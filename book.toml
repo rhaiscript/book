@@ -1,0 +1,22 @@
+[book]
+title = "Rhai - Embedded Scripting for Rust"
+authors = ["Jonathan Turner", "Stephen Chung"]
+description = "Tutorial and reference on the Rhai scripting engine and language."
+language = "en"
+
+[output.html]
+no-section-label = true
+git-repository-url = "https://github.com/jonathandturner/rhai"
+curly-quotes = true
+
+[output.html.fold]
+enable = true
+level = 4
+
+[outputX.linkcheck]
+follow-web-links = false
+traverse-parent-directories = false
+warning-policy = "ignore"
+
+[preprocessor.tera]
+command = "mdbook-tera --json ./src/context.json"
