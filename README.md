@@ -1,7 +1,7 @@
 The Rhai Book
 =============
 
-[_The Rhai Book_](https://schungx.github.io/rhai) serves as Rhai's primary
+[_The Rhai Book_](https://rhaiscript.github.io/rhai) serves as Rhai's primary
 documentation and tutorial resource.
 
 
@@ -23,7 +23,6 @@ cargo install mdbook-tera
 * Run build in source directory:
 
 ```bash
-cd doc
 mdbook build
 ```
 
@@ -33,9 +32,9 @@ Configuration Settings
 
 Settings stored in `context.json`:
 
-| Setting    | Description                                                                                       |
-| ---------- | ------------------------------------------------------------------------------------------------- |
-| `version`  | version of Rhai                                                                                   |
-| `repoHome` | points to the [root of the GitHub repo](https://github.com/jonathandturner/rhai/blob/master)      |
-| `repoTree` | points to the [root of the GitHub repo tree](https://github.com/jonathandturner/rhai/tree/master) |
-| `rootUrl`  | sub-directory for the root domain, e.g. `/rhai`                                                   |
+| Setting    | Description                                                                                  |
+| ---------- | -------------------------------------------------------------------------------------------- |
+| `version`  | version of Rhai                                                                              |
+| `repoHome` | points to the [root of the GitHub repo](https://github.com/rhaiscript/rhai/blob/master)      |
+| `repoTree` | points to the [root of the GitHub repo tree](https://github.com/rhaiscript/rhai/tree/master) |
+| `rootUrl`  | sub-directory for the root domain, e.g. `/rhai`                                              |

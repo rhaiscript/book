@@ -6,7 +6,7 @@ language = "en"
 
 [output.html]
 no-section-label = true
-git-repository-url = "https://github.com/jonathandturner/rhai"
+git-repository-url = "https://github.com/rhaiscript/rhai"
 curly-quotes = true
 
 [output.html.fold]

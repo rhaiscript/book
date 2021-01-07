@@ -47,18 +47,18 @@ a different [features] set, by their _sources_:
 
 * Different versions from [`crates.io`](https://crates.io/crates/rhai/) &ndash; The official crate.
 
-* Different releases from [`GitHub`](https://github.com/jonathandturner/rhai) &ndash; Crate source on GitHub.
+* Different releases from [`GitHub`](https://github.com/rhaiscript/rhai) &ndash; Crate source on GitHub.
 
-* Forked copy of [https://github.com/jonathandturner/rhai](https://github.com/jonathandturner/rhai) on GitHub.
+* Forked copy of [https://github.com/rhaiscript/rhai](https://github.com/rhaiscript/rhai) on GitHub.
 
-* Local copy of [https://github.com/jonathandturner/rhai](https://github.com/jonathandturner/rhai) downloaded form GitHub.
+* Local copy of [https://github.com/rhaiscript/rhai](https://github.com/rhaiscript/rhai) downloaded form GitHub.
 
 Use the following configuration in `Cargo.toml` to pull in multiple copies of Rhai within the same project:
 
 ```toml
 [dependencies]
 rhai = { version = "{{version}}", features = [ "no_float" ] }
-rhai_github = { git = "https://github.com/jonathandturner/rhai", features = [ "unchecked" ] }
+rhai_github = { git = "https://github.com/rhaiscript/rhai", features = [ "unchecked" ] }
 rhai_my_github = { git = "https://github.com/my_github/rhai", branch = "variation1", features = [ "serde", "no_closure" ] }
 rhai_local = { path = "../rhai_copy" }
 ```

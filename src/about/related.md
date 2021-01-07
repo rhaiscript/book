@@ -7,7 +7,7 @@ Related Resources
 Online Resources for Rhai
 -------------------------
 
-* [GitHub](https://github.com/jonathandturner/rhai) &ndash; Home repository
+* [GitHub](https://github.com/rhaiscript/rhai) &ndash; Home repository
 
 * [`crates.io`](https://crates.io/crates/rhai) &ndash; Rhai crate
 
