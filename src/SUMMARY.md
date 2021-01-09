@@ -47,6 +47,7 @@ The Rhai Scripting Language
        2. [Create from AST](rust/modules/ast.md)
        3. [Module Resolvers](rust/modules/resolvers.md)
           1. [Custom Module Resolvers](rust/modules/imp-resolver.md)
+       4. [Self-Contained AST](rust/modules/self-contained.md)
    9. [Plugins](plugins/index.md)
        1. [Export a Rust Module](plugins/module.md)
        2. [Export a Rust Function](plugins/function.md)

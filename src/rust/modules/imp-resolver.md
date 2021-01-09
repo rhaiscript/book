@@ -8,7 +8,7 @@ are resolved.  For instance, modules may need to be loaded from script texts sto
 not in the file system.
 
 A module resolver must implement the trait [`rhai::ModuleResolver`][traits],
-which contains only one function: `resolve`.
+which contains only one required function: `resolve`.
 
 When Rhai prepares to load a module, `ModuleResolver::resolve` is called with the name
 of the _module path_ (i.e. the path specified in the [`import`] statement).
@@ -24,8 +24,8 @@ of the _module path_ (i.e. the path specified in the [`import`] statement).
 * If the module failed to load, return `EvalAltResult::ErrorInModule`.
 
 
-Example
--------
+Example of a Custom Module Resolver
+----------------------------------
 
 ```rust
 use rhai::{ModuleResolver, Module, Engine, EvalAltResult};
@@ -70,3 +70,19 @@ engine.consume(r#"
     foo:bar();
 "#)?;
 ```
+
+
+Implementing `ModuleResolver::resolve_ast`
+-----------------------------------------
+
+There is another function in the [`ModuleResolver`][traits] trait, `resolve_ast`, which is a
+low-level API intended for advanced usage scenarios.
+
+`ModuleResolver::resolve_ast` has a default implementation that simply returns `None`,
+which indicates that this API is not supported by the [module resolver].
+
+Any [module resolver] that serves [modules] based on Rhai scripts should implement
+`ModuleResolver::resolve_ast`. When called, the compiled [`AST`] of the script should be returned.
+
+`ModuleResolver::resolve_ast` should not return an error if `ModuleResolver::resolve` will not.
+On the other hand, the same error should be returned if `ModuleResolver::resolve` will return one.
