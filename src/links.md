@@ -19,7 +19,7 @@
 
 [minimal builds]: {{rootUrl}}/start/builds/minimal.md
 [WASM]: {{rootUrl}}/start/builds/wasm.md
-[playground]: https://alvinhochun.github.io/rhai-demo
+[playground]: https://rhaiscript.github.io/playground
 
 [`Engine`]: {{rootUrl}}/engine/hello-world.md
 [traits]: {{rootUrl}}/rust/traits.md

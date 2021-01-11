@@ -10,6 +10,6 @@ Rhai scripts directly within a browser editor window.
 
 Author : [`@alvinhochun`](https://github.com/alvinhochun)
 
-Repo : [On GitHub](https://github.com/alvinhochun/rhai-playground)
+Repo : [On GitHub](https://github.com/rhaiscript/playground)
 
 URL : [Link to Online Playground][playground]
