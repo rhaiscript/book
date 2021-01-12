@@ -1,7 +1,1 @@
-target/
-Cargo.lock
-.vscode/
-.cargo/
-doc/
-before
-after
+book/
