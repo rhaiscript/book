@@ -5,10 +5,10 @@ Packaged Utilities
 
 A number of Rhai-driven utility programs can be found in the `src/bin` directory:
 
-|                  Utility program                  | Description                                                 |
-| :-----------------------------------------------: | ----------------------------------------------------------- |
-| [`rhai-repl`]({{repoTree}}/examples/rhai-repl.rs) | a simple REPL, interactively evaluate statements from stdin |
-|  [`rhai-run`]({{repoTree}}/examples/rhai-run.rs)  | runs each filename passed to it as a Rhai script            |
+|                 Utility program                  | Description                                                 |
+| :----------------------------------------------: | ----------------------------------------------------------- |
+| [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) | a simple REPL, interactively evaluate statements from stdin |
+|  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  | runs each filename passed to it as a Rhai script            |
 
 
 `rhai-repl` &ndash; The Rhai REPL Tool
