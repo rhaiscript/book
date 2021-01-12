@@ -1,0 +1,684 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Export a Rust Module - Rhai - Embedded Scripting for Rust</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../about/index.html">What is Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/features.html">Features</a></li><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="../start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li></ol></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li><li class="chapter-item expanded "><a href="../start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">Hello World in Rhai – Evaluate a Script</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST for Repeated Evaluations</a></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a></li><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Evaluate Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Initializing and Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Engine Configuration Options</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/index.html">Extend Rhai with Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters in Rust Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/generic.html">Register a Generic Rust Function</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Register a Fallible Rust Function</a></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="../rust/custom.html">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create from Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/module.html" class="active">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="../plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Custom Packages</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/index.html">Rhai Language Reference</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/string-fn.html">Built-in Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a></li><li class="chapter-item expanded "><a href="../language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Time-Stamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Assignment Operators</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Expression</a></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iterator.html">Iterators for Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Values</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/method.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a></li><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/index.html">Safety and Protection</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/checked.html">Checked Arithmetic</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/progress.html">Tracking Progress and Force-Termination</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Statement Depth</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Script Optimization</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/index.html">Usage Patterns</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layer Functions</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a></li><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced.html">Advanced Topics</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-capture.html">Capture Scope for Function Call</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use as DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/disable.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html">Extending with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Functions Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Generate Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/index.html">Appendix</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/jonathandturner/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#export-a-rust-module-to-rhai" id="export-a-rust-module-to-rhai">Export a Rust Module to Rhai</a></h1>
+<h2><a class="header" href="#prelude" id="prelude">Prelude</a></h2>
+<p>When using the plugins system, the entire <code>rhai::plugin</code> module must be imported as a prelude
+because code generated will need these imports.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::plugin::*;
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#export_module" id="export_module"><code>#[export_module]</code></a></h2>
+<p>When applied to a Rust module, the <code>#[export_module]</code> attribute generates the necessary
+code and metadata to allow Rhai access to its public (i.e. marked <code>pub</code>) functions, constants
+and sub-modules.</p>
+<p>This code is exactly what would need to be written by hand to achieve the same goal,
+and is custom fit to each exported item.</p>
+<p>All <code>pub</code> functions become registered functions, all <code>pub</code> constants become <a href="/book/vnext/rust/modules/index.html">module</a> constant variables,
+and all sub-modules become Rhai sub-modules.</p>
+<p>This Rust module can then be registered into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> as a normal <a href="/book/vnext/rust/modules/index.html">module</a>.
+This is done via the <code>exported_module!</code> macro.</p>
+<p>The macro <code>combine_with_exported_module!</code> can be used to <em>combine</em> all the functions
+and variables into an existing <a href="/book/vnext/rust/modules/index.html">module</a>, <em>flattening</em> the namespace – i.e. all sub-modules
+are eliminated and their contents promoted to the top level.  This is typical for
+developing <a href="/book/vnext/rust/packages/create.html">custom packages</a>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    // This constant will be registered as the constant variable 'MY_NUMBER'.
+    // Ignored when registered as a global module.
+    pub const MY_NUMBER: i64 = 42;
+
+    // This function will be registered as 'greet'.
+    pub fn greet(name: &amp;str) -&gt; String {
+        format!(&quot;hello, {}!&quot;, name)
+    }
+    // This function will be registered as 'get_num'.
+    pub fn get_num() -&gt; i64 {
+        mystic_number()
+    }
+    // This function will be registered as 'increment'.
+    // It will also be exposed to the global namespace since 'global' is set.
+    #[rhai_fn(global)]
+    pub fn increment(num: &amp;mut i64) {
+        *num += 1;
+    }
+    // This function is not 'pub', so NOT registered.
+    fn mystic_number() -&gt; i64 {
+        42
+    }
+
+    // Sub-modules are ignored when the module is registered globally.
+    pub mod my_sub_module {
+        // This function is ignored when registered globally.
+        // Otherwise it is a valid registered function under a sub-module.
+        pub fn get_info() -&gt; String {
+            &quot;hello&quot;.to_string()
+        }
+    }
+
+    // Sub-modules are commonly used to put feature gates on a group of
+    // functions because feature gates cannot be put on function definitions.
+    // This is currently a limitation of the plugin procedural macros.
+    #[cfg(feature = &quot;advanced_functions&quot;)]
+    pub mod advanced {
+        // This function is ignored when registered globally.
+        // Otherwise it is a valid registered function under a sub-module
+        // which only exists when the 'advanced_functions' feature is used.
+        pub fn advanced_calc(input: i64) -&gt; i64 {
+            input * 2
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#use-engineregister_global_module" id="use-engineregister_global_module">Use <code>Engine::register_global_module</code></a></h3>
+<p>The simplest way to register this into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is to first use the <code>exported_module!</code> macro
+to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use the <code>Engine::register_global_module</code> method on it:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut engine = Engine::new();
+
+    // The macro call creates a Rhai module from the plugin module.
+    let module = exported_module!(my_module);
+
+    // A module can simply be registered into the global namespace.
+    engine.register_global_module(module.into());
+}
+</code></pre></pre>
+<p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code> and <code>increment</code>)
+are automatically registered into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> when <code>Engine::register_global_module</code> is called.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = greet(&quot;world&quot;);
+x == &quot;hello, world!&quot;;
+
+let x = greet(get_num().to_string());
+x == &quot;hello, 42!&quot;;
+
+let x = get_num();
+x == 42;
+
+increment(x);
+x == 43;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Notice that, when using a <a href="/book/vnext/rust/modules/index.html">module</a> as a <a href="/book/vnext/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
+can be accessed.</p>
+<p>Variables as well as sub-modules are <strong>ignored</strong>.</p>
+<h3><a class="header" href="#use-engineregister_static_module" id="use-engineregister_static_module">Use <code>Engine::register_static_module</code></a></h3>
+<p>Another simple way to register this into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code> macro
+to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use the <code>Engine::register_static_module</code> method on it:</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut engine = Engine::new();
+
+    // The macro call creates a Rhai module from the plugin module.
+    let module = exported_module!(my_module);
+
+    // A module can simply be registered as a static module namespace.
+    engine.register_static_module(&quot;service&quot;, module.into());
+}
+</code></pre></pre>
+<p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code> and <code>increment</code>),
+plus the constant <code>MY_NUMBER</code>, are automatically registered under the module namespace <code>service</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = service::greet(&quot;world&quot;);
+x == &quot;hello, world!&quot;;
+
+service::MY_NUMBER == 42;
+
+let x = service::greet(service::get_num().to_string());
+x == &quot;hello, 42!&quot;;
+
+let x = service::get_num();
+x == 42;
+
+service::increment(x);
+x == 43;
+<span class="boring">}
+</span></code></pre></pre>
+<p>All functions (usually <em>methods</em>) defined in the module and marked with <code>#[rhai_fn(global)]</code>,
+as well as all <a href="/book/vnext/language/iterator.html">type iterators</a>, are automatically exposed to the <em>global</em> namespace, so
+<a href="/book/vnext/language/for.html">iteration</a>, <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> for <a href="/book/vnext/rust/custom.html">custom types</a>
+can work as expected.</p>
+<p>In fact, the default for all <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> defined in a plugin module
+is <code>#[rhai_fn(global)]</code> unless specifically overridden by <code>#[rhai_fn(internal)]</code>.</p>
+<p>Therefore, in the example above, the <code>increment</code> method (defined with <code>#[rhai_fn(global)]</code>)
+works fine when called in method-call style:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = 42;
+x.increment();
+x == 43;
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#use-dynamically" id="use-dynamically">Use Dynamically</a></h3>
+<p>Using this directly as a dynamically-loadable Rhai <a href="/book/vnext/rust/modules/index.html">module</a> is almost the same, except that a
+<a href="/book/vnext/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
+<p>See the <a href="/book/vnext/rust/modules/index.html">module</a> section for more information.</p>
+<h3><a class="header" href="#combine-into-custom-package" id="combine-into-custom-package">Combine into Custom Package</a></h3>
+<p>Finally the plugin module can also be used to develop a <a href="/book/vnext/rust/packages/create.html">custom package</a>,
+using <code>combine_with_exported_module!</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>def_package!(rhai:MyPackage:&quot;My own personal super package&quot;, module, {
+    combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module));
+});
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>combine_with_exported_module!</code> automatically <em>flattens</em> the module namespace so that all
+functions in sub-modules are promoted to the top level.  This is convenient for <a href="/book/vnext/rust/packages/create.html">custom packages</a>.</p>
+<h2><a class="header" href="#sub-modules-and-feature-gates" id="sub-modules-and-feature-gates">Sub-Modules and Feature Gates</a></h2>
+<p>Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
+Rhai <code>Module</code>.</p>
+<p>They are also commonly used to put <em>feature gates</em> or <em>compile-time gates</em> on a group of functions,
+because currently attributes do not work on individual function definitions due to a limitation of
+the procedural macros system.</p>
+<p>This is especially convenient when using the <code>combine_with_exported_module!</code> macro to develop
+<a href="/book/vnext/rust/packages/create.html">custom packages</a> because selected groups of functions can easily be included or excluded based on
+different combinations of feature flags instead of having to manually include/exclude every
+single function.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[export_module]
+mod my_module {
+    // Always available
+    pub fn func0() {}
+
+    // The following sub-module is only available under 'feature1'
+    #[cfg(feature = &quot;feature1&quot;)]
+    pub mod feature1 {
+        fn func1() {}
+        fn func2() {}
+        fn func3() {}
+    }
+
+    // The following sub-module is only available under 'feature2'
+    #[cfg(feature = &quot;feature2&quot;)]
+    pub mod feature2 {
+        fn func4() {}
+        fn func5() {}
+        fn func6() {}
+    }
+}
+
+// Registered functions:
+//   func0 - always available
+//   func1 - available under 'feature1'
+//   func2 - available under 'feature1'
+//   func3 - available under 'feature1'
+//   func4 - available under 'feature2'
+//   func5 - available under 'feature2'
+//   func6 - available under 'feature2'
+combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#function-overloading-and-operators" id="function-overloading-and-operators">Function Overloading and Operators</a></h2>
+<p>Operators and overloaded functions can be specified via applying the <code>#[rhai_fn(name = &quot;...&quot;)]</code>
+attribute to individual functions.</p>
+<p>The text string given as the <code>name</code> parameter to <code>#[rhai_fn]</code> is used to register the function with
+the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
+<p>With <code>#[rhai_fn(name = &quot;...&quot;)]</code>, multiple functions may be registered under the same name in Rhai,
+so long as they have different parameters.</p>
+<p>Operators (which require function names that are not valid for Rust) can also be registered this way.</p>
+<p>Registering the same function name with the same parameter types will cause a parsing error.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    // This is the '+' operator for 'TestStruct'.
+    #[rhai_fn(name = &quot;+&quot;)]
+    pub fn add(obj: &amp;mut TestStruct, value: i64) {
+        obj.prop += value;
+    }
+    // This function is 'calc (i64)'.
+    #[rhai_fn(name = &quot;calc&quot;)]
+    pub fn calc_with_default(num: i64) -&gt; i64 {
+        ...
+    }
+    // This function is 'calc (i64, bool)'.
+    #[rhai_fn(name = &quot;calc&quot;)]
+    pub fn calc_with_option(num: i64, option: bool) -&gt; i64 {
+        ...
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#getters-setters-and-indexers" id="getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
+<p>Functions can be marked as <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> for <a href="/book/vnext/rust/custom.html">custom types</a> via the <code>#[rhai_fn]</code>
+attribute, which is applied on a function level.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    // This is a normal function 'greet'.
+    pub fn greet(name: &amp;str) -&gt; String {
+        format!(&quot;hello, {}!&quot;, name)
+    }
+    // This is a getter for 'TestStruct::prop'.
+    #[rhai_fn(get = &quot;prop&quot;)]
+    pub fn get_prop(obj: &amp;mut TestStruct) -&gt; i64 {
+        obj.prop
+    }
+    // This is a setter for 'TestStruct::prop'.
+    #[rhai_fn(set = &quot;prop&quot;)]
+    pub fn set_prop(obj: &amp;mut TestStruct, value: i64) {
+        obj.prop = value;
+    }
+    // This is an index getter for 'TestStruct'.
+    #[rhai_fn(index_get)]
+    pub fn get_index(obj: &amp;mut TestStruct, index: i64) -&gt; bool {
+        obj.list[index]
+    }
+    // This is an index setter for 'TestStruct'.
+    #[rhai_fn(index_set)]
+    pub fn get_index(obj: &amp;mut TestStruct, index: i64, state: bool) {
+        obj.list[index] = state;
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#multiple-registrations" id="multiple-registrations">Multiple Registrations</a></h2>
+<p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times.</p>
+<p>This is especially useful for the <code>name = &quot;...&quot;</code>, <code>get = &quot;...&quot;</code> and <code>set = &quot;...&quot;</code> parameters
+to give multiple alternative names to the same function.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    // This function can be called in five ways
+    #[rhai_fn(name = &quot;get_prop_value&quot;, name = &quot;prop&quot;, name = &quot;+&quot;, set = &quot;prop&quot;, index_get)]
+    pub fn prop_function(obj: &amp;mut TestStruct, index: i64) -&gt; i64 {
+        obj.prop[index]
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The above function can be called in five ways:</p>
+<table><thead><tr><th>Parameter for <code>#[rhai_fn(...)]</code></th><th align="center">Type</th><th>Call style</th></tr></thead><tbody>
+<tr><td><code>name = &quot;get_prop_value&quot;</code></td><td align="center">method function</td><td><code>get_prop_value(x, 0)</code>, <code>x.get_prop_value(0)</code></td></tr>
+<tr><td><code>name = &quot;prop&quot;</code></td><td align="center">method function</td><td><code>prop(x, 0)</code>, <code>x.prop(0)</code></td></tr>
+<tr><td><code>name = &quot;+&quot;</code></td><td align="center">operator</td><td><code>x + 42</code></td></tr>
+<tr><td><code>set = &quot;prop&quot;</code></td><td align="center">setter</td><td><code>x.prop = 42</code></td></tr>
+<tr><td><code>index_get</code></td><td align="center">index getter</td><td><code>x[0]</code></td></tr>
+</tbody></table>
+<h2><a class="header" href="#fallible-functions" id="fallible-functions">Fallible Functions</a></h2>
+<p>To register <a href="/book/vnext/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
+<code>#[rhai_fn(return_raw)]</code> attribute on functions that return <code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code>.</p>
+<p>A syntax error is generated if the function with <code>#[rhai_fn(return_raw)]</code> does not
+have the appropriate return type.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    // This overloads the '/' operator for i64.
+    #[rhai_fn(name = &quot;/&quot;, return_raw)]
+    pub fn double_and_divide(x: i64, y: i64) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt; {
+        if y == 0 {
+            Err(&quot;Division by zero!&quot;.into())
+        } else {
+            let result = (x * 2) / y;
+            Ok(result.into())
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#nativecallcontext-parameter" id="nativecallcontext-parameter"><code>NativeCallContext</code> Parameter</a></h2>
+<p>If the <em>first</em> parameter of a function is of type <code>rhai::NativeCallContext</code>, then it is treated
+specially by the plugins system.</p>
+<p><code>NativeCallContext</code> is a type that encapsulates the current <em>native call context</em> and exposes the following:</p>
+<table><thead><tr><th>Field</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/book/vnext/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/book/vnext/language/fn-ptr.html">function pointer</a>.</td></tr>
+<tr><td><code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
+<tr><td><code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
+<tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
+<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+</tbody></table>
+<p>This first parameter, if exists, will be stripped before all other processing.  It is <em>virtual</em>.
+Most importantly, it does <em>not</em> count as a parameter to the function and there is no need to provide
+this argument when calling the function in Rhai.</p>
+<p>The native call context can be used to call a <a href="/book/vnext/language/fn-ptr.html">function pointer</a> or <a href="/book/vnext/language/fn-closure.html">closure</a> that has been passed
+as a parameter to the function, thereby implementing a <em>callback</em>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
+use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    #[rhai_fn(return_raw)]
+    pub fn greet(context: NativeCallContext, callback: FnPtr)
+                                -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;
+    {
+        // Call the callback closure with the current context
+        // to obtain the name to greet!
+        let name = callback.call_dynamic(context, None, [])?;
+        Ok(format!(&quot;hello, {}!&quot;, name).into())
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The native call context is also useful in another scenario: protecting a function from malicious scripts.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::{Dynamic, Array, NativeCallContext, EvalAltResult, Position};
+use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+
+#[export_module]
+mod my_module {
+    // This function builds an array of arbitrary size, but is protected
+    // against attacks by first checking with the allowed limit set
+    // into the 'Engine'.
+    #[rhai_fn(return_raw)]
+    pub fn grow(context: NativeCallContext, size: i64)
+                                -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;
+    {
+        // Make sure the function does not generate a
+        // data structure larger than the allowed limit
+        // for the Engine!
+        if size as usize &gt; context.engine().max_array_size()
+        {
+            return EvalAltResult::ErrorDataTooLarge(
+                &quot;Size to grow&quot;.to_string(),
+                context.engine().max_array_size(),
+                size as usize,
+                Position::NONE,
+            ).into();
+        }
+
+        let array = Array::new();
+
+        for x in 0..size {
+            array.push(x.into());
+        }
+
+        OK(array.into())
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#export_module-parameters" id="export_module-parameters"><code>#[export_module]</code> Parameters</a></h2>
+<p>Parameters can be applied to the <code>#[export_module]</code> attribute to override its default behavior.</p>
+<table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
+<tr><td><em>none</em></td><td>exports only public (i.e. <code>pub</code>) functions</td></tr>
+<tr><td><code>export_all</code></td><td>exports all functions (including private, non-<code>pub</code> functions); use <code>#[rhai_fn(skip)]</code> on individual functions to avoid export</td></tr>
+<tr><td><code>export_prefix = &quot;...&quot;</code></td><td>exports functions (including private, non-<code>pub</code> functions) with names starting with a specific prefix</td></tr>
+</tbody></table>
+<h2><a class="header" href="#inner-attributes" id="inner-attributes">Inner Attributes</a></h2>
+<p>Inner attributes can be applied to the inner items of a module to tweak the export process.</p>
+<p><code>#[rhai_fn]</code> is applied to functions, while <code>#[rhai_mod]</code> is applied to sub-modules.</p>
+<p>Parameters should be set on inner attributes to specify the desired behavior.</p>
+<table><thead><tr><th>Attribute Parameter</th><th>Use with</th><th>Apply to</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code>, <code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/sub-module</td></tr>
+<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global namespace</td></tr>
+<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module namespace</td></tr>
+<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code>, <code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/sub-module under the specified name</td></tr>
+<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; Value</code></td><td>registers a getter for the named property</td></tr>
+<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, Value)</code></td><td>registers a setter for the named property</td></tr>
+<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT) -&gt; Value</code></td><td>registers an index getter</td></tr>
+<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT, Value)</code></td><td>registers an index setter</td></tr>
+<tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="/book/vnext/rust/fallible.html">fallible function</a></td></tr>
+</tbody></table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../plugins/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../plugins/function.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../plugins/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../plugins/function.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

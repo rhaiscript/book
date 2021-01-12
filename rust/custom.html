@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Register any Rust Type and its Methods - Rhai - Embedded Scripting for Rust</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../about/index.html">What is Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/features.html">Features</a></li><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="../start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li></ol></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li><li class="chapter-item expanded "><a href="../start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">Hello World in Rhai – Evaluate a Script</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST for Repeated Evaluations</a></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a></li><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Evaluate Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Initializing and Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Engine Configuration Options</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/index.html">Extend Rhai with Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters in Rust Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/generic.html">Register a Generic Rust Function</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Register a Fallible Rust Function</a></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="../rust/custom.html" class="active">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create from Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/module.html">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="../plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Custom Packages</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/index.html">Rhai Language Reference</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/string-fn.html">Built-in Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a></li><li class="chapter-item expanded "><a href="../language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Time-Stamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Assignment Operators</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Expression</a></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iterator.html">Iterators for Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Values</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/method.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a></li><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/index.html">Safety and Protection</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/checked.html">Checked Arithmetic</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/progress.html">Tracking Progress and Force-Termination</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Statement Depth</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Script Optimization</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/index.html">Usage Patterns</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layer Functions</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a></li><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced.html">Advanced Topics</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-capture.html">Capture Scope for Function Call</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use as DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/disable.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html">Extending with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Functions Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Generate Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/index.html">Appendix</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/jonathandturner/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#register-any-rust-type-and-its-methods" id="register-any-rust-type-and-its-methods">Register any Rust Type and its Methods</a></h1>
+<h2><a class="header" href="#free-typing" id="free-typing">Free Typing</a></h2>
+<p>Rhai works seamlessly with <em>any</em> Rust type.  The type can be <em>anything</em>; it does not
+have any prerequisites other than being <code>Clone</code>.  It does not need to implement
+any other trait or use any custom <code>#[derive]</code>.</p>
+<p>This allows Rhai to be integrated into an existing Rust code base with as little plumbing
+as possible, usually silently and seamlessly.  External types that are not defined
+within the same crate (and thus cannot implement special Rhai traits or
+use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
+<p>The reason why it is termed a <em>custom</em> type throughout this documentation is that
+Rhai natively supports a number of data types with fast, internal treatment (see
+the list of <a href="/book/language/values-and-types.html">standard types</a>).  Any type outside of this list is considered <em>custom</em>.</p>
+<p>Any type not supported natively by Rhai is stored as a Rust <em>trait object</em>, with no
+restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).
+It runs slightly slower than natively-supported types as it does not have built-in,
+optimized implementations for commonly-used functions, but for all other purposes has
+no difference.</p>
+<p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
+<h2><a class="header" href="#register-a-custom-type-and-its-methods" id="register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
+<p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/book/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
+<p>If the <a href="/book/start/features.html"><code>sync</code></a> feature is used, it must also be <code>Send + Sync</code>.</p>
+<p>Notice that the custom type needs to be <em>registered</em> using <code>Engine::register_type</code>
+or <code>Engine::register_type_with_name</code>.</p>
+<p>To use native methods on custom types in Rhai scripts, it is common to register an API
+for the type using one of the <code>Engine::register_XXX</code> functions.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::{Engine, EvalAltResult};
+use rhai::RegisterFn;                   // remember 'RegisterFn' is needed
+
+#[derive(Clone)]
+struct TestStruct {
+    field: i64
+}
+
+impl TestStruct {
+    fn new() -&gt; Self {
+        Self { field: 1 }
+    }
+
+    fn update(&amp;mut self, x: i64) {      // methods take &amp;mut as first parameter
+        self.field += x;
+    }
+}
+
+let mut engine = Engine::new();
+
+// Most Engine API's can be chained up.
+engine
+    .register_type::&lt;TestStruct&gt;()      // register custom type
+    .register_fn(&quot;new_ts&quot;, TestStruct::new)
+    .register_fn(&quot;update&quot;, TestStruct::update);
+
+// Cast result back to custom type.
+let result = engine.eval::&lt;TestStruct&gt;(
+    r&quot;
+        let x = new_ts();               // calls 'TestStruct::new'
+        x.update(41);                   // calls 'TestStruct::update'
+        x                               // 'x' holds a 'TestStruct'
+    &quot;
+)?;
+
+println!(&quot;result: {}&quot;, result.field);   // prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<p>Rhai follows the convention that methods of custom types take a <code>&amp;mut</code> first parameter
+to that type, so that invoking methods can always update it.</p>
+<p>All other parameters in Rhai are passed by value (i.e. clones).</p>
+<p><strong>IMPORTANT: Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.</strong></p>
+<h2><a class="header" href="#method-call-style-vs-function-call-style" id="method-call-style-vs-function-call-style">Method-Call Style vs. Function-Call Style</a></h2>
+<p>Any function with a first argument that is a <code>&amp;mut</code> reference can be used
+as method calls because internally they are the same thing: methods on a type is
+implemented as a functions taking a <code>&amp;mut</code> first argument.</p>
+<p>This design is similar to Rust.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl TestStruct {
+    fn foo(&amp;mut self) -&gt; i64 {
+        self.field
+    }
+}
+
+engine.register_fn(&quot;foo&quot;, TestStruct::foo);
+
+let result = engine.eval::&lt;i64&gt;(
+    r&quot;
+        let x = new_ts();
+        foo(x);                         // normal call to 'foo'
+        x.foo()                         // 'foo' can also be called like a method on 'x'
+    &quot;
+)?;
+
+println!(&quot;result: {}&quot;, result);         // prints 1
+<span class="boring">}
+</span></code></pre></pre>
+<p>Under <a href="/book/start/features.html"><code>no_object</code></a>, however, the <em>method</em> style of function calls
+(i.e. calling a function as an object-method) is no longer supported.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Below is a syntax error under 'no_object'.
+let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
+                                            // ^ cannot call in method style under 'no_object'
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#type_of-a-custom-type" id="type_of-a-custom-type"><code>type_of()</code> a Custom Type</a></h2>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
+<p>If <code>Engine::register_type_with_name</code> is used to register the custom type
+with a special “pretty-print” name, <a href="/book/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>engine
+    .register_type::&lt;TestStruct1&gt;()
+    .register_fn(&quot;new_ts1&quot;, TestStruct1::new)
+    .register_type_with_name::&lt;TestStruct2&gt;(&quot;TestStruct&quot;)
+    .register_fn(&quot;new_ts2&quot;, TestStruct2::new);
+
+let ts1_type = engine.eval::&lt;String&gt;(r#&quot;let x = new_ts1(); x.type_of()&quot;#)?;
+let ts2_type = engine.eval::&lt;String&gt;(r#&quot;let x = new_ts2(); x.type_of()&quot;#)?;
+
+println!(&quot;{}&quot;, ts1_type);               // prints 'path::to::TestStruct'
+println!(&quot;{}&quot;, ts1_type);               // prints 'TestStruct'
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#use-the-custom-type-with-arrays" id="use-the-custom-type-with-arrays">Use the Custom Type With Arrays</a></h2>
+<p>The <code>push</code>, <code>insert</code>, <code>pad</code> functions, as well as the <code>+=</code> operator, for <a href="/book/language/arrays.html">arrays</a> are only
+defined for standard built-in types. For custom types, type-specific versions must be registered:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>engine
+    .register_fn(&quot;push&quot;, |list: &amp;mut Array, item: TestStruct| {
+        list.push(Dynamic::from(item));
+    }).register_fn(&quot;+=&quot;, |list: &amp;mut Array, item: TestStruct| {
+        list.push(Dynamic::from(item));
+    }).register_fn(&quot;insert&quot;, |list: &amp;mut Array, position: i64, item: TestStruct| {
+        if position &lt;= 0 {
+            list.insert(0, Dynamic::from(item));
+        } else if (position as usize) &gt;= list.len() - 1 {
+            list.push(item);
+        } else {
+            list.insert(position as usize, Dynamic::from(item));
+        }
+    }).register_fn(&quot;pad&quot;, |list: &amp;mut Array, len: i64, item: TestStruct| {
+        if len as usize &gt; list.len() {
+            list.resize(len as usize, item);
+        }
+    });
+<span class="boring">}
+</span></code></pre></pre>
+<p>In particular, in order to use the <code>in</code> operator with a custom type for an <a href="/book/language/arrays.html">array</a>,
+the <code>==</code> operator must be registered for the custom type:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Assume 'TestStruct' implements `PartialEq`
+engine.register_fn(&quot;==&quot;,
+    |item1: &amp;mut TestStruct, item2: TestStruct| item1 == &amp;item2
+);
+
+// Then this works in Rhai:
+let item = new_ts();        // construct a new 'TestStruct'
+item in array;              // 'in' operator uses '=='
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#working-with-enums" id="working-with-enums">Working With Enums</a></h2>
+<p>It is quite easy to use Rust enums with Rhai.
+See <a href="/book/patterns/enums.html">this chapter</a> for more details.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../rust/operators.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../rust/getters-setters.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../rust/operators.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../rust/getters-setters.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

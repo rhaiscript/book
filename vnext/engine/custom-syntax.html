@@ -1,0 +1,584 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Extending with Custom Syntax - Rhai - Embedded Scripting for Rust</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../about/index.html">What is Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/features.html">Features</a></li><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="../start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li></ol></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li><li class="chapter-item expanded "><a href="../start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">Hello World in Rhai – Evaluate a Script</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST for Repeated Evaluations</a></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a></li><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Evaluate Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Initializing and Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Engine Configuration Options</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/index.html">Extend Rhai with Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters in Rust Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/generic.html">Register a Generic Rust Function</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Register a Fallible Rust Function</a></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="../rust/custom.html">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create from Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/module.html">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="../plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Custom Packages</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/index.html">Rhai Language Reference</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/string-fn.html">Built-in Functions</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a></li><li class="chapter-item expanded "><a href="../language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Time-Stamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Assignment Operators</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Expression</a></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iterator.html">Iterators for Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Values</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/method.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a></li><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/index.html">Safety and Protection</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/checked.html">Checked Arithmetic</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/progress.html">Tracking Progress and Force-Termination</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Statement Depth</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Script Optimization</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/index.html">Usage Patterns</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layer Functions</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a></li><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced.html">Advanced Topics</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-capture.html">Capture Scope for Function Call</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use as DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/disable.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html" class="active">Extending with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Functions Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Generate Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/index.html">Appendix</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/jonathandturner/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#extend-rhai-with-custom-syntax" id="extend-rhai-with-custom-syntax">Extend Rhai with Custom Syntax</a></h1>
+<p>For the ultimate adventurous, there is a built-in facility to <em>extend</em> the Rhai language
+with custom-defined <em>syntax</em>.</p>
+<p>But before going off to define the next weird statement type, heed this warning:</p>
+<h2><a class="header" href="#dont-do-it" id="dont-do-it">Don’t Do It™</a></h2>
+<p>Stick with standard language syntax as much as possible.</p>
+<p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another
+obscure language syntax just to do something.</p>
+<p>Try to use <a href="/book/vnext/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
+<h2><a class="header" href="#where-this-might-be-useful" id="where-this-might-be-useful">Where This Might Be Useful</a></h2>
+<ul>
+<li>
+<p>Where an operation is used a <em>LOT</em> and a custom syntax saves a lot of typing.</p>
+</li>
+<li>
+<p>Where a custom syntax <em>significantly</em> simplifies the code and <em>significantly</em> enhances understanding of the code’s intent.</p>
+</li>
+<li>
+<p>Where certain logic cannot be easily encapsulated inside a function.</p>
+</li>
+<li>
+<p>Where you just want to confuse your user and make their lives miserable, because you can.</p>
+</li>
+</ul>
+<h2><a class="header" href="#step-one--design-the-syntax" id="step-one--design-the-syntax">Step One – Design The Syntax</a></h2>
+<p>A custom syntax is simply a list of symbols.</p>
+<p>These symbol types can be used:</p>
+<ul>
+<li>
+<p>Standard <a href="/book/vnext/appendix/keywords.html">keywords</a></p>
+</li>
+<li>
+<p>Standard <a href="/book/vnext/appendix/operators.html#operators">operators</a>.</p>
+</li>
+<li>
+<p>Reserved <a href="/book/vnext/appendix/operators.html#symbols">symbols</a>.</p>
+</li>
+<li>
+<p>Identifiers following the <a href="/book/vnext/language/variables.html">variable</a> naming rules.</p>
+</li>
+<li>
+<p><code>$expr$</code> – any valid expression, statement or statement block.</p>
+</li>
+<li>
+<p><code>$block$</code> – any valid statement block (i.e. must be enclosed by <code>'{'</code> .. <code>'}'</code>).</p>
+</li>
+<li>
+<p><code>$ident$</code> – any <a href="/book/vnext/language/variables.html">variable</a> name.</p>
+</li>
+</ul>
+<h3><a class="header" href="#the-first-symbol-must-be-an-identifier" id="the-first-symbol-must-be-an-identifier">The First Symbol Must be an Identifier</a></h3>
+<p>There is no specific limit on the combination and sequencing of each symbol type,
+except the <em>first</em> symbol which must be a custom keyword that follows the naming rules
+of <a href="/book/vnext/language/variables.html">variables</a>.</p>
+<p>The first symbol also cannot be a normal or reserved <a href="/book/vnext/appendix/keywords.html">keyword</a>.
+In other words, any valid identifier that is not a <a href="/book/vnext/appendix/keywords.html">keyword</a> will work fine.</p>
+<h3><a class="header" href="#the-first-symbol-must-be-unique" id="the-first-symbol-must-be-unique">The First Symbol Must be Unique</a></h3>
+<p>Rhai uses the <em>first</em> symbol as a clue to parse custom syntax.</p>
+<p>Therefore, at any one time, there can only be <em>one</em> custom syntax starting with each unique symbol.</p>
+<p>Any new custom syntax definition using the same first symbol simply <em>overwrites</em> the previous one.</p>
+<h3><a class="header" href="#example" id="example">Example</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>exec $ident$ &lt;- $expr$ : $block$
+<span class="boring">}
+</span></code></pre></pre>
+<p>The above syntax is made up of a stream of symbols:</p>
+<table><thead><tr><th align="center">Position</th><th align="center">Input</th><th align="center">Symbol</th><th>Description</th></tr></thead><tbody>
+<tr><td align="center">1</td><td align="center"></td><td align="center"><code>exec</code></td><td>custom keyword</td></tr>
+<tr><td align="center">2</td><td align="center">1</td><td align="center"><code>$ident$</code></td><td>a variable name</td></tr>
+<tr><td align="center">3</td><td align="center"></td><td align="center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/book/vnext/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
+<tr><td align="center">4</td><td align="center">2</td><td align="center"><code>$expr$</code></td><td>an expression, which may be enclosed with <code>{</code> .. <code>}</code>, or not.</td></tr>
+<tr><td align="center">5</td><td align="center"></td><td align="center"><code>:</code></td><td>the colon symbol</td></tr>
+<tr><td align="center">6</td><td align="center">3</td><td align="center"><code>$block$</code></td><td>a statement block, which must be enclosed with <code>{</code> .. <code>}</code>.</td></tr>
+</tbody></table>
+<p>This syntax matches the following sample code and generates three inputs (one for each non-keyword):</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Assuming the 'exec' custom syntax implementation declares the variable 'hello':
+let x = exec hello &lt;- foo(1, 2) : {
+            hello += bar(hello);
+            baz(hello);
+        };
+
+print(x);       // variable 'x'  has a value returned by the custom syntax
+
+print(hello);   // variable declared by a custom syntax persists!
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#step-two--implementation" id="step-two--implementation">Step Two – Implementation</a></h2>
+<p>Any custom syntax must include an <em>implementation</em> of it.</p>
+<h3><a class="header" href="#function-signature" id="function-signature">Function Signature</a></h3>
+<p>The function signature of an implementation is:</p>
+<blockquote>
+<p><code>Fn(context: &amp;mut EvalContext, inputs: &amp;[Expression]) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></p>
+</blockquote>
+<p>where:</p>
+<table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>context</code></td><td align="center"><code>&amp;mut EvalContext</code></td><td>mutable reference to the current evaluation <em>context</em></td></tr>
+<tr><td>• <code>scope()</code></td><td align="center"><code>&amp;Scope</code></td><td>reference to the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td>• <code>scope_mut()</code></td><td align="center"><code>&amp;mut &amp;mut Scope</code></td><td>mutable reference to the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>; variables can be added to/removed from it</td></tr>
+<tr><td>• <code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>reference to the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td>• <code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
+<tr><td>• <code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
+<tr><td>• <code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
+<tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>• <code>this_ptr()</code></td><td align="center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound [<code>this</code>] pointer, if any</td></tr>
+<tr><td>• <code>call_level()</code></td><td align="center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
+<tr><td><code>inputs</code></td><td align="center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
+</tbody></table>
+<h3><a class="header" href="#return-value" id="return-value">Return Value</a></h3>
+<p>Return value is the result of evaluating the custom syntax expression.</p>
+<h3><a class="header" href="#access-arguments" id="access-arguments">Access Arguments</a></h3>
+<p>The most important argument is <code>inputs</code> where the matched identifiers (<code>$ident$</code>), expressions/statements (<code>$expr$</code>)
+and statement blocks (<code>$block$</code>) are provided.</p>
+<p>To access a particular argument, use the following patterns:</p>
+<table><thead><tr><th align="center">Argument type</th><th>Pattern (<code>n</code> = slot in <code>inputs</code>)</th><th align="center">Result type</th><th>Description</th></tr></thead><tbody>
+<tr><td align="center"><code>$ident$</code></td><td><code>inputs[n].get_variable_name().unwrap()</code></td><td align="center"><code>&amp;str</code></td><td>name of a variable</td></tr>
+<tr><td align="center"><code>$expr$</code></td><td><code>inputs.get(n).unwrap()</code></td><td align="center"><code>Expression</code></td><td>an expression tree</td></tr>
+<tr><td align="center"><code>$block$</code></td><td><code>inputs.get(n).unwrap()</code></td><td align="center"><code>Expression</code></td><td>an expression tree</td></tr>
+</tbody></table>
+<h3><a class="header" href="#evaluate-an-expression-tree" id="evaluate-an-expression-tree">Evaluate an Expression Tree</a></h3>
+<p>Use the <code>EvalContext::eval_expression_tree</code> method to evaluate an arbitrary expression tree
+within the current evaluation context.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let expression = inputs.get(0).unwrap();
+let result = context.eval_expression_tree(expression)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#declare-variables" id="declare-variables">Declare Variables</a></h3>
+<p>New variables maybe declared (usually with a variable name that is passed in via `$ident$).</p>
+<p>It can simply be pushed into the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+<p>However, beware that all new variables must be declared <em>prior</em> to evaluating any expression tree.
+In other words, any <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> calls that change the list of must come <em>before</em> any
+<code>EvalContext::eval_expression_tree</code> calls.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let var_name = inputs[0].get_variable_name().unwrap();
+let expression = inputs.get(1).unwrap();
+
+context.scope_mut().push(var_name, 0 as INT);   // do this BEFORE 'context.eval_expression_tree'!
+
+let result = context.eval_expression_tree(expression)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#step-three--register-the-custom-syntax" id="step-three--register-the-custom-syntax">Step Three – Register the Custom Syntax</a></h2>
+<p>Use <code>Engine::register_custom_syntax</code> to register a custom syntax.</p>
+<p>Again, beware that the <em>first</em> symbol must be unique.  If there already exists a custom syntax starting
+with that symbol, the previous syntax will be overwritten.</p>
+<p>The syntax is passed simply as a slice of <code>&amp;str</code>.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Custom syntax implementation
+fn implementation_func(
+    context: &amp;mut EvalContext,
+    inputs: &amp;[Expression]
+) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt; {
+    let var_name = inputs[0].get_variable_name().unwrap().to_string();
+    let stmt = inputs.get(1).unwrap();
+    let condition = inputs.get(2).unwrap();
+
+    // Push one new variable into the scope BEFORE 'context.eval_expression_tree'
+    context.scope_mut().push(var_name, 0 as INT);
+
+    loop {
+        // Evaluate the statement block
+        context.eval_expression_tree(stmt)?;
+
+        // Evaluate the condition expression
+        let stop = !context.eval_expression_tree(condition)?
+                            .as_bool().map_err(|err| Box::new(
+                                EvalAltResult::ErrorMismatchDataType(
+                                    &quot;bool&quot;.to_string(),
+                                    err.to_string(),
+                                    condition.position(),
+                                )
+                            ))?;
+
+        if stop {
+            break;
+        }
+    }
+
+    Ok(Dynamic::UNIT)
+}
+
+// Register the custom syntax (sample): exec |x| -&gt; { x += 1 } while x &lt; 0
+engine.register_custom_syntax(
+    &amp;[ &quot;exec&quot;, &quot;|&quot;, &quot;$ident$&quot;, &quot;|&quot;, &quot;-&gt;&quot;, &quot;$block$&quot;, &quot;while&quot;, &quot;$expr$&quot; ], // the custom syntax
+    1,  // the number of new variables declared within this custom syntax
+    implementation_func
+)?;
+<span class="boring">}
+</span></code></pre></pre>
+<p>Remember that a custom syntax acts as an <em>expression</em>, so it can show up practically anywhere:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Use as an expression:
+let foo = (exec |x| -&gt; { x += 1 } while x &lt; 0) * 100;
+
+// Use as a function call argument:
+do_something(exec |x| -&gt; { x += 1 } while x &lt; 0, 24, true);
+
+// Use as a statement:
+exec |x| -&gt; { x += 1 } while x &lt; 0;
+//                                ^ terminate statement with ';'
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#step-four--disable-unneeded-statement-types" id="step-four--disable-unneeded-statement-types">Step Four – Disable Unneeded Statement Types</a></h2>
+<p>When a DSL needs a custom syntax, most likely than not it is extremely specialized.
+Therefore, many statement types actually may not make sense under the same usage scenario.</p>
+<p>So, while at it, better <a href="/book/vnext/engine/disable.html">disable</a> those built-in keywords
+and operators that should not be used by the user.  The would leave only the bare minimum
+language surface exposed, together with the custom syntax that is tailor-designed for
+the scenario.</p>
+<p>A keyword or operator that is disabled can still be used in a custom syntax.</p>
+<p>In an extreme case, it is possible to disable <em>every</em> keyword in the language, leaving only
+custom syntax (plus possibly expressions).  But again, Don’t Do It™ – unless you are certain
+of what you’re doing.</p>
+<h2><a class="header" href="#step-five--document" id="step-five--document">Step Five – Document</a></h2>
+<p>For custom syntax, documentation is crucial.</p>
+<p>Make sure there are <em>lots</em> of examples for users to follow.</p>
+<h2><a class="header" href="#step-six--profit" id="step-six--profit">Step Six – Profit!</a></h2>
+<h2><a class="header" href="#really-advanced--custom-parsers" id="really-advanced--custom-parsers">Really Advanced – Custom Parsers</a></h2>
+<p>Sometimes it is desirable to have multiple custom syntax starting with the
+same symbol.  This is especially common for <em>command-style</em> syntax where the
+second symbol calls a particular command:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// The following simulates a command-style syntax, all starting with 'perform'.
+perform hello world;        // A fixed sequence of symbols
+perform action 42;          // Perform a system action with a parameter
+perform update system;      // Update the system
+perform check all;          // Check all system settings
+perform cleanup;            // Clean up the system
+perform add something;      // Add something to the system
+perform remove something;   // Delete something from the system
+<span class="boring">}
+</span></code></pre></pre>
+<p>Alternatively, a custom syntax may have variable length, with a termination symbol:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// The following is a variable-length list terminated by '&gt;'  
+tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>For even more flexibility in order to handle these advanced use cases, there is a
+<em>low level</em> API for custom syntax that allows the registration of an entire mini-parser.</p>
+<p>Use <code>Engine::register_custom_syntax_raw</code> to register a custom syntax <em>parser</em>
+together with the implementation function.</p>
+<h3><a class="header" href="#how-custom-parsers-work" id="how-custom-parsers-work">How Custom Parsers Work</a></h3>
+<p>A custom parser takes as input parameters two pieces of information:</p>
+<ul>
+<li>
+<p>The symbols parsed so far; <code>$ident$</code> is replaced with the actual identifier parsed,
+while <code>$expr$</code> and <code>$block$</code> stay as they were.</p>
+<p>The custom parser can inspect this symbols stream to determine the next symbol to parse.</p>
+</li>
+<li>
+<p>The <em>look-ahead</em> symbol, which is the symbol that will be parsed <em>next</em>.</p>
+<p>If the look-ahead is an expected symbol, the customer parser just returns it to continue parsing,
+or it can return <code>$ident$</code> to parse it as an identifier, or even <code>$expr$</code> to start parsing
+an expression.</p>
+<p>If the look-ahead is ‘<code>{</code>‘, then the custom parser may also return <code>$block$</code> to start parsing a
+statements block.</p>
+<p>If the look-ahead is unexpected, the custom parser should then return the symbol expected
+and Rhai will fail with a parse error containing information about the expected symbol.</p>
+</li>
+</ul>
+<p>A custom parser always returns the <em>next</em> symbol expected, which can also be <code>$ident$</code>,
+<code>$expr$</code> or <code>$block$</code>, or <code>None</code> if parsing should terminate (<em>without</em> reading the
+look-ahead symbol).</p>
+<h3><a class="header" href="#example-1" id="example-1">Example</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>engine.register_custom_syntax_raw(
+    &quot;perform&quot;,
+    // The custom parser implementation - always returns the next symbol expected
+    // 'look_ahead' is the next symbol about to be read
+    |symbols, look_ahead| match symbols.len() {
+        // perform ...
+        1 =&gt; Ok(Some(&quot;$ident$&quot;.to_string())),
+        // perform command ...
+        2 =&gt; match symbols[1].as_str() {
+            &quot;action&quot; =&gt; Ok(Some(&quot;$expr$&quot;.into())),
+            &quot;hello&quot; =&gt; Ok(Some(&quot;world&quot;.into())),
+            &quot;update&quot; | &quot;check&quot; | &quot;add&quot; | &quot;remove&quot; =&gt; Ok(Some(&quot;$ident$&quot;.into())),
+            &quot;cleanup&quot; =&gt; Ok(None),
+            cmd =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
+                LexError::ImproperSymbol(format!(&quot;Improper command: {}&quot;, cmd))
+            )), Position::NONE)),
+        },
+        // perform command arg ...
+        3 =&gt; match (symbols[1].as_str(), symbols[2].as_str()) {
+            (&quot;action&quot;, _) =&gt; Ok(None),
+            (&quot;hello&quot;, &quot;world&quot;) =&gt; Ok(None),
+            (&quot;update&quot;, arg) if arg == &quot;system&quot; =&gt; Ok(None),
+            (&quot;update&quot;, arg) if arg == &quot;client&quot; =&gt; Ok(None),
+            (&quot;check&quot;, arg) =&gt; Ok(None),
+            (&quot;add&quot;, arg) =&gt; Ok(None),
+            (&quot;remove&quot;, arg) =&gt; Ok(None),
+            (cmd, arg) =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
+                LexError::ImproperSymbol(
+                    format!(&quot;Invalid argument for command {}: {}&quot;, cmd, arg)
+                )
+            )), Position::NONE)),
+        },
+        _ =&gt; unreachable!(),
+    },
+    // Number of new variables declared by this custom syntax
+    0,
+    // Implementation function
+    implementation_func
+);
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#function-signature-1" id="function-signature-1">Function Signature</a></h3>
+<p>The custom syntax parser has the following signature:</p>
+<blockquote>
+<p><code>Fn(symbols: &amp;[ImmutableString], look_ahead: &amp;str) -&gt; Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code></p>
+</blockquote>
+<p>where:</p>
+<table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>symbols</code></td><td align="center"><code>&amp;[ImmutableString]</code></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> is replaced by the actual identifier</td></tr>
+<tr><td><code>look_ahead</code></td><td align="center"><code>&amp;str</code></td><td>a string slice containing the next symbol that is about to be read</td></tr>
+</tbody></table>
+<p>Most strings are <a href="/book/vnext/language/strings-chars.html"><code>ImmutableString</code></a>‘s so it is usually more efficient to just <code>clone</code> the appropriate one
+(if any matches, or keep an internal cache for commonly-used symbols) as the return value.</p>
+<h3><a class="header" href="#return-value-1" id="return-value-1">Return Value</a></h3>
+<p>The return value is <code>Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code> where:</p>
+<table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>Ok(None)</code></td><td>parsing complete and there are no more symbols to match</td></tr>
+<tr><td><code>Ok(Some(symbol))</code></td><td>the next symbol to match, which can also be <code>$expr$</code>, <code>$ident$</code> or <code>$block$</code></td></tr>
+<tr><td><code>Err(ParseError)</code></td><td>error that is reflected back to the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> – normally <code>ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)</code> to indicate that there is a syntax error, but it can be any <code>ParseError</code>.</td></tr>
+</tbody></table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../engine/custom-op.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../patterns/multiple.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../engine/custom-op.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../patterns/multiple.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
