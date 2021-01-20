@@ -3,27 +3,54 @@ Serialization and Deserialization of `Dynamic` with `serde`
 
 {{#include ../links.md}}
 
-Rhai's [`Dynamic`] type supports serialization and deserialization by [`serde`](https://crates.io/crates/serde)
-via the [`serde`][features] feature.
+Rhai's [`Dynamic`] type supports serialization and deserialization by
+[`serde`](https://crates.io/crates/serde) via the [`serde`][features] feature.
 
-A [`Dynamic`] can be seamlessly converted to and from a type that implements
+[`Dynamic`] works _both_ as a _serialization format_ as well as a data type that is serializable.
+
+
+Serialize/Deserialize a `Dynamic`
+--------------------------------
+
+With the [`serde`][features] feature turned on, [`Dynamic`] implements
+[`serde::Serialize`](https://docs.serde.rs/serde/trait.Serialize.html) and
+[`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html), so it can easily
+be serialized and deserialized with [`serde`](https://crates.io/crates/serde).
+
+```rust
+let value: Dynamic = ...;
+
+// Serialize 'Dynamic' to JSON
+let json = serde_json::to_string(&value);
+
+// Deserialize 'Dynamic' from JSON
+let result: Dynamic = serde_json::from_str(&json);
+```
+
+[Custom types] are serialized as text strings of the value's type name.
+
+
+`Dynamic` as Serialization Format
+--------------------------------
+
+A [`Dynamic`] can be seamlessly converted to and from any type that implements
 [`serde::Serialize`](https://docs.serde.rs/serde/trait.Serialize.html) and/or
-[`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html).
+[`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html), acting as a
+serialization format.
 
-
-Serialization
--------------
+### Serialize Any Type to `Dynamic`
 
 The function `rhai::serde::to_dynamic` automatically converts any Rust type that implements
 [`serde::Serialize`](https://docs.serde.rs/serde/trait.Serialize.html) into a [`Dynamic`].
 
-This is usually not necessary because using [`Dynamic::from`][`Dynamic`] is much easier and is essentially
-the same thing.  The only difference is treatment for integer values.  `Dynamic::from` will keep the different
-integer types intact, while `rhai::serde::to_dynamic` will convert them all into [`INT`][standard types]
-(i.e. the system integer type which is `i64` or `i32` depending on the [`only_i32`] feature).
+For primary types, this is usually not necessary because using [`Dynamic::from`][`Dynamic`] is much
+easier and is essentially the same thing.  The only difference is treatment for integer values.
+`Dynamic::from` keeps different integer types intact, while `rhai::serde::to_dynamic` converts them
+all into [`INT`][standard types] (i.e. the system integer type which is `i64` or `i32` depending on
+the [`only_i32`] feature).
 
-In particular, Rust `struct`'s (or any type that is marked as a `serde` map) are converted into [object maps]
-while Rust `Vec`'s (or any type that is marked as a `serde` sequence) are converted into [arrays].
+Rust `struct`'s (or any type that is marked as a `serde` map) are converted into [object maps] while
+Rust `Vec`'s (or any type that is marked as a `serde` sequence) are converted into [arrays].
 
 While it is also simple to serialize a Rust type to `JSON` via `serde`,
 then use [`Engine::parse_json`]({{rootUrl}}/language/json.md) to convert it into an [object map],
@@ -61,8 +88,7 @@ map.is::<Map>() == true;
 ```
 
 
-Deserialization
----------------
+### Deserialize a `Dynamic` into Any Type
 
 The function `rhai::serde::from_dynamic` automatically converts a [`Dynamic`] value into any Rust type
 that implements [`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html).
@@ -104,9 +130,7 @@ let result: Dynamic = engine.eval(r#"
 let x: MyStruct = from_dynamic(&result)?;
 ```
 
-
-Cannot Deserialize Shared Values
--------------------------------
+### Cannot Deserialize Shared Values
 
 A [`Dynamic`] containing a _shared_ value cannot be deserialized &ndash; i.e. it will give a type error.
 
@@ -124,3 +148,5 @@ The [`serde`](https://crates.io/crates/serde) crate is quite heavy.
 If only _simple_ JSON parsing (i.e. only deserialization) of a hash object into a Rhai [object map] is required,
 the [`Engine::parse_json`]({{rootUrl}}/language/json.md}}) method is available as a _cheap_ alternative,
 but it does not provide the same level of correctness, nor are there any configurable options.
+
+

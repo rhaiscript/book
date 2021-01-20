@@ -19,20 +19,19 @@ Binary: `rhai-doc`
 Flags and Options
 -----------------
 
-|    Flag/Option    |    Parameter    | Description                                                                               |
-| :---------------: | :-------------: | ----------------------------------------------------------------------------------------- |
-|  `-h`, `--help`   |                 | print help                                                                                |
-| `-V`, `--version` |                 | print version                                                                             |
-|  `-D`, `--dest`   | _\<directory\>_ | set destination path for documentation output (default `./dist`)                          |
-|   `-d`, `--dir`   | _\<directory\>_ | set source path for Rhai script files (default `.`)                                       |
-|  `-p`, `--pages`  | _\<directory\>_ | set source path for additional [MarkDown] files to include in documentation (default `.`) |
+|    Flag/Option    |    Parameter    | Description                                                                                     |
+| :---------------: | :-------------: | ----------------------------------------------------------------------------------------------- |
+|  `-h`, `--help`   |                 | print help                                                                                      |
+| `-V`, `--version` |                 | print version                                                                                   |
+|  `-D`, `--dest`   | _\<directory\>_ | set destination path for documentation output (default `./dist`)                                |
+|   `-d`, `--dir`   | _\<directory\>_ | set source path for Rhai script files (default `.`)                                             |
+|  `-p`, `--pages`  | _\<directory\>_ | set source path for additional [MarkDown] files to include in documentation (default `./pages`) |
 
 
 `rhai.toml`
 -----------
 
-The file `rhai.toml` contains configuration options for `rhai-doc` and must be placed in the source
-directory.
+The file `rhai.toml` contains configuration options for `rhai-doc` and must be placed in the source directory.
 
 Example:
 
