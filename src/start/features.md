@@ -11,25 +11,72 @@ Notice that this deviates from Rust norm where features are _additive_.
 Excluding unneeded functionalities can result in smaller, faster builds as well as
 more control over what a script can (or cannot) do.
 
-| Feature             | Additive? | Description                                                                                                                                                                                                      |
-| ------------------- | :-------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `unchecked`         |    no     | disables arithmetic checking (such as over-flows and division by zero), call stack depth limit, operations count limit and modules loading limit.<br/>Beware that a bad script may panic the entire system!      |
-| `sync`              |    no     | restricts all values types to those that are `Send + Sync`. Under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                               |
-| `no_optimize`       |    no     | disables [script optimization]                                                                                                                                                                                   |
-| `no_float`          |    no     | disables floating-point numbers and math                                                                                                                                                                         |
-| `f32_float`         |    no     | sets the system floating-point type to `f32` instead of `f64`. `FLOAT` is set to `f32`                                                                                                                           |
-| `only_i32`          |    no     | sets the system integer type to `i32` and disable all other integer types. `INT` is set to `i32`                                                                                                                 |
-| `only_i64`          |    no     | sets the system integer type to `i64` and disable all other integer types. `INT` is set to `i64`                                                                                                                 |
-| `no_index`          |    no     | disables [arrays] and indexing features                                                                                                                                                                          |
-| `no_object`         |    no     | disables support for [custom types] and [object maps]                                                                                                                                                            |
-| `no_function`       |    no     | disables script-defined [functions] (implies `no_closure`)                                                                                                                                                       |
-| `no_module`         |    no     | disables loading external [modules]                                                                                                                                                                              |
-| `no_closure`        |    no     | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_, or [capturing the calling scope]({{rootUrl}}/language/fn-capture.md) in function calls              |
-| `no_std`            |    no     | builds for `no-std` (implies `no_closure`). Notice that additional dependencies will be pulled in to replace `std` features                                                                                      |
-| `serde`             |    yes    | enables serialization/deserialization via `serde` (requires the [`serde`](https://crates.io/crates/serde) crate)                                                                                                 |
-| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                                         |
-| `metadata`          |    yes    | enables exporting [functions metadata] to [JSON format]({{rootUrl}}/engine/metadata/export_to_json.md) (implies `serde` and additionally requires the [`serde_json`](https://crates.io/crates/serde_json) crate) |
-| `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes). Beware that Rhai internals are volatile and may change from version to version                                                                            |
+
+Features that Enable Special Functionalities
+-------------------------------------------
+
+| Feature             | Additive? | Description                                                                                                                                                                                            |
+| ------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                     |
+| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                               |
+| `serde`             |    yes    | enables serialization/deserialization via `serde` (requires the [`serde`](https://crates.io/crates/serde) crate)                                                                                       |
+| `metadata`          |    yes    | enables exporting [functions metadata] to [JSON format]({{rootUrl}}/engine/metadata/export_to_json.md) (implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json)) |
+| `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                                                                  |
+
+
+Features that Disable Certain Language Features
+----------------------------------------------
+
+| Feature       | Additive? | Description                                                                                                                                                                                         |
+| ------------- | :-------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `no_float`    |    no     | disables floating-point numbers and math                                                                                                                                                            |
+| `no_index`    |    no     | disables [arrays] and indexing features                                                                                                                                                             |
+| `no_object`   |    no     | disables support for [custom types] and [object maps]                                                                                                                                               |
+| `no_function` |    no     | disables script-defined [functions] (implies `no_closure`)                                                                                                                                          |
+| `no_module`   |    no     | disables loading external [modules]                                                                                                                                                                 |
+| `no_closure`  |    no     | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_, or [capturing the calling scope]({{rootUrl}}/language/fn-capture.md) in function calls |
+
+
+Features that Disable Certain Engine Features
+--------------------------------------------
+
+| Feature       | Additive? | Description                                                                                                                                                                                                 |
+| ------------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `unchecked`   |    no     | disables arithmetic checking (such as over-flows and division by zero), call stack depth limit, operations count limit and modules loading limit.<br/>Beware that a bad script may panic the entire system! |
+| `no_optimize` |    no     | disables [script optimization]                                                                                                                                                                              |
+
+
+Features that Configure the Engine
+---------------------------------
+
+| Feature     | Additive? | Description                                                                                      |
+| ----------- | :-------: | ------------------------------------------------------------------------------------------------ |
+| `f32_float` |    no     | sets the system floating-point type to `f32` instead of `f64`; `FLOAT` is set to `f32`           |
+| `only_i32`  |    no     | sets the system integer type to `i32` and disable all other integer types; `INT` is set to `i32` |
+| `only_i64`  |    no     | sets the system integer type to `i64` and disable all other integer types; `INT` is set to `i64` |
+
+
+Features for `no-std` Builds
+---------------------------
+
+The following features are provided exclusively for [`no-std`] targets.
+Do not use them when not compiling for [`no-std`].
+
+| Feature  | Additive? | Description                                                                                                                   |
+| -------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------- |
+| `no_std` |    no     | builds for [`no-std`] (implies `no_closure`); notice that additional dependencies will be pulled in to replace `std` features |
+
+
+Features for WebAssembly (WASM) Builds
+-------------------------------------
+
+The following features are provided exclusively for [WASM] targets.
+Do not use them for non-[WASM] targets.
+
+| Feature        | Additive? | Description                                                                        |
+| -------------- | :-------: | ---------------------------------------------------------------------------------- |
+| `wasm-bindgen` |    no     | uses [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) to compile for [WASM] |
+| `stdweb`       |    no     | uses [`stdweb`](https://crates.io/crates/stdweb) to compile for [WASM]             |
 
 
 Example
