@@ -12,12 +12,14 @@
 [`no_module`]: {{rootUrl}}/start/features.md
 [`no_closure`]: {{rootUrl}}/start/features.md
 [`no_std`]: {{rootUrl}}/start/features.md
-[`no-std`]: {{rootUrl}}/start/features.md
+[`wasm-bindgen`]: {{rootUrl}}/start/features.md
+[`stdweb`]: {{rootUrl}}/start/features.md
 [`metadata`]: {{rootUrl}}/start/features.md
 [`internals`]: {{rootUrl}}/start/features.md
 [`unicode-xid-ident`]: {{rootUrl}}/start/features.md
 
 [minimal builds]: {{rootUrl}}/start/builds/minimal.md
+[`no-std`]: {{rootUrl}}/start/builds/no-std.md
 [WASM]: {{rootUrl}}/start/builds/wasm.md
 
 [playground]: https://rhaiscript.github.io/playground

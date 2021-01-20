@@ -15,6 +15,16 @@ When building for WASM, certain features will not be available,
 such as the script file API's and loading modules from external script files.
 
 
+JavaScript Interop
+------------------
+
+Specify either of the [`wasm-bindgen`] or [`stdweb`] features when building for WASM.
+This selects the appropriate JavaScript interop layer to use.
+
+It is still possible to compile for WASM without either [`wasm-bindgen`] or [`stdweb`],
+but then the interop code must be explicitly provided.
+
+
 Size
 ----
 
@@ -39,17 +49,18 @@ Common Features
 Some Rhai functionalities are not necessary in a WASM environment, so the following features
 are typically used for a WASM build:
 
-|    Feature    | Description                                                                                                                                                                                                                            |
-| :-----------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`unchecked`] | When a WASM module panics, it doesn't crash the entire web app; however this also disables [maximum number of operations] and [progress] tracking so a script can still run indefinitely &ndash; the web app must terminate it itself. |
-| [`only_i32`]  | WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit.                                                                                                                                                      |
-| [`f32_float`] | WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses.                                                                                          |
-| [`no_module`] | A WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom [module resolver] can be provided that loads other Rhai scripts.                           |
+|            Feature             | Description                                                                                                                                                                                                                           |
+| :----------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`wasm-bindgen`] or [`stdweb`] | use [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) or [`stdweb`](https://crates.io/crates/stdweb) as the JavaScript interop layer, omit if using custom interop code                                                         |
+|         [`unchecked`]          | when a WASM module panics, it doesn't crash the entire web app; however this also disables [maximum number of operations] and [progress] tracking so a script can still run indefinitely &ndash; the web app must terminate it itself |
+|          [`only_i32`]          | WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit                                                                                                                                                      |
+|         [`f32_float`]          | WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses                                                                                          |
+|         [`no_module`]          | a WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom [module resolver] can be provided that loads other Rhai scripts                           |
 
 The following features are typically _not_ used because they don't make sense in a WASM build:
 
-|    Feature    | Why unnecessary                                                                                        |
-| :-----------: | ------------------------------------------------------------------------------------------------------ |
-|   [`sync`]    | WASM is single-threaded.                                                                               |
-|  [`no_std`]   | `std` lib works fine with WASM.                                                                        |
-| [`internals`] | WASM usually doesn't need to access Rhai internal data structures, unless you are walking the [`AST`]. |
+|    Feature    | Why unnecessary                                                                                       |
+| :-----------: | ----------------------------------------------------------------------------------------------------- |
+|   [`sync`]    | WASM is single-threaded                                                                               |
+|  [`no_std`]   | `std` lib works fine with WASM                                                                        |
+| [`internals`] | WASM usually doesn't need to access Rhai internal data structures, unless you are walking the [`AST`] |
