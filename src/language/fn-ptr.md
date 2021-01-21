@@ -228,6 +228,7 @@ of the particular call to a registered Rust function. It is a type that exposes 
 | Field               |                  Type                   | Description                                                                                                                                                                                                                                |
 | ------------------- | :-------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `engine()`          |                `&Engine`                | the current [`Engine`], with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using [`Engine::call_fn`][`call_fn`], or calling a [function pointer]. |
+| `fn_name()`         |                 `&str`                  | name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)                                                                                                                        |
 | `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                                                                                                                    |
 | `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                                                                                                                |
 | `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                                                                                                           |
@@ -261,7 +262,8 @@ ast.retain_functions(|_, _, _| true);
 let lib = [ast.as_ref()];
 
 // Create native call context
-let context = NativeCallContext::new(&engine, &lib);
+let fn_name = fn_ptr.fn_name().to_string();
+let context = NativeCallContext::new(&engine, &fn_name, &lib);
 
 // 'f' captures: the engine, the AST, and the closure
 let f = move |x: i64| fn_ptr.call_dynamic(context, None, [x.into()]);
