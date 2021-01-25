@@ -14,6 +14,7 @@ A number of examples can be found in the `examples` directory:
 | [`serde`]({{repoHome}}/examples/serde.rs)                                       | example to serialize and deserialize Rust types with [`serde`](https://crates.io/crates/serde).<br/>The [`serde`] feature is required to run |
 | [`simple_fn`]({{repoHome}}/examples/simple_fn.rs)                               | shows how to register a simple function                                                                                                      |
 | [`strings`]({{repoHome}}/examples/strings.rs)                                   | shows different ways to register functions taking string arguments                                                                           |
+| [`threading`]({{repoHome}}/examples/threading.rs)                               | shows to communication to an [`Engine`] running in a separate thread via an MPSC channel                                                     |
 
 
 Running Examples
