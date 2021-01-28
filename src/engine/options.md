@@ -7,7 +7,7 @@ A number of other configuration options are available from the `Engine` to fine-
 
 | Method                   | Not available under          | Description                                                                                                            |
 | ------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `set_doc_comments`       |                              | enables/disables [doc-comments]                                                                                        |
+| `enable_doc_comments`    |                              | enables/disables [doc-comments]                                                                                        |
 | `set_optimization_level` | [`no_optimize`]              | sets the amount of script _optimizations_ performedSee [script optimization]                                           |
 | `set_max_expr_depths`    | [`unchecked`]                | sets the maximum nesting levels of an expression/statementSee [maximum statement depth]                                |
 | `set_max_call_levels`    | [`unchecked`]                | sets the maximum number of function call levels (default 50) to avoid infinite recursionSee [maximum call stack depth] |

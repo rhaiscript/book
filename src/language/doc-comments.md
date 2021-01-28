@@ -74,4 +74,5 @@ of this information to auto-generate documentation for Rhai script functions.
 Disabling Doc-Comments
 ----------------------
 
-Doc-comments can be disabled via the `Engine::set_doc_comments` method.
+Doc-comments can be disabled via the `Engine::enable_doc_comments` method,
+passing an argument of `false`.
