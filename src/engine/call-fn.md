@@ -1,5 +1,5 @@
-Calling Rhai Functions from Rust
-===============================
+Call Rhai Functions from Rust
+============================
 
 {{#include ../links.md}}
 
@@ -56,6 +56,43 @@ let result: () = engine.call_fn(&mut scope, &ast, "hidden", ())?;
 ```
 
 
+`FuncArgs` trait
+----------------
+
+`Engine::call_fn` takes a parameter of any type that implements the [`FuncArgs`][traits] trait,
+which is used to parse a data type into individual argument values for the function call.
+
+Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
+
+Custom types (e.g. structures) can also implement [`FuncArgs`][traits] so they can be used for
+calling `Engine::call_fn`.
+
+```rust
+use std::iter::once;
+use rhai::FuncArgs;
+
+// A struct containing function arguments
+struct Options {
+    pub foo: bool,
+    pub bar: String,
+    pub baz: i64
+}
+
+impl FuncArgs for Options {
+    fn parse<C: Extend<Dynamic>>(self, container: &mut C) {
+        container.extend(once(self.foo.into()));
+        container.extend(once(self.bar.into()));
+        container.extend(once(self.baz.into()));
+    }
+}
+
+let options = Options { foo: true, bar: "world", baz: 42 };
+
+// The type 'Options' can now be used as arguments to 'call_fn'!
+let result: i64 = engine.call_fn(&mut scope, &ast, "hello", options)?;
+```
+
+
 Low-Level API &ndash; `Engine::call_fn_dynamic`
 ----------------------------------------------
 
@@ -73,8 +110,7 @@ let result = engine.call_fn_dynamic(
 ```
 
 
-Binding the `this` Pointer
--------------------------
+### Binding the `this` Pointer
 
 `Engine::call_fn_dynamic` can also bind a value to the `this` pointer of a script-defined function.
 
