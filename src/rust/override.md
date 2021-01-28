@@ -18,5 +18,20 @@ let x = 123.to_float();
 print(x);       // what happens?
 ```
 
-A registered native Rust function, in turn, overrides any built-in function of the
-same name, number and types of parameters.
+
+Search Order of Functions
+-------------------------
+
+Rhai searches for the correct implementation of a function in the following order:
+
+* Rhai script-defined [functions].
+
+* Native Rust functions registered directly into the [`Engine`] via the `Engine::register_XXX` API.
+
+* Native Rust functions in [packages] that have been loaded.
+
+* Native Rust or Rhai script-defined functions in [imported][`import`] [modules] (or [modules]
+  loaded via `Engine::register_static_module`) that have are exposed globally (e.g. via the
+  `#[rhai_fn(global)]` attribute in a [plugin module]).
+
+* [Built-in][built-in operators] functions.
