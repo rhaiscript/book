@@ -40,7 +40,7 @@ Notice that the custom type needs to be _registered_ using `Engine::register_typ
 or `Engine::register_type_with_name`.
 
 To use native methods on custom types in Rhai scripts, it is common to register an API
-for the type using one of the `Engine::register_XXX` functions.
+for the type via the `Engine::register_XXX` methods.
 
 ```rust
 use rhai::{Engine, EvalAltResult};
@@ -166,7 +166,7 @@ engine
     }).register_fn("insert", |list: &mut Array, position: i64, item: TestStruct| {
         if position <= 0 {
             list.insert(0, Dynamic::from(item));
-        } else if (position as usize) >= list.len() - 1 {
+        } else if (position as usize) >= list.len() {
             list.push(item);
         } else {
             list.insert(position as usize, Dynamic::from(item));
