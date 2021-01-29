@@ -52,13 +52,13 @@ ts != 42;               // true - types cannot be compared
 Boolean operators
 -----------------
 
-|     Operator      | Description   | Short-Circuits? |
-| :---------------: | ------------- | :-------------: |
-|   `!` (prefix)    | boolean _NOT_ |       no        |
-|       `&&`        | boolean _AND_ |       yes       |
-|        `&`        | boolean _AND_ |       no        |
-| <code>\|\|</code> | boolean _OR_  |       yes       |
-|  <code>\|</code>  | boolean _OR_  |       no        |
+|     Operator      | Description   | Arity  | Short-Circuits? |
+| :---------------: | ------------- | :----: | :-------------: |
+|   `!` (prefix)    | boolean _NOT_ | unary  |       no        |
+|       `&&`        | boolean _AND_ | binary |       yes       |
+|        `&`        | boolean _AND_ | binary |       no        |
+| <code>\|\|</code> | boolean _OR_  | binary |       yes       |
+|  <code>\|</code>  | boolean _OR_  | binary |       no        |
 
 Double boolean operators `&&` and `||` _short-circuit_ &ndash; meaning that the second operand will not be evaluated
 if the first one already proves the condition wrong.

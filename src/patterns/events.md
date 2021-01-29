@@ -48,7 +48,7 @@ struct Handler {
     // Scripting engine
     pub engine: Engine,
     // Use a custom 'Scope' to keep stored state
-    pub scope: Scope<'static>,
+    pub scope: Scope,
     // Program script
     pub ast: AST
 }

@@ -31,9 +31,9 @@ Custom Types
 
 `type_of()` a [custom type] returns:
 
-* if registered via `Engine::register_type_with_name` &ndash; the registered name
+* the registered name, if registered via `Engine::register_type_with_name`
 
-* if registered via `Engine::register_type` &ndash; the full Rust path name
+* the full Rust type name, if registered via `Engine::register_type`
 
 ```rust
 struct TestStruct1;

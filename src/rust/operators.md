@@ -28,12 +28,12 @@ handled specially and _not_ via a function; as a result, overriding them has no 
 Overload Operator via Rust Function
 ----------------------------------
 
-Operator functions cannot be defined as a script function (because operators syntax are not valid function names).
+Operator functions cannot be defined in script because operators are usually not valid function names.
 
-However, operator functions _can_ be registered to the [`Engine`] via the methods
-`Engine::register_fn`, `Engine::register_result_fn` etc.
+However, operator functions _can_ be registered to the [`Engine`] via the `Engine::register_XXX` API.
 
-When a custom operator function is registered with the same name as an operator, it _overrides_ the built-in version.
+When a custom operator function is registered with the same name as an operator, it _overrides_ the
+built-in version.
 
 ```rust
 use rhai::{Engine, EvalAltResult, RegisterFn};
@@ -67,8 +67,9 @@ Considerations
 
 Normally, use operator overloading for [custom types] only.
 
-Be very careful when overriding built-in operators because script authors expect standard operators to behave in a
-consistent and predictable manner, and will be annoyed if a calculation for '`+`' turns into a subtraction, for example.
+Be very careful when overriding built-in operators because users expect standard operators to behave
+in a consistent and predictable manner, and will be annoyed if a calculation for '`+`' turns into a
+subtraction, for example.
 
 Operator overloading also impacts script optimization when using [`OptimizationLevel::Full`].
 See the [script-optimization] for more details.
