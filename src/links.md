@@ -22,7 +22,7 @@
 [`no-std`]: {{rootUrl}}/start/builds/no-std.md
 [WASM]: {{rootUrl}}/start/builds/wasm.md
 
-[playground]: https://rhaiscript.github.io/playground
+[playground]: https://rhai.rs/playground
 [`rhai-doc`]: https://github.com/rhaiscript/rhai-doc
 [MarkDown]: http://en.wikipedia.org/wiki/Markdown
 

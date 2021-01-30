@@ -1,7 +1,7 @@
 The Rhai Book
 =============
 
-[_The Rhai Book_](https://rhaiscript.github.io/book) serves as Rhai's primary
+[_The Rhai Book_](https://rhai.rs/book) serves as Rhai's primary
 documentation and tutorial resource.
 
 
