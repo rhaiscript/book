@@ -19,9 +19,9 @@ Needless to say, it is _extremely_ inefficient to use `String` parameters.
 -------------------------------
 
 Rust functions accepting parameters of `String` should use `&str` instead because it maps directly to
-[`ImmutableString`][string] which is the type that Rhai uses to represent [strings] internally.
+[`ImmutableString`] which is the type that Rhai uses to represent [strings] internally.
 
-The parameter type `String` involves always converting an [`ImmutableString`][string] into a `String`
+The parameter type `String` involves always converting an [`ImmutableString`] into a `String`
 which mandates cloning it.
 
 Using `ImmutableString` or `&str` is much more efficient.

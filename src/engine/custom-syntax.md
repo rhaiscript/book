@@ -390,7 +390,7 @@ where:
 | `symbols`    | `&[ImmutableString]` | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` is replaced by the actual identifier |
 | `look_ahead` |        `&str`        | a string slice containing the next symbol that is about to be read                                                                             |
 
-Most strings are [`ImmutableString`][string]'s so it is usually more efficient to just `clone` the appropriate one
+Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.
 
 ### Return Value
