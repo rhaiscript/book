@@ -84,17 +84,60 @@ has been registered with a friendly name via `Engine::register_type_with_name`. 
 is different from that of the [`type_of`][`type_of()`] function in Rhai.
 
 
-Conversion Traits
-----------------
+Methods and Traits
+------------------
 
-The following conversion traits are implemented for `Dynamic`:
+The following methods are available when working with `Dynamic`:
 
-* `From<i64>` (`i32` if [`only_i32`])
-* `From<f64>` (if not [`no_float`])
-* `From<bool>`
-* `From<rhai::ImmutableString>`
-* `From<String>`
-* `From<char>`
-* `From<Vec<T>>` (into an [array])
-* `From<HashMap<String, T>>` (into an [object map])
-* `From<Instant>` (into a [timestamp] if not [`no_std`])
+| Method                        |        Return type        | Description                                                                                                                                         |
+| ----------------------------- | :-----------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `from<T>` _(instance method)_ |         `Dynamic`         | create a `Dynamic` from any value that implements `Clone`                                                                                           |
+| `type_name`                   |          `&str`           | name of the value's type                                                                                                                            |
+| `into_shared`                 |         `Dynamic`         | turn the value into a _shared_ value (panics under [`no_closure`])                                                                                  |
+| `flatten_clone`               |         `Dynamic`         | clone the value (a _shared_ value, if any, is cloned into a separate copy)                                                                          |
+| `flatten`                     |         `Dynamic`         | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
+| `read_lock<T>`                | `Option<` _guard to_ `T>` | lock the value for reading (no action under [`no_closure`]                                                                                          |
+| `write_lock<T>`               | `Option<` _guard to_ `T>` | lock the value exclusively for writing (no action under [`no_closure`]                                                                              |
+
+### Detection methods
+
+| Method         | Return type | Description                                                                                       |
+| -------------- | :---------: | ------------------------------------------------------------------------------------------------- |
+| `is<T>`        |   `bool`    | is the value of type `T`?                                                                         |
+| `is_variant`   |   `bool`    | is the value a trait object (i.e. not one of Rhai's [standard types])?                            |
+| `is_shared`    |   `bool`    | is the value _shared_ via a [closure]? Always `false` under [`no_closure`].                       |
+| `is_read_only` |   `bool`    | is the value [constant]? A [constant] value should not be modified.                               |
+| `is_locked`    |   `bool`    | is the value _shared_ and locked (i.e. currently being read)? Always `false` under [`no_closure`] |
+
+### Casting methods
+
+The following methods cast a `Dynamic` into a specific type:
+
+| Method                                        |                        Return type                         |
+| --------------------------------------------- | :--------------------------------------------------------: |
+| `cast<T>`                                     |                  `T` (panics on failure)                   |
+| `try_cast<T>`                                 |                        `Option<T>`                         |
+| `as_int`                                      | `Result<i64, &str>` (`Result<i32, &str>` if [`only_i32`])  |
+| `as_float` (not available under [`no_float`]) | `Result<f64, &str>` (`Result<f32, &str>` if [`f32_float`]) |
+| `as_bool`                                     |                    `Result<bool, &str>`                    |
+| `as_char`                                     |                    `Result<char, &str>`                    |
+| `as_str`                                      |                    `Result<&str, &str>`                    |
+| `take_string`                                 |                   `Result<String, &str>`                   |
+| `take_immutable_string`                       |              `Result<ImmutableString, &str>`               |
+
+### Constructor traits
+
+The following constructor traits are implemented for `Dynamic`:
+
+| Trait                                                                                                                |       Rhai standard type       |
+| -------------------------------------------------------------------------------------------------------------------- | :----------------------------: |
+| `From<i64>` (`From<i32>` if [`only_i32`])                                                                            | `i64` (`i32` if [`only_i32`])  |
+| `From<f64>` (`From<f32>` if [`f32_float`], not available under [`no_float`])                                         | `f64` (`f32` if [`f32_float`]) |
+| `From<bool>`                                                                                                         |             `bool`             |
+| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`                                               |      [`ImmutableString`]       |
+| `From<char>`                                                                                                         |             `char`             |
+| `From<Vec<T>>` (not available under [`no_index`])                                                                    |            [array]             |
+| `From<&[T]>` (not available under [`no_index`])                                                                      |            [array]             |
+| `From<HashMap<K: Into<ImmutableString>, T>>` (not available under [`no_object`])<br/>e.g. `From<HashMap<String, T>>` |          [object map]          |
+| `From<rhai::FnPtr>`                                                                                                  |       [function pointer]       |
+| `From<Instant>` (not available under [`no_std`])                                                                     |          [timestamp]           |
