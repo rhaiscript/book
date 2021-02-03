@@ -29,7 +29,7 @@ encapsulated within an [`AST`]:
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `clone_functions_only(&self)`                  | clone the [`AST`] into a new [`AST`] with only functions, excluding statements                                |
 | `clone_functions_only_filtered(&self, filter)` | clone the [`AST`] into a new [`AST`] with only functions that pass the filter predicate, excluding statements |
-| `retain_functions(&mut self, filter)`          | remove all functions in the [`AST`] that do not pass a particular predicate filter; statements are excluded   |
+| `retain_functions(&mut self, filter)`          | remove all functions in the [`AST`] that do not pass a particular predicate filter; statements are untouched  |
 | `iter_functions(&self)`                        | return an iterator on all the functions in the [`AST`]                                                        |
 | `clear_functions(&mut self)`                   | remove all functions from the [`AST`], leaving only statements                                                |
 

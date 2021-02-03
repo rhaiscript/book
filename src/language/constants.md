@@ -90,8 +90,15 @@ x.double();         // <- error: cannot modify constant 'this'
 x == 43;            // value of 'x' is unchanged by script
 ```
 
+### Implications on script optimization
+
+Rhai _assumes_ that constants are never changed, even via Rust functions.
+
 This is important to keep in mind because the script [optimizer][script optimization]
 by default does _constant propagation_ as a operation.
 
 If a constant is eventually modified by a Rust function, the optimizer will not see
 the updated value and will propagate the original initialization value instead.
+
+`Dynamic::is_read_only` can be used to detect whether a [`Dynamic`] value is constant or not
+within a Rust function.

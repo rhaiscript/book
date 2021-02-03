@@ -10,8 +10,8 @@ This scenario is especially common when simulating object-oriented programming (
 // Define object
 let obj = #{
     data: 42,
-    increment: Fn("inc_obj"),       // use function pointers to
-    decrement: Fn("dec_obj"),       // refer to method functions
+    increment: Fn("inc_obj"),           // use function pointers to
+    decrement: Fn("dec_obj"),           // refer to method functions
     print: Fn("print_obj")
 };
 
@@ -27,9 +27,11 @@ The above can be replaced by using _anonymous functions_ which have the same syn
 ```rust
 let obj = #{
     data: 42,
-    increment: |x| this.data += x,          // one-liner
+    increment: |x| this.data += x,      // one-liner
     decrement: |x| this.data -= x,
-    print_obj: || { print(this.data); }     // full function body
+    print_obj: || {
+        print(this.data);               // full function body
+    }
 };
 ```
 
@@ -44,9 +46,15 @@ let obj = #{
     print: Fn("anon_fn_1002")
 };
 
-fn anon_fn_1000(x) { this.data += x; }
-fn anon_fn_1001(x) { this.data -= x; }
-fn anon_fn_1002() { print this.data; }
+fn anon_fn_1000(x) {
+    this.data += x;                     // when called, 'this' maps to the object map
+}
+fn anon_fn_1001(x) {
+    this.data -= x;                     // when called, 'this' maps to the object map
+}
+fn anon_fn_1002() {
+    print(this.data);                   // when called, 'this' maps to the object map
+}
 ```
 
 

@@ -3,10 +3,11 @@ Working With Rust Enums
 
 {{#include ../links.md}}
 
-Enums in Rust are typically used with _pattern matching_.  Rhai is dynamic, so although
-it integrates with Rust enum variants just fine (treated transparently as [custom types]),
-it is impossible (short of registering a complete API) to distinguish between individual
-enum variants or to extract internal data from them.
+Enums in Rust are typically used with _pattern matching_.
+
+Rhai is dynamic, so although it integrates with Rust enum variants just fine (treated transparently
+as [custom types]), it is impossible  (short of registering a complete API) to distinguish between
+individual enum variants or to extract internal data from them.
 
 
 Simulate an Enum API
