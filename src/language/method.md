@@ -15,7 +15,8 @@ Unlike functions defined in script (for which all arguments are passed by _value
 native Rust functions may mutate the object (or the first argument if called in normal function call style).
 
 However, sometimes it is not as straight-forward, and methods called in function-call style may end up
-not muting the object &ndash; see the example below. Therefore, it is best to always use method-call style.
+not muting the object &ndash; see the example below. Therefore, for performance reasons and to avoid
+cloning the first argument, it is best to always use method-call style wherever possible.
 
 Custom types, properties and methods can be disabled via the [`no_object`] feature.
 
@@ -31,7 +32,7 @@ let array = [ a ];
 
 update(array[0]);   // <- 'array[0]' is an expression returning a calculated value,
                     //    a transient (i.e. a copy), so this statement has no effect
-                    //    except waste a lot of time cloning
+                    //    except waste time cloning 'a'
 
 array[0].update();  // <- call in method-call style will update 'a'
 ```
@@ -93,3 +94,41 @@ fn add_method(obj: &mut VeryComplexType, offset: i64) -> i64 {
     do_add(obj, offset)
 }
 ```
+
+
+Data Race Considerations
+------------------------
+
+Because methods always take a mutable reference as the first argument, even it the value is never changed,
+care must be taken when using _shared_ values with methods.
+
+Usually data races are not possible in Rhai because, for each function call, there is ever only one
+value that is mutable &ndash; the first argument of a method.  All other arguments are cloned.
+
+It is possible, however, to create a data race with a _shared_ value, when the same value is used
+both as the _object_ of a method call (including the `this` pointer) and also as an argument.
+
+```rust
+// A method using the 'this' pointer and an argument
+fn foo(x) {
+    this + x
+}
+
+let value = 42;     // 'value' is not shared by default
+
+let f = || value;   // this closure captures 'value'
+
+// ... at this point, 'value' is shared
+
+value.is_shared() == true;
+
+value.foo(value);   // <- error: data race detected!
+```
+
+The reason why it is a data race is because the variable `value` is _shared_, and cloning it merely
+clones a shared reference to it.  Using it as the method call object (i.e. the `this` pointer) takes
+a mutable reference to the underlying value, which then cause a data race because a non-mutable
+reference is already outstanding due to the argument (which uses the same variable).
+
+Shared values are typically created from [closures] which capture external variable, so data races
+are not possible in Rhai under the [`no_closure`] feature.
