@@ -34,8 +34,8 @@ operate on `f64` only (`f32` under [`f32_float`]):
 
 | Category         | Functions                                                             |
 | ---------------- | --------------------------------------------------------------------- |
-| Trigonometry     | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in degrees                |
-| Arc-trigonometry | `asin`, `acos`, `atan`, `asinh`, `acosh`, `atanh` in degrees          |
+| Trigonometry     | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in radians                |
+| Arc-trigonometry | `asin`, `acos`, `atan`, `asinh`, `acosh`, `atanh` in radians          |
 | Square root      | `sqrt`                                                                |
 | Exponential      | `exp` (base _e_)                                                      |
 | Logarithmic      | `ln` (base _e_), `log10` (base 10), `log` (any base)                  |
