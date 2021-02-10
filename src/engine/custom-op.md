@@ -109,7 +109,7 @@ The following _precedence table_ shows the built-in precedence of standard Rhai 
 | Comparisons         |                                  `>`, `>=`, `<`, `<=`                                   |        130         |
 | Arithmetic          |                                        `+`, `-`                                         |        150         |
 | Arithmetic          |                                      `*`, `/`, `%`                                      |        180         |
-| Arithmetic          |                                           `~`                                           |        190         |
+| Arithmetic          |                                 `**` _(binds to right)_                                 |        190         |
 | Bit-shifts          |                                       `<<`, `>>`                                        |        210         |
-| Object              |                                 `.` _(binds to right)_                                  |        240         |
-| Unary operators     |                         unary `+`, `-`, `!` _(binds to right)_                          |        255         |
+| Unary operators     |                         unary `+`, `-`, `!` _(binds to right)_                          |   second highest   |
+| Object field access |                                 `.` _(binds to right)_                                  |      highest       |
