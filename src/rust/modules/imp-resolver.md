@@ -7,7 +7,7 @@ For many applications in which Rhai is embedded, it is necessary to customize th
 are resolved.  For instance, modules may need to be loaded from script texts stored in a database,
 not in the file system.
 
-A module resolver must implement the trait [`rhai::ModuleResolver`][traits],
+A module resolver must implement the [`ModuleResolver`][traits] trait,
 which contains only one required function: `resolve`.
 
 When Rhai prepares to load a module, `ModuleResolver::resolve` is called with the name

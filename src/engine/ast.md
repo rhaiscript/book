@@ -1,5 +1,5 @@
-Managing `AST`'s
-================
+Manage `AST`'s
+==============
 
 {{#include ../links.md}}
 
@@ -19,8 +19,8 @@ are imported recursively.
 Most of the [`AST`] API is available only under the [`internals`] feature.
 
 
-Extracting Only Functions
--------------------------
+Extract Only Functions
+----------------------
 
 The following methods, not available under [`no_function`], allow manipulation of the functions
 encapsulated within an [`AST`]:
@@ -34,8 +34,8 @@ encapsulated within an [`AST`]:
 | `clear_functions(&mut self)`                   | remove all functions from the [`AST`], leaving only statements                                                |
 
 
-Extracting Only Statements
--------------------------
+Extract Only Statements
+-----------------------
 
 The following methods allow manipulation of the statements in an [`AST`]:
 
@@ -45,8 +45,8 @@ The following methods allow manipulation of the statements in an [`AST`]:
 | `clear_statements(&mut self)`  | remove all statements from the [`AST`], leaving only functions                     |
 
 
-Merging and Combining AST's
----------------------------
+Merge and Combine AST's
+-----------------------
 
 The following methods merge one [`AST`] with another:
 

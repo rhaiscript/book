@@ -61,7 +61,7 @@ nevertheless it makes the DSL syntax much simpler and expressive.
 Custom Syntax
 -------------
 
-For advanced DSL scenarios, it is possible to define entire expression [_syntax_][custom syntax] &ndash
+For advanced DSL scenarios, it is possible to define entire expression [_syntax_][custom syntax] &ndash;
 essentially custom statement types.
 
 For example, the following is a SQL-like syntax for some obscure DSL operation:

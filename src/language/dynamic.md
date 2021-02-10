@@ -93,7 +93,7 @@ The following methods are available when working with `Dynamic`:
 | ----------------------------- | :-----------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `from<T>` _(instance method)_ |         `Dynamic`         | create a `Dynamic` from any value that implements `Clone`                                                                                           |
 | `type_name`                   |          `&str`           | name of the value's type                                                                                                                            |
-| `into_shared`                 |         `Dynamic`         | turn the value into a _shared_ value (panics under [`no_closure`])                                                                                  |
+| `into_shared`                 |         `Dynamic`         | turn the value into a _shared_ value (not available under [`no_closure`])                                                                           |
 | `flatten_clone`               |         `Dynamic`         | clone the value (a _shared_ value, if any, is cloned into a separate copy)                                                                          |
 | `flatten`                     |         `Dynamic`         | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
 | `read_lock<T>`                | `Option<` _guard to_ `T>` | lock the value for reading (no action under [`no_closure`]                                                                                          |
@@ -139,5 +139,5 @@ The following constructor traits are implemented for `Dynamic`:
 | `From<Vec<T>>` (not available under [`no_index`])                                                                    |            [array]             |
 | `From<&[T]>` (not available under [`no_index`])                                                                      |            [array]             |
 | `From<HashMap<K: Into<ImmutableString>, T>>` (not available under [`no_object`])<br/>e.g. `From<HashMap<String, T>>` |          [object map]          |
-| `From<rhai::FnPtr>`                                                                                                  |       [function pointer]       |
+| `From<FnPtr>`                                                                                                        |       [function pointer]       |
 | `From<Instant>` (not available under [`no_std`])                                                                     |          [timestamp]           |
