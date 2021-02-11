@@ -87,3 +87,59 @@ foo(1)                      // <- notice this will be "hello1" instead of 43,
                             //    but it is no longer the return value
 foo("!")                    // <- returns "hello!"
 ```
+
+
+Walk an AST
+-----------
+
+The [`internals`] feature allows access to internal Rhai data structures, particularly the nodes
+that make up the [`AST`].
+
+### AST node types
+
+There are a few useful types when walking an [`AST`]:
+
+| Type         | Description                                                       |
+| ------------ | ----------------------------------------------------------------- |
+| `ASTNode`    | an `enum` with two variants: `Expr` or `Stmt`                     |
+| `Expr`       | an _expression_                                                   |
+| `Stmt`       | a _statement_                                                     |
+| `BinaryExpr` | a sub-type containing the LHS and RHS of a binary expression      |
+| `FnCallExpr` | a sub-type containing information on a function call              |
+| `CustomExpr` | a sub-type containing information on a [custom syntax] expression |
+
+The `AST::walk` method takes a callback function and recursively walks the [`AST`] in depth-first
+manner, with the parent node visited before its children.
+
+### Callback function signature
+
+The function signature of the callback function is:
+
+> `FnMut(&[ASTNode])`
+
+The single argument passed to the method contains a slice of `ASTNode` types representing the path
+from the current node to the root of the [`AST`].
+
+### Children visit order
+
+The order of visits to the children of each node type:
+
+| Node type                                                        | Children visit order                                                    |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `if` statement                                                   | condition expression, _then_ statement, _else_ statement (if any)       |
+| `switch` statement                                               | match element, each of the match statements, default statement (if any) |
+| `while`, `do` statement                                          | condition expression, statement body                                    |
+| `for` statement                                                  | collection expression, statement body                                   |
+| [`try` ... `catch`]({{rootUrl}}/language/try-catch.md) statement | `try` statement body, `catch` statement body                            |
+| [`import`] statement                                             | path expression                                                         |
+| [Array] literal                                                  | each of the element expressions                                         |
+| [Object map] literal                                             | each of the element expressions                                         |
+| Indexing                                                         | LHS, RHS                                                                |
+| Field access/method call                                         | LHS, RHS                                                                |
+| `&&`, <code>\|\|</code>, `in` expression                         | LHS, RHS                                                                |
+| [Function] call, operator expression                             | each of the argument expressions                                        |
+| [`let`][variable], [`const`][constant] statement                 | value expression                                                        |
+| Assignment statement                                             | l-value expression, value expression                                    |
+| Statement block                                                  | each of the statements                                                  |
+| Custom syntax expression                                         | each of the `$expr$` and `$stmt$` blocks                                |
+| All others                                                       | single child, or none                                                   |
