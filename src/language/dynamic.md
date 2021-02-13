@@ -119,6 +119,7 @@ The following methods cast a `Dynamic` into a specific type:
 | `try_cast<T>`                                 |                        `Option<T>`                         |
 | `as_int`                                      | `Result<i64, &str>` (`Result<i32, &str>` if [`only_i32`])  |
 | `as_float` (not available under [`no_float`]) | `Result<f64, &str>` (`Result<f32, &str>` if [`f32_float`]) |
+| `as_decimal` (requires [`decimal`])           |                  `Result<Decimal, &str>`                   |
 | `as_bool`                                     |                    `Result<bool, &str>`                    |
 | `as_char`                                     |                    `Result<char, &str>`                    |
 | `as_str`                                      |                    `Result<&str, &str>`                    |
@@ -129,10 +130,11 @@ The following methods cast a `Dynamic` into a specific type:
 
 The following constructor traits are implemented for `Dynamic`:
 
-| Trait                                                                                                                |       Rhai standard type       |
+| Trait                                                                                                                |           Data type            |
 | -------------------------------------------------------------------------------------------------------------------- | :----------------------------: |
 | `From<i64>` (`From<i32>` if [`only_i32`])                                                                            | `i64` (`i32` if [`only_i32`])  |
 | `From<f64>` (`From<f32>` if [`f32_float`], not available under [`no_float`])                                         | `f64` (`f32` if [`f32_float`]) |
+| `From<Decimal>` (requires [`decimal`])                                                                               |   [`Decimal`][rust_decimal]    |
 | `From<bool>`                                                                                                         |             `bool`             |
 | `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`                                               |      [`ImmutableString`]       |
 | `From<char>`                                                                                                         |             `char`             |

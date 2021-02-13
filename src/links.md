@@ -4,6 +4,7 @@
 [`no_optimize`]: {{rootUrl}}/start/features.md
 [`no_float`]: {{rootUrl}}/start/features.md
 [`f32_float`]: {{rootUrl}}/start/features.md
+[`decimal`]: {{rootUrl}}/start/features.md
 [`only_i32`]: {{rootUrl}}/start/features.md
 [`only_i64`]: {{rootUrl}}/start/features.md
 [`no_index`]: {{rootUrl}}/start/features.md
@@ -55,10 +56,13 @@
 [`()`]: {{rootUrl}}/language/values-and-types.md
 [standard types]: {{rootUrl}}/language/values-and-types.md
 [`Dynamic`]: {{rootUrl}}/language/dynamic.md
+[rust_decimal]: https://crates.io/crates/rust_decimal
 [`to_int`]: {{rootUrl}}/language/convert.md
 [`to_float`]: {{rootUrl}}/language/convert.md
+[`to_decimal`]: {{rootUrl}}/language/convert.md
 [`parse_int`]: {{rootUrl}}/language/convert.md
 [`parse_float`]: {{rootUrl}}/language/convert.md
+[`parse_decimal`]: {{rootUrl}}/language/convert.md
 
 [custom type]: {{rootUrl}}/rust/custom.md
 [custom types]: {{rootUrl}}/rust/custom.md
