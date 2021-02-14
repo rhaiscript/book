@@ -35,11 +35,22 @@ The most important resources to watch out for are:
   it is a severe security breach and may put the entire system at risk.
 
 
+Any Panic is a Bug
+------------------
+
+Rhai is designed to not bring down the host system, regardless of what a script may do to it.
+This is a central design goal &ndash; Rhai provides a "No Panic" guarantee.
+
+When using Rhai, any panic outside of API's with explicitly documented panic conditions is
+considered a bug in Rhai and should be reported as such.
+
+
 `unchecked`
 -----------
 
-All these safe-guards can be turned off via the [`unchecked`] feature, which disables all
-safety checks (even fatal errors such as arithmetic overflows and division-by-zero).
+All the above safe-guards can be turned off via the [`unchecked`] feature, which disables all safety
+checks (even fatal ones such as stack overflow, arithmetic overflow and division-by-zero).
 
-This will increase script evaluation performance, at the expense of having an erroneous
-script able to panic the entire system.
+This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.
+
+Under [`unchecked`], it is very possible for a malicious script to panic and bring down the host system.

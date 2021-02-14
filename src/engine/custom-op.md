@@ -99,17 +99,17 @@ When registering a custom operator, the operator's precedence must also be provi
 
 The following _precedence table_ shows the built-in precedence of standard Rhai operators:
 
-| Category            |                                        Operators                                        | Precedence (0-255) |
-| ------------------- | :-------------------------------------------------------------------------------------: | :----------------: |
-| Assignments         | `=`, `+=`, `-=`, `*=`, `/=`, `~=`, `%=`,<br/>`<<=`, `>>=`, `&=`, <code>\|=</code>, `^=` |         0          |
-| Logic and bit masks |                        <code>\|\|</code>,  <code>\|</code>, `^`                         |         30         |
-| Logic and bit masks |                                        `&&`, `&`                                        |         60         |
-| Comparisons         |                                       `==`, `!=`                                        |         90         |
-|                     |                                          `in`                                           |        110         |
-| Comparisons         |                                  `>`, `>=`, `<`, `<=`                                   |        130         |
-| Arithmetic          |                                        `+`, `-`                                         |        150         |
-| Arithmetic          |                                      `*`, `/`, `%`                                      |        180         |
-| Arithmetic          |                                 `**` _(binds to right)_                                 |        190         |
-| Bit-shifts          |                                       `<<`, `>>`                                        |        210         |
-| Unary operators     |                         unary `+`, `-`, `!` _(binds to right)_                          |   second highest   |
-| Object field access |                                 `.` _(binds to right)_                                  |      highest       |
+| Category            |                                        Operators                                         | Precedence (0-255) |
+| ------------------- | :--------------------------------------------------------------------------------------: | :----------------: |
+| Assignments         | `=`, `+=`, `-=`, `*=`, `/=`, `**=`, `%=`,<br/>`<<=`, `>>=`, `&=`, <code>\|=</code>, `^=` |         0          |
+| Logic and bit masks |                         <code>\|\|</code>,  <code>\|</code>, `^`                         |         30         |
+| Logic and bit masks |                                        `&&`, `&`                                         |         60         |
+| Comparisons         |                                        `==`, `!=`                                        |         90         |
+| Containment         |                                           `in`                                           |        110         |
+| Comparisons         |                                   `>`, `>=`, `<`, `<=`                                   |        130         |
+| Arithmetic          |                                         `+`, `-`                                         |        150         |
+| Arithmetic          |                                      `*`, `/`, `%`                                       |        180         |
+| Arithmetic          |                                 `**` _(binds to right)_                                  |        190         |
+| Bit-shifts          |                                        `<<`, `>>`                                        |        210         |
+| Unary operators     |                          unary `+`, `-`, `!` _(binds to right)_                          |   second highest   |
+| Object field access |                                  `.` _(binds to right)_                                  |      highest       |

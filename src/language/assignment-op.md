@@ -17,7 +17,7 @@ number /= 5;            // number = number / 5
 
 number %= 4;            // number = number % 4
 
-number ~= 3;            // number = number ~ 3
+number **= 3;           // number = number ** 3
 
 number <<= 2;           // number = number << 2
 
