@@ -202,11 +202,16 @@ thereby putting heavy load on the file-system (or even the network if the file i
 it is a severe security breach and may put the entire system at risk.</p>
 </li>
 </ul>
+<h2><a class="header" href="#any-panic-is-a-bug" id="any-panic-is-a-bug">Any Panic is a Bug</a></h2>
+<p>Rhai is designed to not bring down the host system, regardless of what a script may do to it.
+This is a central design goal – Rhai provides a “No Panic” guarantee.</p>
+<p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
+considered a bug in Rhai and should be reported as such.</p>
 <h2><a class="header" href="#unchecked" id="unchecked"><code>unchecked</code></a></h2>
-<p>All these safe-guards can be turned off via the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature, which disables all
-safety checks (even fatal errors such as arithmetic overflows and division-by-zero).</p>
-<p>This will increase script evaluation performance, at the expense of having an erroneous
-script able to panic the entire system.</p>
+<p>All the above safe-guards can be turned off via the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature, which disables all safety
+checks (even fatal ones such as stack overflow, arithmetic overflow and division-by-zero).</p>
+<p>This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.</p>
+<p>Under <a href="/book/vnext/start/features.html"><code>unchecked</code></a>, it is very possible for a malicious script to panic and bring down the host system.</p>
 
                     </main>
 

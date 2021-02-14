@@ -168,11 +168,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#keywords-list" id="keywords-list">Keywords List</a></h1>
-<table><thead><tr><th align="center">Keyword</th><th>Description</th><th align="center">Inactive under</th><th align="center">Is function?</th><th align="center">Overloadable</th></tr></thead><tbody>
+<table><thead><tr><th align="center">Keyword</th><th>Description</th><th align="center">Inactive under</th><th align="center">Is function?</th><th align="center">Can overload?</th></tr></thead><tbody>
 <tr><td align="center"><code>true</code></td><td>boolean true literal</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>false</code></td><td>boolean false literal</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>let</code></td><td>variable declaration</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>const</code></td><td>constant declaration</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>const</code></td><td><a href="/book/vnext/language/constants.html">constant</a> declaration</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>if</code></td><td>if statement</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>else</code></td><td>else block of if statement</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>switch</code></td><td>matching</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
@@ -185,14 +185,14 @@
 <tr><td align="center"><code>continue</code></td><td>continue a loop at the next iteration</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>break</code></td><td>break out of loop iteration</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>return</code></td><td>return value</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>throw</code></td><td>throw exception</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>try</code></td><td>trap exception</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>catch</code></td><td>catch exception</td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>import</code></td><td>import module</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_module</code></a></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>export</code></td><td>export variable</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_module</code></a></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>as</code></td><td>alias for variable export</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_module</code></a></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>private</code></td><td>mark function private</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_function</code></a></td><td align="center">no</td><td align="center"></td></tr>
-<tr><td align="center"><code>fn</code> (lower-case <code>f</code>)</td><td>function definition</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_function</code></a></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>throw</code></td><td>throw <a href="/book/vnext/language/throw.html">exception</a></td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>try</code></td><td>trap <a href="/book/vnext/language/throw.html">exception</a></td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>catch</code></td><td>catch <a href="/book/vnext/language/throw.html">exception</a></td><td align="center"></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>import</code></td><td>import <a href="/book/vnext/rust/modules/index.html">module</a></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_module</code></a></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>export</code></td><td><a href="/book/vnext/language/modules/export.html">export</a> variable</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_module</code></a></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>as</code></td><td>alias for variable <a href="/book/vnext/language/modules/export.html">export</a></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_module</code></a></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>private</code></td><td>mark <a href="/book/vnext/language/functions.html">function</a> <a href="/book/vnext/engine/call-fn.html">private</a></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_function</code></a></td><td align="center">no</td><td align="center"></td></tr>
+<tr><td align="center"><code>fn</code> (lower-case <code>f</code>)</td><td><a href="/book/vnext/language/functions.html">function</a> definition</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_function</code></a></td><td align="center">no</td><td align="center"></td></tr>
 <tr><td align="center"><code>Fn</code> (capital <code>F</code>)</td><td>create a <a href="/book/vnext/language/fn-ptr.html">function pointer</a></td><td align="center"></td><td align="center">yes</td><td align="center">yes</td></tr>
 <tr><td align="center"><code>call</code></td><td>call a <a href="/book/vnext/language/fn-ptr.html">function pointer</a></td><td align="center"></td><td align="center">yes</td><td align="center">no</td></tr>
 <tr><td align="center"><code>curry</code></td><td>curry a <a href="/book/vnext/language/fn-ptr.html">function pointer</a></td><td align="center"></td><td align="center">yes</td><td align="center">no</td></tr>

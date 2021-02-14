@@ -235,6 +235,49 @@ foo(1)                      // &lt;- notice this will be &quot;hello1&quot; inst
 foo(&quot;!&quot;)                    // &lt;- returns &quot;hello!&quot;
 <span class="boring">}
 </span></code></pre></pre>
+<h2><a class="header" href="#walk-an-ast" id="walk-an-ast">Walk an AST</a></h2>
+<p>The <a href="/book/vnext/start/features.html"><code>internals</code></a> feature allows access to internal Rhai data structures, particularly the nodes
+that make up the <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
+<h3><a class="header" href="#ast-node-types" id="ast-node-types">AST node types</a></h3>
+<p>There are a few useful types when walking an <a href="/book/vnext/engine/compile.html"><code>AST</code></a>:</p>
+<table><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>ASTNode</code></td><td>an <code>enum</code> with two variants: <code>Expr</code> or <code>Stmt</code></td></tr>
+<tr><td><code>Expr</code></td><td>an <em>expression</em></td></tr>
+<tr><td><code>Stmt</code></td><td>a <em>statement</em></td></tr>
+<tr><td><code>BinaryExpr</code></td><td>a sub-type containing the LHS and RHS of a binary expression</td></tr>
+<tr><td><code>FnCallExpr</code></td><td>a sub-type containing information on a function call</td></tr>
+<tr><td><code>CustomExpr</code></td><td>a sub-type containing information on a <a href="/book/vnext/engine/custom-syntax.html">custom syntax</a> expression</td></tr>
+</tbody></table>
+<p>The <code>AST::walk</code> method takes a callback function and recursively walks the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> in depth-first
+manner, with the parent node visited before its children.</p>
+<h3><a class="header" href="#callback-function-signature" id="callback-function-signature">Callback function signature</a></h3>
+<p>The function signature of the callback function is:</p>
+<blockquote>
+<p><code>FnMut(&amp;[ASTNode])</code></p>
+</blockquote>
+<p>The single argument passed to the method contains a slice of <code>ASTNode</code> types representing the path
+from the current node to the root of the <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
+<h3><a class="header" href="#children-visit-order" id="children-visit-order">Children visit order</a></h3>
+<p>The order of visits to the children of each node type:</p>
+<table><thead><tr><th>Node type</th><th>Children visit order</th></tr></thead><tbody>
+<tr><td><code>if</code> statement</td><td>condition expression, <em>then</em> statement, <em>else</em> statement (if any)</td></tr>
+<tr><td><code>switch</code> statement</td><td>match element, each of the match statements, default statement (if any)</td></tr>
+<tr><td><code>while</code>, <code>do</code> statement</td><td>condition expression, statement body</td></tr>
+<tr><td><code>for</code> statement</td><td>collection expression, statement body</td></tr>
+<tr><td><a href="/book/vnext/language/try-catch.html"><code>try</code> ... <code>catch</code></a> statement</td><td><code>try</code> statement body, <code>catch</code> statement body</td></tr>
+<tr><td><a href="/book/vnext/language/modules/import.html"><code>import</code></a> statement</td><td>path expression</td></tr>
+<tr><td><a href="/book/vnext/language/arrays.html">Array</a> literal</td><td>each of the element expressions</td></tr>
+<tr><td><a href="/book/vnext/language/object-maps.html">Object map</a> literal</td><td>each of the element expressions</td></tr>
+<tr><td>Indexing</td><td>LHS, RHS</td></tr>
+<tr><td>Field access/method call</td><td>LHS, RHS</td></tr>
+<tr><td><code>&amp;&amp;</code>, <code>||</code>, <code>in</code> expression</td><td>LHS, RHS</td></tr>
+<tr><td><a href="/book/vnext/language/functions.html">Function</a> call, operator expression</td><td>each of the argument expressions</td></tr>
+<tr><td><a href="/book/vnext/language/variables.html"><code>let</code></a>, <a href="/book/vnext/language/constants.html"><code>const</code></a> statement</td><td>value expression</td></tr>
+<tr><td>Assignment statement</td><td>l-value expression, value expression</td></tr>
+<tr><td>Statement block</td><td>each of the statements</td></tr>
+<tr><td>Custom syntax expression</td><td>each of the <code>$expr$</code> and <code>$stmt$</code> blocks</td></tr>
+<tr><td>All others</td><td>single child, or none</td></tr>
+</tbody></table>
 
                     </main>
 

@@ -170,7 +170,10 @@
                         <h1><a class="header" href="#value-conversions" id="value-conversions">Value Conversions</a></h1>
 <h2><a class="header" href="#convert-between-integer-and-floating-point" id="convert-between-integer-and-floating-point">Convert Between Integer and Floating-Point</a></h2>
 <p>The <code>to_float</code> function converts a supported number to <code>FLOAT</code> (defaults to <code>f64</code>).</p>
-<p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
+<p>The <code>to_int</code> function converts a supported value to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
+<p>The <code>to_decimal</code> function converts an integer to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>).
+Converting from floating-point numbers to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> is not supported due to the
+possibility of rounding errors.</p>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -183,6 +186,8 @@ let y = x.to_float() * 100.0;   // works
 
 let z = y.to_int() + x;         // works
 
+let w = y.to_decimal() + x;     // works: math with integers is supported for Decimal values
+
 let c = 'X';                    // character
 
 print(&quot;c is '&quot; + c + &quot;' and its code is &quot; + c.to_int());    // prints &quot;c is 'X' and its code is 88&quot;
@@ -192,6 +197,7 @@ print(&quot;c is '&quot; + c + &quot;' and its code is &quot; + c.to_int());    
 <p>The <code>parse_float</code> function converts a <a href="/book/vnext/language/strings-chars.html">string</a> into a <code>FLOAT</code> (defaults to <code>f64</code>).</p>
 <p>The <code>parse_int</code> function converts a <a href="/book/vnext/language/strings-chars.html">string</a> into an <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).
 An optional radix (2-36) can be provided to parse the <a href="/book/vnext/language/strings-chars.html">string</a> into a number of the specified radix.</p>
+<p>The <code>parse_decimal</code> function converts a <a href="/book/vnext/language/strings-chars.html">string</a> into a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>).</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -199,7 +205,16 @@ An optional radix (2-36) can be provided to parse the <a href="/book/vnext/langu
 x == 123.4;
 type_of(x) == &quot;f64&quot;;
 
-let dec = parse_int(&quot;42&quot;);      // parse as decimal
+let x = parse_decimal(&quot;123.4&quot;); // parse as Decimal value
+type_of(x) == &quot;decimal&quot;;
+
+let x = 1234.to_decimal() / 10; // alternate method to create a Decimal value
+type_of(x) == &quot;decimal&quot;;
+
+let dec = parse_int(&quot;42&quot;);      // parse as integer
+dec == 42;
+type_of(dec) == &quot;i64&quot;;
+
 let dec = parse_int(&quot;42&quot;, 10);  // radix = 10 is the default
 dec == 42;
 type_of(dec) == &quot;i64&quot;;

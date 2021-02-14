@@ -172,15 +172,32 @@
 <p>The default system integer type (also aliased to <code>INT</code>) is <code>i64</code>. It can be turned into <code>i32</code> via the <a href="/book/vnext/start/features.html"><code>only_i32</code></a> feature.</p>
 <p>Floating-point numbers are also supported if not disabled with <a href="/book/vnext/start/features.html"><code>no_float</code></a>. The default system floating-point type is <code>i64</code>
 (also aliased to <code>FLOAT</code>). It can be turned into <code>f32</code> via the <a href="/book/vnext/start/features.html"><code>f32_float</code></a> feature.</p>
+<p>When rounding errors cannot be accepted, such as in financial calculations, the <a href="/book/vnext/start/features.html"><code>decimal</code></a> feature
+turns on support for the <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> type, which is a fixed-precision floating-point
+number with precise rounding behavior.</p>
 <p>‘<code>_</code>‘ separators can be added freely and are ignored within a number – except at the very beginning or right after
 a decimal point (’<code>.</code>‘).</p>
-<table><thead><tr><th>Format</th><th>Type</th></tr></thead><tbody>
-<tr><td><code>123_345</code>, <code>-42</code></td><td><code>INT</code> in decimal</td></tr>
-<tr><td><code>0o07_76</code></td><td><code>INT</code> in octal</td></tr>
-<tr><td><code>0xabcd_ef</code></td><td><code>INT</code> in hex</td></tr>
-<tr><td><code>0b0101_1001</code></td><td><code>INT</code> in binary</td></tr>
-<tr><td><code>123_456.789</code>, <code>-42.</code></td><td><code>FLOAT</code></td></tr>
+<table><thead><tr><th>Format</th><th>Format</th><th align="center">Type</th><th align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></th><th align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a> + <a href="/book/vnext/start/features.html"><code>decimal</code></a></th></tr></thead><tbody>
+<tr><td><code>123_345</code>, <code>-42</code></td><td>decimal</td><td align="center"><code>INT</code></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>0o07_76</code></td><td>octal</td><td align="center"><code>INT</code></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>0xab_cd_ef</code></td><td>hex</td><td align="center"><code>INT</code></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>0b0101_1001</code></td><td>binary</td><td align="center"><code>INT</code></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123_456.789</code></td><td>normal floating-point</td><td align="center"><code>FLOAT</code></td><td align="center">n/a</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>-42.</code></td><td>ending with decimal point</td><td align="center"><code>FLOAT</code></td><td align="center">n/a</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>123_456.789e-10</code></td><td><em>scientific notation</em></td><td align="center"><code>FLOAT</code></td><td align="center">n/a</td><td align="center">n/a</td></tr>
 </tbody></table>
+<h2><a class="header" href="#floating-point-vs-decimal" id="floating-point-vs-decimal">Floating-Point vs. Decimal</a></h2>
+<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (enabled via the <a href="/book/vnext/start/features.html"><code>decimal</code></a> feature) represents a fixed-precision
+floating-point number which is popular with financial calculations and other usage scenarios where
+round-off errors are not acceptable.</p>
+<p>For most situations, the standard floating-point number type <code>FLOAT</code> (<code>f64</code> or <code>f32</code> with
+<code>f32_float</code>) is enough and is faster than <code>Decimal</code>.</p>
+<p>It is possible to use both <code>FLOAT</code> and <code>Decimal</code> together with just the <a href="/book/vnext/start/features.html"><code>decimal</code></a> feature.
+Use <a href="/book/vnext/language/convert.html"><code>parse_decimal</code></a> or <a href="/book/vnext/language/convert.html"><code>to_decimal</code></a> to create a <code>Decimal</code> value.</p>
+<h2><a class="header" href="#use-no_float-and-decimal-together" id="use-no_float-and-decimal-together">Use <code>no_float</code> and <code>decimal</code> Together</a></h2>
+<p>If both <a href="/book/vnext/start/features.html"><code>no_float</code></a> and <a href="/book/vnext/start/features.html"><code>decimal</code></a> features are turned on, however, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>
+<em>replaces</em> the standard floating-point type.</p>
+<p>In other words, floating-point number literals in scripts will parse to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> values.</p>
 
                     </main>
 
