@@ -15,14 +15,14 @@ more control over what a script can (or cannot) do.
 Features that Enable Special Functionalities
 -------------------------------------------
 
-| Feature             | Additive? | Description                                                                                                                                                                                            |
-| ------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                     |
-| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                               |
-| `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type                                                                                                                                                      |
-| `serde`             |    yes    | enables serialization/deserialization via `serde` (requires the [`serde`](https://crates.io/crates/serde) crate)                                                                                       |
-| `metadata`          |    yes    | enables exporting [functions metadata] to [JSON format]({{rootUrl}}/engine/metadata/export_to_json.md) (implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json)) |
-| `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                                                                  |
+| Feature             | Additive? | Description                                                                                                                                                                                           |
+| ------------------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                    |
+| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                              |
+| `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type                                                                                                                                                     |
+| `serde`             |    yes    | enables serialization/deserialization via `serde` (requires the [`serde`](https://crates.io/crates/serde) crate)                                                                                      |
+| `metadata`          |    yes    | enables exporting [functions metadata] to [JSON format]({{rootUrl}}/engine/metadata/export_to_json.md); implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json) |
+| `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                                                                 |
 
 
 Features that Disable Certain Language Features
@@ -33,7 +33,7 @@ Features that Disable Certain Language Features
 | `no_float`    |    no     | disables floating-point numbers and math                                                                                                                                                            |
 | `no_index`    |    no     | disables [arrays] and indexing features                                                                                                                                                             |
 | `no_object`   |    no     | disables support for [custom types] and [object maps]                                                                                                                                               |
-| `no_function` |    no     | disables script-defined [functions] (implies `no_closure`)                                                                                                                                          |
+| `no_function` |    no     | disables script-defined [functions]; implies `no_closure`                                                                                                                                           |
 | `no_module`   |    no     | disables loading external [modules]                                                                                                                                                                 |
 | `no_closure`  |    no     | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_, or [capturing the calling scope]({{rootUrl}}/language/fn-capture.md) in function calls |
 
@@ -50,11 +50,11 @@ Features that Disable Certain Engine Features
 Features that Configure the Engine
 ---------------------------------
 
-| Feature     | Additive? | Description                                                                                      |
-| ----------- | :-------: | ------------------------------------------------------------------------------------------------ |
-| `f32_float` |    no     | sets the system floating-point type to `f32` instead of `f64`; `FLOAT` is set to `f32`           |
-| `only_i32`  |    no     | sets the system integer type to `i32` and disable all other integer types; `INT` is set to `i32` |
-| `only_i64`  |    no     | sets the system integer type to `i64` and disable all other integer types; `INT` is set to `i64` |
+| Feature     | Additive? | Description                                                                                         |
+| ----------- | :-------: | --------------------------------------------------------------------------------------------------- |
+| `f32_float` |    no     | sets the system floating-point type (`FLOAT`) to `f32` instead of `f64`; no effect under `no_float` |
+| `only_i32`  |    no     | sets the system integer type (`INT`) to `i32` and disable all other integer types                   |
+| `only_i64`  |    no     | sets the system integer type (`INT`) to `i64` and disable all other integer types                   |
 
 
 Features for `no-std` Builds
@@ -63,9 +63,9 @@ Features for `no-std` Builds
 The following features are provided exclusively for [`no-std`] targets.
 Do not use them when not compiling for [`no-std`].
 
-| Feature  | Additive? | Description                                                                                                                   |
-| -------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------- |
-| `no_std` |    no     | builds for [`no-std`] (implies `no_closure`); notice that additional dependencies will be pulled in to replace `std` features |
+| Feature  | Additive? | Description                                                                                            |
+| -------- | :-------: | ------------------------------------------------------------------------------------------------------ |
+| `no_std` |    no     | builds for [`no-std`]; notice that additional dependencies will be pulled in to replace `std` features |
 
 
 Features for WebAssembly (WASM) Builds

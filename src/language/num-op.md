@@ -22,19 +22,19 @@ number = -5 - +5;
 Binary Operators
 ----------------
 
-| Operator        | Description                                          | Integer | Floating-point | [`Decimal`][rust_decimal] |
-| --------------- | ---------------------------------------------------- | :-----: | :------------: | :-----------------------: |
-| `+`             | plus                                                 |   yes   |      yes       |   yes, also with `INT`    |
-| `-`             | minus                                                |   yes   |      yes       |   yes, also with `INT`    |
-| `*`             | multiply                                             |   yes   |      yes       |   yes, also with `INT`    |
-| `/`             | divide (integer division if acting on integer types) |   yes   |      yes       |   yes, also with `INT`    |
-| `%`             | modulo (remainder)                                   |   yes   |      yes       |   yes, also with `INT`    |
-| `**`            | power/exponentiation                                 |   yes   |      yes       |            no             |
-| `&`             | bit-wise _And_                                       |   yes   |       no       |            no             |
-| <code>\|</code> | bit-wise _Or_                                        |   yes   |       no       |            no             |
-| `^`             | bit-wise _Xor_                                       |   yes   |       no       |            no             |
-| `<<`            | left bit-shift                                       |   yes   |       no       |            no             |
-| `>>`            | right bit-shift                                      |   yes   |       no       |            no             |
+| Operator        | Description                                          | Integer |     Floating-point     | [`Decimal`][rust_decimal] |
+| --------------- | ---------------------------------------------------- | :-----: | :--------------------: | :-----------------------: |
+| `+`             | plus                                                 |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `-`             | minus                                                |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `*`             | multiply                                             |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `/`             | divide (integer division if acting on integer types) |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `%`             | modulo (remainder)                                   |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `**`            | power/exponentiation                                 |   yes   | yes, also `FLOAT**INT` |            no             |
+| `&`             | bit-wise _And_                                       |   yes   |           no           |            no             |
+| <code>\|</code> | bit-wise _Or_                                        |   yes   |           no           |            no             |
+| `^`             | bit-wise _Xor_                                       |   yes   |           no           |            no             |
+| `<<`            | left bit-shift                                       |   yes   |           no           |            no             |
+| `>>`            | right bit-shift                                      |   yes   |           no           |            no             |
 
 ```rust
 let x = (1 + 2) * (6 - 4) / 2;  // arithmetic, with parentheses
