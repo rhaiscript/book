@@ -174,24 +174,25 @@ using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) opera
 <a href="/book/vnext/start/features.html"><code>decimal</code></a>) only:</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>abs</code></td><td>absolute value</td></tr>
-<tr><td><code>sign</code></td><td>returns -1 (<code>INT</code>) if the number is negative, +1 if positive, 0 if zero</td></tr>
+<tr><td><code>sign</code></td><td>returns (<code>INT</code>) -1 if negative, +1 if positive, 0 if zero</td></tr>
 </tbody></table>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
-operate on integer or <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>) values:</p>
+operate on integers only:</p>
 <table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>to_float</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td>convert the value into an <code>f64</code> (<code>f32</code> under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
+<tr><td><code>to_float</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
+<tr><td><code>to_decimal</code></td><td align="center">non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
 <h2><a class="header" href="#floating-point-functions" id="floating-point-functions">Floating-Point Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
 operate on <code>f64</code> only (<code>f32</code> under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>):</p>
 <table><thead><tr><th>Category</th><th>Functions</th></tr></thead><tbody>
-<tr><td>Trigonometry</td><td><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians</td></tr>
-<tr><td>Arc-trigonometry</td><td><code>asin</code>, <code>acos</code>, <code>atan</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code> in radians</td></tr>
+<tr><td>Trigonometry</td><td><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians, <code>hypot(</code><em>x</em><code>,</code><em>y</em><code>)</code></td></tr>
+<tr><td>Arc-trigonometry</td><td><code>asin</code>, <code>acos</code>, <code>atan(</code><em>x</em><code>)</code>, <code>atan(</code><em>x</em><code>,</code><em>y</em><code>)</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code> in radians</td></tr>
 <tr><td>Square root</td><td><code>sqrt</code></td></tr>
 <tr><td>Exponential</td><td><code>exp</code> (base <em>e</em>)</td></tr>
-<tr><td>Logarithmic</td><td><code>ln</code> (base <em>e</em>), <code>log10</code> (base 10), <code>log</code> (any base)</td></tr>
+<tr><td>Logarithmic</td><td><code>ln</code>, <code>log10</code>, <code>log(</code><em>x</em><code>,</code><em>base</em><code>)</code></td></tr>
 <tr><td>Rounding</td><td><code>floor</code>, <code>ceiling</code>, <code>round</code>, <code>int</code>, <code>fraction</code> methods and properties</td></tr>
-<tr><td>Conversion</td><td><a href="/book/vnext/language/convert.html"><code>to_int</code></a>, <code>to_decimal</code> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>), <code>to_degrees</code>, <code>to_radians</code></td></tr>
+<tr><td>Conversion</td><td><a href="/book/vnext/language/convert.html"><code>to_int</code></a>, <a href="/book/vnext/language/convert.html"><code>to_decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>), <code>to_degrees</code>, <code>to_radians</code></td></tr>
 <tr><td>Testing</td><td><code>is_nan</code>, <code>is_finite</code>, <code>is_infinite</code> methods and properties</td></tr>
 </tbody></table>
 <h2><a class="header" href="#decimal-rounding" id="decimal-rounding">Decimal Rounding</a></h2>
@@ -200,11 +201,11 @@ operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code><
 <table><thead><tr><th>Rounding type</th><th>Methods</th></tr></thead><tbody>
 <tr><td>General</td><td><code>floor</code>, <code>ceiling</code>, <code>int</code>, <code>fraction</code> methods and properties</td></tr>
 <tr><td>Banker’s rounding</td><td><code>round</code> method and property</td></tr>
-<tr><td>Banker’s rounding</td><td><code>round(decimal_points)</code></td></tr>
-<tr><td>Round up</td><td><code>round_up(decimal_points)</code></td></tr>
-<tr><td>Round down</td><td><code>round_down(decimal_points)</code></td></tr>
-<tr><td>Round half-up</td><td><code>round_half_up(decimal_points)</code></td></tr>
-<tr><td>Round half-down</td><td><code>round_half_down(decimal_points)</code></td></tr>
+<tr><td>Banker’s rounding</td><td><code>round(</code><em>decimal points</em><code>)</code></td></tr>
+<tr><td>Round up</td><td><code>round_up(</code><em>decimal points</em><code>)</code></td></tr>
+<tr><td>Round down</td><td><code>round_down(</code><em>decimal points</em><code>)</code></td></tr>
+<tr><td>Round half-up</td><td><code>round_half_up(</code><em>decimal points</em><code>)</code></td></tr>
+<tr><td>Round half-down</td><td><code>round_half_down(</code><em>decimal points</em><code>)</code></td></tr>
 </tbody></table>
 <h2><a class="header" href="#parsing-functions" id="parsing-functions">Parsing Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
@@ -212,7 +213,7 @@ parse numbers:</p>
 <table><thead><tr><th>Function</th><th align="center">No available under</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="/book/vnext/language/convert.html"><code>parse_int</code></a></td><td align="center"></td><td>converts a <a href="/book/vnext/language/strings-chars.html">string</a> to <code>INT</code> with an optional radix</td></tr>
 <tr><td><a href="/book/vnext/language/convert.html"><code>parse_float</code></a></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td>converts a <a href="/book/vnext/language/strings-chars.html">string</a> to <code>FLOAT</code></td></tr>
-<tr><td><a href="/book/vnext/language/convert.html"><code>parse_decimal</code></a></td><td align="center">non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/book/vnext/language/strings-chars.html">string</a> to <code>Decimal</code></td></tr>
+<tr><td><a href="/book/vnext/language/convert.html"><code>parse_decimal</code></a></td><td align="center">non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/book/vnext/language/strings-chars.html">string</a> to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
 <h2><a class="header" href="#constants" id="constants">Constants</a></h2>
 <p>The following functions return standard mathematical constants:</p>
