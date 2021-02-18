@@ -63,4 +63,5 @@ The following features are typically _not_ used because they don't make sense in
 | :-----------: | ----------------------------------------------------------------------------------------------------- |
 |   [`sync`]    | WASM is single-threaded                                                                               |
 |  [`no_std`]   | `std` lib works fine with WASM                                                                        |
+| [`metadata`]  | WASM usually doesn't need access to Rhai functions metadata                                           |
 | [`internals`] | WASM usually doesn't need to access Rhai internal data structures, unless you are walking the [`AST`] |

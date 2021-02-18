@@ -24,7 +24,7 @@ using a [raw `Engine`]) operate on [strings]:
 Examples
 --------
 
-```rust
+```rust,no_run
 let full_name == " Bob C. Davis ";
 full_name.len == 14;
 

@@ -28,7 +28,7 @@ Set Optimization Level
 
 An [`Engine`]'s optimization level is set via a call to `Engine::set_optimization_level`:
 
-```rust
+```rust,no_run
 // Turn on aggressive optimizations
 engine.set_optimization_level(rhai::OptimizationLevel::Full);
 ```

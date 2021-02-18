@@ -16,7 +16,7 @@ it raises an evaluation error.
 It is possible, through a special syntax, to capture the calling scope &ndash; i.e. the scope
 that makes the function call &ndash; and access variables defined there.
 
-```rust
+```rust,no_run
 fn foo(y) {             // function accesses 'x' and 'y', but 'x' is not defined
     x += y;             // 'x' is modified in this function
     x

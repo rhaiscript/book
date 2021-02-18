@@ -8,7 +8,7 @@ and `//` for comments to the end of the line.
 
 Comments can be nested.
 
-```rust
+```rust,no_run
 let /* intruder comment */ name = "Bob";
 
 // This is a very important one-line comment

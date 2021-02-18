@@ -80,7 +80,7 @@ See the section on [custom types] for more details.
 Examples
 --------
 
-```rust
+```rust,no_run
 let y = [2, 3];             // y == [2, 3]
 
 let y = [2, 3,];            // y == [2, 3]

@@ -20,7 +20,7 @@ A module that is only `import`-ed but not under any module name is commonly used
 where the module script contains initialization statements that puts the functions registered with the
 [`Engine`] into a particular state.
 
-```rust
+```rust,no_run
 import "crypto_init";           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import "crypto" as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
@@ -55,7 +55,7 @@ there is a _Very Good Reason™_.
 Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the same module
 during every iteration of the loop!
 
-```rust
+```rust,no_run
 let mod = "crypto";
 
 if secured {                    // new block scope
@@ -83,7 +83,7 @@ cause a stack overflow in the [`Engine`], unless stopped by setting a limit for 
 
 For instance, importing itself always causes an infinite recursion:
 
-```rust
+```rust,no_run
 --------------
 | hello.rhai |
 --------------
@@ -95,7 +95,7 @@ foo::do_something();
 
 Modules cross-referencing also cause infinite recursion:
 
-```rust
+```rust,no_run
 --------------
 | hello.rhai |
 --------------

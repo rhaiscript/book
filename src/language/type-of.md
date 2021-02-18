@@ -7,7 +7,7 @@ The `type_of` function detects the actual type of a value.
 
 This is useful because all variables are [`Dynamic`] in nature.
 
-```rust
+```rust,no_run
 // Use 'type_of()' to get the actual types of values
 type_of('c') == "char";
 type_of(42) == "i64";
@@ -35,7 +35,7 @@ Custom Types
 
 * the full Rust type name, if registered via `Engine::register_type`
 
-```rust
+```rust,no_run
 struct TestStruct1;
 struct TestStruct2;
 

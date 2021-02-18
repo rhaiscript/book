@@ -27,7 +27,7 @@ which mandates cloning it.
 Using `ImmutableString` or `&str` is much more efficient.
 A common mistake made by novice Rhai users is to register functions with `String` parameters.
 
-```rust
+```rust,no_run
 fn get_len1(s: String) -> i64 { s.len() as i64 }            // <- Very inefficient!!!
 fn get_len2(s: &str) -> i64 { s.len() as i64 }              // <- This is better
 fn get_len3(s: ImmutableString) -> i64 { s.len() as i64 }   // <- the above is equivalent to this

@@ -16,7 +16,7 @@ Any script operation that produces an array larger than the maximum also termina
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust
+```rust,no_run
 let mut engine = Engine::new();
 
 engine.set_max_array_size(500); // allow arrays only up to 500 items

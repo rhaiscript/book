@@ -6,7 +6,7 @@ Hello World in Rhai
 To get going with Rhai is as simple as creating an instance of the scripting engine `rhai::Engine` via
 `Engine::new`, then calling the `eval` method:
 
-```rust
+```rust,no_run
 use rhai::{Engine, EvalAltResult};
 
 fn main() -> Result<(), Box<EvalAltResult>>
@@ -24,7 +24,7 @@ fn main() -> Result<(), Box<EvalAltResult>>
 
 Evaluate a script file directly:
 
-```rust
+```rust,no_run
 // 'eval_file' takes a 'PathBuf'
 let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
 ```
@@ -47,7 +47,7 @@ There are two ways to specify the return type &ndash; _turbofish_ notation, or t
 
 Use [`Dynamic`] for uncertain return types.
 
-```rust
+```rust,no_run
 let result = engine.eval::<i64>("40 + 2")?;     // return type is i64, specified using 'turbofish' notation
 
 let result: i64 = engine.eval("40 + 2")?;       // return type is inferred to be i64

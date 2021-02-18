@@ -18,7 +18,7 @@ a script-defined function.
 
 * If it is a script-defined function, the `this` variable within the function body is bound to the [object map] before the function is called.
 
-```rust
+```rust,no_run
 let obj = #{
                 data: 40,
                 action: || this.data += x    // 'action' holds a closure

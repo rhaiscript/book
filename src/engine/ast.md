@@ -18,6 +18,8 @@ are imported recursively.
 
 Most of the [`AST`] API is available only under the [`internals`] feature.
 
+For the complete [`AST`] API, refer to the [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.AST.html) online.
+
 
 Extract Only Functions
 ----------------------
@@ -59,7 +61,7 @@ The following methods merge one [`AST`] with another:
 
 When statements are appended, beware that this may change the semantics of the script.
 
-```rust
+```rust,no_run
 // First script
 let ast1 = engine.compile(r#"
                 fn foo(x) { 42 + x }
@@ -81,7 +83,7 @@ let merged = &ast1 + &ast2;
 
 `merged` in the above example essentially contains the following script program:
 
-```rust
+```rust,no_run
 fn foo(n) { "hello" + n }   // <- definition of first 'foo' is overwritten
 foo(1)                      // <- notice this will be "hello1" instead of 43,
                             //    but it is no longer the return value

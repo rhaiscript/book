@@ -42,7 +42,7 @@ or `Engine::register_type_with_name`.
 To use native methods on custom types in Rhai scripts, it is common to register an API
 for the type via the `Engine::register_XXX` methods.
 
-```rust
+```rust,no_run
 use rhai::{Engine, EvalAltResult};
 use rhai::RegisterFn;                   // remember 'RegisterFn' is needed
 
@@ -98,7 +98,7 @@ implemented as a functions taking a `&mut` first argument.
 
 This design is similar to Rust.
 
-```rust
+```rust,no_run
 impl TestStruct {
     fn foo(&mut self) -> i64 {
         self.field
@@ -121,7 +121,7 @@ println!("result: {}", result);         // prints 1
 Under [`no_object`], however, the _method_ style of function calls
 (i.e. calling a function as an object-method) is no longer supported.
 
-```rust
+```rust,no_run
 // Below is a syntax error under 'no_object'.
 let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
                                             // ^ cannot call in method style under 'no_object'
@@ -136,7 +136,7 @@ let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
 If `Engine::register_type_with_name` is used to register the custom type
 with a special "pretty-print" name, [`type_of()`] will return that name instead.
 
-```rust
+```rust,no_run
 engine
     .register_type::<TestStruct1>()
     .register_fn("new_ts1", TestStruct1::new)
@@ -157,7 +157,7 @@ Use the Custom Type With Arrays
 The `push`, `insert`, `pad` functions, as well as the `+=` operator, for [arrays] are only
 defined for standard built-in types. For custom types, type-specific versions must be registered:
 
-```rust
+```rust,no_run
 engine
     .register_fn("push", |list: &mut Array, item: TestStruct| {
         list.push(Dynamic::from(item));
@@ -181,7 +181,7 @@ engine
 In particular, in order to use the `in` operator with a custom type for an [array],
 the `==` operator must be registered for the custom type:
 
-```rust
+```rust,no_run
 // Assume 'TestStruct' implements `PartialEq`
 engine.register_fn("==",
     |item1: &mut TestStruct, item2: TestStruct| item1 == &item2

@@ -29,7 +29,7 @@ The function cannot be nested inside another function &ndash; it can only be def
 To register the plugin function, simply call `register_exported_fn!`.  The name of the function can be
 any text string, so it is possible to register _overloaded_ functions as well as operators.
 
-```rust
+```rust,no_run
 use rhai::plugin::*;        // import macros
 
 #[export_fn]
@@ -55,7 +55,7 @@ To register [fallible functions] (i.e. functions that may return errors), apply 
 A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not
 have the appropriate return type.
 
-```rust
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_fn]
@@ -103,7 +103,7 @@ this argument when calling the function in Rhai.
 The native call context can be used to call a [function pointer] or [closure] that has been passed
 as a parameter to the function, thereby implementing a _callback_:
 
-```rust
+```rust,no_run
 use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 use rhai::plugin::*;        // a "prelude" import for macros
 
@@ -121,7 +121,7 @@ pub fn greet(context: NativeCallContext, callback: FnPtr)
 
 The native call context is also useful in another scenario: protecting a function from malicious scripts.
 
-```rust
+```rust,no_run
 use rhai::{Dynamic, Array, NativeCallContext, EvalAltResult, Position};
 use rhai::plugin::*;        // a "prelude" import for macros
 

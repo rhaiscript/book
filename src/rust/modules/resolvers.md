@@ -34,7 +34,7 @@ which are also available to functions defined within the same script file.
 
 Modules are also _cached_ so a script file is only evaluated _once_, even when repeatedly imported.
 
-```rust
+```rust,no_run
 ------------------
 | my_module.rhai |
 ------------------
@@ -80,7 +80,7 @@ in the module script if none are found.
 
 One such situation is the need to provide a _default implementation_ to a simulated _virtual_ function:
 
-```rust
+```rust,no_run
 ------------------
 | my_module.rhai |
 ------------------
@@ -135,7 +135,7 @@ Loads modules that are statically added. This can be used under [`no_std`].
 
 Functions are searched in the _global_ namespace by default.
 
-```rust
+```rust,no_run
 use rhai::{Module, module_resolvers::StaticModuleResolver};
 
 let module: Module = create_a_module();
@@ -164,7 +164,7 @@ Set into `Engine`
 
 An [`Engine`]'s module resolver is set via a call to `Engine::set_module_resolver`:
 
-```rust
+```rust,no_run
 use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
 
 // Create a module resolver

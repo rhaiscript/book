@@ -7,7 +7,7 @@ Constants can be defined using the `const` keyword and are immutable.
 
 Constants follow the same naming rules as [variables].
 
-```rust
+```rust,no_run
 const x = 42;
 
 print(x * 2);       // prints 84
@@ -15,7 +15,7 @@ print(x * 2);       // prints 84
 x = 123;            // <- syntax error: cannot assign to constant
 ```
 
-```rust
+```rust,no_run
 const x;            // 'x' is a constant '()'
 
 const x = 40 + 2;   // 'x' is a constant 42
@@ -33,7 +33,7 @@ When added to a custom [`Scope`], a constant can hold any value, not just a lite
 It is very useful to have a constant value hold a [custom type], which essentially acts
 as a [_singleton_](../patterns/singleton.md).
 
-```rust
+```rust,no_run
 use rhai::{Engine, Scope, RegisterFn};
 
 #[derive(Debug, Clone)]
@@ -68,10 +68,11 @@ A custom type stored as a constant cannot be modified via script, but _can_ be m
 a registered Rust function that takes a first `&mut` parameter &ndash; because there is no way for
 Rhai to know whether the Rust function modifies its argument!
 
-```rust
+```rust,no_run
 const x = 42;       // a constant
 
 x.increment();      // call 'increment' defined in Rust with '&mut' first parameter
+                    // must use 'Dynamic::is_read_only' to check if parameter is constant
 
 x == 43;            // value of 'x' is changed!
 

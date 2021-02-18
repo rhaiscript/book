@@ -17,7 +17,7 @@ has consumed, allowing the system to impose a hard upper limit on computing reso
 A script exceeding the maximum operations count terminates with an error result.
 This can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust
+```rust,no_run
 let mut engine = Engine::new();
 
 engine.set_max_operations(500); // allow only up to 500 operations for this script

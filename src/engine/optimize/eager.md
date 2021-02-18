@@ -10,7 +10,7 @@ This also applies to all operators (which are implemented as functions).
 
 For instance, the same example above:
 
-```rust
+```rust,no_run
 // When compiling the following with OptimizationLevel::Full...
 
 const DECISION = 1;

@@ -4,7 +4,7 @@ Compound Assignment Operators
 {{#include ../links.md}}
 
 
-```rust
+```rust,no_run
 let number = 9;
 
 number += 8;            // number = number + 8
@@ -39,7 +39,7 @@ build-up operations for different data types.
 
 For example, it is used to build [strings]:
 
-```rust
+```rust,no_run
 let my_str = "abc";
 my_str += "ABC";
 my_str += 12345;
@@ -49,7 +49,7 @@ my_str == "abcABC12345"
 
 to concatenate [arrays]:
 
-```rust
+```rust,no_run
 let my_array = [1, 2, 3];
 my_array += [4, 5];
 
@@ -58,7 +58,7 @@ my_array == [1, 2, 3, 4, 5];
 
 and mix two [object maps] together:
 
-```rust
+```rust,no_run
 let my_obj = #{a:1, b:2};
 my_obj += #{c:3, d:4, e:5};
 

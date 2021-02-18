@@ -11,7 +11,7 @@ the curried arguments.
 When the curried [function pointer] is called, the curried arguments are inserted starting from the left.
 The actual call arguments should be reduced by the number of curried arguments.
 
-```rust
+```rust,no_run
 fn mul(x, y) {                  // function with two parameters
     x * y
 }

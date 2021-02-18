@@ -28,7 +28,7 @@ Built-In Packages
 
 If only minimal functionalities are required, register the `CorePackage` instead:
 
-```rust
+```rust,no_run
 use rhai::Engine;
 use rhai::packages::{Package, CorePackage};
 

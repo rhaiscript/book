@@ -13,7 +13,7 @@ _precedence_ (which cannot be zero).
 Example
 -------
 
-```rust
+```rust,no_run
 use rhai::{Engine, RegisterFn};
 
 let mut engine = Engine::new();
@@ -41,7 +41,7 @@ Custom operators are merely _syntactic sugar_.  They map directly to registered 
 
 Therefore, the following are equivalent (assuming `foo` has been registered as a custom operator):
 
-```rust
+```rust,no_run
 1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
 
 1 + foo(2 * 3, 4) - 5 / 6   // use function call
@@ -61,7 +61,7 @@ All custom operators must be _identifiers_ that follow the same naming rules as 
 Alternatively, they can also be [reserved symbols]({{rootUrl}}/appendix/operators.md#symbols),
 [disabled operators or keywords][disable keywords and operators].
 
-```rust
+```rust,no_run
 engine.register_custom_operator("foo", 20);     // 'foo' is a valid custom operator
 
 engine.register_custom_operator("#", 20);       // the reserved symbol '#' is also
@@ -79,7 +79,7 @@ Binary Operators Only
 All custom operators must be _binary_ (i.e. they take two operands).
 _Unary_ custom operators are not supported.
 
-```rust
+```rust,no_run
 engine
     .register_custom_operator("foo", 160)?
     .register_fn("foo", |x: i64| x * x);

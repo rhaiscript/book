@@ -36,7 +36,7 @@ can be turned off via the [`no_closure`] feature.
 Examples
 --------
 
-```rust
+```rust,no_run
 let factor = 1;
 
 // Define the object
@@ -69,7 +69,7 @@ method implementations from a _base class_, as per OOP lingo.
 
 Do not use the `mixin` method because it _overwrites_ existing fields.
 
-```rust
+```rust,no_run
 // Define base class
 let BaseClass = #{
     factor: 1,

@@ -14,7 +14,7 @@ A script exceeding the maximum call stack depth will terminate with an error res
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust
+```rust,no_run
 let mut engine = Engine::new();
 
 engine.set_max_call_levels(10);     // allow only up to 10 levels of function calls

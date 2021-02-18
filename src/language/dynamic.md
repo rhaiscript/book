@@ -12,12 +12,13 @@ Use `type_of()` to Get Value Type
 Because [`type_of()`] a `Dynamic` value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value's type.
 
-```c
+```c,no_run
 let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
     "i64" => print("Hey, I got an integer here!"),
     "f64" => print("Hey, I got a float here!"),
+    "decimal" => print("Hey, I got a decimal here!"),
     "string" => print("Hey, I got a string here!"),
     "bool" => print("Hey, I got a boolean here!"),
     "array" => print("Hey, I got an array here!"),
@@ -49,7 +50,7 @@ The `cast` method then converts the value into a specific, known type.
 
 Alternatively, use the `try_cast` method which does not panic but returns `None` when the cast fails.
 
-```rust
+```rust,no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0];                         // an element in an 'Array' is 'Dynamic'
 
@@ -67,7 +68,7 @@ Type Name
 The `type_name` method gets the name of the actual type as a static string slice,
 which can be `match`-ed against.
 
-```rust
+```rust,no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0];                         // an element in an 'Array' is 'Dynamic'
 
@@ -119,12 +120,12 @@ The following methods cast a `Dynamic` into a specific type:
 | `try_cast<T>`                                 |                        `Option<T>`                         |
 | `as_int`                                      | `Result<i64, &str>` (`Result<i32, &str>` if [`only_i32`])  |
 | `as_float` (not available under [`no_float`]) | `Result<f64, &str>` (`Result<f32, &str>` if [`f32_float`]) |
-| `as_decimal` (requires [`decimal`])           |                  `Result<Decimal, &str>`                   |
+| `as_decimal` (requires [`decimal`])           |          [`Result<Decimal, &str>`][rust_decimal]           |
 | `as_bool`                                     |                    `Result<bool, &str>`                    |
 | `as_char`                                     |                    `Result<char, &str>`                    |
 | `as_str`                                      |                    `Result<&str, &str>`                    |
 | `take_string`                                 |                   `Result<String, &str>`                   |
-| `take_immutable_string`                       |              `Result<ImmutableString, &str>`               |
+| `take_immutable_string`                       |    [`Result<ImmutableString, &str>`][`ImmutableString`]    |
 
 ### Constructor traits
 

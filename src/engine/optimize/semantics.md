@@ -7,7 +7,7 @@ Some optimizations can alter subtle semantics of the script.
 
 For example:
 
-```rust
+```rust,no_run
 if true {           // condition always true
     123.456;        // eliminated
     hello;          // eliminated, EVEN THOUGH the variable doesn't exist!
@@ -22,7 +22,7 @@ so the script would have been terminated at that point with an error return.
 
 In fact, any errors inside a statement that has been eliminated will silently _disappear_:
 
-```rust
+```rust,no_run
 print("start!");
 if my_decision { /* do nothing... */ }  // eliminated due to no effect
 print("end!");

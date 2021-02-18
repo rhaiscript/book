@@ -9,7 +9,7 @@ To call these functions, they need to be _registered_ with the [`Engine`] using 
 (in the `RegisterFn` trait) and `Engine::register_result_fn` (in the `RegisterResultFn` trait,
 see [fallible functions]).
 
-```rust
+```rust,no_run
 use rhai::{Dynamic, Engine, EvalAltResult, ImmutableString};
 use rhai::RegisterFn;                       // use 'RegisterFn' trait for 'register_fn'
 use rhai::RegisterResultFn;                 // use 'RegisterResultFn' trait for 'register_result_fn'
@@ -54,7 +54,7 @@ println!("Answer: {}", result);             // prints 42
 To create a [`Dynamic`] value, use the `Dynamic::from` method.
 [Standard types] in Rhai can also use `into()`.
 
-```rust
+```rust,no_run
 use rhai::Dynamic;
 
 let x = (42_i64).into();                        // 'into()' works for standard types

@@ -8,7 +8,7 @@ with `EvalAltResult` holding error information.
 
 To deliberately return an error during an evaluation, use the `throw` keyword.
 
-```rust
+```rust,no_run
 if some_bad_condition_has_happened {
     throw error;    // 'throw' any value as the exception
 }
@@ -20,7 +20,7 @@ Exceptions thrown via `throw` in the script can be captured in Rust by matching
 `Err(Box<EvalAltResult::ErrorRuntime(value, position)>)` with the exception value
 captured by `value`.
 
-```rust
+```rust,no_run
 let result = engine.eval::<i64>(r#"
     let x = 42;
 
@@ -40,7 +40,7 @@ It is possible to _catch_ an exception instead of having it abort the evaluation
 of the entire script via the [`try` ... `catch`]({{rootUrl}}/language/try-catch.md)
 statement common to many C-like languages.
 
-```rust
+```rust,no_run
 try
 {
     throw 42;

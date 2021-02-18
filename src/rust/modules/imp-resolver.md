@@ -27,7 +27,7 @@ of the _module path_ (i.e. the path specified in the [`import`] statement).
 Example of a Custom Module Resolver
 ----------------------------------
 
-```rust
+```rust,no_run
 use rhai::{ModuleResolver, Module, Engine, EvalAltResult};
 
 // Define a custom module resolver.

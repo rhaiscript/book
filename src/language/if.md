@@ -5,7 +5,7 @@
 
 `if` statements follow C syntax:
 
-```rust
+```rust,no_run
 if foo(x) {
     print("It's true!");
 } else if bar == baz {
@@ -28,7 +28,7 @@ even when there is only one statement inside the branch.
 
 Like Rust, there is no ambiguity regarding which `if` clause a branch belongs to.
 
-```rust
+```rust,no_run
 // Rhai is not C!
 if (decision) print("I've decided!");
 //            ^ syntax error, expecting '{' in statement block
@@ -41,7 +41,7 @@ if (decision) print("I've decided!");
 Like Rust, `if` statements can also be used as _expressions_, replacing the `? :` conditional operators
 in other C-like languages.
 
-```rust
+```rust,no_run
 // The following is equivalent to C: int x = 1 + (decision ? 42 : 123) / 2;
 let x = 1 + if decision { 42 } else { 123 } / 2;
 x == 22;

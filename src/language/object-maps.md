@@ -75,7 +75,7 @@ operate on object maps:
 Examples
 --------
 
-```rust
+```rust,no_run
 let y = #{              // object map literal with 3 properties
     a: 1,
     bar: "hello",
@@ -154,7 +154,7 @@ for a `Map` will never be found &ndash; instead, the property will be looked up 
 
 Therefore, _method-call_ notation must be used for built-in properties:
 
-```rust
+```rust,no_run
 map.len                 // access property 'len', returns '()' if not found
 
 map.len()               // returns the number of properties

@@ -11,7 +11,7 @@ exception value that has been thrown.
 It is possible, via the `try` ... `catch` statement, to _catch_ exceptions, optionally
 with an _error variable_.
 
-```rust
+```rust,no_run
 // Catch an exception and capturing its value
 try
 {
@@ -55,7 +55,7 @@ an exception within the `catch` block simply by another [`throw`] statement with
 a value.
 
 
-```rust
+```rust,no_run
 try
 {
     // Call something that will throw an exception...

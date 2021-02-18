@@ -8,7 +8,7 @@ If a function is _fallible_ (i.e. it returns a `Result<_, Error>`), it can be re
 
 The function must return `Result<Dynamic, Box<EvalAltResult>>`.
 
-```rust
+```rust,no_run
 use rhai::{Engine, EvalAltResult, Position};
 use rhai::RegisterResultFn;                     // use 'RegisterResultFn' trait for 'register_result_fn'
 

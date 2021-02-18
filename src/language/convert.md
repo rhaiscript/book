@@ -17,16 +17,16 @@ possibility of rounding errors.
 
 That's it; for other conversions, register custom conversion functions.
 
-```rust
-let x = 42;
+```rust,no_run
+let x = 42;                     // 'x' is an integer
 
-let y = x * 100.0;              // <- error: cannot multiply i64 with f64
+let y = x * 100.0;              // works: floating-point and integer can inter-operate
 
 let y = x.to_float() * 100.0;   // works
 
 let z = y.to_int() + x;         // works
 
-let w = y.to_decimal() + x;     // works: math with integers is supported for Decimal values
+let w = z.to_decimal() + x;     // works: Decimal and integer can inter-operate
 
 let c = 'X';                    // character
 
@@ -44,7 +44,7 @@ An optional radix (2-36) can be provided to parse the [string] into a number of 
 
 The `parse_decimal` function converts a [string] into a [`Decimal`][rust_decimal] (requires [`decimal`]).
 
-```rust
+```rust,no_run
 let x = parse_float("123.4");   // parse as floating-point
 x == 123.4;
 type_of(x) == "f64";

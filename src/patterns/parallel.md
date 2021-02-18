@@ -43,7 +43,7 @@ Key Concepts
 Examples
 --------
 
-```rust
+```rust,no_run
 use rhai::packages::{Package, StandardPackage};
 
 let ast = /* ... some AST ... */;

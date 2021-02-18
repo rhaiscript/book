@@ -40,7 +40,7 @@ because it only requires registering all API functions only once.
 In rare cases where handlers are created and destroyed in a tight loop, a new [`Engine`] instance
 can be created for each event. See [_One Engine Instance Per Call_](parallel.md) for more details.
 
-```rust
+```rust,no_run
 use rhai::{Engine, Scope, AST, EvalAltResult};
 
 // Event handler
@@ -58,7 +58,7 @@ struct Handler {
 
 [Custom types] are often used to hold state. The easiest way to register an entire API is via a [plugin module].
 
-```rust
+```rust,no_run
 use rhai::plugin::*;
 
 // A custom type to a hold state value.
@@ -92,7 +92,7 @@ Steps to initialize the event handler:
 5. Store the compiled [`AST`] for future evaluations,
 6. Run the [`AST`] to initialize event handler state variables.
 
-```rust
+```rust,no_run
 impl Handler {
     pub new(path: impl Into<PathBuf>) -> Self {
         let mut engine = Engine::new();
@@ -129,7 +129,7 @@ There is usually an interface or trait that gets called when an event comes from
 
 Mapping an event from the system into a scripted handler is straight-forward:
 
-```rust
+```rust,no_run
 impl Handler {
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
@@ -173,7 +173,7 @@ in the handler script to access and modify these state variables.
 
 The API registered with the [`Engine`] can be also used throughout the script.
 
-```rust
+```rust,no_run
 fn start(data) {
     if state1 {
         throw "Already started!";

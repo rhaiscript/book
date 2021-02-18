@@ -22,7 +22,7 @@ In particular, a the current _native call context_ (in form of the `NativeCallCo
 `NativeCallContext` exposes the current [`Engine`], among others, so the Rust function can also use [`Engine`] facilities
 (such as evaluating a script).
 
-```rust
+```rust,no_run
 engine.register_raw_fn(
     "increment_by",                                         // function name
     &[                                                      // a slice containing parameter types
@@ -113,7 +113,7 @@ The following example registers a function that takes a [function pointer] as an
 then calls it within the same [`Engine`].  This way, a _callback_ function can be provided
 to a native Rust function.
 
-```rust
+```rust,no_run
 use rhai::{Engine, FnPtr};
 
 let mut engine = Engine::new();
@@ -177,7 +177,7 @@ In order to access a value argument that is expensive to clone _while_ holding a
 to the first argument, either _consume_ that argument via `mem::take` as above, or use `args.split_first`
 to partition the slice:
 
-```rust
+```rust,no_run
 // Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 

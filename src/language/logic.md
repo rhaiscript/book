@@ -22,7 +22,7 @@ supported by the system.
 
 Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an integer is also supported.
 
-```rust
+```rust,no_run
 42 == 42.0;         // true
 
 42.0 == 42;         // true
@@ -39,18 +39,18 @@ Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an
 Comparing two values of _different_ data types, or of unknown data types, always results in `false`,
 except for `!=` (not equals) which results in `true`. This is in line with intuition.
 
-```rust
-42 > "42";          // false - i64 cannot be compared with string
+```rust,no_run
+42 > "42";          // false: i64 cannot be compared with string
 
-42 <= "42";         // false - i64 cannot be compared with string
+42 <= "42";         // false: i64 cannot be compared with string
 
 let ts = new_ts();  // custom type
 
-ts == 42;           // false - different types cannot be compared
+ts == 42;           // false: different types cannot be compared
 
-ts != 42;           // true - different types cannot be compared
+ts != 42;           // true: different types cannot be compared
 
-ts == ts;           // false - unless '==' is defined for the custom type
+ts == ts;           // false: unless '==' is defined for the custom type
 ```
 
 ### Caution: Beware operators for custom types
@@ -59,12 +59,12 @@ The default comparison behavior (i.e. returning `false` instead of raising an er
 may be counter-intuitive for [custom types] because all comparisons default to `false`
 (`true` for `!=`), unless the corresponding operators are defined for the type.
 
-```rust
+```rust,no_run
 let ts = new_ts();  // custom type that doesn't have any operators defined
 
-ts == ts;           // false - unless '==' is defined for the custom type
+ts == ts;           // false: unless '==' is defined for the custom type
 
-ts != ts;           // true - unless '!=' is defined for the custom type
+ts != ts;           // true: unless '!=' is defined for the custom type
 ```
 
 Operators are completely separate from each other.  For example:
@@ -77,16 +77,16 @@ Therefore, if a [custom type] misses an operator definition, the default result 
 
 This behavior can be counter-intuitive.
 
-```rust
+```rust,no_run
 let ts = new_ts();  // custom type with '<=' and '==' defined
 
-ts <= ts;           // true - '<=' defined
+ts <= ts;           // true: '<=' defined
 
-ts < ts;            // false - '<' not defined, even though '<=' is true
+ts < ts;            // false: '<' not defined, even though '<=' is true
 
-ts == ts;           // true - '==' defined
+ts == ts;           // true: '==' defined
 
-ts != ts;           // true - '!=' not defined, even though '==' is true
+ts != ts;           // true: '!=' not defined, even though '==' is true
 ```
 
 It is strongly recommended that, when defining operators for [custom types], always define the full set
@@ -101,20 +101,20 @@ floating-point numbers).  Otherwise the result is always `false` (`true` for `!=
 Therefore, this is an area where a standard [`Engine`] behaves differently from a [raw `Engine`]
 transparently (i.e. without causing errors).
 
-```rust
+```rust,no_run
 // The following under Engine::new_raw()
 
-42.0 == 42.0;       // true - built in
+42.0 == 42.0;       // true: built in
 
-42.0 == 42;         // false - comparison between FLOAT and INT not built in
+42.0 == 42;         // false: comparison between FLOAT and INT not built in
                     // in a standard Engine, this is true
 
-42 < 123;           // true - built in
+42 < 123;           // true: built in
 
-42 < 123.0;         // false - comparison between INT and FLOAT not built in
+42 < 123.0;         // false: comparison between INT and FLOAT not built in
                     // in a standard Engine, this is true
 
-"hello" > "foo";    // true - built in
+"hello" > "foo";    // true: built in
 ```
 
 Boolean operators
@@ -133,7 +133,7 @@ if the first one already proves the condition wrong.
 
 Single boolean operators `&` and `|` always evaluate both operands.
 
-```rust
+```rust,no_run
 a() || b();         // b() is not evaluated if a() is true
 
 a() && b();         // b() is not evaluated if a() is false

@@ -41,7 +41,7 @@ Attempting to register indexers for an [array], [object map] or [string] panics.
 Examples
 --------
 
-```rust
+```rust,no_run
 #[derive(Clone)]
 struct TestStruct {
     fields: Vec<i64>

@@ -31,7 +31,7 @@ Modifying an `ImmutableString` causes it first to be cloned, and then the modifi
 
 A alternative is to use `&str` which de-sugars to `ImmutableString`.
 
-```rust
+```rust,no_run
 fn slow(s: String) -> i64 { ... }               // string is cloned each call
 
 fn fast1(s: ImmutableString) -> i64 { ... }     // cloning 'ImmutableString' is cheap
@@ -83,7 +83,7 @@ In Rhai, there are also no separate concepts of `String` and `&str` as in Rust.
 Examples
 --------
 
-```rust
+```rust,no_run
 let name = "Bob";
 let middle_initial = 'C';
 let last = "Davis";

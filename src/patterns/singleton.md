@@ -51,7 +51,7 @@ use the [Control Layer]({{rootUrl}}/patterns/control.md) pattern instead.
 
 Assume the following command object type:
 
-```rust
+```rust,no_run
 struct EnergizerBunny { ... }
 
 impl EnergizerBunny {
@@ -67,7 +67,7 @@ impl EnergizerBunny {
 
 ### Wrap Command Object Type as Shared
 
-```rust
+```rust,no_run
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
 ```
 
@@ -76,7 +76,7 @@ must then be `Send + Sync`.
 
 ### Register the Custom Type
 
-```rust
+```rust,no_run
 engine.register_type_with_name::<SharedBunny>("EnergizerBunny");
 ```
 
@@ -84,7 +84,7 @@ engine.register_type_with_name::<SharedBunny>("EnergizerBunny");
 
 The easiest way to develop a complete set of API for a [custom type] is via a [plugin module].
 
-```rust
+```rust,no_run
 use rhai::plugin::*;
 
 #[export_module]
@@ -151,7 +151,7 @@ engine.register_global_module(exported_module!(bunny_api).into());
 
 ### Push Constant Command Object into Custom Scope
 
-```rust
+```rust,no_run
 let bunny: SharedBunny = Rc::new(RefCell::(EnergizerBunny::new()));
 
 let mut scope = Scope::new();
@@ -164,7 +164,7 @@ engine.consume_with_scope(&mut scope, script)?;
 
 ### Use the Command API in Script
 
-```rust
+```rust,no_run
 // Access the command object via constant variable 'Bunny'.
 
 if !Bunny.power { Bunny.power = true; }
