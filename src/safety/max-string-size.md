@@ -31,6 +31,6 @@ Setting Maximum Length
 Be conservative when setting a maximum limit and always consider the fact that a registered function may grow
 a string's length without Rhai noticing until the very end.
 
-For instance, the built-in '`+`' operator for strings concatenates two strings together to form one longer string;
+For instance, the built-in `+` operator for strings concatenates two strings together to form one longer string;
 if both strings are _slightly_ below the maximum length limit, the resultant string may be almost _twice_ the maximum length.
 

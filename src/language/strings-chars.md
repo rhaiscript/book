@@ -43,10 +43,10 @@ fn fast2(s: &str) -> i64 { ... }                // de-sugars to above
 String and Character Literals
 ----------------------------
 
-String and character literals follow C-style formatting, with support for Unicode ('`\u`_xxxx_' or '`\U`_xxxxxxxx_')
-and hex ('`\x`_xx_') escape sequences.
+String and character literals follow C-style formatting, with support for Unicode (`\u`_xxxx_' or `\U`_xxxxxxxx_')
+and hex (`\x`_xx_') escape sequences.
 
-Hex sequences map to ASCII characters, while '`\u`' maps to 16-bit common Unicode code points and '`\U`' maps the full,
+Hex sequences map to ASCII characters, while `\u` maps to 16-bit common Unicode code points and `\U` maps the full,
 32-bit extended Unicode code points.
 
 Standard escape sequences:
@@ -58,7 +58,7 @@ Standard escape sequences:
 | `\r`            | carriage-return `CR`             |
 | `\n`            | line-feed `LF`                   |
 | `\"`            | double-quote `"`                 |
-| `\'`            | single-quote `'`                 |
+| `\`             | single-quote ``                  |
 | `\x`_xx_        | ASCII character in 2-digit hex   |
 | `\u`_xxxx_      | Unicode character in 4-digit hex |
 | `\U`_xxxxxxxx_  | Unicode character in 8-digit hex |
@@ -67,7 +67,7 @@ Standard escape sequences:
 Differences from Rust Strings
 ----------------------------
 
-Internally Rhai strings are stored as UTF-8 just like Rust (they _are_ Rust `String`'s!),
+Internally Rhai strings are stored as UTF-8 just like Rust (they _are_ Rust `String`s!),
 but nevertheless there are major differences.
 
 In Rhai a string is the same as an array of Unicode characters and can be directly indexed (unlike Rust).

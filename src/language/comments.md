@@ -3,8 +3,8 @@ Comments
 
 {{#include ../links.md}}
 
-Comments are C-style, including '`/*` ... `*/`' pairs for block comments
-and '`//`' for comments to the end of the line.
+Comments are C-style, including `/*` ... `*/` pairs for block comments
+and `//` for comments to the end of the line.
 
 Comments can be nested.
 

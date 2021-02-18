@@ -15,21 +15,21 @@ that implements `IntoIterator`:
 ```rust
 // Custom type
 #[derive(Debug, Clone)]
-struct TestStruct { ... }
+struct TestStruct { fields: Vec<i64> }
 
 // Implement 'IntoIterator' trait
-impl IntoIterator<Item = ...> for TestStruct {
-    type Item = ...;
-    type IntoIter = SomeIterType<Self::Item>;
+impl IntoIterator<Item = i64> for TestStruct {
+    type Item = i64;
+    type IntoIter = std::vec::IntoIter<Self::Item>;
 
     fn into_iter(self) -> Self::IntoIter {
-        ...
+        self.fields.into_iter()
     }
 }
 
 engine
     .register_type_with_name::<TestStruct>("TestStruct")
-    .register_fn("new_ts", || TestStruct { ... })
+    .register_fn("new_ts", || TestStruct { fields: vec![1, 2, 3, 42] })
     .register_iterator::<TestStruct>();           // register type iterator
 ```
 
@@ -39,7 +39,7 @@ With a type iterator registered, the [custom type] can be iterated through:
 let ts = new_ts();
 
 // Use 'for' statement to loop through items in 'ts'
-for item in ts {
+for value in ts {
     ...
 }
 ```

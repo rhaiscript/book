@@ -62,8 +62,8 @@ the same as a JSON object.  However, it is _almost_ because the syntax for a sub
 
 When `Engine::parse_json` encounters JSON with sub-objects, it fails with a syntax error.
 
-If it is certain that no text string in the JSON will ever contain the character '`{`',
-then it is possible to parse it by first replacing all occupance of '`{`' with "`#{`".
+If it is certain that no text string in the JSON will ever contain the character `{`,
+then it is possible to parse it by first replacing all occupance of `{` with `#{`.
 
 A JSON object hash starting with `#{` is handled transparently by `Engine::parse_json`.
 

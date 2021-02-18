@@ -3,11 +3,11 @@ Statements
 
 {{#include ../links.md}}
 
-Terminated by '`;`'
-------------------
+Terminated by `;`
+-----------------
 
-Statements are terminated by semicolons '`;`' and they are mandatory,
-except for the _last_ statement in a _block_ (enclosed by '`{`' .. '`}`' pairs) where it can be omitted.
+Statements are terminated by semicolons `;` and they are mandatory,
+except for the _last_ statement in a _block_ (enclosed by `{` .. `}` pairs) where it can be omitted.
 
 Semicolons can also be omitted if the statement ends with a block itself
 (e.g. the `if`, `while`, `for` and `loop` statements).

@@ -18,8 +18,8 @@ The maximum allowed size of an object map can be controlled via `Engine::set_max
 Object Map Literals
 ------------------
 
-Object map literals are built within braces '`#{`' ... '`}`' (_name_ `:` _value_ syntax similar to Rust)
-and separated by commas '`,`':
+Object map literals are built within braces `#{` ... `}` (_name_ `:` _value_ syntax similar to Rust)
+and separated by commas `,`:
 
 > `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `}`
 >

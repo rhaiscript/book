@@ -14,7 +14,7 @@ See the section on [_Module Resolvers_][module resolver] for more details.
 -----------------
 
 A module can be _imported_ via the `import` statement, and be given a name.
-Its members can be accessed via '`::`' similar to C++.
+Its members can be accessed via `::` similar to C++.
 
 A module that is only `import`-ed but not under any module name is commonly used for initialization purposes,
 where the module script contains initialization statements that puts the functions registered with the

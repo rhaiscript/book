@@ -50,7 +50,7 @@ These symbol types can be used:
 
 * `$expr$` &ndash; any valid expression, statement or statement block.
 
-* `$block$` &ndash; any valid statement block (i.e. must be enclosed by `'{'` .. `'}'`).
+* `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` .. `}`).
 
 * `$ident$` &ndash; any [variable] name.
 
@@ -322,7 +322,7 @@ A custom parser takes as input parameters two pieces of information:
   or it can return `$ident$` to parse it as an identifier, or even `$expr$` to start parsing
   an expression.
 
-  If the look-ahead is '`{`', then the custom parser may also return `$block$` to start parsing a
+  If the look-ahead is `{`, then the custom parser may also return `$block$` to start parsing a
   statements block.
 
   If the look-ahead is unexpected, the custom parser should then return the symbol expected

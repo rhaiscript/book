@@ -7,7 +7,7 @@ Numbers
 Integers
 --------
 
-Integer numbers follow C-style format with support for decimal, binary ('`0b`'), octal ('`0o`') and hex ('`0x`') notations.
+Integer numbers follow C-style format with support for decimal, binary (`0b`), octal (`0o`) and hex (`0x`) notations.
 
 The default system integer type (also aliased to `INT`) is `i64`. It can be turned into `i32` via the [`only_i32`] feature.
 
@@ -34,8 +34,8 @@ number with no rounding errors.
 Number Literals
 ---------------
 
-'`_`' separators can be added freely and are ignored within a number &ndash; except at the very beginning or right after
-a decimal point ('`.`').
+`_` separators can be added freely and are ignored within a number &ndash; except at the very beginning or right after
+a decimal point (`.`).
 
 | Sample            | Format                    |  Type   |  [`no_float`]  | [`no_float`] + [`decimal`] |
 | ----------------- | ------------------------- | :-----: | :------------: | :------------------------: |

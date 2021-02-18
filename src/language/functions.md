@@ -24,7 +24,7 @@ Implicit Return
 ---------------
 
 Just like in Rust, an implicit return can be used. In fact, the last statement of a block is _always_ the block's return value
-regardless of whether it is terminated with a semicolon `';'`. This is different from Rust.
+regardless of whether it is terminated with a semicolon `;`. This is different from Rust.
 
 ```rust
 fn add(x, y) {      // implicit return:
@@ -129,7 +129,7 @@ x == 500;           // 'x' is NOT changed!
 -----------------------------------------
 
 Script-defined functions can also be called in method-call style.
-When this happens, the keyword '`this`' binds to the object in the method call and can be changed.
+When this happens, the keyword `this` binds to the object in the method call and can be changed.
 
 ```rust
 fn change() {       // not that the object does not need a parameter

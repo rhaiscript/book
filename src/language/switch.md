@@ -98,8 +98,9 @@ efficient, but it also means that [overloading][operator overloading]
 the `==` operator will have no effect.
 
 Therefore, in environments where it is desirable to [overload][operator overloading]
-the `==` operator &ndash; though it is difficult to think of valid scenarios where you'd want
-`1 == 1` to return something other than `true` &ndash; avoid using the `switch` expression.
+the `==` operator for [standard types] &ndash; though it is difficult to think of valid scenarios
+where you'd want `1 == 1` to return something other than `true` &ndash;
+avoid using the `switch` expression.
 
 ### Efficiency
 

@@ -68,7 +68,7 @@ Considerations
 Normally, use operator overloading for [custom types] only.
 
 Be very careful when overriding built-in operators because users expect standard operators to behave
-in a consistent and predictable manner, and will be annoyed if a calculation for '`+`' turns into a
+in a consistent and predictable manner, and will be annoyed if a calculation for `+` turns into a
 subtraction, for example.
 
 Operator overloading also impacts script optimization when using [`OptimizationLevel::Full`].

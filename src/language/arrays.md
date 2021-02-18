@@ -7,7 +7,7 @@ Arrays are first-class citizens in Rhai. Like C, arrays are accessed with zero-b
 
 > _array_ `[` _index_ `]`
 
-Array literals are built within square brackets '`[`' ... '`]`' and separated by commas '`,`':
+Array literals are built within square brackets `[` ... `]` and separated by commas `,`:
 
 > `[` _value_ `,` _value_ `,` `...` `,` _value_ `]`
 >

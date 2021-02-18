@@ -31,7 +31,7 @@ Setting Maximum Size
 Be conservative when setting a maximum limit and always consider the fact that a registered function may grow
 an array's size without Rhai noticing until the very end.
 
-For instance, the built-in '`+`' operator for arrays concatenates two arrays together to form one larger array;
+For instance, the built-in `+` operator for arrays concatenates two arrays together to form one larger array;
 if both arrays are _slightly_ below the maximum size limit, the resultant array may be almost _twice_ the maximum size.
 
 As a malicious script may create a deeply-nested array which consumes huge amounts of memory while each individual
