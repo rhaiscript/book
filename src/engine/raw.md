@@ -17,12 +17,12 @@ To add more functionalities to a _raw_ `Engine`, load [packages] into it.
 Built-in Operators
 ------------------
 
-| Operators                 | Assignment operators          | Supported for types<br/>(see [standard types])                                |
-| ------------------------- | ----------------------------- | ----------------------------------------------------------------------------- |
-| `+`,                      | `+=`                          | `INT`, `FLOAT` (if not [`no_float`]), `char`, `ImmutableString`               |
-| `-`, `*`, `/`, `%`, `**`, | `-=`, `*=`, `/=`, `%=`, `**=` | `INT`, `FLOAT` (if not [`no_float`])                                          |
-| `<<`, `>>`                | `<<=`, `>>=`                  | `INT`                                                                         |
-| `&`, <code>\|</code>, `^` | `&=`, <code>\|=</code>, `^=`  | `INT`, `bool`                                                                 |
-| `&&`, <code>\|\|</code>   |                               | `bool`                                                                        |
-| `==`, `!=`                |                               | `INT`, `FLOAT` (if not [`no_float`]), `bool`, `char`, `()`, `ImmutableString` |
-| `>`, `>=`, `<`, `<=`      |                               | `INT`, `FLOAT` (if not [`no_float`]), `char`, `()`, `ImmutableString`         |
+| Operators                 | Assignment operators          | Supported for types<br/>(see [standard types])                                                                                    |
+| ------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `+`,                      | `+=`                          | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`]), `char`, [`ImmutableString`]               |
+| `-`, `*`, `/`, `%`, `**`, | `-=`, `*=`, `/=`, `%=`, `**=` | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`])                                            |
+| `<<`, `>>`                | `<<=`, `>>=`                  | `INT`                                                                                                                             |
+| `&`, <code>\|</code>, `^` | `&=`, <code>\|=</code>, `^=`  | `INT`, `bool`                                                                                                                     |
+| `&&`, <code>\|\|</code>   |                               | `bool`                                                                                                                            |
+| `==`, `!=`                |                               | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`]), `bool`, `char`, `()`, [`ImmutableString`] |
+| `>`, `>=`, `<`, `<=`      |                               | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`]), `char`, `()`, [`ImmutableString`]         |
