@@ -17,7 +17,9 @@ To add more functionalities to a _raw_ `Engine`, load [packages] into it.
 Built-in Operators
 ------------------
 
-| Operators                 | Assignment operators          | Supported for types<br/>(see [standard types])                                                                                    |
+The following operators are built-in, meaning that they are always available.
+
+| Operators                 | Assignment operators          | Supported types<br/>(see [standard types])                                                                                        |
 | ------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `+`,                      | `+=`                          | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`]), `char`, [`ImmutableString`]               |
 | `-`, `*`, `/`, `%`, `**`, | `-=`, `*=`, `/=`, `%=`, `**=` | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`])                                            |
@@ -26,3 +28,8 @@ Built-in Operators
 | `&&`, <code>\|\|</code>   |                               | `bool`                                                                                                                            |
 | `==`, `!=`                |                               | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`]), `bool`, `char`, `()`, [`ImmutableString`] |
 | `>`, `>=`, `<`, `<=`      |                               | `INT`, `FLOAT` (if not [`no_float`]), [`Decimal`][rust_decimal] (requires [`decimal`]), `char`, `()`, [`ImmutableString`]         |
+
+All built-in operators are binary, and are supported for both operands of the same type.
+
+`FLOAT` and [`Decimal`][rust_decimal] also inter-operate with `INT`, while [strings] inter-operate
+with [characters][string] for certain operators (e.g. `+`).
