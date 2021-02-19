@@ -363,6 +363,18 @@ The above function can be called in five ways:
 | `index_get`                     |  index getter   | `x[0]`                                        |
 
 
+Pure Functions
+--------------
+
+Apply the `#[rhai_fn(pure)]` attribute on a method function (i.e. one taking a `&mut` first parameter)
+to mark it as  _pure_.
+
+Pure functions can be passed a [constant] value as the first `&mut` parameter.
+
+Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
+`EvalAltResult::ErrorAssignmentToConstant` error.
+
+
 Fallible Functions
 ------------------
 
@@ -506,3 +518,4 @@ Parameters should be set on inner attributes to specify the desired behavior.
 | `index_get`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT) -> Value`                    | registers an index getter                               |
 | `index_set`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT, Value)`                      | registers an index setter                               |
 | `return_raw`        | `#[rhai_fn]`                | `pub fn (...) -> Result<Dynamic, Box<EvalAltResult>>` | marks this as a [fallible function]                     |
+| `pure`              | `#[rhai_fn]`                | `pub fn (&mut Type, ...) -> ...`                      | marks this as a _pure_                                  |

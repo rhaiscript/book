@@ -46,20 +46,53 @@ fn main() {
 ```
 
 
+Pure Functions
+--------------
+
+Some functions are _pure_ &ndash; i.e. they do not mutate any parameter, even though the first
+parameter may be passed in as `&mut` (e.g. for a method function).
+
+This is most commonly done to avoid expensive cloning for methods or [property
+getters][getters/setters] that return information about a [custom type] and does not modify it.
+
+Apply the `#[export_fn(pure)]` attribute on a plugin function to mark it as  _pure_.
+
+Pure functions can be passed a [constant] value as the first `&mut` parameter.
+
+Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
+`EvalAltResult::ErrorAssignmentToConstant` error.
+
+```rust,no_run
+use rhai::plugin::*;        // a "prelude" import for macros
+
+// This method is pure, so 'len' can be used on a constant 'MyType'.
+#[export_fn(pure)]
+pub fn len(my_type: &mut MyType) -> i64 {
+    my_type.len()
+}
+
+// This method is not pure, so 'clear' will raise an error
+// when used on a constant 'MyType'.
+#[export_fn]
+pub fn clear(my_type: &mut MyType) {
+    my_type.clear();
+}
+```
+
+
 Fallible Functions
 ------------------
 
 To register [fallible functions] (i.e. functions that may return errors), apply the
-`#[rhai_fn(return_raw)]` attribute on plugin functions that return `Result<Dynamic, Box<EvalAltResult>>`.
+`#[export_fn(return_raw)]` attribute on plugin functions that return `Result<Dynamic, Box<EvalAltResult>>`.
 
-A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not
+A syntax error is generated if the function with `#[export_fn(return_raw)]` does not
 have the appropriate return type.
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
-#[export_fn]
-#[rhai_fn(return_raw)]
+#[export_fn(return_raw)]
 pub fn double_and_divide(x: i64, y: i64) -> Result<Dynamic, Box<EvalAltResult>> {
     if y == 0 {
         Err("Division by zero!".into())
@@ -107,8 +140,7 @@ as a parameter to the function, thereby implementing a _callback_:
 use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 use rhai::plugin::*;        // a "prelude" import for macros
 
-#[export_fn]
-#[rhai_fn(return_raw)]
+#[export_fn(return_raw)]
 pub fn greet(context: NativeCallContext, callback: FnPtr)
                             -> Result<Dynamic, Box<EvalAltResult>>
 {
@@ -128,8 +160,7 @@ use rhai::plugin::*;        // a "prelude" import for macros
 // This function builds an array of arbitrary size, but is protected
 // against attacks by first checking with the allowed limit set
 // into the 'Engine'.
-#[export_fn]
-#[rhai_fn(return_raw)]
+#[export_fn(return_raw)]
 pub fn grow(context: NativeCallContext, size: i64)
                             -> Result<Dynamic, Box<EvalAltResult>>
 {
