@@ -25,6 +25,7 @@ The Rhai Scripting Language
    2. [Compile to AST for Repeated Evaluations](engine/compile.md)
    5. [Evaluate Expressions Only](engine/expressions.md)
    6. [Raw Engine](engine/raw.md)
+      1. [Built-in Operators](engine/builtin.md)
    7. [Scope &ndash; Initializing and Maintaining State](engine/scope.md)
    8. [Engine Configuration Options](engine/options.md)
 4. [Extend Rhai with Rust](rust/index.md)
