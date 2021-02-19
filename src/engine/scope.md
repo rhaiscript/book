@@ -21,18 +21,19 @@ itself will also be `Send + Sync`. This is extremely useful in multi-threaded ap
 `Scope` API
 -----------
 
-| Method                                       | Description                                                                                              |
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `new` _instance method_                      | create a new empty `Scope`                                                                               |
-| `len`                                        | number of [variables]/[constants] currently within the `Scope`                                           |
-| `rewind`                                     | _rewind_ (i.e. reset) the `Scope` to a particular number of [variables]/[constants]                      |
-| `clear`                                      | remove all [variables]/[constants] from the `Scope`, making it empty                                     |
-| `is_empty`                                   | is the `Scope` empty?                                                                                    |
-| `push`, `push_constant`                      | add a new [variable]/[constant] into the `Scope` with a specified value                                  |
-| `push_dynamic`, `push_constant_dynamic`      | add a new [variable]/[constant] into the `Scope` with a [`Dynamic`] value                                |
-| `contains`                                   | does the particular [variable] or [constant] exist in the `Scope`?                                       |
-| `get_value<T>`, `get_mut<T>`, `set_value<T>` | get/set the value of a [variable] within the `Scope` (panics if trying to set the value of a [constant]) |
-| `iter`, `iter_raw`                           | get an iterator to the [variables]/[constants] within the `Scope`                                        |
+| Method                                        | Description                                                                                              |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `new` _instance method_                       | create a new empty `Scope`                                                                               |
+| `len`                                         | number of [variables]/[constants] currently within the `Scope`                                           |
+| `rewind`                                      | _rewind_ (i.e. reset) the `Scope` to a particular number of [variables]/[constants]                      |
+| `clear`                                       | remove all [variables]/[constants] from the `Scope`, making it empty                                     |
+| `is_empty`                                    | is the `Scope` empty?                                                                                    |
+| `push`, `push_constant`                       | add a new [variable]/[constant] into the `Scope` with a specified value                                  |
+| `push_dynamic`, `push_constant_dynamic`       | add a new [variable]/[constant] into the `Scope` with a [`Dynamic`] value                                |
+| `contains`                                    | does the particular [variable] or [constant] exist in the `Scope`?                                       |
+| `get_value<T>`, `get_mut<T>`, `set_value<T>`  | get/set the value of a [variable] within the `Scope` (panics if trying to set the value of a [constant]) |
+| `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                        |
+| `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                               |
 
 For the complete `Scope` API, refer to the [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.Scope.html) online.
 

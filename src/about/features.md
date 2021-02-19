@@ -78,6 +78,8 @@ Flexible
 
 * Re-entrant scripting [`Engine`] can be made `Send + Sync` (via the [`sync`] feature).
 
+* Support for [`Decimal`](https://crates.io/crates/rust_decimal) numbers.
+
 * Serialization/deserialization support via [`serde`](https://crates.io/crates/serde).
 
 * Support for [minimal builds] by excluding unneeded language [features].
