@@ -16,14 +16,14 @@ Simulate an Enum API
 A [plugin module] is extremely handy in creating an entire API for a custom enum type.
 
 ```rust,no_run
-use rhai::{Engine, Dynamic, EvalAltResult};
 use rhai::plugin::*;
+use rhai::{Dynamic, Engine, EvalAltResult};
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 enum MyEnum {
     Foo,
     Bar(i64),
-    Baz(String, bool)
+    Baz(String, bool),
 }
 
 // Create a plugin module with functions constructing the 'MyEnum' variants
@@ -38,77 +38,86 @@ mod MyEnumModule {
         MyEnum::Baz(val1, val2)
     }
     // Access to fields
-    #[rhai_fn(get = "enum_type")]
-    pub fn get_type(a: &mut MyEnum) -> String {
-        match a {
+    #[rhai_fn(get = "enum_type", pure)]
+    pub fn get_type(my_enum: &mut MyEnum) -> String {
+        match my_enum {
             MyEnum::Foo => "Foo".to_string(),
             MyEnum::Bar(_) => "Bar".to_string(),
-            MyEnum::Baz(_, _) => "Baz".to_string()
+            MyEnum::Baz(_, _) => "Baz".to_string(),
         }
     }
-    #[rhai_fn(get = "field_0")]
-    pub fn get_field_0(a: &mut MyEnum) -> Dynamic {
-        match a {
+    #[rhai_fn(get = "field_0", pure)]
+    pub fn get_field_0(my_enum: &mut MyEnum) -> Dynamic {
+        match my_enum {
             MyEnum::Foo => Dynamic::UNIT,
             MyEnum::Bar(x) => Dynamic::from(x),
-            MyEnum::Baz(x, _) => Dynamic::from(x)
+            MyEnum::Baz(x, _) => Dynamic::from(x),
         }
     }
-    #[rhai_fn(get = "field_1")]
-    pub fn get_field_1(a: &mut MyEnum) -> Dynamic {
-        match a {
+    #[rhai_fn(get = "field_1", pure)]
+    pub fn get_field_1(my_enum: &mut MyEnum) -> Dynamic {
+        match my_enum {
             MyEnum::Foo | MyEnum::Bar(_) => Dynamic::UNIT,
-            MyEnum::Baz(_, x) => Dynamic::from(x)
+            MyEnum::Baz(_, x) => Dynamic::from(x),
         }
     }
     // Printing
-    #[rhai(global, name = "to_string", name = "print", name = "to_debug", name = "debug")]
-    pub fn to_string(a: &mut MyEnum) -> String {
-        format!("{:?}", a))
+    #[rhai(
+        global,
+        name = "to_string",
+        name = "print",
+        name = "to_debug",
+        name = "debug",
+        pure
+    )]
+    pub fn to_string(my_enum: &mut MyEnum) -> String {
+        format!("{:?}", my_enum)
     }
     #[rhai_fn(global, name = "+")]
-    pub fn add_to_str(s: &str, a: MyEnum) -> String {
-        format!("{}{:?}", s, a))
+    pub fn add_to_str(string: &str, my_enum: MyEnum) -> String {
+        format!("{}{:?}", string, my_enum)
     }
-    #[rhai_fn(global, name = "+")]
-    pub fn add_str(a: &mut MyEnum, s: &str) -> String {
-        format!("{:?}", a).push_str(s))
+    #[rhai_fn(global, name = "+", pure)]
+    pub fn add_str(my_enum: &mut MyEnum, string: &str) -> String {
+        format!("{:?}", my_enum).push_str(string)
     }
     #[rhai_fn(global, name = "+=")]
-    pub fn append_to_str(s: &mut ImmutableString, a: MyEnum) -> String {
-        s += a.to_string())
+    pub fn append_to_str(s: &mut ImmutableString, my_enum: MyEnum) -> String {
+        s += my_enum.to_string()
     }
     // '==' and '!=' operators
-    #[rhai_fn(global, name = "==")]
-    pub fn eq(a: &mut MyEnum, b: MyEnum) -> bool {
-        a == &b
+    #[rhai_fn(global, name = "==", pure)]
+    pub fn eq(my_enum: &mut MyEnum, my_enum2: MyEnum) -> bool {
+        my_enum == &my_enum2
     }
-    #[rhai_fn(global, name = "!=")]
-    pub fn neq(a: &mut MyEnum, b: MyEnum) -> bool {
-        a != &b
+    #[rhai_fn(global, name = "!=", pure)]
+    pub fn neq(my_enum: &mut MyEnum, my_enum2: MyEnum) -> bool {
+        my_enum != &my_enum2
     }
     // Array functions
     #[rhai_fn(global, name = "push")]
-    pub fn append_to_array(list: &mut Array, item: MyEnum) {
-        list.push(Dynamic::from(item)));
+    pub fn append_to_array(array: &mut Array, my_enum: MyEnum) {
+        array.push(Dynamic::from(my_enum));
     }
     #[rhai_fn(global, name = "+=")]
-    pub fn append_to_array_op(list: &mut Array, item: MyEnum) {
-        list.push(Dynamic::from(item)));
+    pub fn append_to_array_op(array: &mut Array, my_enum: MyEnum) {
+        array.push(Dynamic::from(my_enum));
     }
     #[rhai_fn(global, name = "insert")]
-    pub fn insert_to_array(list: &mut Array, position: i64, item: MyEnum) {
+    pub fn insert_to_array(array: &mut Array, position: i64, my_enum: MyEnum) {
         if position <= 0 {
-            list.insert(0, Dynamic::from(item));
-        } else if (position as usize) >= list.len() - 1 {
-            list.push(item);
+            array.insert(0, Dynamic::from(my_enum));
+        } else if (position as usize) >= array.len() - 1 {
+            array.push(my_enum);
         } else {
-            list.insert(position as usize, Dynamic::from(item));
+            array.insert(position as usize, Dynamic::from(my_enum));
         }
     }
     #[rhai_fn(global, name = "pad")]
-    pub fn pad_array(list: &mut Array, len: i64, item: MyEnum) {
-        if len as usize > list.len() { list.resize(len as usize, item); }
+    pub fn pad_array(array: &mut Array, len: i64, my_enum: MyEnum) {
+        if len as usize > array.len() {
+            array.resize(len as usize, my_enum);
+        }
     }
 }
 
@@ -160,7 +169,7 @@ variant-internal data.
 It is possible, however, to `switch` through enum variants based on their types:
 
 ```c,no_run
-switch x.enum_type {
+switch my_enum.enum_type {
   "Foo" => ...,
   "Bar" => {
     let value = foo.field_0;
@@ -185,16 +194,16 @@ Another way to work with Rust enums in a `switch` expression is through exposing
 ```rust,no_run
 use rhai::Array;
 
-engine.register_get("enum_data", |x: &mut Enum| {
-    match x {
-        Enum::Foo => vec![ "Foo".into() ] as Array,
+engine.register_get("enum_data", |my_enum: &mut MyEnum| {
+    match my_enum {
+        MyEnum::Foo => vec![ "Foo".into() ] as Array,
 
         // Say, skip the data field because it is not
         // used as a discriminant
-        Enum::Bar(value) => vec![ "Bar".into() ] as Array,
+        MyEnum::Bar(value) => vec![ "Bar".into() ] as Array,
 
         // Say, all fields act as discriminants
-        Enum::Baz(val1, val2) => vec![
+        MyEnum::Baz(val1, val2) => vec![
             "Baz".into(), val1.clone().into(), (*val2).into()
         ] as Array
     }
