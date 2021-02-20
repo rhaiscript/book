@@ -6,7 +6,7 @@ Maximum Call Stack Depth
 Limit How Stack Usage by Scripts
 -------------------------------
 
-Rhai by default limits function calls to a maximum depth of 128 levels (8 levels in debug build).
+Rhai by default limits function calls to a maximum depth of 64 levels (8 levels in debug build).
 
 This limit may be changed via the `Engine::set_max_call_levels` method.
 
