@@ -8,12 +8,16 @@ Each Function is a Separate Compilation Unit
 
 [Functions] in Rhai are _pure_ and they form individual _compilation units_.
 This means that individual functions can be separated, exported, re-grouped, imported,
-and generally mix-'n-match-ed with other completely unrelated scripts.
+and generally mix-'n-matched with other completely unrelated scripts.
 
 For example, the `AST::merge` and `AST::combine` methods (or the equivalent `+` and `+=` operators)
 allow combining all functions in one [`AST`] into another, forming a new, unified, group of functions.
 
-In general, there are two types of _namespaces_ where functions are looked up:
+
+Namespace Types
+---------------
+
+In general, there are two main types of _namespaces_ where functions are looked up:
 
 | Namespace | How Many | Source                                                                                                                                                                                                                                        | Lookup                   | Sub-modules? | Variables? |
 | --------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | :----------: | :--------: |
@@ -21,8 +25,7 @@ In general, there are two types of _namespaces_ where functions are looked up:
 | Module    |   Many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                                   | namespace-qualified name |     yes      |    yes     |
 
 
-Module Namespaces
------------------
+### Module Namespaces
 
 There can be multiple module namespaces at any time during a script evaluation, usually loaded via the
 [`import`] statement.
@@ -34,19 +37,18 @@ Functions and variables in module namespaces are isolated and encapsulated withi
 They must be called or accessed in a _namespace-qualified_ manner.
 
 ```rust,no_run
-import "my_module" as m;            // new module namespace 'm' created via 'import'
+import "my_module" as m;        // new module namespace 'm' created via 'import'
 
-let x = m::calc_result();           // namespace-qualified function call
+let x = m::calc_result();       // namespace-qualified function call
 
-let y = m::MY_NUMBER;               // namespace-qualified variable (constant) access
+let y = m::MY_NUMBER;           // namespace-qualified variable/constant access
 
-let x = calc_result();              // <- error: function 'calc_result' not found
-                                    //    in global namespace!
+let z = calc_result();          // <- error: function 'calc_result' not found
+                                //    in global namespace!
 ```
 
 
-Global Namespace
-----------------
+### Global Namespace
 
 There is one _global_ namespace for every [`Engine`], which includes (in the following search order):
 
@@ -69,27 +71,25 @@ This aspect is very similar to JavaScript before ES6 modules.
 
 ```rust,no_run
 // Compile a script into AST
-let ast1 = engine.compile(
-    r#"
-        fn get_message() {
-            "Hello!"                // greeting message
-        }
+let ast1 = engine.compile(r#"
+    fn get_message() {
+        "Hello!"                // greeting message
+    }
 
-        fn say_hello() {
-            print(get_message());   // prints message
-        }
+    fn say_hello() {
+        print(get_message());   // prints message
+    }
 
-        say_hello();
-    "#
-)?;
+    say_hello();
+"#)?;
 
 // Compile another script with an overriding function
 let ast2 = engine.compile(r#"fn get_message() { "Boo!" }"#)?;
 
 // Combine the two AST's
-ast1 += ast2;                       // 'message' will be overwritten
+ast1 += ast2;                   // 'message' will be overwritten
 
-engine.consume_ast(&ast1)?;         // prints 'Boo!'
+engine.consume_ast(&ast1)?;     // prints 'Boo!'
 ```
 
 Therefore, care must be taken when _cross-calling_ functions to make sure that the correct
@@ -99,16 +99,16 @@ The only practical way to ensure that a function is a correct one is to use [mod
 i.e. define the function in a separate module and then [`import`] it:
 
 ```rust,no_run
-----------------
++--------------+
 | message.rhai |
-----------------
++--------------+
 
 fn get_message() { "Hello!" }
 
 
----------------
++-------------+
 | script.rhai |
----------------
++-------------+
 
 import "message" as msg;
 

@@ -84,9 +84,9 @@ cause a stack overflow in the [`Engine`], unless stopped by setting a limit for 
 For instance, importing itself always causes an infinite recursion:
 
 ```rust,no_run
---------------
++------------+
 | hello.rhai |
---------------
++------------+
 
 import "hello" as foo;          // import itself - infinite recursion!
 
@@ -96,17 +96,17 @@ foo::do_something();
 Modules cross-referencing also cause infinite recursion:
 
 ```rust,no_run
---------------
++------------+
 | hello.rhai |
---------------
++------------+
 
 import "world" as foo;
 foo::do_something();
 
 
---------------
++------------+
 | world.rhai |
---------------
++------------+
 
 import "hello" as bar;
 bar::do_something_else();

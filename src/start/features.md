@@ -18,9 +18,9 @@ Features that Enable Special Functionalities
 | Feature             | Additive? | Description                                                                                                                                                                                           |
 | ------------------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                    |
-| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                              |
 | `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type                                                                                                                                                     |
-| `serde`             |    yes    | enables serialization/deserialization via `serde` (requires the [`serde`](https://crates.io/crates/serde) crate)                                                                                      |
+| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                              |
+| `serde`             |    yes    | enables serialization/deserialization via `serde` (pulls in the [`serde`](https://crates.io/crates/serde) crate)                                                                                      |
 | `metadata`          |    yes    | enables exporting [functions metadata] to [JSON format]({{rootUrl}}/engine/metadata/export_to_json.md); implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json) |
 | `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                                                                 |
 
@@ -41,10 +41,10 @@ Features that Disable Certain Language Features
 Features that Disable Certain Engine Features
 --------------------------------------------
 
-| Feature       | Additive? | Description                                                                                                                                                                                                 |
-| ------------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `unchecked`   |    no     | disables arithmetic checking (such as over-flows and division by zero), call stack depth limit, operations count limit and modules loading limit.<br/>Beware that a bad script may panic the entire system! |
-| `no_optimize` |    no     | disables [script optimization]                                                                                                                                                                              |
+| Feature       | Additive? | Description                                                                                                                                                                                                                                                                                                                                                   |
+| ------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `unchecked`   |    no     | disables [arithmetic checking][checked] (such as over-flows and division by zero), [call stack depth limit][maximum call stack depth], [operations count limit][maximum number of operations], [modules loading limit][maximum number of modules] and [data size limit][maximum length of strings].<br/>Beware that a bad script may panic the entire system! |
+| `no_optimize` |    no     | disables [script optimization]                                                                                                                                                                                                                                                                                                                                |
 
 
 Features that Configure the Engine
@@ -86,7 +86,7 @@ Example
 The `Cargo.toml` configuration below turns on these six features:
 
 * `sync` (everything `Send + Sync`)
-* `unchecked` (disable all checking &ndash; should not be used with untrusted user scripts)
+* `unchecked` (disable all [checking][safety] &ndash; should not be used with untrusted user scripts)
 * `only_i32` (only 32-bit signed integers)
 * `no_float` (no floating point numbers)
 * `no_module` (no loading external [modules])

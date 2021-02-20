@@ -35,7 +35,7 @@ all code is compiled into the final binary since what a script requires cannot b
 If a language feature will never be needed, omitting it is a prudent strategy to optimize the build for size.
 
 Omitting arrays ([`no_index`]) yields the most code-size savings, followed by floating-point support
-([`no_float`]), checked arithmetic/script resource limits ([`unchecked`]) and finally object maps and custom types ([`no_object`]).
+([`no_float`]), safety checks ([`unchecked`]) and finally object maps and custom types ([`no_object`]).
 
 Where the usage scenario does not call for loading externally-defined modules, use [`no_module`] to save some bytes.
 Disable script-defined functions ([`no_function`]) and possibly closures ([`no_closure`]) when the features are not needed.

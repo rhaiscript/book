@@ -136,6 +136,8 @@
 [OOP]: {{rootUrl}}/patterns/oop.md
 [DSL]: {{rootUrl}}/engine/dsl.md
 
+[safety]: {{rootUrl}}/safety/index.md
+[checked]: {{rootUrl}}/safety/checked.md
 [sand-boxed]: {{rootUrl}}/safety/sandbox.md
 [maximum statement depth]: {{rootUrl}}/safety/max-stmt-depth.md
 [maximum call stack depth]: {{rootUrl}}/safety/max-call-stack.md
