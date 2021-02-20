@@ -31,14 +31,10 @@ enum MyEnum {
 mod MyEnumModule {
     // Constructors for 'MyEnum' variants
     pub const Foo: &MyEnum = MyEnum::Foo;
-    pub fn Bar(value: i64) -> MyEnum {
-        MyEnum::Bar(value)
-    }
-    pub fn Baz(val1: String, val2: bool) -> MyEnum {
-        MyEnum::Baz(val1, val2)
-    }
+    pub fn Bar(value: i64) -> MyEnum { MyEnum::Bar(value) }
+    pub fn Baz(val1: String, val2: bool) -> MyEnum { MyEnum::Baz(val1, val2) }
     // Access to fields
-    #[rhai_fn(get = "enum_type", pure)]
+    #[rhai_fn(global, get = "enum_type", pure)]
     pub fn get_type(my_enum: &mut MyEnum) -> String {
         match my_enum {
             MyEnum::Foo => "Foo".to_string(),
@@ -46,7 +42,7 @@ mod MyEnumModule {
             MyEnum::Baz(_, _) => "Baz".to_string(),
         }
     }
-    #[rhai_fn(get = "field_0", pure)]
+    #[rhai_fn(global, get = "field_0", pure)]
     pub fn get_field_0(my_enum: &mut MyEnum) -> Dynamic {
         match my_enum {
             MyEnum::Foo => Dynamic::UNIT,
@@ -54,7 +50,7 @@ mod MyEnumModule {
             MyEnum::Baz(x, _) => Dynamic::from(x),
         }
     }
-    #[rhai_fn(get = "field_1", pure)]
+    #[rhai_fn(global, get = "field_1", pure)]
     pub fn get_field_1(my_enum: &mut MyEnum) -> Dynamic {
         match my_enum {
             MyEnum::Foo | MyEnum::Bar(_) => Dynamic::UNIT,
@@ -62,14 +58,7 @@ mod MyEnumModule {
         }
     }
     // Printing
-    #[rhai(
-        global,
-        name = "to_string",
-        name = "print",
-        name = "to_debug",
-        name = "debug",
-        pure
-    )]
+    #[rhai_fn(global, name = "to_string", name = "print", name = "to_debug", name = "debug", pure)]
     pub fn to_string(my_enum: &mut MyEnum) -> String {
         format!("{:?}", my_enum)
     }
