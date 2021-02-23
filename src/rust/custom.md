@@ -151,6 +151,22 @@ println!("{}", ts1_type);               // prints 'TestStruct'
 ```
 
 
+Collection Types
+----------------
+
+Collection types usually contain a `push`, `insert`, `add`, `append` or `+=` method that adds a particular
+item to the collection.
+
+If the collection takes a [`Dynamic`] value (e.g. like an [array]), the type of such an add function
+can take a [`Dynamic`] parameter.
+
+```rust,no_run
+engine.register_fn("add",
+    |col: &mut MyCollectionType, item: Dynamic| col.push(col)
+);
+```
+
+
 Use the Custom Type With Arrays
 ------------------------------
 
@@ -173,4 +189,4 @@ Working With Enums
 ------------------
 
 It is quite easy to use Rust enums with Rhai.
-See [this chapter]({{rootUrl}}/patterns/enums.md) for more details.
+See the section on [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
