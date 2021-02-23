@@ -19,12 +19,17 @@ The maximum allowed length of a string can be controlled via `Engine::set_max_st
 The `ImmutableString` Type
 -------------------------
 
-All strings in Rhai are implemented as `ImmutableString` (see [standard types]).
-An `ImmutableString` does not change and can be shared.
+All strings in Rhai are implemented as `ImmutableString`, which is an alias to
+`Rc<String>` (or `Arc<String>` under [`sync`]).
+
+An `ImmutableString` is immutable (i.e. never changes) and therefore is shared among many users.
+Cloning an `ImmutableString` is cheap since it only copies an immutable reference.
 
 Modifying an `ImmutableString` causes it first to be cloned, and then the modification made to the copy.
 
-### **IMPORTANT** &ndash; Avoid `String` Parameters
+
+**IMPORTANT** &ndash; Avoid `String` Parameters
+----------------------------------------------
 
 `ImmutableString` should be used in place of `String` for function parameters because using
 `String` is very inefficient (the `String` argument is cloned during every call).
@@ -72,12 +77,25 @@ but nevertheless there are major differences.
 
 In Rhai a string is the same as an array of Unicode characters and can be directly indexed (unlike Rust).
 
-This is similar to most other languages where strings are internally represented not as UTF-8 but as arrays of multi-byte
-Unicode characters.
+This is similar to most other languages where strings are stored internally not as UTF-8 but as
+UCS-16 or UCS-32.
 
 Individual characters within a Rhai string can also be replaced just as if the string is an array of Unicode characters.
 
 In Rhai, there are also no separate concepts of `String` and `&str` as in Rust.
+
+### Performance Considerations of Character Indexing
+
+Although Rhai exposes a string as a simple array of `char` which can be directly indexed to get at a
+particular character, internally the string is still stored as UTF-8 (native Rust `String`s).
+
+All indexing operations require walking through the entire UTF-8 string to find the offset of the
+particular character position, and therefore is much slower than simple array indexing.
+
+This implementation detail is hidden from the user but has a performance implication.
+
+Avoid large scale character-based processing of strings; instead, build an actual [array] of
+characters (via the `split()` method) which can then be manipulated efficiently.
 
 
 Examples

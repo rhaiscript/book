@@ -30,10 +30,11 @@ Minimize Size of `Dynamic`
 -------------------------
 
 Turning on [`no_float`] or [`f32_float`] and [`only_i32`] on 32-bit targets makes the critical [`Dynamic`]
-data type only 8 bytes long.
-Normally [`Dynamic`] can be up to 12-16 bytes in order to hold an `i64` or `f64`.
+data type only 8 bytes long for 32-bit targets.
 
-A small [`Dynamic`] helps performance due to better cache efficiency.
+Normally [`Dynamic`] needs to be up 12-16 bytes long in order to hold an `i64` or `f64`.
+
+A smaller [`Dynamic`] helps performance due to better cache efficiency.
 
 
 Use `ImmutableString`
