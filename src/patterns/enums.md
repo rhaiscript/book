@@ -83,31 +83,6 @@ mod MyEnumModule {
     pub fn neq(my_enum: &mut MyEnum, my_enum2: MyEnum) -> bool {
         my_enum != &my_enum2
     }
-    // Array functions
-    #[rhai_fn(global, name = "push")]
-    pub fn append_to_array(array: &mut Array, my_enum: MyEnum) {
-        array.push(Dynamic::from(my_enum));
-    }
-    #[rhai_fn(global, name = "+=")]
-    pub fn append_to_array_op(array: &mut Array, my_enum: MyEnum) {
-        array.push(Dynamic::from(my_enum));
-    }
-    #[rhai_fn(global, name = "insert")]
-    pub fn insert_to_array(array: &mut Array, position: i64, my_enum: MyEnum) {
-        if position <= 0 {
-            array.insert(0, Dynamic::from(my_enum));
-        } else if (position as usize) >= array.len() - 1 {
-            array.push(my_enum);
-        } else {
-            array.insert(position as usize, Dynamic::from(my_enum));
-        }
-    }
-    #[rhai_fn(global, name = "pad")]
-    pub fn pad_array(array: &mut Array, len: i64, my_enum: MyEnum) {
-        if len as usize > array.len() {
-            array.resize(len as usize, my_enum);
-        }
-    }
 }
 
 let mut engine = Engine::new();
