@@ -50,6 +50,56 @@ a decimal point (`.`).
 | `123_456.789e-10` | _scientific notation_     | `FLOAT` | _syntax error_ | [`Decimal`][rust_decimal]  |
 
 
+Warning &ndash; No Implicit Type Conversions
+-------------------------------------------
+
+Unlike most C-like languages, Rhai does _not_ provide implicit type conversions between different
+numeric types.
+
+For example, a `u8` is never implicitly converted to `i64` when used as a parameter in a function
+call or as a comparison operand.  `f32` is never implicitly converted to `f64`.
+
+This is exactly the same as Rust where all numeric types are distinct.  Rhai is written in Rust afterall.
+
+Therefore, care must be taken especially with regards to integer variables pushed inside a custom [`Scope`]
+that they are of the intended type.
+
+It is extremely easy to mess up numeric types since the Rust default integer type is `i32` while for
+Rhai it is `i64` (without [`only_i32`]).
+
+```rust
+use rhai::{Engine, Scope, INT};
+
+let engine = Engine::new();
+
+let mut scope = Scope::new();
+
+scope.push("r", 42);            // 'r' is i32 (Rust default integer type)
+scope.push("x", 42_u8);         // 'x' is u8
+scope.push("y", 42_i64);        // 'y' is i64
+scope.push("z", 42 as INT);     // 'z' is i64 (or i32 under 'only_i32')
+scope.push("f", 42.0_f32);      // 'f' is f32
+
+// Rhai integers are i64 (i32 under 'only_i32')
+engine.eval::<String>("type_of(42)")? == "i64";
+
+// false - i32 is never equal to i64
+engine.eval_with_scope::<bool>(&mut scope, "r == 42")?;
+
+// false - u8 is never equal to i64
+engine.eval_with_scope::<bool>(&mut scope, "x == 42")?;
+
+// true - i64 is equal to i64
+engine.eval_with_scope::<bool>(&mut scope, "y == 42")?;
+
+// true - INT is i64
+engine.eval_with_scope::<bool>(&mut scope, "z == 42")?;
+
+// false - f32 is never equal to f64
+engine.eval_with_scope::<bool>(&mut scope, "f == 42.0")?;
+```
+
+
 Floating-Point vs. Decimal
 --------------------------
 
