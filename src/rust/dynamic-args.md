@@ -41,13 +41,13 @@ fn foo3(x: i64, y: Dynamic, z: bool) { }
 
 fn foo4(x: i64, y: Dynamic, z: Dynamic) { }
 
-fn foo1(x: Dynamic, y: &str, z: bool) { }
+fn foo5(x: Dynamic, y: &str, z: bool) { }
 
-fn foo2(x: Dynamic, y: &str, z: Dynamic) { }
+fn foo6(x: Dynamic, y: &str, z: Dynamic) { }
 
-fn foo3(x: Dynamic, y: Dynamic, z: bool) { }
+fn foo7(x: Dynamic, y: Dynamic, z: bool) { }
 
-fn foo4(x: Dynamic, y: Dynamic, z: Dynamic) { }
+fn foo8(x: Dynamic, y: Dynamic, z: Dynamic) { }
 
 let mut engine = Engine::new();
 
