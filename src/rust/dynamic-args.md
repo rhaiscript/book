@@ -63,3 +63,23 @@ engine
     .register_fn("foo", foo2)
     .register_fn("foo", foo1);
 ```
+
+
+Warning: Only the Right-Most 16 Parameters Can Be `Dynamic`
+---------------------------------------------------------
+
+The number of parameter permutations go up exponentially, and therefore there is a realistic limit
+of 16 parameters, counting from the _right-most side_, allowed to be [`Dynamic`].
+
+For example, Rhai will not find the following function (why you'd want to define one like this is
+beyond understanding):
+
+```rust,no_run
+fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64, x5: i64,
+                             x6: i64, x7: i64, x8: i64, x9: i64, x10: i64,
+                             x11: i64, x12: i64, x13: i64, x14: i64,
+                             x15: i64, x16: i64) {
+
+    // ... do some unspeakably evil things with all those parameters ...
+}
+```
