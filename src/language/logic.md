@@ -36,8 +36,8 @@ Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an
 
 ### Comparing different types (or custom types without the operator function defined) defaults to `false`
 
-Comparing two values of _different_ data types, or with [custom types], defaults to `false` unless
-the appropriate operator functions have been registered.
+Comparing two values of _different_ data types defaults to `false` unless the appropriate operator
+functions have been registered.
 
 The exception is `!=` (not equals) which defaults to `true`. This is in line with intuition.
 
@@ -52,7 +52,7 @@ ts == 42;           // false: different types cannot be compared
 
 ts != 42;           // true: different types cannot be compared
 
-ts == ts;           // false: unless '==' is defined for the custom type
+ts == ts;           // error: '==' not defined for the custom type
 ```
 
 ### Safety valve: Comparing different _numeric_ types has no default
@@ -78,25 +78,13 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 
 ### Caution: Beware operators for custom types
 
-The default comparison behavior (i.e. returning `false` instead of raising an error)
-may be counter-intuitive for [custom types] because all comparisons default to `false`
-(`true` for `!=`), unless the corresponding operators are defined for the type.
-
-```rust,no_run
-let ts = new_ts();  // custom type that doesn't have any operators defined
-
-ts == ts;           // false: unless '==' is defined for the custom type
-
-ts != ts;           // true: unless '!=' is defined for the custom type
-```
-
 Operators are completely separate from each other.  For example:
 
 * `!=` does NOT equal to `!(==)`
 * `>` does NOT equal to `!(<=)`
 * `<=` does NOT equal to `<` plus `==`
 
-Therefore, if a [custom type] misses an operator definition, the default result is simply returned.
+Therefore, if a [custom type] misses an operator definition, is simply raises an error.
 
 This behavior can be counter-intuitive.
 
@@ -105,11 +93,11 @@ let ts = new_ts();  // custom type with '<=' and '==' defined
 
 ts <= ts;           // true: '<=' defined
 
-ts < ts;            // false: '<' not defined, even though '<=' is true
+ts < ts;            // error: '<' not defined, even though '<=' is
 
 ts == ts;           // true: '==' defined
 
-ts != ts;           // true: '!=' not defined, even though '==' is true
+ts != ts;           // error: '!=' not defined, even though '==' is
 ```
 
 It is strongly recommended that, when defining operators for [custom types], always define the full set
