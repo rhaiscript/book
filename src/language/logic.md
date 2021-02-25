@@ -34,10 +34,12 @@ Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an
 42.0 < 42;          // false
 ```
 
-### Different types cannot be compared (always `false`)
+### Comparing different types (or custom types without the operator function defined) defaults to `false`
 
-Comparing two values of _different_ data types, or of unknown data types, always results in `false`,
-except for `!=` (not equals) which results in `true`. This is in line with intuition.
+Comparing two values of _different_ data types, or with [custom types], defaults to `false` unless
+the appropriate operator functions have been registered.
+
+The exception is `!=` (not equals) which defaults to `true`. This is in line with intuition.
 
 ```rust,no_run
 42 > "42";          // false: i64 cannot be compared with string
@@ -51,6 +53,27 @@ ts == 42;           // false: different types cannot be compared
 ts != 42;           // true: different types cannot be compared
 
 ts == ts;           // false: unless '==' is defined for the custom type
+```
+
+### Safety valve: Comparing different _numeric_ types has no default
+
+Beware that the above default does _NOT_ apply to numeric values of different types
+(e.g. comparison between `i64` and `u16`, `i32` and `f64`) &ndash; when multiple numeric types are
+used it is too easy to mess and for subtle errors to creep in.
+
+Therefore, using numeric types other than `INT` and `FLOAT` is _highly discouraged_; these data
+types are only supported for the purpose of facilitating Rust integration.
+
+```rust,no_run
+// Assume variable 'x' = 42_u16, 'y' = 42_u16 (both types of u16)
+
+x == y;             // true: '==' operator for u16 works
+
+x == "hello";       // false: non-numeric operand types default to false
+
+x == 42;            // error: ==(u16, i64) not defined, no default for numeric types
+
+42 == y;            // error: ==(i64, u16) not defined, no default for numeric types
 ```
 
 ### Caution: Beware operators for custom types
