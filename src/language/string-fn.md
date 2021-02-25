@@ -3,6 +3,10 @@ Built-in String Functions
 
 {{#include ../links.md}}
 
+
+Standard Functions
+------------------
+
 The following standard methods (mostly defined in the [`MoreStringPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on [strings]:
 
@@ -10,7 +14,8 @@ using a [raw `Engine`]) operate on [strings]:
 | ------------------------- | :-----------------: | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `len` method and property |                     | _none_                                                                                 | returns the number of characters (not number of bytes) in the string                                                 |
 | `pad`                     |                     | 1) target length<br/>2) character/string to pad                                        | pads the string with a character or a string to at least a specified length                                          |
-| `+=` operator, `append`   |                     | character/string to append                                                             | Adds a character or a string to the end of another string                                                            |
+| `append`                  |                     | character/string to append                                                             | adds a character or a string to the end of another string                                                            |
+| `remove`                  |                     | character/string to remove                                                             | removes a character or a string from the string                                                                      |
 | `clear`                   |                     | _none_                                                                                 | empties the string                                                                                                   |
 | `truncate`                |                     | target length                                                                          | cuts off the string at exactly a specified number of characters                                                      |
 | `contains`                |                     | character/sub-string to search for                                                     | checks if a certain character or sub-string occurs in the string                                                     |
@@ -23,6 +28,27 @@ using a [raw `Engine`]) operate on [strings]:
 | `crop`                    |                     | 1) start index<br/>2) _(optional)_ number of characters to retain, none if < 0         | retains only a portion of the string                                                                                 |
 | `replace`                 |                     | 1) target character/sub-string<br/>2) replacement character/string                     | replaces a sub-string with another                                                                                   |
 | `trim`                    |                     | _none_                                                                                 | trims the string of whitespace at the beginning and end                                                              |
+
+
+Standard Operators
+------------------
+
+The following standard operators inter-operate between [strings] and/or [characters][strings].
+
+When one (or both) of the operands is a [character][string], it is first converted into a
+one-character [string] before running the operator.
+
+| Operator  | Description                             |
+| --------- | --------------------------------------- |
+| `+`, `+=` | string concatenation                    |
+| `-`, `-=` | remove character/sub-string from string |
+| `==`      | equals to                               |
+| `!=`      | not equals to                           |
+| `>`       | greater than                            |
+| `>=`      | greater than or equals to               |
+| `<`       | less than                               |
+| `<=`      | less than or equals to                  |
+
 
 Examples
 --------
