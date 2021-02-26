@@ -49,24 +49,15 @@ Scoped Imports
 `import` statements are _scoped_, meaning that they are only accessible inside the scope that they're imported.
 
 They can appear anywhere a normal statement can be, but in the vast majority of cases `import` statements are
-usually grouped:
-
-1) at the beginning of a script or,
-
-2) at the beginning of a [function]'s body.
+usually grouped at the beginning of a script so they have _global_ visibility.
 
 It is not advised to deviate from this common practice unless there is a _Very Good Reason™_.
 
 Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
 same module during every iteration of the loop!
 
-On the other hand, [functions] in _Rhai_ are _pure_ and they form closed environments.
-They cannot access anything outside of their body, including [variables], [constants], imports etc.
-
-In order to use a module inside a function, it must be imported within the [function] body.
-
 ```rust,no_run
-import "hacker" as h;           // import module
+import "hacker" as h;           // import module - visible globally
 
 if secured {                    // <- new block scope
     let mod = "crypt";
@@ -75,20 +66,16 @@ if secured {                    // <- new block scope
 
     let x = c::encrypt(key);    // use a function in the module
 
-    h::hack(x);                 // use imports from parent blocks
+    h::hack(x);                 // global module 'h' is visible here
 }                               // <- module 'c' disappears at the end of the block scope
 
-c::encrypt(others);             // <- this causes a run-time error because
+h::hack(something);             // this works as 'h' is visible
+
+c::encrypt(something);          // <- this causes a run-time error because
                                 //    module 'c' is no longer available!
 
-fn breaks(data) {
-    h::hack(data);              // <- this will cause a run-time error because
-                                //    module 'h' cannot be accessed here!
-}
-
-fn works(data) {
-    import "hacker" as h;       // import module
-    h::hack(data);              // <- this now works
+fn foo(something) {
+    h::hack(something);         // <- this also works as 'h' is visible
 }
 
 for x in range(0, 1000) {
