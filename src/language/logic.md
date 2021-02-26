@@ -6,17 +6,16 @@ Logic Operators
 Comparison Operators
 --------------------
 
-| Operator | Description               |
-| :------: | ------------------------- |
-|   `==`   | equals to                 |
-|   `!=`   | not equals to             |
-|   `>`    | greater than              |
-|   `>=`   | greater than or equals to |
-|   `<`    | less than                 |
-|   `<=`   | less than or equals to    |
+| Operator | Description<br/>(`x` _operator_ `y`) | `x`, `y` same type, or numeric | `x`, `y` different types |
+| :------: | ------------------------------------ | :----------------------------: | :----------------------: |
+|   `==`   | `x` is equals to `y`                 |      error if not defined      |  `false` if not defined  |
+|   `!=`   | `x` is not equals to `y`             |      error if not defined      |  `true` if not defined   |
+|   `>`    | `x` is greater than `y`              |      error if not defined      |  `false` if not defined  |
+|   `>=`   | `x` is greater than or equals to `y` |      error if not defined      |  `false` if not defined  |
+|   `<`    | `x` is less than `y`                 |      error if not defined      |  `false` if not defined  |
+|   `<=`   | `x` is less than or equals to `y`    |      error if not defined      |  `false` if not defined  |
 
-Comparison between most values of the same type work out-of-the-box for all [standard types]
-supported by the system.
+Comparison between most values of the same type are built in for all [standard types].
 
 ### Floating-point numbers can inter-operate with integers
 
@@ -34,7 +33,20 @@ Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an
 42.0 < 42;          // false
 ```
 
-### Comparing different types (or custom types without the operator function defined) defaults to `false`
+### Strings can inter-operate with characters
+
+Comparing a [string] with a [character] is also supported, with the character first turned into a
+[string] before performing the comparison.
+
+```rust,no_run
+'x' == "x";         // true
+
+"" < 'a';           // true
+
+'x' > "hello";      // false
+```
+
+### Comparing different types defaults to `false`
 
 Comparing two values of _different_ data types defaults to `false` unless the appropriate operator
 functions have been registered.
@@ -61,15 +73,12 @@ Beware that the above default does _NOT_ apply to numeric values of different ty
 (e.g. comparison between `i64` and `u16`, `i32` and `f64`) &ndash; when multiple numeric types are
 used it is too easy to mess and for subtle errors to creep in.
 
-Therefore, using numeric types other than `INT` and `FLOAT` is _highly discouraged_; these data
-types are only supported for the purpose of facilitating Rust integration.
-
 ```rust,no_run
 // Assume variable 'x' = 42_u16, 'y' = 42_u16 (both types of u16)
 
-x == y;             // true: '==' operator for u16 works
+x == y;             // true: '==' operator for u16 is built-in
 
-x == "hello";       // false: non-numeric operand types default to false
+x == "hello";       // false: different non-numeric operand types default to false
 
 x == 42;            // error: ==(u16, i64) not defined, no default for numeric types
 
@@ -80,11 +89,16 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 
 Operators are completely separate from each other.  For example:
 
-* `!=` does NOT equal to `!(==)`
-* `>` does NOT equal to `!(<=)`
-* `<=` does NOT equal to `<` plus `==`
+* `!=` does not equal `!(==)`
 
-Therefore, if a [custom type] misses an operator definition, is simply raises an error.
+* `>` does not equal `!(<=)`
+
+* `<=` does not equal `<` plus `==`
+
+* `<=` does not imply `<`
+
+Therefore, if a [custom type] misses an operator definition, it simply raises an error
+or returns the default.
 
 This behavior can be counter-intuitive.
 
@@ -103,30 +117,6 @@ ts != ts;           // error: '!=' not defined, even though '==' is
 It is strongly recommended that, when defining operators for [custom types], always define the full set
 of six operators (or at least the `==` and `!=` pair) together.
 
-### Caution: Built-in operators behave differently when using a raw `Engine`
-
-When using a [raw `Engine`] without loading any [packages], comparisons can only be made between a limited
-set of types (see [built-in operators]), and both operands must be of the same type (including
-floating-point numbers).  Otherwise the result is always `false` (`true` for `!=`).
-
-Therefore, this is an area where a standard [`Engine`] behaves differently from a [raw `Engine`]
-transparently (i.e. without causing errors).
-
-```rust,no_run
-// The following under Engine::new_raw()
-
-42.0 == 42.0;       // true: built in
-
-42.0 == 42;         // false: comparison between FLOAT and INT not built in
-                    // in a standard Engine, this is true
-
-42 < 123;           // true: built in
-
-42 < 123.0;         // false: comparison between INT and FLOAT not built in
-                    // in a standard Engine, this is true
-
-"hello" > "foo";    // true: built in
-```
 
 Boolean operators
 -----------------
