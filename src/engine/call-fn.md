@@ -40,8 +40,8 @@ let mut scope = Scope::new();
 // Beware, arguments must be of the correct types because Rhai does not have built-in type conversions.
 // If arguments of the wrong types are passed, the Engine will not find the function.
 
-let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( String::from("abc"), 123_i64 ) )?;
-//          ^^^                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( "abc", 123_i64 ) )?;
+//          ^^^                                             ^^^^^^^^^^^^^^^^^^
 //        return type must be specified                          put arguments in a tuple
 
 let result: i64 = engine.call_fn(&mut scope, &ast, "hello", (123_i64,) )?;
@@ -97,20 +97,20 @@ Low-Level API &ndash; `Engine::call_fn_dynamic`
 ----------------------------------------------
 
 For more control, construct all arguments as `Dynamic` values and use `Engine::call_fn_dynamic`,
-passing it anything that implements `AsMut<Dynamic>` (such as a simple array or a `Vec<Dynamic>`):
+passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
 
 ```rust,no_run
 let result = engine.call_fn_dynamic(
                         &mut scope,         // scope to use
                         &ast,               // AST containing the functions
+                        false,              // false = do not evaluate the AST
                         "hello",            // function entry-point
                         None,               // 'this' pointer, if any
-                        [ String::from("abc").into(), 123_i64.into() ]      // arguments
+                        [ "abc".into(), 123_i64.into() ]      // arguments
              )?;
 ```
 
-
-### Binding the `this` Pointer
+### Binding the `this` pointer
 
 `Engine::call_fn_dynamic` can also bind a value to the `this` pointer of a script-defined function.
 
@@ -128,4 +128,28 @@ let result = engine.call_fn_dynamic(
              )?;
 
 assert_eq!(value.as_int()?, 42);
+```
+
+### Evaluate the `AST` before calling the function
+
+The boolean parameter allows evaluating the [`AST`] before calling the function.
+
+This is usually not necessary as a function is an encapsulated closed environment by itself and
+cannot access any external [variables] or [constants].
+
+However, this may be useful to load external [modules] via [`import`] statements for use in the function.
+
+```rust,no_run
+import "library" as lib;    // this line is usually not evaluated
+                            // when using 'call_fn'
+
+fn foo(x) {
+    lib::do_foo(x);         // this will raise an error without
+                            // first evaluating the AST
+}
+
+fn bar(x) {
+    lib::do_bar(x);         // this will raise an error without
+                            // first evaluating the AST
+}
 ```
