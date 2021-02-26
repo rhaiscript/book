@@ -35,8 +35,8 @@ Standard Operators
 
 The following standard operators inter-operate between [strings] and/or [characters][strings].
 
-When one (or both) of the operands is a [character][string], it is first converted into a
-one-character [string] before running the operator.
+When one (or both) of the operands is a [character], it is first converted into a one-character
+[string] before running the operator.
 
 | Operator  | Description                             |
 | --------- | --------------------------------------- |

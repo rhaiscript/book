@@ -46,7 +46,7 @@ Symbols and Patterns
 | `::`                               |         path         | module path separator                 |
 | `#{` .. `}`                        |       hash map       | [object map] literal                  |
 | `"` .. `"`                         |     double quote     | [string]                              |
-| `'` .. `'`                         |     single quote     | [character][string]                   |
+| `'` .. `'`                         |     single quote     | [character]                           |
 | `\`                                |        escape        | escape character literal              |
 | `(` .. `)`                         |     parentheses      | expression grouping                   |
 | `{` .. `}`                         |        braces        | block statement                       |
