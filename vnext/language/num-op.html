@@ -184,17 +184,23 @@ number = -5 - +5;
 </span></code></pre></pre>
 <h2><a class="header" href="#binary-operators" id="binary-operators">Binary Operators</a></h2>
 <table><thead><tr><th>Operator</th><th>Description</th><th align="center">Integer</th><th align="center">Floating-point</th><th align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></th></tr></thead><tbody>
-<tr><td><code>+</code></td><td>plus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>-</code></td><td>minus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>*</code></td><td>multiply</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>/</code></td><td>divide (integer division if acting on integer types)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>%</code></td><td>modulo (remainder)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>**</code></td><td>power/exponentiation</td><td align="center">yes</td><td align="center">yes, also <code>FLOAT**INT</code></td><td align="center">no</td></tr>
-<tr><td><code>&amp;</code></td><td>bit-wise <em>And</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
-<tr><td><code>|</code></td><td>bit-wise <em>Or</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>+</code>, <code>+=</code></td><td>plus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>-</code> <code>-=</code></td><td>minus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>*</code>, <code>*=</code></td><td>multiply</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>/</code>, <code>/=</code></td><td>divide (integer division if acting on integer types)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>%</code>, <code>%=</code></td><td>modulo (remainder)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>**</code>, <code>**=</code></td><td>power/exponentiation</td><td align="center">yes</td><td align="center">yes, also <code>FLOAT**INT</code></td><td align="center">no</td></tr>
+<tr><td><code>&amp;</code>, <code>&amp;=</code></td><td>bit-wise <em>And</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>|</code>, <code>|=</code></td><td>bit-wise <em>Or</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
 <tr><td><code>^</code></td><td>bit-wise <em>Xor</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
-<tr><td><code>&lt;&lt;</code></td><td>left bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
-<tr><td><code>&gt;&gt;</code></td><td>right bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>&lt;&lt;</code>, <code>&lt;&lt;=</code></td><td>left bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>&gt;&gt;</code>, <code>&gt;&gt;=</code></td><td>right bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>==</code></td><td>equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>!=</code></td><td>not equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&gt;</code></td><td>greater than</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&gt;=</code></td><td>greater than or equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&lt;</code></td><td>less than</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&lt;=</code></td><td>less than or equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
 </tbody></table>
 <p>Note: when one of the operands to a binary operator is floating-point, it works with <code>INT</code> for the
 other operand and the result is floating-point.</p>

@@ -205,8 +205,8 @@ let mut scope = Scope::new();
 // Beware, arguments must be of the correct types because Rhai does not have built-in type conversions.
 // If arguments of the wrong types are passed, the Engine will not find the function.
 
-let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( String::from(&quot;abc&quot;), 123_i64 ) )?;
-//          ^^^                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( &quot;abc&quot;, 123_i64 ) )?;
+//          ^^^                                             ^^^^^^^^^^^^^^^^^^
 //        return type must be specified                          put arguments in a tuple
 
 let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, (123_i64,) )?;
@@ -255,20 +255,21 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, op
 </span></code></pre></pre>
 <h2><a class="header" href="#low-level-api--enginecall_fn_dynamic" id="low-level-api--enginecall_fn_dynamic">Low-Level API – <code>Engine::call_fn_dynamic</code></a></h2>
 <p>For more control, construct all arguments as <code>Dynamic</code> values and use <code>Engine::call_fn_dynamic</code>,
-passing it anything that implements <code>AsMut&lt;Dynamic&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
+passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let result = engine.call_fn_dynamic(
                         &amp;mut scope,         // scope to use
                         &amp;ast,               // AST containing the functions
+                        false,              // false = do not evaluate the AST
                         &quot;hello&quot;,            // function entry-point
                         None,               // 'this' pointer, if any
-                        [ String::from(&quot;abc&quot;).into(), 123_i64.into() ]      // arguments
+                        [ &quot;abc&quot;.into(), 123_i64.into() ]      // arguments
              )?;
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#binding-the-this-pointer" id="binding-the-this-pointer">Binding the <code>this</code> Pointer</a></h3>
+<h3><a class="header" href="#binding-the-this-pointer" id="binding-the-this-pointer">Binding the <code>this</code> pointer</a></h3>
 <p><code>Engine::call_fn_dynamic</code> can also bind a value to the <code>this</code> pointer of a script-defined function.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -286,6 +287,28 @@ let result = engine.call_fn_dynamic(
              )?;
 
 assert_eq!(value.as_int()?, 42);
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#evaluate-the-ast-before-calling-the-function" id="evaluate-the-ast-before-calling-the-function">Evaluate the <code>AST</code> before calling the function</a></h3>
+<p>The boolean parameter allows evaluating the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> before calling the function.</p>
+<p>This is usually not necessary as a function is an encapsulated closed environment by itself and
+cannot access any external <a href="/book/vnext/language/variables.html">variables</a> or <a href="/book/vnext/language/constants.html">constants</a>.</p>
+<p>However, this may be useful to load external <a href="/book/vnext/rust/modules/index.html">modules</a> via <a href="/book/vnext/language/modules/import.html"><code>import</code></a> statements for use in the function.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>import &quot;library&quot; as lib;    // this line is usually not evaluated
+                            // when using 'call_fn'
+
+fn foo(x) {
+    lib::do_foo(x);         // this will raise an error without
+                            // first evaluating the AST
+}
+
+fn bar(x) {
+    lib::do_bar(x);         // this will raise an error without
+                            // first evaluating the AST
+}
 <span class="boring">}
 </span></code></pre></pre>
 

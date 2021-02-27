@@ -168,12 +168,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#built-in-string-functions" id="built-in-string-functions">Built-in String Functions</a></h1>
+<h2><a class="header" href="#standard-functions" id="standard-functions">Standard Functions</a></h2>
 <p>The following standard methods (mostly defined in the <a href="/book/vnext/rust/packages/index.html"><code>MoreStringPackage</code></a> but excluded if
 using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <a href="/book/vnext/language/strings-chars.html">strings</a>:</p>
 <table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>len</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of characters (not number of bytes) in the string</td></tr>
 <tr><td><code>pad</code></td><td align="center"></td><td>1) target length<br/>2) character/string to pad</td><td>pads the string with a character or a string to at least a specified length</td></tr>
-<tr><td><code>+=</code> operator, <code>append</code></td><td align="center"></td><td>character/string to append</td><td>Adds a character or a string to the end of another string</td></tr>
+<tr><td><code>append</code></td><td align="center"></td><td>character/string to append</td><td>adds a character or a string to the end of another string</td></tr>
+<tr><td><code>remove</code></td><td align="center"></td><td>character/string to remove</td><td>removes a character or a string from the string</td></tr>
 <tr><td><code>clear</code></td><td align="center"></td><td><em>none</em></td><td>empties the string</td></tr>
 <tr><td><code>truncate</code></td><td align="center"></td><td>target length</td><td>cuts off the string at exactly a specified number of characters</td></tr>
 <tr><td><code>contains</code></td><td align="center"></td><td>character/sub-string to search for</td><td>checks if a certain character or sub-string occurs in the string</td></tr>
@@ -186,6 +188,20 @@ using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) opera
 <tr><td><code>crop</code></td><td align="center"></td><td>1) start index<br/>2) <em>(optional)</em> number of characters to retain, none if &lt; 0</td><td>retains only a portion of the string</td></tr>
 <tr><td><code>replace</code></td><td align="center"></td><td>1) target character/sub-string<br/>2) replacement character/string</td><td>replaces a sub-string with another</td></tr>
 <tr><td><code>trim</code></td><td align="center"></td><td><em>none</em></td><td>trims the string of whitespace at the beginning and end</td></tr>
+</tbody></table>
+<h2><a class="header" href="#standard-operators" id="standard-operators">Standard Operators</a></h2>
+<p>The following standard operators inter-operate between <a href="/book/vnext/language/strings-chars.html">strings</a> and/or <a href="/book/vnext/language/strings-chars.html">characters</a>.</p>
+<p>When one (or both) of the operands is a <a href="/book/vnext/language/strings-chars.html">character</a>, it is first converted into a one-character
+<a href="/book/vnext/language/strings-chars.html">string</a> before running the operator.</p>
+<table><thead><tr><th>Operator</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>+</code>, <code>+=</code></td><td>string concatenation</td></tr>
+<tr><td><code>-</code>, <code>-=</code></td><td>remove character/sub-string from string</td></tr>
+<tr><td><code>==</code></td><td>equals to</td></tr>
+<tr><td><code>!=</code></td><td>not equals to</td></tr>
+<tr><td><code>&gt;</code></td><td>greater than</td></tr>
+<tr><td><code>&gt;=</code></td><td>greater than or equals to</td></tr>
+<tr><td><code>&lt;</code></td><td>less than</td></tr>
+<tr><td><code>&lt;=</code></td><td>less than or equals to</td></tr>
 </tbody></table>
 <h2><a class="header" href="#examples" id="examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">

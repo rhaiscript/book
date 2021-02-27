@@ -174,7 +174,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2><a class="header" href="#versions" id="versions">Versions</a></h2>
-<p>This Book is for version <strong>0.19.13</strong> of Rhai.</p>
+<p>This Book is for version <strong>0.19.14</strong> of Rhai.</p>
 <h2><a class="header" href="#trivia" id="trivia">Trivia</a></h2>
 <h3><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner" id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
 <p>In the beginning there was <a href="http://chaiscript.com">ChaiScript</a>,
@@ -449,7 +449,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;0.19.13&quot;    # assuming 0.19.13 is the latest version
+rhai = &quot;0.19.14&quot;    # assuming 0.19.14 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -520,7 +520,7 @@ Do not use them for non-<a href="start//book/vnext/start/builds/wasm.html">WASM<
 <li><code>no_function</code> (no defining <a href="start//book/vnext/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.19.13&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;0.19.14&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/vnext/language/functions.html">functions</a>
@@ -936,7 +936,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.19.13/rhai/struct.Scope.html">documentation</a> online.</p>
+<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.19.14/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2><a class="header" href="#shadowing" id="shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/vnext/language/variables.html">variable</a> or <a href="engine//book/vnext/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/vnext/language/variables.html">variables</a> and <a href="engine//book/vnext/language/constants.html">constants</a>, but only the latest ones can
@@ -1280,8 +1280,8 @@ let mut scope = Scope::new();
 // Beware, arguments must be of the correct types because Rhai does not have built-in type conversions.
 // If arguments of the wrong types are passed, the Engine will not find the function.
 
-let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( String::from(&quot;abc&quot;), 123_i64 ) )?;
-//          ^^^                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( &quot;abc&quot;, 123_i64 ) )?;
+//          ^^^                                             ^^^^^^^^^^^^^^^^^^
 //        return type must be specified                          put arguments in a tuple
 
 let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, (123_i64,) )?;
@@ -1330,20 +1330,21 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, op
 </span></code></pre></pre>
 <h2><a class="header" href="#low-level-api--enginecall_fn_dynamic" id="low-level-api--enginecall_fn_dynamic">Low-Level API – <code>Engine::call_fn_dynamic</code></a></h2>
 <p>For more control, construct all arguments as <code>Dynamic</code> values and use <code>Engine::call_fn_dynamic</code>,
-passing it anything that implements <code>AsMut&lt;Dynamic&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
+passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let result = engine.call_fn_dynamic(
                         &amp;mut scope,         // scope to use
                         &amp;ast,               // AST containing the functions
+                        false,              // false = do not evaluate the AST
                         &quot;hello&quot;,            // function entry-point
                         None,               // 'this' pointer, if any
-                        [ String::from(&quot;abc&quot;).into(), 123_i64.into() ]      // arguments
+                        [ &quot;abc&quot;.into(), 123_i64.into() ]      // arguments
              )?;
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#binding-the-this-pointer" id="binding-the-this-pointer">Binding the <code>this</code> Pointer</a></h3>
+<h3><a class="header" href="#binding-the-this-pointer" id="binding-the-this-pointer">Binding the <code>this</code> pointer</a></h3>
 <p><code>Engine::call_fn_dynamic</code> can also bind a value to the <code>this</code> pointer of a script-defined function.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -1361,6 +1362,28 @@ let result = engine.call_fn_dynamic(
              )?;
 
 assert_eq!(value.as_int()?, 42);
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#evaluate-the-ast-before-calling-the-function" id="evaluate-the-ast-before-calling-the-function">Evaluate the <code>AST</code> before calling the function</a></h3>
+<p>The boolean parameter allows evaluating the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> before calling the function.</p>
+<p>This is usually not necessary as a function is an encapsulated closed environment by itself and
+cannot access any external <a href="engine//book/vnext/language/variables.html">variables</a> or <a href="engine//book/vnext/language/constants.html">constants</a>.</p>
+<p>However, this may be useful to load external <a href="engine//book/vnext/rust/modules/index.html">modules</a> via <a href="engine//book/vnext/language/modules/import.html"><code>import</code></a> statements for use in the function.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>import &quot;library&quot; as lib;    // this line is usually not evaluated
+                            // when using 'call_fn'
+
+fn foo(x) {
+    lib::do_foo(x);         // this will raise an error without
+                            // first evaluating the AST
+}
+
+fn bar(x) {
+    lib::do_bar(x);         // this will raise an error without
+                            // first evaluating the AST
+}
 <span class="boring">}
 </span></code></pre></pre>
 <h1><a class="header" href="#create-a-rust-closure-from-a-rhai-function" id="create-a-rust-closure-from-a-rhai-function">Create a Rust Closure from a Rhai Function</a></h1>
@@ -1819,7 +1842,7 @@ to scripts either globally or under individual static module <a href="rust/modul
 which converts a normal Rust module into a Rhai <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> via procedural macros.</p>
 <h2><a class="header" href="#create-via-module-api" id="create-via-module-api">Create via <code>Module</code> API</a></h2>
 <p>Manually creating a <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> is possible via the <code>Module</code> API.</p>
-<p>For the complete <code>Module</code> API, refer to the <a href="https://docs.rs/rhai/0.19.13/rhai/struct.Module.html">documentation</a> online.</p>
+<p>For the complete <code>Module</code> API, refer to the <a href="https://docs.rs/rhai/0.19.14/rhai/struct.Module.html">documentation</a> online.</p>
 <h2><a class="header" href="#use-case-1--make-the-module-globally-available" id="use-case-1--make-the-module-globally-available">Use Case 1 – Make the <code>Module</code> Globally Available</a></h2>
 <p><code>Engine::register_global_module</code> registers a shared <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> into the <em>global</em> namespace.</p>
 <p>All <a href="rust/modules//book/vnext/language/functions.html">functions</a> and <a href="rust/modules//book/vnext/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.
@@ -3612,17 +3635,23 @@ number = -5 - +5;
 </span></code></pre></pre>
 <h2><a class="header" href="#binary-operators" id="binary-operators">Binary Operators</a></h2>
 <table><thead><tr><th>Operator</th><th>Description</th><th align="center">Integer</th><th align="center">Floating-point</th><th align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></th></tr></thead><tbody>
-<tr><td><code>+</code></td><td>plus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>-</code></td><td>minus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>*</code></td><td>multiply</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>/</code></td><td>divide (integer division if acting on integer types)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>%</code></td><td>modulo (remainder)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
-<tr><td><code>**</code></td><td>power/exponentiation</td><td align="center">yes</td><td align="center">yes, also <code>FLOAT**INT</code></td><td align="center">no</td></tr>
-<tr><td><code>&amp;</code></td><td>bit-wise <em>And</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
-<tr><td><code>|</code></td><td>bit-wise <em>Or</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>+</code>, <code>+=</code></td><td>plus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>-</code> <code>-=</code></td><td>minus</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>*</code>, <code>*=</code></td><td>multiply</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>/</code>, <code>/=</code></td><td>divide (integer division if acting on integer types)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>%</code>, <code>%=</code></td><td>modulo (remainder)</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>**</code>, <code>**=</code></td><td>power/exponentiation</td><td align="center">yes</td><td align="center">yes, also <code>FLOAT**INT</code></td><td align="center">no</td></tr>
+<tr><td><code>&amp;</code>, <code>&amp;=</code></td><td>bit-wise <em>And</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>|</code>, <code>|=</code></td><td>bit-wise <em>Or</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
 <tr><td><code>^</code></td><td>bit-wise <em>Xor</em></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
-<tr><td><code>&lt;&lt;</code></td><td>left bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
-<tr><td><code>&gt;&gt;</code></td><td>right bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>&lt;&lt;</code>, <code>&lt;&lt;=</code></td><td>left bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>&gt;&gt;</code>, <code>&gt;&gt;=</code></td><td>right bit-shift</td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+<tr><td><code>==</code></td><td>equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>!=</code></td><td>not equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&gt;</code></td><td>greater than</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&gt;=</code></td><td>greater than or equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&lt;</code></td><td>less than</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
+<tr><td><code>&lt;=</code></td><td>less than or equals to</td><td align="center">yes</td><td align="center">yes, also with <code>INT</code></td><td align="center">yes, also with <code>INT</code></td></tr>
 </tbody></table>
 <p>Note: when one of the operands to a binary operator is floating-point, it works with <code>INT</code> for the
 other operand and the result is floating-point.</p>
@@ -3892,12 +3921,14 @@ for ch in record {
 <span class="boring">}
 </span></code></pre></pre>
 <h1><a class="header" href="#built-in-string-functions" id="built-in-string-functions">Built-in String Functions</a></h1>
+<h2><a class="header" href="#standard-functions" id="standard-functions">Standard Functions</a></h2>
 <p>The following standard methods (mostly defined in the <a href="language//book/vnext/rust/packages/index.html"><code>MoreStringPackage</code></a> but excluded if
 using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <a href="language//book/vnext/language/strings-chars.html">strings</a>:</p>
 <table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>len</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of characters (not number of bytes) in the string</td></tr>
 <tr><td><code>pad</code></td><td align="center"></td><td>1) target length<br/>2) character/string to pad</td><td>pads the string with a character or a string to at least a specified length</td></tr>
-<tr><td><code>+=</code> operator, <code>append</code></td><td align="center"></td><td>character/string to append</td><td>Adds a character or a string to the end of another string</td></tr>
+<tr><td><code>append</code></td><td align="center"></td><td>character/string to append</td><td>adds a character or a string to the end of another string</td></tr>
+<tr><td><code>remove</code></td><td align="center"></td><td>character/string to remove</td><td>removes a character or a string from the string</td></tr>
 <tr><td><code>clear</code></td><td align="center"></td><td><em>none</em></td><td>empties the string</td></tr>
 <tr><td><code>truncate</code></td><td align="center"></td><td>target length</td><td>cuts off the string at exactly a specified number of characters</td></tr>
 <tr><td><code>contains</code></td><td align="center"></td><td>character/sub-string to search for</td><td>checks if a certain character or sub-string occurs in the string</td></tr>
@@ -3910,6 +3941,20 @@ using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></
 <tr><td><code>crop</code></td><td align="center"></td><td>1) start index<br/>2) <em>(optional)</em> number of characters to retain, none if &lt; 0</td><td>retains only a portion of the string</td></tr>
 <tr><td><code>replace</code></td><td align="center"></td><td>1) target character/sub-string<br/>2) replacement character/string</td><td>replaces a sub-string with another</td></tr>
 <tr><td><code>trim</code></td><td align="center"></td><td><em>none</em></td><td>trims the string of whitespace at the beginning and end</td></tr>
+</tbody></table>
+<h2><a class="header" href="#standard-operators" id="standard-operators">Standard Operators</a></h2>
+<p>The following standard operators inter-operate between <a href="language//book/vnext/language/strings-chars.html">strings</a> and/or <a href="language//book/vnext/language/strings-chars.html">characters</a>.</p>
+<p>When one (or both) of the operands is a <a href="language//book/vnext/language/strings-chars.html">character</a>, it is first converted into a one-character
+<a href="language//book/vnext/language/strings-chars.html">string</a> before running the operator.</p>
+<table><thead><tr><th>Operator</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>+</code>, <code>+=</code></td><td>string concatenation</td></tr>
+<tr><td><code>-</code>, <code>-=</code></td><td>remove character/sub-string from string</td></tr>
+<tr><td><code>==</code></td><td>equals to</td></tr>
+<tr><td><code>!=</code></td><td>not equals to</td></tr>
+<tr><td><code>&gt;</code></td><td>greater than</td></tr>
+<tr><td><code>&gt;=</code></td><td>greater than or equals to</td></tr>
+<tr><td><code>&lt;</code></td><td>less than</td></tr>
+<tr><td><code>&lt;=</code></td><td>less than or equals to</td></tr>
 </tbody></table>
 <h2><a class="header" href="#examples-7" id="examples-7">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -4641,16 +4686,15 @@ the updated value and will propagate the original initialization value instead.<
 within a Rust function.</p>
 <h1><a class="header" href="#logic-operators" id="logic-operators">Logic Operators</a></h1>
 <h2><a class="header" href="#comparison-operators" id="comparison-operators">Comparison Operators</a></h2>
-<table><thead><tr><th align="center">Operator</th><th>Description</th></tr></thead><tbody>
-<tr><td align="center"><code>==</code></td><td>equals to</td></tr>
-<tr><td align="center"><code>!=</code></td><td>not equals to</td></tr>
-<tr><td align="center"><code>&gt;</code></td><td>greater than</td></tr>
-<tr><td align="center"><code>&gt;=</code></td><td>greater than or equals to</td></tr>
-<tr><td align="center"><code>&lt;</code></td><td>less than</td></tr>
-<tr><td align="center"><code>&lt;=</code></td><td>less than or equals to</td></tr>
+<table><thead><tr><th align="center">Operator</th><th>Description<br/>(<code>x</code> <em>operator</em> <code>y</code>)</th><th align="center"><code>x</code>, <code>y</code> same type, or numeric</th><th align="center"><code>x</code>, <code>y</code> different types</th></tr></thead><tbody>
+<tr><td align="center"><code>==</code></td><td><code>x</code> is equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>!=</code></td><td><code>x</code> is not equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>true</code> if not defined</td></tr>
+<tr><td align="center"><code>&gt;</code></td><td><code>x</code> is greater than <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>&gt;=</code></td><td><code>x</code> is greater than or equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>&lt;</code></td><td><code>x</code> is less than <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
 </tbody></table>
-<p>Comparison between most values of the same type work out-of-the-box for all <a href="language//book/vnext/language/values-and-types.html">standard types</a>
-supported by the system.</p>
+<p>Comparison between most values of the same type are built in for all <a href="language//book/vnext/language/values-and-types.html">standard types</a>.</p>
 <h3><a class="header" href="#floating-point-numbers-can-inter-operate-with-integers" id="floating-point-numbers-can-inter-operate-with-integers">Floating-point numbers can inter-operate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code> or <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>) with an integer is also supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -4667,9 +4711,22 @@ supported by the system.</p>
 42.0 &lt; 42;          // false
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#comparing-different-types-or-custom-types-without-the-operator-function-defined-defaults-to-false" id="comparing-different-types-or-custom-types-without-the-operator-function-defined-defaults-to-false">Comparing different types (or custom types without the operator function defined) defaults to <code>false</code></a></h3>
-<p>Comparing two values of <em>different</em> data types, or with <a href="language//book/vnext/rust/custom.html">custom types</a>, defaults to <code>false</code> unless
-the appropriate operator functions have been registered.</p>
+<h3><a class="header" href="#strings-can-inter-operate-with-characters" id="strings-can-inter-operate-with-characters">Strings can inter-operate with characters</a></h3>
+<p>Comparing a <a href="language//book/vnext/language/strings-chars.html">string</a> with a <a href="language//book/vnext/language/strings-chars.html">character</a> is also supported, with the character first turned into a
+<a href="language//book/vnext/language/strings-chars.html">string</a> before performing the comparison.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>'x' == &quot;x&quot;;         // true
+
+&quot;&quot; &lt; 'a';           // true
+
+'x' &gt; &quot;hello&quot;;      // false
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#comparing-different-types-defaults-to-false" id="comparing-different-types-defaults-to-false">Comparing different types defaults to <code>false</code></a></h3>
+<p>Comparing two values of <em>different</em> data types defaults to <code>false</code> unless the appropriate operator
+functions have been registered.</p>
 <p>The exception is <code>!=</code> (not equals) which defaults to <code>true</code>. This is in line with intuition.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -4684,23 +4741,21 @@ ts == 42;           // false: different types cannot be compared
 
 ts != 42;           // true: different types cannot be compared
 
-ts == ts;           // false: unless '==' is defined for the custom type
+ts == ts;           // error: '==' not defined for the custom type
 <span class="boring">}
 </span></code></pre></pre>
 <h3><a class="header" href="#safety-valve-comparing-different-numeric-types-has-no-default" id="safety-valve-comparing-different-numeric-types-has-no-default">Safety valve: Comparing different <em>numeric</em> types has no default</a></h3>
 <p>Beware that the above default does <em>NOT</em> apply to numeric values of different types
 (e.g. comparison between <code>i64</code> and <code>u16</code>, <code>i32</code> and <code>f64</code>) – when multiple numeric types are
 used it is too easy to mess and for subtle errors to creep in.</p>
-<p>Therefore, using numeric types other than <code>INT</code> and <code>FLOAT</code> is <em>highly discouraged</em>; these data
-types are only supported for the purpose of facilitating Rust integration.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Assume variable 'x' = 42_u16, 'y' = 42_u16 (both types of u16)
 
-x == y;             // true: '==' operator for u16 works
+x == y;             // true: '==' operator for u16 is built-in
 
-x == &quot;hello&quot;;       // false: non-numeric operand types default to false
+x == &quot;hello&quot;;       // false: different non-numeric operand types default to false
 
 x == 42;            // error: ==(u16, i64) not defined, no default for numeric types
 
@@ -4708,26 +4763,23 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <span class="boring">}
 </span></code></pre></pre>
 <h3><a class="header" href="#caution-beware-operators-for-custom-types" id="caution-beware-operators-for-custom-types">Caution: Beware operators for custom types</a></h3>
-<p>The default comparison behavior (i.e. returning <code>false</code> instead of raising an error)
-may be counter-intuitive for <a href="language//book/vnext/rust/custom.html">custom types</a> because all comparisons default to <code>false</code>
-(<code>true</code> for <code>!=</code>), unless the corresponding operators are defined for the type.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let ts = new_ts();  // custom type that doesn't have any operators defined
-
-ts == ts;           // false: unless '==' is defined for the custom type
-
-ts != ts;           // true: unless '!=' is defined for the custom type
-<span class="boring">}
-</span></code></pre></pre>
 <p>Operators are completely separate from each other.  For example:</p>
 <ul>
-<li><code>!=</code> does NOT equal to <code>!(==)</code></li>
-<li><code>&gt;</code> does NOT equal to <code>!(&lt;=)</code></li>
-<li><code>&lt;=</code> does NOT equal to <code>&lt;</code> plus <code>==</code></li>
+<li>
+<p><code>!=</code> does not equal <code>!(==)</code></p>
+</li>
+<li>
+<p><code>&gt;</code> does not equal <code>!(&lt;=)</code></p>
+</li>
+<li>
+<p><code>&lt;=</code> does not equal <code>&lt;</code> plus <code>==</code></p>
+</li>
+<li>
+<p><code>&lt;=</code> does not imply <code>&lt;</code></p>
+</li>
 </ul>
-<p>Therefore, if a <a href="language//book/vnext/rust/custom.html">custom type</a> misses an operator definition, the default result is simply returned.</p>
+<p>Therefore, if a <a href="language//book/vnext/rust/custom.html">custom type</a> misses an operator definition, it simply raises an error
+or returns the default.</p>
 <p>This behavior can be counter-intuitive.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -4736,39 +4788,15 @@ ts != ts;           // true: unless '!=' is defined for the custom type
 
 ts &lt;= ts;           // true: '&lt;=' defined
 
-ts &lt; ts;            // false: '&lt;' not defined, even though '&lt;=' is true
+ts &lt; ts;            // error: '&lt;' not defined, even though '&lt;=' is
 
 ts == ts;           // true: '==' defined
 
-ts != ts;           // true: '!=' not defined, even though '==' is true
+ts != ts;           // error: '!=' not defined, even though '==' is
 <span class="boring">}
 </span></code></pre></pre>
 <p>It is strongly recommended that, when defining operators for <a href="language//book/vnext/rust/custom.html">custom types</a>, always define the full set
 of six operators (or at least the <code>==</code> and <code>!=</code> pair) together.</p>
-<h3><a class="header" href="#caution-built-in-operators-behave-differently-when-using-a-raw-engine" id="caution-built-in-operators-behave-differently-when-using-a-raw-engine">Caution: Built-in operators behave differently when using a raw <code>Engine</code></a></h3>
-<p>When using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a> without loading any <a href="language//book/vnext/rust/packages/index.html">packages</a>, comparisons can only be made between a limited
-set of types (see <a href="language//book/vnext/engine/builtin.html">built-in operators</a>), and both operands must be of the same type (including
-floating-point numbers).  Otherwise the result is always <code>false</code> (<code>true</code> for <code>!=</code>).</p>
-<p>Therefore, this is an area where a standard <a href="language//book/vnext/engine/hello-world.html"><code>Engine</code></a> behaves differently from a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>
-transparently (i.e. without causing errors).</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The following under Engine::new_raw()
-
-42.0 == 42.0;       // true: built in
-
-42.0 == 42;         // false: comparison between FLOAT and INT not built in
-                    // in a standard Engine, this is true
-
-42 &lt; 123;           // true: built in
-
-42 &lt; 123.0;         // false: comparison between INT and FLOAT not built in
-                    // in a standard Engine, this is true
-
-&quot;hello&quot; &gt; &quot;foo&quot;;    // true: built in
-<span class="boring">}
-</span></code></pre></pre>
 <h2><a class="header" href="#boolean-operators" id="boolean-operators">Boolean operators</a></h2>
 <table><thead><tr><th align="center">Operator</th><th>Description</th><th align="center">Arity</th><th align="center">Short-Circuits?</th></tr></thead><tbody>
 <tr><td align="center"><code>!</code> <em>(prefix)</em></td><td>boolean <em>NOT</em></td><td align="center">unary</td><td align="center">no</td></tr>
@@ -6410,25 +6438,14 @@ lock::status = &quot;off&quot;;           // &lt;- runtime error - cannot modify
 <h2><a class="header" href="#scoped-imports" id="scoped-imports">Scoped Imports</a></h2>
 <p><code>import</code> statements are <em>scoped</em>, meaning that they are only accessible inside the scope that they’re imported.</p>
 <p>They can appear anywhere a normal statement can be, but in the vast majority of cases <code>import</code> statements are
-usually grouped:</p>
-<ol>
-<li>
-<p>at the beginning of a script or,</p>
-</li>
-<li>
-<p>at the beginning of a <a href="language/modules//book/vnext/language/functions.html">function</a>‘s body.</p>
-</li>
-</ol>
+usually grouped at the beginning of a script so they have <em>global</em> visibility.</p>
 <p>It is not advised to deviate from this common practice unless there is a <em>Very Good Reason™</em>.</p>
 <p>Especially, do not place an <code>import</code> statement within a loop; doing so will repeatedly re-load the
 same module during every iteration of the loop!</p>
-<p>On the other hand, <a href="language/modules//book/vnext/language/functions.html">functions</a> in <em>Rhai</em> are <em>pure</em> and they form closed environments.
-They cannot access anything outside of their body, including <a href="language/modules//book/vnext/language/variables.html">variables</a>, <a href="language/modules//book/vnext/language/constants.html">constants</a>, imports etc.</p>
-<p>In order to use a module inside a function, it must be imported within the <a href="language/modules//book/vnext/language/functions.html">function</a> body.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>import &quot;hacker&quot; as h;           // import module
+</span>import &quot;hacker&quot; as h;           // import module - visible globally
 
 if secured {                    // &lt;- new block scope
     let mod = &quot;crypt&quot;;
@@ -6437,20 +6454,16 @@ if secured {                    // &lt;- new block scope
 
     let x = c::encrypt(key);    // use a function in the module
 
-    h::hack(x);                 // use imports from parent blocks
+    h::hack(x);                 // global module 'h' is visible here
 }                               // &lt;- module 'c' disappears at the end of the block scope
 
-c::encrypt(others);             // &lt;- this causes a run-time error because
+h::hack(something);             // this works as 'h' is visible
+
+c::encrypt(something);          // &lt;- this causes a run-time error because
                                 //    module 'c' is no longer available!
 
-fn breaks(data) {
-    h::hack(data);              // &lt;- this will cause a run-time error because
-                                //    module 'h' cannot be accessed here!
-}
-
-fn works(data) {
-    import &quot;hacker&quot; as h;       // import module
-    h::hack(data);              // &lt;- this now works
+fn foo(something) {
+    h::hack(something);         // &lt;- this also works as 'h' is visible
 }
 
 for x in range(0, 1000) {
@@ -7181,7 +7194,7 @@ no side-effects), thus the script silently runs to completion without errors.</p
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.19.13/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.19.14/rhai/struct.AST.html">documentation</a> online.</p>
 <h2><a class="header" href="#extract-only-functions" id="extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -8133,7 +8146,7 @@ a different <a href="patterns//book/vnext/start/features.html">features</a> set,
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.19.13&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;0.19.14&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }

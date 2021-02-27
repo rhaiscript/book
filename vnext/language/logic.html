@@ -169,16 +169,15 @@
                     <main>
                         <h1><a class="header" href="#logic-operators" id="logic-operators">Logic Operators</a></h1>
 <h2><a class="header" href="#comparison-operators" id="comparison-operators">Comparison Operators</a></h2>
-<table><thead><tr><th align="center">Operator</th><th>Description</th></tr></thead><tbody>
-<tr><td align="center"><code>==</code></td><td>equals to</td></tr>
-<tr><td align="center"><code>!=</code></td><td>not equals to</td></tr>
-<tr><td align="center"><code>&gt;</code></td><td>greater than</td></tr>
-<tr><td align="center"><code>&gt;=</code></td><td>greater than or equals to</td></tr>
-<tr><td align="center"><code>&lt;</code></td><td>less than</td></tr>
-<tr><td align="center"><code>&lt;=</code></td><td>less than or equals to</td></tr>
+<table><thead><tr><th align="center">Operator</th><th>Description<br/>(<code>x</code> <em>operator</em> <code>y</code>)</th><th align="center"><code>x</code>, <code>y</code> same type, or numeric</th><th align="center"><code>x</code>, <code>y</code> different types</th></tr></thead><tbody>
+<tr><td align="center"><code>==</code></td><td><code>x</code> is equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>!=</code></td><td><code>x</code> is not equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>true</code> if not defined</td></tr>
+<tr><td align="center"><code>&gt;</code></td><td><code>x</code> is greater than <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>&gt;=</code></td><td><code>x</code> is greater than or equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>&lt;</code></td><td><code>x</code> is less than <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
+<tr><td align="center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
 </tbody></table>
-<p>Comparison between most values of the same type work out-of-the-box for all <a href="/book/vnext/language/values-and-types.html">standard types</a>
-supported by the system.</p>
+<p>Comparison between most values of the same type are built in for all <a href="/book/vnext/language/values-and-types.html">standard types</a>.</p>
 <h3><a class="header" href="#floating-point-numbers-can-inter-operate-with-integers" id="floating-point-numbers-can-inter-operate-with-integers">Floating-point numbers can inter-operate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code> or <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>) with an integer is also supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -195,9 +194,22 @@ supported by the system.</p>
 42.0 &lt; 42;          // false
 <span class="boring">}
 </span></code></pre></pre>
-<h3><a class="header" href="#comparing-different-types-or-custom-types-without-the-operator-function-defined-defaults-to-false" id="comparing-different-types-or-custom-types-without-the-operator-function-defined-defaults-to-false">Comparing different types (or custom types without the operator function defined) defaults to <code>false</code></a></h3>
-<p>Comparing two values of <em>different</em> data types, or with <a href="/book/vnext/rust/custom.html">custom types</a>, defaults to <code>false</code> unless
-the appropriate operator functions have been registered.</p>
+<h3><a class="header" href="#strings-can-inter-operate-with-characters" id="strings-can-inter-operate-with-characters">Strings can inter-operate with characters</a></h3>
+<p>Comparing a <a href="/book/vnext/language/strings-chars.html">string</a> with a <a href="/book/vnext/language/strings-chars.html">character</a> is also supported, with the character first turned into a
+<a href="/book/vnext/language/strings-chars.html">string</a> before performing the comparison.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>'x' == &quot;x&quot;;         // true
+
+&quot;&quot; &lt; 'a';           // true
+
+'x' &gt; &quot;hello&quot;;      // false
+<span class="boring">}
+</span></code></pre></pre>
+<h3><a class="header" href="#comparing-different-types-defaults-to-false" id="comparing-different-types-defaults-to-false">Comparing different types defaults to <code>false</code></a></h3>
+<p>Comparing two values of <em>different</em> data types defaults to <code>false</code> unless the appropriate operator
+functions have been registered.</p>
 <p>The exception is <code>!=</code> (not equals) which defaults to <code>true</code>. This is in line with intuition.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -212,23 +224,21 @@ ts == 42;           // false: different types cannot be compared
 
 ts != 42;           // true: different types cannot be compared
 
-ts == ts;           // false: unless '==' is defined for the custom type
+ts == ts;           // error: '==' not defined for the custom type
 <span class="boring">}
 </span></code></pre></pre>
 <h3><a class="header" href="#safety-valve-comparing-different-numeric-types-has-no-default" id="safety-valve-comparing-different-numeric-types-has-no-default">Safety valve: Comparing different <em>numeric</em> types has no default</a></h3>
 <p>Beware that the above default does <em>NOT</em> apply to numeric values of different types
 (e.g. comparison between <code>i64</code> and <code>u16</code>, <code>i32</code> and <code>f64</code>) – when multiple numeric types are
 used it is too easy to mess and for subtle errors to creep in.</p>
-<p>Therefore, using numeric types other than <code>INT</code> and <code>FLOAT</code> is <em>highly discouraged</em>; these data
-types are only supported for the purpose of facilitating Rust integration.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Assume variable 'x' = 42_u16, 'y' = 42_u16 (both types of u16)
 
-x == y;             // true: '==' operator for u16 works
+x == y;             // true: '==' operator for u16 is built-in
 
-x == &quot;hello&quot;;       // false: non-numeric operand types default to false
+x == &quot;hello&quot;;       // false: different non-numeric operand types default to false
 
 x == 42;            // error: ==(u16, i64) not defined, no default for numeric types
 
@@ -236,26 +246,23 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <span class="boring">}
 </span></code></pre></pre>
 <h3><a class="header" href="#caution-beware-operators-for-custom-types" id="caution-beware-operators-for-custom-types">Caution: Beware operators for custom types</a></h3>
-<p>The default comparison behavior (i.e. returning <code>false</code> instead of raising an error)
-may be counter-intuitive for <a href="/book/vnext/rust/custom.html">custom types</a> because all comparisons default to <code>false</code>
-(<code>true</code> for <code>!=</code>), unless the corresponding operators are defined for the type.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let ts = new_ts();  // custom type that doesn't have any operators defined
-
-ts == ts;           // false: unless '==' is defined for the custom type
-
-ts != ts;           // true: unless '!=' is defined for the custom type
-<span class="boring">}
-</span></code></pre></pre>
 <p>Operators are completely separate from each other.  For example:</p>
 <ul>
-<li><code>!=</code> does NOT equal to <code>!(==)</code></li>
-<li><code>&gt;</code> does NOT equal to <code>!(&lt;=)</code></li>
-<li><code>&lt;=</code> does NOT equal to <code>&lt;</code> plus <code>==</code></li>
+<li>
+<p><code>!=</code> does not equal <code>!(==)</code></p>
+</li>
+<li>
+<p><code>&gt;</code> does not equal <code>!(&lt;=)</code></p>
+</li>
+<li>
+<p><code>&lt;=</code> does not equal <code>&lt;</code> plus <code>==</code></p>
+</li>
+<li>
+<p><code>&lt;=</code> does not imply <code>&lt;</code></p>
+</li>
 </ul>
-<p>Therefore, if a <a href="/book/vnext/rust/custom.html">custom type</a> misses an operator definition, the default result is simply returned.</p>
+<p>Therefore, if a <a href="/book/vnext/rust/custom.html">custom type</a> misses an operator definition, it simply raises an error
+or returns the default.</p>
 <p>This behavior can be counter-intuitive.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -264,39 +271,15 @@ ts != ts;           // true: unless '!=' is defined for the custom type
 
 ts &lt;= ts;           // true: '&lt;=' defined
 
-ts &lt; ts;            // false: '&lt;' not defined, even though '&lt;=' is true
+ts &lt; ts;            // error: '&lt;' not defined, even though '&lt;=' is
 
 ts == ts;           // true: '==' defined
 
-ts != ts;           // true: '!=' not defined, even though '==' is true
+ts != ts;           // error: '!=' not defined, even though '==' is
 <span class="boring">}
 </span></code></pre></pre>
 <p>It is strongly recommended that, when defining operators for <a href="/book/vnext/rust/custom.html">custom types</a>, always define the full set
 of six operators (or at least the <code>==</code> and <code>!=</code> pair) together.</p>
-<h3><a class="header" href="#caution-built-in-operators-behave-differently-when-using-a-raw-engine" id="caution-built-in-operators-behave-differently-when-using-a-raw-engine">Caution: Built-in operators behave differently when using a raw <code>Engine</code></a></h3>
-<p>When using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a> without loading any <a href="/book/vnext/rust/packages/index.html">packages</a>, comparisons can only be made between a limited
-set of types (see <a href="/book/vnext/engine/builtin.html">built-in operators</a>), and both operands must be of the same type (including
-floating-point numbers).  Otherwise the result is always <code>false</code> (<code>true</code> for <code>!=</code>).</p>
-<p>Therefore, this is an area where a standard <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> behaves differently from a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>
-transparently (i.e. without causing errors).</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The following under Engine::new_raw()
-
-42.0 == 42.0;       // true: built in
-
-42.0 == 42;         // false: comparison between FLOAT and INT not built in
-                    // in a standard Engine, this is true
-
-42 &lt; 123;           // true: built in
-
-42 &lt; 123.0;         // false: comparison between INT and FLOAT not built in
-                    // in a standard Engine, this is true
-
-&quot;hello&quot; &gt; &quot;foo&quot;;    // true: built in
-<span class="boring">}
-</span></code></pre></pre>
 <h2><a class="header" href="#boolean-operators" id="boolean-operators">Boolean operators</a></h2>
 <table><thead><tr><th align="center">Operator</th><th>Description</th><th align="center">Arity</th><th align="center">Short-Circuits?</th></tr></thead><tbody>
 <tr><td align="center"><code>!</code> <em>(prefix)</em></td><td>boolean <em>NOT</em></td><td align="center">unary</td><td align="center">no</td></tr>
