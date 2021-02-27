@@ -204,25 +204,14 @@ lock::status = &quot;off&quot;;           // &lt;- runtime error - cannot modify
 <h2><a class="header" href="#scoped-imports" id="scoped-imports">Scoped Imports</a></h2>
 <p><code>import</code> statements are <em>scoped</em>, meaning that they are only accessible inside the scope that they’re imported.</p>
 <p>They can appear anywhere a normal statement can be, but in the vast majority of cases <code>import</code> statements are
-usually grouped:</p>
-<ol>
-<li>
-<p>at the beginning of a script or,</p>
-</li>
-<li>
-<p>at the beginning of a <a href="/book/language/functions.html">function</a>‘s body.</p>
-</li>
-</ol>
+usually grouped at the beginning of a script so they have <em>global</em> visibility.</p>
 <p>It is not advised to deviate from this common practice unless there is a <em>Very Good Reason™</em>.</p>
 <p>Especially, do not place an <code>import</code> statement within a loop; doing so will repeatedly re-load the
 same module during every iteration of the loop!</p>
-<p>On the other hand, <a href="/book/language/functions.html">functions</a> in <em>Rhai</em> are <em>pure</em> and they form closed environments.
-They cannot access anything outside of their body, including <a href="/book/language/variables.html">variables</a>, <a href="/book/language/constants.html">constants</a>, imports etc.</p>
-<p>In order to use a module inside a function, it must be imported within the <a href="/book/language/functions.html">function</a> body.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>import &quot;hacker&quot; as h;           // import module
+</span>import &quot;hacker&quot; as h;           // import module - visible globally
 
 if secured {                    // &lt;- new block scope
     let mod = &quot;crypt&quot;;
@@ -231,20 +220,16 @@ if secured {                    // &lt;- new block scope
 
     let x = c::encrypt(key);    // use a function in the module
 
-    h::hack(x);                 // use imports from parent blocks
+    h::hack(x);                 // global module 'h' is visible here
 }                               // &lt;- module 'c' disappears at the end of the block scope
 
-c::encrypt(others);             // &lt;- this causes a run-time error because
+h::hack(something);             // this works as 'h' is visible
+
+c::encrypt(something);          // &lt;- this causes a run-time error because
                                 //    module 'c' is no longer available!
 
-fn breaks(data) {
-    h::hack(data);              // &lt;- this will cause a run-time error because
-                                //    module 'h' cannot be accessed here!
-}
-
-fn works(data) {
-    import &quot;hacker&quot; as h;       // import module
-    h::hack(data);              // &lt;- this now works
+fn foo(something) {
+    h::hack(something);         // &lt;- this also works as 'h' is visible
 }
 
 for x in range(0, 1000) {
