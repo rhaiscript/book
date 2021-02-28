@@ -73,6 +73,15 @@ for x in range(0, 50, 3) {      // step by 3
 
     if x == 42 { break; }       // break out of for loop
 }
+
+// The 'range' function can also step backwards.
+for x in range(50, 0, -3) {     // step by -3
+    if x < 10 { continue; }     // skip to the next iteration
+
+    print(x);
+
+    if x == 42 { break; }       // break out of for loop
+}
 ```
 
 
