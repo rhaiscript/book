@@ -80,20 +80,25 @@ Many script-oriented exceptions can be caught via `try` ... `catch`:
 | Error type                                    |        Error value         |
 | --------------------------------------------- | :------------------------: |
 | Runtime error thrown by a [`throw`] statement | value in `throw` statement |
-| Other runtime error                           |   error message [string]   |
-| Arithmetic error                              |   error message [string]   |
-| Variable not found                            |   error message [string]   |
-| [Function] not found                          |   error message [string]   |
-| [Module] not found                            |   error message [string]   |
-| Unbound [`this`]                              |   error message [string]   |
-| Data type mismatch                            |   error message [string]   |
-| Assignment to a calculated/constant value     |   error message [string]   |
-| [Array]/[string] indexing out-of-bounds       |   error message [string]   |
-| Indexing with an inappropriate data type      |   error message [string]   |
-| Error in a dot expression                     |   error message [string]   |
-| `for` statement without a [type iterator]     |   error message [string]   |
-| Error in an `in` expression                   |   error message [string]   |
-| Data race detected                            |   error message [string]   |
+| Other runtime error                           |        [object map]        |
+| Arithmetic error                              |        [object map]        |
+| Variable not found                            |        [object map]        |
+| [Function] not found                          |        [object map]        |
+| [Module] not found                            |        [object map]        |
+| Unbound [`this`]                              |        [object map]        |
+| Data type mismatch                            |        [object map]        |
+| Assignment to a calculated/constant value     |        [object map]        |
+| [Array]/[string] indexing out-of-bounds       |        [object map]        |
+| Indexing with an inappropriate data type      |        [object map]        |
+| Error in a dot expression                     |        [object map]        |
+| `for` statement without a [type iterator]     |        [object map]        |
+| Error in an `in` expression                   |        [object map]        |
+| Data race detected                            |        [object map]        |
+
+The error value in the `catch` clause is an [object map] containing information on the particular error,
+including its type, line and character position (if any), and source etc.
+
+When the [`no_object`] feature is turned on, however, the error value is a simple [string] description.
 
 
 Non-Catchable Exceptions
