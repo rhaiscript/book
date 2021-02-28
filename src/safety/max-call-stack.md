@@ -3,6 +3,18 @@ Maximum Call Stack Depth
 
 {{#include ../links.md}}
 
+
+In Rhai, it is trivial for a functoin call to perform _infinite recursion_ such that all stack space
+is exhausted.
+
+```rust,no_run
+// This is a function that, when called, recurse forever.
+fn recurse_forever() {
+    recurse_forever();
+}
+```
+
+
 Limit How Stack Usage by Scripts
 -------------------------------
 

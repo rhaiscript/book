@@ -4,6 +4,17 @@ Maximum Number of Operations
 {{#include ../links.md}}
 
 
+In Rhai, it is trivial to construct _infinite loops_, or scripts that run for a very long time.
+
+```rust,no_run
+loop { ... }                        // infinite loop
+
+while 1 < 2 { ... }                 // loop with always-true condition
+
+for x in range(0, 1, -1) { ... }    // iteration that never ends (until overflow)
+```
+
+
 Limit How Long a Script Can Run
 ------------------------------
 
@@ -20,9 +31,9 @@ This can be disabled via the [`unchecked`] feature for higher performance (but h
 ```rust,no_run
 let mut engine = Engine::new();
 
-engine.set_max_operations(500); // allow only up to 500 operations for this script
+engine.set_max_operations(500);     // allow only up to 500 operations for this script
 
-engine.set_max_operations(0);   // allow unlimited operations
+engine.set_max_operations(0);       // allow unlimited operations
 ```
 
 
