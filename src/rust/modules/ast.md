@@ -18,7 +18,7 @@ new [module]:
 
 * Global variables &ndash; all variables exported via the `export` statement (those not exported remain hidden).
 
-* Functions not specifically marked `private`.
+* Functions not specifically marked [`private`].
 
 * Global modules that remain in the [`Scope`] at the end of a script run (become sub-modules).
 

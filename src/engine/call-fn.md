@@ -6,8 +6,6 @@ Call Rhai Functions from Rust
 Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted [function]
 from Rust via `Engine::call_fn`.
 
-[Functions] declared with `private` are hidden and cannot be called from Rust (see also [modules]).
-
 ```rust,no_run
 // Define functions in a script.
 let ast = engine.compile(true,
@@ -25,11 +23,6 @@ let ast = engine.compile(true,
         // this one takes no parameters
         fn hello() {
             42
-        }
-
-        // this one is private and cannot be called by 'call_fn'
-        private hidden() {
-            throw "you shouldn't see me!";
         }
     "#)?;
 
@@ -122,6 +115,7 @@ let mut value: Dynamic = 1_i64.into();
 let result = engine.call_fn_dynamic(
                         &mut scope,
                         &ast,
+                        false,
                         "action",
                         Some(&mut value),   // binding the 'this' pointer
                         [ 41_i64.into() ]
