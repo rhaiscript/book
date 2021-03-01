@@ -54,7 +54,7 @@ def_package!(rhai:MyPackage:"My own personal super package", module, {
 
     // Remember to update the parameter names/types and return type metadata.
     // 'set_fn_XXX' by default does not set function metadata.
-    module.update_fn_metadata(hash, ["s: ImmutableString", "i64"]);
+    module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
 });
 ```
 

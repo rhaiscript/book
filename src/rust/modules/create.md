@@ -39,7 +39,7 @@ let hash = module.set_fn_1("inc", |x: i64| Ok(x + 1));
 
 // Remember to update the parameter names/types and return type metadata.
 // 'Module::set_fn_XXX' by default does not set function metadata.
-module.update_fn_metadata(hash, ["x: i64", "i64"]);
+module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
 // Register the module into the global namespace of the Engine.
 let mut engine = Engine::new();
@@ -77,7 +77,7 @@ let hash = module.set_fn_1("inc", |x: i64| Ok(x + 1));
 
 // Remember to update the parameter names/types and return type metadata.
 // 'Module::set_fn_XXX' by default does not set function metadata.
-module.update_fn_metadata(hash, ["x: i64", "i64"]);
+module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
 // Register the module into the Engine as the static module namespace path
 // 'services::calc'
@@ -106,7 +106,7 @@ let hash = module.set_fn_1_mut("inc", FnNamespace::Global, |x: &mut i64| Ok(x + 
 
 // Remember to update the parameter names/types and return type metadata.
 // 'Module::set_fn_XXX_mut' by default does not set function metadata.
-module.update_fn_metadata(hash, ["x: &mut i64", "i64"]);
+module.update_fn_metadata(hash, &["x: &mut i64", "i64"]);
 
 // Register the module into the Engine as a static module namespace 'calc'
 let mut engine = Engine::new();

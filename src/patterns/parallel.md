@@ -67,7 +67,7 @@ def_package!(rhai:MyCustomPackage:"My own personal super-duper custom package", 
 
     // Remember to update the parameter names/types and return type metadata.
     // 'set_fn_XXX' by default does not set function metadata.
-    module.update_fn_metadata(hash, ["s: ImmutableString", "i64"]);
+    module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
 });
 
 let ast = /* ... some AST ... */;
