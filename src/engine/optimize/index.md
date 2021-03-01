@@ -82,8 +82,8 @@ so whether they are optimized away depends on the situation:
 
 * If the operands are not _constant_ values, it is not optimized.
 
-* If the operator is [overloaded][operator overloading], it is not optimized because the overloading function may not be _pure_
-  (i.e. may cause side-effects when called).
+* If the operator is [overloaded][operator overloading], it is not optimized because the overloading
+  function may not be _pure_ (i.e. may cause side-effects when called).
 
 * If the operator is not _binary_, it is not optimized. Only binary operators are built-in to Rhai.
 
@@ -91,7 +91,8 @@ so whether they are optimized away depends on the situation:
 
 * If the operator is not _built-in_ (see list of [built-in operators]), it is not optimized.
 
-* If the operator is a binary built-in operator for a [standard type][standard types], it is called and replaced by a constant result.
+* If the operator is a binary built-in operator for a [standard type][standard types], it is called
+  and replaced by a constant result.
 
 Rhai guarantees that no external function will be run (in order not to trigger side-effects) during the
 optimization process (unless the optimization level is set to [`OptimizationLevel::Full`]).

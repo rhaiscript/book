@@ -65,19 +65,3 @@ disable `eval` using [`Engine::disable_symbol`][disable keywords and operators]:
 ```rust,no_run
 engine.disable_symbol("eval");  // disable usage of 'eval'
 ```
-
-`eval` can also be disabled by overloading it, probably with something that throws:
-
-```rust,no_run
-fn eval(script) { throw "eval is evil! I refuse to run " + script }
-
-let x = eval("40 + 2");         // throws "eval is evil! I refuse to run 40 + 2"
-```
-
-Or overload it from Rust:
-
-```rust,no_run
-engine.register_result_fn("eval", |script: String| -> Result<(), Box<EvalAltResult>> {
-    Err(format!("eval is evil! I refuse to run {}", script).into())
-});
-```

@@ -28,10 +28,12 @@ Rhai searches for the correct implementation of a function in the following orde
 
 * Native Rust functions registered directly into the [`Engine`] via the `Engine::register_XXX` API.
 
-* Native Rust functions in [packages] that have been loaded.
+* Native Rust functions in [packages] that have been loaded via `Engine::register_global_module`.
 
-* Native Rust or Rhai script-defined functions in [imported][`import`] [modules] (or [modules]
-  loaded via `Engine::register_static_module`) that have are exposed globally (e.g. via the
-  `#[rhai_fn(global)]` attribute in a [plugin module]).
+* Native Rust or Rhai script-defined functions in [imported][`import`] [modules] that are
+  exposed globally (e.g. via the `#[rhai_fn(global)]` attribute in a [plugin module]).
+
+* Native Rust or Rhai script-defined functions in [modules] loaded via `Engine::register_static_module`
+  that are exposed globally (e.g. via the `#[rhai_fn(global)]` attribute in a [plugin module]).
 
 * [Built-in][built-in operators] functions.
