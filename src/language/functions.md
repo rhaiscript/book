@@ -149,8 +149,8 @@ change();           // <- error: `this` is unbound
 `is_def_fn`
 -----------
 
-Use `is_def_fn` to detect if a Rhai function is defined (and therefore callable),
-based on its name and the number of parameters.
+Use `is_def_fn` (not available under [`no_function`]) to detect if a Rhai function is defined
+(and therefore callable) based on its name and the number of parameters.
 
 ```rust,no_run
 fn foo(x) { x + 1 }
