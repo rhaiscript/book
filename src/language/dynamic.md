@@ -123,7 +123,6 @@ The following methods cast a `Dynamic` into a specific type:
 | `as_decimal` (requires [`decimal`])           |          [`Result<Decimal, &str>`][rust_decimal]           |
 | `as_bool`                                     |                    `Result<bool, &str>`                    |
 | `as_char`                                     |                    `Result<char, &str>`                    |
-| `as_str`                                      |                    `Result<&str, &str>`                    |
 | `take_string`                                 |                   `Result<String, &str>`                   |
 | `take_immutable_string`                       |    [`Result<ImmutableString, &str>`][`ImmutableString`]    |
 
