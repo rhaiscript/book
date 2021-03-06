@@ -40,7 +40,7 @@ When one (or both) of the operands is a [character], it is first converted into 
 
 | Operator  | Description                             |
 | --------- | --------------------------------------- |
-| `+`, `+=` | string concatenation                    |
+| `+`, `+=` | character/string concatenation          |
 | `-`, `-=` | remove character/sub-string from string |
 | `==`      | equals to                               |
 | `!=`      | not equals to                           |

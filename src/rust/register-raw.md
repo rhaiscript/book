@@ -41,11 +41,13 @@ engine.register_raw_fn(
 
         let y = std::mem::take(args[1]).cast::<i64>();      // alternatively, directly 'consume' it
 
+        let y = args[1].as_int().unwrap();                  // alternatively, use 'as_xxx()'
+
         let x = args[0].write_lock::<i64>().unwrap();       // get a '&mut' reference to the first argument
 
         *x += y;                                            // perform the action
 
-        Ok(Dynamic::UNIT)                                       // must be 'Result<Dynamic, Box<EvalAltResult>>'
+        Ok(Dynamic::UNIT)                                   // must be 'Result<Dynamic, Box<EvalAltResult>>'
     }
 );
 
@@ -88,20 +90,41 @@ Therefore, it is unnecessary to ever mutate any argument except the first one, a
 will be on the cloned copy.
 
 
-Extract Arguments
------------------
+Extract The First `&mut` Argument (If Any)
+-----------------------------------------
 
-To extract an argument from the `args` parameter (`&mut [&mut Dynamic]`), use the following:
+To extract the first `&mut` argument passed by reference from the `args` parameter (`&mut [&mut Dynamic]`),
+use the following to get a mutable reference to the underlying value:
 
-| Argument type                  | Access (`n` = argument position)      | Result                                                |
-| ------------------------------ | ------------------------------------- | ----------------------------------------------------- |
-| [Primary type][standard types] | `args[n].clone().cast::<T>()`         | copy of value                                         |
-| [Custom type]                  | `args[n].read_lock::<T>().unwrap()`   | immutable reference to value                          |
-| [Custom type] (consumed)       | `std::mem::take(args[n]).cast::<T>()` | the _consumed_ value; the original value becomes `()` |
-| `this` object                  | `args[0].write_lock::<T>().unwrap()`  | mutable reference to value                            |
+```rust,no_run
+let value: &mut T = &mut *args[0].write_lock::<T>().unwrap();
 
-When there is a mutable reference to the `this` object (i.e. the first argument),
-there can be no other immutable references to `args`, otherwise the Rust borrow checker will complain.
+*value = ...    // overwrite the existing value of the first `&mut` parameter
+```
+
+When there is a mutable reference to the first `&mut` argument, there can be no other immutable
+references to `args`, otherwise the Rust borrow checker will complain.
+
+Therefore, always extract the mutable reference last, _after_ all other arguments are taken.
+
+
+Extract Other Pass-By-Value Arguments
+------------------------------------
+
+To extract an argument passed by value from the `args` parameter (`&mut [&mut Dynamic]`), use the following:
+
+| Argument type            | Access (`n` = argument position)                    |                 Result                  | Original value |
+| ------------------------ | --------------------------------------------------- | :-------------------------------------: | :------------: |
+| `INT`                    | `args[n].as_int().unwrap()`                         |                  `INT`                  |   untouched    |
+| `FLOAT`                  | `args[n].as_float().unwrap()`                       |                 `FLOAT`                 |   untouched    |
+| `Decimal`                | `args[n].as_decimal().unwrap()`                     |        [`Decimal`][rust_decimal]        |   untouched    |
+| `bool`                   | `args[n].as_bool().unwrap()`                        |                 `bool`                  |   untouched    |
+| `char`                   | `args[n].as_char().unwrap()`                        |                 `char`                  |   untouched    |
+| `()`                     | `args[n].as_unit().unwrap()`                        |                  `()`                   |   untouched    |
+| String                   | `&*args[n].read_lock::<ImmutableString>().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
+| String (consumed)        | `std::mem::take(args[n]).cast::<ImmutableString>()` |           [`ImmutableString`]           |     [`()`]     |
+| [Custom type]            | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
+| [Custom type] (consumed) | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
 
 
 Example &ndash; Passing a Callback to a Rust Function
@@ -163,29 +186,35 @@ is a _shared value_ created by [capturing][automatic currying] variables from [c
 Shared values are implemented as `Rc<RefCell<Dynamic>>` (`Arc<RwLock<Dynamic>>` under [`sync`]).
 
 If the value is _not_ a shared value, or if running under [`no_closure`] where there is
-no [capturing][automatic currying], this API de-sugars to a simple `Dynamic::downcast_ref` and
-`Dynamic::downcast_mut`.  In other words, there is no locking and reference counting overhead
-for the vast majority of non-shared values.
+no [capturing][automatic currying], this API de-sugars to a simple reference cast.
 
-If the value is a shared value, then it is first locked and the returned lock guard
-then allows access to the underlying value in the specified type.
+In other words, there is no locking and reference counting overhead for the vast majority of
+non-shared values.
+
+If the value _is_ a shared value, then it is first _locked_ and the returned _lock guard_
+allows access to the underlying value in the specified type.
 
 
 Hold Multiple References
 ------------------------
 
 In order to access a value argument that is expensive to clone _while_ holding a mutable reference
-to the first argument, either _consume_ that argument via `mem::take` as above, or use `args.split_first`
-to partition the slice:
+to the first argument, use one of the following tactics:
+
+1) if it is a [primary type][standard types] other than [string], use `as_xxx()` as above
+
+2) directly _consume_ that argument via `std::mem::take` as above
+
+3) use `split_first_mut` to partition the slice:
 
 ```rust,no_run
 // Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 
-// Mutable reference to the first parameter
+// Mutable reference to the first parameter, of type '&mut A'
 let this_ptr = &mut *first.write_lock::<A>().unwrap();
 
-// Immutable reference to the second value parameter
+// Immutable reference to the second value parameter, of type '&B'
 // This can be mutable but there is no point because the parameter is passed by value
 let value_ref = &*rest[0].read_lock::<B>().unwrap();
 ```
