@@ -168,6 +168,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#maximum-call-stack-depth" id="maximum-call-stack-depth">Maximum Call Stack Depth</a></h1>
+<p>In Rhai, it is trivial for a functoin call to perform <em>infinite recursion</em> such that all stack space
+is exhausted.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// This is a function that, when called, recurse forever.
+fn recurse_forever() {
+    recurse_forever();
+}
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#limit-how-stack-usage-by-scripts" id="limit-how-stack-usage-by-scripts">Limit How Stack Usage by Scripts</a></h2>
 <p>Rhai by default limits function calls to a maximum depth of 64 levels (8 levels in debug build).</p>
 <p>This limit may be changed via the <code>Engine::set_max_call_levels</code> method.</p>

@@ -169,32 +169,58 @@
                     <main>
                         <h1><a class="header" href="#string-parameters-in-rust-functions" id="string-parameters-in-rust-functions"><code>String</code> Parameters in Rust Functions</a></h1>
 <h2><a class="header" href="#avoid-string" id="avoid-string">Avoid <code>String</code></a></h2>
-<p>As must as possible, avoid using <code>String</code> parameters in functions.</p>
-<p>Each <code>String</code> argument is cloned during every single call to that function – and the copy
-immediately thrown away right after the call.</p>
+<p>As much as possible, avoid using <code>String</code> parameters in functions.</p>
+<p>Each <code>String</code> argument is cloned during <em>every</em> single call to that function –
+and the copy immediately thrown away right after the call.</p>
 <p>Needless to say, it is <em>extremely</em> inefficient to use <code>String</code> parameters.</p>
 <h2><a class="header" href="#str-maps-to-immutablestring" id="str-maps-to-immutablestring"><code>&amp;str</code> Maps to <code>ImmutableString</code></a></h2>
-<p>Rust functions accepting parameters of <code>String</code> should use <code>&amp;str</code> instead because it maps directly to
-<a href="/book/vnext/language/strings-chars.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/book/vnext/language/strings-chars.html">strings</a> internally.</p>
+<p>Rust functions accepting parameters of <code>String</code> should use <code>&amp;str</code> instead because it maps directly
+to <a href="/book/vnext/language/strings-chars.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/book/vnext/language/strings-chars.html">strings</a> internally.</p>
 <p>The parameter type <code>String</code> involves always converting an <a href="/book/vnext/language/strings-chars.html"><code>ImmutableString</code></a> into a <code>String</code>
 which mandates cloning it.</p>
-<p>Using <code>ImmutableString</code> or <code>&amp;str</code> is much more efficient.
-A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
+<p>Using <code>ImmutableString</code> or <code>&amp;str</code> is much more efficient.</p>
+<p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>fn get_len1(s: String) -&gt; i64 { s.len() as i64 }            // &lt;- Very inefficient!!!
-fn get_len2(s: &amp;str) -&gt; i64 { s.len() as i64 }              // &lt;- This is better
-fn get_len3(s: ImmutableString) -&gt; i64 { s.len() as i64 }   // &lt;- the above is equivalent to this
+</span>fn get_len1(s: String) -&gt; i64 {             // very inefficient!!!
+    s.len() as i64
+}
+fn get_len2(s: &amp;str) -&gt; i64 {               // this is better
+    s.len() as i64
+}
+fn get_len3(s: ImmutableString) -&gt; i64 {    // the above is equivalent to this
+    s.len() as i64
+}
 
 engine
     .register_fn(&quot;len1&quot;, get_len1)
     .register_fn(&quot;len2&quot;, get_len2)
     .register_fn(&quot;len3&quot;, get_len3);
 
-let len = engine.eval::&lt;i64&gt;(&quot;x.len1()&quot;)?;                  // 'x' is cloned, very inefficient!
-let len = engine.eval::&lt;i64&gt;(&quot;x.len2()&quot;)?;                  // 'x' is shared
-let len = engine.eval::&lt;i64&gt;(&quot;x.len3()&quot;)?;                  // 'x' is shared
+let len = engine.eval::&lt;i64&gt;(&quot;len1(x)&quot;)?;   // 'x' is cloned, very inefficient!
+let len = engine.eval::&lt;i64&gt;(&quot;len2(x)&quot;)?;   // 'x' is shared
+let len = engine.eval::&lt;i64&gt;(&quot;len3(x)&quot;)?;   // 'x' is shared
+<span class="boring">}
+</span></code></pre></pre>
+<h2><a class="header" href="#mut-string-does-not-work-as-expected" id="mut-string-does-not-work-as-expected"><code>&amp;mut String</code> Does Not Work As Expected</a></h2>
+<p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,
+which has type <code>ImmutableString</code>.</p>
+<p>In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/vnext/rust/custom.html">custom type</a>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn bad(s: &amp;mut String) { ... }              // '&amp;mut String' will not match string values
+
+fn good(s: &amp;mut ImmutableString) { ... }
+
+engine
+    .register_fn(&quot;bad&quot;, bad)
+    .register_fn(&quot;good&quot;, good);
+
+engine.eval(r#&quot;bad(&quot;hello&quot;)&quot;#)?;            // &lt;- error: function 'bad (string)' not found
+
+engine.eval(r#&quot;good(&quot;hello&quot;)&quot;#)?;           // &lt;- this one works
 <span class="boring">}
 </span></code></pre></pre>
 

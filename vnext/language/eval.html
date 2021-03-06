@@ -225,24 +225,6 @@ disable <code>eval</code> using <a href="/book/vnext/engine/disable.html"><code>
 </span>engine.disable_symbol(&quot;eval&quot;);  // disable usage of 'eval'
 <span class="boring">}
 </span></code></pre></pre>
-<p><code>eval</code> can also be disabled by overloading it, probably with something that throws:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn eval(script) { throw &quot;eval is evil! I refuse to run &quot; + script }
-
-let x = eval(&quot;40 + 2&quot;);         // throws &quot;eval is evil! I refuse to run 40 + 2&quot;
-<span class="boring">}
-</span></code></pre></pre>
-<p>Or overload it from Rust:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>engine.register_result_fn(&quot;eval&quot;, |script: String| -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt; {
-    Err(format!(&quot;eval is evil! I refuse to run {}&quot;, script).into())
-});
-<span class="boring">}
-</span></code></pre></pre>
 
                     </main>
 

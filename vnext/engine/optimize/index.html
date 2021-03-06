@@ -235,8 +235,8 @@ so whether they are optimized away depends on the situation:</p>
 <p>If the operands are not <em>constant</em> values, it is not optimized.</p>
 </li>
 <li>
-<p>If the operator is <a href="/book/vnext/rust/operators.html">overloaded</a>, it is not optimized because the overloading function may not be <em>pure</em>
-(i.e. may cause side-effects when called).</p>
+<p>If the operator is <a href="/book/vnext/rust/operators.html">overloaded</a>, it is not optimized because the overloading
+function may not be <em>pure</em> (i.e. may cause side-effects when called).</p>
 </li>
 <li>
 <p>If the operator is not <em>binary</em>, it is not optimized. Only binary operators are built-in to Rhai.</p>
@@ -248,7 +248,8 @@ so whether they are optimized away depends on the situation:</p>
 <p>If the operator is not <em>built-in</em> (see list of <a href="/book/vnext/engine/builtin.html">built-in operators</a>), it is not optimized.</p>
 </li>
 <li>
-<p>If the operator is a binary built-in operator for a <a href="/book/vnext/language/values-and-types.html">standard type</a>, it is called and replaced by a constant result.</p>
+<p>If the operator is a binary built-in operator for a <a href="/book/vnext/language/values-and-types.html">standard type</a>, it is called
+and replaced by a constant result.</p>
 </li>
 </ul>
 <p>Rhai guarantees that no external function will be run (in order not to trigger side-effects) during the

@@ -525,7 +525,7 @@ mod my_module {
 <p>If the <em>first</em> parameter of a function is of type <code>rhai::NativeCallContext</code>, then it is treated
 specially by the plugins system.</p>
 <p><code>NativeCallContext</code> is a type that encapsulates the current <em>native call context</em> and exposes the following:</p>
-<table><thead><tr><th>Field</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
+<table><thead><tr><th>Method</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/book/vnext/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/book/vnext/language/fn-ptr.html">function pointer</a>.</td></tr>
 <tr><td><code>fn_name()</code></td><td align="center"><code>&amp;str</code></td><td>name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)</td></tr>
 <tr><td><code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
@@ -533,6 +533,7 @@ specially by the plugins system.</p>
 <tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
 <tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <p>This first parameter, if exists, will be stripped before all other processing.  It is <em>virtual</em>.
 Most importantly, it does <em>not</em> count as a parameter to the function and there is no need to provide

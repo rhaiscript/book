@@ -200,11 +200,13 @@ without the conversions.</p>
 
         let y = std::mem::take(args[1]).cast::&lt;i64&gt;();      // alternatively, directly 'consume' it
 
+        let y = args[1].as_int().unwrap();                  // alternatively, use 'as_xxx()'
+
         let x = args[0].write_lock::&lt;i64&gt;().unwrap();       // get a '&amp;mut' reference to the first argument
 
         *x += y;                                            // perform the action
 
-        Ok(Dynamic::UNIT)                                       // must be 'Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;'
+        Ok(Dynamic::UNIT)                                   // must be 'Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;'
     }
 );
 
@@ -230,6 +232,7 @@ engine.register_fn(&quot;increment_by&quot;, |x: &amp;mut i64, y: i64| *x += y);
 <tr><td>• <code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
 <tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>• <code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
 <tr><td><code>args</code></td><td align="center"><code>&amp;mut [&amp;mut Dynamic]</code></td><td>a slice containing <code>&amp;mut</code> references to <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> values.<br/>The slice is guaranteed to contain enough arguments <em>of the correct types</em>.</td></tr>
 </tbody></table>
 <h3><a class="header" href="#return-value" id="return-value">Return value</a></h3>
@@ -237,16 +240,34 @@ engine.register_fn(&quot;increment_by&quot;, |x: &amp;mut i64, y: i64| *x += y);
 <p>Remember, in Rhai, all arguments <em>except</em> the <em>first</em> one are always passed by <em>value</em> (i.e. cloned).
 Therefore, it is unnecessary to ever mutate any argument except the first one, as all mutations
 will be on the cloned copy.</p>
-<h2><a class="header" href="#extract-arguments" id="extract-arguments">Extract Arguments</a></h2>
-<p>To extract an argument from the <code>args</code> parameter (<code>&amp;mut [&amp;mut Dynamic]</code>), use the following:</p>
-<table><thead><tr><th>Argument type</th><th>Access (<code>n</code> = argument position)</th><th>Result</th></tr></thead><tbody>
-<tr><td><a href="/book/vnext/language/values-and-types.html">Primary type</a></td><td><code>args[n].clone().cast::&lt;T&gt;()</code></td><td>copy of value</td></tr>
-<tr><td><a href="/book/vnext/rust/custom.html">Custom type</a></td><td><code>args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td>immutable reference to value</td></tr>
-<tr><td><a href="/book/vnext/rust/custom.html">Custom type</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td>the <em>consumed</em> value; the original value becomes <code>()</code></td></tr>
-<tr><td><code>this</code> object</td><td><code>args[0].write_lock::&lt;T&gt;().unwrap()</code></td><td>mutable reference to value</td></tr>
+<h2><a class="header" href="#extract-the-first-mut-argument-if-any" id="extract-the-first-mut-argument-if-any">Extract The First <code>&amp;mut</code> Argument (If Any)</a></h2>
+<p>To extract the first <code>&amp;mut</code> argument passed by reference from the <code>args</code> parameter (<code>&amp;mut [&amp;mut Dynamic]</code>),
+use the following to get a mutable reference to the underlying value:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let value: &amp;mut T = &amp;mut *args[0].write_lock::&lt;T&gt;().unwrap();
+
+*value = ...    // overwrite the existing value of the first `&amp;mut` parameter
+<span class="boring">}
+</span></code></pre></pre>
+<p>When there is a mutable reference to the first <code>&amp;mut</code> argument, there can be no other immutable
+references to <code>args</code>, otherwise the Rust borrow checker will complain.</p>
+<p>Therefore, always extract the mutable reference last, <em>after</em> all other arguments are taken.</p>
+<h2><a class="header" href="#extract-other-pass-by-value-arguments" id="extract-other-pass-by-value-arguments">Extract Other Pass-By-Value Arguments</a></h2>
+<p>To extract an argument passed by value from the <code>args</code> parameter (<code>&amp;mut [&amp;mut Dynamic]</code>), use the following:</p>
+<table><thead><tr><th>Argument type</th><th>Access (<code>n</code> = argument position)</th><th align="center">Result</th><th align="center">Original value</th></tr></thead><tbody>
+<tr><td><code>INT</code></td><td><code>args[n].as_int().unwrap()</code></td><td align="center"><code>INT</code></td><td align="center">untouched</td></tr>
+<tr><td><code>FLOAT</code></td><td><code>args[n].as_float().unwrap()</code></td><td align="center"><code>FLOAT</code></td><td align="center">untouched</td></tr>
+<tr><td><code>Decimal</code></td><td><code>args[n].as_decimal().unwrap()</code></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td align="center">untouched</td></tr>
+<tr><td><code>bool</code></td><td><code>args[n].as_bool().unwrap()</code></td><td align="center"><code>bool</code></td><td align="center">untouched</td></tr>
+<tr><td><code>char</code></td><td><code>args[n].as_char().unwrap()</code></td><td align="center"><code>char</code></td><td align="center">untouched</td></tr>
+<tr><td><code>()</code></td><td><code>args[n].as_unit().unwrap()</code></td><td align="center"><code>()</code></td><td align="center">untouched</td></tr>
+<tr><td>String</td><td><code>&amp;*args[n].read_lock::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/vnext/language/strings-chars.html"><code>&amp;ImmutableString</code></a></td><td align="center">untouched</td></tr>
+<tr><td>String (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;ImmutableString&gt;()</code></td><td align="center"><a href="/book/vnext/language/strings-chars.html"><code>ImmutableString</code></a></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td><a href="/book/vnext/rust/custom.html">Custom type</a></td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td align="center"><code>&amp;T</code></td><td align="center">untouched</td></tr>
+<tr><td><a href="/book/vnext/rust/custom.html">Custom type</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td align="center"><code>T</code></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
-<p>When there is a mutable reference to the <code>this</code> object (i.e. the first argument),
-there can be no other immutable references to <code>args</code>, otherwise the Rust borrow checker will complain.</p>
 <h2><a class="header" href="#example--passing-a-callback-to-a-rust-function" id="example--passing-a-callback-to-a-rust-function">Example – Passing a Callback to a Rust Function</a></h2>
 <p>The low-level API is useful when there is a need to interact with the scripting <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>
 within a function.</p>
@@ -298,25 +319,35 @@ let result = engine.eval::&lt;i64&gt;(
 is a <em>shared value</em> created by <a href="/book/vnext/language/fn-closure.html">capturing</a> variables from <a href="/book/vnext/language/fn-closure.html">closures</a>.</p>
 <p>Shared values are implemented as <code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code> (<code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> under <a href="/book/vnext/start/features.html"><code>sync</code></a>).</p>
 <p>If the value is <em>not</em> a shared value, or if running under <a href="/book/vnext/start/features.html"><code>no_closure</code></a> where there is
-no <a href="/book/vnext/language/fn-closure.html">capturing</a>, this API de-sugars to a simple <code>Dynamic::downcast_ref</code> and
-<code>Dynamic::downcast_mut</code>.  In other words, there is no locking and reference counting overhead
-for the vast majority of non-shared values.</p>
-<p>If the value is a shared value, then it is first locked and the returned lock guard
-then allows access to the underlying value in the specified type.</p>
+no <a href="/book/vnext/language/fn-closure.html">capturing</a>, this API de-sugars to a simple reference cast.</p>
+<p>In other words, there is no locking and reference counting overhead for the vast majority of
+non-shared values.</p>
+<p>If the value <em>is</em> a shared value, then it is first <em>locked</em> and the returned <em>lock guard</em>
+allows access to the underlying value in the specified type.</p>
 <h2><a class="header" href="#hold-multiple-references" id="hold-multiple-references">Hold Multiple References</a></h2>
 <p>In order to access a value argument that is expensive to clone <em>while</em> holding a mutable reference
-to the first argument, either <em>consume</em> that argument via <code>mem::take</code> as above, or use <code>args.split_first</code>
-to partition the slice:</p>
+to the first argument, use one of the following tactics:</p>
+<ol>
+<li>
+<p>if it is a <a href="/book/vnext/language/values-and-types.html">primary type</a> other than <a href="/book/vnext/language/strings-chars.html">string</a>, use <code>as_xxx()</code> as above</p>
+</li>
+<li>
+<p>directly <em>consume</em> that argument via <code>std::mem::take</code> as above</p>
+</li>
+<li>
+<p>use <code>split_first_mut</code> to partition the slice:</p>
+</li>
+</ol>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 
-// Mutable reference to the first parameter
+// Mutable reference to the first parameter, of type '&amp;mut A'
 let this_ptr = &amp;mut *first.write_lock::&lt;A&gt;().unwrap();
 
-// Immutable reference to the second value parameter
+// Immutable reference to the second value parameter, of type '&amp;B'
 // This can be mutable but there is no point because the parameter is passed by value
 let value_ref = &amp;*rest[0].read_lock::&lt;B&gt;().unwrap();
 <span class="boring">}

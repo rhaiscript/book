@@ -170,7 +170,6 @@
                         <h1><a class="header" href="#call-rhai-functions-from-rust" id="call-rhai-functions-from-rust">Call Rhai Functions from Rust</a></h1>
 <p>Rhai also allows working <em>backwards</em> from the other direction – i.e. calling a Rhai-scripted <a href="/book/vnext/language/functions.html">function</a>
 from Rust via <code>Engine::call_fn</code>.</p>
-<p><a href="/book/vnext/language/functions.html">Functions</a> declared with <code>private</code> are hidden and cannot be called from Rust (see also <a href="/book/vnext/rust/modules/index.html">modules</a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -190,11 +189,6 @@ let ast = engine.compile(true,
         // this one takes no parameters
         fn hello() {
             42
-        }
-
-        // this one is private and cannot be called by 'call_fn'
-        private hidden() {
-            throw &quot;you shouldn't see me!&quot;;
         }
     &quot;#)?;
 
@@ -281,6 +275,7 @@ let mut value: Dynamic = 1_i64.into();
 let result = engine.call_fn_dynamic(
                         &amp;mut scope,
                         &amp;ast,
+                        false,
                         &quot;action&quot;,
                         Some(&amp;mut value),   // binding the 'this' pointer
                         [ 41_i64.into() ]

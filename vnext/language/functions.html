@@ -292,8 +292,8 @@ change();           // &lt;- error: `this` is unbound
 <span class="boring">}
 </span></code></pre></pre>
 <h2><a class="header" href="#is_def_fn" id="is_def_fn"><code>is_def_fn</code></a></h2>
-<p>Use <code>is_def_fn</code> to detect if a Rhai function is defined (and therefore callable),
-based on its name and the number of parameters.</p>
+<p>Use <code>is_def_fn</code> (not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
+(and therefore callable) based on its name and the number of parameters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

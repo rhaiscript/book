@@ -236,21 +236,24 @@ catch
 <p>Many script-oriented exceptions can be caught via <code>try</code> ... <code>catch</code>:</p>
 <table><thead><tr><th>Error type</th><th align="center">Error value</th></tr></thead><tbody>
 <tr><td>Runtime error thrown by a <a href="/book/vnext/language/throw.html"><code>throw</code></a> statement</td><td align="center">value in <code>throw</code> statement</td></tr>
-<tr><td>Other runtime error</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Arithmetic error</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Variable not found</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><a href="/book/vnext/language/functions.html">Function</a> not found</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><a href="/book/vnext/rust/modules/index.html">Module</a> not found</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Unbound [<code>this</code>]</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Data type mismatch</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Assignment to a calculated/constant value</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><a href="/book/vnext/language/arrays.html">Array</a>/<a href="/book/vnext/language/strings-chars.html">string</a> indexing out-of-bounds</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Indexing with an inappropriate data type</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Error in a dot expression</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>for</code> statement without a <a href="/book/vnext/language/iterator.html">type iterator</a></td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Error in an <code>in</code> expression</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td>Data race detected</td><td align="center">error message <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
+<tr><td>Other runtime error</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Arithmetic error</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Variable not found</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><a href="/book/vnext/language/functions.html">Function</a> not found</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><a href="/book/vnext/rust/modules/index.html">Module</a> not found</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Unbound [<code>this</code>]</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Data type mismatch</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Assignment to a calculated/constant value</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><a href="/book/vnext/language/arrays.html">Array</a>/<a href="/book/vnext/language/strings-chars.html">string</a> indexing out-of-bounds</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Indexing with an inappropriate data type</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Error in a dot expression</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>for</code> statement without a <a href="/book/vnext/language/iterator.html">type iterator</a></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Error in an <code>in</code> expression</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Data race detected</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 </tbody></table>
+<p>The error value in the <code>catch</code> clause is an <a href="/book/vnext/language/object-maps.html">object map</a> containing information on the particular error,
+including its type, line and character position (if any), and source etc.</p>
+<p>When the <a href="/book/vnext/start/features.html"><code>no_object</code></a> feature is turned on, however, the error value is a simple <a href="/book/vnext/language/strings-chars.html">string</a> description.</p>
 <h2><a class="header" href="#non-catchable-exceptions" id="non-catchable-exceptions">Non-Catchable Exceptions</a></h2>
 <p>Some exceptions <em>cannot</em> be caught:</p>
 <ul>

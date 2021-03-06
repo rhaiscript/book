@@ -168,6 +168,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#maximum-number-of-operations" id="maximum-number-of-operations">Maximum Number of Operations</a></h1>
+<p>In Rhai, it is trivial to construct <em>infinite loops</em>, or scripts that run for a very long time.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>loop { ... }                        // infinite loop
+
+while 1 &lt; 2 { ... }                 // loop with always-true condition
+
+for x in range(0, 1, -1) { ... }    // iteration that never ends (until overflow)
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#limit-how-long-a-script-can-run" id="limit-how-long-a-script-can-run">Limit How Long a Script Can Run</a></h2>
 <p>Rhai by default does not limit how much time or CPU a script consumes.</p>
 <p>This can be changed via the <code>Engine::set_max_operations</code> method, with zero being unlimited (the default).</p>
@@ -180,9 +191,9 @@ This can be disabled via the <a href="/book/vnext/start/features.html"><code>unc
 </span><span class="boring">fn main() {
 </span>let mut engine = Engine::new();
 
-engine.set_max_operations(500); // allow only up to 500 operations for this script
+engine.set_max_operations(500);     // allow only up to 500 operations for this script
 
-engine.set_max_operations(0);   // allow unlimited operations
+engine.set_max_operations(0);       // allow unlimited operations
 <span class="boring">}
 </span></code></pre></pre>
 <h2><a class="header" href="#what-does-one-operation-mean" id="what-does-one-operation-mean">What Does One <em>Operation</em> Mean</a></h2>

@@ -182,10 +182,12 @@ This is particularly useful when printing output.</p>
 <p>An <code>ImmutableString</code> is immutable (i.e. never changes) and therefore is shared among many users.
 Cloning an <code>ImmutableString</code> is cheap since it only copies an immutable reference.</p>
 <p>Modifying an <code>ImmutableString</code> causes it first to be cloned, and then the modification made to the copy.</p>
-<h2><a class="header" href="#important--avoid-string-parameters" id="important--avoid-string-parameters"><strong>IMPORTANT</strong> – Avoid <code>String</code> Parameters</a></h2>
+<h2><a class="header" href="#avoid-string-parameters" id="avoid-string-parameters">Avoid <code>String</code> Parameters</a></h2>
 <p><code>ImmutableString</code> should be used in place of <code>String</code> for function parameters because using
-<code>String</code> is very inefficient (the <code>String</code> argument is cloned during every call).</p>
+<code>String</code> is very inefficient (the argument is cloned during every function call).</p>
 <p>A alternative is to use <code>&amp;str</code> which de-sugars to <code>ImmutableString</code>.</p>
+<p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,
+which has type <code>ImmutableString</code>.  In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/vnext/rust/custom.html">custom type</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -194,13 +196,15 @@ Cloning an <code>ImmutableString</code> is cheap since it only copies an immutab
 fn fast1(s: ImmutableString) -&gt; i64 { ... }     // cloning 'ImmutableString' is cheap
 
 fn fast2(s: &amp;str) -&gt; i64 { ... }                // de-sugars to above
+
+fn bad(s: &amp;mut String) { ... }                  // '&amp;mut String' will not match string values
 <span class="boring">}
 </span></code></pre></pre>
 <h2><a class="header" href="#string-and-character-literals" id="string-and-character-literals">String and Character Literals</a></h2>
-<p>String and character literals follow C-style formatting, with support for Unicode (<code>\u</code><em>xxxx</em>‘ or <code>\U</code><em>xxxxxxxx</em>‘)
-and hex (<code>\x</code><em>xx</em>‘) escape sequences.</p>
-<p>Hex sequences map to ASCII characters, while <code>\u</code> maps to 16-bit common Unicode code points and <code>\U</code> maps the full,
-32-bit extended Unicode code points.</p>
+<p>String and character literals follow C-style formatting, with support for Unicode (<code>\u</code><em>xxxx</em>‘
+or <code>\U</code><em>xxxxxxxx</em>‘) and hex (<code>\x</code><em>xx</em>‘) escape sequences.</p>
+<p>Hex sequences map to ASCII characters, while <code>\u</code> maps to 16-bit common Unicode code points and <code>\U</code>
+maps the full, 32-bit extended Unicode code points.</p>
 <p>Standard escape sequences:</p>
 <table><thead><tr><th>Escape sequence</th><th>Meaning</th></tr></thead><tbody>
 <tr><td><code>\\</code></td><td>back-slash <code>\</code></td></tr>
@@ -219,10 +223,11 @@ but nevertheless there are major differences.</p>
 <p>In Rhai a string is the same as an array of Unicode characters and can be directly indexed (unlike Rust).</p>
 <p>This is similar to most other languages where strings are stored internally not as UTF-8 but as
 UCS-16 or UCS-32.</p>
-<p>Individual characters within a Rhai string can also be replaced just as if the string is an array of Unicode characters.</p>
+<p>Individual characters within a Rhai string can also be replaced just as if the string is an array of
+Unicode characters.s</p>
 <p>In Rhai, there are also no separate concepts of <code>String</code> and <code>&amp;str</code> as in Rust.</p>
 <h3><a class="header" href="#performance-considerations-of-character-indexing" id="performance-considerations-of-character-indexing">Performance Considerations of Character Indexing</a></h3>
-<p>Although Rhai exposes a string as a simple array of <code>char</code> which can be directly indexed to get at a
+<p>Although Rhai exposes a string as a simple array of <code>char</code> which can be directly indexed to get at a 
 particular character, internally the string is still stored as UTF-8 (native Rust <code>String</code>s).</p>
 <p>All indexing operations require walking through the entire UTF-8 string to find the offset of the
 particular character position, and therefore is much slower than simple array indexing.</p>
