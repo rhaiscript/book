@@ -28,13 +28,16 @@ Cloning an `ImmutableString` is cheap since it only copies an immutable referenc
 Modifying an `ImmutableString` causes it first to be cloned, and then the modification made to the copy.
 
 
-**IMPORTANT** &ndash; Avoid `String` Parameters
-----------------------------------------------
+Avoid `String` Parameters
+-------------------------
 
 `ImmutableString` should be used in place of `String` for function parameters because using
-`String` is very inefficient (the `String` argument is cloned during every call).
+`String` is very inefficient (the argument is cloned during every function call).
 
 A alternative is to use `&str` which de-sugars to `ImmutableString`.
+
+A function with the first parameter being `&mut String` does not match a string argument passed to it,
+which has type `ImmutableString`.  In fact, `&mut String` is treated as an opaque [custom type].
 
 ```rust,no_run
 fn slow(s: String) -> i64 { ... }               // string is cloned each call
@@ -42,17 +45,19 @@ fn slow(s: String) -> i64 { ... }               // string is cloned each call
 fn fast1(s: ImmutableString) -> i64 { ... }     // cloning 'ImmutableString' is cheap
 
 fn fast2(s: &str) -> i64 { ... }                // de-sugars to above
+
+fn bad(s: &mut String) { ... }                  // '&mut String' will not match string values
 ```
 
 
 String and Character Literals
 ----------------------------
 
-String and character literals follow C-style formatting, with support for Unicode (`\u`_xxxx_' or `\U`_xxxxxxxx_')
-and hex (`\x`_xx_') escape sequences.
+String and character literals follow C-style formatting, with support for Unicode (`\u`_xxxx_'
+or `\U`_xxxxxxxx_') and hex (`\x`_xx_') escape sequences.
 
-Hex sequences map to ASCII characters, while `\u` maps to 16-bit common Unicode code points and `\U` maps the full,
-32-bit extended Unicode code points.
+Hex sequences map to ASCII characters, while `\u` maps to 16-bit common Unicode code points and `\U`
+maps the full, 32-bit extended Unicode code points.
 
 Standard escape sequences:
 
@@ -80,13 +85,14 @@ In Rhai a string is the same as an array of Unicode characters and can be direct
 This is similar to most other languages where strings are stored internally not as UTF-8 but as
 UCS-16 or UCS-32.
 
-Individual characters within a Rhai string can also be replaced just as if the string is an array of Unicode characters.
+Individual characters within a Rhai string can also be replaced just as if the string is an array of
+Unicode characters.s
 
 In Rhai, there are also no separate concepts of `String` and `&str` as in Rust.
 
 ### Performance Considerations of Character Indexing
 
-Although Rhai exposes a string as a simple array of `char` which can be directly indexed to get at a
+Although Rhai exposes a string as a simple array of `char` which can be directly indexed to get at a 
 particular character, internally the string is still stored as UTF-8 (native Rust `String`s).
 
 All indexing operations require walking through the entire UTF-8 string to find the offset of the
