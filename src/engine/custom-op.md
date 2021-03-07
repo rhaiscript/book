@@ -21,9 +21,8 @@ let mut engine = Engine::new();
 // Register a custom operator named 'foo' and give it a precedence of 160
 // (i.e. between +|- and *|/)
 // Also register the implementation of the customer operator as a function
-engine
-    .register_custom_operator("foo", 160)?
-    .register_fn("foo", |x: i64, y: i64| (x * y) - (x + y));
+engine.register_custom_operator("foo", 160)?
+      .register_fn("foo", |x: i64, y: i64| (x * y) - (x + y));
 
 // The custom operator can be used in expressions
 let result = engine.eval_expression::<i64>("1 + 2 * 3 foo 4 - 5 / 6")?;
@@ -80,9 +79,8 @@ All custom operators must be _binary_ (i.e. they take two operands).
 _Unary_ custom operators are not supported.
 
 ```rust,no_run
-engine
-    .register_custom_operator("foo", 160)?
-    .register_fn("foo", |x: i64| x * x);
+engine.register_custom_operator("foo", 160)?
+      .register_fn("foo", |x: i64| x * x);
 
 engine.eval::<i64>("1 + 2 * 3 foo 4 - 5 / 6")?; // error: function 'foo (i64, i64)' not found
 ```

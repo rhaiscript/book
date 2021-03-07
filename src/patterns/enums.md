@@ -88,9 +88,8 @@ mod MyEnumModule {
 let mut engine = Engine::new();
 
 // Load the module as the module namespace "MyEnum"
-engine
-    .register_type_with_name::<MyEnum>("MyEnum")
-    .register_static_module("MyEnum", exported_module!(MyEnumModule).into());
+engine.register_type_with_name::<MyEnum>("MyEnum")
+      .register_static_module("MyEnum", exported_module!(MyEnumModule).into());
 ```
 
 With this API in place, working with enums feels almost the same as in Rust:

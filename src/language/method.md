@@ -80,9 +80,8 @@ fn do_add(obj: &VeryComplexType, offset: i64) -> i64 {
     ...
 }
 
-engine
-    .register_type::<VeryComplexType>()
-    .register_fn("+", add_pure /* or  add_method*/);
+engine.register_type::<VeryComplexType>()
+      .register_fn("+", add_pure /* or  add_method*/);
 
 // Very expensive to call, as the 'VeryComplexType' is cloned before each call.
 fn add_pure(obj: VeryComplexType, offset: i64) -> i64 {

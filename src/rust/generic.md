@@ -19,10 +19,9 @@ fn show_it<T: Display>(x: &mut T) {
 
 let mut engine = Engine::new();
 
-engine
-    .register_fn("print", show_it::<i64>)
-    .register_fn("print", show_it::<bool>)
-    .register_fn("print", show_it::<ImmutableString>);
+engine.register_fn("print", show_it::<i64>)
+      .register_fn("print", show_it::<bool>)
+      .register_fn("print", show_it::<ImmutableString>);
 ```
 
 The above example shows how to register multiple functions

@@ -39,10 +39,9 @@ fn get_len3(s: ImmutableString) -> i64 {    // the above is equivalent to this
     s.len() as i64
 }
 
-engine
-    .register_fn("len1", get_len1)
-    .register_fn("len2", get_len2)
-    .register_fn("len3", get_len3);
+engine.register_fn("len1", get_len1)
+      .register_fn("len2", get_len2)
+      .register_fn("len3", get_len3);
 
 let len = engine.eval::<i64>("len1(x)")?;   // 'x' is cloned, very inefficient!
 let len = engine.eval::<i64>("len2(x)")?;   // 'x' is shared
@@ -63,9 +62,8 @@ fn bad(s: &mut String) { ... }              // '&mut String' will not match stri
 
 fn good(s: &mut ImmutableString) { ... }
 
-engine
-    .register_fn("bad", bad)
-    .register_fn("good", good);
+engine.register_fn("bad", bad)
+      .register_fn("good", good);
 
 engine.eval(r#"bad("hello")"#)?;            // <- error: function 'bad (string)' not found
 

@@ -40,9 +40,8 @@ fn main() {
 
         // Register API
         // Notice that the API functions are blocking
-        engine
-            .register_fn("get", move || rx_script.recv().unwrap())
-            .register_fn("put", move |v: i64| tx_script.send(v).unwrap());
+        engine.register_fn("get", move || rx_script.recv().unwrap())
+              .register_fn("put", move |v: i64| tx_script.send(v).unwrap());
 
         // Run script
         engine

@@ -56,10 +56,9 @@ impl TestStruct {
 
 let mut engine = Engine::new();
 
-engine
-    .register_type::<TestStruct>()
-    .register_get_set("xyz", TestStruct::get_field, TestStruct::set_field)
-    .register_fn("new_ts", TestStruct::new);
+engine.register_type::<TestStruct>()
+      .register_get_set("xyz", TestStruct::get_field, TestStruct::set_field)
+      .register_fn("new_ts", TestStruct::new);
 
 let result = engine.eval::<String>(r#"let a = new_ts(); a.xyz = "42"; a.xyz"#)?;
 

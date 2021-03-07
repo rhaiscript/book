@@ -27,10 +27,9 @@ impl IntoIterator<Item = i64> for TestStruct {
     }
 }
 
-engine
-    .register_type_with_name::<TestStruct>("TestStruct")
-    .register_fn("new_ts", || TestStruct { fields: vec![1, 2, 3, 42] })
-    .register_iterator::<TestStruct>();           // register type iterator
+engine.register_type_with_name::<TestStruct>("TestStruct")
+      .register_fn("new_ts", || TestStruct { fields: vec![1, 2, 3, 42] })
+      .register_iterator::<TestStruct>();         // register type iterator
 ```
 
 With a type iterator registered, the [custom type] can be iterated through:

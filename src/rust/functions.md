@@ -31,9 +31,8 @@ fn get_any_value() -> Result<Dynamic, Box<EvalAltResult>> {
 
 let mut engine = Engine::new();
 
-engine
-    .register_fn("add", add_len)
-    .register_fn("add_str", add_len_str);
+engine.register_fn("add", add_len)
+      .register_fn("add_str", add_len_str);
 
 let result = engine.eval::<i64>(r#"add(40, "xx")"#)?;
 

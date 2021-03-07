@@ -64,10 +64,9 @@ impl TestStruct {
 let mut engine = Engine::new();
 
 // Most Engine API's can be chained up.
-engine
-    .register_type::<TestStruct>()      // register custom type
-    .register_fn("new_ts", TestStruct::new)
-    .register_fn("update", TestStruct::update);
+engine.register_type::<TestStruct>()    // register custom type
+      .register_fn("new_ts", TestStruct::new)
+      .register_fn("update", TestStruct::update);
 
 // Cast result back to custom type.
 let result = engine.eval::<TestStruct>(
@@ -137,11 +136,10 @@ If `Engine::register_type_with_name` is used to register the custom type
 with a special "pretty-print" name, [`type_of()`] will return that name instead.
 
 ```rust,no_run
-engine
-    .register_type::<TestStruct1>()
-    .register_fn("new_ts1", TestStruct1::new)
-    .register_type_with_name::<TestStruct2>("TestStruct")
-    .register_fn("new_ts2", TestStruct2::new);
+engine.register_type::<TestStruct1>()
+      .register_fn("new_ts1", TestStruct1::new)
+      .register_type_with_name::<TestStruct2>("TestStruct")
+      .register_fn("new_ts2", TestStruct2::new);
 
 let ts1_type = engine.eval::<String>(r#"let x = new_ts1(); x.type_of()"#)?;
 let ts2_type = engine.eval::<String>(r#"let x = new_ts2(); x.type_of()"#)?;
