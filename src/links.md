@@ -63,6 +63,7 @@
 [`parse_int`]: {{rootUrl}}/language/convert.md
 [`parse_float`]: {{rootUrl}}/language/convert.md
 [`parse_decimal`]: {{rootUrl}}/language/convert.md
+[`in`]: {{rootUrl}}/language/in.md
 
 [custom type]: {{rootUrl}}/rust/custom.md
 [custom types]: {{rootUrl}}/rust/custom.md
@@ -88,6 +89,7 @@
 [strings]: {{rootUrl}}/language/strings-chars.md
 [`ImmutableString`]: {{rootUrl}}/language/strings-chars.md
 [character]: {{rootUrl}}/language/strings-chars.md
+[characters]: {{rootUrl}}/language/strings-chars.md
 
 [array]: {{rootUrl}}/language/arrays.md
 [arrays]: {{rootUrl}}/language/arrays.md
