@@ -65,16 +65,16 @@ Non-pure functions, when passed a [constant] value as the first `&mut` parameter
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
-// This method is pure, so 'len' can be used on a constant 'MyType'.
+// This method is pure, so 'len' can be used on a constant 'TestStruct'.
 #[export_fn(pure)]
-pub fn len(my_type: &mut MyType) -> i64 {
+pub fn len(my_type: &mut TestStruct) -> i64 {
     my_type.len()
 }
 
 // This method is not pure, so 'clear' will raise an error
-// when used on a constant 'MyType'.
+// when used on a constant 'TestStruct'.
 #[export_fn]
-pub fn clear(my_type: &mut MyType) {
+pub fn clear(my_type: &mut TestStruct) {
     my_type.clear();
 }
 ```
