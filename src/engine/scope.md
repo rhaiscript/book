@@ -64,13 +64,13 @@ let engine = Engine::new();
 let mut scope = Scope::new();
 
 // Then push (i.e. add) some initialized variables into the state.
-// Remember the system number types in Rhai are i64 (i32 if 'only_i32') ond f64.
+// Remember the system number types in Rhai are i64 (i32 if 'only_i32')
+// and f64 (f32 if 'f32_float').
 // Better stick to them or it gets hard working with the script.
-scope
-    .push("y", 42_i64)
-    .push("z", 999_i64)
-    .push_constant("MY_NUMBER", 123_i64)            // constants can also be added
-    .set_value("s", "hello, world!");               // 'set_value' adds a variable when one doesn't exist
+scope.push("y", 42_i64)
+     .push("z", 999_i64)
+     .push_constant("MY_NUMBER", 123_i64)       // constants can also be added
+     .set_value("s", "hello, world!");          // 'set_value' adds a variable when one doesn't exist
 
 // First invocation
 engine.eval_with_scope::<()>(&mut scope, r"
@@ -81,7 +81,7 @@ engine.eval_with_scope::<()>(&mut scope, r"
 // Second invocation using the same state
 let result = engine.eval_with_scope::<i64>(&mut scope, "x")?;
 
-println!("result: {}", result);                     // prints 1102
+println!("result: {}", result);                 // prints 1102
 
 // Variable y is changed in the script - read it with 'get_value'
 assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 1);
@@ -89,4 +89,44 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 1);
 // We can modify scope variables directly with 'set_value'
 scope.set_value("y", 42_i64);
 assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
+```
+
+
+`Scope` Lifetime &ndash; Avoid Allocations for Variable Names
+-----------------------------------------------------------
+
+The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
+automatically inferred to be `'static`.
+
+The reason for such a lifetime parameter is obviously due to something held inside the `Scope`
+itself being a reference with a lifetime, and that "something" is the name of each [variable] (and
+[constant]) stored within the `Scope`.
+
+Names of [variables] and [constants] are strings, but they do not need to be owned `String` types.
+
+In fact, the names can easily be string slices referencing external data.  This way, no additional
+`String` allocations are needed in order to push a [variable] or [constant] into the `Scope`.
+
+For applications where [variables] and/or [constants] are frequently pushed into and removed from
+a `Scope` in order to run custom scripts, this has significant performance implications.
+
+```rust,no_run
+let mut scope = Scope::new();
+
+scope.push("my_var", 42 as i64);                // &'static str
+
+scope.push(String::from("also_var),             // String
+    123 as i64
+);
+
+// Read a bunch of configuration values from a database
+let items: Vec<_> = script_env.iter()
+                              .map(|id| read_from_db(id))
+                              .collect();
+
+for item in items {
+    // No String allocation for variable name
+    // 'scope' now has lifetime of 'items'
+    scope.push(&item.name, item.value);         // borrowed &str
+}
 ```
