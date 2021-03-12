@@ -39,7 +39,6 @@ The following methods (mostly defined in the [`BasicArrayPackage`][packages] but
 | `+` operator              | 1) first array<br/>2) second array                                                                                                                                           | concatenates the first array with the second                                                                                                                                                                              |
 | `==` operator             | 1) first array<br/>2) second array                                                                                                                                           | are the two arrays the same (elements compared with the `==` operator, if defined)?                                                                                                                                       |
 | `!=` operator             | 1) first array<br/>2) second array                                                                                                                                           | are the two arrays different (elements compared with the `==` operator, if defined)?                                                                                                                                      |
-| `in` operator             | item to find                                                                                                                                                                 | does the array contain the item (compared with the `==` operator, if defined)?                                                                                                                                            |
 | `insert`                  | 1) position, beginning if < 0, end if ≥ length<br/>2) element to insert                                                                                                      | inserts an element at a certain index                                                                                                                                                                                     |
 | `pop`                     | _none_                                                                                                                                                                       | removes the last element and returns it ([`()`] if empty)                                                                                                                                                                 |
 | `shift`                   | _none_                                                                                                                                                                       | removes the first element and returns it ([`()`] if empty)                                                                                                                                                                |
@@ -58,6 +57,8 @@ The following methods (mostly defined in the [`BasicArrayPackage`][packages] but
 | `retain`                  | 1) start position, beginning if < 0, end if ≥ length<br/>2) number of items to retain, none if < 0                                                                           | retains a portion of the array, removes all other items and returning them (not in original order)                                                                                                                        |
 | `splice`                  | 1) start position, beginning if < 0, end if ≥ length<br/>2) number of items to remove, none if < 0<br/>3) array to insert                                                    | replaces a portion of the array with another (not necessarily of the same length as the replaced portion)                                                                                                                 |
 | `filter`                  | [function pointer] to predicate (usually a [closure])                                                                                                                        | constructs a new array with all items that return `true` when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index                                              |
+| `contains`                | element to find                                                                                                                                                              | does the array contain an element? The `==` operator (if defined) is used to compare [custom types]                                                                                                                       |
+| `index_of`                | element to find (not a [function pointers])                                                                                                                                  | returns the index of the first item in the array that equals the supplied element (using the `==` operator, if defined), or -1 if not found                                                                               |
 | `index_of`                | [function pointer] to predicate (usually a [closure])                                                                                                                        | returns the index of the first item in the array that returns `true` when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index              |
 | `map`                     | [function pointer] to conversion function (usually a [closure])                                                                                                              | constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index                                                |
 | `reduce`                  | 1) [function pointer] to accumulator function (usually a [closure])<br/>2) _(optional)_ [function pointer] to function (usually a [closure]) that provides the initial value | reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value ([`()`] initially)<br/>2nd parameter: array item<br/>3rd parameter: _(optional)_ offset index                    |
@@ -72,7 +73,7 @@ Use Custom Types With Arrays
 
 To use a [custom type] with arrays, a number of array functions need to be manually implemented,
 in particular `push`, `insert`, `pad` and the `+=` operator.  In addition, the `==` operator must be
-implemented for the [custom type] in order to support the `in` operator which uses `==` to
+implemented for the [custom type] in order to support the [`in`] operator which uses `==` to
 compare elements.
 
 See the section on [custom types] for more details.
@@ -98,8 +99,12 @@ y[2] == 3;
 y[3] == 4;
 
 (1 in y) == true;           // use 'in' to test if an item exists in the array
-(42 in y) == false;         // 'in' uses the '==' operator (which users can override)
+
+(42 in y) == false;         // 'in' uses the 'contains' function, which uses the
+                            // '==' operator (that users can override)
                             // to check if the target item exists in the array
+
+y.contains(1) == true;      // the above de-sugars to this
 
 y[1] = 42;                  // y == [1, 42, 3, 4]
 
