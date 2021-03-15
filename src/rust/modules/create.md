@@ -34,11 +34,11 @@ use rhai::{Engine, Module};
 
 let mut module = Module::new();             // new module
 
-// Use the 'Module::set_fn_XXX' API to add functions.
-let hash = module.set_fn_1("inc", |x: i64| Ok(x + 1));
+// Use 'Module::set_native_fn' to add functions.
+let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
 
 // Remember to update the parameter names/types and return type metadata.
-// 'Module::set_fn_XXX' by default does not set function metadata.
+// 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
 // Register the module into the global namespace of the Engine.
@@ -72,11 +72,11 @@ use rhai::{Engine, Module};
 
 let mut module = Module::new();             // new module
 
-// Use the 'Module::set_fn_XXX' API to add functions.
-let hash = module.set_fn_1("inc", |x: i64| Ok(x + 1));
+// Use 'Module::set_native_fn' to add functions.
+let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
 
 // Remember to update the parameter names/types and return type metadata.
-// 'Module::set_fn_XXX' by default does not set function metadata.
+// 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
 // Register the module into the Engine as the static module namespace path
@@ -90,9 +90,9 @@ engine.eval::<i64>("services::calc::inc(41)")? == 42;
 
 ### Expose Functions to the Global Namespace
 
-The `Module::set_fn_XXX_mut` API methods can optionally expose functions in the [module]
-to the _global_ namespace by setting the `namespace` parameter to `FnNamespace::Global`,
-so [getters/setters] and [indexers] for [custom types] can work as expected.
+The [`Module`] API can optionally expose functions to the _global_ namespace by setting the
+`namespace` parameter  to `FnNamespace::Global`, so [getters/setters] and [indexers] for [custom types]
+can work as expected.
 
 [Type iterators], because of their special nature, are _always_ exposed to the _global_ namespace.
 
@@ -102,10 +102,11 @@ use rhai::{Engine, Module, FnNamespace};
 let mut module = Module::new();             // new module
 
 // Expose method 'inc' to the global namespace (default is 'FnNamespace::Internal')
-let hash = module.set_fn_1_mut("inc", FnNamespace::Global, |x: &mut i64| Ok(x + 1));
+let hash = module.set_native_fn("inc", |x: &mut i64| Ok(x + 1));
+module.update_fn_namespace(hash, FnNamespace::Global);
 
 // Remember to update the parameter names/types and return type metadata.
-// 'Module::set_fn_XXX_mut' by default does not set function metadata.
+// 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: &mut i64", "i64"]);
 
 // Register the module into the Engine as a static module namespace 'calc'
@@ -137,7 +138,9 @@ use rhai::module_resolvers::StaticModuleResolver;
 
 let mut module = Module::new();             // new module
 module.set_var("answer", 41_i64);           // variable 'answer' under module
-module.set_fn_1("inc", |x: i64| Ok(x + 1)); // use the 'set_fn_XXX' API to add functions
+module.set_native_fn("inc", |x: i64| {      // use 'Module::set_native_fn' to add functions
+    Ok(x + 1)
+});
 
 // Create the module resolver
 let mut resolver = StaticModuleResolver::new();
