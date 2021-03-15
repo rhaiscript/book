@@ -159,7 +159,7 @@ engine.register_raw_fn(
 
         // Use 'FnPtr::call_dynamic' to call the function pointer.
         // Beware, private script-defined functions will not be found.
-        fp.call_dynamic(context, Some(this_ptr), [value])
+        fp.call_dynamic(&context, Some(this_ptr), [value])
     },
 );
 

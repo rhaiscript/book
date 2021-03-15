@@ -204,7 +204,7 @@ fn call_fn_ptr_with_value(context: NativeCallContext, args: &mut [&mut Dynamic])
 
     // Use 'FnPtr::call_dynamic' to call the function pointer.
     // Beware, private script-defined functions will not be found.
-    fp.call_dynamic(context, Some(this_ptr), [value])
+    fp.call_dynamic(&context, Some(this_ptr), [value])
 }
 
 // Register a Rust function using the low-level API
@@ -266,7 +266,7 @@ let fn_name = fn_ptr.fn_name().to_string();
 let context = NativeCallContext::new(&engine, &fn_name, &lib);
 
 // 'f' captures: the engine, the AST, and the closure
-let f = move |x: i64| fn_ptr.call_dynamic(context, None, [x.into()]);
+let f = move |x: i64| fn_ptr.call_dynamic(&context, None, [x.into()]);
 
 // 'f' can be called like a normal function
 let result = f(42)?;

@@ -443,7 +443,7 @@ mod my_module {
     {
         // Call the callback closure with the current context
         // to obtain the name to greet!
-        let name = callback.call_dynamic(context, None, [])?;
+        let name = callback.call_dynamic(&context, None, [])?;
         Ok(format!("hello, {}!", name).into())
     }
 }
