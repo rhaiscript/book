@@ -25,7 +25,7 @@ Example
 -------
 
 ```rust,no_run
-use rhai::{Engine, RegisterFn};
+use rhai::{Engine};
 
 fn main() {
     // Channel: Script -> Master

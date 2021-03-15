@@ -11,7 +11,7 @@ but Rhai does support _function overloading_.
 ```rust,no_run
 use std::fmt::Display;
 
-use rhai::{Engine, RegisterFn};
+use rhai::Engine;
 
 fn show_it<T: Display>(x: &mut T) {
     println!("put up a good show: {}!", x)

@@ -44,7 +44,6 @@ for the type via the `Engine::register_XXX` methods.
 
 ```rust,no_run
 use rhai::{Engine, EvalAltResult};
-use rhai::RegisterFn;                   // remember 'RegisterFn' is needed
 
 #[derive(Clone)]
 struct TestStruct {

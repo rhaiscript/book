@@ -6,13 +6,10 @@ Register a Rust Function
 Rhai's scripting engine is very lightweight.  It gets most of its abilities from functions.
 
 To call these functions, they need to be _registered_ with the [`Engine`] using `Engine::register_fn`
-(in the `RegisterFn` trait) and `Engine::register_result_fn` (in the `RegisterResultFn` trait,
-see [fallible functions]).
+and `Engine::register_result_fn` (see [fallible functions]).
 
 ```rust,no_run
 use rhai::{Dynamic, Engine, EvalAltResult, ImmutableString};
-use rhai::RegisterFn;                       // use 'RegisterFn' trait for 'register_fn'
-use rhai::RegisterResultFn;                 // use 'RegisterResultFn' trait for 'register_result_fn'
 
 // Normal function that returns a standard type
 // Remember to use 'ImmutableString' and not 'String'

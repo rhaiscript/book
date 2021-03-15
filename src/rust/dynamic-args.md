@@ -28,7 +28,7 @@ from the left to the right. Candidate functions will be matched in order of para
 Therefore, always leave [`Dynamic`] parameters as far to the right as possible.
 
 ```rust,no_run
-use rhai::{Engine, RegisterFn, Dynamic};
+use rhai::{Engine, Dynamic};
 
 // Different versions of the same function 'foo'
 // will be matched in the following order.

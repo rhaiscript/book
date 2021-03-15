@@ -36,7 +36,7 @@ When a custom operator function is registered with the same name as an operator,
 built-in version.
 
 ```rust,no_run
-use rhai::{Engine, EvalAltResult, RegisterFn};
+use rhai::{Engine, EvalAltResult};
 
 let mut engine = Engine::new();
 

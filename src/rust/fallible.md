@@ -3,14 +3,13 @@ Register a Fallible Rust Function
 
 {{#include ../links.md}}
 
-If a function is _fallible_ (i.e. it returns a `Result<_, Error>`), it can be registered with `register_result_fn`
-(using the `RegisterResultFn` trait).
+If a function is _fallible_ (i.e. it returns a `Result<_, _>`),
+it can be registered with `Engine::register_result_fn`.
 
 The function must return `Result<Dynamic, Box<EvalAltResult>>`.
 
 ```rust,no_run
 use rhai::{Engine, EvalAltResult, Position};
-use rhai::RegisterResultFn;                     // use 'RegisterResultFn' trait for 'register_result_fn'
 
 // Function that may fail - the result type must be 'Dynamic'
 fn safe_divide(x: i64, y: i64) -> Result<Dynamic, Box<EvalAltResult>> {

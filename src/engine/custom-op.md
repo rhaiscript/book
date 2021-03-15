@@ -14,7 +14,7 @@ Example
 -------
 
 ```rust,no_run
-use rhai::{Engine, RegisterFn};
+use rhai::Engine;
 
 let mut engine = Engine::new();
 

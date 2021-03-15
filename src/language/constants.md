@@ -34,7 +34,7 @@ It is very useful to have a constant value hold a [custom type], which essential
 as a [_singleton_](../patterns/singleton.md).
 
 ```rust,no_run
-use rhai::{Engine, Scope, RegisterFn};
+use rhai::{Engine, Scope};
 
 #[derive(Debug, Clone)]
 struct TestStruct(i64);                                     // custom type
