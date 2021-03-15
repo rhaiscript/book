@@ -186,7 +186,7 @@ must be used to register the function.
 
 Essentially, use the low-level `Engine::register_raw_fn` method to register the function.
 `FnPtr::call_dynamic` is used to actually call the function pointer, passing to it the
-current _native call context_, the `this` pointer, and other necessary arguments.
+current [_native call context_][`NativeCallContext`], the `this` pointer, and other necessary arguments.
 
 ```rust,no_run
 use rhai::{Engine, Module, Dynamic, FnPtr, NativeCallContext};
@@ -222,7 +222,7 @@ engine.register_raw_fn("super_call",
 `NativeCallContext`
 ------------------
 
-`FnPtr::call_dynamic` takes a parameter of type `NativeCallContext` which holds the _native call context_
+`FnPtr::call_dynamic` takes a parameter of type [`NativeCallContext`] which holds the _native call context_
 of the particular call to a registered Rust function. It is a type that exposes the following:
 
 | Method                  |                  Type                   | Description                                                                                                                                                                                                                                |

@@ -71,6 +71,7 @@
 [indexers]: {{rootUrl}}/rust/indexers.md
 [type iterator]: {{rootUrl}}/language/iterator.md
 [type iterators]: {{rootUrl}}/language/iterator.md
+[`NativeCallContext`]: {{rootUrl}}/rust/context.md
 
 [`instant::Instant`]: https://crates.io/crates/instant
 

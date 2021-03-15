@@ -35,6 +35,7 @@ The Rhai Scripting Language
       2. [String Parameters](rust/strings.md)
       3. [Generic Functions](rust/generic.md)
       4. [Fallible Functions](rust/fallible.md)
+      5. [`NativeCallContext`](rust/context.md)
    3. [Call a Rhai Function from Rust](engine/call-fn.md)
       1. [Create a Rust Closure from a Rhai Function](engine/func.md)
    4. [Override a Built-in Function](rust/override.md)

@@ -20,16 +20,16 @@ fn add_len(x: i64, s: ImmutableString) -> i64 {
 fn add_len_str(x: i64, s: &str) -> i64 {
     x + s.len()
 }
-
-// Function that returns a 'Dynamic' value - must return a 'Result'
-fn get_any_value() -> Result<Dynamic, Box<EvalAltResult>> {
+// Function that returns a 'Dynamic' value
+fn get_any_value() -> Dynamic {
     Ok((42_i64).into())                     // standard types can use 'into()'
 }
 
 let mut engine = Engine::new();
 
 engine.register_fn("add", add_len)
-      .register_fn("add_str", add_len_str);
+      .register_fn("add_str", add_len_str)
+      .register_fn("get_any_value", get_any_value);
 
 let result = engine.eval::<i64>(r#"add(40, "xx")"#)?;
 
@@ -38,9 +38,6 @@ println!("Answer: {}", result);             // prints 42
 let result = engine.eval::<i64>(r#"add_str(40, "xx")"#)?;
 
 println!("Answer: {}", result);             // prints 42
-
-// Functions that return Dynamic values must use register_result_fn()
-engine.register_result_fn("get_any_value", get_any_value);
 
 let result = engine.eval::<i64>("get_any_value()")?;
 

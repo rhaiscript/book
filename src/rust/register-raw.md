@@ -18,9 +18,9 @@ The `Engine::register_raw_fn` method is marked _volatile_, meaning that it may b
 
 If this is acceptable, then using this method to register a Rust function opens up more opportunities.
 
-In particular, a the current _native call context_ (in form of the `NativeCallContext` type) is passed as an argument.
-`NativeCallContext` exposes the current [`Engine`], among others, so the Rust function can also use [`Engine`] facilities
-(such as evaluating a script).
+The function signature includes the current [_native call context_][`NativeCallContext`] which
+exposes the current [`Engine`], among others, so the Rust function can recursively call methods on
+the same [`Engine`].
 
 ```rust,no_run
 engine.register_raw_fn(
@@ -67,19 +67,11 @@ The function signature passed to `Engine::register_raw_fn` takes the following f
 
 where:
 
-| Parameter                      |                  Type                   | Description                                                                                                                                                                                                                                |
-| ------------------------------ | :-------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `T`                            |              `impl Clone`               | return type of the function                                                                                                                                                                                                                |
-| `context`                      |           `NativeCallContext`           | the current _native call context_                                                                                                                                                                                                          |
-| &bull; `engine()`              |                `&Engine`                | the current [`Engine`], with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using [`Engine::call_fn`][`call_fn`], or calling a [function pointer]. |
-| &bull; `fn_name()`             |                 `&str`                  | name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)                                                                                                                        |
-| &bull; `source()`              |             `Option<&str>`              | reference to the current source, if any                                                                                                                                                                                                    |
-| &bull; `iter_imports()`        | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                                                                                                                |
-| &bull; `imports()`             |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                                                                                                           |
-| &bull; `iter_namespaces()`     |     `impl Iterator<Item = &Module>`     | iterator of the namespaces (as [modules]) containing all script-defined functions                                                                                                                                                          |
-| &bull; `namespaces()`          |              `&[&Module]`               | reference to the namespaces (as [modules]) containing all script-defined functions; requires the [`internals`] feature                                                                                                                     |
-| &bull; `call_fn_dynamic_raw()` |  `Result<Dynamic, Box<EvalAltResult>>`  | call a native Rust function with the supplied arguments; this is an advanced method                                                                                                                                                        |
-| `args`                         |          `&mut [&mut Dynamic]`          | a slice containing `&mut` references to [`Dynamic`] values.<br/>The slice is guaranteed to contain enough arguments _of the correct types_.                                                                                                |
+| Parameter |         Type          | Description                                                                                                                                 |
+| --------- | :-------------------: | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `T`       |     `impl Clone`      | return type of the function                                                                                                                 |
+| `context` | [`NativeCallContext`] | the current _native call context_                                                                                                           |
+| `args`    | `&mut [&mut Dynamic]` | a slice containing `&mut` references to [`Dynamic`] values.<br/>The slice is guaranteed to contain enough arguments _of the correct types_. |
 
 ### Return value
 
