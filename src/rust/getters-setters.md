@@ -14,7 +14,7 @@ Getters and setters are disabled when the [`no_object`] feature is used.
 | `register_get`        | `Fn(&mut T) -> V`                                                                |      yes, but not advised      |
 | `register_set`        | `Fn(&mut T, V)`                                                                  |              yes               |
 | `register_get_set`    | getter: `Fn(&mut T) -> V`</br>setter: `Fn(&mut T, V)`                            | yes, but not advised in getter |
-| `register_get_result` | `Fn(&mut T) -> Result<Dynamic, Box<EvalAltResult>>`                              |      yes, but not advised      |
+| `register_get_result` | `Fn(&mut T) -> Result<V, Box<EvalAltResult>>`                                    |      yes, but not advised      |
 | `register_set_result` | `Fn(&mut T, V) -> Result<(), Box<EvalAltResult>>`                                |              yes               |
 
 By convention, property getters are not supposed to mutate the [custom type], although there is nothing

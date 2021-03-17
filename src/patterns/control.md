@@ -118,7 +118,7 @@ engine.register_result_fn("bunny_set_speed", move |speed: i64|
         return Err("Bunny is not yet going!".into());
     }
 
-    Ok(Dynamic::UNIT)
+    Ok(())
 );
 ```
 

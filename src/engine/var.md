@@ -18,7 +18,7 @@ let mut engine = Engine::new();
 // Register a variable resolver.
 engine.on_var(|name, index, context| {
     match name {
-        "MYSTIC_NUMBER" => Ok(Some((42 as INT).into())),
+        "MYSTIC_NUMBER" => Ok(Some(42_i64.into())),
         // Override a variable - make it not found even if it exists!
         "DO_NOT_USE" => Err(Box::new(
             EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE)

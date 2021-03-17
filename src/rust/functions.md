@@ -22,7 +22,7 @@ fn add_len_str(x: i64, s: &str) -> i64 {
 }
 // Function that returns a 'Dynamic' value
 fn get_any_value() -> Dynamic {
-    Ok((42_i64).into())                     // standard types can use 'into()'
+    Ok(42_i64.into())                   // standard types can use '.into()'
 }
 
 let mut engine = Engine::new();
@@ -33,15 +33,15 @@ engine.register_fn("add", add_len)
 
 let result = engine.eval::<i64>(r#"add(40, "xx")"#)?;
 
-println!("Answer: {}", result);             // prints 42
+println!("Answer: {}", result);         // prints 42
 
 let result = engine.eval::<i64>(r#"add_str(40, "xx")"#)?;
 
-println!("Answer: {}", result);             // prints 42
+println!("Answer: {}", result);         // prints 42
 
 let result = engine.eval::<i64>("get_any_value()")?;
 
-println!("Answer: {}", result);             // prints 42
+println!("Answer: {}", result);         // prints 42
 ```
 
 To create a [`Dynamic`] value, use the `Dynamic::from` method.
@@ -50,9 +50,11 @@ To create a [`Dynamic`] value, use the `Dynamic::from` method.
 ```rust,no_run
 use rhai::Dynamic;
 
-let x = (42_i64).into();                        // 'into()' works for standard types
+let x = 42_i64.into();                  // '.into()' works for standard types
 
-let y = Dynamic::from("hello!".to_string());    // remember &str is not supported by Rhai
+let y = "hello!".into();
+
+let x = Dynamic::from(TestStruct::new());
 ```
 
 
