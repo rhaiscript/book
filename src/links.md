@@ -29,7 +29,6 @@
 
 [`Engine`]: {{rootUrl}}/engine/hello-world.md
 [traits]: {{rootUrl}}/rust/traits.md
-[`private`]: {{rootUrl}}/engine/call-fn.md
 [`call_fn`]: {{rootUrl}}/engine/call-fn.md
 [`Func`]: {{rootUrl}}/engine/func.md
 [`AST`]: {{rootUrl}}/engine/compile.md
@@ -131,6 +130,7 @@
 [modules]: {{rootUrl}}/rust/modules/index.md
 [module resolver]: {{rootUrl}}/rust/modules/resolvers.md
 [variable resolver]: {{rootUrl}}/engine/var.md
+[`private`]: {{rootUrl}}/language/modules/export.md
 [`export`]: {{rootUrl}}/language/modules/export.md
 [`import`]: {{rootUrl}}/language/modules/import.md
 
