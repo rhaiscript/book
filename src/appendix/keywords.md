@@ -44,34 +44,36 @@ Keywords List
 Reserved Keywords
 -----------------
 
-| Keyword   | Potential usage       |
-| --------- | --------------------- |
-| `var`     | variable declaration  |
-| `static`  | variable declaration  |
-| `begin`   | block scope           |
-| `end`     | block scope           |
-| `shared`  | share value           |
-| `each`    | looping               |
-| `then`    | control flow          |
-| `goto`    | control flow          |
-| `exit`    | control flow          |
-| `unless`  | control flow          |
-| `match`   | matching              |
-| `case`    | matching              |
-| `public`  | function/field access |
-| `new`     | constructor           |
-| `use`     | import namespace      |
-| `with`    | scope                 |
-| `module`  | module                |
-| `package` | package               |
-| `thread`  | threading             |
-| `spawn`   | threading             |
-| `go`      | threading             |
-| `await`   | async                 |
-| `async`   | async                 |
-| `sync`    | async                 |
-| `yield`   | async                 |
-| `default` | special value         |
-| `void`    | special value         |
-| `null`    | special value         |
-| `nil`     | special value         |
+| Keyword     | Potential usage       |
+| ----------- | --------------------- |
+| `var`       | variable declaration  |
+| `static`    | variable declaration  |
+| `begin`     | block scope           |
+| `end`       | block scope           |
+| `shared`    | share value           |
+| `each`      | looping               |
+| `then`      | control flow          |
+| `goto`      | control flow          |
+| `exit`      | control flow          |
+| `unless`    | control flow          |
+| `match`     | matching              |
+| `case`      | matching              |
+| `public`    | function/field access |
+| `protected` | function/field access |
+| `new`       | constructor           |
+| `use`       | import namespace      |
+| `with`      | scope                 |
+| `module`    | module                |
+| `package`   | package               |
+| `super`     | base class/module     |
+| `thread`    | threading             |
+| `spawn`     | threading             |
+| `go`        | threading             |
+| `await`     | async                 |
+| `async`     | async                 |
+| `sync`      | async                 |
+| `yield`     | async                 |
+| `default`   | special value         |
+| `void`      | special value         |
+| `null`      | special value         |
+| `nil`       | special value         |
