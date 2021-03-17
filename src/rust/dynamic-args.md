@@ -9,10 +9,12 @@ Any clonable value can be set into a [`Dynamic`] value.
 Any parameter in a registered Rust function with a specific type has higher precedence over the
 [`Dynamic`] type, so it is important to understand which _version_ of a function will be used.
 
-For example, the `push` method of an [array] is implemented this way, which makes the function
-applicable for all item types:
+For example, the `push` method of an [array] is implemented this way (minus code that protects
+against [over-sized arrays][maximum size of arrays]), which makes the function applicable for all
+item types:
 
 ```rust,no_run
+// 'item: Dynamic' matches all data types
 fn push(array: &mut Array, item: Dynamic) {
     array.push(item);
 }
@@ -51,8 +53,8 @@ fn foo8(x: Dynamic, y: Dynamic, z: Dynamic) { }
 
 let mut engine = Engine::new();
 
-// Register all functions under the same name
-// (the order does not matter)
+// Register all functions under the same name (order does not matter)
+
 engine.register_fn("foo", foo8)
       .register_fn("foo", foo7)
       .register_fn("foo", foo6)
@@ -70,14 +72,15 @@ Warning: Only the Right-Most 16 Parameters Can Be `Dynamic`
 The number of parameter permutations go up exponentially, and therefore there is a realistic limit
 of 16 parameters, counting from the _right-most side_, allowed to be [`Dynamic`].
 
-For example, Rhai will not find the following function (why you'd want to define one like this is
-beyond understanding):
+For example, Rhai will not find the following function &ndash; Oh! and those 16 parameters to the right
+certainly have nothing to do with it!
 
 ```rust,no_run
-fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64, x5: i64,
-                             x6: i64, x7: i64, x8: i64, x9: i64, x10: i64,
-                             x11: i64, x12: i64, x13: i64, x14: i64,
-                             x15: i64, x16: i64) {
+// The 'd' parameter counts 17th from the right!
+fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
+                             x5: i64, x6: i64, x7: i64, x8: i64,
+                             x9: i64, x10: i64, x11: i64, x12: i64,
+                             x13: i64, x14: i64, x15: i64, x16: i64) {
 
     // ... do some unspeakably evil things with all those parameters ...
 }

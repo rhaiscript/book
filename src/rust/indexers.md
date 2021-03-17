@@ -42,7 +42,7 @@ Examples
 --------
 
 ```rust,no_run
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 struct TestStruct {
     fields: Vec<i64>
 }
@@ -69,13 +69,11 @@ engine.register_type::<TestStruct>()
       .register_indexer_get(TestStruct::get_field)
       .register_indexer_set(TestStruct::set_field);
 
-let result = engine.eval::<i64>(
-                r#"
-                    let a = new_ts();
-                    a["xyz"] = 42;                  // these indexers use strings
-                    a["xyz"]                        // as the index type
-                "#
-)?;
+let result = engine.eval::<i64>(r#"
+                let a = new_ts();
+                a["xyz"] = 42;          // these indexers use strings
+                a["xyz"]                // as the index type
+             "#)?;
 
-println!("Answer: {}", result);                     // prints 42
+println!("Answer: {}", result);         // prints 42
 ```

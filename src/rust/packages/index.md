@@ -12,9 +12,8 @@ must be loaded in order for packages to be used.
 
 ### Packages _are_ Modules
 
-Internally, a _package_ is a _newtype_ wrapping a pre-defined [module],
-with some conveniences to make it easier to define and use as a standard
-_library_ for an [`Engine`].
+Internally, a _package_ is a [module], with some conveniences to make it easier to define and use as
+a standard _library_ for an [`Engine`].
 
 Packages typically contain Rust functions that are callable within a Rhai script.
 All _top-level_ functions in a package are available under the _global namespace_
@@ -29,11 +28,11 @@ Share a Package Among Multiple `Engine`'s
 `Engine::register_global_module` and `Engine::register_static_module` both require _shared_ [modules].
 
 Once a package is created (e.g. via `Package::new`), it can create _shared_ [modules]
-(via `Package::as_shared_module`) and register them into multiple instances of [`Engine`],
+(via `Package::as_shared_module`) and register into multiple instances of [`Engine`],
 even across threads (under the [`sync`] feature).
 
 Therefore, a package only has to be created _once_ and essentially shared among multiple
-[`Engine`] instances.  This is particular useful when spawning large number of [raw `Engine`'s][raw `Engine`].
+[`Engine`] instances.  This is particularly useful when spawning large number of [raw `Engine`'s][raw `Engine`].
 
 ```rust,no_run
 use rhai::Engine;

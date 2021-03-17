@@ -45,7 +45,7 @@ println!("Answer: {}", result);         // prints 42
 ```
 
 To create a [`Dynamic`] value, use the `Dynamic::from` method.
-[Standard types] in Rhai can also use `into()`.
+[Standard types] in Rhai can also use `.into()`.
 
 ```rust,no_run
 use rhai::Dynamic;

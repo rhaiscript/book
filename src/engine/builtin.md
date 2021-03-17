@@ -15,7 +15,7 @@ even when using a [raw `Engine`].
 | `&&`, <code>\|\|</code>   |                               | &bull; `bool` (short-circuits)                                                                                                                                                                       |
 | `==`, `!=`                |                               | &bull; `INT`<br/>&bull; `FLOAT` (if not [`no_float`])<br/>&bull; [`Decimal`][rust_decimal] (requires [`decimal`])<br/>&bull; `bool`<br/>&bull; `char`<br/>&bull; [`ImmutableString`]<br/>&bull; `()` |
 | `>`, `>=`, `<`, `<=`      |                               | &bull; `INT`<br/>&bull; `FLOAT` (if not [`no_float`])<br/>&bull; [`Decimal`][rust_decimal] (requires [`decimal`])<br/>&bull; `char`<br/>&bull; [`ImmutableString`]<br/>&bull; `()`                   |
-| `contains`                |                               | &bull; [`ImmutableString`], `char`/[`ImmutableString`]<br/>&bull; [object map], [`ImmutableString`]                                                                                                  |
+| `contains`                |                               | &bull; [`ImmutableString`]<br/>&bull; `char`/[`ImmutableString`]<br/>&bull; [`ImmutableString`]/[object map]                                                                                         |
 
 All built-in operators are binary, and are supported for both operands of the same type.
 

@@ -58,5 +58,8 @@ Support for [closures] that capture shared variables adds material overhead to s
 This is because every data access must be checked whether it is a shared value and, if so, take a read
 lock before reading it.
 
+As the vast majority of variables are _not_ shared, needless to say this is a non-trivial
+performance overhead.
+
 Use [`no_closure`] to disable closure and capturing support to optimize the hot path
 because there is no need to take locks for shared data.

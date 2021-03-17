@@ -29,16 +29,17 @@ they even cannot be added together. This is very similar to Rust.
 The default integer type is `i64`. If other integer types are not needed, it is possible to exclude them and make a
 smaller build with the [`only_i64`] feature.
 
-If only 32-bit integers are needed, enabling the [`only_i32`] feature will remove support for all integer types other than `i32`, including `i64`.
+If only 32-bit integers are needed, enabling the [`only_i32`] feature will remove support for all
+integer types other than `i32`, including `i64`.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.
 
 If no floating-point is needed or supported, use the [`no_float`] feature to remove it.
 
 Some applications require fixed-precision decimal numbers, which can be enabled via the [`decimal`] feature.
 
-[Strings] in Rhai are _immutable_, meaning that they can be shared but not modified.  In actual, the [`ImmutableString`] type
-is an alias to `Rc<String>` or `Arc<String>` (depending on the [`sync`] feature).
-Any modification done to a Rhai string will cause the string to be cloned and the modifications made to the copy.
+[Strings] in Rhai are _immutable_, meaning that they can be shared but not modified.
+Internally, the [`ImmutableString`] type is a wrapper over `Rc<String>` or `Arc<String>` (depending on [`sync`]).
+Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.
 
 The `to_string` function converts a standard type into a [string] for display purposes.
 

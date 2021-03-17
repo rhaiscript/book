@@ -44,28 +44,24 @@ fn main() {
               .register_fn("put", move |v: i64| tx_script.send(v).unwrap());
 
         // Run script
-        engine
-            .consume(
-                r#"
-                    print("Starting script loop...");
+        engine.consume(r#"
+            print("Starting script loop...");
 
-                    loop {
-                        // The following call blocks until there is data
-                        // in the channel
-                        let x = get();
-                        print("Script Read: " + x);
+            loop {
+                // The following call blocks until there is data
+                // in the channel
+                let x = get();
+                print("Script Read: " + x);
 
-                        x += 1;
+                x += 1;
 
-                        print("Script Write: " + x);
+                print("Script Write: " + x);
 
-                        // The following call blocks until the data
-                        // is successfully sent to the channel
-                        put(x);
-                    }
-                "#,
-            )
-            .unwrap();
+                // The following call blocks until the data
+                // is successfully sent to the channel
+                put(x);
+            }
+        "#).unwrap();
     });
 
     // This is the main processing thread

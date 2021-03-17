@@ -45,7 +45,7 @@ for the type via the `Engine::register_XXX` methods.
 ```rust,no_run
 use rhai::{Engine, EvalAltResult};
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 struct TestStruct {
     field: i64
 }
@@ -68,13 +68,11 @@ engine.register_type::<TestStruct>()    // register custom type
       .register_fn("update", TestStruct::update);
 
 // Cast result back to custom type.
-let result = engine.eval::<TestStruct>(
-    r"
-        let x = new_ts();               // calls 'TestStruct::new'
-        x.update(41);                   // calls 'TestStruct::update'
-        x                               // 'x' holds a 'TestStruct'
-    "
-)?;
+let result = engine.eval::<TestStruct>(r"
+                let x = new_ts();       // calls 'TestStruct::new'
+                x.update(41);           // calls 'TestStruct::update'
+                x                       // 'x' holds a 'TestStruct'
+             ")?;
 
 println!("result: {}", result.field);   // prints 42
 ```

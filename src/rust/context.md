@@ -27,13 +27,13 @@ Implement Safety Checks with `NativeCallContext`
 The native call context is useful for protecting a function from malicious scripts.
 
 ```rust,no_run
-use rhai::{Dynamic, Array, NativeCallContext, EvalAltResult, Position};
+use rhai::{Array, NativeCallContext, EvalAltResult, Position};
 
 // This function builds an array of arbitrary size, but is protected
 // against attacks by first checking with the allowed limit set
 // into the 'Engine'.
 pub fn grow(context: NativeCallContext, size: i64)
-                            -> Result<Dynamic, Box<EvalAltResult>>
+                            -> Result<Array, Box<EvalAltResult>>
 {
     // Make sure the function does not generate a
     // data structure larger than the allowed limit
@@ -54,7 +54,7 @@ pub fn grow(context: NativeCallContext, size: i64)
         array.push(x.into());
     }
 
-    OK(array.into())
+    OK(array)
 }
 ```
 

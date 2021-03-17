@@ -8,23 +8,22 @@ from Rust via `Engine::call_fn`.
 
 ```rust,no_run
 // Define functions in a script.
-let ast = engine.compile(true,
-    r#"
-        // a function with two parameters: string and i64
-        fn hello(x, y) {
-            x.len + y
-        }
+let ast = engine.compile(r#"
+    // a function with two parameters: string and i64
+    fn hello(x, y) {
+        x.len + y
+    }
 
-        // functions can be overloaded: this one takes only one parameter
-        fn hello(x) {
-            x * 2
-        }
+    // functions can be overloaded: this one takes only one parameter
+    fn hello(x) {
+        x * 2
+    }
 
-        // this one takes no parameters
-        fn hello() {
-            42
-        }
-    "#)?;
+    // this one takes no parameters
+    fn hello() {
+        42
+    }
+"#)?;
 
 // A custom scope can also contain any variables/constants available to the functions
 let mut scope = Scope::new();

@@ -10,8 +10,6 @@ In Rhai, it is trivial to construct _infinite loops_, or scripts that run for a 
 loop { ... }                        // infinite loop
 
 while 1 < 2 { ... }                 // loop with always-true condition
-
-for x in range(0, 1, -1) { ... }    // iteration that never ends (until overflow)
 ```
 
 
