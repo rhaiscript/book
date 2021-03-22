@@ -86,7 +86,7 @@ For its evaluation, the callback function will receive the following list of inp
 * `inputs[1] = "price"` - field name
 * `inputs[2] = "row"` - loop variable name
 * `inputs[3] = Expression(table)` - data source
-* `inputs[4] = Expression(row.wright > 50)` - filter predicate
+* `inputs[4] = Expression(row.weight > 50)` - filter predicate
 
 Other identifiers, such as `"calculate"`, `"FROM"`, as well as symbols such as `->` and `:` etc.,
 are parsed in the order defined within the custom syntax.

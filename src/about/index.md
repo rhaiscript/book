@@ -38,7 +38,7 @@ logically the `C` was changed to an `R` to make it "RhaiScript", or just "Rhai".
 
 ### On the origin of the semi-official Rhai logo
 
-One of Rhai's maintainers, [Stephen Chung](https://github.com/schungx), was thinking about a logo
+One of Rhai's maintainers, [`@schungx`](https://github.com/schungx), was thinking about a logo
 when he accidentally came across a copy of _Catcher in the Rye_ in a restaurant, and drew the first
 version of the logo.
 

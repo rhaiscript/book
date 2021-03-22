@@ -138,7 +138,7 @@ map[func].call(42);
 
 
 Bind the `this` Pointer
-----------------------
+-----------------------
 
 When `call` is called as a _method_ but not on a function pointer, it is possible to dynamically dispatch
 to a function call while binding the object in the method call to the `this` pointer of the function.
@@ -200,10 +200,9 @@ fn call_fn_ptr_with_value(context: NativeCallContext, args: &mut [&mut Dynamic])
     // 'args' is guaranteed to contain enough arguments of the correct types
     let fp = std::mem::take(args[1]).cast::<FnPtr>();   // 2nd argument - function pointer
     let value = args[2].clone();                        // 3rd argument - function argument
-    let this_ptr = args.get_mut(0).unwrap();            // 1st argument - this pointer
+    let this_ptr = args.get_mut(0).unwrap();            // 1st argument - 'this' pointer
 
     // Use 'FnPtr::call_dynamic' to call the function pointer.
-    // Beware, private script-defined functions will not be found.
     fp.call_dynamic(&context, Some(this_ptr), [value])
 }
 
@@ -245,12 +244,10 @@ use rhai::{Engine, FnPtr, NativeCallContext};
 let engine = Engine::new();
 
 // Compile script to AST
-let mut ast = engine.compile(
-    r#"
-        let test = "hello";
-        |x| test + x            // this creates an closure
-    "#,
-)?;
+let mut ast = engine.compile(r#"
+    let test = "hello";
+    |x| test + x            // this creates a closure
+"#)?;
 
 // Save the closure together with captured variables
 let fn_ptr = engine.eval_ast::<FnPtr>(&ast)?;
