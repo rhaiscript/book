@@ -9,24 +9,24 @@ Convert Between Integer and Floating-Point
 
 The `to_float` function converts a supported number to `FLOAT` (defaults to `f64`).
 
-The `to_int` function converts a supported value to `INT` (`i32` or `i64` depending on [`only_i32`]).
+The `to_int` function converts a supported number to `INT` (`i32` or `i64` depending on [`only_i32`]).
 
-The `to_decimal` function converts an integer to [`Decimal`][rust_decimal] (requires [`decimal`]).
-Converting from floating-point numbers to [`Decimal`][rust_decimal] is not supported due to the
-possibility of rounding errors.
+The `to_decimal` function converts a supported number to [`Decimal`][rust_decimal] (requires [`decimal`]).
 
 That's it; for other conversions, register custom conversion functions.
 
 ```rust,no_run
 let x = 42;                     // 'x' is an integer
 
-let y = x * 100.0;              // works: floating-point and integer can inter-operate
+let y = x * 100.0;              // integer and floating-point can inter-operate
 
-let y = x.to_float() * 100.0;   // works
+let y = x.to_float() * 100.0;   // convert integer to floating-point with 'to_float'
 
-let z = y.to_int() + x;         // works
+let z = y.to_int() + x;         // convert floating-point to integer with 'to_int'
 
-let w = z.to_decimal() + x;     // works: Decimal and integer can inter-operate
+let d = y.to_decimal();         // convert floating-point to Decimal with 'to_decimal'
+
+let w = z.to_decimal() + x;     // Decimal and integer can inter-operate
 
 let c = 'X';                    // character
 
