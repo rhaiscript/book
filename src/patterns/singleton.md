@@ -121,7 +121,7 @@ pub mod bunny_api {
     }
     #[rhai_fn(set = "speed", return_raw)]
     pub fn set_speed(bunny: &mut SharedBunny, speed: i64)
-            -> Result<Dynamic, Box<EvalAltResult>>
+            -> Result<(), Box<EvalAltResult>>
     {
         if speed <= 0 {
             Err("Speed must be positive!".into())
@@ -131,7 +131,7 @@ pub mod bunny_api {
             Err("Bunny is not yet going!".into())
         } else {
             b.borrow_mut().set_speed(speed);
-            Ok(Dynamic::UNIT)
+            Ok(())
         }
     }
     pub fn turn_left(bunny: &mut SharedBunny) {

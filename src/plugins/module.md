@@ -381,7 +381,8 @@ Fallible Functions
 ------------------
 
 To register [fallible functions] (i.e. functions that may return errors), apply the
-`#[rhai_fn(return_raw)]` attribute on functions that return `Result<Dynamic, Box<EvalAltResult>>`.
+`#[rhai_fn(return_raw)]` attribute on functions that return `Result<T, Box<EvalAltResult>>`
+where `T` is any clonable type.
 
 A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not
 have the appropriate return type.
@@ -393,12 +394,11 @@ use rhai::plugin::*;        // a "prelude" import for macros
 mod my_module {
     // This overloads the '/' operator for i64.
     #[rhai_fn(name = "/", return_raw)]
-    pub fn double_and_divide(x: i64, y: i64) -> Result<Dynamic, Box<EvalAltResult>> {
+    pub fn double_and_divide(x: i64, y: i64) -> Result<i64, Box<EvalAltResult>> {
         if y == 0 {
             Err("Division by zero!".into())
         } else {
-            let result = (x * 2) / y;
-            Ok(result.into())
+            Ok((x * 2) / y)
         }
     }
 }
@@ -433,15 +433,15 @@ Inner attributes can be applied to the inner items of a module to tweak the expo
 
 Parameters should be set on inner attributes to specify the desired behavior.
 
-| Attribute Parameter | Use with                    | Apply to                                              | Description                                             |
-| ------------------- | --------------------------- | ----------------------------------------------------- | ------------------------------------------------------- |
-| `skip`              | `#[rhai_fn]`, `#[rhai_mod]` | function or sub-module                                | do not export this function/sub-module                  |
-| `global`            | `#[rhai_fn]`                | function                                              | expose this function to the global namespace            |
-| `internal`          | `#[rhai_fn]`                | function                                              | keep this function within the internal module namespace |
-| `name = "..."`      | `#[rhai_fn]`, `#[rhai_mod]` | function or sub-module                                | registers function/sub-module under the specified name  |
-| `get = "..."`       | `#[rhai_fn]`                | `pub fn (&mut Type) -> Value`                         | registers a getter for the named property               |
-| `set = "..."`       | `#[rhai_fn]`                | `pub fn (&mut Type, Value)`                           | registers a setter for the named property               |
-| `index_get`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT) -> Value`                    | registers an index getter                               |
-| `index_set`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT, Value)`                      | registers an index setter                               |
-| `return_raw`        | `#[rhai_fn]`                | `pub fn (...) -> Result<Dynamic, Box<EvalAltResult>>` | marks this as a [fallible function]                     |
-| `pure`              | `#[rhai_fn]`                | `pub fn (&mut Type, ...) -> ...`                      | marks this as a _pure_ function                         |
+| Attribute Parameter | Use with                    | Apply to                                           | Description                                             |
+| ------------------- | --------------------------- | -------------------------------------------------- | ------------------------------------------------------- |
+| `skip`              | `#[rhai_fn]`, `#[rhai_mod]` | function or sub-module                             | do not export this function/sub-module                  |
+| `global`            | `#[rhai_fn]`                | function                                           | expose this function to the global namespace            |
+| `internal`          | `#[rhai_fn]`                | function                                           | keep this function within the internal module namespace |
+| `name = "..."`      | `#[rhai_fn]`, `#[rhai_mod]` | function or sub-module                             | registers function/sub-module under the specified name  |
+| `get = "..."`       | `#[rhai_fn]`                | `pub fn (&mut Type) -> Value`                      | registers a getter for the named property               |
+| `set = "..."`       | `#[rhai_fn]`                | `pub fn (&mut Type, Value)`                        | registers a setter for the named property               |
+| `index_get`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT) -> Value`                 | registers an index getter                               |
+| `index_set`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT, Value)`                   | registers an index setter                               |
+| `return_raw`        | `#[rhai_fn]`                | `pub fn (...) -> Result<Type, Box<EvalAltResult>>` | marks this as a [fallible function]                     |
+| `pure`              | `#[rhai_fn]`                | `pub fn (&mut Type, ...) -> ...`                   | marks this as a _pure_ function                         |

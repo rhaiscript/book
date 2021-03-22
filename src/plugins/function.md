@@ -84,7 +84,8 @@ Fallible Functions
 ------------------
 
 To register [fallible functions] (i.e. functions that may return errors), apply the
-`#[export_fn(return_raw)]` attribute on plugin functions that return `Result<Dynamic, Box<EvalAltResult>>`.
+`#[export_fn(return_raw)]` attribute on plugin functions that return `Result<T, Box<EvalAltResult>>`
+where `T` is any clonable type.
 
 A syntax error is generated if the function with `#[export_fn(return_raw)]` does not
 have the appropriate return type.
@@ -93,12 +94,11 @@ have the appropriate return type.
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_fn(return_raw)]
-pub fn double_and_divide(x: i64, y: i64) -> Result<Dynamic, Box<EvalAltResult>> {
+pub fn double_and_divide(x: i64, y: i64) -> Result<i64, Box<EvalAltResult>> {
     if y == 0 {
         Err("Division by zero!".into())
     } else {
-        let result = (x * 2) / y;
-        Ok(result.into())
+        Ok((x * 2) / y)
     }
 }
 
