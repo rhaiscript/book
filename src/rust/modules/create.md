@@ -37,7 +37,8 @@ let mut module = Module::new();             // new module
 // Use 'Module::set_native_fn' to add functions.
 let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
 
-// Remember to update the parameter names/types and return type metadata.
+// Remember to update the parameter names/types and return type metadata
+// when using the 'metadata' feature.
 // 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
@@ -75,7 +76,8 @@ let mut module = Module::new();             // new module
 // Use 'Module::set_native_fn' to add functions.
 let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
 
-// Remember to update the parameter names/types and return type metadata.
+// Remember to update the parameter names/types and return type metadata
+// when using the 'metadata' feature.
 // 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
@@ -105,7 +107,8 @@ let mut module = Module::new();             // new module
 let hash = module.set_native_fn("inc", |x: &mut i64| Ok(x + 1));
 module.update_fn_namespace(hash, FnNamespace::Global);
 
-// Remember to update the parameter names/types and return type metadata.
+// Remember to update the parameter names/types and return type metadata
+// when using the 'metadata' feature.
 // 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: &mut i64", "i64"]);
 

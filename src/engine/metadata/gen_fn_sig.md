@@ -12,6 +12,8 @@ As part of a _reflections_ API, `Engine::gen_fn_signatures` returns a list of fu
 
 > `fn_name ( param_1: type_1, param_2: type_2, ... , param_n : type_n ) -> return_type`
 
+The [`metadata`] feature must be used to turn on this API.
+
 ### Sources
 
 Functions from the following sources are included, in order:

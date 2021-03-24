@@ -52,7 +52,8 @@ def_package!(rhai:MyPackage:"My own personal super package", module, {
         Ok(foo(s.into_owned()))
     });
 
-    // Remember to update the parameter names/types and return type metadata.
+    // Remember to update the parameter names/types and return type metadata
+    // when using the 'metadata' feature.
     // 'Module::set_native_fn' by default does not set function metadata.
     module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
 });

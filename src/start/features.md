@@ -15,14 +15,14 @@ more control over what a script can (or cannot) do.
 Features that Enable Special Functionalities
 -------------------------------------------
 
-| Feature             | Additive? | Description                                                                                                                                                                                           |
-| ------------------- | :-------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                    |
-| `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type                                                                                                                                                     |
-| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                                                              |
-| `serde`             |    yes    | enables serialization/deserialization via `serde` (pulls in the [`serde`](https://crates.io/crates/serde) crate)                                                                                      |
-| `metadata`          |    yes    | enables exporting [functions metadata] to [JSON format]({{rootUrl}}/engine/metadata/export_to_json.md); implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json) |
-| `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                                                                 |
+| Feature             | Additive? | Description                                                                                                                                                        |
+| ------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync` |
+| `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type                                                                                                                  |
+| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers                                                                           |
+| `serde`             |    yes    | enables serialization/deserialization via `serde` (pulls in the [`serde`](https://crates.io/crates/serde) crate)                                                   |
+| `metadata`          |    yes    | enables exporting [functions metadata]; additionally pulls in [`serde_json`](https://crates.io/crates/serde_json)                                                  |
+| `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                              |
 
 
 Features that Disable Certain Language Features

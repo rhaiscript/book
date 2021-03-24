@@ -168,8 +168,8 @@ is_def_fn("bar", 1) == false;
 Metadata
 --------
 
-The function `get_fn_metadata_list` is a _reflection_ API that returns an array of the metadata
-of all script-defined functions in scope.
+The function `get_fn_metadata_list` is a function that returns an array of [object maps], each
+containing the metadata of one script-defined [function] in scope.
 
 Functions from the following sources are returned, in order:
 

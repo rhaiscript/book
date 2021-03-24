@@ -26,3 +26,5 @@ A function's _signature_ encapsulates the first four pieces of information in a 
 concise line of definition:
 
 > `[private] fn_name ( param_1: type_1, param_2: type_2, ... , param_n : type_n ) -> return_type`
+
+Exporting metadata requires the [`metadata`] feature.
