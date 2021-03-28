@@ -57,6 +57,7 @@ Symbols and Patterns
 | `//`                               |       comment        | line comment                          |
 | `/*` .. `*/`                       |       comment        | block comment                         |
 | `(*` .. `*)`                       |       comment        | _reserved_                            |
+| `#!`                               |       shebang        | _reserved_                            |
 | `<` .. `>`                         |   angular brackets   | _reserved_                            |
 | `++`                               |      increment       | _reserved_                            |
 | `--`                               |      decrement       | _reserved_                            |
