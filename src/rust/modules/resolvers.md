@@ -127,6 +127,22 @@ m::greet();                         // prints "hello! from module!"
 
 The base directory can be changed via the `FileModuleResolver::new_with_path` constructor function.
 
+### Unix Shebangs
+
+On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
+script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl/start/bin.md}})).
+
+If a script file starts with `#!`, the entire first line is skipped.
+Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+
+```rust,no_run
+#!/home/to/me/bin/rhai-run
+
+// This is a Rhai script
+
+print("The answer is: " + 42);
+```
+
 
 `StaticModuleResolver`
 ---------------------

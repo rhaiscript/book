@@ -58,3 +58,21 @@ let result: Dynamic = engine.eval("boo()")?;    // use 'Dynamic' if you're not s
 
 let result = engine.eval::<String>("40 + 2")?;  // returns an error because the actual return type is i64, not String
 ```
+
+
+Unix Shebangs
+-------------
+
+On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
+script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl/start/bin.md}})).
+
+If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
+`Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+
+```rust,no_run
+#!/home/to/me/bin/rhai-run
+
+// This is a Rhai script
+
+print("The answer is: " + 42);
+```
