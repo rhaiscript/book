@@ -3,14 +3,16 @@ Literals Syntax
 
 {{#include ../links.md}}
 
-|                                    Type                                    |                                       Literal syntax                                        |
-| :------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
+|                                    Type                                    | Literal syntax                                                                              |
+| :------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------- |
 |                                   `INT`                                    | decimal: `42`, `-123`, `0`<br/>hex: `0x????..`<br/>binary: `0b????..`<br/>octal: `0o????..` |
-| `FLOAT`,<br/>[`Decimal`][rust_decimal] (requires [`no_float`]+[`decimal`]) |                          `42.0`, `-123.456`, `123.`, `123.456e-10`                          |
-|                                  [String]                                  |                             `"... \x?? \u???? \U???????? ..."`                              |
-|                                [Character]                                 |        single: `'?'`<br/>ASCII hex: `'\x??'`<br/>Unicode: `'\u????'`, `'\U????????'`        |
-|                                 [`Array`]                                  |                                     `[ ???, ???, ??? ]`                                     |
-|                                [Object map]                                |                          `#{ a: ???, b: ???, c: ???, "def": ??? }`                          |
-|                                Boolean true                                |                                           `true`                                            |
-|                               Boolean false                                |                                           `false`                                           |
-|                     `Nothing`/`null`/`nil`/`void`/Unit                     |                                            `()`                                             |
+| `FLOAT`,<br/>[`Decimal`][rust_decimal] (requires [`no_float`]+[`decimal`]) | `42.0`, `-123.456`, `123.`, `123.456e-10`                                                   |
+|                              Normal [string]                               | `"... \x?? \u???? \U???????? ..."`                                                          |
+|                         [String] with continuation                         | `"this is the first line\`<br/>`second line\`<br/>`the third line"`                         |
+|                        Literal multi-line [string]                         | <code>\`this is the first line<br/>second line</br>the last line\`</code>                   |
+|                                [Character]                                 | single: `'?'`<br/>ASCII hex: `'\x??'`<br/>Unicode: `'\u????'`, `'\U????????'`               |
+|                                 [`Array`]                                  | `[ ???, ???, ??? ]`                                                                         |
+|                                [Object map]                                | `#{ a: ???, b: ???, c: ???, "def": ??? }`                                                   |
+|                                Boolean true                                | `true`                                                                                      |
+|                               Boolean false                                | `false`                                                                                     |
+|                     `Nothing`/`null`/`nil`/`void`/Unit                     | `()`                                                                                        |

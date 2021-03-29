@@ -53,25 +53,78 @@ fn bad(s: &mut String) { ... }                  // '&mut String' will not match 
 String and Character Literals
 ----------------------------
 
-String and character literals follow C-style formatting, with support for Unicode (`\u`_xxxx_'
-or `\U`_xxxxxxxx_') and hex (`\x`_xx_') escape sequences.
+String and character literals follow JavaScript-style formatting:
+
+* normal strings are wrapped by double-quotes: `"`
+* multi-line literal strings are wrapped by back-ticks: <code>\`</code>
+* characters are wrapped by single-quotes: `'`
+
+
+Standard Escape Sequences
+-------------------------
+
+There is built-in support for Unicode (`\u`_xxxx_ or `\U`_xxxxxxxx_) and hex (`\x`_xx_) escape
+sequences for normal strings and characters.
 
 Hex sequences map to ASCII characters, while `\u` maps to 16-bit common Unicode code points and `\U`
 maps the full, 32-bit extended Unicode code points.
 
-Standard escape sequences:
+Escape sequences are not supported for multi-line literal strings wrapped by back-ticks (<code>\`</code>).
 
 | Escape sequence | Meaning                          |
 | --------------- | -------------------------------- |
-| `\\`            | back-slash `\`                   |
+| `\\`            | back-slash (`\`)                 |
 | `\t`            | tab                              |
-| `\r`            | carriage-return `CR`             |
-| `\n`            | line-feed `LF`                   |
-| `\"`            | double-quote `"`                 |
-| `\`             | single-quote ``                  |
+| `\r`            | carriage-return (`CR`)           |
+| `\n`            | line-feed (`LF`)                 |
+| `\"`            | double-quote (`"`)               |
+| `\'`            | single-quote (`'`)               |
 | `\x`_xx_        | ASCII character in 2-digit hex   |
 | `\u`_xxxx_      | Unicode character in 4-digit hex |
 | `\U`_xxxxxxxx_  | Unicode character in 8-digit hex |
+
+
+Line Continuation
+-----------------
+
+For a normal string wrapped by double-quotes (`"`), a back-slash (`\`) character at the end of a
+line indicates that the string continues onto the next line _without any line-break_.
+
+Whitespace up to the indentation of the opening double-quote is ignored in order to enable lining up
+blocks of text.
+
+Spaces are _not_ added, so to separate one line with the next with a space, put a space before the
+ending back-slash (`\`) character.
+
+```rust,no_run
+let x = "hello, world!\
+         hello world again! \
+         this is the last time!!!";
+
+// ^^^^^^ these whitespaces are ignored
+
+// The above is the same as:
+let x = "hello, world!hello world again! this is the last time!!!";
+```
+
+
+Multi-Line Literal Strings
+--------------------------
+
+A string wrapped by a pair of back-tick (<code>\`</code>) characters is interpreted _literally_,
+meaning that every single character that lies between the two back-ticks are taken verbatim as the string.
+This include new-lines, whitespaces, escape characters etc.
+
+```rust,no_run
+let x = `hello, world! "\t\x42"
+  hello world again! 'x'
+     this is the last time!!! `;
+
+// The above is the same as:
+let x = "hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!! ";
+```
+
+To actually put a back-tick (<code>\`</code>) character inside a multi-line literal string requires post-processing.
 
 
 Differences from Rust Strings

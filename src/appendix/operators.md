@@ -37,39 +37,40 @@ Operators
 Symbols and Patterns
 --------------------
 
-| Symbol                             |         Name         | Description                           |
-| ---------------------------------- | :------------------: | ------------------------------------- |
-| `_`                                |      underscore      | default `switch` case                 |
-| `;`                                |      semicolon       | statement separator                   |
-| `,`                                |        comma         | list separator                        |
-| `:`                                |        colon         | [object map] property value separator |
-| `::`                               |         path         | module path separator                 |
-| `#{` .. `}`                        |       hash map       | [object map] literal                  |
-| `"` .. `"`                         |     double quote     | [string]                              |
-| `'` .. `'`                         |     single quote     | [character]                           |
-| `\`                                |        escape        | escape character literal              |
-| `(` .. `)`                         |     parentheses      | expression grouping                   |
-| `{` .. `}`                         |        braces        | block statement                       |
-| <code>\|</code> .. <code>\|</code> |        pipes         | closure                               |
-| `[` .. `]`                         |       brackets       | [array] literal                       |
-| `!`                                |         bang         | function call in calling scope        |
-| `=>`                               |     double arrow     | `switch` expression case separator    |
-| `//`                               |       comment        | line comment                          |
-| `/*` .. `*/`                       |       comment        | block comment                         |
-| `(*` .. `*)`                       |       comment        | _reserved_                            |
-| `#!`                               |       shebang        | _reserved_                            |
-| `<` .. `>`                         |   angular brackets   | _reserved_                            |
-| `++`                               |      increment       | _reserved_                            |
-| `--`                               |      decrement       | _reserved_                            |
-| `..`                               |        range         | _reserved_                            |
-| `...`                              |        range         | _reserved_                            |
-| `~`                                |        tilde         | _reserved_                            |
-| `#`                                |         hash         | _reserved_                            |
-| `@`                                |          at          | _reserved_                            |
-| `$`                                |        dollar        | _reserved_                            |
-| `->`                               |        arrow         | _reserved_                            |
-| `<-`                               |      left arrow      | _reserved_                            |
-| `===`                              |   strict equals to   | _reserved_                            |
-| `!==`                              | strict not equals to | _reserved_                            |
-| `:=`                               |      assignment      | _reserved_                            |
-| `::<` .. `>`                       |      turbofish       | _reserved_                            |
+| Symbol                             |                Name                | Description                           |
+| ---------------------------------- | :--------------------------------: | ------------------------------------- |
+| `_`                                |             underscore             | default `switch` case                 |
+| `;`                                |             semicolon              | statement separator                   |
+| `,`                                |               comma                | list separator                        |
+| `:`                                |               colon                | [object map] property value separator |
+| `::`                               |                path                | module path separator                 |
+| `#{` .. `}`                        |              hash map              | [object map] literal                  |
+| `"` .. `"`                         |            double quote            | [string]                              |
+| <code>\`</code> .. <code>\`</code> |             back-tick              | multi-line literal [string]           |
+| `'` .. `'`                         |            single quote            | [character]                           |
+| `\`                                | 1) escape<br/>2) line continuation | escape character literal              |
+| `(` .. `)`                         |            parentheses             | expression grouping                   |
+| `{` .. `}`                         |               braces               | block statement                       |
+| <code>\|</code> .. <code>\|</code> |               pipes                | closure                               |
+| `[` .. `]`                         |              brackets              | [array] literal                       |
+| `!`                                |                bang                | function call in calling scope        |
+| `=>`                               |            double arrow            | `switch` expression case separator    |
+| `//`                               |              comment               | line comment                          |
+| `/*` .. `*/`                       |              comment               | block comment                         |
+| `(*` .. `*)`                       |              comment               | _reserved_                            |
+| `#!`                               |              shebang               | _reserved_                            |
+| `<` .. `>`                         |                tag                 | _reserved_                            |
+| `++`                               |             increment              | _reserved_                            |
+| `--`                               |             decrement              | _reserved_                            |
+| `..`                               |             range/rest             | _reserved_                            |
+| `...`                              |                rest                | _reserved_                            |
+| `~`                                |               tilde                | _reserved_                            |
+| `#`                                |                hash                | _reserved_                            |
+| `@`                                |                 at                 | _reserved_                            |
+| `$`                                |               dollar               | _reserved_                            |
+| `->`                               |               arrow                | _reserved_                            |
+| `<-`                               |             left arrow             | _reserved_                            |
+| `===`                              |          strict equals to          | _reserved_                            |
+| `!==`                              |        strict not equals to        | _reserved_                            |
+| `:=`                               |             assignment             | _reserved_                            |
+| `::<` .. `>`                       |             turbofish              | _reserved_                            |
