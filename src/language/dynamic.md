@@ -130,16 +130,17 @@ The following methods cast a `Dynamic` into a specific type:
 
 The following constructor traits are implemented for `Dynamic`:
 
-| Trait                                                                                                                |           Data type            |
-| -------------------------------------------------------------------------------------------------------------------- | :----------------------------: |
-| `From<i64>` (`From<i32>` if [`only_i32`])                                                                            | `i64` (`i32` if [`only_i32`])  |
-| `From<f64>` (`From<f32>` if [`f32_float`], not available under [`no_float`])                                         | `f64` (`f32` if [`f32_float`]) |
-| `From<Decimal>` (requires [`decimal`])                                                                               |   [`Decimal`][rust_decimal]    |
-| `From<bool>`                                                                                                         |             `bool`             |
-| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`                                               |      [`ImmutableString`]       |
-| `From<char>`                                                                                                         |             `char`             |
-| `From<Vec<T>>` (not available under [`no_index`])                                                                    |            [array]             |
-| `From<&[T]>` (not available under [`no_index`])                                                                      |            [array]             |
-| `From<HashMap<K: Into<ImmutableString>, T>>` (not available under [`no_object`])<br/>e.g. `From<HashMap<String, T>>` |          [object map]          |
-| `From<FnPtr>`                                                                                                        |       [function pointer]       |
-| `From<Instant>` (not available under [`no_std`])                                                                     |          [timestamp]           |
+| Trait                                                                                                                          |           Data type            |
+| ------------------------------------------------------------------------------------------------------------------------------ | :----------------------------: |
+| `From<i64>` (`From<i32>` if [`only_i32`])                                                                                      | `i64` (`i32` if [`only_i32`])  |
+| `From<f64>` (`From<f32>` if [`f32_float`], not available under [`no_float`])                                                   | `f64` (`f32` if [`f32_float`]) |
+| `From<Decimal>` (requires [`decimal`])                                                                                         |   [`Decimal`][rust_decimal]    |
+| `From<bool>`                                                                                                                   |             `bool`             |
+| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`                                                         |      [`ImmutableString`]       |
+| `From<char>`                                                                                                                   |             `char`             |
+| `From<Vec<T>>` (not available under [`no_index`])                                                                              |            [array]             |
+| `From<&[T]>` (not available under [`no_index`])                                                                                |            [array]             |
+| `From<HashMap<K: Into<SmartString>, T>>` (not available under [`no_object`] or [`no_std`])<br/>e.g. `From<HashMap<String, T>>` |          [object map]          |
+| `From<BTreeMap<K: Into<SmartString>, T>>` (not available under [`no_object`])<br/>e.g. `From<BTreeMap<String, T>>`             |          [object map]          |
+| `From<FnPtr>`                                                                                                                  |       [function pointer]       |
+| `From<Instant>` (not available under [`no_std`])                                                                               |          [timestamp]           |

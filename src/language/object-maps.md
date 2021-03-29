@@ -7,6 +7,11 @@ Object maps are hash dictionaries. Properties are all [`Dynamic`] and can be fre
 
 The Rust type of a Rhai object map is `rhai::Map`.
 
+Currently it is an alias to `BTree<SmartString, Dynamic>`.
+[`SmartString`](https://crates.io/crate/smartstring) is used because most object map properties are
+short (at least shorter than 23 characters) and ASCII-based, so they can usually be stored inline
+without incurring the cost of an allocation.
+
 [`type_of()`] an object map returns `"map"`.
 
 Object maps are disabled via the [`no_object`] feature.
@@ -145,25 +150,25 @@ y.len() == 0;
 No Support for Property Getters
 ------------------------------
 
-In order not to affect the speed of accessing properties in an object map, new property
-[getters][getters/setters] cannot be registered because they conflict with the syntax of
+In order not to affect the speed of accessing properties in an object map, new
+[property getters][getters/setters] cannot be registered because they conflict with the syntax of
 property access.
 
-A property [getter][getters/setters] function registered via `Engine::register_get`, for example,
+A [property getter][getters/setters] function registered via `Engine::register_get`, for example,
 for a `Map` will never be found &ndash; instead, the property will be looked up in the object map.
 
-Therefore, _method-call_ notation must be used for built-in properties:
+Properties should be registered as _methods_ instead:
 
 ```rust,no_run
 map.len                 // access property 'len', returns '()' if not found
 
-map.len()               // returns the number of properties
+map.len()               // 'len' method - returns the number of properties
 
 map.keys                // access property 'keys', returns '()' if not found
 
-map.keys()              // returns array of all property names
+map.keys()              // 'keys' method - returns array of all property names
 
 map.values              // access property 'values', returns '()' if not found
 
-map.values()            // returns array of all property values
+map.values()            // 'values' method - returns array of all property values
 ```
