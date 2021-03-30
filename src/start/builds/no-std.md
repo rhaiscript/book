@@ -77,3 +77,17 @@ Samples
 
 Check out the [`no-std` sample applications](../examples/rust.md#no-std-samples)
 for different operating environments.
+
+
+Patches
+-------
+
+Currently, the [`SmartString`] crate used by Rhai does not properly handle `no-std` builds.
+
+Therefore, it is necessary to _patch_ this crate until the issue is fixed.
+
+```toml
+[patch.crates-io]
+# Patch smartstring wth a PR fix because it doesn't properly handle no-std builds.
+smartstring = { git = "https://github.com/okready/smartstring", branch = "fix-no_std-builds" }
+```

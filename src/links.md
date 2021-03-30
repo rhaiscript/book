@@ -26,6 +26,8 @@
 [playground]: https://rhai.rs/playground
 [`rhai-doc`]: https://github.com/rhaiscript/rhai-doc
 [MarkDown]: http://en.wikipedia.org/wiki/Markdown
+[`smartstring`]: https://crates.io/crates/smartstring
+[`SmartString`]: https://crates.io/crates/smartstring
 
 [`Engine`]: {{rootUrl}}/engine/hello-world.md
 [traits]: {{rootUrl}}/rust/traits.md

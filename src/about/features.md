@@ -19,9 +19,8 @@ Easy
 
 * Very few additional dependencies &ndash; right now only [`smallvec`](https://crates.io/crates/smallvec),
   [`num-traits`](https://crates.io/crates/num-traits), [`ahash`](https://crates.io/crates/ahash)
-  and [`SmartString`](https://crates.io/crates/smartstring) plus crates for procedural macros;
-  for [`no-std`] and [WASM] builds, a number of additional dependencies are pulled in to provide for
-  missing functionalities.
+  and [`SmartString`]; for [`no-std`] and [WASM] builds, a number of additional dependencies are
+  pulled in to provide for missing functionalities.
 
 * [Plugins] system powered by procedural macros simplifies custom API development.
 
