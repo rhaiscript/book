@@ -75,12 +75,24 @@ let x = "hello, world!\
 let x = "hello, world!hello world again! this is the last time!!!";
 ```
 
+A string with continuation does not open up a new line.  To do so, a new-line character must be
+manually inserted at the appropriate position:
+
+```rust,no_run
+let x = "hello, world!\n\
+         hello world again!\n\
+         this is the last time!!!";
+
+// The above is the same as:
+let x = "hello, world!\nhello world again!\nthis is the last time!!!";
+```
+
 
 Multi-Line Literal Strings
 --------------------------
 
 A string wrapped by a pair of back-tick (`` ` ``) characters is interpreted _literally_,
-meaning that every single character that lies between the two back-ticks are taken verbatim as the string.
+meaning that every single character that lies between the two back-ticks is taken verbatim.
 This include new-lines, whitespaces, escape characters etc.
 
 ```js,no_run
@@ -90,6 +102,20 @@ let x = `hello, world! "\t\x42"
 
 // The above is the same as:
 let x = "hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!! ";
+```
+
+If a back-tick (`` ` ``) appears at the _end_ of a line, then it is understood that the entire text
+block starts from the _next_ line; the starting new-line character is stripped.
+
+```js,no_run
+let x = `
+        hello, world! "\t\x42"
+  hello world again! 'x'
+     this is the last time!!!
+`;
+
+// The above is the same as:
+let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!!\n";
 ```
 
 To actually put a back-tick (`` ` ``) character inside a multi-line literal string requires post-processing.
