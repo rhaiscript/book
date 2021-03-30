@@ -199,7 +199,7 @@ fn call_fn_ptr_with_value(context: NativeCallContext, args: &mut [&mut Dynamic])
 {
     // 'args' is guaranteed to contain enough arguments of the correct types
     let fp = std::mem::take(args[1]).cast::<FnPtr>();   // 2nd argument - function pointer
-    let value = args[2].clone();                        // 3rd argument - function argument
+    let value = std::mem::take(args[2]);                // 3rd argument - function argument
     let this_ptr = args.get_mut(0).unwrap();            // 1st argument - 'this' pointer
 
     // Use 'FnPtr::call_dynamic' to call the function pointer.
