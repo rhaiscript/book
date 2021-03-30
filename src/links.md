@@ -87,7 +87,7 @@
 
 [string]: {{rootUrl}}/language/strings-chars.md
 [strings]: {{rootUrl}}/language/strings-chars.md
-[`ImmutableString`]: {{rootUrl}}/language/strings-chars.md
+[`ImmutableString`]: {{rootUrl}}/rust/immutable-string.md
 [character]: {{rootUrl}}/language/strings-chars.md
 [characters]: {{rootUrl}}/language/strings-chars.md
 
