@@ -72,9 +72,8 @@ Use Custom Types With Arrays
 ---------------------------
 
 To use a [custom type] with arrays, a number of array functions need to be manually implemented,
-in particular `push`, `insert`, `pad` and the `+=` operator.  In addition, the `==` operator must be
-implemented for the [custom type] in order to support the [`in`] operator which uses `==` to
-compare elements.
+in particular the `==` operator in order to support the [`in`] operator which uses `==` (via the
+`contains` method) to compare elements.
 
 See the section on [custom types] for more details.
 

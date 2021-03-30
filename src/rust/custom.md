@@ -156,7 +156,7 @@ If the collection takes a [`Dynamic`] value (e.g. like an [array]), the type of 
 can take a [`Dynamic`] parameter.
 
 ```rust,no_run
-engine.register_fn("add",
+engine.register_fn("push",
     |col: &mut MyCollectionType, item: Dynamic| col.push(col)
 );
 ```
