@@ -6,7 +6,7 @@
 The `switch` _expression_ allows matching on literal values, and it mostly follows Rust's
 `match` syntax:
 
-```c,no_run
+```ts,no_run
 switch calc_secret_value(x) {
     1 => print("It's one!"),
     2 => {
@@ -26,7 +26,7 @@ Expression, Not Statement
 `switch` is not a statement, but an expression. This means that a `switch` expression can
 appear anywhere a regular expression can, e.g. as function call arguments.
 
-```c,no_run
+```ts,no_run
 let x = switch foo { 1 => true, _ => false };
 
 func(switch foo {
@@ -54,7 +54,7 @@ Array and Object Map Literals Also Work
 
 The `switch` expression can match against any _literal_, including [array] and [object map] literals.
 
-```c,no_run
+```ts,no_run
 // Match on arrays
 switch [foo, bar, baz] {
     ["hello", 42, true] => { ... }
