@@ -50,9 +50,11 @@ The `cast` method then converts the value into a specific, known type.
 
 Alternatively, use the `try_cast` method which does not panic but returns `None` when the cast fails.
 
+Use `clone_cast` for on a reference to `Dynamic`.
+
 ```rust,no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
-let item = list[0];                         // an element in an 'Array' is 'Dynamic'
+let item = list[0].clone();                 // an element in an 'Array' is 'Dynamic'
 
 item.is::<i64>() == true;                   // 'is' returns whether a 'Dynamic' value is of a particular type
 
@@ -60,6 +62,9 @@ let value = item.cast::<i64>();             // if the element is 'i64', this suc
 let value: i64 = item.cast();               // type can also be inferred
 
 let value = item.try_cast::<i64>()?;        // 'try_cast' does not panic when the cast fails, but returns 'None'
+
+let value = list[0].clone_cast::<i64>();    // use 'clone_cast' on '&Dynamic'
+let value: i64 = list[0].clone_cast();
 ```
 
 Type Name
@@ -118,6 +123,7 @@ The following methods cast a `Dynamic` into a specific type:
 | --------------------------------------------- | :--------------------------------------------------------: |
 | `cast<T>`                                     |                  `T` (panics on failure)                   |
 | `try_cast<T>`                                 |                        `Option<T>`                         |
+| `clone_cast<T>` (for `&Dynamic`)              |           cloned copy of `T` (panics on failure)           |
 | `as_int`                                      | `Result<i64, &str>` (`Result<i32, &str>` if [`only_i32`])  |
 | `as_float` (not available under [`no_float`]) | `Result<f64, &str>` (`Result<f32, &str>` if [`f32_float`]) |
 | `as_decimal` (requires [`decimal`])           |          [`Result<Decimal, &str>`][rust_decimal]           |
