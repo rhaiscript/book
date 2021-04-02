@@ -57,7 +57,9 @@ Dynamic
 Safe
 ----
 
-* Relatively little `unsafe` code (yes there are some for performance reasons).
+* Relatively little `unsafe` code (yes there are some for performance reasons). `unsafe` is only
+  ever used for type casting purposes, and is never used to get around the borrow checker.
+  In other words, `unsafe` code in Rhai never introduces potential data races.
 
 * Sand-boxed &ndash; the scripting [`Engine`], if declared immutable, cannot mutate the containing
   environment unless [explicitly permitted]({{rootUrl}}/patterns/control.md).
