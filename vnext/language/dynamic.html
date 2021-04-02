@@ -197,11 +197,12 @@ There is no easy way for Rust to decide, at run-time, what type the <code>Dynami
 <p>A <code>Dynamic</code> value’s actual type can be checked via the <code>is</code> method.</p>
 <p>The <code>cast</code> method then converts the value into a specific, known type.</p>
 <p>Alternatively, use the <code>try_cast</code> method which does not panic but returns <code>None</code> when the cast fails.</p>
+<p>Use <code>clone_cast</code> for on a reference to <code>Dynamic</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let list: Array = engine.eval(&quot;...&quot;)?;      // return type is 'Array'
-let item = list[0];                         // an element in an 'Array' is 'Dynamic'
+let item = list[0].clone();                 // an element in an 'Array' is 'Dynamic'
 
 item.is::&lt;i64&gt;() == true;                   // 'is' returns whether a 'Dynamic' value is of a particular type
 
@@ -209,6 +210,9 @@ let value = item.cast::&lt;i64&gt;();             // if the element is 'i64', th
 let value: i64 = item.cast();               // type can also be inferred
 
 let value = item.try_cast::&lt;i64&gt;()?;        // 'try_cast' does not panic when the cast fails, but returns 'None'
+
+let value = list[0].clone_cast::&lt;i64&gt;();    // use 'clone_cast' on '&amp;Dynamic'
+let value: i64 = list[0].clone_cast();
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="type-name"><a class="header" href="#type-name">Type Name</a></h2>
@@ -255,6 +259,7 @@ is different from that of the <a href="/book/vnext/language/type-of.html"><code>
 <table><thead><tr><th>Method</th><th align="center">Return type</th></tr></thead><tbody>
 <tr><td><code>cast&lt;T&gt;</code></td><td align="center"><code>T</code> (panics on failure)</td></tr>
 <tr><td><code>try_cast&lt;T&gt;</code></td><td align="center"><code>Option&lt;T&gt;</code></td></tr>
+<tr><td><code>clone_cast&lt;T&gt;</code> (for <code>&amp;Dynamic</code>)</td><td align="center">cloned copy of <code>T</code> (panics on failure)</td></tr>
 <tr><td><code>as_int</code></td><td align="center"><code>Result&lt;i64, &amp;str&gt;</code> (<code>Result&lt;i32, &amp;str&gt;</code> if <a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td></tr>
 <tr><td><code>as_float</code> (not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td align="center"><code>Result&lt;f64, &amp;str&gt;</code> (<code>Result&lt;f32, &amp;str&gt;</code> if <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
 <tr><td><code>as_decimal</code> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>)</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Result&lt;Decimal, &amp;str&gt;</code></a></td></tr>
