@@ -24,7 +24,9 @@ Built-in module resolvers are grouped under the `rhai::module_resolvers` module 
 -----------------------------
 
 The _default_ module resolution service, not available for [`no_std`] or [WASM] builds.
-Loads a script file (based off the current directory) with `.rhai` extension.
+Loads a script file (based off the current directory or a specified one) with `.rhai` extension.
+
+### Function namespace
 
 All functions in the _global_ namespace, plus all those defined in the same module,
 are _merged_ into a _unified_ namespace.
@@ -32,7 +34,38 @@ are _merged_ into a _unified_ namespace.
 All modules imported at _global_ level via [`import`] statements become sub-modules,
 which are also available to functions defined within the same script file.
 
-Modules are also _cached_ so a script file is only evaluated _once_, even when repeatedly imported.
+### Base directory
+
+_Relative_ paths are resolved relative to a _root_ directory, which is usually the base directory (if set).
+The base directory can be set via `FileModuleResolver::new_with_path` or `FileModuleResolver::set_base_path`.
+
+If the base directory is not set (e.g. using `FileModuleResolver::new`), then it is based off the
+directory holding the loading script. This allows scripts to simply load each other.
+
+### Caching
+
+By default, modules are also _cached_ so a script file is only evaluated _once_, even when
+repeatedly imported.
+
+Use `FileModuleResolver::enable_cache` to enable/disable the script file cache.
+
+### Unix Shebangs
+
+On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
+script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
+
+If a script file starts with `#!`, the entire first line is skipped.
+Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+
+```rust,no_run
+#!/home/to/me/bin/rhai-run
+
+// This is a Rhai script
+
+print("The answer is: " + 42);
+```
+
+### Example
 
 ```rust,no_run
 +----------------+
@@ -121,26 +154,6 @@ m::greet();                         // prints "hi! from main!"
 import "my_module" as m;
 
 m::greet();                         // prints "hello! from module!"
-```
-
-### Changing the base directory
-
-The base directory can be changed via the `FileModuleResolver::new_with_path` constructor function.
-
-### Unix Shebangs
-
-On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
-
-If a script file starts with `#!`, the entire first line is skipped.
-Because of this, Rhai scripts with shebangs at the beginning need no special processing.
-
-```rust,no_run
-#!/home/to/me/bin/rhai-run
-
-// This is a Rhai script
-
-print("The answer is: " + 42);
 ```
 
 
