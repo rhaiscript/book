@@ -70,7 +70,7 @@ let ast1 = engine.compile(r#"
 
 // Second script
 let ast2 = engine.compile(r#"
-                fn foo(n) { "hello" + n }
+                fn foo(n) { `hello${n}` }
                 foo("!")
            "#)?;
 
@@ -83,8 +83,8 @@ let merged = &ast1 + &ast2;
 
 `merged` in the above example essentially contains the following script program:
 
-```rust,no_run
-fn foo(n) { "hello" + n }   // <- definition of first 'foo' is overwritten
+```js,no_run
+fn foo(n) { `hello${n}` }   // <- definition of first 'foo' is overwritten
 foo(1)                      // <- notice this will be "hello1" instead of 43,
                             //    but it is no longer the return value
 foo("!")                    // <- returns "hello!"

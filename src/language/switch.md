@@ -6,7 +6,7 @@
 The `switch` _expression_ allows matching on literal values, and it mostly follows Rust's
 `match` syntax:
 
-```ts,no_run
+```js,no_run
 switch calc_secret_value(x) {
     1 => print("It's one!"),
     2 => {
@@ -15,7 +15,7 @@ switch calc_secret_value(x) {
     }
     3 => print("Go!"),
     // _ is the default when no cases match
-    _ => print("Oops! Something's wrong: " + x)
+    _ => print(`Oops! Something's wrong: ${x}`)
 }
 ```
 

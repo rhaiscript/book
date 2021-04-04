@@ -58,7 +58,7 @@ let ast = engine.compile(r#"
 
     // Variable values become constant module variable values
     foo = calc(foo);
-    hello = "hello, " + foo + " worlds!";
+    hello = `hello, ${foo} worlds!`;
 
     // Finally, export the variables and modules
     export

@@ -15,7 +15,7 @@ The `to_decimal` function converts a supported number to [`Decimal`][rust_decima
 
 That's it; for other conversions, register custom conversion functions.
 
-```rust,no_run
+```js,no_run
 let x = 42;                     // 'x' is an integer
 
 let y = x * 100.0;              // integer and floating-point can inter-operate
@@ -30,7 +30,7 @@ let w = z.to_decimal() + x;     // Decimal and integer can inter-operate
 
 let c = 'X';                    // character
 
-print("c is '" + c + "' and its code is " + c.to_int());    // prints "c is 'X' and its code is 88"
+print(`c is '${c}' and its code is ${c.to_int()}`); // prints "c is 'X' and its code is 88"
 ```
 
 

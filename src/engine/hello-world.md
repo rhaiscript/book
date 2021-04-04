@@ -69,10 +69,11 @@ script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/star
 If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
 `Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
 
-```rust,no_run
+```js,no_run
 #!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
-print("The answer is: " + 42);
+let answer = 42;
+print(`The answer is: ${answer}`);
 ```

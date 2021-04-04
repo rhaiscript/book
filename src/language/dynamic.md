@@ -12,7 +12,7 @@ Use `type_of()` to Get Value Type
 Because [`type_of()`] a `Dynamic` value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value's type.
 
-```c,no_run
+```js,no_run
 let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
@@ -25,7 +25,7 @@ switch type_of(mystery) {
     "map" => print("Hey, I got an object map here!"),
     "Fn" => print("Hey, I got a function pointer here!"),
     "TestStruct" => print("Hey, I got the TestStruct custom type here!"),
-    _ => print("I don't know what this is: " + type_of(mystery))
+    _ => print(`I don't know what this is: ${type_of(mystery)}`)
 }
 ```
 

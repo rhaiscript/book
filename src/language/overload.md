@@ -8,16 +8,16 @@ and _number_ of parameters, but not parameter _types_ since all parameters are t
 
 New definitions _overwrite_ previous definitions of the same name and number of parameters.
 
-```rust,no_run
-fn foo(x,y,z) { print("Three!!! " + x + "," + y + "," + z); }
+```js,no_run
+fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
 
-fn foo(x)     { print("One! " + x); }
+fn foo(x)     { print(`One! ${x}`); }
 
-fn foo(x,y)   { print("Two! " + x + "," + y); }
+fn foo(x,y)   { print(`Two! ${x}, ${y}`); }
 
 fn foo()      { print("None."); }
 
-fn foo(x)     { print("HA! NEW ONE! " + x); }   // overwrites previous definition
+fn foo(x)     { print(`HA! NEW ONE! ${x}`); }   // overwrites previous definition
 
 foo(1,2,3);     // prints "Three!!! 1,2,3"
 

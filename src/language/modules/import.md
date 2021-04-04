@@ -20,14 +20,14 @@ A module that is only `import`-ed but not under any module name is commonly used
 where the module script contains initialization statements that puts the functions registered with the
 [`Engine`] into a particular state.
 
-```rust,no_run
+```js,no_run
 import "crypto_init";           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import "crypto" as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
 
 const SECRET_NUMBER = 42;
 
-let mod_file = "crypto_" + SECRET_NUMBER;
+let mod_file = `crypto_${SECRET_NUMBER}`;
 
 import mod_file as my_mod;      // load the script file "crypto_42.rhai" and import it as a module named 'my_mod'
                                 // notice that module path names can be dynamically constructed!
