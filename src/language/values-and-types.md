@@ -41,6 +41,6 @@ Some applications require fixed-precision decimal numbers, which can be enabled 
 Internally, the [`ImmutableString`] type is a wrapper over `Rc<String>` or `Arc<String>` (depending on [`sync`]).
 Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.
 
-The `to_string` function converts a standard type into a [string] for display purposes.
+The [`to_string()`] function converts a standard type into a [string] for display purposes.
 
-The `to_debug` function converts a standard type into a [string] in debug format.
+The [`to_debug()`] function converts a standard type into a [string] in debug format.

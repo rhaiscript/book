@@ -52,6 +52,59 @@ Escape sequences are not supported for multi-line literal strings wrapped by bac
 | `\U`_xxxxxxxx_  | Unicode character in 8-digit hex |
 
 
+Examples
+--------
+
+```rust,no_run
+let name = "Bob";
+let middle_initial = 'C';
+let last = "Davis";
+
+let full_name = name + " " + middle_initial + ". " + last;
+full_name == "Bob C. Davis";
+
+// String building with different types
+let age = 42;
+let record = full_name + ": age " + age;
+record == "Bob C. Davis: age 42";
+
+// Unlike Rust, Rhai strings can be indexed to get a character
+// (disabled with 'no_index')
+let c = record[4];
+c == 'C';
+
+ts.s = record;                          // custom type properties can take strings
+
+let c = ts.s[4];
+c == 'C';
+
+let c = "foo"[0];                       // indexing also works on string literals...
+c == 'f';
+
+let c = ("foo" + "bar")[5];             // ... and expressions returning strings
+c == 'r';
+
+// Escape sequences in strings
+record += " \u2764\n";                  // escape sequence of '❤' in Unicode
+record == "Bob C. Davis: age 42 ❤\n";   // '\n' = new-line
+
+// Unlike Rust, Rhai strings can be directly modified character-by-character
+// (disabled with 'no_index')
+record[4] = '\x58'; // 0x58 = 'X'
+record == "Bob X. Davis: age 42 ❤\n";
+
+// Use 'in' to test if a substring (or character) exists in a string
+"Davis" in record == true;
+'X' in record == true;
+'C' in record == false;
+
+// Strings can be iterated with a 'for' statement, yielding characters
+for ch in record {
+    print(ch);
+}
+```
+
+
 Line Continuation
 -----------------
 
@@ -121,54 +174,29 @@ let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this
 To actually put a back-tick (`` ` ``) character inside a multi-line literal string requires post-processing.
 
 
-Examples
---------
+String Interpolation
+--------------------
+
+Multi-line literal strings support _string interpolation_ wrapped in `${` ... `}`.
+
+Interpolation is not supported for normal string or character literals.
+
+`${` ... `}` acts as a statements _block_ and can contain anything that is allowed within a
+statements block, including another interpolated string!
+The last result of the block is taken as the value for interpolation.
+
+Rhai uses [`to_string()`] to convert any value into a string, then physically joins all the
+sub-strings together.
 
 ```rust,no_run
-let name = "Bob";
-let middle_initial = 'C';
-let last = "Davis";
+let x = 42;
+let y = 123;
 
-let full_name = name + " " + middle_initial + ". " + last;
-full_name == "Bob C. Davis";
+let s = `
+Undeniable logic:
+1) Hello, ${let w = `${x} world`; if x > 1 { w += "s" } w}!
+2) If ${y} > ${x} then it is ${y > x}!
+`;
 
-// String building with different types
-let age = 42;
-let record = full_name + ": age " + age;
-record == "Bob C. Davis: age 42";
-
-// Unlike Rust, Rhai strings can be indexed to get a character
-// (disabled with 'no_index')
-let c = record[4];
-c == 'C';
-
-ts.s = record;                          // custom type properties can take strings
-
-let c = ts.s[4];
-c == 'C';
-
-let c = "foo"[0];                       // indexing also works on string literals...
-c == 'f';
-
-let c = ("foo" + "bar")[5];             // ... and expressions returning strings
-c == 'r';
-
-// Escape sequences in strings
-record += " \u2764\n";                  // escape sequence of '❤' in Unicode
-record == "Bob C. Davis: age 42 ❤\n";   // '\n' = new-line
-
-// Unlike Rust, Rhai strings can be directly modified character-by-character
-// (disabled with 'no_index')
-record[4] = '\x58'; // 0x58 = 'X'
-record == "Bob X. Davis: age 42 ❤\n";
-
-// Use 'in' to test if a substring (or character) exists in a string
-"Davis" in record == true;
-'X' in record == true;
-'C' in record == false;
-
-// Strings can be iterated with a 'for' statement, yielding characters
-for ch in record {
-    print(ch);
-}
+s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 > 42 then it is true!\n";
 ```

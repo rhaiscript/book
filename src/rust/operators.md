@@ -52,13 +52,13 @@ let result: f64 = engine.eval("1.0 + 0.0");         // '+' operator for two floa
 
 result == 1.0;
 
-fn mixed_add(a: i64, b: f64) -> f64 { (a as f64) + b }
+fn mixed_add(a: i64, b: bool) -> f64 { a + if b { 42 } else { 99 } }
 
-engine.register_fn("+", mixed_add);                 // register '+' operator for an integer and a float
+engine.register_fn("+", mixed_add);                 // register '+' operator for an integer and a bool
 
-let result: i64 = engine.eval("1 + 1.0");           // <- normally an error...
+let result: i64 = engine.eval("1 + true");          // <- normally an error...
 
-result == 2.0;                                      //    ... but not now
+result == 43;                                       //    ... but not now
 ```
 
 
