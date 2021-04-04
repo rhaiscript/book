@@ -139,6 +139,12 @@ sub-strings together.
 let x = 42;
 let y = 123;
 
+let s = `x = ${x} and y = ${y}.`;                   // <- interpolated string
+
+let s = ("x = " + {x} + " and y = " + {y} + ".");   // <- de-sugars to this
+
+s == "x = 42 and y = 123.";
+
 let s = `
 Undeniable logic:
 1) Hello, ${let w = `${x} world`; if x > 1 { w += "s" } w}!
