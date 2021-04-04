@@ -4,7 +4,7 @@ Maximum Call Stack Depth
 {{#include ../links.md}}
 
 
-In Rhai, it is trivial for a functoin call to perform _infinite recursion_ such that all stack space
+In Rhai, it is trivial for a function call to perform _infinite recursion_ such that all stack space
 is exhausted.
 
 ```rust,no_run
