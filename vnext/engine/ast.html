@@ -215,7 +215,7 @@ let ast1 = engine.compile(r#&quot;
 
 // Second script
 let ast2 = engine.compile(r#&quot;
-                fn foo(n) { &quot;hello&quot; + n }
+                fn foo(n) { `hello${n}` }
                 foo(&quot;!&quot;)
            &quot;#)?;
 
@@ -227,15 +227,11 @@ let merged = &amp;ast1 + &amp;ast2;
 <span class="boring">}
 </span></code></pre></pre>
 <p><code>merged</code> in the above example essentially contains the following script program:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(n) { &quot;hello&quot; + n }   // &lt;- definition of first 'foo' is overwritten
+<pre><code class="language-js no_run">fn foo(n) { `hello${n}` }   // &lt;- definition of first 'foo' is overwritten
 foo(1)                      // &lt;- notice this will be &quot;hello1&quot; instead of 43,
                             //    but it is no longer the return value
 foo(&quot;!&quot;)                    // &lt;- returns &quot;hello!&quot;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="walk-an-ast"><a class="header" href="#walk-an-ast">Walk an AST</a></h2>
 <p>The <a href="/book/vnext/start/features.html"><code>internals</code></a> feature allows access to internal Rhai data structures, particularly the nodes
 that make up the <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>

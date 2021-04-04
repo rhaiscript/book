@@ -171,18 +171,15 @@
 <p><a href="/book/vnext/language/functions.html">Functions</a> defined in script can be <em>overloaded</em> by <em>arity</em> (i.e. they are resolved purely upon the function’s <em>name</em>
 and <em>number</em> of parameters, but not parameter <em>types</em> since all parameters are the same type – <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a>).</p>
 <p>New definitions <em>overwrite</em> previous definitions of the same name and number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(x,y,z) { print(&quot;Three!!! &quot; + x + &quot;,&quot; + y + &quot;,&quot; + z); }
+<pre><code class="language-js no_run">fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
 
-fn foo(x)     { print(&quot;One! &quot; + x); }
+fn foo(x)     { print(`One! ${x}`); }
 
-fn foo(x,y)   { print(&quot;Two! &quot; + x + &quot;,&quot; + y); }
+fn foo(x,y)   { print(`Two! ${x}, ${y}`); }
 
 fn foo()      { print(&quot;None.&quot;); }
 
-fn foo(x)     { print(&quot;HA! NEW ONE! &quot; + x); }   // overwrites previous definition
+fn foo(x)     { print(`HA! NEW ONE! ${x}`); }   // overwrites previous definition
 
 foo(1,2,3);     // prints &quot;Three!!! 1,2,3&quot;
 
@@ -191,8 +188,7 @@ foo(42);        // prints &quot;HA! NEW ONE! 42&quot;
 foo(1,2);       // prints &quot;Two!! 1,2&quot;
 
 foo();          // prints &quot;None.&quot;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 
                     </main>
 

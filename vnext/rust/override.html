@@ -170,20 +170,16 @@
                         <h1 id="override-a-built-in-function"><a class="header" href="#override-a-built-in-function">Override a Built-in Function</a></h1>
 <p>Any similarly-named function defined in a script <em>overrides</em> any built-in or registered
 native Rust function of the same name and number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Override the built-in function 'to_float' when called as a method
+<pre><code class="language-js no_run">// Override the built-in function 'to_float' when called as a method
 fn to_float() {
-    print(&quot;Ha! Gotcha! &quot; + this);
+    print(`Ha! Gotcha! ${this}`);
     42.0
 }
 
 let x = 123.to_float();
 
 print(x);       // what happens?
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="search-order-of-functions"><a class="header" href="#search-order-of-functions">Search Order of Functions</a></h2>
 <p>Rhai searches for the correct implementation of a function in the following order:</p>
 <ul>

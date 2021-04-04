@@ -170,7 +170,7 @@
                         <h1 id="switch-expression"><a class="header" href="#switch-expression"><code>switch</code> Expression</a></h1>
 <p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s
 <code>match</code> syntax:</p>
-<pre><code class="language-ts no_run">switch calc_secret_value(x) {
+<pre><code class="language-js no_run">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
         print(&quot;It's two!&quot;);
@@ -178,7 +178,7 @@
     }
     3 =&gt; print(&quot;Go!&quot;),
     // _ is the default when no cases match
-    _ =&gt; print(&quot;Oops! Something's wrong: &quot; + x)
+    _ =&gt; print(`Oops! Something's wrong: ${x}`)
 }
 </code></pre>
 <h2 id="expression-not-statement"><a class="header" href="#expression-not-statement">Expression, Not Statement</a></h2>

@@ -234,7 +234,9 @@ pulled in to provide for missing functionalities.</p>
 <h2 id="safe"><a class="header" href="#safe">Safe</a></h2>
 <ul>
 <li>
-<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons).</p>
+<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons). <code>unsafe</code> is only
+ever used for type casting purposes, and is never used to get around the borrow checker.
+In other words, <code>unsafe</code> code in Rhai never introduces potential data races.</p>
 </li>
 <li>
 <p>Sand-boxed – the scripting <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing

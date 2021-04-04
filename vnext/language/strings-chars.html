@@ -262,20 +262,36 @@ block starts from the <em>next</em> line; the starting new-line character is str
 let x = &quot;        hello, world! \&quot;\\t\\x42\&quot;\n  hello world again! 'x'\n     this is the last time!!!\n&quot;;
 </code></pre>
 <p>To actually put a back-tick (<code>`</code>) character inside a multi-line literal string requires post-processing.</p>
+<h2 id="string-interpolation"><a class="header" href="#string-interpolation">String Interpolation</a></h2>
+<p>Multi-line literal strings support <em>string interpolation</em> wrapped in <code>${</code> ... <code>}</code>.</p>
+<p>Interpolation is not supported for normal string or character literals.</p>
+<p><code>${</code> ... <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
+statements block, including another interpolated string!
+The last result of the block is taken as the value for interpolation.</p>
+<p>Rhai uses <a href="/book/vnext/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
+sub-strings together.</p>
+<pre><code class="language-js no_run">let x = 42;
+let y = 123;
+
+let s = `
+Undeniable logic:
+1) Hello, ${let w = `${x} world`; if x &gt; 1 { w += &quot;s&quot; } w}!
+2) If ${y} &gt; ${x} then it is ${y &gt; x}!
+`;
+
+s == &quot;Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n&quot;;
+</code></pre>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let name = &quot;Bob&quot;;
+<pre><code class="language-js no_run">let name = &quot;Bob&quot;;
 let middle_initial = 'C';
 let last = &quot;Davis&quot;;
 
-let full_name = name + &quot; &quot; + middle_initial + &quot;. &quot; + last;
+let full_name = `${name} ${middle_initial}. ${last}`;
 full_name == &quot;Bob C. Davis&quot;;
 
 // String building with different types
 let age = 42;
-let record = full_name + &quot;: age &quot; + age;
+let record = `${full_name}: age ${age}`;
 record == &quot;Bob C. Davis: age 42&quot;;
 
 // Unlike Rust, Rhai strings can be indexed to get a character
@@ -312,8 +328,7 @@ record == &quot;Bob X. Davis: age 42 ❤\n&quot;;
 for ch in record {
     print(ch);
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 
                     </main>
 

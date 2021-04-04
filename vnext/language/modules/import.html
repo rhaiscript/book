@@ -177,16 +177,13 @@ Its members can be accessed via <code>::</code> similar to C++.</p>
 <p>A module that is only <code>import</code>-ed but not under any module name is commonly used for initialization purposes,
 where the module script contains initialization statements that puts the functions registered with the
 <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> into a particular state.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
+<pre><code class="language-js no_run">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
 
 const SECRET_NUMBER = 42;
 
-let mod_file = &quot;crypto_&quot; + SECRET_NUMBER;
+let mod_file = `crypto_${SECRET_NUMBER}`;
 
 import mod_file as my_mod;      // load the script file &quot;crypto_42.rhai&quot; and import it as a module named 'my_mod'
                                 // notice that module path names can be dynamically constructed!
@@ -199,8 +196,7 @@ lock::hash::sha256(key);        // sub-modules are also supported
 print(lock::status);            // module variables are constants
 
 lock::status = &quot;off&quot;;           // &lt;- runtime error - cannot modify a constant
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="scoped-imports"><a class="header" href="#scoped-imports">Scoped Imports</a></h2>
 <p><code>import</code> statements are <em>scoped</em>, meaning that they are only accessible inside the scope that they’re imported.</p>
 <p>They can appear anywhere a normal statement can be, but in the vast majority of cases <code>import</code> statements are

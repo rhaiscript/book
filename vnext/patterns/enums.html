@@ -219,21 +219,9 @@ mod MyEnumModule {
         }
     }
     // Printing
-    #[rhai_fn(global, name = &quot;to_string&quot;, name = &quot;print&quot;, name = &quot;to_debug&quot;, name = &quot;debug&quot;, pure)]
+    #[rhai_fn(global, name = &quot;to_string&quot;, name = &quot;to_debug&quot;, pure)]
     pub fn to_string(my_enum: &amp;mut MyEnum) -&gt; String {
         format!(&quot;{:?}&quot;, my_enum)
-    }
-    #[rhai_fn(global, name = &quot;+&quot;)]
-    pub fn add_to_str(string: &amp;str, my_enum: MyEnum) -&gt; String {
-        format!(&quot;{}{:?}&quot;, string, my_enum)
-    }
-    #[rhai_fn(global, name = &quot;+&quot;, pure)]
-    pub fn add_str(my_enum: &amp;mut MyEnum, string: &amp;str) -&gt; String {
-        format!(&quot;{:?}&quot;, my_enum).push_str(string)
-    }
-    #[rhai_fn(global, name = &quot;+=&quot;)]
-    pub fn append_to_str(s: &amp;mut ImmutableString, my_enum: MyEnum) -&gt; String {
-        s += my_enum.to_string()
     }
     // '==' and '!=' operators
     #[rhai_fn(global, name = &quot;==&quot;, pure)]

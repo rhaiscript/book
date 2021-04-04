@@ -260,7 +260,9 @@ pulled in to provide for missing functionalities.</p>
 <h2 id="safe"><a class="header" href="#safe">Safe</a></h2>
 <ul>
 <li>
-<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons).</p>
+<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons). <code>unsafe</code> is only
+ever used for type casting purposes, and is never used to get around the borrow checker.
+In other words, <code>unsafe</code> code in Rhai never introduces potential data races.</p>
 </li>
 <li>
 <p>Sand-boxed – the scripting <a href="about//book/vnext/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing
@@ -856,16 +858,13 @@ let result = engine.eval::&lt;String&gt;(&quot;40 + 2&quot;)?;  // returns an er
 script with an interpreter (for Rhai this would be <a href="engine//book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#!/home/to/me/bin/rhai-run
+<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
-print(&quot;The answer is: &quot; + 42);
-<span class="boring">}
-</span></code></pre></pre>
+let answer = 42;
+print(`The answer is: ${answer}`);
+</code></pre>
 <h1 id="compile-a-script-to-ast"><a class="header" href="#compile-a-script-to-ast">Compile a Script (to AST)</a></h1>
 <p>To repeatedly evaluate a script, <em>compile</em> it first with <code>Engine::compile</code> into an <code>AST</code>
 (abstract syntax tree) form.</p>
@@ -896,16 +895,13 @@ for _ in 0..42 {
 script with an interpreter (for Rhai this would be <a href="engine//book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#!/home/to/me/bin/rhai-run
+<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
-print(&quot;The answer is: &quot; + 42);
-<span class="boring">}
-</span></code></pre></pre>
+let answer = 42;
+print(`The answer is: ${answer}`);
+</code></pre>
 <h2 id="ast-manipulation-api"><a class="header" href="#ast-manipulation-api"><code>AST</code> Manipulation API</a></h2>
 <p>Advanced users may want to manipulate an <code>AST</code>, especially the functions contained within.</p>
 <p>See the section on <a href="engine/ast.html"><em>Manage AST’s</em></a> for more details.</p>
@@ -1588,20 +1584,16 @@ schedule_callback(Box::new(move |x: i64, y: String| -&gt; Result&lt;bool, Box&lt
 <h1 id="override-a-built-in-function"><a class="header" href="#override-a-built-in-function">Override a Built-in Function</a></h1>
 <p>Any similarly-named function defined in a script <em>overrides</em> any built-in or registered
 native Rust function of the same name and number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Override the built-in function 'to_float' when called as a method
+<pre><code class="language-js no_run">// Override the built-in function 'to_float' when called as a method
 fn to_float() {
-    print(&quot;Ha! Gotcha! &quot; + this);
+    print(`Ha! Gotcha! ${this}`);
     42.0
 }
 
 let x = 123.to_float();
 
 print(x);       // what happens?
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="search-order-of-functions"><a class="header" href="#search-order-of-functions">Search Order of Functions</a></h2>
 <p>Rhai searches for the correct implementation of a function in the following order:</p>
 <ul>
@@ -1667,13 +1659,13 @@ let result: f64 = engine.eval(&quot;1.0 + 0.0&quot;);         // '+' operator fo
 
 result == 1.0;
 
-fn mixed_add(a: i64, b: f64) -&gt; f64 { (a as f64) + b }
+fn mixed_add(a: i64, b: bool) -&gt; f64 { a + if b { 42 } else { 99 } }
 
-engine.register_fn(&quot;+&quot;, mixed_add);                 // register '+' operator for an integer and a float
+engine.register_fn(&quot;+&quot;, mixed_add);                 // register '+' operator for an integer and a bool
 
-let result: i64 = engine.eval(&quot;1 + 1.0&quot;);           // &lt;- normally an error...
+let result: i64 = engine.eval(&quot;1 + true&quot;);          // &lt;- normally an error...
 
-result == 2.0;                                      //    ... but not now
+result == 43;                                       //    ... but not now
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="considerations"><a class="header" href="#considerations">Considerations</a></h2>
@@ -1965,17 +1957,21 @@ println!(&quot;Answer: {}&quot;, result);         // prints 42
 <p>The indexers API <code>register_indexer_get</code>, <code>register_indexer_get_result</code>, <code>register_indexer_set</code>,
 <code>register_indexer_set_result</code>, and <code>register_indexer_get_set</code> are also not available under <a href="rust//book/vnext/start/features.html"><code>no_index</code></a>.</p>
 <h1 id="printing-for-custom-types"><a class="header" href="#printing-for-custom-types">Printing for Custom Types</a></h1>
-<p>To use custom types for <a href="rust//book/vnext/language/print-debug.html"><code>print</code></a> and <a href="rust//book/vnext/language/print-debug.html"><code>debug</code></a>, or convert its value into a <a href="rust//book/vnext/language/strings-chars.html">string</a>,
-it is necessary that the following functions be registered (assuming the custom type
+<p>To use <a href="rust//book/vnext/rust/custom.html">custom types</a> for <a href="rust//book/vnext/language/print-debug.html"><code>print</code></a> and <a href="rust//book/vnext/language/print-debug.html"><code>debug</code></a>, or convert a <a href="rust//book/vnext/rust/custom.html">custom type</a> into a <a href="rust//book/vnext/language/strings-chars.html">string</a>,
+it is necessary that the following functions be registered (assuming the <a href="rust//book/vnext/rust/custom.html">custom type</a>
 is <code>T: Display + Debug</code>):</p>
 <table><thead><tr><th>Function</th><th>Signature</th><th>Typical implementation</th><th>Usage</th></tr></thead><tbody>
-<tr><td><code>to_string</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>x.to_string()</code></td><td>converts the custom type into a <a href="rust//book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>print</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>x.to_string()</code></td><td>converts the custom type into a <a href="rust//book/vnext/language/strings-chars.html">string</a> for the <a href="rust//book/vnext/language/print-debug.html"><code>print</code></a> statement</td></tr>
-<tr><td><code>to_debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>format!(&quot;{:?}&quot;, x)</code></td><td>converts the custom type into a <a href="rust//book/vnext/language/strings-chars.html">string</a> in debug format</td></tr>
-<tr><td><code>debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>format!(&quot;{:?}&quot;, x)</code></td><td>converts the custom type into a <a href="rust//book/vnext/language/strings-chars.html">string</a> for the <a href="rust//book/vnext/language/print-debug.html"><code>debug</code></a> statement</td></tr>
-<tr><td><code>+</code></td><td><code>|s: &amp;str, x: T| -&gt; String</code></td><td><code>format!(&quot;{}{}&quot;, s, x)</code></td><td>concatenates the custom type with another <a href="rust//book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>+</code></td><td><code>|x: &amp;mut T, s: &amp;str| -&gt; String</code></td><td><code>x.to_string().push_str(s);</code></td><td>concatenates another <a href="rust//book/vnext/language/strings-chars.html">string</a> with the custom type</td></tr>
-<tr><td><code>+=</code></td><td><code>|s: &amp;mut ImmutableString, x: T|</code></td><td><code>s += x.to_string()</code></td><td>appends the custom type to an existing <a href="rust//book/vnext/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>to_string</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>x.to_string()</code></td><td>converts the <a href="rust//book/vnext/rust/custom.html">custom type</a> into a <a href="rust//book/vnext/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>to_debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>format!(&quot;{:?}&quot;, x)</code></td><td>converts the <a href="rust//book/vnext/rust/custom.html">custom type</a> into a <a href="rust//book/vnext/language/strings-chars.html">string</a> in debug format</td></tr>
+</tbody></table>
+<p>The following functions are implemented using <code>to_string()</code> or <code>to_debug()</code> by default, but can be
+overloaded with custom versions:</p>
+<table><thead><tr><th>Function</th><th>Signature</th><th>Default</th><th>Usage</th></tr></thead><tbody>
+<tr><td><code>print</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_string</code></td><td>converts the <a href="rust//book/vnext/rust/custom.html">custom type</a> into a <a href="rust//book/vnext/language/strings-chars.html">string</a> for the <a href="rust//book/vnext/language/print-debug.html"><code>print</code></a> statement</td></tr>
+<tr><td><code>debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_debug</code></td><td>converts the <a href="rust//book/vnext/rust/custom.html">custom type</a> into a <a href="rust//book/vnext/language/strings-chars.html">string</a> for the <a href="rust//book/vnext/language/print-debug.html"><code>debug</code></a> statement</td></tr>
+<tr><td><code>+</code> operator</td><td><code>|s: &amp;str, x: T| -&gt; String</code></td><td><code>to_string</code></td><td>concatenates the <a href="rust//book/vnext/rust/custom.html">custom type</a> with another <a href="rust//book/vnext/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>+</code> operator</td><td><code>|x: &amp;mut T, s: &amp;str| -&gt; String</code></td><td><code>to_string</code></td><td>concatenates another <a href="rust//book/vnext/language/strings-chars.html">string</a> with the <a href="rust//book/vnext/rust/custom.html">custom type</a></td></tr>
+<tr><td><code>+=</code> operator</td><td><code>|s: &amp;mut ImmutableString, x: T|</code></td><td><code>to_string</code></td><td>appends the <a href="rust//book/vnext/rust/custom.html">custom type</a> to an existing <a href="rust//book/vnext/language/strings-chars.html">string</a></td></tr>
 </tbody></table>
 <h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
 <p>Rhai allows organizing functionalities (functions, both Rust-based or script-based, and variables)
@@ -2190,7 +2186,7 @@ let ast = engine.compile(r#&quot;
 
     // Variable values become constant module variable values
     foo = calc(foo);
-    hello = &quot;hello, &quot; + foo + &quot; worlds!&quot;;
+    hello = `hello, ${foo} worlds!`;
 
     // Finally, export the variables and modules
     export
@@ -2242,16 +2238,13 @@ repeatedly imported.</p>
 script with an interpreter (for Rhai this would be <a href="rust/modules//book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped.
 Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#!/home/to/me/bin/rhai-run
+<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
-print(&quot;The answer is: &quot; + 42);
-<span class="boring">}
-</span></code></pre></pre>
+let answer = 42;
+print(`The answer is: ${answer}`);
+</code></pre>
 <h3 id="example-4"><a class="header" href="#example-4">Example</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">+----------------+
 | my_module.rhai |
@@ -3294,14 +3287,14 @@ This is useful on some 32-bit targets where using 64-bit integers incur a perfor
 <p><a href="language//book/vnext/language/strings-chars.html">Strings</a> in Rhai are <em>immutable</em>, meaning that they can be shared but not modified.
 Internally, the <a href="language//book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a> type is a wrapper over <code>Rc&lt;String&gt;</code> or <code>Arc&lt;String&gt;</code> (depending on <a href="language//book/vnext/start/features.html"><code>sync</code></a>).
 Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.</p>
-<p>The <code>to_string</code> function converts a standard type into a <a href="language//book/vnext/language/strings-chars.html">string</a> for display purposes.</p>
-<p>The <code>to_debug</code> function converts a standard type into a <a href="language//book/vnext/language/strings-chars.html">string</a> in debug format.</p>
+<p>The <a href="language//book/vnext/rust/print-custom.html"><code>to_string()</code></a> function converts a standard type into a <a href="language//book/vnext/language/strings-chars.html">string</a> for display purposes.</p>
+<p>The <a href="language//book/vnext/rust/print-custom.html"><code>to_debug()</code></a> function converts a standard type into a <a href="language//book/vnext/language/strings-chars.html">string</a> in debug format.</p>
 <h1 id="dynamic-values"><a class="header" href="#dynamic-values">Dynamic Values</a></h1>
 <p>A <code>Dynamic</code> value can be <em>any</em> type. However, under <a href="language//book/vnext/start/features.html"><code>sync</code></a>, all types must be <code>Send + Sync</code>.</p>
 <h2 id="use-type_of-to-get-value-type"><a class="header" href="#use-type_of-to-get-value-type">Use <code>type_of()</code> to Get Value Type</a></h2>
 <p>Because <a href="language//book/vnext/language/type-of.html"><code>type_of()</code></a> a <code>Dynamic</code> value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value’s type.</p>
-<pre><code class="language-c no_run">let mystery = get_some_dynamic_value();
+<pre><code class="language-js no_run">let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
     &quot;i64&quot; =&gt; print(&quot;Hey, I got an integer here!&quot;),
@@ -3313,7 +3306,7 @@ switch type_of(mystery) {
     &quot;map&quot; =&gt; print(&quot;Hey, I got an object map here!&quot;),
     &quot;Fn&quot; =&gt; print(&quot;Hey, I got a function pointer here!&quot;),
     &quot;TestStruct&quot; =&gt; print(&quot;Hey, I got the TestStruct custom type here!&quot;),
-    _ =&gt; print(&quot;I don't know what this is: &quot; + type_of(mystery))
+    _ =&gt; print(`I don't know what this is: ${type_of(mystery)}`)
 }
 </code></pre>
 <h2 id="functions-returning-dynamic"><a class="header" href="#functions-returning-dynamic">Functions Returning <code>Dynamic</code></a></h2>
@@ -3801,10 +3794,7 @@ parse numbers:</p>
 <p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>).</p>
 <p>The <code>to_decimal</code> function converts a supported number to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="language//book/vnext/start/features.html"><code>decimal</code></a>).</p>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let x = 42;                     // 'x' is an integer
+<pre><code class="language-js no_run">let x = 42;                     // 'x' is an integer
 
 let y = x * 100.0;              // integer and floating-point can inter-operate
 
@@ -3818,9 +3808,8 @@ let w = z.to_decimal() + x;     // Decimal and integer can inter-operate
 
 let c = 'X';                    // character
 
-print(&quot;c is '&quot; + c + &quot;' and its code is &quot; + c.to_int());    // prints &quot;c is 'X' and its code is 88&quot;
-<span class="boring">}
-</span></code></pre></pre>
+print(`c is '${c}' and its code is ${c.to_int()}`); // prints &quot;c is 'X' and its code is 88&quot;
+</code></pre>
 <h2 id="parse-string-into-number"><a class="header" href="#parse-string-into-number">Parse String into Number</a></h2>
 <p>The <code>parse_float</code> function converts a <a href="language//book/vnext/language/strings-chars.html">string</a> into a <code>FLOAT</code> (defaults to <code>f64</code>).</p>
 <p>The <code>parse_int</code> function converts a <a href="language//book/vnext/language/strings-chars.html">string</a> into an <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>).
@@ -3951,20 +3940,36 @@ block starts from the <em>next</em> line; the starting new-line character is str
 let x = &quot;        hello, world! \&quot;\\t\\x42\&quot;\n  hello world again! 'x'\n     this is the last time!!!\n&quot;;
 </code></pre>
 <p>To actually put a back-tick (<code>`</code>) character inside a multi-line literal string requires post-processing.</p>
+<h2 id="string-interpolation"><a class="header" href="#string-interpolation">String Interpolation</a></h2>
+<p>Multi-line literal strings support <em>string interpolation</em> wrapped in <code>${</code> ... <code>}</code>.</p>
+<p>Interpolation is not supported for normal string or character literals.</p>
+<p><code>${</code> ... <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
+statements block, including another interpolated string!
+The last result of the block is taken as the value for interpolation.</p>
+<p>Rhai uses <a href="language//book/vnext/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
+sub-strings together.</p>
+<pre><code class="language-js no_run">let x = 42;
+let y = 123;
+
+let s = `
+Undeniable logic:
+1) Hello, ${let w = `${x} world`; if x &gt; 1 { w += &quot;s&quot; } w}!
+2) If ${y} &gt; ${x} then it is ${y &gt; x}!
+`;
+
+s == &quot;Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n&quot;;
+</code></pre>
 <h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let name = &quot;Bob&quot;;
+<pre><code class="language-js no_run">let name = &quot;Bob&quot;;
 let middle_initial = 'C';
 let last = &quot;Davis&quot;;
 
-let full_name = name + &quot; &quot; + middle_initial + &quot;. &quot; + last;
+let full_name = `${name} ${middle_initial}. ${last}`;
 full_name == &quot;Bob C. Davis&quot;;
 
 // String building with different types
 let age = 42;
-let record = full_name + &quot;: age &quot; + age;
+let record = `${full_name}: age ${age}`;
 record == &quot;Bob C. Davis: age 42&quot;;
 
 // Unlike Rust, Rhai strings can be indexed to get a character
@@ -4001,8 +4006,7 @@ record == &quot;Bob X. Davis: age 42 ❤\n&quot;;
 for ch in record {
     print(ch);
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h1 id="the-immutablestring-type"><a class="header" href="#the-immutablestring-type">The <code>ImmutableString</code> Type</a></h1>
 <p>All <a href="rust//book/vnext/language/strings-chars.html">strings</a> in Rhai are implemented as <code>ImmutableString</code>, which is an alias to
 <code>Rc&lt;String&gt;</code> (or <code>Arc&lt;String&gt;</code> under <a href="rust//book/vnext/start/features.html"><code>sync</code></a>).</p>
@@ -5146,7 +5150,7 @@ let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains'
 <h1 id="switch-expression"><a class="header" href="#switch-expression"><code>switch</code> Expression</a></h1>
 <p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s
 <code>match</code> syntax:</p>
-<pre><code class="language-ts no_run">switch calc_secret_value(x) {
+<pre><code class="language-js no_run">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
         print(&quot;It's two!&quot;);
@@ -5154,7 +5158,7 @@ let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains'
     }
     3 =&gt; print(&quot;Go!&quot;),
     // _ is the default when no cases match
-    _ =&gt; print(&quot;Oops! Something's wrong: &quot; + x)
+    _ =&gt; print(`Oops! Something's wrong: ${x}`)
 }
 </code></pre>
 <h2 id="expression-not-statement"><a class="header" href="#expression-not-statement">Expression, Not Statement</a></h2>
@@ -5854,18 +5858,15 @@ are not possible in Rhai under the <a href="language//book/vnext/start/features.
 <p><a href="language//book/vnext/language/functions.html">Functions</a> defined in script can be <em>overloaded</em> by <em>arity</em> (i.e. they are resolved purely upon the function’s <em>name</em>
 and <em>number</em> of parameters, but not parameter <em>types</em> since all parameters are the same type – <a href="language//book/vnext/language/dynamic.html"><code>Dynamic</code></a>).</p>
 <p>New definitions <em>overwrite</em> previous definitions of the same name and number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(x,y,z) { print(&quot;Three!!! &quot; + x + &quot;,&quot; + y + &quot;,&quot; + z); }
+<pre><code class="language-js no_run">fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
 
-fn foo(x)     { print(&quot;One! &quot; + x); }
+fn foo(x)     { print(`One! ${x}`); }
 
-fn foo(x,y)   { print(&quot;Two! &quot; + x + &quot;,&quot; + y); }
+fn foo(x,y)   { print(`Two! ${x}, ${y}`); }
 
 fn foo()      { print(&quot;None.&quot;); }
 
-fn foo(x)     { print(&quot;HA! NEW ONE! &quot; + x); }   // overwrites previous definition
+fn foo(x)     { print(`HA! NEW ONE! ${x}`); }   // overwrites previous definition
 
 foo(1,2,3);     // prints &quot;Three!!! 1,2,3&quot;
 
@@ -5874,8 +5875,7 @@ foo(42);        // prints &quot;HA! NEW ONE! 42&quot;
 foo(1,2);       // prints &quot;Two!! 1,2&quot;
 
 foo();          // prints &quot;None.&quot;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h1 id="function-namespaces"><a class="header" href="#function-namespaces">Function Namespaces</a></h1>
 <h2 id="each-function-is-a-separate-compilation-unit"><a class="header" href="#each-function-is-a-separate-compilation-unit">Each Function is a Separate Compilation Unit</a></h2>
 <p><a href="language//book/vnext/language/functions.html">Functions</a> in Rhai are <em>pure</em> and they form individual <em>compilation units</em>.
@@ -6476,18 +6476,16 @@ shared variables hoisted into the heap, automatically passing those variables as
 the function. Rhai just brings this directly up to the front.</p>
 <h1 id="print-and-debug"><a class="header" href="#print-and-debug"><code>print</code> and <code>debug</code></a></h1>
 <p>The <code>print</code> and <code>debug</code> functions default to printing to <code>stdout</code>, with <code>debug</code> using standard debug formatting.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>print(&quot;hello&quot;);         // prints hello to stdout
+<pre><code class="language-js no_run">print(&quot;hello&quot;);         // prints hello to stdout
 
 print(1 + 2 + 3);       // prints 6 to stdout
 
-print(&quot;hello&quot; + 42);    // prints hello42 to stdout
+let x = 42;
+
+print(`hello${x}`);     // prints hello42 to stdout
 
 debug(&quot;world!&quot;);        // prints &quot;world!&quot; to stdout using debug formatting
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="override-print-and-debug-with-callback-functions"><a class="header" href="#override-print-and-debug-with-callback-functions">Override <code>print</code> and <code>debug</code> with Callback Functions</a></h2>
 <p>When embedding Rhai into an application, it is usually necessary to trap <code>print</code> and <code>debug</code> output
 (for logging into a tracking log, for example) with the <code>Engine::on_print</code> and <code>Engine::on_debug</code> methods:</p>
@@ -6633,16 +6631,13 @@ Its members can be accessed via <code>::</code> similar to C++.</p>
 <p>A module that is only <code>import</code>-ed but not under any module name is commonly used for initialization purposes,
 where the module script contains initialization statements that puts the functions registered with the
 <a href="language/modules//book/vnext/engine/hello-world.html"><code>Engine</code></a> into a particular state.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
+<pre><code class="language-js no_run">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
 
 const SECRET_NUMBER = 42;
 
-let mod_file = &quot;crypto_&quot; + SECRET_NUMBER;
+let mod_file = `crypto_${SECRET_NUMBER}`;
 
 import mod_file as my_mod;      // load the script file &quot;crypto_42.rhai&quot; and import it as a module named 'my_mod'
                                 // notice that module path names can be dynamically constructed!
@@ -6655,8 +6650,7 @@ lock::hash::sha256(key);        // sub-modules are also supported
 print(lock::status);            // module variables are constants
 
 lock::status = &quot;off&quot;;           // &lt;- runtime error - cannot modify a constant
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="scoped-imports"><a class="header" href="#scoped-imports">Scoped Imports</a></h2>
 <p><code>import</code> statements are <em>scoped</em>, meaning that they are only accessible inside the scope that they’re imported.</p>
 <p>They can appear anywhere a normal statement can be, but in the vast majority of cases <code>import</code> statements are
@@ -7044,7 +7038,7 @@ engine.set_max_modules(1000);   // set to a large number for effectively unlimit
 <span class="boring">}
 </span></code></pre></pre>
 <h1 id="maximum-call-stack-depth"><a class="header" href="#maximum-call-stack-depth">Maximum Call Stack Depth</a></h1>
-<p>In Rhai, it is trivial for a functoin call to perform <em>infinite recursion</em> such that all stack space
+<p>In Rhai, it is trivial for a function call to perform <em>infinite recursion</em> such that all stack space
 is exhausted.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -7456,7 +7450,7 @@ let ast1 = engine.compile(r#&quot;
 
 // Second script
 let ast2 = engine.compile(r#&quot;
-                fn foo(n) { &quot;hello&quot; + n }
+                fn foo(n) { `hello${n}` }
                 foo(&quot;!&quot;)
            &quot;#)?;
 
@@ -7468,15 +7462,11 @@ let merged = &amp;ast1 + &amp;ast2;
 <span class="boring">}
 </span></code></pre></pre>
 <p><code>merged</code> in the above example essentially contains the following script program:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(n) { &quot;hello&quot; + n }   // &lt;- definition of first 'foo' is overwritten
+<pre><code class="language-js no_run">fn foo(n) { `hello${n}` }   // &lt;- definition of first 'foo' is overwritten
 foo(1)                      // &lt;- notice this will be &quot;hello1&quot; instead of 43,
                             //    but it is no longer the return value
 foo(&quot;!&quot;)                    // &lt;- returns &quot;hello!&quot;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="walk-an-ast"><a class="header" href="#walk-an-ast">Walk an AST</a></h2>
 <p>The <a href="engine//book/vnext/start/features.html"><code>internals</code></a> feature allows access to internal Rhai data structures, particularly the nodes
 that make up the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a>.</p>
@@ -8826,21 +8816,9 @@ mod MyEnumModule {
         }
     }
     // Printing
-    #[rhai_fn(global, name = &quot;to_string&quot;, name = &quot;print&quot;, name = &quot;to_debug&quot;, name = &quot;debug&quot;, pure)]
+    #[rhai_fn(global, name = &quot;to_string&quot;, name = &quot;to_debug&quot;, pure)]
     pub fn to_string(my_enum: &amp;mut MyEnum) -&gt; String {
         format!(&quot;{:?}&quot;, my_enum)
-    }
-    #[rhai_fn(global, name = &quot;+&quot;)]
-    pub fn add_to_str(string: &amp;str, my_enum: MyEnum) -&gt; String {
-        format!(&quot;{}{:?}&quot;, string, my_enum)
-    }
-    #[rhai_fn(global, name = &quot;+&quot;, pure)]
-    pub fn add_str(my_enum: &amp;mut MyEnum, string: &amp;str) -&gt; String {
-        format!(&quot;{:?}&quot;, my_enum).push_str(string)
-    }
-    #[rhai_fn(global, name = &quot;+=&quot;)]
-    pub fn append_to_str(s: &amp;mut ImmutableString, my_enum: MyEnum) -&gt; String {
-        s += my_enum.to_string()
     }
     // '==' and '!=' operators
     #[rhai_fn(global, name = &quot;==&quot;, pure)]
@@ -9696,11 +9674,11 @@ fn main() {
                 // The following call blocks until there is data
                 // in the channel
                 let x = get();
-                print(&quot;Script Read: &quot; + x);
+                print(`Script Read: ${x}`);
 
                 x += 1;
 
-                print(&quot;Script Write: &quot; + x);
+                print(`Script Write: ${x}`);
 
                 // The following call blocks until the data
                 // is successfully sent to the channel
@@ -10194,7 +10172,8 @@ link = &quot;https://example.com/tools&quot;
 <tr><td align="center"><code>FLOAT</code>,<br/><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="appendix//book/vnext/start/features.html"><code>no_float</code></a>+<a href="appendix//book/vnext/start/features.html"><code>decimal</code></a>)</td><td><code>42.0</code>, <code>-123.456</code>, <code>123.</code>, <code>123.456e-10</code></td></tr>
 <tr><td align="center">Normal <a href="appendix//book/vnext/language/strings-chars.html">string</a></td><td><code>&quot;... \x?? \u???? \U???????? ...&quot;</code></td></tr>
 <tr><td align="center"><a href="appendix//book/vnext/language/strings-chars.html">String</a> with continuation</td><td><code>&quot;this is the first line\</code><br/><code>second line\</code><br/><code>the third line&quot;</code></td></tr>
-<tr><td align="center">Literal multi-line <a href="appendix//book/vnext/language/strings-chars.html">string</a></td><td><code> `this is the first line</code><br/><code>second line</code></br><code>the last line` </code></td></tr>
+<tr><td align="center">Multi-line literal <a href="appendix//book/vnext/language/strings-chars.html">string</a></td><td><code> `this is the first line</code><br/><code>second line</code></br><code>the last line` </code></td></tr>
+<tr><td align="center">Multi-line literal <a href="appendix//book/vnext/language/strings-chars.html">string</a> with interpolation</td><td><code> `this is the first field: ${obj.field1}</code><br/><code>second field: {obj.field2}</code></br><code>the last field: ${obj.field3}` </code></td></tr>
 <tr><td align="center"><a href="appendix//book/vnext/language/strings-chars.html">Character</a></td><td>single: <code>'?'</code><br/>ASCII hex: <code>'\x??'</code><br/>Unicode: <code>'\u????'</code>, <code>'\U????????'</code></td></tr>
 <tr><td align="center"><a href="appendix//book/vnext/language/arrays.html"><code>Array</code></a></td><td><code>[ ???, ???, ??? ]</code></td></tr>
 <tr><td align="center"><a href="appendix//book/vnext/language/object-maps.html">Object map</a></td><td><code>#{ a: ???, b: ???, c: ???, &quot;def&quot;: ??? }</code></td></tr>

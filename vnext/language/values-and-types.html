@@ -198,8 +198,8 @@ This is useful on some 32-bit targets where using 64-bit integers incur a perfor
 <p><a href="/book/vnext/language/strings-chars.html">Strings</a> in Rhai are <em>immutable</em>, meaning that they can be shared but not modified.
 Internally, the <a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a> type is a wrapper over <code>Rc&lt;String&gt;</code> or <code>Arc&lt;String&gt;</code> (depending on <a href="/book/vnext/start/features.html"><code>sync</code></a>).
 Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.</p>
-<p>The <code>to_string</code> function converts a standard type into a <a href="/book/vnext/language/strings-chars.html">string</a> for display purposes.</p>
-<p>The <code>to_debug</code> function converts a standard type into a <a href="/book/vnext/language/strings-chars.html">string</a> in debug format.</p>
+<p>The <a href="/book/vnext/rust/print-custom.html"><code>to_string()</code></a> function converts a standard type into a <a href="/book/vnext/language/strings-chars.html">string</a> for display purposes.</p>
+<p>The <a href="/book/vnext/rust/print-custom.html"><code>to_debug()</code></a> function converts a standard type into a <a href="/book/vnext/language/strings-chars.html">string</a> in debug format.</p>
 
                     </main>
 

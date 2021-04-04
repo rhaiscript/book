@@ -172,7 +172,7 @@
 <h2 id="use-type_of-to-get-value-type"><a class="header" href="#use-type_of-to-get-value-type">Use <code>type_of()</code> to Get Value Type</a></h2>
 <p>Because <a href="/book/vnext/language/type-of.html"><code>type_of()</code></a> a <code>Dynamic</code> value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value’s type.</p>
-<pre><code class="language-c no_run">let mystery = get_some_dynamic_value();
+<pre><code class="language-js no_run">let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
     &quot;i64&quot; =&gt; print(&quot;Hey, I got an integer here!&quot;),
@@ -184,7 +184,7 @@ switch type_of(mystery) {
     &quot;map&quot; =&gt; print(&quot;Hey, I got an object map here!&quot;),
     &quot;Fn&quot; =&gt; print(&quot;Hey, I got a function pointer here!&quot;),
     &quot;TestStruct&quot; =&gt; print(&quot;Hey, I got the TestStruct custom type here!&quot;),
-    _ =&gt; print(&quot;I don't know what this is: &quot; + type_of(mystery))
+    _ =&gt; print(`I don't know what this is: ${type_of(mystery)}`)
 }
 </code></pre>
 <h2 id="functions-returning-dynamic"><a class="header" href="#functions-returning-dynamic">Functions Returning <code>Dynamic</code></a></h2>
