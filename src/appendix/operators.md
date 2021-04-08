@@ -56,7 +56,9 @@ Symbols and Patterns
 | `!`                                |                bang                | function call in calling scope        |
 | `=>`                               |            double arrow            | `switch` expression case separator    |
 | `//`                               |              comment               | line comment                          |
+| `///`                              |            doc-comment             | line [doc-comment]                    |
 | `/*` .. `*/`                       |              comment               | block comment                         |
+| `/**` .. `*/`                      |            doc-comment             | block [doc-comment]                   |
 | `(*` .. `*)`                       |              comment               | _reserved_                            |
 | `#!`                               |              shebang               | _reserved_                            |
 | `<` .. `>`                         |                tag                 | _reserved_                            |
