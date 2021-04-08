@@ -3,10 +3,13 @@ Doc-Comments
 
 {{#include ../links.md}}
 
-Similar to Rust, comments starting with `///` (three slashes) or `/**` (two asterisks) are
-_doc-comments_.
+Similar to Rust, comments starting with `///` (three slashes) or `/**` (two asterisks)
+are _doc-comments_.
 
-Doc-comments can only appear in front of [function] definitions, not any other elements:
+They are only supported under the [`metadata`] feature.
+
+Doc-comments can only appear in front of [function] definitions, not any other elements.
+Therefore, doc-comments are also not available under [`no_function`].
 
 ```rust,no_run
 /// This is a valid one-line doc-comment
