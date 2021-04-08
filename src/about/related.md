@@ -30,6 +30,12 @@ External Tools
 * [`rhai-doc`] &ndash; Rhai script documentation tool
 
 
+IDE Integration
+---------------
+
+* [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=rhaiscript.vscode-rhai) &ndash; support `.rhai` script files for Visual Studio Code
+
+
 Other Cool Projects
 -------------------
 
