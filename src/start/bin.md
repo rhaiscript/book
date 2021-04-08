@@ -27,7 +27,7 @@ namespace.
 
 Then it enters an REPL, which can call the above functions freely.
 
-```bash
+```sh
 rhai-repl init1.rhai init2.rhai init3.rhai
 ```
 
@@ -44,7 +44,7 @@ Filenames passed to it as command line arguments are run in sequence.
 The following command runs the scripts `script1.rhai`, `script2.rhai` and `script3.rhai`
 in order.
 
-```bash
+```sh
 rhai-run script1.rhai script2.rhai script3.rhai
 ```
 
@@ -54,6 +54,6 @@ Running a Utility Program
 
 Utilities can be run with the following command:
 
-```bash
+```sh
 cargo run --bin {program_name}
 ```

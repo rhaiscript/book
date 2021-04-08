@@ -48,6 +48,6 @@ Running Example Scripts
 
 The [`rhai-run`](../bin.md) utility can be used to run Rhai scripts:
 
-```bash
+```sh
 cargo run --bin rhai-run scripts/any_script.rhai
 ```

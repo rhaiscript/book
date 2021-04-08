@@ -22,7 +22,7 @@ Running Examples
 
 Examples can be run with the following command:
 
-```bash
+```sh
 cargo run --example {example_name}
 ```
 
@@ -37,7 +37,7 @@ To illustrate `no-std` builds, a number of sample applications are available und
 
 `cargo run` cannot be used to run a `no-std` sample.  It must first be built:
 
-```bash
+```sh
 cd no_std/no_std_test
 
 cargo +nightly build --release

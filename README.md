@@ -10,19 +10,19 @@ How to Build from Source
 
 * Install [`mdbook`](https://github.com/rust-lang/mdBook)
 
-```bash
+```sh
 cargo install mdbook
 ```
 
 * Install [`mdbook-tera`](https://github.com/avitex/mdbook-tera) (for templating)
 
-```bash
+```sh
 cargo install mdbook-tera
 ```
 
 * Run `build`
 
-```bash
+```sh
 mdbook build
 ```
 
