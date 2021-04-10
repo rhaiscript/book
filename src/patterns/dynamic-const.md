@@ -31,7 +31,7 @@ Key Concepts
 Implementation
 --------------
 
-```rust,no_run
+```rust , no_run
 let mut engine = Engine::new();
 
 // Create shared data provider.

@@ -67,7 +67,7 @@ let actual_index: usize = if index < 0 {
 Examples
 --------
 
-```rust,no_run
+```rust , no_run
 #[derive(Debug, Clone)]
 struct TestStruct {
     fields: Vec<i64>

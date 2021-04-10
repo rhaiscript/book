@@ -12,7 +12,7 @@ Standard data types with built-in support for the `in` operator are:
 * [Object maps] (check for property name)
 * [Strings] (check for sub-strings or [characters])
 
-```rust,no_run
+```rust , no_run
 42 in [1, "abc", 42, ()] == true;   // check array for item
 
 "foo" in #{                         // check object map for property name
@@ -37,7 +37,7 @@ same type.
 
 See the section on [_Logic Operators_](logic.md) for more details.
 
-```rust,no_run
+```rust , no_run
 let ts = new_ts();                  // assume 'new_ts' returns a custom type
 
 let a = [1, 2, 3, ts, 42, 999];     // array contains custom type
@@ -55,13 +55,13 @@ The `in` operator maps directly to a call to a function `contains` with the two 
 
 For example:
 
-```rust,no_run
+```rust , no_run
 item in container
 ```
 
 maps to the following function call:
 
-```rust,no_run
+```rust , no_run
 contains(container, item)
 ```
 
@@ -70,7 +70,7 @@ function named `contains` with the correct parameter types.
 
 For example:
 
-```rust,no_run
+```rust , no_run
 engine.register_type::<TestStruct>()
       .register_fn("new_ts", || TestStruct::new())
       .register_fn("contains", |container: &mut TestStruct, item: i64| -> bool {
@@ -81,7 +81,7 @@ engine.register_type::<TestStruct>()
 
 Now the `in` operator can be used for `TestStruct`:
 
-```rust,no_run
+```rust , no_run
 let ts = new_ts();
 
 if 42 in ts {                       // this calls the 'contains' function

@@ -33,7 +33,7 @@ the get/set calls will be interpreted as properties on the [object maps].
 Examples
 --------
 
-```rust,no_run
+```rust , no_run
 #[derive(Debug, Clone)]
 struct TestStruct {
     field: String

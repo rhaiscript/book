@@ -8,7 +8,7 @@ such as arithmetic calculations.
 
 For example, in the expression "`a + b`", the `+` operator calls a function named "`+`"!
 
-```rust,no_run
+```rust , no_run
 let x = a + b;
 
 let x = +(a, b);        // <- the above is equivalent to this function call
@@ -35,7 +35,7 @@ However, operator functions _can_ be registered to the [`Engine`] via the `Engin
 When a custom operator function is registered with the same name as an operator, it _overrides_ the
 built-in version.
 
-```rust,no_run
+```rust , no_run
 use rhai::{Engine, EvalAltResult};
 
 let mut engine = Engine::new();

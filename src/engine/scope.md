@@ -55,7 +55,7 @@ Example
 In the following example, a `Scope` is created with a few initialized variables, then it is threaded
 through multiple evaluations.
 
-```rust,no_run
+```rust , no_run
 use rhai::{Engine, Scope, EvalAltResult};
 
 let engine = Engine::new();
@@ -110,7 +110,7 @@ In fact, the names can easily be string slices referencing external data.  This 
 For applications where [variables] and/or [constants] are frequently pushed into and removed from
 a `Scope` in order to run custom scripts, this has significant performance implications.
 
-```rust,no_run
+```rust , no_run
 let mut scope = Scope::new();
 
 scope.push("my_var", 42 as i64);                // &'static str

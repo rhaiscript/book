@@ -12,7 +12,7 @@ except for the _last_ statement in a _block_ (enclosed by `{` .. `}` pairs) wher
 Semicolons can also be omitted for statement types that always end in a block &ndash; for example
 the `if`, `while`, `for` and `loop` statements.
 
-```rust,no_run
+```rust , no_run
 let a = 42;             // normal assignment statement
 let a = foo(42);        // normal function call statement
 foo < 42;               // normal expression as statement

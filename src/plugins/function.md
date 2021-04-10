@@ -29,7 +29,7 @@ The function cannot be nested inside another function &ndash; it can only be def
 To register the plugin function, simply call `register_exported_fn!`.  The name of the function can be
 any text string, so it is possible to register _overloaded_ functions as well as operators.
 
-```rust,no_run
+```rust , no_run
 use rhai::plugin::*;        // import macros
 
 #[export_fn]
@@ -62,7 +62,7 @@ Pure functions can be passed a [constant] value as the first `&mut` parameter.
 Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
 `EvalAltResult::ErrorAssignmentToConstant` error.
 
-```rust,no_run
+```rust , no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 // This method is pure, so 'len' can be used on a constant 'TestStruct'.
@@ -90,7 +90,7 @@ where `T` is any clonable type.
 A syntax error is generated if the function with `#[export_fn(return_raw)]` does not
 have the appropriate return type.
 
-```rust,no_run
+```rust , no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_fn(return_raw)]

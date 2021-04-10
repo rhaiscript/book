@@ -9,9 +9,9 @@ are _doc-comments_.
 They are only supported under the [`metadata`] feature.
 
 Doc-comments can only appear in front of [function] definitions, not any other elements.
-Therefore, doc-comments are also not available under [`no_function`].
+Therefore, doc-comments are not available under [`no_function`].
 
-```rust,no_run
+```rust , no_run
 /// This is a valid one-line doc-comment
 fn foo() {}
 
@@ -37,18 +37,18 @@ let x = 42;
 Special Cases
 -------------
 
-Long streams of `//////...` and `/*****...`  do _NOT_ form doc-comments.
+Long streams of `//////`... and `/*****`... do _NOT_ form doc-comments.
 This is consistent with popular comment block styles for C-like languages.
 
-```rust,no_run
+```rust , no_run
 ///////////////////////////////  <- this is not a doc-comment
-// This is not a doc-comment //  <- this is a normal comment
+// This is not a doc-comment //  <- this is not a doc-comment
 ///////////////////////////////  <- this is not a doc-comment
 
 // However, watch out for comment lines starting with '///'
 
 //////////////////////////////////////////  <- this is not a doc-comment
-/// This, however, IS a doc-comment!!! ///  <- this starts with '///'
+/// This, however, IS a doc-comment!!! ///  <- doc-comment!
 //////////////////////////////////////////  <- this is not a doc-comment
 
 /****************************************

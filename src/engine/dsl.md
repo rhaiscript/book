@@ -45,7 +45,7 @@ that specific environment.  In such cases, it is possible to define [custom oper
 
 For example:
 
-```rust,no_run
+```rust , no_run
 let animal = "rabbit";
 let food = "carrot";
 
@@ -66,7 +66,7 @@ essentially custom statement types.
 
 For example, the following is a SQL-like syntax for some obscure DSL operation:
 
-```rust,no_run
+```rust , no_run
 let table = [..., ..., ..., ...];
 
 // Syntax = calculate $ident$ ( $expr$ -> $ident$ ) => $ident$ : $expr$

@@ -38,7 +38,7 @@ Examples
 
 Assume the following four scripts:
 
-```rust,no_run
+```rust , no_run
 +--------------+
 | default.rhai |
 +--------------+
@@ -85,7 +85,7 @@ fn foo(x) { x + 42 }
 
 Load and combine them sequentially:
 
-```rust,no_run
+```rust , no_run
 let engine = Engine::new();
 
 // Compile the baseline default implementations.

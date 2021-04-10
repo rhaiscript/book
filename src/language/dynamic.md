@@ -52,7 +52,7 @@ Alternatively, use the `try_cast` method which does not panic but returns `None`
 
 Use `clone_cast` for on a reference to `Dynamic`.
 
-```rust,no_run
+```rust , no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0].clone();                 // an element in an 'Array' is 'Dynamic'
 
@@ -73,7 +73,7 @@ Type Name
 The `type_name` method gets the name of the actual type as a static string slice,
 which can be `match`-ed against.
 
-```rust,no_run
+```rust , no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0];                         // an element in an 'Array' is 'Dynamic'
 

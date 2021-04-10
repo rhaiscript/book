@@ -5,7 +5,7 @@ Functions
 
 Rhai supports defining functions in script (unless disabled with [`no_function`]):
 
-```rust,no_run
+```rust , no_run
 fn add(x, y) {
     return x + y;
 }
@@ -26,7 +26,7 @@ Implicit Return
 Just like in Rust, an implicit return can be used. In fact, the last statement of a block is _always_ the block's return value
 regardless of whether it is terminated with a semicolon `;`. This is different from Rust.
 
-```rust,no_run
+```rust , no_run
 fn add(x, y) {      // implicit return:
     x + y;          // value of the last statement (no need for ending semicolon)
                     // is used as the return value
@@ -47,7 +47,7 @@ Global Definitions Only
 
 Functions can only be defined at the global level, never inside a block or another function.
 
-```rust,no_run
+```rust , no_run
 // Global level is OK
 fn add(x, y) {
     x + y
@@ -71,7 +71,7 @@ Functions are not _closures_. They do not capture the calling environment
 and can only access their own parameters.
 They cannot access variables external to the function itself.
 
-```rust,no_run
+```rust , no_run
 let x = 42;
 
 fn foo() { x }          // <- syntax error: variable 'x' doesn't exist
@@ -83,7 +83,7 @@ But Can Call Other Functions
 
 All functions in the same [`AST`] can call each other.
 
-```rust,no_run
+```rust , no_run
 fn foo(x) { x + 1 }     // function defined in the global namespace
 
 fn bar(x) { foo(x) }    // OK! function 'foo' can be called
@@ -112,7 +112,7 @@ All arguments are passed by _value_, so all Rhai script-defined functions are _p
 
 Any update to an argument will **not** be reflected back to the caller.
 
-```rust,no_run
+```rust , no_run
 fn change(s) {      // 's' is passed by value
     s = 42;         // only a COPY of 's' is changed
 }
@@ -131,7 +131,7 @@ x == 500;           // 'x' is NOT changed!
 Script-defined functions can also be called in method-call style.
 When this happens, the keyword `this` binds to the object in the method call and can be changed.
 
-```rust,no_run
+```rust , no_run
 fn change() {       // not that the object does not need a parameter
     this = 42;      // 'this' binds to the object in method-call
 }
@@ -152,7 +152,7 @@ change();           // <- error: `this` is unbound
 Use `is_def_fn` (not available under [`no_function`]) to detect if a Rhai function is defined
 (and therefore callable) based on its name and the number of parameters.
 
-```rust,no_run
+```rust , no_run
 fn foo(x) { x + 1 }
 
 is_def_fn("foo", 1) == true;

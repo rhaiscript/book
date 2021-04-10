@@ -11,7 +11,7 @@ There are also a number of examples scripts that showcase Rhai's features, all i
 | Script                                                            | Description                                                                                 |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | [`array.rhai`]({{repoHome}}/scripts/array.rhai)                   | [arrays]                                                                                    |
-| [`assignment.rhai`]({{repoHome}}/scripts/assignment.rhai)         | variable declarations                                                                       |
+| [`assignment.rhai`]({{repoHome}}/scripts/assignment.rhai)         | [variable] declarations                                                                     |
 | [`comments.rhai`]({{repoHome}}/scripts/comments.rhai)             | just comments                                                                               |
 | [`for1.rhai`]({{repoHome}}/scripts/for1.rhai)                     | [`for`]({{rootUrl}}/language/for.md) loops                                                  |
 | [`for2.rhai`]({{repoHome}}/scripts/for2.rhai)                     | [`for`]({{rootUrl}}/language/for.md) loops on [arrays]                                      |
@@ -25,7 +25,7 @@ There are also a number of examples scripts that showcase Rhai's features, all i
 | [`op1.rhai`]({{repoHome}}/scripts/op1.rhai)                       | just simple addition                                                                        |
 | [`op2.rhai`]({{repoHome}}/scripts/op2.rhai)                       | simple addition and multiplication                                                          |
 | [`op3.rhai`]({{repoHome}}/scripts/op3.rhai)                       | change evaluation order with parenthesis                                                    |
-| [`string.rhai`]({{repoHome}}/scripts/string.rhai)                 | [string] operations                                                                         |
+| [`string.rhai`]({{repoHome}}/scripts/string.rhai)                 | [string] operations, including _interpolation_                                              |
 | [`strings_map.rhai`]({{repoHome}}/scripts/strings_map.rhai)       | [string] and [object map] operations                                                        |
 | [`while.rhai`]({{repoHome}}/scripts/while.rhai)                   | [`while`]({{rootUrl}}/language/while.md) loop                                               |
 

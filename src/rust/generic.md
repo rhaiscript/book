@@ -8,7 +8,7 @@ Rust generic functions can be used in Rhai, but separate instances for each conc
 This essentially _overloads_ the function with different parameter types as Rhai does not natively support generics
 but Rhai does support _function overloading_.
 
-```rust,no_run
+```rust , no_run
 use std::fmt::Display;
 
 use rhai::Engine;

@@ -24,7 +24,7 @@ Key Concepts
 Example
 -------
 
-```rust,no_run
+```rust , no_run
 use rhai::{Engine};
 
 fn main() {

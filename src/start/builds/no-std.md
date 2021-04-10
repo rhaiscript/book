@@ -24,7 +24,7 @@ an allocator crate, such as [`wee_alloc`](https://crates.io/crates/wee_alloc).
 Then there is the need to set up proper error/panic handlers.
 The following example uses `panic = "abort"` and `wee_alloc` as the allocator.
 
-```rust,no_run
+```rust , no_run
 // Set up for no-std.
 #![no_std]
 

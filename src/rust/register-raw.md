@@ -22,7 +22,7 @@ The function signature includes the current [_native call context_][`NativeCallC
 exposes the current [`Engine`], among others, so the Rust function can recursively call methods on
 the same [`Engine`].
 
-```rust,no_run
+```rust , no_run
 engine.register_raw_fn(
     "increment_by",                                         // function name
     &[                                                      // a slice containing parameter types
@@ -88,7 +88,7 @@ Extract The First `&mut` Argument (If Any)
 To extract the first `&mut` argument passed by reference from the `args` parameter (`&mut [&mut Dynamic]`),
 use the following to get a mutable reference to the underlying value:
 
-```rust,no_run
+```rust , no_run
 let value: &mut T = &mut *args[0].write_lock::<T>().unwrap();
 
 *value = ...    // overwrite the existing value of the first `&mut` parameter
@@ -129,7 +129,7 @@ The following example registers a function that takes a [function pointer] as an
 then calls it within the same [`Engine`].  This way, a _callback_ function can be provided
 to a native Rust function.
 
-```rust,no_run
+```rust , no_run
 use rhai::{Engine, FnPtr};
 
 let mut engine = Engine::new();
@@ -199,7 +199,7 @@ to the first argument, use one of the following tactics:
 
 3) use `split_first_mut` to partition the slice:
 
-```rust,no_run
+```rust , no_run
 // Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 

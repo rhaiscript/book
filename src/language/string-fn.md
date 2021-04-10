@@ -54,7 +54,7 @@ When one (or both) of the operands is a [character], it is first converted into 
 Examples
 --------
 
-```rust,no_run
+```rust , no_run
 let full_name == " Bob C. Davis ";
 full_name.len == 14;
 

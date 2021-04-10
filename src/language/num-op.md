@@ -13,7 +13,7 @@ Unary Operators
 | `+`      | positive    |
 | `-`      | negative    |
 
-```rust,no_run
+```rust , no_run
 let number = -5;
 
 number = -5 - +5;
@@ -45,7 +45,7 @@ Binary Operators
 Note: when one of the operands to a binary operator is floating-point, it works with `INT` for the
 other operand and the result is floating-point.
 
-```rust,no_run
+```rust , no_run
 let x = (1 + 2) * (6 - 4) / 2;  // arithmetic, with parentheses
 
 let reminder = 42 % 10;         // modulo
@@ -67,7 +67,7 @@ In Rhai, unary operators take precedence over binary operators.  This is especia
 remember when handling operators such as `**` which in some languages bind tighter than the unary
 `-` operator.
 
-```rust,no_run
+```rust , no_run
 -2 + 2 == 0;
 
 -2 - 2 == -4;

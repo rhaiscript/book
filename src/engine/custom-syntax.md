@@ -73,7 +73,7 @@ Any new custom syntax definition using the same first symbol simply _overwrites_
 
 ### Example
 
-```rust,no_run
+```rust , no_run
 exec $ident$ <- $expr$ : $block$
 ```
 
@@ -90,7 +90,7 @@ The above syntax is made up of a stream of symbols:
 
 This syntax matches the following sample code and generates three inputs (one for each non-keyword):
 
-```rust,no_run
+```rust , no_run
 // Assuming the 'exec' custom syntax implementation declares the variable 'hello':
 let x = exec hello <- foo(1, 2) : {
             hello += bar(hello);
@@ -153,7 +153,7 @@ To access a particular argument, use the following patterns:
 Use the `EvalContext::eval_expression_tree` method to evaluate an arbitrary expression tree
 within the current evaluation context.
 
-```rust,no_run
+```rust , no_run
 let expression = inputs.get(0).unwrap();
 let result = context.eval_expression_tree(expression)?;
 ```
@@ -168,7 +168,7 @@ However, beware that all new variables must be declared _prior_ to evaluating an
 In other words, any [`Scope`] calls that change the list of must come _before_ any
 `EvalContext::eval_expression_tree` calls.
 
-```rust,no_run
+```rust , no_run
 let var_name = inputs[0].get_variable_name().unwrap();
 let expression = inputs.get(1).unwrap();
 
@@ -188,7 +188,7 @@ with that symbol, the previous syntax will be overwritten.
 
 The syntax is passed simply as a slice of `&str`.
 
-```rust,no_run
+```rust , no_run
 // Custom syntax implementation
 fn implementation_func(
     context: &mut EvalContext,
@@ -233,7 +233,7 @@ engine.register_custom_syntax(
 
 Remember that a custom syntax acts as an _expression_, so it can show up practically anywhere:
 
-```rust,no_run
+```rust , no_run
 // Use as an expression:
 let foo = (exec |x| -> { x += 1 } while x < 0) * 100;
 
@@ -283,7 +283,7 @@ Sometimes it is desirable to have multiple custom syntax starting with the
 same symbol.  This is especially common for _command-style_ syntax where the
 second symbol calls a particular command:
 
-```rust,no_run
+```rust , no_run
 // The following simulates a command-style syntax, all starting with 'perform'.
 perform hello world;        // A fixed sequence of symbols
 perform action 42;          // Perform a system action with a parameter
@@ -296,7 +296,7 @@ perform remove something;   // Delete something from the system
 
 Alternatively, a custom syntax may have variable length, with a termination symbol:
 
-```rust,no_run
+```rust , no_run
 // The following is a variable-length list terminated by '>'  
 tags < "foo", "bar", 123, ... , x+y, true >
 ```
@@ -335,7 +335,7 @@ look-ahead symbol).
 
 ### Example
 
-```rust,no_run
+```rust , no_run
 engine.register_custom_syntax_raw(
     "perform",
     // The custom parser implementation - always returns the next symbol expected

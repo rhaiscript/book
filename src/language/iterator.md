@@ -12,7 +12,7 @@ the [custom type] in question.
 `Engine::register_iterator<T>` allows registration of a _type iterator_ for any type
 that implements `IntoIterator`:
 
-```rust,no_run
+```rust , no_run
 // Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec<i64> }
@@ -34,7 +34,7 @@ engine.register_type_with_name::<TestStruct>("TestStruct")
 
 With a type iterator registered, the [custom type] can be iterated through:
 
-```rust,no_run
+```rust , no_run
 let ts = new_ts();
 
 // Use 'for' statement to loop through items in 'ts'

@@ -7,7 +7,7 @@ Constants can be defined using the `const` keyword and are immutable.
 
 Constants follow the same naming rules as [variables].
 
-```rust,no_run
+```rust , no_run
 const x = 42;
 
 print(x * 2);       // prints 84
@@ -15,7 +15,7 @@ print(x * 2);       // prints 84
 x = 123;            // <- syntax error: cannot assign to constant
 ```
 
-```rust,no_run
+```rust , no_run
 const x;            // 'x' is a constant '()'
 
 const x = 40 + 2;   // 'x' is a constant 42
@@ -33,7 +33,7 @@ When added to a custom [`Scope`], a constant can hold any value, not just a lite
 It is very useful to have a constant value hold a [custom type], which essentially acts
 as a [_singleton_](../patterns/singleton.md).
 
-```rust,no_run
+```rust , no_run
 use rhai::{Engine, Scope};
 
 #[derive(Debug, Clone)]
@@ -74,7 +74,7 @@ can avoid unnecessary cloning of a [custom type] value, even though it is actual
 
 See the relevant section on `&mut` parameter usage in [_Methods_](method.md) for more details.
 
-```rust,no_run
+```rust , no_run
 const x = 42;       // a constant
 
 x.increment();      // call 'increment' defined in Rust with '&mut' first parameter

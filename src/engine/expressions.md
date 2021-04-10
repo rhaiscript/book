@@ -7,7 +7,7 @@ Sometimes a use case does not require a full-blown scripting _language_, but onl
 
 In these cases, use the `Engine::compile_expression` and `Engine::eval_expression` methods or their `_with_scope` variants.
 
-```rust,no_run
+```rust , no_run
 let result = engine.eval_expression::<i64>("2 + (10 + 10) * 2")?;
 ```
 
@@ -16,7 +16,7 @@ is supported and will be considered parse errors when encountered.
 
 [Closures] and [anonymous functions] are also not supported because in the background they compile to functions.
 
-```rust,no_run
+```rust , no_run
 // The following are all syntax errors because the script is not an expression.
 
 engine.eval_expression::<()>("x = 42")?;

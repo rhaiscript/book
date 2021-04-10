@@ -16,7 +16,7 @@ by setting the optimization level to [`OptimizationLevel::None`].
 
 Alternatively, turn off optimizations via the [`no_optimize`] feature.
 
-```rust,no_run
+```rust , no_run
 let engine = rhai::Engine::new();
 
 // Turn off the optimizer

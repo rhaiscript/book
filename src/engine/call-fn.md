@@ -6,7 +6,7 @@ Call Rhai Functions from Rust
 Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted [function]
 from Rust via `Engine::call_fn`.
 
-```rust,no_run
+```rust , no_run
 // Define functions in a script.
 let ast = engine.compile(r#"
     // a function with two parameters: string and i64
@@ -59,7 +59,7 @@ Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
 Custom types (e.g. structures) can also implement [`FuncArgs`][traits] so they can be used for
 calling `Engine::call_fn`.
 
-```rust,no_run
+```rust , no_run
 use std::iter::once;
 use rhai::FuncArgs;
 
@@ -91,7 +91,7 @@ Low-Level API &ndash; `Engine::call_fn_dynamic`
 For more control, construct all arguments as `Dynamic` values and use `Engine::call_fn_dynamic`,
 passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
 
-```rust,no_run
+```rust , no_run
 let result = engine.call_fn_dynamic(
                         &mut scope,         // scope to use
                         &ast,               // AST containing the functions
@@ -106,7 +106,7 @@ let result = engine.call_fn_dynamic(
 
 `Engine::call_fn_dynamic` can also bind a value to the `this` pointer of a script-defined function.
 
-```rust,no_run
+```rust , no_run
 let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();
@@ -132,7 +132,7 @@ cannot access any external [variables] or [constants].
 
 However, this may be useful to load external [modules] via [`import`] statements for use in the function.
 
-```rust,no_run
+```rust , no_run
 import "library" as lib;    // this line is usually not evaluated
                             // when using 'call_fn'
 

@@ -28,7 +28,7 @@ Using `ImmutableString` or `&str` is much more efficient.
 
 A common mistake made by novice Rhai users is to register functions with `String` parameters.
 
-```rust,no_run
+```rust , no_run
 fn get_len1(s: String) -> i64 {             // very inefficient!!!
     s.len() as i64
 }
@@ -57,7 +57,7 @@ which has type `ImmutableString`.
 
 In fact, `&mut String` is treated as an opaque [custom type].
 
-```rust,no_run
+```rust , no_run
 fn bad(s: &mut String) { ... }              // '&mut String' will not match string values
 
 fn good(s: &mut ImmutableString) { ... }

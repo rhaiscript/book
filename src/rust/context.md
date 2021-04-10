@@ -26,7 +26,7 @@ Implement Safety Checks with `NativeCallContext`
 
 The native call context is useful for protecting a function from malicious scripts.
 
-```rust,no_run
+```rust , no_run
 use rhai::{Array, NativeCallContext, EvalAltResult, Position};
 
 // This function builds an array of arbitrary size, but is protected
@@ -65,7 +65,7 @@ Implement a Callback
 The _native call context_ can be used to call a [function pointer] or [closure] that has been passed
 as a parameter to the function, thereby implementing a _callback_:
 
-```rust,no_run
+```rust , no_run
 use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
 pub fn greet(context: NativeCallContext, callback: FnPtr)
