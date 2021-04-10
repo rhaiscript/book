@@ -38,6 +38,32 @@ built-in indexing operations for [arrays], [object maps] and [strings].
 Attempting to register indexers for an [array], [object map] or [string] panics.
 
 
+Negative Integer Index
+----------------------
+
+If the indexer takes a signed integer as an index (e.g. the standard `INT` type), care should be
+taken to handle _negative_ values passed as the index.
+
+It is a standard API style for Rhai to assume that an index position counts _backwards_ from the
+_end_ if it is negative.
+
+`-1` as an index usually refers to the _last_ item, `-2` the second to last item, and so on.
+
+Therefore, negative index values go from `-1` (last item) to `-length` (first item).
+
+A typical implementation for negative index values is:
+
+```rust , no_run
+// The following assumes:
+//   'index' is 'INT', 'items_len: usize' is the number of elements
+let actual_index: usize = if index < 0 {
+    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+} else {
+    index as usize
+};
+```
+
+
 Examples
 --------
 

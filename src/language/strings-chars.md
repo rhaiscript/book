@@ -155,6 +155,23 @@ s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 > 42 then it is true!\n
 ```
 
 
+Indexing
+--------
+
+### From beginning
+
+Individual characters within a string can be accessed with zero-based, non-negative integer indices:
+
+> _string_ `[` _index from 0 to total number of characters - 1_ `]`
+
+### From end
+
+A _negative_ index accesses a character in the string counting from the _end_, with -1 being the
+_last_ character.
+
+> _string_ `[` _index from -1 to -(total number of characters)_ `]`
+
+
 Examples
 --------
 
@@ -180,6 +197,9 @@ ts.s = record;                          // custom type properties can take strin
 
 let c = ts.s[4];
 c == 'C';
+
+let c = ts.s[-4];                       // negative index counts from the end
+c == 'e';
 
 let c = "foo"[0];                       // indexing also works on string literals...
 c == 'f';
