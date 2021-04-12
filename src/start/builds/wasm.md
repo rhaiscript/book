@@ -1,5 +1,5 @@
-Building to WebAssembly (WASM)
-=============================
+WebAssembly (WASM) Build
+========================
 
 {{#include ../../links.md}}
 
