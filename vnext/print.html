@@ -437,6 +437,10 @@ without any additional terms or conditions.</p>
 <p><a href="https://github.com/rhaiscript/rhai-doc"><code>rhai-doc</code></a> – Rhai script documentation tool</p>
 </li>
 </ul>
+<h2 id="ide-integration"><a class="header" href="#ide-integration">IDE Integration</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=rhaiscript.vscode-rhai">VS Code Extension</a> – support <code>.rhai</code> script files for Visual Studio Code</li>
+</ul>
 <h2 id="other-cool-projects"><a class="header" href="#other-cool-projects">Other Cool Projects</a></h2>
 <ul>
 <li>
@@ -670,7 +674,7 @@ for different operating environments.</p>
 # Patch smartstring wth a PR fix because it doesn't properly handle no-std builds.
 smartstring = { git = &quot;https://github.com/okready/smartstring&quot;, branch = &quot;fix-no_std-builds&quot; }
 </code></pre>
-<h1 id="building-to-webassembly-wasm"><a class="header" href="#building-to-webassembly-wasm">Building to WebAssembly (WASM)</a></h1>
+<h1 id="webassembly-wasm-build"><a class="header" href="#webassembly-wasm-build">WebAssembly (WASM) Build</a></h1>
 <p>It is possible to use Rhai when compiling to WebAssembly (WASM).
 This yields a scripting engine (and language) that can be run in a standard web browser.</p>
 <p>Why you would <em>want</em> to is another matter... as there is already a nice, fast, complete scripting language
@@ -723,7 +727,7 @@ try out Rhai’s language features in a standard REPL (<strong>R</strong>ead-<st
 <code>init3.rhai</code> – loading the functions defined in each script into the <em>global</em>
 namespace.</p>
 <p>Then it enters an REPL, which can call the above functions freely.</p>
-<pre><code class="language-bash">rhai-repl init1.rhai init2.rhai init3.rhai
+<pre><code class="language-sh">rhai-repl init1.rhai init2.rhai init3.rhai
 </code></pre>
 <h2 id="rhai-run--the-rhai-runner"><a class="header" href="#rhai-run--the-rhai-runner"><code>rhai-run</code> – The Rhai Runner</a></h2>
 <p>Use <code>rhai-run</code> to run Rhai scripts.</p>
@@ -731,11 +735,11 @@ namespace.</p>
 <h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
 <p>The following command runs the scripts <code>script1.rhai</code>, <code>script2.rhai</code> and <code>script3.rhai</code>
 in order.</p>
-<pre><code class="language-bash">rhai-run script1.rhai script2.rhai script3.rhai
+<pre><code class="language-sh">rhai-run script1.rhai script2.rhai script3.rhai
 </code></pre>
 <h2 id="running-a-utility-program"><a class="header" href="#running-a-utility-program">Running a Utility Program</a></h2>
 <p>Utilities can be run with the following command:</p>
-<pre><code class="language-bash">cargo run --bin {program_name}
+<pre><code class="language-sh">cargo run --bin {program_name}
 </code></pre>
 <h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
 <p>Rhai comes with a number of examples showing how to integrate the scripting <a href="start/examples//book/vnext/engine/hello-world.html"><code>Engine</code></a> within
@@ -754,7 +758,7 @@ a Rust application, as well as a number of sample scripts that showcase differen
 </tbody></table>
 <h2 id="running-examples"><a class="header" href="#running-examples">Running Examples</a></h2>
 <p>Examples can be run with the following command:</p>
-<pre><code class="language-bash">cargo run --example {example_name}
+<pre><code class="language-sh">cargo run --example {example_name}
 </code></pre>
 <h2 id="no-std-samples"><a class="header" href="#no-std-samples"><code>no-std</code> Samples</a></h2>
 <p>To illustrate <code>no-std</code> builds, a number of sample applications are available under the <code>no_std</code> directory:</p>
@@ -762,7 +766,7 @@ a Rust application, as well as a number of sample scripts that showcase differen
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/no_std/no_std_test"><code>no_std_test</code></a></td><td>bare-bones test application that evaluates a Rhai expression and sets the result as the return value</td><td align="center">size</td><td align="center"><a href="https://crates.io/crates/wee_alloc"><code>wee_alloc</code></a></td><td align="center">abort</td></tr>
 </tbody></table>
 <p><code>cargo run</code> cannot be used to run a <code>no-std</code> sample.  It must first be built:</p>
-<pre><code class="language-bash">cd no_std/no_std_test
+<pre><code class="language-sh">cd no_std/no_std_test
 
 cargo +nightly build --release
 
@@ -773,7 +777,7 @@ cargo +nightly build --release
 <p>There are also a number of examples scripts that showcase Rhai’s features, all in the <code>scripts</code> directory:</p>
 <table><thead><tr><th>Script</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/array.rhai"><code>array.rhai</code></a></td><td><a href="start/examples//book/vnext/language/arrays.html">arrays</a></td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/assignment.rhai"><code>assignment.rhai</code></a></td><td>variable declarations</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/assignment.rhai"><code>assignment.rhai</code></a></td><td><a href="start/examples//book/vnext/language/variables.html">variable</a> declarations</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/comments.rhai"><code>comments.rhai</code></a></td><td>just comments</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/for1.rhai"><code>for1.rhai</code></a></td><td><a href="start/examples//book/vnext/language/for.html"><code>for</code></a> loops</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/for2.rhai"><code>for2.rhai</code></a></td><td><a href="start/examples//book/vnext/language/for.html"><code>for</code></a> loops on <a href="start/examples//book/vnext/language/arrays.html">arrays</a></td></tr>
@@ -787,7 +791,7 @@ cargo +nightly build --release
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/op1.rhai"><code>op1.rhai</code></a></td><td>just simple addition</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/op2.rhai"><code>op2.rhai</code></a></td><td>simple addition and multiplication</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/op3.rhai"><code>op3.rhai</code></a></td><td>change evaluation order with parenthesis</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/string.rhai"><code>string.rhai</code></a></td><td><a href="start/examples//book/vnext/language/strings-chars.html">string</a> operations</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/string.rhai"><code>string.rhai</code></a></td><td><a href="start/examples//book/vnext/language/strings-chars.html">string</a> operations, including <em>interpolation</em></td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/strings_map.rhai"><code>strings_map.rhai</code></a></td><td><a href="start/examples//book/vnext/language/strings-chars.html">string</a> and <a href="start/examples//book/vnext/language/object-maps.html">object map</a> operations</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/while.rhai"><code>while.rhai</code></a></td><td><a href="start/examples//book/vnext/language/while.html"><code>while</code></a> loop</td></tr>
 </tbody></table>
@@ -801,7 +805,7 @@ cargo +nightly build --release
 </tbody></table>
 <h2 id="running-example-scripts"><a class="header" href="#running-example-scripts">Running Example Scripts</a></h2>
 <p>The <a href="start/examples/../bin.html"><code>rhai-run</code></a> utility can be used to run Rhai scripts:</p>
-<pre><code class="language-bash">cargo run --bin rhai-run scripts/any_script.rhai
+<pre><code class="language-sh">cargo run --bin rhai-run scripts/any_script.rhai
 </code></pre>
 <h1 id="using-the-engine"><a class="header" href="#using-the-engine">Using the Engine</a></h1>
 <p>Rhai’s interpreter resides in the <a href="engine//book/vnext/engine/hello-world.html"><code>Engine</code></a> type under the master <code>rhai</code> namespace.</p>
@@ -1909,6 +1913,26 @@ that prevents this mutation.</p>
 <p>For efficiency reasons, indexers <strong>cannot</strong> be used to overload (i.e. override)
 built-in indexing operations for <a href="rust//book/vnext/language/arrays.html">arrays</a>, <a href="rust//book/vnext/language/object-maps.html">object maps</a> and <a href="rust//book/vnext/language/strings-chars.html">strings</a>.</p>
 <p>Attempting to register indexers for an <a href="rust//book/vnext/language/arrays.html">array</a>, <a href="rust//book/vnext/language/object-maps.html">object map</a> or <a href="rust//book/vnext/language/strings-chars.html">string</a> panics.</p>
+<h2 id="negative-integer-index"><a class="header" href="#negative-integer-index">Negative Integer Index</a></h2>
+<p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
+taken to handle <em>negative</em> values passed as the index.</p>
+<p>It is a standard API style for Rhai to assume that an index position counts <em>backwards</em> from the
+<em>end</em> if it is negative.</p>
+<p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
+<p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
+<p>A typical implementation for negative index values is:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// The following assumes:
+//   'index' is 'INT', 'items_len: usize' is the number of elements
+let actual_index: usize = if index &lt; 0 {
+    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+} else {
+    index as usize
+};
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -3194,9 +3218,11 @@ and <code>//</code> for comments to the end of the line.</p>
 <span class="boring">}
 </span></code></pre></pre>
 <h1 id="doc-comments"><a class="header" href="#doc-comments">Doc-Comments</a></h1>
-<p>Similar to Rust, comments starting with <code>///</code> (three slashes) or <code>/**</code> (two asterisks) are
-<em>doc-comments</em>.</p>
-<p>Doc-comments can only appear in front of <a href="language//book/vnext/language/functions.html">function</a> definitions, not any other elements:</p>
+<p>Similar to Rust, comments starting with <code>///</code> (three slashes) or <code>/**</code> (two asterisks)
+are <em>doc-comments</em>.</p>
+<p>They are only supported under the <a href="language//book/vnext/start/features.html"><code>metadata</code></a> feature.</p>
+<p>Doc-comments can only appear in front of <a href="language//book/vnext/language/functions.html">function</a> definitions, not any other elements.
+Therefore, doc-comments are not available under <a href="language//book/vnext/start/features.html"><code>no_function</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3222,19 +3248,19 @@ let x = 42;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="special-cases"><a class="header" href="#special-cases">Special Cases</a></h2>
-<p>Long streams of <code>//////...</code> and <code>/*****...</code>  do <em>NOT</em> form doc-comments.
+<p>Long streams of <code>//////</code>... and <code>/*****</code>... do <em>NOT</em> form doc-comments.
 This is consistent with popular comment block styles for C-like languages.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>///////////////////////////////  &lt;- this is not a doc-comment
-// This is not a doc-comment //  &lt;- this is a normal comment
+// This is not a doc-comment //  &lt;- this is not a doc-comment
 ///////////////////////////////  &lt;- this is not a doc-comment
 
 // However, watch out for comment lines starting with '///'
 
 //////////////////////////////////////////  &lt;- this is not a doc-comment
-/// This, however, IS a doc-comment!!! ///  &lt;- this starts with '///'
+/// This, however, IS a doc-comment!!! ///  &lt;- doc-comment!
 //////////////////////////////////////////  &lt;- this is not a doc-comment
 
 /****************************************
@@ -3593,15 +3619,19 @@ number with no rounding errors.</p>
 <p><code>_</code> separators can be added freely and are ignored within a number – except at the very beginning or right after
 a decimal point (<code>.</code>).</p>
 <table><thead><tr><th>Sample</th><th>Format</th><th align="center">Type</th><th align="center"><a href="language//book/vnext/start/features.html"><code>no_float</code></a></th><th align="center"><a href="language//book/vnext/start/features.html"><code>no_float</code></a> + <a href="language//book/vnext/start/features.html"><code>decimal</code></a></th></tr></thead><tbody>
-<tr><td><code>_123</code></td><td><em>syntax error</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>_123</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 <tr><td><code>123_345</code>, <code>-42</code></td><td>decimal</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
 <tr><td><code>0o07_76</code></td><td>octal</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
 <tr><td><code>0xab_cd_ef</code></td><td>hex</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
 <tr><td><code>0b0101_1001</code></td><td>binary</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
-<tr><td><code>123._456</code></td><td><em>syntax error</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123._456</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 <tr><td><code>123_456.78_9</code></td><td>normal floating-point</td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 <tr><td><code>-42.</code></td><td>ending with decimal point</td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
-<tr><td><code>123_456.789e-10</code></td><td><em>scientific notation</em></td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>123_456_.789e-10</code></td><td><em>scientific notation</em></td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>.456</code></td><td><em>syntax error (missing leading <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123.456e_10</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123.e-10</code></td><td><em>syntax error (missing decimal <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>.456e-10</code></td><td><em>syntax error (missing leading <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 </tbody></table>
 <h2 id="warning--no-implicit-type-conversions"><a class="header" href="#warning--no-implicit-type-conversions">Warning – No Implicit Type Conversions</a></h2>
 <p>Unlike most C-like languages, Rhai does <em>not</em> provide implicit type conversions between different
@@ -3951,6 +3981,12 @@ sub-strings together.</p>
 <pre><code class="language-js no_run">let x = 42;
 let y = 123;
 
+let s = `x = ${x} and y = ${y}.`;                   // &lt;- interpolated string
+
+let s = (&quot;x = &quot; + {x} + &quot; and y = &quot; + {y} + &quot;.&quot;);   // &lt;- de-sugars to this
+
+s == &quot;x = 42 and y = 123.&quot;;
+
 let s = `
 Undeniable logic:
 1) Hello, ${let w = `${x} world`; if x &gt; 1 { w += &quot;s&quot; } w}!
@@ -3959,6 +3995,18 @@ Undeniable logic:
 
 s == &quot;Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n&quot;;
 </code></pre>
+<h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
+<h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
+<p>Individual characters within a string can be accessed with zero-based, non-negative integer indices:</p>
+<blockquote>
+<p><em>string</em> <code>[</code> <em>index from 0 to total number of characters - 1</em> <code>]</code></p>
+</blockquote>
+<h3 id="from-end"><a class="header" href="#from-end">From end</a></h3>
+<p>A <em>negative</em> index accesses a character in the string counting from the <em>end</em>, with -1 being the
+<em>last</em> character.</p>
+<blockquote>
+<p><em>string</em> <code>[</code> <em>index from -1 to -(total number of characters)</em> <code>]</code></p>
+</blockquote>
 <h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
 <pre><code class="language-js no_run">let name = &quot;Bob&quot;;
 let middle_initial = 'C';
@@ -3981,6 +4029,9 @@ ts.s = record;                          // custom type properties can take strin
 
 let c = ts.s[4];
 c == 'C';
+
+let c = ts.s[-4];                       // negative index counts from the end
+c == 'e';
 
 let c = &quot;foo&quot;[0];                       // indexing also works on string literals...
 c == 'f';
@@ -4064,13 +4115,13 @@ using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></
 <tr><td><code>clear</code></td><td align="center"></td><td><em>none</em></td><td>empties the string</td></tr>
 <tr><td><code>truncate</code></td><td align="center"></td><td>target length</td><td>cuts off the string at exactly a specified number of characters</td></tr>
 <tr><td><code>contains</code></td><td align="center"></td><td>character/sub-string to search for</td><td>checks if a certain character or sub-string occurs in the string</td></tr>
-<tr><td><code>index_of</code></td><td align="center"></td><td>1) character/sub-string to search for<br/>2) <em>(optional)</em> start index</td><td>returns the index that a certain character or sub-string occurs in the string, or -1 if not found</td></tr>
-<tr><td><code>sub_string</code></td><td align="center"></td><td>1) start index<br/>2) <em>(optional)</em> number of characters to extract, none if &lt; 0</td><td>extracts a sub-string (to the end of the string if length is not specified)</td></tr>
+<tr><td><code>index_of</code></td><td align="center"></td><td>1) character/sub-string to search for<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index that a certain character or sub-string occurs in the string, or -1 if not found</td></tr>
+<tr><td><code>sub_string</code></td><td align="center"></td><td>1) start index, counting from end if &lt; 0<br/>2) <em>(optional)</em> number of characters to extract, none if &lt; 0</td><td>extracts a sub-string (to the end of the string if length is not specified)</td></tr>
 <tr><td><code>split</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td><em>none</em></td><td>splits the string by individual characters, returning an <a href="language//book/vnext/language/arrays.html">array</a> of characters</td></tr>
-<tr><td><code>split</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td>Position to split at (in number of characters), beginning if &lt; 0, end if ≥ length</td><td>splits the string into two segments at the specified character position, returning an <a href="language//book/vnext/language/arrays.html">array</a> of two string segments</td></tr>
+<tr><td><code>split</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td>Position to split at (in number of characters), counting from end if &lt; 0, end if ≥ length</td><td>splits the string into two segments at the specified character position, returning an <a href="language//book/vnext/language/arrays.html">array</a> of two string segments</td></tr>
 <tr><td><code>split</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td>1) delimiter character/string<br/>2) <em>(optional)</em> maximum number of segments, 1 if &lt; 1</td><td>splits the string by the specified delimiter, returning an <a href="language//book/vnext/language/arrays.html">array</a> of string segments</td></tr>
 <tr><td><code>split_rev</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td>1) delimiter character/string<br/>2) <em>(optional)</em> maximum number of segments, 1 if &lt; 1</td><td>splits the string by the specified delimiter in reverse order, returning an <a href="language//book/vnext/language/arrays.html">array</a> of string segments</td></tr>
-<tr><td><code>crop</code></td><td align="center"></td><td>1) start index<br/>2) <em>(optional)</em> number of characters to retain, none if &lt; 0</td><td>retains only a portion of the string</td></tr>
+<tr><td><code>crop</code></td><td align="center"></td><td>1) start index, counting from end if &lt; 0<br/>2) <em>(optional)</em> number of characters to retain, none if &lt; 0</td><td>retains only a portion of the string</td></tr>
 <tr><td><code>replace</code></td><td align="center"></td><td>1) target character/sub-string<br/>2) replacement character/string</td><td>replaces a sub-string with another</td></tr>
 <tr><td><code>trim</code></td><td align="center"></td><td><em>none</em></td><td>trims the string of whitespace at the beginning and end</td></tr>
 </tbody></table>
@@ -4132,21 +4183,31 @@ full_name.len == 0;
 <span class="boring">}
 </span></code></pre></pre>
 <h1 id="arrays"><a class="header" href="#arrays">Arrays</a></h1>
-<p>Arrays are first-class citizens in Rhai. Like C, arrays are accessed with zero-based, non-negative integer indices:</p>
-<blockquote>
-<p><em>array</em> <code>[</code> <em>index</em> <code>]</code></p>
-</blockquote>
+<p>Arrays are first-class citizens in Rhai.</p>
 <p>Array literals are built within square brackets <code>[</code> ... <code>]</code> and separated by commas <code>,</code>:</p>
 <blockquote>
 <p><code>[</code> <em>value</em> <code>,</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>value</em> <code>]</code></p>
 <p><code>[</code> <em>value</em> <code>,</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>value</em> <code>,</code> <code>]</code>     <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>All elements stored in an array are <a href="language//book/vnext/language/dynamic.html"><code>Dynamic</code></a>, and the array can freely grow or shrink with elements added or removed.</p>
+<p>All elements stored in an array are <a href="language//book/vnext/language/dynamic.html"><code>Dynamic</code></a>, and the array can freely grow or shrink with
+elements added or removed.</p>
 <p>The Rust type of a Rhai array is <code>rhai::Array</code>.</p>
 <p><a href="language//book/vnext/language/type-of.html"><code>type_of()</code></a> an array returns <code>&quot;array&quot;</code>.</p>
 <p>Arrays are disabled via the <a href="language//book/vnext/start/features.html"><code>no_index</code></a> feature.</p>
 <p>The maximum allowed size of an array can be controlled via <code>Engine::set_max_array_size</code>
 (see <a href="language//book/vnext/safety/max-array-size.html">maximum size of arrays</a>.</p>
+<h2 id="element-access"><a class="header" href="#element-access">Element Access</a></h2>
+<h3 id="from-beginning-1"><a class="header" href="#from-beginning-1">From beginning</a></h3>
+<p>Like C, arrays are accessed with zero-based, non-negative integer indices:</p>
+<blockquote>
+<p><em>array</em> <code>[</code> <em>index from 0 to length-1</em> <code>]</code></p>
+</blockquote>
+<h3 id="from-end-1"><a class="header" href="#from-end-1">From end</a></h3>
+<p>A <em>negative</em> index accesses an element in the array counting from the <em>end</em>, with -1 being the
+<em>last</em> element.</p>
+<blockquote>
+<p><em>array</em> <code>[</code> <em>index from -1 to -length</em> <code>]</code></p>
+</blockquote>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
 <p>The following methods (mostly defined in the <a href="language//book/vnext/rust/packages/index.html"><code>BasicArrayPackage</code></a> but excluded if using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on arrays:</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
@@ -4157,10 +4218,10 @@ full_name.len == 0;
 <tr><td><code>+</code> operator</td><td>1) first array<br/>2) second array</td><td>concatenates the first array with the second</td></tr>
 <tr><td><code>==</code> operator</td><td>1) first array<br/>2) second array</td><td>are the two arrays the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>!=</code> operator</td><td>1) first array<br/>2) second array</td><td>are the two arrays different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
-<tr><td><code>insert</code></td><td>1) position, beginning if &lt; 0, end if ≥ length<br/>2) element to insert</td><td>inserts an element at a certain index</td></tr>
+<tr><td><code>insert</code></td><td>1) position, counting from end if &lt; 0, end if ≥ length<br/>2) element to insert</td><td>inserts an element at a certain index</td></tr>
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last element and returns it (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first element and returns it (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
-<tr><td><code>extract</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) <em>(optional)</em> number of items to extract, none if &lt; 0</td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) <em>(optional)</em> number of items to extract, none if &lt; 0</td><td>extracts a portion of the array into a new array</td></tr>
 <tr><td><code>remove</code></td><td>index</td><td>removes an element at a particular index and returns it (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> if the index is not valid)</td></tr>
 <tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the array</td></tr>
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of elements</td></tr>
@@ -4168,16 +4229,16 @@ full_name.len == 0;
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the array</td></tr>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
-<tr><td><code>split</code></td><td>1) array<br/>2) position to split at, beginning if &lt; 0, end if ≥ length</td><td>splits the array into two arrays, starting from a specified position</td></tr>
+<tr><td><code>split</code></td><td>1) array<br/>2) position to split at, counting from end if &lt; 0, end if ≥ length</td><td>splits the array into two arrays, starting from a specified position</td></tr>
 <tr><td><code>drain</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>drain</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0</td><td>removes a portion of the array, returning the removed items (not in original order)</td></tr>
+<tr><td><code>drain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0</td><td>removes a portion of the array, returning the removed items (not in original order)</td></tr>
 <tr><td><code>retain</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>retain</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) number of items to retain, none if &lt; 0</td><td>retains a portion of the array, removes all other items and returning them (not in original order)</td></tr>
-<tr><td><code>splice</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>retain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to retain, none if &lt; 0</td><td>retains a portion of the array, removes all other items and returning them (not in original order)</td></tr>
+<tr><td><code>splice</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
 <tr><td><code>filter</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>contains</code></td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator (if defined) is used to compare <a href="language//book/vnext/rust/custom.html">custom types</a></td></tr>
-<tr><td><code>index_of</code></td><td>element to find (not a <a href="language//book/vnext/language/fn-ptr.html">function pointers</a>)</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or -1 if not found</td></tr>
-<tr><td><code>index_of</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="language//book/vnext/language/fn-ptr.html">function pointers</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or -1 if not found</td></tr>
+<tr><td><code>index_of</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>map</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>reduce</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>reduce_rev</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
@@ -4232,6 +4293,8 @@ ts.list = y;                // arrays can be assigned completely (by value copy)
 ts.list[1] == 42;
 
 [1, 2, 3][0] == 1;          // indexing on array literal
+
+[1, 2, 3][-1] == 3;         // negative index counts from the end
 
 fn abc() {
     [42, 43, 44]            // a function returning an array
@@ -4351,8 +4414,8 @@ and separated by commas <code>,</code>:</p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>}</code></p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>}</code>  <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>The property <em>name</em> can be a simple variable name following the same
-naming rules as <a href="language//book/vnext/language/variables.html">variables</a>, or an arbitrary <a href="language//book/vnext/language/strings-chars.html">string</a> literal.</p>
+<p>The property <em>name</em> can be a simple variable name following the same naming rules as <a href="language//book/vnext/language/variables.html">variables</a>, or
+a <a href="language//book/vnext/language/strings-chars.html">string</a> literal without interpolation.</p>
 <h2 id="access-properties"><a class="header" href="#access-properties">Access Properties</a></h2>
 <h3 id="dot-notation"><a class="header" href="#dot-notation">Dot Notation</a></h3>
 <p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="language//book/vnext/language/variables.html">variables</a>.</p>
@@ -4371,7 +4434,7 @@ naming rules as <a href="language//book/vnext/language/variables.html">variables
 <p>The following methods (defined in the <a href="language//book/vnext/rust/packages/index.html"><code>BasicMapPackage</code></a> but excluded if using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>)
 operate on object maps:</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>has</code>, <code>contains</code> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
+<tr><td><code>contains</code> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
 <tr><td><code>len</code></td><td><em>none</em></td><td>returns the number of properties</td></tr>
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the object map</td></tr>
 <tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
@@ -4393,16 +4456,19 @@ operate on object maps:</p>
     &quot;baz!$@&quot;: 123.456,  // like JavaScript, you can use any string as property names...
     &quot;&quot;: false,          // even the empty string!
 
-    a: 42               // &lt;- syntax error: duplicated property name
+    `hello`: 999,       // literal strings are also OK
+
+    a: 42,              // &lt;- syntax error: duplicated property name
+
+    `a${2}`: 42,        // &lt;- syntax error: property name cannot have string interpolation
 };
 
 y.a = 42;               // access via dot notation
-y.baz!$@ = 42;          // &lt;- syntax error: only proper variable names allowed in dot notation
-y.&quot;baz!$@&quot; = 42;        // &lt;- syntax error: strings not allowed in dot notation
-
 y.a == 42;
 
-y[&quot;baz!$@&quot;] == 123.456; // access via index notation
+y.baz!$@ = 42;          // &lt;- syntax error: only proper variable names allowed in dot notation
+y.&quot;baz!$@&quot; = 42;        // &lt;- syntax error: strings not allowed in dot notation
+y[&quot;baz!$@&quot;] = 42;       // access via index notation is OK
 
 &quot;baz!$@&quot; in y == true;  // use 'in' to test if a property exists in the object map
 (&quot;z&quot; in y) == false;
@@ -4411,14 +4477,15 @@ ts.obj = y;             // object maps can be assigned completely (by value copy
 let foo = ts.list.a;
 foo == 42;
 
-let foo = #{ a:1,};     // trailing comma is OK
+let foo = #{ a:1, };    // trailing comma is OK
 
 let foo = #{ a:1, b:2, c:3 }[&quot;a&quot;];
+let foo = #{ a:1, b:2, c:3 }.a;
 foo == 1;
 
 fn abc() {
-    #{ a:1, b:2, c:3 } // a function returning an object map
-}
+<span class="boring">    { a:1, b:2, c:3 }  // a function returning an object map
+</span>}
 
 let foo = abc().b;
 foo == 2;
@@ -4426,18 +4493,19 @@ foo == 2;
 let foo = y[&quot;a&quot;];
 foo == 42;
 
-y.has(&quot;a&quot;) == true;
-y.has(&quot;xyz&quot;) == false;
+y.contains(&quot;a&quot;) == true;
+y.contains(&quot;xyz&quot;) == false;
 
 y.xyz == ();            // a non-existing property returns '()'
 y[&quot;xyz&quot;] == ();
 
-y.len() == 3;
+y.len == ();            // an object map has no property getter function
+y.len() == 3;           // method calls are OK
 
 y.remove(&quot;a&quot;) == 1;     // remove property
 
 y.len() == 2;
-y.has(&quot;a&quot;) == false;
+y.contains(&quot;a&quot;) == false;
 
 for name in y.keys() {  // get an array of all the property names via 'keys'
     print(name);
@@ -6563,8 +6631,10 @@ let x = 42;             // this will be exported below
 
 export x;               // the variable 'x' is exported under its own name
 
-export let x = 42;      // convenient short-hand to declare a variable and export it
+export const x = 42;    // convenient short-hand to declare a constant and export it
                         // under its own name
+
+export let x = 123;     // variables can be exported as well, though it'll still be constant
 
 export x as answer;     // the variable 'x' is exported under the alias 'answer'
                         // another script can load this module and access 'x' as 'module::answer'
@@ -10147,7 +10217,9 @@ link = &quot;https://example.com/tools&quot;
 <tr><td><code>!</code></td><td align="center">bang</td><td>function call in calling scope</td></tr>
 <tr><td><code>=&gt;</code></td><td align="center">double arrow</td><td><code>switch</code> expression case separator</td></tr>
 <tr><td><code>//</code></td><td align="center">comment</td><td>line comment</td></tr>
+<tr><td><code>///</code></td><td align="center">doc-comment</td><td>line [doc-comment]</td></tr>
 <tr><td><code>/*</code> .. <code>*/</code></td><td align="center">comment</td><td>block comment</td></tr>
+<tr><td><code>/**</code> .. <code>*/</code></td><td align="center">doc-comment</td><td>block [doc-comment]</td></tr>
 <tr><td><code>(*</code> .. <code>*)</code></td><td align="center">comment</td><td><em>reserved</em></td></tr>
 <tr><td><code>#!</code></td><td align="center">shebang</td><td><em>reserved</em></td></tr>
 <tr><td><code>&lt;</code> .. <code>&gt;</code></td><td align="center">tag</td><td><em>reserved</em></td></tr>

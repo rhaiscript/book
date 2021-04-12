@@ -184,8 +184,8 @@ and separated by commas <code>,</code>:</p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>}</code></p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>}</code>  <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>The property <em>name</em> can be a simple variable name following the same
-naming rules as <a href="/book/vnext/language/variables.html">variables</a>, or an arbitrary <a href="/book/vnext/language/strings-chars.html">string</a> literal.</p>
+<p>The property <em>name</em> can be a simple variable name following the same naming rules as <a href="/book/vnext/language/variables.html">variables</a>, or
+a <a href="/book/vnext/language/strings-chars.html">string</a> literal without interpolation.</p>
 <h2 id="access-properties"><a class="header" href="#access-properties">Access Properties</a></h2>
 <h3 id="dot-notation"><a class="header" href="#dot-notation">Dot Notation</a></h3>
 <p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/book/vnext/language/variables.html">variables</a>.</p>
@@ -204,7 +204,7 @@ naming rules as <a href="/book/vnext/language/variables.html">variables</a>, or 
 <p>The following methods (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMapPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
 operate on object maps:</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>has</code>, <code>contains</code> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
+<tr><td><code>contains</code> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
 <tr><td><code>len</code></td><td><em>none</em></td><td>returns the number of properties</td></tr>
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the object map</td></tr>
 <tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
@@ -226,16 +226,19 @@ operate on object maps:</p>
     &quot;baz!$@&quot;: 123.456,  // like JavaScript, you can use any string as property names...
     &quot;&quot;: false,          // even the empty string!
 
-    a: 42               // &lt;- syntax error: duplicated property name
+    `hello`: 999,       // literal strings are also OK
+
+    a: 42,              // &lt;- syntax error: duplicated property name
+
+    `a${2}`: 42,        // &lt;- syntax error: property name cannot have string interpolation
 };
 
 y.a = 42;               // access via dot notation
-y.baz!$@ = 42;          // &lt;- syntax error: only proper variable names allowed in dot notation
-y.&quot;baz!$@&quot; = 42;        // &lt;- syntax error: strings not allowed in dot notation
-
 y.a == 42;
 
-y[&quot;baz!$@&quot;] == 123.456; // access via index notation
+y.baz!$@ = 42;          // &lt;- syntax error: only proper variable names allowed in dot notation
+y.&quot;baz!$@&quot; = 42;        // &lt;- syntax error: strings not allowed in dot notation
+y[&quot;baz!$@&quot;] = 42;       // access via index notation is OK
 
 &quot;baz!$@&quot; in y == true;  // use 'in' to test if a property exists in the object map
 (&quot;z&quot; in y) == false;
@@ -244,14 +247,15 @@ ts.obj = y;             // object maps can be assigned completely (by value copy
 let foo = ts.list.a;
 foo == 42;
 
-let foo = #{ a:1,};     // trailing comma is OK
+let foo = #{ a:1, };    // trailing comma is OK
 
 let foo = #{ a:1, b:2, c:3 }[&quot;a&quot;];
+let foo = #{ a:1, b:2, c:3 }.a;
 foo == 1;
 
 fn abc() {
-    #{ a:1, b:2, c:3 } // a function returning an object map
-}
+<span class="boring">    { a:1, b:2, c:3 }  // a function returning an object map
+</span>}
 
 let foo = abc().b;
 foo == 2;
@@ -259,18 +263,19 @@ foo == 2;
 let foo = y[&quot;a&quot;];
 foo == 42;
 
-y.has(&quot;a&quot;) == true;
-y.has(&quot;xyz&quot;) == false;
+y.contains(&quot;a&quot;) == true;
+y.contains(&quot;xyz&quot;) == false;
 
 y.xyz == ();            // a non-existing property returns '()'
 y[&quot;xyz&quot;] == ();
 
-y.len() == 3;
+y.len == ();            // an object map has no property getter function
+y.len() == 3;           // method calls are OK
 
 y.remove(&quot;a&quot;) == 1;     // remove property
 
 y.len() == 2;
-y.has(&quot;a&quot;) == false;
+y.contains(&quot;a&quot;) == false;
 
 for name in y.keys() {  // get an array of all the property names via 'keys'
     print(name);

@@ -188,8 +188,10 @@ let x = 42;             // this will be exported below
 
 export x;               // the variable 'x' is exported under its own name
 
-export let x = 42;      // convenient short-hand to declare a variable and export it
+export const x = 42;    // convenient short-hand to declare a constant and export it
                         // under its own name
+
+export let x = 123;     // variables can be exported as well, though it'll still be constant
 
 export x as answer;     // the variable 'x' is exported under the alias 'answer'
                         // another script can load this module and access 'x' as 'module::answer'

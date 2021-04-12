@@ -190,6 +190,26 @@ that prevents this mutation.</p>
 <p>For efficiency reasons, indexers <strong>cannot</strong> be used to overload (i.e. override)
 built-in indexing operations for <a href="/book/vnext/language/arrays.html">arrays</a>, <a href="/book/vnext/language/object-maps.html">object maps</a> and <a href="/book/vnext/language/strings-chars.html">strings</a>.</p>
 <p>Attempting to register indexers for an <a href="/book/vnext/language/arrays.html">array</a>, <a href="/book/vnext/language/object-maps.html">object map</a> or <a href="/book/vnext/language/strings-chars.html">string</a> panics.</p>
+<h2 id="negative-integer-index"><a class="header" href="#negative-integer-index">Negative Integer Index</a></h2>
+<p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
+taken to handle <em>negative</em> values passed as the index.</p>
+<p>It is a standard API style for Rhai to assume that an index position counts <em>backwards</em> from the
+<em>end</em> if it is negative.</p>
+<p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
+<p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
+<p>A typical implementation for negative index values is:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// The following assumes:
+//   'index' is 'INT', 'items_len: usize' is the number of elements
+let actual_index: usize = if index &lt; 0 {
+    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+} else {
+    index as usize
+};
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

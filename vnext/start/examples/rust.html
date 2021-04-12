@@ -181,7 +181,7 @@
 </tbody></table>
 <h2 id="running-examples"><a class="header" href="#running-examples">Running Examples</a></h2>
 <p>Examples can be run with the following command:</p>
-<pre><code class="language-bash">cargo run --example {example_name}
+<pre><code class="language-sh">cargo run --example {example_name}
 </code></pre>
 <h2 id="no-std-samples"><a class="header" href="#no-std-samples"><code>no-std</code> Samples</a></h2>
 <p>To illustrate <code>no-std</code> builds, a number of sample applications are available under the <code>no_std</code> directory:</p>
@@ -189,7 +189,7 @@
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/no_std/no_std_test"><code>no_std_test</code></a></td><td>bare-bones test application that evaluates a Rhai expression and sets the result as the return value</td><td align="center">size</td><td align="center"><a href="https://crates.io/crates/wee_alloc"><code>wee_alloc</code></a></td><td align="center">abort</td></tr>
 </tbody></table>
 <p><code>cargo run</code> cannot be used to run a <code>no-std</code> sample.  It must first be built:</p>
-<pre><code class="language-bash">cd no_std/no_std_test
+<pre><code class="language-sh">cd no_std/no_std_test
 
 cargo +nightly build --release
 

@@ -168,9 +168,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="doc-comments"><a class="header" href="#doc-comments">Doc-Comments</a></h1>
-<p>Similar to Rust, comments starting with <code>///</code> (three slashes) or <code>/**</code> (two asterisks) are
-<em>doc-comments</em>.</p>
-<p>Doc-comments can only appear in front of <a href="/book/vnext/language/functions.html">function</a> definitions, not any other elements:</p>
+<p>Similar to Rust, comments starting with <code>///</code> (three slashes) or <code>/**</code> (two asterisks)
+are <em>doc-comments</em>.</p>
+<p>They are only supported under the <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature.</p>
+<p>Doc-comments can only appear in front of <a href="/book/vnext/language/functions.html">function</a> definitions, not any other elements.
+Therefore, doc-comments are not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -196,19 +198,19 @@ let x = 42;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="special-cases"><a class="header" href="#special-cases">Special Cases</a></h2>
-<p>Long streams of <code>//////...</code> and <code>/*****...</code>  do <em>NOT</em> form doc-comments.
+<p>Long streams of <code>//////</code>... and <code>/*****</code>... do <em>NOT</em> form doc-comments.
 This is consistent with popular comment block styles for C-like languages.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>///////////////////////////////  &lt;- this is not a doc-comment
-// This is not a doc-comment //  &lt;- this is a normal comment
+// This is not a doc-comment //  &lt;- this is not a doc-comment
 ///////////////////////////////  &lt;- this is not a doc-comment
 
 // However, watch out for comment lines starting with '///'
 
 //////////////////////////////////////////  &lt;- this is not a doc-comment
-/// This, however, IS a doc-comment!!! ///  &lt;- this starts with '///'
+/// This, however, IS a doc-comment!!! ///  &lt;- doc-comment!
 //////////////////////////////////////////  &lt;- this is not a doc-comment
 
 /****************************************
