@@ -3,10 +3,9 @@
 
 {{#include ../links.md}}
 
-The `switch` _expression_ allows matching on literal values, and it mostly follows Rust's
-`match` syntax:
+The `switch` _expression_ allows matching on literal values, and it mostly follows Rust's `match` syntax.
 
-```js,no_run
+```js , no_run
 switch calc_secret_value(x) {
     1 => print("It's one!"),
     2 => {
@@ -14,8 +13,20 @@ switch calc_secret_value(x) {
         print("Again!");
     }
     3 => print("Go!"),
-    // _ is the default when no cases match
+    // _ is the default when no cases match.
+    // It must be the last case.
     _ => print(`Oops! Something's wrong: ${x}`)
+}
+```
+
+The _default_ case (i.e. when no other cases match), however, must be the _last_ case in the statement.
+
+```js , no_run
+switch wrong_default {
+    1 => 2,
+    _ => 9,     // <- syntax error: default case not the last
+    2 => 3,
+    3 => 4,     // <- ending with extra comma is OK
 }
 ```
 
@@ -26,7 +37,7 @@ Expression, Not Statement
 `switch` is not a statement, but an expression. This means that a `switch` expression can
 appear anywhere a regular expression can, e.g. as function call arguments.
 
-```ts,no_run
+```js , no_run
 let x = switch foo { 1 => true, _ => false };
 
 func(switch foo {
@@ -54,7 +65,7 @@ Array and Object Map Literals Also Work
 
 The `switch` expression can match against any _literal_, including [array] and [object map] literals.
 
-```ts,no_run
+```js , no_run
 // Match on arrays
 switch [foo, bar, baz] {
     ["hello", 42, true] => { ... }
@@ -71,8 +82,32 @@ switch map {
 }
 ```
 
-Switching on [arrays] is very useful when working with Rust enums (see [this chapter]({{rootUrl}}/patterns/enums.md)
-for more details).
+Switching on [arrays] is very useful when working with Rust enums
+(see [this chapter]({{rootUrl}}/patterns/enums.md) for more details).
+
+
+Case Conditions
+---------------
+
+Similar to Rust, each case (except the default case at the end) can provide an optional condition
+that must evaluate to `true` in order for the case to match.
+
+```js , no_run
+let result = switch calc_secret_value(x) {
+    1 if some_external_condition(x, y, z) => 100,
+
+    2 if x < foo => 200,
+    2 if bar() => 999,      // <- syntax error: still cannot have duplicated cases
+
+    3 => if CONDITION {     // <- put condition inside statement block for
+        123                 //    duplicated cases
+    } else {
+        0
+    }
+
+    _ if CONDITION => 8888  // <- syntax error: default case cannot have condition
+};
+```
 
 
 Difference From `if`-`else if` Chain
