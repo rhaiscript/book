@@ -178,12 +178,34 @@ and execute it to form a module.</p>
 <p>Built-in module resolvers are grouped under the <code>rhai::module_resolvers</code> module namespace.</p>
 <h2 id="filemoduleresolver-default"><a class="header" href="#filemoduleresolver-default"><code>FileModuleResolver</code> (default)</a></h2>
 <p>The <em>default</em> module resolution service, not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds.
-Loads a script file (based off the current directory) with <code>.rhai</code> extension.</p>
+Loads a script file (based off the current directory or a specified one) with <code>.rhai</code> extension.</p>
+<h3 id="function-namespace"><a class="header" href="#function-namespace">Function namespace</a></h3>
 <p>All functions in the <em>global</em> namespace, plus all those defined in the same module,
 are <em>merged</em> into a <em>unified</em> namespace.</p>
 <p>All modules imported at <em>global</em> level via <a href="/book/language/modules/import.html"><code>import</code></a> statements become sub-modules,
 which are also available to functions defined within the same script file.</p>
-<p>Modules are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when repeatedly imported.</p>
+<h3 id="base-directory"><a class="header" href="#base-directory">Base directory</a></h3>
+<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory (if set).
+The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
+<p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then it is based off the
+directory holding the loading script. This allows scripts to simply load each other.</p>
+<h3 id="caching"><a class="header" href="#caching">Caching</a></h3>
+<p>By default, modules are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
+repeatedly imported.</p>
+<p>Use <code>FileModuleResolver::enable_cache</code> to enable/disable the script file cache.</p>
+<h3 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h3>
+<p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
+script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
+<p>If a script file starts with <code>#!</code>, the entire first line is skipped.
+Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
+<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
+
+// This is a Rhai script
+
+let answer = 42;
+print(`The answer is: ${answer}`);
+</code></pre>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">+----------------+
 | my_module.rhai |
 +----------------+
@@ -267,23 +289,6 @@ m::greet();                         // prints &quot;hi! from main!&quot;
 import &quot;my_module&quot; as m;
 
 m::greet();                         // prints &quot;hello! from module!&quot;
-<span class="boring">}
-</span></code></pre></pre>
-<h3 id="changing-the-base-directory"><a class="header" href="#changing-the-base-directory">Changing the base directory</a></h3>
-<p>The base directory can be changed via the <code>FileModuleResolver::new_with_path</code> constructor function.</p>
-<h3 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h3>
-<p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
-<p>If a script file starts with <code>#!</code>, the entire first line is skipped.
-Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#!/home/to/me/bin/rhai-run
-
-// This is a Rhai script
-
-print(&quot;The answer is: &quot; + 42);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="staticmoduleresolver"><a class="header" href="#staticmoduleresolver"><code>StaticModuleResolver</code></a></h2>

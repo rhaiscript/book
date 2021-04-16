@@ -208,13 +208,13 @@ let result: f64 = engine.eval(&quot;1.0 + 0.0&quot;);         // '+' operator fo
 
 result == 1.0;
 
-fn mixed_add(a: i64, b: f64) -&gt; f64 { (a as f64) + b }
+fn mixed_add(a: i64, b: bool) -&gt; f64 { a + if b { 42 } else { 99 } }
 
-engine.register_fn(&quot;+&quot;, mixed_add);                 // register '+' operator for an integer and a float
+engine.register_fn(&quot;+&quot;, mixed_add);                 // register '+' operator for an integer and a bool
 
-let result: i64 = engine.eval(&quot;1 + 1.0&quot;);           // &lt;- normally an error...
+let result: i64 = engine.eval(&quot;1 + true&quot;);          // &lt;- normally an error...
 
-result == 2.0;                                      //    ... but not now
+result == 43;                                       //    ... but not now
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="considerations"><a class="header" href="#considerations">Considerations</a></h2>

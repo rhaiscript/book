@@ -184,15 +184,19 @@ number with no rounding errors.</p>
 <p><code>_</code> separators can be added freely and are ignored within a number – except at the very beginning or right after
 a decimal point (<code>.</code>).</p>
 <table><thead><tr><th>Sample</th><th>Format</th><th align="center">Type</th><th align="center"><a href="/book/start/features.html"><code>no_float</code></a></th><th align="center"><a href="/book/start/features.html"><code>no_float</code></a> + <a href="/book/start/features.html"><code>decimal</code></a></th></tr></thead><tbody>
-<tr><td><code>_123</code></td><td><em>syntax error</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>_123</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 <tr><td><code>123_345</code>, <code>-42</code></td><td>decimal</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
 <tr><td><code>0o07_76</code></td><td>octal</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
 <tr><td><code>0xab_cd_ef</code></td><td>hex</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
 <tr><td><code>0b0101_1001</code></td><td>binary</td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td></tr>
-<tr><td><code>123._456</code></td><td><em>syntax error</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123._456</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 <tr><td><code>123_456.78_9</code></td><td>normal floating-point</td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 <tr><td><code>-42.</code></td><td>ending with decimal point</td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
-<tr><td><code>123_456.789e-10</code></td><td><em>scientific notation</em></td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>123_456_.789e-10</code></td><td><em>scientific notation</em></td><td align="center"><code>FLOAT</code></td><td align="center"><em>syntax error</em></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>.456</code></td><td><em>syntax error (missing leading <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123.456e_10</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>123.e-10</code></td><td><em>syntax error (missing decimal <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
+<tr><td><code>.456e-10</code></td><td><em>syntax error (missing leading <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 </tbody></table>
 <h2 id="warning--no-implicit-type-conversions"><a class="header" href="#warning--no-implicit-type-conversions">Warning – No Implicit Type Conversions</a></h2>
 <p>Unlike most C-like languages, Rhai does <em>not</em> provide implicit type conversions between different

@@ -173,10 +173,7 @@
 <p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/start/features.html"><code>only_i32</code></a>).</p>
 <p>The <code>to_decimal</code> function converts a supported number to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>).</p>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let x = 42;                     // 'x' is an integer
+<pre><code class="language-js no_run">let x = 42;                     // 'x' is an integer
 
 let y = x * 100.0;              // integer and floating-point can inter-operate
 
@@ -190,9 +187,8 @@ let w = z.to_decimal() + x;     // Decimal and integer can inter-operate
 
 let c = 'X';                    // character
 
-print(&quot;c is '&quot; + c + &quot;' and its code is &quot; + c.to_int());    // prints &quot;c is 'X' and its code is 88&quot;
-<span class="boring">}
-</span></code></pre></pre>
+print(`c is '${c}' and its code is ${c.to_int()}`); // prints &quot;c is 'X' and its code is 88&quot;
+</code></pre>
 <h2 id="parse-string-into-number"><a class="header" href="#parse-string-into-number">Parse String into Number</a></h2>
 <p>The <code>parse_float</code> function converts a <a href="/book/language/strings-chars.html">string</a> into a <code>FLOAT</code> (defaults to <code>f64</code>).</p>
 <p>The <code>parse_int</code> function converts a <a href="/book/language/strings-chars.html">string</a> into an <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/start/features.html"><code>only_i32</code></a>).

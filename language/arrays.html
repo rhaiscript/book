@@ -168,21 +168,31 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="arrays"><a class="header" href="#arrays">Arrays</a></h1>
-<p>Arrays are first-class citizens in Rhai. Like C, arrays are accessed with zero-based, non-negative integer indices:</p>
-<blockquote>
-<p><em>array</em> <code>[</code> <em>index</em> <code>]</code></p>
-</blockquote>
+<p>Arrays are first-class citizens in Rhai.</p>
 <p>Array literals are built within square brackets <code>[</code> ... <code>]</code> and separated by commas <code>,</code>:</p>
 <blockquote>
 <p><code>[</code> <em>value</em> <code>,</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>value</em> <code>]</code></p>
 <p><code>[</code> <em>value</em> <code>,</code> <em>value</em> <code>,</code> <code>...</code> <code>,</code> <em>value</em> <code>,</code> <code>]</code>     <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>All elements stored in an array are <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, and the array can freely grow or shrink with elements added or removed.</p>
+<p>All elements stored in an array are <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, and the array can freely grow or shrink with
+elements added or removed.</p>
 <p>The Rust type of a Rhai array is <code>rhai::Array</code>.</p>
 <p><a href="/book/language/type-of.html"><code>type_of()</code></a> an array returns <code>&quot;array&quot;</code>.</p>
 <p>Arrays are disabled via the <a href="/book/start/features.html"><code>no_index</code></a> feature.</p>
 <p>The maximum allowed size of an array can be controlled via <code>Engine::set_max_array_size</code>
 (see <a href="/book/safety/max-array-size.html">maximum size of arrays</a>.</p>
+<h2 id="element-access"><a class="header" href="#element-access">Element Access</a></h2>
+<h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
+<p>Like C, arrays are accessed with zero-based, non-negative integer indices:</p>
+<blockquote>
+<p><em>array</em> <code>[</code> <em>index from 0 to length-1</em> <code>]</code></p>
+</blockquote>
+<h3 id="from-end"><a class="header" href="#from-end">From end</a></h3>
+<p>A <em>negative</em> index accesses an element in the array counting from the <em>end</em>, with -1 being the
+<em>last</em> element.</p>
+<blockquote>
+<p><em>array</em> <code>[</code> <em>index from -1 to -length</em> <code>]</code></p>
+</blockquote>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
 <p>The following methods (mostly defined in the <a href="/book/rust/packages/index.html"><code>BasicArrayPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on arrays:</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
@@ -193,10 +203,10 @@
 <tr><td><code>+</code> operator</td><td>1) first array<br/>2) second array</td><td>concatenates the first array with the second</td></tr>
 <tr><td><code>==</code> operator</td><td>1) first array<br/>2) second array</td><td>are the two arrays the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>!=</code> operator</td><td>1) first array<br/>2) second array</td><td>are the two arrays different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
-<tr><td><code>insert</code></td><td>1) position, beginning if &lt; 0, end if ≥ length<br/>2) element to insert</td><td>inserts an element at a certain index</td></tr>
+<tr><td><code>insert</code></td><td>1) position, counting from end if &lt; 0, end if ≥ length<br/>2) element to insert</td><td>inserts an element at a certain index</td></tr>
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last element and returns it (<a href="/book/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first element and returns it (<a href="/book/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
-<tr><td><code>extract</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) <em>(optional)</em> number of items to extract, none if &lt; 0</td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) <em>(optional)</em> number of items to extract, none if &lt; 0</td><td>extracts a portion of the array into a new array</td></tr>
 <tr><td><code>remove</code></td><td>index</td><td>removes an element at a particular index and returns it (<a href="/book/language/values-and-types.html"><code>()</code></a> if the index is not valid)</td></tr>
 <tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the array</td></tr>
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of elements</td></tr>
@@ -204,16 +214,16 @@
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the array</td></tr>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
-<tr><td><code>split</code></td><td>1) array<br/>2) position to split at, beginning if &lt; 0, end if ≥ length</td><td>splits the array into two arrays, starting from a specified position</td></tr>
+<tr><td><code>split</code></td><td>1) array<br/>2) position to split at, counting from end if &lt; 0, end if ≥ length</td><td>splits the array into two arrays, starting from a specified position</td></tr>
 <tr><td><code>drain</code></td><td>1) <a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>drain</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0</td><td>removes a portion of the array, returning the removed items (not in original order)</td></tr>
+<tr><td><code>drain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0</td><td>removes a portion of the array, returning the removed items (not in original order)</td></tr>
 <tr><td><code>retain</code></td><td>1) <a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>retain</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) number of items to retain, none if &lt; 0</td><td>retains a portion of the array, removes all other items and returning them (not in original order)</td></tr>
-<tr><td><code>splice</code></td><td>1) start position, beginning if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>retain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to retain, none if &lt; 0</td><td>retains a portion of the array, removes all other items and returning them (not in original order)</td></tr>
+<tr><td><code>splice</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
 <tr><td><code>filter</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>contains</code></td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator (if defined) is used to compare <a href="/book/rust/custom.html">custom types</a></td></tr>
-<tr><td><code>index_of</code></td><td>element to find (not a <a href="/book/language/fn-ptr.html">function pointers</a>)</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or -1 if not found</td></tr>
-<tr><td><code>index_of</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="/book/language/fn-ptr.html">function pointers</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or -1 if not found</td></tr>
+<tr><td><code>index_of</code></td><td>1) <a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>map</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>reduce</code></td><td>1) <a href="/book/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="/book/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="/book/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>reduce_rev</code></td><td>1) <a href="/book/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="/book/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="/book/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
@@ -268,6 +278,8 @@ ts.list = y;                // arrays can be assigned completely (by value copy)
 ts.list[1] == 42;
 
 [1, 2, 3][0] == 1;          // indexing on array literal
+
+[1, 2, 3][-1] == 3;         // negative index counts from the end
 
 fn abc() {
     [42, 43, 44]            // a function returning an array

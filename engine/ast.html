@@ -178,7 +178,7 @@
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="/book/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="/book/engine/compile.html"><code>AST</code></a> API is available only under the <a href="/book/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="/book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.19.15/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="/book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="/book/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="/book/engine/compile.html"><code>AST</code></a>:</p>
@@ -215,7 +215,7 @@ let ast1 = engine.compile(r#&quot;
 
 // Second script
 let ast2 = engine.compile(r#&quot;
-                fn foo(n) { &quot;hello&quot; + n }
+                fn foo(n) { `hello${n}` }
                 foo(&quot;!&quot;)
            &quot;#)?;
 
@@ -227,15 +227,11 @@ let merged = &amp;ast1 + &amp;ast2;
 <span class="boring">}
 </span></code></pre></pre>
 <p><code>merged</code> in the above example essentially contains the following script program:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(n) { &quot;hello&quot; + n }   // &lt;- definition of first 'foo' is overwritten
+<pre><code class="language-js no_run">fn foo(n) { `hello${n}` }   // &lt;- definition of first 'foo' is overwritten
 foo(1)                      // &lt;- notice this will be &quot;hello1&quot; instead of 43,
                             //    but it is no longer the return value
 foo(&quot;!&quot;)                    // &lt;- returns &quot;hello!&quot;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="walk-an-ast"><a class="header" href="#walk-an-ast">Walk an AST</a></h2>
 <p>The <a href="/book/start/features.html"><code>internals</code></a> feature allows access to internal Rhai data structures, particularly the nodes
 that make up the <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
@@ -262,7 +258,7 @@ from the current node to the root of the <a href="/book/engine/compile.html"><co
 <p>The order of visits to the children of each node type:</p>
 <table><thead><tr><th>Node type</th><th>Children visit order</th></tr></thead><tbody>
 <tr><td><code>if</code> statement</td><td>condition expression, <em>then</em> statement, <em>else</em> statement (if any)</td></tr>
-<tr><td><code>switch</code> statement</td><td>match element, each of the match statements, default statement (if any)</td></tr>
+<tr><td><code>switch</code> statement</td><td>match element, each of the case conditions and statements, default statements (if any)</td></tr>
 <tr><td><code>while</code>, <code>do</code> statement</td><td>condition expression, statement body</td></tr>
 <tr><td><code>for</code> statement</td><td>collection expression, statement body</td></tr>
 <tr><td><a href="/book/language/try-catch.html"><code>try</code> ... <code>catch</code></a> statement</td><td><code>try</code> statement body, <code>catch</code> statement body</td></tr>

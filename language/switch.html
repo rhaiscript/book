@@ -168,23 +168,31 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="switch-expression"><a class="header" href="#switch-expression"><code>switch</code> Expression</a></h1>
-<p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s
-<code>match</code> syntax:</p>
-<pre><code class="language-ts no_run">switch calc_secret_value(x) {
+<p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s <code>match</code> syntax.</p>
+<pre><code class="language-js no_run">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
         print(&quot;It's two!&quot;);
         print(&quot;Again!&quot;);
     }
     3 =&gt; print(&quot;Go!&quot;),
-    // _ is the default when no cases match
-    _ =&gt; print(&quot;Oops! Something's wrong: &quot; + x)
+    // _ is the default when no cases match.
+    // It must be the last case.
+    _ =&gt; print(`Oops! Something's wrong: ${x}`)
+}
+</code></pre>
+<p>The <em>default</em> case (i.e. when no other cases match), however, must be the <em>last</em> case in the statement.</p>
+<pre><code class="language-js no_run">switch wrong_default {
+    1 =&gt; 2,
+    _ =&gt; 9,     // &lt;- syntax error: default case not the last
+    2 =&gt; 3,
+    3 =&gt; 4,     // &lt;- ending with extra comma is OK
 }
 </code></pre>
 <h2 id="expression-not-statement"><a class="header" href="#expression-not-statement">Expression, Not Statement</a></h2>
 <p><code>switch</code> is not a statement, but an expression. This means that a <code>switch</code> expression can
 appear anywhere a regular expression can, e.g. as function call arguments.</p>
-<pre><code class="language-ts no_run">let x = switch foo { 1 =&gt; true, _ =&gt; false };
+<pre><code class="language-js no_run">let x = switch foo { 1 =&gt; true, _ =&gt; false };
 
 func(switch foo {
     &quot;hello&quot; =&gt; 42,
@@ -206,7 +214,7 @@ if foo == &quot;hello&quot; {
 </code></pre>
 <h2 id="array-and-object-map-literals-also-work"><a class="header" href="#array-and-object-map-literals-also-work">Array and Object Map Literals Also Work</a></h2>
 <p>The <code>switch</code> expression can match against any <em>literal</em>, including <a href="/book/language/arrays.html">array</a> and <a href="/book/language/object-maps.html">object map</a> literals.</p>
-<pre><code class="language-ts no_run">// Match on arrays
+<pre><code class="language-js no_run">// Match on arrays
 switch [foo, bar, baz] {
     [&quot;hello&quot;, 42, true] =&gt; { ... }
     [&quot;hello&quot;, 123, false] =&gt; { ... }
@@ -221,8 +229,26 @@ switch map {
     _ =&gt; { ... }
 }
 </code></pre>
-<p>Switching on <a href="/book/language/arrays.html">arrays</a> is very useful when working with Rust enums (see <a href="/book/patterns/enums.html">this chapter</a>
-for more details).</p>
+<p>Switching on <a href="/book/language/arrays.html">arrays</a> is very useful when working with Rust enums
+(see <a href="/book/patterns/enums.html">this chapter</a> for more details).</p>
+<h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
+<p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
+that must evaluate to <code>true</code> in order for the case to match.</p>
+<pre><code class="language-js no_run">let result = switch calc_secret_value(x) {
+    1 if some_external_condition(x, y, z) =&gt; 100,
+
+    2 if x &lt; foo =&gt; 200,
+    2 if bar() =&gt; 999,      // &lt;- syntax error: still cannot have duplicated cases
+
+    3 =&gt; if CONDITION {     // &lt;- put condition inside statement block for
+        123                 //    duplicated cases
+    } else {
+        0
+    }
+
+    _ if CONDITION =&gt; 8888  // &lt;- syntax error: default case cannot have condition
+};
+</code></pre>
 <h2 id="difference-from-if-else-if-chain"><a class="header" href="#difference-from-if-else-if-chain">Difference From <code>if</code>-<code>else if</code> Chain</a></h2>
 <p>Although a <code>switch</code> expression looks <em>almost</em> the same as an <code>if</code>-<code>else if</code> chain,
 there are subtle differences between the two.</p>
