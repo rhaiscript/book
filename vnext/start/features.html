@@ -226,7 +226,7 @@ Do not use them for non-<a href="/book/vnext/start/builds/wasm.html">WASM</a> ta
 <li><code>no_function</code> (no defining <a href="/book/vnext/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.19.16&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;0.20.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="/book/vnext/language/functions.html">functions</a>

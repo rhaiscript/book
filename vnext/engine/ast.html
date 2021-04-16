@@ -178,7 +178,7 @@
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="/book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="/book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.19.16/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="/book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="/book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -258,7 +258,7 @@ from the current node to the root of the <a href="/book/vnext/engine/compile.htm
 <p>The order of visits to the children of each node type:</p>
 <table><thead><tr><th>Node type</th><th>Children visit order</th></tr></thead><tbody>
 <tr><td><code>if</code> statement</td><td>condition expression, <em>then</em> statement, <em>else</em> statement (if any)</td></tr>
-<tr><td><code>switch</code> statement</td><td>match element, each of the match statements, default statement (if any)</td></tr>
+<tr><td><code>switch</code> statement</td><td>match element, each of the case conditions and statements, default statements (if any)</td></tr>
 <tr><td><code>while</code>, <code>do</code> statement</td><td>condition expression, statement body</td></tr>
 <tr><td><code>for</code> statement</td><td>collection expression, statement body</td></tr>
 <tr><td><a href="/book/vnext/language/try-catch.html"><code>try</code> ... <code>catch</code></a> statement</td><td><code>try</code> statement body, <code>catch</code> statement body</td></tr>

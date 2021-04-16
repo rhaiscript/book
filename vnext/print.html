@@ -174,7 +174,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>0.19.16</strong> of Rhai.</p>
+<p>This Book is for version <strong>0.20.0</strong> of Rhai.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
 <p>In the beginning there was <a href="http://chaiscript.com">ChaiScript</a>,
@@ -462,7 +462,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;0.19.16&quot;    # assuming 0.19.16 is the latest version
+rhai = &quot;0.20.0&quot;    # assuming 0.20.0 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -533,7 +533,7 @@ Do not use them for non-<a href="start//book/vnext/start/builds/wasm.html">WASM<
 <li><code>no_function</code> (no defining <a href="start//book/vnext/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.19.16&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;0.20.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/vnext/language/functions.html">functions</a>
@@ -983,7 +983,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.19.16/rhai/struct.Scope.html">documentation</a> online.</p>
+<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/vnext/language/variables.html">variable</a> or <a href="engine//book/vnext/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/vnext/language/variables.html">variables</a> and <a href="engine//book/vnext/language/constants.html">constants</a>, but only the latest ones can
@@ -2020,7 +2020,7 @@ to scripts either globally or under individual static module <a href="rust/modul
 which converts a normal Rust module into a Rhai <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> via procedural macros.</p>
 <h2 id="create-via-module-api"><a class="header" href="#create-via-module-api">Create via <code>Module</code> API</a></h2>
 <p>Manually creating a <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> is possible via the <code>Module</code> API.</p>
-<p>For the complete <code>Module</code> API, refer to the <a href="https://docs.rs/rhai/0.19.16/rhai/struct.Module.html">documentation</a> online.</p>
+<p>For the complete <code>Module</code> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.Module.html">documentation</a> online.</p>
 <h2 id="use-case-1--make-the-module-globally-available"><a class="header" href="#use-case-1--make-the-module-globally-available">Use Case 1 – Make the <code>Module</code> Globally Available</a></h2>
 <p><code>Engine::register_global_module</code> registers a shared <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> into the <em>global</em> namespace.</p>
 <p>All <a href="rust/modules//book/vnext/language/functions.html">functions</a> and <a href="rust/modules//book/vnext/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.
@@ -5216,8 +5216,7 @@ let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains'
 <span class="boring">}
 </span></code></pre></pre>
 <h1 id="switch-expression"><a class="header" href="#switch-expression"><code>switch</code> Expression</a></h1>
-<p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s
-<code>match</code> syntax:</p>
+<p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s <code>match</code> syntax.</p>
 <pre><code class="language-js no_run">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
@@ -5225,14 +5224,23 @@ let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains'
         print(&quot;Again!&quot;);
     }
     3 =&gt; print(&quot;Go!&quot;),
-    // _ is the default when no cases match
+    // _ is the default when no cases match.
+    // It must be the last case.
     _ =&gt; print(`Oops! Something's wrong: ${x}`)
+}
+</code></pre>
+<p>The <em>default</em> case (i.e. when no other cases match), however, must be the <em>last</em> case in the statement.</p>
+<pre><code class="language-js no_run">switch wrong_default {
+    1 =&gt; 2,
+    _ =&gt; 9,     // &lt;- syntax error: default case not the last
+    2 =&gt; 3,
+    3 =&gt; 4,     // &lt;- ending with extra comma is OK
 }
 </code></pre>
 <h2 id="expression-not-statement"><a class="header" href="#expression-not-statement">Expression, Not Statement</a></h2>
 <p><code>switch</code> is not a statement, but an expression. This means that a <code>switch</code> expression can
 appear anywhere a regular expression can, e.g. as function call arguments.</p>
-<pre><code class="language-ts no_run">let x = switch foo { 1 =&gt; true, _ =&gt; false };
+<pre><code class="language-js no_run">let x = switch foo { 1 =&gt; true, _ =&gt; false };
 
 func(switch foo {
     &quot;hello&quot; =&gt; 42,
@@ -5254,7 +5262,7 @@ if foo == &quot;hello&quot; {
 </code></pre>
 <h2 id="array-and-object-map-literals-also-work"><a class="header" href="#array-and-object-map-literals-also-work">Array and Object Map Literals Also Work</a></h2>
 <p>The <code>switch</code> expression can match against any <em>literal</em>, including <a href="language//book/vnext/language/arrays.html">array</a> and <a href="language//book/vnext/language/object-maps.html">object map</a> literals.</p>
-<pre><code class="language-ts no_run">// Match on arrays
+<pre><code class="language-js no_run">// Match on arrays
 switch [foo, bar, baz] {
     [&quot;hello&quot;, 42, true] =&gt; { ... }
     [&quot;hello&quot;, 123, false] =&gt; { ... }
@@ -5269,8 +5277,26 @@ switch map {
     _ =&gt; { ... }
 }
 </code></pre>
-<p>Switching on <a href="language//book/vnext/language/arrays.html">arrays</a> is very useful when working with Rust enums (see <a href="language//book/vnext/patterns/enums.html">this chapter</a>
-for more details).</p>
+<p>Switching on <a href="language//book/vnext/language/arrays.html">arrays</a> is very useful when working with Rust enums
+(see <a href="language//book/vnext/patterns/enums.html">this chapter</a> for more details).</p>
+<h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
+<p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
+that must evaluate to <code>true</code> in order for the case to match.</p>
+<pre><code class="language-js no_run">let result = switch calc_secret_value(x) {
+    1 if some_external_condition(x, y, z) =&gt; 100,
+
+    2 if x &lt; foo =&gt; 200,
+    2 if bar() =&gt; 999,      // &lt;- syntax error: still cannot have duplicated cases
+
+    3 =&gt; if CONDITION {     // &lt;- put condition inside statement block for
+        123                 //    duplicated cases
+    } else {
+        0
+    }
+
+    _ if CONDITION =&gt; 8888  // &lt;- syntax error: default case cannot have condition
+};
+</code></pre>
 <h2 id="difference-from-if-else-if-chain"><a class="header" href="#difference-from-if-else-if-chain">Difference From <code>if</code>-<code>else if</code> Chain</a></h2>
 <p>Although a <code>switch</code> expression looks <em>almost</em> the same as an <code>if</code>-<code>else if</code> chain,
 there are subtle differences between the two.</p>
@@ -7483,7 +7509,7 @@ no side-effects), thus the script silently runs to completion without errors.</p
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.19.16/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -7563,7 +7589,7 @@ from the current node to the root of the <a href="engine//book/vnext/engine/comp
 <p>The order of visits to the children of each node type:</p>
 <table><thead><tr><th>Node type</th><th>Children visit order</th></tr></thead><tbody>
 <tr><td><code>if</code> statement</td><td>condition expression, <em>then</em> statement, <em>else</em> statement (if any)</td></tr>
-<tr><td><code>switch</code> statement</td><td>match element, each of the match statements, default statement (if any)</td></tr>
+<tr><td><code>switch</code> statement</td><td>match element, each of the case conditions and statements, default statements (if any)</td></tr>
 <tr><td><code>while</code>, <code>do</code> statement</td><td>condition expression, statement body</td></tr>
 <tr><td><code>for</code> statement</td><td>collection expression, statement body</td></tr>
 <tr><td><a href="engine//book/vnext/language/try-catch.html"><code>try</code> ... <code>catch</code></a> statement</td><td><code>try</code> statement body, <code>catch</code> statement body</td></tr>
@@ -8452,7 +8478,7 @@ a different <a href="patterns//book/vnext/start/features.html">features</a> set,
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.19.16&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;0.20.0&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
