@@ -83,7 +83,7 @@ let merged = &ast1 + &ast2;
 
 `merged` in the above example essentially contains the following script program:
 
-```js,no_run
+```js , no_run
 fn foo(n) { `hello${n}` }   // <- definition of first 'foo' is overwritten
 foo(1)                      // <- notice this will be "hello1" instead of 43,
                             //    but it is no longer the return value
@@ -126,22 +126,22 @@ from the current node to the root of the [`AST`].
 
 The order of visits to the children of each node type:
 
-| Node type                                                        | Children visit order                                                    |
-| ---------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `if` statement                                                   | condition expression, _then_ statement, _else_ statement (if any)       |
-| `switch` statement                                               | match element, each of the match statements, default statement (if any) |
-| `while`, `do` statement                                          | condition expression, statement body                                    |
-| `for` statement                                                  | collection expression, statement body                                   |
-| [`try` ... `catch`]({{rootUrl}}/language/try-catch.md) statement | `try` statement body, `catch` statement body                            |
-| [`import`] statement                                             | path expression                                                         |
-| [Array] literal                                                  | each of the element expressions                                         |
-| [Object map] literal                                             | each of the element expressions                                         |
-| Indexing                                                         | LHS, RHS                                                                |
-| Field access/method call                                         | LHS, RHS                                                                |
-| `&&`, <code>\|\|</code>, `in` expression                         | LHS, RHS                                                                |
-| [Function] call, operator expression                             | each of the argument expressions                                        |
-| [`let`][variable], [`const`][constant] statement                 | value expression                                                        |
-| Assignment statement                                             | l-value expression, value expression                                    |
-| Statement block                                                  | each of the statements                                                  |
-| Custom syntax expression                                         | each of the `$expr$` and `$stmt$` blocks                                |
-| All others                                                       | single child, or none                                                   |
+| Node type                                                        | Children visit order                                                                   |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `if` statement                                                   | condition expression, _then_ statement, _else_ statement (if any)                      |
+| `switch` statement                                               | match element, each of the case conditions and statements, default statements (if any) |
+| `while`, `do` statement                                          | condition expression, statement body                                                   |
+| `for` statement                                                  | collection expression, statement body                                                  |
+| [`try` ... `catch`]({{rootUrl}}/language/try-catch.md) statement | `try` statement body, `catch` statement body                                           |
+| [`import`] statement                                             | path expression                                                                        |
+| [Array] literal                                                  | each of the element expressions                                                        |
+| [Object map] literal                                             | each of the element expressions                                                        |
+| Indexing                                                         | LHS, RHS                                                                               |
+| Field access/method call                                         | LHS, RHS                                                                               |
+| `&&`, <code>\|\|</code>, `in` expression                         | LHS, RHS                                                                               |
+| [Function] call, operator expression                             | each of the argument expressions                                                       |
+| [`let`][variable], [`const`][constant] statement                 | value expression                                                                       |
+| Assignment statement                                             | l-value expression, value expression                                                   |
+| Statement block                                                  | each of the statements                                                                 |
+| Custom syntax expression                                         | each of the `$expr$` and `$stmt$` blocks                                               |
+| All others                                                       | single child, or none                                                                  |

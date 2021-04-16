@@ -20,7 +20,7 @@ A module that is only `import`-ed but not under any module name is commonly used
 where the module script contains initialization statements that puts the functions registered with the
 [`Engine`] into a particular state.
 
-```js,no_run
+```js , no_run
 import "crypto_init";           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import "crypto" as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'

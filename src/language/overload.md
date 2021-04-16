@@ -8,7 +8,7 @@ and _number_ of parameters, but not parameter _types_ since all parameters are t
 
 New definitions _overwrite_ previous definitions of the same name and number of parameters.
 
-```js,no_run
+```js , no_run
 fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
 
 fn foo(x)     { print(`One! ${x}`); }

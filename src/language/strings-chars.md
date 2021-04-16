@@ -95,7 +95,7 @@ A string wrapped by a pair of back-tick (`` ` ``) characters is interpreted _lit
 meaning that every single character that lies between the two back-ticks is taken verbatim.
 This include new-lines, whitespaces, escape characters etc.
 
-```js,no_run
+```js , no_run
 let x = `hello, world! "\t\x42"
   hello world again! 'x'
      this is the last time!!! `;
@@ -107,7 +107,7 @@ let x = "hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the 
 If a back-tick (`` ` ``) appears at the _end_ of a line, then it is understood that the entire text
 block starts from the _next_ line; the starting new-line character is stripped.
 
-```js,no_run
+```js , no_run
 let x = `
         hello, world! "\t\x42"
   hello world again! 'x'
@@ -135,7 +135,7 @@ The last result of the block is taken as the value for interpolation.
 Rhai uses [`to_string()`] to convert any value into a string, then physically joins all the
 sub-strings together.
 
-```js,no_run
+```js , no_run
 let x = 42;
 let y = 123;
 
@@ -175,7 +175,7 @@ _last_ character.
 Examples
 --------
 
-```js,no_run
+```js , no_run
 let name = "Bob";
 let middle_initial = 'C';
 let last = "Davis";

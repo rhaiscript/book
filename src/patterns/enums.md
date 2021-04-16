@@ -119,7 +119,7 @@ variant-internal data.
 
 It is possible, however, to `switch` through enum variants based on their types:
 
-```c,no_run
+```c , no_run
 switch my_enum.enum_type {
   "Foo" => ...,
   "Bar" => {
@@ -163,7 +163,7 @@ engine.register_get("enum_data", |my_enum: &mut MyEnum| {
 
 Then it is a simple matter to match an enum via the `switch` expression:
 
-```c,no_run
+```c , no_run
 // Assume 'value' = 'MyEnum::Baz("hello", true)'
 // 'enum_data' creates a variable-length array with 'MyEnum' data
 let x = switch value.enum_data {

@@ -12,7 +12,7 @@ Use `type_of()` to Get Value Type
 Because [`type_of()`] a `Dynamic` value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value's type.
 
-```js,no_run
+```js , no_run
 let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
