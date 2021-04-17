@@ -57,7 +57,7 @@ script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/star
 If a script file starts with `#!`, the entire first line is skipped.
 Because of this, Rhai scripts with shebangs at the beginning need no special processing.
 
-```js , no_run
+```js
 #!/home/to/me/bin/rhai-run
 
 // This is a Rhai script

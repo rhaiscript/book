@@ -51,7 +51,6 @@ a decimal point (`.`).
 | `.456`             | _syntax error (missing leading `0`)_ |         |                |                            |
 | `123.456e_10`      | _syntax error (improper separator)_  |         |                |                            |
 | `123.e-10`         | _syntax error (missing decimal `0`)_ |         |                |                            |
-| `.456e-10`         | _syntax error (missing leading `0`)_ |         |                |                            |
 
 
 Warning &ndash; No Implicit Type Conversions

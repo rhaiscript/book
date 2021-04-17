@@ -5,7 +5,7 @@
 
 The `print` and `debug` functions default to printing to `stdout`, with `debug` using standard debug formatting.
 
-```js , no_run
+```js
 print("hello");         // prints hello to stdout
 
 print(1 + 2 + 3);       // prints 6 to stdout

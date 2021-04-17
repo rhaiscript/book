@@ -31,14 +31,14 @@ Element Access
 
 Like C, arrays are accessed with zero-based, non-negative integer indices:
 
-> _array_ `[` _index from 0 to length-1_ `]`
+> _array_ `[` _index from 0 to (length&minus;1)_ `]`
 
 ### From end
 
-A _negative_ index accesses an element in the array counting from the _end_, with -1 being the
+A _negative_ index accesses an element in the array counting from the _end_, with &minus;1 being the
 _last_ element.
 
-> _array_ `[` _index from -1 to -length_ `]`
+> _array_ `[` _index from &minus;1 to &minus;length_ `]`
 
 
 Built-in Functions
@@ -74,8 +74,8 @@ The following methods (mostly defined in the [`BasicArrayPackage`][packages] but
 | `splice`                  | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of items to remove, none if < 0<br/>3) array to insert   | replaces a portion of the array with another (not necessarily of the same length as the replaced portion)                                                                                                                 |
 | `filter`                  | [function pointer] to predicate (usually a [closure])                                                                               | constructs a new array with all items that return `true` when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index                                              |
 | `contains`                | element to find                                                                                                                     | does the array contain an element? The `==` operator (if defined) is used to compare [custom types]                                                                                                                       |
-| `index_of`                | 1) element to find (not a [function pointers])<br/>2) _(optional)_ start index, counting from end if < 0, end if ≥ length           | returns the index of the first item in the array that equals the supplied element (using the `==` operator, if defined), or -1 if not found                                                                               |
-| `index_of`                | 1) [function pointer] to predicate (usually a [closure])<br/>2) _(optional)_ start index, counting from end if < 0, end if ≥ length | returns the index of the first item in the array that returns `true` when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index              |
+| `index_of`                | 1) element to find (not a [function pointers])<br/>2) _(optional)_ start index, counting from end if < 0, end if ≥ length           | returns the index of the first item in the array that equals the supplied element (using the `==` operator, if defined), or &minus;1 if not found                                                                         |
+| `index_of`                | 1) [function pointer] to predicate (usually a [closure])<br/>2) _(optional)_ start index, counting from end if < 0, end if ≥ length | returns the index of the first item in the array that returns `true` when called with the predicate function, or &minus;1 if not found:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index        |
 | `map`                     | [function pointer] to conversion function (usually a [closure])                                                                     | constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index                                                |
 | `reduce`                  | 1) [function pointer] to accumulator function (usually a [closure])<br/>2) _(optional)_ the initial value                           | reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value ([`()`] initially)<br/>2nd parameter: array item<br/>3rd parameter: _(optional)_ offset index                    |
 | `reduce_rev`              | 1) [function pointer] to accumulator function (usually a [closure])<br/>2) _(optional)_ the initial value                           | reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value ([`()`] initially)<br/>2nd parameter: array item<br/>3rd parameter: _(optional)_ offset index |

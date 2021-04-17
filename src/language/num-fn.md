@@ -10,10 +10,10 @@ The following standard functions (defined in the [`ArithmeticPackage`][packages]
 using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
 [`decimal`]) only:
 
-| Function | Description                                               |
-| -------- | --------------------------------------------------------- |
-| `abs`    | absolute value                                            |
-| `sign`   | returns (`INT`) -1 if negative, +1 if positive, 0 if zero |
+| Function | Description                                                          |
+| -------- | -------------------------------------------------------------------- |
+| `abs`    | absolute value                                                       |
+| `sign`   | returns (`INT`) &minus;1 if negative, &plus;1 if positive, 0 if zero |
 
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
 operate on integers only:

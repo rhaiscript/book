@@ -19,13 +19,13 @@ The maximum allowed length of a string can be controlled via `Engine::set_max_st
 String and Character Literals
 ----------------------------
 
-String and character literals follow JavaScript-style formatting:
+String and character literals follow JavaScript-style syntax:
 
-* normal strings are wrapped by double-quotes: `"`
-
-* multi-line literal strings are wrapped by back-ticks: `` ` ``
-
-* characters are wrapped by single-quotes: `'`
+| Type                      |   Quotes    | Escapes? | Continuation?  | Interpolation? |
+| ------------------------- | :---------: | :------: | :------------: | :------------: |
+| Normal string             |   `"..."`   |   yes    | yes (with `\`) |       no       |
+| Multi-line literal string | `` `...` `` |    no    |       no       | yes (`${...}`) |
+| Character                 |   `'...'`   |   yes    |       no       |       no       |
 
 
 Standard Escape Sequences
@@ -95,7 +95,7 @@ A string wrapped by a pair of back-tick (`` ` ``) characters is interpreted _lit
 meaning that every single character that lies between the two back-ticks is taken verbatim.
 This include new-lines, whitespaces, escape characters etc.
 
-```js , no_run
+```js
 let x = `hello, world! "\t\x42"
   hello world again! 'x'
      this is the last time!!! `;
@@ -107,7 +107,7 @@ let x = "hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the 
 If a back-tick (`` ` ``) appears at the _end_ of a line, then it is understood that the entire text
 block starts from the _next_ line; the starting new-line character is stripped.
 
-```js , no_run
+```js
 let x = `
         hello, world! "\t\x42"
   hello world again! 'x'
@@ -135,7 +135,7 @@ The last result of the block is taken as the value for interpolation.
 Rhai uses [`to_string()`] to convert any value into a string, then physically joins all the
 sub-strings together.
 
-```js , no_run
+```js
 let x = 42;
 let y = 123;
 
@@ -158,24 +158,38 @@ s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 > 42 then it is true!\n
 Indexing
 --------
 
+Strings can be _indexed_ into to get access to any individual character.
+This is similar to many modern languages but different from Rust.
+
 ### From beginning
 
 Individual characters within a string can be accessed with zero-based, non-negative integer indices:
 
-> _string_ `[` _index from 0 to total number of characters - 1_ `]`
+> _string_ `[` _index from 0 to (total number of characters &minus; 1)_ `]`
 
 ### From end
 
-A _negative_ index accesses a character in the string counting from the _end_, with -1 being the
+A _negative_ index accesses a character in the string counting from the _end_, with &minus;1 being the
 _last_ character.
 
-> _string_ `[` _index from -1 to -(total number of characters)_ `]`
+> _string_ `[` _index from &minus;1 to &minus;(total number of characters)_ `]`
+
+### Actual implementation
+
+Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.
+
+Therefore, getting the character at a particular index involves walking through the entire UTF-8
+encoded bytes stream to extract individual Unicode characters, counting them on the way.
+
+Because of this, indexing can be a _slow_ procedure, especially for long strings.
+Along the same lines, getting the _length_ of a string (which returns the number of characters, not
+bytes) can also be slow.
 
 
 Examples
 --------
 
-```js , no_run
+```js
 let name = "Bob";
 let middle_initial = 'C';
 let last = "Davis";

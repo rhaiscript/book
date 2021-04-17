@@ -12,7 +12,7 @@ Use `type_of()` to Get Value Type
 Because [`type_of()`] a `Dynamic` value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value's type.
 
-```js , no_run
+```js
 let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
@@ -95,58 +95,62 @@ Methods and Traits
 
 The following methods are available when working with `Dynamic`:
 
-| Method                        |        Return type        | Description                                                                                                                                         |
-| ----------------------------- | :-----------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `from<T>` _(instance method)_ |         `Dynamic`         | create a `Dynamic` from any value that implements `Clone`                                                                                           |
-| `type_name`                   |          `&str`           | name of the value's type                                                                                                                            |
-| `into_shared`                 |         `Dynamic`         | turn the value into a _shared_ value (not available under [`no_closure`])                                                                           |
-| `flatten_clone`               |         `Dynamic`         | clone the value (a _shared_ value, if any, is cloned into a separate copy)                                                                          |
-| `flatten`                     |         `Dynamic`         | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
-| `read_lock<T>`                | `Option<` _guard to_ `T>` | lock the value for reading (no action under [`no_closure`]                                                                                          |
-| `write_lock<T>`               | `Option<` _guard to_ `T>` | lock the value exclusively for writing (no action under [`no_closure`]                                                                              |
+| Method                        |     Not available under     |        Return type        | Description                                                                                                                                         |
+| ----------------------------- | :-------------------------: | :-----------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `from<T>` _(instance method)_ |                             |         `Dynamic`         | create a `Dynamic` from any value that implements `Clone`                                                                                           |
+| `type_name`                   |                             |          `&str`           | name of the value's type                                                                                                                            |
+| `into_shared`                 |       [`no_closure`]        |         `Dynamic`         | turn the value into a _shared_ value                                                                                                                |
+| `flatten_clone`               |                             |         `Dynamic`         | clone the value (a _shared_ value, if any, is cloned into a separate copy)                                                                          |
+| `flatten`                     |                             |         `Dynamic`         | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
+| `read_lock<T>`                | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value for reading                                                                                                                          |
+| `write_lock<T>`               | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value exclusively for writing                                                                                                              |
 
 ### Detection methods
 
-| Method         | Return type | Description                                                                                       |
-| -------------- | :---------: | ------------------------------------------------------------------------------------------------- |
-| `is<T>`        |   `bool`    | is the value of type `T`?                                                                         |
-| `is_variant`   |   `bool`    | is the value a trait object (i.e. not one of Rhai's [standard types])?                            |
-| `is_shared`    |   `bool`    | is the value _shared_ via a [closure]? Always `false` under [`no_closure`].                       |
-| `is_read_only` |   `bool`    | is the value [constant]? A [constant] value should not be modified.                               |
-| `is_locked`    |   `bool`    | is the value _shared_ and locked (i.e. currently being read)? Always `false` under [`no_closure`] |
+| Method         | Not available under | Return type | Description                                                            |
+| -------------- | :-----------------: | :---------: | ---------------------------------------------------------------------- |
+| `is<T>`        |                     |   `bool`    | is the value of type `T`?                                              |
+| `is_variant`   |                     |   `bool`    | is the value a trait object (i.e. not one of Rhai's [standard types])? |
+| `is_read_only` |                     |   `bool`    | is the value [constant]? A [constant] value should not be modified.    |
+| `is_shared`    |   [`no_closure`]    |   `bool`    | is the value _shared_ via a [closure]?                                 |
+| `is_locked`    |   [`no_closure`]    |   `bool`    | is the value _shared_ and locked (i.e. currently being read)?          |
 
 ### Casting methods
 
 The following methods cast a `Dynamic` into a specific type:
 
-| Method                                        |                        Return type                         |
-| --------------------------------------------- | :--------------------------------------------------------: |
-| `cast<T>`                                     |                  `T` (panics on failure)                   |
-| `try_cast<T>`                                 |                        `Option<T>`                         |
-| `clone_cast<T>` (for `&Dynamic`)              |           cloned copy of `T` (panics on failure)           |
-| `as_int`                                      | `Result<i64, &str>` (`Result<i32, &str>` if [`only_i32`])  |
-| `as_float` (not available under [`no_float`]) | `Result<f64, &str>` (`Result<f32, &str>` if [`f32_float`]) |
-| `as_decimal` (requires [`decimal`])           |          [`Result<Decimal, &str>`][rust_decimal]           |
-| `as_bool`                                     |                    `Result<bool, &str>`                    |
-| `as_char`                                     |                    `Result<char, &str>`                    |
-| `take_string`                                 |                   `Result<String, &str>`                   |
-| `take_immutable_string`                       |    [`Result<ImmutableString, &str>`][`ImmutableString`]    |
+| Method                           | Not available under |                     Return type                      |
+| -------------------------------- | :-----------------: | :--------------------------------------------------: |
+| `cast<T>`                        |                     |               `T` (panics on failure)                |
+| `try_cast<T>`                    |                     |                     `Option<T>`                      |
+| `clone_cast<T>` (for `&Dynamic`) |                     |        cloned copy of `T` (panics on failure)        |
+| `as_int`                         |                     |                 `Result<i64, &str>`                  |
+| `as_int` ([`only_i32`])          |                     |                 `Result<i32, &str>`                  |
+| `as_float`                       |    [`no_float`]     |                 `Result<f64, &str>`                  |
+| `as_float` ([`f32_float`])       |    [`no_float`]     |                 `Result<f32, &str>`                  |
+| `as_decimal`                     |   non-[`decimal`]   |       [`Result<Decimal, &str>`][rust_decimal]        |
+| `as_bool`                        |                     |                 `Result<bool, &str>`                 |
+| `as_char`                        |                     |                 `Result<char, &str>`                 |
+| `take_string`                    |                     |                `Result<String, &str>`                |
+| `take_immutable_string`          |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
 
 ### Constructor traits
 
 The following constructor traits are implemented for `Dynamic`:
 
-| Trait                                                                                                                          |           Data type            |
-| ------------------------------------------------------------------------------------------------------------------------------ | :----------------------------: |
-| `From<i64>` (`From<i32>` if [`only_i32`])                                                                                      | `i64` (`i32` if [`only_i32`])  |
-| `From<f64>` (`From<f32>` if [`f32_float`], not available under [`no_float`])                                                   | `f64` (`f32` if [`f32_float`]) |
-| `From<Decimal>` (requires [`decimal`])                                                                                         |   [`Decimal`][rust_decimal]    |
-| `From<bool>`                                                                                                                   |             `bool`             |
-| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`                                                         |      [`ImmutableString`]       |
-| `From<char>`                                                                                                                   |             `char`             |
-| `From<Vec<T>>` (not available under [`no_index`])                                                                              |            [array]             |
-| `From<&[T]>` (not available under [`no_index`])                                                                                |            [array]             |
-| `From<HashMap<K: Into<SmartString>, T>>` (not available under [`no_object`] or [`no_std`])<br/>e.g. `From<HashMap<String, T>>` |          [object map]          |
-| `From<BTreeMap<K: Into<SmartString>, T>>` (not available under [`no_object`])<br/>e.g. `From<BTreeMap<String, T>>`             |          [object map]          |
-| `From<FnPtr>`                                                                                                                  |       [function pointer]       |
-| `From<Instant>` (not available under [`no_std`])                                                                               |          [timestamp]           |
+| Trait                                                                          |     Not available under     |         Data type         |
+| ------------------------------------------------------------------------------ | :-------------------------: | :-----------------------: |
+| `From<i64>`                                                                    |                             |           `i64`           |
+| `From<i32>` ([`only_i32`])                                                     |                             |           `i32`           |
+| `From<f64>`                                                                    |        [`no_float`]         |           `f64`           |
+| `From<f32>` ([`f32_float`])                                                    |        [`no_float`]         |           `f32`           |
+| `From<Decimal>`                                                                |       non-[`decimal`]       | [`Decimal`][rust_decimal] |
+| `From<bool>`                                                                   |                             |          `bool`           |
+| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`         |                             |    [`ImmutableString`]    |
+| `From<char>`                                                                   |                             |          `char`           |
+| `From<Vec<T>>`                                                                 |        [`no_index`]         |          [array]          |
+| `From<&[T]>`                                                                   |        [`no_index`]         |          [array]          |
+| `From<BTreeMap<K: Into<SmartString>, T>>`<br/>e.g. `From<BTreeMap<String, T>>` |        [`no_object`]        |       [object map]        |
+| `From<HashMap<K: Into<SmartString>, T>>`<br/>e.g. `From<HashMap<String, T>>`   | [`no_object`] or [`no_std`] |       [object map]        |
+| `From<FnPtr>`                                                                  |                             |    [function pointer]     |
+| `From<Instant>`                                                                |         [`no_std`]          |        [timestamp]        |

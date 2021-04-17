@@ -6,7 +6,7 @@ Override a Built-in Function
 Any similarly-named function defined in a script _overrides_ any built-in or registered
 native Rust function of the same name and number of parameters.
 
-```js , no_run
+```js
 // Override the built-in function 'to_float' when called as a method
 fn to_float() {
     print(`Ha! Gotcha! ${this}`);

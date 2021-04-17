@@ -15,7 +15,7 @@ The `to_decimal` function converts a supported number to [`Decimal`][rust_decima
 
 That's it; for other conversions, register custom conversion functions.
 
-```js , no_run
+```js
 let x = 42;                     // 'x' is an integer
 
 let y = x * 100.0;              // integer and floating-point can inter-operate

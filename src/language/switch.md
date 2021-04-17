@@ -5,7 +5,7 @@
 
 The `switch` _expression_ allows matching on literal values, and it mostly follows Rust's `match` syntax.
 
-```js , no_run
+```js
 switch calc_secret_value(x) {
     1 => print("It's one!"),
     2 => {
@@ -13,15 +13,14 @@ switch calc_secret_value(x) {
         print("Again!");
     }
     3 => print("Go!"),
-    // _ is the default when no cases match.
-    // It must be the last case.
+    // _ is the default when no cases match. It must be the last case.
     _ => print(`Oops! Something's wrong: ${x}`)
 }
 ```
 
 The _default_ case (i.e. when no other cases match), however, must be the _last_ case in the statement.
 
-```js , no_run
+```js
 switch wrong_default {
     1 => 2,
     _ => 9,     // <- syntax error: default case not the last
@@ -37,7 +36,7 @@ Expression, Not Statement
 `switch` is not a statement, but an expression. This means that a `switch` expression can
 appear anywhere a regular expression can, e.g. as function call arguments.
 
-```js , no_run
+```js
 let x = switch foo { 1 => true, _ => false };
 
 func(switch foo {
@@ -65,7 +64,7 @@ Array and Object Map Literals Also Work
 
 The `switch` expression can match against any _literal_, including [array] and [object map] literals.
 
-```js , no_run
+```js
 // Match on arrays
 switch [foo, bar, baz] {
     ["hello", 42, true] => { ... }
@@ -92,7 +91,7 @@ Case Conditions
 Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to `true` in order for the case to match.
 
-```js , no_run
+```js
 let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) => 100,
 

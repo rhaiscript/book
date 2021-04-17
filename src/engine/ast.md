@@ -83,7 +83,7 @@ let merged = &ast1 + &ast2;
 
 `merged` in the above example essentially contains the following script program:
 
-```js , no_run
+```js
 fn foo(n) { `hello${n}` }   // <- definition of first 'foo' is overwritten
 foo(1)                      // <- notice this will be "hello1" instead of 43,
                             //    but it is no longer the return value
