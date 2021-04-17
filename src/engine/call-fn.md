@@ -3,27 +3,35 @@ Call Rhai Functions from Rust
 
 {{#include ../links.md}}
 
-Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted [function]
-from Rust via `Engine::call_fn`.
+Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted
+[function] from Rust via `Engine::call_fn`.
+
+Assume this script:
 
 ```rust , no_run
-// Define functions in a script.
-let ast = engine.compile(r#"
-    // a function with two parameters: string and i64
-    fn hello(x, y) {
-        x.len + y
-    }
+import "process" as proc;       // this is evaluated every time
 
-    // functions can be overloaded: this one takes only one parameter
-    fn hello(x) {
-        x * 2
-    }
+// a function with two parameters: string and i64
+fn hello(x, y) {
+    x.len + y
+}
 
-    // this one takes no parameters
-    fn hello() {
-        42
-    }
-"#)?;
+// functions can be overloaded: this one takes only one parameter
+fn hello(x) {
+    x * 2
+}
+
+// this one takes no parameters
+fn hello() {
+    proc::process_data(42);     // can access imported module
+}
+```
+
+[Functions] defined within the script can be called using `Engine::call_fn`:
+
+```rust , no_run
+// Compile the script to AST
+let ast = engine.compile(script)?;
 
 // A custom scope can also contain any variables/constants available to the functions
 let mut scope = Scope::new();
@@ -34,18 +42,21 @@ let mut scope = Scope::new();
 
 let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( "abc", 123_i64 ) )?;
 //          ^^^                                             ^^^^^^^^^^^^^^^^^^
-//        return type must be specified                          put arguments in a tuple
+//          return type must be specified                   put arguments in a tuple
 
 let result: i64 = engine.call_fn(&mut scope, &ast, "hello", (123_i64,) )?;
 //                                                          ^^^^^^^^^^ tuple of one
 
 let result: i64 = engine.call_fn(&mut scope, &ast, "hello", () )?;
 //                                                          ^^ unit = tuple of zero
-
-// The following call will return a function-not-found error because
-// 'hidden' is declared with 'private'.
-let result: () = engine.call_fn(&mut scope, &ast, "hidden", ())?;
 ```
+
+When using `Engine::call_fn`, the [`AST`] is first evaluated before the function is called.
+This is usually desirable in order to [import][`import`] the necessary external [modules] that are
+needed by the function.
+
+If this default behavior is not desirable, use [`AST::clear_statements`]({{rootUrl}}/engine/ast.md)
+to create a copy of the [`AST`] without any body script, only function definitions.
 
 
 `FuncArgs` trait
@@ -98,7 +109,7 @@ let result = engine.call_fn_dynamic(
                         false,              // false = do not evaluate the AST
                         "hello",            // function entry-point
                         None,               // 'this' pointer, if any
-                        [ "abc".into(), 123_i64.into() ]      // arguments
+                        [ "abc".into(), 123_i64.into() ]    // arguments
              )?;
 ```
 
@@ -121,28 +132,4 @@ let result = engine.call_fn_dynamic(
              )?;
 
 assert_eq!(value.as_int()?, 42);
-```
-
-### Evaluate the `AST` before calling the function
-
-The boolean parameter allows evaluating the [`AST`] before calling the function.
-
-This is usually not necessary as a function is an encapsulated closed environment by itself and
-cannot access any external [variables] or [constants].
-
-However, this may be useful to load external [modules] via [`import`] statements for use in the function.
-
-```rust , no_run
-import "library" as lib;    // this line is usually not evaluated
-                            // when using 'call_fn'
-
-fn foo(x) {
-    lib::do_foo(x);         // this will raise an error without
-                            // first evaluating the AST
-}
-
-fn bar(x) {
-    lib::do_bar(x);         // this will raise an error without
-                            // first evaluating the AST
-}
 ```

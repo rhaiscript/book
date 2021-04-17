@@ -85,45 +85,6 @@ All other parameters in Rhai are passed by value (i.e. clones).
 **IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
 
 
-Method-Call Style vs. Function-Call Style
-----------------------------------------
-
-Any function with a first argument that is a `&mut` reference can be used
-as method calls because internally they are the same thing: methods on a type is
-implemented as a functions taking a `&mut` first argument.
-
-This design is similar to Rust.
-
-```rust , no_run
-impl TestStruct {
-    fn foo(&mut self) -> i64 {
-        self.field
-    }
-}
-
-engine.register_fn("foo", TestStruct::foo);
-
-let result = engine.eval::<i64>(
-    r"
-        let x = new_ts();
-        foo(x);                         // normal call to 'foo'
-        x.foo()                         // 'foo' can also be called like a method on 'x'
-    "
-)?;
-
-println!("result: {}", result);         // prints 1
-```
-
-Under [`no_object`], however, the _method_ style of function calls
-(i.e. calling a function as an object-method) is no longer supported.
-
-```rust , no_run
-// Below is a syntax error under 'no_object'.
-let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
-                                            // ^ cannot call in method style under 'no_object'
-```
-
-
 `type_of()` a Custom Type
 -------------------------
 

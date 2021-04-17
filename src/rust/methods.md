@@ -1,32 +1,70 @@
 Call Method as Function
-======================
+=======================
 
 {{#include ../links.md}}
+
+
+Method-Call Style vs. Function-Call Style
+----------------------------------------
+
+Any registered function with a first argument that is a `&mut` reference can be used as method
+because internally they are the same thing: methods on a [custom type] is implemented as a functions
+taking a `&mut` first argument.
+
+This design is similar to Rust.
+
+```rust , no_run
+impl TestStruct {
+    fn foo(&mut self) -> i64 {
+        self.field
+    }
+}
+
+engine.register_fn("foo", TestStruct::foo);
+
+let result = engine.eval::<i64>(
+    r"
+        let x = new_ts();
+        foo(x);                         // normal call to 'foo'
+        x.foo()                         // 'foo' can also be called like a method on 'x'
+    "
+)?;
+
+println!("result: {}", result);         // prints 1
+```
+
+Under [`no_object`], however, the _method-call_ style is no longer supported.
+
+```rust , no_run
+// Below is a syntax error under 'no_object'.
+let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
+                                           // ^ cannot call method-style
+```
 
 
 First `&mut` Parameter
 ----------------------
 
-Property [getters/setters] and [methods][custom types] in a Rust custom type registered with the [`Engine`] can be called
-just like a regular function.  In fact, like Rust, property getters/setters and object methods
+The opposite direction also works &ndash; [methods][custom types] in a Rust [custom type] registered
+with the [`Engine`] can be called just like a regular function.  In fact, like Rust, object methods
 are registered as regular [functions] in Rhai that take a first `&mut` parameter.
 
 Unlike functions defined in script (for which all arguments are passed by _value_),
-native Rust functions may mutate the object (or the first argument if called in normal function call style).
+native Rust functions may mutate the first `&mut` argument.
 
-However, sometimes it is not as straight-forward, and methods called in function-call style may end up
-not muting the object &ndash; see the example below. Therefore, for performance reasons and to avoid
-cloning the first argument, it is best to always use method-call style wherever possible.
+Sometimes, however, there are more subtle differences. Methods called in normal function-call style
+may end up not muting the object afterall &ndash; see the example below.
 
-Custom types, properties and methods can be disabled via the [`no_object`] feature.
+Custom types, [properties][getters/setters], [indexers] and methods are disabled under the
+[`no_object`] feature.
 
 ```rust , no_run
 let a = new_ts();   // constructor function
 a.field = 500;      // property setter
 a.update();         // method call, 'a' can be modified
 
-update(a);          // <- this de-sugars to 'a.update()' thus if 'a' is a simple variable
-                    //    unlike scripted functions, 'a' can be modified and is not a copy
+update(a);          // <- this de-sugars to 'a.update()'
+                    //    'a' can be modified and is not a copy
 
 let array = [ a ];
 
@@ -48,10 +86,10 @@ an equivalent method coded in script, where the object is accessed via the `this
 
 The following table illustrates the differences:
 
-| Function type | Parameters |     Object reference      |      Function signature       |
-| :-----------: | :--------: | :-----------------------: | :---------------------------: |
-|  Native Rust  |  _N_ + 1   | first `&mut T` parameter  | `Fn(obj: &mut T, x: U, y: V)` |
-|  Rhai script  |    _N_     | `this` (of type `&mut T`) |       `Fn(x: U, y: V)`        |
+| Function type | Parameters |     Object reference     |      Function signature       |
+| :-----------: | :--------: | :----------------------: | :---------------------------: |
+|  Native Rust  |  _N_ + 1   | first `&mut T` parameter | `Fn(obj: &mut T, x: U, y: V)` |
+|  Rhai script  |    _N_     |          `this`          |       `Fn(x: U, y: V)`        |
 
 
 `&mut` is Efficient, Except for `&mut ImmutableString`

@@ -179,27 +179,6 @@ x == 500;           // 'x' is NOT changed!
 ```
 
 
-`this` &ndash; Simulating an Object Method
------------------------------------------
-
-Script-defined functions can also be called in method-call style.
-When this happens, the keyword `this` binds to the object in the method call and can be changed.
-
-```rust , no_run
-fn change() {       // not that the object does not need a parameter
-    this = 42;      // 'this' binds to the object in method-call
-}
-
-let x = 500;
-
-x.change();         // call 'change' in method-call style, 'this' binds to 'x'
-
-x == 42;            // 'x' is changed!
-
-change();           // <- error: `this` is unbound
-```
-
-
 `is_def_fn`
 -----------
 
@@ -217,28 +196,3 @@ is_def_fn("foo", 2) == false;
 
 is_def_fn("bar", 1) == false;
 ```
-
-
-Metadata
---------
-
-The function `get_fn_metadata_list` is a function that returns an array of [object maps], each
-containing the metadata of one script-defined [function] in scope.
-
-Functions from the following sources are returned, in order:
-
-1) Encapsulated script environment (e.g. when loading a [module] from a script file),
-2) Current script,
-3) [Modules] imported via the [`import`] statement (latest imports first),
-4) [Modules] added via [`Engine::register_static_module`]({{rootUrl}}/rust/modules/create.md) (latest registrations first)
-
-The return value is an [array] of [object maps] (so `get_fn_metadata_list` is not available under
-[`no_index`] or [`no_object`]), containing the following fields:
-
-| Field          |         Type         | Optional? | Description                                                            |
-| -------------- | :------------------: | :-------: | ---------------------------------------------------------------------- |
-| `namespace`    |       [string]       |    yes    | the module _namespace_ if the function is defined within a module      |
-| `access`       |       [string]       |    no     | `"public"` if the function is public,<br/>`"private"` if it is private |
-| `name`         |       [string]       |    no     | function name                                                          |
-| `params`       | [array] of [strings] |    no     | parameter names                                                        |
-| `is_anonymous` |        `bool`        |    no     | is this function an anonymous function?                                |

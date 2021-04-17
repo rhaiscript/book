@@ -5,6 +5,12 @@ Custom Type Property Getters and Setters
 
 A [custom type] can also expose properties by registering `get` and/or `set` functions.
 
+Properties can be accessed in a JavaScript-like syntax:
+
+> _object_ `.` _property_
+>
+> _object_ `.` _property_ `=` _value_ `;`
+
 Getters and setters each take a `&mut` reference to the first parameter.
 
 Getters and setters are disabled when the [`no_object`] feature is used.

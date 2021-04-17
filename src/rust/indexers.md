@@ -5,9 +5,12 @@ Custom Type Indexers
 
 A [custom type] can also expose an _indexer_ by registering an indexer function.
 
-A [custom type] with an indexer function defined can use the bracket notation to get a property value:
+A [custom type] with an indexer function defined can use the bracket notation to get/set a property
+value at a particular index:
 
 > _object_ `[` _index_ `]`
+>
+> _object_ `[` _index_ `]` `=` _value_ `;`
 
 Like property [getters/setters], indexers take a `&mut` reference to the first parameter.
 
