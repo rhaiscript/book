@@ -169,20 +169,19 @@
                     <main>
                         <h1 id="switch-expression"><a class="header" href="#switch-expression"><code>switch</code> Expression</a></h1>
 <p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s <code>match</code> syntax.</p>
-<pre><code class="language-js no_run">switch calc_secret_value(x) {
+<pre><code class="language-js">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
         print(&quot;It's two!&quot;);
         print(&quot;Again!&quot;);
     }
     3 =&gt; print(&quot;Go!&quot;),
-    // _ is the default when no cases match.
-    // It must be the last case.
+    // _ is the default when no cases match. It must be the last case.
     _ =&gt; print(`Oops! Something's wrong: ${x}`)
 }
 </code></pre>
 <p>The <em>default</em> case (i.e. when no other cases match), however, must be the <em>last</em> case in the statement.</p>
-<pre><code class="language-js no_run">switch wrong_default {
+<pre><code class="language-js">switch wrong_default {
     1 =&gt; 2,
     _ =&gt; 9,     // &lt;- syntax error: default case not the last
     2 =&gt; 3,
@@ -192,7 +191,7 @@
 <h2 id="expression-not-statement"><a class="header" href="#expression-not-statement">Expression, Not Statement</a></h2>
 <p><code>switch</code> is not a statement, but an expression. This means that a <code>switch</code> expression can
 appear anywhere a regular expression can, e.g. as function call arguments.</p>
-<pre><code class="language-js no_run">let x = switch foo { 1 =&gt; true, _ =&gt; false };
+<pre><code class="language-js">let x = switch foo { 1 =&gt; true, _ =&gt; false };
 
 func(switch foo {
     &quot;hello&quot; =&gt; 42,
@@ -214,7 +213,7 @@ if foo == &quot;hello&quot; {
 </code></pre>
 <h2 id="array-and-object-map-literals-also-work"><a class="header" href="#array-and-object-map-literals-also-work">Array and Object Map Literals Also Work</a></h2>
 <p>The <code>switch</code> expression can match against any <em>literal</em>, including <a href="/book/vnext/language/arrays.html">array</a> and <a href="/book/vnext/language/object-maps.html">object map</a> literals.</p>
-<pre><code class="language-js no_run">// Match on arrays
+<pre><code class="language-js">// Match on arrays
 switch [foo, bar, baz] {
     [&quot;hello&quot;, 42, true] =&gt; { ... }
     [&quot;hello&quot;, 123, false] =&gt; { ... }
@@ -234,7 +233,7 @@ switch map {
 <h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
 <p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to <code>true</code> in order for the case to match.</p>
-<pre><code class="language-js no_run">let result = switch calc_secret_value(x) {
+<pre><code class="language-js">let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) =&gt; 100,
 
     2 if x &lt; foo =&gt; 200,

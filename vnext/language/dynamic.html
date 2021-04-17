@@ -172,7 +172,7 @@
 <h2 id="use-type_of-to-get-value-type"><a class="header" href="#use-type_of-to-get-value-type">Use <code>type_of()</code> to Get Value Type</a></h2>
 <p>Because <a href="/book/vnext/language/type-of.html"><code>type_of()</code></a> a <code>Dynamic</code> value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value’s type.</p>
-<pre><code class="language-js no_run">let mystery = get_some_dynamic_value();
+<pre><code class="language-js">let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
     &quot;i64&quot; =&gt; print(&quot;Hey, I got an integer here!&quot;),
@@ -237,52 +237,57 @@ has been registered with a friendly name via <code>Engine::register_type_with_na
 is different from that of the <a href="/book/vnext/language/type-of.html"><code>type_of</code></a> function in Rhai.</p>
 <h2 id="methods-and-traits"><a class="header" href="#methods-and-traits">Methods and Traits</a></h2>
 <p>The following methods are available when working with <code>Dynamic</code>:</p>
-<table><thead><tr><th>Method</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>from&lt;T&gt;</code> <em>(instance method)</em></td><td align="center"><code>Dynamic</code></td><td>create a <code>Dynamic</code> from any value that implements <code>Clone</code></td></tr>
-<tr><td><code>type_name</code></td><td align="center"><code>&amp;str</code></td><td>name of the value’s type</td></tr>
-<tr><td><code>into_shared</code></td><td align="center"><code>Dynamic</code></td><td>turn the value into a <em>shared</em> value (not available under <a href="/book/vnext/start/features.html"><code>no_closure</code></a>)</td></tr>
-<tr><td><code>flatten_clone</code></td><td align="center"><code>Dynamic</code></td><td>clone the value (a <em>shared</em> value, if any, is cloned into a separate copy)</td></tr>
-<tr><td><code>flatten</code></td><td align="center"><code>Dynamic</code></td><td>clone the value into a separate copy if it is <em>shared</em> and there are multiple outstanding references, otherwise <em>shared</em> values are turned unshared</td></tr>
-<tr><td><code>read_lock&lt;T&gt;</code></td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value for reading (no action under <a href="/book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
-<tr><td><code>write_lock&lt;T&gt;</code></td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value exclusively for writing (no action under <a href="/book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
+<table><thead><tr><th>Method</th><th align="center">Not available under</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>from&lt;T&gt;</code> <em>(instance method)</em></td><td align="center"></td><td align="center"><code>Dynamic</code></td><td>create a <code>Dynamic</code> from any value that implements <code>Clone</code></td></tr>
+<tr><td><code>type_name</code></td><td align="center"></td><td align="center"><code>&amp;str</code></td><td>name of the value’s type</td></tr>
+<tr><td><code>into_shared</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_closure</code></a></td><td align="center"><code>Dynamic</code></td><td>turn the value into a <em>shared</em> value</td></tr>
+<tr><td><code>flatten_clone</code></td><td align="center"></td><td align="center"><code>Dynamic</code></td><td>clone the value (a <em>shared</em> value, if any, is cloned into a separate copy)</td></tr>
+<tr><td><code>flatten</code></td><td align="center"></td><td align="center"><code>Dynamic</code></td><td>clone the value into a separate copy if it is <em>shared</em> and there are multiple outstanding references, otherwise <em>shared</em> values are turned unshared</td></tr>
+<tr><td><code>read_lock&lt;T&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_closure</code></a> (pass thru’)</td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value for reading</td></tr>
+<tr><td><code>write_lock&lt;T&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_closure</code></a> (pass thru’)</td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value exclusively for writing</td></tr>
 </tbody></table>
 <h3 id="detection-methods"><a class="header" href="#detection-methods">Detection methods</a></h3>
-<table><thead><tr><th>Method</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>is&lt;T&gt;</code></td><td align="center"><code>bool</code></td><td>is the value of type <code>T</code>?</td></tr>
-<tr><td><code>is_variant</code></td><td align="center"><code>bool</code></td><td>is the value a trait object (i.e. not one of Rhai’s <a href="/book/vnext/language/values-and-types.html">standard types</a>)?</td></tr>
-<tr><td><code>is_shared</code></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> via a <a href="/book/vnext/language/fn-closure.html">closure</a>? Always <code>false</code> under <a href="/book/vnext/start/features.html"><code>no_closure</code></a>.</td></tr>
-<tr><td><code>is_read_only</code></td><td align="center"><code>bool</code></td><td>is the value <a href="/book/vnext/language/constants.html">constant</a>? A <a href="/book/vnext/language/constants.html">constant</a> value should not be modified.</td></tr>
-<tr><td><code>is_locked</code></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> and locked (i.e. currently being read)? Always <code>false</code> under <a href="/book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
+<table><thead><tr><th>Method</th><th align="center">Not available under</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>is&lt;T&gt;</code></td><td align="center"></td><td align="center"><code>bool</code></td><td>is the value of type <code>T</code>?</td></tr>
+<tr><td><code>is_variant</code></td><td align="center"></td><td align="center"><code>bool</code></td><td>is the value a trait object (i.e. not one of Rhai’s <a href="/book/vnext/language/values-and-types.html">standard types</a>)?</td></tr>
+<tr><td><code>is_read_only</code></td><td align="center"></td><td align="center"><code>bool</code></td><td>is the value <a href="/book/vnext/language/constants.html">constant</a>? A <a href="/book/vnext/language/constants.html">constant</a> value should not be modified.</td></tr>
+<tr><td><code>is_shared</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_closure</code></a></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> via a <a href="/book/vnext/language/fn-closure.html">closure</a>?</td></tr>
+<tr><td><code>is_locked</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_closure</code></a></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> and locked (i.e. currently being read)?</td></tr>
 </tbody></table>
 <h3 id="casting-methods"><a class="header" href="#casting-methods">Casting methods</a></h3>
 <p>The following methods cast a <code>Dynamic</code> into a specific type:</p>
-<table><thead><tr><th>Method</th><th align="center">Return type</th></tr></thead><tbody>
-<tr><td><code>cast&lt;T&gt;</code></td><td align="center"><code>T</code> (panics on failure)</td></tr>
-<tr><td><code>try_cast&lt;T&gt;</code></td><td align="center"><code>Option&lt;T&gt;</code></td></tr>
-<tr><td><code>clone_cast&lt;T&gt;</code> (for <code>&amp;Dynamic</code>)</td><td align="center">cloned copy of <code>T</code> (panics on failure)</td></tr>
-<tr><td><code>as_int</code></td><td align="center"><code>Result&lt;i64, &amp;str&gt;</code> (<code>Result&lt;i32, &amp;str&gt;</code> if <a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td></tr>
-<tr><td><code>as_float</code> (not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td align="center"><code>Result&lt;f64, &amp;str&gt;</code> (<code>Result&lt;f32, &amp;str&gt;</code> if <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>as_decimal</code> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>)</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Result&lt;Decimal, &amp;str&gt;</code></a></td></tr>
-<tr><td><code>as_bool</code></td><td align="center"><code>Result&lt;bool, &amp;str&gt;</code></td></tr>
-<tr><td><code>as_char</code></td><td align="center"><code>Result&lt;char, &amp;str&gt;</code></td></tr>
-<tr><td><code>take_string</code></td><td align="center"><code>Result&lt;String, &amp;str&gt;</code></td></tr>
-<tr><td><code>take_immutable_string</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>Result&lt;ImmutableString, &amp;str&gt;</code></a></td></tr>
+<table><thead><tr><th>Method</th><th align="center">Not available under</th><th align="center">Return type (error is the actual data type)</th></tr></thead><tbody>
+<tr><td><code>cast&lt;T&gt;</code></td><td align="center"></td><td align="center"><code>T</code> (panics on failure)</td></tr>
+<tr><td><code>try_cast&lt;T&gt;</code></td><td align="center"></td><td align="center"><code>Option&lt;T&gt;</code></td></tr>
+<tr><td><code>clone_cast&lt;T&gt;</code></td><td align="center"></td><td align="center">cloned copy of <code>T</code> (panics on failure)</td></tr>
+<tr><td><code>as_unit</code></td><td align="center"></td><td align="center"><code>Result&lt;(), &amp;str&gt;</code></td></tr>
+<tr><td><code>as_int</code></td><td align="center"></td><td align="center"><code>Result&lt;i64, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_int</code> (<a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td><td align="center"></td><td align="center"><code>Result&lt;i32, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_float</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>Result&lt;f64, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_float</code> (<a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>Result&lt;f32, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_decimal</code></td><td align="center">non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Result&lt;Decimal, &amp;str&gt;</code></a></td></tr>
+<tr><td><code>as_bool</code></td><td align="center"></td><td align="center"><code>Result&lt;bool, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_char</code></td><td align="center"></td><td align="center"><code>Result&lt;char, &amp;str&gt;</code></td></tr>
+<tr><td><code>take_string</code></td><td align="center"></td><td align="center"><code>Result&lt;String, &amp;str&gt;</code></td></tr>
+<tr><td><code>take_immutable_string</code></td><td align="center"></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>Result&lt;ImmutableString, &amp;str&gt;</code></a></td></tr>
 </tbody></table>
 <h3 id="constructor-traits"><a class="header" href="#constructor-traits">Constructor traits</a></h3>
 <p>The following constructor traits are implemented for <code>Dynamic</code>:</p>
-<table><thead><tr><th>Trait</th><th align="center">Data type</th></tr></thead><tbody>
-<tr><td><code>From&lt;i64&gt;</code> (<code>From&lt;i32&gt;</code> if <a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td><td align="center"><code>i64</code> (<code>i32</code> if <a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td></tr>
-<tr><td><code>From&lt;f64&gt;</code> (<code>From&lt;f32&gt;</code> if <a href="/book/vnext/start/features.html"><code>f32_float</code></a>, not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td align="center"><code>f64</code> (<code>f32</code> if <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>From&lt;Decimal&gt;</code> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>)</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
-<tr><td><code>From&lt;bool&gt;</code></td><td align="center"><code>bool</code></td></tr>
-<tr><td><code>From&lt;S: Into&lt;ImmutableString&gt;&gt;</code><br/>e.g. <code>From&lt;String&gt;</code>, <code>From&lt;&amp;str&gt;</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td></tr>
-<tr><td><code>From&lt;char&gt;</code></td><td align="center"><code>char</code></td></tr>
-<tr><td><code>From&lt;Vec&lt;T&gt;&gt;</code> (not available under <a href="/book/vnext/start/features.html"><code>no_index</code></a>)</td><td align="center"><a href="/book/vnext/language/arrays.html">array</a></td></tr>
-<tr><td><code>From&lt;&amp;[T]&gt;</code> (not available under <a href="/book/vnext/start/features.html"><code>no_index</code></a>)</td><td align="center"><a href="/book/vnext/language/arrays.html">array</a></td></tr>
-<tr><td><code>From&lt;HashMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code> (not available under <a href="/book/vnext/start/features.html"><code>no_object</code></a> or <a href="/book/vnext/start/features.html"><code>no_std</code></a>)<br/>e.g. <code>From&lt;HashMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td><code>From&lt;BTreeMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code> (not available under <a href="/book/vnext/start/features.html"><code>no_object</code></a>)<br/>e.g. <code>From&lt;BTreeMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td><code>From&lt;FnPtr&gt;</code></td><td align="center"><a href="/book/vnext/language/fn-ptr.html">function pointer</a></td></tr>
-<tr><td><code>From&lt;Instant&gt;</code> (not available under <a href="/book/vnext/start/features.html"><code>no_std</code></a>)</td><td align="center"><a href="/book/vnext/language/timestamps.html">timestamp</a></td></tr>
+<table><thead><tr><th>Trait</th><th align="center">Not available under</th><th align="center">Data type</th></tr></thead><tbody>
+<tr><td><code>From&lt;i64&gt;</code></td><td align="center"></td><td align="center"><code>i64</code></td></tr>
+<tr><td><code>From&lt;i32&gt;</code> (<a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td><td align="center"></td><td align="center"><code>i32</code></td></tr>
+<tr><td><code>From&lt;f64&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>f64</code></td></tr>
+<tr><td><code>From&lt;f32&gt;</code> (<a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>f32</code></td></tr>
+<tr><td><code>From&lt;Decimal&gt;</code></td><td align="center">non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>From&lt;bool&gt;</code></td><td align="center"></td><td align="center"><code>bool</code></td></tr>
+<tr><td><code>From&lt;S: Into&lt;ImmutableString&gt;&gt;</code><br/>e.g. <code>From&lt;String&gt;</code>, <code>From&lt;&amp;str&gt;</code></td><td align="center"></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td></tr>
+<tr><td><code>From&lt;char&gt;</code></td><td align="center"></td><td align="center"><code>char</code></td></tr>
+<tr><td><code>From&lt;Vec&lt;T&gt;&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_index</code></a></td><td align="center"><a href="/book/vnext/language/arrays.html">array</a></td></tr>
+<tr><td><code>From&lt;&amp;[T]&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_index</code></a></td><td align="center"><a href="/book/vnext/language/arrays.html">array</a></td></tr>
+<tr><td><code>From&lt;BTreeMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code><br/>e.g. <code>From&lt;BTreeMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_object</code></a></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>From&lt;HashMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code><br/>e.g. <code>From&lt;HashMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_object</code></a> or <a href="/book/vnext/start/features.html"><code>no_std</code></a></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>From&lt;FnPtr&gt;</code></td><td align="center"></td><td align="center"><a href="/book/vnext/language/fn-ptr.html">function pointer</a></td></tr>
+<tr><td><code>From&lt;Instant&gt;</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_std</code></a></td><td align="center"><a href="/book/vnext/language/timestamps.html">timestamp</a></td></tr>
 </tbody></table>
 
                     </main>

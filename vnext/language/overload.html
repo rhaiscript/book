@@ -171,7 +171,7 @@
 <p><a href="/book/vnext/language/functions.html">Functions</a> defined in script can be <em>overloaded</em> by <em>arity</em> (i.e. they are resolved purely upon the function’s <em>name</em>
 and <em>number</em> of parameters, but not parameter <em>types</em> since all parameters are the same type – <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a>).</p>
 <p>New definitions <em>overwrite</em> previous definitions of the same name and number of parameters.</p>
-<pre><code class="language-js no_run">fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
+<pre><code class="language-js">fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
 
 fn foo(x)     { print(`One! ${x}`); }
 

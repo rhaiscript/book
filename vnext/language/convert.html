@@ -173,7 +173,7 @@
 <p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
 <p>The <code>to_decimal</code> function converts a supported number to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>).</p>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
-<pre><code class="language-js no_run">let x = 42;                     // 'x' is an integer
+<pre><code class="language-js">let x = 42;                     // 'x' is an integer
 
 let y = x * 100.0;              // integer and floating-point can inter-operate
 

@@ -177,18 +177,12 @@ This is particularly useful when printing output.</p>
 <p>The maximum allowed length of a string can be controlled via <code>Engine::set_max_string_size</code>
 (see <a href="/book/vnext/safety/max-string-size.html">maximum length of strings</a>).</p>
 <h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
-<p>String and character literals follow JavaScript-style formatting:</p>
-<ul>
-<li>
-<p>normal strings are wrapped by double-quotes: <code>&quot;</code></p>
-</li>
-<li>
-<p>multi-line literal strings are wrapped by back-ticks: <code>`</code></p>
-</li>
-<li>
-<p>characters are wrapped by single-quotes: <code>'</code></p>
-</li>
-</ul>
+<p>String and character literals follow JavaScript-style syntax:</p>
+<table><thead><tr><th>Type</th><th align="center">Quotes</th><th align="center">Escapes?</th><th align="center">Continuation?</th><th align="center">Interpolation?</th></tr></thead><tbody>
+<tr><td>Normal string</td><td align="center"><code>&quot;...&quot;</code></td><td align="center">yes</td><td align="center">yes (with <code>\</code>)</td><td align="center">no</td></tr>
+<tr><td>Multi-line literal string</td><td align="center"><code>`...`</code></td><td align="center">no</td><td align="center">no</td><td align="center">yes (<code>${...}</code>)</td></tr>
+<tr><td>Character</td><td align="center"><code>'...'</code></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+</tbody></table>
 <h2 id="standard-escape-sequences"><a class="header" href="#standard-escape-sequences">Standard Escape Sequences</a></h2>
 <p>There is built-in support for Unicode (<code>\u</code><em>xxxx</em> or <code>\U</code><em>xxxxxxxx</em>) and hex (<code>\x</code><em>xx</em>) escape
 sequences for normal strings and characters.</p>
@@ -243,7 +237,7 @@ let x = &quot;hello, world!\nhello world again!\nthis is the last time!!!&quot;;
 <p>A string wrapped by a pair of back-tick (<code>`</code>) characters is interpreted <em>literally</em>,
 meaning that every single character that lies between the two back-ticks is taken verbatim.
 This include new-lines, whitespaces, escape characters etc.</p>
-<pre><code class="language-js no_run">let x = `hello, world! &quot;\t\x42&quot;
+<pre><code class="language-js">let x = `hello, world! &quot;\t\x42&quot;
   hello world again! 'x'
      this is the last time!!! `;
 
@@ -252,7 +246,7 @@ let x = &quot;hello, world! \&quot;\\t\\x42\&quot;\n  hello world again! 'x'\n  
 </code></pre>
 <p>If a back-tick (<code>`</code>) appears at the <em>end</em> of a line, then it is understood that the entire text
 block starts from the <em>next</em> line; the starting new-line character is stripped.</p>
-<pre><code class="language-js no_run">let x = `
+<pre><code class="language-js">let x = `
         hello, world! &quot;\t\x42&quot;
   hello world again! 'x'
      this is the last time!!!
@@ -270,7 +264,7 @@ statements block, including another interpolated string!
 The last result of the block is taken as the value for interpolation.</p>
 <p>Rhai uses <a href="/book/vnext/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
 sub-strings together.</p>
-<pre><code class="language-js no_run">let x = 42;
+<pre><code class="language-js">let x = 42;
 let y = 123;
 
 let s = `x = ${x} and y = ${y}.`;                   // &lt;- interpolated string
@@ -288,19 +282,28 @@ Undeniable logic:
 s == &quot;Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n&quot;;
 </code></pre>
 <h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
+<p>Strings can be <em>indexed</em> into to get access to any individual character.
+This is similar to many modern languages but different from Rust.</p>
 <h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
 <p>Individual characters within a string can be accessed with zero-based, non-negative integer indices:</p>
 <blockquote>
-<p><em>string</em> <code>[</code> <em>index from 0 to total number of characters - 1</em> <code>]</code></p>
+<p><em>string</em> <code>[</code> <em>index from 0 to (total number of characters − 1)</em> <code>]</code></p>
 </blockquote>
 <h3 id="from-end"><a class="header" href="#from-end">From end</a></h3>
-<p>A <em>negative</em> index accesses a character in the string counting from the <em>end</em>, with -1 being the
+<p>A <em>negative</em> index accesses a character in the string counting from the <em>end</em>, with −1 being the
 <em>last</em> character.</p>
 <blockquote>
-<p><em>string</em> <code>[</code> <em>index from -1 to -(total number of characters)</em> <code>]</code></p>
+<p><em>string</em> <code>[</code> <em>index from −1 to −(total number of characters)</em> <code>]</code></p>
 </blockquote>
+<h3 id="actual-implementation"><a class="header" href="#actual-implementation">Actual implementation</a></h3>
+<p>Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.</p>
+<p>Therefore, getting the character at a particular index involves walking through the entire UTF-8
+encoded bytes stream to extract individual Unicode characters, counting them on the way.</p>
+<p>Because of this, indexing can be a <em>slow</em> procedure, especially for long strings.
+Along the same lines, getting the <em>length</em> of a string (which returns the number of characters, not
+bytes) can also be slow.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
-<pre><code class="language-js no_run">let name = &quot;Bob&quot;;
+<pre><code class="language-js">let name = &quot;Bob&quot;;
 let middle_initial = 'C';
 let last = &quot;Davis&quot;;
 

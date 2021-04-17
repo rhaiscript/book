@@ -177,7 +177,7 @@ Its members can be accessed via <code>::</code> similar to C++.</p>
 <p>A module that is only <code>import</code>-ed but not under any module name is commonly used for initialization purposes,
 where the module script contains initialization statements that puts the functions registered with the
 <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> into a particular state.</p>
-<pre><code class="language-js no_run">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
+<pre><code class="language-js">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
 

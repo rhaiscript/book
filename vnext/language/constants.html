@@ -191,7 +191,6 @@ const x = 40 + 2;   // 'x' is a constant 42
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
 <p>It is possible to add a constant into a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> so it’ll be available to scripts
 running with that <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
-<p>When added to a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>, a constant can hold any value, not just a literal value.</p>
 <p>It is very useful to have a constant value hold a <a href="/book/vnext/rust/custom.html">custom type</a>, which essentially acts
 as a <a href="../patterns/singleton.html"><em>singleton</em></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -221,6 +220,26 @@ r&quot;
     MY_NUMBER.update_value(42);
     print(MY_NUMBER.value);                                 // prints 42
 &quot;)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="automatic-global-module"><a class="header" href="#automatic-global-module">Automatic Global Module</a></h2>
+<p>When a constant is declared at global scope, it is added to a special <a href="/book/vnext/rust/modules/index.html">module</a> called <code>global</code>.</p>
+<p><a href="/book/vnext/language/functions.html">Functions</a> can access those constants via the special <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a> is not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const CONSTANT = 42;        // this constant is automatically added to 'global'
+
+{
+    const INNER = 0;        // this constant is not at global level
+}                           // &lt;- it goes away here
+
+fn foo(x) {
+    x * global::CONSTANT    // ok! 'CONSTANT' exists in 'global'
+
+    x * global::INNER       // &lt;- error: constant 'INNER' not found in 'global'
+}
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="caveat--constants-can-be-modified-via-rust"><a class="header" href="#caveat--constants-can-be-modified-via-rust">Caveat – Constants Can be Modified via Rust</a></h2>

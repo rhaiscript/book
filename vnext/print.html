@@ -174,7 +174,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>0.20.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>0.20.1</strong> of Rhai.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
 <p>In the beginning there was <a href="http://chaiscript.com">ChaiScript</a>,
@@ -462,7 +462,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;0.20.0&quot;    # assuming 0.20.0 is the latest version
+rhai = &quot;0.20.1&quot;    # assuming 0.20.1 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -533,7 +533,7 @@ Do not use them for non-<a href="start//book/vnext/start/builds/wasm.html">WASM<
 <li><code>no_function</code> (no defining <a href="start//book/vnext/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;0.20.1&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/vnext/language/functions.html">functions</a>
@@ -862,7 +862,7 @@ let result = engine.eval::&lt;String&gt;(&quot;40 + 2&quot;)?;  // returns an er
 script with an interpreter (for Rhai this would be <a href="engine//book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
+<pre><code class="language-js">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
@@ -899,7 +899,7 @@ for _ in 0..42 {
 script with an interpreter (for Rhai this would be <a href="engine//book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
+<pre><code class="language-js">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
@@ -983,7 +983,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.1/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/vnext/language/variables.html">variable</a> or <a href="engine//book/vnext/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/vnext/language/variables.html">variables</a> and <a href="engine//book/vnext/language/constants.html">constants</a>, but only the latest ones can
@@ -1588,7 +1588,7 @@ schedule_callback(Box::new(move |x: i64, y: String| -&gt; Result&lt;bool, Box&lt
 <h1 id="override-a-built-in-function"><a class="header" href="#override-a-built-in-function">Override a Built-in Function</a></h1>
 <p>Any similarly-named function defined in a script <em>overrides</em> any built-in or registered
 native Rust function of the same name and number of parameters.</p>
-<pre><code class="language-js no_run">// Override the built-in function 'to_float' when called as a method
+<pre><code class="language-js">// Override the built-in function 'to_float' when called as a method
 fn to_float() {
     print(`Ha! Gotcha! ${this}`);
     42.0
@@ -2020,7 +2020,7 @@ to scripts either globally or under individual static module <a href="rust/modul
 which converts a normal Rust module into a Rhai <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> via procedural macros.</p>
 <h2 id="create-via-module-api"><a class="header" href="#create-via-module-api">Create via <code>Module</code> API</a></h2>
 <p>Manually creating a <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> is possible via the <code>Module</code> API.</p>
-<p>For the complete <code>Module</code> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.Module.html">documentation</a> online.</p>
+<p>For the complete <code>Module</code> API, refer to the <a href="https://docs.rs/rhai/0.20.1/rhai/struct.Module.html">documentation</a> online.</p>
 <h2 id="use-case-1--make-the-module-globally-available"><a class="header" href="#use-case-1--make-the-module-globally-available">Use Case 1 – Make the <code>Module</code> Globally Available</a></h2>
 <p><code>Engine::register_global_module</code> registers a shared <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> into the <em>global</em> namespace.</p>
 <p>All <a href="rust/modules//book/vnext/language/functions.html">functions</a> and <a href="rust/modules//book/vnext/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.
@@ -2262,7 +2262,7 @@ repeatedly imported.</p>
 script with an interpreter (for Rhai this would be <a href="rust/modules//book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped.
 Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
+<pre><code class="language-js">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 
@@ -3320,7 +3320,7 @@ Any modification done to a Rhai string causes the string to be cloned and the mo
 <h2 id="use-type_of-to-get-value-type"><a class="header" href="#use-type_of-to-get-value-type">Use <code>type_of()</code> to Get Value Type</a></h2>
 <p>Because <a href="language//book/vnext/language/type-of.html"><code>type_of()</code></a> a <code>Dynamic</code> value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value’s type.</p>
-<pre><code class="language-js no_run">let mystery = get_some_dynamic_value();
+<pre><code class="language-js">let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
     &quot;i64&quot; =&gt; print(&quot;Hey, I got an integer here!&quot;),
@@ -3385,52 +3385,57 @@ has been registered with a friendly name via <code>Engine::register_type_with_na
 is different from that of the <a href="language//book/vnext/language/type-of.html"><code>type_of</code></a> function in Rhai.</p>
 <h2 id="methods-and-traits"><a class="header" href="#methods-and-traits">Methods and Traits</a></h2>
 <p>The following methods are available when working with <code>Dynamic</code>:</p>
-<table><thead><tr><th>Method</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>from&lt;T&gt;</code> <em>(instance method)</em></td><td align="center"><code>Dynamic</code></td><td>create a <code>Dynamic</code> from any value that implements <code>Clone</code></td></tr>
-<tr><td><code>type_name</code></td><td align="center"><code>&amp;str</code></td><td>name of the value’s type</td></tr>
-<tr><td><code>into_shared</code></td><td align="center"><code>Dynamic</code></td><td>turn the value into a <em>shared</em> value (not available under <a href="language//book/vnext/start/features.html"><code>no_closure</code></a>)</td></tr>
-<tr><td><code>flatten_clone</code></td><td align="center"><code>Dynamic</code></td><td>clone the value (a <em>shared</em> value, if any, is cloned into a separate copy)</td></tr>
-<tr><td><code>flatten</code></td><td align="center"><code>Dynamic</code></td><td>clone the value into a separate copy if it is <em>shared</em> and there are multiple outstanding references, otherwise <em>shared</em> values are turned unshared</td></tr>
-<tr><td><code>read_lock&lt;T&gt;</code></td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value for reading (no action under <a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
-<tr><td><code>write_lock&lt;T&gt;</code></td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value exclusively for writing (no action under <a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
+<table><thead><tr><th>Method</th><th align="center">Not available under</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>from&lt;T&gt;</code> <em>(instance method)</em></td><td align="center"></td><td align="center"><code>Dynamic</code></td><td>create a <code>Dynamic</code> from any value that implements <code>Clone</code></td></tr>
+<tr><td><code>type_name</code></td><td align="center"></td><td align="center"><code>&amp;str</code></td><td>name of the value’s type</td></tr>
+<tr><td><code>into_shared</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td><td align="center"><code>Dynamic</code></td><td>turn the value into a <em>shared</em> value</td></tr>
+<tr><td><code>flatten_clone</code></td><td align="center"></td><td align="center"><code>Dynamic</code></td><td>clone the value (a <em>shared</em> value, if any, is cloned into a separate copy)</td></tr>
+<tr><td><code>flatten</code></td><td align="center"></td><td align="center"><code>Dynamic</code></td><td>clone the value into a separate copy if it is <em>shared</em> and there are multiple outstanding references, otherwise <em>shared</em> values are turned unshared</td></tr>
+<tr><td><code>read_lock&lt;T&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_closure</code></a> (pass thru’)</td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value for reading</td></tr>
+<tr><td><code>write_lock&lt;T&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_closure</code></a> (pass thru’)</td><td align="center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value exclusively for writing</td></tr>
 </tbody></table>
 <h3 id="detection-methods"><a class="header" href="#detection-methods">Detection methods</a></h3>
-<table><thead><tr><th>Method</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>is&lt;T&gt;</code></td><td align="center"><code>bool</code></td><td>is the value of type <code>T</code>?</td></tr>
-<tr><td><code>is_variant</code></td><td align="center"><code>bool</code></td><td>is the value a trait object (i.e. not one of Rhai’s <a href="language//book/vnext/language/values-and-types.html">standard types</a>)?</td></tr>
-<tr><td><code>is_shared</code></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> via a <a href="language//book/vnext/language/fn-closure.html">closure</a>? Always <code>false</code> under <a href="language//book/vnext/start/features.html"><code>no_closure</code></a>.</td></tr>
-<tr><td><code>is_read_only</code></td><td align="center"><code>bool</code></td><td>is the value <a href="language//book/vnext/language/constants.html">constant</a>? A <a href="language//book/vnext/language/constants.html">constant</a> value should not be modified.</td></tr>
-<tr><td><code>is_locked</code></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> and locked (i.e. currently being read)? Always <code>false</code> under <a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
+<table><thead><tr><th>Method</th><th align="center">Not available under</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>is&lt;T&gt;</code></td><td align="center"></td><td align="center"><code>bool</code></td><td>is the value of type <code>T</code>?</td></tr>
+<tr><td><code>is_variant</code></td><td align="center"></td><td align="center"><code>bool</code></td><td>is the value a trait object (i.e. not one of Rhai’s <a href="language//book/vnext/language/values-and-types.html">standard types</a>)?</td></tr>
+<tr><td><code>is_read_only</code></td><td align="center"></td><td align="center"><code>bool</code></td><td>is the value <a href="language//book/vnext/language/constants.html">constant</a>? A <a href="language//book/vnext/language/constants.html">constant</a> value should not be modified.</td></tr>
+<tr><td><code>is_shared</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> via a <a href="language//book/vnext/language/fn-closure.html">closure</a>?</td></tr>
+<tr><td><code>is_locked</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td><td align="center"><code>bool</code></td><td>is the value <em>shared</em> and locked (i.e. currently being read)?</td></tr>
 </tbody></table>
 <h3 id="casting-methods"><a class="header" href="#casting-methods">Casting methods</a></h3>
 <p>The following methods cast a <code>Dynamic</code> into a specific type:</p>
-<table><thead><tr><th>Method</th><th align="center">Return type</th></tr></thead><tbody>
-<tr><td><code>cast&lt;T&gt;</code></td><td align="center"><code>T</code> (panics on failure)</td></tr>
-<tr><td><code>try_cast&lt;T&gt;</code></td><td align="center"><code>Option&lt;T&gt;</code></td></tr>
-<tr><td><code>clone_cast&lt;T&gt;</code> (for <code>&amp;Dynamic</code>)</td><td align="center">cloned copy of <code>T</code> (panics on failure)</td></tr>
-<tr><td><code>as_int</code></td><td align="center"><code>Result&lt;i64, &amp;str&gt;</code> (<code>Result&lt;i32, &amp;str&gt;</code> if <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>)</td></tr>
-<tr><td><code>as_float</code> (not available under <a href="language//book/vnext/start/features.html"><code>no_float</code></a>)</td><td align="center"><code>Result&lt;f64, &amp;str&gt;</code> (<code>Result&lt;f32, &amp;str&gt;</code> if <a href="language//book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>as_decimal</code> (requires <a href="language//book/vnext/start/features.html"><code>decimal</code></a>)</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Result&lt;Decimal, &amp;str&gt;</code></a></td></tr>
-<tr><td><code>as_bool</code></td><td align="center"><code>Result&lt;bool, &amp;str&gt;</code></td></tr>
-<tr><td><code>as_char</code></td><td align="center"><code>Result&lt;char, &amp;str&gt;</code></td></tr>
-<tr><td><code>take_string</code></td><td align="center"><code>Result&lt;String, &amp;str&gt;</code></td></tr>
-<tr><td><code>take_immutable_string</code></td><td align="center"><a href="language//book/vnext/rust/immutable-string.html"><code>Result&lt;ImmutableString, &amp;str&gt;</code></a></td></tr>
+<table><thead><tr><th>Method</th><th align="center">Not available under</th><th align="center">Return type (error is the actual data type)</th></tr></thead><tbody>
+<tr><td><code>cast&lt;T&gt;</code></td><td align="center"></td><td align="center"><code>T</code> (panics on failure)</td></tr>
+<tr><td><code>try_cast&lt;T&gt;</code></td><td align="center"></td><td align="center"><code>Option&lt;T&gt;</code></td></tr>
+<tr><td><code>clone_cast&lt;T&gt;</code></td><td align="center"></td><td align="center">cloned copy of <code>T</code> (panics on failure)</td></tr>
+<tr><td><code>as_unit</code></td><td align="center"></td><td align="center"><code>Result&lt;(), &amp;str&gt;</code></td></tr>
+<tr><td><code>as_int</code></td><td align="center"></td><td align="center"><code>Result&lt;i64, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_int</code> (<a href="language//book/vnext/start/features.html"><code>only_i32</code></a>)</td><td align="center"></td><td align="center"><code>Result&lt;i32, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_float</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>Result&lt;f64, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_float</code> (<a href="language//book/vnext/start/features.html"><code>f32_float</code></a>)</td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>Result&lt;f32, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_decimal</code></td><td align="center">non-<a href="language//book/vnext/start/features.html"><code>decimal</code></a></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Result&lt;Decimal, &amp;str&gt;</code></a></td></tr>
+<tr><td><code>as_bool</code></td><td align="center"></td><td align="center"><code>Result&lt;bool, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_char</code></td><td align="center"></td><td align="center"><code>Result&lt;char, &amp;str&gt;</code></td></tr>
+<tr><td><code>take_string</code></td><td align="center"></td><td align="center"><code>Result&lt;String, &amp;str&gt;</code></td></tr>
+<tr><td><code>take_immutable_string</code></td><td align="center"></td><td align="center"><a href="language//book/vnext/rust/immutable-string.html"><code>Result&lt;ImmutableString, &amp;str&gt;</code></a></td></tr>
 </tbody></table>
 <h3 id="constructor-traits"><a class="header" href="#constructor-traits">Constructor traits</a></h3>
 <p>The following constructor traits are implemented for <code>Dynamic</code>:</p>
-<table><thead><tr><th>Trait</th><th align="center">Data type</th></tr></thead><tbody>
-<tr><td><code>From&lt;i64&gt;</code> (<code>From&lt;i32&gt;</code> if <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>)</td><td align="center"><code>i64</code> (<code>i32</code> if <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>)</td></tr>
-<tr><td><code>From&lt;f64&gt;</code> (<code>From&lt;f32&gt;</code> if <a href="language//book/vnext/start/features.html"><code>f32_float</code></a>, not available under <a href="language//book/vnext/start/features.html"><code>no_float</code></a>)</td><td align="center"><code>f64</code> (<code>f32</code> if <a href="language//book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>From&lt;Decimal&gt;</code> (requires <a href="language//book/vnext/start/features.html"><code>decimal</code></a>)</td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
-<tr><td><code>From&lt;bool&gt;</code></td><td align="center"><code>bool</code></td></tr>
-<tr><td><code>From&lt;S: Into&lt;ImmutableString&gt;&gt;</code><br/>e.g. <code>From&lt;String&gt;</code>, <code>From&lt;&amp;str&gt;</code></td><td align="center"><a href="language//book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td></tr>
-<tr><td><code>From&lt;char&gt;</code></td><td align="center"><code>char</code></td></tr>
-<tr><td><code>From&lt;Vec&lt;T&gt;&gt;</code> (not available under <a href="language//book/vnext/start/features.html"><code>no_index</code></a>)</td><td align="center"><a href="language//book/vnext/language/arrays.html">array</a></td></tr>
-<tr><td><code>From&lt;&amp;[T]&gt;</code> (not available under <a href="language//book/vnext/start/features.html"><code>no_index</code></a>)</td><td align="center"><a href="language//book/vnext/language/arrays.html">array</a></td></tr>
-<tr><td><code>From&lt;HashMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code> (not available under <a href="language//book/vnext/start/features.html"><code>no_object</code></a> or <a href="language//book/vnext/start/features.html"><code>no_std</code></a>)<br/>e.g. <code>From&lt;HashMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="language//book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td><code>From&lt;BTreeMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code> (not available under <a href="language//book/vnext/start/features.html"><code>no_object</code></a>)<br/>e.g. <code>From&lt;BTreeMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="language//book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td><code>From&lt;FnPtr&gt;</code></td><td align="center"><a href="language//book/vnext/language/fn-ptr.html">function pointer</a></td></tr>
-<tr><td><code>From&lt;Instant&gt;</code> (not available under <a href="language//book/vnext/start/features.html"><code>no_std</code></a>)</td><td align="center"><a href="language//book/vnext/language/timestamps.html">timestamp</a></td></tr>
+<table><thead><tr><th>Trait</th><th align="center">Not available under</th><th align="center">Data type</th></tr></thead><tbody>
+<tr><td><code>From&lt;i64&gt;</code></td><td align="center"></td><td align="center"><code>i64</code></td></tr>
+<tr><td><code>From&lt;i32&gt;</code> (<a href="language//book/vnext/start/features.html"><code>only_i32</code></a>)</td><td align="center"></td><td align="center"><code>i32</code></td></tr>
+<tr><td><code>From&lt;f64&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>f64</code></td></tr>
+<tr><td><code>From&lt;f32&gt;</code> (<a href="language//book/vnext/start/features.html"><code>f32_float</code></a>)</td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_float</code></a></td><td align="center"><code>f32</code></td></tr>
+<tr><td><code>From&lt;Decimal&gt;</code></td><td align="center">non-<a href="language//book/vnext/start/features.html"><code>decimal</code></a></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>From&lt;bool&gt;</code></td><td align="center"></td><td align="center"><code>bool</code></td></tr>
+<tr><td><code>From&lt;S: Into&lt;ImmutableString&gt;&gt;</code><br/>e.g. <code>From&lt;String&gt;</code>, <code>From&lt;&amp;str&gt;</code></td><td align="center"></td><td align="center"><a href="language//book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td></tr>
+<tr><td><code>From&lt;char&gt;</code></td><td align="center"></td><td align="center"><code>char</code></td></tr>
+<tr><td><code>From&lt;Vec&lt;T&gt;&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td align="center"><a href="language//book/vnext/language/arrays.html">array</a></td></tr>
+<tr><td><code>From&lt;&amp;[T]&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td align="center"><a href="language//book/vnext/language/arrays.html">array</a></td></tr>
+<tr><td><code>From&lt;BTreeMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code><br/>e.g. <code>From&lt;BTreeMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_object</code></a></td><td align="center"><a href="language//book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>From&lt;HashMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code><br/>e.g. <code>From&lt;HashMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_object</code></a> or <a href="language//book/vnext/start/features.html"><code>no_std</code></a></td><td align="center"><a href="language//book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>From&lt;FnPtr&gt;</code></td><td align="center"></td><td align="center"><a href="language//book/vnext/language/fn-ptr.html">function pointer</a></td></tr>
+<tr><td><code>From&lt;Instant&gt;</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_std</code></a></td><td align="center"><a href="language//book/vnext/language/timestamps.html">timestamp</a></td></tr>
 </tbody></table>
 <h1 id="type_of"><a class="header" href="#type_of"><code>type_of()</code></a></h1>
 <p>The <code>type_of</code> function detects the actual type of a value.</p>
@@ -3631,7 +3636,6 @@ a decimal point (<code>.</code>).</p>
 <tr><td><code>.456</code></td><td><em>syntax error (missing leading <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 <tr><td><code>123.456e_10</code></td><td><em>syntax error (improper separator)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 <tr><td><code>123.e-10</code></td><td><em>syntax error (missing decimal <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
-<tr><td><code>.456e-10</code></td><td><em>syntax error (missing leading <code>0</code>)</em></td><td align="center"></td><td align="center"></td><td align="center"></td></tr>
 </tbody></table>
 <h2 id="warning--no-implicit-type-conversions"><a class="header" href="#warning--no-implicit-type-conversions">Warning – No Implicit Type Conversions</a></h2>
 <p>Unlike most C-like languages, Rhai does <em>not</em> provide implicit type conversions between different
@@ -3771,7 +3775,7 @@ using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></
 <a href="language//book/vnext/start/features.html"><code>decimal</code></a>) only:</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>abs</code></td><td>absolute value</td></tr>
-<tr><td><code>sign</code></td><td>returns (<code>INT</code>) -1 if negative, +1 if positive, 0 if zero</td></tr>
+<tr><td><code>sign</code></td><td>returns (<code>INT</code>) −1 if negative, +1 if positive, 0 if zero</td></tr>
 </tbody></table>
 <p>The following standard functions (defined in the <a href="language//book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>)
 operate on integers only:</p>
@@ -3824,7 +3828,7 @@ parse numbers:</p>
 <p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>).</p>
 <p>The <code>to_decimal</code> function converts a supported number to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="language//book/vnext/start/features.html"><code>decimal</code></a>).</p>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
-<pre><code class="language-js no_run">let x = 42;                     // 'x' is an integer
+<pre><code class="language-js">let x = 42;                     // 'x' is an integer
 
 let y = x * 100.0;              // integer and floating-point can inter-operate
 
@@ -3885,18 +3889,12 @@ This is particularly useful when printing output.</p>
 <p>The maximum allowed length of a string can be controlled via <code>Engine::set_max_string_size</code>
 (see <a href="language//book/vnext/safety/max-string-size.html">maximum length of strings</a>).</p>
 <h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
-<p>String and character literals follow JavaScript-style formatting:</p>
-<ul>
-<li>
-<p>normal strings are wrapped by double-quotes: <code>&quot;</code></p>
-</li>
-<li>
-<p>multi-line literal strings are wrapped by back-ticks: <code>`</code></p>
-</li>
-<li>
-<p>characters are wrapped by single-quotes: <code>'</code></p>
-</li>
-</ul>
+<p>String and character literals follow JavaScript-style syntax:</p>
+<table><thead><tr><th>Type</th><th align="center">Quotes</th><th align="center">Escapes?</th><th align="center">Continuation?</th><th align="center">Interpolation?</th></tr></thead><tbody>
+<tr><td>Normal string</td><td align="center"><code>&quot;...&quot;</code></td><td align="center">yes</td><td align="center">yes (with <code>\</code>)</td><td align="center">no</td></tr>
+<tr><td>Multi-line literal string</td><td align="center"><code>`...`</code></td><td align="center">no</td><td align="center">no</td><td align="center">yes (<code>${...}</code>)</td></tr>
+<tr><td>Character</td><td align="center"><code>'...'</code></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
+</tbody></table>
 <h2 id="standard-escape-sequences"><a class="header" href="#standard-escape-sequences">Standard Escape Sequences</a></h2>
 <p>There is built-in support for Unicode (<code>\u</code><em>xxxx</em> or <code>\U</code><em>xxxxxxxx</em>) and hex (<code>\x</code><em>xx</em>) escape
 sequences for normal strings and characters.</p>
@@ -3951,7 +3949,7 @@ let x = &quot;hello, world!\nhello world again!\nthis is the last time!!!&quot;;
 <p>A string wrapped by a pair of back-tick (<code>`</code>) characters is interpreted <em>literally</em>,
 meaning that every single character that lies between the two back-ticks is taken verbatim.
 This include new-lines, whitespaces, escape characters etc.</p>
-<pre><code class="language-js no_run">let x = `hello, world! &quot;\t\x42&quot;
+<pre><code class="language-js">let x = `hello, world! &quot;\t\x42&quot;
   hello world again! 'x'
      this is the last time!!! `;
 
@@ -3960,7 +3958,7 @@ let x = &quot;hello, world! \&quot;\\t\\x42\&quot;\n  hello world again! 'x'\n  
 </code></pre>
 <p>If a back-tick (<code>`</code>) appears at the <em>end</em> of a line, then it is understood that the entire text
 block starts from the <em>next</em> line; the starting new-line character is stripped.</p>
-<pre><code class="language-js no_run">let x = `
+<pre><code class="language-js">let x = `
         hello, world! &quot;\t\x42&quot;
   hello world again! 'x'
      this is the last time!!!
@@ -3978,7 +3976,7 @@ statements block, including another interpolated string!
 The last result of the block is taken as the value for interpolation.</p>
 <p>Rhai uses <a href="language//book/vnext/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
 sub-strings together.</p>
-<pre><code class="language-js no_run">let x = 42;
+<pre><code class="language-js">let x = 42;
 let y = 123;
 
 let s = `x = ${x} and y = ${y}.`;                   // &lt;- interpolated string
@@ -3996,19 +3994,28 @@ Undeniable logic:
 s == &quot;Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n&quot;;
 </code></pre>
 <h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
+<p>Strings can be <em>indexed</em> into to get access to any individual character.
+This is similar to many modern languages but different from Rust.</p>
 <h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
 <p>Individual characters within a string can be accessed with zero-based, non-negative integer indices:</p>
 <blockquote>
-<p><em>string</em> <code>[</code> <em>index from 0 to total number of characters - 1</em> <code>]</code></p>
+<p><em>string</em> <code>[</code> <em>index from 0 to (total number of characters − 1)</em> <code>]</code></p>
 </blockquote>
 <h3 id="from-end"><a class="header" href="#from-end">From end</a></h3>
-<p>A <em>negative</em> index accesses a character in the string counting from the <em>end</em>, with -1 being the
+<p>A <em>negative</em> index accesses a character in the string counting from the <em>end</em>, with −1 being the
 <em>last</em> character.</p>
 <blockquote>
-<p><em>string</em> <code>[</code> <em>index from -1 to -(total number of characters)</em> <code>]</code></p>
+<p><em>string</em> <code>[</code> <em>index from −1 to −(total number of characters)</em> <code>]</code></p>
 </blockquote>
+<h3 id="actual-implementation"><a class="header" href="#actual-implementation">Actual implementation</a></h3>
+<p>Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.</p>
+<p>Therefore, getting the character at a particular index involves walking through the entire UTF-8
+encoded bytes stream to extract individual Unicode characters, counting them on the way.</p>
+<p>Because of this, indexing can be a <em>slow</em> procedure, especially for long strings.
+Along the same lines, getting the <em>length</em> of a string (which returns the number of characters, not
+bytes) can also be slow.</p>
 <h2 id="examples-6"><a class="header" href="#examples-6">Examples</a></h2>
-<pre><code class="language-js no_run">let name = &quot;Bob&quot;;
+<pre><code class="language-js">let name = &quot;Bob&quot;;
 let middle_initial = 'C';
 let last = &quot;Davis&quot;;
 
@@ -4107,15 +4114,15 @@ other scripting languages.</p>
 <p>The following standard methods (mostly defined in the <a href="language//book/vnext/rust/packages/index.html"><code>MoreStringPackage</code></a> but excluded if
 using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <a href="language//book/vnext/language/strings-chars.html">strings</a>:</p>
 <table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>len</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of characters (not number of bytes) in the string</td></tr>
-<tr><td><code>bytes</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of bytes making up the UTF-8 string; for strings containing only single-byte ASCII characters, this is much faster than <code>len</code></td></tr>
+<tr><td><code>len</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of characters (<strong>not</strong> number of bytes) in the string</td></tr>
+<tr><td><code>bytes</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of bytes making up the UTF-8 string; for strings containing only ASCII characters, this is much faster than <code>len</code></td></tr>
 <tr><td><code>pad</code></td><td align="center"></td><td>1) target length<br/>2) character/string to pad</td><td>pads the string with a character or a string to at least a specified length</td></tr>
 <tr><td><code>append</code></td><td align="center"></td><td>character/string to append</td><td>adds a character or a string to the end of another string</td></tr>
 <tr><td><code>remove</code></td><td align="center"></td><td>character/string to remove</td><td>removes a character or a string from the string</td></tr>
 <tr><td><code>clear</code></td><td align="center"></td><td><em>none</em></td><td>empties the string</td></tr>
 <tr><td><code>truncate</code></td><td align="center"></td><td>target length</td><td>cuts off the string at exactly a specified number of characters</td></tr>
 <tr><td><code>contains</code></td><td align="center"></td><td>character/sub-string to search for</td><td>checks if a certain character or sub-string occurs in the string</td></tr>
-<tr><td><code>index_of</code></td><td align="center"></td><td>1) character/sub-string to search for<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index that a certain character or sub-string occurs in the string, or -1 if not found</td></tr>
+<tr><td><code>index_of</code></td><td align="center"></td><td>1) character/sub-string to search for<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index that a certain character or sub-string occurs in the string, or −1 if not found</td></tr>
 <tr><td><code>sub_string</code></td><td align="center"></td><td>1) start index, counting from end if &lt; 0<br/>2) <em>(optional)</em> number of characters to extract, none if &lt; 0</td><td>extracts a sub-string (to the end of the string if length is not specified)</td></tr>
 <tr><td><code>split</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td><em>none</em></td><td>splits the string by individual characters, returning an <a href="language//book/vnext/language/arrays.html">array</a> of characters</td></tr>
 <tr><td><code>split</code></td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_index</code></a></td><td>Position to split at (in number of characters), counting from end if &lt; 0, end if ≥ length</td><td>splits the string into two segments at the specified character position, returning an <a href="language//book/vnext/language/arrays.html">array</a> of two string segments</td></tr>
@@ -4125,6 +4132,9 @@ using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></
 <tr><td><code>replace</code></td><td align="center"></td><td>1) target character/sub-string<br/>2) replacement character/string</td><td>replaces a sub-string with another</td></tr>
 <tr><td><code>trim</code></td><td align="center"></td><td><em>none</em></td><td>trims the string of whitespace at the beginning and end</td></tr>
 </tbody></table>
+<p>Beware that functions that involve indexing into a <a href="language//book/vnext/language/strings-chars.html">string</a> to get at individual <a href="language//book/vnext/language/strings-chars.html">characters</a>,
+e.g. <code>sub_string</code>, require walking through the entire UTF-8 encoded bytes stream to extract
+individual Unicode characters and counting them, which can be slow for long <a href="language//book/vnext/language/strings-chars.html">strings</a>.</p>
 <h2 id="standard-operators"><a class="header" href="#standard-operators">Standard Operators</a></h2>
 <p>The following standard operators inter-operate between <a href="language//book/vnext/language/strings-chars.html">strings</a> and/or <a href="language//book/vnext/language/strings-chars.html">characters</a>.</p>
 <p>When one (or both) of the operands is a <a href="language//book/vnext/language/strings-chars.html">character</a>, it is first converted into a one-character
@@ -4200,13 +4210,13 @@ elements added or removed.</p>
 <h3 id="from-beginning-1"><a class="header" href="#from-beginning-1">From beginning</a></h3>
 <p>Like C, arrays are accessed with zero-based, non-negative integer indices:</p>
 <blockquote>
-<p><em>array</em> <code>[</code> <em>index from 0 to length-1</em> <code>]</code></p>
+<p><em>array</em> <code>[</code> <em>index from 0 to (length−1)</em> <code>]</code></p>
 </blockquote>
 <h3 id="from-end-1"><a class="header" href="#from-end-1">From end</a></h3>
-<p>A <em>negative</em> index accesses an element in the array counting from the <em>end</em>, with -1 being the
+<p>A <em>negative</em> index accesses an element in the array counting from the <em>end</em>, with −1 being the
 <em>last</em> element.</p>
 <blockquote>
-<p><em>array</em> <code>[</code> <em>index from -1 to -length</em> <code>]</code></p>
+<p><em>array</em> <code>[</code> <em>index from −1 to −length</em> <code>]</code></p>
 </blockquote>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
 <p>The following methods (mostly defined in the <a href="language//book/vnext/rust/packages/index.html"><code>BasicArrayPackage</code></a> but excluded if using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on arrays:</p>
@@ -4237,8 +4247,8 @@ elements added or removed.</p>
 <tr><td><code>splice</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
 <tr><td><code>filter</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>contains</code></td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator (if defined) is used to compare <a href="language//book/vnext/rust/custom.html">custom types</a></td></tr>
-<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="language//book/vnext/language/fn-ptr.html">function pointers</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or -1 if not found</td></tr>
-<tr><td><code>index_of</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or -1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="language//book/vnext/language/fn-ptr.html">function pointers</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</td></tr>
+<tr><td><code>index_of</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>map</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>reduce</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>reduce_rev</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
@@ -4681,7 +4691,7 @@ if now.elapsed &gt; 30.0 {
 <p>The following are reserved keywords in Rhai:</p>
 <table><thead><tr><th>Active keywords</th><th>Reserved keywords</th><th>Usage</th><th align="center">Inactive under feature</th></tr></thead><tbody>
 <tr><td><code>true</code>, <code>false</code></td><td></td><td><a href="language//book/vnext/language/constants.html">constants</a></td><td align="center"></td></tr>
-<tr><td><code>let</code>, <code>const</code></td><td><code>var</code>, <code>static</code></td><td><a href="language//book/vnext/language/variables.html">variables</a></td><td align="center"></td></tr>
+<tr><td><code>let</code>, <code>const</code>, <code>global</code></td><td><code>var</code>, <code>static</code></td><td><a href="language//book/vnext/language/variables.html">variables</a></td><td align="center"></td></tr>
 <tr><td></td><td><code>begin</code>, <code>end</code></td><td>block scopes</td><td align="center"></td></tr>
 <tr><td><code>is_shared</code></td><td></td><td><em>shared</em> values</td><td align="center"><a href="language//book/vnext/start/features.html"><code>no_closure</code></a></td></tr>
 <tr><td><code>if</code>, <code>else</code></td><td><code>then</code>, <code>unless</code>, <code>goto</code>, <code>exit</code></td><td>control flow</td><td align="center"></td></tr>
@@ -4805,7 +4815,6 @@ const x = 40 + 2;   // 'x' is a constant 42
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
 <p>It is possible to add a constant into a custom <a href="language//book/vnext/engine/scope.html"><code>Scope</code></a> so it’ll be available to scripts
 running with that <a href="language//book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
-<p>When added to a custom <a href="language//book/vnext/engine/scope.html"><code>Scope</code></a>, a constant can hold any value, not just a literal value.</p>
 <p>It is very useful to have a constant value hold a <a href="language//book/vnext/rust/custom.html">custom type</a>, which essentially acts
 as a <a href="language/../patterns/singleton.html"><em>singleton</em></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -4835,6 +4844,26 @@ r&quot;
     MY_NUMBER.update_value(42);
     print(MY_NUMBER.value);                                 // prints 42
 &quot;)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="automatic-global-module"><a class="header" href="#automatic-global-module">Automatic Global Module</a></h2>
+<p>When a constant is declared at global scope, it is added to a special <a href="language//book/vnext/rust/modules/index.html">module</a> called <code>global</code>.</p>
+<p><a href="language//book/vnext/language/functions.html">Functions</a> can access those constants via the special <code>global</code> <a href="language//book/vnext/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <code>global</code> <a href="language//book/vnext/rust/modules/index.html">module</a> is not available under <a href="language//book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const CONSTANT = 42;        // this constant is automatically added to 'global'
+
+{
+    const INNER = 0;        // this constant is not at global level
+}                           // &lt;- it goes away here
+
+fn foo(x) {
+    x * global::CONSTANT    // ok! 'CONSTANT' exists in 'global'
+
+    x * global::INNER       // &lt;- error: constant 'INNER' not found in 'global'
+}
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="caveat--constants-can-be-modified-via-rust"><a class="header" href="#caveat--constants-can-be-modified-via-rust">Caveat – Constants Can be Modified via Rust</a></h2>
@@ -5217,20 +5246,19 @@ let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains'
 </span></code></pre></pre>
 <h1 id="switch-expression"><a class="header" href="#switch-expression"><code>switch</code> Expression</a></h1>
 <p>The <code>switch</code> <em>expression</em> allows matching on literal values, and it mostly follows Rust’s <code>match</code> syntax.</p>
-<pre><code class="language-js no_run">switch calc_secret_value(x) {
+<pre><code class="language-js">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
         print(&quot;It's two!&quot;);
         print(&quot;Again!&quot;);
     }
     3 =&gt; print(&quot;Go!&quot;),
-    // _ is the default when no cases match.
-    // It must be the last case.
+    // _ is the default when no cases match. It must be the last case.
     _ =&gt; print(`Oops! Something's wrong: ${x}`)
 }
 </code></pre>
 <p>The <em>default</em> case (i.e. when no other cases match), however, must be the <em>last</em> case in the statement.</p>
-<pre><code class="language-js no_run">switch wrong_default {
+<pre><code class="language-js">switch wrong_default {
     1 =&gt; 2,
     _ =&gt; 9,     // &lt;- syntax error: default case not the last
     2 =&gt; 3,
@@ -5240,7 +5268,7 @@ let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains'
 <h2 id="expression-not-statement"><a class="header" href="#expression-not-statement">Expression, Not Statement</a></h2>
 <p><code>switch</code> is not a statement, but an expression. This means that a <code>switch</code> expression can
 appear anywhere a regular expression can, e.g. as function call arguments.</p>
-<pre><code class="language-js no_run">let x = switch foo { 1 =&gt; true, _ =&gt; false };
+<pre><code class="language-js">let x = switch foo { 1 =&gt; true, _ =&gt; false };
 
 func(switch foo {
     &quot;hello&quot; =&gt; 42,
@@ -5262,7 +5290,7 @@ if foo == &quot;hello&quot; {
 </code></pre>
 <h2 id="array-and-object-map-literals-also-work"><a class="header" href="#array-and-object-map-literals-also-work">Array and Object Map Literals Also Work</a></h2>
 <p>The <code>switch</code> expression can match against any <em>literal</em>, including <a href="language//book/vnext/language/arrays.html">array</a> and <a href="language//book/vnext/language/object-maps.html">object map</a> literals.</p>
-<pre><code class="language-js no_run">// Match on arrays
+<pre><code class="language-js">// Match on arrays
 switch [foo, bar, baz] {
     [&quot;hello&quot;, 42, true] =&gt; { ... }
     [&quot;hello&quot;, 123, false] =&gt; { ... }
@@ -5282,7 +5310,7 @@ switch map {
 <h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
 <p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to <code>true</code> in order for the case to match.</p>
-<pre><code class="language-js no_run">let result = switch calc_secret_value(x) {
+<pre><code class="language-js">let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) =&gt; 100,
 
     2 if x &lt; foo =&gt; 200,
@@ -5741,8 +5769,8 @@ fn do_addition(x) {
 </span></code></pre></pre>
 <h2 id="no-access-to-external-scope"><a class="header" href="#no-access-to-external-scope">No Access to External Scope</a></h2>
 <p>Functions are not <em>closures</em>. They do not capture the calling environment
-and can only access their own parameters.
-They cannot access variables external to the function itself.</p>
+and can only access their own parameters.</p>
+<p>They cannot access variables external to the function itself.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -5751,14 +5779,58 @@ They cannot access variables external to the function itself.</p>
 fn foo() { x }          // &lt;- syntax error: variable 'x' doesn't exist
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="but-can-call-other-functions"><a class="header" href="#but-can-call-other-functions">But Can Call Other Functions</a></h2>
+<h2 id="but-can-call-other-functions-and-access-modules"><a class="header" href="#but-can-call-other-functions-and-access-modules">But Can Call Other Functions and Access Modules</a></h2>
 <p>All functions in the same <a href="language//book/vnext/engine/compile.html"><code>AST</code></a> can call each other.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn foo(x) { x + 1 }     // function defined in the global namespace
 
-fn bar(x) { foo(x) }    // OK! function 'foo' can be called
+fn bar(x) { foo(x) }    // ok! function 'foo' can be called
+<span class="boring">}
+</span></code></pre></pre>
+<p>In addition, <a href="language//book/vnext/rust/modules/index.html">modules</a> <a href="language//book/vnext/language/modules/import.html">imported</a> at global level can be accessed.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>import &quot;hello&quot; as hey;
+import &quot;world&quot; as woo;
+
+{
+    import &quot;x&quot; as xyz;  // &lt;- this module is not at global level
+}                       // &lt;- it goes away here
+
+fn foo(x) {
+    hey::process(x);    // ok! imported module 'hey' can be accessed
+
+    print(woo::value);  // ok! imported module 'woo' can be accessed
+
+    xyz::do_work();     // &lt;- error: module 'xyz' not found
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="automatic-global-module-1"><a class="header" href="#automatic-global-module-1">Automatic Global Module</a></h2>
+<p>When a <a href="language//book/vnext/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="language//book/vnext/rust/modules/index.html">module</a> called <code>global</code>.</p>
+<p>Functions can access those <a href="language//book/vnext/language/constants.html">constants</a> via the special <code>global</code> <a href="language//book/vnext/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <code>global</code> <a href="language//book/vnext/rust/modules/index.html">module</a> is not available under <a href="language//book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>const CONSTANT = 42;        // this constant is automatically added to 'global'
+
+var hello = 1;              // variables are not added to 'global'
+
+{
+    const INNER = 0;        // this constant is not at global level
+}                           // &lt;- it goes away here
+
+fn foo(x) {
+    x * global::hello       // &lt;- error: variable 'hello' not found in 'global'
+
+    x * global::CONSTANT    // ok! 'CONSTANT' exists in 'global'
+
+    x * global::INNER       // &lt;- error: constant 'INNER' not found in 'global'
+}
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="use-before-definition-allowed"><a class="header" href="#use-before-definition-allowed">Use Before Definition Allowed</a></h2>
@@ -5766,6 +5838,14 @@ fn bar(x) { foo(x) }    // OK! function 'foo' can be called
 <p>A function does not need to be defined prior to being used in a script;
 a statement in the script can freely call a function defined afterwards.</p>
 <p>This is similar to Rust and many other modern languages, such as JavaScript’s <code>function</code> keyword.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = foo(41);            // &lt;- I can do this!
+
+fn foo(x) { x + 1 }         // &lt;- define 'foo' after use
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="arguments-are-passed-by-value"><a class="header" href="#arguments-are-passed-by-value">Arguments are Passed by Value</a></h2>
 <p>Functions defined in script always take <a href="language//book/vnext/language/dynamic.html"><code>Dynamic</code></a> parameters (i.e. they can be of any types).
 Therefore, functions with the same name and same <em>number</em> of parameters are equivalent.</p>
@@ -5952,7 +6032,7 @@ are not possible in Rhai under the <a href="language//book/vnext/start/features.
 <p><a href="language//book/vnext/language/functions.html">Functions</a> defined in script can be <em>overloaded</em> by <em>arity</em> (i.e. they are resolved purely upon the function’s <em>name</em>
 and <em>number</em> of parameters, but not parameter <em>types</em> since all parameters are the same type – <a href="language//book/vnext/language/dynamic.html"><code>Dynamic</code></a>).</p>
 <p>New definitions <em>overwrite</em> previous definitions of the same name and number of parameters.</p>
-<pre><code class="language-js no_run">fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
+<pre><code class="language-js">fn foo(x,y,z) { print(`Three!!! ${x}, ${y}, ${z}`); }
 
 fn foo(x)     { print(`One! ${x}`); }
 
@@ -6570,7 +6650,7 @@ shared variables hoisted into the heap, automatically passing those variables as
 the function. Rhai just brings this directly up to the front.</p>
 <h1 id="print-and-debug"><a class="header" href="#print-and-debug"><code>print</code> and <code>debug</code></a></h1>
 <p>The <code>print</code> and <code>debug</code> functions default to printing to <code>stdout</code>, with <code>debug</code> using standard debug formatting.</p>
-<pre><code class="language-js no_run">print(&quot;hello&quot;);         // prints hello to stdout
+<pre><code class="language-js">print(&quot;hello&quot;);         // prints hello to stdout
 
 print(1 + 2 + 3);       // prints 6 to stdout
 
@@ -6727,7 +6807,7 @@ Its members can be accessed via <code>::</code> similar to C++.</p>
 <p>A module that is only <code>import</code>-ed but not under any module name is commonly used for initialization purposes,
 where the module script contains initialization statements that puts the functions registered with the
 <a href="language/modules//book/vnext/engine/hello-world.html"><code>Engine</code></a> into a particular state.</p>
-<pre><code class="language-js no_run">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
+<pre><code class="language-js">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
 
@@ -7509,7 +7589,7 @@ no side-effects), thus the script silently runs to completion without errors.</p
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.1/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -7558,7 +7638,7 @@ let merged = &amp;ast1 + &amp;ast2;
 <span class="boring">}
 </span></code></pre></pre>
 <p><code>merged</code> in the above example essentially contains the following script program:</p>
-<pre><code class="language-js no_run">fn foo(n) { `hello${n}` }   // &lt;- definition of first 'foo' is overwritten
+<pre><code class="language-js">fn foo(n) { `hello${n}` }   // &lt;- definition of first 'foo' is overwritten
 foo(1)                      // &lt;- notice this will be &quot;hello1&quot; instead of 43,
                             //    but it is no longer the return value
 foo(&quot;!&quot;)                    // &lt;- returns &quot;hello!&quot;
@@ -8478,7 +8558,7 @@ a different <a href="patterns//book/vnext/start/features.html">features</a> set,
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.0&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;0.20.1&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
@@ -10132,6 +10212,7 @@ link = &quot;https://example.com/tools&quot;
 <tr><td align="center"><code>false</code></td><td>boolean false literal</td><td align="center"></td><td align="center">no</td></tr>
 <tr><td align="center"><code>let</code></td><td>variable declaration</td><td align="center"></td><td align="center">no</td></tr>
 <tr><td align="center"><code>const</code></td><td><a href="appendix//book/vnext/language/constants.html">constant</a> declaration</td><td align="center"></td><td align="center">no</td></tr>
+<tr><td align="center"><code>global</code></td><td>automatic global <a href="appendix//book/vnext/rust/modules/index.html">module</a></td><td align="center"><a href="appendix//book/vnext/start/features.html"><code>no_function</code></a></td><td align="center">no</td></tr>
 <tr><td align="center"><code>if</code></td><td>if statement</td><td align="center"></td><td align="center">no</td></tr>
 <tr><td align="center"><code>else</code></td><td>else block of if statement</td><td align="center"></td><td align="center">no</td></tr>
 <tr><td align="center"><code>switch</code></td><td>matching</td><td align="center"></td><td align="center">no</td></tr>

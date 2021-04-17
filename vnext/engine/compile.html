@@ -197,7 +197,7 @@ for _ in 0..42 {
 script with an interpreter (for Rhai this would be <a href="/book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<pre><code class="language-js no_run">#!/home/to/me/bin/rhai-run
+<pre><code class="language-js">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
 

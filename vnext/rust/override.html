@@ -170,7 +170,7 @@
                         <h1 id="override-a-built-in-function"><a class="header" href="#override-a-built-in-function">Override a Built-in Function</a></h1>
 <p>Any similarly-named function defined in a script <em>overrides</em> any built-in or registered
 native Rust function of the same name and number of parameters.</p>
-<pre><code class="language-js no_run">// Override the built-in function 'to_float' when called as a method
+<pre><code class="language-js">// Override the built-in function 'to_float' when called as a method
 fn to_float() {
     print(`Ha! Gotcha! ${this}`);
     42.0
