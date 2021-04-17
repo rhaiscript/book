@@ -9,6 +9,7 @@ Keywords List
 |        `false`        | boolean false literal                       |                 |      no      |
 |         `let`         | variable declaration                        |                 |      no      |
 |        `const`        | [constant] declaration                      |                 |      no      |
+|       `global`        | automatic global [module]                   | [`no_function`] |      no      |
 |         `if`          | if statement                                |                 |      no      |
 |        `else`         | else block of if statement                  |                 |      no      |
 |       `switch`        | matching                                    |                 |      no      |

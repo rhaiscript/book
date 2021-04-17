@@ -28,8 +28,6 @@ Manually Add Constant into Custom Scope
 It is possible to add a constant into a custom [`Scope`] so it'll be available to scripts
 running with that [`Scope`].
 
-When added to a custom [`Scope`], a constant can hold any value, not just a literal value.
-
 It is very useful to have a constant value hold a [custom type], which essentially acts
 as a [_singleton_](../patterns/singleton.md).
 
@@ -58,6 +56,30 @@ r"
     MY_NUMBER.update_value(42);
     print(MY_NUMBER.value);                                 // prints 42
 ")?;
+```
+
+
+Automatic Global Module
+-----------------------
+
+When a constant is declared at global scope, it is added to a special [module] called `global`.
+
+[Functions] can access those constants via the special `global` [module].
+
+Naturally, the automatic `global` [module] is not available under [`no_function`].
+
+```rust , no_run
+const CONSTANT = 42;        // this constant is automatically added to 'global'
+
+{
+    const INNER = 0;        // this constant is not at global level
+}                           // <- it goes away here
+
+fn foo(x) {
+    x * global::CONSTANT    // ok! 'CONSTANT' exists in 'global'
+
+    x * global::INNER       // <- error: constant 'INNER' not found in 'global'
+}
 ```
 
 

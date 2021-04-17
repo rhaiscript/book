@@ -8,7 +8,7 @@ The following are reserved keywords in Rhai:
 | Active keywords                                                  | Reserved keywords                                          | Usage                    | Inactive under feature |
 | ---------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------ | :--------------------: |
 | `true`, `false`                                                  |                                                            | [constants]              |                        |
-| `let`, `const`                                                   | `var`, `static`                                            | [variables]              |                        |
+| `let`, `const`, `global`                                         | `var`, `static`                                            | [variables]              |                        |
 |                                                                  | `begin`, `end`                                             | block scopes             |                        |
 | `is_shared`                                                      |                                                            | _shared_ values          |     [`no_closure`]     |
 | `if`, `else`                                                     | `then`, `unless`, `goto`, `exit`                           | control flow             |                        |

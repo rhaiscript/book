@@ -69,6 +69,7 @@ No Access to External Scope
 
 Functions are not _closures_. They do not capture the calling environment
 and can only access their own parameters.
+
 They cannot access variables external to the function itself.
 
 ```rust , no_run
@@ -78,15 +79,62 @@ fn foo() { x }          // <- syntax error: variable 'x' doesn't exist
 ```
 
 
-But Can Call Other Functions
----------------------------
+But Can Call Other Functions and Access Modules
+----------------------------------------------
 
 All functions in the same [`AST`] can call each other.
 
 ```rust , no_run
 fn foo(x) { x + 1 }     // function defined in the global namespace
 
-fn bar(x) { foo(x) }    // OK! function 'foo' can be called
+fn bar(x) { foo(x) }    // ok! function 'foo' can be called
+```
+
+In addition, [modules] [imported][`import`] at global level can be accessed.
+
+```rust , no_run
+import "hello" as hey;
+import "world" as woo;
+
+{
+    import "x" as xyz;  // <- this module is not at global level
+}                       // <- it goes away here
+
+fn foo(x) {
+    hey::process(x);    // ok! imported module 'hey' can be accessed
+
+    print(woo::value);  // ok! imported module 'woo' can be accessed
+
+    xyz::do_work();     // <- error: module 'xyz' not found
+}
+```
+
+
+Automatic Global Module
+-----------------------
+
+When a [constant] is declared at global scope, it is added to a special [module] called `global`.
+
+Functions can access those [constants] via the special `global` [module].
+
+Naturally, the automatic `global` [module] is not available under [`no_function`].
+
+```rust , no_run
+const CONSTANT = 42;        // this constant is automatically added to 'global'
+
+var hello = 1;              // variables are not added to 'global'
+
+{
+    const INNER = 0;        // this constant is not at global level
+}                           // <- it goes away here
+
+fn foo(x) {
+    x * global::hello       // <- error: variable 'hello' not found in 'global'
+
+    x * global::CONSTANT    // ok! 'CONSTANT' exists in 'global'
+
+    x * global::INNER       // <- error: constant 'INNER' not found in 'global'
+}
 ```
 
 
@@ -99,6 +147,12 @@ A function does not need to be defined prior to being used in a script;
 a statement in the script can freely call a function defined afterwards.
 
 This is similar to Rust and many other modern languages, such as JavaScript's `function` keyword.
+
+```rust , no_run
+let x = foo(41);            // <- I can do this!
+
+fn foo(x) { x + 1 }         // <- define 'foo' after use
+```
 
 
 Arguments are Passed by Value
