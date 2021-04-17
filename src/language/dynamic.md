@@ -119,20 +119,21 @@ The following methods are available when working with `Dynamic`:
 
 The following methods cast a `Dynamic` into a specific type:
 
-| Method                           | Not available under |                     Return type                      |
-| -------------------------------- | :-----------------: | :--------------------------------------------------: |
-| `cast<T>`                        |                     |               `T` (panics on failure)                |
-| `try_cast<T>`                    |                     |                     `Option<T>`                      |
-| `clone_cast<T>` (for `&Dynamic`) |                     |        cloned copy of `T` (panics on failure)        |
-| `as_int`                         |                     |                 `Result<i64, &str>`                  |
-| `as_int` ([`only_i32`])          |                     |                 `Result<i32, &str>`                  |
-| `as_float`                       |    [`no_float`]     |                 `Result<f64, &str>`                  |
-| `as_float` ([`f32_float`])       |    [`no_float`]     |                 `Result<f32, &str>`                  |
-| `as_decimal`                     |   non-[`decimal`]   |       [`Result<Decimal, &str>`][rust_decimal]        |
-| `as_bool`                        |                     |                 `Result<bool, &str>`                 |
-| `as_char`                        |                     |                 `Result<char, &str>`                 |
-| `take_string`                    |                     |                `Result<String, &str>`                |
-| `take_immutable_string`          |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
+| Method                     | Not available under |     Return type (error is the actual data type)      |
+| -------------------------- | :-----------------: | :--------------------------------------------------: |
+| `cast<T>`                  |                     |               `T` (panics on failure)                |
+| `try_cast<T>`              |                     |                     `Option<T>`                      |
+| `clone_cast<T>`            |                     |        cloned copy of `T` (panics on failure)        |
+| `as_unit`                  |                     |                  `Result<(), &str>`                  |
+| `as_int`                   |                     |                 `Result<i64, &str>`                  |
+| `as_int` ([`only_i32`])    |                     |                 `Result<i32, &str>`                  |
+| `as_float`                 |    [`no_float`]     |                 `Result<f64, &str>`                  |
+| `as_float` ([`f32_float`]) |    [`no_float`]     |                 `Result<f32, &str>`                  |
+| `as_decimal`               |   non-[`decimal`]   |       [`Result<Decimal, &str>`][rust_decimal]        |
+| `as_bool`                  |                     |                 `Result<bool, &str>`                 |
+| `as_char`                  |                     |                 `Result<char, &str>`                 |
+| `take_string`              |                     |                `Result<String, &str>`                |
+| `take_immutable_string`    |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
 
 ### Constructor traits
 
