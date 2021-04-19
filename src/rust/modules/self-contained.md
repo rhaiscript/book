@@ -14,7 +14,7 @@ other physical limitations), it is disconnected from the central source for self
 operation.
 
 
-Compile a script into a _self-contained_ [`AST`] via the `Engine::compile_into_self_contained`.
+Compile a script into a _self-contained_ [`AST`] via `Engine::compile_into_self_contained`.
 
 ```rust , no_run
 let mut engine = Engine::new();
