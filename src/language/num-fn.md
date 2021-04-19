@@ -48,15 +48,15 @@ Decimal Rounding
 The following rounding methods (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
 operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] feature:
 
-| Rounding type     | Methods                                                      |
-| ----------------- | ------------------------------------------------------------ |
-| General           | `floor`, `ceiling`, `int`, `fraction` methods and properties |
-| Banker's rounding | `round` method and property                                  |
-| Banker's rounding | `round(`_decimal points_`)`                                  |
-| Round up          | `round_up(`_decimal points_`)`                               |
-| Round down        | `round_down(`_decimal points_`)`                             |
-| Round half-up     | `round_half_up(`_decimal points_`)`                          |
-| Round half-down   | `round_half_down(`_decimal points_`)`                        |
+| Rounding type     | Behavior                                    | Methods                                                      |
+| ----------------- | ------------------------------------------- | ------------------------------------------------------------ |
+| None              |                                             | `floor`, `ceiling`, `int`, `fraction` methods and properties |
+| Banker's rounding | round to integer                            | `round` method and property                                  |
+| Banker's rounding | round to specified number of decimal points | `round(`_decimal points_`)`                                  |
+| Round up          | away from zero                              | `round_up(`_decimal points_`)`                               |
+| Round down        | towards zero                                | `round_down(`_decimal points_`)`                             |
+| Round half-up     | mid-point away from zero                    | `round_half_up(`_decimal points_`)`                          |
+| Round half-down   | mid-point towards zero                      | `round_half_down(`_decimal points_`)`                        |
 
 
 Parsing Functions
