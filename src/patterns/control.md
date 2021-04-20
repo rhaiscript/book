@@ -66,7 +66,7 @@ Note: Use `Arc<Mutex<T>>` or `Arc<RwLock<T>>` when using the [`sync`] feature be
 must then be `Send + Sync`.
 
 ```rust , no_run
-let bunny: SharedBunny = Rc::new(RefCell::(EnergizerBunny::new()));
+let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
 ```
 
 ### Register Control API
