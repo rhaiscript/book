@@ -3,18 +3,33 @@ Packaged Utilities
 
 {{#include ../links.md}}
 
-A number of Rhai-driven utility programs can be found in the `src/bin` directory:
+A number of Rhai-driven tools can be found in the `src/bin` directory:
 
-|                 Utility program                  | Description                                                 |
+|                       Tool                       | Description                                                 |
 | :----------------------------------------------: | ----------------------------------------------------------- |
 | [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) | a simple REPL, interactively evaluate statements from stdin |
 |  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  | runs each filename passed to it as a Rhai script            |
 
 
+Install Tools
+-------------
+
+To install these tools, use the following command:
+
+```sh
+cargo install --path . --bins
+```
+
+or specifically:
+
+```sh
+cargo install --path . --bin rhai-run
+```
+
 `rhai-repl` &ndash; The Rhai REPL Tool
 -------------------------------------
 
-`rhai-repl` is a particularly useful utility program &ndash; it allows one to interactively
+`rhai-repl` is a particularly useful tool &ndash; it allows one to interactively
 try out Rhai's language features in a standard REPL (**R**ead-**E**val-**P**rint **L**oop).
 
 Filenames passed to it as command line arguments are run and loaded before the REPL starts.
@@ -49,10 +64,10 @@ rhai-run script1.rhai script2.rhai script3.rhai
 ```
 
 
-Running a Utility Program
+Running a Tool from Cargo
 -------------------------
 
-Utilities can be run with the following command:
+Tools can also be run with the following `cargo` command:
 
 ```sh
 cargo run --bin {program_name}
