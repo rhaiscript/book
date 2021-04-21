@@ -11,8 +11,8 @@ A function pointer is created via the `Fn` function, which takes a [string] para
 Call a function pointer using the `call` method.
 
 
-Built-in methods
-----------------
+Built-in Functions
+------------------
 
 The following standard methods (mostly defined in the [`BasicFnPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on function pointers:
@@ -49,10 +49,6 @@ call(func, 1);              // normal function call style also works for 'call'
 let len = Fn("len");        // 'Fn' also works with registered native Rust functions
 
 len.call("hello") == 5;
-
-let add = Fn("+");          // 'Fn' works with built-in operators also
-
-add.call(40, 2) == 42;
 
 let fn_name = "hello";      // the function name does not have to exist yet
 

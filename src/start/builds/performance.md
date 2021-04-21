@@ -3,15 +3,27 @@ Performance Build
 
 {{#include ../../links.md}}
 
-Some features are for performance.  For example, using [`only_i32`] or [`only_i64`] disables all other integer types (such as `u16`).
+
+Some features are for performance.  In order to squeeze out the maximum performance from Rhai, the
+following features should be considered:
+
+| Feature        | Description                                            | Rationale                 |
+| -------------- | ------------------------------------------------------ | ------------------------- |
+| [`only_i32`]   | support only a single `i32` integer type               | reduce data size          |
+| [`no_float`]   | remove support for floating-point numbers              | reduce code size          |
+| [`f32_float`]  | set floating-point numbers (if not disabled) to 32-bit | reduce data size          |
+| [`no_closure`] | remove support for variables sharing                   | no need for data locking  |
+| [`unchecked`]  | disable [checked] arithmetic                           | remove unnecessary checks |
+
+When the above feature flags are used, performance may increase over 10% on 32-bit systems.
 
 
 Use Only One Integer Type
 ------------------------
 
-If only a single integer type is needed in scripts &ndash; most of the time this is the case &ndash; it is best to avoid registering
-lots of functions related to other integer types that will never be used.  As a result, [`Engine`] creation will be faster
-because fewer functions need to be loaded.
+If only a single integer type is needed in scripts &ndash; most of the time this is the case &ndash;
+it is best to avoid registering lots of functions related to other integer types that will never be used.
+As a result, [`Engine`] creation will be faster because fewer functions need to be loaded.
 
 The [`only_i32`] and [`only_i64`] features disable all integer types except `i32` or `i64` respectively.
 
@@ -29,7 +41,7 @@ due to 64-bit arithmetic requiring more CPU cycles to complete.
 Minimize Size of `Dynamic`
 -------------------------
 
-Turning on [`no_float`] or [`f32_float`] and [`only_i32`] on 32-bit targets makes the critical [`Dynamic`]
+Turning on [`no_float`] (or [`f32_float`]) and [`only_i32`] on 32-bit targets makes the critical [`Dynamic`]
 data type only 8 bytes long for 32-bit targets.
 
 Normally [`Dynamic`] needs to be up 12-16 bytes long in order to hold an `i64` or `f64`.
@@ -43,23 +55,31 @@ Use `ImmutableString`
 Internally, Rhai uses _immutable_ [strings] instead of the Rust `String` type.  This is mainly to avoid excessive
 cloning when passing function arguments.
 
-Rhai's internal string type is `ImmutableString` (basically `Rc<String>` or `Arc<String>` depending on the [`sync`] feature).
+Rhai's internal string type is [`ImmutableString`] (basically `Rc<String>` or `Arc<String>` depending on the [`sync`] feature).
 It is cheap to clone, but expensive to modify (a new copy of the string must be made in order to change it).
 
-Therefore, functions taking `String` parameters should use `ImmutableString` or `&str` (both map to `ImmutableString`)
+Therefore, functions taking `String` parameters should use [`ImmutableString`] or `&str` (maps to [`ImmutableString`])
 for the best performance with Rhai.
 
 
 Disable Closures
 ----------------
 
-Support for [closures] that capture shared variables adds material overhead to script evaluation.
+Support for [closures] that capture _shared_ [variables] adds material overhead to script evaluation.
 
-This is because every data access must be checked whether it is a shared value and, if so, take a read
-lock before reading it.
+This is because every data access must be checked whether it is a shared value and, if so, take a
+read lock before reading it.
 
-As the vast majority of variables are _not_ shared, needless to say this is a non-trivial
+As the vast majority of [variables] are _not_ shared, needless to say this is a non-trivial
 performance overhead.
 
-Use [`no_closure`] to disable closure and capturing support to optimize the hot path
-because there is no need to take locks for shared data.
+Use [`no_closure`] to disable [closure] and [capturing][capture] support to optimize the hot path
+because it no longer needs to take locks for shared data.
+
+
+Unchecked Build
+---------------
+
+[Checked] arithmetic provide a safety net and prevents malicious scripts from bringing down the host.
+
+For maximum performance, however, these [safety] checks can be turned off via the [`unchecked`] feature.

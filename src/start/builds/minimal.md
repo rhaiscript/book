@@ -30,24 +30,24 @@ If, for some reason, 64-bit long integers must be supported, use [`only_i64`] in
 Opt-Out of Features
 ------------------
 
-Opt out of as many features as possible, if they are not needed, to reduce code size because, remember, by default
-all code is compiled into the final binary since what a script requires cannot be predicted.
-If a language feature will never be needed, omitting it is a prudent strategy to optimize the build for size.
+Opt out of as many features as possible, if they are not needed, to reduce code size because,
+remember, by default all code is compiled into the final binary since what a script requires cannot
+be predicted. If a language feature will never be needed, omitting it is a prudent strategy to
+optimize the build for size.
 
 Omitting arrays ([`no_index`]) yields the most code-size savings, followed by floating-point support
 ([`no_float`]), safety checks ([`unchecked`]) and finally object maps and custom types ([`no_object`]).
 
-Where the usage scenario does not call for loading externally-defined modules, use [`no_module`] to save some bytes.
-Disable script-defined functions ([`no_function`]) and possibly closures ([`no_closure`]) when the features are not needed.
-Both of these have some code size savings but not much.
+Where the usage scenario does not call for loading externally-defined modules, use [`no_module`] to
+save some bytes. Disable script-defined functions ([`no_function`]) and possibly closures
+([`no_closure`]) when the features are not needed. Both of these have some code size savings but not much.
 
 
 Use a Raw [`Engine`]
 -------------------
 
-[`Engine::new_raw`][raw `Engine`] creates a _raw_ engine.
-A _raw_ engine supports, out of the box, only a very [restricted set]({{rootUrl}}/engine/raw.md#built-in-operators)
-of basic arithmetic and logical operators.
+[`Engine::new_raw`][raw `Engine`] creates a _raw_ engine. A _raw_ engine supports, out of the box,
+only a very [restricted set][built-in operators] of basic arithmetic and logical operators.
 
 Selectively include other necessary functionalities by picking specific [packages] to minimize the footprint.
 
