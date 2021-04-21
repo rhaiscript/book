@@ -8,6 +8,7 @@ language = "en"
 no-section-label = true
 git-repository-url = "https://github.com/rhaiscript/rhai"
 curly-quotes = true
+google-analytics = "G-2T4F5GFLP5"
 
 [output.html.fold]
 enable = true
