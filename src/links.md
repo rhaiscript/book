@@ -1,6 +1,7 @@
 [features]: {{rootUrl}}/start/features.md
 [`unchecked`]: {{rootUrl}}/start/features.md
 [`sync`]: {{rootUrl}}/start/features.md
+[`no_position`]: {{rootUrl}}/start/features.md
 [`no_optimize`]: {{rootUrl}}/start/features.md
 [`no_float`]: {{rootUrl}}/start/features.md
 [`f32_float`]: {{rootUrl}}/start/features.md

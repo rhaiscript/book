@@ -42,6 +42,11 @@ Where the usage scenario does not call for loading externally-defined modules, u
 save some bytes. Disable script-defined functions ([`no_function`]) and possibly closures
 ([`no_closure`]) when the features are not needed. Both of these have some code size savings but not much.
 
+For embedded scripts that are not expected to cause errors, the [`no_position`] feature can be used
+to disable position tracking during parsing. No line number/character position information is kept
+for error reporting purposes. This may result in a slightly smaller build due to elimination of code
+related to position tracking.
+
 
 Use a Raw [`Engine`]
 -------------------

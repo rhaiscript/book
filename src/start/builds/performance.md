@@ -7,13 +7,14 @@ Performance Build
 Some features are for performance.  In order to squeeze out the maximum performance from Rhai, the
 following features should be considered:
 
-| Feature        | Description                                            | Rationale                 |
-| -------------- | ------------------------------------------------------ | ------------------------- |
-| [`only_i32`]   | support only a single `i32` integer type               | reduce data size          |
-| [`no_float`]   | remove support for floating-point numbers              | reduce code size          |
-| [`f32_float`]  | set floating-point numbers (if not disabled) to 32-bit | reduce data size          |
-| [`no_closure`] | remove support for variables sharing                   | no need for data locking  |
-| [`unchecked`]  | disable [checked] arithmetic                           | remove unnecessary checks |
+| Feature         | Description                                            | Rationale                 |
+| --------------- | ------------------------------------------------------ | ------------------------- |
+| [`only_i32`]    | support only a single `i32` integer type               | reduce data size          |
+| [`no_float`]    | remove support for floating-point numbers              | reduce code size          |
+| [`f32_float`]   | set floating-point numbers (if not disabled) to 32-bit | reduce data size          |
+| [`no_closure`]  | remove support for variables sharing                   | no need for data locking  |
+| [`unchecked`]   | disable [checked] arithmetic                           | remove unnecessary checks |
+| [`no_position`] | disable position tracking during parsing               | remove unnecessary code   |
 
 When the above feature flags are used, performance may increase over 10% on 32-bit systems.
 
@@ -83,3 +84,14 @@ Unchecked Build
 [Checked] arithmetic provide a safety net and prevents malicious scripts from bringing down the host.
 
 For maximum performance, however, these [safety] checks can be turned off via the [`unchecked`] feature.
+
+
+Disable Position
+----------------
+
+For embedded scripts that are not expected to cause errors, the [`no_position`] feature can be used
+to disable position tracking during parsing.
+
+No line number/character position information is kept for error reporting purposes.
+
+This may result in a slightly fast build due to elimination of code related to position tracking.
