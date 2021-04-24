@@ -12,22 +12,31 @@ Script optimization can be turned off via the [`no_optimize`] feature.
 Dead Code Removal
 ----------------
 
-For example, in the following:
+Rhai attempts to eliminate _dead code_ (i.e. code that does nothing, for example an expression by
+itself as a statement, which is allowed in Rhai).
 
 ```rust , no_run
 {
     let x = 999;            // NOT eliminated: variable may be used later on (perhaps even an 'eval')
+    
     123;                    // eliminated: no effect
+    
     "hello";                // eliminated: no effect
-    [1, 2, x, x*2, 5];      // eliminated: no effect
-    foo(42);                // NOT eliminated: the function 'foo' may have side-effects
+    
+    [1, 2, x, 4];           // eliminated: no effect
+    
+    if 42 > 0 {             // '42 > 0' is replaced by 'true' and the first branch promoted
+        foo(42);            // promoted, NOT eliminated: the function 'foo' may have side-effects
+    } else {
+        bar(x);             // eliminated: branch is never reached
+    }
+    
+    let z = x;              // eliminated: local variable, no side-effects, and only pure afterwards
+    
     666                     // NOT eliminated: this is the return value of the block,
                             // and the block is the last one so this is the return value of the whole script
 }
 ```
-
-Rhai attempts to eliminate _dead code_ (i.e. code that does nothing, for example an expression by itself as a statement,
-which is allowed in Rhai).
 
 The above script optimizes to:
 
@@ -39,11 +48,14 @@ The above script optimizes to:
 }
 ```
 
+Normally, nobody deliberately writes scripts with dead code, but it is extremely common for
+template-based machine-generated scripts, especially where [constants] are involved.
+
 
 Constants Propagation
 --------------------
 
-Constants propagation is used to remove dead code:
+Constants propagation can be used to remove dead code:
 
 ```rust , no_run
 const ABC = true;
@@ -74,8 +86,43 @@ This is almost never a problem because real-world scripts seldom modify a consta
 but the possibility is always there.
 
 
-Eager Operator Evaluations
--------------------------
+Op-Assignment Rewrite
+---------------------
+
+Usually, an _op-assignment_ operator (e.g. `+=` for append) takes a mutable first parameter
+(i.e. `&mut`) while the corresponding simple operator (i.e. `+`) does not.
+
+This has huge performance implications because arguments passed as reference are always cloned.
+
+```rust , no_run
+let x = create_some_very_big_type();
+
+x = x + 1;
+//  ^ 'x' is cloned here
+
+// The above is equivalent to:
+let temp_value = x + 1;
+x = temp_value;
+
+x += 1;             // <- 'x' is NOT cloned
+```
+
+The script optimizer rewrites normal expressions into _op-assignment_ style wherever possible.
+However, and only those involving **simple variable references** are optimized.
+
+```rust , no_run
+x = x + 1;          // <- this statement...
+
+x += x;             // ... is rewritten as this
+
+x[y] = x[y] + 1;    // <- but this is not, so this is MUCH slower...
+
+x[y] + 1;           // ... than this
+```
+
+
+Eager Operator Evaluation
+------------------------
 
 Beware, however, that most operators are actually function calls, and those functions can be overridden,
 so whether they are optimized away depends on the situation:
@@ -127,7 +174,7 @@ are simply left behind:
 
 ```rust , no_run
 // Assume 'new_state' returns some custom type that is NOT one of the standard types.
-// Also assume that the '==; operator is defined for that custom type.
+// Also assume that the '==' operator is defined for that custom type.
 const DECISION_1 = new_state(1);
 const DECISION_2 = new_state(2);
 const DECISION_3 = new_state(3);
