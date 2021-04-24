@@ -95,3 +95,51 @@ to disable position tracking during parsing.
 No line number/character position information is kept for error reporting purposes.
 
 This may result in a slightly fast build due to elimination of code related to position tracking.
+
+
+Avoid Cloning
+-------------
+
+Rhai values are typically _cloned_ when passed around, especially into [function] calls.
+Large data structures may incur material cloning overhead.
+
+Some functions accept the first parameter as a mutable reference (i.e. `&mut`), for example
+_methods_ for [custom types], and may avoid potentially-costly cloning.
+
+For example, the `+=` (append) assignment operator takes a mutable reference to the l-value while
+the corresponding `+` (add) assignment usually doesn't.  The difference in performance can be huge:
+
+```rust , no_run
+let x = create_some_very_big_type();
+
+x = x + 1;
+//  ^ 'x' is cloned here
+
+// The above is equivalent to:
+let temp_value = x + 1;
+x = temp_value;
+
+x += 1;             // <- 'x' is NOT cloned
+```
+
+### Simple variable references are optimized
+
+Rhai's script [optimizer][script optimization] is usually smart enough to rewrite function calls
+into _method-call_ style or _op-assignment_ style to take advantage of this.  However, there are
+limits to its intelligence, and only **simple variable references** are optimized.
+
+```rust , no_run
+x = x + 1;          // <- this statement...
+
+x += x;             // ... is rewritten as this
+
+x[y] = x[y] + 1;    // <- but this is not, so this is MUCH slower...
+
+x[y] + 1;           // ... than this
+
+some_func(x, 1);    // <- this statement...
+
+x.some_func(1);     // ... is rewritten as this
+
+some_func(x[y], 1); // <- but this is not, so 'x[y]` is cloned
+```
