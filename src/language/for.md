@@ -57,6 +57,7 @@ The `range` function allows iterating through a range of numbers
 
 ```rust , no_run
 // Iterate starting from 0 and stopping at 49.
+// The step is assumed to be 1 when omitted for integers.
 for x in range(0, 50) {
     if x > 10 { continue; }     // skip to the next iteration
 
@@ -75,12 +76,21 @@ for x in range(0, 50, 3) {      // step by 3
 }
 
 // The 'range' function can also step backwards.
-for x in range(50, 0, -3) {     // step by -3
+for x in range(50, 0, -3) {     // step down by -3
     if x < 10 { continue; }     // skip to the next iteration
 
     print(x);
 
     if x == 42 { break; }       // break out of for loop
+}
+
+// It works also for floating-point numbers.
+for x in range(5.0,0.0,-2.0) {  // step down by -2.0
+    if x < 10 { continue; }     // skip to the next iteration
+
+    print(x);
+
+    if x == 4.2 { break; }      // break out of for loop
 }
 ```
 
