@@ -13,10 +13,10 @@ following features should be considered:
 | [`no_float`]    | remove support for floating-point numbers              | reduce code size          |
 | [`f32_float`]   | set floating-point numbers (if not disabled) to 32-bit | reduce data size          |
 | [`no_closure`]  | remove support for variables sharing                   | no need for data locking  |
-| [`unchecked`]   | disable [checked] arithmetic                           | remove unnecessary checks |
-| [`no_position`] | disable position tracking during parsing               | remove unnecessary code   |
+| [`unchecked`]   | disable all safety [checks][checked]                   | remove non-essential code |
+| [`no_position`] | disable position tracking during parsing               | remove non-essential code |
 
-When the above feature flags are used, performance may increase over 10% on 32-bit systems.
+When the above feature flags are used, performance may increase by around 15-20%.
 
 
 Use Only One Integer Type
@@ -81,7 +81,8 @@ because it no longer needs to take locks for shared data.
 Unchecked Build
 ---------------
 
-[Checked] arithmetic provide a safety net and prevents malicious scripts from bringing down the host.
+By default, Rhai provides a _Don't Panic_ guarantee and prevents malicious scripts from bringing
+down the host. Any panic can be considered a bug.
 
 For maximum performance, however, these [safety] checks can be turned off via the [`unchecked`] feature.
 

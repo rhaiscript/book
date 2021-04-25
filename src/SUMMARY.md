@@ -110,7 +110,7 @@ The Rhai Scripting Language
        2. [Import Modules](language/modules/import.md)
    22. [Eval Function](language/eval.md)
 6. [Safety and Protection](safety/index.md)
-   1. [Checked Arithmetic](safety/checked.md)
+   1. [Safety Checks](safety/checked.md)
    2. [Sand-Boxing](safety/sandbox.md)
    3. [Maximum Length of Strings](safety/max-string-size.md)
    4. [Maximum Size of Arrays](safety/max-array-size.md)

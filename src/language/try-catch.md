@@ -80,7 +80,6 @@ Many script-oriented exceptions can be caught via `try` ... `catch`:
 | Error type                                    |        Error value         |
 | --------------------------------------------- | :------------------------: |
 | Runtime error thrown by a [`throw`] statement | value in `throw` statement |
-| Other runtime error                           |        [object map]        |
 | Arithmetic error                              |        [object map]        |
 | Variable not found                            |        [object map]        |
 | [Function] not found                          |        [object map]        |
@@ -94,6 +93,7 @@ Many script-oriented exceptions can be caught via `try` ... `catch`:
 | `for` statement without a [type iterator]     |        [object map]        |
 | Error in an `in` expression                   |        [object map]        |
 | Data race detected                            |        [object map]        |
+| Other runtime error                           |        [object map]        |
 
 The error value in the `catch` clause is an [object map] containing information on the particular error,
 including its type, line and character position (if any), and source etc.
