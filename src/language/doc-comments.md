@@ -20,14 +20,14 @@ fn foo() {}
  ** doc-comment
  **/
 fn bar(x) {
-   /// Syntax error - this doc-comment is invalid
+   /// Syntax error: this doc-comment is invalid
    x + 1
 }
 
-/** Syntax error - this doc-comment is invalid */
+/** Syntax error: this doc-comment is invalid */
 let x = 42;
 
-/// Syntax error - this doc-comment is also invalid
+/// Syntax error: this doc-comment is also invalid
 {
    let x = 42;
 }

@@ -39,7 +39,7 @@ lock::hash::sha256(key);        // sub-modules are also supported
 
 print(lock::status);            // module variables are constants
 
-lock::status = "off";           // <- runtime error - cannot modify a constant
+lock::status = "off";           // <- runtime error: cannot modify a constant
 ```
 
 

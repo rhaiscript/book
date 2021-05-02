@@ -9,6 +9,7 @@ Built-In Packages
 
 | Package                | Description                                                                                            | In `Core` | In `Standard` |
 | ---------------------- | ------------------------------------------------------------------------------------------------------ | :-------: | :-----------: |
+| `LanguageCorePackage`  | core functions for the Rhai language                                                                   |    yes    |      yes      |
 | `ArithmeticPackage`    | arithmetic operators (e.g. `+`, `-`, `*`, `/`) for numeric types that are not built in (e.g. `u16`)    |    yes    |      yes      |
 | `BasicIteratorPackage` | numeric ranges (e.g. `range(1, 10)`)                                                                   |    yes    |      yes      |
 | `LogicPackage`         | logical and comparison operators (e.g. `==`, `>`) for numeric types that are not built in (e.g. `u16`) |    yes    |      yes      |
