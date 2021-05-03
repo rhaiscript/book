@@ -72,10 +72,3 @@ for each function defined within the script, which includes doc-comments.
 Doc-comments never affect the evaluation of a script nor do they incur
 significant performance overhead.  However, third party tools can take advantage
 of this information to auto-generate documentation for Rhai script functions.
-
-
-Disabling Doc-Comments
-----------------------
-
-Doc-comments can be disabled via the `Engine::enable_doc_comments` method,
-passing an argument of `false`.
