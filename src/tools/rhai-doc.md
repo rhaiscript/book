@@ -19,13 +19,15 @@ Binary: `rhai-doc`
 Flags and Options
 -----------------
 
-|    Flag/Option    |    Parameter    | Description                                                                                     |
-| :---------------: | :-------------: | ----------------------------------------------------------------------------------------------- |
-|  `-h`, `--help`   |                 | print help                                                                                      |
-| `-V`, `--version` |                 | print version                                                                                   |
-|  `-D`, `--dest`   | _\<directory\>_ | set destination path for documentation output (default `./dist`)                                |
-|   `-d`, `--dir`   | _\<directory\>_ | set source path for Rhai script files (default `.`)                                             |
-|  `-p`, `--pages`  | _\<directory\>_ | set source path for additional [MarkDown] files to include in documentation (default `./pages`) |
+| Flag/Option       | Parameter       | Description                                                                         |
+| ----------------- | --------------- | ----------------------------------------------------------------------------------- |
+| `-h`, `--help`    |                 | print help                                                                          |
+| `-V`, `--version` |                 | print version                                                                       |
+| `--verbose`       |                 | print diagnostic messages                                                           |
+| `--config`        | _\<file\>_      | set configuration file (default `./rhai.toml`)                                      |
+| `-D`, `--dest`    | _\<directory\>_ | set destination path for documentation output (default `./dist`)                    |
+| `-d`, `--dir`     | _\<directory\>_ | set source path for Rhai script files (default `.`)                                 |
+| `-p`, `--pages`   | _\<directory\>_ | set source path for additional [MarkDown] page files to include (default `./pages`) |
 
 
 `rhai.toml`
@@ -37,10 +39,11 @@ Example:
 
 ```toml
 name = "My Rhai Project"                # project name
-colour = [246, 119, 2]                  # theme color
+color = [246, 119, 2]                   # theme color
 index = "home.md"                       # this file becomes 'index.html`
 root = "https://example.com/docs/"      # root URL for generated site
 icon = "logo.svg"                       # project icon
+stylesheet = "my_stylesheet.css"        # custom stylesheet
 extension = "rhai"                      # script extension
 
 [[links]]                               # external link for 'Blog'
@@ -54,14 +57,15 @@ link = "https://example.com/tools"
 
 Options for `rhai.toml`:
 
-|    Option    |      Value       | Description                                                   |
-| :----------: | :--------------: | ------------------------------------------------------------- |
-|    `name`    |      string      | name of project &ndash; used as titles on documentation pages |
-|   `colour`   | RGB value string | theme color for generated documentation                       |
-|   `index`    |    file name     | main MarkDown file &ndash; becomes `index.html`               |
-|    `root`    |    URL string    | root URL generated as part of documentation                   |
-|    `icon`    |    file path     | project icon                                                  |
-| `extension`  | extension string | script file extension (default `rhai`)                        |
-| `[[links]]`  |      table       | external links                                                |
-| `links.name` |      string      | &bull; title of external link                                 |
-| `links.link` |    URL string    | &bull; URL of external link                                   |
+|    Option     |          Value           | Description                                                   |
+| :-----------: | :----------------------: | ------------------------------------------------------------- |
+|    `name`     |          string          | name of project &ndash; used as titles on documentation pages |
+|    `color`    | RGB values (0-255) array | theme color for generated documentation                       |
+|    `index`    |        file name         | main MarkDown file &ndash; becomes `index.html`               |
+|    `root`     |        URL string        | root URL generated as part of documentation                   |
+|    `icon`     |        file path         | project icon, if any                                          |
+| `stylesheet`  |        file path         | custom stylesheet, if any                                     |
+|  `extension`  |     extension string     | script file extension (default `rhai`)                        |
+|  `[[links]]`  |          table           | external links                                                |
+| &bull; `name` |          string          | &bull; title of external link                                 |
+| &bull; `link` |        URL string        | &bull; URL of external link                                   |
