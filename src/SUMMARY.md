@@ -83,6 +83,7 @@ The Rhai Scripting Language
    4. [Statements](language/statements.md)
    5. [Variables](language/variables.md)
    6. [Constants](language/constants.md)
+      1. [Automatic Global Module](language/global.md)
    7. [Logic Operators](language/logic.md)
    8. [Assignment Operators](language/assignment-op.md)
    9. [If Statement / Expression](language/if.md)
