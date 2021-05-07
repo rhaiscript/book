@@ -115,7 +115,7 @@ let mut scope = Scope::new();
 
 scope.push("my_var", 42 as i64);                // &'static str
 
-scope.push(String::from("also_var"),             // String
+scope.push(String::from("also_var"),            // String
     123 as i64
 );
 
