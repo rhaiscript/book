@@ -89,5 +89,5 @@ Therefore, it is necessary to _patch_ this crate until the issue is fixed.
 ```toml
 [patch.crates-io]
 # Patch smartstring wth a PR fix because it doesn't properly handle no-std builds.
-smartstring = { git = "https://github.com/okready/smartstring", branch = "fix-no_std-builds" }
+smartstring = { git = "https://github.com/rhaiscript/smartstring" }
 ```
