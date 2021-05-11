@@ -172,7 +172,7 @@ In other words, any [`Scope`] calls that change the list of must come _before_ a
 let var_name = inputs[0].get_variable_name().unwrap();
 let expression = inputs.get(1).unwrap();
 
-context.scope_mut().push(var_name, 0 as INT);   // do this BEFORE 'context.eval_expression_tree'!
+context.scope_mut().push(var_name, 0_i64);      // do this BEFORE 'context.eval_expression_tree'!
 
 let result = context.eval_expression_tree(expression)?;
 ```
@@ -198,12 +198,21 @@ fn implementation_func(
     let stmt = inputs.get(1).unwrap();
     let condition = inputs.get(2).unwrap();
 
-    // Push one new variable into the scope BEFORE 'context.eval_expression_tree'
-    context.scope_mut().push(var_name, 0 as INT);
+    // Push new variable into the scope BEFORE 'context.eval_expression_tree'
+    context.scope_mut().push(var_name.clone(), 0_i64);
+
+    let mut count = 0_i64;
 
     loop {
         // Evaluate the statement block
         context.eval_expression_tree(stmt)?;
+
+        count += 1;
+
+        // Declare a new variable every three turns...
+        if count % 3 == 0 {
+            context.scope_mut().push(format!("{}{}", var_name, count), count);
+        }
 
         // Evaluate the condition expression
         let stop = !context.eval_expression_tree(condition)?
@@ -223,10 +232,10 @@ fn implementation_func(
     Ok(Dynamic::UNIT)
 }
 
-// Register the custom syntax (sample): exec |x| -> { x += 1 } while x < 0
+// Register the custom syntax (sample): exec<x> -> { x += 1 } while x < 0
 engine.register_custom_syntax(
-    &[ "exec", "|", "$ident$", "|", "->", "$block$", "while", "$expr$" ], // the custom syntax
-    1,  // the number of new variables declared within this custom syntax
+    &[ "exec", "<", "$ident$", ">", "->", "$block$", "while", "$expr$" ], // the custom syntax
+    true,  // variables declared within this custom syntax
     implementation_func
 )?;
 ```
@@ -235,14 +244,19 @@ Remember that a custom syntax acts as an _expression_, so it can show up practic
 
 ```rust , no_run
 // Use as an expression:
-let foo = (exec |x| -> { x += 1 } while x < 0) * 100;
+let foo = (exec<x> -> { x += 1 } while x < 42) * 100;
+
+// New variables are successfully declared...
+x == 42;
+x3 == 3;
+x6 == 6;
 
 // Use as a function call argument:
-do_something(exec |x| -> { x += 1 } while x < 0, 24, true);
+do_something(exec<x> -> { x += 1 } while x < 42, 24, true);
 
 // Use as a statement:
-exec |x| -> { x += 1 } while x < 0;
-//                                ^ terminate statement with ';'
+exec<x> -> { x += 1 } while x < 0;
+//                               ^ terminate statement with ';'
 ```
 
 
@@ -370,8 +384,8 @@ engine.register_custom_syntax_raw(
         },
         _ => unreachable!(),
     },
-    // Number of new variables declared by this custom syntax
-    0,
+    // No variables declared/removed by this custom syntax
+    false,
     // Implementation function
     implementation_func
 );
