@@ -30,16 +30,18 @@ Floating-Point Functions
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
 operate on `f64` only (`f32` under [`f32_float`]):
 
-| Category         | Functions                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------- |
-| Trigonometry     | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`             |
-| Arc-trigonometry | `asin`, `acos`, `atan(`_x_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
-| Square root      | `sqrt`                                                                                   |
-| Exponential      | `exp` (base _e_)                                                                         |
-| Logarithmic      | `ln`, `log10`, `log(`_x_`,`_base_`)`                                                     |
-| Rounding         | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
-| Conversion       | [`to_int`], [`to_decimal`] (requires [`decimal`]), `to_degrees`, `to_radians`            |
-| Testing          | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
+| Category         | Supports Decimal | Functions                                                                                |
+| ---------------- | :--------------: | ---------------------------------------------------------------------------------------- |
+| Trigonometry     |        no        | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`             |
+| Arc-trigonometry |        no        | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
+| Square root      |       yes        | `sqrt`                                                                                   |
+| Exponential      |       yes        | `exp` (base _e_)                                                                         |
+| Logarithmic      |       yes        | `ln` (base _e_)                                                                          |
+| Logarithmic      |        no        | `log(`_x_`)` in base 10, `log(`_x_`,`_base_`)`                                           |
+| Rounding         |       yes        | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
+| Conversion       |       yes        | [`to_int`], [`to_decimal`] (requires [`decimal`])                                        |
+| Conversion       |        no        | `to_degrees`, `to_radians`                                                               |
+| Testing          |        no        | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
 Decimal Rounding
