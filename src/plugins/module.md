@@ -376,6 +376,40 @@ Pure functions can be passed a [constant] value as the first `&mut` parameter.
 Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
 `EvalAltResult::ErrorAssignmentToConstant` error.
 
+For example:
+
+```rust , no_run
+use rhai::plugin::*;        // a "prelude" import for macros
+
+#[export_module]
+mod my_module {
+    fn internal_calc(array: &mut rhai::Array, x: i64) -> i64 {
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
+    }
+    // This function can be passed a constant
+    #[rhai_fn(name = "add1", pure)]
+    pub fn add_scaled(array: &mut rhai::Array, x: i64) -> i64 {
+        internal_calc(array, x)
+    }
+    // This function CANNOT be passed a constant
+    #[rhai_fn(name = "add2")]
+    pub fn add_scaled2(array: &mut rhai::Array, x: i64) -> i64 {
+        internal_calc(array, x)
+    }
+}
+```
+
+When applied to a Rhai script:
+
+```rust , no_run
+// Constant
+const VECTOR = [1, 2, 3, 4, 5, 6, 7];
+
+let r = VECTOR.add1(2);     // ok!
+
+let r = VECTOR.add2(2);     // runtime error: cannot assign to constant
+```
+
 
 Fallible Functions
 ------------------
