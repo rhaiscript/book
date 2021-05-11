@@ -139,19 +139,21 @@ The following methods cast a `Dynamic` into a specific type:
 
 The following constructor traits are implemented for `Dynamic`:
 
-| Trait                                                                          |     Not available under     |         Data type         |
-| ------------------------------------------------------------------------------ | :-------------------------: | :-----------------------: |
-| `From<i64>`                                                                    |                             |           `i64`           |
-| `From<i32>` ([`only_i32`])                                                     |                             |           `i32`           |
-| `From<f64>`                                                                    |        [`no_float`]         |           `f64`           |
-| `From<f32>` ([`f32_float`])                                                    |        [`no_float`]         |           `f32`           |
-| `From<Decimal>`                                                                |       non-[`decimal`]       | [`Decimal`][rust_decimal] |
-| `From<bool>`                                                                   |                             |          `bool`           |
-| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`         |                             |    [`ImmutableString`]    |
-| `From<char>`                                                                   |                             |          `char`           |
-| `From<Vec<T>>`                                                                 |        [`no_index`]         |          [array]          |
-| `From<&[T]>`                                                                   |        [`no_index`]         |          [array]          |
-| `From<BTreeMap<K: Into<SmartString>, T>>`<br/>e.g. `From<BTreeMap<String, T>>` |        [`no_object`]        |       [object map]        |
-| `From<HashMap<K: Into<SmartString>, T>>`<br/>e.g. `From<HashMap<String, T>>`   | [`no_object`] or [`no_std`] |       [object map]        |
-| `From<FnPtr>`                                                                  |                             |    [function pointer]     |
-| `From<Instant>`                                                                |         [`no_std`]          |        [timestamp]        |
+| Trait                                                                          |      Not available under       |         Data type         |
+| ------------------------------------------------------------------------------ | :----------------------------: | :-----------------------: |
+| `From<i64>`                                                                    |                                |           `i64`           |
+| `From<i32>` ([`only_i32`])                                                     |                                |           `i32`           |
+| `From<f64>`                                                                    |          [`no_float`]          |           `f64`           |
+| `From<f32>` ([`f32_float`])                                                    |          [`no_float`]          |           `f32`           |
+| `From<Decimal>`                                                                |        non-[`decimal`]         | [`Decimal`][rust_decimal] |
+| `From<bool>`                                                                   |                                |          `bool`           |
+| `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`         |                                |    [`ImmutableString`]    |
+| `From<char>`                                                                   |                                |          `char`           |
+| `From<Vec<T>>`                                                                 |          [`no_index`]          |          [array]          |
+| `From<&[T]>`                                                                   |          [`no_index`]          |          [array]          |
+| `From<BTreeMap<K: Into<SmartString>, T>>`<br/>e.g. `From<BTreeMap<String, T>>` |         [`no_object`]          |       [object map]        |
+| `From<HashMap<K: Into<SmartString>, T>>`<br/>e.g. `From<HashMap<String, T>>`   |  [`no_object`] or [`no_std`]   |       [object map]        |
+| `From<FnPtr>`                                                                  |                                |    [function pointer]     |
+| `From<Instant>`                                                                |           [`no_std`]           |        [timestamp]        |
+| `From<Rc<RefCell<Dynamic>>>`                                                   |   [`sync`] or [`no_closure`]   |        [`Dynamic`]        |
+| `From<Arc<RwLock<Dynamic>>>` ([`sync`])                                        | non-[`sync`] or [`no_closure`] |        [`Dynamic`]        |
