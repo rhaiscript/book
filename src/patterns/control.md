@@ -62,11 +62,12 @@ impl EnergizerBunny {
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
 ```
 
-Note: Use `Arc<Mutex<T>>` or `Arc<RwLock<T>>` when using the [`sync`] feature because the function
-must then be `Send + Sync`.
+or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
 ```rust , no_run
-let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
+pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
+
+pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
 ```
 
 ### Register Control API

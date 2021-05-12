@@ -56,8 +56,9 @@ Use `ImmutableString`
 Internally, Rhai uses _immutable_ [strings] instead of the Rust `String` type.  This is mainly to avoid excessive
 cloning when passing function arguments.
 
-Rhai's internal string type is [`ImmutableString`] (basically `Rc<String>` or `Arc<String>` depending on the [`sync`] feature).
-It is cheap to clone, but expensive to modify (a new copy of the string must be made in order to change it).
+Rhai's internal string type is [`ImmutableString`] (basically `Rc<SmartString>` or
+`Arc<SmartString>` depending on the [`sync`] feature). It is cheap to clone, but expensive to modify
+(a new copy of the string must be made in order to change it).
 
 Therefore, functions taking `String` parameters should use [`ImmutableString`] or `&str` (maps to [`ImmutableString`])
 for the best performance with Rhai.

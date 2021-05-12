@@ -71,8 +71,13 @@ impl EnergizerBunny {
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
 ```
 
-Note: Use `Arc<Mutex<T>>` or `Arc<RwLock<T>>` when using the [`sync`] feature because the function
-must then be `Send + Sync`.
+or in multi-threaded environments with the [`sync`] feature, use one of the following:
+
+```rust , no_run
+pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
+
+pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
+```
 
 ### Register the Custom Type
 
@@ -91,7 +96,7 @@ use rhai::plugin::*;
 pub mod bunny_api {
     pub const MAX_SPEED: i64 = 100;
 
-    #[rhai_fn(get = "power")]
+    #[rhai_fn(get = "power", pure)]
     pub fn get_power(bunny: &mut SharedBunny) -> bool {
         bunny.borrow().is_going()
     }
@@ -111,7 +116,7 @@ pub mod bunny_api {
             }
         }
     }
-    #[rhai_fn(get = "speed")]
+    #[rhai_fn(get = "speed", pure)]
     pub fn get_speed(bunny: &mut SharedBunny) -> i64 {
         if bunny.borrow().is_going() {
             bunny.borrow().get_speed()

@@ -308,7 +308,7 @@ mod my_module {
         format!("hello, {}!", name)
     }
     // This is a getter for 'TestStruct::prop'.
-    #[rhai_fn(get = "prop")]
+    #[rhai_fn(get = "prop", pure)]
     pub fn get_prop(obj: &mut TestStruct) -> i64 {
         obj.prop
     }

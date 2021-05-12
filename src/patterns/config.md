@@ -49,11 +49,12 @@ struct Config {
 pub type SharedConfig = Rc<RefCell<Config>>;
 ```
 
-Note: Use `Arc<Mutex<T>>` or `Arc<RwLock<T>>` when using the [`sync`] feature because the function
-must then be `Send + Sync`.
+or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
 ```rust , no_run
-let config: SharedConfig = Rc::new(RefCell::new(Default::default()));
+let config: SharedConfig = Arc<RwLock<Config>>;
+
+let config: SharedConfig = Arc<Mutex<Config>>;
 ```
 
 ### Register Config API

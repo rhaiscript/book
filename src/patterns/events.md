@@ -74,7 +74,7 @@ mod SomeTypeAPI {
     #[rhai_fn(global)]
     pub func2(obj: &mut SomeType) -> bool { ... }
     pub process(data: i64) -> i64 { ... }
-    #[rhai_fn(get = "value")]
+    #[rhai_fn(get = "value", pure)]
     pub get_value(obj: &mut SomeType) -> i64 { obj.data }
     #[rhai_fn(set = "value")]
     pub set_value(obj: &mut SomeType, value: i64) { obj.data = value; }
