@@ -242,12 +242,8 @@ mod my_module {
 
 // Registered functions:
 //   func0 - always available
-//   func1 - available under 'feature1'
-//   func2 - available under 'feature1'
-//   func3 - available under 'feature1'
-//   func4 - available under 'feature2'
-//   func5 - available under 'feature2'
-//   func6 - available under 'feature2'
+//   func1, func2, func3 - available under 'feature1'
+//   func4, func5, func6 - available under 'feature2'
 combine_with_exported_module!(module, "my_module_ID", my_module);
 ```
 
@@ -369,9 +365,9 @@ Pure Functions
 Apply the `#[rhai_fn(pure)]` attribute on a method function (i.e. one taking a `&mut` first parameter)
 to mark it as  _pure_.
 
-Pure functions _should not_ modify the value of the `&mut` parameter.
+Pure functions _MUST NOT_ modify the value of the `&mut` parameter.
 
-Pure functions can be passed a [constant] value as the first `&mut` parameter.
+Therefore, pure functions can be passed a [constant] value as the first `&mut` parameter.
 
 Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
 `EvalAltResult::ErrorAssignmentToConstant` error.
@@ -396,6 +392,22 @@ mod my_module {
     pub fn add_scaled2(array: &mut rhai::Array, x: i64) -> i64 {
         internal_calc(array, x)
     }
+    // This getter can be applied to a constant
+    #[rhai_fn(get = "first1", pure)]
+    pub fn get_first(array: &mut rhai::Array) -> i64 {
+        array[0]
+    }
+    // This getter CANNOT be applied to a constant
+    #[rhai_fn(get = "first2")]
+    pub fn get_first2(array: &mut rhai::Array) -> i64 {
+        array[0]
+    }
+    // The following is a syntax error because a setter is SUPPOSED to
+    // mutate the object.  Therefore the 'pure' attribute cannot be used.
+    #[rhai_fn(get = "values", pure)]
+    pub fn set_values(array: &mut rhai::Array, value: i64) {
+        // ...
+    }
 }
 ```
 
@@ -407,7 +419,11 @@ const VECTOR = [1, 2, 3, 4, 5, 6, 7];
 
 let r = VECTOR.add1(2);     // ok!
 
-let r = VECTOR.add2(2);     // runtime error: cannot assign to constant
+let r = VECTOR.add2(2);     // runtime error: constant modified
+
+let r = VECTOR.first1;      // ok!
+
+let r = VECTOR.first2;      // runtime error: constant modified
 ```
 
 

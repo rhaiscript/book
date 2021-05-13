@@ -12,7 +12,7 @@ const x = 42;
 
 print(x * 2);       // prints 84
 
-x = 123;            // <- syntax error: cannot assign to constant
+x = 123;            // <- syntax error: constant modified
 ```
 
 ```rust , no_run

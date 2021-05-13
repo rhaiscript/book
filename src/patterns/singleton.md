@@ -100,7 +100,9 @@ pub mod bunny_api {
     pub fn get_power(bunny: &mut SharedBunny) -> bool {
         bunny.borrow().is_going()
     }
-    #[rhai_fn(set = "power")]
+    // Notice that property setters cannot be marked 'pure'
+    // so use a method instead.
+    #[rhai_fn(pure)]
     pub fn set_power(bunny: &mut SharedBunny, on: bool) {
         if on {
             if bunny.borrow().is_going() {
@@ -124,7 +126,9 @@ pub mod bunny_api {
             0
         }
     }
-    #[rhai_fn(set = "speed", return_raw)]
+    // Notice that property setters cannot be marked 'pure'
+    // so use a method instead.
+    #[rhai_fn(pure, return_raw)]
     pub fn set_speed(bunny: &mut SharedBunny, speed: i64)
             -> Result<(), Box<EvalAltResult>>
     {
@@ -172,9 +176,9 @@ engine.consume_with_scope(&mut scope, script)?;
 ```rust , no_run
 // Access the command object via constant variable 'Bunny'.
 
-if !Bunny.power { Bunny.power = true; }
+if !Bunny.power { Bunny.set_power(true); }
 
-if Bunny.speed > 50 { Bunny.speed = 50; }
+if Bunny.speed > 50 { Bunny.set_speed(50); }
 
 Bunny.turn_left();
 ```

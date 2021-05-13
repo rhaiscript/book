@@ -58,6 +58,7 @@ getters][getters/setters] that return information about a [custom type] and does
 Apply the `#[export_fn(pure)]` attribute on a plugin function to mark it as  _pure_.
 
 Pure functions can be passed a [constant] value as the first `&mut` parameter.
+The condition is that they _MUST NOT_ modify that value.
 
 Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
 `EvalAltResult::ErrorAssignmentToConstant` error.
