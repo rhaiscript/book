@@ -100,9 +100,8 @@ pub mod bunny_api {
     pub fn get_power(bunny: &mut SharedBunny) -> bool {
         bunny.borrow().is_going()
     }
-    // Notice that property setters cannot be marked 'pure'
-    // so use a method instead.
-    #[rhai_fn(pure)]
+    // Marked setter 'pure' to enable it to operate on constants.
+    #[rhai_fn(set = "power", pure)]
     pub fn set_power(bunny: &mut SharedBunny, on: bool) {
         if on {
             if bunny.borrow().is_going() {
@@ -126,9 +125,8 @@ pub mod bunny_api {
             0
         }
     }
-    // Notice that property setters cannot be marked 'pure'
-    // so use a method instead.
-    #[rhai_fn(pure, return_raw)]
+    // Marked setter 'pure' to enable it to operate on constants.
+    #[rhai_fn(set = "speed", pure, return_raw)]
     pub fn set_speed(bunny: &mut SharedBunny, speed: i64)
             -> Result<(), Box<EvalAltResult>>
     {
@@ -158,27 +156,40 @@ pub mod bunny_api {
 engine.register_global_module(exported_module!(bunny_api).into());
 ```
 
-### Push Constant Command Object into Custom Scope
+### Compile script into AST
 
 ```rust , no_run
-let bunny: SharedBunny = Rc::new(RefCell::(EnergizerBunny::new()));
+let ast = engine.compile(script)?;
+```
+
+### Push Constant Command Object into Custom Scope and Run AST
+
+```rust , no_run
+let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
 
 let mut scope = Scope::new();
 
 // Add the command object into a custom Scope.
-scope.push_constant("Bunny", bunny.clone());
+// Constants, as a convention, are named with all-capital letters.
+scope.push_constant("BUNNY", bunny.clone());
 
+// Run the compiled AST
+engine.consume_ast_with_scope(&mut scope, &ast)?;
+
+// Running the script directly, as below, is less desirable because
+// the constant 'BUNNY' will be propagated and copied into each usage
+// during the script optimization step
 engine.consume_with_scope(&mut scope, script)?;
 ```
 
 ### Use the Command API in Script
 
 ```rust , no_run
-// Access the command object via constant variable 'Bunny'.
+// Access the command object via constant variable 'BUNNY'.
 
-if !Bunny.power { Bunny.set_power(true); }
+if !BUNNY.power { BUNNY.power = true; }
 
-if Bunny.speed > 50 { Bunny.set_speed(50); }
+if BUNNY.speed > 50 { BUNNY.speed = 50; }
 
-Bunny.turn_left();
+BUNNY.turn_left();
 ```

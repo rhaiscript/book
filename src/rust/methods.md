@@ -23,7 +23,7 @@ impl TestStruct {
 engine.register_fn("foo", TestStruct::foo);
 
 let result = engine.eval::<i64>(
-    r"
+    "
         let x = new_ts();
         foo(x);                         // normal call to 'foo'
         x.foo()                         // 'foo' can also be called like a method on 'x'

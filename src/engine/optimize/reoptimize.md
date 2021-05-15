@@ -15,7 +15,7 @@ The final, optimized [`AST`] is then used for evaluations.
 ```rust , no_run
 // Compile master script to AST
 let master_ast = engine.compile(
-r"
+"
     if SCENARIO == 1 {
         do_work();
     } else if SCENARIO == 2 {

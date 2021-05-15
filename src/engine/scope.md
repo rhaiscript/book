@@ -73,7 +73,8 @@ scope.push("y", 42_i64)
      .set_value("s", "hello, world!");          // 'set_value' adds a variable when one doesn't exist
 
 // First invocation
-engine.eval_with_scope::<()>(&mut scope, r"
+engine.eval_with_scope::<()>(&mut scope, 
+"
     let x = 4 + 5 - y + z + MY_NUMBER + s.len;
     y = 1;
 ")?;
