@@ -55,7 +55,7 @@ template-based machine-generated scripts, especially where [constants] are invol
 Constants Propagation
 --------------------
 
-Constants propagation can be used to remove dead code:
+[Constants] propagation is used to remove dead code:
 
 ```rust , no_run
 const ABC = true;
@@ -70,19 +70,56 @@ print("done!");                             // <- the line above is further simp
                                             //    because the condition is always true
 ```
 
-These are quite effective for template-based machine-generated scripts where certain constant values
+These are quite effective for template-based machine-generated scripts where certain [constant] values
 are spliced into the script text in order to turn on/off certain sections.
 
-For fixed script texts, the constant values can be provided in a user-defined [`Scope`] object
+For fixed script texts, the [constant] values can be provided in a user-defined [`Scope`] object
 to the [`Engine`] for use in compilation and evaluation.
 
-### Caveat
+### Caveat &ndash; beware large constants
 
-If the [constants] are modified later on (yes, it is possible, via Rust functions),
+[Constants] propagation replaces each usage of the [constant] with a clone of its value.
+
+This may have negative implications to performance if the [constant] value is expensive to clone
+(e.g. if the type is very large).
+
+```rust , no_run
+let mut scope = Scope::new();
+
+// Push a large constant into the scope...
+scope.push_constant("MY_BIG_TYPE", AVeryLargeType::take_long_time_to_create());
+
+// Causes each usage of 'MY_BIG_TYPE' in the script below to be replaced
+// by cloned copies of 'AVeryLargeType'.
+let result = engine.consume_with_scope(&mut scope,
+"
+    let value = MY_BIG_TYPE.value;
+    let data = MY_BIG_TYPE.data;
+    let len = MY_BIG_TYPE.len();
+    let has_options = MY_BIG_TYPE.has_options();
+    let num_options = MY_BIG_TYPE.options_len();
+")?;
+```
+
+To avoid this, compile the script first to an [`AST`] _without_ the [constants], then evaluate the
+[`AST`] (e.g. with `Engine::eval_ast_with_scope` or `Engine::consume_ast_with_scope`) together with
+the [constants].
+
+### Caveat &ndash; constants may be modified by Rust methods
+
+If the [constants] are modified later on (yes, it is possible, via Rust _methods_),
 the modified values will not show up in the optimized script.
 Only the initialization values of [constants] are ever retained.
 
-This is almost never a problem because real-world scripts seldom modify a constant,
+```rust , no_run
+const MY_SECRET_ANSWER = 42;
+
+MY_SECRET_ANSWER.update_to(666);    // assume 'update_to(&mut i64)' is a Rust function
+
+print(MY_SECRET_ANSWER);            // prints 42 because the constant is propagated
+```
+
+This is almost never a problem because real-world scripts seldom modify a [constant],
 but the possibility is always there.
 
 
@@ -108,12 +145,14 @@ x += 1;             // <- 'x' is NOT cloned
 ```
 
 The script optimizer rewrites normal expressions into _op-assignment_ style wherever possible.
+
 However, and only those involving **simple variable references** are optimized.
+In other words, no _common sub-expression elimination_ is performed by Rhai.
 
 ```rust , no_run
 x = x + 1;          // <- this statement...
 
-x += x;             // ... is rewritten as this
+x += 1;             // ... is rewritten as this
 
 x[y] = x[y] + 1;    // <- but this is not, so this is MUCH slower...
 
