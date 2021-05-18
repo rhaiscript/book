@@ -65,7 +65,7 @@ The Rhai Scripting Language
    2. [Values and Types](language/values-and-types.md)
       1. [Dynamic Values](language/dynamic.md)
          1. [type_of()](language/type-of.md)
-         2. [Tag](language/dynamic-tag.md)
+         2. [Value Tag](language/dynamic-tag.md)
          3. [Serialization/Deserialization with `serde`](rust/serde.md)
       2. [Numbers](language/numbers.md)
          1. [Operators](language/num-op.md)

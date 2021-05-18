@@ -3,11 +3,13 @@ Dynamic Value Tag
 
 {{#include ../links.md}}
 
-Each [`Dynamic`] value can contain a _tag_ that is `i16` and can contain any arbitrary data.
+Each [`Dynamic`] value can contain a _tag_ that is `i32` and can contain any arbitrary data.
+
+On 32-bit targets, however, the tag is only `i16`.
 
 The _tag_ defaults to zero.
 
-It is an error to set a tag to a value beyond the bounds of `i16`.
+It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-bit targets).
 
 
 Examples
@@ -16,23 +18,23 @@ Examples
 ```rust , no_run
 let x = 42;
 
-x.tag == 0;         // tag defaults to zero
+x.tag == 0;             // tag defaults to zero
 
-x.tag = 0xab;       // set tag value
+x.tag = 123;            // set tag value
 
-set_tag(x, 0xab);   // 'set_tag' function also works
+set_tag(x, 123);        // 'set_tag' function also works
 
-x.tag == 171;       // get updated tag value
+x.tag == 123;           // get updated tag value
 
-x.tag() == 171;     // method also works
+x.tag() == 123;         // method also works
 
-tag(x) == 171;      // function call style also works
+tag(x) == 123;          // function call style also works
 
 let y = x;
 
-y.tag == 171;       // the tag is copied across assignment
+y.tag == 123;           // the tag is copied across assignment
 
-y.tag = 0xabcd;     // runtime error: 0xabcd is too large for 'i16'
+y.tag = 3000000000;     // runtime error: 3000000000 is too large for 'i32'
 ```
 
 
@@ -135,4 +137,52 @@ print(`First condition = ${(my_result.tag & 0b0001) != 0}`);
 print(`Second condition = ${(my_result.tag & 0b0010) != 0}`);
 print(`Third condition = ${(my_result.tag & 0b0100) != 0}`);
 print(`Result check = ${(my_result.tag & 0b1000) != 0}`);
+```
+
+### Poor-man's tuples
+
+Rust has _tuples_ but Rhai does not (nor does JavaScript in this sense).
+
+Sometimes it is useful to return multiple pieces of data from a function.
+Similar to the JavaScript situation, practical alternatives using Rhai include returning an [object
+map] or an [array].
+
+Both of these alternatives, however, incur overhead that may be wasteful when the amount of
+additional information is small &ndash; e.g. in many cases, a single `bool`.
+
+The tag value is an ideal container for such additional information without resorting to a
+full-blown [object map] or [array] (which may not even be available under the [`no_index`] and
+[`no_object`] features).
+
+```rust , no_run
+// Verify Bell's Inequality by calculating a norm
+// and comparing it with a hypotenuse.
+// https://en.wikipedia.org/wiki/Bell%27s_theorem
+//
+// Returns the smaller of the norm or hypotenuse.
+// Tag is 1 if norm <= hypo, 0 if otherwise.
+fn bells_inequality(x, y, z) {
+    let norm = sqrt(x ** 2 + y ** 2);
+    let result;
+
+    if norm <= z {
+        result = norm;
+        result.tag = 1;
+    } else {
+        result = z;
+        result.tag = 0;
+    }
+
+    result
+}
+
+let dist = bells_inequality(x, y, z);
+
+print(`Value = ${dist}`);
+
+if dist.tag == 1 {
+    print("Local realism maintained! Einstein rules!");
+} else {
+    print("Spooky action at a distance detected! Einstein will hate this...");
+}
 ```
