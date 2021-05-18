@@ -53,6 +53,7 @@
 [`Scope`]: {{rootUrl}}/engine/scope.md
 [`serde`]: {{rootUrl}}/rust/serde.md
 
+[`type_of`]: {{rootUrl}}/language/type-of.md
 [`type_of()`]: {{rootUrl}}/language/type-of.md
 [`to_string()`]: {{rootUrl}}/rust/print-custom.md
 [`to_debug()`]: {{rootUrl}}/rust/print-custom.md

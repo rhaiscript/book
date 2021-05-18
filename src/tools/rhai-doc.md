@@ -11,9 +11,11 @@ defined.  Documentation is taken from [MarkDown] [doc-comments] on the functions
 
 Author: [`@semirix`](https://github.com/semirix)
 
-Repo: [On GitHub](https://github.com/rhaiscript/rhai-doc)
+Repo: [on GitHub](https://github.com/rhaiscript/rhai-doc)
 
-Binary: [On `crates.io`](https://crates.io/crates/rhai-doc)
+Binary: [on `crates.io`](https://crates.io/crates/rhai-doc)
+
+Example: [on `rhai.rs`](https://rhai.rs/rhai-doc)
 
 
 Install
