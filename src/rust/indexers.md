@@ -106,3 +106,48 @@ let result = engine.eval::<i64>(r#"
 
 println!("Answer: {}", result);         // prints 42
 ```
+
+
+Indexer as Property Access Fallback
+----------------------------------
+
+An indexer taking a [string] index is a special case.  It acts as a _fallback_ to property
+[getters/setters].
+
+During a property access, if the appropriate property [getter/setter][getters/setters] is not
+defined, an indexer is called and passed the string name of the property.
+
+The reverse, however, is not true &ndash; when an indexer fails or doesn't exist, the corresponding
+property [getter/setter][getters/setters], if any, is not called.
+
+```rust , no_run
+type MyType = HashMap<String, i64>;
+
+let mut engine = Engine::new();
+
+// Define custom type, property getter and string indexers
+engine.register_type::<MyType>()
+      .register_fn("new_ts", || {
+          let mut object = MyType::new();
+          object.insert("foo", 1);
+          object.insert("bar", 42);
+          object.insert("baz", 123);
+      })
+      // Property 'hello'
+      .register_get("hello", |object: &mut MyType| object.len() as i64)
+      // Index getter/setter
+      .register_indexer_get(|object: &mut MyType, index: &str| *object[index])
+      .register_indexer_set(|object: &mut MyType, index: &str, value: i64| object[index] = value);
+
+// Calls a["foo"] because getter for 'foo' does not exist
+engine.consume("let a = new_ts(); print(a.foo);");
+
+// Calls a["bar"] because getter for 'bar' does not exist
+engine.consume("let a = new_ts(); print(a.bar);");
+
+// Calls a["baz"] = 999 because getter for 'baz' does not exist
+engine.consume("let a = new_ts(); a.baz = 999;");
+
+// Error: Property getter is not a fallback for indexer
+engine.consume(r#"let a = new_ts(); print(a["hello"]);"#);
+```

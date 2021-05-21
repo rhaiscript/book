@@ -76,3 +76,19 @@ println!("Answer: {}", result);                     // prints 42
 ```
 
 **IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
+
+
+Fallback to Indexer
+-------------------
+
+If the getter/setter of a particular property is not defined, but an [indexer][indexers] is defined
+on the [custom type] with [string] index, then the corresponding [indexer][indexers] will be called
+with the name of the property as the index value.
+
+In other words, [indexers] act as a _fallback_ to property getters/setters.
+
+```rust , no_run
+a.foo           // if property getter for 'foo' doesn't exist...
+
+a["foo"]        // an indexer (if any) is tried
+```
