@@ -44,7 +44,8 @@ fn main() {
               .register_fn("put", move |v: i64| tx_script.send(v).unwrap());
 
         // Run script
-        engine.consume(r#"
+        engine.consume(
+        r#"
             print("Starting script loop...");
 
             loop {

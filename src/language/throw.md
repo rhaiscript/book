@@ -21,7 +21,8 @@ Exceptions thrown via `throw` in the script can be captured in Rust by matching
 captured by `value`.
 
 ```rust , no_run
-let result = engine.eval::<i64>(r#"
+let result = engine.eval::<i64>(
+r#"
     let x = 42;
 
     if x > 0 {

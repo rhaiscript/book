@@ -156,13 +156,13 @@ engine.register_raw_fn(
 );
 
 let result = engine.eval::<i64>(
-          r#"
-                fn foo(x) { this += x; }    // script-defined function 'foo'
+r#"
+    fn foo(x) { this += x; }        // script-defined function 'foo'
 
-                let x = 41;                 // object
-                x.bar(Fn("foo"), 1);        // pass 'foo' as function pointer
-                x
-          "#)?;
+    let x = 41;                     // object
+    x.bar(Fn("foo"), 1);            // pass 'foo' as function pointer
+    x
+"#)?;
 ```
 
 

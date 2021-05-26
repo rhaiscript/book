@@ -117,14 +117,15 @@ struct MyStruct {
 
 let engine = Engine::new();
 
-let result: Dynamic = engine.eval(r#"
-            ##{
-                a: 42,
-                b: [ "hello", "world" ],
-                c: true,
-                d: #{ x: 123.456, y: 999.0 }
-            }
-        "#)?;
+let result: Dynamic = engine.eval(
+r#"
+    #{
+        a: 42,
+        b: [ "hello", "world" ],
+        c: true,
+        d: #{ x: 123.456, y: 999.0 }
+    }
+"#)?;
 
 // Convert the 'Dynamic' object map into 'MyStruct'
 let x: MyStruct = from_dynamic(&result)?;
@@ -148,5 +149,3 @@ The [`serde`](https://crates.io/crates/serde) crate is quite heavy.
 If only _simple_ JSON parsing (i.e. only deserialization) of a hash object into a Rhai [object map] is required,
 the [`Engine::parse_json`]({{rootUrl}}/language/json.md}}) method is available as a _cheap_ alternative,
 but it does not provide the same level of correctness, nor are there any configurable options.
-
-

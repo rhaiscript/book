@@ -23,14 +23,13 @@ impl TestStruct {
 engine.register_fn("foo", TestStruct::foo);
 
 let result = engine.eval::<i64>(
-    "
-        let x = new_ts();
-        foo(x);                         // normal call to 'foo'
-        x.foo()                         // 'foo' can also be called like a method on 'x'
-    "
-)?;
+"
+    let x = new_ts();
+    foo(x);                         // normal call to 'foo'
+    x.foo()                         // 'foo' can also be called like a method on 'x'
+")?;
 
-println!("result: {}", result);         // prints 1
+println!("result: {}", result);     // prints 1
 ```
 
 Under [`no_object`], however, the _method-call_ style is no longer supported.

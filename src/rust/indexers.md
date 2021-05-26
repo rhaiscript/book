@@ -26,8 +26,8 @@ Indexers are disabled when the [`no_index`] feature is used.
 | `register_indexer_get_result` | `Fn(&mut T, X) -> Result<Dynamic, Box<EvalAltResult>>`                                                        |      yes, but not advised      |
 | `register_indexer_set_result` | `Fn(&mut T, X, V) -> Result<(), Box<EvalAltResult>>`                                                          |              yes               |
 
-By convention, index getters are not supposed to mutate the [custom type], although there is nothing
-that prevents this mutation.
+By convention, index [getters][getters/setters] are not supposed to mutate the [custom type],
+although there is nothing that prevents this mutation.
 
 **IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
 
@@ -98,13 +98,14 @@ engine.register_type::<TestStruct>()
       .register_indexer_get(TestStruct::get_field)
       .register_indexer_set(TestStruct::set_field);
 
-let result = engine.eval::<i64>(r#"
-                let a = new_ts();
-                a["xyz"] = 42;          // these indexers use strings
-                a["xyz"]                // as the index type
-             "#)?;
+let result = engine.eval::<i64>(
+r#"
+    let a = new_ts();
+    a["xyz"] = 42;                  // these indexers use strings
+    a["xyz"]                        // as the index type
+"#)?;
 
-println!("Answer: {}", result);         // prints 42
+println!("Answer: {}", result);     // prints 42
 ```
 
 
@@ -116,6 +117,17 @@ An indexer taking a [string] index is a special case.  It acts as a _fallback_ t
 
 During a property access, if the appropriate property [getter/setter][getters/setters] is not
 defined, an indexer is called and passed the string name of the property.
+
+This is also extremely useful as a short-hand for indexers, when the [string] keys conform to
+property name syntax.
+
+```rust , no_run
+// You can write this...
+let x = foo["hello_world"];
+
+// but it is easier with this...
+let x = foo.hello_world;
+```
 
 The reverse, however, is not true &ndash; when an indexer fails or doesn't exist, the corresponding
 property [getter/setter][getters/setters], if any, is not called.

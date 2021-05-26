@@ -240,7 +240,8 @@ use rhai::{Engine, FnPtr, NativeCallContext};
 let engine = Engine::new();
 
 // Compile script to AST
-let mut ast = engine.compile(r#"
+let mut ast = engine.compile(
+r#"
     let test = "hello";
     |x| test + x            // this creates a closure
 "#)?;

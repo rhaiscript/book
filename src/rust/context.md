@@ -38,8 +38,7 @@ pub fn grow(context: NativeCallContext, size: i64)
     // Make sure the function does not generate a
     // data structure larger than the allowed limit
     // for the Engine!
-    if size as usize > context.engine().max_array_size()
-    {
+    if size as usize > context.engine().max_array_size() {
         return EvalAltResult::ErrorDataTooLarge(
             "Size to grow".to_string(),
             context.engine().max_array_size(),

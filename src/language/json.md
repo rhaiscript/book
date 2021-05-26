@@ -22,8 +22,7 @@ let json = r#"{
                 "$d e f!": "hello",     // <- any text can be a property name
                 "^^^!!!": [1,42,"999"], // <- value can be array or another hash
                 "z": null               // <- JSON 'null' value
-              }
-"#;
+              }"#;
 
 // Parse the JSON expression as an object map
 // Set the second boolean parameter to true in order to map 'null' to '()'

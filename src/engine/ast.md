@@ -63,16 +63,18 @@ When statements are appended, beware that this may change the semantics of the s
 
 ```rust , no_run
 // First script
-let ast1 = engine.compile(r#"
-                fn foo(x) { 42 + x }
-                foo(1)
-           "#)?;
+let ast1 = engine.compile(
+"
+     fn foo(x) { 42 + x }
+     foo(1)
+")?;
 
 // Second script
-let ast2 = engine.compile(r#"
-                fn foo(n) { `hello${n}` }
-                foo("!")
-           "#)?;
+let ast2 = engine.compile(
+r#"
+     fn foo(n) { `hello${n}` }
+     foo("!")
+"#)?;
 
 // Merge them
 let merged = ast1.merge(&ast2);

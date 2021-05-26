@@ -71,7 +71,8 @@ This aspect is very similar to JavaScript before ES6 modules.
 
 ```rust , no_run
 // Compile a script into AST
-let ast1 = engine.compile(r#"
+let ast1 = engine.compile(
+r#"
     fn get_message() {
         "Hello!"                // greeting message
     }

@@ -40,7 +40,8 @@ use rhai::{Engine, Module};
 let engine = Engine::new();
 
 // Compile a script into an 'AST'
-let ast = engine.compile(r#"
+let ast = engine.compile(
+r#"
     // Functions become module functions
     fn calc(x) {
         x + 1
