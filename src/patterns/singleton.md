@@ -89,6 +89,9 @@ engine.register_type_with_name::<SharedBunny>("EnergizerBunny");
 
 The easiest way to develop a complete set of API for a [custom type] is via a [plugin module].
 
+Notice that putting `pure` in `#[rhai_fn(...)]` allows a [getter/setter][getters/setters] to operate
+on a [constant] without raising an error.
+
 ```rust , no_run
 use rhai::plugin::*;
 
@@ -100,7 +103,6 @@ pub mod bunny_api {
     pub fn get_power(bunny: &mut SharedBunny) -> bool {
         bunny.borrow().is_going()
     }
-    // Marked setter 'pure' to enable it to operate on constants.
     #[rhai_fn(set = "power", pure)]
     pub fn set_power(bunny: &mut SharedBunny, on: bool) {
         if on {
@@ -125,7 +127,6 @@ pub mod bunny_api {
             0
         }
     }
-    // Marked setter 'pure' to enable it to operate on constants.
     #[rhai_fn(set = "speed", pure, return_raw)]
     pub fn set_speed(bunny: &mut SharedBunny, speed: i64)
             -> Result<(), Box<EvalAltResult>>
