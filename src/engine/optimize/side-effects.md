@@ -11,7 +11,7 @@ custom types and functions are registered.
 If custom functions are registered, they _may_ be called (or maybe not, if the calls happen to lie
 within a pruned code block).
 
-If custom functions are registered to overload built-in operators, they will also be called when
+If custom functions are registered to overload [built-in operators], they will also be called when
 the operators are used (in an `if` statement, for example), potentially causing side-effects.
 
 Therefore, the rule-of-thumb is:

@@ -38,6 +38,7 @@
 [`eval_expression`]: {{rootUrl}}/engine/expressions.md
 [`eval_expression_with_scope`]: {{rootUrl}}/engine/expressions.md
 [raw `Engine`]: {{rootUrl}}/engine/raw.md
+[built-in operator]: {{rootUrl}}/engine/builtin.md
 [built-in operators]: {{rootUrl}}/engine/builtin.md
 [package]: {{rootUrl}}/rust/packages/index.md
 [packages]: {{rootUrl}}/rust/packages/index.md

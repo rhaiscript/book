@@ -16,23 +16,23 @@ The final, optimized [`AST`] is then used for evaluations.
 // Compile master script to AST
 let master_ast = engine.compile(
 "
-    if SCENARIO == 1 {
-        do_work();
-    } else if SCENARIO == 2 {
-        do_something();
-    } else if SCENARIO == 3 {
-        do_something_else();
-    } else {
-        do_nothing();
+    switch SCENARIO {
+        1 => do_work(),
+        2 => do_something(),
+        3 => do_something_else(),
+        _ => do_nothing()
     }
 ")?;
 
-// Create a new 'Scope' - put constants in it to aid optimization
-let mut scope = Scope::new();
-scope.push_constant("SCENARIO", 1_i64);
+for n in 0..5_i64 {
+    // Create a new 'Scope' - put constants in it to aid optimization
+    let mut scope = Scope::new();
+    scope.push_constant("SCENARIO", n);
 
-// Re-optimize the AST
-let new_ast = engine.optimize_ast(&scope, master_ast.clone(), OptimizationLevel::Simple);
+    // Re-optimize the AST
+    let new_ast = engine.optimize_ast(&scope, master_ast.clone(), OptimizationLevel::Simple);
 
-// 'new_ast' is essentially: 'do_work()'
+    // Run it
+    engine.consume_ast(&new_ast)?;
+}
 ```
