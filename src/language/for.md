@@ -95,6 +95,40 @@ for x in range(5.0,0.0,-2.0) {  // step down by -2.0
 ```
 
 
+Iterate Through Bit-Fields
+--------------------------
+
+The `bits` function allows iterating through an integer as a [bit-field].
+
+`bits` optionally accepts the bit number to start from (counting from the most-significant-bit if
+negative), as well as the number of bits to iterate (defaults all).
+
+
+```js , no_run
+let x = 0b111001011011000101100010100;
+let num_on = 0;
+
+// Iterate through all the bits
+for bit in x.bits() {
+    if bit { num_on += 1; }
+}
+
+print(`There are ${num_on} bits turned on!`);
+
+const START = 3;
+let index = START;
+
+// Iterate through all the bits from 3 through 12
+for bit in x.bits(START, 10) {
+    print(`Bit #${index} is ${if bit { "ON" } else { "OFF" }}!`);
+
+    if index >= 32 { break; }   // break out of for loop
+
+    index += 1;
+}
+```
+
+
 Iterate Through Object Maps
 --------------------------
 

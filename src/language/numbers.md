@@ -11,6 +11,8 @@ Integer numbers follow C-style format with support for decimal, binary (`0b`), o
 
 The default system integer type (also aliased to `INT`) is `i64`. It can be turned into `i32` via the [`only_i32`] feature.
 
+Integers can also be conveniently manipulated as [bit-fields].
+
 
 Floating-Point Numbers
 ----------------------
