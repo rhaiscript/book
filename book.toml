@@ -6,7 +6,9 @@ language = "en"
 
 [output.html]
 no-section-label = true
+additional-css = [ "stylesheets/rhai.min.css" ]
 git-repository-url = "https://github.com/rhaiscript/rhai"
+edit-url-template = "https://github.com/rhaiscript/book/edit/master/{path}"
 curly-quotes = true
 google-analytics = "UA-195121118-1"
 
