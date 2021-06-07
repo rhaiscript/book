@@ -6,11 +6,41 @@
 Iterating through a range or an [array], or any type with a registered [type iterator],
 is provided by the `for` ... `in` loop.
 
+There are two alternative syntaxes, one including a counter variable:
+
+> `for` _variable-name_ `in` _expression_ `{` ... `}`
+>
+> `for (` _variable-name_ `,` _counter-variable-name_ `) in` _expression_ `{` ... `}`
+
+
+Counter Variable
+----------------
+
+The counter variable, if specified, starts from zero, incrementing upwards.
+
+```js , no_run
+let a = [42, 123, 999, 0, true, "hello", "world!", 987.6543];
+
+// Loop through the array
+for (item, count) in a {
+    if x.type_of() == "string" {
+        continue;                   // skip to the next iteration
+    }
+
+    // 'item' contains a copy of each element during each iteration
+    // 'count' increments (starting from zero) for each iteration
+    print(`Item #${count + 1} = ${item}`);
+
+    if x == 42 { break; }           // break out of for loop
+}
+```
+
+
+Break or Continue
+-----------------
+
 Like C, `continue` can be used to skip to the next iteration, by-passing all following statements;
 `break` can be used to break out of the loop unconditionally.
-
-To loop through a number sequence (with or without steps), use the `range` function to
-return a numeric iterator.
 
 
 Iterate Through Arrays
@@ -21,12 +51,13 @@ Iterating through an [array] yields cloned _copies_ of each element.
 ```rust , no_run
 let a = [1, 3, 5, 7, 9, 42];
 
+// Loop through the array
 for x in a {
-    if x > 10 { continue; }     // skip to the next iteration
+    if x > 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 ```
 
@@ -49,11 +80,11 @@ for ch in s.chars() {
 
 // Iterate starting from the 3rd character and stopping at the 7th.
 for ch in s.chars(2, 5) {
-    if ch > 'z' { continue; }   // skip to the next iteration
+    if ch > 'z' { continue; }       // skip to the next iteration
 
     print(ch);
 
-    if x == '@' { break; }      // break out of for loop
+    if x == '@' { break; }          // break out of for loop
 }
 ```
 
@@ -65,41 +96,41 @@ The `range` function allows iterating through a range of numbers
 (not including the last number).
 
 ```rust , no_run
-// Iterate starting from 0 and stopping at 49.
-// The step is assumed to be 1 when omitted for integers.
+// Iterate starting from 0 and stopping at 49
+// The step is assumed to be 1 when omitted for integers
 for x in range(0, 50) {
-    if x > 10 { continue; }     // skip to the next iteration
+    if x > 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
-// The 'range' function also takes a step.
-for x in range(0, 50, 3) {      // step by 3
-    if x > 10 { continue; }     // skip to the next iteration
+// The 'range' function also takes a step
+for x in range(0, 50, 3) {          // step by 3
+    if x > 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
-// The 'range' function can also step backwards.
-for x in range(50, 0, -3) {     // step down by -3
-    if x < 10 { continue; }     // skip to the next iteration
+// The 'range' function can also step backwards
+for x in range(50, 0, -3) {         // step down by -3
+    if x < 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
-// It works also for floating-point numbers.
-for x in range(5.0,0.0,-2.0) {  // step down by -2.0
-    if x < 10 { continue; }     // skip to the next iteration
+// It works also for floating-point numbers
+for x in range(5.0,0.0,-2.0) {      // step down by -2.0
+    if x < 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 4.2 { break; }      // break out of for loop
+    if x == 4.2 { break; }          // break out of for loop
 }
 ```
 
@@ -125,15 +156,12 @@ for bit in x.bits() {
 print(`There are ${num_on} bits turned on!`);
 
 const START = 3;
-let index = START;
 
 // Iterate through all the bits from 3 through 12
-for bit in x.bits(START, 10) {
+for (bit, index) in x.bits(START, 10) {
     print(`Bit #${index} is ${if bit { "ON" } else { "OFF" }}!`);
 
-    if index >= 32 { break; }   // break out of for loop
-
-    index += 1;
+    if index >= 7 { break; }        // break out of for loop
 }
 ```
 
@@ -151,11 +179,11 @@ let map = #{a:1, b:3, c:5, d:7, e:9};
 
 // Property names are returned in unsorted, random order
 for x in map.keys() {
-    if x > 10 { continue; }     // skip to the next iteration
+    if x > 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
 // Property values are returned in unsorted, random order
