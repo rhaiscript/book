@@ -13,38 +13,47 @@ To loop through a number sequence (with or without steps), use the `range` funct
 return a numeric iterator.
 
 
-Iterate Through Strings
------------------------
-
-Iterating through a [string] yields characters.
-
-```rust , no_run
-let s = "hello, world!";
-
-for ch in s {
-    if ch > 'z' { continue; }   // skip to the next iteration
-
-    print(ch);
-
-    if x == '@' { break; }      // break out of for loop
-}
-```
-
-
 Iterate Through Arrays
 ----------------------
 
 Iterating through an [array] yields cloned _copies_ of each element.
 
 ```rust , no_run
-let array = [1, 3, 5, 7, 9, 42];
+let a = [1, 3, 5, 7, 9, 42];
 
-for x in array {
+for x in a {
     if x > 10 { continue; }     // skip to the next iteration
 
     print(x);
 
     if x == 42 { break; }       // break out of for loop
+}
+```
+
+
+Iterate Through Strings
+-----------------------
+
+The `chars` method allows iterating through a [string], yielding characters.
+
+`chars` optionally accepts the character to start from (counting from the end if negative), as well
+as the number of characters to iterate (defaults all).
+
+```rust , no_run
+let s = "hello, world!";
+
+// Iterate through all the characters.
+for ch in s.chars() {
+    print(ch);
+}
+
+// Iterate starting from the 3rd character and stopping at the 7th.
+for ch in s.chars(2, 5) {
+    if ch > 'z' { continue; }   // skip to the next iteration
+
+    print(ch);
+
+    if x == '@' { break; }      // break out of for loop
 }
 ```
 
@@ -105,7 +114,7 @@ negative), as well as the number of bits to iterate (defaults all).
 
 
 ```js , no_run
-let x = 0b111001011011000101100010100;
+let x = 0b_1001110010_1101100010_1100010100;
 let num_on = 0;
 
 // Iterate through all the bits
