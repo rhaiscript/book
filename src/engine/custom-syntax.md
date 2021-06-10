@@ -41,18 +41,16 @@ A custom syntax is simply a list of symbols.
 These symbol types can be used:
 
 * Standard [keywords]({{rootUrl}}/appendix/keywords.md)
-
 * Standard [operators]({{rootUrl}}/appendix/operators.md#operators).
-
 * Reserved [symbols]({{rootUrl}}/appendix/operators.md#symbols).
-
 * Identifiers following the [variable] naming rules.
-
 * `$expr$` &ndash; any valid expression, statement or statement block.
-
 * `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` .. `}`).
-
 * `$ident$` &ndash; any [variable] name.
+* `$bool$` &ndash; a boolean value.
+* `$int$` &ndash; an integer number.
+* `$float$` &ndash; a floating-point number (if not [`no_float`]).
+* `$string$` &ndash; a [string] literal.
 
 ### The First Symbol Must be an Identifier
 
@@ -74,25 +72,29 @@ Any new custom syntax definition using the same first symbol simply _overwrites_
 ### Example
 
 ```rust , no_run
-exec $ident$ <- $expr$ : $block$
+exec [ $ident$ ; $int$ ] <- $expr$ : $block$
 ```
 
 The above syntax is made up of a stream of symbols:
 
-| Position | Input |  Symbol   | Description                                                                                              |
-| :------: | :---: | :-------: | -------------------------------------------------------------------------------------------------------- |
-|    1     |       |  `exec`   | custom keyword                                                                                           |
-|    2     |   1   | `$ident$` | a variable name                                                                                          |
-|    3     |       |   `<-`    | the left-arrow symbol (which is a [reserved symbol]({{rootUrl}}/appendix/operators.md#symbols) in Rhai). |
-|    4     |   2   | `$expr$`  | an expression, which may be enclosed with `{` .. `}`, or not.                                            |
-|    5     |       |    `:`    | the colon symbol                                                                                         |
-|    6     |   3   | `$block$` | a statement block, which must be enclosed with `{` .. `}`.                                               |
+| Position | Input slot |  Symbol   | Description                                                                                              |
+| :------: | :--------: | :-------: | -------------------------------------------------------------------------------------------------------- |
+|    1     |            |  `exec`   | custom keyword                                                                                           |
+|    2     |            |    `[`    | the left bracket symbol                                                                                  |
+|    2     |     0      | `$ident$` | a variable name                                                                                          |
+|    3     |            |    `;`    | the semicolon symbol                                                                                     |
+|    4     |     1      |  `$int$`  | an integer number                                                                                        |
+|    5     |            |    `]`    | the right bracket symbol                                                                                 |
+|    6     |            |   `<-`    | the left-arrow symbol (which is a [reserved symbol]({{rootUrl}}/appendix/operators.md#symbols) in Rhai). |
+|    7     |     2      | `$expr$`  | an expression, which may be enclosed with `{` .. `}`, or not.                                            |
+|    8     |            |    `:`    | the colon symbol                                                                                         |
+|    9     |     3      | `$block$` | a statement block, which must be enclosed with `{` .. `}`.                                               |
 
 This syntax matches the following sample code and generates three inputs (one for each non-keyword):
 
 ```rust , no_run
 // Assuming the 'exec' custom syntax implementation declares the variable 'hello':
-let x = exec hello <- foo(1, 2) : {
+let x = exec [hello;42] <- foo(1, 2) : {
             hello += bar(hello);
             baz(hello);
         };
@@ -142,11 +144,31 @@ and statement blocks (`$block$`) are provided.
 
 To access a particular argument, use the following patterns:
 
-| Argument type | Pattern (`n` = slot in `inputs`)         | Result type  | Description        |
-| :-----------: | ---------------------------------------- | :----------: | ------------------ |
-|   `$ident$`   | `inputs[n].get_variable_name().unwrap()` |    `&str`    | name of a variable |
-|   `$expr$`    | `inputs.get(n).unwrap()`                 | `Expression` | an expression tree |
-|   `$block$`   | `inputs.get(n).unwrap()`                 | `Expression` | an expression tree |
+| Argument type | Pattern (`n` = slot in `inputs`)                                                      |     Result type     | Description           |
+| :-----------: | ------------------------------------------------------------------------------------- | :-----------------: | --------------------- |
+|   `$ident$`   | `inputs[n]`<br/>`.get_variable_name().unwrap()`                                       |       `&str`        | name of a variable    |
+|   `$expr$`    | `&inputs[n]`                                                                          |    `&Expression`    | an expression tree    |
+|   `$block$`   | `&inputs[n]`                                                                          |    `&Expression`    | an expression tree    |
+|   `$bool$`    | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_bool().unwrap()`             |       `bool`        | boolean value         |
+|    `$int$`    | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_int().unwrap()`              |        `INT`        | integer number        |
+|   `$float$`   | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_float().unwrap()`            |       `FLOAT`       | floating-point number |
+|  `$string$`   | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_immutable_string().unwrap()` | [`ImmutableString`] | [string] literal      |
+
+### Get literal constants
+
+Several argument types represent literal constants that can be obtained directly via
+`get_literal_value`.
+
+```rust , no_run
+let expression = &inputs[0];
+let value: Dynamic = expression.get_literal_value().unwrap();
+
+// Use 'Dynamic' methods to extract the value
+let bool_value = value.as_bool().unwrap();
+let int_value = value.as_int().unwrap();
+let float_value = value.as_float().unwrap();
+let string_value = value.as_immutable_string().unwrap();
+```
 
 ### Evaluate an Expression Tree
 
@@ -154,7 +176,7 @@ Use the `EvalContext::eval_expression_tree` method to evaluate an arbitrary expr
 within the current evaluation context.
 
 ```rust , no_run
-let expression = inputs.get(0).unwrap();
+let expression = &inputs[0];
 let result = context.eval_expression_tree(expression)?;
 ```
 
