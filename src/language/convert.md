@@ -71,3 +71,27 @@ let hex = parse_int("ab", 16);  // parse as hex (radix = 16)
 hex == 0xab;
 type_of(hex) == "i64";
 ```
+
+
+Formatting Numbers
+------------------
+
+The `to_binary` function converts an integer number to a [string] in binary (i.e. only `1` and `0`).
+
+The `to_octal` function converts an integer number to a [string] in octal (i.e. from `0` to `7`).
+
+The `to_hex` function converts an integer number to a [string] in hex.
+
+```rust , no_run
+let x = 0x1234abcd;
+
+x == 305441741;
+
+x.to_string() == "305441741";
+
+x.to_binary() == "10010001101001010101111001101";
+
+x.to_octal() == "2215125715";
+
+x.to_hex() == "1234abcd";
+```

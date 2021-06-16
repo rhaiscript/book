@@ -68,6 +68,9 @@
 [`parse_int`]: {{rootUrl}}/language/convert.md
 [`parse_float`]: {{rootUrl}}/language/convert.md
 [`parse_decimal`]: {{rootUrl}}/language/convert.md
+[`to_binary`]: {{rootUrl}}/language/convert.md
+[`to_octal`]: {{rootUrl}}/language/convert.md
+[`to_hex`]: {{rootUrl}}/language/convert.md
 [`in`]: {{rootUrl}}/language/in.md
 
 [custom type]: {{rootUrl}}/rust/custom.md

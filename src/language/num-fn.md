@@ -28,24 +28,24 @@ Floating-Point Functions
 -----------------------
 
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
-operate on `f64` only (`f32` under [`f32_float`]):
+operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal] (requires [`decimal`]) only:
 
-| Category         | Supports Decimal | Functions                                                                                |
-| ---------------- | :--------------: | ---------------------------------------------------------------------------------------- |
-| Trigonometry     |        no        | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`             |
-| Arc-trigonometry |        no        | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
-| Square root      |       yes        | `sqrt`                                                                                   |
-| Exponential      |       yes        | `exp` (base _e_)                                                                         |
-| Logarithmic      |       yes        | `ln` (base _e_)                                                                          |
-| Logarithmic      |        no        | `log(`_x_`)` in base 10, `log(`_x_`,`_base_`)`                                           |
-| Rounding         |       yes        | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
-| Conversion       |       yes        | [`to_int`], [`to_decimal`] (requires [`decimal`])                                        |
-| Conversion       |        no        | `to_degrees`, `to_radians`                                                               |
-| Testing          |        no        | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
+| Category         | Supports `Decimal` | Functions                                                                                |
+| ---------------- | :----------------: | ---------------------------------------------------------------------------------------- |
+| Trigonometry     |         no         | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`             |
+| Arc-trigonometry |         no         | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
+| Square root      |        yes         | `sqrt`                                                                                   |
+| Exponential      |        yes         | `exp` (base _e_)                                                                         |
+| Logarithmic      |        yes         | `ln` (base _e_)                                                                          |
+| Logarithmic      |         no         | `log(`_x_`)` in base 10, `log(`_x_`,`_base_`)`                                           |
+| Rounding         |        yes         | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
+| Conversion       |        yes         | [`to_int`], [`to_decimal`] (requires [`decimal`]), [`to_float`] (not under [`no_float`]) |
+| Conversion       |         no         | `to_degrees`, `to_radians`                                                               |
+| Testing          |         no         | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
-Decimal Rounding
-----------------
+Rounding Functions
+------------------
 
 The following rounding methods (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
 operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] feature:
@@ -72,6 +72,22 @@ parse numbers:
 | [`parse_int`]     |                    | converts a [string] to `INT` with an optional radix |
 | [`parse_float`]   |    [`no_float`]    | converts a [string] to `FLOAT`                      |
 | [`parse_decimal`] |  non-[`decimal`]   | converts a [string] to [`Decimal`][rust_decimal]    |
+
+
+Formatting Functions
+--------------------
+
+The following standard functions (defined in the [`BasicStringPackage`][packages] but excluded if using a [raw `Engine`])
+convert integer numbers into a [string] of hex, octal or binary representations:
+
+| Function      | Description                          |
+| ------------- | ------------------------------------ |
+| [`to_binary`] | converts an integer number to binary |
+| [`to_octal`]  | converts an integer number to octal  |
+| [`to_hex`]    | converts an integer number to hex    |
+
+These formatting functions are defined for all available integer numbers &ndash; i.e. `INT`, `u8`, `i8`,
+`u16`, `i16`, `u32`, `i32`, `u64`, `i64`, `u128` and `i128` unless disabled by feature flags.
 
 
 Constants
