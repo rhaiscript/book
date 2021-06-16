@@ -118,20 +118,20 @@ The function signature of an implementation is:
 
 where:
 
-| Parameter                  |                  Type                   | Description                                                                                                            |
-| -------------------------- | :-------------------------------------: | ---------------------------------------------------------------------------------------------------------------------- |
-| `context`                  |           `&mut EvalContext`            | mutable reference to the current evaluation _context_                                                                  |
-| &bull; `scope()`           |                `&Scope`                 | reference to the current [`Scope`]                                                                                     |
-| &bull; `scope_mut()`       |            `&mut &mut Scope`            | mutable reference to the current [`Scope`]; variables can be added to/removed from it                                  |
-| &bull; `engine()`          |                `&Engine`                | reference to the current [`Engine`]                                                                                    |
-| &bull; `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                |
-| &bull; `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                            |
-| &bull; `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature       |
-| &bull; `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the namespaces (as [modules]) containing all script-defined functions                                      |
-| &bull; `namespaces()`      |              `&[&Module]`               | reference to the namespaces (as [modules]) containing all script-defined functions; requires the [`internals`] feature |
-| &bull; `this_ptr()`        |           `Option<&Dynamic>`            | reference to the current bound [`this`] pointer, if any                                                                |
-| &bull; `call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                            |
-| `inputs`                   |             `&[Expression]`             | a list of input expression trees                                                                                       |
+| Parameter                  |                  Type                   | Description                                                                                                                                     |
+| -------------------------- | :-------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`                  |           `&mut EvalContext`            | mutable reference to the current evaluation _context_                                                                                           |
+| &bull; `scope()`           |                `&Scope`                 | reference to the current [`Scope`]                                                                                                              |
+| &bull; `scope_mut()`       |            `&mut &mut Scope`            | mutable reference to the current [`Scope`]; variables can be added to/removed from it                                                           |
+| &bull; `engine()`          |                `&Engine`                | reference to the current [`Engine`]                                                                                                             |
+| &bull; `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                         |
+| &bull; `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                     |
+| &bull; `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                |
+| &bull; `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                      |
+| &bull; `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature |
+| &bull; `this_ptr()`        |           `Option<&Dynamic>`            | reference to the current bound [`this`] pointer, if any                                                                                         |
+| &bull; `call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                                                     |
+| `inputs`                   |             `&[Expression]`             | a list of input expression trees                                                                                                                |
 
 ### Return Value
 
@@ -144,30 +144,35 @@ and statement blocks (`$block$`) are provided.
 
 To access a particular argument, use the following patterns:
 
-| Argument type | Pattern (`n` = slot in `inputs`)                                                      |     Result type     | Description           |
-| :-----------: | ------------------------------------------------------------------------------------- | :-----------------: | --------------------- |
-|   `$ident$`   | `inputs[n]`<br/>`.get_variable_name().unwrap()`                                       |       `&str`        | name of a variable    |
-|   `$expr$`    | `&inputs[n]`                                                                          |    `&Expression`    | an expression tree    |
-|   `$block$`   | `&inputs[n]`                                                                          |    `&Expression`    | an expression tree    |
-|   `$bool$`    | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_bool().unwrap()`             |       `bool`        | boolean value         |
-|    `$int$`    | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_int().unwrap()`              |        `INT`        | integer number        |
-|   `$float$`   | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_float().unwrap()`            |       `FLOAT`       | floating-point number |
-|  `$string$`   | `inputs[n]`<br/>`.get_literal_value().unwrap()`<br/>`.as_immutable_string().unwrap()` | [`ImmutableString`] | [string] literal      |
+| Argument type | Pattern (`n` = slot in `inputs`)                            |     Result type     | Description           |
+| :-----------: | ----------------------------------------------------------- | :-----------------: | --------------------- |
+|   `$ident$`   | `inputs[n].get_variable_name().unwrap()`                    |       `&str`        | name of a variable    |
+|   `$expr$`    | `&inputs[n]`                                                |    `&Expression`    | an expression tree    |
+|   `$block$`   | `&inputs[n]`                                                |    `&Expression`    | an expression tree    |
+|   `$bool$`    | `inputs[n].get_literal_value::<bool>().unwrap()`            |       `bool`        | boolean value         |
+|    `$int$`    | `inputs[n].get_literal_value::<INT>().unwrap()`             |        `INT`        | integer number        |
+|   `$float$`   | `inputs[n].get_literal_value::<FLOAT>().unwrap()`           |       `FLOAT`       | floating-point number |
+|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()` | [`ImmutableString`] | [string] literal      |
 
 ### Get literal constants
 
 Several argument types represent literal constants that can be obtained directly via
-`get_literal_value`.
+`Expression::get_literal_value<T>`.
 
 ```rust , no_run
 let expression = &inputs[0];
-let value: Dynamic = expression.get_literal_value().unwrap();
 
-// Use 'Dynamic' methods to extract the value
-let bool_value = value.as_bool().unwrap();
-let int_value = value.as_int().unwrap();
-let float_value = value.as_float().unwrap();
-let string_value = value.as_immutable_string().unwrap();
+// Use 'get_literal_value' with a turbo-fish type to extract the value
+let string_value = expression.get_literal_value::<ImmutableString>().unwrap();
+let float_value = expression.get_literal_value::<FLOAT>().unwrap();
+
+// Or assign directly to a variable with type...
+let int_value: INT = expression.get_literal_value().unwrap();
+
+// Or use type inference!
+let bool_value = expression.get_literal_value().unwrap();
+
+if bool_value { ... }       // 'bool_value' inferred to be 'bool'
 ```
 
 ### Evaluate an Expression Tree
@@ -237,17 +242,16 @@ fn implementation_func(
         }
 
         // Evaluate the condition expression
-        let stop = !context.eval_expression_tree(condition)?
-                            .as_bool().map_err(|err| Box::new(
-                                EvalAltResult::ErrorMismatchDataType(
-                                    "bool".to_string(),
-                                    err.to_string(),
-                                    condition.position(),
-                                )
-                            ))?;
+        let expr_result = !context.eval_expression_tree(condition)?;
 
-        if stop {
-            break;
+        match expr_result.as_bool() {
+            Ok(true) => (),
+            Ok(false) => break,
+            Err(err) => return Err(EvalAltResult::ErrorMismatchDataType(
+                            "bool".to_string(),
+                            err.to_string(),
+                            condition.position(),
+                        ).into()),
         }
     }
 
