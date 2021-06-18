@@ -38,23 +38,26 @@ impl ModuleResolver for MyModuleResolver {
     // Only required function.
     fn resolve(
         &self,
-        engine: &Engine,                    // reference to the current 'Engine'
-        source_path: Option<&str>,          // path of the parent module
-        path: &str,                         // the module path
-        pos: Position,                      // position of the 'import' statement
+        engine: &Engine,                        // reference to the current 'Engine'
+        source_path: Option<&str>,              // path of the parent module
+        path: &str,                             // the module path
+        pos: Position,                          // position of the 'import' statement
     ) -> Result<Rc<Module>, Box<EvalAltResult>> {
         // Check module path.
         if is_valid_module_path(path) {
-            let mut my_module =
-                load_secret_module(path)    // load the custom module
-                    .map_err(|err|
-                        // Return EvalAltResult::ErrorInModule upon loading error
-                        EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into()
-                    )?;
-            my_module.build_index();        // index it
-            Rc::new(my_module)              // make it shared
+            // Load the custom module
+            match load_secret_module(path) {
+                Ok(my_module) => {
+                    my_module.build_index();    // index it
+                    Rc::new(my_module)          // make it shared
+                },
+                // Return 'EvalAltResult::ErrorInModule' upon loading error
+                Err(err) => Err(
+                    EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into()
+                )
+            }
         } else {
-            // Return EvalAltResult::ErrorModuleNotFound if the path is invalid
+            // Return 'EvalAltResult::ErrorModuleNotFound' if the path is invalid
             Err(EvalAltResult::ErrorModuleNotFound(path.into(), pos).into())
         }
     }
