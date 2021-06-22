@@ -45,6 +45,8 @@
 
         <!-- Custom theme stylesheets -->
         
+        <link rel="stylesheet" href="stylesheets/rhai.min.css">
+        
 
         
     </head>
@@ -97,7 +99,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="about/index.html">What is Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="about/features.html">Features</a></li><li class="chapter-item expanded "><a href="about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="start/builds/wasm.html">WebAssembly (WASM)</a></li></ol></li><li class="chapter-item expanded "><a href="start/bin.html">Packaged Utilities</a></li><li class="chapter-item expanded "><a href="start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="start/examples/scripts.html">Scripts</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/hello-world.html">Hello World in Rhai – Evaluate a Script</a></li><li class="chapter-item expanded "><a href="engine/compile.html">Compile to AST for Repeated Evaluations</a></li><li class="chapter-item expanded "><a href="engine/expressions.html">Evaluate Expressions Only</a></li><li class="chapter-item expanded "><a href="engine/raw.html">Raw Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/builtin.html">Built-in Operators</a></li></ol></li><li class="chapter-item expanded "><a href="engine/scope.html">Scope – Initializing and Maintaining State</a></li><li class="chapter-item expanded "><a href="engine/options.html">Engine Configuration Options</a></li></ol></li><li class="chapter-item expanded "><a href="rust/index.html">Extend Rhai with Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/dynamic-args.html">Dynamic Parameters</a></li><li class="chapter-item expanded "><a href="rust/strings.html">String Parameters</a></li><li class="chapter-item expanded "><a href="rust/generic.html">Generic Functions</a></li><li class="chapter-item expanded "><a href="rust/fallible.html">Fallible Functions</a></li><li class="chapter-item expanded "><a href="rust/context.html">NativeCallContext</a></li></ol></li><li class="chapter-item expanded "><a href="engine/call-fn.html">Call a Rhai Function from Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/func.html">Create a Rust Closure from a Rhai Function</a></li></ol></li><li class="chapter-item expanded "><a href="rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="rust/custom.html">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="rust/methods.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/modules/create.html">Create from Rust</a></li><li class="chapter-item expanded "><a href="rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="rust/modules/use.html">Use a Module</a></li><li class="chapter-item expanded "><a href="rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li><li class="chapter-item expanded "><a href="rust/modules/self-contained.html">Self-Contained AST</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="plugins/module.html">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="rust/packages/create.html">Custom Packages</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="language/index.html">Rhai Language Reference</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="language/dynamic-tag.html">Value Tag</a></li><li class="chapter-item expanded "><a href="rust/serde.html">Serialization/Deserialization with serde</a></li></ol></li><li class="chapter-item expanded "><a href="language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="language/num-fn.html">Functions</a></li><li class="chapter-item expanded "><a href="language/convert.html">Value Conversions</a></li></ol></li><li class="chapter-item expanded "><a href="language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/immutable-string.html">ImmutableString</a></li><li class="chapter-item expanded "><a href="language/string-fn.html">Built-in Functions</a></li></ol></li><li class="chapter-item expanded "><a href="language/arrays.html">Arrays</a></li><li class="chapter-item expanded "><a href="language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="language/timestamps.html">Time-Stamps</a></li></ol></li><li class="chapter-item expanded "><a href="language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="language/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="language/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="language/constants.html">Constants</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/global.html">Automatic Global Module</a></li></ol></li><li class="chapter-item expanded "><a href="language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="language/assignment-op.html">Assignment Operators</a></li><li class="chapter-item expanded "><a href="language/if.html">If Statement / Expression</a></li><li class="chapter-item expanded "><a href="language/in.html">In Operator</a></li><li class="chapter-item expanded "><a href="language/switch.html">Switch Expression</a></li><li class="chapter-item expanded "><a href="language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/iterator.html">Iterators for Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="language/return.html">Return Values</a></li><li class="chapter-item expanded "><a href="language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="language/fn-ptr.html">Function Pointers</a></li><li class="chapter-item expanded "><a href="language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="language/fn-closure.html">Closures</a></li><li class="chapter-item expanded "><a href="language/fn-metadata.html">Metadata</a></li></ol></li><li class="chapter-item expanded "><a href="language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/modules/export.html">Export Variables, Functions and Sub-Modules</a></li><li class="chapter-item expanded "><a href="language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="language/eval.html">Eval Function</a></li></ol></li><li class="chapter-item expanded "><a href="safety/index.html">Safety and Protection</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="safety/checked.html">Safety Checks</a></li><li class="chapter-item expanded "><a href="safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="safety/max-operations.html">Maximum Number of Operations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="safety/progress.html">Tracking Progress and Force-Termination</a></li></ol></li><li class="chapter-item expanded "><a href="safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="safety/max-stmt-depth.html">Maximum Statement Depth</a></li></ol></li><li class="chapter-item expanded "><a href="engine/optimize/index.html">Script Optimization</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="engine/optimize/eager.html">Eager Function Evaluation</a></li><li class="chapter-item expanded "><a href="engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="engine/optimize/volatility.html">Volatility Considerations</a></li><li class="chapter-item expanded "><a href="engine/optimize/semantics.html">Subtle Semantic Changes</a></li></ol></li><li class="chapter-item expanded "><a href="advanced.html">Advanced Topics</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/ast.html">Manage AST's</a></li><li class="chapter-item expanded "><a href="language/fn-capture.html">Capture Scope for Function Call</a></li><li class="chapter-item expanded "><a href="rust/register-raw.html">Low-Level API</a></li><li class="chapter-item expanded "><a href="engine/var.html">Variable Resolver</a></li><li class="chapter-item expanded "><a href="engine/dsl.html">Use as DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/disable.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="engine/custom-syntax.html">Extend with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="patterns/multiple.html">Multiple Instantiation</a></li><li class="chapter-item expanded "><a href="engine/metadata/index.html">Functions Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/metadata/gen_fn_sig.html">Generate Function Signatures</a></li><li class="chapter-item expanded "><a href="engine/metadata/export_to_json.html">Export Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="patterns/index.html">Usage Patterns</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="patterns/control.html">Control Layer Over Rust Backend</a></li><li class="chapter-item expanded "><a href="patterns/singleton.html">Singleton Command</a></li><li class="chapter-item expanded "><a href="patterns/multi-layer.html">Multi-Layer Functions</a></li><li class="chapter-item expanded "><a href="patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="pattern/../patterns/multi-threading.html">Multi-Threaded Synchronization</a></li><li class="chapter-item expanded "><a href="patterns/events.html">Scriptable Event Handler with State</a></li><li class="chapter-item expanded "><a href="patterns/dynamic-const.html">Dynamic Constants Provider</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="appendix/index.html">Appendix</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix/literals.html">Literals</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="about/index.html">What is Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="about/features.html">Features</a></li><li class="chapter-item expanded "><a href="about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="start/builds/wasm.html">WebAssembly (WASM)</a></li></ol></li><li class="chapter-item expanded "><a href="start/bin.html">Packaged Utilities</a></li><li class="chapter-item expanded "><a href="start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="start/examples/scripts.html">Scripts</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/hello-world.html">Hello World in Rhai – Evaluate a Script</a></li><li class="chapter-item expanded "><a href="engine/compile.html">Compile to AST for Repeated Evaluations</a></li><li class="chapter-item expanded "><a href="engine/expressions.html">Evaluate Expressions Only</a></li><li class="chapter-item expanded "><a href="engine/raw.html">Raw Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/builtin.html">Built-in Operators</a></li></ol></li><li class="chapter-item expanded "><a href="engine/scope.html">Scope – Initializing and Maintaining State</a></li><li class="chapter-item expanded "><a href="engine/options.html">Engine Configuration Options</a></li></ol></li><li class="chapter-item expanded "><a href="rust/index.html">Extend Rhai with Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/dynamic-args.html">Dynamic Parameters</a></li><li class="chapter-item expanded "><a href="rust/strings.html">String Parameters</a></li><li class="chapter-item expanded "><a href="rust/generic.html">Generic Functions</a></li><li class="chapter-item expanded "><a href="rust/fallible.html">Fallible Functions</a></li><li class="chapter-item expanded "><a href="rust/context.html">NativeCallContext</a></li></ol></li><li class="chapter-item expanded "><a href="engine/call-fn.html">Call a Rhai Function from Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/func.html">Create a Rust Closure from a Rhai Function</a></li></ol></li><li class="chapter-item expanded "><a href="rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="rust/custom.html">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="rust/methods.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/modules/create.html">Create from Rust</a></li><li class="chapter-item expanded "><a href="rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="rust/modules/use.html">Use a Module</a></li><li class="chapter-item expanded "><a href="rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li><li class="chapter-item expanded "><a href="rust/modules/self-contained.html">Self-Contained AST</a></li></ol></li><li class="chapter-item expanded "><a href="plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="plugins/module.html">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="rust/packages/create.html">Custom Packages</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="language/index.html">Rhai Language Reference</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="language/dynamic-tag.html">Value Tag</a></li><li class="chapter-item expanded "><a href="rust/serde.html">Serialization/Deserialization with serde</a></li></ol></li><li class="chapter-item expanded "><a href="language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="language/num-fn.html">Functions</a></li><li class="chapter-item expanded "><a href="language/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="language/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rust/immutable-string.html">ImmutableString</a></li><li class="chapter-item expanded "><a href="language/string-fn.html">Built-in Functions</a></li></ol></li><li class="chapter-item expanded "><a href="language/arrays.html">Arrays</a></li><li class="chapter-item expanded "><a href="language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="language/timestamps.html">Time-Stamps</a></li></ol></li><li class="chapter-item expanded "><a href="language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="language/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="language/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="language/constants.html">Constants</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/global.html">Automatic Global Module</a></li></ol></li><li class="chapter-item expanded "><a href="language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="language/assignment-op.html">Assignment Operators</a></li><li class="chapter-item expanded "><a href="language/if.html">If Statement / Expression</a></li><li class="chapter-item expanded "><a href="language/in.html">In Operator</a></li><li class="chapter-item expanded "><a href="language/switch.html">Switch Expression</a></li><li class="chapter-item expanded "><a href="language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/iterator.html">Iterators for Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="language/return.html">Return Values</a></li><li class="chapter-item expanded "><a href="language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="language/fn-ptr.html">Function Pointers</a></li><li class="chapter-item expanded "><a href="language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="language/fn-closure.html">Closures</a></li><li class="chapter-item expanded "><a href="language/fn-metadata.html">Metadata</a></li></ol></li><li class="chapter-item expanded "><a href="language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="language/modules/export.html">Export Variables, Functions and Sub-Modules</a></li><li class="chapter-item expanded "><a href="language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="language/eval.html">Eval Function</a></li></ol></li><li class="chapter-item expanded "><a href="safety/index.html">Safety and Protection</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="safety/checked.html">Safety Checks</a></li><li class="chapter-item expanded "><a href="safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="safety/max-operations.html">Maximum Number of Operations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="safety/progress.html">Tracking Progress and Force-Termination</a></li></ol></li><li class="chapter-item expanded "><a href="safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="safety/max-stmt-depth.html">Maximum Statement Depth</a></li></ol></li><li class="chapter-item expanded "><a href="engine/optimize/index.html">Script Optimization</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="engine/optimize/eager.html">Eager Function Evaluation</a></li><li class="chapter-item expanded "><a href="engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="engine/optimize/volatility.html">Volatility Considerations</a></li><li class="chapter-item expanded "><a href="engine/optimize/semantics.html">Subtle Semantic Changes</a></li></ol></li><li class="chapter-item expanded "><a href="advanced.html">Advanced Topics</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/ast.html">Manage AST's</a></li><li class="chapter-item expanded "><a href="language/fn-capture.html">Capture Scope for Function Call</a></li><li class="chapter-item expanded "><a href="rust/register-raw.html">Low-Level API</a></li><li class="chapter-item expanded "><a href="engine/var.html">Variable Resolver</a></li><li class="chapter-item expanded "><a href="engine/dsl.html">Use as DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/disable.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="engine/custom-syntax.html">Extend with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="patterns/multiple.html">Multiple Instantiation</a></li><li class="chapter-item expanded "><a href="engine/metadata/index.html">Functions Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="engine/metadata/gen_fn_sig.html">Generate Function Signatures</a></li><li class="chapter-item expanded "><a href="engine/metadata/export_to_json.html">Export Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="patterns/index.html">Usage Patterns</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="patterns/control.html">Control Layer Over Rust Backend</a></li><li class="chapter-item expanded "><a href="patterns/singleton.html">Singleton Command</a></li><li class="chapter-item expanded "><a href="patterns/multi-layer.html">Multi-Layer Functions</a></li><li class="chapter-item expanded "><a href="patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="pattern/../patterns/multi-threading.html">Multi-Threaded Synchronization</a></li><li class="chapter-item expanded "><a href="patterns/events.html">Scriptable Event Handler with State</a></li><li class="chapter-item expanded "><a href="patterns/dynamic-const.html">Dynamic Constants Provider</a></li></ol></li><li class="chapter-item expanded "><a href="tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="appendix/index.html">Appendix</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="appendix/literals.html">Literals</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -176,7 +178,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>0.20.2</strong> of Rhai.</p>
+<p>This Book is for version <strong>0.20.3</strong> of Rhai.</p>
 <p>For the latest development version, see <a href="about//book/vnext/">here</a>.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
@@ -263,9 +265,7 @@ pulled in to provide for missing functionalities.</p>
 <h2 id="safe"><a class="header" href="#safe">Safe</a></h2>
 <ul>
 <li>
-<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons). <code>unsafe</code> is only
-ever used for type casting purposes, and is never used to get around the borrow checker.
-In other words, <code>unsafe</code> code in Rhai never introduces potential data races.</p>
+<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons).</p>
 </li>
 <li>
 <p>Sand-boxed – the scripting <a href="about//book/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing
@@ -428,6 +428,9 @@ without any additional terms or conditions.</p>
 <p><a href="https://discord.gg/HquqbYFcZ9">Discord Chat</a> – Rhai channel</p>
 </li>
 <li>
+<p><a href="https://rhaiscript.zulipchat.com">Zulip Chat</a> – Rhai organization</p>
+</li>
+<li>
 <p><a href="https://www.reddit.com/r/Rhai">Reddit</a> – Rhai community</p>
 </li>
 </ul>
@@ -491,7 +494,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;0.20.2&quot;    # assuming 0.20.2 is the latest version
+rhai = &quot;0.20.3&quot;    # assuming 0.20.3 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -563,7 +566,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <li><code>no_function</code> (no defining <a href="start//book/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.2&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;0.20.3&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/language/functions.html">functions</a>
@@ -889,7 +892,9 @@ cargo +nightly build --release
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl1.rhai"><code>function_decl1.rhai</code></a></td><td>a <a href="start/examples//book/language/functions.html">function</a> without parameters</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl2.rhai"><code>function_decl2.rhai</code></a></td><td>a <a href="start/examples//book/language/functions.html">function</a> with two parameters</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl3.rhai"><code>function_decl3.rhai</code></a></td><td>a <a href="start/examples//book/language/functions.html">function</a> with many parameters</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl4.rhai"><code>function_decl4.rhai</code></a></td><td>a <a href="start/examples//book/language/functions.html">function</a> acting as a <a href="start/examples//book/language/fn-method.html">method</a></td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/if1.rhai"><code>if1.rhai</code></a></td><td><a href="start/examples//book/language/if.html"><code>if</code></a> example</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/if2.rhai"><code>if2.rhai</code></a></td><td><a href="start/examples//book/language/if.html"><code>if</code></a>-expression example</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/loop.rhai"><code>loop.rhai</code></a></td><td>count-down <a href="start/examples//book/language/loop.html"><code>loop</code></a> in Rhai, emulating a <code>do</code> .. <code>while</code> loop</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/module.rhai"><code>module.rhai</code></a></td><td>import a script file as a module</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/oop.rhai"><code>oop.rhai</code></a></td><td>simulate <a href="start/examples//book/patterns/oop.html">object-oriented programming (OOP)</a> with <a href="start/examples//book/language/fn-closure.html">closures</a></td></tr>
@@ -897,6 +902,7 @@ cargo +nightly build --release
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/op2.rhai"><code>op2.rhai</code></a></td><td>simple addition and multiplication</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/op3.rhai"><code>op3.rhai</code></a></td><td>change evaluation order with parenthesis</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/string.rhai"><code>string.rhai</code></a></td><td><a href="start/examples//book/language/strings-chars.html">string</a> operations, including <em>interpolation</em></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/switch.rhai"><code>switch.rhai</code></a></td><td><a href="start/examples//book/language/switch.html"><code>switch</code></a> example</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/strings_map.rhai"><code>strings_map.rhai</code></a></td><td><a href="start/examples//book/language/strings-chars.html">string</a> and <a href="start/examples//book/language/object-maps.html">object map</a> operations</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/while.rhai"><code>while.rhai</code></a></td><td><a href="start/examples//book/language/while.html"><code>while</code></a> loop</td></tr>
 </tbody></table>
@@ -1088,7 +1094,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.2/rhai/struct.Scope.html">documentation</a> online.</p>
+<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.3/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/language/variables.html">variables</a> and <a href="engine//book/language/constants.html">constants</a>, but only the latest ones can
@@ -1455,8 +1461,8 @@ specially by the <a href="rust//book/engine/hello-world.html"><code>Engine</code
 <tr><td><code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td><code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
 <tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
-<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a></td></tr>
+<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>; requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <h2 id="implement-safety-checks-with-nativecallcontext"><a class="header" href="#implement-safety-checks-with-nativecallcontext">Implement Safety Checks with <code>NativeCallContext</code></a></h2>
@@ -1475,8 +1481,7 @@ pub fn grow(context: NativeCallContext, size: i64)
     // Make sure the function does not generate a
     // data structure larger than the allowed limit
     // for the Engine!
-    if size as usize &gt; context.engine().max_array_size()
-    {
+    if size as usize &gt; context.engine().max_array_size() {
         return EvalAltResult::ErrorDataTooLarge(
             &quot;Size to grow&quot;.to_string(),
             context.engine().max_array_size(),
@@ -1850,8 +1855,8 @@ with a special “pretty-print” name, <a href="rust//book/language/type-of.htm
       .register_type_with_name::&lt;TestStruct2&gt;(&quot;TestStruct&quot;)
       .register_fn(&quot;new_ts2&quot;, TestStruct2::new);
 
-let ts1_type = engine.eval::&lt;String&gt;(r#&quot;let x = new_ts1(); x.type_of()&quot;#)?;
-let ts2_type = engine.eval::&lt;String&gt;(r#&quot;let x = new_ts2(); x.type_of()&quot;#)?;
+let ts1_type = engine.eval::&lt;String&gt;(&quot;let x = new_ts1(); x.type_of()&quot;)?;
+let ts2_type = engine.eval::&lt;String&gt;(&quot;let x = new_ts2(); x.type_of()&quot;)?;
 
 println!(&quot;{}&quot;, ts1_type);               // prints 'path::to::TestStruct'
 println!(&quot;{}&quot;, ts1_type);               // prints 'TestStruct'
@@ -1941,11 +1946,12 @@ engine.register_type::&lt;TestStruct&gt;()
       .register_get_set(&quot;xyz&quot;, TestStruct::get_field, TestStruct::set_field)
       .register_fn(&quot;new_ts&quot;, TestStruct::new);
 
-let result = engine.eval::&lt;String&gt;(r#&quot;
-                let a = new_ts();
-                a.xyz = &quot;42&quot;;
-                a.xyz
-             &quot;#)?;
+let result = engine.eval::&lt;String&gt;(
+r#&quot;
+    let a = new_ts();
+    a.xyz = &quot;42&quot;;
+    a.xyz
+&quot;#)?;
 
 println!(&quot;Answer: {}&quot;, result);                     // prints 42
 <span class="boring">}
@@ -1982,18 +1988,30 @@ value at a particular index:</p>
 <tr><td><code>register_indexer_get_result</code></td><td><code>Fn(&amp;mut T, X) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td align="center">yes, but not advised</td></tr>
 <tr><td><code>register_indexer_set_result</code></td><td><code>Fn(&amp;mut T, X, V) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;</code></td><td align="center">yes</td></tr>
 </tbody></table>
-<p>By convention, index getters are not supposed to mutate the <a href="rust//book/rust/custom.html">custom type</a>, although there is nothing
-that prevents this mutation.</p>
+<p>By convention, index <a href="rust//book/rust/getters-setters.html">getters</a> are not supposed to mutate the <a href="rust//book/rust/custom.html">custom type</a>,
+although there is nothing that prevents this mutation.</p>
 <p><strong>IMPORTANT: Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.</strong></p>
-<h2 id="cannot-override-arrays-object-maps-and-strings"><a class="header" href="#cannot-override-arrays-object-maps-and-strings">Cannot Override Arrays, Object Maps and Strings</a></h2>
+<h2 id="cannot-override-arrays-object-maps-strings-and-integers"><a class="header" href="#cannot-override-arrays-object-maps-strings-and-integers">Cannot Override Arrays, Object Maps, Strings and Integers</a></h2>
 <p>For efficiency reasons, indexers <strong>cannot</strong> be used to overload (i.e. override)
-built-in indexing operations for <a href="rust//book/language/arrays.html">arrays</a>, <a href="rust//book/language/object-maps.html">object maps</a> and <a href="rust//book/language/strings-chars.html">strings</a>.</p>
-<p>Attempting to register indexers for an <a href="rust//book/language/arrays.html">array</a>, <a href="rust//book/language/object-maps.html">object map</a> or <a href="rust//book/language/strings-chars.html">string</a> panics.</p>
-<h2 id="negative-integer-index"><a class="header" href="#negative-integer-index">Negative Integer Index</a></h2>
+built-in indexing operations for <a href="rust//book/language/arrays.html">arrays</a>, <a href="rust//book/language/object-maps.html">object maps</a>, <a href="rust//book/language/strings-chars.html">strings</a> and integers
+(acting as <a href="rust//book/language/bit-fields.html">bit-field</a> operation).</p>
+<p>These types have built-in indexer implementations that are fast and efficient:</p>
+<table><thead><tr><th>Type</th><th align="center">Index type</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="rust//book/language/arrays.html"><code>Array</code></a></td><td align="center"><code>INT</code></td><td align="center"><a href="rust//book/language/dynamic.html"><code>Dynamic</code></a></td><td>access a particular element inside the <a href="rust//book/language/arrays.html">array</a></td></tr>
+<tr><td><a href="rust//book/language/object-maps.html"><code>Map</code></a></td><td align="center"><a href="rust//book/rust/immutable-string.html"><code>ImmutableString</code></a>,<br/><code>String</code>, <code>&amp;str</code></td><td align="center"><a href="rust//book/language/dynamic.html"><code>Dynamic</code></a></td><td>access a particular property inside the <a href="rust//book/language/object-maps.html">object map</a></td></tr>
+<tr><td><a href="rust//book/rust/immutable-string.html"><code>ImmutableString</code></a>,<br/><code>String</code>, <code>&amp;str</code></td><td align="center"><code>INT</code></td><td align="center"><a href="rust//book/language/strings-chars.html">character</a></td><td>access a particular <a href="rust//book/language/strings-chars.html">character</a> inside the <a href="rust//book/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>INT</code></td><td align="center"><code>INT</code></td><td align="center">boolean</td><td>access a particular bit inside the integer as a <a href="rust//book/language/bit-fields.html">bit-field</a></td></tr>
+</tbody></table>
+<p>Attempting to register indexers for an <a href="rust//book/language/arrays.html">array</a>, <a href="rust//book/language/object-maps.html">object map</a>, <a href="rust//book/language/strings-chars.html">string</a> or <code>INT</code> panics
+when using the <code>Engine::register_indexer_XXX</code> API.  They can, however, be defined in a
+<a href="rust//book/plugins/module.html">plugin module</a>, only to be ignored.</p>
+<p>In general, it is a bad idea to overload indexers for any of the <a href="rust//book/language/values-and-types.html">standard types</a> supported
+internally by Rhai, since built-in indexers may be added in future versions.</p>
+<h2 id="convention-for-negative-index"><a class="header" href="#convention-for-negative-index">Convention for Negative Index</a></h2>
 <p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
 taken to handle <em>negative</em> values passed as the index.</p>
-<p>It is a standard API style for Rhai to assume that an index position counts <em>backwards</em> from the
-<em>end</em> if it is negative.</p>
+<p>It is a standard API <em>convention</em> for Rhai to assume that an index position counts <em>backwards</em> from
+the <em>end</em> if it is negative.</p>
 <p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
 <p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
 <p>A typical implementation for negative index values is:</p>
@@ -2002,13 +2020,16 @@ taken to handle <em>negative</em> values passed as the index.</p>
 </span><span class="boring">fn main() {
 </span>// The following assumes:
 //   'index' is 'INT', 'items_len: usize' is the number of elements
-let actual_index: usize = if index &lt; 0 {
+let actual_index = if index &lt; 0 {
     index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
 } else {
     index as usize
 };
 <span class="boring">}
 </span></code></pre></pre>
+<p>The <em>end</em> of a data type can be interpreted creatively.  For example, in an integer used as a
+<a href="rust//book/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
+<em>most-significant-bit</em> (MSB).</p>
 <h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -2040,13 +2061,14 @@ engine.register_type::&lt;TestStruct&gt;()
       .register_indexer_get(TestStruct::get_field)
       .register_indexer_set(TestStruct::set_field);
 
-let result = engine.eval::&lt;i64&gt;(r#&quot;
-                let a = new_ts();
-                a[&quot;xyz&quot;] = 42;          // these indexers use strings
-                a[&quot;xyz&quot;]                // as the index type
-             &quot;#)?;
+let result = engine.eval::&lt;i64&gt;(
+r#&quot;
+    let a = new_ts();
+    a[&quot;xyz&quot;] = 42;                  // these indexers use strings
+    a[&quot;xyz&quot;]                        // as the index type
+&quot;#)?;
 
-println!(&quot;Answer: {}&quot;, result);         // prints 42
+println!(&quot;Answer: {}&quot;, result);     // prints 42
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="indexer-as-property-access-fallback"><a class="header" href="#indexer-as-property-access-fallback">Indexer as Property Access Fallback</a></h2>
@@ -2054,6 +2076,18 @@ println!(&quot;Answer: {}&quot;, result);         // prints 42
 <a href="rust//book/rust/getters-setters.html">getters/setters</a>.</p>
 <p>During a property access, if the appropriate property <a href="rust//book/rust/getters-setters.html">getter/setter</a> is not
 defined, an indexer is called and passed the string name of the property.</p>
+<p>This is also extremely useful as a short-hand for indexers, when the <a href="rust//book/language/strings-chars.html">string</a> keys conform to
+property name syntax.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// You can write this...
+let x = foo[&quot;hello_world&quot;];
+
+// but it is easier with this...
+let x = foo.hello_world;
+<span class="boring">}
+</span></code></pre></pre>
 <p>The reverse, however, is not true – when an indexer fails or doesn’t exist, the corresponding
 property <a href="rust//book/rust/getters-setters.html">getter/setter</a>, if any, is not called.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -2108,14 +2142,13 @@ taking a <code>&amp;mut</code> first argument.</p>
 engine.register_fn(&quot;foo&quot;, TestStruct::foo);
 
 let result = engine.eval::&lt;i64&gt;(
-    &quot;
-        let x = new_ts();
-        foo(x);                         // normal call to 'foo'
-        x.foo()                         // 'foo' can also be called like a method on 'x'
-    &quot;
-)?;
+&quot;
+    let x = new_ts();
+    foo(x);                         // normal call to 'foo'
+    x.foo()                         // 'foo' can also be called like a method on 'x'
+&quot;)?;
 
-println!(&quot;result: {}&quot;, result);         // prints 1
+println!(&quot;result: {}&quot;, result);     // prints 1
 <span class="boring">}
 </span></code></pre></pre>
 <p>Under <a href="rust//book/start/features.html"><code>no_object</code></a>, however, the <em>method-call</em> style is no longer supported.</p>
@@ -2283,7 +2316,7 @@ which converts a normal Rust module into a Rhai <a href="rust/modules//book/rust
 <p>Manually creating a <a href="rust/modules//book/rust/modules/index.html">module</a> is possible via the <code>Module</code> public API, which is volatile and may
 change from time to time.</p>
 <p>For the complete <code>Module</code> public API, refer to the
-<a href="https://docs.rs/rhai/0.20.2/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/0.20.3/rhai/struct.Module.html">documentation</a> online.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <p>A <a href="rust/modules//book/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="rust/modules//book/engine/compile.html"><code>AST</code></a>) containing global <a href="rust/modules//book/language/variables.html">variables</a>,
@@ -2318,7 +2351,8 @@ other than non-<a href="rust/modules//book/language/modules/export.html"><code>p
 let engine = Engine::new();
 
 // Compile a script into an 'AST'
-let ast = engine.compile(r#&quot;
+let ast = engine.compile(
+r#&quot;
     // Functions become module functions
     fn calc(x) {
         x + 1
@@ -2490,10 +2524,18 @@ let mut engine = Engine::new();
 engine.set_module_resolver(resolver);
 
 // Use namespace-qualified variables
-engine.eval::&lt;i64&gt;(r#&quot;import &quot;question&quot; as q; q::answer + 1&quot;#)? == 42;
+engine.eval::&lt;i64&gt;(
+r#&quot;
+    import &quot;question&quot; as q;
+    q::answer + 1
+&quot;#)? == 42;
 
 // Call namespace-qualified functions
-engine.eval::&lt;i64&gt;(r#&quot;import &quot;question&quot; as q; q::inc(q::answer)&quot;#)? == 42;
+engine.eval::&lt;i64&gt;(
+r#&quot;
+    import &quot;question&quot; as q;
+    q::inc(q::answer)
+&quot;#)? == 42;
 <span class="boring">}
 </span></code></pre></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="module-resolvers"><a class="header" href="#module-resolvers">Module Resolvers</a></h1>
@@ -2695,23 +2737,26 @@ impl ModuleResolver for MyModuleResolver {
     // Only required function.
     fn resolve(
         &amp;self,
-        engine: &amp;Engine,                    // reference to the current 'Engine'
-        source_path: Option&lt;&amp;str&gt;,          // path of the parent module
-        path: &amp;str,                         // the module path
-        pos: Position,                      // position of the 'import' statement
+        engine: &amp;Engine,                        // reference to the current 'Engine'
+        source_path: Option&lt;&amp;str&gt;,              // path of the parent module
+        path: &amp;str,                             // the module path
+        pos: Position,                          // position of the 'import' statement
     ) -&gt; Result&lt;Rc&lt;Module&gt;, Box&lt;EvalAltResult&gt;&gt; {
         // Check module path.
         if is_valid_module_path(path) {
-            let mut my_module =
-                load_secret_module(path)    // load the custom module
-                    .map_err(|err|
-                        // Return EvalAltResult::ErrorInModule upon loading error
-                        EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into()
-                    )?;
-            my_module.build_index();        // index it
-            Rc::new(my_module)              // make it shared
+            // Load the custom module
+            match load_secret_module(path) {
+                Ok(my_module) =&gt; {
+                    my_module.build_index();    // index it
+                    Rc::new(my_module)          // make it shared
+                },
+                // Return 'EvalAltResult::ErrorInModule' upon loading error
+                Err(err) =&gt; Err(
+                    EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into()
+                )
+            }
         } else {
-            // Return EvalAltResult::ErrorModuleNotFound if the path is invalid
+            // Return 'EvalAltResult::ErrorModuleNotFound' if the path is invalid
             Err(EvalAltResult::ErrorModuleNotFound(path.into(), pos).into())
         }
     }
@@ -2722,7 +2767,8 @@ let mut engine = Engine::new();
 // Set the custom module resolver into the 'Engine'.
 engine.set_module_resolver(MyModuleResolver {});
 
-engine.consume(r#&quot;
+engine.consume(
+r#&quot;
     import &quot;hello&quot; as foo;  // this 'import' statement will call
                             // 'MyModuleResolver::resolve' with &quot;hello&quot; as 'path'
     foo:bar();
@@ -3732,8 +3778,8 @@ is different from that of the <a href="language//book/language/type-of.html"><co
 <tr><td><code>as_decimal</code></td><td align="center">non-<a href="language//book/start/features.html"><code>decimal</code></a></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Result&lt;Decimal, &amp;str&gt;</code></a></td></tr>
 <tr><td><code>as_bool</code></td><td align="center"></td><td align="center"><code>Result&lt;bool, &amp;str&gt;</code></td></tr>
 <tr><td><code>as_char</code></td><td align="center"></td><td align="center"><code>Result&lt;char, &amp;str&gt;</code></td></tr>
-<tr><td><code>take_string</code></td><td align="center"></td><td align="center"><code>Result&lt;String, &amp;str&gt;</code></td></tr>
-<tr><td><code>take_immutable_string</code></td><td align="center"></td><td align="center"><a href="language//book/rust/immutable-string.html"><code>Result&lt;ImmutableString, &amp;str&gt;</code></a></td></tr>
+<tr><td><code>as_string</code></td><td align="center"></td><td align="center"><code>Result&lt;String, &amp;str&gt;</code></td></tr>
+<tr><td><code>as_immutable_string</code></td><td align="center"></td><td align="center"><a href="language//book/rust/immutable-string.html"><code>Result&lt;ImmutableString, &amp;str&gt;</code></a></td></tr>
 </tbody></table>
 <h3 id="constructor-traits"><a class="header" href="#constructor-traits">Constructor traits</a></h3>
 <p>The following constructor traits are implemented for <code>Dynamic</code>:</p>
@@ -4069,14 +4115,15 @@ struct MyStruct {
 
 let engine = Engine::new();
 
-let result: Dynamic = engine.eval(r#&quot;
-            #{
-                a: 42,
-                b: [ &quot;hello&quot;, &quot;world&quot; ],
-                c: true,
-                d: #{ x: 123.456, y: 999.0 }
-            }
-        &quot;#)?;
+let result: Dynamic = engine.eval(
+r#&quot;
+<span class="boring">    {
+</span>        a: 42,
+        b: [ &quot;hello&quot;, &quot;world&quot; ],
+        c: true,
+        d: #{ x: 123.456, y: 999.0 }
+    }
+&quot;#)?;
 
 // Convert the 'Dynamic' object map into 'MyStruct'
 let x: MyStruct = from_dynamic(&amp;result)?;
@@ -4096,6 +4143,7 @@ but it does not provide the same level of correctness, nor are there any configu
 <h2 id="integers"><a class="header" href="#integers">Integers</a></h2>
 <p>Integer numbers follow C-style format with support for decimal, binary (<code>0b</code>), octal (<code>0o</code>) and hex (<code>0x</code>) notations.</p>
 <p>The default system integer type (also aliased to <code>INT</code>) is <code>i64</code>. It can be turned into <code>i32</code> via the <a href="language//book/start/features.html"><code>only_i32</code></a> feature.</p>
+<p>Integers can also be conveniently manipulated as <a href="language//book/language/bit-fields.html">bit-fields</a>.</p>
 <h2 id="floating-point-numbers"><a class="header" href="#floating-point-numbers">Floating-Point Numbers</a></h2>
 <p>Floating-point numbers are also supported if not disabled with <a href="language//book/start/features.html"><code>no_float</code></a>.</p>
 <p>Both decimal and scientific notations can be used.</p>
@@ -4270,8 +4318,8 @@ operate on integers only:</p>
 </tbody></table>
 <h2 id="floating-point-functions"><a class="header" href="#floating-point-functions">Floating-Point Functions</a></h2>
 <p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>)
-operate on <code>f64</code> only (<code>f32</code> under <a href="language//book/start/features.html"><code>f32_float</code></a>):</p>
-<table><thead><tr><th>Category</th><th align="center">Supports Decimal</th><th>Functions</th></tr></thead><tbody>
+operate on <code>f64</code> (<code>f32</code> under <a href="language//book/start/features.html"><code>f32_float</code></a>) and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="language//book/start/features.html"><code>decimal</code></a>) only:</p>
+<table><thead><tr><th>Category</th><th align="center">Supports <code>Decimal</code></th><th>Functions</th></tr></thead><tbody>
 <tr><td>Trigonometry</td><td align="center">no</td><td><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians, <code>hypot(</code><em>x</em><code>,</code><em>y</em><code>)</code></td></tr>
 <tr><td>Arc-trigonometry</td><td align="center">no</td><td><code>asin</code>, <code>acos</code>, <code>atan(</code><em>v</em><code>)</code>, <code>atan(</code><em>x</em><code>,</code><em>y</em><code>)</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code> in radians</td></tr>
 <tr><td>Square root</td><td align="center">yes</td><td><code>sqrt</code></td></tr>
@@ -4279,11 +4327,11 @@ operate on <code>f64</code> only (<code>f32</code> under <a href="language//book
 <tr><td>Logarithmic</td><td align="center">yes</td><td><code>ln</code> (base <em>e</em>)</td></tr>
 <tr><td>Logarithmic</td><td align="center">no</td><td><code>log(</code><em>x</em><code>)</code> in base 10, <code>log(</code><em>x</em><code>,</code><em>base</em><code>)</code></td></tr>
 <tr><td>Rounding</td><td align="center">yes</td><td><code>floor</code>, <code>ceiling</code>, <code>round</code>, <code>int</code>, <code>fraction</code> methods and properties</td></tr>
-<tr><td>Conversion</td><td align="center">yes</td><td><a href="language//book/language/convert.html"><code>to_int</code></a>, <a href="language//book/language/convert.html"><code>to_decimal</code></a> (requires <a href="language//book/start/features.html"><code>decimal</code></a>)</td></tr>
+<tr><td>Conversion</td><td align="center">yes</td><td><a href="language//book/language/convert.html"><code>to_int</code></a>, <a href="language//book/language/convert.html"><code>to_decimal</code></a> (requires <a href="language//book/start/features.html"><code>decimal</code></a>), <a href="language//book/language/convert.html"><code>to_float</code></a> (not under <a href="language//book/start/features.html"><code>no_float</code></a>)</td></tr>
 <tr><td>Conversion</td><td align="center">no</td><td><code>to_degrees</code>, <code>to_radians</code></td></tr>
 <tr><td>Testing</td><td align="center">no</td><td><code>is_nan</code>, <code>is_finite</code>, <code>is_infinite</code> methods and properties</td></tr>
 </tbody></table>
-<h2 id="decimal-rounding"><a class="header" href="#decimal-rounding">Decimal Rounding</a></h2>
+<h2 id="rounding-functions"><a class="header" href="#rounding-functions">Rounding Functions</a></h2>
 <p>The following rounding methods (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>)
 operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only, which requires the <a href="language//book/start/features.html"><code>decimal</code></a> feature:</p>
 <table><thead><tr><th>Rounding type</th><th>Behavior</th><th>Methods</th></tr></thead><tbody>
@@ -4303,6 +4351,16 @@ parse numbers:</p>
 <tr><td><a href="language//book/language/convert.html"><code>parse_float</code></a></td><td align="center"><a href="language//book/start/features.html"><code>no_float</code></a></td><td>converts a <a href="language//book/language/strings-chars.html">string</a> to <code>FLOAT</code></td></tr>
 <tr><td><a href="language//book/language/convert.html"><code>parse_decimal</code></a></td><td align="center">non-<a href="language//book/start/features.html"><code>decimal</code></a></td><td>converts a <a href="language//book/language/strings-chars.html">string</a> to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
+<h2 id="formatting-functions"><a class="header" href="#formatting-functions">Formatting Functions</a></h2>
+<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>BasicStringPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>)
+convert integer numbers into a <a href="language//book/language/strings-chars.html">string</a> of hex, octal or binary representations:</p>
+<table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="language//book/language/convert.html"><code>to_binary</code></a></td><td>converts an integer number to binary</td></tr>
+<tr><td><a href="language//book/language/convert.html"><code>to_octal</code></a></td><td>converts an integer number to octal</td></tr>
+<tr><td><a href="language//book/language/convert.html"><code>to_hex</code></a></td><td>converts an integer number to hex</td></tr>
+</tbody></table>
+<p>These formatting functions are defined for all available integer numbers – i.e. <code>INT</code>, <code>u8</code>, <code>i8</code>,
+<code>u16</code>, <code>i16</code>, <code>u32</code>, <code>i32</code>, <code>u64</code>, <code>i64</code>, <code>u128</code> and <code>i128</code> unless disabled by feature flags.</p>
 <h2 id="constants"><a class="header" href="#constants">Constants</a></h2>
 <p>The following functions return standard mathematical constants:</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
@@ -4366,6 +4424,87 @@ hex == 0xab;
 type_of(hex) == &quot;i64&quot;;
 <span class="boring">}
 </span></code></pre></pre>
+<h2 id="formatting-numbers"><a class="header" href="#formatting-numbers">Formatting Numbers</a></h2>
+<p>The <code>to_binary</code> function converts an integer number to a <a href="language//book/language/strings-chars.html">string</a> in binary (i.e. only <code>1</code> and <code>0</code>).</p>
+<p>The <code>to_octal</code> function converts an integer number to a <a href="language//book/language/strings-chars.html">string</a> in octal (i.e. from <code>0</code> to <code>7</code>).</p>
+<p>The <code>to_hex</code> function converts an integer number to a <a href="language//book/language/strings-chars.html">string</a> in hex.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let x = 0x1234abcd;
+
+x == 305441741;
+
+x.to_string() == &quot;305441741&quot;;
+
+x.to_binary() == &quot;10010001101001010101111001101&quot;;
+
+x.to_octal() == &quot;2215125715&quot;;
+
+x.to_hex() == &quot;1234abcd&quot;;
+<span class="boring">}
+</span></code></pre></pre>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="integer-as-bit-fields"><a class="header" href="#integer-as-bit-fields">Integer as Bit-Fields</a></h1>
+<p>Since bit-wise operators are defined on integer numbers, individual bits can also be accessed and
+manipulated via an indexing syntax.</p>
+<p>If a bit is set (i.e. <code>1</code>), the index access returns <code>true</code>.
+If a bit is not set (i.e. <code>0</code>), the index access returns <code>false</code>.</p>
+<p>There is nothing here that cannot be done via standard bit-manipulation (i.e. shifting and masking)
+operations. However, this is an extremely useful, and performant, short-hand since it usually
+replaces a sequence of multiple steps.</p>
+<p>Indexing an integer as a bit-field is disabled via the <a href="language//book/start/features.html"><code>no_index</code></a> feature.</p>
+<h2 id="from-least-significant-bit-lsb"><a class="header" href="#from-least-significant-bit-lsb">From Least-Significant Bit (LSB)</a></h2>
+<p>Bits in a bit-field are accessed with zero-based, non-negative integer indices:</p>
+<blockquote>
+<p><em>integer</em> <code>[</code> <em>index from 0 to 63 or 31</em> <code>]</code></p>
+<p><em>integer</em> <code>[</code> <em>index from 0 to 63 or 31</em> <code>] =</code> <em>new value</em> ;</p>
+</blockquote>
+<p>The maximum bit number that can be accessed is 63 (or 31 under <a href="language//book/start/features.html"><code>only_i32</code></a>).</p>
+<h2 id="from-most-significant-bit-msb"><a class="header" href="#from-most-significant-bit-msb">From Most-Significant Bit (MSB)</a></h2>
+<p>A <em>negative</em> index accesses a bit in the bit-field counting from the <em>end</em>, or from the
+<em>most-significant bit</em>, with −1 being the <em>highest</em> bit.</p>
+<blockquote>
+<p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>]</code></p>
+<p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>] =</code> <em>new value</em> ;</p>
+</blockquote>
+<p>The maximum bit number that can be accessed is −64 (or −32 under <a href="language//book/start/features.html"><code>only_i32</code></a>).</p>
+<h2 id="bit-field-functions"><a class="header" href="#bit-field-functions">Bit-Field Functions</a></h2>
+<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>LogicPackage</code></a> but excluded if
+using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields:</p>
+<table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>get_bit</code></td><td>bit number, counting from MSB if &lt; 0</td><td>returns the state of a bit: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td></tr>
+<tr><td><code>set_bit</code></td><td>1) bit number, counting from MSB if &lt; 0<br/>2) new state: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td><td>sets the state of a bit</td></tr>
+<tr><td><code>get_bits</code></td><td>1) starting bit number, counting from MSB if &lt; 0<br/>2) number of bits to extract, none if &lt; 1, to MSB if ≥ <em>length</em></td><td>extracts a number of bits, shifted towards LSB</td></tr>
+<tr><td><code>set_bits</code></td><td>1) starting bit number, counting from MSB if &lt; 0<br/>2) number of bits to set, none if &lt; 1, to MSB if ≥ <em>length</em><br/>3) new value</td><td>sets a number of bits from the new value</td></tr>
+<tr><td><code>bits</code></td><td>1) <em>(optional)</em> starting bit number, counting from MSB if &lt; 0<br/>2) <em>(optional)</em> number of bits to extract, none if &lt; 1, to MSB if ≥ <em>length</em></td><td>allows iteration over the bits of a bit-field</td></tr>
+</tbody></table>
+<h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
+<pre><code class="language-js no_run">// Assume the following bits fields in a single 16-bit word:
+//
+// +---------+-------+-----------------+------------+
+// |   0-2   |   3   |      4-11       |    12-15   |
+// +---------+-------+-----------------+------------+
+// | Command | Flag  |    0-255 data   |   0 0 0 0  |
+// +---------+-------+-----------------+------------+
+
+let value = read_from_hw_register(42);
+
+let command = value.get_bits(0, 3);         // Command = bits 0-2
+let flag = value[3];                        // Flag = bit 3
+let data = value.get_bits(4, 8);            // Data = bits 4-11
+let reserved = value.get_bits(-4);          // Reserved = last 4 bits
+
+if reserved != 0 {
+    throw reserved;
+}
+
+switch command {
+    0 =&gt; print(`Data = ${data}`),
+    1 =&gt; value.set_bits(4, 8, data / 2),
+    2 =&gt; value[3] = !flag,
+    _ =&gt; print(`Unknown: ${command}`)
+}
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="strings-and-characters"><a class="header" href="#strings-and-characters">Strings and Characters</a></h1>
 <p>String in Rhai contain any text sequence of valid Unicode characters.
 Internally strings are stored in UTF-8 encoding.</p>
@@ -4600,7 +4739,7 @@ other scripting languages.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="built-in-string-functions"><a class="header" href="#built-in-string-functions">Built-in String Functions</a></h1>
 <h2 id="standard-functions"><a class="header" href="#standard-functions">Standard Functions</a></h2>
 <p>The following standard methods (mostly defined in the <a href="language//book/rust/packages/index.html"><code>MoreStringPackage</code></a> but excluded if
-using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on <a href="language//book/language/strings-chars.html">strings</a>:</p>
+using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on <a href="language//book/language/strings-chars.html">strings</a> (and possibly characters):</p>
 <table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>len</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of characters (<strong>not</strong> number of bytes) in the string</td></tr>
 <tr><td><code>bytes</code> method and property</td><td align="center"></td><td><em>none</em></td><td>returns the number of bytes making up the UTF-8 string; for strings containing only ASCII characters, this is much faster than <code>len</code></td></tr>
@@ -4609,6 +4748,10 @@ using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) op
 <tr><td><code>remove</code></td><td align="center"></td><td>character/string to remove</td><td>removes a character or a string from the string</td></tr>
 <tr><td><code>clear</code></td><td align="center"></td><td><em>none</em></td><td>empties the string</td></tr>
 <tr><td><code>truncate</code></td><td align="center"></td><td>target length</td><td>cuts off the string at exactly a specified number of characters</td></tr>
+<tr><td><code>to_upper</code></td><td align="center"></td><td><em>none</em></td><td>converts the string/character into upper-case as a new string/character and returns it</td></tr>
+<tr><td><code>to_lower</code></td><td align="center"></td><td><em>none</em></td><td>converts the string/character into lower-case as a new string/character and returns it</td></tr>
+<tr><td><code>make_upper</code></td><td align="center"></td><td><em>none</em></td><td>converts the string/character into upper-case</td></tr>
+<tr><td><code>make_lower</code></td><td align="center"></td><td><em>none</em></td><td>converts the string/character into lower-case</td></tr>
 <tr><td><code>contains</code></td><td align="center"></td><td>character/sub-string to search for</td><td>checks if a certain character or sub-string occurs in the string</td></tr>
 <tr><td><code>index_of</code></td><td align="center"></td><td>1) character/sub-string to search for<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index that a certain character or sub-string occurs in the string, or −1 if not found</td></tr>
 <tr><td><code>sub_string</code></td><td align="center"></td><td>1) start index, counting from end if &lt; 0<br/>2) <em>(optional)</em> number of characters to extract, none if &lt; 0</td><td>extracts a sub-string (to the end of the string if length is not specified)</td></tr>
@@ -4619,6 +4762,7 @@ using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) op
 <tr><td><code>crop</code></td><td align="center"></td><td>1) start index, counting from end if &lt; 0<br/>2) <em>(optional)</em> number of characters to retain, none if &lt; 0</td><td>retains only a portion of the string</td></tr>
 <tr><td><code>replace</code></td><td align="center"></td><td>1) target character/sub-string<br/>2) replacement character/string</td><td>replaces a sub-string with another</td></tr>
 <tr><td><code>trim</code></td><td align="center"></td><td><em>none</em></td><td>trims the string of whitespace at the beginning and end</td></tr>
+<tr><td><code>chars</code></td><td align="center"></td><td>1) <em>(optional)</em> start index, counting from end if &lt; 0<br/>2) <em>(optional)</em> number of characters to iterate, none if &lt; 0</td><td>allows iteration of the characters inside the string</td></tr>
 </tbody></table>
 <p>Beware that functions that involve indexing into a <a href="language//book/language/strings-chars.html">string</a> to get at individual <a href="language//book/language/strings-chars.html">characters</a>,
 e.g. <code>sub_string</code>, require walking through the entire UTF-8 encoded bytes stream to extract
@@ -5060,8 +5204,7 @@ let json = r#&quot;{
                 &quot;$d e f!&quot;: &quot;hello&quot;,     // &lt;- any text can be a property name
                 &quot;^^^!!!&quot;: [1,42,&quot;999&quot;], // &lt;- value can be array or another hash
                 &quot;z&quot;: null               // &lt;- JSON 'null' value
-              }
-&quot;#;
+              }&quot;#;
 
 // Parse the JSON expression as an object map
 // Set the second boolean parameter to true in order to map 'null' to '()'
@@ -5941,39 +6084,69 @@ there is no way for the loop to stop iterating.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="for-loop"><a class="header" href="#for-loop"><code>for</code> Loop</a></h1>
 <p>Iterating through a range or an <a href="language//book/language/arrays.html">array</a>, or any type with a registered <a href="language//book/language/iterator.html">type iterator</a>,
 is provided by the <code>for</code> ... <code>in</code> loop.</p>
+<p>There are two alternative syntaxes, one including a counter variable:</p>
+<blockquote>
+<p><code>for</code> <em>variable-name</em> <code>in</code> <em>expression</em> <code>{</code> ... <code>}</code></p>
+<p><code>for (</code> <em>variable-name</em> <code>,</code> <em>counter-variable-name</em> <code>) in</code> <em>expression</em> <code>{</code> ... <code>}</code></p>
+</blockquote>
+<h2 id="counter-variable"><a class="header" href="#counter-variable">Counter Variable</a></h2>
+<p>The counter variable, if specified, starts from zero, incrementing upwards.</p>
+<pre><code class="language-js no_run">let a = [42, 123, 999, 0, true, &quot;hello&quot;, &quot;world!&quot;, 987.6543];
+
+// Loop through the array
+for (item, count) in a {
+    if x.type_of() == &quot;string&quot; {
+        continue;                   // skip to the next iteration
+    }
+
+    // 'item' contains a copy of each element during each iteration
+    // 'count' increments (starting from zero) for each iteration
+    print(`Item #${count + 1} = ${item}`);
+
+    if x == 42 { break; }           // break out of for loop
+}
+</code></pre>
+<h2 id="break-or-continue"><a class="header" href="#break-or-continue">Break or Continue</a></h2>
 <p>Like C, <code>continue</code> can be used to skip to the next iteration, by-passing all following statements;
 <code>break</code> can be used to break out of the loop unconditionally.</p>
-<p>To loop through a number sequence (with or without steps), use the <code>range</code> function to
-return a numeric iterator.</p>
-<h2 id="iterate-through-strings"><a class="header" href="#iterate-through-strings">Iterate Through Strings</a></h2>
-<p>Iterating through a <a href="language//book/language/strings-chars.html">string</a> yields characters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let s = &quot;hello, world!&quot;;
-
-for ch in s {
-    if ch &gt; 'z' { continue; }   // skip to the next iteration
-
-    print(ch);
-
-    if x == '@' { break; }      // break out of for loop
-}
-<span class="boring">}
-</span></code></pre></pre>
 <h2 id="iterate-through-arrays"><a class="header" href="#iterate-through-arrays">Iterate Through Arrays</a></h2>
 <p>Iterating through an <a href="language//book/language/arrays.html">array</a> yields cloned <em>copies</em> of each element.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let array = [1, 3, 5, 7, 9, 42];
+</span>let a = [1, 3, 5, 7, 9, 42];
 
-for x in array {
-    if x &gt; 10 { continue; }     // skip to the next iteration
+// Loop through the array
+for x in a {
+    if x &gt; 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="iterate-through-strings"><a class="header" href="#iterate-through-strings">Iterate Through Strings</a></h2>
+<p>The <code>chars</code> method allows iterating through a <a href="language//book/language/strings-chars.html">string</a>, yielding characters.</p>
+<p><code>chars</code> optionally accepts the character to start from (counting from the end if negative), as well
+as the number of characters to iterate (defaults all).</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = &quot;hello, world!&quot;;
+
+// Iterate through all the characters.
+for ch in s.chars() {
+    print(ch);
+}
+
+// Iterate starting from the 3rd character and stopping at the 7th.
+for ch in s.chars(2, 5) {
+    if ch &gt; 'z' { continue; }       // skip to the next iteration
+
+    print(ch);
+
+    if x == '@' { break; }          // break out of for loop
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -5983,44 +6156,67 @@ for x in array {
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// Iterate starting from 0 and stopping at 49.
-// The step is assumed to be 1 when omitted for integers.
+</span>// Iterate starting from 0 and stopping at 49
+// The step is assumed to be 1 when omitted for integers
 for x in range(0, 50) {
-    if x &gt; 10 { continue; }     // skip to the next iteration
+    if x &gt; 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
-// The 'range' function also takes a step.
-for x in range(0, 50, 3) {      // step by 3
-    if x &gt; 10 { continue; }     // skip to the next iteration
+// The 'range' function also takes a step
+for x in range(0, 50, 3) {          // step by 3
+    if x &gt; 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
-// The 'range' function can also step backwards.
-for x in range(50, 0, -3) {     // step down by -3
-    if x &lt; 10 { continue; }     // skip to the next iteration
+// The 'range' function can also step backwards
+for x in range(50, 0, -3) {         // step down by -3
+    if x &lt; 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
-// It works also for floating-point numbers.
-for x in range(5.0,0.0,-2.0) {  // step down by -2.0
-    if x &lt; 10 { continue; }     // skip to the next iteration
+// It works also for floating-point numbers
+for x in range(5.0,0.0,-2.0) {      // step down by -2.0
+    if x &lt; 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 4.2 { break; }      // break out of for loop
+    if x == 4.2 { break; }          // break out of for loop
 }
 <span class="boring">}
 </span></code></pre></pre>
+<h2 id="iterate-through-bit-fields"><a class="header" href="#iterate-through-bit-fields">Iterate Through Bit-Fields</a></h2>
+<p>The <code>bits</code> function allows iterating through an integer as a <a href="language//book/language/bit-fields.html">bit-field</a>.</p>
+<p><code>bits</code> optionally accepts the bit number to start from (counting from the most-significant-bit if
+negative), as well as the number of bits to iterate (defaults all).</p>
+<pre><code class="language-js no_run">let x = 0b_1001110010_1101100010_1100010100;
+let num_on = 0;
+
+// Iterate through all the bits
+for bit in x.bits() {
+    if bit { num_on += 1; }
+}
+
+print(`There are ${num_on} bits turned on!`);
+
+const START = 3;
+
+// Iterate through all the bits from 3 through 12
+for (bit, index) in x.bits(START, 10) {
+    print(`Bit #${index} is ${if bit { &quot;ON&quot; } else { &quot;OFF&quot; }}!`);
+
+    if index &gt;= 7 { break; }        // break out of for loop
+}
+</code></pre>
 <h2 id="iterate-through-object-maps"><a class="header" href="#iterate-through-object-maps">Iterate Through Object Maps</a></h2>
 <p>Two methods, <code>keys</code> and <code>values</code>, return <a href="language//book/language/arrays.html">arrays</a> containing cloned <em>copies</em>
 of all property names and values of an <a href="language//book/language/object-maps.html">object map</a>, respectively.</p>
@@ -6032,11 +6228,11 @@ of all property names and values of an <a href="language//book/language/object-m
 
 // Property names are returned in unsorted, random order
 for x in map.keys() {
-    if x &gt; 10 { continue; }     // skip to the next iteration
+    if x &gt; 10 { continue; }         // skip to the next iteration
 
     print(x);
 
-    if x == 42 { break; }       // break out of for loop
+    if x == 42 { break; }           // break out of for loop
 }
 
 // Property values are returned in unsorted, random order
@@ -6119,7 +6315,8 @@ captured by <code>value</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let result = engine.eval::&lt;i64&gt;(r#&quot;
+</span>let result = engine.eval::&lt;i64&gt;(
+r#&quot;
     let x = 42;
 
     if x &gt; 0 {
@@ -6523,7 +6720,8 @@ This aspect is very similar to JavaScript before ES6 modules.</p>
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Compile a script into AST
-let ast1 = engine.compile(r#&quot;
+let ast1 = engine.compile(
+r#&quot;
     fn get_message() {
         &quot;Hello!&quot;                // greeting message
     }
@@ -6766,8 +6964,8 @@ of the particular call to a registered Rust function. It is a type that exposes 
 <tr><td><code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td><code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="language//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
 <tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="language//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="language//book/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="language//book/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
-<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="language//book/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="language//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="language//book/language/fn-namespaces.html">namespaces</a> (as <a href="language//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="language//book/language/functions.html">functions</a></td></tr>
+<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="language//book/language/fn-namespaces.html">namespaces</a> (as <a href="language//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="language//book/language/functions.html">functions</a>; requires the <a href="language//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <p>This type is normally provided by the <a href="language//book/engine/hello-world.html"><code>Engine</code></a> (e.g. when using <a href="language/../rust/register-raw.html"><code>Engine::register_fn_raw</code></a>).
@@ -6780,7 +6978,8 @@ However, it may also be manually constructed from a tuple:</p>
 let engine = Engine::new();
 
 // Compile script to AST
-let mut ast = engine.compile(r#&quot;
+let mut ast = engine.compile(
+r#&quot;
     let test = &quot;hello&quot;;
     |x| test + x            // this creates a closure
 &quot;#)?;
@@ -7903,16 +8102,16 @@ but the possibility is always there.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let x = create_some_very_big_type();
+</span>let big = create_some_very_big_type();
 
-x = x + 1;
-//  ^ 'x' is cloned here
+big = big + 1;
+//    ^ 'big' is cloned here
 
 // The above is equivalent to:
-let temp_value = x + 1;
-x = temp_value;
+let temp_value = big + 1;
+big = temp_value;
 
-x += 1;             // &lt;- 'x' is NOT cloned
+big += 1;           // &lt;- 'big' is NOT cloned
 <span class="boring">}
 </span></code></pre></pre>
 <p>The script optimizer rewrites normal expressions into <em>op-assignment</em> style wherever possible.</p>
@@ -7935,32 +8134,23 @@ x[y] + 1;           // ... than this
 so whether they are optimized away depends on the situation:</p>
 <ul>
 <li>
-<p>If the operands are not <em>constant</em> values, it is not optimized.</p>
+<p>If the operands are not <a href="engine/optimize//book/language/constants.html">constant</a> values, it is not optimized.</p>
 </li>
 <li>
 <p>If the operator is <a href="engine/optimize//book/rust/operators.html">overloaded</a>, it is not optimized because the overloading
 function may not be <em>pure</em> (i.e. may cause side-effects when called).</p>
 </li>
 <li>
-<p>If the operator is not <em>binary</em>, it is not optimized. Only binary operators are built-in to Rhai.</p>
-</li>
-<li>
-<p>If the operands are not of the same type, it is not optimized.</p>
-</li>
-<li>
 <p>If the operator is not <em>built-in</em> (see list of <a href="engine/optimize//book/engine/builtin.html">built-in operators</a>), it is not optimized.</p>
 </li>
 <li>
-<p>If the operator is a binary built-in operator for a <a href="engine/optimize//book/language/values-and-types.html">standard type</a>, it is called
-and replaced by a constant result.</p>
+<p>If the operator is a <a href="engine/optimize//book/engine/builtin.html">built-in operator</a> for a <a href="engine/optimize//book/language/values-and-types.html">standard type</a>,
+it is called and replaced by a <a href="engine/optimize//book/language/constants.html">constant</a> result.</p>
 </li>
 </ul>
 <p>Rhai guarantees that no external function will be run (in order not to trigger side-effects) during the
 optimization process (unless the optimization level is set to <a href="engine/optimize//book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>).</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The following is most likely generated by machine.
+<pre><code class="language-js no_run">// The following is most likely generated by machine.
 
 const DECISION = 1;             // this is an integer, one of the standard types
 
@@ -7973,16 +8163,24 @@ if DECISION == 1 {              // this is optimized into 'true'
 } else {
     :
 }
-<span class="boring">}
-</span></code></pre></pre>
-<p>Because of the eager evaluation of operators for <a href="engine/optimize//book/language/values-and-types.html">standard types</a>, many constant expressions will be evaluated
-and replaced by the result.</p>
+
+// Or an equivalent using 'switch':
+
+switch DECISION {
+    1 =&gt; ...,                   // this statement is promoted
+    2 =&gt; ...,                   // this statement is eliminated
+    3 =&gt; ...,                   // this statement is eliminated
+    _ =&gt; ...                    // this statement is eliminated
+}
+</code></pre>
+<p>Because of the eager evaluation of <a href="engine/optimize//book/engine/builtin.html">operators</a> for <a href="engine/optimize//book/language/values-and-types.html">standard types</a>, many
+<a href="engine/optimize//book/language/constants.html">constant</a> expressions will be evaluated and replaced by the result.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let x = (1+2) * 3-4 / 5%6;      // will be replaced by 'let x = 9'
+</span>let x = (1+2)*3-4/5%6;          // will be replaced by 'let x = 9'
 
-let y = (1 &gt; 2) || (3 &lt; =4);    // will be replaced by 'let y = true'
+let y = (1 &gt; 2) || (3 &lt;= 4);    // will be replaced by 'let y = true'
 <span class="boring">}
 </span></code></pre></pre>
 <p>For operators that are not optimized away due to one of the above reasons, the function calls
@@ -8017,18 +8215,19 @@ if DECISION == 1 {              // NOT optimized away because the operator is no
 </li>
 <li>
 <p><code>Simple</code> (default) performs only relatively <em>safe</em> optimizations without causing side-effects
-(i.e. it only relies on static analysis and <a href="engine/optimize//book/engine/builtin.html">built-in operators</a> for constant <a href="engine/optimize//book/language/values-and-types.html">standard types</a>,
+(i.e. it only relies on static analysis and <a href="engine/optimize//book/engine/builtin.html">built-in operators</a> for <a href="engine/optimize//book/language/constants.html">constant</a> <a href="engine/optimize//book/language/values-and-types.html">standard types</a>,
 and will not perform any external function calls).</p>
-<p>However, it is important to bear in mind that <em>constants propagation</em> is performed with the
-caveat that, if <a href="engine/optimize//book/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust functions),
-the modified values will not show up in the optimized script.  Only the initialization values
+<p>However, it is important to bear the caveat in mind that, when <em>constants propagation</em> is
+performed, and if the <a href="engine/optimize//book/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust functions),
+the modified values will <em>not</em> show up in the optimized script.  Only the initialization values
 of <a href="engine/optimize//book/language/constants.html">constants</a> are ever retained.</p>
-<p>Furthermore, overriding a <a href="engine/optimize//book/engine/builtin.html">built-in operator</a> in the <a href="engine/optimize//book/engine/hello-world.html"><code>Engine</code></a> afterwards
-has no effect after the optimizer replaces an expression with its calculated value.</p>
+<p>Furthermore, overriding a <a href="engine/optimize//book/engine/builtin.html">built-in operator</a> in the <a href="engine/optimize//book/engine/hello-world.html"><code>Engine</code></a> afterwards has no effect after the
+optimizer replaces an expression with its calculated value.</p>
 </li>
 <li>
-<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on constant arguments to determine their result.
-One benefit to this is that many more optimization opportunities arise, especially with regards to comparison operators.</p>
+<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="engine/optimize//book/language/constants.html">constant</a> arguments
+to determine their results. One benefit to this is that many more optimization opportunities
+arise, especially with regards to comparison operators.</p>
 </li>
 </ul>
 <h2 id="set-optimization-level"><a class="header" href="#set-optimization-level">Set Optimization Level</a></h2>
@@ -8053,25 +8252,25 @@ effectively pruning out unused code sections.</p>
 </span>// Compile master script to AST
 let master_ast = engine.compile(
 &quot;
-    if SCENARIO == 1 {
-        do_work();
-    } else if SCENARIO == 2 {
-        do_something();
-    } else if SCENARIO == 3 {
-        do_something_else();
-    } else {
-        do_nothing();
+    switch SCENARIO {
+        1 =&gt; do_work(),
+        2 =&gt; do_something(),
+        3 =&gt; do_something_else(),
+        _ =&gt; do_nothing()
     }
 &quot;)?;
 
-// Create a new 'Scope' - put constants in it to aid optimization
-let mut scope = Scope::new();
-scope.push_constant(&quot;SCENARIO&quot;, 1_i64);
+for n in 0..5_i64 {
+    // Create a new 'Scope' - put constants in it to aid optimization
+    let mut scope = Scope::new();
+    scope.push_constant(&quot;SCENARIO&quot;, n);
 
-// Re-optimize the AST
-let new_ast = engine.optimize_ast(&amp;scope, master_ast.clone(), OptimizationLevel::Simple);
+    // Re-optimize the AST
+    let new_ast = engine.optimize_ast(&amp;scope, master_ast.clone(), OptimizationLevel::Simple);
 
-// 'new_ast' is essentially: 'do_work()'
+    // Run it
+    engine.consume_ast(&amp;new_ast)?;
+}
 <span class="boring">}
 </span></code></pre></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="eager-function-evaluation-when-using-full-optimization-level"><a class="header" href="#eager-function-evaluation-when-using-full-optimization-level">Eager Function Evaluation When Using Full Optimization Level</a></h1>
@@ -8103,7 +8302,7 @@ which are handled specially) so using <a href="engine/optimize//book/engine/opti
 custom types and functions are registered.</p>
 <p>If custom functions are registered, they <em>may</em> be called (or maybe not, if the calls happen to lie
 within a pruned code block).</p>
-<p>If custom functions are registered to overload built-in operators, they will also be called when
+<p>If custom functions are registered to overload <a href="engine/optimize//book/engine/builtin.html">built-in operators</a>, they will also be called when
 the operators are used (in an <code>if</code> statement, for example), potentially causing side-effects.</p>
 <p>Therefore, the rule-of-thumb is:</p>
 <ul>
@@ -8119,10 +8318,10 @@ when that happens, existing scripts may break in subtle ways.</p>
 <p>Even if a custom function does not mutate state nor cause side-effects, it may still be <em>volatile</em>,
 i.e. it <em>depends</em> on the external environment and is not <em>pure</em>.</p>
 <p>A perfect example is a function that gets the current time – obviously each run will return a different value!</p>
-<p>The optimizer, when using <a href="engine/optimize//book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>, will <em>merrily assume</em> that all functions are <em>pure</em>,
-so when it finds constant arguments (or none) it eagerly executes the function call and replaces it with the result.</p>
+<p>The optimizer, when using <a href="engine/optimize//book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>, <em>merrily assumes</em> that all functions are <em>non-volatile</em>,
+so when it finds <a href="engine/optimize//book/language/constants.html">constant</a> arguments (or none) it eagerly executes the function call and replaces it with the result.</p>
 <p>This causes the script to behave differently from the intended semantics.</p>
-<p>Therefore, <strong>avoid using <a href="engine/optimize//book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a></strong> if non-<em>pure</em> custom types and/or functions are involved.</p>
+<p>Therefore, <strong>avoid using <a href="engine/optimize//book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a></strong> if volatile custom functions are involved.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="subtle-semantic-changes-after-optimization"><a class="header" href="#subtle-semantic-changes-after-optimization">Subtle Semantic Changes After Optimization</a></h1>
 <p>Some optimizations can alter subtle semantics of the script.</p>
 <p>For example:</p>
@@ -8173,7 +8372,7 @@ no side-effects), thus the script silently runs to completion without errors.</p
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.2/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.3/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/engine/compile.html"><code>AST</code></a>:</p>
@@ -8203,16 +8402,18 @@ encapsulated within an <a href="engine//book/engine/compile.html"><code>AST</cod
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// First script
-let ast1 = engine.compile(r#&quot;
-                fn foo(x) { 42 + x }
-                foo(1)
-           &quot;#)?;
+let ast1 = engine.compile(
+&quot;
+     fn foo(x) { 42 + x }
+     foo(1)
+&quot;)?;
 
 // Second script
-let ast2 = engine.compile(r#&quot;
-                fn foo(n) { `hello${n}` }
-                foo(&quot;!&quot;)
-           &quot;#)?;
+let ast2 = engine.compile(
+r#&quot;
+     fn foo(n) { `hello${n}` }
+     foo(&quot;!&quot;)
+&quot;#)?;
 
 // Merge them
 let merged = ast1.merge(&amp;ast2);
@@ -8451,13 +8652,13 @@ engine.register_raw_fn(
 );
 
 let result = engine.eval::&lt;i64&gt;(
-          r#&quot;
-                fn foo(x) { this += x; }    // script-defined function 'foo'
+r#&quot;
+    fn foo(x) { this += x; }        // script-defined function 'foo'
 
-                let x = 41;                 // object
-                x.bar(Fn(&quot;foo&quot;), 1);        // pass 'foo' as function pointer
-                x
-          &quot;#)?;
+    let x = 41;                     // object
+    x.bar(Fn(&quot;foo&quot;), 1);            // pass 'foo' as function pointer
+    x
+&quot;#)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="tldr--why-read_lock-and-write_lock"><a class="header" href="#tldr--why-read_lock-and-write_lock">TL;DR – Why <code>read_lock</code> and <code>write_lock</code></a></h2>
@@ -8567,8 +8768,8 @@ the script is evaluated.</p>
 <tr><td>• <code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td>• <code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
 <tr><td>• <code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="engine//book/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
-<tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="engine//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a></td></tr>
+<tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a>; requires the <a href="engine//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td>• <code>this_ptr()</code></td><td align="center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound [<code>this</code>] pointer, if any</td></tr>
 <tr><td>• <code>call_level()</code></td><td align="center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
 </tbody></table>
@@ -8671,7 +8872,7 @@ engine.compile(&quot;let x = 40 + 2; x += 1;&quot;)?;
 customized operators performing specific logic.</p>
 <p><code>Engine::register_custom_operator</code> registers a keyword as a custom operator, giving it a particular
 <em>precedence</em> (which cannot be zero).</p>
-<h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
+<h2 id="example-6"><a class="header" href="#example-6">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8783,27 +8984,17 @@ obscure language syntax just to do something.</p>
 <p>A custom syntax is simply a list of symbols.</p>
 <p>These symbol types can be used:</p>
 <ul>
-<li>
-<p>Standard <a href="engine//book/appendix/keywords.html">keywords</a></p>
-</li>
-<li>
-<p>Standard <a href="engine//book/appendix/operators.html#operators">operators</a>.</p>
-</li>
-<li>
-<p>Reserved <a href="engine//book/appendix/operators.html#symbols">symbols</a>.</p>
-</li>
-<li>
-<p>Identifiers following the <a href="engine//book/language/variables.html">variable</a> naming rules.</p>
-</li>
-<li>
-<p><code>$expr$</code> – any valid expression, statement or statement block.</p>
-</li>
-<li>
-<p><code>$block$</code> – any valid statement block (i.e. must be enclosed by <code>{</code> .. <code>}</code>).</p>
-</li>
-<li>
-<p><code>$ident$</code> – any <a href="engine//book/language/variables.html">variable</a> name.</p>
-</li>
+<li>Standard <a href="engine//book/appendix/keywords.html">keywords</a></li>
+<li>Standard <a href="engine//book/appendix/operators.html#operators">operators</a>.</li>
+<li>Reserved <a href="engine//book/appendix/operators.html#symbols">symbols</a>.</li>
+<li>Identifiers following the <a href="engine//book/language/variables.html">variable</a> naming rules.</li>
+<li><code>$expr$</code> – any valid expression, statement or statement block.</li>
+<li><code>$block$</code> – any valid statement block (i.e. must be enclosed by <code>{</code> .. <code>}</code>).</li>
+<li><code>$ident$</code> – any <a href="engine//book/language/variables.html">variable</a> name.</li>
+<li><code>$bool$</code> – a boolean value.</li>
+<li><code>$int$</code> – an integer number.</li>
+<li><code>$float$</code> – a floating-point number (if not <a href="engine//book/start/features.html"><code>no_float</code></a>).</li>
+<li><code>$string$</code> – a <a href="engine//book/language/strings-chars.html">string</a> literal.</li>
 </ul>
 <h3 id="the-first-symbol-must-be-an-identifier"><a class="header" href="#the-first-symbol-must-be-an-identifier">The First Symbol Must be an Identifier</a></h3>
 <p>There is no specific limit on the combination and sequencing of each symbol type,
@@ -8815,28 +9006,32 @@ In other words, any valid identifier that is not a <a href="engine//book/appendi
 <p>Rhai uses the <em>first</em> symbol as a clue to parse custom syntax.</p>
 <p>Therefore, at any one time, there can only be <em>one</em> custom syntax starting with each unique symbol.</p>
 <p>Any new custom syntax definition using the same first symbol simply <em>overwrites</em> the previous one.</p>
-<h3 id="example-6"><a class="header" href="#example-6">Example</a></h3>
+<h3 id="example-7"><a class="header" href="#example-7">Example</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>exec $ident$ &lt;- $expr$ : $block$
+</span>exec [ $ident$ ; $int$ ] &lt;- $expr$ : $block$
 <span class="boring">}
 </span></code></pre></pre>
 <p>The above syntax is made up of a stream of symbols:</p>
-<table><thead><tr><th align="center">Position</th><th align="center">Input</th><th align="center">Symbol</th><th>Description</th></tr></thead><tbody>
+<table><thead><tr><th align="center">Position</th><th align="center">Input slot</th><th align="center">Symbol</th><th>Description</th></tr></thead><tbody>
 <tr><td align="center">1</td><td align="center"></td><td align="center"><code>exec</code></td><td>custom keyword</td></tr>
-<tr><td align="center">2</td><td align="center">1</td><td align="center"><code>$ident$</code></td><td>a variable name</td></tr>
-<tr><td align="center">3</td><td align="center"></td><td align="center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="engine//book/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
-<tr><td align="center">4</td><td align="center">2</td><td align="center"><code>$expr$</code></td><td>an expression, which may be enclosed with <code>{</code> .. <code>}</code>, or not.</td></tr>
-<tr><td align="center">5</td><td align="center"></td><td align="center"><code>:</code></td><td>the colon symbol</td></tr>
-<tr><td align="center">6</td><td align="center">3</td><td align="center"><code>$block$</code></td><td>a statement block, which must be enclosed with <code>{</code> .. <code>}</code>.</td></tr>
+<tr><td align="center">2</td><td align="center"></td><td align="center"><code>[</code></td><td>the left bracket symbol</td></tr>
+<tr><td align="center">2</td><td align="center">0</td><td align="center"><code>$ident$</code></td><td>a variable name</td></tr>
+<tr><td align="center">3</td><td align="center"></td><td align="center"><code>;</code></td><td>the semicolon symbol</td></tr>
+<tr><td align="center">4</td><td align="center">1</td><td align="center"><code>$int$</code></td><td>an integer number</td></tr>
+<tr><td align="center">5</td><td align="center"></td><td align="center"><code>]</code></td><td>the right bracket symbol</td></tr>
+<tr><td align="center">6</td><td align="center"></td><td align="center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="engine//book/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
+<tr><td align="center">7</td><td align="center">2</td><td align="center"><code>$expr$</code></td><td>an expression, which may be enclosed with <code>{</code> .. <code>}</code>, or not.</td></tr>
+<tr><td align="center">8</td><td align="center"></td><td align="center"><code>:</code></td><td>the colon symbol</td></tr>
+<tr><td align="center">9</td><td align="center">3</td><td align="center"><code>$block$</code></td><td>a statement block, which must be enclosed with <code>{</code> .. <code>}</code>.</td></tr>
 </tbody></table>
 <p>This syntax matches the following sample code and generates three inputs (one for each non-keyword):</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Assuming the 'exec' custom syntax implementation declares the variable 'hello':
-let x = exec hello &lt;- foo(1, 2) : {
+let x = exec [hello;42] &lt;- foo(1, 2) : {
             hello += bar(hello);
             baz(hello);
         };
@@ -8862,8 +9057,8 @@ print(hello);   // variable declared by a custom syntax persists!
 <tr><td>• <code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td>• <code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
 <tr><td>• <code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="engine//book/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the namespaces (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined functions</td></tr>
-<tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the namespaces (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined functions; requires the <a href="engine//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a></td></tr>
+<tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a>; requires the <a href="engine//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td>• <code>this_ptr()</code></td><td align="center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound [<code>this</code>] pointer, if any</td></tr>
 <tr><td>• <code>call_level()</code></td><td align="center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
 <tr><td><code>inputs</code></td><td align="center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
@@ -8876,16 +9071,41 @@ and statement blocks (<code>$block$</code>) are provided.</p>
 <p>To access a particular argument, use the following patterns:</p>
 <table><thead><tr><th align="center">Argument type</th><th>Pattern (<code>n</code> = slot in <code>inputs</code>)</th><th align="center">Result type</th><th>Description</th></tr></thead><tbody>
 <tr><td align="center"><code>$ident$</code></td><td><code>inputs[n].get_variable_name().unwrap()</code></td><td align="center"><code>&amp;str</code></td><td>name of a variable</td></tr>
-<tr><td align="center"><code>$expr$</code></td><td><code>inputs.get(n).unwrap()</code></td><td align="center"><code>Expression</code></td><td>an expression tree</td></tr>
-<tr><td align="center"><code>$block$</code></td><td><code>inputs.get(n).unwrap()</code></td><td align="center"><code>Expression</code></td><td>an expression tree</td></tr>
+<tr><td align="center"><code>$expr$</code></td><td><code>&amp;inputs[n]</code></td><td align="center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
+<tr><td align="center"><code>$block$</code></td><td><code>&amp;inputs[n]</code></td><td align="center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
+<tr><td align="center"><code>$bool$</code></td><td><code>inputs[n].get_literal_value::&lt;bool&gt;().unwrap()</code></td><td align="center"><code>bool</code></td><td>boolean value</td></tr>
+<tr><td align="center"><code>$int$</code></td><td><code>inputs[n].get_literal_value::&lt;INT&gt;().unwrap()</code></td><td align="center"><code>INT</code></td><td>integer number</td></tr>
+<tr><td align="center"><code>$float$</code></td><td><code>inputs[n].get_literal_value::&lt;FLOAT&gt;().unwrap()</code></td><td align="center"><code>FLOAT</code></td><td>floating-point number</td></tr>
+<tr><td align="center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="engine//book/rust/immutable-string.html"><code>ImmutableString</code></a></td><td><a href="engine//book/language/strings-chars.html">string</a> literal</td></tr>
 </tbody></table>
+<h3 id="get-literal-constants"><a class="header" href="#get-literal-constants">Get literal constants</a></h3>
+<p>Several argument types represent literal constants that can be obtained directly via
+<code>Expression::get_literal_value&lt;T&gt;</code>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let expression = &amp;inputs[0];
+
+// Use 'get_literal_value' with a turbo-fish type to extract the value
+let string_value = expression.get_literal_value::&lt;ImmutableString&gt;().unwrap();
+let float_value = expression.get_literal_value::&lt;FLOAT&gt;().unwrap();
+
+// Or assign directly to a variable with type...
+let int_value: INT = expression.get_literal_value().unwrap();
+
+// Or use type inference!
+let bool_value = expression.get_literal_value().unwrap();
+
+if bool_value { ... }       // 'bool_value' inferred to be 'bool'
+<span class="boring">}
+</span></code></pre></pre>
 <h3 id="evaluate-an-expression-tree"><a class="header" href="#evaluate-an-expression-tree">Evaluate an Expression Tree</a></h3>
 <p>Use the <code>EvalContext::eval_expression_tree</code> method to evaluate an arbitrary expression tree
 within the current evaluation context.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let expression = inputs.get(0).unwrap();
+</span>let expression = &amp;inputs[0];
 let result = context.eval_expression_tree(expression)?;
 <span class="boring">}
 </span></code></pre></pre>
@@ -8940,17 +9160,16 @@ fn implementation_func(
         }
 
         // Evaluate the condition expression
-        let stop = !context.eval_expression_tree(condition)?
-                            .as_bool().map_err(|err| Box::new(
-                                EvalAltResult::ErrorMismatchDataType(
-                                    &quot;bool&quot;.to_string(),
-                                    err.to_string(),
-                                    condition.position(),
-                                )
-                            ))?;
+        let expr_result = !context.eval_expression_tree(condition)?;
 
-        if stop {
-            break;
+        match expr_result.as_bool() {
+            Ok(true) =&gt; (),
+            Ok(false) =&gt; break,
+            Err(err) =&gt; return Err(EvalAltResult::ErrorMismatchDataType(
+                            &quot;bool&quot;.to_string(),
+                            err.to_string(),
+                            condition.position(),
+                        ).into()),
         }
     }
 
@@ -9051,7 +9270,7 @@ and Rhai will fail with a parse error containing information about the expected 
 <p>A custom parser always returns the <em>next</em> symbol expected, which can also be <code>$ident$</code>,
 <code>$expr$</code> or <code>$block$</code>, or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
-<h3 id="example-7"><a class="header" href="#example-7">Example</a></h3>
+<h3 id="example-8"><a class="header" href="#example-8">Example</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -9156,7 +9375,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.2&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;0.20.3&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
@@ -10446,7 +10665,7 @@ messages to/from an <a href="pattern/../patterns//book/engine/hello-world.html">
 <p>An API is registered with the <a href="pattern/../patterns//book/engine/hello-world.html"><code>Engine</code></a> that is essentially <em>blocking</em> until synchronization is achieved.</p>
 </li>
 </ul>
-<h2 id="example-8"><a class="header" href="#example-8">Example</a></h2>
+<h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">use rhai::{Engine};
 
 fn main() {
@@ -10466,7 +10685,8 @@ fn main() {
               .register_fn(&quot;put&quot;, move |v: i64| tx_script.send(v).unwrap());
 
         // Run script
-        engine.consume(r#&quot;
+        engine.consume(
+        r#&quot;
             print(&quot;Starting script loop...&quot;);
 
             loop {
@@ -10814,7 +11034,7 @@ defined.  Documentation is taken from <a href="http://en.wikipedia.org/wiki/Mark
 <code>rhai-doc</code> and must be placed in the source directory.</p>
 <p>A skeleton <code>rhai.toml</code> can be generated inside the source directory via the <code>new</code> command.</p>
 <p>An alternate configuration file can be specified via the <code>--config</code> option.</p>
-<h3 id="example-9"><a class="header" href="#example-9">Example</a></h3>
+<h3 id="example-10"><a class="header" href="#example-10">Example</a></h3>
 <pre><code class="language-toml">name = &quot;My Rhai Project&quot;                # project name
 color = [246, 119, 2]                   # theme color
 root = &quot;/docs/&quot;                         # root URL for generated site
