@@ -178,7 +178,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>0.20.3</strong> of Rhai.</p>
+<p>This Book is for version <strong>0.20.4</strong> of Rhai.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
 <p>In the beginning there was <a href="http://chaiscript.com">ChaiScript</a>,
@@ -264,9 +264,7 @@ pulled in to provide for missing functionalities.</p>
 <h2 id="safe"><a class="header" href="#safe">Safe</a></h2>
 <ul>
 <li>
-<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons). <code>unsafe</code> is only
-ever used for type casting purposes, and is never used to get around the borrow checker.
-In other words, <code>unsafe</code> code in Rhai never introduces potential data races.</p>
+<p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons).</p>
 </li>
 <li>
 <p>Sand-boxed – the scripting <a href="about//book/vnext/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing
@@ -495,7 +493,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;0.20.3&quot;    # assuming 0.20.3 is the latest version
+rhai = &quot;0.20.4&quot;    # assuming 0.20.4 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -567,7 +565,7 @@ Do not use them for non-<a href="start//book/vnext/start/builds/wasm.html">WASM<
 <li><code>no_function</code> (no defining <a href="start//book/vnext/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.3&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;0.20.4&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/vnext/language/functions.html">functions</a>
@@ -1095,7 +1093,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.3/rhai/struct.Scope.html">documentation</a> online.</p>
+<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.4/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/vnext/language/variables.html">variable</a> or <a href="engine//book/vnext/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/vnext/language/variables.html">variables</a> and <a href="engine//book/vnext/language/constants.html">constants</a>, but only the latest ones can
@@ -2317,7 +2315,7 @@ which converts a normal Rust module into a Rhai <a href="rust/modules//book/vnex
 <p>Manually creating a <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> is possible via the <code>Module</code> public API, which is volatile and may
 change from time to time.</p>
 <p>For the complete <code>Module</code> public API, refer to the
-<a href="https://docs.rs/rhai/0.20.3/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/0.20.4/rhai/struct.Module.html">documentation</a> online.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <p>A <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="rust/modules//book/vnext/engine/compile.html"><code>AST</code></a>) containing global <a href="rust/modules//book/vnext/language/variables.html">variables</a>,
@@ -8373,7 +8371,7 @@ no side-effects), thus the script silently runs to completion without errors.</p
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.3/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.4/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -9376,7 +9374,7 @@ a different <a href="patterns//book/vnext/start/features.html">features</a> set,
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.3&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;0.20.4&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
