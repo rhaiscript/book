@@ -88,10 +88,28 @@ let my_result = some_complex_calculation(key);
 print(`Result = ${my_result} and reason = ${my_result.tag}`);
 ```
 
+### Identify data source
+
+It is convenient to use the tag value to record the _source_ of a piece of data.
+
+```js
+let x = [0, 1, 2, 3, 42, 99, 123];
+
+// Store the index number of each value into its tag before
+// filtering out all even numbers, leaving only odd numbers
+let filtered = x.map(|v, i| { v.tag = i; v }).filter(|v| v.is_odd());
+
+// The tag now contains the original index position
+
+for (data, i) in filtered {
+    print(`${i + 1}: Value ${data} from position #${data.tag + 1}`);
+}
+```
+
 ### Identify code conditions
 
-The tag value may also contain a _bit-field_ of up to 16 individual bits, indicating up to 16 logic
-conditions that contributed to the value.
+The tag value may also contain a _[bit-field_ of up to 32 (16 under 32-bit targets) individual bits,
+recording up to 32 (or 16 under 32-bit targets) logic conditions that contributed to the value.
 
 Again, after the script is verified, all tag assignment statements can simply be removed.
 
@@ -103,25 +121,25 @@ fn some_complex_calculation(x) {
     // Check first condition
     if some_complex_condition() {
         result += 1;
-        result.tag |= 0b0001;
+        result.tag[0] = true;   // Set first bit in bit-field
     }
 
     // Check second condition
     if some_other_very_complex_condition(x) == 1 {
         result *= 10;
-        result.tag |= 0b0010;
+        result.tag[1] = true;   // Set second bit in bit-field
     }
 
     // Check third condition
     if some_non_understandable_calculation(x) > 0 {
         result -= 42;
-        result.tag |= 0b0100;
+        result.tag[2] = true;   // Set third bit in bit-field
     }
 
     // Check result
     if result > 100 {
         result = 0;
-        result.tag = 0b1000;
+        result.tag[3] = true;   // Set forth bit in bit-field
     }
 }
 
@@ -131,12 +149,13 @@ let my_result = some_complex_calculation(key);
 // the result of each condition.
 
 // It is now easy to trace how 'my_result' gets its final value.
+// Use indexing on the tag to get at individual bits.
 
 print(`Result = ${my_result}`);
-print(`First condition = ${(my_result.tag & 0b0001) != 0}`);
-print(`Second condition = ${(my_result.tag & 0b0010) != 0}`);
-print(`Third condition = ${(my_result.tag & 0b0100) != 0}`);
-print(`Result check = ${(my_result.tag & 0b1000) != 0}`);
+print(`First condition = ${my_result.tag[0]}`);
+print(`Second condition = ${my_result.tag[1]}`);
+print(`Third condition = ${my_result.tag[2]}`);
+print(`Result check = ${my_result.tag[3]}`);
 ```
 
 ### Poor-man's tuples
@@ -148,11 +167,11 @@ Similar to the JavaScript situation, practical alternatives using Rhai include r
 map] or an [array].
 
 Both of these alternatives, however, incur overhead that may be wasteful when the amount of
-additional information is small &ndash; e.g. in many cases, a single `bool`.
+additional information is small &ndash; e.g. in many cases, a single `bool`, or a small number.
 
-The tag value is an ideal container for such additional information without resorting to a
-full-blown [object map] or [array] (which may not even be available under the [`no_index`] and
-[`no_object`] features).
+The tag value is an ideal container (as a [bit-field]) for such additional information without
+resorting to a full-blown [object map] or [array] (which may not even be available under
+[`no_index`] or [`no_object`]).
 
 ```rust , no_run
 // Verify Bell's Inequality by calculating a norm
