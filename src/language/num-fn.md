@@ -3,20 +3,20 @@ Numeric Functions
 
 {{#include ../links.md}}
 
+
 Integer Functions
-----------------
+-----------------
 
 The following standard functions (defined in the [`ArithmeticPackage`][packages] but excluded if
-using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
-[`decimal`]) only:
+using a [raw `Engine`]) operate on integers only:
 
-| Function | Description                                                          |
-| -------- | -------------------------------------------------------------------- |
-| `abs`    | absolute value                                                       |
-| `sign`   | returns (`INT`) &minus;1 if negative, &plus;1 if positive, 0 if zero |
+| Function  | Description                                                      |
+| --------- | ---------------------------------------------------------------- |
+| `is_odd`  | returns `true` if the value is an odd number, otherwise `false`  |
+| `is_even` | returns `true` if the value is an even number, otherwise `false` |
 
-The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
-operate on integers only:
+The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if
+using a [raw `Engine`]) operate on integers only:
 
 | Function     | Not available under | Description                                              |
 | ------------ | :-----------------: | -------------------------------------------------------- |
@@ -24,11 +24,26 @@ operate on integers only:
 | `to_decimal` |   non-[`decimal`]   | convert the value into [`Decimal`][rust_decimal]         |
 
 
+Signed Numeric Functions
+------------------------
+
+The following standard functions (defined in the [`ArithmeticPackage`][packages] but excluded if
+using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
+[`decimal`]) only:
+
+| Function  | Description                                                          |
+| --------- | -------------------------------------------------------------------- |
+| `abs`     | absolute value                                                       |
+| `sign`    | returns (`INT`) &minus;1 if negative, &plus;1 if positive, 0 if zero |
+| `is_zero` | returns `true` if the value is zero, otherwise `false`               |
+
+
 Floating-Point Functions
 -----------------------
 
-The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
-operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal] (requires [`decimal`]) only:
+The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if
+using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal]
+(requires [`decimal`]) only:
 
 | Category         | Supports `Decimal` | Functions                                                                                |
 | ---------------- | :----------------: | ---------------------------------------------------------------------------------------- |
@@ -44,8 +59,8 @@ operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal] (requ
 | Testing          |         no         | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
-Rounding Functions
-------------------
+Decimal Rounding Functions
+--------------------------
 
 The following rounding methods (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
 operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] feature:
