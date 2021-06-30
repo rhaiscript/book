@@ -152,7 +152,9 @@ The following constructor traits are implemented for `Dynamic`:
 | `From<Vec<T>>`                                                                 |          [`no_index`]          |          [array]          |
 | `From<&[T]>`                                                                   |          [`no_index`]          |          [array]          |
 | `From<BTreeMap<K: Into<SmartString>, T>>`<br/>e.g. `From<BTreeMap<String, T>>` |         [`no_object`]          |       [object map]        |
+| `From<BTreeSet<K: Into<SmartString>>>`<br/>e.g. `From<BTreeSet<String>>`       |         [`no_object`]          |       [object map]        |
 | `From<HashMap<K: Into<SmartString>, T>>`<br/>e.g. `From<HashMap<String, T>>`   |  [`no_object`] or [`no_std`]   |       [object map]        |
+| `From<HashSet<K: Into<SmartString>>>`<br/>e.g. `From<HashSet<String>>`         |  [`no_object`] or [`no_std`]   |       [object map]        |
 | `From<FnPtr>`                                                                  |                                |    [function pointer]     |
 | `From<Instant>`                                                                |           [`no_std`]           |        [timestamp]        |
 | `From<Rc<RefCell<Dynamic>>>`                                                   |   [`sync`] or [`no_closure`]   |        [`Dynamic`]        |
