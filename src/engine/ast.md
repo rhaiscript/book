@@ -119,31 +119,35 @@ manner, with the parent node visited before its children.
 
 The function signature of the callback function is:
 
-> `FnMut(&[ASTNode])`
+> `FnMut(&[ASTNode]) -> bool`
 
 The single argument passed to the method contains a slice of `ASTNode` types representing the path
 from the current node to the root of the [`AST`].
+
+Return `true` to continue walking the [`AST`], or `false` to terminate.
 
 ### Children visit order
 
 The order of visits to the children of each node type:
 
-| Node type                                                        | Children visit order                                                                   |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `if` statement                                                   | condition expression, _then_ statement, _else_ statement (if any)                      |
-| `switch` statement                                               | match element, each of the case conditions and statements, default statements (if any) |
-| `while`, `do` statement                                          | condition expression, statement body                                                   |
-| `for` statement                                                  | collection expression, statement body                                                  |
-| [`try` ... `catch`]({{rootUrl}}/language/try-catch.md) statement | `try` statement body, `catch` statement body                                           |
-| [`import`] statement                                             | path expression                                                                        |
-| [Array] literal                                                  | each of the element expressions                                                        |
-| [Object map] literal                                             | each of the element expressions                                                        |
-| Indexing                                                         | LHS, RHS                                                                               |
-| Field access/method call                                         | LHS, RHS                                                                               |
-| `&&`, <code>\|\|</code>, `in` expression                         | LHS, RHS                                                                               |
-| [Function] call, operator expression                             | each of the argument expressions                                                       |
-| [`let`][variable], [`const`][constant] statement                 | value expression                                                                       |
-| Assignment statement                                             | l-value expression, value expression                                                   |
-| Statement block                                                  | each of the statements                                                                 |
-| Custom syntax expression                                         | each of the `$expr$` and `$stmt$` blocks                                               |
-| All others                                                       | single child, or none                                                                  |
+| Node type                                        | Children visit order                                                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `if` statement                                   | condition expression, _then_ statements, _else_ statements (if any)                        |
+| `switch` statement                               | match element, each of the case conditions and statements, default statements (if any)     |
+| `while`, `do`, `loop` statement                  | condition expression, statements body                                                      |
+| `for` statement                                  | collection expression, statements body                                                     |
+| `try` ... `catch` statement                      | `try` statements body, `catch` statements body                                             |
+| `return` statement                               | return value expression                                                                    |
+| [`import`] statement                             | path expression                                                                            |
+| [Array] literal                                  | each of the element expressions                                                            |
+| [Object map] literal                             | each of the element expressions                                                            |
+| Interpolated [string]                            | each of the [string]/expression segments                                                   |
+| Indexing                                         | LHS, RHS                                                                                   |
+| Field access/method call                         | LHS, RHS                                                                                   |
+| `&&`, <code>\|\|</code>                          | LHS, RHS                                                                                   |
+| [Function] call, operator expression             | each of the argument expressions                                                           |
+| [`let`][variable], [`const`][constant] statement | value expression                                                                           |
+| Assignment statement                             | l-value expression, value expression                                                       |
+| Statements block                                 | each of the statements                                                                     |
+| Custom syntax expression                         | each of the `$expr$`, `$stmt$`, `$ident$`, `$bool$`, `$int$`, `$float$`, `$string$` blocks |
+| All others                                       | single child, or none                                                                      |
