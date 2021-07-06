@@ -176,7 +176,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="raw-engine"><a class="header" href="#raw-engine">Raw <code>Engine</code></a></h1>
-<p><code>Engine::new</code> creates a scripting <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to the console via <code>print</code>).</p>
+<p><code>Engine::new</code> creates a scripting <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
+via <code>print</code> or <code>debug</code>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
 <p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of
@@ -185,6 +186,39 @@ basic arithmetic and logical operators are supported (see below).</p>
 <h2 id="built-in-operators"><a class="header" href="#built-in-operators">Built-in Operators</a></h2>
 <p>Even with a raw <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, some operators are built in and are always available.</p>
 <p>See <a href="/book/vnext/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
+<h2 id="differences-with-enginenew"><a class="header" href="#differences-with-enginenew">Differences with <code>Engine::new</code></a></h2>
+<p><code>Engine::new</code> is equivalent to:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::module_resolvers::FileModuleResolver;
+use rhai::packages::StandardPackage;
+
+// Create a raw scripting Engine
+let mut engine = Self::new_raw();
+
+// Use the file-based module resolver
+engine.set_module_resolver(FileModuleResolver::new());
+
+// Default print/debug implementations
+engine.on_print(|text| println!(&quot;{}&quot;, text));
+
+engine.on_debug(|text, source, pos| {
+    if let Some(source) = source {
+        println!(&quot;{}{:?} | {}&quot;, source, pos, text);
+    } else if pos.is_none() {
+        println!(&quot;{}&quot;, text);
+    } else {
+        println!(&quot;{:?} | {}&quot;, pos, text);
+    }
+});
+
+// Register the Standard Package
+let package = StandardPackage::new().as_shared_module();
+
+engine.register_global_module(package);
+<span class="boring">}
+</span></code></pre></pre>
 
                     </main>
 

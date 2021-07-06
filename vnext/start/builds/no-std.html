@@ -234,13 +234,6 @@ fn main(_argc: isize, _argv: *const *const u8) -&gt; isize {
 <h2 id="samples"><a class="header" href="#samples">Samples</a></h2>
 <p>Check out the <a href="../examples/rust.html#no-std-samples"><code>no-std</code> sample applications</a>
 for different operating environments.</p>
-<h2 id="patches"><a class="header" href="#patches">Patches</a></h2>
-<p>Currently, the <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> crate used by Rhai does not properly handle <code>no-std</code> builds.</p>
-<p>Therefore, it is necessary to <em>patch</em> this crate until the issue is fixed.</p>
-<pre><code class="language-toml">[patch.crates-io]
-# Patch smartstring wth a PR fix because it doesn't properly handle no-std builds.
-smartstring = { git = &quot;https://github.com/rhaiscript/smartstring&quot; }
-</code></pre>
 
                     </main>
 
