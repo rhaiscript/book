@@ -178,7 +178,7 @@
                         <h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
 <p>Object maps are hash dictionaries. Properties are all <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
 <p>The Rust type of a Rhai object map is <code>rhai::Map</code>.</p>
-<p>Currently it is an alias to <code>BTree&lt;SmartString, Dynamic&gt;</code>.
+<p>Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.
 <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because most object map properties are short (at least shorter than 23
 characters) and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.</p>
 <p><a href="/book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>

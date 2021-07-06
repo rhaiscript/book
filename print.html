@@ -178,7 +178,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>0.20.3</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.0.0</strong> of Rhai.</p>
 <p>For the latest development version, see <a href="about//book/vnext/">here</a>.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
@@ -494,7 +494,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;0.20.3&quot;    # assuming 0.20.3 is the latest version
+rhai = &quot;1.0.0&quot;    # assuming 1.0.0 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https:/crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -566,7 +566,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <li><code>no_function</code> (no defining <a href="start//book/language/functions.html">functions</a>)</li>
 </ul>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.3&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;1.0.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/language/functions.html">functions</a>
@@ -768,13 +768,6 @@ fn main(_argc: isize, _argv: *const *const u8) -&gt; isize {
 <h2 id="samples"><a class="header" href="#samples">Samples</a></h2>
 <p>Check out the <a href="start/builds/../examples/rust.html#no-std-samples"><code>no-std</code> sample applications</a>
 for different operating environments.</p>
-<h2 id="patches"><a class="header" href="#patches">Patches</a></h2>
-<p>Currently, the <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> crate used by Rhai does not properly handle <code>no-std</code> builds.</p>
-<p>Therefore, it is necessary to <em>patch</em> this crate until the issue is fixed.</p>
-<pre><code class="language-toml">[patch.crates-io]
-# Patch smartstring wth a PR fix because it doesn't properly handle no-std builds.
-smartstring = { git = &quot;https://github.com/rhaiscript/smartstring&quot; }
-</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="webassembly-wasm-build"><a class="header" href="#webassembly-wasm-build">WebAssembly (WASM) Build</a></h1>
 <p>It is possible to use Rhai when compiling to WebAssembly (WASM).
 This yields a scripting engine (and language) that can be run in a standard web browser.</p>
@@ -1045,7 +1038,8 @@ let result = engine.eval_expression_with_scope::&lt;i64&gt;(&amp;mut scope, &quo
 <span class="boring">}
 </span></code></pre></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="raw-engine"><a class="header" href="#raw-engine">Raw <code>Engine</code></a></h1>
-<p><code>Engine::new</code> creates a scripting <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to the console via <code>print</code>).</p>
+<p><code>Engine::new</code> creates a scripting <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
+via <code>print</code> or <code>debug</code>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
 <p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of
@@ -1054,6 +1048,39 @@ basic arithmetic and logical operators are supported (see below).</p>
 <h2 id="built-in-operators"><a class="header" href="#built-in-operators">Built-in Operators</a></h2>
 <p>Even with a raw <a href="engine//book/engine/hello-world.html"><code>Engine</code></a>, some operators are built in and are always available.</p>
 <p>See <a href="engine//book/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
+<h2 id="differences-with-enginenew"><a class="header" href="#differences-with-enginenew">Differences with <code>Engine::new</code></a></h2>
+<p><code>Engine::new</code> is equivalent to:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use rhai::module_resolvers::FileModuleResolver;
+use rhai::packages::StandardPackage;
+
+// Create a raw scripting Engine
+let mut engine = Self::new_raw();
+
+// Use the file-based module resolver
+engine.set_module_resolver(FileModuleResolver::new());
+
+// Default print/debug implementations
+engine.on_print(|text| println!(&quot;{}&quot;, text));
+
+engine.on_debug(|text, source, pos| {
+    if let Some(source) = source {
+        println!(&quot;{}{:?} | {}&quot;, source, pos, text);
+    } else if pos.is_none() {
+        println!(&quot;{}&quot;, text);
+    } else {
+        println!(&quot;{:?} | {}&quot;, pos, text);
+    }
+});
+
+// Register the Standard Package
+let package = StandardPackage::new().as_shared_module();
+
+engine.register_global_module(package);
+<span class="boring">}
+</span></code></pre></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="built-in-operators-1"><a class="header" href="#built-in-operators-1">Built-in Operators</a></h1>
 <p>The following operators are built-in, meaning that they are always available,
 even when using a <a href="engine//book/engine/raw.html">raw <code>Engine</code></a>.</p>
@@ -1094,7 +1121,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/0.20.3/rhai/struct.Scope.html">documentation</a> online.</p>
+<p>For the complete <code>Scope</code> API, refer to the <a href="https://docs.rs/rhai/1.0.0/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/language/variables.html">variables</a> and <a href="engine//book/language/constants.html">constants</a>, but only the latest ones can
@@ -2316,7 +2343,7 @@ which converts a normal Rust module into a Rhai <a href="rust/modules//book/rust
 <p>Manually creating a <a href="rust/modules//book/rust/modules/index.html">module</a> is possible via the <code>Module</code> public API, which is volatile and may
 change from time to time.</p>
 <p>For the complete <code>Module</code> public API, refer to the
-<a href="https://docs.rs/rhai/0.20.3/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.0.0/rhai/struct.Module.html">documentation</a> online.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <p>A <a href="rust/modules//book/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="rust/modules//book/engine/compile.html"><code>AST</code></a>) containing global <a href="rust/modules//book/language/variables.html">variables</a>,
@@ -3795,7 +3822,9 @@ is different from that of the <a href="language//book/language/type-of.html"><co
 <tr><td><code>From&lt;Vec&lt;T&gt;&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_index</code></a></td><td align="center"><a href="language//book/language/arrays.html">array</a></td></tr>
 <tr><td><code>From&lt;&amp;[T]&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_index</code></a></td><td align="center"><a href="language//book/language/arrays.html">array</a></td></tr>
 <tr><td><code>From&lt;BTreeMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code><br/>e.g. <code>From&lt;BTreeMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_object</code></a></td><td align="center"><a href="language//book/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>From&lt;BTreeSet&lt;K: Into&lt;SmartString&gt;&gt;&gt;</code><br/>e.g. <code>From&lt;BTreeSet&lt;String&gt;&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_object</code></a></td><td align="center"><a href="language//book/language/object-maps.html">object map</a></td></tr>
 <tr><td><code>From&lt;HashMap&lt;K: Into&lt;SmartString&gt;, T&gt;&gt;</code><br/>e.g. <code>From&lt;HashMap&lt;String, T&gt;&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_object</code></a> or <a href="language//book/start/features.html"><code>no_std</code></a></td><td align="center"><a href="language//book/language/object-maps.html">object map</a></td></tr>
+<tr><td><code>From&lt;HashSet&lt;K: Into&lt;SmartString&gt;&gt;&gt;</code><br/>e.g. <code>From&lt;HashSet&lt;String&gt;&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_object</code></a> or <a href="language//book/start/features.html"><code>no_std</code></a></td><td align="center"><a href="language//book/language/object-maps.html">object map</a></td></tr>
 <tr><td><code>From&lt;FnPtr&gt;</code></td><td align="center"></td><td align="center"><a href="language//book/language/fn-ptr.html">function pointer</a></td></tr>
 <tr><td><code>From&lt;Instant&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>no_std</code></a></td><td align="center"><a href="language//book/language/timestamps.html">timestamp</a></td></tr>
 <tr><td><code>From&lt;Rc&lt;RefCell&lt;Dynamic&gt;&gt;&gt;</code></td><td align="center"><a href="language//book/start/features.html"><code>sync</code></a> or <a href="language//book/start/features.html"><code>no_closure</code></a></td><td align="center"><a href="language//book/language/dynamic.html"><code>Dynamic</code></a></td></tr>
@@ -3923,9 +3952,23 @@ let my_result = some_complex_calculation(key);
 
 print(`Result = ${my_result} and reason = ${my_result.tag}`);
 </code></pre>
+<h3 id="identify-data-source"><a class="header" href="#identify-data-source">Identify data source</a></h3>
+<p>It is convenient to use the tag value to record the <em>source</em> of a piece of data.</p>
+<pre><code class="language-js">let x = [0, 1, 2, 3, 42, 99, 123];
+
+// Store the index number of each value into its tag before
+// filtering out all even numbers, leaving only odd numbers
+let filtered = x.map(|v, i| { v.tag = i; v }).filter(|v| v.is_odd());
+
+// The tag now contains the original index position
+
+for (data, i) in filtered {
+    print(`${i + 1}: Value ${data} from position #${data.tag + 1}`);
+}
+</code></pre>
 <h3 id="identify-code-conditions"><a class="header" href="#identify-code-conditions">Identify code conditions</a></h3>
-<p>The tag value may also contain a <em>bit-field</em> of up to 16 individual bits, indicating up to 16 logic
-conditions that contributed to the value.</p>
+<p>The tag value may also contain a <em>[bit-field</em> of up to 32 (16 under 32-bit targets) individual bits,
+recording up to 32 (or 16 under 32-bit targets) logic conditions that contributed to the value.</p>
 <p>Again, after the script is verified, all tag assignment statements can simply be removed.</p>
 <pre><code class="language-js">
 fn some_complex_calculation(x) {
@@ -3934,25 +3977,25 @@ fn some_complex_calculation(x) {
     // Check first condition
     if some_complex_condition() {
         result += 1;
-        result.tag |= 0b0001;
+        result.tag[0] = true;   // Set first bit in bit-field
     }
 
     // Check second condition
     if some_other_very_complex_condition(x) == 1 {
         result *= 10;
-        result.tag |= 0b0010;
+        result.tag[1] = true;   // Set second bit in bit-field
     }
 
     // Check third condition
     if some_non_understandable_calculation(x) &gt; 0 {
         result -= 42;
-        result.tag |= 0b0100;
+        result.tag[2] = true;   // Set third bit in bit-field
     }
 
     // Check result
     if result &gt; 100 {
         result = 0;
-        result.tag = 0b1000;
+        result.tag[3] = true;   // Set forth bit in bit-field
     }
 }
 
@@ -3962,12 +4005,13 @@ let my_result = some_complex_calculation(key);
 // the result of each condition.
 
 // It is now easy to trace how 'my_result' gets its final value.
+// Use indexing on the tag to get at individual bits.
 
 print(`Result = ${my_result}`);
-print(`First condition = ${(my_result.tag &amp; 0b0001) != 0}`);
-print(`Second condition = ${(my_result.tag &amp; 0b0010) != 0}`);
-print(`Third condition = ${(my_result.tag &amp; 0b0100) != 0}`);
-print(`Result check = ${(my_result.tag &amp; 0b1000) != 0}`);
+print(`First condition = ${my_result.tag[0]}`);
+print(`Second condition = ${my_result.tag[1]}`);
+print(`Third condition = ${my_result.tag[2]}`);
+print(`Result check = ${my_result.tag[3]}`);
 </code></pre>
 <h3 id="poor-mans-tuples"><a class="header" href="#poor-mans-tuples">Poor-man’s tuples</a></h3>
 <p>Rust has <em>tuples</em> but Rhai does not (nor does JavaScript in this sense).</p>
@@ -3975,10 +4019,10 @@ print(`Result check = ${(my_result.tag &amp; 0b1000) != 0}`);
 Similar to the JavaScript situation, practical alternatives using Rhai include returning an <a href="language//book/language/object-maps.html">object
 map</a> or an <a href="language//book/language/arrays.html">array</a>.</p>
 <p>Both of these alternatives, however, incur overhead that may be wasteful when the amount of
-additional information is small – e.g. in many cases, a single <code>bool</code>.</p>
-<p>The tag value is an ideal container for such additional information without resorting to a
-full-blown <a href="language//book/language/object-maps.html">object map</a> or <a href="language//book/language/arrays.html">array</a> (which may not even be available under the <a href="language//book/start/features.html"><code>no_index</code></a> and
-<a href="language//book/start/features.html"><code>no_object</code></a> features).</p>
+additional information is small – e.g. in many cases, a single <code>bool</code>, or a small number.</p>
+<p>The tag value is an ideal container (as a <a href="language//book/language/bit-fields.html">bit-field</a>) for such additional information without
+resorting to a full-blown <a href="language//book/language/object-maps.html">object map</a> or <a href="language//book/language/arrays.html">array</a> (which may not even be available under
+<a href="language//book/start/features.html"><code>no_index</code></a> or <a href="language//book/start/features.html"><code>no_object</code></a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4304,21 +4348,30 @@ remember when handling operators such as <code>**</code> which in some languages
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="numeric-functions"><a class="header" href="#numeric-functions">Numeric Functions</a></h1>
 <h2 id="integer-functions"><a class="header" href="#integer-functions">Integer Functions</a></h2>
 <p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>ArithmeticPackage</code></a> but excluded if
+using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on integers only:</p>
+<table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>is_odd</code></td><td>returns <code>true</code> if the value is an odd number, otherwise <code>false</code></td></tr>
+<tr><td><code>is_even</code></td><td>returns <code>true</code> if the value is an even number, otherwise <code>false</code></td></tr>
+</tbody></table>
+<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if
+using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on integers only:</p>
+<table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_float</code></td><td align="center"><a href="language//book/start/features.html"><code>no_float</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="language//book/start/features.html"><code>f32_float</code></a>)</td></tr>
+<tr><td><code>to_decimal</code></td><td align="center">non-<a href="language//book/start/features.html"><code>decimal</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+</tbody></table>
+<h2 id="signed-numeric-functions"><a class="header" href="#signed-numeric-functions">Signed Numeric Functions</a></h2>
+<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>ArithmeticPackage</code></a> but excluded if
 using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>f32</code>, <code>f64</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires
 <a href="language//book/start/features.html"><code>decimal</code></a>) only:</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>abs</code></td><td>absolute value</td></tr>
 <tr><td><code>sign</code></td><td>returns (<code>INT</code>) −1 if negative, +1 if positive, 0 if zero</td></tr>
-</tbody></table>
-<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>)
-operate on integers only:</p>
-<table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>to_float</code></td><td align="center"><a href="language//book/start/features.html"><code>no_float</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="language//book/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>to_decimal</code></td><td align="center">non-<a href="language//book/start/features.html"><code>decimal</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>is_zero</code></td><td>returns <code>true</code> if the value is zero, otherwise <code>false</code></td></tr>
 </tbody></table>
 <h2 id="floating-point-functions"><a class="header" href="#floating-point-functions">Floating-Point Functions</a></h2>
-<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>)
-operate on <code>f64</code> (<code>f32</code> under <a href="language//book/start/features.html"><code>f32_float</code></a>) and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="language//book/start/features.html"><code>decimal</code></a>) only:</p>
+<p>The following standard functions (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if
+using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on <code>f64</code> (<code>f32</code> under <a href="language//book/start/features.html"><code>f32_float</code></a>) and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>
+(requires <a href="language//book/start/features.html"><code>decimal</code></a>) only:</p>
 <table><thead><tr><th>Category</th><th align="center">Supports <code>Decimal</code></th><th>Functions</th></tr></thead><tbody>
 <tr><td>Trigonometry</td><td align="center">no</td><td><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians, <code>hypot(</code><em>x</em><code>,</code><em>y</em><code>)</code></td></tr>
 <tr><td>Arc-trigonometry</td><td align="center">no</td><td><code>asin</code>, <code>acos</code>, <code>atan(</code><em>v</em><code>)</code>, <code>atan(</code><em>x</em><code>,</code><em>y</em><code>)</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code> in radians</td></tr>
@@ -4331,7 +4384,7 @@ operate on <code>f64</code> (<code>f32</code> under <a href="language//book/star
 <tr><td>Conversion</td><td align="center">no</td><td><code>to_degrees</code>, <code>to_radians</code></td></tr>
 <tr><td>Testing</td><td align="center">no</td><td><code>is_nan</code>, <code>is_finite</code>, <code>is_infinite</code> methods and properties</td></tr>
 </tbody></table>
-<h2 id="rounding-functions"><a class="header" href="#rounding-functions">Rounding Functions</a></h2>
+<h2 id="decimal-rounding-functions"><a class="header" href="#decimal-rounding-functions">Decimal Rounding Functions</a></h2>
 <p>The following rounding methods (defined in the <a href="language//book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>)
 operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only, which requires the <a href="language//book/start/features.html"><code>decimal</code></a> feature:</p>
 <table><thead><tr><th>Rounding type</th><th>Behavior</th><th>Methods</th></tr></thead><tbody>
@@ -5042,7 +5095,7 @@ a.retain(|v, i| i &gt; 0);     // a == []
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
 <p>Object maps are hash dictionaries. Properties are all <a href="language//book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
 <p>The Rust type of a Rhai object map is <code>rhai::Map</code>.</p>
-<p>Currently it is an alias to <code>BTree&lt;SmartString, Dynamic&gt;</code>.
+<p>Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.
 <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because most object map properties are short (at least shorter than 23
 characters) and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.</p>
 <p><a href="language//book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
@@ -5323,11 +5376,10 @@ if now.elapsed &gt; 30.0 {
 <table><thead><tr><th>Active keywords</th><th>Reserved keywords</th><th>Usage</th><th align="center">Inactive under feature</th></tr></thead><tbody>
 <tr><td><code>true</code>, <code>false</code></td><td></td><td><a href="language//book/language/constants.html">constants</a></td><td align="center"></td></tr>
 <tr><td><code>let</code>, <code>const</code>, <code>global</code></td><td><code>var</code>, <code>static</code></td><td><a href="language//book/language/variables.html">variables</a></td><td align="center"></td></tr>
-<tr><td></td><td><code>begin</code>, <code>end</code></td><td>block scopes</td><td align="center"></td></tr>
 <tr><td><code>is_shared</code></td><td></td><td><em>shared</em> values</td><td align="center"><a href="language//book/start/features.html"><code>no_closure</code></a></td></tr>
-<tr><td><code>if</code>, <code>else</code></td><td><code>then</code>, <code>unless</code>, <code>goto</code>, <code>exit</code></td><td>control flow</td><td align="center"></td></tr>
+<tr><td><code>if</code>, <code>else</code></td><td><code>goto</code>, <code>exit</code></td><td>control flow</td><td align="center"></td></tr>
 <tr><td><code>switch</code></td><td><code>match</code>, <code>case</code></td><td>switching and matching</td><td align="center"></td></tr>
-<tr><td><code>do</code>, <code>while</code>, <code>loop</code>, <code>until</code>, <code>for</code>, <code>in</code>, <code>continue</code>, <code>break</code></td><td><code>each</code></td><td>looping</td><td align="center"></td></tr>
+<tr><td><code>do</code>, <code>while</code>, <code>loop</code>, <code>until</code>, <code>for</code>, <code>in</code>, <code>continue</code>, <code>break</code></td><td></td><td>looping</td><td align="center"></td></tr>
 <tr><td><code>fn</code>, <code>private</code></td><td><code>public</code>, <code>protected</code>, <code>new</code></td><td><a href="language//book/language/functions.html">functions</a></td><td align="center"><a href="language//book/start/features.html"><code>no_function</code></a></td></tr>
 <tr><td><code>return</code></td><td></td><td>return values</td><td align="center"></td></tr>
 <tr><td><code>throw</code>, <code>try</code>, <code>catch</code></td><td></td><td>throw/catch <a href="language//book/language/throw.html">exceptions</a></td><td align="center"></td></tr>
@@ -8372,7 +8424,7 @@ no side-effects), thus the script silently runs to completion without errors.</p
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/0.20.3/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.0.0/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/engine/compile.html"><code>AST</code></a>:</p>
@@ -8446,29 +8498,32 @@ manner, with the parent node visited before its children.</p>
 <h3 id="callback-function-signature"><a class="header" href="#callback-function-signature">Callback function signature</a></h3>
 <p>The function signature of the callback function is:</p>
 <blockquote>
-<p><code>FnMut(&amp;[ASTNode])</code></p>
+<p><code>FnMut(&amp;[ASTNode]) -&gt; bool</code></p>
 </blockquote>
 <p>The single argument passed to the method contains a slice of <code>ASTNode</code> types representing the path
 from the current node to the root of the <a href="engine//book/engine/compile.html"><code>AST</code></a>.</p>
+<p>Return <code>true</code> to continue walking the <a href="engine//book/engine/compile.html"><code>AST</code></a>, or <code>false</code> to terminate.</p>
 <h3 id="children-visit-order"><a class="header" href="#children-visit-order">Children visit order</a></h3>
 <p>The order of visits to the children of each node type:</p>
 <table><thead><tr><th>Node type</th><th>Children visit order</th></tr></thead><tbody>
-<tr><td><code>if</code> statement</td><td>condition expression, <em>then</em> statement, <em>else</em> statement (if any)</td></tr>
+<tr><td><code>if</code> statement</td><td>condition expression, <em>then</em> statements, <em>else</em> statements (if any)</td></tr>
 <tr><td><code>switch</code> statement</td><td>match element, each of the case conditions and statements, default statements (if any)</td></tr>
-<tr><td><code>while</code>, <code>do</code> statement</td><td>condition expression, statement body</td></tr>
-<tr><td><code>for</code> statement</td><td>collection expression, statement body</td></tr>
-<tr><td><a href="engine//book/language/try-catch.html"><code>try</code> ... <code>catch</code></a> statement</td><td><code>try</code> statement body, <code>catch</code> statement body</td></tr>
+<tr><td><code>while</code>, <code>do</code>, <code>loop</code> statement</td><td>condition expression, statements body</td></tr>
+<tr><td><code>for</code> statement</td><td>collection expression, statements body</td></tr>
+<tr><td><code>try</code> ... <code>catch</code> statement</td><td><code>try</code> statements body, <code>catch</code> statements body</td></tr>
+<tr><td><code>return</code> statement</td><td>return value expression</td></tr>
 <tr><td><a href="engine//book/language/modules/import.html"><code>import</code></a> statement</td><td>path expression</td></tr>
 <tr><td><a href="engine//book/language/arrays.html">Array</a> literal</td><td>each of the element expressions</td></tr>
 <tr><td><a href="engine//book/language/object-maps.html">Object map</a> literal</td><td>each of the element expressions</td></tr>
+<tr><td>Interpolated <a href="engine//book/language/strings-chars.html">string</a></td><td>each of the <a href="engine//book/language/strings-chars.html">string</a>/expression segments</td></tr>
 <tr><td>Indexing</td><td>LHS, RHS</td></tr>
 <tr><td>Field access/method call</td><td>LHS, RHS</td></tr>
-<tr><td><code>&amp;&amp;</code>, <code>||</code>, <code>in</code> expression</td><td>LHS, RHS</td></tr>
+<tr><td><code>&amp;&amp;</code>, <code>||</code></td><td>LHS, RHS</td></tr>
 <tr><td><a href="engine//book/language/functions.html">Function</a> call, operator expression</td><td>each of the argument expressions</td></tr>
 <tr><td><a href="engine//book/language/variables.html"><code>let</code></a>, <a href="engine//book/language/constants.html"><code>const</code></a> statement</td><td>value expression</td></tr>
 <tr><td>Assignment statement</td><td>l-value expression, value expression</td></tr>
-<tr><td>Statement block</td><td>each of the statements</td></tr>
-<tr><td>Custom syntax expression</td><td>each of the <code>$expr$</code> and <code>$stmt$</code> blocks</td></tr>
+<tr><td>Statements block</td><td>each of the statements</td></tr>
+<tr><td>Custom syntax expression</td><td>each of the <code>$expr$</code>, <code>$stmt$</code>, <code>$ident$</code>, <code>$bool$</code>, <code>$int$</code>, <code>$float$</code>, <code>$string$</code> blocks</td></tr>
 <tr><td>All others</td><td>single child, or none</td></tr>
 </tbody></table>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="capture-the-calling-scope-for-function-call"><a class="header" href="#capture-the-calling-scope-for-function-call">Capture The Calling Scope for Function Call</a></h1>
@@ -9375,7 +9430,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;0.20.3&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;1.0.0&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
@@ -11118,14 +11173,9 @@ under the scripts directory.</p>
 <table><thead><tr><th>Keyword</th><th>Potential usage</th></tr></thead><tbody>
 <tr><td><code>var</code></td><td>variable declaration</td></tr>
 <tr><td><code>static</code></td><td>variable declaration</td></tr>
-<tr><td><code>begin</code></td><td>block scope</td></tr>
-<tr><td><code>end</code></td><td>block scope</td></tr>
 <tr><td><code>shared</code></td><td>share value</td></tr>
-<tr><td><code>each</code></td><td>looping</td></tr>
-<tr><td><code>then</code></td><td>control flow</td></tr>
 <tr><td><code>goto</code></td><td>control flow</td></tr>
 <tr><td><code>exit</code></td><td>control flow</td></tr>
-<tr><td><code>unless</code></td><td>control flow</td></tr>
 <tr><td><code>match</code></td><td>matching</td></tr>
 <tr><td><code>case</code></td><td>matching</td></tr>
 <tr><td><code>public</code></td><td>function/field access</td></tr>

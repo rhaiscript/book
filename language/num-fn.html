@@ -178,21 +178,30 @@
                         <h1 id="numeric-functions"><a class="header" href="#numeric-functions">Numeric Functions</a></h1>
 <h2 id="integer-functions"><a class="header" href="#integer-functions">Integer Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>ArithmeticPackage</code></a> but excluded if
+using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on integers only:</p>
+<table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>is_odd</code></td><td>returns <code>true</code> if the value is an odd number, otherwise <code>false</code></td></tr>
+<tr><td><code>is_even</code></td><td>returns <code>true</code> if the value is an even number, otherwise <code>false</code></td></tr>
+</tbody></table>
+<p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if
+using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on integers only:</p>
+<table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>to_float</code></td><td align="center"><a href="/book/start/features.html"><code>no_float</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>)</td></tr>
+<tr><td><code>to_decimal</code></td><td align="center">non-<a href="/book/start/features.html"><code>decimal</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+</tbody></table>
+<h2 id="signed-numeric-functions"><a class="header" href="#signed-numeric-functions">Signed Numeric Functions</a></h2>
+<p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>ArithmeticPackage</code></a> but excluded if
 using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>f32</code>, <code>f64</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires
 <a href="/book/start/features.html"><code>decimal</code></a>) only:</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>abs</code></td><td>absolute value</td></tr>
 <tr><td><code>sign</code></td><td>returns (<code>INT</code>) −1 if negative, +1 if positive, 0 if zero</td></tr>
-</tbody></table>
-<p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>)
-operate on integers only:</p>
-<table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>to_float</code></td><td align="center"><a href="/book/start/features.html"><code>no_float</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>to_decimal</code></td><td align="center">non-<a href="/book/start/features.html"><code>decimal</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>is_zero</code></td><td>returns <code>true</code> if the value is zero, otherwise <code>false</code></td></tr>
 </tbody></table>
 <h2 id="floating-point-functions"><a class="header" href="#floating-point-functions">Floating-Point Functions</a></h2>
-<p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>)
-operate on <code>f64</code> (<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>) and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>) only:</p>
+<p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if
+using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on <code>f64</code> (<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>) and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>
+(requires <a href="/book/start/features.html"><code>decimal</code></a>) only:</p>
 <table><thead><tr><th>Category</th><th align="center">Supports <code>Decimal</code></th><th>Functions</th></tr></thead><tbody>
 <tr><td>Trigonometry</td><td align="center">no</td><td><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians, <code>hypot(</code><em>x</em><code>,</code><em>y</em><code>)</code></td></tr>
 <tr><td>Arc-trigonometry</td><td align="center">no</td><td><code>asin</code>, <code>acos</code>, <code>atan(</code><em>v</em><code>)</code>, <code>atan(</code><em>x</em><code>,</code><em>y</em><code>)</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code> in radians</td></tr>
@@ -205,7 +214,7 @@ operate on <code>f64</code> (<code>f32</code> under <a href="/book/start/feature
 <tr><td>Conversion</td><td align="center">no</td><td><code>to_degrees</code>, <code>to_radians</code></td></tr>
 <tr><td>Testing</td><td align="center">no</td><td><code>is_nan</code>, <code>is_finite</code>, <code>is_infinite</code> methods and properties</td></tr>
 </tbody></table>
-<h2 id="rounding-functions"><a class="header" href="#rounding-functions">Rounding Functions</a></h2>
+<h2 id="decimal-rounding-functions"><a class="header" href="#decimal-rounding-functions">Decimal Rounding Functions</a></h2>
 <p>The following rounding methods (defined in the <a href="/book/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>)
 operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only, which requires the <a href="/book/start/features.html"><code>decimal</code></a> feature:</p>
 <table><thead><tr><th>Rounding type</th><th>Behavior</th><th>Methods</th></tr></thead><tbody>
