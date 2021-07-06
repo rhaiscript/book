@@ -9,11 +9,10 @@ The following are reserved keywords in Rhai:
 | ---------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------ | :--------------------: |
 | `true`, `false`                                                  |                                                            | [constants]              |                        |
 | `let`, `const`, `global`                                         | `var`, `static`                                            | [variables]              |                        |
-|                                                                  | `begin`, `end`                                             | block scopes             |                        |
 | `is_shared`                                                      |                                                            | _shared_ values          |     [`no_closure`]     |
-| `if`, `else`                                                     | `then`, `unless`, `goto`, `exit`                           | control flow             |                        |
+| `if`, `else`                                                     | `goto`, `exit`                                             | control flow             |                        |
 | `switch`                                                         | `match`, `case`                                            | switching and matching   |                        |
-| `do`, `while`, `loop`, `until`, `for`, `in`, `continue`, `break` | `each`                                                     | looping                  |                        |
+| `do`, `while`, `loop`, `until`, `for`, `in`, `continue`, `break` |                                                            | looping                  |                        |
 | `fn`, `private`                                                  | `public`, `protected`, `new`                               | [functions]              |    [`no_function`]     |
 | `return`                                                         |                                                            | return values            |                        |
 | `throw`, `try`, `catch`                                          |                                                            | throw/catch [exceptions] |                        |

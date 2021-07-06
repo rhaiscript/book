@@ -49,14 +49,9 @@ Reserved Keywords
 | ----------- | --------------------- |
 | `var`       | variable declaration  |
 | `static`    | variable declaration  |
-| `begin`     | block scope           |
-| `end`       | block scope           |
 | `shared`    | share value           |
-| `each`      | looping               |
-| `then`      | control flow          |
 | `goto`      | control flow          |
 | `exit`      | control flow          |
-| `unless`    | control flow          |
 | `match`     | matching              |
 | `case`      | matching              |
 | `public`    | function/field access |
