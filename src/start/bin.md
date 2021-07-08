@@ -14,16 +14,16 @@ A number of Rhai-driven tools can be found in the `src/bin` directory:
 Install Tools
 -------------
 
-To install these tools, use the following command:
+To install these tools (with [`decimal`] and [`metadata`] support), use the following command:
 
 ```sh
-cargo install --path . --bins
+cargo install --path . --bins  --features decimal,metadata
 ```
 
 or specifically:
 
 ```sh
-cargo install --path . --bin rhai-run
+cargo install --path . --bin rhai-run  --features decimal,metadata
 ```
 
 `rhai-repl` &ndash; The Rhai REPL Tool
