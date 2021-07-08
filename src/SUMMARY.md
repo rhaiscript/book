@@ -151,7 +151,7 @@ The Rhai Scripting Language
    5. [Singleton Command](patterns/singleton.md)
    6. [Multi-Layer Functions](patterns/multi-layer.md)
    7. [One Engine Instance Per Call](patterns/parallel.md)
-   8. [Multi-Threaded Synchronization](pattern/../patterns/multi-threading.md)
+   8. [Multi-Threaded Synchronization](patterns/multi-threading.md)
    9. [Scriptable Event Handler with State](patterns/events.md)
    10. [Dynamic Constants Provider](patterns/dynamic-const.md)
 10. [External Tools](tools/index.md)
