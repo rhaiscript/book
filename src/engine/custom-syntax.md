@@ -47,6 +47,7 @@ These symbol types can be used:
 * `$expr$` &ndash; any valid expression, statement or statement block.
 * `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` .. `}`).
 * `$ident$` &ndash; any [variable] name.
+* `$symbol$` &ndash; any [symbol]({{rootUrl}}/appendix/operators.md}}), active or reserved.
 * `$bool$` &ndash; a boolean value.
 * `$int$` &ndash; an integer number.
 * `$float$` &ndash; a floating-point number (if not [`no_float`]).
@@ -72,29 +73,29 @@ Any new custom syntax definition using the same first symbol simply _overwrites_
 ### Example
 
 ```rust , no_run
-exec [ $ident$ ; $int$ ] <- $expr$ : $block$
+exec [ $ident$ $symbol$ $int$ ] <- $expr$ : $block$
 ```
 
 The above syntax is made up of a stream of symbols:
 
-| Position | Input slot |  Symbol   | Description                                                                                              |
-| :------: | :--------: | :-------: | -------------------------------------------------------------------------------------------------------- |
-|    1     |            |  `exec`   | custom keyword                                                                                           |
-|    2     |            |    `[`    | the left bracket symbol                                                                                  |
-|    2     |     0      | `$ident$` | a variable name                                                                                          |
-|    3     |            |    `;`    | the semicolon symbol                                                                                     |
-|    4     |     1      |  `$int$`  | an integer number                                                                                        |
-|    5     |            |    `]`    | the right bracket symbol                                                                                 |
-|    6     |            |   `<-`    | the left-arrow symbol (which is a [reserved symbol]({{rootUrl}}/appendix/operators.md#symbols) in Rhai). |
-|    7     |     2      | `$expr$`  | an expression, which may be enclosed with `{` .. `}`, or not.                                            |
-|    8     |            |    `:`    | the colon symbol                                                                                         |
-|    9     |     3      | `$block$` | a statement block, which must be enclosed with `{` .. `}`.                                               |
+| Position | Input slot |   Symbol   | Description                                                                                              |
+| :------: | :--------: | :--------: | -------------------------------------------------------------------------------------------------------- |
+|    1     |            |   `exec`   | custom keyword                                                                                           |
+|    2     |            |    `[`     | the left bracket symbol                                                                                  |
+|    2     |     0      | `$ident$`  | a variable name                                                                                          |
+|    3     |     1      | `$symbol$` | the operator                                                                                             |
+|    4     |     2      |  `$int$`   | an integer number                                                                                        |
+|    5     |            |    `]`     | the right bracket symbol                                                                                 |
+|    6     |            |    `<-`    | the left-arrow symbol (which is a [reserved symbol]({{rootUrl}}/appendix/operators.md#symbols) in Rhai). |
+|    7     |     3      |  `$expr$`  | an expression, which may be enclosed with `{` .. `}`, or not.                                            |
+|    8     |            |    `:`     | the colon symbol                                                                                         |
+|    9     |     4      | `$block$`  | a statement block, which must be enclosed with `{` .. `}`.                                               |
 
 This syntax matches the following sample code and generates three inputs (one for each non-keyword):
 
 ```rust , no_run
 // Assuming the 'exec' custom syntax implementation declares the variable 'hello':
-let x = exec [hello;42] <- foo(1, 2) : {
+let x = exec [hello < 42] <- foo(1, 2) : {
             hello += bar(hello);
             baz(hello);
         };
@@ -146,13 +147,14 @@ To access a particular argument, use the following patterns:
 
 | Argument type | Pattern (`n` = slot in `inputs`)                            |     Result type     | Description           |
 | :-----------: | ----------------------------------------------------------- | :-----------------: | --------------------- |
-|   `$ident$`   | `inputs[n].get_variable_name().unwrap()`                    |       `&str`        | name of a variable    |
+|   `$ident$`   | `inputs[n].get_variable_name().unwrap()`                    |       `&str`        | variable name         |
+|  `$symbol$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()` | [`ImmutableString`] | symbol literal        |
 |   `$expr$`    | `&inputs[n]`                                                |    `&Expression`    | an expression tree    |
 |   `$block$`   | `&inputs[n]`                                                |    `&Expression`    | an expression tree    |
 |   `$bool$`    | `inputs[n].get_literal_value::<bool>().unwrap()`            |       `bool`        | boolean value         |
 |    `$int$`    | `inputs[n].get_literal_value::<INT>().unwrap()`             |        `INT`        | integer number        |
 |   `$float$`   | `inputs[n].get_literal_value::<FLOAT>().unwrap()`           |       `FLOAT`       | floating-point number |
-|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()` | [`ImmutableString`] | [string] literal      |
+|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()` | [`ImmutableString`] | [string] text         |
 
 ### Get literal constants
 
@@ -351,9 +353,19 @@ together with the implementation function.
 
 A custom parser takes as input parameters two pieces of information:
 
-* The symbols parsed so far; `$ident$` is replaced with the actual identifier parsed,
-  while `$expr$` and `$block$` stay as they were.
+* The symbols (as [strings]) parsed so far:
   
+  | Argument type | Value             |
+  | :-----------: | ----------------- |
+  |   `$ident$`   | identifier name   |
+  |  `$symbol$`   | symbol literal    |
+  |   `$expr$`    | `$expr$`          |
+  |   `$block$`   | `$block$`         |
+  |   `$bool$`    | `true` or `false` |
+  |    `$int$`    | value of number   |
+  |   `$float$`   | value of number   |
+  |  `$string$`   | [string] text     |
+
   The custom parser can inspect this symbols stream to determine the next symbol to parse.
 
 * The _look-ahead_ symbol, which is the symbol that will be parsed _next_.
