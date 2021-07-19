@@ -21,7 +21,7 @@ Floating-point numbers are also supported if not disabled with [`no_float`].
 
 Both decimal and scientific notations can be used.
 
-The default system floating-point type is `i64` (also aliased to `FLOAT`).
+The default system floating-point type is `f64` (also aliased to `FLOAT`).
 It can be turned into `f32` via the [`f32_float`] feature.
 
 
