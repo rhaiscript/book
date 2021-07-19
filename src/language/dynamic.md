@@ -16,6 +16,7 @@ it is usually used to perform type-specific actions based on the actual value's 
 let mystery = get_some_dynamic_value();
 
 switch type_of(mystery) {
+    "()" => print("Hey, I got the unit () here!"),
     "i64" => print("Hey, I got an integer here!"),
     "f64" => print("Hey, I got a float here!"),
     "decimal" => print("Hey, I got a decimal here!"),
@@ -24,6 +25,7 @@ switch type_of(mystery) {
     "array" => print("Hey, I got an array here!"),
     "map" => print("Hey, I got an object map here!"),
     "Fn" => print("Hey, I got a function pointer here!"),
+    "timestamp" => print("Hey, I got a time-stamp here!"),
     "TestStruct" => print("Hey, I got the TestStruct custom type here!"),
     _ => print(`I don't know what this is: ${type_of(mystery)}`)
 }
@@ -67,21 +69,31 @@ let value = list[0].clone_cast::<i64>();    // use 'clone_cast' on '&Dynamic'
 let value: i64 = list[0].clone_cast();
 ```
 
-Type Name
----------
+Type Name and Matching Types
+----------------------------
 
 The `type_name` method gets the name of the actual type as a static string slice,
 which can be `match`-ed against.
+
+This is a very simple and direct way to act on a `Dynamic` value based on the actual type of
+the data value.
 
 ```rust , no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0];                         // an element in an 'Array' is 'Dynamic'
 
 match item.type_name() {                    // 'type_name' returns the name of the actual Rust type
+    "()" => ...
     "i64" => ...
+    "f64" => ...
+    "rust_decimal::Decimal" => ...
     "alloc::string::String" => ...
     "bool" => ...
+    "char" => ...
+    "FnPtr" => ...
     "crate::path::to::module::TestStruct" => ...
+        :
+        :
 }
 ```
 
@@ -141,6 +153,7 @@ The following constructor traits are implemented for `Dynamic`:
 
 | Trait                                                                          |      Not available under       |         Data type         |
 | ------------------------------------------------------------------------------ | :----------------------------: | :-----------------------: |
+| `From<()>`                                                                     |                                |           `()`            |
 | `From<i64>`                                                                    |                                |           `i64`           |
 | `From<i32>` ([`only_i32`])                                                     |                                |           `i32`           |
 | `From<f64>`                                                                    |          [`no_float`]          |           `f64`           |
@@ -157,5 +170,5 @@ The following constructor traits are implemented for `Dynamic`:
 | `From<HashSet<K: Into<SmartString>>>`<br/>e.g. `From<HashSet<String>>`         |  [`no_object`] or [`no_std`]   |       [object map]        |
 | `From<FnPtr>`                                                                  |                                |    [function pointer]     |
 | `From<Instant>`                                                                |           [`no_std`]           |        [timestamp]        |
-| `From<Rc<RefCell<Dynamic>>>`                                                   |   [`sync`] or [`no_closure`]   |        [`Dynamic`]        |
-| `From<Arc<RwLock<Dynamic>>>` ([`sync`])                                        | non-[`sync`] or [`no_closure`] |        [`Dynamic`]        |
+| `From<Rc<RefCell<Dynamic>>>`                                                   |   [`sync`] or [`no_closure`]   |         `Dynamic`         |
+| `From<Arc<RwLock<Dynamic>>>` ([`sync`])                                        | non-[`sync`] or [`no_closure`] |         `Dynamic`         |
