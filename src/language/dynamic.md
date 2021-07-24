@@ -144,8 +144,8 @@ The following methods cast a `Dynamic` into a specific type:
 | `as_decimal`               |   non-[`decimal`]   |       [`Result<Decimal, &str>`][rust_decimal]        |
 | `as_bool`                  |                     |                 `Result<bool, &str>`                 |
 | `as_char`                  |                     |                 `Result<char, &str>`                 |
-| `as_string`                |                     |                `Result<String, &str>`                |
-| `as_immutable_string`      |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
+| `into_string`              |                     |                `Result<String, &str>`                |
+| `into_immutable_string`    |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
 
 ### Constructor traits
 
