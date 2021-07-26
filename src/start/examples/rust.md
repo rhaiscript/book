@@ -34,7 +34,6 @@ To illustrate `no-std` builds, a number of sample applications are available und
 | Sample                                           | Description                                                                                          | Optimization |                     Allocator                     | Panics |
 | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | :----------: | :-----------------------------------------------: | :----: |
 | [`no_std_test`]({{repoHome}}/no_std/no_std_test) | bare-bones test application that evaluates a Rhai expression and sets the result as the return value |     size     | [`wee_alloc`](https://crates.io/crates/wee_alloc) | abort  |
-| [`no-std_repl`]({{repoHome}}/no_std/no_std_repl) | the [REPL]({{rootUrl}}/start/bin.md) tool compiled for `no-std`                                      |     size     | [`wee_alloc`](https://crates.io/crates/wee_alloc) | abort  |
 
 
 Building the Samples
