@@ -6,7 +6,7 @@ Compile a Script (to AST)
 To repeatedly evaluate a script, _compile_ it first with `Engine::compile` into an `AST`
 (abstract syntax tree) form.
 
-`Engine::eval_ast` evaluates a pre-compiled `AST`.
+`Engine::eval_ast_XXX` and `Engine::run_ast_XXX` evaluate a pre-compiled `AST`.
 
 ```rust , no_run
 // Compile to an AST and store it for later evaluations

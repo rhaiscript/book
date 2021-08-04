@@ -30,6 +30,25 @@ let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
 ```
 
 
+Run a Script
+------------
+
+In many cases, scripts only need to be run and no return value is expected.
+
+The `Engine::run_XXX` API mirrors `Engine::eval_XXX` but throws away the result, keeping only errors.
+
+```rust , no_run
+// Evaluate a script, ignoring the result
+engine.run("do_some_action(42);")?;
+
+// The above is the same as expecting () as the result...
+engine.eval::<()>("do_some_action(42);")?;
+
+// Running a script file also works in a similar manner
+engine.run_file("hello_world.rhai".into())?;
+```
+
+
 Error Type
 ----------
 
