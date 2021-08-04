@@ -85,6 +85,6 @@ for x in 0..10_000 {
     engine.register_global_module(custom_pkg.as_shared_module());
 
     // Evaluate script
-    engine.consume_ast(&ast)?;
+    engine.run_ast(&ast)?;
 }
 ```

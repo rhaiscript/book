@@ -28,7 +28,7 @@ let ast = engine.compile_into_self_contained(&mut scope, script)?;
 engine.set_module_resolver(DummyModuleResolver::new());
 
 // The AST still evaluates fine, even with 'import' statements!
-engine.consume(&ast)?;
+engine.run(&ast)?;
 ```
 
 When such an [`AST`] is evaluated, [`import`] statements within are provided the _pre-resolved_

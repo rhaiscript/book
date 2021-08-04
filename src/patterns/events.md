@@ -114,7 +114,7 @@ impl Handler {
 
         // Evaluate the script to initialize it and other state variables.
         // In a real application you'd again be handling errors...
-        engine.consume_ast_with_scope(&mut scope, &ast).unwrap();
+        engine.run_ast_with_scope(&mut scope, &ast).unwrap();
 
         // The event handler is essentially these three items:
         Handler { engine, scope, ast }

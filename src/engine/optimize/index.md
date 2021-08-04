@@ -91,7 +91,7 @@ scope.push_constant("MY_BIG_TYPE", AVeryLargeType::take_long_time_to_create());
 
 // Causes each usage of 'MY_BIG_TYPE' in the script below to be replaced
 // by cloned copies of 'AVeryLargeType'.
-let result = engine.consume_with_scope(&mut scope,
+let result = engine.run_with_scope(&mut scope,
 "
     let value = MY_BIG_TYPE.value;
     let data = MY_BIG_TYPE.data;
@@ -102,7 +102,7 @@ let result = engine.consume_with_scope(&mut scope,
 ```
 
 To avoid this, compile the script first to an [`AST`] _without_ the [constants], then evaluate the
-[`AST`] (e.g. with `Engine::eval_ast_with_scope` or `Engine::consume_ast_with_scope`) together with
+[`AST`] (e.g. with `Engine::eval_ast_with_scope` or `Engine::run_ast_with_scope`) together with
 the [constants].
 
 ### Caveat &ndash; constants may be modified by Rust methods

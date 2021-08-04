@@ -171,14 +171,14 @@ engine.register_type::<MyType>()
       .register_indexer_set(|object: &mut MyType, index: &str, value: i64| object[index] = value);
 
 // Calls a["foo"] because getter for 'foo' does not exist
-engine.consume("let a = new_ts(); print(a.foo);");
+engine.run("let a = new_ts(); print(a.foo);");
 
 // Calls a["bar"] because getter for 'bar' does not exist
-engine.consume("let a = new_ts(); print(a.bar);");
+engine.run("let a = new_ts(); print(a.bar);");
 
 // Calls a["baz"] = 999 because getter for 'baz' does not exist
-engine.consume("let a = new_ts(); a.baz = 999;");
+engine.run("let a = new_ts(); a.baz = 999;");
 
 // Error: Property getter is not a fallback for indexer
-engine.consume(r#"let a = new_ts(); print(a["hello"]);"#);
+engine.run(r#"let a = new_ts(); print(a["hello"]);"#);
 ```

@@ -175,12 +175,12 @@ let mut scope = Scope::new();
 scope.push_constant("BUNNY", bunny.clone());
 
 // Run the compiled AST
-engine.consume_ast_with_scope(&mut scope, &ast)?;
+engine.run_ast_with_scope(&mut scope, &ast)?;
 
 // Running the script directly, as below, is less desirable because
 // the constant 'BUNNY' will be propagated and copied into each usage
 // during the script optimization step
-engine.consume_with_scope(&mut scope, script)?;
+engine.run_with_scope(&mut scope, script)?;
 ```
 
 ### Use the Command API in Script

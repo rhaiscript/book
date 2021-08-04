@@ -90,7 +90,7 @@ let ast2 = engine.compile(r#"fn get_message() { "Boo!" }"#)?;
 // Combine the two AST's
 ast1 += ast2;                   // 'message' will be overwritten
 
-engine.consume_ast(&ast1)?;     // prints 'Boo!'
+engine.run_ast(&ast1)?;         // prints 'Boo!'
 ```
 
 Therefore, care must be taken when _cross-calling_ functions to make sure that the correct

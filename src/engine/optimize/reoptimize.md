@@ -33,6 +33,6 @@ for n in 0..5_i64 {
     let new_ast = engine.optimize_ast(&scope, master_ast.clone(), OptimizationLevel::Simple);
 
     // Run it
-    engine.consume_ast(&new_ast)?;
+    engine.run_ast(&new_ast)?;
 }
 ```

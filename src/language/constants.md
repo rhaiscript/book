@@ -60,12 +60,12 @@ let mut scope = Scope::new();                               // create custom sco
 scope.push_constant("MY_NUMBER", TestStruct(123_i64));      // add constant variable
 
 // Beware: constant objects can still be modified via a method call!
-engine.consume_ast_with_scope(&mut scope, &ast)?;           // prints 42
+engine.run_ast_with_scope(&mut scope, &ast)?;               // prints 42
 
 // Running the script directly, as below, is less desirable because
 // the constant 'MY_NUMBER' will be propagated and copied into each usage
 // during the script optimization step
-engine.consume_with_scope(&mut scope, script)?;
+engine.run_with_scope(&mut scope, script)?;
 ```
 
 
