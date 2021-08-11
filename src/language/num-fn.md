@@ -52,7 +52,8 @@ using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decim
 | Square root      |        yes         | `sqrt`                                                                                   |
 | Exponential      |        yes         | `exp` (base _e_)                                                                         |
 | Logarithmic      |        yes         | `ln` (base _e_)                                                                          |
-| Logarithmic      |         no         | `log(`_x_`)` in base 10, `log(`_x_`,`_base_`)`                                           |
+| Logarithmic      |        yes         | `log` (base 10)                                                                          |
+| Logarithmic      |         no         | `log(`_x_`,`_base_`)`                                                                    |
 | Rounding         |        yes         | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
 | Conversion       |        yes         | [`to_int`], [`to_decimal`] (requires [`decimal`]), [`to_float`] (not under [`no_float`]) |
 | Conversion       |         no         | `to_degrees`, `to_radians`                                                               |
