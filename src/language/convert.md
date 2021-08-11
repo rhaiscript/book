@@ -37,7 +37,8 @@ print(`c is '${c}' and its code is ${c.to_int()}`); // prints "c is 'X' and its 
 Parse String into Number
 ------------------------
 
-The `parse_float` function converts a [string] into a `FLOAT` (defaults to `f64`).
+The `parse_float` function converts a [string] into a `FLOAT` (defaults to `f64`,
+`f32` under [`f32_float`] and [`Decimal`][rust_decimal] under [`no_float`] and [`decimal`]).
 
 The `parse_int` function converts a [string] into an `INT` (`i32` or `i64` depending on [`only_i32`]).
 An optional radix (2-36) can be provided to parse the [string] into a number of the specified radix.

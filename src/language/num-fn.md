@@ -82,11 +82,11 @@ Parsing Functions
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
 parse numbers:
 
-| Function          | No available under | Description                                         |
-| ----------------- | :----------------: | --------------------------------------------------- |
-| [`parse_int`]     |                    | converts a [string] to `INT` with an optional radix |
-| [`parse_float`]   |    [`no_float`]    | converts a [string] to `FLOAT`                      |
-| [`parse_decimal`] |  non-[`decimal`]   | converts a [string] to [`Decimal`][rust_decimal]    |
+| Function          |        No available under        | Description                                                                                   |
+| ----------------- | :------------------------------: | --------------------------------------------------------------------------------------------- |
+| [`parse_int`]     |                                  | converts a [string] to `INT` with an optional radix                                           |
+| [`parse_float`]   | [`no_float`] and non-[`decimal`] | converts a [string] to `FLOAT` ([`Decimal`][rust_decimal] under [`no_float`] and [`decimal`]) |
+| [`parse_decimal`] |         non-[`decimal`]          | converts a [string] to [`Decimal`][rust_decimal]                                              |
 
 
 Formatting Functions
