@@ -119,20 +119,20 @@ The function signature of an implementation is:
 
 where:
 
-| Parameter                  |                  Type                   | Description                                                                                                                                     |
-| -------------------------- | :-------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`                  |           `&mut EvalContext`            | mutable reference to the current evaluation _context_                                                                                           |
-| &bull; `scope()`           |                `&Scope`                 | reference to the current [`Scope`]                                                                                                              |
-| &bull; `scope_mut()`       |            `&mut &mut Scope`            | mutable reference to the current [`Scope`]; variables can be added to/removed from it                                                           |
-| &bull; `engine()`          |                `&Engine`                | reference to the current [`Engine`]                                                                                                             |
-| &bull; `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                         |
-| &bull; `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                     |
-| &bull; `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                |
-| &bull; `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                      |
-| &bull; `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature |
-| &bull; `this_ptr()`        |           `Option<&Dynamic>`            | reference to the current bound [`this`] pointer, if any                                                                                         |
-| &bull; `call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                                                     |
-| `inputs`                   |             `&[Expression]`             | a list of input expression trees                                                                                                                |
+| Parameter                        |                  Type                   | Description                                                                                                                                     |
+| -------------------------------- | :-------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`                        |           `&mut EvalContext`            | mutable reference to the current evaluation _context_                                                                                           |
+| &nbsp;&nbsp;`.scope()`           |                `&Scope`                 | reference to the current [`Scope`]                                                                                                              |
+| &nbsp;&nbsp;`.scope_mut()`       |            `&mut &mut Scope`            | mutable reference to the current [`Scope`]; variables can be added to/removed from it                                                           |
+| &nbsp;&nbsp;`.engine()`          |                `&Engine`                | reference to the current [`Engine`]                                                                                                             |
+| &nbsp;&nbsp;`.source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                         |
+| &nbsp;&nbsp;`.iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                     |
+| &nbsp;&nbsp;`.imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                |
+| &nbsp;&nbsp;`.iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                      |
+| &nbsp;&nbsp;`.namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature |
+| &nbsp;&nbsp;`.this_ptr()`        |           `Option<&Dynamic>`            | reference to the current bound [`this`] pointer, if any                                                                                         |
+| &nbsp;&nbsp;`.call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                                                     |
+| `inputs`                         |             `&[Expression]`             | a list of input expression trees                                                                                                                |
 
 ### Return Value
 
@@ -199,7 +199,7 @@ In other words, any [`Scope`] calls that change the list of must come _before_ a
 
 ```rust , no_run
 let var_name = inputs[0].get_variable_name().unwrap();
-let expression = inputs.get(1).unwrap();
+let expression = &inputs[1];
 
 context.scope_mut().push(var_name, 0_i64);      // do this BEFORE 'context.eval_expression_tree'!
 
@@ -219,13 +219,10 @@ The syntax is passed simply as a slice of `&str`.
 
 ```rust , no_run
 // Custom syntax implementation
-fn implementation_func(
-    context: &mut EvalContext,
-    inputs: &[Expression]
-) -> Result<Dynamic, Box<EvalAltResult>> {
+fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Result<Dynamic, Box<EvalAltResult>> {
     let var_name = inputs[0].get_variable_name().unwrap().to_string();
-    let stmt = inputs.get(1).unwrap();
-    let condition = inputs.get(2).unwrap();
+    let stmt = &inputs[1];
+    let condition = &inputs[2];
 
     // Push new variable into the scope BEFORE 'context.eval_expression_tree'
     context.scope_mut().push(var_name.clone(), 0_i64);
@@ -284,7 +281,8 @@ do_something(exec<x> -> { x += 1 } while x < 42, 24, true);
 
 // Use as a statement:
 exec<x> -> { x += 1 } while x < 0;
-//                               ^ terminate statement with ';'
+//                               ^ terminate statement with ';' unless the custom
+//                                 syntax already ends with '}'
 ```
 
 
@@ -318,8 +316,35 @@ Step Six &ndash; Profit!
 ------------------------
 
 
+A Practical Example &ndash; Recreating JavaScript's `var` Statement
+=================================================================
+
+The following example recreates the `var` variable declaration syntax in JavaScript, which creates a
+global variable if one doesn't already exist.  There is currently no equivalent in Rhai.
+
+```rust , no_run
+// Register the custom syntax: var x = ???
+engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |context, inputs| {
+    let var_name = inputs[0].get_variable_name().unwrap().to_string();
+    let expr = &inputs[1];
+
+    // Evaluate the expression
+    let value = context.eval_expression_tree(expr)?;
+
+    // Push a new variable into the scope if it doesn't already exist.
+    // Otherwise just set its value.
+    if !context.scope().is_constant(&var_name).unwrap_or(false) {
+        context.scope_mut().set_value(var_name, value);
+        Ok(Dynamic::UNIT)
+    } else {
+        Err(format!("variable {} is constant", var_name).into())
+    }
+})?;
+```
+
+
 Really Advanced &ndash; Custom Parsers
--------------------------------------
+=====================================
 
 Sometimes it is desirable to have multiple custom syntax starting with the
 same symbol.  This is especially common for _command-style_ syntax where the
@@ -349,7 +374,9 @@ _low level_ API for custom syntax that allows the registration of an entire mini
 Use `Engine::register_custom_syntax_raw` to register a custom syntax _parser_
 together with the implementation function.
 
-### How Custom Parsers Work
+
+How Custom Parsers Work
+-----------------------
 
 A custom parser takes as input parameters two pieces of information:
 
@@ -385,7 +412,8 @@ A custom parser always returns the _next_ symbol expected, which can also be `$i
 look-ahead symbol).
 
 
-### Example
+Example
+-------
 
 ```rust , no_run
 engine.register_custom_syntax_raw(
@@ -429,7 +457,8 @@ engine.register_custom_syntax_raw(
 );
 ```
 
-### Function Signature
+Function Signature
+------------------
 
 The custom syntax parser has the following signature:
 
