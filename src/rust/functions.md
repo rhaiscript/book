@@ -8,7 +8,7 @@ Rhai's scripting engine is very lightweight.  It gets most of its abilities from
 To call these functions, they need to be _registered_ with the [`Engine`] using `Engine::register_fn`
 and `Engine::register_result_fn` (see [fallible functions]).
 
-```rust , no_run
+```rust no_run
 use rhai::{Dynamic, Engine, EvalAltResult, ImmutableString};
 
 // Normal function that returns a standard type
@@ -47,7 +47,7 @@ println!("Answer: {}", result);         // prints 42
 To create a [`Dynamic`] value, use the `Dynamic::from` method.
 [Standard types] in Rhai can also use `.into()`.
 
-```rust , no_run
+```rust no_run
 use rhai::Dynamic;
 
 let x = 42_i64.into();                  // '.into()' works for standard types

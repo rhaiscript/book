@@ -14,7 +14,7 @@ Variables and sub-modules are **ignored**.
 
 This is by far the easiest way to expose a module's functionalities to Rhai.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Module};
 
 let mut module = Module::new();             // new module
@@ -39,7 +39,7 @@ as calling `Engine::register_fn` (or any of the `Engine::register_XXX` API) indi
 on each top-level function within that [module].  In fact, the actual implementation of
 `Engine::register_fn` etc. simply adds the function to an internal [module]!
 
-```rust , no_run
+```rust no_run
 // The above is essentially the same as:
 let mut engine = Engine::new();
 
@@ -54,7 +54,7 @@ Use Case 2 &ndash; Make the `Module` a Static Module
 
 `Engine::register_static_module` registers a [module] and under a specific module namespace.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Module};
 
 let mut module = Module::new();             // new module
@@ -84,7 +84,7 @@ can work as expected.
 
 [Type iterators], because of their special nature, are _always_ exposed to the _global_ namespace.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Module, FnNamespace};
 
 let mut module = Module::new();             // new module
@@ -121,7 +121,7 @@ the module when loaded via `import` statements.
 The easiest way is to use, for example, the [`StaticModuleResolver`][module resolver] to hold such
 a custom module.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Scope, Module};
 use rhai::module_resolvers::StaticModuleResolver;
 

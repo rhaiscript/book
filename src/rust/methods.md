@@ -13,7 +13,7 @@ taking a `&mut` first argument.
 
 This design is similar to Rust.
 
-```rust , no_run
+```rust no_run
 impl TestStruct {
     fn foo(&mut self) -> i64 {
         self.field
@@ -34,7 +34,7 @@ println!("result: {}", result);     // prints 1
 
 Under [`no_object`], however, the _method-call_ style is no longer supported.
 
-```rust , no_run
+```rust no_run
 // Below is a syntax error under 'no_object'.
 let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
                                            // ^ cannot call method-style
@@ -57,7 +57,7 @@ may end up not muting the object afterall &ndash; see the example below.
 Custom types, [properties][getters/setters], [indexers] and methods are disabled under the
 [`no_object`] feature.
 
-```rust , no_run
+```rust no_run
 let a = new_ts();   // constructor function
 a.field = 500;      // property setter
 a.update();         // method call, 'a' can be modified
@@ -107,7 +107,7 @@ copies of argument values), this may result in a significant performance boost.
 For primary types that are cheap to clone (e.g. those that implement `Copy`), including `ImmutableString`,
 this is not necessary.
 
-```rust , no_run
+```rust no_run
 // This is a type that is very expensive to clone.
 #[derive(Debug, Clone)]
 struct VeryComplexType { ... }
@@ -144,7 +144,7 @@ value that is mutable &ndash; the first argument of a method.  All other argumen
 It is possible, however, to create a data race with a _shared_ value, when the same value is used
 both as the _object_ of a method call (including the `this` pointer) and also as an argument.
 
-```rust , no_run
+```rust no_run
 // A method using the 'this' pointer and an argument
 fn foo(x) {
     this + x

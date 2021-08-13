@@ -27,7 +27,7 @@ using a [raw `Engine`]) operate on function pointers:
 Examples
 --------
 
-```rust , no_run
+```rust no_run
 fn foo(x) { 41 + x }
 
 let func = Fn("foo");       // use the 'Fn' function to create a function pointer
@@ -65,7 +65,7 @@ Because of their dynamic nature, function pointers cannot refer to functions in 
 They can only refer to functions within the global [namespace][function namespace].
 See _[Function Namespaces]_ for more details.
 
-```rust , no_run
+```rust no_run
 import "foo" as f;          // assume there is 'f::do_work()'
 
 f::do_work();               // works!
@@ -91,7 +91,7 @@ at runtime, which function to call among a group.
 Although it is possible to simulate dynamic dispatch via a number and a large `if-then-else-if` statement,
 using function pointers significantly simplifies the code.
 
-```rust , no_run
+```rust no_run
 let x = some_calculation();
 
 // These are the functions to call depending on the value of 'x'
@@ -141,7 +141,7 @@ to a function call while binding the object in the method call to the `this` poi
 
 To achieve this, pass the function pointer as the _first_ argument to `call`:
 
-```rust , no_run
+```rust no_run
 fn add(x) {                 // define function which uses 'this'
     this += x;
 }
@@ -184,7 +184,7 @@ Essentially, use the low-level `Engine::register_raw_fn` method to register the 
 `FnPtr::call_dynamic` is used to actually call the function pointer, passing to it the
 current [_native call context_][`NativeCallContext`], the `this` pointer, and other necessary arguments.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Module, Dynamic, FnPtr, NativeCallContext};
 
 let mut engine = Engine::new();
@@ -234,7 +234,7 @@ of the particular call to a registered Rust function. It is a type that exposes 
 This type is normally provided by the [`Engine`] (e.g. when using [`Engine::register_fn_raw`](../rust/register-raw.md)).
 However, it may also be manually constructed from a tuple:
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, FnPtr, NativeCallContext};
 
 let engine = Engine::new();

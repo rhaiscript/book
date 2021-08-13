@@ -16,7 +16,7 @@ Scripts under normal builds of Rhai never crash the host system &ndash; any pani
 This checking can be turned off via the [`unchecked`] feature for higher performance
 (but higher risks as well).
 
-```rust , no_run
+```rust no_run
 let x = 1_000_000_000_000;
 
 x * x;      // Normal build: runtime error: multiplication overflow
@@ -37,7 +37,7 @@ at runtime. [`unchecked`] turns them **all** off as well, such as...
 
 ### [Infinite loops][maximum number of operations]
 
-```rust , no_run
+```rust no_run
 // Normal build: runtime error: exceeds maximum number of operations
 loop { foo(); }
 
@@ -47,7 +47,7 @@ loop { foo(); }
 
 ### [Infinite recursion][maximum call stack depth]
 
-```rust , no_run
+```rust no_run
 fn foo() { foo(); }
 
 foo();      // Normal build: runtime error: exceeds maximum stack depth
@@ -57,7 +57,7 @@ foo();      // 'unchecked' build: panic due to stack overflow!
 
 ### [Gigantic data structures][maximum size of arrays]
 
-```rust , no_run
+```rust no_run
 let x = [];
 
 // Normal build: runtime error: array exceeds maximum size
@@ -69,7 +69,7 @@ loop { x += 42; }
 
 ### Improper range iteration
 
-```rust , no_run
+```rust no_run
 // Normal build: runtime error: zero step
 for x in range(0, 10, 0) { ... }
 

@@ -8,7 +8,7 @@ to prevent usage of certain language features.
 
 Rhai supports surgically disabling a keyword or operator via the `Engine::disable_symbol` method.
 
-```rust , no_run
+```rust no_run
 use rhai::Engine;
 
 let mut engine = Engine::new();

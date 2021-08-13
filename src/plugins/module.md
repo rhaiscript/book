@@ -10,7 +10,7 @@ Prelude
 When using the plugins system, the entire `rhai::plugin` module must be imported as a prelude
 because code generated will need these imports.
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;
 ```
 
@@ -36,7 +36,7 @@ and variables into an existing [module], _flattening_ the namespace &ndash; i.e.
 are eliminated and their contents promoted to the top level.  This is typical for
 developing [custom packages].
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -93,7 +93,7 @@ mod my_module {
 The simplest way to register this into an [`Engine`] is to first use the `exported_module!` macro
 to turn it into a normal Rhai [module], then use the `Engine::register_global_module` method on it:
 
-```rust , no_run
+```rust no_run
 fn main() {
     let mut engine = Engine::new();
 
@@ -108,7 +108,7 @@ fn main() {
 The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`)
 are automatically registered into the [`Engine`] when `Engine::register_global_module` is called.
 
-```rust , no_run
+```rust no_run
 let x = greet("world");
 x == "hello, world!";
 
@@ -132,7 +132,7 @@ Variables as well as sub-modules are **ignored**.
 Another simple way to register this into an [`Engine`] is, again, to use the `exported_module!` macro
 to turn it into a normal Rhai [module], then use the `Engine::register_static_module` method on it:
 
-```rust , no_run
+```rust no_run
 fn main() {
     let mut engine = Engine::new();
 
@@ -147,7 +147,7 @@ fn main() {
 The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`),
 plus the constant `MY_NUMBER`, are automatically registered under the module namespace `service`:
 
-```rust , no_run
+```rust no_run
 let x = service::greet("world");
 x == "hello, world!";
 
@@ -174,7 +174,7 @@ is `#[rhai_fn(global)]` unless specifically overridden by `#[rhai_fn(internal)]`
 Therefore, in the example above, the `increment` method (defined with `#[rhai_fn(global)]`)
 works fine when called in method-call style:
 
-```rust , no_run
+```rust no_run
 let x = 42;
 x.increment();
 x == 43;
@@ -192,7 +192,7 @@ See the [module] section for more information.
 Finally the plugin module can also be used to develop a [custom package],
 using `combine_with_exported_module!`:
 
-```rust , no_run
+```rust no_run
 def_package!(rhai:MyPackage:"My own personal super package", module, {
     combine_with_exported_module!(module, "my_module_ID", my_module));
 });
@@ -217,7 +217,7 @@ This is especially convenient when using the `combine_with_exported_module!` mac
 different combinations of feature flags instead of having to manually include/exclude every
 single function.
 
-```rust , no_run
+```rust no_run
 #[export_module]
 mod my_module {
     // Always available
@@ -264,7 +264,7 @@ Operators (which require function names that are not valid for Rust) can also be
 
 Registering the same function name with the same parameter types will cause a parsing error.
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -294,7 +294,7 @@ Getters, Setters and Indexers
 Functions can be marked as [getters/setters] and [indexers] for [custom types] via the `#[rhai_fn]`
 attribute, which is applied on a function level.
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -335,7 +335,7 @@ Parameters to the `#[rhai_fn(...)]` attribute can be applied multiple times.
 This is especially useful for the `name = "..."`, `get = "..."` and `set = "..."` parameters
 to give multiple alternative names to the same function.
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -374,7 +374,7 @@ Non-pure functions, when passed a [constant] value as the first `&mut` parameter
 
 For example:
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -413,7 +413,7 @@ mod my_module {
 
 When applied to a Rhai script:
 
-```rust , no_run
+```rust no_run
 // Constant
 const VECTOR = [1, 2, 3, 4, 5, 6, 7];
 
@@ -437,7 +437,7 @@ where `T` is any clonable type.
 A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not
 have the appropriate return type.
 
-```rust , no_run
+```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]

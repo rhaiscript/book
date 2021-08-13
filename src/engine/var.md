@@ -12,7 +12,7 @@ resolution service and to override its default behavior.
 
 To do so, provide a closure to the [`Engine`] via the `Engine::on_var` method:
 
-```rust , no_run
+```rust no_run
 let mut engine = Engine::new();
 
 // Register a variable resolver.

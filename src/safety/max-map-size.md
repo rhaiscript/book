@@ -16,7 +16,7 @@ Any script operation that produces an object map with more properties than the m
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust , no_run
+```rust no_run
 let mut engine = Engine::new();
 
 engine.set_max_map_size(500);   // allow object maps with only up to 500 properties

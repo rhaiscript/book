@@ -12,7 +12,7 @@ effectively pruning out unused code sections.
 
 The final, optimized [`AST`] is then used for evaluations.
 
-```rust , no_run
+```rust no_run
 // Compile master script to AST
 let master_ast = engine.compile(
 "

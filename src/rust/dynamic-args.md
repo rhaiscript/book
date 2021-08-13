@@ -13,7 +13,7 @@ For example, the `push` method of an [array] is implemented this way (minus code
 against [over-sized arrays][maximum size of arrays]), which makes the function applicable for all
 item types:
 
-```rust , no_run
+```rust no_run
 // 'item: Dynamic' matches all data types
 fn push(array: &mut Array, item: Dynamic) {
     array.push(item);
@@ -29,7 +29,7 @@ from the left to the right. Candidate functions will be matched in order of para
 
 Therefore, always leave [`Dynamic`] parameters as far to the right as possible.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Dynamic};
 
 // Different versions of the same function 'foo'
@@ -75,7 +75,7 @@ of 16 parameters, counting from the _right-most side_, allowed to be [`Dynamic`]
 For example, Rhai will not find the following function &ndash; Oh! and those 16 parameters to the right
 certainly have nothing to do with it!
 
-```rust , no_run
+```rust no_run
 // The 'd' parameter counts 17th from the right!
 fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
                              x5: i64, x6: i64, x7: i64, x8: i64,

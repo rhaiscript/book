@@ -29,7 +29,7 @@ where:
 Examples
 --------
 
-```rust , no_run
+```rust no_run
 // Import necessary types and traits.
 use rhai::{
     def_package,            // 'def_package!' macro
@@ -74,7 +74,7 @@ are pulled up to the top level instead) and so there will not be any sub-modules
 
 Variables in the [plugin module] are ignored.
 
-```rust , no_run
+```rust no_run
 // Import necessary types and traits.
 use rhai::{
     def_package,

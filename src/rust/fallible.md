@@ -8,7 +8,7 @@ it can be registered with `Engine::register_result_fn`.
 
 The function must return `Result<T, Box<EvalAltResult>>` where `T` is any clonable type.
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, EvalAltResult, Position};
 
 // Function that may fail - the error type must be 'Box<EvalAltResult>'

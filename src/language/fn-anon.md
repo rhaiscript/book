@@ -6,7 +6,7 @@ Anonymous Functions
 Sometimes it gets tedious to define separate functions only to dispatch them via single [function pointers].
 This scenario is especially common when simulating object-oriented programming ([OOP]).
 
-```rust , no_run
+```rust no_run
 // Define object
 let obj = #{
     data: 42,
@@ -24,7 +24,7 @@ fn print_obj() { print(this.data); }
 The above can be replaced by using _anonymous functions_ which have the same syntax as Rust's closures
 (but they are **NOT** real closures, merely syntactic sugar):
 
-```rust , no_run
+```rust no_run
 let obj = #{
     data: 42,
     increment: |x| this.data += x,      // one-liner
@@ -38,7 +38,7 @@ let obj = #{
 The anonymous functions will be hoisted into separate functions in the global namespace.
 The above is equivalent to:
 
-```rust , no_run
+```rust no_run
 let obj = #{
     data: 42,
     increment: Fn("anon_fn_1000"),

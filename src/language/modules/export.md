@@ -24,7 +24,7 @@ but cannot be accessed from outside.
 
 Everything exported from a module is **constant** (i.e. read-only).
 
-```rust , no_run
+```rust no_run
 // This is a module script.
 
 let hidden = 123;       // variable not exported - default hidden
@@ -52,7 +52,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 
 One `export` statement can export multiple variables, even under multiple names.
 
-```rust , no_run
+```rust no_run
 // The following exports three variables:
 //   - 'x' (as 'x' and 'hello')
 //   - 'y' (as 'foo' and 'bar')
@@ -68,7 +68,7 @@ All functions are automatically exported, _unless_ it is explicitly opt-out with
 
 Functions declared [`private`] are hidden to the outside.
 
-```rust , no_run
+```rust no_run
 // This is a module script.
 
 fn inc(x) { x + 1 }     // script-defined function - default public
@@ -88,7 +88,7 @@ All loaded modules are automatically exported as sub-modules.
 To prevent a module from being exported, load it inside a block statement so that it goes away at the
 end of the block.
 
-```rust , no_run
+```rust no_run
 // This is a module script.
 
 import "hello" as foo;      // exported as sub-module 'foo'

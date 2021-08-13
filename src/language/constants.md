@@ -8,7 +8,7 @@ Constants can be defined using the `const` keyword and are immutable.
 Constants follow the same naming rules as [variables], but as a convention are often named with
 all-capital letters.
 
-```rust , no_run
+```rust no_run
 const X = 42;
 
 print(X * 2);       // prints 84
@@ -16,7 +16,7 @@ print(X * 2);       // prints 84
 X = 123;            // <- syntax error: constant modified
 ```
 
-```rust , no_run
+```rust no_run
 const X;            // 'X' is a constant '()'
 
 const X = 40 + 2;   // 'X' is a constant 42
@@ -32,7 +32,7 @@ running with that [`Scope`].
 It is very useful to have a constant value hold a [custom type], which essentially acts
 as a [_singleton_](../patterns/singleton.md).
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Scope};
 
 #[derive(Debug, Clone)]
@@ -88,7 +88,7 @@ If it is called as a [method], however, the Rust function will be able to modify
 Also, property [setters][getters/setters] and [indexers] are always assumed to mutate the first
 `&mut` parameter and so they always raise errors when passed constants by default.
 
-```rust , no_run
+```rust no_run
 // For the below, assume 'increment' is a Rust function with '&mut' first parameter
 
 const X = 42;       // a constant

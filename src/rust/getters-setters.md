@@ -39,7 +39,7 @@ the get/set calls will be interpreted as properties on the [object maps].
 Examples
 --------
 
-```rust , no_run
+```rust no_run
 #[derive(Debug, Clone)]
 struct TestStruct {
     field: String
@@ -88,7 +88,7 @@ with the name of the property as the index value.
 
 In other words, [indexers] act as a _fallback_ to property getters/setters.
 
-```rust , no_run
+```rust no_run
 a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried

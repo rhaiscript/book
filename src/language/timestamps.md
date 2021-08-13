@@ -29,7 +29,7 @@ The following methods (defined in the [`BasicTimePackage`][packages] but exclude
 Examples
 --------
 
-```rust , no_run
+```rust no_run
 let now = timestamp();
 
 // Do some lengthy operation...

@@ -8,7 +8,7 @@ Rhai also allows working _backwards_ from the other direction &ndash; i.e. calli
 
 Assume this script:
 
-```rust , no_run
+```rust no_run
 import "process" as proc;       // this is evaluated every time
 
 // a function with two parameters: string and i64
@@ -29,7 +29,7 @@ fn hello() {
 
 [Functions] defined within the script can be called using `Engine::call_fn`:
 
-```rust , no_run
+```rust no_run
 // Compile the script to AST
 let ast = engine.compile(script)?;
 
@@ -70,7 +70,7 @@ Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
 Custom types (e.g. structures) can also implement [`FuncArgs`][traits] so they can be used for
 calling `Engine::call_fn`.
 
-```rust , no_run
+```rust no_run
 use std::iter::once;
 use rhai::FuncArgs;
 
@@ -102,7 +102,7 @@ Low-Level API &ndash; `Engine::call_fn_dynamic`
 For more control, construct all arguments as `Dynamic` values and use `Engine::call_fn_dynamic`,
 passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
 
-```rust , no_run
+```rust no_run
 let result = engine.call_fn_dynamic(
                         &mut scope,         // scope to use
                         &ast,               // AST containing the functions
@@ -117,7 +117,7 @@ let result = engine.call_fn_dynamic(
 
 `Engine::call_fn_dynamic` can also bind a value to the `this` pointer of a script-defined function.
 
-```rust , no_run
+```rust no_run
 let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();

@@ -34,7 +34,7 @@ Examples
 Don't forget the [`export`] statement, otherwise there will be no variables exposed by the module
 other than non-[`private`] functions (unless that's intentional).
 
-```rust , no_run
+```rust no_run
 use rhai::{Engine, Module};
 
 let engine = Engine::new();

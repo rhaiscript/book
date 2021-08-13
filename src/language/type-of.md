@@ -44,7 +44,7 @@ Custom Types
 
 * the full Rust type name, if registered via `Engine::register_type`
 
-```rust , no_run
+```rust no_run
 struct TestStruct1;
 struct TestStruct2;
 

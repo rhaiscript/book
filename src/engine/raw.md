@@ -28,7 +28,7 @@ Differences with `Engine::new`
 
 `Engine::new` is equivalent to:
 
-```rust , no_run
+```rust no_run
 use rhai::module_resolvers::FileModuleResolver;
 use rhai::packages::StandardPackage;
 

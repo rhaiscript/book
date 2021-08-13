@@ -71,7 +71,7 @@ Therefore, negative index values go from `-1` (last item) to `-length` (first it
 
 A typical implementation for negative index values is:
 
-```rust , no_run
+```rust no_run
 // The following assumes:
 //   'index' is 'INT', 'items_len: usize' is the number of elements
 let actual_index = if index < 0 {
@@ -89,7 +89,7 @@ _most-significant-bit_ (MSB).
 Examples
 --------
 
-```rust , no_run
+```rust no_run
 #[derive(Debug, Clone)]
 struct TestStruct {
     fields: Vec<i64>
@@ -140,7 +140,7 @@ defined, an indexer is called and passed the string name of the property.
 This is also extremely useful as a short-hand for indexers, when the [string] keys conform to
 property name syntax.
 
-```rust , no_run
+```rust no_run
 // You can write this...
 let x = foo["hello_world"];
 
@@ -151,7 +151,7 @@ let x = foo.hello_world;
 The reverse, however, is not true &ndash; when an indexer fails or doesn't exist, the corresponding
 property [getter/setter][getters/setters], if any, is not called.
 
-```rust , no_run
+```rust no_run
 type MyType = HashMap<String, i64>;
 
 let mut engine = Engine::new();

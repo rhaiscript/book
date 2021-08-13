@@ -48,7 +48,7 @@ Iterate Through Arrays
 
 Iterating through an [array] yields cloned _copies_ of each element.
 
-```rust , no_run
+```rust no_run
 let a = [1, 3, 5, 7, 9, 42];
 
 // Loop through the array
@@ -70,7 +70,7 @@ The `chars` method allows iterating through a [string], yielding characters.
 `chars` optionally accepts the character to start from (counting from the end if negative), as well
 as the number of characters to iterate (defaults all).
 
-```rust , no_run
+```rust no_run
 let s = "hello, world!";
 
 // Iterate through all the characters.
@@ -95,7 +95,7 @@ Iterate Through Numeric Ranges
 The `range` function allows iterating through a range of numbers
 (not including the last number).
 
-```rust , no_run
+```rust no_run
 // Iterate starting from 0 and stopping at 49
 // The step is assumed to be 1 when omitted for integers
 for x in range(0, 50) {
@@ -174,7 +174,7 @@ of all property names and values of an [object map], respectively.
 
 These [arrays] can be iterated.
 
-```rust , no_run
+```rust no_run
 let map = #{a:1, b:3, c:5, d:7, e:9};
 
 // Property names are returned in unsorted, random order

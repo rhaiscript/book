@@ -64,7 +64,7 @@ blocks of text.
 Spaces are _not_ added, so to separate one line with the next with a space, put a space before the
 ending back-slash (`\`) character.
 
-```rust , no_run
+```rust no_run
 let x = "hello, world!\
          hello world again! \
          this is the last time!!!";
@@ -78,7 +78,7 @@ let x = "hello, world!hello world again! this is the last time!!!";
 A string with continuation does not open up a new line.  To do so, a new-line character must be
 manually inserted at the appropriate position:
 
-```rust , no_run
+```rust no_run
 let x = "hello, world!\n\
          hello world again!\n\
          this is the last time!!!";

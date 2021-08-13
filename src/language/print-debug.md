@@ -23,7 +23,7 @@ Override `print` and `debug` with Callback Functions
 When embedding Rhai into an application, it is usually necessary to trap `print` and `debug` output
 (for logging into a tracking log, for example) with the `Engine::on_print` and `Engine::on_debug` methods:
 
-```rust , no_run
+```rust no_run
 // Any function or closure that takes an '&str' argument can be used to override 'print'.
 engine.on_print(|x| println!("hello: {}", x));
 

@@ -45,7 +45,7 @@ An optional radix (2-36) can be provided to parse the [string] into a number of 
 
 The `parse_decimal` function converts a [string] into a [`Decimal`][rust_decimal] (requires [`decimal`]).
 
-```rust , no_run
+```rust no_run
 let x = parse_float("123.4");   // parse as floating-point
 x == 123.4;
 type_of(x) == "f64";
@@ -83,7 +83,7 @@ The `to_octal` function converts an integer number to a [string] in octal (i.e. 
 
 The `to_hex` function converts an integer number to a [string] in hex.
 
-```rust , no_run
+```rust no_run
 let x = 0x1234abcd;
 
 x == 305441741;

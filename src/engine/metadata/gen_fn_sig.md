@@ -62,7 +62,7 @@ so no type information is needed:
 
 probably defined as:
 
-```rust , no_run
+```rust no_run
 fn foo(x, y, z) {
     ...
 }

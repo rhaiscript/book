@@ -15,7 +15,7 @@ It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-b
 Examples
 --------
 
-```rust , no_run
+```rust no_run
 let x = 42;
 
 x.tag == 0;             // tag defaults to zero
@@ -173,7 +173,7 @@ The tag value is an ideal container (as a [bit-field]) for such additional infor
 resorting to a full-blown [object map] or [array] (which may not even be available under
 [`no_index`] or [`no_object`]).
 
-```rust , no_run
+```rust no_run
 // Verify Bell's Inequality by calculating a norm
 // and comparing it with a hypotenuse.
 // https://en.wikipedia.org/wiki/Bell%27s_theorem

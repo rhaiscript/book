@@ -10,7 +10,7 @@ When dealing with third-party untrusted scripts that may be malicious, in order 
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
 [`Engine`] via the `Engine::on_progress` method:
 
-```rust , no_run
+```rust no_run
 let mut engine = Engine::new();
 
 engine.on_progress(|count| {    // parameter is number of operations already performed
