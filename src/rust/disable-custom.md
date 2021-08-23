@@ -7,8 +7,8 @@ Disable Custom Types
 `no_object` Feature
 -------------------
 
-The custom types API `register_type`, `register_type_with_name`, `register_get`, `register_get_result`,
-`register_set`, `register_set_result` and `register_get_set` are not available under [`no_object`].
+The custom types API `register_get`, `register_get_result`, `register_set`, `register_set_result`
+and `register_get_set` are not available under [`no_object`].
 
 
 `no_index` Feature
