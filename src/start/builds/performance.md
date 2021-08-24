@@ -82,8 +82,8 @@ because it no longer needs to take locks for shared data.
 Unchecked Build
 ---------------
 
-By default, Rhai provides a _Don't Panic_ guarantee and prevents malicious scripts from bringing
-down the host. Any panic can be considered a bug.
+By default, Rhai provides a [_Don't Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic)
+guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.
 
 For maximum performance, however, these [safety] checks can be turned off via the [`unchecked`] feature.
 
