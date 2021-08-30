@@ -59,8 +59,8 @@ There is no specific limit on the combination and sequencing of each symbol type
 except the _first_ symbol which must be a custom keyword that follows the naming rules
 of [variables].
 
-The first symbol also cannot be a normal or reserved [keyword].
-In other words, any valid identifier that is not a [keyword] will work fine.
+The first symbol also cannot be a normal [keyword] unless it is [disabled][disable keywords and operators].
+Any valid identifier that is not an active [keyword] works fine, even if it is a reserved [keyword].
 
 ### The First Symbol Must be Unique
 

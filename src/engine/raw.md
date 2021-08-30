@@ -14,6 +14,9 @@ basic arithmetic and logical operators are supported (see below).
 
 To add more functionalities to a _raw_ `Engine`, load [packages] into it.
 
+Since [packages] can be shared, this is an extremely efficient way to create multiple instances of
+the same [`Engine`] with the same set of functions.
+
 
 Built-in Operators
 ------------------

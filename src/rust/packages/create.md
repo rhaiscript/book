@@ -9,6 +9,11 @@ The macro `def_package!` can be used to create a custom [package].
 A custom package can aggregate many other packages into a single self-contained unit.
 More functions can be added on top of others.
 
+Custom packages are extremely useful when multiple [raw `Engine`] instances must be created such
+that they all share the same set of functions.
+
+For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/parallel.md) pattern.
+
 
 `def_package!`
 --------------
