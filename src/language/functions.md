@@ -122,7 +122,7 @@ Naturally, the automatic `global` [module] is not available under [`no_function`
 ```rust no_run
 const CONSTANT = 42;        // this constant is automatically added to 'global'
 
-var hello = 1;              // variables are not added to 'global'
+let hello = 1;              // variables are not added to 'global'
 
 {
     const INNER = 0;        // this constant is not at global level
