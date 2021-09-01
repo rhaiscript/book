@@ -4,49 +4,28 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Functions - Rhai - Embedded Scripting for Rust</title>
-        
-        
-
-
         <!-- Custom HTML head -->
-        
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
-
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../stylesheets/rhai.min.css">
-        
-
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -105,7 +84,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -122,36 +100,26 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/rhaiscript/book/edit/master/src/language/functions.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
-                        
-
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
                         <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
@@ -162,8 +130,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -177,7 +143,7 @@
                     <main>
                         <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
 <p>Rhai supports defining functions in script (unless disabled with <a href="/book/start/features.html"><code>no_function</code></a>):</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn add(x, y) {
@@ -196,7 +162,7 @@ sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 <h2 id="implicit-return"><a class="header" href="#implicit-return">Implicit Return</a></h2>
 <p>Just like in Rust, an implicit return can be used. In fact, the last statement of a block is <em>always</em> the block’s return value
 regardless of whether it is terminated with a semicolon <code>;</code>. This is different from Rust.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn add(x, y) {      // implicit return:
@@ -215,7 +181,7 @@ add2(42) == 44;
 </span></code></pre></pre>
 <h2 id="global-definitions-only"><a class="header" href="#global-definitions-only">Global Definitions Only</a></h2>
 <p>Functions can only be defined at the global level, never inside a block or another function.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Global level is OK
@@ -237,7 +203,7 @@ fn do_addition(x) {
 <p>Functions are not <em>closures</em>. They do not capture the calling environment
 and can only access their own parameters.</p>
 <p>They cannot access variables external to the function itself.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = 42;
@@ -247,7 +213,7 @@ fn foo() { x }          // &lt;- syntax error: variable 'x' doesn't exist
 </span></code></pre></pre>
 <h2 id="but-can-call-other-functions-and-access-modules"><a class="header" href="#but-can-call-other-functions-and-access-modules">But Can Call Other Functions and Access Modules</a></h2>
 <p>All functions in the same <a href="/book/engine/compile.html"><code>AST</code></a> can call each other.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn foo(x) { x + 1 }     // function defined in the global namespace
@@ -256,7 +222,7 @@ fn bar(x) { foo(x) }    // ok! function 'foo' can be called
 <span class="boring">}
 </span></code></pre></pre>
 <p>In addition, <a href="/book/rust/modules/index.html">modules</a> <a href="/book/language/modules/import.html">imported</a> at global level can be accessed.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>import &quot;hello&quot; as hey;
@@ -279,12 +245,12 @@ fn foo(x) {
 <p>When a <a href="/book/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/rust/modules/index.html">module</a> called <code>global</code>.</p>
 <p>Functions can access those <a href="/book/language/constants.html">constants</a> via the special <code>global</code> <a href="/book/rust/modules/index.html">module</a>.</p>
 <p>Naturally, the automatic <code>global</code> <a href="/book/rust/modules/index.html">module</a> is not available under <a href="/book/start/features.html"><code>no_function</code></a>.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>const CONSTANT = 42;        // this constant is automatically added to 'global'
 
-var hello = 1;              // variables are not added to 'global'
+let hello = 1;              // variables are not added to 'global'
 
 {
     const INNER = 0;        // this constant is not at global level
@@ -304,7 +270,7 @@ fn foo(x) {
 <p>A function does not need to be defined prior to being used in a script;
 a statement in the script can freely call a function defined afterwards.</p>
 <p>This is similar to Rust and many other modern languages, such as JavaScript’s <code>function</code> keyword.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let x = foo(41);            // &lt;- I can do this!
@@ -318,7 +284,7 @@ Therefore, functions with the same name and same <em>number</em> of parameters a
 <p>All arguments are passed by <em>value</em>, so all Rhai script-defined functions are <em>pure</em>
 (i.e. they never modify their arguments).</p>
 <p>Any update to an argument will <strong>not</strong> be reflected back to the caller.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn change(s) {      // 's' is passed by value
@@ -335,7 +301,7 @@ x == 500;           // 'x' is NOT changed!
 <h2 id="is_def_fn"><a class="header" href="#is_def_fn"><code>is_def_fn</code></a></h2>
 <p>Use <code>is_def_fn</code> (not available under <a href="/book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
 (and therefore callable) based on its name and the number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn foo(x) { x + 1 }
@@ -354,42 +320,28 @@ is_def_fn(&quot;bar&quot;, 1) == false;
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../language/try-catch.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
-
-                        
                             <a rel="next" href="../language/fn-method.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../language/try-catch.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
-
-                
                     <a rel="next" href="../language/fn-method.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
-
-        
         <!-- Google Analytics Tag -->
         <script type="text/javascript">
             var localAddrs = ["localhost", "127.0.0.1", ""];
@@ -406,32 +358,16 @@ is_def_fn(&quot;bar&quot;, 1) == false;
                 ga('send', 'pageview');
             }
         </script>
-        
-
-        
-
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-
     </body>
 </html>

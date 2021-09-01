@@ -4,49 +4,28 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Loadable Configuration - Rhai - Embedded Scripting for Rust</title>
-        
-        
-
-
         <!-- Custom HTML head -->
-        
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
-
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
-
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
         <link rel="stylesheet" href="../stylesheets/rhai.min.css">
-        
-
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -105,7 +84,6 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
@@ -122,36 +100,26 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/rhaiscript/book/edit/master/src/patterns/config.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
-                        
-
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
                         <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
@@ -162,8 +130,6 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -208,7 +174,7 @@
 </ul>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <h3 id="configuration-type"><a class="header" href="#configuration-type">Configuration Type</a></h3>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, Clone, Default)]
@@ -221,14 +187,14 @@ struct Config {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="make-shared-object"><a class="header" href="#make-shared-object">Make Shared Object</a></h3>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub type SharedConfig = Rc&lt;RefCell&lt;Config&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
 <p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let config: SharedConfig = Arc&lt;RwLock&lt;Config&gt;&gt;;
@@ -241,7 +207,7 @@ let config: SharedConfig = Arc&lt;Mutex&lt;Config&gt;&gt;;
 move it into each function registration via a closure.</p>
 <p>Therefore, it is not possible to use a <a href="/book/plugins/module.html">plugin module</a> to achieve this, and each function must
 be registered one after another.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Notice 'move' is used to move the shared configuration object into the closure.
@@ -283,7 +249,7 @@ engine.register_fn(&quot;config_is_set&quot;, move |value: String|
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="configuration-script"><a class="header" href="#configuration-script">Configuration Script</a></h3>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>+----------------+
@@ -301,7 +267,7 @@ if config_contains(&quot;hey&quot;) || config_is_set(&quot;hey&quot;) {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="load-the-configuration"><a class="header" href="#load-the-configuration">Load the Configuration</a></h3>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>import &quot;my_config&quot;;         // run configuration script without creating a module
@@ -316,7 +282,7 @@ id == &quot;hello&quot;;
 <p>A properly-designed <a href="/book/engine/custom-syntax.html">custom syntax</a> can make the configuration file clean, simple to write,
 easy to understand and quick to modify.</p>
 <p>For example, the above configuration example may be expressed by this custom syntax:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
+<pre><pre class="playground"><code class="language-rust   no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>+----------------+
@@ -343,42 +309,28 @@ if config contains &quot;hey&quot; || config is_set &quot;hey&quot; {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../patterns/enums.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
-
-                        
                             <a rel="next" href="../patterns/control.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
-
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../patterns/enums.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
-
-                
                     <a rel="next" href="../patterns/control.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
-
-        
         <!-- Google Analytics Tag -->
         <script type="text/javascript">
             var localAddrs = ["localhost", "127.0.0.1", ""];
@@ -395,32 +347,16 @@ if config contains &quot;hey&quot; || config is_set &quot;hey&quot; {
                 ga('send', 'pageview');
             }
         </script>
-        
-
-        
-
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
-
-        
-
-        
         <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
-
-        
-
     </body>
 </html>
