@@ -22,7 +22,7 @@ fn add_len_str(x: i64, s: &str) -> i64 {
 }
 // Function that returns a 'Dynamic' value
 fn get_any_value() -> Dynamic {
-    Ok(42_i64.into())                   // standard types can use '.into()'
+    42_i64.into()                       // standard types can use '.into()'
 }
 
 let mut engine = Engine::new();

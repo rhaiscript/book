@@ -54,10 +54,10 @@ The following methods merge one [`AST`] with another:
 
 | Method                                        | Description                                                                                                                                                                                                                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `merge(&self, &second)`, `+` operator         | append the second [`AST`] to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                     |
-| `merge_filtered(&self, &second, filter)`      | append the second [`AST`] (but only functions that pass the predicate filter) to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`] |
-| `combine(&mut self, second)`, `+=` operator   | append the second [`AST`] to this [`AST`]; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                                                                              |
-| `combine_filtered(&mut self, second, filter)` | append the second [`AST`] (but only functions that pass the predicate filter) to this [`AST`]; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                          |
+| `merge(&self, &ast)`,<br />`+` operator       | append the second [`AST`] to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                     |
+| `merge_filtered(&self, &ast, filter)`         | append the second [`AST`] (but only functions that pass the predicate filter) to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`] |
+| `combine(&mut self, ast)`,<br />`+=` operator | append the second [`AST`] to this [`AST`]; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                                                                              |
+| `combine_filtered(&mut self, ast, filter)`    | append the second [`AST`] (but only functions that pass the predicate filter) to this [`AST`]; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                          |
 
 When statements are appended, beware that this may change the semantics of the script.
 
@@ -130,24 +130,25 @@ Return `true` to continue walking the [`AST`], or `false` to terminate.
 
 The order of visits to the children of each node type:
 
-| Node type                                        | Children visit order                                                                       |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `if` statement                                   | condition expression, _then_ statements, _else_ statements (if any)                        |
-| `switch` statement                               | match element, each of the case conditions and statements, default statements (if any)     |
-| `while`, `do`, `loop` statement                  | condition expression, statements body                                                      |
-| `for` statement                                  | collection expression, statements body                                                     |
-| `try` ... `catch` statement                      | `try` statements body, `catch` statements body                                             |
-| `return` statement                               | return value expression                                                                    |
-| [`import`] statement                             | path expression                                                                            |
-| [Array] literal                                  | each of the element expressions                                                            |
-| [Object map] literal                             | each of the element expressions                                                            |
-| Interpolated [string]                            | each of the [string]/expression segments                                                   |
-| Indexing                                         | LHS, RHS                                                                                   |
-| Field access/method call                         | LHS, RHS                                                                                   |
-| `&&`, <code>\|\|</code>                          | LHS, RHS                                                                                   |
-| [Function] call, operator expression             | each of the argument expressions                                                           |
-| [`let`][variable], [`const`][constant] statement | value expression                                                                           |
-| Assignment statement                             | l-value expression, value expression                                                       |
-| Statements block                                 | each of the statements                                                                     |
-| Custom syntax expression                         | each of the `$expr$`, `$stmt$`, `$ident$`, `$bool$`, `$int$`, `$float$`, `$string$` blocks |
-| All others                                       | single child, or none                                                                      |
+| Node type                                        | Children visit order                                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `if` statement                                   | condition expression, _then_ statements, _else_ statements (if any)                                    |
+| `switch` statement                               | match element, each of the case conditions and statements, default statements (if any)                 |
+| `while`, `do`, `loop` statement                  | condition expression, statements body                                                                  |
+| `for` statement                                  | collection expression, statements body                                                                 |
+| `return` statement                               | return value expression                                                                                |
+| [`throw`] statement                              | exception value expression                                                                             |
+| [`try` ... `catch`][exception] statement         | `try` statements body, `catch` statements body                                                         |
+| [`import`] statement                             | path expression                                                                                        |
+| [Array] literal                                  | each of the element expressions                                                                        |
+| [Object map] literal                             | each of the element expressions                                                                        |
+| Interpolated [string]                            | each of the [string]/expression segments                                                               |
+| Indexing                                         | LHS, RHS                                                                                               |
+| Field access/method call                         | LHS, RHS                                                                                               |
+| `&&`, <code>\|\|</code>                          | LHS, RHS                                                                                               |
+| [Function] call, operator expression             | each of the argument expressions                                                                       |
+| [`let`][variable], [`const`][constant] statement | value expression                                                                                       |
+| Assignment statement                             | l-value expression, value expression                                                                   |
+| Statements block                                 | each of the statements                                                                                 |
+| Custom syntax expression                         | each of the `$expr$`, `$stmt$`, `$ident$`, `$symbol$`, `$bool$`, `$int$`, `$float$`, `$string$` blocks |
+| All others                                       | single child, or none                                                                                  |

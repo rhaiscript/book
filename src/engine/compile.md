@@ -4,7 +4,7 @@ Compile a Script (to AST)
 {{#include ../links.md}}
 
 To repeatedly evaluate a script, _compile_ it first with `Engine::compile` into an `AST`
-(abstract syntax tree) form.
+(**A**bstract **S**yntax **T**ree) form.
 
 `Engine::eval_ast_XXX` and `Engine::run_ast_XXX` evaluate a pre-compiled `AST`.
 
