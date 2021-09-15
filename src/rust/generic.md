@@ -3,10 +3,15 @@ Register a Generic Rust Function
 
 {{#include ../links.md}}
 
-Rust generic functions can be used in Rhai, but separate instances for each concrete type must be registered separately.
+Rust generic functions can be used in Rhai, but separate instances for each concrete type must be
+registered separately.
 
-This essentially _overloads_ the function with different parameter types as Rhai does not natively support generics
-but Rhai does support _function overloading_.
+This essentially _overloads_ the function with different parameter types as Rhai does not natively
+support generics but Rhai does support _function overloading_.
+
+Due to its dynamic nature, Rhai cannot monomorphize generic functions automatically.
+
+Monomorphization of generic functions must be performed manually.
 
 ```rust no_run
 use std::fmt::Display;
