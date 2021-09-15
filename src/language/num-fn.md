@@ -47,7 +47,8 @@ using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decim
 
 | Category         | Supports `Decimal` | Functions                                                                                |
 | ---------------- | :----------------: | ---------------------------------------------------------------------------------------- |
-| Trigonometry     |         no         | `sin`, `cos`, `tan`, `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`             |
+| Trigonometry     |        yes         | `sin`, `cos`, `tan`                                                                      |
+| Trigonometry     |         no         | `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`                                  |
 | Arc-trigonometry |         no         | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
 | Square root      |        yes         | `sqrt`                                                                                   |
 | Exponential      |        yes         | `exp` (base _e_)                                                                         |
@@ -106,8 +107,8 @@ These formatting functions are defined for all available integer numbers &ndash;
 `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, `u128` and `i128` unless disabled by feature flags.
 
 
-Constants
----------
+Floating-point Constants
+------------------------
 
 The following functions return standard mathematical constants:
 
