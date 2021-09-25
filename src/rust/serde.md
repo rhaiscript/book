@@ -3,6 +3,11 @@ Serialization and Deserialization of `Dynamic` with `serde`
 
 {{#include ../links.md}}
 
+[`serde`]: https://crates.io/crates/serde
+[`serde::Serialize`]: https://docs.serde.rs/serde/trait.Serialize.html
+[`serde::Deserialize`]: https://docs.serde.rs/serde/trait.Deserialize.html
+
+
 Rhai's [`Dynamic`] type supports serialization and deserialization by
 [`serde`](https://crates.io/crates/serde) via the [`serde`][features] feature.
 
@@ -12,10 +17,8 @@ Rhai's [`Dynamic`] type supports serialization and deserialization by
 Serialize/Deserialize a `Dynamic`
 --------------------------------
 
-With the [`serde`][features] feature turned on, [`Dynamic`] implements
-[`serde::Serialize`](https://docs.serde.rs/serde/trait.Serialize.html) and
-[`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html), so it can easily
-be serialized and deserialized with [`serde`](https://crates.io/crates/serde).
+With the [`serde`][features] feature turned on, [`Dynamic`] implements [`serde::Serialize`] and
+[`serde::Deserialize`], so it can easily be serialized and deserialized with [`serde`].
 
 ```rust no_run
 let value: Dynamic = ...;
@@ -33,15 +36,13 @@ let result: Dynamic = serde_json::from_str(&json);
 `Dynamic` as Serialization Format
 --------------------------------
 
-A [`Dynamic`] can be seamlessly converted to and from any type that implements
-[`serde::Serialize`](https://docs.serde.rs/serde/trait.Serialize.html) and/or
-[`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html), acting as a
-serialization format.
+A [`Dynamic`] can be seamlessly converted to and from any type that implements [`serde::Serialize`]
+and/or [`serde::Deserialize`], acting as a serialization format.
 
 ### Serialize Any Type to `Dynamic`
 
 The function `rhai::serde::to_dynamic` automatically converts any Rust type that implements
-[`serde::Serialize`](https://docs.serde.rs/serde/trait.Serialize.html) into a [`Dynamic`].
+[`serde::Serialize`] into a [`Dynamic`].
 
 For primary types, this is usually not necessary because using [`Dynamic::from`][`Dynamic`] is much
 easier and is essentially the same thing.  The only difference is treatment for integer values.
@@ -91,7 +92,7 @@ map.is::<Map>() == true;
 ### Deserialize a `Dynamic` into Any Type
 
 The function `rhai::serde::from_dynamic` automatically converts a [`Dynamic`] value into any Rust type
-that implements [`serde::Deserialize`](https://docs.serde.rs/serde/trait.Deserialize.html).
+that implements [`serde::Deserialize`].
 
 In particular, [object maps] are converted into Rust `struct`'s (or any type that is marked as
 a `serde` map) while [arrays] are converted into Rust `Vec`'s (or any type that is marked
