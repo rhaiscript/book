@@ -27,6 +27,15 @@ By convention, property getters are not supposed to mutate the [custom type], al
 that prevents this mutation.
 
 
+Getters Must Be Pure
+--------------------
+
+Property getters are assumed to be _pure_, meaning that they cannot mutate any data.
+
+Even though a property getter function also takes `&mut` as the first parameter, Rhai assumes that
+no data is changed when the function is called.
+
+
 Cannot Override Object Maps
 --------------------------
 
@@ -46,8 +55,10 @@ struct TestStruct {
 }
 
 impl TestStruct {
-    // Remember &mut must be used even for getters
+    // Remember &mut must be used even for getters.
     fn get_field(&mut self) -> String {
+        // Property getters are assumed to be PURE, meaning they are
+        // not supposed to mutate any data.
         self.field.clone()
     }
 
