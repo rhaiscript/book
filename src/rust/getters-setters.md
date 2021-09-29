@@ -30,7 +30,7 @@ that prevents this mutation.
 Getters Must Be Pure
 --------------------
 
-Property getters are assumed to be _pure_, meaning that they cannot mutate any data.
+Property getters are assumed to be _pure_, meaning that they should not mutate any data.
 
 Even though a property getter function also takes `&mut` as the first parameter, Rhai assumes that
 no data is changed when the function is called.
@@ -84,7 +84,7 @@ r#"
     a.xyz
 "#)?;
 
-println!("Answer: {}", result);                     // prints 42
+println!("Answer: {}", result);                 // prints 42
 ```
 
 **IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
@@ -93,8 +93,8 @@ println!("Answer: {}", result);                     // prints 42
 Fallback to Indexer
 -------------------
 
-If the getter/setter of a particular property is not defined, but an [indexer][indexers] is defined
-on the [custom type] with [string] index, then the corresponding [indexer][indexers] will be called
+If the getter/setter of a particular property is not defined, but an [indexer] is defined
+on the [custom type] with [string] index, then the corresponding [indexer] will be called
 with the name of the property as the index value.
 
 In other words, [indexers] act as a _fallback_ to property getters/setters.
@@ -103,4 +103,43 @@ In other words, [indexers] act as a _fallback_ to property getters/setters.
 a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried
+```
+
+
+Chaining Updates
+----------------
+
+It is possible to _chain_ property accesses and/or indexing (via [indexers]) together to modify a
+particular property value at the end of the chain.
+
+Rhai detects such modifications and updates the changed values all the way back up the chain.
+
+In the end, the syntax works as expected by intuition, automatically and without special attention.
+
+```rust no_run
+// Assume a deeply-nested object...
+let root = get_new_container_object();
+
+root.prop1.sub["hello"].list[0].value = 42;
+
+// The above is equivalent to:
+
+// First getting all the intermediate values...
+let prop1_value = root.prop1;                   // via property getter
+let sub_value = prop1_value.sub;                // via property getter
+let sub_value_item = sub_value["hello"];        // via index getter
+let list_value = sub_value_item.list;           // via property getter
+let list_item = list_value[0];                  // via index getter
+
+list_item.value = 42;       // modify property value deep down the chain
+
+// Propagate the changes back up the chain...
+list_value[0] = list_item;                      // via index setter
+sub_value_item.list = list_value;               // via property setter
+sub_value["hello"] = sub_value_item;            // via index setter
+prop1_value.sub = sub_value;                    // via property setter
+root.prop1 = prop1_value;                       // via property setter
+
+// The below prints 42...
+print(root.prop1.sub["hello"].list[0].value);
 ```
