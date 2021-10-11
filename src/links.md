@@ -76,6 +76,7 @@
 [custom type]: {{rootUrl}}/rust/custom.md
 [custom types]: {{rootUrl}}/rust/custom.md
 [getters/setters]: {{rootUrl}}/rust/getters-setters.md
+[indexer]: {{rootUrl}}/rust/indexers.md
 [indexers]: {{rootUrl}}/rust/indexers.md
 [type iterator]: {{rootUrl}}/language/iterator.md
 [type iterators]: {{rootUrl}}/language/iterator.md
