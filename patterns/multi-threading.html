@@ -145,20 +145,20 @@
 <h2 id="usage-scenarios"><a class="header" href="#usage-scenarios">Usage Scenarios</a></h2>
 <ul>
 <li>
-<p>A system needs to communicate with an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
+<p>A system needs to communicate with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
 </li>
 <li>
-<p>Multiple <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>s running in separate threads need to coordinate/synchronize with each other.</p>
+<p>Multiple <a href="/book/engine/hello-world.html"><code>Engine</code></a>s running in separate threads need to coordinate/synchronize with each other.</p>
 </li>
 </ul>
 <h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
 <ul>
 <li>
 <p>An MPSC channel (or any other appropriate synchronization primitive) is used to send/receive
-messages to/from an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
+messages to/from an <a href="/book/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
 </li>
 <li>
-<p>An API is registered with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> that is essentially <em>blocking</em> until synchronization is achieved.</p>
+<p>An API is registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> that is essentially <em>blocking</em> until synchronization is achieved.</p>
 </li>
 </ul>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -217,9 +217,9 @@ fn main() {
     }
 }
 </code></pre></pre>
-<h2 id="considerations-for-a-hrefbookvnextstartfeatureshtmlsynca"><a class="header" href="#considerations-for-a-hrefbookvnextstartfeatureshtmlsynca">Considerations for <a href="/book/vnext/start/features.html"><code>sync</code></a></a></h2>
+<h2 id="considerations-for-a-hrefbookstartfeatureshtmlsynca"><a class="header" href="#considerations-for-a-hrefbookstartfeatureshtmlsynca">Considerations for <a href="/book/start/features.html"><code>sync</code></a></a></h2>
 <p><code>std::mpsc::Sender</code> and <code>std::mpsc::Receiver</code> are not <code>Sync</code>, therefore they cannot be used in
-registered functions if the <a href="/book/vnext/start/features.html"><code>sync</code></a> feature is enabled.</p>
+registered functions if the <a href="/book/start/features.html"><code>sync</code></a> feature is enabled.</p>
 <p>In that situation, it is possible to wrap the <code>Sender</code> and <code>Receiver</code> each in a <code>Mutex</code>,
 which makes them <code>Sync</code>. This, however, incurs the additional overhead of locking and unlocking
 the <code>Mutex</code> during every function call, which is technically not necessary because there are no
@@ -231,12 +231,12 @@ including ones that are <em>blocking</em>.</p>
 Therefore it does <em>not</em> provide an async API.</p>
 <p>That means, although it is simple to use Rhai within a multi-threading environment where blocking a
 thread is acceptable or even expected, it is currently not possible to call <em>async</em> functions
-within Rhai scripts because there is no mechanism in <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> to wrap the state of the call stack
+within Rhai scripts because there is no mechanism in <a href="/book/engine/hello-world.html"><code>Engine</code></a> to wrap the state of the call stack
 inside a future.</p>
-<p>Fortunately an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is re-entrant so it can be shared among many async tasks.
+<p>Fortunately an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is re-entrant so it can be shared among many async tasks.
 It is usually possible to split a script into multiple parts to avoid having to call async functions.</p>
-<p>Creating an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is also relatively cheap (extremely cheap if creating a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>),
-so it is also a valid pattern to spawn a new <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> instance for each task.</p>
+<p>Creating an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is also relatively cheap (extremely cheap if creating a <a href="/book/engine/raw.html">raw <code>Engine</code></a>),
+so it is also a valid pattern to spawn a new <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance for each task.</p>
 
                     </main>
 

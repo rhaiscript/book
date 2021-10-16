@@ -144,16 +144,16 @@
                         <h1 id="generate-function-signatures"><a class="header" href="#generate-function-signatures">Generate Function Signatures</a></h1>
 <h2 id="enginegen_fn_signatures"><a class="header" href="#enginegen_fn_signatures"><code>Engine::gen_fn_signatures</code></a></h2>
 <p>As part of a <em>reflections</em> API, <code>Engine::gen_fn_signatures</code> returns a list of function <em>signatures</em>
-(as <code>Vec&lt;String&gt;</code>), each corresponding to a particular function available to that <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> instance.</p>
+(as <code>Vec&lt;String&gt;</code>), each corresponding to a particular function available to that <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance.</p>
 <blockquote>
 <p><code>fn_name ( param_1: type_1, param_2: type_2, ... , param_n : type_n ) -&gt; return_type</code></p>
 </blockquote>
-<p>The <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature must be used to turn on this API.</p>
+<p>The <a href="/book/start/features.html"><code>metadata</code></a> feature must be used to turn on this API.</p>
 <h3 id="sources"><a class="header" href="#sources">Sources</a></h3>
 <p>Functions from the following sources are included, in order:</p>
 <ol>
 <li>Native Rust functions registered into the global namespace via the <code>Engine::register_XXX</code> API</li>
-<li><em>Public</em> (i.e. non-<a href="/book/vnext/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) in global sub-modules
+<li><em>Public</em> (i.e. non-<a href="/book/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) in global sub-modules
 registered via <code>Engine::register_static_module</code>.</li>
 <li>Native Rust functions in global modules registered via <code>Engine::register_global_module</code> (optional)</li>
 </ol>
@@ -172,15 +172,15 @@ Notice that function names do not need to be valid identifiers.</p>
 <blockquote>
 <p><code>+(_, _)</code></p>
 </blockquote>
-<p>A <a href="/book/vnext/rust/getters-setters.html">property setter</a> – again, unknown parameters and return type.
+<p>A <a href="/book/rust/getters-setters.html">property setter</a> – again, unknown parameters and return type.
 Notice that function names do not need to be valid identifiers.
 In this case, the first parameter should be <code>&amp;mut T</code> of the custom type and the return value is <code>()</code>:</p>
 <blockquote>
 <p><code>set$prop(_, _, _)</code></p>
 </blockquote>
 <h3 id="script-defined-functions"><a class="header" href="#script-defined-functions">Script-Defined Functions</a></h3>
-<p>Script-defined <a href="/book/vnext/language/functions.html">function</a> signatures contain parameter names. Since all parameters, as well as
-the return value, are <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> the types are simply not shown.</p>
+<p>Script-defined <a href="/book/language/functions.html">function</a> signatures contain parameter names. Since all parameters, as well as
+the return value, are <a href="/book/language/dynamic.html"><code>Dynamic</code></a> the types are simply not shown.</p>
 <p>A script-defined function always takes dynamic arguments, and the return type is also dynamic,
 so no type information is needed:</p>
 <blockquote>
@@ -200,19 +200,19 @@ so no type information is needed:</p>
 <p><code>foo(x: Dynamic, y: Dynamic, z: Dynamic) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <h3 id="plugin-functions"><a class="header" href="#plugin-functions">Plugin Functions</a></h3>
-<p>Functions defined in <a href="/book/vnext/plugins/module.html">plugin modules</a> are the best.  They contain all the metadata
+<p>Functions defined in <a href="/book/plugins/module.html">plugin modules</a> are the best.  They contain all the metadata
 describing the functions.</p>
 <p>For example, a plugin function <code>merge</code>:</p>
 <blockquote>
 <p><code>merge(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; Option&lt;bool&gt;</code></p>
 </blockquote>
 <p>Notice that function names do not need to be valid identifiers.</p>
-<p>For example, an operator defined as a <a href="/book/vnext/rust/fallible.html">fallible function</a> in a <a href="/book/vnext/plugins/module.html">plugin module</a> via
+<p>For example, an operator defined as a <a href="/book/rust/fallible.html">fallible function</a> in a <a href="/book/plugins/module.html">plugin module</a> via
 <code>#[rhai_fn(name=&quot;+=&quot;, return_raw)]</code> returns <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code>:</p>
 <blockquote>
 <p><code>+=(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
-<p>For example, a <a href="/book/vnext/rust/getters-setters.html">property getter</a> defined in a <a href="/book/vnext/plugins/module.html">plugin module</a>:</p>
+<p>For example, a <a href="/book/rust/getters-setters.html">property getter</a> defined in a <a href="/book/plugins/module.html">plugin module</a>:</p>
 <blockquote>
 <p><code>get$prop(obj: &amp;mut MyStruct&lt;i64&gt;) -&gt; String</code></p>
 </blockquote>

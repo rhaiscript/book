@@ -142,18 +142,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="raw-engine"><a class="header" href="#raw-engine">Raw <code>Engine</code></a></h1>
-<p><code>Engine::new</code> creates a scripting <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
+<p><code>Engine::new</code> creates a scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
 via <code>print</code> or <code>debug</code>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
 <p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of
 basic arithmetic and logical operators are supported (see below).</p>
-<p>To add more functionalities to a <em>raw</em> <code>Engine</code>, load <a href="/book/vnext/rust/packages/index.html">packages</a> into it.</p>
-<p>Since <a href="/book/vnext/rust/packages/index.html">packages</a> can be shared, this is an extremely efficient way to create multiple instances of
-the same <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
+<p>To add more functionalities to a <em>raw</em> <code>Engine</code>, load <a href="/book/rust/packages/index.html">packages</a> into it.</p>
+<p>Since <a href="/book/rust/packages/index.html">packages</a> can be shared, this is an extremely efficient way to create multiple instances of
+the same <a href="/book/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
 <h2 id="built-in-operators"><a class="header" href="#built-in-operators">Built-in Operators</a></h2>
-<p>Even with a raw <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, some operators are built in and are always available.</p>
-<p>See <a href="/book/vnext/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
+<p>Even with a raw <a href="/book/engine/hello-world.html"><code>Engine</code></a>, some operators are built in and are always available.</p>
+<p>See <a href="/book/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
 <h2 id="differences-with-enginenew"><a class="header" href="#differences-with-enginenew">Differences with <code>Engine::new</code></a></h2>
 <p><code>Engine::new</code> is equivalent to:</p>
 <pre><pre class="playground"><code class="language-rust no_run">

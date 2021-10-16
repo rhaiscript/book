@@ -171,9 +171,9 @@ number ^= 0x00ff;       // number = number ^ 0x00ff;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="the-flexible-"><a class="header" href="#the-flexible-">The Flexible <code>+=</code></a></h2>
-<p>The the <code>+</code> and <code>+=</code> operators are often <a href="/book/vnext/rust/functions.html#function-overloading">overloaded</a> to perform
+<p>The the <code>+</code> and <code>+=</code> operators are often <a href="/book/rust/functions.html#function-overloading">overloaded</a> to perform
 build-up operations for different data types.</p>
-<p>For example, it is used to build <a href="/book/vnext/language/strings-chars.html">strings</a>:</p>
+<p>For example, it is used to build <a href="/book/language/strings-chars.html">strings</a>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -184,7 +184,7 @@ my_str += 12345;
 my_str == &quot;abcABC12345&quot;
 <span class="boring">}
 </span></code></pre></pre>
-<p>to concatenate <a href="/book/vnext/language/arrays.html">arrays</a>:</p>
+<p>to concatenate <a href="/book/language/arrays.html">arrays</a>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -194,7 +194,7 @@ my_array += [4, 5];
 my_array == [1, 2, 3, 4, 5];
 <span class="boring">}
 </span></code></pre></pre>
-<p>and mix two <a href="/book/vnext/language/object-maps.html">object maps</a> together:</p>
+<p>and mix two <a href="/book/language/object-maps.html">object maps</a> together:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

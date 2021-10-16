@@ -169,7 +169,7 @@ print(z);                       // &lt;- error: variable 'z' not found
 &quot;print(42)&quot;.eval();             // &lt;- nope... method-call style doesn't work with 'eval'
 <span class="boring">}
 </span></code></pre></pre>
-<p>Script segments passed to <code>eval</code> execute inside the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>, so they can access and modify <em>everything</em>,
+<p>Script segments passed to <code>eval</code> execute inside the current <a href="/book/engine/scope.html"><code>Scope</code></a>, so they can access and modify <em>everything</em>,
 including all variables that are visible at that position in code! It is almost as if the script segments were
 physically pasted in at the position of the <code>eval</code> call.</p>
 <h2 id="cannot-define-new-functions"><a class="header" href="#cannot-define-new-functions">Cannot Define New Functions</a></h2>
@@ -192,7 +192,7 @@ print(x);
 </span></code></pre></pre>
 <h2 id="eval-is-evil"><a class="header" href="#eval-is-evil"><code>eval</code> is Evil</a></h2>
 <p>For those who subscribe to the (very sensible) motto of <a href="http://linterrors.com/js/eval-is-evil">“<code>eval</code> is evil”</a>,
-disable <code>eval</code> using <a href="/book/vnext/engine/disable.html"><code>Engine::disable_symbol</code></a>:</p>
+disable <code>eval</code> using <a href="/book/engine/disable.html"><code>Engine::disable_symbol</code></a>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

@@ -189,7 +189,7 @@ during the parsing or evaluation process.</p>
 <p>The type parameter for <code>Engine::eval</code> is used to specify the type of the return value,
 which <em>must</em> match the actual type or an error is returned. Rhai is very strict here.</p>
 <p>There are two ways to specify the return type – <em>turbofish</em> notation, or type inference.</p>
-<p>Use <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> for uncertain return types.</p>
+<p>Use <a href="/book/language/dynamic.html"><code>Dynamic</code></a> for uncertain return types.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -206,7 +206,7 @@ let result = engine.eval::&lt;String&gt;(&quot;40 + 2&quot;)?;  // returns an er
 </span></code></pre></pre>
 <h2 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h2>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be <a href="/book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
+script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
 <pre><code class="language-js">#!/home/to/me/bin/rhai-run

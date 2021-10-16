@@ -151,7 +151,7 @@
 <p>The system constants are expensive to load.</p>
 </li>
 <li>
-<p>The system constants set is too massive to push into a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+<p>The system constants set is too massive to push into a custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 </li>
 <li>
 <p>The values of system constants are volatile and call-dependent.</p>
@@ -160,7 +160,7 @@
 <h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
 <ul>
 <li>
-<p>Use a <a href="/book/vnext/engine/var.html">variable resolver</a> to intercept variable access.</p>
+<p>Use a <a href="/book/engine/var.html">variable resolver</a> to intercept variable access.</p>
 </li>
 <li>
 <p>Only load a variable when it is being used.</p>
@@ -191,7 +191,7 @@ engine.on_var(move |name, _, _, _| Ok(db.get(name).map(Dynamic::from)));
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="values-are-constants"><a class="header" href="#values-are-constants">Values are Constants</a></h2>
-<p>All values provided by a <a href="/book/vnext/engine/var.html">variable resolver</a> are <em><a href="/book/vnext/language/constants.html">constants</a></em> due to their dynamic nature.
+<p>All values provided by a <a href="/book/engine/var.html">variable resolver</a> are <em><a href="/book/language/constants.html">constants</a></em> due to their dynamic nature.
 They cannot be assigned to.</p>
 <p>In order to change values in an external system, register a dedicated API for that purpose.</p>
 

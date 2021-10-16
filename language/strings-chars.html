@@ -145,11 +145,11 @@
 <p>String in Rhai contain any text sequence of valid Unicode characters.
 Internally strings are stored in UTF-8 encoding.</p>
 <p>Strings can be built up from other strings and types via the <code>+</code> operator
-(provided by the <a href="/book/vnext/rust/packages/index.html"><code>MoreStringPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>).
+(provided by the <a href="/book/rust/packages/index.html"><code>MoreStringPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>).
 This is particularly useful when printing output.</p>
-<p><a href="/book/vnext/language/type-of.html"><code>type_of()</code></a> a string returns <code>&quot;string&quot;</code>.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> a string returns <code>&quot;string&quot;</code>.</p>
 <p>The maximum allowed length of a string can be controlled via <code>Engine::set_max_string_size</code>
-(see <a href="/book/vnext/safety/max-string-size.html">maximum length of strings</a>).</p>
+(see <a href="/book/safety/max-string-size.html">maximum length of strings</a>).</p>
 <h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
 <p>String and character literals follow JavaScript-style syntax:</p>
 <table><thead><tr><th>Type</th><th align="center">Quotes</th><th align="center">Escapes?</th><th align="center">Continuation?</th><th align="center">Interpolation?</th></tr></thead><tbody>
@@ -236,7 +236,7 @@ let x = &quot;        hello, world! \&quot;\\t\\x42\&quot;\n  hello world again!
 <p><code>${</code> ... <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
 statements block, including another interpolated string!
 The last result of the block is taken as the value for interpolation.</p>
-<p>Rhai uses <a href="/book/vnext/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
+<p>Rhai uses <a href="/book/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
 sub-strings together.</p>
 <pre><code class="language-js">let x = 42;
 let y = 123;

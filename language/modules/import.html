@@ -142,15 +142,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="import-a-module"><a class="header" href="#import-a-module">Import a Module</a></h1>
-<p>Before a module can be used (via an <code>import</code> statement) in a script, there must be a <a href="/book/vnext/rust/modules/resolvers.html">module resolver</a>
-registered into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
-<p>See the section on <a href="/book/vnext/rust/modules/resolvers.html"><em>Module Resolvers</em></a> for more details.</p>
+<p>Before a module can be used (via an <code>import</code> statement) in a script, there must be a <a href="/book/rust/modules/resolvers.html">module resolver</a>
+registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
+<p>See the section on <a href="/book/rust/modules/resolvers.html"><em>Module Resolvers</em></a> for more details.</p>
 <h2 id="import-statement"><a class="header" href="#import-statement"><code>import</code> Statement</a></h2>
 <p>A module can be <em>imported</em> via the <code>import</code> statement, and be given a name.
 Its members can be accessed via <code>::</code> similar to C++.</p>
 <p>A module that is only <code>import</code>-ed but not under any module name is commonly used for initialization purposes,
 where the module script contains initialization statements that puts the functions registered with the
-<a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> into a particular state.</p>
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> into a particular state.</p>
 <pre><code class="language-js">import &quot;crypto_init&quot;;           // run the script file 'crypto_init.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
@@ -211,7 +211,7 @@ for x in range(0, 1000) {
 </span></code></pre></pre>
 <h2 id="recursive-imports"><a class="header" href="#recursive-imports">Recursive Imports</a></h2>
 <p>Beware of <em>import cycles</em> – i.e. recursively loading the same module. This is a sure-fire way to
-cause a stack overflow in the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, unless stopped by setting a limit for <a href="/book/vnext/safety/max-modules.html">maximum number of modules</a>.</p>
+cause a stack overflow in the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, unless stopped by setting a limit for <a href="/book/safety/max-modules.html">maximum number of modules</a>.</p>
 <p>For instance, importing itself always causes an infinite recursion:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

@@ -142,12 +142,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dynamic-parameters-in-rust-functions"><a class="header" href="#dynamic-parameters-in-rust-functions"><code>Dynamic</code> Parameters in Rust Functions</a></h1>
-<p>It is possible for Rust functions to contain parameters of type <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a>.
-Any clonable value can be set into a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value.</p>
+<p>It is possible for Rust functions to contain parameters of type <a href="/book/language/dynamic.html"><code>Dynamic</code></a>.
+Any clonable value can be set into a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value.</p>
 <p>Any parameter in a registered Rust function with a specific type has higher precedence over the
-<a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> type, so it is important to understand which <em>version</em> of a function will be used.</p>
-<p>For example, the <code>push</code> method of an <a href="/book/vnext/language/arrays.html">array</a> is implemented this way (minus code that protects
-against <a href="/book/vnext/safety/max-array-size.html">over-sized arrays</a>), which makes the function applicable for all
+<a href="/book/language/dynamic.html"><code>Dynamic</code></a> type, so it is important to understand which <em>version</em> of a function will be used.</p>
+<p>For example, the <code>push</code> method of an <a href="/book/language/arrays.html">array</a> is implemented this way (minus code that protects
+against <a href="/book/safety/max-array-size.html">over-sized arrays</a>), which makes the function applicable for all
 item types:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -159,9 +159,9 @@ fn push(array: &amp;mut Array, item: Dynamic) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
-<p>A <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value has less precedence than a value of a specific type, and parameter matching starts
+<p>A <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value has less precedence than a value of a specific type, and parameter matching starts
 from the left to the right. Candidate functions will be matched in order of parameter types.</p>
-<p>Therefore, always leave <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> parameters as far to the right as possible.</p>
+<p>Therefore, always leave <a href="/book/language/dynamic.html"><code>Dynamic</code></a> parameters as far to the right as possible.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -202,7 +202,7 @@ engine.register_fn(&quot;foo&quot;, foo8)
 </span></code></pre></pre>
 <h2 id="warning-only-the-right-most-16-parameters-can-be-dynamic"><a class="header" href="#warning-only-the-right-most-16-parameters-can-be-dynamic">Warning: Only the Right-Most 16 Parameters Can Be <code>Dynamic</code></a></h2>
 <p>The number of parameter permutations go up exponentially, and therefore there is a realistic limit
-of 16 parameters, counting from the <em>right-most side</em>, allowed to be <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a>.</p>
+of 16 parameters, counting from the <em>right-most side</em>, allowed to be <a href="/book/language/dynamic.html"><code>Dynamic</code></a>.</p>
 <p>For example, Rhai will not find the following function – Oh! and those 16 parameters to the right
 certainly have nothing to do with it!</p>
 <pre><pre class="playground"><code class="language-rust no_run">

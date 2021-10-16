@@ -157,14 +157,14 @@ code and metadata to allow Rhai access to its public (i.e. marked <code>pub</cod
 and sub-modules.</p>
 <p>This code is exactly what would need to be written by hand to achieve the same goal,
 and is custom fit to each exported item.</p>
-<p>All <code>pub</code> functions become registered functions, all <code>pub</code> constants become <a href="/book/vnext/rust/modules/index.html">module</a> constant variables,
+<p>All <code>pub</code> functions become registered functions, all <code>pub</code> constants become <a href="/book/rust/modules/index.html">module</a> constant variables,
 and all sub-modules become Rhai sub-modules.</p>
-<p>This Rust module can then be registered into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> as a normal <a href="/book/vnext/rust/modules/index.html">module</a>.
+<p>This Rust module can then be registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> as a normal <a href="/book/rust/modules/index.html">module</a>.
 This is done via the <code>exported_module!</code> macro.</p>
 <p>The macro <code>combine_with_exported_module!</code> can be used to <em>combine</em> all the functions
-and variables into an existing <a href="/book/vnext/rust/modules/index.html">module</a>, <em>flattening</em> the namespace – i.e. all sub-modules
+and variables into an existing <a href="/book/rust/modules/index.html">module</a>, <em>flattening</em> the namespace – i.e. all sub-modules
 are eliminated and their contents promoted to the top level.  This is typical for
-developing <a href="/book/vnext/rust/packages/create.html">custom packages</a>.</p>
+developing <a href="/book/rust/packages/create.html">custom packages</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -220,8 +220,8 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="use-engineregister_global_module"><a class="header" href="#use-engineregister_global_module">Use <code>Engine::register_global_module</code></a></h3>
-<p>The simplest way to register this into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is to first use the <code>exported_module!</code> macro
-to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use the <code>Engine::register_global_module</code> method on it:</p>
+<p>The simplest way to register this into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is to first use the <code>exported_module!</code> macro
+to turn it into a normal Rhai <a href="/book/rust/modules/index.html">module</a>, then use the <code>Engine::register_global_module</code> method on it:</p>
 <pre><pre class="playground"><code class="language-rust no_run">fn main() {
     let mut engine = Engine::new();
 
@@ -233,7 +233,7 @@ to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">modu
 }
 </code></pre></pre>
 <p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code> and <code>increment</code>)
-are automatically registered into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> when <code>Engine::register_global_module</code> is called.</p>
+are automatically registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> when <code>Engine::register_global_module</code> is called.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -250,12 +250,12 @@ increment(x);
 x == 43;
 <span class="boring">}
 </span></code></pre></pre>
-<p>Notice that, when using a <a href="/book/vnext/rust/modules/index.html">module</a> as a <a href="/book/vnext/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
+<p>Notice that, when using a <a href="/book/rust/modules/index.html">module</a> as a <a href="/book/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
 can be accessed.</p>
 <p>Variables as well as sub-modules are <strong>ignored</strong>.</p>
 <h3 id="use-engineregister_static_module"><a class="header" href="#use-engineregister_static_module">Use <code>Engine::register_static_module</code></a></h3>
-<p>Another simple way to register this into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code> macro
-to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use the <code>Engine::register_static_module</code> method on it:</p>
+<p>Another simple way to register this into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code> macro
+to turn it into a normal Rhai <a href="/book/rust/modules/index.html">module</a>, then use the <code>Engine::register_static_module</code> method on it:</p>
 <pre><pre class="playground"><code class="language-rust no_run">fn main() {
     let mut engine = Engine::new();
 
@@ -287,10 +287,10 @@ x == 43;
 <span class="boring">}
 </span></code></pre></pre>
 <p>All functions (usually <em>methods</em>) defined in the module and marked with <code>#[rhai_fn(global)]</code>,
-as well as all <a href="/book/vnext/language/iterator.html">type iterators</a>, are automatically exposed to the <em>global</em> namespace, so
-<a href="/book/vnext/language/for.html">iteration</a>, <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> for <a href="/book/vnext/rust/custom.html">custom types</a>
+as well as all <a href="/book/language/iterator.html">type iterators</a>, are automatically exposed to the <em>global</em> namespace, so
+<a href="/book/language/for.html">iteration</a>, <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> for <a href="/book/rust/custom.html">custom types</a>
 can work as expected.</p>
-<p>In fact, the default for all <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> defined in a plugin module
+<p>In fact, the default for all <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> defined in a plugin module
 is <code>#[rhai_fn(global)]</code> unless specifically overridden by <code>#[rhai_fn(internal)]</code>.</p>
 <p>Therefore, in the example above, the <code>increment</code> method (defined with <code>#[rhai_fn(global)]</code>)
 works fine when called in method-call style:</p>
@@ -303,11 +303,11 @@ x == 43;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="use-dynamically"><a class="header" href="#use-dynamically">Use Dynamically</a></h3>
-<p>Using this directly as a dynamically-loadable Rhai <a href="/book/vnext/rust/modules/index.html">module</a> is almost the same, except that a
-<a href="/book/vnext/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
-<p>See the <a href="/book/vnext/rust/modules/index.html">module</a> section for more information.</p>
+<p>Using this directly as a dynamically-loadable Rhai <a href="/book/rust/modules/index.html">module</a> is almost the same, except that a
+<a href="/book/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
+<p>See the <a href="/book/rust/modules/index.html">module</a> section for more information.</p>
 <h3 id="combine-into-custom-package"><a class="header" href="#combine-into-custom-package">Combine into Custom Package</a></h3>
-<p>Finally the plugin module can also be used to develop a <a href="/book/vnext/rust/packages/create.html">custom package</a>,
+<p>Finally the plugin module can also be used to develop a <a href="/book/rust/packages/create.html">custom package</a>,
 using <code>combine_with_exported_module!</code>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -318,7 +318,7 @@ using <code>combine_with_exported_module!</code>:</p>
 <span class="boring">}
 </span></code></pre></pre>
 <p><code>combine_with_exported_module!</code> automatically <em>flattens</em> the module namespace so that all
-functions in sub-modules are promoted to the top level.  This is convenient for <a href="/book/vnext/rust/packages/create.html">custom packages</a>.</p>
+functions in sub-modules are promoted to the top level.  This is convenient for <a href="/book/rust/packages/create.html">custom packages</a>.</p>
 <h2 id="sub-modules-and-feature-gates"><a class="header" href="#sub-modules-and-feature-gates">Sub-Modules and Feature Gates</a></h2>
 <p>Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
 Rhai <code>Module</code>.</p>
@@ -326,7 +326,7 @@ Rhai <code>Module</code>.</p>
 because currently attributes do not work on individual function definitions due to a limitation of
 the procedural macros system.</p>
 <p>This is especially convenient when using the <code>combine_with_exported_module!</code> macro to develop
-<a href="/book/vnext/rust/packages/create.html">custom packages</a> because selected groups of functions can easily be included or excluded based on
+<a href="/book/rust/packages/create.html">custom packages</a> because selected groups of functions can easily be included or excluded based on
 different combinations of feature flags instead of having to manually include/exclude every
 single function.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -365,7 +365,7 @@ combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <p>Operators and overloaded functions can be specified via applying the <code>#[rhai_fn(name = &quot;...&quot;)]</code>
 attribute to individual functions.</p>
 <p>The text string given as the <code>name</code> parameter to <code>#[rhai_fn]</code> is used to register the function with
-the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
+the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
 <p>With <code>#[rhai_fn(name = &quot;...&quot;)]</code>, multiple functions may be registered under the same name in Rhai,
 so long as they have different parameters.</p>
 <p>Operators (which require function names that are not valid for Rust) can also be registered this way.</p>
@@ -396,7 +396,7 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="getters-setters-and-indexers"><a class="header" href="#getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
-<p>Functions can be marked as <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> for <a href="/book/vnext/rust/custom.html">custom types</a> via the <code>#[rhai_fn]</code>
+<p>Functions can be marked as <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> for <a href="/book/rust/custom.html">custom types</a> via the <code>#[rhai_fn]</code>
 attribute, which is applied on a function level.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -463,8 +463,8 @@ mod my_module {
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
 to mark it as  <em>pure</em>.</p>
 <p>Pure functions <em>MUST NOT</em> modify the value of the <code>&amp;mut</code> parameter.</p>
-<p>Therefore, pure functions can be passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
-<p>Non-pure functions, when passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
+<p>Therefore, pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
 <code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
 <p>For example:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -523,7 +523,7 @@ let r = VECTOR.first2;      // runtime error: constant modified
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="fallible-functions"><a class="header" href="#fallible-functions">Fallible Functions</a></h2>
-<p>To register <a href="/book/vnext/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
+<p>To register <a href="/book/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[rhai_fn(return_raw)]</code> attribute on functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
 <p>A syntax error is generated if the function with <code>#[rhai_fn(return_raw)]</code> does not
@@ -548,7 +548,7 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="nativecallcontext-parameter"><a class="header" href="#nativecallcontext-parameter"><code>NativeCallContext</code> Parameter</a></h2>
-<p>The <em>first</em> parameter of a function can also be <a href="/book/vnext/rust/context.html"><code>NativeCallContext</code></a>, which is treated
+<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>, which is treated
 specially by the plugins system.</p>
 <h2 id="export_module-parameters"><a class="header" href="#export_module-parameters"><code>#[export_module]</code> Parameters</a></h2>
 <p>Parameters can be applied to the <code>#[export_module]</code> attribute to override its default behavior.</p>
@@ -570,7 +570,7 @@ specially by the plugins system.</p>
 <tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, Value)</code></td><td>registers a setter for the named property</td></tr>
 <tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT) -&gt; Value</code></td><td>registers an index getter</td></tr>
 <tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT, Value)</code></td><td>registers an index setter</td></tr>
-<tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Type, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="/book/vnext/rust/fallible.html">fallible function</a></td></tr>
+<tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Type, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="/book/rust/fallible.html">fallible function</a></td></tr>
 <tr><td><code>pure</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ...) -&gt; ...</code></td><td>marks this as a <em>pure</em> function</td></tr>
 </tbody></table>
 

@@ -146,7 +146,7 @@
 (a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
 <p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-<a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> via the <code>Engine::on_progress</code> method:</p>
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> via the <code>Engine::on_progress</code> method:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -163,16 +163,16 @@ engine.on_progress(|count| {    // parameter is number of operations already per
 </span></code></pre></pre>
 <p>The closure passed to <code>Engine::on_progress</code> will be called once for every operation.
 Return <code>Some(token)</code> to terminate the script immediately, with the provided value
-(any <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a>) acting as a termination token.</p>
-<p>Progress tracking is disabled with the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature.</p>
+(any <a href="/book/language/dynamic.html"><code>Dynamic</code></a>) acting as a termination token.</p>
+<p>Progress tracking is disabled with the <a href="/book/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="termination-token"><a class="header" href="#termination-token">Termination Token</a></h2>
-<p>The <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value returned by the closure for <code>Engine::on_progress</code> is a <em>termination token</em>.
+<p>The <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value returned by the closure for <code>Engine::on_progress</code> is a <em>termination token</em>.
 A script that is manually terminated returns with <code>Err(EvalAltResult::ErrorTerminated(token, position))</code>
 wrapping this value.</p>
 <p>The termination token is commonly used to provide information on the <em>reason</em> or <em>source</em>
 behind the termination decision.</p>
 <p>If the termination token is not needed, simply return <code>Some(Dynamic::UNIT)</code> to terminate the script
-run with <a href="/book/vnext/language/values-and-types.html"><code>()</code></a> as the token.</p>
+run with <a href="/book/language/values-and-types.html"><code>()</code></a> as the token.</p>
 <h2 id="operations-count-vs-progress-percentage"><a class="header" href="#operations-count-vs-progress-percentage">Operations Count vs. Progress Percentage</a></h2>
 <p>Notice that the <em>operations count</em> value passed into the closure does not indicate the <em>percentage</em>
 of work already done by the script (and thus it is not real <em>progress</em> tracking), because it is

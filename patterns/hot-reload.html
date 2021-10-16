@@ -157,10 +157,10 @@
 <h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
 <ul>
 <li>
-<p>The Rhai <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is <em>re-entrant</em>, meaning that it is decoupled from scripts.</p>
+<p>The Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> is <em>re-entrant</em>, meaning that it is decoupled from scripts.</p>
 </li>
 <li>
-<p>A new script only needs to be recompiled and the new <a href="/book/vnext/engine/compile.html"><code>AST</code></a> replaces the old for new behaviors to be active.</p>
+<p>A new script only needs to be recompiled and the new <a href="/book/engine/compile.html"><code>AST</code></a> replaces the old for new behaviors to be active.</p>
 </li>
 <li>
 <p>Surgically <em>patch</em> scripts when only parts of the scripts are modified.</p>
@@ -168,7 +168,7 @@
 </ul>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <h3 id="embed-scripting-engine-and-script-into-system"><a class="header" href="#embed-scripting-engine-and-script-into-system">Embed scripting engine and script into system</a></h3>
-<p>Say, a system has a Rhai <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> plus a compiled script (in <a href="/book/vnext/engine/compile.html"><code>AST</code></a> form)...</p>
+<p>Say, a system has a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> plus a compiled script (in <a href="/book/engine/compile.html"><code>AST</code></a> form)...</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -198,7 +198,7 @@ system.on_event(|sys: &amp;System, event: &amp;str, data: Map| {
 </span></code></pre></pre>
 <h3 id="hot-reload-entire-script-upon-change"><a class="header" href="#hot-reload-entire-script-upon-change">Hot reload entire script upon change</a></h3>
 <p>If the control scripts are small enough and changes are infrequent, it is much simpler just to
-recompile the whole set of script and replace the original <a href="/book/vnext/engine/compile.html"><code>AST</code></a> with the new one.</p>
+recompile the whole set of script and replace the original <a href="/book/engine/compile.html"><code>AST</code></a> with the new one.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

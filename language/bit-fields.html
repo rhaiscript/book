@@ -149,14 +149,14 @@ If a bit is not set (i.e. <code>0</code>), the index access returns <code>false<
 <p>There is nothing here that cannot be done via standard bit-manipulation (i.e. shifting and masking)
 operations. However, this is an extremely useful, and performant, short-hand since it usually
 replaces a sequence of multiple steps.</p>
-<p>Indexing an integer as a bit-field is disabled via the <a href="/book/vnext/start/features.html"><code>no_index</code></a> feature.</p>
+<p>Indexing an integer as a bit-field is disabled via the <a href="/book/start/features.html"><code>no_index</code></a> feature.</p>
 <h2 id="from-least-significant-bit-lsb"><a class="header" href="#from-least-significant-bit-lsb">From Least-Significant Bit (LSB)</a></h2>
 <p>Bits in a bit-field are accessed with zero-based, non-negative integer indices:</p>
 <blockquote>
 <p><em>integer</em> <code>[</code> <em>index from 0 to 63 or 31</em> <code>]</code></p>
 <p><em>integer</em> <code>[</code> <em>index from 0 to 63 or 31</em> <code>] =</code> <em>new value</em> ;</p>
 </blockquote>
-<p>The maximum bit number that can be accessed is 63 (or 31 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
+<p>The maximum bit number that can be accessed is 63 (or 31 under <a href="/book/start/features.html"><code>only_i32</code></a>).</p>
 <h2 id="from-most-significant-bit-msb"><a class="header" href="#from-most-significant-bit-msb">From Most-Significant Bit (MSB)</a></h2>
 <p>A <em>negative</em> index accesses a bit in the bit-field counting from the <em>end</em>, or from the
 <em>most-significant bit</em>, with −1 being the <em>highest</em> bit.</p>
@@ -164,10 +164,10 @@ replaces a sequence of multiple steps.</p>
 <p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>]</code></p>
 <p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>] =</code> <em>new value</em> ;</p>
 </blockquote>
-<p>The maximum bit number that can be accessed is −64 (or −32 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
+<p>The maximum bit number that can be accessed is −64 (or −32 under <a href="/book/start/features.html"><code>only_i32</code></a>).</p>
 <h2 id="bit-field-functions"><a class="header" href="#bit-field-functions">Bit-Field Functions</a></h2>
-<p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>LogicPackage</code></a> but excluded if
-using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields:</p>
+<p>The following standard functions (defined in the <a href="/book/rust/packages/index.html"><code>LogicPackage</code></a> but excluded if
+using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields:</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>get_bit</code></td><td>bit number, counting from MSB if &lt; 0</td><td>returns the state of a bit: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td></tr>
 <tr><td><code>set_bit</code></td><td>1) bit number, counting from MSB if &lt; 0<br/>2) new state: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td><td>sets the state of a bit</td></tr>

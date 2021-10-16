@@ -142,36 +142,36 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="scope--initializing-and-maintaining-state"><a class="header" href="#scope--initializing-and-maintaining-state"><code>Scope</code> – Initializing and Maintaining State</a></h1>
-<p>By default, Rhai treats each <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> invocation as a fresh one, persisting only the functions
+<p>By default, Rhai treats each <a href="/book/engine/hello-world.html"><code>Engine</code></a> invocation as a fresh one, persisting only the functions
 that have been defined but no global state.</p>
 <p>This gives each evaluation a clean starting slate.</p>
 <p>In order to continue using the same global state from one invocation to the next, such a state
 (a <code>Scope</code>) must be manually created and passed in.</p>
-<p>All <code>Scope</code> <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> have values that are <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a>, meaning they can store
+<p>All <code>Scope</code> <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> have values that are <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, meaning they can store
 values of any type.</p>
-<p>Under <a href="/book/vnext/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
+<p>Under <a href="/book/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
 itself will also be <code>Send + Sync</code>. This is extremely useful in multi-threaded applications.</p>
 <h2 id="scope-api"><a class="header" href="#scope-api"><code>Scope</code> API</a></h2>
 <table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>new</code> <em>instance method</em></td><td>create a new empty <code>Scope</code></td></tr>
-<tr><td><code>len</code></td><td>number of <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> currently within the <code>Scope</code></td></tr>
-<tr><td><code>rewind</code></td><td><em>rewind</em> (i.e. reset) the <code>Scope</code> to a particular number of <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a></td></tr>
-<tr><td><code>clear</code></td><td>remove all <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> from the <code>Scope</code>, making it empty</td></tr>
+<tr><td><code>len</code></td><td>number of <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> currently within the <code>Scope</code></td></tr>
+<tr><td><code>rewind</code></td><td><em>rewind</em> (i.e. reset) the <code>Scope</code> to a particular number of <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a></td></tr>
+<tr><td><code>clear</code></td><td>remove all <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> from the <code>Scope</code>, making it empty</td></tr>
 <tr><td><code>is_empty</code></td><td>is the <code>Scope</code> empty?</td></tr>
-<tr><td><code>push</code>, <code>push_constant</code></td><td>add a new <a href="/book/vnext/language/variables.html">variable</a>/<a href="/book/vnext/language/constants.html">constant</a> into the <code>Scope</code> with a specified value</td></tr>
-<tr><td><code>push_dynamic</code>, <code>push_constant_dynamic</code></td><td>add a new <a href="/book/vnext/language/variables.html">variable</a>/<a href="/book/vnext/language/constants.html">constant</a> into the <code>Scope</code> with a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value</td></tr>
-<tr><td><code>contains</code></td><td>does the particular <a href="/book/vnext/language/variables.html">variable</a> or <a href="/book/vnext/language/constants.html">constant</a> exist in the <code>Scope</code>?</td></tr>
-<tr><td><code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code>, <code>set_value&lt;T&gt;</code></td><td>get/set the value of a <a href="/book/vnext/language/variables.html">variable</a> within the <code>Scope</code> (panics if trying to set the value of a <a href="/book/vnext/language/constants.html">constant</a>)</td></tr>
-<tr><td><code>is_constant</code></td><td>is the particular <a href="/book/vnext/language/variables.html">variable</a> in the <code>Scope</code> a <a href="/book/vnext/language/constants.html">constant</a>?</td></tr>
-<tr><td><code>set_or_push&lt;T&gt;</code></td><td>set the value of a <a href="/book/vnext/language/variables.html">variable</a> within the <code>Scope</code> if it exists and is not <a href="/book/vnext/language/constants.html">constant</a>; add a new <a href="/book/vnext/language/variables.html">variable</a> into the <code>Scope</code> otherwise</td></tr>
-<tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
-<tr><td><code>Extend::extend</code></td><td>add <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
+<tr><td><code>push</code>, <code>push_constant</code></td><td>add a new <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a> into the <code>Scope</code> with a specified value</td></tr>
+<tr><td><code>push_dynamic</code>, <code>push_constant_dynamic</code></td><td>add a new <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a> into the <code>Scope</code> with a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value</td></tr>
+<tr><td><code>contains</code></td><td>does the particular <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> exist in the <code>Scope</code>?</td></tr>
+<tr><td><code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code>, <code>set_value&lt;T&gt;</code></td><td>get/set the value of a <a href="/book/language/variables.html">variable</a> within the <code>Scope</code> (panics if trying to set the value of a <a href="/book/language/constants.html">constant</a>)</td></tr>
+<tr><td><code>is_constant</code></td><td>is the particular <a href="/book/language/variables.html">variable</a> in the <code>Scope</code> a <a href="/book/language/constants.html">constant</a>?</td></tr>
+<tr><td><code>set_or_push&lt;T&gt;</code></td><td>set the value of a <a href="/book/language/variables.html">variable</a> within the <code>Scope</code> if it exists and is not <a href="/book/language/constants.html">constant</a>; add a new <a href="/book/language/variables.html">variable</a> into the <code>Scope</code> otherwise</td></tr>
+<tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
+<tr><td><code>Extend::extend</code></td><td>add <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
 <p>For details on the <code>Scope</code> API, refer to the
 <a href="https://docs.rs/rhai/1.1.0/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
-<p>A newly-added <a href="/book/vnext/language/variables.html">variable</a> or <a href="/book/vnext/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
-<p>In other words, all versions are kept for <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a>, but only the latest ones can
+<p>A newly-added <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
+<p>In other words, all versions are kept for <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a>, but only the latest ones can
 be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> and <code>set_value&lt;T&gt;</code>.</p>
 <p>Essentially, a <code>Scope</code> is always searched in <em>reverse order</em>.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -220,12 +220,12 @@ assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y s
 <p>The <code>Scope</code> has a <em>lifetime</em> parameter, in the vast majority of cases it can be omitted and
 automatically inferred to be <code>'static</code>.</p>
 <p>The reason for such a lifetime parameter is obviously due to something held inside the <code>Scope</code>
-itself being a reference with a lifetime, and that “something” is the name of each <a href="/book/vnext/language/variables.html">variable</a> (and
-<a href="/book/vnext/language/constants.html">constant</a>) stored within the <code>Scope</code>.</p>
-<p>Names of <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> are strings, but they do not need to be owned <code>String</code> types.</p>
+itself being a reference with a lifetime, and that “something” is the name of each <a href="/book/language/variables.html">variable</a> (and
+<a href="/book/language/constants.html">constant</a>) stored within the <code>Scope</code>.</p>
+<p>Names of <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> are strings, but they do not need to be owned <code>String</code> types.</p>
 <p>In fact, the names can easily be string slices referencing external data.  This way, no additional
-<code>String</code> allocations are needed in order to push a <a href="/book/vnext/language/variables.html">variable</a> or <a href="/book/vnext/language/constants.html">constant</a> into the <code>Scope</code>.</p>
-<p>For applications where <a href="/book/vnext/language/variables.html">variables</a> and/or <a href="/book/vnext/language/constants.html">constants</a> are frequently pushed into and removed from
+<code>String</code> allocations are needed in order to push a <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> into the <code>Scope</code>.</p>
+<p>For applications where <a href="/book/language/variables.html">variables</a> and/or <a href="/book/language/constants.html">constants</a> are frequently pushed into and removed from
 a <code>Scope</code> in order to run custom scripts, this has significant performance implications.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

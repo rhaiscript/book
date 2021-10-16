@@ -145,21 +145,21 @@
 <p>Rhai can be successfully used as a domain-specific language (DSL).</p>
 <h2 id="expressions-only"><a class="header" href="#expressions-only">Expressions Only</a></h2>
 <p>In many DSL scenarios, only evaluation of expressions is needed.</p>
-<p>The <a href="/book/vnext/engine/expressions.html"><code>Engine::eval_expression_XXX</code></a> API can be used to restrict
+<p>The <a href="/book/engine/expressions.html"><code>Engine::eval_expression_XXX</code></a> API can be used to restrict
 a script to expressions only.</p>
 <h2 id="unicode-standard-annex-31-identifiers"><a class="header" href="#unicode-standard-annex-31-identifiers">Unicode Standard Annex #31 Identifiers</a></h2>
 <p>Variable names and other identifiers do not necessarily need to be ASCII-only.</p>
-<p>The <a href="/book/vnext/start/features.html"><code>unicode-xid-ident</code></a> feature, when turned on, causes Rhai to allow variable names and identifiers
+<p>The <a href="/book/start/features.html"><code>unicode-xid-ident</code></a> feature, when turned on, causes Rhai to allow variable names and identifiers
 that follow <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>.</p>
 <p>This is sometimes useful in a non-English DSL.</p>
 <h2 id="disable-keywords-andor-operators"><a class="header" href="#disable-keywords-andor-operators">Disable Keywords and/or Operators</a></h2>
 <p>In some DSL scenarios, it is necessary to further restrict the language to exclude certain
 language features that are not necessary or dangerous to the application.</p>
 <p>For example, a DSL may disable the <code>while</code> loop while keeping all other statement types intact.</p>
-<p>It is possible, in Rhai, to surgically <a href="/book/vnext/engine/disable.html">disable keywords and operators</a>.</p>
+<p>It is possible, in Rhai, to surgically <a href="/book/engine/disable.html">disable keywords and operators</a>.</p>
 <h2 id="custom-operators"><a class="header" href="#custom-operators">Custom Operators</a></h2>
 <p>On the other hand, some DSL scenarios require special operators that make sense only for
-that specific environment.  In such cases, it is possible to define <a href="/book/vnext/engine/custom-op.html">custom operators</a> in Rhai.</p>
+that specific environment.  In such cases, it is possible to define <a href="/book/engine/custom-op.html">custom operators</a> in Rhai.</p>
 <p>For example:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -172,10 +172,10 @@ animal eats food            // custom operator 'eats'
 eats(animal, food)          // &lt;- the above really de-sugars to this
 <span class="boring">}
 </span></code></pre></pre>
-<p>Although a <a href="/book/vnext/engine/custom-op.html">custom operator</a> always de-sugars to a simple function call,
+<p>Although a <a href="/book/engine/custom-op.html">custom operator</a> always de-sugars to a simple function call,
 nevertheless it makes the DSL syntax much simpler and expressive.</p>
 <h2 id="custom-syntax"><a class="header" href="#custom-syntax">Custom Syntax</a></h2>
-<p>For advanced DSL scenarios, it is possible to define entire expression <a href="/book/vnext/engine/custom-syntax.html"><em>syntax</em></a> –
+<p>For advanced DSL scenarios, it is possible to define entire expression <a href="/book/engine/custom-syntax.html"><em>syntax</em></a> –
 essentially custom statement types.</p>
 <p>For example, the following is a SQL-like syntax for some obscure DSL operation:</p>
 <pre><pre class="playground"><code class="language-rust no_run">

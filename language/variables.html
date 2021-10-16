@@ -151,14 +151,14 @@ In other words, the first character that is not an underscore <code>_</code> mus
 <p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.
 This restriction is to reduce confusion because, for instance, <code>_1</code> can easily be misread (or mis-typed) as <code>-1</code>.</p>
 <p>Variable names are case <em>sensitive</em>.</p>
-<p>Variable names also cannot be the same as a <a href="/book/vnext/appendix/keywords.html">keyword</a>.</p>
+<p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a>.</p>
 <h3 id="unicode-standard-annex-31-identifiers"><a class="header" href="#unicode-standard-annex-31-identifiers">Unicode Standard Annex #31 Identifiers</a></h3>
-<p>The <a href="/book/vnext/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
+<p>The <a href="/book/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
 <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>.</p>
 <h2 id="declare-a-variable"><a class="header" href="#declare-a-variable">Declare a Variable</a></h2>
 <p>Variables are declared using the <code>let</code> keyword.</p>
 <p>Variables do not have to be given an initial value.
-If none is provided, it defaults to <a href="/book/vnext/language/values-and-types.html"><code>()</code></a>.</p>
+If none is provided, it defaults to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <p>A variable defined within a statement block is <em>local</em> to that block.</p>
 <p>Use <code>is_def_var</code> to detect if a variable is defined.</p>
 <pre><pre class="playground"><code class="language-rust no_run">

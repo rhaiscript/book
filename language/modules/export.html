@@ -142,9 +142,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="export-variables-functions-and-sub-modules-in-module"><a class="header" href="#export-variables-functions-and-sub-modules-in-module">Export Variables, Functions and Sub-Modules in Module</a></h1>
-<p>The easiest way to expose a collection of functions as a self-contained <a href="/book/vnext/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
-<p>See the section on <a href="/book/vnext/rust/modules/ast.html"><em>Creating a Module from AST</em></a> for more details.</p>
-<p>The script text is evaluated, variables are then selectively exposed via the <a href="/book/vnext/language/modules/export.html"><code>export</code></a> statement.
+<p>The easiest way to expose a collection of functions as a self-contained <a href="/book/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
+<p>See the section on <a href="/book/rust/modules/ast.html"><em>Creating a Module from AST</em></a> for more details.</p>
+<p>The script text is evaluated, variables are then selectively exposed via the <a href="/book/language/modules/export.html"><code>export</code></a> statement.
 Functions defined by the script are automatically exported.</p>
 <p>Modules loaded within this module at the global level become <em>sub-modules</em> and are also automatically exported.</p>
 <h2 id="export-global-variables"><a class="header" href="#export-global-variables">Export Global Variables</a></h2>
@@ -191,8 +191,8 @@ export x, x as hello, x as world, y as foo, y as bar, z;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
-<p>All functions are automatically exported, <em>unless</em> it is explicitly opt-out with the <a href="/book/vnext/language/modules/export.html"><code>private</code></a> prefix.</p>
-<p>Functions declared <a href="/book/vnext/language/modules/export.html"><code>private</code></a> are hidden to the outside.</p>
+<p>All functions are automatically exported, <em>unless</em> it is explicitly opt-out with the <a href="/book/language/modules/export.html"><code>private</code></a> prefix.</p>
+<p>Functions declared <a href="/book/language/modules/export.html"><code>private</code></a> are hidden to the outside.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -203,7 +203,7 @@ fn inc(x) { x + 1 }     // script-defined function - default public
 private fn foo() {}     // private function - hidden
 <span class="boring">}
 </span></code></pre></pre>
-<p><a href="/book/vnext/language/modules/export.html"><code>private</code></a> functions are commonly called to initialize the module.
+<p><a href="/book/language/modules/export.html"><code>private</code></a> functions are commonly called to initialize the module.
 They cannot be called apart from this.</p>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>All loaded modules are automatically exported as sub-modules.</p>

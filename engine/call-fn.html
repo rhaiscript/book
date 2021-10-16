@@ -143,7 +143,7 @@
                     <main>
                         <h1 id="call-rhai-functions-from-rust"><a class="header" href="#call-rhai-functions-from-rust">Call Rhai Functions from Rust</a></h1>
 <p>Rhai also allows working <em>backwards</em> from the other direction – i.e. calling a Rhai-scripted
-<a href="/book/vnext/language/functions.html">function</a> from Rust via <code>Engine::call_fn</code>.</p>
+<a href="/book/language/functions.html">function</a> from Rust via <code>Engine::call_fn</code>.</p>
 <p>Assume this script:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -166,7 +166,7 @@ fn hello() {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p><a href="/book/vnext/language/functions.html">Functions</a> defined within the script can be called using <code>Engine::call_fn</code>:</p>
+<p><a href="/book/language/functions.html">Functions</a> defined within the script can be called using <code>Engine::call_fn</code>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -191,16 +191,16 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ()
 //                                                          ^^ unit = tuple of zero
 <span class="boring">}
 </span></code></pre></pre>
-<p>When using <code>Engine::call_fn</code>, the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is first evaluated before the function is called.
-This is usually desirable in order to <a href="/book/vnext/language/modules/import.html">import</a> the necessary external <a href="/book/vnext/rust/modules/index.html">modules</a> that are
+<p>When using <code>Engine::call_fn</code>, the <a href="/book/engine/compile.html"><code>AST</code></a> is first evaluated before the function is called.
+This is usually desirable in order to <a href="/book/language/modules/import.html">import</a> the necessary external <a href="/book/rust/modules/index.html">modules</a> that are
 needed by the function.</p>
-<p>If this default behavior is not desirable, use <a href="/book/vnext/engine/ast.html"><code>AST::clear_statements</code></a>
-to create a copy of the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> without any body script, only function definitions.</p>
+<p>If this default behavior is not desirable, use <a href="/book/engine/ast.html"><code>AST::clear_statements</code></a>
+to create a copy of the <a href="/book/engine/compile.html"><code>AST</code></a> without any body script, only function definitions.</p>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> trait</a></h2>
-<p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="/book/vnext/rust/traits.html"><code>FuncArgs</code></a> trait,
+<p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="/book/rust/traits.html"><code>FuncArgs</code></a> trait,
 which is used to parse a data type into individual argument values for the function call.</p>
-<p>Rhai implements <a href="/book/vnext/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
-<p>Custom types (e.g. structures) can also implement <a href="/book/vnext/rust/traits.html"><code>FuncArgs</code></a> so they can be used for
+<p>Rhai implements <a href="/book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
+<p>Custom types (e.g. structures) can also implement <a href="/book/rust/traits.html"><code>FuncArgs</code></a> so they can be used for
 calling <code>Engine::call_fn</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

@@ -144,7 +144,7 @@
                         <h1 id="call-method-as-function"><a class="header" href="#call-method-as-function">Call Method as Function</a></h1>
 <h2 id="method-call-style-vs-function-call-style"><a class="header" href="#method-call-style-vs-function-call-style">Method-Call Style vs. Function-Call Style</a></h2>
 <p>Any registered function with a first argument that is a <code>&amp;mut</code> reference can be used as method
-because internally they are the same thing: methods on a <a href="/book/vnext/rust/custom.html">custom type</a> is implemented as a functions
+because internally they are the same thing: methods on a <a href="/book/rust/custom.html">custom type</a> is implemented as a functions
 taking a <code>&amp;mut</code> first argument.</p>
 <p>This design is similar to Rust.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -168,7 +168,7 @@ let result = engine.eval::&lt;i64&gt;(
 println!(&quot;result: {}&quot;, result);     // prints 1
 <span class="boring">}
 </span></code></pre></pre>
-<p>Under <a href="/book/vnext/start/features.html"><code>no_object</code></a>, however, the <em>method-call</em> style is no longer supported.</p>
+<p>Under <a href="/book/start/features.html"><code>no_object</code></a>, however, the <em>method-call</em> style is no longer supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -178,15 +178,15 @@ let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="first-mut-parameter"><a class="header" href="#first-mut-parameter">First <code>&amp;mut</code> Parameter</a></h2>
-<p>The opposite direction also works – <a href="/book/vnext/rust/custom.html">methods</a> in a Rust <a href="/book/vnext/rust/custom.html">custom type</a> registered
-with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
-are registered as regular <a href="/book/vnext/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
+<p>The opposite direction also works – <a href="/book/rust/custom.html">methods</a> in a Rust <a href="/book/rust/custom.html">custom type</a> registered
+with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
+are registered as regular <a href="/book/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
 <p>Unlike functions defined in script (for which all arguments are passed by <em>value</em>),
 native Rust functions may mutate the first <code>&amp;mut</code> argument.</p>
 <p>Sometimes, however, there are more subtle differences. Methods called in normal function-call style
 may end up not muting the object afterall – see the example below.</p>
-<p>Custom types, <a href="/book/vnext/rust/getters-setters.html">properties</a>, <a href="/book/vnext/rust/indexers.html">indexers</a> and methods are disabled under the
-<a href="/book/vnext/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Custom types, <a href="/book/rust/getters-setters.html">properties</a>, <a href="/book/rust/indexers.html">indexers</a> and methods are disabled under the
+<a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -208,7 +208,7 @@ array[0].update();  // &lt;- call in method-call style will update 'a'
 </span></code></pre></pre>
 <p><strong>IMPORTANT: Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.</strong></p>
 <h2 id="number-of-parameters-in-methods"><a class="header" href="#number-of-parameters-in-methods">Number of Parameters in Methods</a></h2>
-<p>Native Rust methods registered with an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
+<p>Native Rust methods registered with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
 an equivalent method coded in script, where the object is accessed via the <code>this</code> pointer instead.</p>
 <p>The following table illustrates the differences:</p>
 <table><thead><tr><th align="center">Function type</th><th align="center">Parameters</th><th align="center">Object reference</th><th align="center">Function signature</th></tr></thead><tbody>
@@ -281,8 +281,8 @@ value.foo(value);   // &lt;- error: data race detected!
 clones a shared reference to it.  Using it as the method call object (i.e. the <code>this</code> pointer) takes
 a mutable reference to the underlying value, which then cause a data race because a non-mutable
 reference is already outstanding due to the argument (which uses the same variable).</p>
-<p>Shared values are typically created from <a href="/book/vnext/language/fn-closure.html">closures</a> which capture external variable, so data races
-are not possible in Rhai under the <a href="/book/vnext/start/features.html"><code>no_closure</code></a> feature.</p>
+<p>Shared values are typically created from <a href="/book/language/fn-closure.html">closures</a> which capture external variable, so data races
+are not possible in Rhai under the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
 
                     </main>
 

@@ -142,7 +142,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
-<p>Rhai supports defining functions in script (unless disabled with <a href="/book/vnext/start/features.html"><code>no_function</code></a>):</p>
+<p>Rhai supports defining functions in script (unless disabled with <a href="/book/start/features.html"><code>no_function</code></a>):</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -212,7 +212,7 @@ fn foo() { x }          // &lt;- syntax error: variable 'x' doesn't exist
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="but-can-call-other-functions-and-access-modules"><a class="header" href="#but-can-call-other-functions-and-access-modules">But Can Call Other Functions and Access Modules</a></h2>
-<p>All functions in the same <a href="/book/vnext/engine/compile.html"><code>AST</code></a> can call each other.</p>
+<p>All functions in the same <a href="/book/engine/compile.html"><code>AST</code></a> can call each other.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -221,7 +221,7 @@ fn foo() { x }          // &lt;- syntax error: variable 'x' doesn't exist
 fn bar(x) { foo(x) }    // ok! function 'foo' can be called
 <span class="boring">}
 </span></code></pre></pre>
-<p>In addition, <a href="/book/vnext/rust/modules/index.html">modules</a> <a href="/book/vnext/language/modules/import.html">imported</a> at global level can be accessed.</p>
+<p>In addition, <a href="/book/rust/modules/index.html">modules</a> <a href="/book/language/modules/import.html">imported</a> at global level can be accessed.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -242,9 +242,9 @@ fn foo(x) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="automatic-global-module"><a class="header" href="#automatic-global-module">Automatic Global Module</a></h2>
-<p>When a <a href="/book/vnext/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/vnext/rust/modules/index.html">module</a> called <code>global</code>.</p>
-<p>Functions can access those <a href="/book/vnext/language/constants.html">constants</a> via the special <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a>.</p>
-<p>Naturally, the automatic <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a> is not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<p>When a <a href="/book/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/rust/modules/index.html">module</a> called <code>global</code>.</p>
+<p>Functions can access those <a href="/book/language/constants.html">constants</a> via the special <code>global</code> <a href="/book/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <code>global</code> <a href="/book/rust/modules/index.html">module</a> is not available under <a href="/book/start/features.html"><code>no_function</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -279,7 +279,7 @@ fn foo(x) { x + 1 }         // &lt;- define 'foo' after use
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="arguments-are-passed-by-value"><a class="header" href="#arguments-are-passed-by-value">Arguments are Passed by Value</a></h2>
-<p>Functions defined in script always take <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> parameters (i.e. they can be of any types).
+<p>Functions defined in script always take <a href="/book/language/dynamic.html"><code>Dynamic</code></a> parameters (i.e. they can be of any types).
 Therefore, functions with the same name and same <em>number</em> of parameters are equivalent.</p>
 <p>All arguments are passed by <em>value</em>, so all Rhai script-defined functions are <em>pure</em>
 (i.e. they never modify their arguments).</p>
@@ -299,7 +299,7 @@ x == 500;           // 'x' is NOT changed!
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="is_def_fn"><a class="header" href="#is_def_fn"><code>is_def_fn</code></a></h2>
-<p>Use <code>is_def_fn</code> (not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
+<p>Use <code>is_def_fn</code> (not available under <a href="/book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
 (and therefore callable) based on its name and the number of parameters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

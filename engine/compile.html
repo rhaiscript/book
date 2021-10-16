@@ -159,7 +159,7 @@ for _ in 0..42 {
 <span class="boring">}
 </span></code></pre></pre>
 <p>Compiling a script file is also supported with <code>Engine::compile_file</code>
-(not available under <a href="/book/vnext/start/features.html"><code>no_std</code></a> or in <a href="/book/vnext/start/builds/wasm.html">WASM</a> builds):</p>
+(not available under <a href="/book/start/features.html"><code>no_std</code></a> or in <a href="/book/start/builds/wasm.html">WASM</a> builds):</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -168,7 +168,7 @@ for _ in 0..42 {
 </span></code></pre></pre>
 <h2 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h2>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be <a href="/book/vnext/start/bin.html"><code>rhai-run</code></a>).</p>
+script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
 <pre><code class="language-js">#!/home/to/me/bin/rhai-run

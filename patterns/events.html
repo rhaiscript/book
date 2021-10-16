@@ -162,13 +162,13 @@
 <li>
 <p>An <em>event handler</em> object is declared that holds the following items:</p>
 <ul>
-<li><a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> with registered functions serving as an API,</li>
-<li><a href="/book/vnext/engine/compile.html"><code>AST</code></a> of the user script,</li>
-<li>a <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> containing state.</li>
+<li><a href="/book/engine/hello-world.html"><code>Engine</code></a> with registered functions serving as an API,</li>
+<li><a href="/book/engine/compile.html"><code>AST</code></a> of the user script,</li>
+<li>a <a href="/book/engine/scope.html"><code>Scope</code></a> containing state.</li>
 </ul>
 </li>
 <li>
-<p>Upon an event, the appropriate event handler function in the script is called via <a href="/book/vnext/engine/call-fn.html"><code>Engine::call_fn</code></a>.</p>
+<p>Upon an event, the appropriate event handler function in the script is called via <a href="/book/engine/call-fn.html"><code>Engine::call_fn</code></a>.</p>
 </li>
 <li>
 <p>Optionally, trap the <code>EvalAltResult::ErrorFunctionNotFound</code> error to provide a default implementation.</p>
@@ -176,9 +176,9 @@
 </ul>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <h3 id="declare-handler-object"><a class="header" href="#declare-handler-object">Declare Handler Object</a></h3>
-<p>In most cases, it would be simpler to store an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> instance together with the handler object
+<p>In most cases, it would be simpler to store an <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance together with the handler object
 because it only requires registering all API functions only once.</p>
-<p>In rare cases where handlers are created and destroyed in a tight loop, a new <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> instance
+<p>In rare cases where handlers are created and destroyed in a tight loop, a new <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance
 can be created for each event. See <a href="parallel.html"><em>One Engine Instance Per Call</em></a> for more details.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -197,7 +197,7 @@ struct Handler {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="register-api-for-any-custom-type"><a class="header" href="#register-api-for-any-custom-type">Register API for Any Custom Type</a></h3>
-<p><a href="/book/vnext/rust/custom.html">Custom types</a> are often used to hold state. The easiest way to register an entire API is via a <a href="/book/vnext/plugins/module.html">plugin module</a>.</p>
+<p><a href="/book/rust/custom.html">Custom types</a> are often used to hold state. The easiest way to register an entire API is via a <a href="/book/plugins/module.html">plugin module</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -226,12 +226,12 @@ mod SomeTypeAPI {
 <h3 id="initialize-handler-object"><a class="header" href="#initialize-handler-object">Initialize Handler Object</a></h3>
 <p>Steps to initialize the event handler:</p>
 <ol>
-<li>Register an API with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>,</li>
-<li>Create a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> to serve as the stored state,</li>
-<li>Add default state variables into the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>,</li>
-<li>Get the handler script and <a href="/book/vnext/engine/compile.html">compile</a> it,</li>
-<li>Store the compiled <a href="/book/vnext/engine/compile.html"><code>AST</code></a> for future evaluations,</li>
-<li>Run the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> to initialize event handler state variables.</li>
+<li>Register an API with the <a href="/book/engine/hello-world.html"><code>Engine</code></a>,</li>
+<li>Create a custom <a href="/book/engine/scope.html"><code>Scope</code></a> to serve as the stored state,</li>
+<li>Add default state variables into the custom <a href="/book/engine/scope.html"><code>Scope</code></a>,</li>
+<li>Get the handler script and <a href="/book/engine/compile.html">compile</a> it,</li>
+<li>Store the compiled <a href="/book/engine/compile.html"><code>AST</code></a> for future evaluations,</li>
+<li>Run the <a href="/book/engine/compile.html"><code>AST</code></a> to initialize event handler state variables.</li>
 </ol>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -300,7 +300,7 @@ mod SomeTypeAPI {
                             // Turn function-not-found into a success
                             Ok(Dynamic::UNIT)
                          }
-                         _ =&gt; Err(err.into())
+                         _ =&gt; Err(err)
                       })?
         }
     }
@@ -308,9 +308,9 @@ mod SomeTypeAPI {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="sample-handler-script"><a class="header" href="#sample-handler-script">Sample Handler Script</a></h3>
-<p>Because the stored state is kept in a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>, it is possible for all functions defined
+<p>Because the stored state is kept in a custom <a href="/book/engine/scope.html"><code>Scope</code></a>, it is possible for all functions defined
 in the handler script to access and modify these state variables.</p>
-<p>The API registered with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> can be also used throughout the script.</p>
+<p>The API registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be also used throughout the script.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

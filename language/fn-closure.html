@@ -143,20 +143,20 @@
                     <main>
                         <h1 id="simulating-closures"><a class="header" href="#simulating-closures">Simulating Closures</a></h1>
 <h2 id="capture-external-variables-via-automatic-currying"><a class="header" href="#capture-external-variables-via-automatic-currying">Capture External Variables via Automatic Currying</a></h2>
-<p>Since <a href="/book/vnext/language/fn-anon.html">anonymous functions</a> de-sugar to standard function definitions, they retain all the behaviors of
+<p>Since <a href="/book/language/fn-anon.html">anonymous functions</a> de-sugar to standard function definitions, they retain all the behaviors of
 Rhai functions, including being <em>pure</em>, having no access to external variables.</p>
 <p>The anonymous function syntax, however, automatically <em>captures</em> variables that are not defined within
 the current scope, but are defined in the external scope – i.e. the scope where the anonymous function
 is created.</p>
-<p>Variables that are accessible during the time the <a href="/book/vnext/language/fn-anon.html">anonymous function</a> is created can be captured,
+<p>Variables that are accessible during the time the <a href="/book/language/fn-anon.html">anonymous function</a> is created can be captured,
 as long as they are not shadowed by local variables defined within the function’s scope.</p>
 <p>The captured variables are automatically converted into <strong>reference-counted shared values</strong>
-(<code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code> in normal builds, <code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> in <a href="/book/vnext/start/features.html"><code>sync</code></a> builds).</p>
+(<code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code> in normal builds, <code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> in <a href="/book/start/features.html"><code>sync</code></a> builds).</p>
 <p>Therefore, similar to closures in many languages, these captured shared values persist through
 reference counting, and may be read or modified even after the variables that hold them
 go out of scope and no longer exist.</p>
 <p>Use the <code>Dynamic::is_shared</code> function to check whether a particular value is a shared value.</p>
-<p>Automatic currying can be turned off via the <a href="/book/vnext/start/features.html"><code>no_closure</code></a> feature.</p>
+<p>Automatic currying can be turned off via the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -231,10 +231,10 @@ x.call(f, 2);                       // &lt;- error: data race detected on 'x'
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="data-races-in-sync-builds-can-become-deadlocks"><a class="header" href="#data-races-in-sync-builds-can-become-deadlocks">Data Races in <code>sync</code> Builds Can Become Deadlocks</a></h2>
-<p>Under the <a href="/book/vnext/start/features.html"><code>sync</code></a> feature, shared values are guarded with a <code>RwLock</code>, meaning that data race
+<p>Under the <a href="/book/start/features.html"><code>sync</code></a> feature, shared values are guarded with a <code>RwLock</code>, meaning that data race
 conditions no longer raise an error.</p>
 <p>Instead, they wait endlessly for the <code>RwLock</code> to be freed, and thus can become deadlocks.</p>
-<p>On the other hand, since the same thread (i.e. the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> thread) that is holding the lock
+<p>On the other hand, since the same thread (i.e. the <a href="/book/engine/hello-world.html"><code>Engine</code></a> thread) that is holding the lock
 is attempting to read it again, this may also <a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html#panics-1">panic</a>
 depending on the O/S.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -266,10 +266,10 @@ in the current execution scope – where the anonymous function is created.</p>
 </li>
 <li>
 <p>The variable is then converted into a <strong>reference-counted shared value</strong>.</p>
-<p>An <a href="/book/vnext/language/fn-anon.html">anonymous function</a> which captures an external variable is the only way to create a reference-counted shared value in Rhai.</p>
+<p>An <a href="/book/language/fn-anon.html">anonymous function</a> which captures an external variable is the only way to create a reference-counted shared value in Rhai.</p>
 </li>
 <li>
-<p>The shared value is then <a href="/book/vnext/language/fn-curry.html">curried</a> into the <a href="/book/vnext/language/fn-ptr.html">function pointer</a> itself, essentially carrying a reference to that shared value
+<p>The shared value is then <a href="/book/language/fn-curry.html">curried</a> into the <a href="/book/language/fn-ptr.html">function pointer</a> itself, essentially carrying a reference to that shared value
 and inserting it into future calls of the function.</p>
 <p>This process is called <em>Automatic Currying</em>, and is the mechanism through which Rhai simulates normal closures.</p>
 </li>

@@ -144,8 +144,8 @@
                         <h1 id="value-conversions"><a class="header" href="#value-conversions">Value Conversions</a></h1>
 <h2 id="convert-between-integer-and-floating-point"><a class="header" href="#convert-between-integer-and-floating-point">Convert Between Integer and Floating-Point</a></h2>
 <p>The <code>to_float</code> function converts a supported number to <code>FLOAT</code> (defaults to <code>f64</code>).</p>
-<p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
-<p>The <code>to_decimal</code> function converts a supported number to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>).</p>
+<p>The <code>to_int</code> function converts a supported number to <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/start/features.html"><code>only_i32</code></a>).</p>
+<p>The <code>to_decimal</code> function converts a supported number to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>).</p>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
 <pre><code class="language-js">let x = 42;                     // 'x' is an integer
 
@@ -164,11 +164,11 @@ let c = 'X';                    // character
 print(`c is '${c}' and its code is ${c.to_int()}`); // prints &quot;c is 'X' and its code is 88&quot;
 </code></pre>
 <h2 id="parse-string-into-number"><a class="header" href="#parse-string-into-number">Parse String into Number</a></h2>
-<p>The <code>parse_float</code> function converts a <a href="/book/vnext/language/strings-chars.html">string</a> into a <code>FLOAT</code> (defaults to <code>f64</code>,
-<code>f32</code> under <a href="/book/vnext/start/features.html"><code>f32_float</code></a> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> under <a href="/book/vnext/start/features.html"><code>no_float</code></a> and <a href="/book/vnext/start/features.html"><code>decimal</code></a>).</p>
-<p>The <code>parse_int</code> function converts a <a href="/book/vnext/language/strings-chars.html">string</a> into an <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).
-An optional radix (2-36) can be provided to parse the <a href="/book/vnext/language/strings-chars.html">string</a> into a number of the specified radix.</p>
-<p>The <code>parse_decimal</code> function converts a <a href="/book/vnext/language/strings-chars.html">string</a> into a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>).</p>
+<p>The <code>parse_float</code> function converts a <a href="/book/language/strings-chars.html">string</a> into a <code>FLOAT</code> (defaults to <code>f64</code>,
+<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> under <a href="/book/start/features.html"><code>no_float</code></a> and <a href="/book/start/features.html"><code>decimal</code></a>).</p>
+<p>The <code>parse_int</code> function converts a <a href="/book/language/strings-chars.html">string</a> into an <code>INT</code> (<code>i32</code> or <code>i64</code> depending on <a href="/book/start/features.html"><code>only_i32</code></a>).
+An optional radix (2-36) can be provided to parse the <a href="/book/language/strings-chars.html">string</a> into a number of the specified radix.</p>
+<p>The <code>parse_decimal</code> function converts a <a href="/book/language/strings-chars.html">string</a> into a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -200,9 +200,9 @@ type_of(hex) == &quot;i64&quot;;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="formatting-numbers"><a class="header" href="#formatting-numbers">Formatting Numbers</a></h2>
-<p>The <code>to_binary</code> function converts an integer number to a <a href="/book/vnext/language/strings-chars.html">string</a> in binary (i.e. only <code>1</code> and <code>0</code>).</p>
-<p>The <code>to_octal</code> function converts an integer number to a <a href="/book/vnext/language/strings-chars.html">string</a> in octal (i.e. from <code>0</code> to <code>7</code>).</p>
-<p>The <code>to_hex</code> function converts an integer number to a <a href="/book/vnext/language/strings-chars.html">string</a> in hex.</p>
+<p>The <code>to_binary</code> function converts an integer number to a <a href="/book/language/strings-chars.html">string</a> in binary (i.e. only <code>1</code> and <code>0</code>).</p>
+<p>The <code>to_octal</code> function converts an integer number to a <a href="/book/language/strings-chars.html">string</a> in octal (i.e. from <code>0</code> to <code>7</code>).</p>
+<p>The <code>to_hex</code> function converts an integer number to a <a href="/book/language/strings-chars.html">string</a> in hex.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

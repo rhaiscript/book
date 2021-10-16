@@ -149,23 +149,23 @@
 </li>
 <li>
 <p><code>Simple</code> (default) performs only relatively <em>safe</em> optimizations without causing side-effects
-(i.e. it only relies on static analysis and <a href="/book/vnext/engine/builtin.html">built-in operators</a> for <a href="/book/vnext/language/constants.html">constant</a> <a href="/book/vnext/language/values-and-types.html">standard types</a>,
+(i.e. it only relies on static analysis and <a href="/book/engine/builtin.html">built-in operators</a> for <a href="/book/language/constants.html">constant</a> <a href="/book/language/values-and-types.html">standard types</a>,
 and will not perform any external function calls).</p>
 <p>However, it is important to bear the caveat in mind that, when <em>constants propagation</em> is
-performed, and if the <a href="/book/vnext/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust functions),
+performed, and if the <a href="/book/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust functions),
 the modified values will <em>not</em> show up in the optimized script.  Only the initialization values
-of <a href="/book/vnext/language/constants.html">constants</a> are ever retained.</p>
-<p>Furthermore, overriding a <a href="/book/vnext/engine/builtin.html">built-in operator</a> in the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> afterwards has no effect after the
+of <a href="/book/language/constants.html">constants</a> are ever retained.</p>
+<p>Furthermore, overriding a <a href="/book/engine/builtin.html">built-in operator</a> in the <a href="/book/engine/hello-world.html"><code>Engine</code></a> afterwards has no effect after the
 optimizer replaces an expression with its calculated value.</p>
 </li>
 <li>
-<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="/book/vnext/language/constants.html">constant</a> arguments
+<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="/book/language/constants.html">constant</a> arguments
 to determine their results. One benefit to this is that many more optimization opportunities
 arise, especially with regards to comparison operators.</p>
 </li>
 </ul>
 <h2 id="set-optimization-level"><a class="header" href="#set-optimization-level">Set Optimization Level</a></h2>
-<p>An <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>‘s optimization level is set via a call to <code>Engine::set_optimization_level</code>:</p>
+<p>An <a href="/book/engine/hello-world.html"><code>Engine</code></a>‘s optimization level is set via a call to <code>Engine::set_optimization_level</code>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

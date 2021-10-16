@@ -143,30 +143,30 @@
                     <main>
                         <h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
-<p>A <a href="/book/vnext/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="/book/vnext/engine/compile.html"><code>AST</code></a>) containing global <a href="/book/vnext/language/variables.html">variables</a>,
-<a href="/book/vnext/language/functions.html">functions</a> and sub-modules via the <code>Module::eval_ast_as_new</code> method.</p>
-<p>See the section on <a href="/book/vnext/language/modules/export.html"><em>Exporting Variables, Functions and Sub-Modules</em></a> for details on how to
+<p>A <a href="/book/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="/book/engine/compile.html"><code>AST</code></a>) containing global <a href="/book/language/variables.html">variables</a>,
+<a href="/book/language/functions.html">functions</a> and sub-modules via the <code>Module::eval_ast_as_new</code> method.</p>
+<p>See the section on <a href="/book/language/modules/export.html"><em>Exporting Variables, Functions and Sub-Modules</em></a> for details on how to
 prepare a Rhai script for this purpose as well as to control which functions/variables to export.</p>
-<p>When given an <a href="/book/vnext/engine/compile.html"><code>AST</code></a>, it is first evaluated (usually to <a href="/book/vnext/language/modules/import.html">import</a> <a href="/book/vnext/rust/modules/index.html">modules</a> and set up global
-<a href="/book/vnext/language/constants.html">constants</a> used by <a href="/book/vnext/language/functions.html">functions</a>), then the following items are exposed as members of the new <a href="/book/vnext/rust/modules/index.html">module</a>:</p>
+<p>When given an <a href="/book/engine/compile.html"><code>AST</code></a>, it is first evaluated (usually to <a href="/book/language/modules/import.html">import</a> <a href="/book/rust/modules/index.html">modules</a> and set up global
+<a href="/book/language/constants.html">constants</a> used by <a href="/book/language/functions.html">functions</a>), then the following items are exposed as members of the new <a href="/book/rust/modules/index.html">module</a>:</p>
 <ul>
 <li>
-<p>Global <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> – all <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> exported via the
-<a href="/book/vnext/language/modules/export.html"><code>export</code></a> statement (those not exported remain hidden).</p>
+<p>Global <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> – all <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> exported via the
+<a href="/book/language/modules/export.html"><code>export</code></a> statement (those not exported remain hidden).</p>
 </li>
 <li>
-<p><a href="/book/vnext/language/functions.html">Functions</a> not specifically marked <a href="/book/vnext/language/modules/export.html"><code>private</code></a>.</p>
+<p><a href="/book/language/functions.html">Functions</a> not specifically marked <a href="/book/language/modules/export.html"><code>private</code></a>.</p>
 </li>
 <li>
-<p>Imported <a href="/book/vnext/rust/modules/index.html">modules</a> that remain in the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
+<p>Imported <a href="/book/rust/modules/index.html">modules</a> that remain in the <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
 <p><code>Module::eval_ast_as_new</code> encapsulates the entire <code>AST</code> into each function call, merging the
 module namespace with the global namespace.  Therefore, functions defined within the same module
 script can cross-call each other.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
-<p>Don’t forget the <a href="/book/vnext/language/modules/export.html"><code>export</code></a> statement, otherwise there will be no variables exposed by the module
-other than non-<a href="/book/vnext/language/modules/export.html"><code>private</code></a> functions (unless that’s intentional).</p>
+<p>Don’t forget the <a href="/book/language/modules/export.html"><code>export</code></a> statement, otherwise there will be no variables exposed by the module
+other than non-<a href="/book/language/modules/export.html"><code>private</code></a> functions (unless that’s intentional).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

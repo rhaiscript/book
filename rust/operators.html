@@ -156,11 +156,11 @@ let x = +(a, b);        // &lt;- the above is equivalent to this function call
 <p>Similarly, comparison operators including <code>==</code>, <code>!=</code> etc. are all implemented as functions,
 with the stark exception of <code>&amp;&amp;</code> and <code>||</code>.</p>
 <h2 id="and--cannot-be-overloaded"><a class="header" href="#and--cannot-be-overloaded"><code>&amp;&amp;</code> and <code>||</code> Cannot Be Overloaded</a></h2>
-<p>Because they <a href="/book/vnext/language/logic.html#boolean-operators"><em>short-circuit</em></a>, <code>&amp;&amp;</code> and <code>||</code> are
+<p>Because they <a href="/book/language/logic.html#boolean-operators"><em>short-circuit</em></a>, <code>&amp;&amp;</code> and <code>||</code> are
 handled specially and <em>not</em> via a function; as a result, overriding them has no effect at all.</p>
 <h2 id="overload-operator-via-rust-function"><a class="header" href="#overload-operator-via-rust-function">Overload Operator via Rust Function</a></h2>
 <p>Operator functions cannot be defined in script because operators are usually not valid function names.</p>
-<p>However, operator functions <em>can</em> be registered to the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> via the <code>Engine::register_XXX</code> API.</p>
+<p>However, operator functions <em>can</em> be registered to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via the <code>Engine::register_XXX</code> API.</p>
 <p>When a custom operator function is registered with the same name as an operator, it <em>overrides</em> the
 built-in version.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -192,11 +192,11 @@ result == 43;                                       //    ... but not now
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="considerations"><a class="header" href="#considerations">Considerations</a></h2>
-<p>Normally, use operator overloading for <a href="/book/vnext/rust/custom.html">custom types</a> only.</p>
+<p>Normally, use operator overloading for <a href="/book/rust/custom.html">custom types</a> only.</p>
 <p>Be very careful when overriding built-in operators because users expect standard operators to behave
 in a consistent and predictable manner, and will be annoyed if a calculation for <code>+</code> turns into a
 subtraction, for example.</p>
-<p>Operator overloading also impacts script optimization when using <a href="/book/vnext/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>.
+<p>Operator overloading also impacts script optimization when using <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>.
 See the [script-optimization] for more details.</p>
 
                     </main>

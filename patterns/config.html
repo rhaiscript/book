@@ -160,16 +160,16 @@
 <h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
 <ul>
 <li>
-<p>Leverage the loadable <a href="/book/vnext/rust/modules/index.html">modules</a> of Rhai.  The <a href="/book/vnext/start/features.html"><code>no_module</code></a> feature must not be on.</p>
+<p>Leverage the loadable <a href="/book/rust/modules/index.html">modules</a> of Rhai.  The <a href="/book/start/features.html"><code>no_module</code></a> feature must not be on.</p>
 </li>
 <li>
 <p>Expose the configuration API.  Use separate scripts to configure that API.  Dynamically load scripts via the <code>import</code> statement.</p>
 </li>
 <li>
-<p>Leverage <a href="/book/vnext/rust/functions.html#function-overloading">function overloading</a> to simplify the API design.</p>
+<p>Leverage <a href="/book/rust/functions.html#function-overloading">function overloading</a> to simplify the API design.</p>
 </li>
 <li>
-<p>Since Rhai is <em>sand-boxed</em>, it cannot mutate the environment.  To modify the external configuration object via an API, it must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/vnext/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>Since Rhai is <em>sand-boxed</em>, it cannot mutate the environment.  To modify the external configuration object via an API, it must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 </ul>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
@@ -193,7 +193,7 @@ struct Config {
 </span>pub type SharedConfig = Rc&lt;RefCell&lt;Config&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
-<p>or in multi-threaded environments with the <a href="/book/vnext/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
+<p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -205,7 +205,7 @@ let config: SharedConfig = Arc&lt;Mutex&lt;Config&gt;&gt;;
 <h3 id="register-config-api"><a class="header" href="#register-config-api">Register Config API</a></h3>
 <p>The trick to building a Config API is to clone the shared configuration object and
 move it into each function registration via a closure.</p>
-<p>Therefore, it is not possible to use a <a href="/book/vnext/plugins/module.html">plugin module</a> to achieve this, and each function must
+<p>Therefore, it is not possible to use a <a href="/book/plugins/module.html">plugin module</a> to achieve this, and each function must
 be registered one after another.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -278,8 +278,8 @@ id == &quot;hello&quot;;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="consider-a-custom-syntax"><a class="header" href="#consider-a-custom-syntax">Consider a Custom Syntax</a></h2>
-<p>This is probably one of the few scenarios where a <a href="/book/vnext/engine/custom-syntax.html">custom syntax</a> can be recommended.</p>
-<p>A properly-designed <a href="/book/vnext/engine/custom-syntax.html">custom syntax</a> can make the configuration file clean, simple to write,
+<p>This is probably one of the few scenarios where a <a href="/book/engine/custom-syntax.html">custom syntax</a> can be recommended.</p>
+<p>A properly-designed <a href="/book/engine/custom-syntax.html">custom syntax</a> can make the configuration file clean, simple to write,
 easy to understand and quick to modify.</p>
 <p>For example, the above configuration example may be expressed by this custom syntax:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -303,7 +303,7 @@ if config contains &quot;hey&quot; || config is_set &quot;hey&quot; {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Notice that <code>contains</code> and <code>is_set</code> may be implemented as a <a href="/book/vnext/engine/custom-op.html">custom operator</a>.</p>
+<p>Notice that <code>contains</code> and <code>is_set</code> may be implemented as a <a href="/book/engine/custom-op.html">custom operator</a>.</p>
 
                     </main>
 

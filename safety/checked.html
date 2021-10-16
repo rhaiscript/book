@@ -147,7 +147,7 @@
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.</p>
 <p>Scripts under normal builds of Rhai never crash the host system – any panic is a bug.</p>
-<p>This checking can be turned off via the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature for higher performance
+<p>This checking can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance
 (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -165,8 +165,8 @@ x / 0;      // 'unchecked' build: panic!
 </span></code></pre></pre>
 <h2 id="other-safety-checks"><a class="header" href="#other-safety-checks">Other Safety Checks</a></h2>
 <p>In addition to arithmetic overflows etc., there are many other safety checks performed by Rhai
-at runtime. <a href="/book/vnext/start/features.html"><code>unchecked</code></a> turns them <strong>all</strong> off as well, such as...</p>
-<h3 id="a-hrefbookvnextsafetymax-operationshtmlinfinite-loopsa"><a class="header" href="#a-hrefbookvnextsafetymax-operationshtmlinfinite-loopsa"><a href="/book/vnext/safety/max-operations.html">Infinite loops</a></a></h3>
+at runtime. <a href="/book/start/features.html"><code>unchecked</code></a> turns them <strong>all</strong> off as well, such as...</p>
+<h3 id="a-hrefbooksafetymax-operationshtmlinfinite-loopsa"><a class="header" href="#a-hrefbooksafetymax-operationshtmlinfinite-loopsa"><a href="/book/safety/max-operations.html">Infinite loops</a></a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -177,7 +177,7 @@ loop { foo(); }
 loop { foo(); }
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="a-hrefbookvnextsafetymax-call-stackhtmlinfinite-recursiona"><a class="header" href="#a-hrefbookvnextsafetymax-call-stackhtmlinfinite-recursiona"><a href="/book/vnext/safety/max-call-stack.html">Infinite recursion</a></a></h3>
+<h3 id="a-hrefbooksafetymax-call-stackhtmlinfinite-recursiona"><a class="header" href="#a-hrefbooksafetymax-call-stackhtmlinfinite-recursiona"><a href="/book/safety/max-call-stack.html">Infinite recursion</a></a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -188,7 +188,7 @@ foo();      // Normal build: runtime error: exceeds maximum stack depth
 foo();      // 'unchecked' build: panic due to stack overflow!
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="a-hrefbookvnextsafetymax-array-sizehtmlgigantic-data-structuresa"><a class="header" href="#a-hrefbookvnextsafetymax-array-sizehtmlgigantic-data-structuresa"><a href="/book/vnext/safety/max-array-size.html">Gigantic data structures</a></a></h3>
+<h3 id="a-hrefbooksafetymax-array-sizehtmlgigantic-data-structuresa"><a class="header" href="#a-hrefbooksafetymax-array-sizehtmlgigantic-data-structuresa"><a href="/book/safety/max-array-size.html">Gigantic data structures</a></a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

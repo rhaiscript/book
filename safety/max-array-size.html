@@ -143,11 +143,11 @@
                     <main>
                         <h1 id="maximum-size-of-arrays"><a class="header" href="#maximum-size-of-arrays">Maximum Size of Arrays</a></h1>
 <h2 id="limit-how-large-arrays-can-grow"><a class="header" href="#limit-how-large-arrays-can-grow">Limit How Large Arrays Can Grow</a></h2>
-<p>Rhai by default does not limit how large an <a href="/book/vnext/language/arrays.html">array</a> can be.</p>
+<p>Rhai by default does not limit how large an <a href="/book/language/arrays.html">array</a> can be.</p>
 <p>This can be changed via the <code>Engine::set_max_array_size</code> method, with zero being unlimited (the default).</p>
 <p>A script attempting to create an array literal larger than the maximum will terminate with a parse error.</p>
 <p>Any script operation that produces an array larger than the maximum also terminates the script with an error result.</p>
-<p>This check can be disabled via the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -164,8 +164,8 @@ an array’s size without Rhai noticing until the very end.</p>
 <p>For instance, the built-in <code>+</code> operator for arrays concatenates two arrays together to form one larger array;
 if both arrays are <em>slightly</em> below the maximum size limit, the resultant array may be almost <em>twice</em> the maximum size.</p>
 <p>As a malicious script may create a deeply-nested array which consumes huge amounts of memory while each individual
-array still stays under the maximum size limit, Rhai also recursively adds up the sizes of all <a href="/book/vnext/language/strings-chars.html">strings</a>, <a href="/book/vnext/language/arrays.html">arrays</a>
-and <a href="/book/vnext/language/object-maps.html">object maps</a> contained within each array to make sure that the <em>aggregate</em> sizes of none of these data structures
+array still stays under the maximum size limit, Rhai also recursively adds up the sizes of all <a href="/book/language/strings-chars.html">strings</a>, <a href="/book/language/arrays.html">arrays</a>
+and <a href="/book/language/object-maps.html">object maps</a> contained within each array to make sure that the <em>aggregate</em> sizes of none of these data structures
 exceed their respective maximum size limits (if any).</p>
 
                     </main>

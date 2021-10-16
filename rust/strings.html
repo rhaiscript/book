@@ -149,8 +149,8 @@ and the copy immediately thrown away right after the call.</p>
 <p>Needless to say, it is <em>extremely</em> inefficient to use <code>String</code> parameters.</p>
 <h2 id="str-maps-to-immutablestring"><a class="header" href="#str-maps-to-immutablestring"><code>&amp;str</code> Maps to <code>ImmutableString</code></a></h2>
 <p>Rust functions accepting parameters of <code>String</code> should use <code>&amp;str</code> instead because it maps directly
-to <a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/book/vnext/language/strings-chars.html">strings</a> internally.</p>
-<p>The parameter type <code>String</code> involves always converting an <a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a> into a <code>String</code>
+to <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/book/language/strings-chars.html">strings</a> internally.</p>
+<p>The parameter type <code>String</code> involves always converting an <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> into a <code>String</code>
 which mandates cloning it.</p>
 <p>Using <code>ImmutableString</code> or <code>&amp;str</code> is much more efficient.</p>
 <p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
@@ -179,7 +179,7 @@ let len = engine.eval::&lt;i64&gt;(&quot;len3(x)&quot;)?;   // 'x' is shared
 <h2 id="mut-string-does-not-work-as-expected"><a class="header" href="#mut-string-does-not-work-as-expected"><code>&amp;mut String</code> Does Not Work As Expected</a></h2>
 <p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,
 which has type <code>ImmutableString</code>.</p>
-<p>In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/vnext/rust/custom.html">custom type</a>.</p>
+<p>In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/rust/custom.html">custom type</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

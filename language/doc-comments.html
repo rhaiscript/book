@@ -144,9 +144,9 @@
                         <h1 id="doc-comments"><a class="header" href="#doc-comments">Doc-Comments</a></h1>
 <p>Similar to Rust, comments starting with <code>///</code> (three slashes) or <code>/**</code> (two asterisks)
 are <em>doc-comments</em>.</p>
-<p>They are only supported under the <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature.</p>
-<p>Doc-comments can only appear in front of <a href="/book/vnext/language/functions.html">function</a> definitions, not any other elements.
-Therefore, doc-comments are not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<p>They are only supported under the <a href="/book/start/features.html"><code>metadata</code></a> feature.</p>
+<p>Doc-comments can only appear in front of <a href="/book/language/functions.html">function</a> definitions, not any other elements.
+Therefore, doc-comments are not available under <a href="/book/start/features.html"><code>no_function</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -197,7 +197,7 @@ This is consistent with popular comment block styles for C-like languages.</p>
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="using-doc-comments"><a class="header" href="#using-doc-comments">Using Doc-Comments</a></h2>
-<p>Doc-comments are stored within the script’s <a href="/book/vnext/engine/compile.html"><code>AST</code></a> after compilation.</p>
+<p>Doc-comments are stored within the script’s <a href="/book/engine/compile.html"><code>AST</code></a> after compilation.</p>
 <p>The <code>AST::iter_functions</code> method provides a <code>ScriptFnMetadata</code> instance
 for each function defined within the script, which includes doc-comments.</p>
 <p>Doc-comments never affect the evaluation of a script nor do they incur

@@ -144,10 +144,10 @@
                         <h1 id="working-with-rust-enums"><a class="header" href="#working-with-rust-enums">Working With Rust Enums</a></h1>
 <p>Enums in Rust are typically used with <em>pattern matching</em>.</p>
 <p>Rhai is dynamic, so although it integrates with Rust enum variants just fine (treated transparently
-as <a href="/book/vnext/rust/custom.html">custom types</a>), it is impossible  (short of registering a complete API) to distinguish between
+as <a href="/book/rust/custom.html">custom types</a>), it is impossible  (short of registering a complete API) to distinguish between
 individual enum variants or to extract internal data from them.</p>
 <h2 id="simulate-an-enum-api"><a class="header" href="#simulate-an-enum-api">Simulate an Enum API</a></h2>
-<p>A <a href="/book/vnext/plugins/module.html">plugin module</a> is extremely handy in creating an entire API for a custom enum type.</p>
+<p>A <a href="/book/plugins/module.html">plugin module</a> is extremely handy in creating an entire API for a custom enum type.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -248,7 +248,7 @@ z.field_0 == &quot;hello&quot;;
 z.field_1 == true;
 <span class="boring">}
 </span></code></pre></pre>
-<p>Since enums are internally treated as <a href="/book/vnext/rust/custom.html">custom types</a>, they are not <em>literals</em> and cannot be
+<p>Since enums are internally treated as <a href="/book/rust/custom.html">custom types</a>, they are not <em>literals</em> and cannot be
 used as a match case in <code>switch</code> expressions.  This is quite a limitation because the equivalent
 <code>match</code> statement is commonly used in Rust to work with enums and bind variables to
 variant-internal data.</p>
@@ -269,7 +269,7 @@ variant-internal data.</p>
 <h2 id="use-switch-through-arrays"><a class="header" href="#use-switch-through-arrays">Use <code>switch</code> Through Arrays</a></h2>
 <p>Another way to work with Rust enums in a <code>switch</code> expression is through exposing the internal data
 (or at least those that act as effective <em>discriminants</em>) of each enum variant as a variable-length
-<a href="/book/vnext/language/arrays.html">array</a>, usually with the name of the variant as the first item for convenience:</p>
+<a href="/book/language/arrays.html">array</a>, usually with the name of the variant as the first item for convenience:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

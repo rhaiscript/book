@@ -143,7 +143,7 @@
                     <main>
                         <h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
 <p>Constants can be defined using the <code>const</code> keyword and are immutable.</p>
-<p>Constants follow the same naming rules as <a href="/book/vnext/language/variables.html">variables</a>, but as a convention are often named with
+<p>Constants follow the same naming rules as <a href="/book/language/variables.html">variables</a>, but as a convention are often named with
 all-capital letters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -164,9 +164,9 @@ const X = 40 + 2;   // 'X' is a constant 42
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
-<p>It is possible to add a constant into a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> so it’ll be available to scripts
-running with that <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
-<p>It is very useful to have a constant value hold a <a href="/book/vnext/rust/custom.html">custom type</a>, which essentially acts
+<p>It is possible to add a constant into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> so it’ll be available to scripts
+running with that <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>It is very useful to have a constant value hold a <a href="/book/rust/custom.html">custom type</a>, which essentially acts
 as a <a href="../patterns/singleton.html"><em>singleton</em></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -211,12 +211,12 @@ engine.run_with_scope(&amp;mut scope, script)?;
 a registered Rust function that takes a first <code>&amp;mut</code> parameter – because there is no way for
 Rhai to know whether the Rust function modifies its argument!</p>
 <p>By default, native Rust functions with a first <code>&amp;mut</code> parameter always allow constants to be passed
-to them. This is because using <code>&amp;mut</code> can avoid unnecessary cloning of a <a href="/book/vnext/rust/custom.html">custom type</a> value, even
+to them. This is because using <code>&amp;mut</code> can avoid unnecessary cloning of a <a href="/book/rust/custom.html">custom type</a> value, even
 though it is actually not modified – for example returning the size of a collection type.</p>
 <p>In line with intuition, Rhai is smart enough to always pass a <em>cloned copy</em> of a constant as the
 first <code>&amp;mut</code> argument if the function is called in normal function call style.</p>
 <p>If it is called as a [method], however, the Rust function will be able to modify the constant’s value.</p>
-<p>Also, property <a href="/book/vnext/rust/getters-setters.html">setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> are always assumed to mutate the first
+<p>Also, property <a href="/book/rust/getters-setters.html">setters</a> and <a href="/book/rust/indexers.html">indexers</a> are always assumed to mutate the first
 <code>&amp;mut</code> parameter and so they always raise errors when passed constants by default.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -251,19 +251,19 @@ X == 43;            // value of 'X' is unchanged by script
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="pure-plugin-functions"><a class="header" href="#pure-plugin-functions">Pure plugin functions</a></h3>
-<p>When functions are registered as part of a <a href="/book/vnext/plugins/index.html">plugin</a>, <code>&amp;mut</code> parameters are protected from being
+<p>When functions are registered as part of a <a href="/book/plugins/index.html">plugin</a>, <code>&amp;mut</code> parameters are protected from being
 passed constant values.</p>
-<p>By default, <a href="/book/vnext/plugins/function.html">plugin functions</a> that take a first <code>&amp;mut</code> parameter disallow passing constants as that
+<p>By default, <a href="/book/plugins/function.html">plugin functions</a> that take a first <code>&amp;mut</code> parameter disallow passing constants as that
 parameter.</p>
-<p>However, if a <a href="/book/vnext/plugins/function.html">plugin function</a> is marked with the <code>#[export_fn(pure)]</code> or <code>#[rhai_fn(pure)]</code> attribute,
+<p>However, if a <a href="/book/plugins/function.html">plugin function</a> is marked with the <code>#[export_fn(pure)]</code> or <code>#[rhai_fn(pure)]</code> attribute,
 it is considered <em>pure</em> (i.e. assumed to not modify its arguments) and so constants are allowed.</p>
 <h3 id="implications-on-script-optimization"><a class="header" href="#implications-on-script-optimization">Implications on script optimization</a></h3>
 <p>Rhai <em>assumes</em> that constants are never changed, even via Rust functions.</p>
-<p>This is important to keep in mind because the script <a href="/book/vnext/engine/optimize/index.html">optimizer</a>
+<p>This is important to keep in mind because the script <a href="/book/engine/optimize/index.html">optimizer</a>
 by default does <em>constant propagation</em> as a operation.</p>
 <p>If a constant is eventually modified by a Rust function, the optimizer will not see
 the updated value and will propagate the original initialization value instead.</p>
-<p><code>Dynamic::is_read_only</code> can be used to detect whether a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value is constant or not
+<p><code>Dynamic::is_read_only</code> can be used to detect whether a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value is constant or not
 within a Rust function.</p>
 
                     </main>

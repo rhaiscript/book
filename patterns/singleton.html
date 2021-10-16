@@ -163,16 +163,16 @@
 <h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
 <ul>
 <li>
-<p>Expose a Command type with an API.  The <a href="/book/vnext/start/features.html"><code>no_object</code></a> feature must not be on.</p>
+<p>Expose a Command type with an API.  The <a href="/book/start/features.html"><code>no_object</code></a> feature must not be on.</p>
 </li>
 <li>
-<p>Leverage <a href="/book/vnext/rust/functions.html#function-overloading">function overloading</a> to simplify the API design.</p>
+<p>Leverage <a href="/book/rust/functions.html#function-overloading">function overloading</a> to simplify the API design.</p>
 </li>
 <li>
-<p>Since Rhai is <em><a href="/book/vnext/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate the environment.  To perform external actions via an API, the command object type must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/vnext/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>Since Rhai is <em><a href="/book/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate the environment.  To perform external actions via an API, the command object type must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 <li>
-<p>Load each command object into a custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> as constant variables.</p>
+<p>Load each command object into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> as constant variables.</p>
 </li>
 <li>
 <p>Control each command object in script via the constants.</p>
@@ -185,7 +185,7 @@ wrapping the system in a shared, interior-mutated object.</p>
 as a name singleton object in the scripting space.</p>
 <p>Use this when the API is complex but has a clear object structure.</p>
 <p>For a relatively simple API that is action-based and not object-based,
-use the <a href="/book/vnext/patterns/control.html">Control Layer</a> pattern instead.</p>
+use the <a href="/book/patterns/control.html">Control Layer</a> pattern instead.</p>
 <h3 id="functional-api"><a class="header" href="#functional-api">Functional API</a></h3>
 <p>Assume the following command object type:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -211,7 +211,7 @@ impl EnergizerBunny {
 </span>pub type SharedBunny = Rc&lt;RefCell&lt;EnergizerBunny&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
-<p>or in multi-threaded environments with the <a href="/book/vnext/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
+<p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -228,9 +228,9 @@ pub type SharedBunny = Arc&lt;Mutex&lt;EnergizerBunny&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="develop-a-plugin-with-methods-and-getterssetters"><a class="header" href="#develop-a-plugin-with-methods-and-getterssetters">Develop a Plugin with Methods and Getters/Setters</a></h3>
-<p>The easiest way to develop a complete set of API for a <a href="/book/vnext/rust/custom.html">custom type</a> is via a <a href="/book/vnext/plugins/module.html">plugin module</a>.</p>
-<p>Notice that putting <code>pure</code> in <code>#[rhai_fn(...)]</code> allows a <a href="/book/vnext/rust/getters-setters.html">getter/setter</a> to operate
-on a <a href="/book/vnext/language/constants.html">constant</a> without raising an error.</p>
+<p>The easiest way to develop a complete set of API for a <a href="/book/rust/custom.html">custom type</a> is via a <a href="/book/plugins/module.html">plugin module</a>.</p>
+<p>Notice that putting <code>pure</code> in <code>#[rhai_fn(...)]</code> allows a <a href="/book/rust/getters-setters.html">getter/setter</a> to operate
+on a <a href="/book/language/constants.html">constant</a> without raising an error.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

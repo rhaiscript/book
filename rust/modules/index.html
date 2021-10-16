@@ -143,20 +143,20 @@
                     <main>
                         <h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
 <p>Rhai allows organizing functionalities (functions, both Rust-based or script-based, and variables)
-into independent <em>modules</em>. Modules can be disabled via the <a href="/book/vnext/start/features.html"><code>no_module</code></a> feature.</p>
+into independent <em>modules</em>. Modules can be disabled via the <a href="/book/start/features.html"><code>no_module</code></a> feature.</p>
 <p>A module is of the type <code>Module</code> and holds a collection of functions, variables,
-<a href="/book/vnext/language/iterator.html">type iterators</a> and sub-modules.</p>
+<a href="/book/language/iterator.html">type iterators</a> and sub-modules.</p>
 <p>It may be created entirely from Rust functions, or it may encapsulate a Rhai script together
 with the functions and variables defined by that script.</p>
 <p>Other scripts can then load this module and use the functions and variables exported
 as if they were defined inside the same script.</p>
-<p>Alternatively, modules can be registered directly into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> and made available
-to scripts either globally or under individual static module <a href="/book/vnext/language/fn-namespaces.html"><em>namespaces</em></a>.</p>
+<p>Alternatively, modules can be registered directly into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> and made available
+to scripts either globally or under individual static module <a href="/book/language/fn-namespaces.html"><em>namespaces</em></a>.</p>
 <h2 id="usage-patterns"><a class="header" href="#usage-patterns">Usage Patterns</a></h2>
 <table><thead><tr><th>Usage</th><th align="center">API</th><th align="center">Lookup</th><th align="center">Sub-modules?</th><th align="center">Variables?</th></tr></thead><tbody>
 <tr><td>Global module</td><td align="center"><code>Engine:: register_global_module</code></td><td align="center">simple name</td><td align="center">ignored</td><td align="center">ignored</td></tr>
 <tr><td>Static module</td><td align="center"><code>Engine:: register_static_module</code></td><td align="center">namespace-qualified name</td><td align="center">yes</td><td align="center">yes</td></tr>
-<tr><td>Dynamic module</td><td align="center"><a href="/book/vnext/language/modules/import.html"><code>import</code></a> statement</td><td align="center">namespace-qualified name</td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td>Dynamic module</td><td align="center"><a href="/book/language/modules/import.html"><code>import</code></a> statement</td><td align="center">namespace-qualified name</td><td align="center">yes</td><td align="center">yes</td></tr>
 </tbody></table>
 
                     </main>

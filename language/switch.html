@@ -186,7 +186,7 @@ if foo == &quot;hello&quot; {
 }
 </code></pre>
 <h2 id="array-and-object-map-literals-also-work"><a class="header" href="#array-and-object-map-literals-also-work">Array and Object Map Literals Also Work</a></h2>
-<p>The <code>switch</code> expression can match against any <em>literal</em>, including <a href="/book/vnext/language/arrays.html">array</a> and <a href="/book/vnext/language/object-maps.html">object map</a> literals.</p>
+<p>The <code>switch</code> expression can match against any <em>literal</em>, including <a href="/book/language/arrays.html">array</a> and <a href="/book/language/object-maps.html">object map</a> literals.</p>
 <pre><code class="language-js">// Match on arrays
 switch [foo, bar, baz] {
     [&quot;hello&quot;, 42, true] =&gt; { ... }
@@ -202,8 +202,8 @@ switch map {
     _ =&gt; { ... }
 }
 </code></pre>
-<p>Switching on <a href="/book/vnext/language/arrays.html">arrays</a> is very useful when working with Rust enums
-(see <a href="/book/vnext/patterns/enums.html">this chapter</a> for more details).</p>
+<p>Switching on <a href="/book/language/arrays.html">arrays</a> is very useful when working with Rust enums
+(see <a href="/book/patterns/enums.html">this chapter</a> for more details).</p>
 <h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
 <p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to <code>true</code> in order for the case to match.</p>
@@ -229,16 +229,16 @@ there are subtle differences between the two.</p>
 <p>A <code>switch</code> expression matches through <em>hashing</em> via a look-up table.
 Therefore, matching is very fast.  Walking down an <code>if</code>-<code>else if</code> chain
 is <em>much</em> slower.</p>
-<p>On the other hand, operators can be <a href="/book/vnext/rust/operators.html">overloaded</a> in Rhai,
+<p>On the other hand, operators can be <a href="/book/rust/operators.html">overloaded</a> in Rhai,
 meaning that it is possible to override the <code>==</code> operator for integers such
 that <code>x == y</code> returns a different result from the built-in default.</p>
 <p><code>switch</code> expressions do <em>not</em> use the <code>==</code> operator for comparison;
 instead, they <em>hash</em> the data values and jump directly to the correct
 statements via a pre-compiled look-up table.  This makes matching extremely
-efficient, but it also means that <a href="/book/vnext/rust/operators.html">overloading</a>
+efficient, but it also means that <a href="/book/rust/operators.html">overloading</a>
 the <code>==</code> operator will have no effect.</p>
-<p>Therefore, in environments where it is desirable to <a href="/book/vnext/rust/operators.html">overload</a>
-the <code>==</code> operator for <a href="/book/vnext/language/values-and-types.html">standard types</a> – though it is difficult to think of valid scenarios
+<p>Therefore, in environments where it is desirable to <a href="/book/rust/operators.html">overload</a>
+the <code>==</code> operator for <a href="/book/language/values-and-types.html">standard types</a> – though it is difficult to think of valid scenarios
 where you’d want <code>1 == 1</code> to return something other than <code>true</code> –
 avoid using the <code>switch</code> expression.</p>
 <h3 id="efficiency"><a class="header" href="#efficiency">Efficiency</a></h3>

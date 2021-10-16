@@ -158,24 +158,24 @@ print(x);       // what happens?
 <p>Rhai searches for the correct implementation of a function in the following order:</p>
 <ul>
 <li>
-<p>Rhai script-defined <a href="/book/vnext/language/functions.html">functions</a>.</p>
+<p>Rhai script-defined <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>Native Rust functions registered directly into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> via the <code>Engine::register_XXX</code> API.</p>
+<p>Native Rust functions registered directly into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via the <code>Engine::register_XXX</code> API.</p>
 </li>
 <li>
-<p>Native Rust functions in <a href="/book/vnext/rust/packages/index.html">packages</a> that have been loaded via <code>Engine::register_global_module</code>.</p>
+<p>Native Rust functions in <a href="/book/rust/packages/index.html">packages</a> that have been loaded via <code>Engine::register_global_module</code>.</p>
 </li>
 <li>
-<p>Native Rust or Rhai script-defined functions in <a href="/book/vnext/language/modules/import.html">imported</a> <a href="/book/vnext/rust/modules/index.html">modules</a> that are
-exposed globally (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a <a href="/book/vnext/plugins/module.html">plugin module</a>).</p>
+<p>Native Rust or Rhai script-defined functions in <a href="/book/language/modules/import.html">imported</a> <a href="/book/rust/modules/index.html">modules</a> that are
+exposed globally (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a <a href="/book/plugins/module.html">plugin module</a>).</p>
 </li>
 <li>
-<p>Native Rust or Rhai script-defined functions in <a href="/book/vnext/rust/modules/index.html">modules</a> loaded via <code>Engine::register_static_module</code>
-that are exposed globally (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a <a href="/book/vnext/plugins/module.html">plugin module</a>).</p>
+<p>Native Rust or Rhai script-defined functions in <a href="/book/rust/modules/index.html">modules</a> loaded via <code>Engine::register_static_module</code>
+that are exposed globally (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a <a href="/book/plugins/module.html">plugin module</a>).</p>
 </li>
 <li>
-<p><a href="/book/vnext/engine/builtin.html">Built-in</a> functions.</p>
+<p><a href="/book/engine/builtin.html">Built-in</a> functions.</p>
 </li>
 </ul>
 

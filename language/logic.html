@@ -151,7 +151,7 @@
 <tr><td align="center"><code>&lt;</code></td><td><code>x</code> is less than <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
 <tr><td align="center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td align="center">error if not defined</td><td align="center"><code>false</code> if not defined</td></tr>
 </tbody></table>
-<p>Comparison between most values of the same type are built in for all <a href="/book/vnext/language/values-and-types.html">standard types</a>.</p>
+<p>Comparison between most values of the same type are built in for all <a href="/book/language/values-and-types.html">standard types</a>.</p>
 <h3 id="floating-point-numbers-can-inter-operate-with-integers"><a class="header" href="#floating-point-numbers-can-inter-operate-with-integers">Floating-point numbers can inter-operate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code> or <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>) with an integer is also supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -169,8 +169,8 @@
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="strings-can-inter-operate-with-characters"><a class="header" href="#strings-can-inter-operate-with-characters">Strings can inter-operate with characters</a></h3>
-<p>Comparing a <a href="/book/vnext/language/strings-chars.html">string</a> with a <a href="/book/vnext/language/strings-chars.html">character</a> is also supported, with the character first turned into a
-<a href="/book/vnext/language/strings-chars.html">string</a> before performing the comparison.</p>
+<p>Comparing a <a href="/book/language/strings-chars.html">string</a> with a <a href="/book/language/strings-chars.html">character</a> is also supported, with the character first turned into a
+<a href="/book/language/strings-chars.html">string</a> before performing the comparison.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -235,7 +235,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <p><code>&lt;=</code> does not imply <code>&lt;</code></p>
 </li>
 </ul>
-<p>Therefore, if a <a href="/book/vnext/rust/custom.html">custom type</a> misses an operator definition, it simply raises an error
+<p>Therefore, if a <a href="/book/rust/custom.html">custom type</a> misses an operator definition, it simply raises an error
 or returns the default.</p>
 <p>This behavior can be counter-intuitive.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -252,7 +252,7 @@ ts == ts;           // true: '==' defined
 ts != ts;           // error: '!=' not defined, even though '==' is
 <span class="boring">}
 </span></code></pre></pre>
-<p>It is strongly recommended that, when defining operators for <a href="/book/vnext/rust/custom.html">custom types</a>, always define the full set
+<p>It is strongly recommended that, when defining operators for <a href="/book/rust/custom.html">custom types</a>, always define the full set
 of six operators (or at least the <code>==</code> and <code>!=</code> pair) together.</p>
 <h2 id="boolean-operators"><a class="header" href="#boolean-operators">Boolean operators</a></h2>
 <table><thead><tr><th align="center">Operator</th><th>Description</th><th align="center">Arity</th><th align="center">Short-Circuits?</th></tr></thead><tbody>
@@ -277,7 +277,7 @@ a() | b();          // both a() and b() are evaluated
 a() &amp; b();          // both a() and b() are evaluated
 <span class="boring">}
 </span></code></pre></pre>
-<p>All boolean operators are <a href="/book/vnext/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
+<p>All boolean operators are <a href="/book/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
 
                     </main>
 

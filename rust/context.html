@@ -143,16 +143,16 @@
                     <main>
                         <h1 id="nativecallcontext"><a class="header" href="#nativecallcontext"><code>NativeCallContext</code></a></h1>
 <p>If the <em>first</em> parameter of a function is of type <code>rhai::NativeCallContext</code>, then it is treated
-specially by the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>.</p>
+specially by the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 <p><code>NativeCallContext</code> is a type that encapsulates the current <em>native call context</em> and exposes the following:</p>
 <table><thead><tr><th>Method</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/book/vnext/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/book/vnext/language/fn-ptr.html">function pointer</a>.</td></tr>
+<tr><td><code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>the current <a href="/book/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/book/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/book/language/fn-ptr.html">function pointer</a>.</td></tr>
 <tr><td><code>fn_name()</code></td><td align="center"><code>&amp;str</code></td><td>name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)</td></tr>
 <tr><td><code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
-<tr><td><code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
-<tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a></td></tr>
-<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a>; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
+<tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>; requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <h2 id="implement-safety-checks-with-nativecallcontext"><a class="header" href="#implement-safety-checks-with-nativecallcontext">Implement Safety Checks with <code>NativeCallContext</code></a></h2>
@@ -191,7 +191,7 @@ pub fn grow(context: NativeCallContext, size: i64)
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="implement-a-callback"><a class="header" href="#implement-a-callback">Implement a Callback</a></h2>
-<p>The <em>native call context</em> can be used to call a <a href="/book/vnext/language/fn-ptr.html">function pointer</a> or <a href="/book/vnext/language/fn-closure.html">closure</a> that has been passed
+<p>The <em>native call context</em> can be used to call a <a href="/book/language/fn-ptr.html">function pointer</a> or <a href="/book/language/fn-closure.html">closure</a> that has been passed
 as a parameter to the function, thereby implementing a <em>callback</em>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

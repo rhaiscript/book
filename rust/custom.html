@@ -152,16 +152,16 @@ within the same crate (and thus cannot implement special Rhai traits or
 use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
 <p>The reason why it is termed a <em>custom</em> type throughout this documentation is that
 Rhai natively supports a number of data types with fast, internal treatment (see
-the list of <a href="/book/vnext/language/values-and-types.html">standard types</a>).  Any type outside of this list is considered <em>custom</em>.</p>
+the list of <a href="/book/language/values-and-types.html">standard types</a>).  Any type outside of this list is considered <em>custom</em>.</p>
 <p>Any type not supported natively by Rhai is stored as a Rust <em>trait object</em>, with no
-restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/vnext/start/features.html"><code>sync</code></a> feature).
+restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).
 It runs slightly slower than natively-supported types as it does not have built-in,
 optimized implementations for commonly-used functions, but for all other purposes has
 no difference.</p>
-<p>Support for custom types can be turned off via the <a href="/book/vnext/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
-<p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
-<p>If the <a href="/book/vnext/start/features.html"><code>sync</code></a> feature is used, it must also be <code>Send + Sync</code>.</p>
+<p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/book/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
+<p>If the <a href="/book/start/features.html"><code>sync</code></a> feature is used, it must also be <code>Send + Sync</code>.</p>
 <p>Notice that the custom type needs to be <em>registered</em> using <code>Engine::register_type</code>
 or <code>Engine::register_type_with_name</code>.</p>
 <p>To use native methods on custom types in Rhai scripts, it is common to register an API
@@ -209,9 +209,9 @@ to that type, so that invoking methods can always update it.</p>
 <p>All other parameters in Rhai are passed by value (i.e. clones).</p>
 <p><strong>IMPORTANT: Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.</strong></p>
 <h2 id="type_of-a-custom-type"><a class="header" href="#type_of-a-custom-type"><code>type_of()</code> a Custom Type</a></h2>
-<p><a href="/book/vnext/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
 <p>If <code>Engine::register_type_with_name</code> is used to register the custom type
-with a special “pretty-print” name, <a href="/book/vnext/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
+with a special “pretty-print” name, <a href="/book/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -230,8 +230,8 @@ println!(&quot;{}&quot;, ts1_type);               // prints 'TestStruct'
 <h2 id="collection-types"><a class="header" href="#collection-types">Collection Types</a></h2>
 <p>Collection types usually contain a <code>push</code>, <code>insert</code>, <code>add</code>, <code>append</code> or <code>+=</code> method that adds a particular
 item to the collection.</p>
-<p>If the collection takes a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value (e.g. like an <a href="/book/vnext/language/arrays.html">array</a>), the type of such an add function
-can take a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> parameter.</p>
+<p>If the collection takes a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value (e.g. like an <a href="/book/language/arrays.html">array</a>), the type of such an add function
+can take a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> parameter.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -241,7 +241,7 @@ can take a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> 
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="use-the-custom-type-with-arrays"><a class="header" href="#use-the-custom-type-with-arrays">Use the Custom Type With Arrays</a></h2>
-<p>In order to use the <a href="/book/vnext/language/in.html"><code>in</code></a> operator with a custom type for an <a href="/book/vnext/language/arrays.html">array</a>, the <code>==</code> operator must be
+<p>In order to use the <a href="/book/language/in.html"><code>in</code></a> operator with a custom type for an <a href="/book/language/arrays.html">array</a>, the <code>==</code> operator must be
 registered for the custom type:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -258,7 +258,7 @@ item in array;              // 'in' operator uses '=='
 </span></code></pre></pre>
 <h2 id="working-with-enums"><a class="header" href="#working-with-enums">Working With Enums</a></h2>
 <p>It is quite easy to use Rust enums with Rhai.
-See the section on <a href="/book/vnext/patterns/enums.html">Working with Enums</a> for more details.</p>
+See the section on <a href="/book/patterns/enums.html">Working with Enums</a> for more details.</p>
 
                     </main>
 

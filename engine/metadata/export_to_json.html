@@ -144,20 +144,20 @@
                         <h1 id="export-functions-metadata-to-json"><a class="header" href="#export-functions-metadata-to-json">Export Functions Metadata to JSON</a></h1>
 <h2 id="enginegen_fn_metadata_to_jsonbrenginegen_fn_metadata_with_ast_to_json"><a class="header" href="#enginegen_fn_metadata_to_jsonbrenginegen_fn_metadata_with_ast_to_json"><code>Engine::gen_fn_metadata_to_json</code><br/><code>Engine::gen_fn_metadata_with_ast_to_json</code></a></h2>
 <p>As part of a <em>reflections</em> API, <code>Engine::gen_fn_metadata_to_json</code> and the corresponding
-<code>Engine::gen_fn_metadata_with_ast_to_json</code> export the full list of <a href="/book/vnext/engine/metadata/index.html">functions metadata</a>
+<code>Engine::gen_fn_metadata_with_ast_to_json</code> export the full list of <a href="/book/engine/metadata/index.html">functions metadata</a>
 in JSON format.</p>
-<p>The <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature must be used to turn on this API, which requires
+<p>The <a href="/book/start/features.html"><code>metadata</code></a> feature must be used to turn on this API, which requires
 the <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a> crate.</p>
 <h3 id="sources"><a class="header" href="#sources">Sources</a></h3>
 <p>Functions from the following sources are included:</p>
 <ol>
-<li>Script-defined functions in an <a href="/book/vnext/engine/compile.html"><code>AST</code></a> (for <code>Engine::gen_fn_metadata_with_ast_to_json</code>)</li>
+<li>Script-defined functions in an <a href="/book/engine/compile.html"><code>AST</code></a> (for <code>Engine::gen_fn_metadata_with_ast_to_json</code>)</li>
 <li>Native Rust functions registered into the global namespace via the <code>Engine::register_XXX</code> API</li>
 <li>Native Rust functions in global modules registered via <code>Engine::register_global_module</code> (optional)</li>
-<li><em>Public</em> (i.e. non-<a href="/book/vnext/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) in static modules
+<li><em>Public</em> (i.e. non-<a href="/book/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) in static modules
 registered via <code>Engine::register_static_module</code></li>
 </ol>
-<p>Notice that if a function has been <a href="/book/vnext/rust/functions.html#function-overloading">overloaded</a>, only the overriding function’s
+<p>Notice that if a function has been <a href="/book/rust/functions.html#function-overloading">overloaded</a>, only the overriding function’s
 metadata is included.</p>
 <h2 id="json-schema"><a class="header" href="#json-schema">JSON Schema</a></h2>
 <p>The JSON schema used to hold functions metadata is very simple, containing a nested structure of

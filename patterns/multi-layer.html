@@ -145,7 +145,7 @@
 <h2 id="usage-scenario"><a class="header" href="#usage-scenario">Usage Scenario</a></h2>
 <ul>
 <li>
-<p>A system is divided into separate <em>layers</em>, each providing logic in terms of scripted <a href="/book/vnext/language/functions.html">functions</a>.</p>
+<p>A system is divided into separate <em>layers</em>, each providing logic in terms of scripted <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
 <p>A lower layer provides <em>default implementations</em> of certain functions.</p>
@@ -171,10 +171,10 @@ corporate-wide defaults.</p>
 <p>Each layer is a separate script.</p>
 </li>
 <li>
-<p>The lowest layer script is compiled into a base <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
+<p>The lowest layer script is compiled into a base <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 </li>
 <li>
-<p>Higher layer scripts are also compiled into <a href="/book/vnext/engine/compile.html"><code>AST</code></a> and <em>combined</em> into the base using <code>AST::combine</code>
+<p>Higher layer scripts are also compiled into <a href="/book/engine/compile.html"><code>AST</code></a> and <em>combined</em> into the base using <code>AST::combine</code>
 (or the <code>+=</code> operator), overriding any existing functions.</p>
 </li>
 </ul>

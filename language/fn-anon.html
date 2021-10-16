@@ -142,8 +142,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="anonymous-functions"><a class="header" href="#anonymous-functions">Anonymous Functions</a></h1>
-<p>Sometimes it gets tedious to define separate functions only to dispatch them via single <a href="/book/vnext/language/fn-ptr.html">function pointers</a>.
-This scenario is especially common when simulating object-oriented programming (<a href="/book/vnext/patterns/oop.html">OOP</a>).</p>
+<p>Sometimes it gets tedious to define separate functions only to dispatch them via single <a href="/book/language/fn-ptr.html">function pointers</a>.
+This scenario is especially common when simulating object-oriented programming (<a href="/book/patterns/oop.html">OOP</a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -202,8 +202,8 @@ fn anon_fn_1002() {
 <h2 id="warning--not-real-closures"><a class="header" href="#warning--not-real-closures">WARNING – NOT Real Closures</a></h2>
 <p>Remember: anonymous functions, though having the same syntax as Rust <em>closures</em>, are themselves
 <strong>not</strong> real closures.</p>
-<p>In particular, they capture their execution environment via <a href="/book/vnext/language/fn-closure.html">automatic currying</a>
-(disabled via <a href="/book/vnext/start/features.html"><code>no_closure</code></a>).</p>
+<p>In particular, they capture their execution environment via <a href="/book/language/fn-closure.html">automatic currying</a>
+(disabled via <a href="/book/start/features.html"><code>no_closure</code></a>).</p>
 
                     </main>
 

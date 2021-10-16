@@ -143,9 +143,9 @@
                     <main>
                         <h1 id="sand-boxing--block-access-to-external-data"><a class="header" href="#sand-boxing--block-access-to-external-data">Sand-Boxing – Block Access to External Data</a></h1>
 <p>Rhai is <em>sand-boxed</em> so a script can never read from outside its own environment.</p>
-<p>Furthermore, an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> created non-<code>mut</code> cannot mutate any state, including itself
+<p>Furthermore, an <a href="/book/engine/hello-world.html"><code>Engine</code></a> created non-<code>mut</code> cannot mutate any state, including itself
 (and therefore it is also <em>re-entrant</em>).</p>
-<p>It is highly recommended that <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>‘s be created immutable as much as possible.</p>
+<p>It is highly recommended that <a href="/book/engine/hello-world.html"><code>Engine</code></a>‘s be created immutable as much as possible.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -163,16 +163,16 @@ let engine = engine;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="using-rhai-to-control-external-environment"><a class="header" href="#using-rhai-to-control-external-environment">Using Rhai to Control External Environment</a></h2>
-<p>How does a <em>sand-boxed</em>, immutable <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> control the external environment?
+<p>How does a <em>sand-boxed</em>, immutable <a href="/book/engine/hello-world.html"><code>Engine</code></a> control the external environment?
 This is necessary in order to use Rhai as a <em>dynamic control layer</em> over a Rust core system.</p>
 <p>There are two general patterns, both involving wrapping the external system
 in a shared, interior-mutated object (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</code>):</p>
 <ul>
 <li>
-<p><a href="/book/vnext/patterns/control.html">Control Layer</a> pattern.</p>
+<p><a href="/book/patterns/control.html">Control Layer</a> pattern.</p>
 </li>
 <li>
-<p><a href="/book/vnext/patterns/singleton.html">Singleton Command Object</a> pattern.</p>
+<p><a href="/book/patterns/singleton.html">Singleton Command Object</a> pattern.</p>
 </li>
 </ul>
 

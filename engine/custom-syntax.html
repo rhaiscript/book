@@ -149,7 +149,7 @@ with custom-defined <em>syntax</em>.</p>
 <p>Stick with standard language syntax as much as possible.</p>
 <p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another
 obscure language syntax just to do something.</p>
-<p>Try to use <a href="/book/vnext/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
+<p>Try to use <a href="/book/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
 <h2 id="where-this-might-be-useful"><a class="header" href="#where-this-might-be-useful">Where This Might Be Useful</a></h2>
 <ul>
 <li>
@@ -169,25 +169,25 @@ obscure language syntax just to do something.</p>
 <p>A custom syntax is simply a list of symbols.</p>
 <p>These symbol types can be used:</p>
 <ul>
-<li>Standard <a href="/book/vnext/appendix/keywords.html">keywords</a></li>
-<li>Standard <a href="/book/vnext/appendix/operators.html#operators">operators</a>.</li>
-<li>Reserved <a href="/book/vnext/appendix/operators.html#symbols">symbols</a>.</li>
-<li>Identifiers following the <a href="/book/vnext/language/variables.html">variable</a> naming rules.</li>
+<li>Standard <a href="/book/appendix/keywords.html">keywords</a></li>
+<li>Standard <a href="/book/appendix/operators.html#operators">operators</a>.</li>
+<li>Reserved <a href="/book/appendix/operators.html#symbols">symbols</a>.</li>
+<li>Identifiers following the <a href="/book/language/variables.html">variable</a> naming rules.</li>
 <li><code>$expr$</code> – any valid expression, statement or statement block.</li>
 <li><code>$block$</code> – any valid statement block (i.e. must be enclosed by <code>{</code> .. <code>}</code>).</li>
-<li><code>$ident$</code> – any <a href="/book/vnext/language/variables.html">variable</a> name.</li>
-<li><code>$symbol$</code> – any <a href="/book/vnext/appendix/operators.html">symbol</a>, active or reserved.</li>
+<li><code>$ident$</code> – any <a href="/book/language/variables.html">variable</a> name.</li>
+<li><code>$symbol$</code> – any <a href="/book/appendix/operators.html">symbol</a>, active or reserved.</li>
 <li><code>$bool$</code> – a boolean value.</li>
 <li><code>$int$</code> – an integer number.</li>
-<li><code>$float$</code> – a floating-point number (if not <a href="/book/vnext/start/features.html"><code>no_float</code></a>).</li>
-<li><code>$string$</code> – a <a href="/book/vnext/language/strings-chars.html">string</a> literal.</li>
+<li><code>$float$</code> – a floating-point number (if not <a href="/book/start/features.html"><code>no_float</code></a>).</li>
+<li><code>$string$</code> – a <a href="/book/language/strings-chars.html">string</a> literal.</li>
 </ul>
 <h3 id="the-first-symbol-must-be-an-identifier"><a class="header" href="#the-first-symbol-must-be-an-identifier">The First Symbol Must be an Identifier</a></h3>
 <p>There is no specific limit on the combination and sequencing of each symbol type,
 except the <em>first</em> symbol which must be a custom keyword that follows the naming rules
-of <a href="/book/vnext/language/variables.html">variables</a>.</p>
-<p>The first symbol also cannot be a normal <a href="/book/vnext/appendix/keywords.html">keyword</a> unless it is <a href="/book/vnext/engine/disable.html">disabled</a>.
-Any valid identifier that is not an active <a href="/book/vnext/appendix/keywords.html">keyword</a> works fine, even if it is a reserved <a href="/book/vnext/appendix/keywords.html">keyword</a>.</p>
+of <a href="/book/language/variables.html">variables</a>.</p>
+<p>The first symbol also cannot be a normal <a href="/book/appendix/keywords.html">keyword</a> unless it is <a href="/book/engine/disable.html">disabled</a>.
+Any valid identifier that is not an active <a href="/book/appendix/keywords.html">keyword</a> works fine, even if it is a reserved <a href="/book/appendix/keywords.html">keyword</a>.</p>
 <h3 id="the-first-symbol-must-be-unique"><a class="header" href="#the-first-symbol-must-be-unique">The First Symbol Must be Unique</a></h3>
 <p>Rhai uses the <em>first</em> symbol as a clue to parse custom syntax.</p>
 <p>Therefore, at any one time, there can only be <em>one</em> custom syntax starting with each unique symbol.</p>
@@ -207,7 +207,7 @@ Any valid identifier that is not an active <a href="/book/vnext/appendix/keyword
 <tr><td align="center">3</td><td align="center">1</td><td align="center"><code>$symbol$</code></td><td>the operator</td></tr>
 <tr><td align="center">4</td><td align="center">2</td><td align="center"><code>$int$</code></td><td>an integer number</td></tr>
 <tr><td align="center">5</td><td align="center"></td><td align="center"><code>]</code></td><td>the right bracket symbol</td></tr>
-<tr><td align="center">6</td><td align="center"></td><td align="center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/book/vnext/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
+<tr><td align="center">6</td><td align="center"></td><td align="center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/book/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
 <tr><td align="center">7</td><td align="center">3</td><td align="center"><code>$expr$</code></td><td>an expression, which may be enclosed with <code>{</code> .. <code>}</code>, or not.</td></tr>
 <tr><td align="center">8</td><td align="center"></td><td align="center"><code>:</code></td><td>the colon symbol</td></tr>
 <tr><td align="center">9</td><td align="center">4</td><td align="center"><code>$block$</code></td><td>a statement block, which must be enclosed with <code>{</code> .. <code>}</code>.</td></tr>
@@ -237,14 +237,14 @@ print(hello);   // variable declared by a custom syntax persists!
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>context</code></td><td align="center"><code>&amp;mut EvalContext</code></td><td>mutable reference to the current evaluation <em>context</em></td></tr>
-<tr><td>  <code>.scope()</code></td><td align="center"><code>&amp;Scope</code></td><td>reference to the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td>  <code>.scope_mut()</code></td><td align="center"><code>&amp;mut &amp;mut Scope</code></td><td>mutable reference to the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>; variables can be added to/removed from it</td></tr>
-<tr><td>  <code>.engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>reference to the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td>  <code>.scope()</code></td><td align="center"><code>&amp;Scope</code></td><td>reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td>  <code>.scope_mut()</code></td><td align="center"><code>&amp;mut &amp;mut Scope</code></td><td>mutable reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a>; variables can be added to/removed from it</td></tr>
+<tr><td>  <code>.engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>reference to the current <a href="/book/engine/hello-world.html"><code>Engine</code></a></td></tr>
 <tr><td>  <code>.source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
-<tr><td>  <code>.iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
-<tr><td>  <code>.imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td>  <code>.iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a></td></tr>
-<tr><td>  <code>.namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a>; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>  <code>.iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
+<tr><td>  <code>.imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td>  <code>.iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td>  <code>.namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>; requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td>  <code>.this_ptr()</code></td><td align="center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound [<code>this</code>] pointer, if any</td></tr>
 <tr><td>  <code>.call_level()</code></td><td align="center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
 <tr><td><code>inputs</code></td><td align="center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
@@ -257,13 +257,13 @@ and statement blocks (<code>$block$</code>) are provided.</p>
 <p>To access a particular argument, use the following patterns:</p>
 <table><thead><tr><th align="center">Argument type</th><th>Pattern (<code>n</code> = slot in <code>inputs</code>)</th><th align="center">Result type</th><th>Description</th></tr></thead><tbody>
 <tr><td align="center"><code>$ident$</code></td><td><code>inputs[n].get_variable_name().unwrap()</code></td><td align="center"><code>&amp;str</code></td><td>variable name</td></tr>
-<tr><td align="center"><code>$symbol$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td><td>symbol literal</td></tr>
+<tr><td align="center"><code>$symbol$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a></td><td>symbol literal</td></tr>
 <tr><td align="center"><code>$expr$</code></td><td><code>&amp;inputs[n]</code></td><td align="center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
 <tr><td align="center"><code>$block$</code></td><td><code>&amp;inputs[n]</code></td><td align="center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
 <tr><td align="center"><code>$bool$</code></td><td><code>inputs[n].get_literal_value::&lt;bool&gt;().unwrap()</code></td><td align="center"><code>bool</code></td><td>boolean value</td></tr>
 <tr><td align="center"><code>$int$</code></td><td><code>inputs[n].get_literal_value::&lt;INT&gt;().unwrap()</code></td><td align="center"><code>INT</code></td><td>integer number</td></tr>
 <tr><td align="center"><code>$float$</code></td><td><code>inputs[n].get_literal_value::&lt;FLOAT&gt;().unwrap()</code></td><td align="center"><code>FLOAT</code></td><td>floating-point number</td></tr>
-<tr><td align="center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td><td><a href="/book/vnext/language/strings-chars.html">string</a> text</td></tr>
+<tr><td align="center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a></td><td><a href="/book/language/strings-chars.html">string</a> text</td></tr>
 </tbody></table>
 <h3 id="get-literal-constants"><a class="header" href="#get-literal-constants">Get literal constants</a></h3>
 <p>Several argument types represent literal constants that can be obtained directly via
@@ -298,9 +298,9 @@ let result = context.eval_expression_tree(expression)?;
 </span></code></pre></pre>
 <h3 id="declare-variables"><a class="header" href="#declare-variables">Declare Variables</a></h3>
 <p>New variables maybe declared (usually with a variable name that is passed in via `$ident$).</p>
-<p>It can simply be pushed into the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+<p>It can simply be pushed into the <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <p>However, beware that all new variables must be declared <em>prior</em> to evaluating any expression tree.
-In other words, any <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> calls that change the list of must come <em>before</em> any
+In other words, any <a href="/book/engine/scope.html"><code>Scope</code></a> calls that change the list of must come <em>before</em> any
 <code>EvalContext::eval_expression_tree</code> calls.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -392,7 +392,7 @@ exec&lt;x&gt; -&gt; { x += 1 } while x &lt; 0;
 <h2 id="step-four--disable-unneeded-statement-types"><a class="header" href="#step-four--disable-unneeded-statement-types">Step Four – Disable Unneeded Statement Types</a></h2>
 <p>When a DSL needs a custom syntax, most likely than not it is extremely specialized.
 Therefore, many statement types actually may not make sense under the same usage scenario.</p>
-<p>So, while at it, better <a href="/book/vnext/engine/disable.html">disable</a> those built-in keywords
+<p>So, while at it, better <a href="/book/engine/disable.html">disable</a> those built-in keywords
 and operators that should not be used by the user.  The would leave only the bare minimum
 language surface exposed, together with the custom syntax that is tailor-designed for
 the scenario.</p>
@@ -463,7 +463,7 @@ together with the implementation function.</p>
 <p>A custom parser takes as input parameters two pieces of information:</p>
 <ul>
 <li>
-<p>The symbols (as <a href="/book/vnext/language/strings-chars.html">strings</a>) parsed so far:</p>
+<p>The symbols (as <a href="/book/language/strings-chars.html">strings</a>) parsed so far:</p>
 <table><thead><tr><th align="center">Argument type</th><th>Value</th></tr></thead><tbody>
 <tr><td align="center"><code>$ident$</code></td><td>identifier name</td></tr>
 <tr><td align="center"><code>$symbol$</code></td><td>symbol literal</td></tr>
@@ -472,7 +472,7 @@ together with the implementation function.</p>
 <tr><td align="center"><code>$bool$</code></td><td><code>true</code> or <code>false</code></td></tr>
 <tr><td align="center"><code>$int$</code></td><td>value of number</td></tr>
 <tr><td align="center"><code>$float$</code></td><td>value of number</td></tr>
-<tr><td align="center"><code>$string$</code></td><td><a href="/book/vnext/language/strings-chars.html">string</a> text</td></tr>
+<tr><td align="center"><code>$string$</code></td><td><a href="/book/language/strings-chars.html">string</a> text</td></tr>
 </tbody></table>
 <p>The custom parser can inspect this symbols stream to determine the next symbol to parse.</p>
 </li>
@@ -545,14 +545,14 @@ look-ahead symbol).</p>
 <tr><td><code>symbols</code></td><td align="center"><code>&amp;[ImmutableString]</code></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
 <tr><td><code>look_ahead</code></td><td align="center"><code>&amp;str</code></td><td>a string slice containing the next symbol that is about to be read</td></tr>
 </tbody></table>
-<p>Most strings are <a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a>‘s so it is usually more efficient to just <code>clone</code> the appropriate one
+<p>Most strings are <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a>‘s so it is usually more efficient to just <code>clone</code> the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.</p>
 <h3 id="return-value-1"><a class="header" href="#return-value-1">Return Value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>Ok(None)</code></td><td>parsing complete and there are no more symbols to match</td></tr>
 <tr><td><code>Ok(Some(symbol))</code></td><td>the next symbol to match, which can also be <code>$expr$</code>, <code>$ident$</code> or <code>$block$</code></td></tr>
-<tr><td><code>Err(ParseError)</code></td><td>error that is reflected back to the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> – normally <code>ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)</code> to indicate that there is a syntax error, but it can be any <code>ParseError</code>.</td></tr>
+<tr><td><code>Err(ParseError)</code></td><td>error that is reflected back to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> – normally <code>ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)</code> to indicate that there is a syntax error, but it can be any <code>ParseError</code>.</td></tr>
 </tbody></table>
 
                     </main>

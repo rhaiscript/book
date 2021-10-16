@@ -142,12 +142,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="create-a-custom-package"><a class="header" href="#create-a-custom-package">Create a Custom Package</a></h1>
-<p>The macro <code>def_package!</code> can be used to create a custom <a href="/book/vnext/rust/packages/index.html">package</a>.</p>
+<p>The macro <code>def_package!</code> can be used to create a custom <a href="/book/rust/packages/index.html">package</a>.</p>
 <p>A custom package can aggregate many other packages into a single self-contained unit.
 More functions can be added on top of others.</p>
-<p>Custom packages are extremely useful when multiple <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a> instances must be created such
+<p>Custom packages are extremely useful when multiple <a href="/book/engine/raw.html">raw <code>Engine</code></a> instances must be created such
 that they all share the same set of functions.</p>
-<p>For an example, see the <a href="/book/vnext/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
+<p>For an example, see the <a href="/book/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
 <h2 id="def_package"><a class="header" href="#def_package"><code>def_package!</code></a></h2>
 <blockquote>
 <p><code>def_package!(root:package_name:description, variable, block)</code></p>
@@ -157,7 +157,7 @@ that they all share the same set of functions.</p>
 <tr><td align="center"><code>root</code></td><td>root namespace, usually <code>rhai</code></td></tr>
 <tr><td align="center"><code>package_name</code></td><td>name of the package, usually ending in <code>...Package</code></td></tr>
 <tr><td align="center"><code>description</code></td><td>doc-comment for the package</td></tr>
-<tr><td align="center"><code>variable</code></td><td>a variable name holding a reference to the <a href="/book/vnext/rust/modules/index.html">module</a> (<code>&amp;mut Module</code>) that is to form the package</td></tr>
+<tr><td align="center"><code>variable</code></td><td>a variable name holding a reference to the <a href="/book/rust/modules/index.html">module</a> (<code>&amp;mut Module</code>) that is to form the package</td></tr>
 <tr><td align="center"><code>block</code></td><td>a code block that initializes the package</td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -195,12 +195,12 @@ def_package!(rhai:MyPackage:&quot;My own personal super package&quot;, module, {
 </span></code></pre></pre>
 <h2 id="create-a-custom-package-from-a-plugin-module"><a class="header" href="#create-a-custom-package-from-a-plugin-module">Create a Custom Package from a Plugin Module</a></h2>
 <p>By far the easiest way to create a custom module is to call <code>plugin::combine_with_exported_module!</code>
-from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/book/vnext/plugins/module.html">plugin module</a>.</p>
+from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/book/plugins/module.html">plugin module</a>.</p>
 <p>In fact, this exactly is how Rhai’s built-in packages, such as <code>BasicMathPackage</code>, are implemented.</p>
-<p>Due to specific requirements of a <a href="/book/vnext/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
-<em>flattens</em> all sub-modules (i.e. all functions and <a href="/book/vnext/language/iterator.html">type iterators</a> defined within sub-modules
+<p>Due to specific requirements of a <a href="/book/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
+<em>flattens</em> all sub-modules (i.e. all functions and <a href="/book/language/iterator.html">type iterators</a> defined within sub-modules
 are pulled up to the top level instead) and so there will not be any sub-modules added to the package.</p>
-<p>Variables in the <a href="/book/vnext/plugins/module.html">plugin module</a> are ignored.</p>
+<p>Variables in the <a href="/book/plugins/module.html">plugin module</a> are ignored.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

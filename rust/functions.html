@@ -143,8 +143,8 @@
                     <main>
                         <h1 id="register-a-rust-function"><a class="header" href="#register-a-rust-function">Register a Rust Function</a></h1>
 <p>Rhai’s scripting engine is very lightweight.  It gets most of its abilities from functions.</p>
-<p>To call these functions, they need to be <em>registered</em> with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> using <code>Engine::register_fn</code>
-and <code>Engine::register_result_fn</code> (see <a href="/book/vnext/rust/fallible.html">fallible functions</a>).</p>
+<p>To call these functions, they need to be <em>registered</em> with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> using <code>Engine::register_fn</code>
+and <code>Engine::register_result_fn</code> (see <a href="/book/rust/fallible.html">fallible functions</a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -183,8 +183,8 @@ let result = engine.eval::&lt;i64&gt;(&quot;get_any_value()&quot;)?;
 println!(&quot;Answer: {}&quot;, result);         // prints 42
 <span class="boring">}
 </span></code></pre></pre>
-<p>To create a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value, use the <code>Dynamic::from</code> method.
-<a href="/book/vnext/language/values-and-types.html">Standard types</a> in Rhai can also use <code>.into()</code>.</p>
+<p>To create a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value, use the <code>Dynamic::from</code> method.
+<a href="/book/language/values-and-types.html">Standard types</a> in Rhai can also use <code>.into()</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -198,7 +198,7 @@ let x = Dynamic::from(TestStruct::new());
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="function-overloading"><a class="header" href="#function-overloading">Function Overloading</a></h2>
-<p>Functions registered with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> can be <em>overloaded</em> as long as the <em>signature</em> is unique,
+<p>Functions registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be <em>overloaded</em> as long as the <em>signature</em> is unique,
 i.e. different functions can have the same name as long as their parameters are of different types
 or different number.</p>
 <p>New definitions <em>overwrite</em> previous definitions of the same name and same number/types of parameters.</p>

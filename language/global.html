@@ -142,9 +142,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="automatic-global-module"><a class="header" href="#automatic-global-module">Automatic Global Module</a></h1>
-<p>When a <a href="/book/vnext/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/vnext/rust/modules/index.html">module</a> called <code>global</code>.</p>
-<p><a href="/book/vnext/language/functions.html">Functions</a> can access those constants via the special <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a>.</p>
-<p>Naturally, the automatic <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a> is not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<p>When a <a href="/book/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/rust/modules/index.html">module</a> called <code>global</code>.</p>
+<p><a href="/book/language/functions.html">Functions</a> can access those constants via the special <code>global</code> <a href="/book/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <code>global</code> <a href="/book/rust/modules/index.html">module</a> is not available under <a href="/book/start/features.html"><code>no_function</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -162,7 +162,7 @@ fn foo(x) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="overriding-global"><a class="header" href="#overriding-global">Overriding <code>global</code></a></h2>
-<p>It is possible to <em>override</em> the automatic global <a href="/book/vnext/rust/modules/index.html">module</a> by <a href="/book/vnext/language/modules/import.html">importing</a> another <a href="/book/vnext/rust/modules/index.html">module</a>
+<p>It is possible to <em>override</em> the automatic global <a href="/book/rust/modules/index.html">module</a> by <a href="/book/language/modules/import.html">importing</a> another <a href="/book/rust/modules/index.html">module</a>
 under the name <code>global</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

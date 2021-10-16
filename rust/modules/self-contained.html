@@ -142,14 +142,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="compile-to-a-self-contained-ast"><a class="header" href="#compile-to-a-self-contained-ast">Compile to a Self-Contained <code>AST</code></a></h1>
-<p>When a script <a href="/book/vnext/language/modules/import.html">imports</a> external <a href="/book/vnext/rust/modules/index.html">modules</a> that may not be available later on,
-it is possible to eagerly <a href="/book/vnext/rust/modules/resolvers.html"><em>pre-resolve</em></a> these imports and embed them
-directly into a self-contained <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
+<p>When a script <a href="/book/language/modules/import.html">imports</a> external <a href="/book/rust/modules/index.html">modules</a> that may not be available later on,
+it is possible to eagerly <a href="/book/rust/modules/resolvers.html"><em>pre-resolve</em></a> these imports and embed them
+directly into a self-contained <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 <p>For instance, a system may periodically connect to a central source (e.g. a database) to load
-scripts and compile them to <a href="/book/vnext/engine/compile.html"><code>AST</code></a> form. Afterwards, in order to conserve bandwidth (or due to
+scripts and compile them to <a href="/book/engine/compile.html"><code>AST</code></a> form. Afterwards, in order to conserve bandwidth (or due to
 other physical limitations), it is disconnected from the central source for self-contained
 operation.</p>
-<p>Compile a script into a <em>self-contained</em> <a href="/book/vnext/engine/compile.html"><code>AST</code></a> via <code>Engine::compile_into_self_contained</code>.</p>
+<p>Compile a script into a <em>self-contained</em> <a href="/book/engine/compile.html"><code>AST</code></a> via <code>Engine::compile_into_self_contained</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -167,12 +167,12 @@ engine.set_module_resolver(DummyModuleResolver::new());
 engine.run(&amp;ast)?;
 <span class="boring">}
 </span></code></pre></pre>
-<p>When such an <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is evaluated, <a href="/book/vnext/language/modules/import.html"><code>import</code></a> statements within are provided the <em>pre-resolved</em>
-<a href="/book/vnext/rust/modules/index.html">modules</a> without going through the normal <a href="/book/vnext/rust/modules/resolvers.html">module resolution</a> process.</p>
+<p>When such an <a href="/book/engine/compile.html"><code>AST</code></a> is evaluated, <a href="/book/language/modules/import.html"><code>import</code></a> statements within are provided the <em>pre-resolved</em>
+<a href="/book/rust/modules/index.html">modules</a> without going through the normal <a href="/book/rust/modules/resolvers.html">module resolution</a> process.</p>
 <h2 id="only-static-paths"><a class="header" href="#only-static-paths">Only Static Paths</a></h2>
-<p><code>Engine::compile_into_self_contained</code> only pre-resolves <a href="/book/vnext/language/modules/import.html"><code>import</code></a> statements in the script
-that are <em>static</em>, i.e. with a path that is a <a href="/book/vnext/language/strings-chars.html">string</a> literal.</p>
-<p>It does not matter where the <a href="/book/vnext/language/modules/import.html"><code>import</code></a> statement occurs (e.g. deep within statement blocks,
+<p><code>Engine::compile_into_self_contained</code> only pre-resolves <a href="/book/language/modules/import.html"><code>import</code></a> statements in the script
+that are <em>static</em>, i.e. with a path that is a <a href="/book/language/strings-chars.html">string</a> literal.</p>
+<p>It does not matter where the <a href="/book/language/modules/import.html"><code>import</code></a> statement occurs (e.g. deep within statement blocks,
 within function bodies).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

@@ -143,13 +143,13 @@
                     <main>
                         <h1 id="export-a-rust-function-to-rhai"><a class="header" href="#export-a-rust-function-to-rhai">Export a Rust Function to Rhai</a></h1>
 <p>Sometimes only a few ad hoc functions are required and it is simpler to register
-individual functions instead of a full-blown <a href="/book/vnext/plugins/module.html">plugin module</a>.</p>
+individual functions instead of a full-blown <a href="/book/plugins/module.html">plugin module</a>.</p>
 <h2 id="macros"><a class="header" href="#macros">Macros</a></h2>
 <table><thead><tr><th>Macro</th><th>Signature</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>#[export_fn]</code></td><td>apply to rust function defined in a Rust module</td><td>exports the function</td></tr>
-<tr><td><code>register_exported_fn!</code></td><td><code>register_exported_fn!(&amp;mut </code><em>engine</em><code>, &quot;</code><em>name</em><code>&quot;, </code><em>function</em><code>)</code></td><td>registers the function into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> under a specific name</td></tr>
-<tr><td><code>set_exported_fn!</code></td><td><code>set_exported_fn!(&amp;mut </code><em>module</em><code>, &quot;</code><em>name</em><code>&quot;, </code><em>function</em><code>)</code></td><td>registers the function into a <a href="/book/vnext/rust/modules/index.html"><code>Module</code></a> under a specific name</td></tr>
-<tr><td><code>set_exported_global_fn!</code></td><td><code>set_exported_global_fn!(&amp;mut </code><em>module</em><code>, &quot;</code><em>name</em><code>&quot;, </code><em>function</em><code>)</code></td><td>registers the function into a <a href="/book/vnext/rust/modules/index.html"><code>Module</code></a> under a specific name, exposing it to the global namespace</td></tr>
+<tr><td><code>register_exported_fn!</code></td><td><code>register_exported_fn!(&amp;mut </code><em>engine</em><code>, &quot;</code><em>name</em><code>&quot;, </code><em>function</em><code>)</code></td><td>registers the function into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> under a specific name</td></tr>
+<tr><td><code>set_exported_fn!</code></td><td><code>set_exported_fn!(&amp;mut </code><em>module</em><code>, &quot;</code><em>name</em><code>&quot;, </code><em>function</em><code>)</code></td><td>registers the function into a <a href="/book/rust/modules/index.html"><code>Module</code></a> under a specific name</td></tr>
+<tr><td><code>set_exported_global_fn!</code></td><td><code>set_exported_global_fn!(&amp;mut </code><em>module</em><code>, &quot;</code><em>name</em><code>&quot;, </code><em>function</em><code>)</code></td><td>registers the function into a <a href="/book/rust/modules/index.html"><code>Module</code></a> under a specific name, exposing it to the global namespace</td></tr>
 </tbody></table>
 <h2 id="export_fn-and-register_exported_fn"><a class="header" href="#export_fn-and-register_exported_fn"><code>#[export_fn]</code> and <code>register_exported_fn!</code></a></h2>
 <p>Apply <code>#[export_fn]</code> onto a function defined at <em>module level</em> to convert it into a Rhai plugin function.</p>
@@ -173,12 +173,12 @@ fn main() {
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
 <p>Some functions are <em>pure</em> – i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as <code>&amp;mut</code> (e.g. for a method function).</p>
-<p>This is most commonly done to avoid expensive cloning for methods or <a href="/book/vnext/rust/getters-setters.html">property
-getters</a> that return information about a <a href="/book/vnext/rust/custom.html">custom type</a> and does not modify it.</p>
+<p>This is most commonly done to avoid expensive cloning for methods or <a href="/book/rust/getters-setters.html">property
+getters</a> that return information about a <a href="/book/rust/custom.html">custom type</a> and does not modify it.</p>
 <p>Apply the <code>#[export_fn(pure)]</code> attribute on a plugin function to mark it as  <em>pure</em>.</p>
-<p>Pure functions can be passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.
+<p>Pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.
 The condition is that they <em>MUST NOT</em> modify that value.</p>
-<p>Non-pure functions, when passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
+<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
 <code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -200,7 +200,7 @@ pub fn clear(my_type: &amp;mut TestStruct) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="fallible-functions"><a class="header" href="#fallible-functions">Fallible Functions</a></h2>
-<p>To register <a href="/book/vnext/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
+<p>To register <a href="/book/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[export_fn(return_raw)]</code> attribute on plugin functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
 <p>A syntax error is generated if the function with <code>#[export_fn(return_raw)]</code> does not
@@ -224,7 +224,7 @@ fn main() {
 }
 </code></pre></pre>
 <h2 id="nativecallcontext-parameter"><a class="header" href="#nativecallcontext-parameter"><code>NativeCallContext</code> Parameter</a></h2>
-<p>The <em>first</em> parameter of a function can also be <a href="/book/vnext/rust/context.html"><code>NativeCallContext</code></a>, which is treated
+<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>, which is treated
 specially by the plugins system.</p>
 
                     </main>

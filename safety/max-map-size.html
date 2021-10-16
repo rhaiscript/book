@@ -143,11 +143,11 @@
                     <main>
                         <h1 id="maximum-size-of-object-maps"><a class="header" href="#maximum-size-of-object-maps">Maximum Size of Object Maps</a></h1>
 <h2 id="limit-how-large-object-maps-can-grow"><a class="header" href="#limit-how-large-object-maps-can-grow">Limit How Large Object Maps Can Grow</a></h2>
-<p>Rhai by default does not limit how large (i.e. the number of properties) an <a href="/book/vnext/language/object-maps.html">object map</a> can be.</p>
+<p>Rhai by default does not limit how large (i.e. the number of properties) an <a href="/book/language/object-maps.html">object map</a> can be.</p>
 <p>This can be changed via the <code>Engine::set_max_map_size</code> method, with zero being unlimited (the default).</p>
 <p>A script attempting to create an object map literal with more properties than the maximum will terminate with a parse error.</p>
 <p>Any script operation that produces an object map with more properties than the maximum also terminates the script with an error result.</p>
-<p>This check can be disabled via the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -164,8 +164,8 @@ an object map’s size without Rhai noticing until the very end.</p>
 <p>For instance, the built-in <code>+</code> operator for object maps concatenates two object maps together to form one larger object map;
 if both object maps are <em>slightly</em> below the maximum size limit, the resultant object map may be almost <em>twice</em> the maximum size.</p>
 <p>As a malicious script may create a deeply-nested object map which consumes huge amounts of memory while each individual
-object map still stays under the maximum size limit, Rhai also recursively adds up the sizes of all <a href="/book/vnext/language/strings-chars.html">strings</a>, <a href="/book/vnext/language/arrays.html">arrays</a>
-and <a href="/book/vnext/language/object-maps.html">object maps</a> contained within each object map to make sure that the <em>aggregate</em> sizes of none of these data structures
+object map still stays under the maximum size limit, Rhai also recursively adds up the sizes of all <a href="/book/language/strings-chars.html">strings</a>, <a href="/book/language/arrays.html">arrays</a>
+and <a href="/book/language/object-maps.html">object maps</a> contained within each object map to make sure that the <em>aggregate</em> sizes of none of these data structures
 exceed their respective maximum size limits (if any).</p>
 
                     </main>

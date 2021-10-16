@@ -143,21 +143,21 @@
                     <main>
                         <h1 id="function-namespaces"><a class="header" href="#function-namespaces">Function Namespaces</a></h1>
 <h2 id="each-function-is-a-separate-compilation-unit"><a class="header" href="#each-function-is-a-separate-compilation-unit">Each Function is a Separate Compilation Unit</a></h2>
-<p><a href="/book/vnext/language/functions.html">Functions</a> in Rhai are <em>pure</em> and they form individual <em>compilation units</em>.
+<p><a href="/book/language/functions.html">Functions</a> in Rhai are <em>pure</em> and they form individual <em>compilation units</em>.
 This means that individual functions can be separated, exported, re-grouped, imported,
 and generally mix-’n-matched with other completely unrelated scripts.</p>
 <p>For example, the <code>AST::merge</code> and <code>AST::combine</code> methods (or the equivalent <code>+</code> and <code>+=</code> operators)
-allow combining all functions in one <a href="/book/vnext/engine/compile.html"><code>AST</code></a> into another, forming a new, unified, group of functions.</p>
+allow combining all functions in one <a href="/book/engine/compile.html"><code>AST</code></a> into another, forming a new, unified, group of functions.</p>
 <h2 id="namespace-types"><a class="header" href="#namespace-types">Namespace Types</a></h2>
 <p>In general, there are two main types of <em>namespaces</em> where functions are looked up:</p>
 <table><thead><tr><th>Namespace</th><th align="center">How Many</th><th>Source</th><th>Lookup</th><th align="center">Sub-modules?</th><th align="center">Variables?</th></tr></thead><tbody>
-<tr><td>Global</td><td align="center">One</td><td>1) <a href="/book/vnext/engine/compile.html"><code>AST</code></a> being evaluated<br/>2) <code>Engine::register_XXX</code> API<br/>3) global <a href="/book/vnext/rust/modules/index.html">modules</a> registered via <code>Engine::register_global_module</code><br/>4) functions in static <a href="/book/vnext/rust/modules/index.html">modules</a> registered via <code>Engine::register_static_module</code> and marked <em>global</em></td><td>simple name</td><td align="center">ignored</td><td align="center">ignored</td></tr>
-<tr><td>Module</td><td align="center">Many</td><td>1) <a href="/book/vnext/rust/modules/index.html">Module</a> registered via <code>Engine::register_static_module</code><br/>2) <a href="/book/vnext/rust/modules/index.html">Module</a> loaded via <a href="/book/vnext/language/modules/import.html"><code>import</code></a> statement</td><td>namespace-qualified name</td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td>Global</td><td align="center">One</td><td>1) <a href="/book/engine/compile.html"><code>AST</code></a> being evaluated<br/>2) <code>Engine::register_XXX</code> API<br/>3) global <a href="/book/rust/modules/index.html">modules</a> registered via <code>Engine::register_global_module</code><br/>4) functions in static <a href="/book/rust/modules/index.html">modules</a> registered via <code>Engine::register_static_module</code> and marked <em>global</em></td><td>simple name</td><td align="center">ignored</td><td align="center">ignored</td></tr>
+<tr><td>Module</td><td align="center">Many</td><td>1) <a href="/book/rust/modules/index.html">Module</a> registered via <code>Engine::register_static_module</code><br/>2) <a href="/book/rust/modules/index.html">Module</a> loaded via <a href="/book/language/modules/import.html"><code>import</code></a> statement</td><td>namespace-qualified name</td><td align="center">yes</td><td align="center">yes</td></tr>
 </tbody></table>
 <h3 id="module-namespaces"><a class="header" href="#module-namespaces">Module Namespaces</a></h3>
 <p>There can be multiple module namespaces at any time during a script evaluation, usually loaded via the
-<a href="/book/vnext/language/modules/import.html"><code>import</code></a> statement.</p>
-<p><em>Static</em> module namespaces can also be registered into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::register_static_module</code>.</p>
+<a href="/book/language/modules/import.html"><code>import</code></a> statement.</p>
+<p><em>Static</em> module namespaces can also be registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::register_static_module</code>.</p>
 <p>Functions and variables in module namespaces are isolated and encapsulated within their own environments.</p>
 <p>They must be called or accessed in a <em>namespace-qualified</em> manner.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -174,21 +174,21 @@ let z = calc_result();          // &lt;- error: function 'calc_result' not found
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="global-namespace"><a class="header" href="#global-namespace">Global Namespace</a></h3>
-<p>There is one <em>global</em> namespace for every <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, which includes (in the following search order):</p>
+<p>There is one <em>global</em> namespace for every <a href="/book/engine/hello-world.html"><code>Engine</code></a>, which includes (in the following search order):</p>
 <ul>
 <li>
-<p>All functions defined in the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> currently being evaluated.</p>
+<p>All functions defined in the <a href="/book/engine/compile.html"><code>AST</code></a> currently being evaluated.</p>
 </li>
 <li>
 <p>All native Rust functions and iterators registered via the <code>Engine::register_XXX</code> API.</p>
 </li>
 <li>
-<p>All functions and iterators defined in global <a href="/book/vnext/rust/modules/index.html">modules</a> that are registered into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> via
+<p>All functions and iterators defined in global <a href="/book/rust/modules/index.html">modules</a> that are registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via
 <code>Engine::register_global_module</code>.</p>
 </li>
 <li>
-<p>Functions defined in <a href="/book/vnext/rust/modules/index.html">modules</a> registered via <code>Engine::register_static_module</code> that are specifically
-marked for exposure to the global namespace (e.g. via the <code>#[rhai(global)]</code> attribute in a <a href="/book/vnext/plugins/module.html">plugin module</a>).</p>
+<p>Functions defined in <a href="/book/rust/modules/index.html">modules</a> registered via <code>Engine::register_static_module</code> that are specifically
+marked for exposure to the global namespace (e.g. via the <code>#[rhai(global)]</code> attribute in a <a href="/book/plugins/module.html">plugin module</a>).</p>
 </li>
 </ul>
 <p>Anywhere in a Rhai script, when a function call is made, the function is searched within the
@@ -224,8 +224,8 @@ engine.run_ast(&amp;ast1)?;         // prints 'Boo!'
 </span></code></pre></pre>
 <p>Therefore, care must be taken when <em>cross-calling</em> functions to make sure that the correct
 functions are called.</p>
-<p>The only practical way to ensure that a function is a correct one is to use <a href="/book/vnext/rust/modules/index.html">modules</a> -
-i.e. define the function in a separate module and then <a href="/book/vnext/language/modules/import.html"><code>import</code></a> it:</p>
+<p>The only practical way to ensure that a function is a correct one is to use <a href="/book/rust/modules/index.html">modules</a> -
+i.e. define the function in a separate module and then <a href="/book/language/modules/import.html"><code>import</code></a> it:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
