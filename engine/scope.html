@@ -232,10 +232,10 @@ a <code>Scope</code> in order to run custom scripts, this has significant perfor
 </span><span class="boring">fn main() {
 </span>let mut scope = Scope::new();
 
-scope.push(&quot;my_var&quot;, 42 as i64);                // &amp;'static str
+scope.push(&quot;my_var&quot;, 42_i64);                   // &amp;'static str
 
 scope.push(String::from(&quot;also_var&quot;),            // String
-    123 as i64
+    123_i64
 );
 
 // Read a bunch of configuration values from a database

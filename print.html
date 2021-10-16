@@ -1169,10 +1169,10 @@ a <code>Scope</code> in order to run custom scripts, this has significant perfor
 </span><span class="boring">fn main() {
 </span>let mut scope = Scope::new();
 
-scope.push(&quot;my_var&quot;, 42 as i64);                // &amp;'static str
+scope.push(&quot;my_var&quot;, 42_i64);                   // &amp;'static str
 
 scope.push(String::from(&quot;also_var&quot;),            // String
-    123 as i64
+    123_i64
 );
 
 // Read a bunch of configuration values from a database
@@ -11058,7 +11058,7 @@ struct Handler {
     // Scripting engine
     pub engine: Engine,
     // Use a custom 'Scope' to keep stored state
-    pub scope: Scope,
+    pub scope: Scope&lt;'static&gt;,
     // Program script
     pub ast: AST
 }
@@ -11074,20 +11074,20 @@ struct Handler {
 // A custom type to a hold state value.
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default)]
 pub struct SomeType {
-    data: i64;
+    data: i64
 }
 
 #[export_module]
 mod SomeTypeAPI {
     #[rhai_fn(global)]
-    pub func1(obj: &amp;mut SomeType) -&gt; bool { ... }
+    pub fn func1(obj: &amp;mut SomeType) -&gt; bool { ... }
     #[rhai_fn(global)]
-    pub func2(obj: &amp;mut SomeType) -&gt; bool { ... }
-    pub process(data: i64) -&gt; i64 { ... }
+    pub fn func2(obj: &amp;mut SomeType) -&gt; bool { ... }
+    pub fn process(data: i64) -&gt; i64 { ... }
     #[rhai_fn(get = &quot;value&quot;, pure)]
-    pub get_value(obj: &amp;mut SomeType) -&gt; i64 { obj.data }
+    pub fn get_value(obj: &amp;mut SomeType) -&gt; i64 { obj.data }
     #[rhai_fn(set = &quot;value&quot;)]
-    pub set_value(obj: &amp;mut SomeType, value: i64) { obj.data = value; }
+    pub fn set_value(obj: &amp;mut SomeType, value: i64) { obj.data = value; }
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -11105,19 +11105,19 @@ mod SomeTypeAPI {
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Handler {
-    pub new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
+    pub fn new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
         let mut engine = Engine::new();
 
         // Register custom types and API's
         engine.register_type_with_name::&lt;SomeType&gt;(&quot;SomeType&quot;)
-              .register_global_module(exported_module!(SomeTypeAPI));
+              .register_global_module(exported_module!(SomeTypeAPI).into());
 
         // Create a custom 'Scope' to hold state
         let mut scope = Scope::new();
 
         // Add initialized state into the custom 'Scope'
-        scope.push(&quot;state1&quot;, false);
-        scope.push(&quot;state2&quot;, SomeType::new(42));
+        scope.push(&quot;bool_state&quot;, false);
+        scope.push(&quot;some_type_state&quot;, SomeType::new(42));
 
         // Compile the handler script.
         // In a real application you'd be handling errors...
@@ -11142,7 +11142,7 @@ mod SomeTypeAPI {
 </span>impl Handler {
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
-    pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Result&lt;(), Error&gt; {
+    pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Dynamic {
         let engine = &amp;self.engine;
         let scope = &amp;mut self.scope;
         let ast = &amp;self.ast;
@@ -11150,26 +11150,28 @@ mod SomeTypeAPI {
         match event_name {
             // The 'start' event maps to function 'start'.
             // In a real application you'd be handling errors...
-            &quot;start&quot; =&gt; engine.call_fn(scope, ast, &quot;start&quot;, (event_data,))?,
+            &quot;start&quot; =&gt; engine.call_fn(scope, ast, &quot;start&quot;, (event_data,)).unwrap(),
 
             // The 'end' event maps to function 'end'.
             // In a real application you'd be handling errors...
-            &quot;end&quot; =&gt; engine.call_fn(scope, ast, &quot;end&quot;, (event_data,))?,
+            &quot;end&quot; =&gt; engine.call_fn(scope, ast, &quot;end&quot;, (event_data,)).unwrap(),
 
             // The 'update' event maps to function 'update'.
-            // This event provides a default implementation when the scripted function
-            // is not found.
+            // This event provides a default implementation when the scripted function is not found.
             &quot;update&quot; =&gt;
                 engine.call_fn(scope, ast, &quot;update&quot;, (event_data,))
                       .or_else(|err| match *err {
                          EvalAltResult::ErrorFunctionNotFound(fn_name, _) if fn_name == &quot;update&quot; =&gt; {
                             // Default implementation of 'update' event handler
-                            self.scope.set_value(&quot;state2&quot;, SomeType::new(42));
+                            self.scope.set_value(&quot;some_type_state&quot;, SomeType::new(42));
                             // Turn function-not-found into a success
                             Ok(Dynamic::UNIT)
                          }
                          _ =&gt; Err(err)
-                      })?
+                      }).unwrap(),
+
+            // In a real application you'd be handling unknown events...
+            _ =&gt; panic!(&quot;unknown event: {}&quot;, event_name)
         }
     }
 }
@@ -11183,29 +11185,29 @@ in the handler script to access and modify these state variables.</p>
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn start(data) {
-    if state1 {
+    if bool_state {
         throw &quot;Already started!&quot;;
     }
-    if state2.func1() || state2.func2() {
+    if some_type_state.func1() || some_type_state.func2() {
         throw &quot;Conditions not yet ready to start!&quot;;
     }
-    state1 = true;
-    state2.value = data;
+    bool_state = true;
+    some_type_state.value = data;
 }
 
 fn end(data) {
-    if !state1 {
+    if !bool_state {
         throw &quot;Not yet started!&quot;;
     }
-    if state2.func1() || state2.func2() {
+    if some_type_state.func1() || some_type_state.func2() {
         throw &quot;Conditions not yet ready to start!&quot;;
     }
-    state1 = false;
-    state2.value = data;
+    bool_state = false;
+    some_type_state.value = data;
 }
 
 fn update(data) {
-    state2.value += process(data);
+    some_type_state.value += process(data);
 }
 <span class="boring">}
 </span></code></pre></pre>
