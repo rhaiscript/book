@@ -48,7 +48,7 @@ struct Handler {
     // Scripting engine
     pub engine: Engine,
     // Use a custom 'Scope' to keep stored state
-    pub scope: Scope,
+    pub scope: Scope<'static>,
     // Program script
     pub ast: AST
 }
@@ -64,20 +64,20 @@ use rhai::plugin::*;
 // A custom type to a hold state value.
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default)]
 pub struct SomeType {
-    data: i64;
+    data: i64
 }
 
 #[export_module]
 mod SomeTypeAPI {
     #[rhai_fn(global)]
-    pub func1(obj: &mut SomeType) -> bool { ... }
+    pub fn func1(obj: &mut SomeType) -> bool { ... }
     #[rhai_fn(global)]
-    pub func2(obj: &mut SomeType) -> bool { ... }
-    pub process(data: i64) -> i64 { ... }
+    pub fn func2(obj: &mut SomeType) -> bool { ... }
+    pub fn process(data: i64) -> i64 { ... }
     #[rhai_fn(get = "value", pure)]
-    pub get_value(obj: &mut SomeType) -> i64 { obj.data }
+    pub fn get_value(obj: &mut SomeType) -> i64 { obj.data }
     #[rhai_fn(set = "value")]
-    pub set_value(obj: &mut SomeType, value: i64) { obj.data = value; }
+    pub fn set_value(obj: &mut SomeType, value: i64) { obj.data = value; }
 }
 ```
 
@@ -94,19 +94,19 @@ Steps to initialize the event handler:
 
 ```rust no_run
 impl Handler {
-    pub new(path: impl Into<PathBuf>) -> Self {
+    pub fn new(path: impl Into<PathBuf>) -> Self {
         let mut engine = Engine::new();
 
         // Register custom types and API's
         engine.register_type_with_name::<SomeType>("SomeType")
-              .register_global_module(exported_module!(SomeTypeAPI));
+              .register_global_module(exported_module!(SomeTypeAPI).into());
 
         // Create a custom 'Scope' to hold state
         let mut scope = Scope::new();
 
         // Add initialized state into the custom 'Scope'
-        scope.push("state1", false);
-        scope.push("state2", SomeType::new(42));
+        scope.push("bool_state", false);
+        scope.push("some_type_state", SomeType::new(42));
 
         // Compile the handler script.
         // In a real application you'd be handling errors...
@@ -132,7 +132,7 @@ Mapping an event from the system into a scripted handler is straight-forward:
 impl Handler {
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
-    pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Result<(), Error> {
+    pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
         let engine = &self.engine;
         let scope = &mut self.scope;
         let ast = &self.ast;
@@ -140,26 +140,28 @@ impl Handler {
         match event_name {
             // The 'start' event maps to function 'start'.
             // In a real application you'd be handling errors...
-            "start" => engine.call_fn(scope, ast, "start", (event_data,))?,
+            "start" => engine.call_fn(scope, ast, "start", (event_data,)).unwrap(),
 
             // The 'end' event maps to function 'end'.
             // In a real application you'd be handling errors...
-            "end" => engine.call_fn(scope, ast, "end", (event_data,))?,
+            "end" => engine.call_fn(scope, ast, "end", (event_data,)).unwrap(),
 
             // The 'update' event maps to function 'update'.
-            // This event provides a default implementation when the scripted function
-            // is not found.
+            // This event provides a default implementation when the scripted function is not found.
             "update" =>
                 engine.call_fn(scope, ast, "update", (event_data,))
                       .or_else(|err| match *err {
                          EvalAltResult::ErrorFunctionNotFound(fn_name, _) if fn_name == "update" => {
                             // Default implementation of 'update' event handler
-                            self.scope.set_value("state2", SomeType::new(42));
+                            self.scope.set_value("some_type_state", SomeType::new(42));
                             // Turn function-not-found into a success
                             Ok(Dynamic::UNIT)
                          }
-                         _ => Err(err.into())
-                      })?
+                         _ => Err(err)
+                      }).unwrap(),
+
+            // In a real application you'd be handling unknown events...
+            _ => panic!("unknown event: {}", event_name)
         }
     }
 }
@@ -174,28 +176,28 @@ The API registered with the [`Engine`] can be also used throughout the script.
 
 ```rust no_run
 fn start(data) {
-    if state1 {
+    if bool_state {
         throw "Already started!";
     }
-    if state2.func1() || state2.func2() {
+    if some_type_state.func1() || some_type_state.func2() {
         throw "Conditions not yet ready to start!";
     }
-    state1 = true;
-    state2.value = data;
+    bool_state = true;
+    some_type_state.value = data;
 }
 
 fn end(data) {
-    if !state1 {
+    if !bool_state {
         throw "Not yet started!";
     }
-    if state2.func1() || state2.func2() {
+    if some_type_state.func1() || some_type_state.func2() {
         throw "Conditions not yet ready to start!";
     }
-    state1 = false;
-    state2.value = data;
+    bool_state = false;
+    some_type_state.value = data;
 }
 
 fn update(data) {
-    state2.value += process(data);
+    some_type_state.value += process(data);
 }
 ```
