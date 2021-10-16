@@ -117,10 +117,10 @@ a `Scope` in order to run custom scripts, this has significant performance impli
 ```rust no_run
 let mut scope = Scope::new();
 
-scope.push("my_var", 42 as i64);                // &'static str
+scope.push("my_var", 42_i64);                   // &'static str
 
 scope.push(String::from("also_var"),            // String
-    123 as i64
+    123_i64
 );
 
 // Read a bunch of configuration values from a database
