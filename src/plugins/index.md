@@ -11,3 +11,9 @@ a _plugin_ simplifies the work of creating and registering new functionality in 
 
 Plugins are processed via a set of procedural macros under the `rhai::plugin` module. These
 allow registering Rust functions directly in the Engine, or adding Rust modules as packages.
+
+There are two types of plugins:
+
+1) [Plugin Functions]
+
+2) [Plugin Modules]

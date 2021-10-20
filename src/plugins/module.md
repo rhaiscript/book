@@ -45,7 +45,9 @@ mod my_module {
     // Ignored when registered as a global module.
     pub const MY_NUMBER: i64 = 42;
 
-    // This function will be registered as 'greet'.
+    // This function will be registered as 'greet'
+    // but is only available with the 'greetings' feature.
+    #[cfg(feature = "greetings")]
     pub fn greet(name: &str) -> String {
         format!("hello, {}!", name)
     }
@@ -202,15 +204,18 @@ def_package!(rhai:MyPackage:"My own personal super package", module, {
 functions in sub-modules are promoted to the top level.  This is convenient for [custom packages].
 
 
-Sub-Modules and Feature Gates
-----------------------------
+Sub-Modules
+-----------
 
 Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
 Rhai `Module`.
 
-They are also commonly used to put _feature gates_ or _compile-time gates_ on a group of functions,
-because currently attributes do not work on individual function definitions due to a limitation of
-the procedural macros system.
+Most of the time, plugin modules are used as a [packages].  In such usage, all functions within a
+sub-module are _flattened_ into the [namespace][function namespace].  As a result, sub-modules can
+be used conveniently as a _grouping_ mechanism.
+
+They are also commonly used to put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a
+large group of functions without having to put the gates on individual functions.
 
 This is especially convenient when using the `combine_with_exported_module!` macro to develop
 [custom packages] because selected groups of functions can easily be included or excluded based on
@@ -223,7 +228,9 @@ mod my_module {
     // Always available
     pub fn func0() {}
 
-    // The following sub-module is only available under 'feature1'
+    // The following functions are only available under 'feature1'.
+    // Use a sub-module for convenience, since all functions underneath
+    // will be flattened into the namespace.
     #[cfg(feature = "feature1")]
     pub mod feature1 {
         fn func1() {}
@@ -231,7 +238,15 @@ mod my_module {
         fn func3() {}
     }
 
-    // The following sub-module is only available under 'feature2'
+    // The above is equivalent to:
+    #[cfg(feature = "feature1")]
+    pub fn func1() {}
+    #[cfg(feature = "feature1")]
+    pub fn func2() {}
+    #[cfg(feature = "feature1")]
+    pub fn func3() {}
+
+    // The following functions are only available under 'feature2'
     #[cfg(feature = "feature2")]
     pub mod feature2 {
         fn func4() {}
@@ -244,6 +259,7 @@ mod my_module {
 //   func0 - always available
 //   func1, func2, func3 - available under 'feature1'
 //   func4, func5, func6 - available under 'feature2'
+//   func0, func1, func2, func3, func4, func5, func6 - available under 'feature1' and 'feature2'
 combine_with_exported_module!(module, "my_module_ID", my_module);
 ```
 
