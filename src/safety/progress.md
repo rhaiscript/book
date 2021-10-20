@@ -33,7 +33,7 @@ Termination Token
 -----------------
 
 The [`Dynamic`] value returned by the closure for `Engine::on_progress` is a _termination token_.
-A script that is manually terminated returns with `Err(EvalAltResult::ErrorTerminated(token, position))`
+A script that is manually terminated returns with `Err(Box<EvalAltResult::ErrorTerminated(token, position)>)`
 wrapping this value.
 
 The termination token is commonly used to provide information on the _reason_ or _source_

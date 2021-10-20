@@ -52,9 +52,7 @@ impl ModuleResolver for MyModuleResolver {
                     Rc::new(my_module)          // make it shared
                 },
                 // Return 'EvalAltResult::ErrorInModule' upon loading error
-                Err(err) => Err(
-                    EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into()
-                )
+                Err(err) => Err(EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into())
             }
         } else {
             // Return 'EvalAltResult::ErrorModuleNotFound' if the path is invalid

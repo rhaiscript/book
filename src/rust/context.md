@@ -39,12 +39,12 @@ pub fn grow(context: NativeCallContext, size: i64)
     // data structure larger than the allowed limit
     // for the Engine!
     if size as usize > context.engine().max_array_size() {
-        return EvalAltResult::ErrorDataTooLarge(
+        return Err(EvalAltResult::ErrorDataTooLarge(
             "Size to grow".to_string(),
             context.engine().max_array_size(),
             size as usize,
             Position::NONE,
-        ).into();
+        ).into());
     }
 
     let array = Array::new();

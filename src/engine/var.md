@@ -20,13 +20,11 @@ engine.on_var(|name, index, context| {
     match name {
         "MYSTIC_NUMBER" => Ok(Some(42_i64.into())),
         // Override a variable - make it not found even if it exists!
-        "DO_NOT_USE" => Err(Box::new(
-            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE)
-        )),
+        "DO_NOT_USE" => Err(EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE).into()),
         // Silently maps 'chameleon' into 'innocent'.
-        "chameleon" => context.scope().get_value("innocent").map(Some).ok_or_else(|| Box::new(
-            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE)
-        )),
+        "chameleon" => context.scope().get_value("innocent").map(Some).ok_or_else(|| 
+            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE).into()
+        ),
         // Return Ok(None) to continue with the normal variable resolution process.
         _ => Ok(None)
     }
