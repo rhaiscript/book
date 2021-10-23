@@ -83,7 +83,7 @@ The following methods (mostly defined in the [`BasicArrayPackage`][packages] but
 | `some`                    | [function pointer] to predicate (usually a [closure]), or the function name as a [string]                                                                               | returns `true` if any item returns `true` when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index                                                             |
 | `all`                     | [function pointer] to predicate (usually a [closure]), or the function name as a [string]                                                                               | returns `true` if all items return `true` when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: _(optional)_ offset index                                                             |
 | `sort`                    | [function pointer] to a comparison function (usually a [closure]), or the function name as a [string]                                                                   | sorts the array with a comparison function:<br/>1st parameter: first item<br/>2nd parameter: second item<br/>return value: `INT` < 0 if first < second, > 0 if first > second, 0 if first == second                       |
-
+| `sort`                    | _none_                                                                                                                                                                  | sorts a _homogeneous_ array containing only elements of the same comparable built-in type (`INT`, `FLOAT`, [`Decimal`][rust_decimal], [string], [character], `bool`, [`()`])                                              |
 
 Use Custom Types With Arrays
 ---------------------------
@@ -240,11 +240,13 @@ a.splice(1, 1, [1, 3, 2]);  // a == [42, 1, 3, 2, 99]
 
 a.extract(1, 3);            // returns [1, 3, 2]
 
-a.sort(|x, y| x - y);       // a == [1, 2, 3, 42, 99]
+a.sort(|x, y| y - x);       // a == [99, 42, 3, 2, 1]
+
+a.sort();                   // a == [1, 2, 3, 42, 99]
 
 a.drain(|v| v <= 1);        // a == [2, 3, 42, 99]
 
-a.drain(|v, i| i ≥ 3);     // a == [2, 3, 42]
+a.drain(|v, i| i ≥ 3);      // a == [2, 3, 42]
 
 a.retain(|v| v > 10);       // a == [42]
 
