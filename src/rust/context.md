@@ -32,8 +32,7 @@ use rhai::{Array, NativeCallContext, EvalAltResult, Position};
 // This function builds an array of arbitrary size, but is protected
 // against attacks by first checking with the allowed limit set
 // into the 'Engine'.
-pub fn grow(context: NativeCallContext, size: i64)
-                            -> Result<Array, Box<EvalAltResult>>
+pub fn grow(context: NativeCallContext, size: i64) -> Result<Array, Box<EvalAltResult>>
 {
     // Make sure the function does not generate a
     // data structure larger than the allowed limit
@@ -67,8 +66,7 @@ as a parameter to the function, thereby implementing a _callback_:
 ```rust no_run
 use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
-pub fn greet(context: NativeCallContext, callback: FnPtr)
-                            -> Result<String, Box<EvalAltResult>>
+pub fn greet(context: NativeCallContext, callback: FnPtr) -> Result<String, Box<EvalAltResult>>
 {
     // Call the callback closure with the current context
     // to obtain the name to greet!

@@ -228,38 +228,50 @@ mod my_module {
     // Always available
     pub fn func0() {}
 
-    // The following functions are only available under 'feature1'.
+    // The following functions are only available under 'foo'.
     // Use a sub-module for convenience, since all functions underneath
     // will be flattened into the namespace.
-    #[cfg(feature = "feature1")]
-    pub mod feature1 {
-        fn func1() {}
-        fn func2() {}
-        fn func3() {}
+    #[cfg(feature = "foo")]
+    pub mod group_foo {
+        pub fn func1() {}
+        pub fn func2() {}
+        pub fn func3() {}
     }
 
-    // The above is equivalent to:
-    #[cfg(feature = "feature1")]
+    // The following functions are only available under 'bar'
+    #[cfg(feature = "bar")]
+    pub mod group_bar {
+        pub fn func4() {}
+        pub fn func5() {}
+        pub fn func6() {}
+    }
+}
+
+// The above is equivalent to:
+#[export_module]
+mod my_module_alternate {
+    pub fn func0() {}
+
+    #[cfg(feature = "foo")]
     pub fn func1() {}
-    #[cfg(feature = "feature1")]
+    #[cfg(feature = "foo")]
     pub fn func2() {}
-    #[cfg(feature = "feature1")]
+    #[cfg(feature = "foo")]
     pub fn func3() {}
 
-    // The following functions are only available under 'feature2'
-    #[cfg(feature = "feature2")]
-    pub mod feature2 {
-        fn func4() {}
-        fn func5() {}
-        fn func6() {}
-    }
+    #[cfg(feature = "bar")]
+    pub fn func4() {}
+    #[cfg(feature = "bar")]
+    pub fn func5() {}
+    #[cfg(feature = "bar")]
+    pub fn func6() {}
 }
 
 // Registered functions:
 //   func0 - always available
-//   func1, func2, func3 - available under 'feature1'
-//   func4, func5, func6 - available under 'feature2'
-//   func0, func1, func2, func3, func4, func5, func6 - available under 'feature1' and 'feature2'
+//   func1, func2, func3 - available under 'foo'
+//   func4, func5, func6 - available under 'bar'
+//   func0, func1, func2, func3, func4, func5, func6 - available under 'foo' and 'bar'
 combine_with_exported_module!(module, "my_module_ID", my_module);
 ```
 
@@ -291,8 +303,7 @@ mod my_module {
         obj.prop += value;
     }
     // This function is 'calc (i64)'.
-    #[rhai_fn(name = "calc")]
-    pub fn calc_with_default(num: i64) -> i64 {
+    pub fn calc(num: i64) -> i64 {
         ...
     }
     // This function is 'calc (i64, bool)'.
@@ -395,18 +406,15 @@ use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
 mod my_module {
-    fn internal_calc(array: &mut rhai::Array, x: i64) -> i64 {
-        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
-    }
     // This function can be passed a constant
     #[rhai_fn(name = "add1", pure)]
     pub fn add_scaled(array: &mut rhai::Array, x: i64) -> i64 {
-        internal_calc(array, x)
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
     }
     // This function CANNOT be passed a constant
     #[rhai_fn(name = "add2")]
     pub fn add_scaled2(array: &mut rhai::Array, x: i64) -> i64 {
-        internal_calc(array, x)
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
     }
     // This getter can be applied to a constant
     #[rhai_fn(get = "first1", pure)]
@@ -499,15 +507,15 @@ Inner attributes can be applied to the inner items of a module to tweak the expo
 
 Parameters should be set on inner attributes to specify the desired behavior.
 
-| Attribute Parameter | Use with                    | Apply to                                           | Description                                             |
-| ------------------- | --------------------------- | -------------------------------------------------- | ------------------------------------------------------- |
-| `skip`              | `#[rhai_fn]`, `#[rhai_mod]` | function or sub-module                             | do not export this function/sub-module                  |
-| `global`            | `#[rhai_fn]`                | function                                           | expose this function to the global namespace            |
-| `internal`          | `#[rhai_fn]`                | function                                           | keep this function within the internal module namespace |
-| `name = "..."`      | `#[rhai_fn]`, `#[rhai_mod]` | function or sub-module                             | registers function/sub-module under the specified name  |
-| `get = "..."`       | `#[rhai_fn]`                | `pub fn (&mut Type) -> Value`                      | registers a getter for the named property               |
-| `set = "..."`       | `#[rhai_fn]`                | `pub fn (&mut Type, Value)`                        | registers a setter for the named property               |
-| `index_get`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT) -> Value`                 | registers an index getter                               |
-| `index_set`         | `#[rhai_fn]`                | `pub fn (&mut Type, INT, Value)`                   | registers an index setter                               |
-| `return_raw`        | `#[rhai_fn]`                | `pub fn (...) -> Result<Type, Box<EvalAltResult>>` | marks this as a [fallible function]                     |
-| `pure`              | `#[rhai_fn]`                | `pub fn (&mut Type, ...) -> ...`                   | marks this as a _pure_ function                         |
+| Attribute Parameter | Use with                       | Apply to                                           | Description                                                                   |
+| ------------------- | ------------------------------ | -------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `skip`              | `#[rhai_fn]`<br/>`#[rhai_mod]` | function or sub-module                             | do not export this function/[sub-module][module]                              |
+| `global`            | `#[rhai_fn]`                   | function                                           | expose this function to the global [namespace][function namespace]            |
+| `internal`          | `#[rhai_fn]`                   | function                                           | keep this function within the internal module [namespace][function namespace] |
+| `name = "..."`      | `#[rhai_fn]`<br/>`#[rhai_mod]` | function or sub-module                             | registers function/[sub-module][module] under the specified name              |
+| `get = "..."`       | `#[rhai_fn]`                   | `pub fn (&mut Type) -> ValueType`                  | registers a property [getter][getters/setters] for the named property         |
+| `set = "..."`       | `#[rhai_fn]`                   | `pub fn (&mut Type, ValueType)`                    | registers a property [setter][getters/setters] for the named property         |
+| `index_get`         | `#[rhai_fn]`                   | `pub fn (&mut Type, IndexType) -> ValueType`       | registers an [index getter][indexer]                                          |
+| `index_set`         | `#[rhai_fn]`                   | `pub fn (&mut Type, IndexType, ValueType)`         | registers an [index setter][indexer]                                          |
+| `return_raw`        | `#[rhai_fn]`                   | `pub fn (...) -> Result<Type, Box<EvalAltResult>>` | marks this as a [fallible function]                                           |
+| `pure`              | `#[rhai_fn]`                   | `pub fn (&mut Type, ...) -> ...`                   | marks this as a _pure_ function                                               |

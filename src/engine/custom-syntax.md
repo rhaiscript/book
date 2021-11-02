@@ -379,12 +379,15 @@ together with the implementation function.
 How Custom Parsers Work
 -----------------------
 
+### Parameters
+
 A custom parser takes as input parameters two pieces of information:
 
 * The symbols (as [strings]) parsed so far:
   
   | Argument type | Value             |
   | :-----------: | ----------------- |
+  | text [string] | text value        |
   |   `$ident$`   | identifier name   |
   |  `$symbol$`   | symbol literal    |
   |   `$expr$`    | `$expr$`          |
@@ -408,9 +411,16 @@ A custom parser takes as input parameters two pieces of information:
   If the look-ahead is unexpected, the custom parser should then return the symbol expected
   and Rhai will fail with a parse error containing information about the expected symbol.
 
-A custom parser always returns the _next_ symbol expected, which can also be `$ident$`,
-`$expr$` or `$block$`, or `None` if parsing should terminate (_without_ reading the
+### Return Value
+
+A custom parser always returns `Some` with the _next_ symbol expected (which can be `$ident$`,
+`$expr$`, `$block$` etc.) or `None` if parsing should terminate (_without_ reading the
 look-ahead symbol).
+
+A return symbol starting with `$$` is treated specially. Like returning `None`, it also
+terminates parsing, but at the same time it adds this symbol as text into the _inputs_ stream at the end.
+This is typically used to inform the implementation function which custom syntax variant was
+actually parsed.
 
 
 Example
@@ -421,28 +431,35 @@ engine.register_custom_syntax_raw(
     "perform",
     // The custom parser implementation - always returns the next symbol expected
     // 'look_ahead' is the next symbol about to be read
+    //
+    // Return symbols starting with '$$' terminate parsing but also allows us
+    // to determine which syntax variant was actually parsed so we can perform the
+    // appropriate action.
+    //
+    // The return type is 'Option<ImmutableString>' to allow common text strings
+    // to be interned and shared easily, reducing allocations during parsing.
     |symbols, look_ahead| match symbols.len() {
         // perform ...
-        1 => Ok(Some("$ident$".to_string())),
+        1 => Ok(Some("$ident$".into())),
         // perform command ...
         2 => match symbols[1].as_str() {
             "action" => Ok(Some("$expr$".into())),
             "hello" => Ok(Some("world".into())),
             "update" | "check" | "add" | "remove" => Ok(Some("$ident$".into())),
-            "cleanup" => Ok(None),
+            "cleanup" => Ok(Some("$$cleanup".into())),
             cmd => Err(ParseError(Box::new(ParseErrorType::BadInput(
                 LexError::ImproperSymbol(format!("Improper command: {}", cmd))
             )), Position::NONE)),
         },
         // perform command arg ...
         3 => match (symbols[1].as_str(), symbols[2].as_str()) {
-            ("action", _) => Ok(None),
-            ("hello", "world") => Ok(None),
-            ("update", arg) if arg == "system" => Ok(None),
-            ("update", arg) if arg == "client" => Ok(None),
-            ("check", arg) => Ok(None),
-            ("add", arg) => Ok(None),
-            ("remove", arg) => Ok(None),
+            ("action", _) => Ok(Some("$$action".into())),
+            ("hello", "world") => Ok(Some("$$hello-world".into())),
+            ("update", arg) if arg == "system" => Ok(Some("$$update-system".into())),
+            ("update", arg) if arg == "client" => Ok(Some("$$update-client".into())),
+            ("check", arg) => Ok(Some("$$check".into())),
+            ("add", arg) => Ok(Some("$$add".into())),
+            ("remove", arg) => Ok(Some("$$remove".into())),
             (cmd, arg) => Err(ParseError(Box::new(ParseErrorType::BadInput(
                 LexError::ImproperSymbol(
                     format!("Invalid argument for command {}: {}", cmd, arg)
