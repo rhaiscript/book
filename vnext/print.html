@@ -656,6 +656,8 @@ Use <a href="start/builds//book/vnext/start/features.html"><code>only_i32</code>
 remember, by default all code is compiled into the final binary since what a script requires cannot
 be predicted. If a language feature will never be needed, omitting it is a prudent strategy to
 optimize the build for size.</p>
+<p>Removing the script <a href="start/builds//book/vnext/engine/optimize/index.html">optimizer</a> (<a href="start/builds//book/vnext/start/features.html"><code>no_optimize</code></a>) yields a sizable code saving,
+at the expense of a less efficient script.</p>
 <p>Omitting arrays (<a href="start/builds//book/vnext/start/features.html"><code>no_index</code></a>) yields the most code-size savings, followed by floating-point support
 (<a href="start/builds//book/vnext/start/features.html"><code>no_float</code></a>), safety checks (<a href="start/builds//book/vnext/start/features.html"><code>unchecked</code></a>) and finally object maps and custom types (<a href="start/builds//book/vnext/start/features.html"><code>no_object</code></a>).</p>
 <p>Where the usage scenario does not call for loading externally-defined modules, use <a href="start/builds//book/vnext/start/features.html"><code>no_module</code></a> to
@@ -1168,10 +1170,10 @@ a <code>Scope</code> in order to run custom scripts, this has significant perfor
 </span><span class="boring">fn main() {
 </span>let mut scope = Scope::new();
 
-scope.push(&quot;my_var&quot;, 42 as i64);                // &amp;'static str
+scope.push(&quot;my_var&quot;, 42_i64);                   // &amp;'static str
 
 scope.push(String::from(&quot;also_var&quot;),            // String
-    123 as i64
+    123_i64
 );
 
 // Read a bunch of configuration values from a database
@@ -1476,7 +1478,7 @@ specially by the <a href="rust//book/vnext/engine/hello-world.html"><code>Engine
 <tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="rust//book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="rust//book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="rust//book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/vnext/language/functions.html">functions</a></td></tr>
 <tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="rust//book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/vnext/language/functions.html">functions</a>; requires the <a href="rust//book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
+<tr><td><code>call_fn_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <h2 id="implement-safety-checks-with-nativecallcontext"><a class="header" href="#implement-safety-checks-with-nativecallcontext">Implement Safety Checks with <code>NativeCallContext</code></a></h2>
 <p>The native call context is useful for protecting a function from malicious scripts.</p>
@@ -1488,19 +1490,18 @@ specially by the <a href="rust//book/vnext/engine/hello-world.html"><code>Engine
 // This function builds an array of arbitrary size, but is protected
 // against attacks by first checking with the allowed limit set
 // into the 'Engine'.
-pub fn grow(context: NativeCallContext, size: i64)
-                            -&gt; Result&lt;Array, Box&lt;EvalAltResult&gt;&gt;
+pub fn grow(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, Box&lt;EvalAltResult&gt;&gt;
 {
     // Make sure the function does not generate a
     // data structure larger than the allowed limit
     // for the Engine!
     if size as usize &gt; context.engine().max_array_size() {
-        return EvalAltResult::ErrorDataTooLarge(
+        return Err(EvalAltResult::ErrorDataTooLarge(
             &quot;Size to grow&quot;.to_string(),
             context.engine().max_array_size(),
             size as usize,
             Position::NONE,
-        ).into();
+        ).into());
     }
 
     let array = Array::new();
@@ -1521,8 +1522,7 @@ as a parameter to the function, thereby implementing a <em>callback</em>:</p>
 </span><span class="boring">fn main() {
 </span>use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
-pub fn greet(context: NativeCallContext, callback: FnPtr)
-                            -&gt; Result&lt;String, Box&lt;EvalAltResult&gt;&gt;
+pub fn greet(context: NativeCallContext, callback: FnPtr) -&gt; Result&lt;String, Box&lt;EvalAltResult&gt;&gt;
 {
     // Call the callback closure with the current context
     // to obtain the name to greet!
@@ -2805,9 +2805,7 @@ impl ModuleResolver for MyModuleResolver {
                     Rc::new(my_module)          // make it shared
                 },
                 // Return 'EvalAltResult::ErrorInModule' upon loading error
-                Err(err) =&gt; Err(
-                    EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into()
-                )
+                Err(err) =&gt; Err(EvalAltResult::ErrorInModule(path.into(), Box::new(err), pos).into())
             }
         } else {
             // Return 'EvalAltResult::ErrorModuleNotFound' if the path is invalid
@@ -2904,6 +2902,15 @@ functionality.</p>
 a <em>plugin</em> simplifies the work of creating and registering new functionality in an <a href="plugins//book/vnext/engine/hello-world.html"><code>Engine</code></a>.</p>
 <p>Plugins are processed via a set of procedural macros under the <code>rhai::plugin</code> module. These
 allow registering Rust functions directly in the Engine, or adding Rust modules as packages.</p>
+<p>There are two types of plugins:</p>
+<ol>
+<li>
+<p><a href="plugins//book/vnext/plugins/function.html">Plugin Functions</a></p>
+</li>
+<li>
+<p><a href="plugins//book/vnext/plugins/module.html">Plugin Modules</a></p>
+</li>
+</ol>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="export-a-rust-module-to-rhai"><a class="header" href="#export-a-rust-module-to-rhai">Export a Rust Module to Rhai</a></h1>
 <h2 id="prelude"><a class="header" href="#prelude">Prelude</a></h2>
 <p>When using the plugins system, the entire <code>rhai::plugin</code> module must be imported as a prelude
@@ -2939,7 +2946,9 @@ mod my_module {
     // Ignored when registered as a global module.
     pub const MY_NUMBER: i64 = 42;
 
-    // This function will be registered as 'greet'.
+    // This function will be registered as 'greet'
+    // but is only available with the 'greetings' feature.
+    #[cfg(feature = &quot;greetings&quot;)]
     pub fn greet(name: &amp;str) -&gt; String {
         format!(&quot;hello, {}!&quot;, name)
     }
@@ -3082,12 +3091,14 @@ using <code>combine_with_exported_module!</code>:</p>
 </span></code></pre></pre>
 <p><code>combine_with_exported_module!</code> automatically <em>flattens</em> the module namespace so that all
 functions in sub-modules are promoted to the top level.  This is convenient for <a href="plugins//book/vnext/rust/packages/create.html">custom packages</a>.</p>
-<h2 id="sub-modules-and-feature-gates"><a class="header" href="#sub-modules-and-feature-gates">Sub-Modules and Feature Gates</a></h2>
+<h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
 Rhai <code>Module</code>.</p>
-<p>They are also commonly used to put <em>feature gates</em> or <em>compile-time gates</em> on a group of functions,
-because currently attributes do not work on individual function definitions due to a limitation of
-the procedural macros system.</p>
+<p>Most of the time, plugin modules are used as a <a href="plugins//book/vnext/rust/packages/index.html">packages</a>.  In such usage, all functions within a
+sub-module are <em>flattened</em> into the <a href="plugins//book/vnext/language/fn-namespaces.html">namespace</a>.  As a result, sub-modules can
+be used conveniently as a <em>grouping</em> mechanism.</p>
+<p>They are also commonly used to put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a
+large group of functions without having to put the gates on individual functions.</p>
 <p>This is especially convenient when using the <code>combine_with_exported_module!</code> macro to develop
 <a href="plugins//book/vnext/rust/packages/create.html">custom packages</a> because selected groups of functions can easily be included or excluded based on
 different combinations of feature flags instead of having to manually include/exclude every
@@ -3100,27 +3111,50 @@ mod my_module {
     // Always available
     pub fn func0() {}
 
-    // The following sub-module is only available under 'feature1'
-    #[cfg(feature = &quot;feature1&quot;)]
-    pub mod feature1 {
-        fn func1() {}
-        fn func2() {}
-        fn func3() {}
+    // The following functions are only available under 'foo'.
+    // Use a sub-module for convenience, since all functions underneath
+    // will be flattened into the namespace.
+    #[cfg(feature = &quot;foo&quot;)]
+    pub mod group_foo {
+        pub fn func1() {}
+        pub fn func2() {}
+        pub fn func3() {}
     }
 
-    // The following sub-module is only available under 'feature2'
-    #[cfg(feature = &quot;feature2&quot;)]
-    pub mod feature2 {
-        fn func4() {}
-        fn func5() {}
-        fn func6() {}
+    // The following functions are only available under 'bar'
+    #[cfg(feature = &quot;bar&quot;)]
+    pub mod group_bar {
+        pub fn func4() {}
+        pub fn func5() {}
+        pub fn func6() {}
     }
+}
+
+// The above is equivalent to:
+#[export_module]
+mod my_module_alternate {
+    pub fn func0() {}
+
+    #[cfg(feature = &quot;foo&quot;)]
+    pub fn func1() {}
+    #[cfg(feature = &quot;foo&quot;)]
+    pub fn func2() {}
+    #[cfg(feature = &quot;foo&quot;)]
+    pub fn func3() {}
+
+    #[cfg(feature = &quot;bar&quot;)]
+    pub fn func4() {}
+    #[cfg(feature = &quot;bar&quot;)]
+    pub fn func5() {}
+    #[cfg(feature = &quot;bar&quot;)]
+    pub fn func6() {}
 }
 
 // Registered functions:
 //   func0 - always available
-//   func1, func2, func3 - available under 'feature1'
-//   func4, func5, func6 - available under 'feature2'
+//   func1, func2, func3 - available under 'foo'
+//   func4, func5, func6 - available under 'bar'
+//   func0, func1, func2, func3, func4, func5, func6 - available under 'foo' and 'bar'
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <span class="boring">}
 </span></code></pre></pre>
@@ -3146,8 +3180,7 @@ mod my_module {
         obj.prop += value;
     }
     // This function is 'calc (i64)'.
-    #[rhai_fn(name = &quot;calc&quot;)]
-    pub fn calc_with_default(num: i64) -&gt; i64 {
+    pub fn calc(num: i64) -&gt; i64 {
         ...
     }
     // This function is 'calc (i64, bool)'.
@@ -3237,18 +3270,15 @@ to mark it as  <em>pure</em>.</p>
 
 #[export_module]
 mod my_module {
-    fn internal_calc(array: &amp;mut rhai::Array, x: i64) -&gt; i64 {
-        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
-    }
     // This function can be passed a constant
     #[rhai_fn(name = &quot;add1&quot;, pure)]
     pub fn add_scaled(array: &amp;mut rhai::Array, x: i64) -&gt; i64 {
-        internal_calc(array, x)
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
     }
     // This function CANNOT be passed a constant
     #[rhai_fn(name = &quot;add2&quot;)]
     pub fn add_scaled2(array: &amp;mut rhai::Array, x: i64) -&gt; i64 {
-        internal_calc(array, x)
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
     }
     // This getter can be applied to a constant
     #[rhai_fn(get = &quot;first1&quot;, pure)]
@@ -3325,14 +3355,14 @@ specially by the plugins system.</p>
 <p><code>#[rhai_fn]</code> is applied to functions, while <code>#[rhai_mod]</code> is applied to sub-modules.</p>
 <p>Parameters should be set on inner attributes to specify the desired behavior.</p>
 <table><thead><tr><th>Attribute Parameter</th><th>Use with</th><th>Apply to</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code>, <code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/sub-module</td></tr>
-<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global namespace</td></tr>
-<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module namespace</td></tr>
-<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code>, <code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/sub-module under the specified name</td></tr>
-<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; Value</code></td><td>registers a getter for the named property</td></tr>
-<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, Value)</code></td><td>registers a setter for the named property</td></tr>
-<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT) -&gt; Value</code></td><td>registers an index getter</td></tr>
-<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT, Value)</code></td><td>registers an index setter</td></tr>
+<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/<a href="plugins//book/vnext/rust/modules/index.html">sub-module</a></td></tr>
+<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global <a href="plugins//book/vnext/language/fn-namespaces.html">namespace</a></td></tr>
+<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module <a href="plugins//book/vnext/language/fn-namespaces.html">namespace</a></td></tr>
+<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/<a href="plugins//book/vnext/rust/modules/index.html">sub-module</a> under the specified name</td></tr>
+<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; ValueType</code></td><td>registers a property <a href="plugins//book/vnext/rust/getters-setters.html">getter</a> for the named property</td></tr>
+<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ValueType)</code></td><td>registers a property <a href="plugins//book/vnext/rust/getters-setters.html">setter</a> for the named property</td></tr>
+<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType) -&gt; ValueType</code></td><td>registers an <a href="plugins//book/vnext/rust/indexers.html">index getter</a></td></tr>
+<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType, ValueType)</code></td><td>registers an <a href="plugins//book/vnext/rust/indexers.html">index setter</a></td></tr>
 <tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Type, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="plugins//book/vnext/rust/fallible.html">fallible function</a></td></tr>
 <tr><td><code>pure</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ...) -&gt; ...</code></td><td>marks this as a <em>pure</em> function</td></tr>
 </tbody></table>
@@ -4967,21 +4997,23 @@ elements added or removed.</p>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
 <tr><td><code>split</code></td><td>1) array<br/>2) position to split at, counting from end if &lt; 0, end if ≥ length</td><td>splits the array into two arrays, starting from a specified position</td></tr>
-<tr><td><code>drain</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>drain</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>drain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0</td><td>removes a portion of the array, returning the removed items (not in original order)</td></tr>
-<tr><td><code>retain</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>retain</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>retain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to retain, none if &lt; 0</td><td>retains a portion of the array, removes all other items and returning them (not in original order)</td></tr>
 <tr><td><code>splice</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>filter</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>filter</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>contains</code></td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator (if defined) is used to compare <a href="language//book/vnext/rust/custom.html">custom types</a></td></tr>
-<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="language//book/vnext/language/fn-ptr.html">function pointers</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</td></tr>
-<tr><td><code>index_of</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>map</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>reduce</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>reduce_rev</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>some</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>all</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>sort</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function:<br/>1st parameter: first item<br/>2nd parameter: second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</td></tr>
+<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="language//book/vnext/language/fn-ptr.html">function pointer</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</td></tr>
+<tr><td><code>index_of</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a><br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a>; if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> items in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two items in the array</td></tr>
+<tr><td><code>map</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>reduce</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a><br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>reduce_rev</code></td><td>1) <a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a><br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="language//book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>some</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>all</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>sort</code></td><td><a href="language//book/vnext/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/vnext/language/strings-chars.html">string</a></td><td>sorts the array with a comparison function:<br/>1st parameter: first item<br/>2nd parameter: second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</td></tr>
+<tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/vnext/language/strings-chars.html">string</a>, <a href="language//book/vnext/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/vnext/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
 <h2 id="use-custom-types-with-arrays"><a class="header" href="#use-custom-types-with-arrays">Use Custom Types With Arrays</a></h2>
 <p>To use a <a href="language//book/vnext/rust/custom.html">custom type</a> with arrays, a number of array functions need to be manually implemented,
@@ -5071,6 +5103,8 @@ y.clear();                  // y == []
 
 y.len == 0;
 
+// The examples below use 'a' as the master array
+
 let a = [42, 123, 99];
 
 a.map(|v| v + 1);           // returns [43, 124, 100]
@@ -5081,31 +5115,11 @@ a.filter(|v| v &gt; 50);       // returns [123, 99]
 
 a.filter(|v, i| i == 1);    // returns [123]
 
-// Provide an initial value directly
-a.reduce(|sum, v| sum + v, 0) == 264;
+a.filter(&quot;is_odd&quot;);         // returns [123, 99]
 
-// Detect the initial value of '()'
-a.reduce(
-    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
-) == 264;
+a.filter(Fn(&quot;is_odd&quot;));     // &lt;- previous statement is equivalent to this...
 
-// Detect the initial value via index
-a.reduce(|sum, v, i|
-    if i == 0 { v } else { sum + v }
-) == 264;
-
-// Provide an initial value directly
-a.reduce_rev(|sum, v| sum + v, 0) == 264;
-
-// Detect the initial value of '()'
-a.reduce_rev(
-    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
-) == 264;
-
-// Detect the initial value via index
-a.reduce_rev(|sum, v, i|
-    if i == 2 { v } else { sum + v }
-) == 264;
+a.filter(|v| is_odd(v));    // &lt;- or this
 
 a.some(|v| v &gt; 50);         // returns true
 
@@ -5119,15 +5133,45 @@ a.all(|v| v &gt; 50);          // returns false
 
 a.all(|v, i| v &gt; i);        // returns true
 
+// Reducing - initial value provided directly
+a.reduce(|sum, v| sum + v, 0) == 264;
+
+// Reducing - initial value is '()'
+a.reduce(
+    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
+) == 264;
+
+// Reducing - initial value has index == 0
+a.reduce(|sum, v, i|
+    if i == 0 { v } else { sum + v }
+) == 264;
+
+// Reducing - initial value provided directly
+a.reduce_rev(|sum, v| sum + v, 0) == 264;
+
+// Reducing - initial value is '()'
+a.reduce_rev(
+    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
+) == 264;
+
+// Reducing - initial value has index == 0
+a.reduce_rev(|sum, v, i|
+    if i == 2 { v } else { sum + v }
+) == 264;
+
+// In-place modification
+
 a.splice(1, 1, [1, 3, 2]);  // a == [42, 1, 3, 2, 99]
 
 a.extract(1, 3);            // returns [1, 3, 2]
 
-a.sort(|x, y| x - y);       // a == [1, 2, 3, 42, 99]
+a.sort(|x, y| y - x);       // a == [99, 42, 3, 2, 1]
+
+a.sort();                   // a == [1, 2, 3, 42, 99]
 
 a.drain(|v| v &lt;= 1);        // a == [2, 3, 42, 99]
 
-a.drain(|v, i| i ≥ 3);     // a == [2, 3, 42]
+a.drain(|v, i| i ≥ 3);      // a == [2, 3, 42]
 
 a.retain(|v| v &gt; 10);       // a == [42]
 
@@ -7060,7 +7104,7 @@ of the particular call to a registered Rust function. It is a type that exposes 
 <tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="language//book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="language//book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="language//book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="language//book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="language//book/vnext/language/functions.html">functions</a></td></tr>
 <tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="language//book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="language//book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="language//book/vnext/language/functions.html">functions</a>; requires the <a href="language//book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
+<tr><td><code>call_fn_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <p>This type is normally provided by the <a href="language//book/vnext/engine/hello-world.html"><code>Engine</code></a> (e.g. when using <a href="language/../rust/register-raw.html"><code>Engine::register_fn_raw</code></a>).
 However, it may also be manually constructed from a tuple:</p>
@@ -7502,7 +7546,7 @@ private fn foo() {}     // private function - hidden
 </span></code></pre></pre>
 <p><a href="language/modules//book/vnext/language/modules/export.html"><code>private</code></a> functions are commonly called to initialize the module.
 They cannot be called apart from this.</p>
-<h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
+<h2 id="sub-modules-1"><a class="header" href="#sub-modules-1">Sub-Modules</a></h2>
 <p>All loaded modules are automatically exported as sub-modules.</p>
 <p>To prevent a module from being exported, load it inside a block statement so that it goes away at the
 end of the block.</p>
@@ -7975,7 +8019,7 @@ Return <code>Some(token)</code> to terminate the script immediately, with the pr
 <p>Progress tracking is disabled with the <a href="safety//book/vnext/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="termination-token"><a class="header" href="#termination-token">Termination Token</a></h2>
 <p>The <a href="safety//book/vnext/language/dynamic.html"><code>Dynamic</code></a> value returned by the closure for <code>Engine::on_progress</code> is a <em>termination token</em>.
-A script that is manually terminated returns with <code>Err(EvalAltResult::ErrorTerminated(token, position))</code>
+A script that is manually terminated returns with <code>Err(Box&lt;EvalAltResult::ErrorTerminated(token, position)&gt;)</code>
 wrapping this value.</p>
 <p>The termination token is commonly used to provide information on the <em>reason</em> or <em>source</em>
 behind the termination decision.</p>
@@ -8566,7 +8610,7 @@ from the current node to the root of the <a href="engine//book/vnext/engine/comp
 <tr><td><a href="engine//book/vnext/language/variables.html"><code>let</code></a>, <a href="engine//book/vnext/language/constants.html"><code>const</code></a> statement</td><td>value expression</td></tr>
 <tr><td>Assignment statement</td><td>l-value expression, value expression</td></tr>
 <tr><td>Statements block</td><td>each of the statements</td></tr>
-<tr><td>Custom syntax expression</td><td>each of the <code>$expr$</code>, <code>$stmt$</code>, <code>$ident$</code>, <code>$symbol$</code>, <code>$bool$</code>, <code>$int$</code>, <code>$float$</code>, <code>$string$</code> blocks</td></tr>
+<tr><td>Custom syntax expression</td><td>each of the inputs stream</td></tr>
 <tr><td>All others</td><td>single child, or none</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="capture-the-calling-scope-for-function-call"><a class="header" href="#capture-the-calling-scope-for-function-call">Capture The Calling Scope for Function Call</a></h1>
@@ -8816,13 +8860,11 @@ engine.on_var(|name, index, context| {
     match name {
         &quot;MYSTIC_NUMBER&quot; =&gt; Ok(Some(42_i64.into())),
         // Override a variable - make it not found even if it exists!
-        &quot;DO_NOT_USE&quot; =&gt; Err(Box::new(
-            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE)
-        )),
+        &quot;DO_NOT_USE&quot; =&gt; Err(EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE).into()),
         // Silently maps 'chameleon' into 'innocent'.
-        &quot;chameleon&quot; =&gt; context.scope().get_value(&quot;innocent&quot;).map(Some).ok_or_else(|| Box::new(
-            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE)
-        )),
+        &quot;chameleon&quot; =&gt; context.scope().get_value(&quot;innocent&quot;).map(Some).ok_or_else(|| 
+            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE).into()
+        ),
         // Return Ok(None) to continue with the normal variable resolution process.
         _ =&gt; Ok(None)
     }
@@ -9413,11 +9455,13 @@ tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
 <p>Use <code>Engine::register_custom_syntax_raw</code> to register a custom syntax <em>parser</em>
 together with the implementation function.</p>
 <h2 id="how-custom-parsers-work"><a class="header" href="#how-custom-parsers-work">How Custom Parsers Work</a></h2>
+<h3 id="parameters"><a class="header" href="#parameters">Parameters</a></h3>
 <p>A custom parser takes as input parameters two pieces of information:</p>
 <ul>
 <li>
 <p>The symbols (as <a href="engine//book/vnext/language/strings-chars.html">strings</a>) parsed so far:</p>
 <table><thead><tr><th align="center">Argument type</th><th>Value</th></tr></thead><tbody>
+<tr><td align="center">text <a href="engine//book/vnext/language/strings-chars.html">string</a></td><td>text value</td></tr>
 <tr><td align="center"><code>$ident$</code></td><td>identifier name</td></tr>
 <tr><td align="center"><code>$symbol$</code></td><td>symbol literal</td></tr>
 <tr><td align="center"><code>$expr$</code></td><td><code>$expr$</code></td></tr>
@@ -9440,9 +9484,14 @@ statements block.</p>
 and Rhai will fail with a parse error containing information about the expected symbol.</p>
 </li>
 </ul>
-<p>A custom parser always returns the <em>next</em> symbol expected, which can also be <code>$ident$</code>,
-<code>$expr$</code> or <code>$block$</code>, or <code>None</code> if parsing should terminate (<em>without</em> reading the
+<h3 id="return-value-3"><a class="header" href="#return-value-3">Return Value</a></h3>
+<p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
+<code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
+<p>A return symbol starting with <code>$$</code> is treated specially. Like returning <code>None</code>, it also
+terminates parsing, but at the same time it adds this symbol as text into the <em>inputs</em> stream at the end.
+This is typically used to inform the implementation function which custom syntax variant was
+actually parsed.</p>
 <h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -9451,28 +9500,35 @@ look-ahead symbol).</p>
     &quot;perform&quot;,
     // The custom parser implementation - always returns the next symbol expected
     // 'look_ahead' is the next symbol about to be read
+    //
+    // Return symbols starting with '$$' terminate parsing but also allows us
+    // to determine which syntax variant was actually parsed so we can perform the
+    // appropriate action.
+    //
+    // The return type is 'Option&lt;ImmutableString&gt;' to allow common text strings
+    // to be interned and shared easily, reducing allocations during parsing.
     |symbols, look_ahead| match symbols.len() {
         // perform ...
-        1 =&gt; Ok(Some(&quot;$ident$&quot;.to_string())),
+        1 =&gt; Ok(Some(&quot;$ident$&quot;.into())),
         // perform command ...
         2 =&gt; match symbols[1].as_str() {
             &quot;action&quot; =&gt; Ok(Some(&quot;$expr$&quot;.into())),
             &quot;hello&quot; =&gt; Ok(Some(&quot;world&quot;.into())),
             &quot;update&quot; | &quot;check&quot; | &quot;add&quot; | &quot;remove&quot; =&gt; Ok(Some(&quot;$ident$&quot;.into())),
-            &quot;cleanup&quot; =&gt; Ok(None),
+            &quot;cleanup&quot; =&gt; Ok(Some(&quot;$$cleanup&quot;.into())),
             cmd =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
                 LexError::ImproperSymbol(format!(&quot;Improper command: {}&quot;, cmd))
             )), Position::NONE)),
         },
         // perform command arg ...
         3 =&gt; match (symbols[1].as_str(), symbols[2].as_str()) {
-            (&quot;action&quot;, _) =&gt; Ok(None),
-            (&quot;hello&quot;, &quot;world&quot;) =&gt; Ok(None),
-            (&quot;update&quot;, arg) if arg == &quot;system&quot; =&gt; Ok(None),
-            (&quot;update&quot;, arg) if arg == &quot;client&quot; =&gt; Ok(None),
-            (&quot;check&quot;, arg) =&gt; Ok(None),
-            (&quot;add&quot;, arg) =&gt; Ok(None),
-            (&quot;remove&quot;, arg) =&gt; Ok(None),
+            (&quot;action&quot;, _) =&gt; Ok(Some(&quot;$$action&quot;.into())),
+            (&quot;hello&quot;, &quot;world&quot;) =&gt; Ok(Some(&quot;$$hello-world&quot;.into())),
+            (&quot;update&quot;, arg) if arg == &quot;system&quot; =&gt; Ok(Some(&quot;$$update-system&quot;.into())),
+            (&quot;update&quot;, arg) if arg == &quot;client&quot; =&gt; Ok(Some(&quot;$$update-client&quot;.into())),
+            (&quot;check&quot;, arg) =&gt; Ok(Some(&quot;$$check&quot;.into())),
+            (&quot;add&quot;, arg) =&gt; Ok(Some(&quot;$$add&quot;.into())),
+            (&quot;remove&quot;, arg) =&gt; Ok(Some(&quot;$$remove&quot;.into())),
             (cmd, arg) =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
                 LexError::ImproperSymbol(
                     format!(&quot;Invalid argument for command {}: {}&quot;, cmd, arg)
@@ -9500,7 +9556,7 @@ look-ahead symbol).</p>
 </tbody></table>
 <p>Most strings are <a href="engine//book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a>‘s so it is usually more efficient to just <code>clone</code> the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.</p>
-<h3 id="return-value-3"><a class="header" href="#return-value-3">Return Value</a></h3>
+<h3 id="return-value-4"><a class="header" href="#return-value-4">Return Value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>Ok(None)</code></td><td>parsing complete and there are no more symbols to match</td></tr>
@@ -11057,7 +11113,7 @@ struct Handler {
     // Scripting engine
     pub engine: Engine,
     // Use a custom 'Scope' to keep stored state
-    pub scope: Scope,
+    pub scope: Scope&lt;'static&gt;,
     // Program script
     pub ast: AST
 }
@@ -11073,20 +11129,20 @@ struct Handler {
 // A custom type to a hold state value.
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default)]
 pub struct SomeType {
-    data: i64;
+    data: i64
 }
 
 #[export_module]
 mod SomeTypeAPI {
     #[rhai_fn(global)]
-    pub func1(obj: &amp;mut SomeType) -&gt; bool { ... }
+    pub fn func1(obj: &amp;mut SomeType) -&gt; bool { ... }
     #[rhai_fn(global)]
-    pub func2(obj: &amp;mut SomeType) -&gt; bool { ... }
-    pub process(data: i64) -&gt; i64 { ... }
+    pub fn func2(obj: &amp;mut SomeType) -&gt; bool { ... }
+    pub fn process(data: i64) -&gt; i64 { ... }
     #[rhai_fn(get = &quot;value&quot;, pure)]
-    pub get_value(obj: &amp;mut SomeType) -&gt; i64 { obj.data }
+    pub fn get_value(obj: &amp;mut SomeType) -&gt; i64 { obj.data }
     #[rhai_fn(set = &quot;value&quot;)]
-    pub set_value(obj: &amp;mut SomeType, value: i64) { obj.data = value; }
+    pub fn set_value(obj: &amp;mut SomeType, value: i64) { obj.data = value; }
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -11104,19 +11160,19 @@ mod SomeTypeAPI {
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Handler {
-    pub new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
+    pub fn new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
         let mut engine = Engine::new();
 
         // Register custom types and API's
         engine.register_type_with_name::&lt;SomeType&gt;(&quot;SomeType&quot;)
-              .register_global_module(exported_module!(SomeTypeAPI));
+              .register_global_module(exported_module!(SomeTypeAPI).into());
 
         // Create a custom 'Scope' to hold state
         let mut scope = Scope::new();
 
         // Add initialized state into the custom 'Scope'
-        scope.push(&quot;state1&quot;, false);
-        scope.push(&quot;state2&quot;, SomeType::new(42));
+        scope.push(&quot;bool_state&quot;, false);
+        scope.push(&quot;some_type_state&quot;, SomeType::new(42));
 
         // Compile the handler script.
         // In a real application you'd be handling errors...
@@ -11141,7 +11197,7 @@ mod SomeTypeAPI {
 </span>impl Handler {
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
-    pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Result&lt;(), Error&gt; {
+    pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Dynamic {
         let engine = &amp;self.engine;
         let scope = &amp;mut self.scope;
         let ast = &amp;self.ast;
@@ -11149,26 +11205,28 @@ mod SomeTypeAPI {
         match event_name {
             // The 'start' event maps to function 'start'.
             // In a real application you'd be handling errors...
-            &quot;start&quot; =&gt; engine.call_fn(scope, ast, &quot;start&quot;, (event_data,))?,
+            &quot;start&quot; =&gt; engine.call_fn(scope, ast, &quot;start&quot;, (event_data,)).unwrap(),
 
             // The 'end' event maps to function 'end'.
             // In a real application you'd be handling errors...
-            &quot;end&quot; =&gt; engine.call_fn(scope, ast, &quot;end&quot;, (event_data,))?,
+            &quot;end&quot; =&gt; engine.call_fn(scope, ast, &quot;end&quot;, (event_data,)).unwrap(),
 
             // The 'update' event maps to function 'update'.
-            // This event provides a default implementation when the scripted function
-            // is not found.
+            // This event provides a default implementation when the scripted function is not found.
             &quot;update&quot; =&gt;
                 engine.call_fn(scope, ast, &quot;update&quot;, (event_data,))
                       .or_else(|err| match *err {
                          EvalAltResult::ErrorFunctionNotFound(fn_name, _) if fn_name == &quot;update&quot; =&gt; {
                             // Default implementation of 'update' event handler
-                            self.scope.set_value(&quot;state2&quot;, SomeType::new(42));
+                            self.scope.set_value(&quot;some_type_state&quot;, SomeType::new(42));
                             // Turn function-not-found into a success
                             Ok(Dynamic::UNIT)
                          }
-                         _ =&gt; Err(err.into())
-                      })?
+                         _ =&gt; Err(err)
+                      }).unwrap(),
+
+            // In a real application you'd be handling unknown events...
+            _ =&gt; panic!(&quot;unknown event: {}&quot;, event_name)
         }
     }
 }
@@ -11182,29 +11240,29 @@ in the handler script to access and modify these state variables.</p>
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn start(data) {
-    if state1 {
+    if bool_state {
         throw &quot;Already started!&quot;;
     }
-    if state2.func1() || state2.func2() {
+    if some_type_state.func1() || some_type_state.func2() {
         throw &quot;Conditions not yet ready to start!&quot;;
     }
-    state1 = true;
-    state2.value = data;
+    bool_state = true;
+    some_type_state.value = data;
 }
 
 fn end(data) {
-    if !state1 {
+    if !bool_state {
         throw &quot;Not yet started!&quot;;
     }
-    if state2.func1() || state2.func2() {
+    if some_type_state.func1() || some_type_state.func2() {
         throw &quot;Conditions not yet ready to start!&quot;;
     }
-    state1 = false;
-    state2.value = data;
+    bool_state = false;
+    some_type_state.value = data;
 }
 
 fn update(data) {
-    state2.value += process(data);
+    some_type_state.value += process(data);
 }
 <span class="boring">}
 </span></code></pre></pre>

@@ -153,7 +153,7 @@ specially by the <a href="/book/vnext/engine/hello-world.html"><code>Engine</cod
 <tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a></td></tr>
 <tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a>; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>call_fn_dynamic_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a native Rust function with the supplied arguments; this is an advanced method</td></tr>
+<tr><td><code>call_fn_raw()</code></td><td align="center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 <h2 id="implement-safety-checks-with-nativecallcontext"><a class="header" href="#implement-safety-checks-with-nativecallcontext">Implement Safety Checks with <code>NativeCallContext</code></a></h2>
 <p>The native call context is useful for protecting a function from malicious scripts.</p>
@@ -165,19 +165,18 @@ specially by the <a href="/book/vnext/engine/hello-world.html"><code>Engine</cod
 // This function builds an array of arbitrary size, but is protected
 // against attacks by first checking with the allowed limit set
 // into the 'Engine'.
-pub fn grow(context: NativeCallContext, size: i64)
-                            -&gt; Result&lt;Array, Box&lt;EvalAltResult&gt;&gt;
+pub fn grow(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, Box&lt;EvalAltResult&gt;&gt;
 {
     // Make sure the function does not generate a
     // data structure larger than the allowed limit
     // for the Engine!
     if size as usize &gt; context.engine().max_array_size() {
-        return EvalAltResult::ErrorDataTooLarge(
+        return Err(EvalAltResult::ErrorDataTooLarge(
             &quot;Size to grow&quot;.to_string(),
             context.engine().max_array_size(),
             size as usize,
             Position::NONE,
-        ).into();
+        ).into());
     }
 
     let array = Array::new();
@@ -198,8 +197,7 @@ as a parameter to the function, thereby implementing a <em>callback</em>:</p>
 </span><span class="boring">fn main() {
 </span>use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
-pub fn greet(context: NativeCallContext, callback: FnPtr)
-                            -&gt; Result&lt;String, Box&lt;EvalAltResult&gt;&gt;
+pub fn greet(context: NativeCallContext, callback: FnPtr) -&gt; Result&lt;String, Box&lt;EvalAltResult&gt;&gt;
 {
     // Call the callback closure with the current context
     // to obtain the name to greet!

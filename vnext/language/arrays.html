@@ -189,21 +189,23 @@ elements added or removed.</p>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
 <tr><td><code>split</code></td><td>1) array<br/>2) position to split at, counting from end if &lt; 0, end if ≥ length</td><td>splits the array into two arrays, starting from a specified position</td></tr>
-<tr><td><code>drain</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>drain</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>drain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0</td><td>removes a portion of the array, returning the removed items (not in original order)</td></tr>
-<tr><td><code>retain</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>retain</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>retain</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to retain, none if &lt; 0</td><td>retains a portion of the array, removes all other items and returning them (not in original order)</td></tr>
 <tr><td><code>splice</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of items to remove, none if &lt; 0<br/>3) array to insert</td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>filter</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>filter</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
 <tr><td><code>contains</code></td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator (if defined) is used to compare <a href="/book/vnext/rust/custom.html">custom types</a></td></tr>
-<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="/book/vnext/language/fn-ptr.html">function pointers</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</td></tr>
-<tr><td><code>index_of</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>map</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>reduce</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>reduce_rev</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)<br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>some</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>all</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
-<tr><td><code>sort</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function:<br/>1st parameter: first item<br/>2nd parameter: second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</td></tr>
+<tr><td><code>index_of</code></td><td>1) element to find (not a <a href="/book/vnext/language/fn-ptr.html">function pointer</a>)<br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</td></tr>
+<tr><td><code>index_of</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a><br/>2) <em>(optional)</em> start index, counting from end if &lt; 0, end if ≥ length</td><td>returns the index of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a>; if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> items in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two items in the array</td></tr>
+<tr><td><code>map</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>constructs a new array with all items mapped to the result of applying the conversion function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>reduce</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a><br/>2) <em>(optional)</em> the initial value</td><td>reduces the array into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>reduce_rev</code></td><td>1) <a href="/book/vnext/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a><br/>2) <em>(optional)</em> the initial value</td><td>reduces the array (in reverse order) into a single value via the accumulator function:<br/>1st parameter: accumulated value (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> initially)<br/>2nd parameter: array item<br/>3rd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>some</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>all</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function:<br/>1st parameter: array item<br/>2nd parameter: <em>(optional)</em> offset index</td></tr>
+<tr><td><code>sort</code></td><td><a href="/book/vnext/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="/book/vnext/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/vnext/language/strings-chars.html">string</a></td><td>sorts the array with a comparison function:<br/>1st parameter: first item<br/>2nd parameter: second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</td></tr>
+<tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="/book/vnext/language/strings-chars.html">string</a>, <a href="/book/vnext/language/strings-chars.html">character</a>, <code>bool</code>, <a href="/book/vnext/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
 <h2 id="use-custom-types-with-arrays"><a class="header" href="#use-custom-types-with-arrays">Use Custom Types With Arrays</a></h2>
 <p>To use a <a href="/book/vnext/rust/custom.html">custom type</a> with arrays, a number of array functions need to be manually implemented,
@@ -293,6 +295,8 @@ y.clear();                  // y == []
 
 y.len == 0;
 
+// The examples below use 'a' as the master array
+
 let a = [42, 123, 99];
 
 a.map(|v| v + 1);           // returns [43, 124, 100]
@@ -303,31 +307,11 @@ a.filter(|v| v &gt; 50);       // returns [123, 99]
 
 a.filter(|v, i| i == 1);    // returns [123]
 
-// Provide an initial value directly
-a.reduce(|sum, v| sum + v, 0) == 264;
+a.filter(&quot;is_odd&quot;);         // returns [123, 99]
 
-// Detect the initial value of '()'
-a.reduce(
-    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
-) == 264;
+a.filter(Fn(&quot;is_odd&quot;));     // &lt;- previous statement is equivalent to this...
 
-// Detect the initial value via index
-a.reduce(|sum, v, i|
-    if i == 0 { v } else { sum + v }
-) == 264;
-
-// Provide an initial value directly
-a.reduce_rev(|sum, v| sum + v, 0) == 264;
-
-// Detect the initial value of '()'
-a.reduce_rev(
-    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
-) == 264;
-
-// Detect the initial value via index
-a.reduce_rev(|sum, v, i|
-    if i == 2 { v } else { sum + v }
-) == 264;
+a.filter(|v| is_odd(v));    // &lt;- or this
 
 a.some(|v| v &gt; 50);         // returns true
 
@@ -341,15 +325,45 @@ a.all(|v| v &gt; 50);          // returns false
 
 a.all(|v, i| v &gt; i);        // returns true
 
+// Reducing - initial value provided directly
+a.reduce(|sum, v| sum + v, 0) == 264;
+
+// Reducing - initial value is '()'
+a.reduce(
+    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
+) == 264;
+
+// Reducing - initial value has index == 0
+a.reduce(|sum, v, i|
+    if i == 0 { v } else { sum + v }
+) == 264;
+
+// Reducing - initial value provided directly
+a.reduce_rev(|sum, v| sum + v, 0) == 264;
+
+// Reducing - initial value is '()'
+a.reduce_rev(
+    |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
+) == 264;
+
+// Reducing - initial value has index == 0
+a.reduce_rev(|sum, v, i|
+    if i == 2 { v } else { sum + v }
+) == 264;
+
+// In-place modification
+
 a.splice(1, 1, [1, 3, 2]);  // a == [42, 1, 3, 2, 99]
 
 a.extract(1, 3);            // returns [1, 3, 2]
 
-a.sort(|x, y| x - y);       // a == [1, 2, 3, 42, 99]
+a.sort(|x, y| y - x);       // a == [99, 42, 3, 2, 1]
+
+a.sort();                   // a == [1, 2, 3, 42, 99]
 
 a.drain(|v| v &lt;= 1);        // a == [2, 3, 42, 99]
 
-a.drain(|v, i| i ≥ 3);     // a == [2, 3, 42]
+a.drain(|v, i| i ≥ 3);      // a == [2, 3, 42]
 
 a.retain(|v| v &gt; 10);       // a == [42]
 

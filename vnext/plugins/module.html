@@ -176,7 +176,9 @@ mod my_module {
     // Ignored when registered as a global module.
     pub const MY_NUMBER: i64 = 42;
 
-    // This function will be registered as 'greet'.
+    // This function will be registered as 'greet'
+    // but is only available with the 'greetings' feature.
+    #[cfg(feature = &quot;greetings&quot;)]
     pub fn greet(name: &amp;str) -&gt; String {
         format!(&quot;hello, {}!&quot;, name)
     }
@@ -319,12 +321,14 @@ using <code>combine_with_exported_module!</code>:</p>
 </span></code></pre></pre>
 <p><code>combine_with_exported_module!</code> automatically <em>flattens</em> the module namespace so that all
 functions in sub-modules are promoted to the top level.  This is convenient for <a href="/book/vnext/rust/packages/create.html">custom packages</a>.</p>
-<h2 id="sub-modules-and-feature-gates"><a class="header" href="#sub-modules-and-feature-gates">Sub-Modules and Feature Gates</a></h2>
+<h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
 Rhai <code>Module</code>.</p>
-<p>They are also commonly used to put <em>feature gates</em> or <em>compile-time gates</em> on a group of functions,
-because currently attributes do not work on individual function definitions due to a limitation of
-the procedural macros system.</p>
+<p>Most of the time, plugin modules are used as a <a href="/book/vnext/rust/packages/index.html">packages</a>.  In such usage, all functions within a
+sub-module are <em>flattened</em> into the <a href="/book/vnext/language/fn-namespaces.html">namespace</a>.  As a result, sub-modules can
+be used conveniently as a <em>grouping</em> mechanism.</p>
+<p>They are also commonly used to put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a
+large group of functions without having to put the gates on individual functions.</p>
 <p>This is especially convenient when using the <code>combine_with_exported_module!</code> macro to develop
 <a href="/book/vnext/rust/packages/create.html">custom packages</a> because selected groups of functions can easily be included or excluded based on
 different combinations of feature flags instead of having to manually include/exclude every
@@ -337,27 +341,50 @@ mod my_module {
     // Always available
     pub fn func0() {}
 
-    // The following sub-module is only available under 'feature1'
-    #[cfg(feature = &quot;feature1&quot;)]
-    pub mod feature1 {
-        fn func1() {}
-        fn func2() {}
-        fn func3() {}
+    // The following functions are only available under 'foo'.
+    // Use a sub-module for convenience, since all functions underneath
+    // will be flattened into the namespace.
+    #[cfg(feature = &quot;foo&quot;)]
+    pub mod group_foo {
+        pub fn func1() {}
+        pub fn func2() {}
+        pub fn func3() {}
     }
 
-    // The following sub-module is only available under 'feature2'
-    #[cfg(feature = &quot;feature2&quot;)]
-    pub mod feature2 {
-        fn func4() {}
-        fn func5() {}
-        fn func6() {}
+    // The following functions are only available under 'bar'
+    #[cfg(feature = &quot;bar&quot;)]
+    pub mod group_bar {
+        pub fn func4() {}
+        pub fn func5() {}
+        pub fn func6() {}
     }
+}
+
+// The above is equivalent to:
+#[export_module]
+mod my_module_alternate {
+    pub fn func0() {}
+
+    #[cfg(feature = &quot;foo&quot;)]
+    pub fn func1() {}
+    #[cfg(feature = &quot;foo&quot;)]
+    pub fn func2() {}
+    #[cfg(feature = &quot;foo&quot;)]
+    pub fn func3() {}
+
+    #[cfg(feature = &quot;bar&quot;)]
+    pub fn func4() {}
+    #[cfg(feature = &quot;bar&quot;)]
+    pub fn func5() {}
+    #[cfg(feature = &quot;bar&quot;)]
+    pub fn func6() {}
 }
 
 // Registered functions:
 //   func0 - always available
-//   func1, func2, func3 - available under 'feature1'
-//   func4, func5, func6 - available under 'feature2'
+//   func1, func2, func3 - available under 'foo'
+//   func4, func5, func6 - available under 'bar'
+//   func0, func1, func2, func3, func4, func5, func6 - available under 'foo' and 'bar'
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <span class="boring">}
 </span></code></pre></pre>
@@ -383,8 +410,7 @@ mod my_module {
         obj.prop += value;
     }
     // This function is 'calc (i64)'.
-    #[rhai_fn(name = &quot;calc&quot;)]
-    pub fn calc_with_default(num: i64) -&gt; i64 {
+    pub fn calc(num: i64) -&gt; i64 {
         ...
     }
     // This function is 'calc (i64, bool)'.
@@ -474,18 +500,15 @@ to mark it as  <em>pure</em>.</p>
 
 #[export_module]
 mod my_module {
-    fn internal_calc(array: &amp;mut rhai::Array, x: i64) -&gt; i64 {
-        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
-    }
     // This function can be passed a constant
     #[rhai_fn(name = &quot;add1&quot;, pure)]
     pub fn add_scaled(array: &amp;mut rhai::Array, x: i64) -&gt; i64 {
-        internal_calc(array, x)
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
     }
     // This function CANNOT be passed a constant
     #[rhai_fn(name = &quot;add2&quot;)]
     pub fn add_scaled2(array: &amp;mut rhai::Array, x: i64) -&gt; i64 {
-        internal_calc(array, x)
+        array.iter().map(|v| v.as_int().unwrap()).fold(0, |(r, v)| r += v * x)
     }
     // This getter can be applied to a constant
     #[rhai_fn(get = &quot;first1&quot;, pure)]
@@ -562,14 +585,14 @@ specially by the plugins system.</p>
 <p><code>#[rhai_fn]</code> is applied to functions, while <code>#[rhai_mod]</code> is applied to sub-modules.</p>
 <p>Parameters should be set on inner attributes to specify the desired behavior.</p>
 <table><thead><tr><th>Attribute Parameter</th><th>Use with</th><th>Apply to</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code>, <code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/sub-module</td></tr>
-<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global namespace</td></tr>
-<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module namespace</td></tr>
-<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code>, <code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/sub-module under the specified name</td></tr>
-<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; Value</code></td><td>registers a getter for the named property</td></tr>
-<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, Value)</code></td><td>registers a setter for the named property</td></tr>
-<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT) -&gt; Value</code></td><td>registers an index getter</td></tr>
-<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, INT, Value)</code></td><td>registers an index setter</td></tr>
+<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/<a href="/book/vnext/rust/modules/index.html">sub-module</a></td></tr>
+<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global <a href="/book/vnext/language/fn-namespaces.html">namespace</a></td></tr>
+<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module <a href="/book/vnext/language/fn-namespaces.html">namespace</a></td></tr>
+<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/<a href="/book/vnext/rust/modules/index.html">sub-module</a> under the specified name</td></tr>
+<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; ValueType</code></td><td>registers a property <a href="/book/vnext/rust/getters-setters.html">getter</a> for the named property</td></tr>
+<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ValueType)</code></td><td>registers a property <a href="/book/vnext/rust/getters-setters.html">setter</a> for the named property</td></tr>
+<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType) -&gt; ValueType</code></td><td>registers an <a href="/book/vnext/rust/indexers.html">index getter</a></td></tr>
+<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType, ValueType)</code></td><td>registers an <a href="/book/vnext/rust/indexers.html">index setter</a></td></tr>
 <tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Type, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="/book/vnext/rust/fallible.html">fallible function</a></td></tr>
 <tr><td><code>pure</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ...) -&gt; ...</code></td><td>marks this as a <em>pure</em> function</td></tr>
 </tbody></table>

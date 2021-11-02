@@ -167,7 +167,7 @@ Return <code>Some(token)</code> to terminate the script immediately, with the pr
 <p>Progress tracking is disabled with the <a href="/book/vnext/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="termination-token"><a class="header" href="#termination-token">Termination Token</a></h2>
 <p>The <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value returned by the closure for <code>Engine::on_progress</code> is a <em>termination token</em>.
-A script that is manually terminated returns with <code>Err(EvalAltResult::ErrorTerminated(token, position))</code>
+A script that is manually terminated returns with <code>Err(Box&lt;EvalAltResult::ErrorTerminated(token, position)&gt;)</code>
 wrapping this value.</p>
 <p>The termination token is commonly used to provide information on the <em>reason</em> or <em>source</em>
 behind the termination decision.</p>

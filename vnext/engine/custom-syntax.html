@@ -460,11 +460,13 @@ tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
 <p>Use <code>Engine::register_custom_syntax_raw</code> to register a custom syntax <em>parser</em>
 together with the implementation function.</p>
 <h2 id="how-custom-parsers-work"><a class="header" href="#how-custom-parsers-work">How Custom Parsers Work</a></h2>
+<h3 id="parameters"><a class="header" href="#parameters">Parameters</a></h3>
 <p>A custom parser takes as input parameters two pieces of information:</p>
 <ul>
 <li>
 <p>The symbols (as <a href="/book/vnext/language/strings-chars.html">strings</a>) parsed so far:</p>
 <table><thead><tr><th align="center">Argument type</th><th>Value</th></tr></thead><tbody>
+<tr><td align="center">text <a href="/book/vnext/language/strings-chars.html">string</a></td><td>text value</td></tr>
 <tr><td align="center"><code>$ident$</code></td><td>identifier name</td></tr>
 <tr><td align="center"><code>$symbol$</code></td><td>symbol literal</td></tr>
 <tr><td align="center"><code>$expr$</code></td><td><code>$expr$</code></td></tr>
@@ -487,9 +489,14 @@ statements block.</p>
 and Rhai will fail with a parse error containing information about the expected symbol.</p>
 </li>
 </ul>
-<p>A custom parser always returns the <em>next</em> symbol expected, which can also be <code>$ident$</code>,
-<code>$expr$</code> or <code>$block$</code>, or <code>None</code> if parsing should terminate (<em>without</em> reading the
+<h3 id="return-value-1"><a class="header" href="#return-value-1">Return Value</a></h3>
+<p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
+<code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
+<p>A return symbol starting with <code>$$</code> is treated specially. Like returning <code>None</code>, it also
+terminates parsing, but at the same time it adds this symbol as text into the <em>inputs</em> stream at the end.
+This is typically used to inform the implementation function which custom syntax variant was
+actually parsed.</p>
 <h2 id="example-1"><a class="header" href="#example-1">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -498,28 +505,35 @@ look-ahead symbol).</p>
     &quot;perform&quot;,
     // The custom parser implementation - always returns the next symbol expected
     // 'look_ahead' is the next symbol about to be read
+    //
+    // Return symbols starting with '$$' terminate parsing but also allows us
+    // to determine which syntax variant was actually parsed so we can perform the
+    // appropriate action.
+    //
+    // The return type is 'Option&lt;ImmutableString&gt;' to allow common text strings
+    // to be interned and shared easily, reducing allocations during parsing.
     |symbols, look_ahead| match symbols.len() {
         // perform ...
-        1 =&gt; Ok(Some(&quot;$ident$&quot;.to_string())),
+        1 =&gt; Ok(Some(&quot;$ident$&quot;.into())),
         // perform command ...
         2 =&gt; match symbols[1].as_str() {
             &quot;action&quot; =&gt; Ok(Some(&quot;$expr$&quot;.into())),
             &quot;hello&quot; =&gt; Ok(Some(&quot;world&quot;.into())),
             &quot;update&quot; | &quot;check&quot; | &quot;add&quot; | &quot;remove&quot; =&gt; Ok(Some(&quot;$ident$&quot;.into())),
-            &quot;cleanup&quot; =&gt; Ok(None),
+            &quot;cleanup&quot; =&gt; Ok(Some(&quot;$$cleanup&quot;.into())),
             cmd =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
                 LexError::ImproperSymbol(format!(&quot;Improper command: {}&quot;, cmd))
             )), Position::NONE)),
         },
         // perform command arg ...
         3 =&gt; match (symbols[1].as_str(), symbols[2].as_str()) {
-            (&quot;action&quot;, _) =&gt; Ok(None),
-            (&quot;hello&quot;, &quot;world&quot;) =&gt; Ok(None),
-            (&quot;update&quot;, arg) if arg == &quot;system&quot; =&gt; Ok(None),
-            (&quot;update&quot;, arg) if arg == &quot;client&quot; =&gt; Ok(None),
-            (&quot;check&quot;, arg) =&gt; Ok(None),
-            (&quot;add&quot;, arg) =&gt; Ok(None),
-            (&quot;remove&quot;, arg) =&gt; Ok(None),
+            (&quot;action&quot;, _) =&gt; Ok(Some(&quot;$$action&quot;.into())),
+            (&quot;hello&quot;, &quot;world&quot;) =&gt; Ok(Some(&quot;$$hello-world&quot;.into())),
+            (&quot;update&quot;, arg) if arg == &quot;system&quot; =&gt; Ok(Some(&quot;$$update-system&quot;.into())),
+            (&quot;update&quot;, arg) if arg == &quot;client&quot; =&gt; Ok(Some(&quot;$$update-client&quot;.into())),
+            (&quot;check&quot;, arg) =&gt; Ok(Some(&quot;$$check&quot;.into())),
+            (&quot;add&quot;, arg) =&gt; Ok(Some(&quot;$$add&quot;.into())),
+            (&quot;remove&quot;, arg) =&gt; Ok(Some(&quot;$$remove&quot;.into())),
             (cmd, arg) =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
                 LexError::ImproperSymbol(
                     format!(&quot;Invalid argument for command {}: {}&quot;, cmd, arg)
@@ -547,7 +561,7 @@ look-ahead symbol).</p>
 </tbody></table>
 <p>Most strings are <a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a>‘s so it is usually more efficient to just <code>clone</code> the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.</p>
-<h3 id="return-value-1"><a class="header" href="#return-value-1">Return Value</a></h3>
+<h3 id="return-value-2"><a class="header" href="#return-value-2">Return Value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>Ok(None)</code></td><td>parsing complete and there are no more symbols to match</td></tr>

@@ -160,6 +160,8 @@ Use <a href="/book/vnext/start/features.html"><code>only_i32</code></a> to prune
 remember, by default all code is compiled into the final binary since what a script requires cannot
 be predicted. If a language feature will never be needed, omitting it is a prudent strategy to
 optimize the build for size.</p>
+<p>Removing the script <a href="/book/vnext/engine/optimize/index.html">optimizer</a> (<a href="/book/vnext/start/features.html"><code>no_optimize</code></a>) yields a sizable code saving,
+at the expense of a less efficient script.</p>
 <p>Omitting arrays (<a href="/book/vnext/start/features.html"><code>no_index</code></a>) yields the most code-size savings, followed by floating-point support
 (<a href="/book/vnext/start/features.html"><code>no_float</code></a>), safety checks (<a href="/book/vnext/start/features.html"><code>unchecked</code></a>) and finally object maps and custom types (<a href="/book/vnext/start/features.html"><code>no_object</code></a>).</p>
 <p>Where the usage scenario does not call for loading externally-defined modules, use <a href="/book/vnext/start/features.html"><code>no_module</code></a> to
