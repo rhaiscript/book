@@ -19,6 +19,7 @@ specially by the [`Engine`].
 | `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                                                                                                                 |
 | `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature                                                                                            |
 | `call_fn_raw()`     |  `Result<Dynamic, Box<EvalAltResult>>`  | call a function with the supplied arguments; this is an advanced method                                                                                                                                                                    |
+| `position()`        |               `Position`                | position of the function call                                                                                                                                                                                                              |
 
 
 Implement Safety Checks with `NativeCallContext`
@@ -42,7 +43,7 @@ pub fn grow(context: NativeCallContext, size: i64) -> Result<Array, Box<EvalAltR
             "Size to grow".to_string(),
             context.engine().max_array_size(),
             size as usize,
-            Position::NONE,
+            context.position(),
         ).into());
     }
 

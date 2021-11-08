@@ -230,6 +230,7 @@ of the particular call to a registered Rust function. It is a type that exposes 
 | `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                                                                                                                 |
 | `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature                                                                                            |
 | `call_fn_raw()`     |  `Result<Dynamic, Box<EvalAltResult>>`  | call a function with the supplied arguments; this is an advanced method                                                                                                                                                                    |
+| `position()`        |               `Position`                | position of the function call                                                                                                                                                                                                              |
 
 This type is normally provided by the [`Engine`] (e.g. when using [`Engine::register_fn_raw`](../rust/register-raw.md)).
 However, it may also be manually constructed from a tuple:
