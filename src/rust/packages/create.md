@@ -38,7 +38,6 @@ Examples
 // Import necessary types and traits.
 use rhai::{
     def_package,            // 'def_package!' macro
-    packages::Package,      // 'Package' trait
     packages::{             // pre-defined packages
         ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage
     }
@@ -83,7 +82,6 @@ Variables in the [plugin module] are ignored.
 // Import necessary types and traits.
 use rhai::{
     def_package,
-    packages::Package,
     packages::{ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage}
 };
 use rhai::plugin::*;
@@ -134,3 +132,12 @@ def_package!(rhai:MyPackage:"My own personal super package", module, {
     combine_with_exported_module!(module, "my-functions", my_module));
 });
 ```
+
+
+Create a Custom Package as an Independent Crate
+----------------------------------------------
+
+The project [`rhai-rand`](https://rhaiscript/rhai-rand) shows a simple example of creating a
+custom [package] as an independent crate.
+
+This allows the custom [package] to be used in multiple projects.
