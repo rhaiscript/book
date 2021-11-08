@@ -18,17 +18,17 @@ For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/pa
 `def_package!`
 --------------
 
-> `def_package!(root:package_name:description, variable, block)`
+> `def_package!(`_root_`:`_name_`:"`_description_`", `_variable_`, { `_block_` });`
 
 where:
 
-|   Parameter    | Description                                                                                     |
-| :------------: | ----------------------------------------------------------------------------------------------- |
-|     `root`     | root namespace, usually `rhai`                                                                  |
-| `package_name` | name of the package, usually ending in `...Package`                                             |
-| `description`  | doc-comment for the package                                                                     |
-|   `variable`   | a variable name holding a reference to the [module] (`&mut Module`) that is to form the package |
-|    `block`     | a code block that initializes the package                                                       |
+|  Parameter  | Description                                                                                     |
+| :---------: | ----------------------------------------------------------------------------------------------- |
+|    root     | root namespace, usually `rhai`                                                                  |
+|    name     | name of the package, usually ending in ...`Package`                                             |
+| description | doc-comment for the package                                                                     |
+|  variable   | a variable name holding a reference to the [module] (`&mut Module`) that is to form the package |
+|    block    | a code block that initializes the package                                                       |
 
 
 Examples
@@ -141,3 +141,49 @@ The project [`rhai-rand`](https://rhaiscript/rhai-rand) shows a simple example o
 custom [package] as an independent crate.
 
 This allows the custom [package] to be used in multiple projects.
+
+Essentially, the concept is to create a Rust crate that specifies [`rhai`](https://crates.io/crates/rhai) as dependency.
+The main `lib.rs` module can contain the package being constructed.
+
+```toml
+┌────────────┐
+│ Cargo.toml │
+└────────────┘
+
+[dependencies]
+rhai = "{{version}}"    # assuming {{version}} is the latest version
+```
+
+```rust no_run
+┌────────┐
+│ lib.rs │
+└────────┘
+
+use rhai::def_package;
+use rhai::plugin::*;
+
+#[export_module]
+mod my_module {
+    pub const MY_NUMBER: i64 = 42;
+
+    pub fn greet(name: &str) -> String {
+        format!("hello, {}!", name)
+    }
+    pub fn get_num() -> i64 {
+        42
+    }
+
+    // This is a sub-module, but if using combine_with_exported_module!, it will
+    // be flattened and all functions registered at the top level.
+    pub mod my_sub_module {
+        pub fn get_sub_num() -> i64 {
+            0
+        }
+    }
+}
+
+// Define the package 'MyPackage' which is exported for the crate.
+def_package!(rhai:MyPackage:"My own personal super package in a new crate!", module, {
+    combine_with_exported_module!(module, "my-functions", my_module));
+});
+```

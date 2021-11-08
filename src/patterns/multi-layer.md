@@ -39,9 +39,9 @@ Examples
 Assume the following four scripts:
 
 ```rust no_run
-+--------------+
-| default.rhai |
-+--------------+
+┌──────────────┐
+│ default.rhai │
+└──────────────┘
 
 // Default implementation of 'foo'.
 fn foo(x) { x + 1 }
@@ -52,10 +52,9 @@ fn bar(x, y) { x + y }
 // Default implementation of 'no_touch'.
 fn no_touch() { throw "do not touch me!"; }
 
-
-+-------------+
-| lowest.rhai |
-+-------------+
+┌─────────────┐
+│ lowest.rhai │
+└─────────────┘
 
 // Specific implementation of 'foo'.
 fn foo(x) { x * 2 }
@@ -63,10 +62,9 @@ fn foo(x) { x * 2 }
 // New implementation for this layer.
 fn baz() { print("hello!"); }
 
-
-+-------------+
-| middle.rhai |
-+-------------+
+┌─────────────┐
+│ middle.rhai │
+└─────────────┘
 
 // Specific implementation of 'bar'.
 fn bar(x, y) { x - y }
@@ -74,10 +72,9 @@ fn bar(x, y) { x - y }
 // Specific implementation of 'baz'.
 fn baz() { print("hey!"); }
 
-
-+--------------+
-| highest.rhai |
-+--------------+
+┌──────────────┐
+│ highest.rhai │
+└──────────────┘
 
 // Specific implementation of 'foo'.
 fn foo(x) { x + 42 }

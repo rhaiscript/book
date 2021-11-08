@@ -107,9 +107,9 @@ engine.register_fn("config_is_set", move |value: String|
 ### Configuration Script
 
 ```rust no_run
-+----------------+
-| my_config.rhai |
-+----------------+
+┌────────────────┐
+│ my_config.rhai │
+└────────────────┘
 
 config_set_id("hello");
 
@@ -143,9 +143,9 @@ easy to understand and quick to modify.
 For example, the above configuration example may be expressed by this custom syntax:
 
 ```rust no_run
-+----------------+
-| my_config.rhai |
-+----------------+
+┌────────────────┐
+│ my_config.rhai │
+└────────────────┘
 
 // Configure ID
 id "hello";

@@ -100,16 +100,16 @@ The only practical way to ensure that a function is a correct one is to use [mod
 i.e. define the function in a separate module and then [`import`] it:
 
 ```rust no_run
-+--------------+
-| message.rhai |
-+--------------+
+┌──────────────┐
+│ message.rhai │
+└──────────────┘
 
 fn get_message() { "Hello!" }
 
 
-+-------------+
-| script.rhai |
-+-------------+
+┌─────────────┐
+│ script.rhai │
+└─────────────┘
 
 import "message" as msg;
 

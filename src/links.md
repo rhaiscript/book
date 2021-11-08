@@ -36,7 +36,6 @@
 [`Func`]: {{rootUrl}}/engine/func.md
 [`AST`]: {{rootUrl}}/engine/compile.md
 [`eval_expression`]: {{rootUrl}}/engine/expressions.md
-[`eval_expression_with_scope`]: {{rootUrl}}/engine/expressions.md
 [raw `Engine`]: {{rootUrl}}/engine/raw.md
 [built-in operator]: {{rootUrl}}/engine/builtin.md
 [built-in operators]: {{rootUrl}}/engine/builtin.md

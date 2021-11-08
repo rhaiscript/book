@@ -94,6 +94,10 @@ The `Cargo.toml` configuration below turns on these six features:
 * `no_function` (no defining [functions])
 
 ```toml
+┌────────────┐
+│ Cargo.toml │
+└────────────┘
+
 [dependencies]
 rhai = { version = "{{version}}", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
 ```

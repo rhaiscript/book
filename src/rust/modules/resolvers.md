@@ -69,9 +69,9 @@ print(`The answer is: ${answer}`);
 ### Example
 
 ```rust no_run
-+----------------+
-| my_module.rhai |
-+----------------+
+┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
 
 // This function overrides any in the main script.
 private fn inner_message() { "hello! from module!" }
@@ -84,9 +84,9 @@ fn greet_main() {
     print(main_message());      // call function not in module script
 }
 
-+-----------+
-| main.rhai |
-+-----------+
+┌───────────┐
+│ main.rhai │
+└───────────┘
 
 // This function is overridden by the module script.
 fn inner_message() { "hi! from main!" }
@@ -115,9 +115,9 @@ in the module script if none are found.
 One such situation is the need to provide a _default implementation_ to a simulated _virtual_ function:
 
 ```rust no_run
-+----------------+
-| my_module.rhai |
-+----------------+
+┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
 
 // Do not do this (it will override the main script):
 // fn message() { "hello! from module!" }
@@ -135,9 +135,9 @@ fn greet() {
     }
 }
 
-+-----------+
-| main.rhai |
-+-----------+
+┌───────────┐
+│ main.rhai │
+└───────────┘
 
 // The main script defines 'message' which is needed by the module script.
 fn message() { "hi! from main!" }
@@ -146,9 +146,9 @@ import "my_module" as m;
 
 m::greet();                         // prints "hi! from main!"
 
-+------------+
-| main2.rhai |
-+------------+
+┌────────────┐
+│ main2.rhai │
+└────────────┘
 
 // The main script does not define 'message' which is needed by the module script.
 

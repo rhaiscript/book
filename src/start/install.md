@@ -9,6 +9,10 @@ The easiest way is to install the Rhai crate from [`crates.io`](https://crates.i
 starting by looking up the latest version and adding this line under `dependencies` in the project's `Cargo.toml`:
 
 ```toml
+┌────────────┐
+│ Cargo.toml │
+└────────────┘
+
 [dependencies]
 rhai = "{{version}}"    # assuming {{version}} is the latest version
 ```
