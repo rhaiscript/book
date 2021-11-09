@@ -41,10 +41,11 @@ Extract Only Statements
 
 The following methods allow manipulation of the statements in an [`AST`]:
 
-| Method                         | Description                                                                        |
-| ------------------------------ | ---------------------------------------------------------------------------------- |
-| `clone_statements_only(&self)` | clone the [`AST`] into a new [`AST`] with only the statements, excluding functions |
-| `clear_statements(&mut self)`  | remove all statements from the [`AST`], leaving only functions                     |
+| Method                                                | Description                                                                                     |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `clone_statements_only(&self)`                        | clone the [`AST`] into a new [`AST`] with only the statements, excluding functions              |
+| `clear_statements(&mut self)`                         | remove all statements from the [`AST`], leaving only functions                                  |
+| `iter_literal_variables(&self, constants, variables)` | return an iterator on all top-level literal constant and/or variable definitions in the [`AST`] |
 
 
 Merge and Combine AST's
