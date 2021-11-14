@@ -70,6 +70,8 @@ pub struct SomeType {
 #[export_module]
 mod SomeTypeAPI {
     #[rhai_fn(global)]
+    pub fn new_state(value: i64) -> SomeType { ... }
+    #[rhai_fn(global)]
     pub fn func1(obj: &mut SomeType) -> bool { ... }
     #[rhai_fn(global)]
     pub fn func2(obj: &mut SomeType) -> bool { ... }
@@ -87,7 +89,7 @@ Steps to initialize the event handler:
 
 1. Register an API with the [`Engine`],
 2. Create a custom [`Scope`] to serve as the stored state,
-3. Add default state variables into the custom [`Scope`],
+3. Add default state variables into the custom [`Scope`] and/or create them by calling an initiation function
 4. Get the handler script and [compile][`AST`] it,
 5. Store the compiled [`AST`] for future evaluations,
 6. Run the [`AST`] to initialize event handler state variables.
@@ -130,6 +132,19 @@ Mapping an event from the system into a scripted handler is straight-forward:
 
 ```rust no_run
 impl Handler {
+    // Create a new 'Handler'.
+    // In a real application you'd be handling errors...
+    pub fn new(script: &str) -> Self {
+        let engine = Engine::new();
+        let mut scope = Scope::new();
+        let ast = engine.compile(script).unwrap();
+
+        // Run the 'init' function to initialize the state
+        engine.call_fn(&mut scope, &ast, "init", ()).unwrap();
+
+        Self { engine, scope, ast }
+    }
+
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
     pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
@@ -175,6 +190,13 @@ in the handler script to access and modify these state variables.
 The API registered with the [`Engine`] can be also used throughout the script.
 
 ```rust no_run
+// Initialize state
+fn init() {
+    let bool_state = false;
+    let some_type_state = new_state(42);
+}
+
+// 'start' event handler
 fn start(data) {
     if bool_state {
         throw "Already started!";
@@ -186,6 +208,7 @@ fn start(data) {
     some_type_state.value = data;
 }
 
+// 'end' event handler
 fn end(data) {
     if !bool_state {
         throw "Not yet started!";
@@ -197,6 +220,7 @@ fn end(data) {
     some_type_state.value = data;
 }
 
+// 'update' event handler
 fn update(data) {
     some_type_state.value += process(data);
 }
