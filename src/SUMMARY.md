@@ -132,7 +132,7 @@ The Rhai Scripting Language
    6. [Subtle Semantic Changes](engine/optimize/semantics.md)
 8. [Advanced Topics](advanced.md)
    1. [Manage AST's](engine/ast.md)
-   2. [Capture Scope for Function Call](language/fn-capture.md)
+   2. [Call Function Within Caller's Scope](language/fn-parent-scope.md)
    3. [Low-Level API](rust/register-raw.md)
    4. [Variable Resolver](engine/var.md)
    5. [Use as DSL](engine/dsl.md)

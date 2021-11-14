@@ -127,7 +127,6 @@
 [function pointer]: {{rootUrl}}/language/fn-ptr.md
 [function pointers]: {{rootUrl}}/language/fn-ptr.md
 [currying]: {{rootUrl}}/language/fn-curry.md
-[capture]: {{rootUrl}}/language/fn-capture.md
 [automatic currying]: {{rootUrl}}/language/fn-closure.md
 [closure]: {{rootUrl}}/language/fn-closure.md
 [closures]: {{rootUrl}}/language/fn-closure.md

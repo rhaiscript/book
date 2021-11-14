@@ -75,8 +75,8 @@ read lock before reading it.
 As the vast majority of [variables] are _not_ shared, needless to say this is a non-trivial
 performance overhead.
 
-Use [`no_closure`] to disable [closure] and [capturing][capture] support to optimize the hot path
-because it no longer needs to take locks for shared data.
+Use [`no_closure`] to disable support for [closures] to optimize the hot path because it no longer
+needs to take locks for shared data.
 
 
 Unchecked Build
