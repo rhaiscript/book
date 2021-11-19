@@ -55,8 +55,9 @@ When using `Engine::call_fn`, the [`AST`] is first evaluated before the function
 This is usually desirable in order to [import][`import`] the necessary external [modules] that are
 needed by the function.
 
-If this default behavior is not desirable, use [`AST::clear_statements`]({{rootUrl}}/engine/ast.md)
-to create a copy of the [`AST`] without any body script, only function definitions.
+New [variables]/[constants] introduced are not retained so they do not pollute the custom [`Scope`].
+
+If these default behaviors are not desirable, use `Engine::call_fn_raw`.
 
 
 `FuncArgs` trait
@@ -96,39 +97,57 @@ let result: i64 = engine.call_fn(&mut scope, &ast, "hello", options)?;
 ```
 
 
-Low-Level API &ndash; `Engine::call_fn_dynamic`
-----------------------------------------------
+Low-Level API &ndash; `Engine::call_fn_raw`
+------------------------------------------
 
-For more control, construct all arguments as `Dynamic` values and use `Engine::call_fn_dynamic`,
+For more control, construct all arguments as `Dynamic` values and use `Engine::call_fn_raw`,
 passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
 
 ```rust no_run
-let result = engine.call_fn_dynamic(
-                        &mut scope,         // scope to use
-                        &ast,               // AST containing the functions
-                        false,              // false = do not evaluate the AST
-                        "hello",            // function entry-point
-                        None,               // 'this' pointer, if any
-                        [ "abc".into(), 123_i64.into() ]    // arguments
+let result = engine.call_fn_raw(
+                &mut scope,         // scope to use
+                &ast,               // AST containing the functions
+                false,              // false = do not evaluate the AST
+                false,              // false = do not rewind the scope (i.e. keep new variables)
+                "hello",            // function entry-point
+                None,               // 'this' pointer, if any
+                [ "abc".into(), 123_i64.into() ]    // arguments
              )?;
 ```
 
-### Binding the `this` pointer
+`Engine::call_fn_raw` extends control to the following:
 
-`Engine::call_fn_dynamic` can also bind a value to the `this` pointer of a script-defined function.
+* Whether to skip evaluation of the [`AST`] before calling the target function
+* Whether to rewind the custom [`Scope`] at the end of the function call
+* Whether to bind the `this` pointer to a specific value
+
+### Skip evaluation of the `AST`
+
+By default, the [`AST`] is evaluated before calling the target function.
+A parameter can be passed to skip this evaluation.
+
+### Keep new variables/constants
+
+By default, any new [variable]/[constant] defined within a function are cleared after the call and
+will not spill into the custom [`Scope`]. A parameter can be passed to keep them within the [`Scope`].
+
+### Bind the `this` pointer
+
+`Engine::call_fn_raw` can also bind a value to the `this` pointer of a script-defined function.
 
 ```rust no_run
 let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();
 
-let result = engine.call_fn_dynamic(
-                        &mut scope,
-                        &ast,
-                        false,
-                        "action",
-                        Some(&mut value),   // binding the 'this' pointer
-                        [ 41_i64.into() ]
+let result = engine.call_fn_raw(
+                &mut scope,
+                &ast,
+                false,
+                false,
+                "action",
+                Some(&mut value),   // binding the 'this' pointer
+                [ 41_i64.into() ]
              )?;
 
 assert_eq!(value.as_int()?, 42);

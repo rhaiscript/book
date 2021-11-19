@@ -13,6 +13,8 @@ Usage Scenario
 
 * State must be kept between invocations of event handlers.
 
+* State may be provided by the system or the user, or both.
+
 * Default implementations of event handlers can be provided.
 
 
@@ -22,7 +24,9 @@ Key Concepts
 * An _event handler_ object is declared that holds the following items:
   * [`Engine`] with registered functions serving as an API,
   * [`AST`] of the user script,
-  * a [`Scope`] containing state.
+  * a [`Scope`] containing system-provided default state.
+
+* User-provided state is initialized by a function called via [`Engine::call_fn_raw`][`call_fn`].
 
 * Upon an event, the appropriate event handler function in the script is called via [`Engine::call_fn`][`call_fn`].
 
@@ -68,7 +72,7 @@ pub struct SomeType {
 }
 
 #[export_module]
-mod SomeTypeAPI {
+mod some_type_api {
     #[rhai_fn(global)]
     pub fn new_state(value: i64) -> SomeType { ... }
     #[rhai_fn(global)]
@@ -96,27 +100,31 @@ Steps to initialize the event handler:
 
 ```rust no_run
 impl Handler {
+    // Create a new 'Handler'.
+    // In a real application you'd be handling errors...
     pub fn new(path: impl Into<PathBuf>) -> Self {
         let mut engine = Engine::new();
 
         // Register custom types and API's
         engine.register_type_with_name::<SomeType>("SomeType")
-              .register_global_module(exported_module!(SomeTypeAPI).into());
+              .register_global_module(exported_module!(some_type_api).into());
 
         // Create a custom 'Scope' to hold state
         let mut scope = Scope::new();
 
-        // Add initialized state into the custom 'Scope'
-        scope.push("bool_state", false);
-        scope.push("some_type_state", SomeType::new(42));
+        // Add any system-provided state into the custom 'Scope'.
+        // Constants can be used to optimize the script.
+        scope.push_constant("MY_CONSTANT", 42_i64);
+        scope.push("bool_state", ());
 
         // Compile the handler script.
         // In a real application you'd be handling errors...
-        let ast = engine.compile_file(path).unwrap();
+        let ast = engine.compile_file_with_scope(&mut scope, path).unwrap();
 
-        // Evaluate the script to initialize it and other state variables.
+        // Run the 'init' function to initialize the state, retaining variables.
         // In a real application you'd again be handling errors...
-        engine.run_ast_with_scope(&mut scope, &ast).unwrap();
+        engine.call_fn_raw(&mut scope, &ast, false, false, "init", None, []).unwrap();
+        //                                          ^^^^^ do not rewind scope
 
         // The event handler is essentially these three items:
         Handler { engine, scope, ast }
@@ -132,19 +140,6 @@ Mapping an event from the system into a scripted handler is straight-forward:
 
 ```rust no_run
 impl Handler {
-    // Create a new 'Handler'.
-    // In a real application you'd be handling errors...
-    pub fn new(script: &str) -> Self {
-        let engine = Engine::new();
-        let mut scope = Scope::new();
-        let ast = engine.compile(script).unwrap();
-
-        // Run the 'init' function to initialize the state
-        engine.call_fn(&mut scope, &ast, "init", ()).unwrap();
-
-        Self { engine, scope, ast }
-    }
-
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
     pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
@@ -190,7 +185,9 @@ in the handler script to access and modify these state variables.
 The API registered with the [`Engine`] can be also used throughout the script.
 
 ```rust no_run
-// Initialize state
+// Initialize user-provided state (overrides system-provided state, if any)
+// When 'call_fn_raw' is used to call this and the scope is not rewound,
+// any new variables introduced will stay inside the custom 'Scope'.
 fn init() {
     let bool_state = false;
     let some_type_state = new_state(42);
