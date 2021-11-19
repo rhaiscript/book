@@ -171,3 +171,5 @@
 [custom operator]: {{rootUrl}}/engine/custom-op.md
 [custom operators]: {{rootUrl}}/engine/custom-op.md
 [custom syntax]: {{rootUrl}}/engine/custom-syntax.md
+
+[`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md
