@@ -17,8 +17,9 @@ Built-In Packages
 | `BasicTimePackage`     | basic time functions (e.g. [timestamps])                                                               |    yes    |      yes      |
 | `MoreStringPackage`    | additional string functions, including converting common types to string                               |    no     |      yes      |
 | `BasicMathPackage`     | basic math functions (e.g. `sin`, `sqrt`)                                                              |    no     |      yes      |
-| `BasicArrayPackage`    | basic [array] functions (not available under `no_index`)                                               |    no     |      yes      |
-| `BasicMapPackage`      | basic [object map] functions (not available under `no_object`)                                         |    no     |      yes      |
+| `BasicArrayPackage`    | basic [array] functions (not available under [`no_index`])                                             |    no     |      yes      |
+| `BasicBlobPackage`     | basic [BLOB] functions (not available under [`no_index`])                                              |    no     |      yes      |
+| `BasicMapPackage`      | basic [object map] functions (not available under [`no_object`])                                       |    no     |      yes      |
 | `BasicFnPackage`       | basic methods for [function pointers].                                                                 |    yes    |      yes      |
 | `CorePackage`          | basic essentials                                                                                       |    yes    |      yes      |
 | `StandardPackage`      | standard library (default for `Engine::new`)                                                           |    no     |      yes      |

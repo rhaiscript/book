@@ -14,14 +14,14 @@ Array literals are built within square brackets `[` ... `]` and separated by com
 All elements stored in an array are [`Dynamic`], and the array can freely grow or shrink with
 elements added or removed.
 
-The Rust type of a Rhai array is `rhai::Array`.
+The Rust type of a Rhai array is `rhai::Array` which is an alias to `Vec<Dynamic>`.
 
 [`type_of()`] an array returns `"array"`.
 
 Arrays are disabled via the [`no_index`] feature.
 
 The maximum allowed size of an array can be controlled via `Engine::set_max_array_size`
-(see [maximum size of arrays].
+(see [maximum size of arrays]).
 
 
 Element Access

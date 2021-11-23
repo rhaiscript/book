@@ -107,6 +107,10 @@
 [arrays]: {{rootUrl}}/language/arrays.md
 [`Array`]: {{rootUrl}}/language/arrays.md
 
+[BLOB]: {{rootUrl}}/language/blobs.md
+[BLOB's]: {{rootUrl}}/language/blobs.md
+[`Blob`]: {{rootUrl}}/language/blobs.md
+
 [`Map`]: {{rootUrl}}/language/object-maps.md
 [object map]: {{rootUrl}}/language/object-maps.md
 [object maps]: {{rootUrl}}/language/object-maps.md

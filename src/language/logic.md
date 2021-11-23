@@ -71,7 +71,7 @@ ts == ts;           // error: '==' not defined for the custom type
 
 Beware that the above default does _NOT_ apply to numeric values of different types
 (e.g. comparison between `i64` and `u16`, `i32` and `f64`) &ndash; when multiple numeric types are
-used it is too easy to mess and for subtle errors to creep in.
+used it is too easy to mess up and for subtle errors to creep in.
 
 ```rust no_run
 // Assume variable 'x' = 42_u16, 'y' = 42_u16 (both types of u16)

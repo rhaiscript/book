@@ -1,5 +1,5 @@
-`rhai-rand` - Random Number Generation, Shuffling and Sampling
-============================================================
+`rhai-rand`: Random Number Generation, Shuffling and Sampling
+===========================================================
 
 {{#include ../links.md}}
 
@@ -70,10 +70,10 @@ The following functions are defined:
 
 ### Arrays
 
-The following methods are defined for [arrays]:
+The following methods are defined for [arrays] (requires the `array` feature):
 
-|  Method   |                       Parameter(s)                        | Return value | Feature | Description                                                                |
-| :-------: | :-------------------------------------------------------: | :----------: | :-----: | -------------------------------------------------------------------------- |
-| `shuffle` |                          _none_                           |              | `array` | shuffles the items in the [array]                                          |
-| `sample`  |                          _none_                           | [`Dynamic`]  | `array` | returns a random item from the [array]                                     |
-| `sample`  | number of items to sample (empty if ≤ 0, all if ≥ length) |  [`Array`]   | `array` | returns a non-repeating _shuffled_ random sample of items from the [array] |
+|  Method   |                       Parameter(s)                        | Return value | Description                                                                |
+| :-------: | :-------------------------------------------------------: | :----------: | -------------------------------------------------------------------------- |
+| `shuffle` |                          _none_                           |              | shuffles the items in the [array]                                          |
+| `sample`  |                          _none_                           | [`Dynamic`]  | returns a random item from the [array]                                     |
+| `sample`  | number of items to sample (empty if ≤ 0, all if ≥ length) |  [`Array`]   | returns a non-repeating _shuffled_ random sample of items from the [array] |

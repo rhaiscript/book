@@ -146,6 +146,8 @@ The following methods cast a `Dynamic` into a specific type:
 | `as_char`                  |                     |                 `Result<char, &str>`                 |
 | `into_string`              |                     |                `Result<String, &str>`                |
 | `into_immutable_string`    |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
+| `into_array`               |    [`no_index`]     |             `Result<Array, &str>`[array]             |
+| `into_typed_array<T>`      |    [`no_index`]     |                `Result<Vec<T>, &str>`                |
 
 ### Constructor traits
 
@@ -172,3 +174,4 @@ The following constructor traits are implemented for `Dynamic`:
 | `From<Instant>`                                                                |           [`no_std`]           |        [timestamp]        |
 | `From<Rc<RefCell<Dynamic>>>`                                                   |   [`sync`] or [`no_closure`]   |         `Dynamic`         |
 | `From<Arc<RwLock<Dynamic>>>` ([`sync`])                                        | non-[`sync`] or [`no_closure`] |         `Dynamic`         |
+| `FromIterator<X: IntoIterator<Item=T>>`                                        |          [`no_index`]          |          [array]          |

@@ -8,7 +8,7 @@ resources used by a script so that it does not consume more resources that it is
 
 The most important resources to watch out for are:
 
-* **Memory**: A malicious script may continuously grow a [string], an [array] or [object map] until all memory is consumed.
+* **Memory**: A malicious script may continuously grow a [string], an [array], a [BLOB] or [object map] until all memory is consumed.
 
   It may also create a large [array] or [object map] literal that exhausts all memory during parsing.
 
