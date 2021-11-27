@@ -167,81 +167,51 @@ the `this` pointer (for syntactic reasons).
 Therefore, obviously, binding the `this` pointer is unsupported under [`no_object`].
 
 
-Call a Function Pointer in Rust
-------------------------------
+Call a Function Pointer within a Rust Function (as a Callback)
+------------------------------------------------------------
 
 It is completely normal to register a Rust function with an [`Engine`] that takes parameters
 whose types are function pointers.  The Rust type in question is `rhai::FnPtr`.
 
 A function pointer in Rhai is essentially syntactic sugar wrapping the _name_ of a function
-to call in script.  Therefore, the script's [`AST`] is required to call a function pointer,
-as well as the entire _execution context_ that the script is running in.
+to call in script.  Therefore, the script's _execution context_ is needed in order to call a
+function pointer.
 
-For a rust function taking a function pointer as parameter, the [Low-Level API](../rust/register-raw.md)
-must be used to register the function.
-
-Essentially, use the low-level `Engine::register_raw_fn` method to register the function.
-`FnPtr::call_dynamic` is used to actually call the function pointer, passing to it the
-current [_native call context_][`NativeCallContext`], the `this` pointer, and other necessary arguments.
+The type [`NativeCallContext`] holds the _native call context_ of the particular call to a
+registered Rust function. This type is normally provided by the [`Engine`] when a function is
+registered with the first parameter type being [`NativeCallContext`].
 
 ```rust no_run
 use rhai::{Engine, Module, Dynamic, FnPtr, NativeCallContext};
 
 let mut engine = Engine::new();
 
-// Define Rust function in required low-level API signature
-fn call_fn_ptr_with_value(context: NativeCallContext, args: &mut [&mut Dynamic])
-    -> Result<Dynamic, Box<EvalAltResult>>
+// A function expecting a callback in form of a function pointer
+fn super_call(context: NativeCallContext, callback: FnPtr, value: i64)
+                -> Result<Dynamic, Box<EvalAltResult>>
 {
-    // 'args' is guaranteed to contain enough arguments of the correct types
-    let fp = std::mem::take(args[1]).cast::<FnPtr>();   // 2nd argument - function pointer
-    let value = std::mem::take(args[2]);                // 3rd argument - function argument
-    let this_ptr = args.get_mut(0).unwrap();            // 1st argument - 'this' pointer
-
-    // Use 'FnPtr::call_dynamic' to call the function pointer.
-    fp.call_dynamic(&context, Some(this_ptr), [value])
+    // Use 'FnPtr::call_dynamic' to call the function pointer using the call context
+    callback.call_dynamic(&context, None, [value.into()])
 }
 
-// Register a Rust function using the low-level API
-engine.register_raw_fn("super_call",
-    &[ // parameter types
-        std::any::TypeId::of::<i64>(),
-        std::any::TypeId::of::<FnPtr>(),
-        std::any::TypeId::of::<i64>()
-    ],
-    call_fn_ptr_with_value
-);
+engine.register_result_fn("super_call", super_call);
 ```
 
 
-`NativeCallContext`
-------------------
+Call a Function Pointer Directly
+-------------------------------
 
-`FnPtr::call_dynamic` takes a parameter of type [`NativeCallContext`] which holds the _native call context_
-of the particular call to a registered Rust function. It is a type that exposes the following:
-
-| Method              |                  Type                   | Description                                                                                                                                                                                                                                |
-| ------------------- | :-------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `engine()`          |                `&Engine`                | the current [`Engine`], with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using [`Engine::call_fn`][`call_fn`], or calling a [function pointer]. |
-| `fn_name()`         |                 `&str`                  | name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)                                                                                                                        |
-| `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                                                                                                                    |
-| `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                                                                                                                |
-| `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                                                                                                           |
-| `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                                                                                                                 |
-| `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature                                                                                            |
-| `call_fn_raw()`     |  `Result<Dynamic, Box<EvalAltResult>>`  | call a function with the supplied arguments; this is an advanced method                                                                                                                                                                    |
-| `position()`        |               `Position`                | position of the function call                                                                                                                                                                                                              |
-
-This type is normally provided by the [`Engine`] (e.g. when using [`Engine::register_fn_raw`](../rust/register-raw.md)).
-However, it may also be manually constructed from a tuple:
+The `FnPtr::call` method allows the function pointer to be called directly on any [`Engine`] and
+[`AST`], making it possible to reuse the `FnPtr` data type in may different calls and scripting
+environments.
 
 ```rust no_run
-use rhai::{Engine, FnPtr, NativeCallContext};
+use rhai::{Engine, FnPtr};
 
 let engine = Engine::new();
 
 // Compile script to AST
-let mut ast = engine.compile(
+let ast = engine.compile(
 r#"
     let test = "hello";
     |x| test + x            // this creates a closure
@@ -250,19 +220,13 @@ r#"
 // Save the closure together with captured variables
 let fn_ptr = engine.eval_ast::<FnPtr>(&ast)?;
 
-// Get rid of the script, retaining only functions
-ast.retain_functions(|_, _, _| true);
-
-// Create function namespace from the 'AST'
-let lib = [ast.as_ref()];
-
-// Create native call context
-let fn_name = fn_ptr.fn_name().to_string();
-let context = NativeCallContext::new(&engine, &fn_name, &lib);
-
-// 'f' captures: the engine, the AST, and the closure
-let f = move |x: i64| fn_ptr.call_dynamic(&context, None, [x.into()]);
+// 'f' captures: the Engine, the AST, and the closure
+let f = move |x: INT| -> Result<String, Box<EvalAltResult>> {
+            fn_ptr.call(&engine, &ast, (x,))
+        };
 
 // 'f' can be called like a normal function
 let result = f(42)?;
+
+result == "hello42";
 ```
