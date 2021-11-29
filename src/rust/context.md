@@ -69,9 +69,8 @@ use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
 pub fn greet(context: NativeCallContext, callback: FnPtr) -> Result<String, Box<EvalAltResult>>
 {
-    // Call the callback closure with the current context
-    // to obtain the name to greet!
-    let name = callback.call_dynamic(&context, None, [])?;
+    // Call the callback closure with the current context to obtain the name to greet!
+    let name = callback.call_within_context(&context, ())?;
     Ok(format!("hello, {}!", name))
 }
 ```

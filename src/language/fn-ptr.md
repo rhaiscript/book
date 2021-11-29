@@ -186,12 +186,14 @@ use rhai::{Engine, Module, Dynamic, FnPtr, NativeCallContext};
 
 let mut engine = Engine::new();
 
-// A function expecting a callback in form of a function pointer
+// A function expecting a callback in form of a function pointer.
 fn super_call(context: NativeCallContext, callback: FnPtr, value: i64)
-                -> Result<Dynamic, Box<EvalAltResult>>
+                -> Result<String, Box<EvalAltResult>>
 {
-    // Use 'FnPtr::call_dynamic' to call the function pointer using the call context
-    callback.call_dynamic(&context, None, [value.into()])
+    // Use 'FnPtr::call_within_context' to call the function pointer using the call context.
+    // 'FnPtr::call_within_context' automatically casts to the required result type.
+    callback.call_within_context(&context, (value,))
+    //                                     ^^^^^^^^ arguments passed in tuple
 }
 
 engine.register_result_fn("super_call", super_call);

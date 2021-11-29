@@ -129,6 +129,9 @@ The following example registers a function that takes a [function pointer] as an
 then calls it within the same [`Engine`].  This way, a _callback_ function can be provided
 to a native Rust function.
 
+The example also showcases the use of `FnPtr::call_raw`, a low-level API which allows binding the
+`this` pointer to the function pointer call.
+
 ```rust no_run
 use rhai::{Engine, FnPtr};
 
@@ -147,11 +150,14 @@ engine.register_raw_fn(
 
         let fp = std::mem::take(args[1]).cast::<FnPtr>();   // 2nd argument - function pointer
         let value = std::mem::take(args[2]);                // 3rd argument - function argument
-        let this_ptr = args.get_mut(0).unwrap();            // 1st argument - this pointer
 
-        // Use 'FnPtr::call_dynamic' to call the function pointer.
-        // Beware, private script-defined functions will not be found.
-        fp.call_dynamic(&context, Some(this_ptr), [value])
+        // The 1st argument holds the 'this' pointer.
+        // This should be done last as it gets a mutable reference to 'args'.
+        let this_ptr = args.get_mut(0).unwrap();
+
+        // Use 'FnPtr::call_raw' to call the function pointer with the context
+        // while also binding the 'this' pointer!
+        fp.call_raw(&context, Some(this_ptr), [value])
     },
 );
 
