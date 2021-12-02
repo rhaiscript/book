@@ -107,15 +107,30 @@ Methods and Traits
 
 The following methods are available when working with `Dynamic`:
 
-| Method                        |     Not available under     |        Return type        | Description                                                                                                                                         |
-| ----------------------------- | :-------------------------: | :-----------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `from<T>` _(instance method)_ |                             |         `Dynamic`         | create a `Dynamic` from any value that implements `Clone`                                                                                           |
-| `type_name`                   |                             |          `&str`           | name of the value's type                                                                                                                            |
-| `into_shared`                 |       [`no_closure`]        |         `Dynamic`         | turn the value into a _shared_ value                                                                                                                |
-| `flatten_clone`               |                             |         `Dynamic`         | clone the value (a _shared_ value, if any, is cloned into a separate copy)                                                                          |
-| `flatten`                     |                             |         `Dynamic`         | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
-| `read_lock<T>`                | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value for reading                                                                                                                          |
-| `write_lock<T>`               | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value exclusively for writing                                                                                                              |
+| Method          |     Not available under     |        Return type        | Description                                                                                                                                         |
+| --------------- | :-------------------------: | :-----------------------: | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type_name`     |                             |          `&str`           | name of the value's type                                                                                                                            |
+| `into_shared`   |       [`no_closure`]        |         `Dynamic`         | turn the value into a _shared_ value                                                                                                                |
+| `flatten_clone` |                             |         `Dynamic`         | clone the value (a _shared_ value, if any, is cloned into a separate copy)                                                                          |
+| `flatten`       |                             |         `Dynamic`         | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
+| `read_lock<T>`  | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value for reading                                                                                                                          |
+| `write_lock<T>` | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value exclusively for writing                                                                                                              |
+
+### Constructor instance methods
+
+| Method           | Not available under |                           Value type                            |         Data type         |
+| ---------------- | :-----------------: | :-------------------------------------------------------------: | :-----------------------: |
+| `from_bool`      |                     |                             `bool`                              |          `bool`           |
+| `from_int`       |                     |                              `INT`                              |      integer number       |
+| `from_float`     |    [`no_float`]     |                             `FLOAT`                             |   floating-point number   |
+| `from_decimal`   |   non-[`decimal`]   |                    [`Decimal`][rust_decimal]                    | [`Decimal`][rust_decimal] |
+| `from_str`       |                     |                             `&str`                              |         [string]          |
+| `from_char`      |                     |                             `char`                              |        [character]        |
+| `from_array`     |    [`no_index`]     |                            `Vec<T>`                             |          [array]          |
+| `from_blob`      |    [`no_index`]     |                            `Vec<u8>`                            |          [BLOB]           |
+| `from_map`       |    [`no_object`]    |                              `Map`                              |       [object map]        |
+| `from_timestamp` |     [`no_std`]      | `std::time::Instant`<br/>([`instant::Instant`] if [WASM] build) |        [timestamp]        |
+| `from<T>`        |                     |                                                                 |                           |
 
 ### Detection methods
 
@@ -131,39 +146,36 @@ The following methods are available when working with `Dynamic`:
 
 The following methods cast a `Dynamic` into a specific type:
 
-| Method                     | Not available under |     Return type (error is the actual data type)      |
-| -------------------------- | :-----------------: | :--------------------------------------------------: |
-| `cast<T>`                  |                     |               `T` (panics on failure)                |
-| `try_cast<T>`              |                     |                     `Option<T>`                      |
-| `clone_cast<T>`            |                     |        cloned copy of `T` (panics on failure)        |
-| `as_unit`                  |                     |                  `Result<(), &str>`                  |
-| `as_int`                   |                     |                 `Result<i64, &str>`                  |
-| `as_int` ([`only_i32`])    |                     |                 `Result<i32, &str>`                  |
-| `as_float`                 |    [`no_float`]     |                 `Result<f64, &str>`                  |
-| `as_float` ([`f32_float`]) |    [`no_float`]     |                 `Result<f32, &str>`                  |
-| `as_decimal`               |   non-[`decimal`]   |       [`Result<Decimal, &str>`][rust_decimal]        |
-| `as_bool`                  |                     |                 `Result<bool, &str>`                 |
-| `as_char`                  |                     |                 `Result<char, &str>`                 |
-| `into_string`              |                     |                `Result<String, &str>`                |
-| `into_immutable_string`    |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
-| `into_array`               |    [`no_index`]     |             `Result<Array, &str>`[array]             |
-| `into_typed_array<T>`      |    [`no_index`]     |                `Result<Vec<T>, &str>`                |
+| Method                  | Not available under |     Return type (error is the actual data type)      |
+| ----------------------- | :-----------------: | :--------------------------------------------------: |
+| `cast<T>`               |                     |               `T` (panics on failure)                |
+| `try_cast<T>`           |                     |                     `Option<T>`                      |
+| `clone_cast<T>`         |                     |        cloned copy of `T` (panics on failure)        |
+| `as_unit`               |                     |                  `Result<(), &str>`                  |
+| `as_int`                |                     |                 `Result<INT, &str>`                  |
+| `as_float`              |    [`no_float`]     |                `Result<FLOAT, &str>`                 |
+| `as_decimal`            |   non-[`decimal`]   |       [`Result<Decimal, &str>`][rust_decimal]        |
+| `as_bool`               |                     |                 `Result<bool, &str>`                 |
+| `as_char`               |                     |                 `Result<char, &str>`                 |
+| `into_string`           |                     |                `Result<String, &str>`                |
+| `into_immutable_string` |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
+| `into_array`            |    [`no_index`]     |             `Result<Array, &str>`[array]             |
+| `into_blob`             |    [`no_index`]     |             `Result<Blob, &str>`[array]              |
+| `into_typed_array<T>`   |    [`no_index`]     |                `Result<Vec<T>, &str>`                |
 
 ### Constructor traits
 
-The following constructor traits are implemented for `Dynamic`:
+The following constructor traits are implemented for `Dynamic` where `T: Clone`:
 
 | Trait                                                                          |      Not available under       |         Data type         |
 | ------------------------------------------------------------------------------ | :----------------------------: | :-----------------------: |
 | `From<()>`                                                                     |                                |           `()`            |
-| `From<i64>`                                                                    |                                |           `i64`           |
-| `From<i32>` ([`only_i32`])                                                     |                                |           `i32`           |
-| `From<f64>`                                                                    |          [`no_float`]          |           `f64`           |
-| `From<f32>` ([`f32_float`])                                                    |          [`no_float`]          |           `f32`           |
+| `From<INT>`                                                                    |                                |      integer number       |
+| `From<FLOAT>`                                                                  |          [`no_float`]          |   floating-point number   |
 | `From<Decimal>`                                                                |        non-[`decimal`]         | [`Decimal`][rust_decimal] |
 | `From<bool>`                                                                   |                                |          `bool`           |
 | `From<S: Into<ImmutableString>>`<br/>e.g. `From<String>`, `From<&str>`         |                                |    [`ImmutableString`]    |
-| `From<char>`                                                                   |                                |          `char`           |
+| `From<char>`                                                                   |                                |        [character]        |
 | `From<Vec<T>>`                                                                 |          [`no_index`]          |          [array]          |
 | `From<&[T]>`                                                                   |          [`no_index`]          |          [array]          |
 | `From<BTreeMap<K: Into<SmartString>, T>>`<br/>e.g. `From<BTreeMap<String, T>>` |         [`no_object`]          |       [object map]        |
