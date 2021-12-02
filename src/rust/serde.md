@@ -88,7 +88,6 @@ let map: Dynamic = to_dynamic(x);
 map.is::<Map>() == true;
 ```
 
-
 ### Deserialize a `Dynamic` into Any Type
 
 The function `rhai::serde::from_dynamic` automatically converts a [`Dynamic`] value into any Rust type
@@ -150,3 +149,34 @@ The [`serde`](https://crates.io/crates/serde) crate is quite heavy.
 If only _simple_ JSON parsing (i.e. only deserialization) of a hash object into a Rhai [object map] is required,
 the [`Engine::parse_json`]({{rootUrl}}/language/json.md}}) method is available as a _cheap_ alternative,
 but it does not provide the same level of correctness, nor are there any configurable options.
+
+
+Working with BLOB's
+-------------------
+
+[BLOB's], or byte-arrays, are normally serialized and deserialized as simple [arrays].
+
+For higher efficiency, it is necessary to specify [BLOB] fields via the
+`serde_bytes` attribute from the [`serde_bytes`](https://crates.io/crates/serde_bytes) crate.
+
+```rust no_run
+use serde::{Deserialize, Serialize};
+
+// Use 'serde_bytes' to serialize the data as Dynamic BLOB's
+#[derive(Deserialize, Serialize)]
+struct TypeWithBlobs<'a> {
+    #[serde(with = "serde_bytes")]
+    bytes: &'a [u8],
+
+    #[serde(with = "serde_bytes")]
+    byte_buf: Vec<u8>,
+}
+
+let blobs = from_dynamic::<TypeWithBlobs>(&blob)?;
+
+// Use 'serde_bytes::Bytes' to get a slice to a stream of bytes
+let bytes_ref: &[u8] = from_dynamic::<serde_bytes::Bytes>(&blob)?.as_ref();
+
+// Use 'serde_bytes::ByteBuf' to get a 'Vec<u8>'
+let bytes: Vec<u8> = from_dynamic::<serde_bytes::ByteBuf>(&blob)?.into_vec();
+```
