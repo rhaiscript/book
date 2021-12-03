@@ -12,7 +12,7 @@ This is particularly useful when printing output.
 
 [`type_of()`] a string returns `"string"`.
 
-The maximum allowed length of a string can be controlled via `Engine::set_max_string_size`
+The maximum allowed length of a string can be controlled via [`Engine::set_max_string_size`][options]
 (see [maximum length of strings]).
 
 

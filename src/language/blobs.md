@@ -16,7 +16,7 @@ The Rust type of a Rhai BLOB is `rhai::Blob` which is an alias to `Vec<u8>`.
 
 BLOB's are disabled via the [`no_index`] feature.
 
-The maximum allowed size of a BLOB can be controlled via `Engine::set_max_array_size`
+The maximum allowed size of a BLOB can be controlled via [`Engine::set_max_array_size`][options]
 (see [maximum size of arrays]).
 
 

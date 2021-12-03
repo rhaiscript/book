@@ -49,3 +49,5 @@ x == 22;
 let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 ```
+
+`if`-expressions can be disabled via [`Engine::set_allow_if_expression`][options].

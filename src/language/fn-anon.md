@@ -57,6 +57,8 @@ fn anon_fn_1002() {
 }
 ```
 
+Anonymous functions can be disabled via [`Engine::set_allow_anonymous_function`][options].
+
 
 WARNING &ndash; NOT Real Closures
 --------------------------------

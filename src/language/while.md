@@ -18,3 +18,5 @@ while x > 0 {
     if x == 5 { break; }    // break out of while loop
 }
 ```
+
+`while` loops can be disabled via [`Engine::set_allow_looping`][options].

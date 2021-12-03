@@ -58,6 +58,8 @@ if foo == "hello" {
 }
 ```
 
+`switch`-expressions can be disabled via [`Engine::set_allow_switch_expression`][options].
+
 
 Array and Object Map Literals Also Work
 --------------------------------------

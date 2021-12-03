@@ -18,7 +18,7 @@ Limit How Long a Script Can Run
 
 Rhai by default does not limit how much time or CPU a script consumes.
 
-This can be changed via the `Engine::set_max_operations` method, with zero being unlimited (the default).
+This can be changed via the [`Engine::set_max_operations`][options] method, with zero being unlimited (the default).
 
 The _operations count_ is intended to be a very course-grained measurement of the amount of CPU that a script
 has consumed, allowing the system to impose a hard upper limit on computing resources.

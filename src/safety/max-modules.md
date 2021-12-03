@@ -5,7 +5,7 @@ Maximum Number of Modules
 
 Rhai by default does not limit how many [modules] can be loaded via [`import`] statements.
 
-This can be changed via the `Engine::set_max_modules` method. Notice that setting the maximum number
+This can be changed via the [`Engine::set_max_modules`][options] method. Notice that setting the maximum number
 of modules to zero does _not_ indicate unlimited modules, but disallows loading any module altogether.
 
 A script attempting to load more than the maximum number of modules will terminate with an error result.

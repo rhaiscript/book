@@ -15,7 +15,7 @@ characters) and ASCII-based, so they can usually be stored inline without incurr
 
 Object maps are disabled via the [`no_object`] feature.
 
-The maximum allowed size of an object map can be controlled via `Engine::set_max_map_size`
+The maximum allowed size of an object map can be controlled via [`Engine::set_max_map_size`][options]
 (see [maximum size of object maps]).
 
 

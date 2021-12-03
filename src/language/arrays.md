@@ -20,7 +20,7 @@ The Rust type of a Rhai array is `rhai::Array` which is an alias to `Vec<Dynamic
 
 Arrays are disabled via the [`no_index`] feature.
 
-The maximum allowed size of an array can be controlled via `Engine::set_max_array_size`
+The maximum allowed size of an array can be controlled via [`Engine::set_max_array_size`][options]
 (see [maximum size of arrays]).
 
 

@@ -20,7 +20,7 @@ recursively parse an extremely deeply-nested code stream.
 let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));
 ```
 
-This limit may be changed via the `Engine::set_max_expr_depths` method.
+This limit may be changed via the [`Engine::set_max_expr_depths`][options] method.
 
 There are two limits to set, one for the maximum depth at global level, and the other for function bodies.
 

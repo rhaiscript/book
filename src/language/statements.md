@@ -43,3 +43,5 @@ _regardless_ of whether it is terminated by a semicolon or not. This is differen
 if the last statement is terminated by a semicolon, the block's return value is taken to be `()`.
 
 If the last statement has no return value (e.g. variable definitions, assignments) then it is assumed to be [`()`].
+
+Statement expressions can be disabled via [`Engine::set_allow_statement_expression`][options].

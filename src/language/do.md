@@ -26,3 +26,5 @@ do {
     if x == 5 { break; }    // break out of do loop
 } until x == 0;
 ```
+
+`do` loops can be disabled via [`Engine::set_allow_looping`][options].

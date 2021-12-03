@@ -24,3 +24,5 @@ loop {
 
 Beware: a `loop` statement without a `break` statement inside its loop block is infinite -
 there is no way for the loop to stop iterating.
+
+`loop` statements can be disabled via [`Engine::set_allow_looping`][options].
