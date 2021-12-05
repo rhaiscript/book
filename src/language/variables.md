@@ -66,3 +66,27 @@ is_def_var("_x") == true;
 
 is_def_var("y") == false;
 ```
+
+
+Use Before Definition
+---------------------
+
+By default, variables do not need to be defined before they are used.
+If a variable accessed by a script is not defined previously, within the same script,
+it is searched for inside the [`Scope`] (if any) passed into the `Engine::eval_with_scope` call.
+
+If no [`Scope`] is used to evaluate the script, that an undefined variable causes a runtime
+error when accessed.
+
+
+Strict Variables Mode
+---------------------
+
+With [`Engine::set_strict_variables`][options], it is possible to turn on
+[_Strict Variables_][strict variables] mode.
+
+When [strict variables] mode is active, accessing a variable not previously defined within
+the same script directly causes a parse error when compiling the script.
+
+Turn on [strict variables] mode if no [`Scope`] is to be provided for script evaluation runs.
+This way, variable access errors are caught during compile time instead of runtime.

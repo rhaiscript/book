@@ -145,6 +145,7 @@
 [modules]: {{rootUrl}}/rust/modules/index.md
 [module resolver]: {{rootUrl}}/rust/modules/resolvers.md
 [variable resolver]: {{rootUrl}}/engine/var.md
+[strict variables]: {{rootUrl}}/engine/strict-var.md
 [`private`]: {{rootUrl}}/language/modules/export.md
 [`export`]: {{rootUrl}}/language/modules/export.md
 [`import`]: {{rootUrl}}/language/modules/import.md
@@ -173,7 +174,7 @@
 
 [options]: {{rootUrl}}/engine/options.md
 
-[disable keywords and operators]: {{rootUrl}}/engine/disable.md
+[disable keywords and operators]: {{rootUrl}}/engine/disable-keywords.md
 [custom operator]: {{rootUrl}}/engine/custom-op.md
 [custom operators]: {{rootUrl}}/engine/custom-op.md
 [custom syntax]: {{rootUrl}}/engine/custom-syntax.md
