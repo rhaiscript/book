@@ -46,7 +46,7 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
       {
         "sub_sub_module_A":
         {
-          "functions":
+          "functions":  /* functions exported in 'sub_sub_module_A' */
           [
             { ... function metadata ... },
             { ... function metadata ... },
@@ -67,7 +67,7 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
     },
     ...
   },
-  "functions":
+  "functions":  /* functions defined in the 'AST' */
   [
     { ... function metadata ... },
     { ... function metadata ... },
@@ -82,6 +82,8 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
 
 ```json
 {
+  "baseHash": 9876543210,  /* partial hash with only number of parameters */
+  "fullHash": 1234567890,  /* full hash with actual parameter types */
   "namespace": "internal" | "global",
   "access": "public" | "private",
   "name": "fn_name",
