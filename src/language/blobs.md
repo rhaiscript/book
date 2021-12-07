@@ -3,9 +3,9 @@ BLOB's
 
 {{#include ../links.md}}
 
-BLOB's (**B**inary **L**arge **OB**jects), used to hold arrays of bytes, have built-in support in Rhai.
+BLOB's (**B**inary **L**arge **OB**jects), used to hold packed arrays of bytes, have built-in support in Rhai.
 
-A BLOB has no literal representation.  A new BLOB can be created via the `blob` function.
+A BLOB has no literal representation, but is created via the `blob` function.
 
 All items stored in a BLOB are bytes (i.e. `u8`) and the BLOB can freely grow or shrink with bytes
 added or removed.
@@ -70,6 +70,6 @@ The following methods (mostly defined in the [`BasicBlobPackage`][packages] but 
 | `truncate`                | target length                                                                                                                    | cuts off the BLOB at exactly a specified length (discarding all subsequent bytes)                        |
 | `chop`                    | target length                                                                                                                    | cuts off the head of the BLOB, leaving the tail at exactly a specified length                            |
 | `split`                   | 1) BLOB<br/>2) position to split at, counting from end if < 0, end if ≥ length                                                   | splits the BLOB into two BLOB's, starting from a specified position                                      |
-| `drain`                   | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to remove, none if ≤ 0                       | removes a portion of the BLOB, returning the removed bytes (not in original order)                       |
-| `retain`                  | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to retain, none if ≤ 0                       | retains a portion of the BLOB, removes all other bytes and returning them (not in original order)        |
+| `drain`                   | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to remove, none if ≤ 0                       | removes a portion of the BLOB, returning the removed bytes                                               |
+| `retain`                  | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to retain, none if ≤ 0                       | retains a portion of the BLOB, removes all other bytes and returning them                                |
 | `splice`                  | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to remove, none if ≤ 0<br/>3) BLOB to insert | replaces a portion of the BLOB with another (not necessarily of the same length as the replaced portion) |
