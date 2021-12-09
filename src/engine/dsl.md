@@ -51,7 +51,11 @@ let food = "carrot";
 
 animal eats food            // custom operator 'eats'
 
-eats(animal, food)          // <- the above really de-sugars to this
+eats(animal, food)          // <- the above actually de-sugars to this
+
+let x = foo # bar;          // custom operator '#'
+
+let x = #(foo, bar)         // <- the above actually de-sugars to this
 ```
 
 Although a [custom operator] always de-sugars to a simple function call,

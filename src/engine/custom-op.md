@@ -18,17 +18,17 @@ use rhai::Engine;
 
 let mut engine = Engine::new();
 
-// Register a custom operator named 'foo' and give it a precedence of 160
+// Register a custom operator '#' and give it a precedence of 160
 // (i.e. between +|- and *|/)
 // Also register the implementation of the customer operator as a function
-engine.register_custom_operator("foo", 160)?
-      .register_fn("foo", |x: i64, y: i64| (x * y) - (x + y));
+engine.register_custom_operator("#", 160)?
+      .register_fn("#", |x: i64, y: i64| (x * y) - (x + y));
 
 // The custom operator can be used in expressions
-let result = engine.eval_expression::<i64>("1 + 2 * 3 foo 4 - 5 / 6")?;
+let result = engine.eval_expression::<i64>("1 + 2 * 3 # 4 - 5 / 6")?;
 //                                                    ^ custom operator
 
-// The above is equivalent to: 1 + ((2 * 3) foo 4) - (5 / 6)
+// The above is equivalent to: 1 + ((2 * 3) # 4) - (5 / 6)
 result == 15;
 ```
 
@@ -38,12 +38,20 @@ Alternatives to a Custom Operator
 
 Custom operators are merely _syntactic sugar_.  They map directly to registered functions.
 
-Therefore, the following are equivalent (assuming `foo` has been registered as a custom operator):
-
 ```rust no_run
+┌──────┐
+│ Rust │
+└──────┘
+
+engine.register_custom_operator("foo", 160)?;
+
+┌──────┐
+│ Rhai │
+└──────┘
+
 1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
 
-1 + foo(2 * 3, 4) - 5 / 6   // use function call
+1 + foo(2 * 3, 4) - 5 / 6   // <- above is equivalent to this function call
 ```
 
 A script using custom operators can always be pre-processed, via a pre-processor application,
@@ -61,14 +69,14 @@ Alternatively, they can also be [reserved symbols]({{rootUrl}}/appendix/operator
 [disabled operators or keywords][disable keywords and operators].
 
 ```rust no_run
-engine.register_custom_operator("foo", 20);     // 'foo' is a valid custom operator
+engine.register_custom_operator("foo", 20)?;    // 'foo' is a valid custom operator
 
-engine.register_custom_operator("#", 20);       // the reserved symbol '#' is also
+engine.register_custom_operator("#", 20)?;      // the reserved symbol '#' is also
                                                 // a valid custom operator
 
-engine.register_custom_operator("+", 30);       // <- error: '+' is an active operator
+engine.register_custom_operator("+", 30)?;      // <- error: '+' is an active operator
 
-engine.register_custom_operator("=>", 30);      // <- error: '=>' is an active symbol
+engine.register_custom_operator("=>", 30)?;     // <- error: '=>' is an active symbol
 ```
 
 
@@ -79,10 +87,10 @@ All custom operators must be _binary_ (i.e. they take two operands).
 _Unary_ custom operators are not supported.
 
 ```rust no_run
-engine.register_custom_operator("foo", 160)?
-      .register_fn("foo", |x: i64| x * x);
+engine.register_custom_operator("#", 160)?
+      .register_fn("#", |x: i64| x * x);
 
-engine.eval::<i64>("1 + 2 * 3 foo 4 - 5 / 6")?; // error: function 'foo (i64, i64)' not found
+engine.eval::<i64>("1 + 2 * 3 # 4 - 5 / 6")?;   // error: function '# (i64, i64)' not found
 ```
 
 
