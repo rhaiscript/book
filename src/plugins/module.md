@@ -195,6 +195,8 @@ Finally the plugin module can also be used to develop a [custom package],
 using `combine_with_exported_module!`:
 
 ```rust no_run
+use rhai::def_package;
+
 def_package!(rhai:MyPackage:"My own personal super package", module, {
     combine_with_exported_module!(module, "my_module_ID", my_module));
 });

@@ -45,7 +45,7 @@ Escape sequences are not supported for multi-line literal strings wrapped by bac
 | `\t`            | tab                              |
 | `\r`            | carriage-return (`CR`)           |
 | `\n`            | line-feed (`LF`)                 |
-| `\"`            | double-quote (`"`)               |
+| `\"` or `""`    | double-quote (`"`)               |
 | `\'`            | single-quote (`'`)               |
 | `\x`_xx_        | ASCII character in 2-digit hex   |
 | `\u`_xxxx_      | Unicode character in 4-digit hex |
@@ -67,12 +67,12 @@ ending back-slash (`\`) character.
 ```rust no_run
 let x = "hello, world!\
          hello world again! \
-         this is the last time!!!";
+         this is the ""last"" time!!!";
 
 // ^^^^^^ these whitespaces are ignored
 
 // The above is the same as:
-let x = "hello, world!hello world again! this is the last time!!!";
+let x = "hello, world!hello world again! this is the \"last\" time!!!";
 ```
 
 A string with continuation does not open up a new line.  To do so, a new-line character must be
@@ -118,7 +118,15 @@ let x = `
 let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!!\n";
 ```
 
-To actually put a back-tick (`` ` ``) character inside a multi-line literal string requires post-processing.
+To actually put a back-tick (`` ` ``) character inside a multi-line literal string, use two
+back-ticks together (i.e. ``` `` ```):
+
+```js
+let x = `I have a quote " as well as a back-tick `` here.`;
+
+// The above is the same as:
+let x = "I have a quote \" as well as a back-tick ` here.";
+```
 
 
 String Interpolation
