@@ -16,6 +16,11 @@ The final, optimized [`AST`] is then used for evaluations.
 // Compile master script to AST
 let master_ast = engine.compile(
 "
+    fn do_work() {
+        // Constants in scope are also propagated into functions
+        print(SCENARIO);
+    }
+
     switch SCENARIO {
         1 => do_work(),
         2 => do_something(),
@@ -25,7 +30,7 @@ let master_ast = engine.compile(
 ")?;
 
 for n in 0..5_i64 {
-    // Create a new 'Scope' - put constants in it to aid optimization
+    // Create a new scope - put constants in it to aid optimization
     let mut scope = Scope::new();
     scope.push_constant("SCENARIO", n);
 
@@ -36,3 +41,7 @@ for n in 0..5_i64 {
     engine.run_ast(&new_ast)?;
 }
 ```
+
+Beware that [constants] inside the custom [`Scope`] will also be propagated to [functions] defined
+within the script while normally such [functions] are _pure_ and cannot see [variables]/[constants]
+within the global [`Scope`].

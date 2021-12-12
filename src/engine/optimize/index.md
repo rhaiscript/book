@@ -73,8 +73,102 @@ print("done!");                             // <- the line above is further simp
 These are quite effective for template-based machine-generated scripts where certain [constant] values
 are spliced into the script text in order to turn on/off certain sections.
 
-For fixed script texts, the [constant] values can be provided in a user-defined [`Scope`] object
-to the [`Engine`] for use in compilation and evaluation.
+For fixed script texts, the [constant] values can also be provided in a custom [`Scope`] object to
+the [`Engine`] for use in compilation and evaluation.
+
+```rust no_run
+use rhai::{Engine, Scope};
+
+let engine = Engine::new();
+
+let mut scope = Scope::new();
+
+// Add constant to custom scope
+scope.push_constant("ABC", true);
+
+// Evaluate script with custom scope
+engine.run_with_scope(&mut scope,
+"
+    if ABC {    // 'ABC' is replaced by 'true'
+        print("done!");
+    }
+")?;
+```
+
+### Caveat &ndash; constants in custom scope are also propagated into functions
+
+[Constants] defined at _global_ level typically cannot be seen by script [functions] because they are _pure_.
+
+```rust no_run
+const MY_CONSTANT = 42;     // <- constant defined at global level
+
+print(MY_CONSTANT);         // <- optimized to: print(42)
+
+fn foo() {
+    MY_CONSTANT             // <- not optimized: 'foo' cannot see 'MY_CONSTANT'
+}
+
+print(foo());               // error: 'MY_CONSTANT' not found
+```
+
+When [constants] are provided in a custom [`Scope`] (e.g. via `Engine::compile_with_scope`,
+`Engine::eval_with_scope` or `Engine::run_with_scope`) instead of defined within the same script,
+they are also propagated to [functions].
+
+This is usually the intuitive usage and behavior expected by regular users, even though it means
+that a script will behave differently (essentially a runtime error) when [script optimization] is disabled.
+
+```rust no_run
+use rhai::{Engine, Scope};
+
+let engine = Engine::new();
+
+let mut scope = Scope::new();
+
+// Add constant to custom scope
+scope.push_constant("MY_CONSTANT", 42_i64);
+
+engine.run_with_scope(&mut scope,
+"
+    print(MY_CONSTANT);     // optimized to: print(42)
+
+    fn foo() {
+        MY_CONSTANT         // optimized to: fn foo() { 42 }
+    }
+
+    print(foo());           // prints 42
+")?;
+```
+
+The script will act differently when [script optimization] is disabled because script [functions]
+are _pure_ and typically cannot see [constants] within the custom [`Scope`].
+
+Therefore, constants in [functions] now throw a runtime error.
+
+```rust no_run
+use rhai::{Engine, Scope, OptimizationLevel};
+
+let mut engine = Engine::new();
+
+// Turn off script optimization, no constants propagation is performed
+engine.set_optimization_level(OptimizationLevel::None);
+
+let mut scope = Scope::new();
+
+// Add constant to custom scope
+scope.push_constant("MY_CONSTANT", 42_i64);
+
+engine.run_with_scope(&mut scope,
+"
+    print(MY_CONSTANT);     // prints 42
+
+    fn foo() {
+        MY_CONSTANT         // <- 'foo' cannot see 'MY_CONSTANT'
+    }
+
+    print(foo());           // error: 'MY_CONSTANT' not found
+")?;
+```
 
 ### Caveat &ndash; beware large constants
 
