@@ -64,7 +64,8 @@ Symbols and Patterns
 | `<` .. `>`                         |                tag                 | _reserved_                            |
 | `++`                               |             increment              | _reserved_                            |
 | `--`                               |             decrement              | _reserved_                            |
-| `..`                               |             range/rest             | _reserved_                            |
+| `..`                               |               range                | _reserved_                            |
+| `..=`                              |               range                | _reserved_                            |
 | `...`                              |                rest                | _reserved_                            |
 | `~`                                |               tilde                | _reserved_                            |
 | `#`                                |                hash                | _reserved_                            |
