@@ -69,17 +69,17 @@ The `switch` expression can match against any _literal_, including [array] and [
 ```js
 // Match on arrays
 switch [foo, bar, baz] {
-    ["hello", 42, true] => { ... }
-    ["hello", 123, false] => { ... }
-    ["world", 1, true] => { ... }
-    _ => { ... }
+    ["hello", 42, true] => ...,
+    ["hello", 123, false] => ...,
+    ["world", 1, true] => ...,
+    _ => ...
 }
 
 // Match on object maps
 switch map {
-    #{ a: 1, b: 2, c: true } => { ... }
-    #{ a: 42, d: "hello" } => { ... }
-    _ => { ... }
+    #{ a: 1, b: 2, c: true } => ...,
+    #{ a: 42, d: "hello" } => ...,
+    _ => ...
 }
 ```
 
@@ -108,6 +108,38 @@ let result = switch calc_secret_value(x) {
 
     _ if CONDITION => 8888  // <- syntax error: default case cannot have condition
 };
+```
+
+
+Range Cases
+-----------
+
+Because of their popularity, literal integer [ranges] can also be used as `switch` cases,
+but they must come _after_ all integer cases.
+
+Numeric [ranges] are only searched when the `switch` value is itself an integer (i.e. they never
+match any other data types).
+
+[Range] cases can _overlap_. When more then one [range] contain the `switch` value, the _first_ one
+with a fulfilled condition (if any) is evaluated.  In other words, numeric [range] cases are tried
+in the order that they appear in the original script.
+
+```js
+let x = 42;
+
+switch x {
+    'x' => ...,             // no match: wrong data type
+
+    1 => ...,
+    2 => ...,
+
+    0..50 if x > 45 => ..., // no match: condition is 'false'
+    -10..20 => ...,         // no match: not in range
+    0..50 => ...,           // <- MATCH!!! duplicated range cases are OK
+    30..100 => ...,         // no match: the previous case matches first
+
+    42 => ...,              // <- syntax error: integer cases cannot follow range cases
+}
 ```
 
 

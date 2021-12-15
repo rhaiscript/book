@@ -78,7 +78,7 @@ fn foo(something) {
     h::hack(something);         // <- this also works as 'h' is visible
 }
 
-for x in range(0, 1000) {
+for x in 0..1000 {
     import "crypto" as c;       // <- importing a module inside a loop is a Very Bad Idea™
 
     c.encrypt(something);

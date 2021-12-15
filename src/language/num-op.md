@@ -22,25 +22,27 @@ number = -5 - +5;
 Binary Operators
 ----------------
 
-| Operator                          | Description                                          | Integer |     Floating-point     | [`Decimal`][rust_decimal] |
-| --------------------------------- | ---------------------------------------------------- | :-----: | :--------------------: | :-----------------------: |
-| `+`, `+=`                         | plus                                                 |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `-` `-=`                          | minus                                                |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `*`, `*=`                         | multiply                                             |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `/`, `/=`                         | divide (integer division if acting on integer types) |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `%`, `%=`                         | modulo (remainder)                                   |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `**`, `**=`                       | power/exponentiation                                 |   yes   | yes, also `FLOAT**INT` |            no             |
-| `&`, `&=`                         | bit-wise _And_                                       |   yes   |           no           |            no             |
-| <code>\|</code>, <code>\|=</code> | bit-wise _Or_                                        |   yes   |           no           |            no             |
-| `^`                               | bit-wise _Xor_                                       |   yes   |           no           |            no             |
-| `<<`, `<<=`                       | left bit-shift                                       |   yes   |           no           |            no             |
-| `>>`, `>>=`                       | right bit-shift                                      |   yes   |           no           |            no             |
-| `==`                              | equals to                                            |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `!=`                              | not equals to                                        |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `>`                               | greater than                                         |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `>=`                              | greater than or equals to                            |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `<`                               | less than                                            |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
-| `<=`                              | less than or equals to                               |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| Operator                          | Description                                          | Return value | Integer |     Floating-point     | [`Decimal`][rust_decimal] |
+| --------------------------------- | ---------------------------------------------------- | :----------: | :-----: | :--------------------: | :-----------------------: |
+| `+`, `+=`                         | plus                                                 |   numeric    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `-` `-=`                          | minus                                                |   numeric    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `*`, `*=`                         | multiply                                             |   numeric    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `/`, `/=`                         | divide (integer division if acting on integer types) |   numeric    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `%`, `%=`                         | modulo (remainder)                                   |   numeric    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `**`, `**=`                       | power/exponentiation                                 |   numeric    |   yes   | yes, also `FLOAT**INT` |            no             |
+| `&`, `&=`                         | bit-wise _And_                                       |   numeric    |   yes   |           no           |            no             |
+| <code>\|</code>, <code>\|=</code> | bit-wise _Or_                                        |   numeric    |   yes   |           no           |            no             |
+| `^`                               | bit-wise _Xor_                                       |   numeric    |   yes   |           no           |            no             |
+| `<<`, `<<=`                       | left bit-shift                                       |   numeric    |   yes   |           no           |            no             |
+| `>>`, `>>=`                       | right bit-shift                                      |   numeric    |   yes   |           no           |            no             |
+| `==`                              | equals to                                            |    `bool`    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `!=`                              | not equals to                                        |    `bool`    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `>`                               | greater than                                         |    `bool`    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `>=`                              | greater than or equals to                            |    `bool`    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `<`                               | less than                                            |    `bool`    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `<=`                              | less than or equals to                               |    `bool`    |   yes   |  yes, also with `INT`  |   yes, also with `INT`    |
+| `..`                              | exclusive range                                      |   [range]    |   yes   |           no           |            no             |
+| `..=`                             | inclusive range                                      |   [range]    |   yes   |           no           |            no             |
 
 Note: when one of the operands to a binary operator is floating-point, it works with `INT` for the
 other operand and the result is floating-point.

@@ -108,6 +108,7 @@ The following _precedence table_ shows the built-in precedence of standard Rhai 
 | Category            |                                        Operators                                         | Precedence (0-255) |
 | ------------------- | :--------------------------------------------------------------------------------------: | :----------------: |
 | Assignments         | `=`, `+=`, `-=`, `*=`, `/=`, `**=`, `%=`,<br/>`<<=`, `>>=`, `&=`, <code>\|=</code>, `^=` |         0          |
+| Ranges              |                                       `..`, `..=`                                        |         10         |
 | Logic and bit masks |                         <code>\|\|</code>,  <code>\|</code>, `^`                         |         30         |
 | Logic and bit masks |                                        `&&`, `&`                                         |         60         |
 | Comparisons         |                                        `==`, `!=`                                        |         90         |

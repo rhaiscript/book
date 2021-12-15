@@ -29,5 +29,5 @@ engine.compile(r#"loop { print("hello world!"); }"#)?;
 
 engine.compile("do { x += 1; } until x > 10;")?;
 
-engine.compile("for n in range(0, 10) { print(n); }")?;
+engine.compile("for n in 0..10 { print(n); }")?;
 ```

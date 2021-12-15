@@ -37,7 +37,6 @@ for (item, count) in a {
 }
 ```
 
-
 Break or Continue
 -----------------
 
@@ -63,7 +62,6 @@ for x in a {
 }
 ```
 
-
 Iterate Through Strings
 -----------------------
 
@@ -71,6 +69,8 @@ The `chars` method allows iterating through a [string], yielding characters.
 
 `chars` optionally accepts the character to start from (counting from the end if negative), as well
 as the number of characters to iterate (defaults all).
+
+`char` also accepts a [range] which can be created via the `..` (exclusive) and `..=` (inclusive) operators.
 
 ```rust no_run
 let s = "hello, world!";
@@ -88,18 +88,37 @@ for ch in s.chars(2, 5) {
 
     if x == '@' { break; }          // break out of for loop
 }
+
+// Iterate starting from the 3rd character and stopping at the end.
+for ch in s.chars(2..s.len) {
+    if ch > 'z' { continue; }       // skip to the next iteration
+
+    print(ch);
+
+    if x == '@' { break; }          // break out of for loop
+}
 ```
 
 
 Iterate Through Numeric Ranges
 -----------------------------
 
-The `range` function allows iterating through a range of numbers
-(not including the last number).
+[Ranges] are created via the `..` (exclusive) and `..=` (inclusive) operators.
+
+The `range` function similarly creates exclusive [ranges], plus allowing optional step values.
 
 ```rust no_run
 // Iterate starting from 0 and stopping at 49
 // The step is assumed to be 1 when omitted for integers
+for x in 0..50 {
+    if x > 10 { continue; }         // skip to the next iteration
+
+    print(x);
+
+    if x == 42 { break; }           // break out of for loop
+}
+
+// The 'range' function is just the same
 for x in range(0, 50) {
     if x > 10 { continue; }         // skip to the next iteration
 
@@ -136,7 +155,6 @@ for x in range(5.0,0.0,-2.0) {      // step down by -2.0
 }
 ```
 
-
 Iterate Through Bit-Fields
 --------------------------
 
@@ -145,6 +163,7 @@ The `bits` function allows iterating through an integer as a [bit-field].
 `bits` optionally accepts the bit number to start from (counting from the most-significant-bit if
 negative), as well as the number of bits to iterate (defaults all).
 
+`bits` also accepts a [range] which can be created via the `..` (exclusive) and `..=` (inclusive) operators.
 
 ```js , no_run
 let x = 0b_1001110010_1101100010_1100010100;
@@ -165,8 +184,14 @@ for (bit, index) in x.bits(START, 10) {
 
     if index >= 7 { break; }        // break out of for loop
 }
-```
 
+// Iterate through all the bits from 3 through 12
+for (bit, index) in x.bits(3..=12) {
+    print(`Bit #${index} is ${if bit { "ON" } else { "OFF" }}!`);
+
+    if index >= 7 { break; }        // break out of for loop
+}
+```
 
 Iterate Through Object Maps
 --------------------------

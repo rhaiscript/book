@@ -103,6 +103,9 @@
 [bit-field]: {{rootUrl}}/language/bit-fields.md
 [bit-fields]: {{rootUrl}}/language/bit-fields.md
 
+[range]: {{rootUrl}}/language/ranges.md
+[ranges]: {{rootUrl}}/language/ranges.md
+
 [array]: {{rootUrl}}/language/arrays.md
 [arrays]: {{rootUrl}}/language/arrays.md
 [`Array`]: {{rootUrl}}/language/arrays.md

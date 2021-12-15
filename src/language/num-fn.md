@@ -10,10 +10,10 @@ Integer Functions
 The following standard functions (defined in the [`ArithmeticPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on integers only:
 
-| Function  | Description                                                      |
-| --------- | ---------------------------------------------------------------- |
-| `is_odd`  | returns `true` if the value is an odd number, otherwise `false`  |
-| `is_even` | returns `true` if the value is an even number, otherwise `false` |
+| Function                      | Description                                                      |
+| ----------------------------- | ---------------------------------------------------------------- |
+| `is_odd` method and property  | returns `true` if the value is an odd number, otherwise `false`  |
+| `is_even` method and property | returns `true` if the value is an even number, otherwise `false` |
 
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on integers only:
@@ -31,11 +31,11 @@ The following standard functions (defined in the [`ArithmeticPackage`][packages]
 using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
 [`decimal`]) only:
 
-| Function  | Description                                                          |
-| --------- | -------------------------------------------------------------------- |
-| `abs`     | absolute value                                                       |
-| `sign`    | returns (`INT`) &minus;1 if negative, &plus;1 if positive, 0 if zero |
-| `is_zero` | returns `true` if the value is zero, otherwise `false`               |
+| Function                      | Description                                                          |
+| ----------------------------- | -------------------------------------------------------------------- |
+| `abs`                         | absolute value                                                       |
+| `sign`                        | returns (`INT`) &minus;1 if negative, &plus;1 if positive, 0 if zero |
+| `is_zero` method and property | returns `true` if the value is zero, otherwise `false`               |
 
 
 Floating-Point Functions

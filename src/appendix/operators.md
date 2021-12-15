@@ -32,6 +32,8 @@ Operators
 |                                             `!`                                              | boolean _NOT_                          |     no     |       right       |
 |                                          `[` .. `]`                                          | indexing                               |    yes     |       left        |
 |                                             `.`                                              | 1) property access<br/>2) method call  |    yes     |       left        |
+|                                             `..`                                             | exclusive range                        |    yes     |       left        |
+|                                            `..=`                                             | inclusive range                        |    yes     |       left        |
 
 
 Symbols and Patterns
@@ -64,8 +66,6 @@ Symbols and Patterns
 | `<` .. `>`                         |                tag                 | _reserved_                            |
 | `++`                               |             increment              | _reserved_                            |
 | `--`                               |             decrement              | _reserved_                            |
-| `..`                               |               range                | _reserved_                            |
-| `..=`                              |               range                | _reserved_                            |
 | `...`                              |                rest                | _reserved_                            |
 | `~`                                |               tilde                | _reserved_                            |
 | `#`                                |                hash                | _reserved_                            |

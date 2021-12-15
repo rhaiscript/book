@@ -69,7 +69,7 @@ ever only _one_ captured variable, and all ten closures capture the _same_ varia
 ```rust no_run
 let funcs = [];
 
-for i in range(0, 10) {
+for i in 0..10 {
     funcs.push(|| print(i));        // the for loop variable 'i' is captured
 }
 

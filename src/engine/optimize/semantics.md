@@ -39,5 +39,26 @@ the script should have been terminated due to a type error.
 However, after optimization, the entire `if` statement is removed (because an access to `my_decision` produces
 no side-effects), thus the script silently runs to completion without errors.
 
+Another example is more subtle &ndash; that of an empty loop body.
+
+```rust no_run
+// ... say, the 'Engine' is limited to no more than 10,000 operations...
+
+// The following should fail because it exceeds the operations limit:
+for n in 0..42000 {
+    // empty loop
+}
+
+// The above is optimized away because the loop body is empty
+// and the iterations simply do nothing.
+()
+```
+
+Normally, and empty loop body inside a [`for`]({{rootUrl}}/language/for.md) statement with a pure
+iterator does nothing and can be safely eliminated.  However, without optimization, the script may
+fail by exceeding the [maximum number of operations] allow.
+
+Thus the script now runs silently to completion without errors.
+
 It is usually a _Very Bad Idea™_ to depend on a script failing or such kind of subtleties, but if it turns out to be necessary
 (why? I would never guess), turn script optimization off by setting the optimization level to [`OptimizationLevel::None`].

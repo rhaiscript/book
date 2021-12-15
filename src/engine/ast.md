@@ -131,25 +131,25 @@ Return `true` to continue walking the [`AST`], or `false` to terminate.
 
 The order of visits to the children of each node type:
 
-| Node type                                        | Children visit order                                                                   |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------- |
-| `if` statement                                   | condition expression, _then_ statements, _else_ statements (if any)                    |
-| `switch` statement                               | match element, each of the case conditions and statements, default statements (if any) |
-| `while`, `do`, `loop` statement                  | condition expression, statements body                                                  |
-| `for` statement                                  | collection expression, statements body                                                 |
-| `return` statement                               | return value expression                                                                |
-| [`throw`] statement                              | exception value expression                                                             |
-| [`try` ... `catch`][exception] statement         | `try` statements body, `catch` statements body                                         |
-| [`import`] statement                             | path expression                                                                        |
-| [Array] literal                                  | each of the element expressions                                                        |
-| [Object map] literal                             | each of the element expressions                                                        |
-| Interpolated [string]                            | each of the [string]/expression segments                                               |
-| Indexing                                         | LHS, RHS                                                                               |
-| Field access/method call                         | LHS, RHS                                                                               |
-| `&&`, <code>\|\|</code>                          | LHS, RHS                                                                               |
-| [Function] call, operator expression             | each of the argument expressions                                                       |
-| [`let`][variable], [`const`][constant] statement | value expression                                                                       |
-| Assignment statement                             | l-value expression, value expression                                                   |
-| Statements block                                 | each of the statements                                                                 |
-| Custom syntax expression                         | each of the inputs stream                                                              |
-| All others                                       | single child, or none                                                                  |
+| Node type                                        | Children visit order                                                                                                                |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `if` statement                                   | condition expression, _then_ statements, _else_ statements (if any)                                                                 |
+| `switch` statement                               | match element, each of the case conditions and statements, each of the range conditions and statements, default statements (if any) |
+| `while`, `do`, `loop` statement                  | condition expression, statements body                                                                                               |
+| `for` statement                                  | collection expression, statements body                                                                                              |
+| `return` statement                               | return value expression                                                                                                             |
+| [`throw`] statement                              | exception value expression                                                                                                          |
+| [`try` ... `catch`][exception] statement         | `try` statements body, `catch` statements body                                                                                      |
+| [`import`] statement                             | path expression                                                                                                                     |
+| [Array] literal                                  | each of the element expressions                                                                                                     |
+| [Object map] literal                             | each of the element expressions                                                                                                     |
+| Interpolated [string]                            | each of the [string]/expression segments                                                                                            |
+| Indexing                                         | LHS, RHS                                                                                                                            |
+| Field access/method call                         | LHS, RHS                                                                                                                            |
+| `&&`, <code>\|\|</code>                          | LHS, RHS                                                                                                                            |
+| [Function] call, operator expression             | each of the argument expressions                                                                                                    |
+| [`let`][variable], [`const`][constant] statement | value expression                                                                                                                    |
+| Assignment statement                             | l-value expression, value expression                                                                                                |
+| Statements block                                 | each of the statements                                                                                                              |
+| Custom syntax expression                         | each of the inputs stream                                                                                                           |
+| All others                                       | single child, or none                                                                                                               |
