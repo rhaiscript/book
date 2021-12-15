@@ -130,13 +130,17 @@ let x = 42;
 switch x {
     'x' => ...,             // no match: wrong data type
 
-    1 => ...,
-    2 => ...,
+    1 => ...,               // <- specific integer cases are checked first
+    2 => ...,               // <- but these do not match
 
     0..50 if x > 45 => ..., // no match: condition is 'false'
+
     -10..20 => ...,         // no match: not in range
+
     0..50 => ...,           // <- MATCH!!! duplicated range cases are OK
-    30..100 => ...,         // no match: the previous case matches first
+
+    30..100 => ...,         // no match: even though it is within range,
+                            // the previous case matches first
 
     42 => ...,              // <- syntax error: integer cases cannot follow range cases
 }

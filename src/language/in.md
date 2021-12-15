@@ -8,6 +8,7 @@ data type _contains_ a particular item.
 
 Standard data types with built-in support for the `in` operator are:
 
+* Numeric [ranges] (check for integer number)
 * [Arrays] (check for items)
 * [Object maps] (check for property name)
 * [Strings] (check for sub-strings or [characters])
@@ -24,6 +25,8 @@ Standard data types with built-in support for the `in` operator are:
 'w' in "hello, world!" == true;     // check string for character
 
 "wor" in "hello, world" == true;    // check string for sub-string
+
+42 in -100..100 == true;            // check range for number
 ```
 
 
