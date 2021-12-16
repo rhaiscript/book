@@ -33,8 +33,7 @@ Where This Might Be Useful
 * Where you just want to confuse your user and make their lives miserable, because you can.
 
 
-Step One &ndash; Design The Syntax
----------------------------------
+### Step One &ndash; Design The Syntax
 
 A custom syntax is simply a list of symbols.
 
@@ -53,7 +52,7 @@ These symbol types can be used:
 * `$float$` &ndash; a floating-point number (if not [`no_float`]).
 * `$string$` &ndash; a [string] literal.
 
-### The First Symbol Must be an Identifier
+#### The first symbol must be an identifier
 
 There is no specific limit on the combination and sequencing of each symbol type,
 except the _first_ symbol which must be a custom keyword that follows the naming rules
@@ -62,7 +61,7 @@ of [variables].
 The first symbol also cannot be a normal [keyword] unless it is [disabled][disable keywords and operators].
 Any valid identifier that is not an active [keyword] works fine, even if it is a reserved [keyword].
 
-### The First Symbol Must be Unique
+#### The first symbol must be unique
 
 Rhai uses the _first_ symbol as a clue to parse custom syntax.
 
@@ -70,7 +69,7 @@ Therefore, at any one time, there can only be _one_ custom syntax starting with 
 
 Any new custom syntax definition using the same first symbol simply _overwrites_ the previous one.
 
-### Example
+#### Example
 
 ```rust no_run
 exec [ $ident$ $symbol$ $int$ ] <- $expr$ : $block$
@@ -106,12 +105,11 @@ print(hello);   // variable declared by a custom syntax persists!
 ```
 
 
-Step Two &ndash; Implementation
-------------------------------
+### Step Two &ndash; Implementation
 
 Any custom syntax must include an _implementation_ of it.
 
-### Function Signature
+#### Function signature
 
 The function signature of an implementation is:
 
@@ -134,38 +132,40 @@ where:
 | &nbsp;&nbsp;`.call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                                                     |
 | `inputs`                         |             `&[Expression]`             | a list of input expression trees                                                                                                                |
 
-### Return Value
+#### Return value
 
 Return value is the result of evaluating the custom syntax expression.
 
-### Access Arguments
+#### Access arguments
 
 The most important argument is `inputs` where the matched identifiers (`$ident$`), expressions/statements (`$expr$`)
 and statement blocks (`$block$`) are provided.
 
 To access a particular argument, use the following patterns:
 
-| Argument type | Pattern (`n` = slot in `inputs`)                            |     Result type     | Description           |
-| :-----------: | ----------------------------------------------------------- | :-----------------: | --------------------- |
-|   `$ident$`   | `inputs[n].get_variable_name().unwrap()`                    |       `&str`        | variable name         |
-|  `$symbol$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()` | [`ImmutableString`] | symbol literal        |
-|   `$expr$`    | `&inputs[n]`                                                |    `&Expression`    | an expression tree    |
-|   `$block$`   | `&inputs[n]`                                                |    `&Expression`    | an expression tree    |
-|   `$bool$`    | `inputs[n].get_literal_value::<bool>().unwrap()`            |       `bool`        | boolean value         |
-|    `$int$`    | `inputs[n].get_literal_value::<INT>().unwrap()`             |        `INT`        | integer number        |
-|   `$float$`   | `inputs[n].get_literal_value::<FLOAT>().unwrap()`           |       `FLOAT`       | floating-point number |
-|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()` | [`ImmutableString`] | [string] text         |
+| Argument type | Pattern (`n` = slot in `inputs`)                                                                             |             Result type             | Description           |
+| :-----------: | ------------------------------------------------------------------------------------------------------------ | :---------------------------------: | --------------------- |
+|   `$ident$`   | `inputs[n].get_string_value().unwrap()`                                                                      |               `&str`                | variable name         |
+|  `$symbol$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`                                                  |         [`ImmutableString`]         | symbol literal        |
+|   `$expr$`    | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree    |
+|   `$block$`   | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree    |
+|   `$bool$`    | `inputs[n].get_literal_value::<bool>().unwrap()`                                                             |               `bool`                | boolean value         |
+|    `$int$`    | `inputs[n].get_literal_value::<INT>().unwrap()`                                                              |                `INT`                | integer number        |
+|   `$float$`   | `inputs[n].get_literal_value::<FLOAT>().unwrap()`                                                            |               `FLOAT`               | floating-point number |
+|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`<br/><br/>`inputs[n].get_string_value().unwrap()` | [`ImmutableString`]<br/><br/>`&str` | [string] text         |
 
-### Get literal constants
+#### Get literal constants
 
 Several argument types represent literal constants that can be obtained directly via
-`Expression::get_literal_value<T>`.
+`Expression::get_literal_value<T>` or `Expression::get_string_value` (for [strings]).
 
 ```rust no_run
 let expression = &inputs[0];
 
 // Use 'get_literal_value' with a turbo-fish type to extract the value
 let string_value = expression.get_literal_value::<ImmutableString>().unwrap();
+let string_slice = expression.get_string_value().unwrap();
+
 let float_value = expression.get_literal_value::<FLOAT>().unwrap();
 
 // Or assign directly to a variable with type...
@@ -177,7 +177,7 @@ let bool_value = expression.get_literal_value().unwrap();
 if bool_value { ... }       // 'bool_value' inferred to be 'bool'
 ```
 
-### Evaluate an Expression Tree
+#### Evaluate an expression tree
 
 Use the `EvalContext::eval_expression_tree` method to evaluate an arbitrary expression tree
 within the current evaluation context.
@@ -187,9 +187,9 @@ let expression = &inputs[0];
 let result = context.eval_expression_tree(expression)?;
 ```
 
-### Declare Variables
+#### Declare variables
 
-New variables maybe declared (usually with a variable name that is passed in via `$ident$).
+New variables maybe declared (usually with a variable name that is passed in via `$ident$`).
 
 It can simply be pushed into the [`Scope`].
 
@@ -198,7 +198,7 @@ In other words, any [`Scope`] calls that change the list of must come _before_ a
 `EvalContext::eval_expression_tree` calls.
 
 ```rust no_run
-let var_name = inputs[0].get_variable_name().unwrap();
+let var_name = inputs[0].get_string_value().unwrap();
 let expression = &inputs[1];
 
 context.scope_mut().push(var_name, 0_i64);      // do this BEFORE 'context.eval_expression_tree'!
@@ -207,8 +207,7 @@ let result = context.eval_expression_tree(expression)?;
 ```
 
 
-Step Three &ndash; Register the Custom Syntax
---------------------------------------------
+### Step Three &ndash; Register the Custom Syntax
 
 Use `Engine::register_custom_syntax` to register a custom syntax.
 
@@ -220,12 +219,12 @@ The syntax is passed simply as a slice of `&str`.
 ```rust no_run
 // Custom syntax implementation
 fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Result<Dynamic, Box<EvalAltResult>> {
-    let var_name = inputs[0].get_variable_name().unwrap().to_string();
+    let var_name = inputs[0].get_string_value().unwrap();
     let stmt = &inputs[1];
     let condition = &inputs[2];
 
     // Push new variable into the scope BEFORE 'context.eval_expression_tree'
-    context.scope_mut().push(var_name.clone(), 0_i64);
+    context.scope_mut().push(var_name.to_string(), 0_i64);
 
     let mut count = 0_i64;
 
@@ -286,8 +285,7 @@ exec<x> -> { x += 1 } while x < 0;
 ```
 
 
-Step Four &ndash; Disable Unneeded Statement Types
--------------------------------------------------
+### Step Four &ndash; Disable Unneeded Statement Types
 
 When a DSL needs a custom syntax, most likely than not it is extremely specialized.
 Therefore, many statement types actually may not make sense under the same usage scenario.
@@ -304,20 +302,18 @@ custom syntax (plus possibly expressions).  But again, Don't Do It™ &ndash; un
 of what you're doing.
 
 
-Step Five &ndash; Document
--------------------------
+### Step Five &ndash; Document
 
 For custom syntax, documentation is crucial.
 
 Make sure there are _lots_ of examples for users to follow.
 
 
-Step Six &ndash; Profit!
-------------------------
+### Step Six &ndash; Profit!
 
 
 Practical Example &ndash; Recreating JavaScript's `var` Statement
-===============================================================
+---------------------------------------------------------------
 
 The following example recreates a statement similar to the `var` variable declaration syntax in
 JavaScript, which creates a global variable if one doesn't already exist.
@@ -326,7 +322,7 @@ There is currently no equivalent in Rhai.
 ```rust no_run
 // Register the custom syntax: var x = ???
 engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |context, inputs| {
-    let var_name = inputs[0].get_variable_name().unwrap().to_string();
+    let var_name = inputs[0].get_string_value().unwrap().to_string();
     let expr = &inputs[1];
 
     // Evaluate the expression
@@ -334,8 +330,8 @@ engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |conte
 
     // Push a new variable into the scope if it doesn't already exist.
     // Otherwise just set its value.
-    if !context.scope().is_constant(&var_name).unwrap_or(false) {
-        context.scope_mut().set_value(var_name, value);
+    if !context.scope().is_constant(var_name).unwrap_or(false) {
+        context.scope_mut().set_value(var_name.to_string(), value);
         Ok(Dynamic::UNIT)
     } else {
         Err(format!("variable {} is constant", var_name).into())
@@ -345,11 +341,10 @@ engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |conte
 
 
 Really Advanced &ndash; Custom Parsers
-=====================================
+-------------------------------------
 
-Sometimes it is desirable to have multiple custom syntax starting with the
-same symbol.  This is especially common for _command-style_ syntax where the
-second symbol calls a particular command:
+Sometimes it is desirable to have multiple custom syntax starting with the same symbol.
+This is especially common for _command-style_ syntax where the second symbol calls a particular command:
 
 ```rust no_run
 // The following simulates a command-style syntax, all starting with 'perform'.
@@ -379,11 +374,37 @@ together with the implementation function.
 How Custom Parsers Work
 -----------------------
 
+### Leading symbol
+
+The leading symbol for a custom parser can either be:
+
+* a identifier that isn't a normal [keyword] unless [disabled][disable keywords and operators], or
+
+* a valid symbol (see [list]({{rootUrl}}/appendix/operators.md)) which is not a normal operator unless [disabled][disable keywords and operators].
+
+Under this API, it is no longer restricted to be valid identifiers.
+
+### Function Signature
+
+The custom syntax parser has the following signature:
+
+> `Fn(symbols: &[ImmutableString], look_ahead: &str) -> Result<Option<ImmutableString>, ParseError>`
+
+where:
+
+| Parameter    |         Type         | Description                                                                                                                                                         |
+| ------------ | :------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `symbols`    | `&[ImmutableString]` | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
+| `look_ahead` |        `&str`        | a string slice containing the next symbol that is about to be read                                                                                                  |
+
+Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
+(if any matches, or keep an internal cache for commonly-used symbols) as the return value.
+
 ### Parameters
 
 A custom parser takes as input parameters two pieces of information:
 
-* The symbols (as [strings]) parsed so far:
+* The symbols (as [`ImmutableString`]s) parsed so far:
   
   | Argument type | Value             |
   | :-----------: | ----------------- |
@@ -411,7 +432,15 @@ A custom parser takes as input parameters two pieces of information:
   If the look-ahead is unexpected, the custom parser should then return the symbol expected
   and Rhai will fail with a parse error containing information about the expected symbol.
 
-### Return Value
+### Return value
+
+The return value is `Result<Option<ImmutableString>, ParseError>` where:
+
+| Value              | Description                                                                                                                                                                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Ok(None)`         | parsing complete and there are no more symbols to match                                                                                                                                                                             |
+| `Ok(Some(symbol))` | the next symbol to match, which can also be `$expr$`, `$ident$` or `$block$`                                                                                                                                                        |
+| `Err(ParseError)`  | error that is reflected back to the [`Engine`] &ndash; normally `ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)` to indicate that there is a syntax error, but it can be any `ParseError`. |
 
 A custom parser always returns `Some` with the _next_ symbol expected (which can be `$ident$`,
 `$expr$`, `$block$` etc.) or `None` if parsing should terminate (_without_ reading the
@@ -423,11 +452,11 @@ This is typically used to inform the implementation function which custom syntax
 actually parsed.
 
 
-Example
--------
+### Example
 
 ```rust no_run
 engine.register_custom_syntax_raw(
+    // The leading symbol - which needs not be an identifier.
     "perform",
     // The custom parser implementation - always returns the next symbol expected
     // 'look_ahead' is the next symbol about to be read
@@ -474,30 +503,3 @@ engine.register_custom_syntax_raw(
     implementation_func
 );
 ```
-
-Function Signature
-------------------
-
-The custom syntax parser has the following signature:
-
-> `Fn(symbols: &[ImmutableString], look_ahead: &str) -> Result<Option<ImmutableString>, ParseError>`
-
-where:
-
-| Parameter    |         Type         | Description                                                                                                                                                         |
-| ------------ | :------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `symbols`    | `&[ImmutableString]` | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
-| `look_ahead` |        `&str`        | a string slice containing the next symbol that is about to be read                                                                                                  |
-
-Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
-(if any matches, or keep an internal cache for commonly-used symbols) as the return value.
-
-### Return Value
-
-The return value is `Result<Option<ImmutableString>, ParseError>` where:
-
-| Value              | Description                                                                                                                                                                                                                         |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Ok(None)`         | parsing complete and there are no more symbols to match                                                                                                                                                                             |
-| `Ok(Some(symbol))` | the next symbol to match, which can also be `$expr$`, `$ident$` or `$block$`                                                                                                                                                        |
-| `Err(ParseError)`  | error that is reflected back to the [`Engine`] &ndash; normally `ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)` to indicate that there is a syntax error, but it can be any `ParseError`. |
