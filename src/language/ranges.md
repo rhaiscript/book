@@ -40,11 +40,10 @@ Built-in Functions
 The following methods (mostly defined in the [`BasicIteratorPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on ranges:
 
-| Function                           |   Parameters    | Description                                    |
-| ---------------------------------- | :-------------: | ---------------------------------------------- |
-| `start` method and property        |                 | beginning of the range                         |
-| `end` method and property          |                 | end of the range                               |
-| `contains`                         | number to check | does this range contain the specified number?  |
-| `is_empty` method and property     |                 | is the range empty (i.e. contains no numbers)? |
-| `is_inclusive` method and property |                 | is the range inclusive?                        |
-| `is_exclusive` method and property |                 | is the range exclusive?                        |
+| Function                           |   Parameters    | Description                                   |
+| ---------------------------------- | :-------------: | --------------------------------------------- |
+| `start` method and property        |                 | beginning of the range                        |
+| `end` method and property          |                 | end of the range                              |
+| `contains`                         | number to check | does this range contain the specified number? |
+| `is_inclusive` method and property |                 | is the range inclusive?                       |
+| `is_exclusive` method and property |                 | is the range exclusive?                       |
