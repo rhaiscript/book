@@ -55,7 +55,7 @@ template-based machine-generated scripts, especially where [constants] are invol
 Constants Propagation
 --------------------
 
-[Constants] propagation is used to remove dead code:
+[Constants] propagation is used to remove dead code.
 
 ```rust no_run
 const ABC = true;
@@ -260,14 +260,14 @@ Eager Operator Evaluation
 Beware, however, that most operators are actually function calls, and those functions can be overridden,
 so whether they are optimized away depends on the situation:
 
-* If the operands are not [constant] values, it is not optimized.
+* if the operands are not [constant] values, it is not optimized;
 
-* If the operator is [overloaded][operator overloading], it is not optimized because the overloading
-  function may not be _pure_ (i.e. may cause side-effects when called).
+* if the operator is [overloaded][operator overloading], it is not optimized because the overloading
+  function may not be _pure_ (i.e. may cause side-effects when called);
 
-* If the operator is not _built-in_ (see list of [built-in operators]), it is not optimized.
+* if the operator is not _built-in_ (see list of [built-in operators]), it is not optimized;
 
-* If the operator is a [built-in operator] for a [standard type][standard types],
+* if the operator is a [built-in operator] for a [standard type][standard types],
   it is called and replaced by a [constant] result.
 
 Rhai guarantees that no external function will be run (in order not to trigger side-effects) during the
@@ -308,7 +308,7 @@ let y = (1 > 2) || (3 <= 4);    // will be replaced by 'let y = true'
 ```
 
 For operators that are not optimized away due to one of the above reasons, the function calls
-are simply left behind:
+are simply left behind.
 
 ```rust no_run
 // Assume 'new_state' returns some custom type that is NOT one of the standard types.

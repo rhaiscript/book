@@ -182,7 +182,7 @@ registered Rust function. This type is normally provided by the [`Engine`] when 
 registered with the first parameter type being [`NativeCallContext`].
 
 ```rust no_run
-use rhai::{Engine, Module, Dynamic, FnPtr, NativeCallContext};
+use rhai::{Engine, FnPtr, NativeCallContext};
 
 let mut engine = Engine::new();
 

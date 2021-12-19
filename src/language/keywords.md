@@ -3,7 +3,7 @@ Keywords
 
 {{#include ../links.md}}
 
-The following are reserved keywords in Rhai:
+The following are reserved keywords in Rhai.
 
 | Active keywords                                                  | Reserved keywords                                          | Usage                    | Inactive under feature |
 | ---------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------ | :--------------------: |

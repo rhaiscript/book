@@ -59,7 +59,7 @@ Built-in Functions
 -----------------
 
 The following methods (defined in the [`BasicMapPackage`][packages] but excluded if using a [raw `Engine`])
-operate on object maps:
+operate on object maps.
 
 | Function               | Parameter(s)                                 | Description                                                                                                                              |
 | ---------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |

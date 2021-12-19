@@ -19,7 +19,7 @@ The maximum allowed length of a string can be controlled via [`Engine::set_max_s
 String and Character Literals
 ----------------------------
 
-String and character literals follow JavaScript-style syntax:
+String and character literals follow JavaScript-style syntax.
 
 | Type                      |   Quotes    | Escapes? | Continuation?  | Interpolation? |
 | ------------------------- | :---------: | :------: | :------------: | :------------: |

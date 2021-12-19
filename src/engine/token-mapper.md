@@ -21,9 +21,9 @@ The function signature passed to `Engine::on_parse_token` takes the following fo
 
 > `Fn(token: Token, pos: Position, state: &TokenizeState) -> Token`
 
-where `pos` is the location of the token and
-[`state`][`TokenizeState`](https://docs.rs/rhai/{{version}}/rhai/struct.TokenizeState.html)
-holds the current state of the tokenizer.
+where `pos` is the location of the [token][`Token`] and
+[`state`](https://docs.rs/rhai/{{version}}/rhai/struct.TokenizeState.html) holds the current state
+of the tokenizer.
 
 ### Raising errors
 

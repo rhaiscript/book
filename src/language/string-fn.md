@@ -8,7 +8,7 @@ Standard Functions
 ------------------
 
 The following standard methods (mostly defined in the [`MoreStringPackage`][packages] but excluded if
-using a [raw `Engine`]) operate on [strings] (and possibly characters):
+using a [raw `Engine`]) operate on [strings] (and possibly characters).
 
 | Function                    | Not available under | Parameter(s)                                                                                                                 | Description                                                                                                                                                  |
 | --------------------------- | :-----------------: | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

@@ -7,23 +7,25 @@
 If the _first_ parameter of a function is of type `rhai::NativeCallContext`, then it is treated
 specially by the [`Engine`].
 
-`NativeCallContext` is a type that encapsulates the current _native call context_ and exposes the following:
+`NativeCallContext` is a type that encapsulates the current _call context_ of a Rust function call
+and exposes the following.
 
-| Method              |                  Type                   | Description                                                                                                                                                                                                                                |
+| Method              |               Return type               | Description                                                                                                                                                                                                                                |
 | ------------------- | :-------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `engine()`          |                `&Engine`                | the current [`Engine`], with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using [`Engine::call_fn`][`call_fn`], or calling a [function pointer]. |
 | `fn_name()`         |                 `&str`                  | name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)                                                                                                                        |
 | `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                                                                                                                    |
+| `position()`        |               `Position`                | position of the function call                                                                                                                                                                                                              |
 | `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                                                                                                                |
 | `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                                                                                                           |
 | `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                                                                                                                 |
 | `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature                                                                                            |
+| `call_fn()`         |     `Result<T, Box<EvalAltResult>>`     | call a function with the supplied arguments, casting the result into the required type                                                                                                                                                     |
 | `call_fn_raw()`     |  `Result<Dynamic, Box<EvalAltResult>>`  | call a function with the supplied arguments; this is an advanced method                                                                                                                                                                    |
-| `position()`        |               `Position`                | position of the function call                                                                                                                                                                                                              |
 
 
-Implement Safety Checks with `NativeCallContext`
------------------------------------------------
+Implement Safety Checks
+-----------------------
 
 The native call context is useful for protecting a function from malicious scripts.
 
@@ -58,18 +60,41 @@ pub fn grow(context: NativeCallContext, size: i64) -> Result<Array, Box<EvalAltR
 ```
 
 
+Call a Function within a Function
+---------------------------------
+
+The _native call context_ can be used to call a [function] within the current evaluation
+via `call_fn`.
+
+```rust no_run
+use rhai::{Engine, NativeCallContext};
+
+let mut engine = Engine::new();
+
+// A function expecting a callback in form of a function pointer.
+fn super_call(context: NativeCallContext, value: i64) -> Result<i64, Box<EvalAltResult>>
+{
+    // Use 'call_fn' to call a function within the current evaluation!
+    context.call_fn("double", (value,))
+    //                        ^^^^^^^^ arguments passed in tuple
+}
+
+engine.register_result_fn("super_call", super_call);
+```
+
+
 Implement a Callback
 --------------------
 
 The _native call context_ can be used to call a [function pointer] or [closure] that has been passed
-as a parameter to the function, thereby implementing a _callback_:
+as a parameter to the function (via `FnPtr::call_with_context`), thereby implementing a _callback_.
 
 ```rust no_run
 use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
 pub fn greet(context: NativeCallContext, callback: FnPtr) -> Result<String, Box<EvalAltResult>>
 {
-    // Call the callback closure with the current context to obtain the name to greet!
+    // Call the callback closure with the current evaluation context!
     let name = callback.call_within_context(&context, ())?;
     Ok(format!("hello, {}!", name))
 }

@@ -22,9 +22,9 @@ if foo(x) {
 Braces Are Mandatory
 --------------------
 
-Unlike C, the condition expression does _not_ need to be enclosed in parentheses `(` .. `)`, but
-all branches of the `if` statement must be enclosed within braces `{` .. `}`,
-even when there is only one statement inside the branch.
+Unlike C, the condition expression does _not_ need to be enclosed in parentheses `(` .. `)`, but all
+branches of the `if` statement must be enclosed within braces `{` .. `}`, even when there is only
+one statement inside the branch.
 
 Like Rust, there is no ambiguity regarding which `if` clause a branch belongs to.
 
@@ -38,8 +38,8 @@ if (decision) print("I've decided!");
 `if`-Expressions
 ---------------
 
-Like Rust, `if` statements can also be used as _expressions_, replacing the `? :` conditional operators
-in other C-like languages.
+Like Rust, `if` statements can also be used as _expressions_, replacing the `? :` conditional
+operators in other C-like languages.
 
 ```rust no_run
 // The following is equivalent to C: int x = 1 + (decision ? 42 : 123) / 2;

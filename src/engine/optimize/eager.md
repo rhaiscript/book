@@ -3,8 +3,9 @@ Eager Function Evaluation When Using Full Optimization Level
 
 {{#include ../../links.md}}
 
-When the optimization level is [`OptimizationLevel::Full`], the [`Engine`] assumes all functions to be _pure_
-and will _eagerly_ evaluated all function calls with constant arguments, using the result to replace the call.
+When the optimization level is [`OptimizationLevel::Full`], the [`Engine`] assumes all functions to
+be _pure_ and will _eagerly_ evaluated all function calls with constant arguments, using the result
+to replace the call.
 
 This also applies to all operators (which are implemented as functions).
 

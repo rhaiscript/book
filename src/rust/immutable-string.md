@@ -18,8 +18,8 @@ Therefore, direct string modifications are expensive.
 Avoid `String` Parameters
 -------------------------
 
-`ImmutableString` should be used in place of `String` for function parameters because using
-`String` is very inefficient (the argument is cloned during every function call).
+`ImmutableString` should be used in place of `String` for function parameters because using `String`
+is very inefficient (the argument is cloned during every function call).
 
 A alternative is to use `&str` which de-sugars to `ImmutableString`.
 

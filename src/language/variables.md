@@ -3,6 +3,7 @@ Variables
 
 {{#include ../links.md}}
 
+
 Valid Names
 -----------
 
@@ -15,7 +16,7 @@ However, unlike Rust, a variable name must also contain at least one ASCII lette
 In other words, the first character that is not an underscore `_` must be an ASCII letter and not a digit.
 
 Therefore, some names acceptable to Rust, like `_`, `_42foo`, `_1` etc., are not valid in Rhai.
-This restriction is to reduce confusion because, for instance, `_1` can easily be misread (or mis-typed) as `-1`.
+This restriction is to reduce confusion because, for instance, `_1` can easily be misread (or mistyped) as `-1`.
 
 Variable names are case _sensitive_.
 

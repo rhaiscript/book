@@ -9,9 +9,9 @@ Any clonable value can be set into a [`Dynamic`] value.
 Any parameter in a registered Rust function with a specific type has higher precedence over the
 [`Dynamic`] type, so it is important to understand which _version_ of a function will be used.
 
-For example, the `push` method of an [array] is implemented this way (minus code that protects
-against [over-sized arrays][maximum size of arrays]), which makes the function applicable for all
-item types:
+For example, the `push` method of an [array] is implemented as follows (minus code that protects
+against [over-sized arrays][maximum size of arrays]), making the function applicable for all
+item types.
 
 ```rust no_run
 // 'item: Dynamic' matches all data types
@@ -82,6 +82,6 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
                              x9: i64, x10: i64, x11: i64, x12: i64,
                              x13: i64, x14: i64, x15: i64, x16: i64) {
 
-    // ... do some unspeakably evil things with all those parameters ...
+    // ... do something unspeakably evil with all those parameters ...
 }
 ```

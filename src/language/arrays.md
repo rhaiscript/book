@@ -44,7 +44,7 @@ _last_ element.
 Built-in Functions
 -----------------
 
-The following methods (mostly defined in the [`BasicArrayPackage`][packages] but excluded if using a [raw `Engine`]) operate on arrays:
+The following methods (mostly defined in the [`BasicArrayPackage`][packages] but excluded if using a [raw `Engine`]) operate on arrays,
 
 | Function                  | Parameter(s)                                                                                                                                                            | Description                                                                                                                                                                                                               |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

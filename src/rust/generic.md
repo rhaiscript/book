@@ -29,6 +29,5 @@ engine.register_fn("print", show_it::<i64>)
       .register_fn("print", show_it::<ImmutableString>);
 ```
 
-The above example shows how to register multiple functions
-(or, in this case, multiple overloaded versions of the same function)
-under the same name.
+The above example shows how to register multiple functions (or, in this case, multiple overloaded
+versions of the same function) under the same name.

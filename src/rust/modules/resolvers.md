@@ -10,7 +10,7 @@ See the section on [_Importing Modules_][`import`] for more details.
 _Module Resolvers_ are service types that implement the [`ModuleResolver`][traits] trait.
 
 
-Built-In Module Resolvers
+Built-in Module Resolvers
 ------------------------
 
 There are a number of standard resolvers built into Rhai, the default being the `FileModuleResolver`

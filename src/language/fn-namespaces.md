@@ -19,10 +19,10 @@ Namespace Types
 
 In general, there are two main types of _namespaces_ where functions are looked up:
 
-| Namespace | How Many | Source                                                                                                                                                                                                                                        | Lookup                   | Sub-modules? | Variables? |
+| Namespace | Quantity | Source                                                                                                                                                                                                                                        | Lookup                   | Sub-modules? | Variables? |
 | --------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | :----------: | :--------: |
-| Global    |   One    | 1) [`AST`] being evaluated<br/>2) `Engine::register_XXX` API<br/>3) global [modules] registered via `Engine::register_global_module`<br/>4) functions in static [modules] registered via `Engine::register_static_module` and marked _global_ | simple name              |   ignored    |  ignored   |
-| Module    |   Many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                                   | namespace-qualified name |     yes      |    yes     |
+| Global    |   one    | 1) [`AST`] being evaluated<br/>2) `Engine::register_XXX` API<br/>3) global [modules] registered via `Engine::register_global_module`<br/>4) functions in static [modules] registered via `Engine::register_static_module` and marked _global_ | simple name              |   ignored    |  ignored   |
+| Module    |   many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                                   | namespace-qualified name |     yes      |    yes     |
 
 
 ### Module Namespaces
@@ -52,15 +52,15 @@ let z = calc_result();          // <- error: function 'calc_result' not found
 
 There is one _global_ namespace for every [`Engine`], which includes (in the following search order):
 
-* All functions defined in the [`AST`] currently being evaluated.
+* all functions defined in the [`AST`] currently being evaluated,
 
-* All native Rust functions and iterators registered via the `Engine::register_XXX` API.
+* all native Rust functions and iterators registered via the `Engine::register_XXX` API,
 
-* All functions and iterators defined in global [modules] that are registered into the [`Engine`] via
-  `Engine::register_global_module`.
+* all functions and iterators defined in global [modules] that are registered into the [`Engine`] via `register_global_module`,
 
-* Functions defined in [modules] registered via `Engine::register_static_module` that are specifically
-  marked for exposure to the global namespace (e.g. via the `#[rhai(global)]` attribute in a [plugin module]).
+* functions defined in [modules] registered into the [`Engine`] via `register_static_module` that
+  are specifically marked for exposure to the global [namespace][function namespace] (e.g. via the
+  `#[rhai(global)]` attribute in a [plugin module]).
 
 Anywhere in a Rhai script, when a function call is made, the function is searched within the
 global namespace, in the above search order.

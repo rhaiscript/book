@@ -3,7 +3,7 @@ What Rhai Isn't
 
 {{#include ../links.md}}
 
-Rhai's purpose is to provide a dynamic layer over Rust code, in the same spirit of _zero cost abstractions_. 
+Rhai's purpose is to provide a dynamic layer over Rust code, in the same spirit of _zero cost abstractions_.
 It doesn't attempt to be a new language. For example:
 
 * **No classes**.  Well, Rust doesn't either. On the other hand...

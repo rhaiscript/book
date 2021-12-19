@@ -61,19 +61,19 @@ Package Functions
 
 The following functions are defined:
 
-|   Function   | Return value | Feature | Description                                                      |
-| :----------: | :----------: | :-----: | ---------------------------------------------------------------- |
-|    `rand`    |    `INT`     |         | generates a random number                                        |
-| `rand_float` |   `FLOAT`    | `float` | generates a random floating-point number between `0.0` and `1.0` |
-| `rand_bool`  |    `bool`    |         | generates a random boolean                                       |
+|   Function   | Return type | Feature | Description                                                      |
+| :----------: | :---------: | :-----: | ---------------------------------------------------------------- |
+|    `rand`    |    `INT`    |         | generates a random number                                        |
+| `rand_float` |   `FLOAT`   | `float` | generates a random floating-point number between `0.0` and `1.0` |
+| `rand_bool`  |   `bool`    |         | generates a random boolean                                       |
 
 
 ### Arrays
 
 The following methods are defined for [arrays] (requires the `array` feature):
 
-|  Method   |                       Parameter(s)                        | Return value | Description                                                                |
-| :-------: | :-------------------------------------------------------: | :----------: | -------------------------------------------------------------------------- |
-| `shuffle` |                          _none_                           |              | shuffles the items in the [array]                                          |
-| `sample`  |                          _none_                           | [`Dynamic`]  | returns a random item from the [array]                                     |
-| `sample`  | number of items to sample (empty if ≤ 0, all if ≥ length) |  [`Array`]   | returns a non-repeating _shuffled_ random sample of items from the [array] |
+|  Method   |                       Parameter(s)                        | Return type | Description                                                                |
+| :-------: | :-------------------------------------------------------: | :---------: | -------------------------------------------------------------------------- |
+| `shuffle` |                          _none_                           |             | shuffles the items in the [array]                                          |
+| `sample`  |                          _none_                           | [`Dynamic`] | returns a random item from the [array]                                     |
+| `sample`  | number of items to sample (empty if ≤ 0, all if ≥ length) |  [`Array`]  | returns a non-repeating _shuffled_ random sample of items from the [array] |

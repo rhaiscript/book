@@ -3,9 +3,9 @@ Use the Low-Level API to Register a Rust Function
 
 {{#include ../links.md}}
 
-When a native Rust function is registered with an `Engine` using the `Engine::register_XXX` API,
-Rhai transparently converts all function arguments from [`Dynamic`] into the correct types before
-calling the function.
+When a native Rust function is registered with an `Engine` using the `register_XXX` API, Rhai
+transparently converts all function arguments from [`Dynamic`] into the correct types before calling
+the function.
 
 For more power and flexibility, there is a _low-level_ API to work directly with [`Dynamic`] values
 without the conversions.
@@ -60,7 +60,7 @@ engine.register_fn("increment_by", |x: &mut i64, y: i64| *x += y);
 Function Signature
 ------------------
 
-The function signature passed to `Engine::register_raw_fn` takes the following form:
+The function signature passed to `Engine::register_raw_fn` takes the following form.
 
 > `Fn(context: NativeCallContext, args: &mut [&mut Dynamic])`  
 > `-> Result<T, Box<EvalAltResult>> + 'static`
@@ -103,20 +103,20 @@ Therefore, always extract the mutable reference last, _after_ all other argument
 Extract Other Pass-By-Value Arguments
 ------------------------------------
 
-To extract an argument passed by value from the `args` parameter (`&mut [&mut Dynamic]`), use the following:
+To extract an argument passed by value from the `args` parameter (`&mut [&mut Dynamic]`), use the following statements.
 
-| Argument type            | Access (`n` = argument position)                    |                 Result                  | Original value |
-| ------------------------ | --------------------------------------------------- | :-------------------------------------: | :------------: |
-| `INT`                    | `args[n].as_int().unwrap()`                         |                  `INT`                  |   untouched    |
-| `FLOAT`                  | `args[n].as_float().unwrap()`                       |                 `FLOAT`                 |   untouched    |
-| `Decimal`                | `args[n].as_decimal().unwrap()`                     |        [`Decimal`][rust_decimal]        |   untouched    |
-| `bool`                   | `args[n].as_bool().unwrap()`                        |                 `bool`                  |   untouched    |
-| `char`                   | `args[n].as_char().unwrap()`                        |                 `char`                  |   untouched    |
-| `()`                     | `args[n].as_unit().unwrap()`                        |                  `()`                   |   untouched    |
-| String                   | `&*args[n].read_lock::<ImmutableString>().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
-| String (consumed)        | `std::mem::take(args[n]).cast::<ImmutableString>()` |           [`ImmutableString`]           |     [`()`]     |
-| [Custom type]            | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
-| [Custom type] (consumed) | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
+| Argument type             | Access statement (`n` = argument position)          |                 Result                  | Original value |
+| ------------------------- | --------------------------------------------------- | :-------------------------------------: | :------------: |
+| `INT`                     | `args[n].as_int().unwrap()`                         |                  `INT`                  |   untouched    |
+| `FLOAT`                   | `args[n].as_float().unwrap()`                       |                 `FLOAT`                 |   untouched    |
+| [`Decimal`][rust_decimal] | `args[n].as_decimal().unwrap()`                     |        [`Decimal`][rust_decimal]        |   untouched    |
+| `bool`                    | `args[n].as_bool().unwrap()`                        |                 `bool`                  |   untouched    |
+| `char`                    | `args[n].as_char().unwrap()`                        |                 `char`                  |   untouched    |
+| `()`                      | `args[n].as_unit().unwrap()`                        |                  `()`                   |   untouched    |
+| [String]                  | `&*args[n].read_lock::<ImmutableString>().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
+| [String] (consumed)       | `std::mem::take(args[n]).cast::<ImmutableString>()` |           [`ImmutableString`]           |     [`()`]     |
+| [Custom type]             | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
+| [Custom type] (consumed)  | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
 
 
 Example &ndash; Passing a Callback to a Rust Function

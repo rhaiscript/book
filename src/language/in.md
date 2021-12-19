@@ -3,15 +3,28 @@
 
 {{#include ../links.md}}
 
+
 The `in` operator is used to check for _containment_ &ndash; i.e. whether a particular collection
 data type _contains_ a particular item.
 
-Standard data types with built-in support for the `in` operator are:
+Internally the `in` operator is simply syntactic sugar for a call to the `contains` function.
 
-* Numeric [ranges] (check for integer number)
-* [Arrays] (check for items)
-* [Object maps] (check for property name)
-* [Strings] (check for sub-strings or [characters])
+
+Built-in Support
+----------------
+
+The following standard data types have built-in support for the `in` operator.
+
+|    Data type    |              Check for              |
+| :-------------: | :---------------------------------: |
+| Numeric [range] |           integer number            |
+|     [Array]     |           contained item            |
+|  [Object map]   |            property name            |
+|    [String]     | [sub-string][string] or [character] |
+
+
+Examples
+--------
 
 ```rust no_run
 42 in [1, "abc", 42, ()] == true;   // check array for item
@@ -33,7 +46,8 @@ Standard data types with built-in support for the `in` operator are:
 Array Items Comparison
 ----------------------
 
-The default implementation of the `in` operator for [arrays] uses the `==` operator (if defined) to compare items.
+The default implementation of the `in` operator for [arrays] uses the `==` operator (if defined)
+to compare items.
 
 Beware that, for a [custom type], `==` defaults to `false` when comparing it with a value of of the
 same type.

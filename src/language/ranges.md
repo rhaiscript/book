@@ -19,7 +19,7 @@ The Rust type of a range `std::ops::Range` (exclusive) or `std::ops::RangeInclus
 Usage Scenarios
 ---------------
 
-Ranges are commonly used in these scenarios:
+Ranges are commonly used in the following scenarios.
 
 | Scenario                                               | Example                                 |
 | ------------------------------------------------------ | --------------------------------------- |
@@ -38,9 +38,9 @@ Built-in Functions
 -----------------
 
 The following methods (mostly defined in the [`BasicIteratorPackage`][packages] but excluded if
-using a [raw `Engine`]) operate on ranges:
+using a [raw `Engine`]) operate on ranges.
 
-| Function                           |   Parameters    | Description                                   |
+| Function                           |  Parameter(s)   | Description                                   |
 | ---------------------------------- | :-------------: | --------------------------------------------- |
 | `start` method and property        |                 | beginning of the range                        |
 | `end` method and property          |                 | end of the range                              |

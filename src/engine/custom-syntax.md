@@ -117,20 +117,26 @@ The function signature of an implementation is:
 
 where:
 
-| Parameter                        |                  Type                   | Description                                                                                                                                     |
-| -------------------------------- | :-------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`                        |           `&mut EvalContext`            | mutable reference to the current evaluation _context_                                                                                           |
-| &nbsp;&nbsp;`.scope()`           |                `&Scope`                 | reference to the current [`Scope`]                                                                                                              |
-| &nbsp;&nbsp;`.scope_mut()`       |            `&mut &mut Scope`            | mutable reference to the current [`Scope`]; variables can be added to/removed from it                                                           |
-| &nbsp;&nbsp;`.engine()`          |                `&Engine`                | reference to the current [`Engine`]                                                                                                             |
-| &nbsp;&nbsp;`.source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                         |
-| &nbsp;&nbsp;`.iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                     |
-| &nbsp;&nbsp;`.imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                |
-| &nbsp;&nbsp;`.iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                      |
-| &nbsp;&nbsp;`.namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature |
-| &nbsp;&nbsp;`.this_ptr()`        |           `Option<&Dynamic>`            | reference to the current bound [`this`] pointer, if any                                                                                         |
-| &nbsp;&nbsp;`.call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                                                     |
-| `inputs`                         |             `&[Expression]`             | a list of input expression trees                                                                                                                |
+| Parameter |        Type        | Description                                           |
+| --------- | :----------------: | ----------------------------------------------------- |
+| `context` | `&mut EvalContext` | mutable reference to the current _evaluation context_ |
+| `inputs`  |  `&[Expression]`   | a list of input expression trees                      |
+
+and `EvalContext` is a type that encapsulates the current _evaluation context_ and exposes the following:
+
+| Method              |               Return type               | Description                                                                                                                                     |
+| ------------------- | :-------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scope()`           |                `&Scope`                 | reference to the current [`Scope`]                                                                                                              |
+| `scope_mut()`       |            `&mut &mut Scope`            | mutable reference to the current [`Scope`]; variables can be added to/removed from it                                                           |
+| `engine()`          |                `&Engine`                | reference to the current [`Engine`]                                                                                                             |
+| `source()`          |             `Option<&str>`              | reference to the current source, if any                                                                                                         |
+| `iter_imports()`    | `impl Iterator<Item = (&str, &Module)>` | iterator of the current stack of [modules] imported via `import` statements                                                                     |
+| `imports()`         |               `&Imports`                | reference to the current stack of [modules] imported via `import` statements; requires the [`internals`] feature                                |
+| `iter_namespaces()` |     `impl Iterator<Item = &Module>`     | iterator of the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                      |
+| `namespaces()`      |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]; requires the [`internals`] feature |
+| `this_ptr()`        |           `Option<&Dynamic>`            | reference to the current bound [`this`] pointer, if any                                                                                         |
+| `call_level()`      |                 `usize`                 | the current nesting level of function calls                                                                                                     |
+
 
 #### Return value
 

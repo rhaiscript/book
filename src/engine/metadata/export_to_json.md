@@ -11,8 +11,8 @@ As part of a _reflections_ API, `Engine::gen_fn_metadata_to_json` and the corres
 `Engine::gen_fn_metadata_with_ast_to_json` export the full list of [functions metadata]
 in JSON format.
 
-The [`metadata`] feature must be used to turn on this API, which requires
-the [`serde_json`](https://crates.io/crates/serde_json) crate.
+The [`metadata`] feature must be used to turn on this API, which requires the
+[`serde_json`](https://crates.io/crates/serde_json) crate.
 
 ### Sources
 

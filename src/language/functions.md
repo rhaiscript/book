@@ -3,7 +3,7 @@ Functions
 
 {{#include ../links.md}}
 
-Rhai supports defining functions in script (unless disabled with [`no_function`]):
+Rhai supports defining functions in script (unless disabled with [`no_function`]).
 
 ```rust no_run
 fn add(x, y) {
@@ -23,8 +23,9 @@ sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 Implicit Return
 ---------------
 
-Just like in Rust, an implicit return can be used. In fact, the last statement of a block is _always_ the block's return value
-regardless of whether it is terminated with a semicolon `;`. This is different from Rust.
+Just like in Rust, an implicit return can be used. In fact, the last statement of a block is
+_always_ the block's return value regardless of whether it is terminated with a semicolon `;`. This
+is different from Rust.
 
 ```rust no_run
 fn add(x, y) {      // implicit return:
@@ -67,8 +68,8 @@ fn do_addition(x) {
 No Access to External Scope
 --------------------------
 
-Functions are not _closures_. They do not capture the calling environment
-and can only access their own parameters.
+Functions are not _closures_. They do not capture the calling environment and can only access their
+own parameters.
 
 They cannot access variables external to the function itself.
 

@@ -85,10 +85,10 @@ an equivalent method coded in script, where the object is accessed via the `this
 
 The following table illustrates the differences:
 
-| Function type | Parameters |     Object reference     |      Function signature       |
-| :-----------: | :--------: | :----------------------: | :---------------------------: |
-|  Native Rust  |  _N_ + 1   | first `&mut T` parameter | `Fn(obj: &mut T, x: U, y: V)` |
-|  Rhai script  |    _N_     |          `this`          |       `Fn(x: U, y: V)`        |
+| Function type | No. of parameters |     Object reference     |      Function signature       |
+| :-----------: | :---------------: | :----------------------: | :---------------------------: |
+|  Native Rust  |      _N_ + 1      | first `&mut T` parameter | `Fn(obj: &mut T, x: U, y: V)` |
+|  Rhai script  |        _N_        |          `this`          |       `Fn(x: U, y: V)`        |
 
 
 `&mut` is Efficient, Except for `&mut ImmutableString`

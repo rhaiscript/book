@@ -52,8 +52,8 @@ Pure Functions
 Some functions are _pure_ &ndash; i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as `&mut` (e.g. for a method function).
 
-This is most commonly done to avoid expensive cloning for methods or [property
-getters][getters/setters] that return information about a [custom type] and does not modify it.
+This is most commonly done to avoid expensive cloning for methods or [property getters][getters/setters]
+that return information about a [custom type] and does not modify it.
 
 Apply the `#[export_fn(pure)]` attribute on a plugin function to mark it as  _pure_.
 

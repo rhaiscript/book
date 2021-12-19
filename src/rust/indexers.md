@@ -16,7 +16,7 @@ Like property [getters/setters], indexers take a `&mut` reference to the first p
 
 They also take an additional parameter of any type that serves as the _index_ within brackets.
 
-Indexers are disabled when the [`no_index`] feature is used.
+Indexers are disabled when the [`no_index`] and [`no_object`] features are used together.
 
 | `Engine` API                  | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`X: Clone` = index type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------- | :----------------------------: |
@@ -32,25 +32,27 @@ although there is nothing that prevents this mutation.
 **IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
 
 
-Cannot Override Arrays, Object Maps, Strings and Integers
---------------------------------------------------------
+Cannot Override Arrays, BLOB's Object Maps, Strings and Integers
+--------------------------------------------------------------
 
 For efficiency reasons, indexers **cannot** be used to overload (i.e. override)
 built-in indexing operations for [arrays], [object maps], [strings] and integers
 (acting as [bit-field] operation).
 
-These types have built-in indexer implementations that are fast and efficient:
+The following types have built-in indexer implementations that are fast and efficient.
 
-| Type                                      |                Index type                 | Return type | Description                                                 |
-| ----------------------------------------- | :---------------------------------------: | :---------: | ----------------------------------------------------------- |
-| [`Array`]                                 |                   `INT`                   | [`Dynamic`] | access a particular element inside the [array]              |
-| [`Map`]                                   | [`ImmutableString`],<br/>`String`, `&str` | [`Dynamic`] | access a particular property inside the [object map]        |
-| [`ImmutableString`],<br/>`String`, `&str` |                   `INT`                   | [character] | access a particular [character] inside the [string]         |
-| `INT`                                     |                   `INT`                   |   boolean   | access a particular bit inside the integer as a [bit-field] |
+| Type                                      |                Index type                 | Return type | Description                                                                  |
+| ----------------------------------------- | :---------------------------------------: | :---------: | ---------------------------------------------------------------------------- |
+| [`Array`]                                 |                   `INT`                   | [`Dynamic`] | access a particular element inside the [array]                               |
+| [`Blob`]                                  |                   `INT`                   |    `INT`    | access a particular byte value inside the [BLOB]                             |
+| [`Map`]                                   | [`ImmutableString`],<br/>`String`, `&str` | [`Dynamic`] | access a particular property inside the [object map]                         |
+| [`ImmutableString`],<br/>`String`, `&str` |                   `INT`                   | [character] | access a particular [character] inside the [string]                          |
+| `INT`                                     |                   `INT`                   |   boolean   | access a particular bit inside the integer number as a [bit-field]           |
+| `INT`                                     |                  [range]                  |    `INT`    | access a particular range of bits inside the integer number as a [bit-field] |
 
-Attempting to register indexers for an [array], [object map], [string] or `INT` panics
-when using the `Engine::register_indexer_XXX` API.  They can, however, be defined in a
-[plugin module], only to be ignored.
+Attempting to register indexers for an [array], [object map], [string] or `INT` panics when using
+the `Engine::register_indexer_XXX` API.  They can, however, be defined in a [plugin module], only to
+be ignored.
 
 In general, it is a bad idea to overload indexers for any of the [standard types] supported
 internally by Rhai, since built-in indexers may be added in future versions.
@@ -84,6 +86,8 @@ let actual_index = if index < 0 {
 The _end_ of a data type can be interpreted creatively.  For example, in an integer used as a
 [bit-field], the _start_ is the _least-significant-bit_ (LSB) while the `end` is the
 _most-significant-bit_ (MSB).
+
+By convention, negative values are _not_ interpreted specially for index values that are [ranges].
 
 
 Examples

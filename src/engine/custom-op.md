@@ -45,9 +45,9 @@ Custom operators are merely _syntactic sugar_.  They map directly to registered 
 
 engine.register_custom_operator("foo", 160)?;
 
-┌──────┐
-│ Rhai │
-└──────┘
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
 
 1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
 

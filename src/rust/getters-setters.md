@@ -41,8 +41,8 @@ Cannot Override Object Maps
 
 Property getters and setters are mainly intended for [custom types].
 
-Any getter or setter function registered for [object maps] is simply _ignored_ because
-the get/set calls will be interpreted as properties on the [object maps].
+Any getter or setter function registered for [object maps] is simply _ignored_ because the get/set
+calls will be interpreted as properties on the [object maps].
 
 
 Examples
@@ -93,9 +93,9 @@ println!("Answer: {}", result);                 // prints 42
 Fallback to Indexer
 -------------------
 
-If the getter/setter of a particular property is not defined, but an [indexer] is defined
-on the [custom type] with [string] index, then the corresponding [indexer] will be called
-with the name of the property as the index value.
+If the getter/setter of a particular property is not defined, but an [indexer] is defined on the
+[custom type] with [string] index, then the corresponding [indexer] will be called with the name of
+the property as the index value.
 
 In other words, [indexers] act as a _fallback_ to property getters/setters.
 

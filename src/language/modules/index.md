@@ -10,5 +10,5 @@ A module is of the type `Module` and holds a collection of functions, variables,
 It may be created entirely from Rust functions, or it may encapsulate a Rhai script together with the functions
 and variables defined by that script.
 
-Other scripts can then load this module and use the functions and variables exported
-as if they were defined inside the same script.
+Other scripts can then load this module and use the functions and variables exported as if they were
+defined inside the same script.

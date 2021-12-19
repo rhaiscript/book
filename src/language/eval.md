@@ -60,7 +60,7 @@ print(x);
 --------------
 
 For those who subscribe to the (very sensible) motto of ["`eval` is evil"](http://linterrors.com/js/eval-is-evil),
-disable `eval` using [`Engine::disable_symbol`][disable keywords and operators]:
+disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 
 ```rust no_run
 engine.disable_symbol("eval");  // disable usage of 'eval'

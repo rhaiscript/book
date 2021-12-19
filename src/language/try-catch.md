@@ -75,7 +75,7 @@ catch
 Catchable Exceptions
 --------------------
 
-Many script-oriented exceptions can be caught via `try` ... `catch`:
+Many script-oriented exceptions can be caught via `try` ... `catch`.
 
 | Error type                                    |        Error value         |
 | --------------------------------------------- | :------------------------: |
@@ -104,10 +104,12 @@ When the [`no_object`] feature is turned on, however, the error value is a simpl
 Non-Catchable Exceptions
 ------------------------
 
-Some exceptions _cannot_ be caught:
+Some exceptions _cannot_ be caught.
 
-* Syntax error during parsing
-* System error &ndash; e.g. script file not found
-* Script evaluation metrics over [safety limits]({{rootUrl}}/safety/index.md)
-* Function calls nesting exceeding [maximum call stack depth]
-* Script evaluation manually terminated
+| Error type                                                  | Notes                             |
+| ----------------------------------------------------------- | --------------------------------- |
+| Syntax error during parsing                                 | invalid script                    |
+| System error &ndash; e.g. script file not found             | system errors are not recoverable |
+| Script evaluation metrics over [safety limits][safety]      | [safety] protection               |
+| Function calls nesting exceeding [maximum call stack depth] | [safety] protection               |
+| Script evaluation manually terminated                       | [safety] protection               |

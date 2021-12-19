@@ -16,7 +16,7 @@ The Rust type of a timestamp is `std::time::Instant` ([`instant::Instant`] in [W
 Built-in Functions
 -----------------
 
-The following methods (defined in the [`BasicTimePackage`][packages] but excluded if using a [raw `Engine`]) operate on timestamps:
+The following methods (defined in the [`BasicTimePackage`][packages] but excluded if using a [raw `Engine`]) operate on timestamps.
 
 | Function                      | Parameter(s)                                | Description                                              |
 | ----------------------------- | ------------------------------------------- | -------------------------------------------------------- |

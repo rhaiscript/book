@@ -6,9 +6,9 @@ Re-Optimize an AST
 Sometimes it is more efficient to store one single, large script with delimited code blocks guarded by
 constant variables.  This script is compiled once to an [`AST`].
 
-Then, depending on the execution environment, constants are passed into the [`Engine`] and the [`AST`]
-is _re_-optimized based on those constants via the `Engine::optimize_ast` method,
-effectively pruning out unused code sections.
+Then, depending on the execution environment, constants are passed into the [`Engine`] and the
+[`AST`] is _re_-optimized based on those constants via `Engine::optimize_ast`, effectively pruning
+out unused code sections.
 
 The final, optimized [`AST`] is then used for evaluations.
 

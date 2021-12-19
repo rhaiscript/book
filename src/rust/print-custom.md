@@ -5,7 +5,7 @@ Printing for Custom Types
 
 To use [custom types] for [`print`] and [`debug`], or convert a [custom type] into a [string],
 it is necessary that the following functions be registered (assuming the [custom type]
-is `T: Display + Debug`):
+is `T: Display + Debug`).
 
 | Function    | Signature                            | Typical implementation | Usage                                                      |
 | ----------- | ------------------------------------ | ---------------------- | ---------------------------------------------------------- |
@@ -14,7 +14,7 @@ is `T: Display + Debug`):
 
 
 The following functions are implemented using `to_string()` or `to_debug()` by default, but can be
-overloaded with custom versions:
+overloaded with custom versions.
 
 | Function      | Signature                                      | Default     | Usage                                                                  |
 | ------------- | ---------------------------------------------- | ----------- | ---------------------------------------------------------------------- |

@@ -8,7 +8,7 @@ Integer Functions
 -----------------
 
 The following standard functions (defined in the [`ArithmeticPackage`][packages] but excluded if
-using a [raw `Engine`]) operate on integers only:
+using a [raw `Engine`]) operate on integers only.
 
 | Function                      | Description                                                      |
 | ----------------------------- | ---------------------------------------------------------------- |
@@ -16,7 +16,7 @@ using a [raw `Engine`]) operate on integers only:
 | `is_even` method and property | returns `true` if the value is an even number, otherwise `false` |
 
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if
-using a [raw `Engine`]) operate on integers only:
+using a [raw `Engine`]) operate on integers only.
 
 | Function     | Not available under | Description                                              |
 | ------------ | :-----------------: | -------------------------------------------------------- |
@@ -29,7 +29,7 @@ Signed Numeric Functions
 
 The following standard functions (defined in the [`ArithmeticPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
-[`decimal`]) only:
+[`decimal`]) only.
 
 | Function                      | Description                                                          |
 | ----------------------------- | -------------------------------------------------------------------- |
@@ -43,7 +43,7 @@ Floating-Point Functions
 
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal]
-(requires [`decimal`]) only:
+(requires [`decimal`]) only.
 
 | Category         | Supports `Decimal` | Functions                                                                                |
 | ---------------- | :----------------: | ---------------------------------------------------------------------------------------- |
@@ -65,7 +65,7 @@ Decimal Rounding Functions
 --------------------------
 
 The following rounding methods (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
-operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] feature:
+operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] feature.
 
 | Rounding type     | Behavior                                    | Methods                                                      |
 | ----------------- | ------------------------------------------- | ------------------------------------------------------------ |
@@ -82,7 +82,7 @@ Parsing Functions
 -----------------
 
 The following standard functions (defined in the [`BasicMathPackage`][packages] but excluded if using a [raw `Engine`])
-parse numbers:
+parse numbers.
 
 | Function          |        No available under        | Description                                                                                   |
 | ----------------- | :------------------------------: | --------------------------------------------------------------------------------------------- |
@@ -95,7 +95,7 @@ Formatting Functions
 --------------------
 
 The following standard functions (defined in the [`BasicStringPackage`][packages] but excluded if using a [raw `Engine`])
-convert integer numbers into a [string] of hex, octal or binary representations:
+convert integer numbers into a [string] of hex, octal or binary representations.
 
 | Function      | Description                          |
 | ------------- | ------------------------------------ |
@@ -110,7 +110,7 @@ These formatting functions are defined for all available integer numbers &ndash;
 Floating-point Constants
 ------------------------
 
-The following functions return standard mathematical constants:
+The following functions return standard mathematical constants.
 
 | Function | Description               |
 | -------- | ------------------------- |

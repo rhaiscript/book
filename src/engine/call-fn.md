@@ -6,56 +6,73 @@ Call Rhai Functions from Rust
 Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted
 [function] from Rust via `Engine::call_fn`.
 
-Assume this script:
-
 ```rust no_run
-import "process" as proc;       // this is evaluated every time
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
 
-// a function with two parameters: string and i64
+import "process" as proc;           // this is evaluated every time
+
 fn hello(x, y) {
-    x.len + y
+    // hopefully 'my_var' is in scope when this is called
+    x.len + y + my_var
 }
 
-// functions can be overloaded: this one takes only one parameter
 fn hello(x) {
-    x * 2
+    // hopefully 'my_string' is in scope when this is called
+    x * my_string.len()
 }
 
-// this one takes no parameters
 fn hello() {
-    proc::process_data(42);     // can access imported module
+    // hopefully 'MY_CONST' is in scope when this is called
+    if MY_CONST {
+        proc::process_data(42);     // can access imported module
+    }
 }
-```
 
-[Functions] defined within the script can be called using `Engine::call_fn`:
+┌──────┐
+│ Rust │
+└──────┘
 
-```rust no_run
 // Compile the script to AST
 let ast = engine.compile(script)?;
 
-// A custom scope can also contain any variables/constants available to the functions
+// Create a custom 'Scope'
 let mut scope = Scope::new();
 
-// Evaluate a function defined in the script, passing arguments into the script as a tuple.
-// Beware, arguments must be of the correct types because Rhai does not have built-in type conversions.
-// If arguments of the wrong types are passed, the Engine will not find the function.
+// A custom 'Scope' can also contain any variables/constants available to
+// the functions
+scope.push("my_var", 42_i64);
+scope.push("my_string", "hello, world!");
+scope.push_constant("MY_CONST", true);
+
+// Evaluate a function defined in the script, passing arguments into the
+// script as a tuple.
+//
+// Beware, arguments must be of the correct types because Rhai does not
+// have built-in type conversions. If arguments of the wrong types are passed,
+// the Engine will not find the function.
+//
+// Variables/constants pushed into the custom 'Scope'
+// (i.e. 'my_var', 'my_string', 'MY_CONST') are visible to the function.
 
 let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( "abc", 123_i64 ) )?;
 //          ^^^                                             ^^^^^^^^^^^^^^^^^^
 //          return type must be specified                   put arguments in a tuple
 
-let result: i64 = engine.call_fn(&mut scope, &ast, "hello", (123_i64,) )?;
-//                                                          ^^^^^^^^^^ tuple of one
+let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( 123_i64, ) )?;
+//                                                          ^^^^^^^^^^^^ tuple of one
 
 let result: i64 = engine.call_fn(&mut scope, &ast, "hello", () )?;
 //                                                          ^^ unit = tuple of zero
 ```
 
-When using `Engine::call_fn`, the [`AST`] is first evaluated before the function is called.
+When using `Engine::call_fn`, the [`AST`] is first evaluated before the [function] is called.
 This is usually desirable in order to [import][`import`] the necessary external [modules] that are
-needed by the function.
+needed by the [function].
 
-New [variables]/[constants] introduced are not retained so they do not pollute the custom [`Scope`].
+All new [variables]/[constants] introduced are, by default, _not_ retained inside the [`Scope`].
+In other words, the [`Scope`] is _rewound_ to the initial size after each call.
 
 If these default behaviors are not desirable, use `Engine::call_fn_raw`.
 
@@ -64,7 +81,7 @@ If these default behaviors are not desirable, use `Engine::call_fn_raw`.
 ----------------
 
 `Engine::call_fn` takes a parameter of any type that implements the [`FuncArgs`][traits] trait,
-which is used to parse a data type into individual argument values for the function call.
+which is used to parse a data type into individual argument values for the [function] call.
 
 Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
 
@@ -117,38 +134,89 @@ let result = engine.call_fn_raw(
 
 `Engine::call_fn_raw` extends control to the following:
 
-* Whether to skip evaluation of the [`AST`] before calling the target function
-* Whether to rewind the custom [`Scope`] at the end of the function call
+* Whether to skip evaluation of the [`AST`] before calling the target [function]
+* Whether to rewind the custom [`Scope`] at the end of the [function] call
 * Whether to bind the `this` pointer to a specific value
 
 ### Skip evaluation of the `AST`
 
-By default, the [`AST`] is evaluated before calling the target function.
+By default, the [`AST`] is evaluated before calling the target [function].
 A parameter can be passed to skip this evaluation.
 
 ### Keep new variables/constants
 
-By default, any new [variable]/[constant] defined within a function are cleared after the call and
-will not spill into the custom [`Scope`]. A parameter can be passed to keep them within the [`Scope`].
+By default, the [`Engine`] _rewinds_ the custom [`Scope`] after each call to the initial size,
+so any new [variable]/[constant] defined are cleared and will not spill into the custom [`Scope`].
+
+This keeps the [`Scope`] from being continuously polluted by new [variables] and is usually the
+expected intuitive behavior.
+
+A parameter can be passed to keep new [variables]/[constants] within the custom [`Scope`].
+This allows the [function] to easily pass values back to the caller by leaving them inside the
+custom [`Scope`].
+
+When doing so, however, beware that all [variables]/[constants] defined at top level of the
+[function] or in the script body will _persist_ inside the custom [`Scope`].  If any of them are
+temporary and not intended to be retained, define them inside a statements block.
+
+```rust no_run
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+fn initialize() {
+    let x = 42;                     // 'x' is retained
+    let y = x * 2;                  // 'y' is retained
+
+    // Use a new statements block to define temp variables
+    {
+        let temp = x + y;           // 'temp' is NOT retained
+
+        foo = temp * temp;          // 'foo' is visible in the scope
+    }
+}
+
+let foo = 123;                      // 'foo' is retained
+
+// Use a new statements block to define temp variables
+{
+    let bar = foo / 2;              // 'bar' is NOT retained
+
+    foo = bar * bar;
+}
+
+┌──────┐
+│ Rust │
+└──────┘
+
+engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
+//                                   ^^^^ evaluate AST before call
+//                                         ^^^^^ do not rewind scope
+
+// At this point, 'scope' contains these variables: 'foo', 'x', 'y'
+```
 
 ### Bind the `this` pointer
 
-`Engine::call_fn_raw` can also bind a value to the `this` pointer of a script-defined function.
+`Engine::call_fn_raw` can also bind a value to the `this` pointer of a script-defined [function].
+
+This functionality is not available to `Engine::call_fn` which cannot call functions in
+_method-call_ style.
 
 ```rust no_run
 let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();
 
-let result = engine.call_fn_raw(
-                &mut scope,
-                &ast,
-                false,
-                false,
-                "action",
-                Some(&mut value),   // binding the 'this' pointer
-                [ 41_i64.into() ]
-             )?;
+engine.call_fn_raw(
+            &mut scope,
+            &ast,
+            false,
+            false,
+            "action",
+            Some(&mut value),       // binding the 'this' pointer
+            [ 41_i64.into() ]
+       )?;
 
 assert_eq!(value.as_int()?, 42);
 ```

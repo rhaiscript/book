@@ -16,12 +16,12 @@ prepare a Rhai script for this purpose as well as to control which functions/var
 When given an [`AST`], it is first evaluated (usually to [import][`import`] [modules] and set up global
 [constants] used by [functions]), then the following items are exposed as members of the new [module]:
 
-* Global [variables] and [constants] &ndash; all [variables] and [constants] exported via the
-  [`export`] statement (those not exported remain hidden).
+* global [variables] and [constants] &ndash; all [variables] and [constants] exported via the
+  [`export`] statement (those not exported remain hidden),
 
-* [Functions] not specifically marked [`private`].
+* [functions] not specifically marked [`private`],
 
-* Imported [modules] that remain in the [`Scope`] at the end of a script run become sub-modules.
+* imported [modules] that remain in the [`Scope`] at the end of a script run become sub-modules.
 
 `Module::eval_ast_as_new` encapsulates the entire `AST` into each function call, merging the
 module namespace with the global namespace.  Therefore, functions defined within the same module

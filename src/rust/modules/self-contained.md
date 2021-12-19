@@ -4,9 +4,9 @@ Compile to a Self-Contained `AST`
 {{#include ../../links.md}}
 
 
-When a script [imports][`import`] external [modules] that may not be available later on,
-it is possible to eagerly [_pre-resolve_][module resolver] these imports and embed them
-directly into a self-contained [`AST`].
+When a script [imports][`import`] external [modules] that may not be available later on, it is
+possible to eagerly [_pre-resolve_][module resolver] these imports and embed them directly into a
+self-contained [`AST`].
 
 For instance, a system may periodically connect to a central source (e.g. a database) to load
 scripts and compile them to [`AST`] form. Afterwards, in order to conserve bandwidth (or due to

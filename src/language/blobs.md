@@ -43,17 +43,99 @@ depending on the [`only_i32`] feature).  Only the lowest 8 bits are significant,
 ignored.
 
 
+Crate a BLOB
+------------
+
+The function `blob` allows creating an empty BLOB, optionally filling it to a required size with a
+particular value (default zero).
+
+```rust no_run
+let x = blob();             // empty BLOB
+
+let x = blob(10);           // BLOB with ten zeros
+
+let x = blob(50, 42);       // BLOB with 50x 42's
+```
+
+### Initialize with byte stream
+
+To quickly initialize a BLOB with a particular byte stream, the `write_be` method can be used to
+write eight bytes at a time (four under [`only_i32`]) in big-endian byte order.
+
+If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.
+
+```rust no_run
+let buf = blob(12, 0);      // BLOB with 12x zeros
+
+// Write eight bytes at a time, in big-endian order
+buf.write_be(0, 8, 0xab_cd_ef_12_34_56_78_90);
+buf.write_be(8, 8, 0x0a_0b_0c_0d_00_00_00_00);
+                            //   ^^^^^^^^^^^ remember to pad unused bytes
+
+print(buf);                 // prints "[abcdef1234567890 0a0b0c0d]"
+
+buf[3] == 0x12;
+buf[10] == 0x0c;
+
+// Under 'only_i32', write four bytes at a time:
+buf.write_be(0, 4, 0xab_cd_ef_12);
+buf.write_be(4, 4, 0x34_56_78_90);
+buf.write_be(8, 4, 0x0a_0b_0c_0d);
+```
+
+
+Writing ASCII Bytes
+-------------------
+
+For many embedded applications, it is necessary to encode an ASCII [string] as a byte stream.
+
+Use the `write` method to write [strings] into any specific [range] within a BLOB.
+The [string] is always written in UTF-8 encoding, which is the same as ASCII encoding for
+strict ASCII [characters].
+
+The following is an example of a building a 16-byte command to send to an embedded device.
+
+```rust no_run
+// Assume the following 16-byte command for an embedded device:
+// ┌─────────┬───────────────┬──────────────────────────────────┬───────┐
+// │    0    │       1       │              2-13                │ 14-15 │
+// ├─────────┼───────────────┼──────────────────────────────────┼───────┤
+// │ command │ string length │ ASCII string, max. 12 characters │  CRC  │
+// └─────────┴───────────────┴──────────────────────────────────┴───────┘
+
+let buf = blob(16, 0);      // initialize command buffer
+
+let text = "foo & bar";     // text string to send to device
+
+buf[0] = 0x42;              // command code
+buf[1] = s.len();           // length of string
+
+buf.write(2..14, text);     // write the string
+
+let crc = buf.calc_crc();   // calculate CRC
+
+buf.write_le(14, 2, crc);    // write CRC
+
+print(buf);                 // prints "[4209666f6f202620 626172000000abcd]"
+                            //          ^^ command code              ^^^^ CRC
+                            //            ^^ string length
+                            //              ^^^^^^^^^^^^^^^^^^^ foo & bar
+
+device.send(buf);           // send command to device
+```
+
+
 Built-in Functions
 -----------------
 
-The following functions (mostly defined in the [`BasicBlobPackage`][packages] but excluded if using a [raw `Engine`]) operate on BLOB's:
+The following functions (mostly defined in the [`BasicBlobPackage`][packages] but excluded if using a [raw `Engine`]) operate on BLOB's.
 
 | Functions                           | Parameter(s)                                                                                                                                                                                       | Description                                                                                                                                          |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `blob` constructor function         | 1) _(optional)_ initial length of the BLOB<br/>2) _(optional)_ initial byte value                                                                                                                  | creates a new BLOB, optionally of a particular length filled with an initial byte value (default = 0)                                                |
 | `push`                              | byte to insert                                                                                                                                                                                     | inserts a byte at the end                                                                                                                            |
 | `append`                            | BLOB to append                                                                                                                                                                                     | concatenates the second BLOB to the end of the first                                                                                                 |
-| `+=` operator                       | 1) BLOB<br/>2) byte to insert (not another BLOB)                                                                                                                                                   | inserts a byte at the end                                                                                                                            |
+| `+=` operator                       | 1) BLOB<br/>2) byte to insert                                                                                                                                                                      | inserts a byte at the end                                                                                                                            |
 | `+=` operator                       | 1) BLOB<br/>2) BLOB to append                                                                                                                                                                      | concatenates the second BLOB to the end of the first                                                                                                 |
 | `+` operator                        | 1) first BLOB<br/>2) second BLOB                                                                                                                                                                   | concatenates the first BLOB with the second                                                                                                          |
 | `==` operator                       | 1) first BLOB<br/>2) second BLOB                                                                                                                                                                   | are the two BLOB's the same?                                                                                                                         |
@@ -90,3 +172,5 @@ The following functions (mostly defined in the [`BasicBlobPackage`][packages] bu
 | `write_le`                          | 1) [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under [`only_i32`] or [`f32_float`])<br/>2) integer or floating-point value                              | writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)                 |
 | `write_be`                          | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to write, 8 if > 8 (4 under [`only_i32`] or [`f32_float`]), none if ≤ 0<br/>3) integer or floating-point value | writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)                    |
 | `write_be`                          | 1) [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under [`only_i32`] or [`f32_float`])<br/>2) integer or floating-point value                              | writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)                    |
+| `write`                             | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) [string] to write                                             | writes a [string] to the particular offset in UTF-8 encoding                                                                                         |
+| `write`                             | [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) [string] to write                                                                                  | writes a [string] to the particular offset in UTF-8 encoding                                                                                         |

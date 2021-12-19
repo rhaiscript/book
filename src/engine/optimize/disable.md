@@ -11,8 +11,8 @@ When scripts:
 
 * do not use constants in calculations
 
-the optimization pass may be a waste of time and resources.  In that case, turn optimization off
-by setting the optimization level to [`OptimizationLevel::None`].
+the optimization pass may be a waste of time and resources.
+In that case, turn optimization off by setting the optimization level to [`OptimizationLevel::None`].
 
 ```rust no_run
 let engine = rhai::Engine::new();

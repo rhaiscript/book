@@ -3,6 +3,10 @@ Subtle Semantic Changes After Optimization
 
 {{#include ../../links.md}}
 
+
+Disappearing Runtime Errors
+--------------------------
+
 Some optimizations can alter subtle semantics of the script.
 
 For example:
@@ -17,10 +21,11 @@ if true {           // condition always true
 foo(42)             // <- the above optimizes to this
 ```
 
-If the original script were evaluated instead, it would have been an error &ndash; the variable `hello` does not exist,
-so the script would have been terminated at that point with an error return.
+If the original script were evaluated instead, it would have been an error &ndash;
+the variable `hello` does not exist, so the script would have been terminated at that point
+with a runtime error.
 
-In fact, any errors inside a statement that has been eliminated will silently _disappear_:
+In fact, any errors inside a statement that has been eliminated will silently _disappear_.
 
 ```rust no_run
 print("start!");
@@ -36,8 +41,12 @@ print("end!");
 In the script above, if `my_decision` holds anything other than a boolean value,
 the script should have been terminated due to a type error.
 
-However, after optimization, the entire `if` statement is removed (because an access to `my_decision` produces
-no side-effects), thus the script silently runs to completion without errors.
+However, after optimization, the entire `if` statement is removed (because an access to
+`my_decision` produces no side-effects), thus the script silently runs to completion without errors.
+
+
+Eliminated Useless Work
+-----------------------
 
 Another example is more subtle &ndash; that of an empty loop body.
 
@@ -55,10 +64,18 @@ for n in 0..42000 {
 ```
 
 Normally, and empty loop body inside a [`for`]({{rootUrl}}/language/for.md) statement with a pure
-iterator does nothing and can be safely eliminated.  However, without optimization, the script may
-fail by exceeding the [maximum number of operations] allow.
+iterator does nothing and can be safely eliminated.
 
 Thus the script now runs silently to completion without errors.
 
-It is usually a _Very Bad Idea™_ to depend on a script failing or such kind of subtleties, but if it turns out to be necessary
-(why? I would never guess), turn script optimization off by setting the optimization level to [`OptimizationLevel::None`].
+Without optimization, the script may fail by exceeding the [maximum number of operations] allowed.
+
+
+Do Not Depend on Runtime Errors
+------------------------------
+
+Needless to say, it is usually a _Very Bad Idea™_ to depend on a script failing with a runtime error
+or such kind of subtleties.
+
+If it turns out to be necessary (why? I would never guess), turn script optimization off by setting
+the optimization level to [`OptimizationLevel::None`].

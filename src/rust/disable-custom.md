@@ -4,16 +4,10 @@ Disable Custom Types
 {{#include ../links.md}}
 
 
-`no_object` Feature
--------------------
+The [`no_object`] feature disables support for [custom types] including:
 
-The custom types API `register_get`, `register_get_result`, `register_set`, `register_set_result`
-and `register_get_set` are not available under [`no_object`].
+* [_method-style_]({{rootUrl}}/rust/methods.md}}) function calls (e.g. `obj.method()`),
 
+* [object maps] and the [`Map`] type,
 
-`no_index` Feature
-------------------
-
-The indexers API `register_indexer_get`, `register_indexer_get_result`, `register_indexer_set`,
-`register_indexer_set_result`, and `register_indexer_get_set` are not available under
-[`no_object`]`+`[`no_index`].
+* the `register_get`, `register_get_result`, `register_set`, `register_set_result` and `register_get_set` API's for [`Engine`]

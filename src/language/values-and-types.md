@@ -3,7 +3,7 @@ Values and Types
 
 {{#include ../links.md}}
 
-The following primitive types are supported natively:
+The following primitive types are supported natively.
 
 | Category                                                                                                                         | Equivalent Rust types                                                                                 | [`type_of()`]         | `to_string()`             |
 | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------- | ------------------------- |
@@ -25,7 +25,7 @@ The following primitive types are supported natively:
 | **System floating-point** (current configuration, disabled with [`no_float`])                                                    | `rhai::FLOAT` (`f32` or `f64`)                                                                        | `"f32"` or `"f64"`    | `"123.456"` etc.          |
 | **Nothing/void/nil/null/Unit** (or whatever it is called)                                                                        | `()`                                                                                                  | `"()"`                | `""` _(empty string)_     |
 
-All types are treated strictly separate by Rhai, meaning that `i32` and `i64` and `u32` are completely different -
+All types are treated strictly separate by Rhai, meaning that `i32` and `i64` and `u32` are completely different &nsash;
 they even cannot be added together. This is very similar to Rust.
 
 The default integer type is `i64`. If other integer types are not needed, it is possible to exclude them and make a

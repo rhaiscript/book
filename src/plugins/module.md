@@ -4,8 +4,8 @@ Export a Rust Module to Rhai
 {{#include ../links.md}}
 
 
-Prelude
--------
+Import Prelude
+--------------
 
 When using the plugins system, the entire `rhai::plugin` module must be imported as a prelude
 because code generated will need these imports.
@@ -132,7 +132,7 @@ Variables as well as sub-modules are **ignored**.
 ### Use `Engine::register_static_module`
 
 Another simple way to register this into an [`Engine`] is, again, to use the `exported_module!` macro
-to turn it into a normal Rhai [module], then use the `Engine::register_static_module` method on it:
+to turn it into a normal Rhai [module], then use `Engine::register_static_module` on it.
 
 ```rust no_run
 fn main() {
@@ -191,38 +191,14 @@ See the [module] section for more information.
 
 ### Combine into Custom Package
 
-Finally the plugin module can also be used to develop a [custom package],
-using `combine_with_exported_module!`:
+Finally the plugin module can also be used to develop a [custom package], using
+`combine_with_exported_module!` which automatically _flattens_ the module namespace so that all
+functions in sub-modules are promoted to the top level [namespace][function namespace],
+all sub-modules are eliminated, and all variables are ignored.
 
-```rust no_run
-use rhai::def_package;
-
-def_package!(rhai:MyPackage:"My own personal super package", module, {
-    combine_with_exported_module!(module, "my_module_ID", my_module));
-});
-```
-
-`combine_with_exported_module!` automatically _flattens_ the module namespace so that all
-functions in sub-modules are promoted to the top level.  This is convenient for [custom packages].
-
-
-Sub-Modules
------------
-
-Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
-Rhai `Module`.
-
-Most of the time, plugin modules are used as a [packages].  In such usage, all functions within a
-sub-module are _flattened_ into the [namespace][function namespace].  As a result, sub-modules can
-be used conveniently as a _grouping_ mechanism.
-
-They are also commonly used to put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a
-large group of functions without having to put the gates on individual functions.
-
-This is especially convenient when using the `combine_with_exported_module!` macro to develop
-[custom packages] because selected groups of functions can easily be included or excluded based on
-different combinations of feature flags instead of having to manually include/exclude every
-single function.
+Due to this _flattening_, sub-modules are used conveniently as a _grouping_ mechanism,
+especially to put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a
+large collection of functions without having to duplicate the gates onto individual functions.
 
 ```rust no_run
 #[export_module]
@@ -278,8 +254,8 @@ combine_with_exported_module!(module, "my_module_ID", my_module);
 ```
 
 
-Function Overloading and Operators
----------------------------------
+Functions Overloading and Operators
+----------------------------------
 
 Operators and overloaded functions can be specified via applying the `#[rhai_fn(name = "...")]`
 attribute to individual functions.
@@ -400,8 +376,6 @@ Therefore, pure functions can be passed a [constant] value as the first `&mut` p
 
 Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
 `EvalAltResult::ErrorAssignmentToConstant` error.
-
-For example:
 
 ```rust no_run
 use rhai::plugin::*;        // a "prelude" import for macros

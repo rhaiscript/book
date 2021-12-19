@@ -128,7 +128,7 @@ Use the Custom Type With Arrays
 ------------------------------
 
 In order to use the [`in`] operator with a custom type for an [array], the `==` operator must be
-registered for the custom type:
+registered for the custom type.
 
 ```rust no_run
 // Assume 'TestStruct' implements `PartialEq`
