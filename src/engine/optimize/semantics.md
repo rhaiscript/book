@@ -41,7 +41,7 @@ print("end!");
 In the script above, if `my_decision` holds anything other than a boolean value,
 the script should have been terminated due to a type error.
 
-However, after optimization, the entire `if` statement is removed (because an access to
+However, after optimization, the entire [`if`] statement is removed (because an access to
 `my_decision` produces no side-effects), thus the script silently runs to completion without errors.
 
 
@@ -63,8 +63,8 @@ for n in 0..42000 {
 ()
 ```
 
-Normally, and empty loop body inside a [`for`]({{rootUrl}}/language/for.md) statement with a pure
-iterator does nothing and can be safely eliminated.
+Normally, and empty loop body inside a [`for`] statement with a pure iterator does nothing and can
+be safely eliminated.
 
 Thus the script now runs silently to completion without errors.
 

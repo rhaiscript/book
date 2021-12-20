@@ -7,7 +7,7 @@ Literals Syntax
 | :------------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------- |
 |                                   `INT`                                    | decimal: `42`, `-123`, `0`<br/>hex: `0x????..`<br/>binary: `0b????..`<br/>octal: `0o????..`                             |
 | `FLOAT`,<br/>[`Decimal`][rust_decimal] (requires [`no_float`]+[`decimal`]) | `42.0`, `-123.456`, `123.`, `123.456e-10`                                                                               |
-|        [Ranges] in [`switch`]({{rootUrl}}/language/switch.md) cases        | `-10..10` (exclusive), `0..=50` (inclusive)                                                                             |
+|                        [Ranges] in [`switch`] cases                        | `-10..10` (exclusive), `0..=50` (inclusive)                                                                             |
 |                              Normal [string]                               | `"... \x?? \u???? \U???????? ..."`                                                                                      |
 |                         [String] with continuation                         | `"this is the first line\`<br/>`second line\`<br/>`the third line"`                                                     |
 |                        Multi-line literal [string]                         | `` `this is the first line``<br/>``second line``</br>``the last line` ``                                                |

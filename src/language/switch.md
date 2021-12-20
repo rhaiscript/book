@@ -150,14 +150,14 @@ switch x {
 Difference From `if`-`else if` Chain
 -----------------------------------
 
-Although a `switch` expression looks _almost_ the same as an `if`-`else if` chain,
+Although a `switch` expression looks _almost_ the same as an [`if`-`else if`][`if`] chain,
 there are subtle differences between the two.
 
 ### Look-up Table vs `x == y`
 
 A `switch` expression matches through _hashing_ via a look-up table.
-Therefore, matching is very fast.  Walking down an `if`-`else if` chain
-is _much_ slower.
+Therefore, matching is very fast.  Walking down an [`if`-`else if`][`if`]
+chain is _much_ slower.
 
 On the other hand, operators can be [overloaded][operator overloading] in Rhai,
 meaning that it is possible to override the `==` operator for integers such
@@ -180,5 +180,5 @@ Because the `switch` expression works through a look-up table, it is very effici
 even for _large_ number of cases; in fact, switching is an O(1) operation regardless
 of the size of the data and number of cases to match.
 
-A long `if`-`else if` chain becomes increasingly slower with each additional case
+A long [`if`-`else if`][`if`] chain becomes increasingly slower with each additional case
 because essentially an O(n) _linear scan_ is performed.

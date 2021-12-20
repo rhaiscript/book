@@ -128,7 +128,6 @@
 [function overloading]: {{rootUrl}}/rust/functions.md#function-overloading
 [fallible function]: {{rootUrl}}/rust/fallible.md
 [fallible functions]: {{rootUrl}}/rust/fallible.md
-[`throw`]: {{rootUrl}}/language/throw.md
 [exception]: {{rootUrl}}/language/throw.md
 [exceptions]: {{rootUrl}}/language/throw.md
 [function pointer]: {{rootUrl}}/language/fn-ptr.md
@@ -150,8 +149,6 @@
 [variable resolver]: {{rootUrl}}/engine/var.md
 [strict variables]: {{rootUrl}}/engine/strict-var.md
 [`private`]: {{rootUrl}}/language/modules/export.md
-[`export`]: {{rootUrl}}/language/modules/export.md
-[`import`]: {{rootUrl}}/language/modules/import.md
 
 [`eval`]: {{rootUrl}}/language/eval.md
 
@@ -181,5 +178,19 @@
 [custom operator]: {{rootUrl}}/engine/custom-op.md
 [custom operators]: {{rootUrl}}/engine/custom-op.md
 [custom syntax]: {{rootUrl}}/engine/custom-syntax.md
+
+[`if`]: {{rootUrl}}/language/if.md
+[`switch`]: {{rootUrl}}/language/switch.md
+[`while`]: {{rootUrl}}/language/while.md
+[`do`]: {{rootUrl}}/language/do.md
+[`loop`]: {{rootUrl}}/language/loop.md
+[`for`]: {{rootUrl}}/language/for.md
+[`in`]: {{rootUrl}}/language/in.md
+[`return`]: {{rootUrl}}/language/return.md
+[`throw`]: {{rootUrl}}/language/throw.md
+[`try`]: {{rootUrl}}/language/try-catch.md
+[`catch`]: {{rootUrl}}/language/try-catch.md
+[`import`]: {{rootUrl}}/language/modules/import.md
+[`export`]: {{rootUrl}}/language/modules/export.md
 
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md

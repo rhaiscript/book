@@ -3,10 +3,10 @@ Iterators for Custom Types
 
 {{#include ../links.md}}
 
-If a [custom type] is iterable, the [`for`](for.md) loop can be used to iterate through
+If a [custom type] is iterable, the [`for`] loop can be used to iterate through
 its items in sequence.
 
-In order to use a [`for`](for.md) statement, a _type iterator_ must be registered for
+In order to use a [`for`] statement, a _type iterator_ must be registered for
 the [custom type] in question.
 
 `Engine::register_iterator<T>` allows registration of a _type iterator_ for any type

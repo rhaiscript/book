@@ -32,7 +32,7 @@ Disable Keywords and/or Operators
 In some DSL scenarios, it is necessary to further restrict the language to exclude certain
 language features that are not necessary or dangerous to the application.
 
-For example, a DSL may disable the `while` loop while keeping all other statement types intact.
+For example, a DSL may disable the [`while`] loop while keeping all other statement types intact.
 
 It is possible, in Rhai, to surgically [disable keywords and operators].
 

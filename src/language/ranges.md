@@ -21,17 +21,17 @@ Usage Scenarios
 
 Ranges are commonly used in the following scenarios.
 
-| Scenario                                               | Example                                 |
-| ------------------------------------------------------ | --------------------------------------- |
-| [`for`]({{rootUrl}}/language/for.md) statements        | `for n in 0..100 { ... }`               |
-| [`in`]({{rootUrl}}/language/in.md) expressions         | `if n in 0..100 { ... }`                |
-| [`switch`]({{rootUrl}}/language/switch.md) expressions | `switch n { 0..100 => ... }`            |
-| [Bit-fields] access                                    | `let x = n[2..6];`                      |
-| [Array] range-based API's                              | `array.extract(2..8)`                   |
-| [String] range-based API's                             | `string.sub_string(4..=12)`             |
-| [BLOB] range-based API's                               | `blob.parse_le_int(4..8)`               |
-| Bits iteration                                         | `for bit in n.bits(2..=9) { ... }`      |
-| [Characters] iteration                                 | `for ch in string.bits(4..=12) { ... }` |
+| Scenario                   | Example                                 |
+| -------------------------- | --------------------------------------- |
+| [`for`] statements         | `for n in 0..100 { ... }`               |
+| [`in`] expressions         | `if n in 0..100 { ... }`                |
+| [`switch`] expressions     | `switch n { 0..100 => ... }`            |
+| [Bit-fields] access        | `let x = n[2..6];`                      |
+| [Array] range-based API's  | `array.extract(2..8)`                   |
+| [String] range-based API's | `string.sub_string(4..=12)`             |
+| [BLOB] range-based API's   | `blob.parse_le_int(4..8)`               |
+| Bits iteration             | `for bit in n.bits(2..=9) { ... }`      |
+| [Characters] iteration     | `for ch in string.bits(4..=12) { ... }` |
 
 
 Built-in Functions

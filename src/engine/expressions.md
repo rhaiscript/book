@@ -11,8 +11,8 @@ In these cases, use the `Engine::compile_expression` and `Engine::eval_expressio
 let result = engine.eval_expression::<i64>("2 + (10 + 10) * 2")?;
 ```
 
-When evaluating _expressions_, no full-blown statement (e.g. `if`, `while`, `for`, `fn`) &ndash; not even variable assignment &ndash;
-is supported and will be considered parse errors when encountered.
+When evaluating _expressions_, no full-blown statement (e.g. [`if`], [`while`], [`for`], `fn`)
+&ndash; not even [variable] assignment &ndash; is supported and will be considered parse errors.
 
 [Closures] and [anonymous functions] are also not supported because in the background they compile to functions.
 

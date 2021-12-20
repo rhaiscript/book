@@ -110,7 +110,7 @@ The following _precedence table_ shows the built-in precedence of standard Rhai 
 | Logic and bit masks | <code>\|\|</code>,  <code>\|</code>, `^` |  left   |         30         |
 | Logic and bit masks |                `&&`, `&`                 |  left   |         60         |
 | Comparisons         |                `==`, `!=`                |  left   |         90         |
-| Containment         |                   `in`                   |  left   |        110         |
+| Containment         |                  [`in`                   |  left   |        110         |
 | Comparisons         |           `>`, `>=`, `<`, `<=`           |  left   |        130         |
 | Ranges              |               `..`, `..=`                |  left   |        140         |
 | Arithmetic          |                 `+`, `-`                 |  left   |        150         |

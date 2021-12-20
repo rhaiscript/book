@@ -15,7 +15,7 @@ even when using a [raw `Engine`].
 | `&&`, <code>\|\|</code>   |                               | &bull; `bool` (short-circuits)                                                                                                                                                                                                         |
 | `==`, `!=`                |                               | &bull; `INT`<br/>&bull; `FLOAT` (if not [`no_float`])<br/>&bull; [`Decimal`][rust_decimal] (requires [`decimal`])<br/>&bull; `bool`<br/>&bull; `char`<br/>&bull; [string]<br/>&bull; [BLOB]<br/>&bull; numeric [range]<br/>&bull; `()` |
 | `>`, `>=`, `<`, `<=`      |                               | &bull; `INT`<br/>&bull; `FLOAT` (if not [`no_float`])<br/>&bull; [`Decimal`][rust_decimal] (requires [`decimal`])<br/>&bull; `char`<br/>&bull; [string]<br/>&bull; `()`                                                                |
-| `in`                      |                               | &bull; [string]<br/>&bull; `char`/[string]<br/>&bull; [string]/[object map] (if not [`no_object`])<br/>&bull;`INT`/[BLOB] (if not [`no_index`])<br/>&bull;`INT`/numeric [range]                                                        |
+| [`in`]                    |                               | &bull; [string]<br/>&bull; `char`/[string]<br/>&bull; [string]/[object map] (if not [`no_object`])<br/>&bull;`INT`/[BLOB] (if not [`no_index`])<br/>&bull;`INT`/numeric [range]                                                        |
 
 All built-in operators are binary, and are supported for both operands of the same type.
 

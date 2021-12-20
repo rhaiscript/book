@@ -38,7 +38,7 @@ Catch a Thrown Exception
 ------------------------
 
 It is possible to _catch_ an exception instead of having it abort the evaluation
-of the entire script via the [`try` ... `catch`]({{rootUrl}}/language/try-catch.md)
+of the entire script via the [`try` ... `catch`][`try`]
 statement common to many C-like languages.
 
 ```rust no_run

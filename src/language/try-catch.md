@@ -77,23 +77,22 @@ Catchable Exceptions
 
 Many script-oriented exceptions can be caught via `try` ... `catch`.
 
-| Error type                                    |        Error value         |
-| --------------------------------------------- | :------------------------: |
-| Runtime error thrown by a [`throw`] statement | value in `throw` statement |
-| Arithmetic error                              |        [object map]        |
-| Variable not found                            |        [object map]        |
-| [Function] not found                          |        [object map]        |
-| [Module] not found                            |        [object map]        |
-| Unbound [`this`]                              |        [object map]        |
-| Data type mismatch                            |        [object map]        |
-| Assignment to a calculated/constant value     |        [object map]        |
-| [Array]/[string] indexing out-of-bounds       |        [object map]        |
-| Indexing with an inappropriate data type      |        [object map]        |
-| Error in a dot expression                     |        [object map]        |
-| `for` statement without a [type iterator]     |        [object map]        |
-| Error in an `in` expression                   |        [object map]        |
-| Data race detected                            |        [object map]        |
-| Other runtime error                           |        [object map]        |
+| Error type                                    |         Error value          |
+| --------------------------------------------- | :--------------------------: |
+| Runtime error thrown by a [`throw`] statement | value in [`throw`] statement |
+| Arithmetic error                              |         [object map]         |
+| Variable not found                            |         [object map]         |
+| [Function] not found                          |         [object map]         |
+| [Module] not found                            |         [object map]         |
+| Unbound `this`                                |         [object map]         |
+| Data type mismatch                            |         [object map]         |
+| Assignment to a calculated/[constant] value   |         [object map]         |
+| [Array]/[string] indexing out-of-bounds       |         [object map]         |
+| Indexing with an inappropriate data type      |         [object map]         |
+| Error in a dot expression                     |         [object map]         |
+| [`for`] statement without a [type iterator]   |         [object map]         |
+| Data race detected                            |         [object map]         |
+| Other runtime error                           |         [object map]         |
 
 The error value in the `catch` clause is an [object map] containing information on the particular error,
 including its type, line and character position (if any), and source etc.

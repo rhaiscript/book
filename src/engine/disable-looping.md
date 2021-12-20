@@ -7,8 +7,7 @@ For certain scripts, especially those in embedded usage for straight calculation
 script [`AST`]'s are eventually transcribed into some other instruction set, looping may be
 undesirable as it may not be supported by the application itself.
 
-Rhai looping constructs include the [`while`](../language/while.md), [`loop`](../language/loop.md),
-[`do`](../language/do.md) and [`for`](../language/for.md) statements.
+Rhai looping constructs include the [`while`], [`loop`], [`do`] and [`for`] statements.
 
 Although it is possible to disable these keywords via [`Engine::disable_symbol`][disable keywords
 and operators], it is simpler to disable all looping via [`Engine::set_allow_looping`][options].

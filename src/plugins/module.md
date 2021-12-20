@@ -167,7 +167,7 @@ x == 43;
 
 All functions (usually _methods_) defined in the module and marked with `#[rhai_fn(global)]`,
 as well as all [type iterators], are automatically exposed to the _global_ namespace, so
-[iteration]({{rootUrl}}/language/for.md), [getters/setters] and [indexers] for [custom types]
+[iteration][`for`], [getters/setters] and [indexers] for [custom types]
 can work as expected.
 
 In fact, the default for all [getters/setters] and [indexers] defined in a plugin module
