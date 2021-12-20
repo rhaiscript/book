@@ -32,8 +32,8 @@ although there is nothing that prevents this mutation.
 **IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
 
 
-Cannot Override Arrays, BLOB's Object Maps, Strings and Integers
---------------------------------------------------------------
+Cannot Override Arrays, BLOB's, Object Maps, Strings and Integers
+---------------------------------------------------------------
 
 For efficiency reasons, indexers **cannot** be used to overload (i.e. override)
 built-in indexing operations for [arrays], [object maps], [strings] and integers
@@ -145,11 +145,19 @@ This is also extremely useful as a short-hand for indexers, when the [string] ke
 property name syntax.
 
 ```rust no_run
+// Assume 'obj' has an indexer defined with string parameters...
+
+// Let's create a new key...
+obj.hello_world = 42;
+
+// The above is equivalent to this:
+obj["hello_world"] = 42;
+
 // You can write this...
-let x = foo["hello_world"];
+let x = obj["hello_world"];
 
 // but it is easier with this...
-let x = foo.hello_world;
+let x = obj.hello_world;
 ```
 
 The reverse, however, is not true &ndash; when an indexer fails or doesn't exist, the corresponding
@@ -174,15 +182,15 @@ engine.register_type::<MyType>()
       .register_indexer_get(|object: &mut MyType, index: &str| *object[index])
       .register_indexer_set(|object: &mut MyType, index: &str, value: i64| object[index] = value);
 
-// Calls a["foo"] because getter for 'foo' does not exist
-engine.run("let a = new_ts(); print(a.foo);");
+// Calls ts["foo"] because getter for 'foo' does not exist
+engine.run("let ts = new_ts(); print(ts.foo);");
 
-// Calls a["bar"] because getter for 'bar' does not exist
-engine.run("let a = new_ts(); print(a.bar);");
+// Calls ts["bar"] because getter for 'bar' does not exist
+engine.run("let ts = new_ts(); print(ts.bar);");
 
-// Calls a["baz"] = 999 because getter for 'baz' does not exist
-engine.run("let a = new_ts(); a.baz = 999;");
+// Calls ts["baz"] = 999 because getter for 'baz' does not exist
+engine.run("let ts = new_ts(); ts.baz = 999;");
 
 // Error: Property getter is not a fallback for indexer
-engine.run(r#"let a = new_ts(); print(a["hello"]);"#);
+engine.run(r#"let ts = new_ts(); print(ts["hello"]);"#);
 ```

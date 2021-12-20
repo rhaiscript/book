@@ -21,11 +21,11 @@ String and Character Literals
 
 String and character literals follow JavaScript-style syntax.
 
-| Type                      |   Quotes    | Escapes? | Continuation?  | Interpolation? |
-| ------------------------- | :---------: | :------: | :------------: | :------------: |
-| Normal string             |   `"..."`   |   yes    | yes (with `\`) |       no       |
-| Multi-line literal string | `` `...` `` |    no    |       no       | yes (`${...}`) |
-| Character                 |   `'...'`   |   yes    |       no       |       no       |
+| Type                      |   Quotes    | Escapes? | Continuation? | Interpolation? |
+| ------------------------- | :---------: | :------: | :-----------: | :------------: |
+| Normal string             |   `"..."`   |   yes    |   with `\`    |       no       |
+| Multi-line literal string | `` `...` `` |    no    |      no       | with `${...}`  |
+| Character                 |   `'...'`   |   yes    |      no       |       no       |
 
 
 Standard Escape Sequences
@@ -68,7 +68,6 @@ ending back-slash (`\`) character.
 let x = "hello, world!\
          hello world again! \
          this is the ""last"" time!!!";
-
 // ^^^^^^ these whitespaces are ignored
 
 // The above is the same as:
@@ -76,7 +75,7 @@ let x = "hello, world!hello world again! this is the \"last\" time!!!";
 ```
 
 A string with continuation does not open up a new line.  To do so, a new-line character must be
-manually inserted at the appropriate position:
+manually inserted at the appropriate position.
 
 ```rust no_run
 let x = "hello, world!\n\
@@ -119,7 +118,7 @@ let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this
 ```
 
 To actually put a back-tick (`` ` ``) character inside a multi-line literal string, use two
-back-ticks together (i.e. ``` `` ```):
+back-ticks together (i.e. ``` `` ```).
 
 ```js
 let x = `I have a quote " as well as a back-tick `` here.`;

@@ -84,6 +84,7 @@ fn greet_main() {
     print(main_message());      // call function not in module script
 }
 
+
 ┌───────────┐
 │ main.rhai │
 └───────────┘
@@ -135,6 +136,7 @@ fn greet() {
     }
 }
 
+
 ┌───────────┐
 │ main.rhai │
 └───────────┘
@@ -145,6 +147,7 @@ fn message() { "hi! from main!" }
 import "my_module" as m;
 
 m::greet();                         // prints "hi! from main!"
+
 
 ┌────────────┐
 │ main2.rhai │

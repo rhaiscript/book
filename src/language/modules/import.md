@@ -114,6 +114,7 @@ Modules cross-referencing also cause infinite recursion:
 import "world" as foo;
 foo::do_something();
 
+
 ┌────────────┐
 │ world.rhai │
 └────────────┘

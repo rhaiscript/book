@@ -17,7 +17,7 @@ The following are reserved keywords in Rhai.
 | [`return`]                                                                 |                                                            | return values                       |                                |
 | [`throw`], [`try`], [`catch`]                                              |                                                            | [throw/catch][`catch`] [exceptions] |                                |
 | [`import`], [`export`], `as`                                               | `use`, `with`, `module`, `package`, `super`                | [modules]                           |         [`no_module`]          |
-| `global`                                                                   |                                                            | automatic global [module]           | [`no_function`], [`no_module`] |
+| [`global`]                                                                 |                                                            | automatic global [module]           | [`no_function`], [`no_module`] |
 | [`Fn`][function pointer], `call`, [`curry`][currying]                      |                                                            | [function pointers]                 |                                |
 |                                                                            | `spawn`, `thread`, `go`, `sync`, `async`, `await`, `yield` | threading/async                     |                                |
 | [`type_of`], [`print`], [`debug`], [`eval`], `is_def_var`                  |                                                            | special functions                   |                                |

@@ -27,7 +27,7 @@ Keywords List
 |       `import`        | [import][`import`] [module]                             |         [`no_module`]          |      no      |
 |       `export`        | [export][`export`] [variable]                           |         [`no_module`]          |      no      |
 |         `as`          | alias for [variable] [export][`export`]                 |         [`no_module`]          |      no      |
-|       `global`        | automatic global [module]                               | [`no_module`], [`no_function`] |      no      |
+|       `global`        | automatic [global][`global`] [module]                   | [`no_module`], [`no_function`] |      no      |
 |       `private`       | mark [function] [private][`private`]                    |        [`no_function`]         |      no      |
 | `fn` (lower-case `f`) | [function] definition                                   |        [`no_function`]         |      no      |
 |  `Fn` (capital `F`)   | create a [function pointer]                             |                                |     yes      |

@@ -3,17 +3,31 @@ Ranges
 
 {{#include ../links.md}}
 
+
+Syntax
+------
+
 Numeric ranges can be constructed by the `..` (exclusive) or `..=` (inclusive) operators.
 
-> _start_ `..` _end_ &nbsp;&nbsp;&nbsp;&nbsp; (exclusive)
->
-> _start_ `..=` _end_ &nbsp;&nbsp;&nbsp;&nbsp; (inclusive)
+### Exclusive range
 
-An _exclusive_ range does not include the last (i.e. "end") value, while an _inclusive_ range does.
+> _start_ `..` _end_
 
-The Rust type of a range `std::ops::Range` (exclusive) or `std::ops::RangeInclusive` (inclusive).
+An _exclusive_ range does not include the last (i.e. "end") value.
 
-[`type_of()`] a range returns `"range"` (exclusive) or `"range="` (inclusive).
+The Rust type of an exclusive range is `std::ops::Range<INT>`.
+
+[`type_of()`] an exclusive range returns `"range"`.
+
+### Inclusive range
+
+> _start_ `..=` _end_
+
+An _inclusive_ range includes the last (i.e. "end") value.
+
+The Rust type of an inclusive range is `std::ops::RangeInclusive<INT>`.
+
+[`type_of()`] an inclusive range returns `"range="`.
 
 
 Usage Scenarios

@@ -22,13 +22,13 @@ captured by `value`.
 
 ```rust no_run
 let result = engine.eval::<i64>(
-r#"
+"
     let x = 42;
 
     if x > 0 {
         throw x;
     }
-"#);
+";
 
 println!("{}", result);     // prints "Runtime error: 42 (line 5, position 15)"
 ```

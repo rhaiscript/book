@@ -146,6 +146,7 @@
 [module]: {{rootUrl}}/rust/modules/index.md
 [modules]: {{rootUrl}}/rust/modules/index.md
 [module resolver]: {{rootUrl}}/rust/modules/resolvers.md
+[`global`]: {{rootUrl}}/language/global.md
 [variable resolver]: {{rootUrl}}/engine/var.md
 [strict variables]: {{rootUrl}}/engine/strict-var.md
 [`private`]: {{rootUrl}}/language/modules/export.md

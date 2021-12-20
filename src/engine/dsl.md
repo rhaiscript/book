@@ -43,8 +43,6 @@ Custom Operators
 On the other hand, some DSL scenarios require special operators that make sense only for
 that specific environment.  In such cases, it is possible to define [custom operators] in Rhai.
 
-For example:
-
 ```rust no_run
 let animal = "rabbit";
 let food = "carrot";

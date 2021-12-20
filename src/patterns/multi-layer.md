@@ -52,6 +52,7 @@ fn bar(x, y) { x + y }
 // Default implementation of 'no_touch'.
 fn no_touch() { throw "do not touch me!"; }
 
+
 ┌─────────────┐
 │ lowest.rhai │
 └─────────────┘
@@ -62,6 +63,7 @@ fn foo(x) { x * 2 }
 // New implementation for this layer.
 fn baz() { print("hello!"); }
 
+
 ┌─────────────┐
 │ middle.rhai │
 └─────────────┘
@@ -71,6 +73,7 @@ fn bar(x, y) { x - y }
 
 // Specific implementation of 'baz'.
 fn baz() { print("hey!"); }
+
 
 ┌──────────────┐
 │ highest.rhai │

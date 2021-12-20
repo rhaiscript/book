@@ -9,17 +9,13 @@ Constants follow the same naming rules as [variables], but as a convention are o
 all-capital letters.
 
 ```rust no_run
-const X = 42;
+const X;            // 'X' is a constant '()'
+
+const X = 40 + 2;   // 'X' is a constant 42
 
 print(X * 2);       // prints 84
 
 X = 123;            // <- syntax error: constant modified
-```
-
-```rust no_run
-const X;            // 'X' is a constant '()'
-
-const X = 40 + 2;   // 'X' is a constant 42
 ```
 
 

@@ -30,6 +30,7 @@ fn hello() {
     }
 }
 
+
 ┌──────┐
 │ Rust │
 └──────┘
@@ -184,6 +185,7 @@ let foo = 123;                      // 'foo' is retained
 
     foo = bar * bar;
 }
+
 
 ┌──────┐
 │ Rust │

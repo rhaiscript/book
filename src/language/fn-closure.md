@@ -17,7 +17,7 @@ Variables that are accessible during the time the [anonymous function] is create
 as long as they are not shadowed by local variables defined within the function's scope.
 
 The captured variables are automatically converted into **reference-counted shared values**
-(`Rc<RefCell<Dynamic>>` in normal builds, `Arc<RwLock<Dynamic>>` in [`sync`] builds).
+(`Rc<RefCell<Dynamic>>`, or `Arc<RwLock<Dynamic>>` under [`sync`]).
 
 Therefore, similar to closures in many languages, these captured shared values persist through
 reference counting, and may be read or modified even after the variables that hold them
@@ -47,13 +47,12 @@ x = 40;                             // changing 'x'...
 f.call(2) == 42;                    // the value of 'x' is 40 because 'x' is shared
 
 // The above de-sugars into this:
-fn anon$1001(x, y) { x + y }        // parameter 'x' is inserted
 
-$make_shared(x);                    // convert variable 'x' into a shared value
+fn anon_0001(x, y) { x + y }        // parameter 'x' is inserted
 
-let f = Fn("anon$1001").curry(x);   // shared 'x' is curried
+$make_shared$(x);                   // convert variable 'x' into a shared value
 
-f.call(2) == 42;
+let f = Fn("anon_0001").curry(x);   // shared 'x' is curried
 ```
 
 
@@ -67,17 +66,17 @@ It prints `9`, `9`, `9`, ... `9`, `9`, not `0`, `1`, `2`, ... `8`, `9`, because 
 ever only _one_ captured variable, and all ten closures capture the _same_ variable.
 
 ```rust no_run
-let funcs = [];
+let list = [];
 
 for i in 0..10 {
-    funcs.push(|| print(i));        // the for loop variable 'i' is captured
+    list.push(|| print(i));         // the for loop variable 'i' is captured
 }
 
-funcs.len() == 10;                  // 10 closures stored in the array
+list.len() == 10;                   // 10 closures stored in the array
 
-funcs[0].type_of() == "Fn";         // make sure these are closures
+list[0].type_of() == "Fn";          // make sure these are closures
 
-for f in funcs {
+for f in list {
     f.call();                       // all references to 'i' are the same variable!
 }
 ```

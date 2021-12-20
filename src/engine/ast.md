@@ -72,10 +72,10 @@ let ast1 = engine.compile(
 
 // Second script
 let ast2 = engine.compile(
-r#"
+"
      fn foo(n) { `hello${n}` }
      foo("!")
-"#)?;
+")?;
 
 // Merge them
 let merged = ast1.merge(&ast2);

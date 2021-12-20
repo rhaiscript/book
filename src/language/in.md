@@ -96,20 +96,25 @@ container.contains(item)
 Support for the `in` operator can be easily extended to other types by registering a custom binary
 function named `contains` with the correct parameter types.
 
-For example:
-
 ```rust no_run
+┌──────┐
+│ Rust │
+└──────┘
+
 engine.register_type::<TestStruct>()
       .register_fn("new_ts", || TestStruct::new())
       .register_fn("contains", |ts: &mut TestStruct, item: i64| -> bool {
           // Remember the parameters are switched from the 'in' expression
           ts.contains(item)
       });
-```
 
-Now the `in` operator can be used for `TestStruct`:
 
-```rust no_run
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+// Now the 'in' operator can be used for 'TestStruct' and integer
+
 let ts = new_ts();
 
 if 42 in ts {                       // this calls the 'contains' function

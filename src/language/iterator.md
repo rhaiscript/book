@@ -10,9 +10,15 @@ In order to use a [`for`] statement, a _type iterator_ must be registered for
 the [custom type] in question.
 
 `Engine::register_iterator<T>` allows registration of a _type iterator_ for any type
-that implements `IntoIterator`:
+that implements `IntoIterator`.
+
+With a type iterator registered, the [custom type] can be iterated through.
 
 ```rust no_run
+┌──────┐
+│ Rust │
+└──────┘
+
 // Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec<i64> }
@@ -27,14 +33,16 @@ impl IntoIterator<Item = i64> for TestStruct {
     }
 }
 
+// Register API and type iterator for 'TestStruct'
 engine.register_type_with_name::<TestStruct>("TestStruct")
       .register_fn("new_ts", || TestStruct { fields: vec![1, 2, 3, 42] })
-      .register_iterator::<TestStruct>();         // register type iterator
-```
+      .register_iterator::<TestStruct>();
 
-With a type iterator registered, the [custom type] can be iterated through:
 
-```rust no_run
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
 let ts = new_ts();
 
 // Use 'for' statement to loop through items in 'ts'

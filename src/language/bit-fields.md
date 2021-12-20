@@ -53,6 +53,8 @@ _most-significant bit_, with &minus;1 being the _highest_ bit.
 
 The maximum bit number that can be accessed is &minus;64 (or &minus;32 under [`only_i32`]).
 
+[Ranges] always count from the least-significant bit (LSB) and has no support for negative positions.
+
 
 Bit-Field Functions
 -------------------
@@ -77,11 +79,11 @@ Example
 
 ```js , no_run
 // Assume the following bits fields in a single 16-bit word:
-// ┌─────────┬───────┬─────────────────┬───────────┐
-// │   0-2   │   3   │      4-11       │   12-15   │
-// ├─────────┼───────┼─────────────────┼───────────┤
-// │ Command │ Flag  │    0-255 data   │  0 0 0 0  │
-// └─────────┴───────┴─────────────────┴───────────┘
+// ┌─────────┬────────────┬──────┬─────────┐
+// │  15-12  │    11-4    │  3   │   2-0   │
+// ├─────────┼────────────┼──────┼─────────┤
+// │    0    │ 0-255 data │ flag │ command │
+// └─────────┴────────────┴──────┴─────────┘
 
 let value = read_start_hw_register(42);
 
@@ -89,8 +91,8 @@ let command = value.get_bits(0, 3);         // Command = bits 0-2
 
 let flag = value[3];                        // Flag = bit 3
 
-let data = value.get_bits(4..=11);          // Data = bits 4-11
-let data = value[4..=11];                   // <- above is the same as this
+let data = value[4..=11];                   // Data = bits 4-11
+let data = value.get_bits(4..=11);          // <- above is the same as this
 
 let reserved = value.get_bits(-4);          // Reserved = last 4 bits
 
@@ -100,7 +102,7 @@ if reserved != 0 {
 
 switch command {
     0 => print(`Data = ${data}`),
-    1 => value.set_bits(4..=11, data / 2),
+    1 => value[4..=11] = data / 2,
     2 => value[3] = !flag,
     _ => print(`Unknown: ${command}`)
 }

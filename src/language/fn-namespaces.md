@@ -24,7 +24,6 @@ In general, there are two main types of _namespaces_ where functions are looked 
 | Global    |   one    | 1) [`AST`] being evaluated<br/>2) `Engine::register_XXX` API<br/>3) global [modules] registered via `Engine::register_global_module`<br/>4) functions in static [modules] registered via `Engine::register_static_module` and marked _global_ | simple name              |   ignored    |  ignored   |
 | Module    |   many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                                   | namespace-qualified name |     yes      |    yes     |
 
-
 ### Module Namespaces
 
 There can be multiple module namespaces at any time during a script evaluation, usually loaded via the
@@ -46,7 +45,6 @@ let y = m::MY_NUMBER;           // namespace-qualified variable/constant access
 let z = calc_result();          // <- error: function 'calc_result' not found
                                 //    in global namespace!
 ```
-
 
 ### Global Namespace
 

@@ -16,7 +16,7 @@ can be changed.
 The only way for a script-defined [function] to change an external value is via `this`.
 
 ```rust no_run
-fn change() {       // not that the object does not need a parameter
+fn change() {       // note that the method does not need a parameter
     this = 42;      // 'this' binds to the object in method-call
 }
 
