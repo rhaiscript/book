@@ -9,6 +9,13 @@ data type _contains_ a particular item.
 
 Internally the `in` operator is simply syntactic sugar for a call to the `contains` function.
 
+```rust no_run
+42 in array;
+
+// The above is equivalent to:
+array.contains(42);
+```
+
 
 Built-in Support
 ----------------
@@ -27,13 +34,17 @@ Examples
 --------
 
 ```rust no_run
-42 in [1, "abc", 42, ()] == true;   // check array for item
+let array = [1, "abc", 42, ()];
 
-"foo" in #{                         // check object map for property name
+42 in array == true;                // check array for item
+
+let map = #{
     foo: 42,
     bar: true,
     baz: "hello"
-} == true;
+};
+
+"foo" in map == true;               // check object map for property name
 
 'w' in "hello, world!" == true;     // check string for character
 
@@ -57,9 +68,10 @@ See the section on [_Logic Operators_](logic.md) for more details.
 ```rust no_run
 let ts = new_ts();                  // assume 'new_ts' returns a custom type
 
-let a = [1, 2, 3, ts, 42, 999];     // array contains custom type
+let array = [1, 2, 3, ts, 42, 999];
+//                    ^^ custom type
 
-42 in a == true;                    // 42 cannot be compared with 'ts'
+42 in array == true;                // 42 cannot be compared with 'ts'
                                     // so it defaults to 'false'
                                     // because == operator is not defined
 ```
@@ -70,16 +82,15 @@ Custom Implementation of `contains`
 
 The `in` operator maps directly to a call to a function `contains` with the two operands switched.
 
-For example:
-
 ```rust no_run
+// This expression...
 item in container
-```
 
-maps to the following function call:
-
-```rust no_run
+// maps to this...
 contains(container, item)
+
+// or...
+container.contains(item)
 ```
 
 Support for the `in` operator can be easily extended to other types by registering a custom binary
@@ -90,9 +101,9 @@ For example:
 ```rust no_run
 engine.register_type::<TestStruct>()
       .register_fn("new_ts", || TestStruct::new())
-      .register_fn("contains", |container: &mut TestStruct, item: i64| -> bool {
+      .register_fn("contains", |ts: &mut TestStruct, item: i64| -> bool {
           // Remember the parameters are switched from the 'in' expression
-          container.contains(item)
+          ts.contains(item)
       });
 ```
 
@@ -106,4 +117,5 @@ if 42 in ts {                       // this calls the 'contains' function
 }
 
 let err = "hello" in ts;            // <- runtime error: 'contains' not found
+                                    //    for 'TestStruct' and string
 ```
