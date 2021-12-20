@@ -61,7 +61,7 @@ Function Signature
 The function signature passed to `Engine::on_var` takes the following form:
 
 > `Fn(name: &str, index: usize, context: &EvalContext)`  
-> `-> Result<Option<Dynamic>, Box<EvalAltResult>> + 'static`
+> &nbsp;&nbsp;&nbsp;&nbsp;`-> Result<Option<Dynamic>, Box<EvalAltResult>> + 'static`
 
 where:
 

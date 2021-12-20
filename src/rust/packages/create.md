@@ -17,17 +17,26 @@ For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/pa
 `def_package!`
 --------------
 
-> `def_package!(`_root_`:`_name_`:"`_description_`", `_variable_`, { `_block_` });`
+> ```rust no_run
+> def_package! {
+>     /// Package description doc-comment
+>     root::name => |variable| {
+>                         :
+>         // package initialization code block
+>                         :
+>     }
+> }
+> ```
 
 where:
 
-|  Parameter  | Description                                                                                     |
-| :---------: | ----------------------------------------------------------------------------------------------- |
-|    root     | root namespace, usually `rhai`                                                                  |
-|    name     | name of the package, usually ending in ...`Package`                                             |
-| description | doc-comment for the package                                                                     |
-|  variable   | a variable name holding a reference to the [module] (`&mut Module`) that is to form the package |
-|    block    | a code block that initializes the package                                                       |
+|  Parameter  | Description                                                                                             |
+| :---------: | ------------------------------------------------------------------------------------------------------- |
+| description | doc-comment for the package                                                                             |
+|    root     | root namespace, usually `rhai`                                                                          |
+|    name     | name of the package, usually ending in ...`Package`                                                     |
+|  variable   | a variable name holding a reference to the [module] forming the package, usually `module`, `m` or `lib` |
+| code block  | a code block that initializes the package                                                               |
 
 
 Examples
@@ -41,23 +50,24 @@ use rhai::packages::{
 };
 
 // Define the package 'MyPackage'.
-def_package!(rhai:MyPackage:"My own personal super package", module, {
-    // Aggregate other packages simply by calling 'init' on each.
-    ArithmeticPackage::init(module);
-    LogicPackage::init(module);
-    BasicArrayPackage::init(module);
-    BasicMapPackage::init(module);
+def_package! {
+    /// My own personal super package
+    rhai::MyPackage => |module| {
+        // Aggregate other packages simply by calling 'init' on each.
+        ArithmeticPackage::init(module);
+        LogicPackage::init(module);
+        BasicArrayPackage::init(module);
+        BasicMapPackage::init(module);
 
-    // Register additional Rust functions using 'Module::set_native_fn'.
-    let hash = module.set_native_fn("foo", |s: ImmutableString| {
-        Ok(foo(s.into_owned()))
-    });
+        // Register additional Rust functions using 'Module::set_native_fn'.
+        let hash = module.set_native_fn("foo", |s: &str| Ok(foo(s)));
 
-    // Remember to update the parameter names/types and return type metadata
-    // when using the 'metadata' feature.
-    // 'Module::set_native_fn' by default does not set function metadata.
-    module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
-});
+        // Remember to update the parameter names/types and return type
+        // metadata when using the 'metadata' feature because
+        // 'Module::set_native_fn' by default does not set function metadata.
+        module.update_fn_metadata(hash, &["s: &str", "i64"]);
+    }
+}
 ```
 
 
@@ -78,23 +88,35 @@ Variables in the [plugin module] are ignored.
 ```rust no_run
 // Import necessary types and traits.
 use rhai::def_package;
-use rhai::packages::{ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage};
+use rhai::packages::{
+    ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage
+};
 use rhai::plugin::*;
 
 // Define plugin module.
 #[export_module]
-mod my_module {
+mod my_plugin_module {
     pub const MY_NUMBER: i64 = 42;
 
     pub fn greet(name: &str) -> String {
         format!("hello, {}!", name)
     }
-    pub fn get_num() -> i64 {
+
+    // Non-public functions are by default not exported.
+    fn get_private_num() -> i64 {
         42
     }
 
-    // This is a sub-module, but if using combine_with_exported_module!, it will
-    // be flattened and all functions registered at the top level.
+    pub fn get_num() -> i64 {
+        get_private_num()
+    }
+
+    // This is a sub-module, but if using 'combine_with_exported_module!',
+    // it will be flattened and all functions registered at the top level.
+    //
+    // Because of the flattening, sub-modules are very convenient for
+    // putting feature gates onto large groups of functions.
+    #[cfg(feature = "sub-num-feature")]
     pub mod my_sub_module {
         pub fn get_sub_num() -> i64 {
             0
@@ -103,27 +125,34 @@ mod my_module {
 }
 
 // Define the package 'MyPackage'.
-def_package!(rhai:MyPackage:"My own personal super package", module, {
-    // Aggregate other packages simply by calling 'init' on each.
-    ArithmeticPackage::init(module);
-    LogicPackage::init(module);
-    BasicArrayPackage::init(module);
-    BasicMapPackage::init(module);
+def_package! {
+    /// My own personal super package
+    rhai::MyPackage => |module| {
+        // Aggregate other packages simply by calling 'init' on each.
+        ArithmeticPackage::init(module);
+        LogicPackage::init(module);
+        BasicArrayPackage::init(module);
+        BasicMapPackage::init(module);
 
-    // Merge all registered functions and constants from the plugin module into the custom package.
-    //
-    // The sub-module 'my_sub_module' is flattened and its functions registered at the top level.
-    //
-    // The text string name in the second parameter can be anything and is reserved for future use;
-    // it is recommended to be an ID string that uniquely identifies the plugin module.
-    //
-    // The constant variable, 'MY_NUMBER', is ignored.
-    //
-    // This call ends up registering three functions at the top level of the package:
-    //   1) greet
-    //   2) get_num
-    //   3) get_sub_num (pulled up from 'my_sub_module')
-    //
-    combine_with_exported_module!(module, "my-functions", my_module));
-});
+        // Merge all registered functions and constants from the plugin module
+        // into the custom package.
+        //
+        // The sub-module 'my_sub_module' is flattened and its functions
+        // registered at the top level.
+        //
+        // The text string name in the second parameter can be anything
+        // and is reserved for future use; it is recommended to be an
+        // ID string that uniquely identifies the plugin module.
+        //
+        // The constant variable, 'MY_NUMBER', is ignored.
+        //
+        // This call ends up registering three functions at the top level of
+        // the package:
+        // 1) 'greet'
+        // 2) 'get_num'
+        // 3) 'get_sub_num' (flattened from 'my_sub_module')
+        //
+        combine_with_exported_module!(module, "my-mod", my_plugin_module));
+    }
+}
 ```

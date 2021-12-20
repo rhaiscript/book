@@ -56,20 +56,23 @@ use rhai::packages::{Package, StandardPackage};
 
 // Define the custom package 'MyCustomPackage'.
 
-def_package!(rhai:MyCustomPackage:"My own personal super-duper custom package", module, {
-    // Aggregate other packages simply by calling 'init' on each.
-    StandardPackage::init(module);
+def_package! {
+    /// My own personal super-duper custom package
+    rhai:MyCustomPackage => |module| {
+      // Aggregate other packages simply by calling 'init' on each.
+      StandardPackage::init(module);
 
-    // Register additional Rust functions using 'Module::set_native_fn'.
-    let hash = module.set_native_fn("foo", |s: ImmutableString| {
-        Ok(foo(s.into_owned()))
-    });
+      // Register additional Rust functions using 'Module::set_native_fn'.
+      let hash = module.set_native_fn("foo", |s: ImmutableString| {
+          Ok(foo(s.into_owned()))
+      });
 
-    // Remember to update the parameter names/types and return type metadata
-    // when using the 'metadata' feature.
-    // 'Module::set_native_fn' by default does not set function metadata.
-    module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
-});
+      // Remember to update the parameter names/types and return type metadata
+      // when using the 'metadata' feature.
+      // 'Module::set_native_fn' by default does not set function metadata.
+      module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
+  }
+}
 
 let ast = /* ... some AST ... */;
 
