@@ -50,10 +50,26 @@ engine.register_global_module(random.as_shared_module());
 Features
 --------
 
-| Feature | Description                                     | Should not be used with Rhai feature |
-| :-----: | ----------------------------------------------- | :----------------------------------: |
-| `float` | enables random floating-point number generation |             [`no_float`]             |
-| `array` | enables methods for [arrays]                    |             [`no_index`]             |
+|  Feature   | Description                                                  | Default? | Should not be used with Rhai feature |
+| :--------: | ------------------------------------------------------------ | :------: | :----------------------------------: |
+|  `float`   | enables random floating-point number generation              |   yes    |             [`no_float`]             |
+|  `array`   | enables methods for [arrays]                                 |   yes    |             [`no_index`]             |
+| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |    no    |                                      |
+
+### Example &ndash; working with `no_float` in Rhai
+
+```toml
+┌────────────┐
+│ Cargo.toml │
+└────────────┘
+
+[dependencies]
+# Rhai is set for 'no_float', meaning no floating-point support
+rhai = { version="{{version}}", features = ["no_float"] }
+
+# Use 'default-features = false' to clear defaults, then only add 'array'
+rhai-rand = { version="0.1", default-features = false, features = ["array"] }
+```
 
 
 Package Functions
