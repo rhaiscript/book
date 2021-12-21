@@ -51,7 +51,9 @@ mod my_module {
     pub fn greet(name: &str) -> String {
         format!("hello, {}!", name)
     }
-    // This function will be registered as 'get_num'.
+    /// This function will be registered as 'get_num'.
+    ///
+    /// If this is a Rust doc-comment, then it is included in the metadata.
     pub fn get_num() -> i64 {
         mystic_number()
     }
@@ -89,6 +91,12 @@ mod my_module {
     }
 }
 ```
+
+### Doc-comments
+
+If the [`metadata`] feature is active, doc-comments (i.e. comments starting with `///` or wrapped
+with `/**` ... `*/`) on plugin functions are extracted into the functions' [_metadata_][functions metadata].
+
 
 ### Use `Engine::register_global_module`
 
@@ -442,7 +450,7 @@ use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
 mod my_module {
-    // This overloads the '/' operator for i64.
+    /// This overloads the '/' operator for i64.
     #[rhai_fn(name = "/", return_raw)]
     pub fn double_and_divide(x: i64, y: i64) -> Result<i64, Box<EvalAltResult>> {
         if y == 0 {

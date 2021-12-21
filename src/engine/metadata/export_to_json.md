@@ -92,11 +92,11 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
   "params":  /* omitted if no parameters */
   [
     { "name": "param_1", "type": "type_1" },
-    { "name": "param_2" },  /* no type info */
-    { "name": "_", "type": "type_3" },
+    { "name": "param_2" },  /* no type name */
+    { "type": "type_3" },   /* no parameter name */
     ...
   ],
-  "returnType": "ret_type",  /* omitted if unknown */
+  "returnType": "ret_type",  /* omitted if () or unknown */
   "signature": "[private] fn_name(param_1: type_1, param_2, _: type_3) -> ret_type",
   "docComments":  /* omitted if none */
   [
