@@ -25,6 +25,17 @@ For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/pa
 >         // package initialization code block
 >                         :
 >     }
+>
+>     // Multiple packages can be defined at the same time
+>
+>     /// Package description doc-comment
+>     root::name => |variable| {
+>                         :
+>         // package initialization code block
+>                         :
+>     }
+> 
+>     :
 > }
 > ```
 
