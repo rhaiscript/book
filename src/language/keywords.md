@@ -10,6 +10,7 @@ The following are reserved keywords in Rhai.
 | `true`, `false`                                                            |                                                            | [constants]                         |                                |
 | [`let`][variable], [`const`][constant]                                     | `var`, `static`                                            | [variables]                         |                                |
 | `is_shared`                                                                |                                                            | _shared_ values                     |         [`no_closure`]         |
+|                                                                            | `is`                                                       | type checking                       |                                |
 | [`if`], [`else`][`if`]                                                     | `goto`, `exit`                                             | control flow                        |                                |
 | [`switch`]                                                                 | `match`, `case`                                            | switching and matching              |                                |
 | [`do`], [`while`], [`loop`], `until`, [`for`], [`in`], `continue`, `break` |                                                            | looping                             |                                |

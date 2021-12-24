@@ -59,6 +59,7 @@ Reserved Keywords
 | `new`       | constructor           |
 | `use`       | import namespace      |
 | `with`      | scope                 |
+| `is`        | type check            |
 | `module`    | module                |
 | `package`   | package               |
 | `super`     | base class/module     |
