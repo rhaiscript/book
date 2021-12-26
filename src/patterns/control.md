@@ -56,7 +56,7 @@ impl EnergizerBunny {
 }
 ```
 
-### Wrap API in Shared Object
+### Wrap API in shared object
 
 ```rust no_run
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
@@ -70,7 +70,7 @@ pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
 pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
 ```
 
-### Register Control API
+### Register control API
 
 The trick to building a Control API is to clone the shared API object and
 move it into each function registration via a closure.

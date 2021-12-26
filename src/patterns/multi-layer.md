@@ -9,13 +9,13 @@ Usage Scenario
 
 * A system is divided into separate _layers_, each providing logic in terms of scripted [functions].
 
-* A lower layer provides _default implementations_ of certain functions.
+* A lower layer provides _default implementations_ of certain [functions].
 
-* Higher layers each provide progressively more specific implementations of the same functions.
+* Higher layers each provide progressively more specific implementations of the same [functions].
 
-* A more specific function, if defined in a higher layer, always overrides the implementation in a lower layer.
+* A more specific [function], if defined in a higher layer, always overrides the implementation in a lower layer.
 
-* This is akin to object-oriented programming but with functions.
+* This is akin to object-oriented programming but with [functions].
 
 * This type of system is extremely convenient for dynamic business rules configuration, setting corporate-wide
   policies, granting permissions for specific roles etc. where specific, local rules need to override
@@ -30,7 +30,7 @@ Key Concepts
 * The lowest layer script is compiled into a base [`AST`].
 
 * Higher layer scripts are also compiled into [`AST`] and _combined_ into the base using `AST::combine`
-  (or the `+=` operator), overriding any existing functions.
+  (or the `+=` operator), overriding any existing [functions].
 
 
 Examples

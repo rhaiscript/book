@@ -31,7 +31,7 @@ Key Concepts
 Implementation
 --------------
 
-### Configuration Type
+### Configuration type
 
 ```rust no_run
 #[derive(Debug, Clone, Default)]
@@ -43,7 +43,7 @@ struct Config {
 }
 ```
 
-### Make Shared Object
+### Make shared object
 
 ```rust no_run
 pub type SharedConfig = Rc<RefCell<Config>>;
@@ -57,7 +57,7 @@ let config: SharedConfig = Arc<RwLock<Config>>;
 let config: SharedConfig = Arc<Mutex<Config>>;
 ```
 
-### Register Config API
+### Register config API
 
 The trick to building a Config API is to clone the shared configuration object and
 move it into each function registration via a closure.
@@ -104,7 +104,7 @@ engine.register_fn("config_is_set", move |value: String|
 );
 ```
 
-### Configuration Script
+### Configuration script
 
 ```rust no_run
 ┌────────────────┐
@@ -121,7 +121,7 @@ if config_contains("hey") || config_is_set("hey") {
 }
 ```
 
-### Load the Configuration
+### Load the configuration
 
 ```rust no_run
 import "my_config";         // run configuration script without creating a module

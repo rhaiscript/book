@@ -65,7 +65,7 @@ impl EnergizerBunny {
 }
 ```
 
-### Wrap Command Object Type as Shared
+### Wrap command object type as shared
 
 ```rust no_run
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
@@ -79,13 +79,13 @@ pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
 pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
 ```
 
-### Register the Custom Type
+### Register the custom type
 
 ```rust no_run
 engine.register_type_with_name::<SharedBunny>("EnergizerBunny");
 ```
 
-### Develop a Plugin with Methods and Getters/Setters
+### Develop a plugin with methods and getters/setters
 
 The easiest way to develop a complete set of API for a [custom type] is via a [plugin module].
 
@@ -163,7 +163,7 @@ engine.register_global_module(exported_module!(bunny_api).into());
 let ast = engine.compile(script)?;
 ```
 
-### Push Constant Command Object into Custom Scope and Run AST
+### Push constant command object into custom scope and run AST
 
 ```rust no_run
 let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
@@ -183,7 +183,7 @@ engine.run_ast_with_scope(&mut scope, &ast)?;
 engine.run_with_scope(&mut scope, script)?;
 ```
 
-### Use the Command API in Script
+### Use the command API in script
 
 ```rust no_run
 // Access the command object via constant variable 'BUNNY'.

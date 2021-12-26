@@ -74,8 +74,8 @@ system.watch(|sys: &mut System, file: &str| {
 
 ### Hot load specific functions via patching
 
-If the control scripts are large and complicated, and if the system can detect changes to specific functions,
-it is also possible to _patch_ just the changed functions.
+If the control scripts are large and complicated, and if the system can detect changes to specific [functions],
+it is also possible to _patch_ just the changed [functions].
 
 ```rust no_run
 // Watch for changes in the script
