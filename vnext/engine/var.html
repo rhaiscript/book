@@ -194,22 +194,25 @@ the script is evaluated.</p>
 <p>The function signature passed to <code>Engine::on_var</code> takes the following form:</p>
 <blockquote>
 <p><code>Fn(name: &amp;str, index: usize, context: &amp;EvalContext)</code><br />
-<code>-&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt; + 'static</code></p>
+    <code>-&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt; + 'static</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td align="center"><code>&amp;str</code></td><td><a href="/book/vnext/language/variables.html">variable</a> name</td></tr>
 <tr><td><code>index</code></td><td align="center"><code>usize</code></td><td>an offset from the bottom of the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> that the <a href="/book/vnext/language/variables.html">variable</a> is supposed to reside.<br/>Offsets start from 1, with 1 meaning the last <a href="/book/vnext/language/variables.html">variable</a> in the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.  Essentially the correct <a href="/book/vnext/language/variables.html">variable</a> is at position <code>scope.len() - index</code>.<br/>If <code>index</code> is zero, then there is no pre-calculated offset position and a search through the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> must be performed.</td></tr>
-<tr><td><code>context</code></td><td align="center"><code>&amp;EvalContext</code></td><td>reference to the current evaluation <em>context</em></td></tr>
-<tr><td>• <code>scope()</code></td><td align="center"><code>&amp;Scope</code></td><td>reference to the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td>• <code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>reference to the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a></td></tr>
-<tr><td>• <code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
-<tr><td>• <code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
-<tr><td>• <code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td>• <code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a></td></tr>
-<tr><td>• <code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a>; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td>• <code>this_ptr()</code></td><td align="center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound [<code>this</code>] pointer, if any</td></tr>
-<tr><td>• <code>call_level()</code></td><td align="center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
+<tr><td><code>context</code></td><td align="center"><code>&amp;EvalContext</code></td><td>the current <em>evaluation context</em></td></tr>
+</tbody></table>
+<p>and <code>EvalContext</code> is a type that encapsulates the current <em>evaluation context</em> and exposes the following:</p>
+<table><thead><tr><th>Method</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>scope()</code></td><td align="center"><code>&amp;Scope</code></td><td>reference to the current <a href="/book/vnext/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td><code>engine()</code></td><td align="center"><code>&amp;Engine</code></td><td>reference to the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td><code>source()</code></td><td align="center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
+<tr><td><code>iter_imports()</code></td><td align="center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements</td></tr>
+<tr><td><code>imports()</code></td><td align="center"><code>&amp;Imports</code></td><td>reference to the current stack of <a href="/book/vnext/rust/modules/index.html">modules</a> imported via <code>import</code> statements; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td align="center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a></td></tr>
+<tr><td><code>namespaces()</code></td><td align="center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="/book/vnext/language/fn-namespaces.html">namespaces</a> (as <a href="/book/vnext/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/vnext/language/functions.html">functions</a>; requires the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>this_ptr()</code></td><td align="center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound [<code>this</code>] pointer, if any</td></tr>
+<tr><td><code>call_level()</code></td><td align="center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
 </tbody></table>
 <h3 id="return-value"><a class="header" href="#return-value">Return Value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>

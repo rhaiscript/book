@@ -142,7 +142,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
-<p>Rhai supports defining functions in script (unless disabled with <a href="/book/vnext/start/features.html"><code>no_function</code></a>):</p>
+<p>Rhai supports defining functions in script (unless disabled with <a href="/book/vnext/start/features.html"><code>no_function</code></a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -160,8 +160,9 @@ sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="implicit-return"><a class="header" href="#implicit-return">Implicit Return</a></h2>
-<p>Just like in Rust, an implicit return can be used. In fact, the last statement of a block is <em>always</em> the block’s return value
-regardless of whether it is terminated with a semicolon <code>;</code>. This is different from Rust.</p>
+<p>Just like in Rust, an implicit return can be used. In fact, the last statement of a block is
+<em>always</em> the block’s return value regardless of whether it is terminated with a semicolon <code>;</code>. This
+is different from Rust.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -200,8 +201,8 @@ fn do_addition(x) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="no-access-to-external-scope"><a class="header" href="#no-access-to-external-scope">No Access to External Scope</a></h2>
-<p>Functions are not <em>closures</em>. They do not capture the calling environment
-and can only access their own parameters.</p>
+<p>Functions are not <em>closures</em>. They do not capture the calling environment and can only access their
+own parameters.</p>
 <p>They cannot access variables external to the function itself.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -242,9 +243,9 @@ fn foo(x) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="automatic-global-module"><a class="header" href="#automatic-global-module">Automatic Global Module</a></h2>
-<p>When a <a href="/book/vnext/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/vnext/rust/modules/index.html">module</a> called <code>global</code>.</p>
-<p>Functions can access those <a href="/book/vnext/language/constants.html">constants</a> via the special <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a>.</p>
-<p>Naturally, the automatic <code>global</code> <a href="/book/vnext/rust/modules/index.html">module</a> is not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>.</p>
+<p>When a <a href="/book/vnext/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/vnext/rust/modules/index.html">module</a> called <a href="/book/vnext/language/global.html"><code>global</code></a>.</p>
+<p>Functions can access those <a href="/book/vnext/language/constants.html">constants</a> via the special <a href="/book/vnext/language/global.html"><code>global</code></a> <a href="/book/vnext/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <a href="/book/vnext/language/global.html"><code>global</code></a> <a href="/book/vnext/rust/modules/index.html">module</a> is not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a> nor <a href="/book/vnext/start/features.html"><code>no_module</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

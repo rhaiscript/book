@@ -142,6 +142,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="subtle-semantic-changes-after-optimization"><a class="header" href="#subtle-semantic-changes-after-optimization">Subtle Semantic Changes After Optimization</a></h1>
+<h2 id="disappearing-runtime-errors"><a class="header" href="#disappearing-runtime-errors">Disappearing Runtime Errors</a></h2>
 <p>Some optimizations can alter subtle semantics of the script.</p>
 <p>For example:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -156,9 +157,10 @@
 foo(42)             // &lt;- the above optimizes to this
 <span class="boring">}
 </span></code></pre></pre>
-<p>If the original script were evaluated instead, it would have been an error – the variable <code>hello</code> does not exist,
-so the script would have been terminated at that point with an error return.</p>
-<p>In fact, any errors inside a statement that has been eliminated will silently <em>disappear</em>:</p>
+<p>If the original script were evaluated instead, it would have been an error –
+the variable <code>hello</code> does not exist, so the script would have been terminated at that point
+with a runtime error.</p>
+<p>In fact, any errors inside a statement that has been eliminated will silently <em>disappear</em>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -174,8 +176,9 @@ print(&quot;end!&quot;);
 </span></code></pre></pre>
 <p>In the script above, if <code>my_decision</code> holds anything other than a boolean value,
 the script should have been terminated due to a type error.</p>
-<p>However, after optimization, the entire <code>if</code> statement is removed (because an access to <code>my_decision</code> produces
-no side-effects), thus the script silently runs to completion without errors.</p>
+<p>However, after optimization, the entire <a href="/book/vnext/language/if.html"><code>if</code></a> statement is removed (because an access to
+<code>my_decision</code> produces no side-effects), thus the script silently runs to completion without errors.</p>
+<h2 id="eliminated-useless-work"><a class="header" href="#eliminated-useless-work">Eliminated Useless Work</a></h2>
 <p>Another example is more subtle – that of an empty loop body.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -192,12 +195,15 @@ for n in 0..42000 {
 ()
 <span class="boring">}
 </span></code></pre></pre>
-<p>Normally, and empty loop body inside a <a href="/book/vnext/language/for.html"><code>for</code></a> statement with a pure
-iterator does nothing and can be safely eliminated.  However, without optimization, the script may
-fail by exceeding the <a href="/book/vnext/safety/max-operations.html">maximum number of operations</a> allow.</p>
+<p>Normally, and empty loop body inside a <a href="/book/vnext/language/for.html"><code>for</code></a> statement with a pure iterator does nothing and can
+be safely eliminated.</p>
 <p>Thus the script now runs silently to completion without errors.</p>
-<p>It is usually a <em>Very Bad Idea™</em> to depend on a script failing or such kind of subtleties, but if it turns out to be necessary
-(why? I would never guess), turn script optimization off by setting the optimization level to <a href="/book/vnext/engine/optimize/optimize-levels.html"><code>OptimizationLevel::None</code></a>.</p>
+<p>Without optimization, the script may fail by exceeding the <a href="/book/vnext/safety/max-operations.html">maximum number of operations</a> allowed.</p>
+<h2 id="do-not-depend-on-runtime-errors"><a class="header" href="#do-not-depend-on-runtime-errors">Do Not Depend on Runtime Errors</a></h2>
+<p>Needless to say, it is usually a <em>Very Bad Idea™</em> to depend on a script failing with a runtime error
+or such kind of subtleties.</p>
+<p>If it turns out to be necessary (why? I would never guess), turn script optimization off by setting
+the optimization level to <a href="/book/vnext/engine/optimize/optimize-levels.html"><code>OptimizationLevel::None</code></a>.</p>
 
                     </main>
 

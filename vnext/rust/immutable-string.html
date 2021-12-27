@@ -150,8 +150,8 @@ Cloning an <code>ImmutableString</code> is cheap since it only copies an immutab
 <p>Modifying an <code>ImmutableString</code> causes it first to be cloned, and then the modification made to the copy.
 Therefore, direct string modifications are expensive.</p>
 <h2 id="avoid-string-parameters"><a class="header" href="#avoid-string-parameters">Avoid <code>String</code> Parameters</a></h2>
-<p><code>ImmutableString</code> should be used in place of <code>String</code> for function parameters because using
-<code>String</code> is very inefficient (the argument is cloned during every function call).</p>
+<p><code>ImmutableString</code> should be used in place of <code>String</code> for function parameters because using <code>String</code>
+is very inefficient (the argument is cloned during every function call).</p>
 <p>A alternative is to use <code>&amp;str</code> which de-sugars to <code>ImmutableString</code>.</p>
 <p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,
 which has type <code>ImmutableString</code>.  In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/vnext/rust/custom.html">custom type</a>.</p>

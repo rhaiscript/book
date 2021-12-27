@@ -148,19 +148,13 @@ all-capital letters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>const X = 42;
+</span>const X;            // 'X' is a constant '()'
+
+const X = 40 + 2;   // 'X' is a constant 42
 
 print(X * 2);       // prints 84
 
 X = 123;            // &lt;- syntax error: constant modified
-<span class="boring">}
-</span></code></pre></pre>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>const X;            // 'X' is a constant '()'
-
-const X = 40 + 2;   // 'X' is a constant 42
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>

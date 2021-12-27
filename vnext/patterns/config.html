@@ -173,7 +173,7 @@
 </li>
 </ul>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
-<h3 id="configuration-type"><a class="header" href="#configuration-type">Configuration Type</a></h3>
+<h3 id="configuration-type"><a class="header" href="#configuration-type">Configuration type</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -186,7 +186,7 @@ struct Config {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="make-shared-object"><a class="header" href="#make-shared-object">Make Shared Object</a></h3>
+<h3 id="make-shared-object"><a class="header" href="#make-shared-object">Make shared object</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -202,7 +202,7 @@ struct Config {
 let config: SharedConfig = Arc&lt;Mutex&lt;Config&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="register-config-api"><a class="header" href="#register-config-api">Register Config API</a></h3>
+<h3 id="register-config-api"><a class="header" href="#register-config-api">Register config API</a></h3>
 <p>The trick to building a Config API is to clone the shared configuration object and
 move it into each function registration via a closure.</p>
 <p>Therefore, it is not possible to use a <a href="/book/vnext/plugins/module.html">plugin module</a> to achieve this, and each function must
@@ -248,7 +248,7 @@ engine.register_fn(&quot;config_is_set&quot;, move |value: String|
 );
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="configuration-script"><a class="header" href="#configuration-script">Configuration Script</a></h3>
+<h3 id="configuration-script"><a class="header" href="#configuration-script">Configuration script</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -266,7 +266,7 @@ if config_contains(&quot;hey&quot;) || config_is_set(&quot;hey&quot;) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="load-the-configuration"><a class="header" href="#load-the-configuration">Load the Configuration</a></h3>
+<h3 id="load-the-configuration"><a class="header" href="#load-the-configuration">Load the configuration</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

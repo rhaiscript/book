@@ -142,7 +142,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="export-a-rust-module-to-rhai"><a class="header" href="#export-a-rust-module-to-rhai">Export a Rust Module to Rhai</a></h1>
-<h2 id="prelude"><a class="header" href="#prelude">Prelude</a></h2>
+<h2 id="import-prelude"><a class="header" href="#import-prelude">Import Prelude</a></h2>
 <p>When using the plugins system, the entire <code>rhai::plugin</code> module must be imported as a prelude
 because code generated will need these imports.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -182,7 +182,9 @@ mod my_module {
     pub fn greet(name: &amp;str) -&gt; String {
         format!(&quot;hello, {}!&quot;, name)
     }
-    // This function will be registered as 'get_num'.
+    /// This function will be registered as 'get_num'.
+    ///
+    /// If this is a Rust doc-comment, then it is included in the metadata.
     pub fn get_num() -&gt; i64 {
         mystic_number()
     }
@@ -221,6 +223,9 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
+<h3 id="doc-comments"><a class="header" href="#doc-comments">Doc-comments</a></h3>
+<p>If the <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature is active, doc-comments (i.e. comments starting with <code>///</code> or wrapped
+with <code>/**</code> ... <code>*/</code>) on plugin functions are extracted into the functions’ <a href="/book/vnext/engine/metadata/index.html"><em>metadata</em></a>.</p>
 <h3 id="use-engineregister_global_module"><a class="header" href="#use-engineregister_global_module">Use <code>Engine::register_global_module</code></a></h3>
 <p>The simplest way to register this into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is to first use the <code>exported_module!</code> macro
 to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use the <code>Engine::register_global_module</code> method on it:</p>
@@ -257,7 +262,7 @@ can be accessed.</p>
 <p>Variables as well as sub-modules are <strong>ignored</strong>.</p>
 <h3 id="use-engineregister_static_module"><a class="header" href="#use-engineregister_static_module">Use <code>Engine::register_static_module</code></a></h3>
 <p>Another simple way to register this into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code> macro
-to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use the <code>Engine::register_static_module</code> method on it:</p>
+to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>, then use <code>Engine::register_static_module</code> on it.</p>
 <pre><pre class="playground"><code class="language-rust no_run">fn main() {
     let mut engine = Engine::new();
 
@@ -309,32 +314,13 @@ x == 43;
 <a href="/book/vnext/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
 <p>See the <a href="/book/vnext/rust/modules/index.html">module</a> section for more information.</p>
 <h3 id="combine-into-custom-package"><a class="header" href="#combine-into-custom-package">Combine into Custom Package</a></h3>
-<p>Finally the plugin module can also be used to develop a <a href="/book/vnext/rust/packages/create.html">custom package</a>,
-using <code>combine_with_exported_module!</code>:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::def_package;
-
-def_package!(rhai:MyPackage:&quot;My own personal super package&quot;, module, {
-    combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module));
-});
-<span class="boring">}
-</span></code></pre></pre>
-<p><code>combine_with_exported_module!</code> automatically <em>flattens</em> the module namespace so that all
-functions in sub-modules are promoted to the top level.  This is convenient for <a href="/book/vnext/rust/packages/create.html">custom packages</a>.</p>
-<h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
-<p>Sub-modules in a plugin module definition are turned into valid sub-modules in the resultant
-Rhai <code>Module</code>.</p>
-<p>Most of the time, plugin modules are used as a <a href="/book/vnext/rust/packages/index.html">packages</a>.  In such usage, all functions within a
-sub-module are <em>flattened</em> into the <a href="/book/vnext/language/fn-namespaces.html">namespace</a>.  As a result, sub-modules can
-be used conveniently as a <em>grouping</em> mechanism.</p>
-<p>They are also commonly used to put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a
-large group of functions without having to put the gates on individual functions.</p>
-<p>This is especially convenient when using the <code>combine_with_exported_module!</code> macro to develop
-<a href="/book/vnext/rust/packages/create.html">custom packages</a> because selected groups of functions can easily be included or excluded based on
-different combinations of feature flags instead of having to manually include/exclude every
-single function.</p>
+<p>Finally the plugin module can also be used to develop a <a href="/book/vnext/rust/packages/create.html">custom package</a>, using
+<code>combine_with_exported_module!</code> which automatically <em>flattens</em> the module namespace so that all
+functions in sub-modules are promoted to the top level <a href="/book/vnext/language/fn-namespaces.html">namespace</a>,
+all sub-modules are eliminated, and all variables are ignored.</p>
+<p>Due to this <em>flattening</em>, sub-modules are used conveniently as a <em>grouping</em> mechanism,
+especially to put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a
+large collection of functions without having to duplicate the gates onto individual functions.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -390,7 +376,7 @@ mod my_module_alternate {
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="function-overloading-and-operators"><a class="header" href="#function-overloading-and-operators">Function Overloading and Operators</a></h2>
+<h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
 <p>Operators and overloaded functions can be specified via applying the <code>#[rhai_fn(name = &quot;...&quot;)]</code>
 attribute to individual functions.</p>
 <p>The text string given as the <code>name</code> parameter to <code>#[rhai_fn]</code> is used to register the function with
@@ -494,7 +480,6 @@ to mark it as  <em>pure</em>.</p>
 <p>Therefore, pure functions can be passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
 <p>Non-pure functions, when passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
 <code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
-<p>For example:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -560,7 +545,7 @@ have the appropriate return type.</p>
 
 #[export_module]
 mod my_module {
-    // This overloads the '/' operator for i64.
+    /// This overloads the '/' operator for i64.
     #[rhai_fn(name = &quot;/&quot;, return_raw)]
     pub fn double_and_divide(x: i64, y: i64) -&gt; Result&lt;i64, Box&lt;EvalAltResult&gt;&gt; {
         if y == 0 {

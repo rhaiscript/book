@@ -150,8 +150,8 @@
 </span>let result = engine.eval_expression::&lt;i64&gt;(&quot;2 + (10 + 10) * 2&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
-<p>When evaluating <em>expressions</em>, no full-blown statement (e.g. <code>if</code>, <code>while</code>, <code>for</code>, <code>fn</code>) – not even variable assignment –
-is supported and will be considered parse errors when encountered.</p>
+<p>When evaluating <em>expressions</em>, no full-blown statement (e.g. <a href="/book/vnext/language/if.html"><code>if</code></a>, <a href="/book/vnext/language/while.html"><code>while</code></a>, <a href="/book/vnext/language/for.html"><code>for</code></a>, <code>fn</code>)
+– not even <a href="/book/vnext/language/variables.html">variable</a> assignment – is supported and will be considered parse errors.</p>
 <p><a href="/book/vnext/language/fn-closure.html">Closures</a> and <a href="/book/vnext/language/fn-anon.html">anonymous functions</a> are also not supported because in the background they compile to functions.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

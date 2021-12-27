@@ -174,9 +174,10 @@ replaces a sequence of multiple steps.</p>
 <p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>] =</code> <code>true</code> <em>or</em> <code>false</code> ;</p>
 </blockquote>
 <p>The maximum bit number that can be accessed is −64 (or −32 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
+<p><a href="/book/vnext/language/ranges.html">Ranges</a> always count from the least-significant bit (LSB) and has no support for negative positions.</p>
 <h2 id="bit-field-functions"><a class="header" href="#bit-field-functions">Bit-Field Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>LogicPackage</code></a> but excluded if
-using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields:</p>
+using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>get_bit</code></td><td>bit number, counting from MSB if &lt; 0</td><td>returns the state of a bit: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td></tr>
 <tr><td><code>set_bit</code></td><td>1) bit number, counting from MSB if &lt; 0<br/>2) new state: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td><td>sets the state of a bit</td></tr>
@@ -189,12 +190,11 @@ using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) opera
 </tbody></table>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-js   no_run">// Assume the following bits fields in a single 16-bit word:
-//
-// ┌─────────┬───────┬─────────────────┬────────────┐
-// │   0-2   │   3   │      4-11       │    12-15   │
-// ├─────────┼───────┼─────────────────┼────────────┤
-// │ Command │ Flag  │    0-255 data   │   0 0 0 0  │
-// └─────────┴───────┴─────────────────┴────────────┘
+// ┌─────────┬────────────┬──────┬─────────┐
+// │  15-12  │    11-4    │  3   │   2-0   │
+// ├─────────┼────────────┼──────┼─────────┤
+// │    0    │ 0-255 data │ flag │ command │
+// └─────────┴────────────┴──────┴─────────┘
 
 let value = read_start_hw_register(42);
 
@@ -202,8 +202,8 @@ let command = value.get_bits(0, 3);         // Command = bits 0-2
 
 let flag = value[3];                        // Flag = bit 3
 
-let data = value.get_bits(4..=11);          // Data = bits 4-11
-let data = value[4..=11];                   // &lt;- above is the same as this
+let data = value[4..=11];                   // Data = bits 4-11
+let data = value.get_bits(4..=11);          // &lt;- above is the same as this
 
 let reserved = value.get_bits(-4);          // Reserved = last 4 bits
 
@@ -213,7 +213,7 @@ if reserved != 0 {
 
 switch command {
     0 =&gt; print(`Data = ${data}`),
-    1 =&gt; value.set_bits(4..=11, data / 2),
+    1 =&gt; value[4..=11] = data / 2,
     2 =&gt; value[3] = !flag,
     _ =&gt; print(`Unknown: ${command}`)
 }

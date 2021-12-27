@@ -148,16 +148,16 @@
 <p>A system is divided into separate <em>layers</em>, each providing logic in terms of scripted <a href="/book/vnext/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>A lower layer provides <em>default implementations</em> of certain functions.</p>
+<p>A lower layer provides <em>default implementations</em> of certain <a href="/book/vnext/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>Higher layers each provide progressively more specific implementations of the same functions.</p>
+<p>Higher layers each provide progressively more specific implementations of the same <a href="/book/vnext/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>A more specific function, if defined in a higher layer, always overrides the implementation in a lower layer.</p>
+<p>A more specific <a href="/book/vnext/language/functions.html">function</a>, if defined in a higher layer, always overrides the implementation in a lower layer.</p>
 </li>
 <li>
-<p>This is akin to object-oriented programming but with functions.</p>
+<p>This is akin to object-oriented programming but with <a href="/book/vnext/language/functions.html">functions</a>.</p>
 </li>
 <li>
 <p>This type of system is extremely convenient for dynamic business rules configuration, setting corporate-wide
@@ -175,7 +175,7 @@ corporate-wide defaults.</p>
 </li>
 <li>
 <p>Higher layer scripts are also compiled into <a href="/book/vnext/engine/compile.html"><code>AST</code></a> and <em>combined</em> into the base using <code>AST::combine</code>
-(or the <code>+=</code> operator), overriding any existing functions.</p>
+(or the <code>+=</code> operator), overriding any existing <a href="/book/vnext/language/functions.html">functions</a>.</p>
 </li>
 </ul>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -196,6 +196,7 @@ fn bar(x, y) { x + y }
 // Default implementation of 'no_touch'.
 fn no_touch() { throw &quot;do not touch me!&quot;; }
 
+
 ┌─────────────┐
 │ lowest.rhai │
 └─────────────┘
@@ -206,6 +207,7 @@ fn foo(x) { x * 2 }
 // New implementation for this layer.
 fn baz() { print(&quot;hello!&quot;); }
 
+
 ┌─────────────┐
 │ middle.rhai │
 └─────────────┘
@@ -215,6 +217,7 @@ fn bar(x, y) { x - y }
 
 // Specific implementation of 'baz'.
 fn baz() { print(&quot;hey!&quot;); }
+
 
 ┌──────────────┐
 │ highest.rhai │

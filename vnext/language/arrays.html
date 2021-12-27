@@ -168,15 +168,13 @@ elements added or removed.</p>
 <p><em>array</em> <code>[</code> <em>index from −1 to −length</em> <code>]</code></p>
 </blockquote>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
-<p>The following methods (mostly defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicArrayPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on arrays:</p>
+<p>The following methods (mostly defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicArrayPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on arrays.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>push</code></td><td>element to insert</td><td>inserts an element at the end</td></tr>
-<tr><td><code>append</code></td><td>array to append</td><td>concatenates the second array to the end of the first</td></tr>
-<tr><td><code>+=</code> operator</td><td>1) array<br/>2) element to insert (not another array)</td><td>inserts an element at the end</td></tr>
-<tr><td><code>+=</code> operator</td><td>1) array<br/>2) array to append</td><td>concatenates the second array to the end of the first</td></tr>
+<tr><td><code>push</code>, <code>+=</code> operator</td><td>1) array<br/>2) element to append (not another array)</td><td>appends an element to the end</td></tr>
+<tr><td><code>append</code>, <code>+=</code> operator</td><td>1) array<br/>2) array to append</td><td>concatenates the second array to the end of the first</td></tr>
 <tr><td><code>+</code> operator</td><td>1) first array<br/>2) second array</td><td>concatenates the first array with the second</td></tr>
-<tr><td><code>==</code> operator</td><td>1) first array<br/>2) second array</td><td>are the two arrays the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
-<tr><td><code>!=</code> operator</td><td>1) first array<br/>2) second array</td><td>are the two arrays different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
+<tr><td><code>==</code> operator</td><td>1) first array<br/>2) second array</td><td>are two arrays the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
+<tr><td><code>!=</code> operator</td><td>1) first array<br/>2) second array</td><td>are two arrays different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>insert</code></td><td>1) position, counting from end if &lt; 0, end if ≥ length<br/>2) element to insert</td><td>inserts an element at a certain index</td></tr>
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last element and returns it (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first element and returns it (<a href="/book/vnext/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>

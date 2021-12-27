@@ -204,7 +204,7 @@ impl EnergizerBunny {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="wrap-command-object-type-as-shared"><a class="header" href="#wrap-command-object-type-as-shared">Wrap Command Object Type as Shared</a></h3>
+<h3 id="wrap-command-object-type-as-shared"><a class="header" href="#wrap-command-object-type-as-shared">Wrap command object type as shared</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -220,14 +220,14 @@ impl EnergizerBunny {
 pub type SharedBunny = Arc&lt;Mutex&lt;EnergizerBunny&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="register-the-custom-type"><a class="header" href="#register-the-custom-type">Register the Custom Type</a></h3>
+<h3 id="register-the-custom-type"><a class="header" href="#register-the-custom-type">Register the custom type</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>engine.register_type_with_name::&lt;SharedBunny&gt;(&quot;EnergizerBunny&quot;);
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="develop-a-plugin-with-methods-and-getterssetters"><a class="header" href="#develop-a-plugin-with-methods-and-getterssetters">Develop a Plugin with Methods and Getters/Setters</a></h3>
+<h3 id="develop-a-plugin-with-methods-and-getterssetters"><a class="header" href="#develop-a-plugin-with-methods-and-getterssetters">Develop a plugin with methods and getters/setters</a></h3>
 <p>The easiest way to develop a complete set of API for a <a href="/book/vnext/rust/custom.html">custom type</a> is via a <a href="/book/vnext/plugins/module.html">plugin module</a>.</p>
 <p>Notice that putting <code>pure</code> in <code>#[rhai_fn(...)]</code> allows a <a href="/book/vnext/rust/getters-setters.html">getter/setter</a> to operate
 on a <a href="/book/vnext/language/constants.html">constant</a> without raising an error.</p>
@@ -305,7 +305,7 @@ engine.register_global_module(exported_module!(bunny_api).into());
 </span>let ast = engine.compile(script)?;
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="push-constant-command-object-into-custom-scope-and-run-ast"><a class="header" href="#push-constant-command-object-into-custom-scope-and-run-ast">Push Constant Command Object into Custom Scope and Run AST</a></h3>
+<h3 id="push-constant-command-object-into-custom-scope-and-run-ast"><a class="header" href="#push-constant-command-object-into-custom-scope-and-run-ast">Push constant command object into custom scope and run AST</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -326,7 +326,7 @@ engine.run_ast_with_scope(&amp;mut scope, &amp;ast)?;
 engine.run_with_scope(&amp;mut scope, script)?;
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="use-the-command-api-in-script"><a class="header" href="#use-the-command-api-in-script">Use the Command API in Script</a></h3>
+<h3 id="use-the-command-api-in-script"><a class="header" href="#use-the-command-api-in-script">Use the command API in script</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

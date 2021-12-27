@@ -142,9 +142,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="use-the-low-level-api-to-register-a-rust-function"><a class="header" href="#use-the-low-level-api-to-register-a-rust-function">Use the Low-Level API to Register a Rust Function</a></h1>
-<p>When a native Rust function is registered with an <code>Engine</code> using the <code>Engine::register_XXX</code> API,
-Rhai transparently converts all function arguments from <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> into the correct types before
-calling the function.</p>
+<p>When a native Rust function is registered with an <code>Engine</code> using the <code>register_XXX</code> API, Rhai
+transparently converts all function arguments from <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> into the correct types before calling
+the function.</p>
 <p>For more power and flexibility, there is a <em>low-level</em> API to work directly with <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> values
 without the conversions.</p>
 <h2 id="raw-function-registration"><a class="header" href="#raw-function-registration">Raw Function Registration</a></h2>
@@ -190,10 +190,10 @@ engine.register_fn(&quot;increment_by&quot;, |x: &amp;mut i64, y: i64| *x += y);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <code>Engine::register_raw_fn</code> takes the following form:</p>
+<p>The function signature passed to <code>Engine::register_raw_fn</code> takes the following form.</p>
 <blockquote>
 <p><code>Fn(context: NativeCallContext, args: &amp;mut [&amp;mut Dynamic])</code><br />
-<code>-&gt; Result&lt;T, Box&lt;EvalAltResult&gt;&gt; + 'static</code></p>
+    <code>-&gt; Result&lt;T, Box&lt;EvalAltResult&gt;&gt; + 'static</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
@@ -221,16 +221,16 @@ use the following to get a mutable reference to the underlying value:</p>
 references to <code>args</code>, otherwise the Rust borrow checker will complain.</p>
 <p>Therefore, always extract the mutable reference last, <em>after</em> all other arguments are taken.</p>
 <h2 id="extract-other-pass-by-value-arguments"><a class="header" href="#extract-other-pass-by-value-arguments">Extract Other Pass-By-Value Arguments</a></h2>
-<p>To extract an argument passed by value from the <code>args</code> parameter (<code>&amp;mut [&amp;mut Dynamic]</code>), use the following:</p>
-<table><thead><tr><th>Argument type</th><th>Access (<code>n</code> = argument position)</th><th align="center">Result</th><th align="center">Original value</th></tr></thead><tbody>
+<p>To extract an argument passed by value from the <code>args</code> parameter (<code>&amp;mut [&amp;mut Dynamic]</code>), use the following statements.</p>
+<table><thead><tr><th>Argument type</th><th>Access statement (<code>n</code> = argument position)</th><th align="center">Result</th><th align="center">Original value</th></tr></thead><tbody>
 <tr><td><code>INT</code></td><td><code>args[n].as_int().unwrap()</code></td><td align="center"><code>INT</code></td><td align="center">untouched</td></tr>
 <tr><td><code>FLOAT</code></td><td><code>args[n].as_float().unwrap()</code></td><td align="center"><code>FLOAT</code></td><td align="center">untouched</td></tr>
-<tr><td><code>Decimal</code></td><td><code>args[n].as_decimal().unwrap()</code></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td align="center">untouched</td></tr>
+<tr><td><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td><code>args[n].as_decimal().unwrap()</code></td><td align="center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td align="center">untouched</td></tr>
 <tr><td><code>bool</code></td><td><code>args[n].as_bool().unwrap()</code></td><td align="center"><code>bool</code></td><td align="center">untouched</td></tr>
 <tr><td><code>char</code></td><td><code>args[n].as_char().unwrap()</code></td><td align="center"><code>char</code></td><td align="center">untouched</td></tr>
 <tr><td><code>()</code></td><td><code>args[n].as_unit().unwrap()</code></td><td align="center"><code>()</code></td><td align="center">untouched</td></tr>
-<tr><td>String</td><td><code>&amp;*args[n].read_lock::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>&amp;ImmutableString</code></a></td><td align="center">untouched</td></tr>
-<tr><td>String (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;ImmutableString&gt;()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td><a href="/book/vnext/language/strings-chars.html">String</a></td><td><code>&amp;*args[n].read_lock::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>&amp;ImmutableString</code></a></td><td align="center">untouched</td></tr>
+<tr><td><a href="/book/vnext/language/strings-chars.html">String</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;ImmutableString&gt;()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
 <tr><td><a href="/book/vnext/rust/custom.html">Custom type</a></td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td align="center"><code>&amp;T</code></td><td align="center">untouched</td></tr>
 <tr><td><a href="/book/vnext/rust/custom.html">Custom type</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td align="center"><code>T</code></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>

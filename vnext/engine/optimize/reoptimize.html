@@ -144,9 +144,9 @@
                         <h1 id="re-optimize-an-ast"><a class="header" href="#re-optimize-an-ast">Re-Optimize an AST</a></h1>
 <p>Sometimes it is more efficient to store one single, large script with delimited code blocks guarded by
 constant variables.  This script is compiled once to an <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
-<p>Then, depending on the execution environment, constants are passed into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> and the <a href="/book/vnext/engine/compile.html"><code>AST</code></a>
-is <em>re</em>-optimized based on those constants via the <code>Engine::optimize_ast</code> method,
-effectively pruning out unused code sections.</p>
+<p>Then, depending on the execution environment, constants are passed into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> and the
+<a href="/book/vnext/engine/compile.html"><code>AST</code></a> is <em>re</em>-optimized based on those constants via <code>Engine::optimize_ast</code>, effectively pruning
+out unused code sections.</p>
 <p>The final, optimized <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is then used for evaluations.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

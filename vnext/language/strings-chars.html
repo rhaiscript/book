@@ -151,10 +151,10 @@ This is particularly useful when printing output.</p>
 <p>The maximum allowed length of a string can be controlled via <a href="/book/vnext/engine/options.html"><code>Engine::set_max_string_size</code></a>
 (see <a href="/book/vnext/safety/max-string-size.html">maximum length of strings</a>).</p>
 <h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
-<p>String and character literals follow JavaScript-style syntax:</p>
+<p>String and character literals follow JavaScript-style syntax.</p>
 <table><thead><tr><th>Type</th><th align="center">Quotes</th><th align="center">Escapes?</th><th align="center">Continuation?</th><th align="center">Interpolation?</th></tr></thead><tbody>
-<tr><td>Normal string</td><td align="center"><code>&quot;...&quot;</code></td><td align="center">yes</td><td align="center">yes (with <code>\</code>)</td><td align="center">no</td></tr>
-<tr><td>Multi-line literal string</td><td align="center"><code>`...`</code></td><td align="center">no</td><td align="center">no</td><td align="center">yes (<code>${...}</code>)</td></tr>
+<tr><td>Normal string</td><td align="center"><code>&quot;...&quot;</code></td><td align="center">yes</td><td align="center">with <code>\</code></td><td align="center">no</td></tr>
+<tr><td>Multi-line literal string</td><td align="center"><code>`...`</code></td><td align="center">no</td><td align="center">no</td><td align="center">with <code>${...}</code></td></tr>
 <tr><td>Character</td><td align="center"><code>'...'</code></td><td align="center">yes</td><td align="center">no</td><td align="center">no</td></tr>
 </tbody></table>
 <h2 id="standard-escape-sequences"><a class="header" href="#standard-escape-sequences">Standard Escape Sequences</a></h2>
@@ -187,7 +187,6 @@ ending back-slash (<code>\</code>) character.</p>
 </span>let x = &quot;hello, world!\
          hello world again! \
          this is the &quot;&quot;last&quot;&quot; time!!!&quot;;
-
 // ^^^^^^ these whitespaces are ignored
 
 // The above is the same as:
@@ -195,7 +194,7 @@ let x = &quot;hello, world!hello world again! this is the \&quot;last\&quot; tim
 <span class="boring">}
 </span></code></pre></pre>
 <p>A string with continuation does not open up a new line.  To do so, a new-line character must be
-manually inserted at the appropriate position:</p>
+manually inserted at the appropriate position.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -230,7 +229,7 @@ block starts from the <em>next</em> line; the starting new-line character is str
 let x = &quot;        hello, world! \&quot;\\t\\x42\&quot;\n  hello world again! 'x'\n     this is the last time!!!\n&quot;;
 </code></pre>
 <p>To actually put a back-tick (<code>`</code>) character inside a multi-line literal string, use two
-back-ticks together (i.e. <code>``</code>):</p>
+back-ticks together (i.e. <code>``</code>).</p>
 <pre><code class="language-js">let x = `I have a quote &quot; as well as a back-tick `` here.`;
 
 // The above is the same as:

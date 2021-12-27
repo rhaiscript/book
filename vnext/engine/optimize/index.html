@@ -187,7 +187,7 @@ itself as a statement, which is allowed in Rhai).</p>
 <p>Normally, nobody deliberately writes scripts with dead code, but it is extremely common for
 template-based machine-generated scripts, especially where <a href="/book/vnext/language/constants.html">constants</a> are involved.</p>
 <h2 id="constants-propagation"><a class="header" href="#constants-propagation">Constants Propagation</a></h2>
-<p><a href="/book/vnext/language/constants.html">Constants</a> propagation is used to remove dead code:</p>
+<p><a href="/book/vnext/language/constants.html">Constants</a> propagation is used to remove dead code.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -385,17 +385,17 @@ x[y] + 1;           // ... than this
 so whether they are optimized away depends on the situation:</p>
 <ul>
 <li>
-<p>If the operands are not <a href="/book/vnext/language/constants.html">constant</a> values, it is not optimized.</p>
+<p>if the operands are not <a href="/book/vnext/language/constants.html">constant</a> values, it is not optimized;</p>
 </li>
 <li>
-<p>If the operator is <a href="/book/vnext/rust/operators.html">overloaded</a>, it is not optimized because the overloading
-function may not be <em>pure</em> (i.e. may cause side-effects when called).</p>
+<p>if the operator is <a href="/book/vnext/rust/operators.html">overloaded</a>, it is not optimized because the overloading
+function may not be <em>pure</em> (i.e. may cause side-effects when called);</p>
 </li>
 <li>
-<p>If the operator is not <em>built-in</em> (see list of <a href="/book/vnext/engine/builtin.html">built-in operators</a>), it is not optimized.</p>
+<p>if the operator is not <em>built-in</em> (see list of <a href="/book/vnext/engine/builtin.html">built-in operators</a>), it is not optimized;</p>
 </li>
 <li>
-<p>If the operator is a <a href="/book/vnext/engine/builtin.html">built-in operator</a> for a <a href="/book/vnext/language/values-and-types.html">standard type</a>,
+<p>if the operator is a <a href="/book/vnext/engine/builtin.html">built-in operator</a> for a <a href="/book/vnext/language/values-and-types.html">standard type</a>,
 it is called and replaced by a <a href="/book/vnext/language/constants.html">constant</a> result.</p>
 </li>
 </ul>
@@ -435,7 +435,7 @@ let y = (1 &gt; 2) || (3 &lt;= 4);    // will be replaced by 'let y = true'
 <span class="boring">}
 </span></code></pre></pre>
 <p>For operators that are not optimized away due to one of the above reasons, the function calls
-are simply left behind:</p>
+are simply left behind.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

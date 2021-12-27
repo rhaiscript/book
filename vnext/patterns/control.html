@@ -191,7 +191,7 @@ impl EnergizerBunny {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="wrap-api-in-shared-object"><a class="header" href="#wrap-api-in-shared-object">Wrap API in Shared Object</a></h3>
+<h3 id="wrap-api-in-shared-object"><a class="header" href="#wrap-api-in-shared-object">Wrap API in shared object</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -207,7 +207,7 @@ impl EnergizerBunny {
 pub type SharedBunny = Arc&lt;Mutex&lt;EnergizerBunny&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="register-control-api"><a class="header" href="#register-control-api">Register Control API</a></h3>
+<h3 id="register-control-api"><a class="header" href="#register-control-api">Register control API</a></h3>
 <p>The trick to building a Control API is to clone the shared API object and
 move it into each function registration via a closure.</p>
 <p>Therefore, it is not possible to use a <a href="/book/vnext/plugins/module.html">plugin module</a> to achieve this, and each function must

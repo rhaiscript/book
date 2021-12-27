@@ -142,28 +142,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="optimization-levels"><a class="header" href="#optimization-levels">Optimization Levels</a></h1>
-<p>There are three levels of optimization: <code>None</code>, <code>Simple</code> and <code>Full</code>.</p>
-<ul>
-<li>
+<p>There are three levels of optimization: <code>None</code>, <code>Simple</code> and <code>Full</code>.
+The default is <code>Simple</code>.</p>
+<h2 id="none"><a class="header" href="#none"><code>None</code></a></h2>
 <p><code>None</code> is obvious – no optimization on the AST is performed.</p>
-</li>
-<li>
-<p><code>Simple</code> (default) performs only relatively <em>safe</em> optimizations without causing side-effects
-(i.e. it only relies on static analysis and <a href="/book/vnext/engine/builtin.html">built-in operators</a> for <a href="/book/vnext/language/constants.html">constant</a> <a href="/book/vnext/language/values-and-types.html">standard types</a>,
-and will not perform any external function calls).</p>
-<p>However, it is important to bear the caveat in mind that, when <em>constants propagation</em> is
-performed, and if the <a href="/book/vnext/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust functions),
-the modified values will <em>not</em> show up in the optimized script.  Only the initialization values
-of <a href="/book/vnext/language/constants.html">constants</a> are ever retained.</p>
+<h2 id="simple-default"><a class="header" href="#simple-default"><code>Simple</code> (Default)</a></h2>
+<p><code>Simple</code> performs only relatively <em>safe</em> optimizations without causing side-effects (i.e. it only
+relies on static analysis and <a href="/book/vnext/engine/builtin.html">built-in operators</a> for <a href="/book/vnext/language/constants.html">constant</a> <a href="/book/vnext/language/values-and-types.html">standard types</a>, and will not
+perform any external function calls).</p>
+<p>However, it is important to bear the caveat in mind that, when <em>constants propagation</em> is performed,
+and if the <a href="/book/vnext/language/constants.html">constants</a> are modified later (yes, it is possible, via Rust functions), the modified
+values will <em>not</em> show up in the optimized script.  Only the initialization values of <a href="/book/vnext/language/constants.html">constants</a>
+are ever retained.</p>
 <p>Furthermore, overriding a <a href="/book/vnext/engine/builtin.html">built-in operator</a> in the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> afterwards has no effect after the
 optimizer replaces an expression with its calculated value.</p>
-</li>
-<li>
-<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="/book/vnext/language/constants.html">constant</a> arguments
-to determine their results. One benefit to this is that many more optimization opportunities
-arise, especially with regards to comparison operators.</p>
-</li>
-</ul>
+<h2 id="full"><a class="header" href="#full"><code>Full</code></a></h2>
+<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="/book/vnext/language/constants.html">constant</a> arguments to
+determine their results. One benefit to this is that many more optimization opportunities arise,
+especially with regards to comparison operators.</p>
 <h2 id="set-optimization-level"><a class="header" href="#set-optimization-level">Set Optimization Level</a></h2>
 <p>An <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>‘s optimization level is set via a call to <a href="/book/vnext/engine/options.html"><code>Engine::set_optimization_level</code></a>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">

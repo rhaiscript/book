@@ -236,24 +236,28 @@ in the order that they appear in the original script.</p>
 switch x {
     'x' =&gt; ...,             // no match: wrong data type
 
-    1 =&gt; ...,
-    2 =&gt; ...,
+    1 =&gt; ...,               // &lt;- specific integer cases are checked first
+    2 =&gt; ...,               // &lt;- but these do not match
 
     0..50 if x &gt; 45 =&gt; ..., // no match: condition is 'false'
+
     -10..20 =&gt; ...,         // no match: not in range
+
     0..50 =&gt; ...,           // &lt;- MATCH!!! duplicated range cases are OK
-    30..100 =&gt; ...,         // no match: the previous case matches first
+
+    30..100 =&gt; ...,         // no match: even though it is within range,
+                            // the previous case matches first
 
     42 =&gt; ...,              // &lt;- syntax error: integer cases cannot follow range cases
 }
 </code></pre>
 <h2 id="difference-from-if-else-if-chain"><a class="header" href="#difference-from-if-else-if-chain">Difference From <code>if</code>-<code>else if</code> Chain</a></h2>
-<p>Although a <code>switch</code> expression looks <em>almost</em> the same as an <code>if</code>-<code>else if</code> chain,
+<p>Although a <code>switch</code> expression looks <em>almost</em> the same as an <a href="/book/vnext/language/if.html"><code>if</code>-<code>else if</code></a> chain,
 there are subtle differences between the two.</p>
 <h3 id="look-up-table-vs-x--y"><a class="header" href="#look-up-table-vs-x--y">Look-up Table vs <code>x == y</code></a></h3>
 <p>A <code>switch</code> expression matches through <em>hashing</em> via a look-up table.
-Therefore, matching is very fast.  Walking down an <code>if</code>-<code>else if</code> chain
-is <em>much</em> slower.</p>
+Therefore, matching is very fast.  Walking down an <a href="/book/vnext/language/if.html"><code>if</code>-<code>else if</code></a>
+chain is <em>much</em> slower.</p>
 <p>On the other hand, operators can be <a href="/book/vnext/rust/operators.html">overloaded</a> in Rhai,
 meaning that it is possible to override the <code>==</code> operator for integers such
 that <code>x == y</code> returns a different result from the built-in default.</p>
@@ -270,7 +274,7 @@ avoid using the <code>switch</code> expression.</p>
 <p>Because the <code>switch</code> expression works through a look-up table, it is very efficient
 even for <em>large</em> number of cases; in fact, switching is an O(1) operation regardless
 of the size of the data and number of cases to match.</p>
-<p>A long <code>if</code>-<code>else if</code> chain becomes increasingly slower with each additional case
+<p>A long <a href="/book/vnext/language/if.html"><code>if</code>-<code>else if</code></a> chain becomes increasingly slower with each additional case
 because essentially an O(n) <em>linear scan</em> is performed.</p>
 
                     </main>

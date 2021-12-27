@@ -144,13 +144,13 @@
                         <h1 id="printing-for-custom-types"><a class="header" href="#printing-for-custom-types">Printing for Custom Types</a></h1>
 <p>To use <a href="/book/vnext/rust/custom.html">custom types</a> for <a href="/book/vnext/language/print-debug.html"><code>print</code></a> and <a href="/book/vnext/language/print-debug.html"><code>debug</code></a>, or convert a <a href="/book/vnext/rust/custom.html">custom type</a> into a <a href="/book/vnext/language/strings-chars.html">string</a>,
 it is necessary that the following functions be registered (assuming the <a href="/book/vnext/rust/custom.html">custom type</a>
-is <code>T: Display + Debug</code>):</p>
+is <code>T: Display + Debug</code>).</p>
 <table><thead><tr><th>Function</th><th>Signature</th><th>Typical implementation</th><th>Usage</th></tr></thead><tbody>
 <tr><td><code>to_string</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>x.to_string()</code></td><td>converts the <a href="/book/vnext/rust/custom.html">custom type</a> into a <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
 <tr><td><code>to_debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>format!(&quot;{:?}&quot;, x)</code></td><td>converts the <a href="/book/vnext/rust/custom.html">custom type</a> into a <a href="/book/vnext/language/strings-chars.html">string</a> in debug format</td></tr>
 </tbody></table>
 <p>The following functions are implemented using <code>to_string()</code> or <code>to_debug()</code> by default, but can be
-overloaded with custom versions:</p>
+overloaded with custom versions.</p>
 <table><thead><tr><th>Function</th><th>Signature</th><th>Default</th><th>Usage</th></tr></thead><tbody>
 <tr><td><code>print</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_string</code></td><td>converts the <a href="/book/vnext/rust/custom.html">custom type</a> into a <a href="/book/vnext/language/strings-chars.html">string</a> for the <a href="/book/vnext/language/print-debug.html"><code>print</code></a> statement</td></tr>
 <tr><td><code>debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_debug</code></td><td>converts the <a href="/book/vnext/rust/custom.html">custom type</a> into a <a href="/book/vnext/language/strings-chars.html">string</a> for the <a href="/book/vnext/language/print-debug.html"><code>debug</code></a> statement</td></tr>

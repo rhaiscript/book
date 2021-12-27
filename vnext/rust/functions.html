@@ -143,8 +143,8 @@
                     <main>
                         <h1 id="register-a-rust-function"><a class="header" href="#register-a-rust-function">Register a Rust Function</a></h1>
 <p>Rhai’s scripting engine is very lightweight.  It gets most of its abilities from functions.</p>
-<p>To call these functions, they need to be <em>registered</em> with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> using <code>Engine::register_fn</code>
-and <code>Engine::register_result_fn</code> (see <a href="/book/vnext/rust/fallible.html">fallible functions</a>).</p>
+<p>To call these functions, they need to be <em>registered</em> with the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> via <code>register_fn</code> and
+<code>register_result_fn</code> (see <a href="/book/vnext/rust/fallible.html">fallible functions</a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

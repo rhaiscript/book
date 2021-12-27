@@ -173,11 +173,12 @@ number ^= 0x00ff;       // number = number ^ 0x00ff;
 <h2 id="the-flexible-"><a class="header" href="#the-flexible-">The Flexible <code>+=</code></a></h2>
 <p>The the <code>+</code> and <code>+=</code> operators are often <a href="/book/vnext/rust/functions.html#function-overloading">overloaded</a> to perform
 build-up operations for different data types.</p>
-<p>For example, it is used to build <a href="/book/vnext/language/strings-chars.html">strings</a>:</p>
+<p>For example, <code>+=</code> is commonly used to build <a href="/book/vnext/language/strings-chars.html">strings</a>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let my_str = &quot;abc&quot;;
+
 my_str += &quot;ABC&quot;;
 my_str += 12345;
 
@@ -189,19 +190,43 @@ my_str == &quot;abcABC12345&quot;
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let my_array = [1, 2, 3];
+
 my_array += [4, 5];
 
 my_array == [1, 2, 3, 4, 5];
 <span class="boring">}
 </span></code></pre></pre>
-<p>and mix two <a href="/book/vnext/language/object-maps.html">object maps</a> together:</p>
+<p>to concatenate <a href="/book/vnext/language/blobs.html">BLOB’s</a>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let my_obj = #{a:1, b:2};
-my_obj += #{c:3, d:4, e:5};
+</span>let my_blob = blob(3, 0x42);
+
+my_blob += blob(5, 0x99);
+
+my_blob.to_string() == &quot;[4242429999999999]&quot;;
+<span class="boring">}
+</span></code></pre></pre>
+<p>to mix two <a href="/book/vnext/language/object-maps.html">object maps</a> together:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let my_obj = #{ a:1, b:2 };
+
+my_obj += #{ c:3, d:4, e:5 };
 
 my_obj.len() == 5;
+<span class="boring">}
+</span></code></pre></pre>
+<p>to add to <a href="/book/vnext/language/timestamps.html">timestamps</a>:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let now = timestamp();
+
+now += 42;
+
+now - timestamp() == 42;
 <span class="boring">}
 </span></code></pre></pre>
 

@@ -145,7 +145,7 @@
 <p>When encountering an <a href="/book/vnext/language/modules/import.html"><code>import</code></a> statement, Rhai attempts to <em>resolve</em> the module based on the path string.</p>
 <p>See the section on <a href="/book/vnext/language/modules/import.html"><em>Importing Modules</em></a> for more details.</p>
 <p><em>Module Resolvers</em> are service types that implement the <a href="/book/vnext/rust/traits.html"><code>ModuleResolver</code></a> trait.</p>
-<h2 id="built-in-module-resolvers"><a class="header" href="#built-in-module-resolvers">Built-In Module Resolvers</a></h2>
+<h2 id="built-in-module-resolvers"><a class="header" href="#built-in-module-resolvers">Built-in Module Resolvers</a></h2>
 <p>There are a number of standard resolvers built into Rhai, the default being the <code>FileModuleResolver</code>
 which simply loads a script file based on the path (with <code>.rhai</code> extension attached)
 and execute it to form a module.</p>
@@ -195,6 +195,7 @@ fn greet_main() {
     print(main_message());      // call function not in module script
 }
 
+
 ┌───────────┐
 │ main.rhai │
 └───────────┘
@@ -243,6 +244,7 @@ fn greet() {
     }
 }
 
+
 ┌───────────┐
 │ main.rhai │
 └───────────┘
@@ -253,6 +255,7 @@ fn message() { &quot;hi! from main!&quot; }
 import &quot;my_module&quot; as m;
 
 m::greet();                         // prints &quot;hi! from main!&quot;
+
 
 ┌────────────┐
 │ main2.rhai │

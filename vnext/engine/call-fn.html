@@ -144,61 +144,79 @@
                         <h1 id="call-rhai-functions-from-rust"><a class="header" href="#call-rhai-functions-from-rust">Call Rhai Functions from Rust</a></h1>
 <p>Rhai also allows working <em>backwards</em> from the other direction – i.e. calling a Rhai-scripted
 <a href="/book/vnext/language/functions.html">function</a> from Rust via <code>Engine::call_fn</code>.</p>
-<p>Assume this script:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>import &quot;process&quot; as proc;       // this is evaluated every time
+</span>┌─────────────┐
+│ Rhai script │
+└─────────────┘
 
-// a function with two parameters: string and i64
+import &quot;process&quot; as proc;           // this is evaluated every time
+
 fn hello(x, y) {
-    x.len + y
+    // hopefully 'my_var' is in scope when this is called
+    x.len + y + my_var
 }
 
-// functions can be overloaded: this one takes only one parameter
 fn hello(x) {
-    x * 2
+    // hopefully 'my_string' is in scope when this is called
+    x * my_string.len()
 }
 
-// this one takes no parameters
 fn hello() {
-    proc::process_data(42);     // can access imported module
+    // hopefully 'MY_CONST' is in scope when this is called
+    if MY_CONST {
+        proc::process_data(42);     // can access imported module
+    }
 }
-<span class="boring">}
-</span></code></pre></pre>
-<p><a href="/book/vnext/language/functions.html">Functions</a> defined within the script can be called using <code>Engine::call_fn</code>:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Compile the script to AST
+
+
+┌──────┐
+│ Rust │
+└──────┘
+
+// Compile the script to AST
 let ast = engine.compile(script)?;
 
-// A custom scope can also contain any variables/constants available to the functions
+// Create a custom 'Scope'
 let mut scope = Scope::new();
 
-// Evaluate a function defined in the script, passing arguments into the script as a tuple.
-// Beware, arguments must be of the correct types because Rhai does not have built-in type conversions.
-// If arguments of the wrong types are passed, the Engine will not find the function.
+// A custom 'Scope' can also contain any variables/constants available to
+// the functions
+scope.push(&quot;my_var&quot;, 42_i64);
+scope.push(&quot;my_string&quot;, &quot;hello, world!&quot;);
+scope.push_constant(&quot;MY_CONST&quot;, true);
+
+// Evaluate a function defined in the script, passing arguments into the
+// script as a tuple.
+//
+// Beware, arguments must be of the correct types because Rhai does not
+// have built-in type conversions. If arguments of the wrong types are passed,
+// the Engine will not find the function.
+//
+// Variables/constants pushed into the custom 'Scope'
+// (i.e. 'my_var', 'my_string', 'MY_CONST') are visible to the function.
 
 let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( &quot;abc&quot;, 123_i64 ) )?;
 //          ^^^                                             ^^^^^^^^^^^^^^^^^^
 //          return type must be specified                   put arguments in a tuple
 
-let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, (123_i64,) )?;
-//                                                          ^^^^^^^^^^ tuple of one
+let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( 123_i64, ) )?;
+//                                                          ^^^^^^^^^^^^ tuple of one
 
 let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, () )?;
 //                                                          ^^ unit = tuple of zero
 <span class="boring">}
 </span></code></pre></pre>
-<p>When using <code>Engine::call_fn</code>, the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is first evaluated before the function is called.
+<p>When using <code>Engine::call_fn</code>, the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is first evaluated before the <a href="/book/vnext/language/functions.html">function</a> is called.
 This is usually desirable in order to <a href="/book/vnext/language/modules/import.html">import</a> the necessary external <a href="/book/vnext/rust/modules/index.html">modules</a> that are
-needed by the function.</p>
-<p>New <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> introduced are not retained so they do not pollute the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+needed by the <a href="/book/vnext/language/functions.html">function</a>.</p>
+<p>All new <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> introduced are, by default, <em>not</em> retained inside the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.
+In other words, the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> to the initial size after each call.</p>
 <p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> trait</a></h2>
 <p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="/book/vnext/rust/traits.html"><code>FuncArgs</code></a> trait,
-which is used to parse a data type into individual argument values for the function call.</p>
+which is used to parse a data type into individual argument values for the <a href="/book/vnext/language/functions.html">function</a> call.</p>
 <p>Rhai implements <a href="/book/vnext/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
 <p>Custom types (e.g. structures) can also implement <a href="/book/vnext/rust/traits.html"><code>FuncArgs</code></a> so they can be used for
 calling <code>Engine::call_fn</code>.</p>
@@ -248,18 +266,68 @@ passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as
 </span></code></pre></pre>
 <p><code>Engine::call_fn_raw</code> extends control to the following:</p>
 <ul>
-<li>Whether to skip evaluation of the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> before calling the target function</li>
-<li>Whether to rewind the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> at the end of the function call</li>
+<li>Whether to skip evaluation of the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> before calling the target <a href="/book/vnext/language/functions.html">function</a></li>
+<li>Whether to rewind the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> at the end of the <a href="/book/vnext/language/functions.html">function</a> call</li>
 <li>Whether to bind the <code>this</code> pointer to a specific value</li>
 </ul>
 <h3 id="skip-evaluation-of-the-ast"><a class="header" href="#skip-evaluation-of-the-ast">Skip evaluation of the <code>AST</code></a></h3>
-<p>By default, the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is evaluated before calling the target function.
+<p>By default, the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="/book/vnext/language/functions.html">function</a>.
 A parameter can be passed to skip this evaluation.</p>
 <h3 id="keep-new-variablesconstants"><a class="header" href="#keep-new-variablesconstants">Keep new variables/constants</a></h3>
-<p>By default, any new <a href="/book/vnext/language/variables.html">variable</a>/<a href="/book/vnext/language/constants.html">constant</a> defined within a function are cleared after the call and
-will not spill into the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>. A parameter can be passed to keep them within the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+<p>By default, the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> <em>rewinds</em> the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> after each call to the initial size,
+so any new <a href="/book/vnext/language/variables.html">variable</a>/<a href="/book/vnext/language/constants.html">constant</a> defined are cleared and will not spill into the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+<p>This keeps the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> from being continuously polluted by new <a href="/book/vnext/language/variables.html">variables</a> and is usually the
+expected intuitive behavior.</p>
+<p>A parameter can be passed to keep new <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> within the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.
+This allows the <a href="/book/vnext/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
+custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.</p>
+<p>When doing so, however, beware that all <a href="/book/vnext/language/variables.html">variables</a>/<a href="/book/vnext/language/constants.html">constants</a> defined at top level of the
+<a href="/book/vnext/language/functions.html">function</a> or in the script body will <em>persist</em> inside the custom <a href="/book/vnext/engine/scope.html"><code>Scope</code></a>.  If any of them are
+temporary and not intended to be retained, define them inside a statements block.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+fn initialize() {
+    let x = 42;                     // 'x' is retained
+    let y = x * 2;                  // 'y' is retained
+
+    // Use a new statements block to define temp variables
+    {
+        let temp = x + y;           // 'temp' is NOT retained
+
+        foo = temp * temp;          // 'foo' is visible in the scope
+    }
+}
+
+let foo = 123;                      // 'foo' is retained
+
+// Use a new statements block to define temp variables
+{
+    let bar = foo / 2;              // 'bar' is NOT retained
+
+    foo = bar * bar;
+}
+
+
+┌──────┐
+│ Rust │
+└──────┘
+
+engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;, None, [])?;
+//                                   ^^^^ evaluate AST before call
+//                                         ^^^^^ do not rewind scope
+
+// At this point, 'scope' contains these variables: 'foo', 'x', 'y'
+<span class="boring">}
+</span></code></pre></pre>
 <h3 id="bind-the-this-pointer"><a class="header" href="#bind-the-this-pointer">Bind the <code>this</code> pointer</a></h3>
-<p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined function.</p>
+<p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/book/vnext/language/functions.html">function</a>.</p>
+<p>This functionality is not available to <code>Engine::call_fn</code> which cannot call functions in
+<em>method-call</em> style.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -267,15 +335,15 @@ will not spill into the custom <a href="/book/vnext/engine/scope.html"><code>Sco
 
 let mut value: Dynamic = 1_i64.into();
 
-let result = engine.call_fn_raw(
-                &amp;mut scope,
-                &amp;ast,
-                false,
-                false,
-                &quot;action&quot;,
-                Some(&amp;mut value),   // binding the 'this' pointer
-                [ 41_i64.into() ]
-             )?;
+engine.call_fn_raw(
+            &amp;mut scope,
+            &amp;ast,
+            false,
+            false,
+            &quot;action&quot;,
+            Some(&amp;mut value),       // binding the 'this' pointer
+            [ 41_i64.into() ]
+       )?;
 
 assert_eq!(value.as_int()?, 42);
 <span class="boring">}

@@ -150,15 +150,38 @@ that they all share the same set of functions.</p>
 <p>For an example, see the <a href="/book/vnext/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
 <h2 id="def_package"><a class="header" href="#def_package"><code>def_package!</code></a></h2>
 <blockquote>
-<p><code>def_package!(</code><em>root</em><code>:</code><em>name</em><code>:&quot;</code><em>description</em><code>&quot;, </code><em>variable</em><code>, { </code><em>block</em><code> });</code></p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>def_package! {
+    /// Package description doc-comment
+    root::name =&gt; |variable| {
+                        :
+        // package initialization code block
+                        :
+    }
+
+    // Multiple packages can be defined at the same time
+
+    /// Package description doc-comment
+    root::name =&gt; |variable| {
+                        :
+        // package initialization code block
+                        :
+    }
+
+    :
+}
+<span class="boring">}
+</span></code></pre></pre>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th align="center">Parameter</th><th>Description</th></tr></thead><tbody>
+<tr><td align="center">description</td><td>doc-comment for the package</td></tr>
 <tr><td align="center">root</td><td>root namespace, usually <code>rhai</code></td></tr>
 <tr><td align="center">name</td><td>name of the package, usually ending in ...<code>Package</code></td></tr>
-<tr><td align="center">description</td><td>doc-comment for the package</td></tr>
-<tr><td align="center">variable</td><td>a variable name holding a reference to the <a href="/book/vnext/rust/modules/index.html">module</a> (<code>&amp;mut Module</code>) that is to form the package</td></tr>
-<tr><td align="center">block</td><td>a code block that initializes the package</td></tr>
+<tr><td align="center">variable</td><td>a variable name holding a reference to the <a href="/book/vnext/rust/modules/index.html">module</a> forming the package, usually <code>module</code>, <code>m</code> or <code>lib</code></td></tr>
+<tr><td align="center">code block</td><td>a code block that initializes the package</td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -171,23 +194,24 @@ use rhai::packages::{
 };
 
 // Define the package 'MyPackage'.
-def_package!(rhai:MyPackage:&quot;My own personal super package&quot;, module, {
-    // Aggregate other packages simply by calling 'init' on each.
-    ArithmeticPackage::init(module);
-    LogicPackage::init(module);
-    BasicArrayPackage::init(module);
-    BasicMapPackage::init(module);
+def_package! {
+    /// My own personal super package
+    rhai::MyPackage =&gt; |module| {
+        // Aggregate other packages simply by calling 'init' on each.
+        ArithmeticPackage::init(module);
+        LogicPackage::init(module);
+        BasicArrayPackage::init(module);
+        BasicMapPackage::init(module);
 
-    // Register additional Rust functions using 'Module::set_native_fn'.
-    let hash = module.set_native_fn(&quot;foo&quot;, |s: ImmutableString| {
-        Ok(foo(s.into_owned()))
-    });
+        // Register additional Rust functions using 'Module::set_native_fn'.
+        let hash = module.set_native_fn(&quot;foo&quot;, |s: &amp;str| Ok(foo(s)));
 
-    // Remember to update the parameter names/types and return type metadata
-    // when using the 'metadata' feature.
-    // 'Module::set_native_fn' by default does not set function metadata.
-    module.update_fn_metadata(hash, &amp;[&quot;s: ImmutableString&quot;, &quot;i64&quot;]);
-});
+        // Remember to update the parameter names/types and return type
+        // metadata when using the 'metadata' feature because
+        // 'Module::set_native_fn' by default does not set function metadata.
+        module.update_fn_metadata(hash, &amp;[&quot;s: &amp;str&quot;, &quot;i64&quot;]);
+    }
+}
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="create-a-custom-package-from-a-plugin-module"><a class="header" href="#create-a-custom-package-from-a-plugin-module">Create a Custom Package from a Plugin Module</a></h2>
@@ -203,23 +227,35 @@ are pulled up to the top level instead) and so there will not be any sub-modules
 </span><span class="boring">fn main() {
 </span>// Import necessary types and traits.
 use rhai::def_package;
-use rhai::packages::{ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage};
+use rhai::packages::{
+    ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage
+};
 use rhai::plugin::*;
 
 // Define plugin module.
 #[export_module]
-mod my_module {
+mod my_plugin_module {
     pub const MY_NUMBER: i64 = 42;
 
     pub fn greet(name: &amp;str) -&gt; String {
         format!(&quot;hello, {}!&quot;, name)
     }
-    pub fn get_num() -&gt; i64 {
+
+    // Non-public functions are by default not exported.
+    fn get_private_num() -&gt; i64 {
         42
     }
 
-    // This is a sub-module, but if using combine_with_exported_module!, it will
-    // be flattened and all functions registered at the top level.
+    pub fn get_num() -&gt; i64 {
+        get_private_num()
+    }
+
+    // This is a sub-module, but if using 'combine_with_exported_module!',
+    // it will be flattened and all functions registered at the top level.
+    //
+    // Because of the flattening, sub-modules are very convenient for
+    // putting feature gates onto large groups of functions.
+    #[cfg(feature = &quot;sub-num-feature&quot;)]
     pub mod my_sub_module {
         pub fn get_sub_num() -&gt; i64 {
             0
@@ -228,29 +264,36 @@ mod my_module {
 }
 
 // Define the package 'MyPackage'.
-def_package!(rhai:MyPackage:&quot;My own personal super package&quot;, module, {
-    // Aggregate other packages simply by calling 'init' on each.
-    ArithmeticPackage::init(module);
-    LogicPackage::init(module);
-    BasicArrayPackage::init(module);
-    BasicMapPackage::init(module);
+def_package! {
+    /// My own personal super package
+    rhai::MyPackage =&gt; |module| {
+        // Aggregate other packages simply by calling 'init' on each.
+        ArithmeticPackage::init(module);
+        LogicPackage::init(module);
+        BasicArrayPackage::init(module);
+        BasicMapPackage::init(module);
 
-    // Merge all registered functions and constants from the plugin module into the custom package.
-    //
-    // The sub-module 'my_sub_module' is flattened and its functions registered at the top level.
-    //
-    // The text string name in the second parameter can be anything and is reserved for future use;
-    // it is recommended to be an ID string that uniquely identifies the plugin module.
-    //
-    // The constant variable, 'MY_NUMBER', is ignored.
-    //
-    // This call ends up registering three functions at the top level of the package:
-    //   1) greet
-    //   2) get_num
-    //   3) get_sub_num (pulled up from 'my_sub_module')
-    //
-    combine_with_exported_module!(module, &quot;my-functions&quot;, my_module));
-});
+        // Merge all registered functions and constants from the plugin module
+        // into the custom package.
+        //
+        // The sub-module 'my_sub_module' is flattened and its functions
+        // registered at the top level.
+        //
+        // The text string name in the second parameter can be anything
+        // and is reserved for future use; it is recommended to be an
+        // ID string that uniquely identifies the plugin module.
+        //
+        // The constant variable, 'MY_NUMBER', is ignored.
+        //
+        // This call ends up registering three functions at the top level of
+        // the package:
+        // 1) 'greet'
+        // 2) 'get_num'
+        // 3) 'get_sub_num' (flattened from 'my_sub_module')
+        //
+        combine_with_exported_module!(module, &quot;my-mod&quot;, my_plugin_module));
+    }
+}
 <span class="boring">}
 </span></code></pre></pre>
 

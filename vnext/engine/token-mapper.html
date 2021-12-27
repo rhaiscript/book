@@ -151,9 +151,9 @@
 <blockquote>
 <p><code>Fn(token: Token, pos: Position, state: &amp;TokenizeState) -&gt; Token</code></p>
 </blockquote>
-<p>where <code>pos</code> is the location of the token and
-[<code>state</code>]<a href="https://docs.rs/rhai/1.4.0/rhai/struct.TokenizeState.html"><code>TokenizeState</code></a>
-holds the current state of the tokenizer.</p>
+<p>where <code>pos</code> is the location of the <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html">token</a> and
+<a href="https://docs.rs/rhai/1.4.0/rhai/struct.TokenizeState.html"><code>state</code></a> holds the current state
+of the tokenizer.</p>
 <h3 id="raising-errors"><a class="header" href="#raising-errors">Raising errors</a></h3>
 <p>It is possible to raise a parsing error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>

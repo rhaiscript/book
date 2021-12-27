@@ -142,8 +142,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="eager-function-evaluation-when-using-full-optimization-level"><a class="header" href="#eager-function-evaluation-when-using-full-optimization-level">Eager Function Evaluation When Using Full Optimization Level</a></h1>
-<p>When the optimization level is <a href="/book/vnext/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>, the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> assumes all functions to be <em>pure</em>
-and will <em>eagerly</em> evaluated all function calls with constant arguments, using the result to replace the call.</p>
+<p>When the optimization level is <a href="/book/vnext/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>, the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> assumes all functions to
+be <em>pure</em> and will <em>eagerly</em> evaluated all function calls with constant arguments, using the result
+to replace the call.</p>
 <p>This also applies to all operators (which are implemented as functions).</p>
 <p>For instance, the same example above:</p>
 <pre><pre class="playground"><code class="language-rust no_run">

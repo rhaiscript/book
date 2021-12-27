@@ -162,7 +162,7 @@ fn print_obj() { print(this.data); }
 <span class="boring">}
 </span></code></pre></pre>
 <p>The above can be replaced by using <em>anonymous functions</em> which have the same syntax as Rust’s closures
-(but they are <strong>NOT</strong> real closures, merely syntactic sugar):</p>
+(but they are <strong>NOT</strong> real closures, merely syntactic sugar).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -174,27 +174,23 @@ fn print_obj() { print(this.data); }
         print(this.data);               // full function body
     }
 };
-<span class="boring">}
-</span></code></pre></pre>
-<p>The anonymous functions will be hoisted into separate functions in the global namespace.
-The above is equivalent to:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let obj = #{
+
+// The above is equivalent to...
+
+let obj = #{
     data: 42,
-    increment: Fn(&quot;anon_fn_1000&quot;),
-    decrement: Fn(&quot;anon_fn_1001&quot;),
-    print: Fn(&quot;anon_fn_1002&quot;)
+    increment: Fn(&quot;anon_fn_0001&quot;),
+    decrement: Fn(&quot;anon_fn_0002&quot;),
+    print: Fn(&quot;anon_fn_0003&quot;)
 };
 
-fn anon_fn_1000(x) {
+fn anon_fn_0001(x) {
     this.data += x;                     // when called, 'this' maps to the object map
 }
-fn anon_fn_1001(x) {
+fn anon_fn_0002(x) {
     this.data -= x;                     // when called, 'this' maps to the object map
 }
-fn anon_fn_1002() {
+fn anon_fn_0003() {
     print(this.data);                   // when called, 'this' maps to the object map
 }
 <span class="boring">}
@@ -202,7 +198,7 @@ fn anon_fn_1002() {
 <p>Anonymous functions can be disabled via <a href="/book/vnext/engine/options.html"><code>Engine::set_allow_anonymous_function</code></a>.</p>
 <h2 id="warning--not-real-closures"><a class="header" href="#warning--not-real-closures">WARNING – NOT Real Closures</a></h2>
 <p>Remember: anonymous functions, though having the same syntax as Rust <em>closures</em>, are themselves
-<strong>not</strong> real closures.</p>
+<strong>NOT</strong> real closures.</p>
 <p>In particular, they capture their execution environment via <a href="/book/vnext/language/fn-closure.html">automatic currying</a>
 (disabled via <a href="/book/vnext/start/features.html"><code>no_closure</code></a>).</p>
 

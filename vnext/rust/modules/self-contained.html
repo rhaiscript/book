@@ -142,9 +142,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="compile-to-a-self-contained-ast"><a class="header" href="#compile-to-a-self-contained-ast">Compile to a Self-Contained <code>AST</code></a></h1>
-<p>When a script <a href="/book/vnext/language/modules/import.html">imports</a> external <a href="/book/vnext/rust/modules/index.html">modules</a> that may not be available later on,
-it is possible to eagerly <a href="/book/vnext/rust/modules/resolvers.html"><em>pre-resolve</em></a> these imports and embed them
-directly into a self-contained <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
+<p>When a script <a href="/book/vnext/language/modules/import.html">imports</a> external <a href="/book/vnext/rust/modules/index.html">modules</a> that may not be available later on, it is
+possible to eagerly <a href="/book/vnext/rust/modules/resolvers.html"><em>pre-resolve</em></a> these imports and embed them directly into a
+self-contained <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.</p>
 <p>For instance, a system may periodically connect to a central source (e.g. a database) to load
 scripts and compile them to <a href="/book/vnext/engine/compile.html"><code>AST</code></a> form. Afterwards, in order to conserve bandwidth (or due to
 other physical limitations), it is disconnected from the central source for self-contained

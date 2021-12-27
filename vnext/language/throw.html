@@ -162,13 +162,13 @@ captured by <code>value</code>.</p>
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let result = engine.eval::&lt;i64&gt;(
-r#&quot;
+&quot;
     let x = 42;
 
     if x &gt; 0 {
         throw x;
     }
-&quot;#);
+&quot;;
 
 println!(&quot;{}&quot;, result);     // prints &quot;Runtime error: 42 (line 5, position 15)&quot;
 <span class="boring">}

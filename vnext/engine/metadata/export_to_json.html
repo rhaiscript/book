@@ -146,8 +146,8 @@
 <p>As part of a <em>reflections</em> API, <code>Engine::gen_fn_metadata_to_json</code> and the corresponding
 <code>Engine::gen_fn_metadata_with_ast_to_json</code> export the full list of <a href="/book/vnext/engine/metadata/index.html">functions metadata</a>
 in JSON format.</p>
-<p>The <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature must be used to turn on this API, which requires
-the <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a> crate.</p>
+<p>The <a href="/book/vnext/start/features.html"><code>metadata</code></a> feature must be used to turn on this API, which requires the
+<a href="https://crates.io/crates/serde_json"><code>serde_json</code></a> crate.</p>
 <h3 id="sources"><a class="header" href="#sources">Sources</a></h3>
 <p>Functions from the following sources are included:</p>
 <ol>
@@ -215,11 +215,11 @@ metadata is included.</p>
   &quot;params&quot;:  /* omitted if no parameters */
   [
     { &quot;name&quot;: &quot;param_1&quot;, &quot;type&quot;: &quot;type_1&quot; },
-    { &quot;name&quot;: &quot;param_2&quot; },  /* no type info */
-    { &quot;name&quot;: &quot;_&quot;, &quot;type&quot;: &quot;type_3&quot; },
+    { &quot;name&quot;: &quot;param_2&quot; },  /* no type name */
+    { &quot;type&quot;: &quot;type_3&quot; },   /* no parameter name */
     ...
   ],
-  &quot;returnType&quot;: &quot;ret_type&quot;,  /* omitted if unknown */
+  &quot;returnType&quot;: &quot;ret_type&quot;,  /* omitted if () or unknown */
   &quot;signature&quot;: &quot;[private] fn_name(param_1: type_1, param_2, _: type_3) -&gt; ret_type&quot;,
   &quot;docComments&quot;:  /* omitted if none */
   [

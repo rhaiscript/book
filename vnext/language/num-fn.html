@@ -144,13 +144,13 @@
                         <h1 id="numeric-functions"><a class="header" href="#numeric-functions">Numeric Functions</a></h1>
 <h2 id="integer-functions"><a class="header" href="#integer-functions">Integer Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>ArithmeticPackage</code></a> but excluded if
-using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on integers only:</p>
+using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on integers only.</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>is_odd</code> method and property</td><td>returns <code>true</code> if the value is an odd number, otherwise <code>false</code></td></tr>
 <tr><td><code>is_even</code> method and property</td><td>returns <code>true</code> if the value is an even number, otherwise <code>false</code></td></tr>
 </tbody></table>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if
-using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on integers only:</p>
+using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on integers only.</p>
 <table><thead><tr><th>Function</th><th align="center">Not available under</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>to_float</code></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td></tr>
 <tr><td><code>to_decimal</code></td><td align="center">non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
@@ -158,7 +158,7 @@ using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) opera
 <h2 id="signed-numeric-functions"><a class="header" href="#signed-numeric-functions">Signed Numeric Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>ArithmeticPackage</code></a> but excluded if
 using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>f32</code>, <code>f64</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires
-<a href="/book/vnext/start/features.html"><code>decimal</code></a>) only:</p>
+<a href="/book/vnext/start/features.html"><code>decimal</code></a>) only.</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>abs</code></td><td>absolute value</td></tr>
 <tr><td><code>sign</code></td><td>returns (<code>INT</code>) −1 if negative, +1 if positive, 0 if zero</td></tr>
@@ -167,7 +167,7 @@ using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) opera
 <h2 id="floating-point-functions"><a class="header" href="#floating-point-functions">Floating-Point Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if
 using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>f64</code> (<code>f32</code> under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>) and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>
-(requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>) only:</p>
+(requires <a href="/book/vnext/start/features.html"><code>decimal</code></a>) only.</p>
 <table><thead><tr><th>Category</th><th align="center">Supports <code>Decimal</code></th><th>Functions</th></tr></thead><tbody>
 <tr><td>Trigonometry</td><td align="center">yes</td><td><code>sin</code>, <code>cos</code>, <code>tan</code></td></tr>
 <tr><td>Trigonometry</td><td align="center">no</td><td><code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians, <code>hypot(</code><em>x</em><code>,</code><em>y</em><code>)</code></td></tr>
@@ -184,7 +184,7 @@ using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) opera
 </tbody></table>
 <h2 id="decimal-rounding-functions"><a class="header" href="#decimal-rounding-functions">Decimal Rounding Functions</a></h2>
 <p>The following rounding methods (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
-operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only, which requires the <a href="/book/vnext/start/features.html"><code>decimal</code></a> feature:</p>
+operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only, which requires the <a href="/book/vnext/start/features.html"><code>decimal</code></a> feature.</p>
 <table><thead><tr><th>Rounding type</th><th>Behavior</th><th>Methods</th></tr></thead><tbody>
 <tr><td>None</td><td></td><td><code>floor</code>, <code>ceiling</code>, <code>int</code>, <code>fraction</code> methods and properties</td></tr>
 <tr><td>Banker’s rounding</td><td>round to integer</td><td><code>round</code> method and property</td></tr>
@@ -196,7 +196,7 @@ operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code><
 </tbody></table>
 <h2 id="parsing-functions"><a class="header" href="#parsing-functions">Parsing Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicMathPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
-parse numbers:</p>
+parse numbers.</p>
 <table><thead><tr><th>Function</th><th align="center">No available under</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="/book/vnext/language/convert.html"><code>parse_int</code></a></td><td align="center"></td><td>converts a <a href="/book/vnext/language/strings-chars.html">string</a> to <code>INT</code> with an optional radix</td></tr>
 <tr><td><a href="/book/vnext/language/convert.html"><code>parse_float</code></a></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a> and non-<a href="/book/vnext/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/book/vnext/language/strings-chars.html">string</a> to <code>FLOAT</code> (<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> under <a href="/book/vnext/start/features.html"><code>no_float</code></a> and <a href="/book/vnext/start/features.html"><code>decimal</code></a>)</td></tr>
@@ -204,7 +204,7 @@ parse numbers:</p>
 </tbody></table>
 <h2 id="formatting-functions"><a class="header" href="#formatting-functions">Formatting Functions</a></h2>
 <p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicStringPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>)
-convert integer numbers into a <a href="/book/vnext/language/strings-chars.html">string</a> of hex, octal or binary representations:</p>
+convert integer numbers into a <a href="/book/vnext/language/strings-chars.html">string</a> of hex, octal or binary representations.</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="/book/vnext/language/convert.html"><code>to_binary</code></a></td><td>converts an integer number to binary</td></tr>
 <tr><td><a href="/book/vnext/language/convert.html"><code>to_octal</code></a></td><td>converts an integer number to octal</td></tr>
@@ -213,7 +213,7 @@ convert integer numbers into a <a href="/book/vnext/language/strings-chars.html"
 <p>These formatting functions are defined for all available integer numbers – i.e. <code>INT</code>, <code>u8</code>, <code>i8</code>,
 <code>u16</code>, <code>i16</code>, <code>u32</code>, <code>i32</code>, <code>u64</code>, <code>i64</code>, <code>u128</code> and <code>i128</code> unless disabled by feature flags.</p>
 <h2 id="floating-point-constants"><a class="header" href="#floating-point-constants">Floating-point Constants</a></h2>
-<p>The following functions return standard mathematical constants:</p>
+<p>The following functions return standard mathematical constants.</p>
 <table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>PI</code></td><td>returns the value of π</td></tr>
 <tr><td><code>E</code></td><td>returns the value of <em>e</em></td></tr>

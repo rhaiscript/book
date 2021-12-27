@@ -142,16 +142,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="iterators-for-custom-types"><a class="header" href="#iterators-for-custom-types">Iterators for Custom Types</a></h1>
-<p>If a <a href="/book/vnext/rust/custom.html">custom type</a> is iterable, the <a href="for.html"><code>for</code></a> loop can be used to iterate through
+<p>If a <a href="/book/vnext/rust/custom.html">custom type</a> is iterable, the <a href="/book/vnext/language/for.html"><code>for</code></a> loop can be used to iterate through
 its items in sequence.</p>
-<p>In order to use a <a href="for.html"><code>for</code></a> statement, a <em>type iterator</em> must be registered for
+<p>In order to use a <a href="/book/vnext/language/for.html"><code>for</code></a> statement, a <em>type iterator</em> must be registered for
 the <a href="/book/vnext/rust/custom.html">custom type</a> in question.</p>
 <p><code>Engine::register_iterator&lt;T&gt;</code> allows registration of a <em>type iterator</em> for any type
-that implements <code>IntoIterator</code>:</p>
+that implements <code>IntoIterator</code>.</p>
+<p>With a type iterator registered, the <a href="/book/vnext/rust/custom.html">custom type</a> can be iterated through.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// Custom type
+</span>┌──────┐
+│ Rust │
+└──────┘
+
+// Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec&lt;i64&gt; }
 
@@ -165,16 +170,17 @@ impl IntoIterator&lt;Item = i64&gt; for TestStruct {
     }
 }
 
+// Register API and type iterator for 'TestStruct'
 engine.register_type_with_name::&lt;TestStruct&gt;(&quot;TestStruct&quot;)
       .register_fn(&quot;new_ts&quot;, || TestStruct { fields: vec![1, 2, 3, 42] })
-      .register_iterator::&lt;TestStruct&gt;();         // register type iterator
-<span class="boring">}
-</span></code></pre></pre>
-<p>With a type iterator registered, the <a href="/book/vnext/rust/custom.html">custom type</a> can be iterated through:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let ts = new_ts();
+      .register_iterator::&lt;TestStruct&gt;();
+
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+let ts = new_ts();
 
 // Use 'for' statement to loop through items in 'ts'
 for value in ts {

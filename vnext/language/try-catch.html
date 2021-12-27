@@ -207,21 +207,20 @@ catch
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="catchable-exceptions"><a class="header" href="#catchable-exceptions">Catchable Exceptions</a></h2>
-<p>Many script-oriented exceptions can be caught via <code>try</code> ... <code>catch</code>:</p>
+<p>Many script-oriented exceptions can be caught via <code>try</code> ... <code>catch</code>.</p>
 <table><thead><tr><th>Error type</th><th align="center">Error value</th></tr></thead><tbody>
-<tr><td>Runtime error thrown by a <a href="/book/vnext/language/throw.html"><code>throw</code></a> statement</td><td align="center">value in <code>throw</code> statement</td></tr>
+<tr><td>Runtime error thrown by a <a href="/book/vnext/language/throw.html"><code>throw</code></a> statement</td><td align="center">value in <a href="/book/vnext/language/throw.html"><code>throw</code></a> statement</td></tr>
 <tr><td>Arithmetic error</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td>Variable not found</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td><a href="/book/vnext/language/functions.html">Function</a> not found</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td><a href="/book/vnext/rust/modules/index.html">Module</a> not found</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td>Unbound [<code>this</code>]</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Unbound <code>this</code></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td>Data type mismatch</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td>Assignment to a calculated/constant value</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td>Assignment to a calculated/<a href="/book/vnext/language/constants.html">constant</a> value</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td><a href="/book/vnext/language/arrays.html">Array</a>/<a href="/book/vnext/language/strings-chars.html">string</a> indexing out-of-bounds</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td>Indexing with an inappropriate data type</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td>Error in a dot expression</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td><code>for</code> statement without a <a href="/book/vnext/language/iterator.html">type iterator</a></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
-<tr><td>Error in an <code>in</code> expression</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
+<tr><td><a href="/book/vnext/language/for.html"><code>for</code></a> statement without a <a href="/book/vnext/language/iterator.html">type iterator</a></td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td>Data race detected</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td>Other runtime error</td><td align="center"><a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 </tbody></table>
@@ -229,14 +228,14 @@ catch
 including its type, line and character position (if any), and source etc.</p>
 <p>When the <a href="/book/vnext/start/features.html"><code>no_object</code></a> feature is turned on, however, the error value is a simple <a href="/book/vnext/language/strings-chars.html">string</a> description.</p>
 <h2 id="non-catchable-exceptions"><a class="header" href="#non-catchable-exceptions">Non-Catchable Exceptions</a></h2>
-<p>Some exceptions <em>cannot</em> be caught:</p>
-<ul>
-<li>Syntax error during parsing</li>
-<li>System error – e.g. script file not found</li>
-<li>Script evaluation metrics over <a href="/book/vnext/safety/index.html">safety limits</a></li>
-<li>Function calls nesting exceeding <a href="/book/vnext/safety/max-call-stack.html">maximum call stack depth</a></li>
-<li>Script evaluation manually terminated</li>
-</ul>
+<p>Some exceptions <em>cannot</em> be caught.</p>
+<table><thead><tr><th>Error type</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Syntax error during parsing</td><td>invalid script</td></tr>
+<tr><td>System error – e.g. script file not found</td><td>system errors are not recoverable</td></tr>
+<tr><td>Script evaluation metrics over <a href="/book/vnext/safety/index.html">safety limits</a></td><td><a href="/book/vnext/safety/index.html">safety</a> protection</td></tr>
+<tr><td>Function calls nesting exceeding <a href="/book/vnext/safety/max-call-stack.html">maximum call stack depth</a></td><td><a href="/book/vnext/safety/index.html">safety</a> protection</td></tr>
+<tr><td>Script evaluation manually terminated</td><td><a href="/book/vnext/safety/index.html">safety</a> protection</td></tr>
+</tbody></table>
 
                     </main>
 

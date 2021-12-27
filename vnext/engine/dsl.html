@@ -155,12 +155,11 @@ that follow <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Anne
 <h2 id="disable-keywords-andor-operators"><a class="header" href="#disable-keywords-andor-operators">Disable Keywords and/or Operators</a></h2>
 <p>In some DSL scenarios, it is necessary to further restrict the language to exclude certain
 language features that are not necessary or dangerous to the application.</p>
-<p>For example, a DSL may disable the <code>while</code> loop while keeping all other statement types intact.</p>
+<p>For example, a DSL may disable the <a href="/book/vnext/language/while.html"><code>while</code></a> loop while keeping all other statement types intact.</p>
 <p>It is possible, in Rhai, to surgically <a href="/book/vnext/engine/disable-keywords.html">disable keywords and operators</a>.</p>
 <h2 id="custom-operators"><a class="header" href="#custom-operators">Custom Operators</a></h2>
 <p>On the other hand, some DSL scenarios require special operators that make sense only for
 that specific environment.  In such cases, it is possible to define <a href="/book/vnext/engine/custom-op.html">custom operators</a> in Rhai.</p>
-<p>For example:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

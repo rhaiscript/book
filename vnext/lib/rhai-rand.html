@@ -177,20 +177,33 @@ engine.register_global_module(random.as_shared_module());
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
-<table><thead><tr><th align="center">Feature</th><th>Description</th><th align="center">Should not be used with Rhai feature</th></tr></thead><tbody>
-<tr><td align="center"><code>float</code></td><td>enables random floating-point number generation</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td></tr>
-<tr><td align="center"><code>array</code></td><td>enables methods for <a href="/book/vnext/language/arrays.html">arrays</a></td><td align="center"><a href="/book/vnext/start/features.html"><code>no_index</code></a></td></tr>
+<table><thead><tr><th align="center">Feature</th><th>Description</th><th align="center">Default?</th><th align="center">Should not be used with Rhai feature</th></tr></thead><tbody>
+<tr><td align="center"><code>float</code></td><td>enables random floating-point number generation</td><td align="center">yes</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_float</code></a></td></tr>
+<tr><td align="center"><code>array</code></td><td>enables methods for <a href="/book/vnext/language/arrays.html">arrays</a></td><td align="center">yes</td><td align="center"><a href="/book/vnext/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td align="center"><code>metadata</code></td><td>enables <a href="/book/vnext/engine/metadata/index.html">functions metadata</a> (turns on <a href="/book/vnext/start/features.html"><code>metadata</code></a> in Rhai)</td><td align="center">no</td><td align="center"></td></tr>
 </tbody></table>
+<h3 id="example--working-with-no_float-in-rhai"><a class="header" href="#example--working-with-no_float-in-rhai">Example – working with <code>no_float</code> in Rhai</a></h3>
+<pre><code class="language-toml">┌────────────┐
+│ Cargo.toml │
+└────────────┘
+
+[dependencies]
+# Rhai is set for 'no_float', meaning no floating-point support
+rhai = { version=&quot;1.4.0&quot;, features = [&quot;no_float&quot;] }
+
+# Use 'default-features = false' to clear defaults, then only add 'array'
+rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&quot;array&quot;] }
+</code></pre>
 <h2 id="package-functions"><a class="header" href="#package-functions">Package Functions</a></h2>
 <p>The following functions are defined:</p>
-<table><thead><tr><th align="center">Function</th><th align="center">Return value</th><th align="center">Feature</th><th>Description</th></tr></thead><tbody>
+<table><thead><tr><th align="center">Function</th><th align="center">Return type</th><th align="center">Feature</th><th>Description</th></tr></thead><tbody>
 <tr><td align="center"><code>rand</code></td><td align="center"><code>INT</code></td><td align="center"></td><td>generates a random number</td></tr>
 <tr><td align="center"><code>rand_float</code></td><td align="center"><code>FLOAT</code></td><td align="center"><code>float</code></td><td>generates a random floating-point number between <code>0.0</code> and <code>1.0</code></td></tr>
 <tr><td align="center"><code>rand_bool</code></td><td align="center"><code>bool</code></td><td align="center"></td><td>generates a random boolean</td></tr>
 </tbody></table>
 <h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
 <p>The following methods are defined for <a href="/book/vnext/language/arrays.html">arrays</a> (requires the <code>array</code> feature):</p>
-<table><thead><tr><th align="center">Method</th><th align="center">Parameter(s)</th><th align="center">Return value</th><th>Description</th></tr></thead><tbody>
+<table><thead><tr><th align="center">Method</th><th align="center">Parameter(s)</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td align="center"><code>shuffle</code></td><td align="center"><em>none</em></td><td align="center"></td><td>shuffles the items in the <a href="/book/vnext/language/arrays.html">array</a></td></tr>
 <tr><td align="center"><code>sample</code></td><td align="center"><em>none</em></td><td align="center"><a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a></td><td>returns a random item from the <a href="/book/vnext/language/arrays.html">array</a></td></tr>
 <tr><td align="center"><code>sample</code></td><td align="center">number of items to sample (empty if ≤ 0, all if ≥ length)</td><td align="center"><a href="/book/vnext/language/arrays.html"><code>Array</code></a></td><td>returns a non-repeating <em>shuffled</em> random sample of items from the <a href="/book/vnext/language/arrays.html">array</a></td></tr>

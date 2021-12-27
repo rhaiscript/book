@@ -211,7 +211,7 @@ array[0].update();  // &lt;- call in method-call style will update 'a'
 <p>Native Rust methods registered with an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
 an equivalent method coded in script, where the object is accessed via the <code>this</code> pointer instead.</p>
 <p>The following table illustrates the differences:</p>
-<table><thead><tr><th align="center">Function type</th><th align="center">Parameters</th><th align="center">Object reference</th><th align="center">Function signature</th></tr></thead><tbody>
+<table><thead><tr><th align="center">Function type</th><th align="center">No. of parameters</th><th align="center">Object reference</th><th align="center">Function signature</th></tr></thead><tbody>
 <tr><td align="center">Native Rust</td><td align="center"><em>N</em> + 1</td><td align="center">first <code>&amp;mut T</code> parameter</td><td align="center"><code>Fn(obj: &amp;mut T, x: U, y: V)</code></td></tr>
 <tr><td align="center">Rhai script</td><td align="center"><em>N</em></td><td align="center"><code>this</code></td><td align="center"><code>Fn(x: U, y: V)</code></td></tr>
 </tbody></table>

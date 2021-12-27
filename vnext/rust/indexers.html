@@ -151,7 +151,7 @@ value at a particular index:</p>
 </blockquote>
 <p>Like property <a href="/book/vnext/rust/getters-setters.html">getters/setters</a>, indexers take a <code>&amp;mut</code> reference to the first parameter.</p>
 <p>They also take an additional parameter of any type that serves as the <em>index</em> within brackets.</p>
-<p>Indexers are disabled when the <a href="/book/vnext/start/features.html"><code>no_index</code></a> feature is used.</p>
+<p>Indexers are disabled when the <a href="/book/vnext/start/features.html"><code>no_index</code></a> and <a href="/book/vnext/start/features.html"><code>no_object</code></a> features are used together.</p>
 <table><thead><tr><th><code>Engine</code> API</th><th>Function signature(s)<br/>(<code>T: Clone</code> = custom type,<br/><code>X: Clone</code> = index type,<br/><code>V: Clone</code> = data type)</th><th align="center">Can mutate <code>T</code>?</th></tr></thead><tbody>
 <tr><td><code>register_indexer_get</code></td><td><code>Fn(&amp;mut T, X) -&gt; V</code></td><td align="center">yes, but not advised</td></tr>
 <tr><td><code>register_indexer_set</code></td><td><code>Fn(&amp;mut T, X, V)</code></td><td align="center">yes</td></tr>
@@ -162,20 +162,22 @@ value at a particular index:</p>
 <p>By convention, index <a href="/book/vnext/rust/getters-setters.html">getters</a> are not supposed to mutate the <a href="/book/vnext/rust/custom.html">custom type</a>,
 although there is nothing that prevents this mutation.</p>
 <p><strong>IMPORTANT: Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.</strong></p>
-<h2 id="cannot-override-arrays-object-maps-strings-and-integers"><a class="header" href="#cannot-override-arrays-object-maps-strings-and-integers">Cannot Override Arrays, Object Maps, Strings and Integers</a></h2>
+<h2 id="cannot-override-arrays-blobs-object-maps-strings-and-integers"><a class="header" href="#cannot-override-arrays-blobs-object-maps-strings-and-integers">Cannot Override Arrays, BLOB’s, Object Maps, Strings and Integers</a></h2>
 <p>For efficiency reasons, indexers <strong>cannot</strong> be used to overload (i.e. override)
 built-in indexing operations for <a href="/book/vnext/language/arrays.html">arrays</a>, <a href="/book/vnext/language/object-maps.html">object maps</a>, <a href="/book/vnext/language/strings-chars.html">strings</a> and integers
 (acting as <a href="/book/vnext/language/bit-fields.html">bit-field</a> operation).</p>
-<p>These types have built-in indexer implementations that are fast and efficient:</p>
+<p>The following types have built-in indexer implementations that are fast and efficient.</p>
 <table><thead><tr><th>Type</th><th align="center">Index type</th><th align="center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="/book/vnext/language/arrays.html"><code>Array</code></a></td><td align="center"><code>INT</code></td><td align="center"><a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a></td><td>access a particular element inside the <a href="/book/vnext/language/arrays.html">array</a></td></tr>
+<tr><td><a href="/book/vnext/language/blobs.html"><code>Blob</code></a></td><td align="center"><code>INT</code></td><td align="center"><code>INT</code></td><td>access a particular byte value inside the <a href="/book/vnext/language/blobs.html">BLOB</a></td></tr>
 <tr><td><a href="/book/vnext/language/object-maps.html"><code>Map</code></a></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a>,<br/><code>String</code>, <code>&amp;str</code></td><td align="center"><a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a></td><td>access a particular property inside the <a href="/book/vnext/language/object-maps.html">object map</a></td></tr>
 <tr><td><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a>,<br/><code>String</code>, <code>&amp;str</code></td><td align="center"><code>INT</code></td><td align="center"><a href="/book/vnext/language/strings-chars.html">character</a></td><td>access a particular <a href="/book/vnext/language/strings-chars.html">character</a> inside the <a href="/book/vnext/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>INT</code></td><td align="center"><code>INT</code></td><td align="center">boolean</td><td>access a particular bit inside the integer as a <a href="/book/vnext/language/bit-fields.html">bit-field</a></td></tr>
+<tr><td><code>INT</code></td><td align="center"><code>INT</code></td><td align="center">boolean</td><td>access a particular bit inside the integer number as a <a href="/book/vnext/language/bit-fields.html">bit-field</a></td></tr>
+<tr><td><code>INT</code></td><td align="center"><a href="/book/vnext/language/ranges.html">range</a></td><td align="center"><code>INT</code></td><td>access a particular range of bits inside the integer number as a <a href="/book/vnext/language/bit-fields.html">bit-field</a></td></tr>
 </tbody></table>
-<p>Attempting to register indexers for an <a href="/book/vnext/language/arrays.html">array</a>, <a href="/book/vnext/language/object-maps.html">object map</a>, <a href="/book/vnext/language/strings-chars.html">string</a> or <code>INT</code> panics
-when using the <code>Engine::register_indexer_XXX</code> API.  They can, however, be defined in a
-<a href="/book/vnext/plugins/module.html">plugin module</a>, only to be ignored.</p>
+<p>Attempting to register indexers for an <a href="/book/vnext/language/arrays.html">array</a>, <a href="/book/vnext/language/object-maps.html">object map</a>, <a href="/book/vnext/language/strings-chars.html">string</a> or <code>INT</code> panics when using
+the <code>Engine::register_indexer_XXX</code> API.  They can, however, be defined in a <a href="/book/vnext/plugins/module.html">plugin module</a>, only to
+be ignored.</p>
 <p>In general, it is a bad idea to overload indexers for any of the <a href="/book/vnext/language/values-and-types.html">standard types</a> supported
 internally by Rhai, since built-in indexers may be added in future versions.</p>
 <h2 id="convention-for-negative-index"><a class="header" href="#convention-for-negative-index">Convention for Negative Index</a></h2>
@@ -201,6 +203,7 @@ let actual_index = if index &lt; 0 {
 <p>The <em>end</em> of a data type can be interpreted creatively.  For example, in an integer used as a
 <a href="/book/vnext/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
 <em>most-significant-bit</em> (MSB).</p>
+<p>By convention, negative values are <em>not</em> interpreted specially for index values that are <a href="/book/vnext/language/ranges.html">ranges</a>.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -252,11 +255,19 @@ property name syntax.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// You can write this...
-let x = foo[&quot;hello_world&quot;];
+</span>// Assume 'obj' has an indexer defined with string parameters...
+
+// Let's create a new key...
+obj.hello_world = 42;
+
+// The above is equivalent to this:
+obj[&quot;hello_world&quot;] = 42;
+
+// You can write this...
+let x = obj[&quot;hello_world&quot;];
 
 // but it is easier with this...
-let x = foo.hello_world;
+let x = obj.hello_world;
 <span class="boring">}
 </span></code></pre></pre>
 <p>The reverse, however, is not true – when an indexer fails or doesn’t exist, the corresponding
@@ -282,17 +293,17 @@ engine.register_type::&lt;MyType&gt;()
       .register_indexer_get(|object: &amp;mut MyType, index: &amp;str| *object[index])
       .register_indexer_set(|object: &amp;mut MyType, index: &amp;str, value: i64| object[index] = value);
 
-// Calls a[&quot;foo&quot;] because getter for 'foo' does not exist
-engine.run(&quot;let a = new_ts(); print(a.foo);&quot;);
+// Calls ts[&quot;foo&quot;] because getter for 'foo' does not exist
+engine.run(&quot;let ts = new_ts(); print(ts.foo);&quot;);
 
-// Calls a[&quot;bar&quot;] because getter for 'bar' does not exist
-engine.run(&quot;let a = new_ts(); print(a.bar);&quot;);
+// Calls ts[&quot;bar&quot;] because getter for 'bar' does not exist
+engine.run(&quot;let ts = new_ts(); print(ts.bar);&quot;);
 
-// Calls a[&quot;baz&quot;] = 999 because getter for 'baz' does not exist
-engine.run(&quot;let a = new_ts(); a.baz = 999;&quot;);
+// Calls ts[&quot;baz&quot;] = 999 because getter for 'baz' does not exist
+engine.run(&quot;let ts = new_ts(); ts.baz = 999;&quot;);
 
 // Error: Property getter is not a fallback for indexer
-engine.run(r#&quot;let a = new_ts(); print(a[&quot;hello&quot;]);&quot;#);
+engine.run(r#&quot;let ts = new_ts(); print(ts[&quot;hello&quot;]);&quot;#);
 <span class="boring">}
 </span></code></pre></pre>
 

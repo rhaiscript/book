@@ -179,9 +179,10 @@ result == 15;
 
 engine.register_custom_operator(&quot;foo&quot;, 160)?;
 
-┌──────┐
-│ Rhai │
-└──────┘
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
 
 1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
 
@@ -225,20 +226,19 @@ engine.eval::&lt;i64&gt;(&quot;1 + 2 * 3 # 4 - 5 / 6&quot;)?;   // error: functi
 <p>A higher precedence binds more tightly than a lower precedence, so <code>*</code> and <code>/</code> binds before <code>+</code> and <code>-</code> etc.</p>
 <p>When registering a custom operator, the operator’s precedence must also be provided.</p>
 <p>The following <em>precedence table</em> shows the built-in precedence of standard Rhai operators:</p>
-<table><thead><tr><th>Category</th><th align="center">Operators</th><th align="center">Precedence (0-255)</th></tr></thead><tbody>
-<tr><td>Assignments</td><td align="center"><code>=</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>**=</code>, <code>%=</code>,<br/><code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>&amp;=</code>, <code>|=</code>, <code>^=</code></td><td align="center">0</td></tr>
-<tr><td>Ranges</td><td align="center"><code>..</code>, <code>..=</code></td><td align="center">10</td></tr>
-<tr><td>Logic and bit masks</td><td align="center"><code>||</code>,  <code>|</code>, <code>^</code></td><td align="center">30</td></tr>
-<tr><td>Logic and bit masks</td><td align="center"><code>&amp;&amp;</code>, <code>&amp;</code></td><td align="center">60</td></tr>
-<tr><td>Comparisons</td><td align="center"><code>==</code>, <code>!=</code></td><td align="center">90</td></tr>
-<tr><td>Containment</td><td align="center"><code>in</code></td><td align="center">110</td></tr>
-<tr><td>Comparisons</td><td align="center"><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></td><td align="center">130</td></tr>
-<tr><td>Arithmetic</td><td align="center"><code>+</code>, <code>-</code></td><td align="center">150</td></tr>
-<tr><td>Arithmetic</td><td align="center"><code>*</code>, <code>/</code>, <code>%</code></td><td align="center">180</td></tr>
-<tr><td>Arithmetic</td><td align="center"><code>**</code> <em>(binds to right)</em></td><td align="center">190</td></tr>
-<tr><td>Bit-shifts</td><td align="center"><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td><td align="center">210</td></tr>
-<tr><td>Unary operators</td><td align="center">unary <code>+</code>, <code>-</code>, <code>!</code> <em>(binds to right)</em></td><td align="center">second highest</td></tr>
-<tr><td>Object field access</td><td align="center"><code>.</code> <em>(binds to right)</em></td><td align="center">highest</td></tr>
+<table><thead><tr><th>Category</th><th align="center">Operators</th><th align="center">Binding</th><th align="center">Precedence (0-255)</th></tr></thead><tbody>
+<tr><td>Logic and bit masks</td><td align="center"><code>||</code>,  <code>|</code>, <code>^</code></td><td align="center">left</td><td align="center">30</td></tr>
+<tr><td>Logic and bit masks</td><td align="center"><code>&amp;&amp;</code>, <code>&amp;</code></td><td align="center">left</td><td align="center">60</td></tr>
+<tr><td>Comparisons</td><td align="center"><code>==</code>, <code>!=</code></td><td align="center">left</td><td align="center">90</td></tr>
+<tr><td>Containment</td><td align="center">[<code>in</code></td><td align="center">left</td><td align="center">110</td></tr>
+<tr><td>Comparisons</td><td align="center"><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></td><td align="center">left</td><td align="center">130</td></tr>
+<tr><td>Ranges</td><td align="center"><code>..</code>, <code>..=</code></td><td align="center">left</td><td align="center">140</td></tr>
+<tr><td>Arithmetic</td><td align="center"><code>+</code>, <code>-</code></td><td align="center">left</td><td align="center">150</td></tr>
+<tr><td>Arithmetic</td><td align="center"><code>*</code>, <code>/</code>, <code>%</code></td><td align="center">left</td><td align="center">180</td></tr>
+<tr><td>Arithmetic</td><td align="center"><code>**</code></td><td align="center">right</td><td align="center">190</td></tr>
+<tr><td>Bit-shifts</td><td align="center"><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td><td align="center">left</td><td align="center">210</td></tr>
+<tr><td>Unary operators</td><td align="center">unary <code>+</code>, <code>-</code>, <code>!</code></td><td align="center">right</td><td align="center">highest</td></tr>
+<tr><td>Object field access</td><td align="center"><code>.</code></td><td align="center">right</td><td align="center">highest</td></tr>
 </tbody></table>
 
                     </main>

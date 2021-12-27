@@ -142,13 +142,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="disable-custom-types"><a class="header" href="#disable-custom-types">Disable Custom Types</a></h1>
-<h2 id="no_object-feature"><a class="header" href="#no_object-feature"><code>no_object</code> Feature</a></h2>
-<p>The custom types API <code>register_get</code>, <code>register_get_result</code>, <code>register_set</code>, <code>register_set_result</code>
-and <code>register_get_set</code> are not available under <a href="/book/vnext/start/features.html"><code>no_object</code></a>.</p>
-<h2 id="no_index-feature"><a class="header" href="#no_index-feature"><code>no_index</code> Feature</a></h2>
-<p>The indexers API <code>register_indexer_get</code>, <code>register_indexer_get_result</code>, <code>register_indexer_set</code>,
-<code>register_indexer_set_result</code>, and <code>register_indexer_get_set</code> are not available under
-<a href="/book/vnext/start/features.html"><code>no_object</code></a><code>+</code><a href="/book/vnext/start/features.html"><code>no_index</code></a>.</p>
+<p>The <a href="/book/vnext/start/features.html"><code>no_object</code></a> feature disables support for <a href="/book/vnext/rust/custom.html">custom types</a> including:</p>
+<ul>
+<li>
+<p><a href="/book/vnext/rust/methods.html"><em>method-style</em></a> function calls (e.g. <code>obj.method()</code>),</p>
+</li>
+<li>
+<p><a href="/book/vnext/language/object-maps.html">object maps</a> and the <a href="/book/vnext/language/object-maps.html"><code>Map</code></a> type,</p>
+</li>
+<li>
+<p>the <code>register_get</code>, <code>register_get_result</code>, <code>register_set</code>, <code>register_set_result</code> and <code>register_get_set</code> API’s for <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a></p>
+</li>
+</ul>
 
                     </main>
 

@@ -190,9 +190,12 @@ mod my_module {
 }
 
 // Define the package 'MyPackage' which is exported for the crate.
-def_package!(rhai:MyPackage:&quot;My own personal super package in a new crate!&quot;, module, {
-    combine_with_exported_module!(module, &quot;my-functions&quot;, my_module));
-});
+def_package! {
+    /// My own personal super package in a new crate!
+    rhai:MyPackage =&gt; |module| {
+        combine_with_exported_module!(module, &quot;my-functions&quot;, my_module));
+    }
+}
 <span class="boring">}
 </span></code></pre></pre>
 

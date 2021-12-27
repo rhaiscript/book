@@ -173,8 +173,8 @@ fn main() {
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
 <p>Some functions are <em>pure</em> – i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as <code>&amp;mut</code> (e.g. for a method function).</p>
-<p>This is most commonly done to avoid expensive cloning for methods or <a href="/book/vnext/rust/getters-setters.html">property
-getters</a> that return information about a <a href="/book/vnext/rust/custom.html">custom type</a> and does not modify it.</p>
+<p>This is most commonly done to avoid expensive cloning for methods or <a href="/book/vnext/rust/getters-setters.html">property getters</a>
+that return information about a <a href="/book/vnext/rust/custom.html">custom type</a> and does not modify it.</p>
 <p>Apply the <code>#[export_fn(pure)]</code> attribute on a plugin function to mark it as  <em>pure</em>.</p>
 <p>Pure functions can be passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.
 The condition is that they <em>MUST NOT</em> modify that value.</p>

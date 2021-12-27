@@ -144,7 +144,8 @@
                         <h1 id="parse-an-object-map-from-json"><a class="header" href="#parse-an-object-map-from-json">Parse an Object Map from JSON</a></h1>
 <p>The syntax for an <a href="/book/vnext/language/object-maps.html">object map</a> is extremely similar to the JSON representation of a object hash,
 with the exception of <code>null</code> values which can technically be mapped to <a href="/book/vnext/language/values-and-types.html"><code>()</code></a>.</p>
-<p>A valid JSON string does not start with a hash character <code>#</code> while a Rhai <a href="/book/vnext/language/object-maps.html">object map</a> does – that’s the major difference!</p>
+<p>A valid JSON string does not start with a hash character <code>#</code> while a Rhai <a href="/book/vnext/language/object-maps.html">object map</a> does –
+that’s the major difference!</p>
 <p>Use the <code>Engine::parse_json</code> method to parse a piece of JSON into an object map.
 The JSON text must represent a single object hash (i.e. must be wrapped within “<code>{ .. }</code>“)
 otherwise it returns a syntax error.</p>
@@ -178,8 +179,8 @@ result == 3;          // the object map is successfully used in the script
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="representation-of-numbers"><a class="header" href="#representation-of-numbers">Representation of Numbers</a></h2>
-<p>JSON numbers are all floating-point while Rhai supports integers (<code>INT</code>) and floating-point (<code>FLOAT</code>) if
-the <a href="/book/vnext/start/features.html"><code>no_float</code></a> feature is not used.</p>
+<p>JSON numbers are all floating-point while Rhai supports integers (<code>INT</code>) and floating-point (<code>FLOAT</code>)
+if the <a href="/book/vnext/start/features.html"><code>no_float</code></a> feature is not used.</p>
 <p>Most common generators of JSON data distinguish between integer and floating-point values by always
 serializing a floating-point number with a decimal point (i.e. <code>123.0</code> instead of <code>123</code> which is
 assumed to be an integer).</p>

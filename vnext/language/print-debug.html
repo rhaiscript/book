@@ -155,7 +155,7 @@ debug(&quot;world!&quot;);        // prints &quot;world!&quot; to stdout using d
 </code></pre>
 <h2 id="override-print-and-debug-with-callback-functions"><a class="header" href="#override-print-and-debug-with-callback-functions">Override <code>print</code> and <code>debug</code> with Callback Functions</a></h2>
 <p>When embedding Rhai into an application, it is usually necessary to trap <code>print</code> and <code>debug</code> output
-(for logging into a tracking log, for example) with the <code>Engine::on_print</code> and <code>Engine::on_debug</code> methods:</p>
+(for logging into a tracking log, for example) with the <code>Engine::on_print</code> and <code>Engine::on_debug</code> methods.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -188,7 +188,7 @@ for entry in logbook.read().unwrap().iter() {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="on_debug-callback-signature"><a class="header" href="#on_debug-callback-signature"><code>on_debug</code> Callback Signature</a></h2>
-<p>The function signature passed to <code>Engine::on_debug</code> takes the following form:</p>
+<p>The function signature passed to <code>Engine::on_debug</code> takes the following form.</p>
 <blockquote>
 <p><code>Fn(text: &amp;str, source: Option&lt;&amp;str&gt;, pos: Position)</code></p>
 </blockquote>

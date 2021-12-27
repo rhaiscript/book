@@ -151,7 +151,7 @@ is created.</p>
 <p>Variables that are accessible during the time the <a href="/book/vnext/language/fn-anon.html">anonymous function</a> is created can be captured,
 as long as they are not shadowed by local variables defined within the function’s scope.</p>
 <p>The captured variables are automatically converted into <strong>reference-counted shared values</strong>
-(<code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code> in normal builds, <code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> in <a href="/book/vnext/start/features.html"><code>sync</code></a> builds).</p>
+(<code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code>, or <code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> under <a href="/book/vnext/start/features.html"><code>sync</code></a>).</p>
 <p>Therefore, similar to closures in many languages, these captured shared values persist through
 reference counting, and may be read or modified even after the variables that hold them
 go out of scope and no longer exist.</p>
@@ -176,13 +176,12 @@ x = 40;                             // changing 'x'...
 f.call(2) == 42;                    // the value of 'x' is 40 because 'x' is shared
 
 // The above de-sugars into this:
-fn anon$1001(x, y) { x + y }        // parameter 'x' is inserted
 
-$make_shared(x);                    // convert variable 'x' into a shared value
+fn anon_0001(x, y) { x + y }        // parameter 'x' is inserted
 
-let f = Fn(&quot;anon$1001&quot;).curry(x);   // shared 'x' is curried
+$make_shared$(x);                   // convert variable 'x' into a shared value
 
-f.call(2) == 42;
+let f = Fn(&quot;anon_0001&quot;).curry(x);   // shared 'x' is curried
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="beware-captured-variables-are-truly-shared"><a class="header" href="#beware-captured-variables-are-truly-shared">Beware: Captured Variables are Truly Shared</a></h2>
@@ -193,17 +192,17 @@ ever only <em>one</em> captured variable, and all ten closures capture the <em>s
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let funcs = [];
+</span>let list = [];
 
 for i in 0..10 {
-    funcs.push(|| print(i));        // the for loop variable 'i' is captured
+    list.push(|| print(i));         // the for loop variable 'i' is captured
 }
 
-funcs.len() == 10;                  // 10 closures stored in the array
+list.len() == 10;                   // 10 closures stored in the array
 
-funcs[0].type_of() == &quot;Fn&quot;;         // make sure these are closures
+list[0].type_of() == &quot;Fn&quot;;          // make sure these are closures
 
-for f in funcs {
+for f in list {
     f.call();                       // all references to 'i' are the same variable!
 }
 <span class="boring">}

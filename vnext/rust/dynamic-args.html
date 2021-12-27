@@ -146,9 +146,9 @@
 Any clonable value can be set into a <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> value.</p>
 <p>Any parameter in a registered Rust function with a specific type has higher precedence over the
 <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> type, so it is important to understand which <em>version</em> of a function will be used.</p>
-<p>For example, the <code>push</code> method of an <a href="/book/vnext/language/arrays.html">array</a> is implemented this way (minus code that protects
-against <a href="/book/vnext/safety/max-array-size.html">over-sized arrays</a>), which makes the function applicable for all
-item types:</p>
+<p>For example, the <code>push</code> method of an <a href="/book/vnext/language/arrays.html">array</a> is implemented as follows (minus code that protects
+against <a href="/book/vnext/safety/max-array-size.html">over-sized arrays</a>), making the function applicable for all
+item types.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -214,7 +214,7 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
                              x9: i64, x10: i64, x11: i64, x12: i64,
                              x13: i64, x14: i64, x15: i64, x16: i64) {
 
-    // ... do some unspeakably evil things with all those parameters ...
+    // ... do something unspeakably evil with all those parameters ...
 }
 <span class="boring">}
 </span></code></pre></pre>

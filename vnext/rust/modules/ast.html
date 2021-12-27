@@ -151,14 +151,14 @@ prepare a Rhai script for this purpose as well as to control which functions/var
 <a href="/book/vnext/language/constants.html">constants</a> used by <a href="/book/vnext/language/functions.html">functions</a>), then the following items are exposed as members of the new <a href="/book/vnext/rust/modules/index.html">module</a>:</p>
 <ul>
 <li>
-<p>Global <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> – all <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> exported via the
-<a href="/book/vnext/language/modules/export.html"><code>export</code></a> statement (those not exported remain hidden).</p>
+<p>global <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> – all <a href="/book/vnext/language/variables.html">variables</a> and <a href="/book/vnext/language/constants.html">constants</a> exported via the
+<a href="/book/vnext/language/modules/export.html"><code>export</code></a> statement (those not exported remain hidden),</p>
 </li>
 <li>
-<p><a href="/book/vnext/language/functions.html">Functions</a> not specifically marked <a href="/book/vnext/language/modules/export.html"><code>private</code></a>.</p>
+<p><a href="/book/vnext/language/functions.html">functions</a> not specifically marked <a href="/book/vnext/language/modules/export.html"><code>private</code></a>,</p>
 </li>
 <li>
-<p>Imported <a href="/book/vnext/rust/modules/index.html">modules</a> that remain in the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
+<p>imported <a href="/book/vnext/rust/modules/index.html">modules</a> that remain in the <a href="/book/vnext/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
 <p><code>Module::eval_ast_as_new</code> encapsulates the entire <code>AST</code> into each function call, merging the
