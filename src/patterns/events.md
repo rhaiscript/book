@@ -81,15 +81,12 @@ mod test_struct_api {
     #[rhai_fn(global)]
     pub fn func1(obj: &mut TestStruct) -> bool {
                 :
-                :
     }
     #[rhai_fn(global)]
     pub fn func2(obj: &mut TestStruct) -> i64 {
                 :
-                :
     }
     pub fn process(data: i64) -> i64 {
-                :
                 :
     }
     #[rhai_fn(get = "value", pure)]
