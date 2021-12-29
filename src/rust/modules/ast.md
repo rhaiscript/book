@@ -24,15 +24,16 @@ When given an [`AST`], it is first evaluated (usually to [import][`import`] [mod
 * imported [modules] that remain in the [`Scope`] at the end of a script run become sub-modules.
 
 `Module::eval_ast_as_new` encapsulates the entire `AST` into each function call, merging the
-module namespace with the global namespace.  Therefore, functions defined within the same module
-script can cross-call each other.
+[module namespace][function namespace] with the [global namespace][function namespace].
+
+Therefore, [functions] defined within the same [module] script can cross-call each other.
 
 
 Examples
 --------
 
-Don't forget the [`export`] statement, otherwise there will be no variables exposed by the module
-other than non-[`private`] functions (unless that's intentional).
+Don't forget the [`export`] statement, otherwise there will be no [variables] exposed by the
+[module] other than non-[`private`] [functions] (unless that's intentional).
 
 ```rust no_run
 use rhai::{Engine, Module};

@@ -70,7 +70,7 @@ Warning: Only the Right-Most 16 Parameters Can Be `Dynamic`
 ---------------------------------------------------------
 
 The number of parameter permutations go up exponentially, and therefore there is a realistic limit
-of 16 parameters, counting from the _right-most side_, allowed to be [`Dynamic`].
+of 16 parameters allowed to be [`Dynamic`], counting from the _right-most side_.
 
 For example, Rhai will not find the following function &ndash; Oh! and those 16 parameters to the right
 certainly have nothing to do with it!

@@ -3,7 +3,7 @@ Anonymous Functions
 
 {{#include ../links.md}}
 
-Sometimes it gets tedious to define separate functions only to dispatch them via single [function pointers].
+Sometimes it gets tedious to define separate [functions] only to dispatch them via single [function pointers].
 This scenario is especially common when simulating object-oriented programming ([OOP]).
 
 ```rust no_run

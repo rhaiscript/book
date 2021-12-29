@@ -44,9 +44,6 @@ Binary Operators
 | `..`                              | exclusive range                                      |   [range]   |   yes   |           no           |            no             |
 | `..=`                             | inclusive range                                      |   [range]   |   yes   |           no           |            no             |
 
-Note: when one of the operands to a binary operator is floating-point, it works with `INT` for the
-other operand and the result is floating-point.
-
 ```rust no_run
 let x = (1 + 2) * (6 - 4) / 2;  // arithmetic, with parentheses
 
@@ -59,6 +56,50 @@ let left_shifted = 42 << 3;     // left shift
 let right_shifted = 42 >> 3;    // right shift
 
 let bit_op = 42 | 99;           // bit masking
+```
+
+
+Floating-Point Interoperates with Integers
+-----------------------------------------
+
+When one of the operands to a binary arithmetic operator is floating-point, it works with `INT` for
+the other operand and the result is floating-point.
+
+```rust no_run
+let x = 41.0 + 1;               // 'FLOAT' + 'INT'
+
+type_of(x) == "f64";            // result is 'FLOAT'
+
+let x = 21 * 2.0;               // 'FLOAT' * 'INT'
+
+type_of(x) == "f64";
+
+(x == 42) == true;              // 'FLOAT' == 'INT'
+
+(10 < x) == true;               // 'INT' < 'FLOAT'
+```
+
+
+Decimal Interoperates with Integers
+----------------------------------
+
+When one of the operands to a binary arithmetic operator is [`Decimal`][rust_decimal],
+it works with `INT` for the other operand and the result is [`Decimal`][rust_decimal].
+
+```rust no_run
+let d = parse_decimal("2");
+
+let x = d + 1;                  // 'Decimal' + 'INT'
+
+type_of(x) == "decimal";        // result is 'Decimal'
+
+let x = 21 * d;                 // 'Decimal' * 'INT'
+
+type_of(x) == "decimal";
+
+(x == 42) == true;              // 'Decimal' == 'INT'
+
+(10 < x) == true;               // 'INT' < 'Decimal'
 ```
 
 
@@ -80,5 +121,6 @@ remember when handling operators such as `**` which in some languages bind tight
 
 -2 % 2 == 0;
 
--2 ** 2 = 4;    // in some languages this means -(2 ** 2) == -4
+-2 ** 2 = 4;            // means: (-2) ** 2
+                        // in some languages this means: -(2 ** 2)
 ```

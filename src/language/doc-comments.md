@@ -3,10 +3,11 @@ Doc-Comments
 
 {{#include ../links.md}}
 
-Similar to Rust, comments starting with `///` (three slashes) or `/**` (two asterisks)
+Similar to Rust, [comments] starting with `///` (three slashes) or `/**` (two asterisks)
 are _doc-comments_.
 
 They are only supported under the [`metadata`] feature.
+If [`metadata`] is not active, doc-comments are treated as normal [comments].
 
 Doc-comments can only appear in front of [function] definitions, not any other elements.
 Therefore, doc-comments are not available under [`no_function`].
@@ -38,7 +39,7 @@ Special Cases
 -------------
 
 Long streams of `//////`... and `/*****`... do _NOT_ form doc-comments.
-This is consistent with popular comment block styles for C-like languages.
+This is consistent with popular [comment] block styles for C-like languages.
 
 ```rust no_run
 ///////////////////////////////  <- this is not a doc-comment

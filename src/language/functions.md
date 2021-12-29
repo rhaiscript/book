@@ -7,11 +7,11 @@ Rhai supports defining functions in script (unless disabled with [`no_function`]
 
 ```rust no_run
 fn add(x, y) {
-    return x + y;
+    x + y
 }
 
 fn sub(x, y,) {     // trailing comma in parameters list is OK
-    return x - y;
+    x - y
 }
 
 add(2, 3) == 5;

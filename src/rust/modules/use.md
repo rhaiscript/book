@@ -4,15 +4,16 @@ Make a Module Available to Scripts
 {{#include ../../links.md}}
 
 
-Use Case 1 &ndash; Make the `Module` Globally Available
-------------------------------------------------------
+Use Case 1 &ndash; Make the Module Globally Available
+----------------------------------------------------
 
-`Engine::register_global_module` registers a shared [module] into the _global_ namespace.
+`Engine::register_global_module` registers a shared [module] into the
+[_global_ namespace][function namespace].
 
 All [functions] and [type iterators] can be accessed without _namespace qualifiers_.
 Variables and sub-modules are **ignored**.
 
-This is by far the easiest way to expose a module's functionalities to Rhai.
+This is by far the easiest way to expose a [module]'s functionalities to Rhai.
 
 ```rust no_run
 use rhai::{Engine, Module};
@@ -49,10 +50,11 @@ engine.eval::<i64>("inc(41)")? == 42;       // no need to import module
 ```
 
 
-Use Case 2 &ndash; Make the `Module` a Static Module
----------------------------------------------------
+Use Case 2 &ndash; Make the Module a Static Module
+-------------------------------------------------
 
-`Engine::register_static_module` registers a [module] and under a specific module namespace.
+`Engine::register_static_module` registers a [module] and under a specific
+[module namespace][function namespace].
 
 ```rust no_run
 use rhai::{Engine, Module};
@@ -78,11 +80,12 @@ engine.eval::<i64>("services::calc::inc(41)")? == 42;
 
 ### Expose Functions to the Global Namespace
 
-The [`Module`] API can optionally expose functions to the _global_ namespace by setting the
-`namespace` parameter  to `FnNamespace::Global`, so [getters/setters] and [indexers] for [custom types]
-can work as expected.
+The [`Module`] API can optionally expose functions to the [_global_ namespace][function namespace]
+by setting the `namespace` parameter to `FnNamespace::Global`, so [getters/setters] and [indexers]
+for [custom types] can work as expected.
 
-[Type iterators], because of their special nature, are _always_ exposed to the _global_ namespace.
+[Type iterators], because of their special nature, are _always_ exposed to the
+[_global_ namespace][function namespace].
 
 ```rust no_run
 use rhai::{Engine, Module, FnNamespace};

@@ -7,11 +7,11 @@ Value Conversions
 Convert Between Integer and Floating-Point
 -----------------------------------------
 
-The `to_float` function converts a supported number to `FLOAT` (defaults to `f64`).
-
-The `to_int` function converts a supported number to `INT` (`i32` or `i64` depending on [`only_i32`]).
-
-The `to_decimal` function converts a supported number to [`Decimal`][rust_decimal] (requires [`decimal`]).
+| Function     | Not available under |             From type              |          To type          |
+| ------------ | :-----------------: | :--------------------------------: | :-----------------------: |
+| `to_int`     |                     | `FLOAT`, [`Decimal`][rust_decimal] |           `INT`           |
+| `to_float`   |    [`no_float`]     | `INT`,  [`Decimal`][rust_decimal]  |          `FLOAT`          |
+| `to_decimal` |   non-[`decimal`]   |           `INT`, `FLOAT`           | [`Decimal`][rust_decimal] |
 
 That's it; for other conversions, register custom conversion functions.
 
@@ -37,13 +37,13 @@ print(`c is '${c}' and its code is ${c.to_int()}`); // prints "c is 'X' and its 
 Parse String into Number
 ------------------------
 
-The `parse_float` function converts a [string] into a `FLOAT` (defaults to `f64`,
-`f32` under [`f32_float`] and [`Decimal`][rust_decimal] under [`no_float`] and [`decimal`]).
-
-The `parse_int` function converts a [string] into an `INT` (`i32` or `i64` depending on [`only_i32`]).
-An optional radix (2-36) can be provided to parse the [string] into a number of the specified radix.
-
-The `parse_decimal` function converts a [string] into a [`Decimal`][rust_decimal] (requires [`decimal`]).
+| Function                                 | From type |          To type          |
+| ---------------------------------------- | :-------: | :-----------------------: |
+| `parse_int`                              | [string]  |           `INT`           |
+| `parse_int` with radix 2-36              | [string]  |  `INT` (specified radix)  |
+| `parse_float` (not [`no_float`])         | [string]  |          `FLOAT`          |
+| `parse_float` ([`no_float`]+[`decimal`]) | [string]  | [`Decimal`][rust_decimal] |
+| `parse_decimal` (requires [`decimal`])   | [string]  | [`Decimal`][rust_decimal] |
 
 ```rust no_run
 let x = parse_float("123.4");   // parse as floating-point
@@ -77,11 +77,11 @@ type_of(hex) == "i64";
 Formatting Numbers
 ------------------
 
-The `to_binary` function converts an integer number to a [string] in binary (i.e. only `1` and `0`).
-
-The `to_octal` function converts an integer number to a [string] in octal (i.e. from `0` to `7`).
-
-The `to_hex` function converts an integer number to a [string] in hex.
+| Function    | From type | To type  |             Format             |
+| ----------- | :-------: | :------: | :----------------------------: |
+| `to_binary` |   `INT`   | [string] | binary (i.e. only `1` and `0`) |
+| `to_octal`  |   `INT`   | [string] |    octal (i.e. `0` ... `7`)    |
+| `to_hex`    |   `INT`   | [string] |     hex (i.e. `0` ... `f`)     |
 
 ```rust no_run
 let x = 0x1234abcd;

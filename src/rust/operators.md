@@ -6,7 +6,7 @@ Operator Overloading
 In Rhai, a lot of functionalities are actually implemented as functions, including basic operations
 such as arithmetic calculations.
 
-For example, in the expression "`a + b`", the `+` operator calls a function named "`+`"!
+For example, in the expression "`a + b`", the `+` operator actually calls a function named "`+`"!
 
 ```rust no_run
 let x = a + b;
@@ -30,10 +30,10 @@ Overload Operator via Rust Function
 
 Operator functions cannot be defined in script because operators are usually not valid function names.
 
-However, operator functions _can_ be registered to the [`Engine`] via the `Engine::register_XXX` API.
+However, operator functions _can_ be registered via `Engine::register_fn`.
 
-When a custom operator function is registered with the same name as an operator, it _overrides_ the
-built-in version.
+When a custom operator function is registered with the same name as an operator,
+it _overrides_ the built-in version.
 
 ```rust no_run
 use rhai::{Engine, EvalAltResult};
@@ -68,8 +68,8 @@ Considerations
 Normally, use operator overloading for [custom types] only.
 
 Be very careful when overriding built-in operators because users expect standard operators to behave
-in a consistent and predictable manner, and will be annoyed if a calculation for `+` turns into a
-subtraction, for example.
+in a consistent and predictable manner, and will be annoyed if an expression involving `+` turns into
+a subtraction, for example.  You may think it is amusing, but users who need to get things done won't.
 
 Operator overloading also impacts script optimization when using [`OptimizationLevel::Full`].
 See the [script-optimization] for more details.

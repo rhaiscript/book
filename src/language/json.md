@@ -35,7 +35,7 @@ map.len() == 6;       // 'map' contains all properties in the JSON string
 let mut scope = Scope::new();
 scope.push("map", map);
 
-let result = engine.eval_with_scope::<INT>(r#"map["^^^!!!"].len()"#)?;
+let result = engine.eval_with_scope::<i64>(r#"map["^^^!!!"].len()"#)?;
 
 result == 3;          // the object map is successfully used in the script
 ```
@@ -44,7 +44,7 @@ Representation of Numbers
 ------------------------
 
 JSON numbers are all floating-point while Rhai supports integers (`INT`) and floating-point (`FLOAT`)
-if the [`no_float`] feature is not used.
+(not available under [`no_float`]).
 
 Most common generators of JSON data distinguish between integer and floating-point values by always
 serializing a floating-point number with a decimal point (i.e. `123.0` instead of `123` which is

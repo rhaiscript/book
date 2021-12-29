@@ -4,7 +4,7 @@ The `ImmutableString` Type
 {{#include ../links.md}}
 
 All [strings] in Rhai are implemented as `ImmutableString`, which is an alias to
-`Rc<SmartString>` (or `Arc<SmartString>` under [`sync`]).
+`Rc<SmartString>` (or `Arc<SmartString>` under the [`sync`] feature).
 
 [`SmartString`] is used because many strings in scripts are short (fewer than 24 ASCII characters).
 
@@ -58,14 +58,17 @@ In Rhai, there are also no separate concepts of `String` and `&str` (a string sl
 Performance Considerations of Character Indexing
 -----------------------------------------------
 
-Although Rhai exposes a [string] as a simple array of `char` which can be directly indexed to get at
-a particular character, internally the [string] is still stored as UTF-8 (native Rust `String`s).
+Although Rhai exposes a [string] as a simple array of [characters] which can be directly indexed to
+get at a particular [character].
 
-All indexing operations require walking through the entire UTF-8 string to find the offset of the
-particular character position, and therefore is _much_ slower than the simple array indexing for
-other scripting languages.
+However, such convenient syntax is an _illusion_.  Internally the [string] is still stored in UTF-8
+(native Rust `String`s).
+
+All indexing operations actually require walking through the entire UTF-8 string to find the offset
+of the particular [character] position, and therefore is _much_ slower than the simple array
+indexing for other scripting languages.
 
 This implementation detail is hidden from the user but has a performance implication.
 
-Avoid large scale character-based processing of [strings]; instead, build an actual [array] of
+Avoid large scale [character]-based processing of [strings]; instead, build an actual [array] of
 [characters] (via the `split()` method) which can then be manipulated efficiently.

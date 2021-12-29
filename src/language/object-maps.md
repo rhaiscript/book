@@ -8,8 +8,8 @@ Object maps are hash dictionaries. Properties are all [`Dynamic`] and can be fre
 The Rust type of a Rhai object map is `rhai::Map`.
 
 Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
-[`SmartString`] is used because most object map properties are short (at least shorter than 23
-characters) and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
+[`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
+and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
 
 [`type_of()`] an object map returns `"map"`.
 

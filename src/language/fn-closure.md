@@ -6,26 +6,26 @@ Simulating Closures
 Capture External Variables via Automatic Currying
 ------------------------------------------------
 
-Since [anonymous functions] de-sugar to standard function definitions, they retain all the behaviors of
-Rhai functions, including being _pure_, having no access to external variables.
+Since [anonymous functions] de-sugar to standard function definitions, they retain all the behaviors
+of Rhai functions, including being _pure_, having no access to external [variables].
 
-The anonymous function syntax, however, automatically _captures_ variables that are not defined within
-the current scope, but are defined in the external scope &ndash; i.e. the scope where the anonymous function
-is created.
+The [anonymous function] syntax, however, automatically _captures_ [variables] that are not defined
+within the current scope, but are defined in the external scope &ndash; i.e. the scope where the
+[anonymous function] is created.
 
-Variables that are accessible during the time the [anonymous function] is created can be captured,
-as long as they are not shadowed by local variables defined within the function's scope.
+[Variables] that are accessible during the time the [anonymous function] is created can be captured,
+as long as they are not shadowed by local [variables] defined within the function's scope.
 
-The captured variables are automatically converted into **reference-counted shared values**
+The captured [variables] are automatically converted into **reference-counted shared values**
 (`Rc<RefCell<Dynamic>>`, or `Arc<RwLock<Dynamic>>` under [`sync`]).
 
 Therefore, similar to closures in many languages, these captured shared values persist through
-reference counting, and may be read or modified even after the variables that hold them
-go out of scope and no longer exist.
+reference counting, and may be read or modified even after the [variables] that hold them go out of
+scope and no longer exist.
 
 Use the `Dynamic::is_shared` function to check whether a particular value is a shared value.
 
-Automatic currying can be turned off via the [`no_closure`] feature.
+[Automatic currying] can be turned off via the [`no_closure`] feature.
 
 
 Examples
@@ -60,10 +60,10 @@ Beware: Captured Variables are Truly Shared
 ------------------------------------------
 
 The example below is a typical tutorial sample for many languages to illustrate the traps
-that may accompany capturing external scope variables in closures.
+that may accompany capturing external [variables] in closures.
 
 It prints `9`, `9`, `9`, ... `9`, `9`, not `0`, `1`, `2`, ... `8`, `9`, because there is
-ever only _one_ captured variable, and all ten closures capture the _same_ variable.
+ever only _one_ captured [variable], and all ten closures capture the _same_ [variable].
 
 ```rust no_run
 let list = [];
@@ -87,8 +87,8 @@ Therefore &ndash; Be Careful to Prevent Data Races
 
 Rust does not have data races, but that doesn't mean Rhai doesn't.
 
-Avoid performing a method call on a captured shared variable (which essentially takes a
-mutable reference to the shared object) while using that same variable as a parameter
+Avoid performing a method call on a captured shared [variable] (which essentially takes a
+mutable reference to the shared object) while using that same [variable] as a parameter
 in the method call &ndash; this is a sure-fire way to generate a data race error.
 
 If a shared value is used as the `this` pointer in a method call to a closure function,
@@ -139,21 +139,24 @@ TL;DR
 
 The actual implementation of closures de-sugars to:
 
-1. Keeping track of what variables are accessed inside the anonymous function,
+1. Keeping track of what [variables] are accessed inside the [anonymous function],
 
-2. If a variable is not defined within the anonymous function's scope, it is looked up _outside_ the function and
-   in the current execution scope &ndash; where the anonymous function is created.
+2. If a [variable] is not defined within the [anonymous function's][anonymous function] scope,
+   it is looked up _outside_ the [function] and in the current execution scope &ndash;
+   where the [anonymous function] is created.
 
-3. The variable is added to the parameters list of the anonymous function, at the front.
+3. The [variable] is added to the parameters list of the [anonymous function], at the front.
 
-4. The variable is then converted into a **reference-counted shared value**.
+4. The [variable] is then converted into a **reference-counted shared value**.
 
-   An [anonymous function] which captures an external variable is the only way to create a reference-counted shared value in Rhai.
+   An [anonymous function] which captures an external [variable] is the only way to create a
+   reference-counted shared value in Rhai.
 
-5. The shared value is then [curried][currying] into the [function pointer] itself, essentially carrying a reference to that shared value
-   and inserting it into future calls of the function.
+5. The shared value is then [curried][currying] into the [function pointer] itself,
+   essentially carrying a reference to that shared value and inserting it into future calls of the [function].
 
-   This process is called _Automatic Currying_, and is the mechanism through which Rhai simulates normal closures.
+   This process is called [_Automatic Currying_][automatic currying], and is the mechanism through
+   which Rhai simulates normal closures.
 
 ### Q: Why are closures implemented as automatic currying?
 

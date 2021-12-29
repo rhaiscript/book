@@ -4,7 +4,7 @@ Function Pointers
 {{#include ../links.md}}
 
 It is possible to store a _function pointer_ in a variable just like a normal value.
-In fact, internally a function pointer simply stores the _name_ of the function as a string.
+In fact, internally a function pointer simply stores the _name_ of the function as a [string].
 
 A function pointer is created via the `Fn` function, which takes a [string] parameter.
 
@@ -15,7 +15,7 @@ Built-in Functions
 ------------------
 
 The following standard methods (mostly defined in the [`BasicFnPackage`][packages] but excluded if
-using a [raw `Engine`]) operate on function pointers:
+using a [raw `Engine`]) operate on function pointers.
 
 | Function                           | Parameter(s) | Description                                                                                      |
 | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------ |
@@ -118,7 +118,7 @@ let func = if x < 0 {
     Fn("method2")
 } else if x > 0 {
     Fn("method3")
-}
+};
 
 // Dynamic dispatch
 func.call(42);
@@ -223,7 +223,7 @@ r#"
 let fn_ptr = engine.eval_ast::<FnPtr>(&ast)?;
 
 // 'f' captures: the Engine, the AST, and the closure
-let f = move |x: INT| -> Result<String, Box<EvalAltResult>> {
+let f = move |x: i64| -> Result<String, Box<EvalAltResult>> {
             fn_ptr.call(&engine, &ast, (x,))
         };
 

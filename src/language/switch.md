@@ -1,5 +1,5 @@
-`switch` Expression
-===================
+Switch Expressions
+==================
 
 {{#include ../links.md}}
 

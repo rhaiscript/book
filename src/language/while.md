@@ -1,5 +1,5 @@
-`while` Loop
-============
+While Loop
+==========
 
 {{#include ../links.md}}
 

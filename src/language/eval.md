@@ -39,8 +39,8 @@ physically pasted in at the position of the `eval` call.
 Cannot Define New Functions
 --------------------------
 
-New functions cannot be defined within an `eval` call, since functions can only be defined at the _global_ level,
-not inside another function call!
+New [functions] cannot be defined within an `eval` call, since functions can only be defined at the _global_ level,
+not inside another [function] call!
 
 ```rust no_run
 let script = "x += 32";

@@ -1,5 +1,5 @@
-Ranges
-======
+Range
+=====
 
 {{#include ../links.md}}
 

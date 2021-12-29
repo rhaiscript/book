@@ -122,6 +122,7 @@
 [timestamp]: {{rootUrl}}/language/timestamps.md
 [timestamps]: {{rootUrl}}/language/timestamps.md
 
+[comments]: {{rootUrl}}/language/comments.md
 [doc-comments]: {{rootUrl}}/language/doc-comments.md
 [function]: {{rootUrl}}/language/functions.md
 [functions]: {{rootUrl}}/language/functions.md

@@ -8,7 +8,8 @@ custom [package] as an independent crate.
 
 This allows the custom [package] to be used in multiple projects.
 
-Essentially, the concept is to create a Rust crate that specifies [`rhai`](https://crates.io/crates/rhai) as dependency.
+Essentially, the concept is to create a Rust crate that specifies
+[`rhai`](https://crates.io/crates/rhai) as dependency.
 The main `lib.rs` module can contain the [package] being constructed.
 
 ```toml

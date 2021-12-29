@@ -1,5 +1,5 @@
 Built-in String Functions
-========================
+=========================
 
 {{#include ../links.md}}
 

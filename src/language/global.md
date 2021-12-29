@@ -6,7 +6,7 @@ Automatic Global Module
 
 When a [constant] is declared at global scope, it is added to a special [module] called `global`.
 
-[Functions] can access those constants via the special `global` [module].
+[Functions] can access those [constants] via the special `global` [module].
 
 Naturally, the automatic `global` [module] is not available under [`no_function`] nor [`no_module`].
 

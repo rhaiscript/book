@@ -1,5 +1,5 @@
-Infinite `loop`
-===============
+Infinite Loop
+=============
 
 {{#include ../links.md}}
 

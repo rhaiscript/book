@@ -3,8 +3,8 @@ Register a Fallible Rust Function
 
 {{#include ../links.md}}
 
-If a function is _fallible_ (i.e. it returns a `Result<_, _>`),
-it can be registered with an [`Engine`] via `register_result_fn`.
+If a function is _fallible_ (i.e. it returns a `Result<_, _>`), it can be registered with via
+`Engine::register_result_fn`.
 
 The function must return `Result<T, Box<EvalAltResult>>` where `T` is any clonable type.
 

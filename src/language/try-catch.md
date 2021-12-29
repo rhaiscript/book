@@ -1,5 +1,5 @@
-Catch Exceptions
-================
+Catch Exception
+===============
 
 {{#include ../links.md}}
 

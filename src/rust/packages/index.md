@@ -19,7 +19,7 @@ Packages typically contain Rust functions that are callable within a Rhai script
 All _top-level_ functions in a package are available under the _global namespace_
 (i.e. they're available without namespace qualifiers).
 
-Sub-modules and variables are ignored in packages.
+Sub-[modules] and [variables] are ignored in packages.
 
 
 Share a Package Among Multiple `Engine`'s
@@ -31,8 +31,8 @@ Once a package is created (e.g. via `Package::new`), it can create _shared_ [mod
 (via `Package::as_shared_module`) and register into multiple instances of [`Engine`],
 even across threads (under the [`sync`] feature).
 
-Therefore, a package only has to be created _once_ and essentially shared among multiple
-[`Engine`] instances.  This is particularly useful when spawning large number of [raw `Engine`'s][raw `Engine`].
+Therefore, a package only has to be created _once_ and essentially shared among multiple [`Engine`] instances.
+This is particularly useful when spawning large number of [raw `Engine`'s][raw `Engine`].
 
 ```rust no_run
 use rhai::Engine;

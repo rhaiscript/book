@@ -1,5 +1,5 @@
 Strings and Characters
-=====================
+======================
 
 {{#include ../links.md}}
 

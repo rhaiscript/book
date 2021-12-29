@@ -68,7 +68,7 @@ engine.run_with_scope(&mut scope, script)?;
 Caveat &ndash; Constants Can be Modified via Rust
 ------------------------------------------------
 
-A custom type stored as a constant cannot be modified via script, but _can_ be modified via
+A [custom type] stored as a constant cannot be modified via script, but _can_ be modified via
 a registered Rust function that takes a first `&mut` parameter &ndash; because there is no way for
 Rhai to know whether the Rust function modifies its argument!
 

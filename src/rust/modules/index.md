@@ -4,9 +4,11 @@ Modules
 {{#include ../../links.md}}
 
 Rhai allows organizing functionalities (functions, both Rust-based or script-based, and variables)
-into independent _modules_. Modules can be disabled via the [`no_module`] feature.
+into independent _modules_.
 
-A module is of the type `Module` and holds a collection of functions, variables,
+Modules can be disabled via the [`no_module`] feature.
+
+A module has the type `Module` and holds a collection of functions, variables,
 [type iterators] and sub-modules.
 
 It may be created entirely from Rust functions, or it may encapsulate a Rhai script together

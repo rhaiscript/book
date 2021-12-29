@@ -84,11 +84,11 @@ a normal expression.
 
 For its evaluation, the callback function will receive the following list of inputs:
 
-* `inputs[0] = "sum"` - math operator
-* `inputs[1] = "price"` - field name
-* `inputs[2] = "row"` - loop variable name
-* `inputs[3] = Expression(table)` - data source
-* `inputs[4] = Expression(row.weight > 50)` - filter predicate
+* `inputs[0] = "sum"` &ndash; math operator
+* `inputs[1] = "price"` &ndash; field name
+* `inputs[2] = "row"` &ndash; loop variable name
+* `inputs[3] = Expression(table)` &ndash; data source
+* `inputs[4] = Expression(row.weight > 50)` &ndash; filter predicate
 
 Other identifiers, such as `"calculate"`, `"FROM"`, as well as symbols such as `->` and `:` etc.,
 are parsed in the order defined within the custom syntax.

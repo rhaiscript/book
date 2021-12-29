@@ -1,5 +1,5 @@
-`timestamp`
-===========
+Timestamp
+=========
 
 {{#include ../links.md}}
 

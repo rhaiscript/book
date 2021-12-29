@@ -175,7 +175,7 @@ let string_slice = expression.get_string_value().unwrap();
 let float_value = expression.get_literal_value::<FLOAT>().unwrap();
 
 // Or assign directly to a variable with type...
-let int_value: INT = expression.get_literal_value().unwrap();
+let int_value: i64 = expression.get_literal_value().unwrap();
 
 // Or use type inference!
 let bool_value = expression.get_literal_value().unwrap();

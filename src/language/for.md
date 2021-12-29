@@ -1,5 +1,5 @@
-`for` Loop
-==========
+For Loop
+========
 
 {{#include ../links.md}}
 
@@ -10,7 +10,7 @@ There are two alternative syntaxes, one including a counter variable:
 
 > `for` _variable-name_ `in` _expression_ `{` ... `}`
 >
-> `for (` _variable-name_ `,` _counter-variable-name_ `) in` _expression_ `{` ... `}`
+> `for (` _variable-name_ `,` _counter-variable-name_ `)` `in` _expression_ `{` ... `}`
 
 `for` loops can be disabled via [`Engine::set_allow_looping`][options].
 
@@ -146,7 +146,7 @@ for x in range(50, 0, -3) {         // step down by -3
 }
 
 // It works also for floating-point numbers
-for x in range(5.0,0.0,-2.0) {      // step down by -2.0
+for x in range(5.0, 0.0, -2.0) {    // step down by -2.0
     if x < 10 { continue; }         // skip to the next iteration
 
     print(x);

@@ -37,7 +37,7 @@ The Flexible `+=`
 The the `+` and `+=` operators are often [overloaded][function overloading] to perform
 build-up operations for different data types.
 
-For example, `+=` is commonly used to build [strings]:
+### Build strings
 
 ```rust no_run
 let my_str = "abc";
@@ -48,7 +48,7 @@ my_str += 12345;
 my_str == "abcABC12345"
 ```
 
-to concatenate [arrays]:
+### Concatenate arrays
 
 ```rust no_run
 let my_array = [1, 2, 3];
@@ -58,7 +58,7 @@ my_array += [4, 5];
 my_array == [1, 2, 3, 4, 5];
 ```
 
-to concatenate [BLOB's]:
+### Concatenate BLOB's
 
 ```rust no_run
 let my_blob = blob(3, 0x42);
@@ -68,7 +68,7 @@ my_blob += blob(5, 0x99);
 my_blob.to_string() == "[4242429999999999]";
 ```
 
-to mix two [object maps] together:
+### Mix two object maps together
 
 ```rust no_run
 let my_obj = #{ a:1, b:2 };
@@ -78,7 +78,7 @@ my_obj += #{ c:3, d:4, e:5 };
 my_obj.len() == 5;
 ```
 
-to add to [timestamps]:
+### Add to timestamps
 
 ```rust no_run
 let now = timestamp();

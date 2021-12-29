@@ -30,6 +30,10 @@ x.tag() == 123;         // method also works
 
 tag(x) == 123;          // function call style also works
 
+x.tag[3..5] = 2;        // tag can be used as a bit-field
+
+x.tag[3..5] == 2;
+
 let y = x;
 
 y.tag == 123;           // the tag is copied across assignment
@@ -158,20 +162,9 @@ print(`Third condition = ${my_result.tag[2]}`);
 print(`Result check = ${my_result.tag[3]}`);
 ```
 
-### Poor-man's tuples
+### Return auxillary info
 
-Rust has _tuples_ but Rhai does not (nor does JavaScript in this sense).
-
-Sometimes it is useful to return multiple pieces of data from a function.
-Similar to the JavaScript situation, practical alternatives using Rhai include returning an [object
-map] or an [array].
-
-Both of these alternatives, however, incur overhead that may be wasteful when the amount of
-additional information is small &ndash; e.g. in many cases, a single `bool`, or a small number.
-
-The tag value is an ideal container (as a [bit-field]) for such additional information without
-resorting to a full-blown [object map] or [array] (which may not even be available under
-[`no_index`] or [`no_object`]).
+Sometimes it is useful to return auxillary info from a [function].
 
 ```rust no_run
 // Verify Bell's Inequality by calculating a norm
@@ -204,4 +197,41 @@ if dist.tag == 1 {
 } else {
     print("Spooky action at a distance detected! Einstein will hate this...");
 }
+```
+
+### Poor-man's tuples
+
+Rust has _tuples_ but Rhai does not (nor does JavaScript in this sense).
+
+Similar to the JavaScript situation, practical alternatives using Rhai include returning an
+[object map] or an [array].
+
+Both of these alternatives, however, incur overhead that may be wasteful when the amount of
+additional information is small &ndash; e.g. in many cases, a single `bool`, or a small number.
+
+To return a number of _small_ values from [functions], the tag value as a [bit-field] is an ideal
+container without resorting to a full-blown [object map] or [array].
+
+```rust no_run
+// This function essentially returns a tuple of four numbers:
+// (result, a, b, c)
+fn complex_calc(x, y, z) {
+    let a = x + y;
+    let b = x - y + z;
+    let c = (a + b) * z / y;
+    let r = do_complex_calculation(a, b, c);
+
+    // Store 'a', 'b' and 'c' into tag if they are small
+    r.tag[0..8] = a;
+    r.tag[8..16] = b;
+    r.tag[16..32] = c;
+
+    r
+}
+
+// Deconstruct the tuple
+let result = complex_calc(x, y, z);
+let a = r.tag[0..8];
+let b = r.tag[8..16];
+let c = r.tag[16..32];
 ```

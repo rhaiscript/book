@@ -1,5 +1,5 @@
-`if` Statement
-==============
+If Statement
+============
 
 {{#include ../links.md}}
 
@@ -35,8 +35,8 @@ if (decision) print("I've decided!");
 ```
 
 
-`if`-Expressions
----------------
+If-Expression
+-------------
 
 Like Rust, `if` statements can also be used as _expressions_, replacing the `? :` conditional
 operators in other C-like languages.

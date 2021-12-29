@@ -87,7 +87,17 @@ The _end_ of a data type can be interpreted creatively.  For example, in an inte
 [bit-field], the _start_ is the _least-significant-bit_ (LSB) while the `end` is the
 _most-significant-bit_ (MSB).
 
-By convention, negative values are _not_ interpreted specially for index values that are [ranges].
+
+Convention for Range Index
+--------------------------
+
+[Ranges] can be easily used as indexer parameters via the types
+`std::ops::Range<INT>` (exclusive) and `std::ops::RangeInclusive<INT>` (inclusive).
+
+One complication is that two versions of the same indexer must be defined to support _exclusive_
+and _inclusive_ [ranges] respectively.
+
+By convention, negative values are _not_ interpreted specially in indexers for [ranges].
 
 
 Examples
@@ -135,7 +145,7 @@ println!("Answer: {}", result);     // prints 42
 Indexer as Property Access Fallback
 ----------------------------------
 
-An indexer taking a [string] index is a special case.  It acts as a _fallback_ to property
+An indexer taking a [string] index is a special case &ndash; it acts as a _fallback_ to property
 [getters/setters].
 
 During a property access, if the appropriate property [getter/setter][getters/setters] is not
@@ -143,6 +153,9 @@ defined, an indexer is called and passed the string name of the property.
 
 This is also extremely useful as a short-hand for indexers, when the [string] keys conform to
 property name syntax.
+
+Defining such an indexer allows easy creation of _property bags_ (similar to [object maps])
+which can dynamically add/remove properties.
 
 ```rust no_run
 // Assume 'obj' has an indexer defined with string parameters...
@@ -160,6 +173,8 @@ let x = obj["hello_world"];
 let x = obj.hello_world;
 ```
 
+### Caveat &ndash; reverse is NOT true
+
 The reverse, however, is not true &ndash; when an indexer fails or doesn't exist, the corresponding
 property [getter/setter][getters/setters], if any, is not called.
 
@@ -171,26 +186,34 @@ let mut engine = Engine::new();
 // Define custom type, property getter and string indexers
 engine.register_type::<MyType>()
       .register_fn("new_ts", || {
-          let mut object = MyType::new();
-          object.insert("foo", 1);
-          object.insert("bar", 42);
-          object.insert("baz", 123);
+          let mut obj = MyType::new();
+          obj.insert("foo".to_string(), 1);
+          obj.insert("bar".to_string(), 42);
+          obj.insert("baz".to_string(), 123);
+          obj
       })
       // Property 'hello'
-      .register_get("hello", |object: &mut MyType| object.len() as i64)
+      .register_get("hello", |obj: &mut MyType| obj.len() as i64)
       // Index getter/setter
-      .register_indexer_get(|object: &mut MyType, index: &str| *object[index])
-      .register_indexer_set(|object: &mut MyType, index: &str, value: i64| object[index] = value);
+      .register_indexer_get_result(|obj: &mut MyType, prop: &str|
+          obj.get(index).cloned().ok_or_else(|| "not found".into())
+      ).register_indexer_set(|obj: &mut MyType, prop: &str, value: i64|
+          obj.insert(prop.to_string(), value)
+      );
 
-// Calls ts["foo"] because getter for 'foo' does not exist
 engine.run("let ts = new_ts(); print(ts.foo);");
+//                                   ^^^^^^
+//                 Calls ts["foo"] - getter for 'foo' does not exist
 
-// Calls ts["bar"] because getter for 'bar' does not exist
 engine.run("let ts = new_ts(); print(ts.bar);");
+//                                   ^^^^^^
+//                 Calls ts["bar"] - getter for 'bar' does not exist
 
-// Calls ts["baz"] = 999 because getter for 'baz' does not exist
 engine.run("let ts = new_ts(); ts.baz = 999;");
+//                             ^^^^^^^^^^^^
+//                 Calls ts["baz"] = 999 - setter for 'baz' does not exist
 
-// Error: Property getter is not a fallback for indexer
 engine.run(r#"let ts = new_ts(); print(ts["hello"]);"#);
+//                                     ^^^^^^^^^^^
+//                 Error: Property getter for 'hello' not a fallback for indexer
 ```

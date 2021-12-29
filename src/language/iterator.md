@@ -1,5 +1,5 @@
-Iterators for Custom Types
-==========================
+Iterator for Custom Type
+========================
 
 {{#include ../links.md}}
 

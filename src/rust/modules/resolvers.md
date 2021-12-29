@@ -3,7 +3,7 @@ Module Resolvers
 
 {{#include ../../links.md}}
 
-When encountering an [`import`] statement, Rhai attempts to _resolve_ the module based on the path string.
+When encountering an [`import`] statement, Rhai attempts to _resolve_ the [module] based on the path string.
 
 See the section on [_Importing Modules_][`import`] for more details.
 
@@ -15,23 +15,24 @@ Built-in Module Resolvers
 
 There are a number of standard resolvers built into Rhai, the default being the `FileModuleResolver`
 which simply loads a script file based on the path (with `.rhai` extension attached)
-and execute it to form a module.
+and execute it to form a [module].
 
-Built-in module resolvers are grouped under the `rhai::module_resolvers` module namespace.
+Built-in [module] resolvers are grouped under the `rhai::module_resolvers`
+[module namespace][function namespace].
 
 
 `FileModuleResolver` (default)
 -----------------------------
 
-The _default_ module resolution service, not available for [`no_std`] or [WASM] builds.
+The _default_ [module] resolution service, not available for [`no_std`] or [WASM] builds.
 Loads a script file (based off the current directory or a specified one) with `.rhai` extension.
 
 ### Function namespace
 
-All functions in the _global_ namespace, plus all those defined in the same module,
-are _merged_ into a _unified_ namespace.
+All functions in the [_global_ namespace][function namespace], plus all those defined in the same
+[module], are _merged_ into a _unified_ [namespace][function namespace].
 
-All modules imported at _global_ level via [`import`] statements become sub-modules,
+All [modules] imported at _global_ level via [`import`] statements become sub-[modules],
 which are also available to functions defined within the same script file.
 
 ### Base directory
@@ -44,7 +45,7 @@ directory holding the loading script. This allows scripts to simply load each ot
 
 ### Caching
 
-By default, modules are also _cached_ so a script file is only evaluated _once_, even when
+By default, [modules] are also _cached_ so a script file is only evaluated _once_, even when
 repeatedly imported.
 
 Use `FileModuleResolver::enable_cache` to enable/disable the script file cache.
@@ -106,12 +107,12 @@ m::greet_main();                // prints "main here!"
 
 When calling a namespace-qualified function defined within a module, other functions defined within
 the same module script override any similar-named functions (with the same number of parameters)
-defined in the global namespace.  This is to ensure that a module acts as a self-contained unit and
-functions defined in the calling script do not override module code.
+defined in the [global namespace][function namespace].  This is to ensure that a module acts as a
+self-contained unit and functions defined in the calling script do not override module code.
 
-In some situations, however, it is actually beneficial to do it in reverse: have module code call functions
-defined in the calling script (i.e. in the global namespace) if they exist, and only call those defined
-in the module script if none are found.
+In some situations, however, it is actually beneficial to do it in reverse: have module code call
+functions defined in the calling script (i.e. in the [global namespace][function namespace]) if they
+exist, and only call those defined in the module script if none are found.
 
 One such situation is the need to provide a _default implementation_ to a simulated _virtual_ function:
 
@@ -164,9 +165,9 @@ m::greet();                         // prints "hello! from module!"
 `StaticModuleResolver`
 ---------------------
 
-Loads modules that are statically added. This can be used under [`no_std`].
+Loads [modules] that are statically added. This can be used under [`no_std`].
 
-Functions are searched in the _global_ namespace by default.
+Functions are searched in the [_global_ namespace][function namespace] by default.
 
 ```rust no_run
 use rhai::{Module, module_resolvers::StaticModuleResolver};
@@ -181,9 +182,9 @@ resolver.insert("my_module", module);
 `ModuleResolversCollection`
 --------------------------
 
-A collection of module resolvers. Modules will be resolved from each resolver in sequential order.
+A collection of module resolvers. [Modules] will be resolved from each resolver in sequential order.
 
-This is useful when multiple types of modules are needed simultaneously.
+This is useful when multiple types of [modules] are needed simultaneously.
 
 
 `DummyResolversCollection`

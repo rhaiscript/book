@@ -5,10 +5,10 @@ Create a Custom Package
 
 The macro `def_package!` can be used to create a custom [package].
 
-A custom package can aggregate many other packages into a single self-contained unit.
+A custom [package] can aggregate many other [packages] into a single self-contained unit.
 More functions can be added on top of others.
 
-Custom packages are extremely useful when multiple [raw `Engine`] instances must be created such
+Custom [packages] are extremely useful when multiple [raw `Engine`] instances must be created such
 that they all share the same set of functions.
 
 For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/parallel.md) pattern.
@@ -60,7 +60,6 @@ use rhai::packages::{
     ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage
 };
 
-// Define the package 'MyPackage'.
 def_package! {
     /// My own personal super package
     rhai::MyPackage => |module| {
@@ -88,11 +87,11 @@ Create a Custom Package from a Plugin Module
 By far the easiest way to create a custom [package] is to call `plugin::combine_with_exported_module!`
 from within `def_package!` which simply merges in all the functions defined within a [plugin module].
 
-In fact, this exactly is how Rhai's built-in packages, such as `BasicMathPackage`, are implemented.
+In fact, this exactly is how Rhai's built-in [packages], such as `BasicMathPackage`, are implemented.
 
 Due to specific requirements of a [package], `plugin::combine_with_exported_module!`
 _flattens_ all sub-modules (i.e. all functions and [type iterators] defined within sub-modules
-are pulled up to the top level instead) and so there will not be any sub-modules added to the package.
+are pulled up to the top level instead) and so there will not be any sub-modules added to the [package].
 
 Variables in the [plugin module] are ignored.
 
@@ -135,7 +134,6 @@ mod my_plugin_module {
     }
 }
 
-// Define the package 'MyPackage'.
 def_package! {
     /// My own personal super package
     rhai::MyPackage => |module| {

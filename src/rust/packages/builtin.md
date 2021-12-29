@@ -5,7 +5,7 @@ Built-In Packages
 
 `Engine::new` creates an [`Engine`] with the `StandardPackage` loaded.
 
-`Engine::new_raw` creates an [`Engine`] with _no_ package loaded.
+`Engine::new_raw` creates an [`Engine`] with _no_ [package] loaded.
 
 | Package                | Description                                                                                                 | In `Core` | In `Standard` |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------- | :-------: | :-----------: |
@@ -28,7 +28,7 @@ Built-In Packages
 `CorePackage`
 -------------
 
-If only minimal functionalities are required, register the `CorePackage` instead:
+If only minimal functionalities are required, register the `CorePackage` instead.
 
 ```rust no_run
 use rhai::Engine;

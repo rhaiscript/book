@@ -5,15 +5,16 @@ Custom Type Property Getters and Setters
 
 A [custom type] can also expose properties by registering `get` and/or `set` functions.
 
-Properties can be accessed in a JavaScript-like syntax:
+Properties can be accessed in a Rust-like syntax:
 
 > _object_ `.` _property_
 >
 > _object_ `.` _property_ `=` _value_ `;`
 
-Getters and setters each take a `&mut` reference to the first parameter.
+Property getter and setter functions are called behind the scene.
+They each take a `&mut` reference to the first parameter.
 
-Getters and setters are disabled when the [`no_object`] feature is used.
+Getters and setters are disabled under the [`no_object`] feature.
 
 | `Engine` API          | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
 | --------------------- | -------------------------------------------------------------------------------- | :----------------------------: |
@@ -23,14 +24,12 @@ Getters and setters are disabled when the [`no_object`] feature is used.
 | `register_get_result` | `Fn(&mut T) -> Result<V, Box<EvalAltResult>>`                                    |      yes, but not advised      |
 | `register_set_result` | `Fn(&mut T, V) -> Result<(), Box<EvalAltResult>>`                                |              yes               |
 
-By convention, property getters are not supposed to mutate the [custom type], although there is nothing
-that prevents this mutation.
-
 
 Getters Must Be Pure
 --------------------
 
-Property getters are assumed to be _pure_, meaning that they should not mutate any data.
+By convention, property getters are assumed to be _pure_, meaning that they are not supposed to
+mutate the [custom type], although there is nothing that prevents this mutation in Rust.
 
 Even though a property getter function also takes `&mut` as the first parameter, Rhai assumes that
 no data is changed when the function is called.
@@ -42,7 +41,7 @@ Cannot Override Object Maps
 Property getters and setters are mainly intended for [custom types].
 
 Any getter or setter function registered for [object maps] is simply _ignored_ because the get/set
-calls will be interpreted as properties on the [object maps].
+syntax will be interpreted as access to properties on the [object maps].
 
 
 Examples
@@ -104,6 +103,9 @@ a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried
 ```
+
+This feature makes it very easy for [custom types] to act as _property bags_
+(similar to an [object map]) which can add/remove properties at will.
 
 
 Chaining Updates

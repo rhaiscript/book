@@ -17,9 +17,9 @@ Comparison Operators
 
 Comparison between most values of the same type are built in for all [standard types].
 
-### Floating-point numbers can inter-operate with integers
+### Floating-point numbers interoperate with integers
 
-Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an integer is also supported.
+Comparing a floating-point number (`FLOAT`) with an integer is also supported.
 
 ```rust no_run
 42 == 42.0;         // true
@@ -33,7 +33,25 @@ Comparing a floating-point number (`FLOAT` or [`Decimal`][rust_decimal]) with an
 42.0 < 42;          // false
 ```
 
-### Strings can inter-operate with characters
+### Decimal numbers interoperate with integers
+
+Comparing a [`Decimal`][rust_decimal] number with an integer is also supported.
+
+```rust no_run
+let d =  parse_decimal("42");
+
+42 == d;            // true
+
+d == 42;            // true
+
+d > 42;             // false
+
+42 >= d;            // true
+
+d < 42;             // false
+```
+
+### Strings interoperate with characters
 
 Comparing a [string] with a [character] is also supported, with the character first turned into a
 [string] before performing the comparison.

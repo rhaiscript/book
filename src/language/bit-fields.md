@@ -36,7 +36,7 @@ Bits in a bit-field are accessed with zero-based, non-negative integer indices:
 > _integer_ `[` _start_ `..` _end_ `] =` _new integer value_ ;  
 > _integer_ `[` _start_ `..=` _end_ `] =` _new integer value_ ;
 
-Bits outside of the range are ignored.
+Bits outside of the [range] are ignored.
 
 The maximum bit number that can be accessed is 63 (or 31 under [`only_i32`]).
 

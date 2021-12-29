@@ -3,10 +3,10 @@ Throw Exception on Error
 
 {{#include ../links.md}}
 
-All of [`Engine`]'s evaluation/consuming methods return `Result<T, Box<rhai::EvalAltResult>>`
+All [`Engine`] evaluation API methods return `Result<T, Box<rhai::EvalAltResult>>`
 with `EvalAltResult` holding error information.
 
-To deliberately return an error during an evaluation, use the `throw` keyword.
+To deliberately return an error, use the `throw` keyword.
 
 ```rust no_run
 if some_bad_condition_has_happened {
@@ -28,7 +28,7 @@ let result = engine.eval::<i64>(
     if x > 0 {
         throw x;
     }
-";
+").expect_err();
 
 println!("{}", result);     // prints "Runtime error: 42 (line 5, position 15)"
 ```
@@ -42,9 +42,13 @@ of the entire script via the [`try` ... `catch`][`try`]
 statement common to many C-like languages.
 
 ```rust no_run
+fn code_that_throws() {
+    throw 42;
+}
+
 try
 {
-    throw 42;
+    code_that_throws();
 }
 catch (err)         // 'err' captures the thrown exception value
 {
