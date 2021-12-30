@@ -41,11 +41,56 @@ Ranges are commonly used in the following scenarios.
 | [`in`] expressions         | `if n in 0..100 { ... }`                |
 | [`switch`] expressions     | `switch n { 0..100 => ... }`            |
 | [Bit-fields] access        | `let x = n[2..6];`                      |
-| [Array] range-based API's  | `array.extract(2..8)`                   |
-| [String] range-based API's | `string.sub_string(4..=12)`             |
-| [BLOB] range-based API's   | `blob.parse_le_int(4..8)`               |
 | Bits iteration             | `for bit in n.bits(2..=9) { ... }`      |
+| [Array] range-based API's  | `array.extract(2..8)`                   |
+| [BLOB] range-based API's   | `blob.parse_le_int(4..8)`               |
+| [String] range-based API's | `string.sub_string(4..=12)`             |
 | [Characters] iteration     | `for ch in string.bits(4..=12) { ... }` |
+| [Custom types]             | `my_obj.action(3..=15, "foo");`         |
+
+
+Use as Parameter Type
+---------------------
+
+Native Rust functions that take parameters of type `std::ops::Range<INT>` or
+`std::ops::RangeInclusive<INT>`, when registered into an [`Engine`],
+accept ranges as arguments.
+
+However, beware that `..` (exclusive range) and `..=` (inclusive range) are _different_ types
+to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
+be registered to handle both range styles.
+
+```rust no_run
+┌──────┐
+│ Rust │
+└──────┘
+
+/// The actual work function
+fn do_work(obj: &mut TestStruct, from: INT, to: INT, inclusive: bool) {
+    ...
+}
+
+engine
+    /// Version of API that accepts an exclusive range
+    .register_fn("do_work", |obj: &mut TestStruct, range: Range<INT>|
+        do_work(obj, range.start, range.end, false)
+    )
+    /// Version of API that accepts an inclusive range
+    .register_fn("do_work", |obj: &mut TestStruct, range: RangeInclusive<INT>|
+        do_work(obj, range.start(), range.end(), true)
+    );
+
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+let obj = new_ts();
+
+do_work(obj, 0..12);        // use exclusive range
+
+do_work(obj, 0..=11);       // use inclusive range
+```
 
 
 Built-in Functions
