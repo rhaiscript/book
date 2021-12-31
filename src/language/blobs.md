@@ -89,9 +89,7 @@ Writing ASCII Bytes
 
 For many embedded applications, it is necessary to encode an ASCII [string] as a byte stream.
 
-Use the `write` method to write [strings] into any specific [range] within a BLOB.
-The [string] is always written in UTF-8 encoding, which is the same as ASCII encoding for
-strict ASCII [characters].
+Use the `write_ascii` method to write ASCII [strings] into any specific [range] within a BLOB.
 
 The following is an example of a building a 16-byte command to send to an embedded device.
 
@@ -110,11 +108,11 @@ let text = "foo & bar";     // text string to send to device
 buf[0] = 0x42;              // command code
 buf[1] = s.len();           // length of string
 
-buf.write(2..14, text);     // write the string
+buf.write_ascii(2..14, text);   // write the string
 
 let crc = buf.calc_crc();   // calculate CRC
 
-buf.write_le(14, 2, crc);    // write CRC
+buf.write_le(14, 2, crc);   // write CRC
 
 print(buf);                 // prints "[4209666f6f202620 626172000000abcd]"
                             //          ^^ command code              ^^^^ CRC
@@ -170,5 +168,7 @@ The following functions (mostly defined in the [`BasicBlobPackage`][packages] bu
 | `write_le`                                              | 1) [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under [`only_i32`] or [`f32_float`])<br/>2) integer or floating-point value                              | writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)                 |
 | `write_be`                                              | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to write, 8 if > 8 (4 under [`only_i32`] or [`f32_float`]), none if ≤ 0<br/>3) integer or floating-point value | writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)                    |
 | `write_be`                                              | 1) [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under [`only_i32`] or [`f32_float`])<br/>2) integer or floating-point value                              | writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)                    |
-| `write`                                                 | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) [string] to write                                             | writes a [string] to the particular offset in UTF-8 encoding                                                                                         |
-| `write`                                                 | [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) [string] to write                                                                                  | writes a [string] to the particular offset in UTF-8 encoding                                                                                         |
+| `write_utf8`                                            | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) [string] to write                                             | writes a [string] to the particular offset in UTF-8 encoding                                                                                         |
+| `write_utf8`                                            | 1) [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) [string] to write                                                                               | writes a [string] to the particular offset in UTF-8 encoding                                                                                         |
+| `write_ascii`                                           | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of [characters] to write, none if ≤ 0, to end if ≥ length<br/>3) [string] to write                                      | writes a [string] to the particular offset in 7-bit ASCII encoding (non-ASCII [characters] are skipped)                                              |
+| `write_ascii`                                           | 1) [range] of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) [string] to write                                                                               | writes a [string] to the particular offset in 7-bit ASCII encoding (non-ASCII [characters] are skipped)                                              |
