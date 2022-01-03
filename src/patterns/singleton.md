@@ -58,7 +58,7 @@ impl EnergizerBunny {
     pub fn new () -> Self { ... }
     pub fn go (&mut self) { ... }
     pub fn stop (&mut self) { ... }
-    pub fn is_going (&self) -> bol { ... }
+    pub fn is_going (&self) -> bool { ... }
     pub fn get_speed (&self) -> i64 { ... }
     pub fn set_speed (&mut self, speed: i64) { ... }
     pub fn turn (&mut self, left_turn: bool) { ... }
