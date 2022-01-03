@@ -59,8 +59,10 @@ The maximum bit number that can be accessed is &minus;64 (or &minus;32 under [`o
 Bit-Field Functions
 -------------------
 
-The following standard functions (defined in the [`LogicPackage`][packages] but excluded if
+The following standard functions (defined in the [`BitFieldPackage`][packages] but excluded if
 using a [raw `Engine`]) operate on `INT` bit-fields.
+
+These functions are available even under the [`no_index`] feature.
 
 | Function                   | Parameter(s)                                                                                                                                   | Description                                               |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |

@@ -11,10 +11,11 @@ Built-In Packages
 | ---------------------- | ----------------------------------------------------------------------------------------------------------- | :-------: | :-----------: |
 | `LanguageCorePackage`  | core functions for the Rhai language                                                                        |    yes    |      yes      |
 | `ArithmeticPackage`    | arithmetic operators (e.g. `+`, `-`, `*`, `/`) for numeric types that are not built in (e.g. `u16`)         |    yes    |      yes      |
+| `BitFieldPackage`      | basic [bit-field] functions                                                                                 |    no     |      yes      |
 | `BasicIteratorPackage` | numeric ranges (e.g. `range(1, 100, 5)`), iterators for [arrays], [strings], [bit-fields] and [object maps] |    yes    |      yes      |
-| `LogicPackage`         | logical and comparison operators (e.g. `==`, `>`) for numeric types that are not built in (e.g. `u16`)      |    yes    |      yes      |
+| `LogicPackage`         | logical and comparison operators (e.g. `==`, `>`) for numeric types that are not built in (e.g. `u16`)      |    no     |      yes      |
 | `BasicStringPackage`   | basic string functions (e.g. `print`, `debug`, `len`) that are not built in                                 |    yes    |      yes      |
-| `BasicTimePackage`     | basic time functions (e.g. [timestamps])                                                                    |    yes    |      yes      |
+| `BasicTimePackage`     | basic time functions (e.g. [timestamps])                                                                    |    no     |      yes      |
 | `MoreStringPackage`    | additional string functions, including converting common types to string                                    |    no     |      yes      |
 | `BasicMathPackage`     | basic math functions (e.g. `sin`, `sqrt`)                                                                   |    no     |      yes      |
 | `BasicArrayPackage`    | basic [array] functions (not available under [`no_index`])                                                  |    no     |      yes      |
