@@ -27,8 +27,8 @@ When embedding Rhai into an application, it is usually necessary to trap `print`
 // Any function or closure that takes an '&str' argument can be used to override 'print'.
 engine.on_print(|x| println!("hello: {}", x));
 
-// Any function or closure that takes a '&str' and a 'Position' argument can be used to
-// override 'debug'.
+// Any function or closure that takes a '&str', an 'Option<&str>' and a 'Position' argument
+// can be used to override 'debug'.
 engine.on_debug(|x, src, pos| println!("DEBUG of {} at {:?}: {}", src.unwrap_or("unknown"), pos, x));
 
 // Example: quick-'n-dirty logging

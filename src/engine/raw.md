@@ -9,13 +9,21 @@ via `print` or `debug`).
 In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.
 
-Use `Engine::new_raw` to create a _raw_ `Engine`, in which only a minimal set of
-basic arithmetic and logical operators are supported (see below).
+Use `Engine::new_raw` to create a _raw_ `Engine`, in which only a minimal set of [built-in][built-in operators]
+basic arithmetic and logical operators are supported.
 
 To add more functionalities to a _raw_ `Engine`, load [packages] into it.
 
 Since [packages] can be shared, this is an extremely efficient way to create multiple instances of
 the same [`Engine`] with the same set of functions.
+
+|                               |       `Engine::new`        | `Engine::new_raw` |
+| ----------------------------- | :------------------------: | :---------------: |
+| [Built-in operators]          |            yes             |        yes        |
+| [Package] loaded              |     `StandardPackage`      |      _none_       |
+| [Module resolver]             |    `FileModuleResolver`    |      _none_       |
+| [`Engine::on_print`][`print`] |         `println!`         |      _none_       |
+| [`Engine::on_debug`][`debug`] | `println!` in debug format |      _none_       |
 
 
 Built-in Operators
