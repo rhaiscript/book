@@ -111,7 +111,7 @@ Any custom syntax must include an _implementation_ of it.
 
 #### Function signature
 
-The function signature of an implementation is:
+The signature of an implementation function is as follows.
 
 > `Fn(context: &mut EvalContext, inputs: &[Expression]) -> Result<Dynamic, Box<EvalAltResult>>`
 
@@ -392,7 +392,7 @@ Under this API, it is no longer restricted to be valid identifiers.
 
 ### Function Signature
 
-The custom syntax parser has the following signature:
+The custom syntax parser has the following signature.
 
 > `Fn(symbols: &[ImmutableString], look_ahead: &str) -> Result<Option<ImmutableString>, ParseError>`
 

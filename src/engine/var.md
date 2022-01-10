@@ -58,7 +58,7 @@ Benefits of Using a Variable Resolver
 Function Signature
 ------------------
 
-The function signature passed to `Engine::on_var` takes the following form:
+The function signature passed to `Engine::on_var` takes the following form.
 
 > `Fn(name: &str, index: usize, context: &EvalContext)`  
 > &nbsp;&nbsp;&nbsp;&nbsp;`-> Result<Option<Dynamic>, Box<EvalAltResult>> + 'static`

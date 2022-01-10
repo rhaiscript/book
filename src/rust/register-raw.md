@@ -18,10 +18,6 @@ The `Engine::register_raw_fn` method is marked _volatile_, meaning that it may b
 
 If this is acceptable, then using this method to register a Rust function opens up more opportunities.
 
-The function signature includes the current [_native call context_][`NativeCallContext`] which
-exposes the current [`Engine`], among others, so the Rust function can recursively call methods on
-the same [`Engine`].
-
 ```rust no_run
 engine.register_raw_fn(
     "increment_by",                                         // function name
@@ -70,7 +66,7 @@ where:
 | Parameter |         Type          | Description                                                                                                                                 |
 | --------- | :-------------------: | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `T`       |     `impl Clone`      | return type of the function                                                                                                                 |
-| `context` | [`NativeCallContext`] | the current _native call context_                                                                                                           |
+| `context` | [`NativeCallContext`] | the current _native call context_, useful for recursively calling functions on the same [`Engine`]                                          |
 | `args`    | `&mut [&mut Dynamic]` | a slice containing `&mut` references to [`Dynamic`] values.<br/>The slice is guaranteed to contain enough arguments _of the correct types_. |
 
 ### Return value
@@ -115,8 +111,8 @@ To extract an argument passed by value from the `args` parameter (`&mut [&mut Dy
 | `()`                      | `args[n].as_unit().unwrap()`                        |                  `()`                   |   untouched    |
 | [String]                  | `&*args[n].read_lock::<ImmutableString>().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
 | [String] (consumed)       | `std::mem::take(args[n]).cast::<ImmutableString>()` |           [`ImmutableString`]           |     [`()`]     |
-| [Custom type]             | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
-| [Custom type] (consumed)  | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
+| Others                    | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
+| Others (consumed)         | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
 
 
 Example &ndash; Passing a Callback to a Rust Function

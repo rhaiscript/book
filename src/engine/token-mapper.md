@@ -17,13 +17,17 @@ _mapper function_ that converts (remaps) a [`Token`] into another.
 Function Signature
 ------------------
 
-The function signature passed to `Engine::on_parse_token` takes the following form:
+The function signature passed to `Engine::on_parse_token` takes the following form.
 
 > `Fn(token: Token, pos: Position, state: &TokenizeState) -> Token`
 
-where `pos` is the location of the [token][`Token`] and
-[`state`](https://docs.rs/rhai/{{version}}/rhai/struct.TokenizeState.html) holds the current state
-of the tokenizer.
+where:
+
+| Parameter |                                        Type                                         | Description                      |
+| --------- | :---------------------------------------------------------------------------------: | -------------------------------- |
+| `token`   |                                      [`Token`]                                      | the next symbol parsed           |
+| `pos`     |                                     `Position`                                      | location of the [token][`Token`] |
+| `state`   | [`&TokenizeState`](https://docs.rs/rhai/{{version}}/rhai/struct.TokenizeState.html) | current state of the tokenizer   |
 
 ### Raising errors
 

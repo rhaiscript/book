@@ -118,7 +118,7 @@ manner, with the parent node visited before its children.
 
 ### Callback function signature
 
-The function signature of the callback function is:
+The signature of the callback function takes the following form.
 
 > `FnMut(&[ASTNode]) -> bool`
 
