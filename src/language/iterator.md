@@ -15,10 +15,6 @@ that implements `IntoIterator`.
 With a type iterator registered, the [custom type] can be iterated through.
 
 ```rust no_run
-┌──────┐
-│ Rust │
-└──────┘
-
 // Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec<i64> }
@@ -33,20 +29,20 @@ impl IntoIterator<Item = i64> for TestStruct {
     }
 }
 
+let mut engine = Engine::new();
+
 // Register API and type iterator for 'TestStruct'
 engine.register_type_with_name::<TestStruct>("TestStruct")
       .register_fn("new_ts", || TestStruct { fields: vec![1, 2, 3, 42] })
       .register_iterator::<TestStruct>();
 
+engine.run(
+"
+    let ts = new_ts();
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
-let ts = new_ts();
-
-// Use 'for' statement to loop through items in 'ts'
-for value in ts {
-    ...
-}
+    // Use 'for' statement to loop through items in 'ts'
+    for value in ts {
+        ...
+    }
+")?;
 ```

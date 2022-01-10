@@ -97,9 +97,7 @@ Support for the `in` operator can be easily extended to other types by registeri
 function named `contains` with the correct parameter types.
 
 ```rust no_run
-┌──────┐
-│ Rust │
-└──────┘
+let mut engine = Engine::new();
 
 engine.register_type::<TestStruct>()
       .register_fn("new_ts", || TestStruct::new())
@@ -108,19 +106,17 @@ engine.register_type::<TestStruct>()
           ts.contains(item)
       });
 
-
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
 // Now the 'in' operator can be used for 'TestStruct' and integer
 
-let ts = new_ts();
+engine.run(
+r#"
+    let ts = new_ts();
 
-if 42 in ts {                       // this calls the 'contains' function
-    print("I got 42!");
-}
+    if 42 in ts {                   // this calls the 'contains' function
+        print("I got 42!");
+    }
 
-let err = "hello" in ts;            // <- runtime error: 'contains' not found
+    let err = "hello" in ts;        // <- runtime error: 'contains' not found
                                     //    for 'TestStruct' and string
+"#)?;
 ```

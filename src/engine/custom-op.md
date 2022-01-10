@@ -39,20 +39,14 @@ Alternatives to a Custom Operator
 Custom operators are merely _syntactic sugar_.  They map directly to registered functions.
 
 ```rust no_run
-┌──────┐
-│ Rust │
-└──────┘
+let mut engine = Engine::new();
 
+// Define 'foo' operator
 engine.register_custom_operator("foo", 160)?;
 
+engine.eval::<i64>("1 + 2 * 3 foo 4 - 5 / 6")?;       // use custom operator
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
-1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
-
-1 + foo(2 * 3, 4) - 5 / 6   // <- above is equivalent to this function call
+engine.eval::<i64>("1 + foo(2 * 3, 4) - 5 / 6")?;     // <- above is equivalent to this
 ```
 
 A script using custom operators can always be pre-processed, via a pre-processor application,
@@ -70,14 +64,14 @@ Alternatively, they can also be [reserved symbols]({{rootUrl}}/appendix/operator
 [disabled operators or keywords][disable keywords and operators].
 
 ```rust no_run
-engine.register_custom_operator("foo", 20)?;    // 'foo' is a valid custom operator
+engine.register_custom_operator("foo", 20)?;          // 'foo' is a valid custom operator
 
-engine.register_custom_operator("#", 20)?;      // the reserved symbol '#' is also
-                                                // a valid custom operator
+engine.register_custom_operator("#", 20)?;            // the reserved symbol '#' is also
+                                                      // a valid custom operator
 
-engine.register_custom_operator("+", 30)?;      // <- error: '+' is an active operator
+engine.register_custom_operator("+", 30)?;            // <- error: '+' is an active operator
 
-engine.register_custom_operator("=>", 30)?;     // <- error: '=>' is an active symbol
+engine.register_custom_operator("=>", 30)?;           // <- error: '=>' is an active symbol
 ```
 
 
@@ -88,10 +82,11 @@ All custom operators must be _binary_ (i.e. they take two operands).
 _Unary_ custom operators are not supported.
 
 ```rust no_run
+// Register unary '#' operator
 engine.register_custom_operator("#", 160)?
       .register_fn("#", |x: i64| x * x);
 
-engine.eval::<i64>("1 + 2 * 3 # 4 - 5 / 6")?;   // error: function '# (i64, i64)' not found
+engine.eval::<i64>("# 42")?;                          // <- syntax error
 ```
 
 
