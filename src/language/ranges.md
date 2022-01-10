@@ -53,43 +53,71 @@ Use as Parameter Type
 ---------------------
 
 Native Rust functions that take parameters of type `std::ops::Range<INT>` or
-`std::ops::RangeInclusive<INT>`, when registered into an [`Engine`],
-accept ranges as arguments.
+`std::ops::RangeInclusive<INT>`, when registered into an [`Engine`], accept ranges as arguments.
 
 However, beware that `..` (exclusive range) and `..=` (inclusive range) are _different_ types
 to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
 be registered to handle both range styles.
 
 ```rust no_run
-┌──────┐
-│ Rust │
-└──────┘
+use std::ops::{Range, RangeInclusive};
 
 /// The actual work function
-fn do_work(obj: &mut TestStruct, from: INT, to: INT, inclusive: bool) {
+fn do_work(obj: &mut TestStruct, from: i64, to: i64, inclusive: bool) {
     ...
 }
 
+let mut engine = Engine::new();
+
 engine
     /// Version of API that accepts an exclusive range
-    .register_fn("do_work", |obj: &mut TestStruct, range: Range<INT>|
+    .register_fn("do_work", |obj: &mut TestStruct, range: Range<i64>|
         do_work(obj, range.start, range.end, false)
     )
     /// Version of API that accepts an inclusive range
-    .register_fn("do_work", |obj: &mut TestStruct, range: RangeInclusive<INT>|
+    .register_fn("do_work", |obj: &mut TestStruct, range: RangeInclusive<i64>|
         do_work(obj, range.start(), range.end(), true)
     );
 
+engine.run(
+"
+    let obj = new_ts();
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
+    obj.do_work(0..12);         // use exclusive range
 
-let obj = new_ts();
+    obj.do_work(0..=11);        // use inclusive range
+")?;
+```
 
-do_work(obj, 0..12);        // use exclusive range
+### Indexers Using Ranges
 
-do_work(obj, 0..=11);       // use inclusive range
+[Indexers] commonly use ranges as parameters.
+
+```rust no_run
+use std::ops::{Range, RangeInclusive};
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of indexer that accepts an exclusive range
+    .register_indexer_get_set(
+        |obj: &mut TestStruct, range: Range<i64>| -> bool { ... },
+        |obj: &mut TestStruct, range: Range<i64>, value: bool| { ... },
+    )
+    /// Version of indexer that accepts an inclusive range
+    .register_indexer_get_set(
+        |obj: &mut TestStruct, range: RangeInclusive<i64>| -> bool { ... },
+        |obj: &mut TestStruct, range: RangeInclusive<i64>, value: bool| { ... },
+    );
+
+engine.run(
+"
+    let obj = new_ts();
+
+    let x = obj[0..12];         // use exclusive range
+
+    obj[0..=11] = !x;           // use inclusive range
+")?;
 ```
 
 

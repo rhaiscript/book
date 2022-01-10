@@ -58,48 +58,6 @@ In general, it is a bad idea to overload indexers for any of the [standard types
 internally by Rhai, since built-in indexers may be added in future versions.
 
 
-Convention for Negative Index
------------------------------
-
-If the indexer takes a signed integer as an index (e.g. the standard `INT` type), care should be
-taken to handle _negative_ values passed as the index.
-
-It is a standard API _convention_ for Rhai to assume that an index position counts _backwards_ from
-the _end_ if it is negative.
-
-`-1` as an index usually refers to the _last_ item, `-2` the second to last item, and so on.
-
-Therefore, negative index values go from `-1` (last item) to `-length` (first item).
-
-A typical implementation for negative index values is:
-
-```rust no_run
-// The following assumes:
-//   'index' is 'INT', 'items_len: usize' is the number of elements
-let actual_index = if index < 0 {
-    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
-} else {
-    index as usize
-};
-```
-
-The _end_ of a data type can be interpreted creatively.  For example, in an integer used as a
-[bit-field], the _start_ is the _least-significant-bit_ (LSB) while the `end` is the
-_most-significant-bit_ (MSB).
-
-
-Convention for Range Index
---------------------------
-
-[Ranges] can be easily used as indexer parameters via the types
-`std::ops::Range<INT>` (exclusive) and `std::ops::RangeInclusive<INT>` (inclusive).
-
-One complication is that two versions of the same indexer must be defined to support _exclusive_
-and _inclusive_ [ranges] respectively.
-
-By convention, negative values are _not_ interpreted specially in indexers for [ranges].
-
-
 Examples
 --------
 
@@ -139,6 +97,75 @@ r#"
 "#)?;
 
 println!("Answer: {}", result);     // prints 42
+```
+
+
+Convention for Negative Index
+-----------------------------
+
+If the indexer takes a signed integer as an index (e.g. the standard `INT` type), care should be
+taken to handle _negative_ values passed as the index.
+
+It is a standard API _convention_ for Rhai to assume that an index position counts _backwards_ from
+the _end_ if it is negative.
+
+`-1` as an index usually refers to the _last_ item, `-2` the second to last item, and so on.
+
+Therefore, negative index values go from `-1` (last item) to `-length` (first item).
+
+A typical implementation for negative index values is:
+
+```rust no_run
+// The following assumes:
+//   'index' is 'INT', 'items_len: usize' is the number of elements
+let actual_index = if index < 0 {
+    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+} else {
+    index as usize
+};
+```
+
+The _end_ of a data type can be interpreted creatively.  For example, in an integer used as a
+[bit-field], the _start_ is the _least-significant-bit_ (LSB) while the `end` is the
+_most-significant-bit_ (MSB).
+
+
+Convention for Range Index
+--------------------------
+
+It is very common for [ranges] to be used as indexer parameters via the types
+`std::ops::Range<INT>` (exclusive) and `std::ops::RangeInclusive<INT>` (inclusive).
+
+One complication is that two versions of the same indexer must be defined to support _exclusive_
+and _inclusive_ [ranges] respectively.
+
+By convention, negative values are _not_ interpreted specially in indexers for [ranges].
+
+```rust no_run
+use std::ops::{Range, RangeInclusive};
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of indexer that accepts an exclusive range
+    .register_indexer_get_set(
+        |obj: &mut TestStruct, range: Range<i64>| -> bool { ... },
+        |obj: &mut TestStruct, range: Range<i64>, value: bool| { ... },
+    )
+    /// Version of indexer that accepts an inclusive range
+    .register_indexer_get_set(
+        |obj: &mut TestStruct, range: RangeInclusive<i64>| -> bool { ... },
+        |obj: &mut TestStruct, range: RangeInclusive<i64>, value: bool| { ... },
+    );
+
+engine.run(
+"
+    let obj = new_ts();
+
+    let x = obj[0..12];             // use exclusive range
+
+    obj[0..=11] = !x;               // use inclusive range
+")?;
 ```
 
 
