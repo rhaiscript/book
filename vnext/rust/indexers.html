@@ -180,35 +180,6 @@ the <code>Engine::register_indexer_XXX</code> API.  They can, however, be define
 be ignored.</p>
 <p>In general, it is a bad idea to overload indexers for any of the <a href="/book/vnext/language/values-and-types.html">standard types</a> supported
 internally by Rhai, since built-in indexers may be added in future versions.</p>
-<h2 id="convention-for-negative-index"><a class="header" href="#convention-for-negative-index">Convention for Negative Index</a></h2>
-<p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
-taken to handle <em>negative</em> values passed as the index.</p>
-<p>It is a standard API <em>convention</em> for Rhai to assume that an index position counts <em>backwards</em> from
-the <em>end</em> if it is negative.</p>
-<p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
-<p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
-<p>A typical implementation for negative index values is:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The following assumes:
-//   'index' is 'INT', 'items_len: usize' is the number of elements
-let actual_index = if index &lt; 0 {
-    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
-} else {
-    index as usize
-};
-<span class="boring">}
-</span></code></pre></pre>
-<p>The <em>end</em> of a data type can be interpreted creatively.  For example, in an integer used as a
-<a href="/book/vnext/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
-<em>most-significant-bit</em> (MSB).</p>
-<h2 id="convention-for-range-index"><a class="header" href="#convention-for-range-index">Convention for Range Index</a></h2>
-<p><a href="/book/vnext/language/ranges.html">Ranges</a> can be easily used as indexer parameters via the types
-<code>std::ops::Range&lt;INT&gt;</code> (exclusive) and <code>std::ops::RangeInclusive&lt;INT&gt;</code> (inclusive).</p>
-<p>One complication is that two versions of the same indexer must be defined to support <em>exclusive</em>
-and <em>inclusive</em> <a href="/book/vnext/language/ranges.html">ranges</a> respectively.</p>
-<p>By convention, negative values are <em>not</em> interpreted specially in indexers for <a href="/book/vnext/language/ranges.html">ranges</a>.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -248,6 +219,64 @@ r#&quot;
 &quot;#)?;
 
 println!(&quot;Answer: {}&quot;, result);     // prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="convention-for-negative-index"><a class="header" href="#convention-for-negative-index">Convention for Negative Index</a></h2>
+<p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
+taken to handle <em>negative</em> values passed as the index.</p>
+<p>It is a standard API <em>convention</em> for Rhai to assume that an index position counts <em>backwards</em> from
+the <em>end</em> if it is negative.</p>
+<p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
+<p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
+<p>A typical implementation for negative index values is:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// The following assumes:
+//   'index' is 'INT', 'items_len: usize' is the number of elements
+let actual_index = if index &lt; 0 {
+    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+} else {
+    index as usize
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <em>end</em> of a data type can be interpreted creatively.  For example, in an integer used as a
+<a href="/book/vnext/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
+<em>most-significant-bit</em> (MSB).</p>
+<h2 id="convention-for-range-index"><a class="header" href="#convention-for-range-index">Convention for Range Index</a></h2>
+<p>It is very common for <a href="/book/vnext/language/ranges.html">ranges</a> to be used as indexer parameters via the types
+<code>std::ops::Range&lt;INT&gt;</code> (exclusive) and <code>std::ops::RangeInclusive&lt;INT&gt;</code> (inclusive).</p>
+<p>One complication is that two versions of the same indexer must be defined to support <em>exclusive</em>
+and <em>inclusive</em> <a href="/book/vnext/language/ranges.html">ranges</a> respectively.</p>
+<p>By convention, negative values are <em>not</em> interpreted specially in indexers for <a href="/book/vnext/language/ranges.html">ranges</a>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::ops::{Range, RangeInclusive};
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of indexer that accepts an exclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;, value: bool| { ... },
+    )
+    /// Version of indexer that accepts an inclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;, value: bool| { ... },
+    );
+
+engine.run(
+&quot;
+    let obj = new_ts();
+
+    let x = obj[0..12];             // use exclusive range
+
+    obj[0..=11] = !x;               // use inclusive range
+&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="indexer-as-property-access-fallback"><a class="header" href="#indexer-as-property-access-fallback">Indexer as Property Access Fallback</a></h2>

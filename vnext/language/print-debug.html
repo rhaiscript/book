@@ -162,8 +162,8 @@ debug(&quot;world!&quot;);        // prints &quot;world!&quot; to stdout using d
 </span>// Any function or closure that takes an '&amp;str' argument can be used to override 'print'.
 engine.on_print(|x| println!(&quot;hello: {}&quot;, x));
 
-// Any function or closure that takes a '&amp;str' and a 'Position' argument can be used to
-// override 'debug'.
+// Any function or closure that takes a '&amp;str', an 'Option&lt;&amp;str&gt;' and a 'Position' argument
+// can be used to override 'debug'.
 engine.on_debug(|x, src, pos| println!(&quot;DEBUG of {} at {:?}: {}&quot;, src.unwrap_or(&quot;unknown&quot;), pos, x));
 
 // Example: quick-'n-dirty logging

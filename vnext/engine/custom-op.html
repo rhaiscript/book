@@ -173,20 +173,14 @@ result == 15;
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>┌──────┐
-│ Rust │
-└──────┘
+</span>let mut engine = Engine::new();
 
+// Define 'foo' operator
 engine.register_custom_operator(&quot;foo&quot;, 160)?;
 
+engine.eval::&lt;i64&gt;(&quot;1 + 2 * 3 foo 4 - 5 / 6&quot;)?;       // use custom operator
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
-1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
-
-1 + foo(2 * 3, 4) - 5 / 6   // &lt;- above is equivalent to this function call
+engine.eval::&lt;i64&gt;(&quot;1 + foo(2 * 3, 4) - 5 / 6&quot;)?;     // &lt;- above is equivalent to this
 <span class="boring">}
 </span></code></pre></pre>
 <p>A script using custom operators can always be pre-processed, via a pre-processor application,
@@ -199,14 +193,14 @@ into a syntax that uses the corresponding function calls.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>engine.register_custom_operator(&quot;foo&quot;, 20)?;    // 'foo' is a valid custom operator
+</span>engine.register_custom_operator(&quot;foo&quot;, 20)?;          // 'foo' is a valid custom operator
 
-engine.register_custom_operator(&quot;#&quot;, 20)?;      // the reserved symbol '#' is also
-                                                // a valid custom operator
+engine.register_custom_operator(&quot;#&quot;, 20)?;            // the reserved symbol '#' is also
+                                                      // a valid custom operator
 
-engine.register_custom_operator(&quot;+&quot;, 30)?;      // &lt;- error: '+' is an active operator
+engine.register_custom_operator(&quot;+&quot;, 30)?;            // &lt;- error: '+' is an active operator
 
-engine.register_custom_operator(&quot;=&gt;&quot;, 30)?;     // &lt;- error: '=&gt;' is an active symbol
+engine.register_custom_operator(&quot;=&gt;&quot;, 30)?;           // &lt;- error: '=&gt;' is an active symbol
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="binary-operators-only"><a class="header" href="#binary-operators-only">Binary Operators Only</a></h2>
@@ -215,10 +209,11 @@ engine.register_custom_operator(&quot;=&gt;&quot;, 30)?;     // &lt;- error: '=&
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>engine.register_custom_operator(&quot;#&quot;, 160)?
+</span>// Register unary '#' operator
+engine.register_custom_operator(&quot;#&quot;, 160)?
       .register_fn(&quot;#&quot;, |x: i64| x * x);
 
-engine.eval::&lt;i64&gt;(&quot;1 + 2 * 3 # 4 - 5 / 6&quot;)?;   // error: function '# (i64, i64)' not found
+engine.eval::&lt;i64&gt;(&quot;# 42&quot;)?;                          // &lt;- syntax error
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="operator-precedence"><a class="header" href="#operator-precedence">Operator Precedence</a></h2>

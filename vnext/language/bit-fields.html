@@ -176,8 +176,9 @@ replaces a sequence of multiple steps.</p>
 <p>The maximum bit number that can be accessed is −64 (or −32 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>).</p>
 <p><a href="/book/vnext/language/ranges.html">Ranges</a> always count from the least-significant bit (LSB) and has no support for negative positions.</p>
 <h2 id="bit-field-functions"><a class="header" href="#bit-field-functions">Bit-Field Functions</a></h2>
-<p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>LogicPackage</code></a> but excluded if
+<p>The following standard functions (defined in the <a href="/book/vnext/rust/packages/index.html"><code>BitFieldPackage</code></a> but excluded if
 using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields.</p>
+<p>These functions are available even under the <a href="/book/vnext/start/features.html"><code>no_index</code></a> feature.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>get_bit</code></td><td>bit number, counting from MSB if &lt; 0</td><td>returns the state of a bit: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td></tr>
 <tr><td><code>set_bit</code></td><td>1) bit number, counting from MSB if &lt; 0<br/>2) new state: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td><td>sets the state of a bit</td></tr>

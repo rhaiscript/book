@@ -230,7 +230,7 @@ print(hello);   // variable declared by a custom syntax persists!
 <h3 id="step-two--implementation"><a class="header" href="#step-two--implementation">Step Two – Implementation</a></h3>
 <p>Any custom syntax must include an <em>implementation</em> of it.</p>
 <h4 id="function-signature"><a class="header" href="#function-signature">Function signature</a></h4>
-<p>The function signature of an implementation is:</p>
+<p>The signature of an implementation function is as follows.</p>
 <blockquote>
 <p><code>Fn(context: &amp;mut EvalContext, inputs: &amp;[Expression]) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
@@ -476,7 +476,7 @@ together with the implementation function.</p>
 </ul>
 <p>Under this API, it is no longer restricted to be valid identifiers.</p>
 <h3 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h3>
-<p>The custom syntax parser has the following signature:</p>
+<p>The custom syntax parser has the following signature.</p>
 <blockquote>
 <p><code>Fn(symbols: &amp;[ImmutableString], look_ahead: &amp;str) -&gt; Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code></p>
 </blockquote>

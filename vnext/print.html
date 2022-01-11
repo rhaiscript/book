@@ -144,7 +144,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.4.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.5.0</strong> of Rhai.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
 <p>In the beginning there was <a href="http://chaiscript.com">ChaiScript</a>,
@@ -459,7 +459,7 @@ starting by looking up the latest version and adding this line under <code>depen
 └────────────┘
 
 [dependencies]
-rhai = &quot;1.4.0&quot;    # assuming 1.4.0 is the latest version
+rhai = &quot;1.5.0&quot;    # assuming 1.5.0 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -535,7 +535,7 @@ Do not use them for non-<a href="start//book/vnext/start/builds/wasm.html">WASM<
 └────────────┘
 
 [dependencies]
-rhai = { version = &quot;1.4.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;1.5.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like <code>u32</code>, <code>i16</code> or <code>i64</code>),
 no floating-point, is <code>Send + Sync</code> (so it can be safely used across threads), and does not support defining <a href="start//book/vnext/language/functions.html">functions</a>
@@ -853,11 +853,13 @@ cargo +nightly build --release
 <h2 id="language-feature-scripts"><a class="header" href="#language-feature-scripts">Language Feature Scripts</a></h2>
 <p>There are also a number of examples scripts that showcase Rhai’s features, all in the <code>scripts</code> directory:</p>
 <table><thead><tr><th>Script</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/array.rhai"><code>array.rhai</code></a></td><td><a href="start/examples//book/vnext/language/arrays.html">arrays</a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/array.rhai"><code>array.rhai</code></a></td><td><a href="start/examples//book/vnext/language/arrays.html">arrays</a> example</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/assignment.rhai"><code>assignment.rhai</code></a></td><td><a href="start/examples//book/vnext/language/variables.html">variable</a> declarations</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/comments.rhai"><code>comments.rhai</code></a></td><td>just comments</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/comments.rhai"><code>comments.rhai</code></a></td><td>just regular <a href="start/examples//book/vnext/language/comments.html">comments</a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/doc-comments.rhai"><code>doc-comments.rhai</code></a></td><td><a href="start/examples//book/vnext/language/doc-comments.html">doc-comments</a> example</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/for1.rhai"><code>for1.rhai</code></a></td><td><a href="start/examples//book/vnext/language/for.html"><code>for</code></a> loops</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/for2.rhai"><code>for2.rhai</code></a></td><td><a href="start/examples//book/vnext/language/for.html"><code>for</code></a> loops on <a href="start/examples//book/vnext/language/arrays.html">arrays</a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/for2.rhai"><code>for2.rhai</code></a></td><td><a href="start/examples//book/vnext/language/for.html"><code>for</code></a> loops with <a href="start/examples//book/vnext/language/arrays.html">array</a> iterations</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/for2.rhai"><code>for3.rhai</code></a></td><td><a href="start/examples//book/vnext/language/for.html"><code>for</code></a> loops with <a href="start/examples//book/vnext/language/fn-closure.html">closures</a></td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl1.rhai"><code>function_decl1.rhai</code></a></td><td>a <a href="start/examples//book/vnext/language/functions.html">function</a> without parameters</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl2.rhai"><code>function_decl2.rhai</code></a></td><td>a <a href="start/examples//book/vnext/language/functions.html">function</a> with two parameters</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/master/scripts/function_decl3.rhai"><code>function_decl3.rhai</code></a></td><td>a <a href="start/examples//book/vnext/language/functions.html">function</a> with many parameters</td></tr>
@@ -1034,11 +1036,18 @@ let result = engine.eval_expression_with_scope::&lt;i64&gt;(&amp;mut scope, &quo
 via <code>print</code> or <code>debug</code>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
-<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of
-basic arithmetic and logical operators are supported (see below).</p>
+<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of <a href="engine//book/vnext/engine/builtin.html">built-in</a>
+basic arithmetic and logical operators are supported.</p>
 <p>To add more functionalities to a <em>raw</em> <code>Engine</code>, load <a href="engine//book/vnext/rust/packages/index.html">packages</a> into it.</p>
 <p>Since <a href="engine//book/vnext/rust/packages/index.html">packages</a> can be shared, this is an extremely efficient way to create multiple instances of
 the same <a href="engine//book/vnext/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
+<table><thead><tr><th></th><th align="center"><code>Engine::new</code></th><th align="center"><code>Engine::new_raw</code></th></tr></thead><tbody>
+<tr><td><a href="engine//book/vnext/engine/builtin.html">Built-in operators</a></td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td><a href="engine//book/vnext/rust/packages/index.html">Package</a> loaded</td><td align="center"><code>StandardPackage</code></td><td align="center"><em>none</em></td></tr>
+<tr><td><a href="engine//book/vnext/rust/modules/resolvers.html">Module resolver</a></td><td align="center"><code>FileModuleResolver</code></td><td align="center"><em>none</em></td></tr>
+<tr><td><a href="engine//book/vnext/language/print-debug.html"><code>Engine::on_print</code></a></td><td align="center"><code>println!</code></td><td align="center"><em>none</em></td></tr>
+<tr><td><a href="engine//book/vnext/language/print-debug.html"><code>Engine::on_debug</code></a></td><td align="center"><code>println!</code> in debug format</td><td align="center"><em>none</em></td></tr>
+</tbody></table>
 <h2 id="built-in-operators"><a class="header" href="#built-in-operators">Built-in Operators</a></h2>
 <p>Even with a raw <a href="engine//book/vnext/engine/hello-world.html"><code>Engine</code></a>, some operators are built in and are always available.</p>
 <p>See <a href="engine//book/vnext/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
@@ -1118,7 +1127,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/vnext/language/variables.html">variables</a>/<a href="engine//book/vnext/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.4.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.5.0/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/vnext/language/variables.html">variable</a> or <a href="engine//book/vnext/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/vnext/language/variables.html">variables</a> and <a href="engine//book/vnext/language/constants.html">constants</a>, but only the latest ones can
@@ -2203,35 +2212,6 @@ the <code>Engine::register_indexer_XXX</code> API.  They can, however, be define
 be ignored.</p>
 <p>In general, it is a bad idea to overload indexers for any of the <a href="rust//book/vnext/language/values-and-types.html">standard types</a> supported
 internally by Rhai, since built-in indexers may be added in future versions.</p>
-<h2 id="convention-for-negative-index"><a class="header" href="#convention-for-negative-index">Convention for Negative Index</a></h2>
-<p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
-taken to handle <em>negative</em> values passed as the index.</p>
-<p>It is a standard API <em>convention</em> for Rhai to assume that an index position counts <em>backwards</em> from
-the <em>end</em> if it is negative.</p>
-<p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
-<p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
-<p>A typical implementation for negative index values is:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The following assumes:
-//   'index' is 'INT', 'items_len: usize' is the number of elements
-let actual_index = if index &lt; 0 {
-    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
-} else {
-    index as usize
-};
-<span class="boring">}
-</span></code></pre></pre>
-<p>The <em>end</em> of a data type can be interpreted creatively.  For example, in an integer used as a
-<a href="rust//book/vnext/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
-<em>most-significant-bit</em> (MSB).</p>
-<h2 id="convention-for-range-index"><a class="header" href="#convention-for-range-index">Convention for Range Index</a></h2>
-<p><a href="rust//book/vnext/language/ranges.html">Ranges</a> can be easily used as indexer parameters via the types
-<code>std::ops::Range&lt;INT&gt;</code> (exclusive) and <code>std::ops::RangeInclusive&lt;INT&gt;</code> (inclusive).</p>
-<p>One complication is that two versions of the same indexer must be defined to support <em>exclusive</em>
-and <em>inclusive</em> <a href="rust//book/vnext/language/ranges.html">ranges</a> respectively.</p>
-<p>By convention, negative values are <em>not</em> interpreted specially in indexers for <a href="rust//book/vnext/language/ranges.html">ranges</a>.</p>
 <h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -2271,6 +2251,64 @@ r#&quot;
 &quot;#)?;
 
 println!(&quot;Answer: {}&quot;, result);     // prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="convention-for-negative-index"><a class="header" href="#convention-for-negative-index">Convention for Negative Index</a></h2>
+<p>If the indexer takes a signed integer as an index (e.g. the standard <code>INT</code> type), care should be
+taken to handle <em>negative</em> values passed as the index.</p>
+<p>It is a standard API <em>convention</em> for Rhai to assume that an index position counts <em>backwards</em> from
+the <em>end</em> if it is negative.</p>
+<p><code>-1</code> as an index usually refers to the <em>last</em> item, <code>-2</code> the second to last item, and so on.</p>
+<p>Therefore, negative index values go from <code>-1</code> (last item) to <code>-length</code> (first item).</p>
+<p>A typical implementation for negative index values is:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// The following assumes:
+//   'index' is 'INT', 'items_len: usize' is the number of elements
+let actual_index = if index &lt; 0 {
+    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+} else {
+    index as usize
+};
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <em>end</em> of a data type can be interpreted creatively.  For example, in an integer used as a
+<a href="rust//book/vnext/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
+<em>most-significant-bit</em> (MSB).</p>
+<h2 id="convention-for-range-index"><a class="header" href="#convention-for-range-index">Convention for Range Index</a></h2>
+<p>It is very common for <a href="rust//book/vnext/language/ranges.html">ranges</a> to be used as indexer parameters via the types
+<code>std::ops::Range&lt;INT&gt;</code> (exclusive) and <code>std::ops::RangeInclusive&lt;INT&gt;</code> (inclusive).</p>
+<p>One complication is that two versions of the same indexer must be defined to support <em>exclusive</em>
+and <em>inclusive</em> <a href="rust//book/vnext/language/ranges.html">ranges</a> respectively.</p>
+<p>By convention, negative values are <em>not</em> interpreted specially in indexers for <a href="rust//book/vnext/language/ranges.html">ranges</a>.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::ops::{Range, RangeInclusive};
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of indexer that accepts an exclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;, value: bool| { ... },
+    )
+    /// Version of indexer that accepts an inclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;, value: bool| { ... },
+    );
+
+engine.run(
+&quot;
+    let obj = new_ts();
+
+    let x = obj[0..12];             // use exclusive range
+
+    obj[0..=11] = !x;               // use inclusive range
+&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="indexer-as-property-access-fallback"><a class="header" href="#indexer-as-property-access-fallback">Indexer as Property Access Fallback</a></h2>
@@ -2543,7 +2581,7 @@ which converts a normal Rust module into a Rhai <a href="rust/modules//book/vnex
 <p>Manually creating a <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> is possible via the <a href="rust/modules//book/vnext/rust/modules/index.html"><code>Module</code></a> public API, which is volatile and may
 change from time to time.</p>
 <p>For the complete <a href="rust/modules//book/vnext/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.4.0/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.5.0/rhai/struct.Module.html">documentation</a> online.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <p>A <a href="rust/modules//book/vnext/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="rust/modules//book/vnext/engine/compile.html"><code>AST</code></a>) containing global <a href="rust/modules//book/vnext/language/variables.html">variables</a>,
@@ -3668,10 +3706,11 @@ for _ in 0..100 {
 <table><thead><tr><th>Package</th><th>Description</th><th align="center">In <code>Core</code></th><th align="center">In <code>Standard</code></th></tr></thead><tbody>
 <tr><td><code>LanguageCorePackage</code></td><td>core functions for the Rhai language</td><td align="center">yes</td><td align="center">yes</td></tr>
 <tr><td><code>ArithmeticPackage</code></td><td>arithmetic operators (e.g. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td><code>BitFieldPackage</code></td><td>basic <a href="rust/packages//book/vnext/language/bit-fields.html">bit-field</a> functions</td><td align="center">no</td><td align="center">yes</td></tr>
 <tr><td><code>BasicIteratorPackage</code></td><td>numeric ranges (e.g. <code>range(1, 100, 5)</code>), iterators for <a href="rust/packages//book/vnext/language/arrays.html">arrays</a>, <a href="rust/packages//book/vnext/language/strings-chars.html">strings</a>, <a href="rust/packages//book/vnext/language/bit-fields.html">bit-fields</a> and <a href="rust/packages//book/vnext/language/object-maps.html">object maps</a></td><td align="center">yes</td><td align="center">yes</td></tr>
-<tr><td><code>LogicPackage</code></td><td>logical and comparison operators (e.g. <code>==</code>, <code>&gt;</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td><code>LogicPackage</code></td><td>logical and comparison operators (e.g. <code>==</code>, <code>&gt;</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td align="center">no</td><td align="center">yes</td></tr>
 <tr><td><code>BasicStringPackage</code></td><td>basic string functions (e.g. <code>print</code>, <code>debug</code>, <code>len</code>) that are not built in</td><td align="center">yes</td><td align="center">yes</td></tr>
-<tr><td><code>BasicTimePackage</code></td><td>basic time functions (e.g. <a href="rust/packages//book/vnext/language/timestamps.html">timestamps</a>)</td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td><code>BasicTimePackage</code></td><td>basic time functions (e.g. <a href="rust/packages//book/vnext/language/timestamps.html">timestamps</a>)</td><td align="center">no</td><td align="center">yes</td></tr>
 <tr><td><code>MoreStringPackage</code></td><td>additional string functions, including converting common types to string</td><td align="center">no</td><td align="center">yes</td></tr>
 <tr><td><code>BasicMathPackage</code></td><td>basic math functions (e.g. <code>sin</code>, <code>sqrt</code>)</td><td align="center">no</td><td align="center">yes</td></tr>
 <tr><td><code>BasicArrayPackage</code></td><td>basic <a href="rust/packages//book/vnext/language/arrays.html">array</a> functions (not available under <a href="rust/packages//book/vnext/start/features.html"><code>no_index</code></a>)</td><td align="center">no</td><td align="center">yes</td></tr>
@@ -3864,7 +3903,7 @@ The main <code>lib.rs</code> module can contain the <a href="rust/packages//book
 name = &quot;my-package&quot;     # 'my-package' crate
 
 [dependencies]
-rhai = &quot;1.4.0&quot;          # assuming 1.4.0 is the latest version
+rhai = &quot;1.5.0&quot;          # assuming 1.5.0 is the latest version
 </code></pre>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -4978,12 +5017,82 @@ x.to_hex() == &quot;1234abcd&quot;;
 <tr><td><a href="language//book/vnext/language/in.html"><code>in</code></a> expressions</td><td><code>if n in 0..100 { ... }</code></td></tr>
 <tr><td><a href="language//book/vnext/language/switch.html"><code>switch</code></a> expressions</td><td><code>switch n { 0..100 =&gt; ... }</code></td></tr>
 <tr><td><a href="language//book/vnext/language/bit-fields.html">Bit-fields</a> access</td><td><code>let x = n[2..6];</code></td></tr>
-<tr><td><a href="language//book/vnext/language/arrays.html">Array</a> range-based API’s</td><td><code>array.extract(2..8)</code></td></tr>
-<tr><td><a href="language//book/vnext/language/strings-chars.html">String</a> range-based API’s</td><td><code>string.sub_string(4..=12)</code></td></tr>
-<tr><td><a href="language//book/vnext/language/blobs.html">BLOB</a> range-based API’s</td><td><code>blob.parse_le_int(4..8)</code></td></tr>
 <tr><td>Bits iteration</td><td><code>for bit in n.bits(2..=9) { ... }</code></td></tr>
+<tr><td><a href="language//book/vnext/language/arrays.html">Array</a> range-based API’s</td><td><code>array.extract(2..8)</code></td></tr>
+<tr><td><a href="language//book/vnext/language/blobs.html">BLOB</a> range-based API’s</td><td><code>blob.parse_le_int(4..8)</code></td></tr>
+<tr><td><a href="language//book/vnext/language/strings-chars.html">String</a> range-based API’s</td><td><code>string.sub_string(4..=12)</code></td></tr>
 <tr><td><a href="language//book/vnext/language/strings-chars.html">Characters</a> iteration</td><td><code>for ch in string.bits(4..=12) { ... }</code></td></tr>
+<tr><td><a href="language//book/vnext/rust/custom.html">Custom types</a></td><td><code>my_obj.action(3..=15, &quot;foo&quot;);</code></td></tr>
 </tbody></table>
+<h2 id="use-as-parameter-type"><a class="header" href="#use-as-parameter-type">Use as Parameter Type</a></h2>
+<p>Native Rust functions that take parameters of type <code>std::ops::Range&lt;INT&gt;</code> or
+<code>std::ops::RangeInclusive&lt;INT&gt;</code>, when registered into an <a href="language//book/vnext/engine/hello-world.html"><code>Engine</code></a>, accept ranges as arguments.</p>
+<p>However, beware that <code>..</code> (exclusive range) and <code>..=</code> (inclusive range) are <em>different</em> types
+to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
+be registered to handle both range styles.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::ops::{Range, RangeInclusive};
+
+/// The actual work function
+fn do_work(obj: &amp;mut TestStruct, from: i64, to: i64, inclusive: bool) {
+    ...
+}
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of API that accepts an exclusive range
+    .register_fn(&quot;do_work&quot;, |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;|
+        do_work(obj, range.start, range.end, false)
+    )
+    /// Version of API that accepts an inclusive range
+    .register_fn(&quot;do_work&quot;, |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;|
+        do_work(obj, range.start(), range.end(), true)
+    );
+
+engine.run(
+&quot;
+    let obj = new_ts();
+
+    obj.do_work(0..12);         // use exclusive range
+
+    obj.do_work(0..=11);        // use inclusive range
+&quot;)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="indexers-using-ranges"><a class="header" href="#indexers-using-ranges">Indexers Using Ranges</a></h3>
+<p><a href="language//book/vnext/rust/indexers.html">Indexers</a> commonly use ranges as parameters.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::ops::{Range, RangeInclusive};
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of indexer that accepts an exclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;, value: bool| { ... },
+    )
+    /// Version of indexer that accepts an inclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;, value: bool| { ... },
+    );
+
+engine.run(
+&quot;
+    let obj = new_ts();
+
+    let x = obj[0..12];         // use exclusive range
+
+    obj[0..=11] = !x;           // use inclusive range
+&quot;)?;
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
 <p>The following methods (mostly defined in the <a href="language//book/vnext/rust/packages/index.html"><code>BasicIteratorPackage</code></a> but excluded if
 using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on ranges.</p>
@@ -5029,8 +5138,9 @@ replaces a sequence of multiple steps.</p>
 <p>The maximum bit number that can be accessed is −64 (or −32 under <a href="language//book/vnext/start/features.html"><code>only_i32</code></a>).</p>
 <p><a href="language//book/vnext/language/ranges.html">Ranges</a> always count from the least-significant bit (LSB) and has no support for negative positions.</p>
 <h2 id="bit-field-functions"><a class="header" href="#bit-field-functions">Bit-Field Functions</a></h2>
-<p>The following standard functions (defined in the <a href="language//book/vnext/rust/packages/index.html"><code>LogicPackage</code></a> but excluded if
+<p>The following standard functions (defined in the <a href="language//book/vnext/rust/packages/index.html"><code>BitFieldPackage</code></a> but excluded if
 using a <a href="language//book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on <code>INT</code> bit-fields.</p>
+<p>These functions are available even under the <a href="language//book/vnext/start/features.html"><code>no_index</code></a> feature.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>get_bit</code></td><td>bit number, counting from MSB if &lt; 0</td><td>returns the state of a bit: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td></tr>
 <tr><td><code>set_bit</code></td><td>1) bit number, counting from MSB if &lt; 0<br/>2) new state: <code>true</code> if <code>1</code>, <code>false</code> if <code>0</code></td><td>sets the state of a bit</td></tr>
@@ -5698,9 +5808,7 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);
 </span></code></pre></pre>
 <h2 id="writing-ascii-bytes"><a class="header" href="#writing-ascii-bytes">Writing ASCII Bytes</a></h2>
 <p>For many embedded applications, it is necessary to encode an ASCII <a href="language//book/vnext/language/strings-chars.html">string</a> as a byte stream.</p>
-<p>Use the <code>write</code> method to write <a href="language//book/vnext/language/strings-chars.html">strings</a> into any specific <a href="language//book/vnext/language/ranges.html">range</a> within a BLOB.
-The <a href="language//book/vnext/language/strings-chars.html">string</a> is always written in UTF-8 encoding, which is the same as ASCII encoding for
-strict ASCII <a href="language//book/vnext/language/strings-chars.html">characters</a>.</p>
+<p>Use the <code>write_ascii</code> method to write ASCII <a href="language//book/vnext/language/strings-chars.html">strings</a> into any specific <a href="language//book/vnext/language/ranges.html">range</a> within a BLOB.</p>
 <p>The following is an example of a building a 16-byte command to send to an embedded device.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -5719,11 +5827,11 @@ let text = &quot;foo &amp; bar&quot;;     // text string to send to device
 buf[0] = 0x42;              // command code
 buf[1] = s.len();           // length of string
 
-buf.write(2..14, text);     // write the string
+buf.write_ascii(2..14, text);   // write the string
 
 let crc = buf.calc_crc();   // calculate CRC
 
-buf.write_le(14, 2, crc);    // write CRC
+buf.write_le(14, 2, crc);   // write CRC
 
 print(buf);                 // prints &quot;[4209666f6f202620 626172000000abcd]&quot;
                             //          ^^ command code              ^^^^ CRC
@@ -5774,8 +5882,10 @@ device.send(buf);           // send command to device
 <tr><td><code>write_le</code></td><td>1) <a href="language//book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="language//book/vnext/start/features.html"><code>only_i32</code></a> or <a href="language//book/vnext/start/features.html"><code>f32_float</code></a>)<br/>2) integer or floating-point value</td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
 <tr><td><code>write_be</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of bytes to write, 8 if &gt; 8 (4 under <a href="language//book/vnext/start/features.html"><code>only_i32</code></a> or <a href="language//book/vnext/start/features.html"><code>f32_float</code></a>), none if ≤ 0<br/>3) integer or floating-point value</td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
 <tr><td><code>write_be</code></td><td>1) <a href="language//book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="language//book/vnext/start/features.html"><code>only_i32</code></a> or <a href="language//book/vnext/start/features.html"><code>f32_float</code></a>)<br/>2) integer or floating-point value</td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) <a href="language//book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="language//book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
-<tr><td><code>write</code></td><td><a href="language//book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) <a href="language//book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="language//book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_utf8</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) <a href="language//book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="language//book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_utf8</code></td><td>1) <a href="language//book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) <a href="language//book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="language//book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_ascii</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of <a href="language//book/vnext/language/strings-chars.html">characters</a> to write, none if ≤ 0, to end if ≥ length<br/>3) <a href="language//book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="language//book/vnext/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="language//book/vnext/language/strings-chars.html">characters</a> are skipped)</td></tr>
+<tr><td><code>write_ascii</code></td><td>1) <a href="language//book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) <a href="language//book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="language//book/vnext/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="language//book/vnext/language/strings-chars.html">characters</a> are skipped)</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
 <p>Object maps are hash dictionaries. Properties are all <a href="language//book/vnext/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
@@ -6701,9 +6811,7 @@ function named <code>contains</code> with the correct parameter types.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>┌──────┐
-│ Rust │
-└──────┘
+</span>let mut engine = Engine::new();
 
 engine.register_type::&lt;TestStruct&gt;()
       .register_fn(&quot;new_ts&quot;, || TestStruct::new())
@@ -6712,21 +6820,19 @@ engine.register_type::&lt;TestStruct&gt;()
           ts.contains(item)
       });
 
-
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
 // Now the 'in' operator can be used for 'TestStruct' and integer
 
-let ts = new_ts();
+engine.run(
+r#&quot;
+    let ts = new_ts();
 
-if 42 in ts {                       // this calls the 'contains' function
-    print(&quot;I got 42!&quot;);
-}
+    if 42 in ts {                   // this calls the 'contains' function
+        print(&quot;I got 42!&quot;);
+    }
 
-let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains' not found
+    let err = &quot;hello&quot; in ts;        // &lt;- runtime error: 'contains' not found
                                     //    for 'TestStruct' and string
+&quot;#)?;
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="switch-expressions"><a class="header" href="#switch-expressions">Switch Expressions</a></h1>
@@ -7130,11 +7236,7 @@ that implements <code>IntoIterator</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>┌──────┐
-│ Rust │
-└──────┘
-
-// Custom type
+</span>// Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec&lt;i64&gt; }
 
@@ -7148,22 +7250,22 @@ impl IntoIterator&lt;Item = i64&gt; for TestStruct {
     }
 }
 
+let mut engine = Engine::new();
+
 // Register API and type iterator for 'TestStruct'
 engine.register_type_with_name::&lt;TestStruct&gt;(&quot;TestStruct&quot;)
       .register_fn(&quot;new_ts&quot;, || TestStruct { fields: vec![1, 2, 3, 42] })
       .register_iterator::&lt;TestStruct&gt;();
 
+engine.run(
+&quot;
+    let ts = new_ts();
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
-let ts = new_ts();
-
-// Use 'for' statement to loop through items in 'ts'
-for value in ts {
-    ...
-}
+    // Use 'for' statement to loop through items in 'ts'
+    for value in ts {
+        ...
+    }
+&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="return-value"><a class="header" href="#return-value">Return Value</a></h1>
@@ -8155,8 +8257,8 @@ debug(&quot;world!&quot;);        // prints &quot;world!&quot; to stdout using d
 </span>// Any function or closure that takes an '&amp;str' argument can be used to override 'print'.
 engine.on_print(|x| println!(&quot;hello: {}&quot;, x));
 
-// Any function or closure that takes a '&amp;str' and a 'Position' argument can be used to
-// override 'debug'.
+// Any function or closure that takes a '&amp;str', an 'Option&lt;&amp;str&gt;' and a 'Position' argument
+// can be used to override 'debug'.
 engine.on_debug(|x, src, pos| println!(&quot;DEBUG of {} at {:?}: {}&quot;, src.unwrap_or(&quot;unknown&quot;), pos, x));
 
 // Example: quick-'n-dirty logging
@@ -8465,7 +8567,7 @@ disable <code>eval</code> via <a href="language//book/vnext/engine/disable-keywo
 └────────────┘
 
 [dependencies]
-rhai = &quot;1.4.0&quot;
+rhai = &quot;1.5.0&quot;
 rhai-rand = &quot;0.1&quot;
 </code></pre>
 <h2 id="load-package-into-a-hreflibbookvnextenginehello-worldhtmlenginea"><a class="header" href="#load-package-into-a-hreflibbookvnextenginehello-worldhtmlenginea">Load Package into <a href="lib//book/vnext/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -8498,7 +8600,7 @@ engine.register_global_module(random.as_shared_module());
 
 [dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version=&quot;1.4.0&quot;, features = [&quot;no_float&quot;] }
+rhai = { version=&quot;1.5.0&quot;, features = [&quot;no_float&quot;] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&quot;array&quot;] }
@@ -9432,7 +9534,7 @@ the optimization level to <a href="engine/optimize//book/vnext/engine/optimize/o
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.4.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.5.0/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -9505,7 +9607,7 @@ that make up the <a href="engine//book/vnext/engine/compile.html"><code>AST</cod
 <p>The <code>AST::walk</code> method takes a callback function and recursively walks the <a href="engine//book/vnext/engine/compile.html"><code>AST</code></a> in depth-first
 manner, with the parent node visited before its children.</p>
 <h3 id="callback-function-signature"><a class="header" href="#callback-function-signature">Callback function signature</a></h3>
-<p>The function signature of the callback function is:</p>
+<p>The signature of the callback function takes the following form.</p>
 <blockquote>
 <p><code>FnMut(&amp;[ASTNode]) -&gt; bool</code></p>
 </blockquote>
@@ -9607,9 +9709,6 @@ without the conversions.</p>
 <h2 id="raw-function-registration"><a class="header" href="#raw-function-registration">Raw Function Registration</a></h2>
 <p>The <code>Engine::register_raw_fn</code> method is marked <em>volatile</em>, meaning that it may be changed without warning.</p>
 <p>If this is acceptable, then using this method to register a Rust function opens up more opportunities.</p>
-<p>The function signature includes the current <a href="rust//book/vnext/rust/context.html"><em>native call context</em></a> which
-exposes the current <a href="rust//book/vnext/engine/hello-world.html"><code>Engine</code></a>, among others, so the Rust function can recursively call methods on
-the same <a href="rust//book/vnext/engine/hello-world.html"><code>Engine</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -9655,7 +9754,7 @@ engine.register_fn(&quot;increment_by&quot;, |x: &amp;mut i64, y: i64| *x += y);
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>T</code></td><td align="center"><code>impl Clone</code></td><td>return type of the function</td></tr>
-<tr><td><code>context</code></td><td align="center"><a href="rust//book/vnext/rust/context.html"><code>NativeCallContext</code></a></td><td>the current <em>native call context</em></td></tr>
+<tr><td><code>context</code></td><td align="center"><a href="rust//book/vnext/rust/context.html"><code>NativeCallContext</code></a></td><td>the current <em>native call context</em>, useful for recursively calling functions on the same <a href="rust//book/vnext/engine/hello-world.html"><code>Engine</code></a></td></tr>
 <tr><td><code>args</code></td><td align="center"><code>&amp;mut [&amp;mut Dynamic]</code></td><td>a slice containing <code>&amp;mut</code> references to <a href="rust//book/vnext/language/dynamic.html"><code>Dynamic</code></a> values.<br/>The slice is guaranteed to contain enough arguments <em>of the correct types</em>.</td></tr>
 </tbody></table>
 <h3 id="return-value-1"><a class="header" href="#return-value-1">Return value</a></h3>
@@ -9688,8 +9787,8 @@ references to <code>args</code>, otherwise the Rust borrow checker will complain
 <tr><td><code>()</code></td><td><code>args[n].as_unit().unwrap()</code></td><td align="center"><code>()</code></td><td align="center">untouched</td></tr>
 <tr><td><a href="rust//book/vnext/language/strings-chars.html">String</a></td><td><code>&amp;*args[n].read_lock::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="rust//book/vnext/rust/immutable-string.html"><code>&amp;ImmutableString</code></a></td><td align="center">untouched</td></tr>
 <tr><td><a href="rust//book/vnext/language/strings-chars.html">String</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;ImmutableString&gt;()</code></td><td align="center"><a href="rust//book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td><td align="center"><a href="rust//book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
-<tr><td><a href="rust//book/vnext/rust/custom.html">Custom type</a></td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td align="center"><code>&amp;T</code></td><td align="center">untouched</td></tr>
-<tr><td><a href="rust//book/vnext/rust/custom.html">Custom type</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td align="center"><code>T</code></td><td align="center"><a href="rust//book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td>Others</td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td align="center"><code>&amp;T</code></td><td align="center">untouched</td></tr>
+<tr><td>Others (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td align="center"><code>T</code></td><td align="center"><a href="rust//book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
 <h2 id="example--passing-a-callback-to-a-rust-function"><a class="header" href="#example--passing-a-callback-to-a-rust-function">Example – Passing a Callback to a Rust Function</a></h2>
 <p>The low-level API is useful when there is a need to interact with the scripting <a href="rust//book/vnext/engine/hello-world.html"><code>Engine</code></a>
@@ -9865,7 +9964,7 @@ the script is evaluated.</p>
 </li>
 </ol>
 <h2 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h2>
-<p>The function signature passed to <code>Engine::on_var</code> takes the following form:</p>
+<p>The function signature passed to <code>Engine::on_var</code> takes the following form.</p>
 <blockquote>
 <p><code>Fn(name: &amp;str, index: usize, context: &amp;EvalContext)</code><br />
     <code>-&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt; + 'static</code></p>
@@ -9962,17 +10061,20 @@ a normal expression.</p>
 are parsed in the order defined within the custom syntax.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/vnext/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/vnext/start/features.html"><code>internals</code></a>.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.5.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/vnext/start/features.html"><code>internals</code></a>.</p>
 <p>The function <code>Engine::on_parse_token</code>, available only under <a href="engine//book/vnext/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.5.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <h2 id="function-signature-2"><a class="header" href="#function-signature-2">Function Signature</a></h2>
-<p>The function signature passed to <code>Engine::on_parse_token</code> takes the following form:</p>
+<p>The function signature passed to <code>Engine::on_parse_token</code> takes the following form.</p>
 <blockquote>
 <p><code>Fn(token: Token, pos: Position, state: &amp;TokenizeState) -&gt; Token</code></p>
 </blockquote>
-<p>where <code>pos</code> is the location of the <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html">token</a> and
-<a href="https://docs.rs/rhai/1.4.0/rhai/struct.TokenizeState.html"><code>state</code></a> holds the current state
-of the tokenizer.</p>
+<p>where:</p>
+<table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>token</code></td><td align="center"><a href="https://docs.rs/rhai/1.5.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td align="center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.5.0/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td align="center"><a href="https://docs.rs/rhai/1.5.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+</tbody></table>
 <h3 id="raising-errors"><a class="header" href="#raising-errors">Raising errors</a></h3>
 <p>It is possible to raise a parsing error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>
@@ -10084,20 +10186,14 @@ result == 15;
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>┌──────┐
-│ Rust │
-└──────┘
+</span>let mut engine = Engine::new();
 
+// Define 'foo' operator
 engine.register_custom_operator(&quot;foo&quot;, 160)?;
 
+engine.eval::&lt;i64&gt;(&quot;1 + 2 * 3 foo 4 - 5 / 6&quot;)?;       // use custom operator
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
-1 + 2 * 3 foo 4 - 5 / 6     // use custom operator
-
-1 + foo(2 * 3, 4) - 5 / 6   // &lt;- above is equivalent to this function call
+engine.eval::&lt;i64&gt;(&quot;1 + foo(2 * 3, 4) - 5 / 6&quot;)?;     // &lt;- above is equivalent to this
 <span class="boring">}
 </span></code></pre></pre>
 <p>A script using custom operators can always be pre-processed, via a pre-processor application,
@@ -10110,14 +10206,14 @@ into a syntax that uses the corresponding function calls.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>engine.register_custom_operator(&quot;foo&quot;, 20)?;    // 'foo' is a valid custom operator
+</span>engine.register_custom_operator(&quot;foo&quot;, 20)?;          // 'foo' is a valid custom operator
 
-engine.register_custom_operator(&quot;#&quot;, 20)?;      // the reserved symbol '#' is also
-                                                // a valid custom operator
+engine.register_custom_operator(&quot;#&quot;, 20)?;            // the reserved symbol '#' is also
+                                                      // a valid custom operator
 
-engine.register_custom_operator(&quot;+&quot;, 30)?;      // &lt;- error: '+' is an active operator
+engine.register_custom_operator(&quot;+&quot;, 30)?;            // &lt;- error: '+' is an active operator
 
-engine.register_custom_operator(&quot;=&gt;&quot;, 30)?;     // &lt;- error: '=&gt;' is an active symbol
+engine.register_custom_operator(&quot;=&gt;&quot;, 30)?;           // &lt;- error: '=&gt;' is an active symbol
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="binary-operators-only"><a class="header" href="#binary-operators-only">Binary Operators Only</a></h2>
@@ -10126,10 +10222,11 @@ engine.register_custom_operator(&quot;=&gt;&quot;, 30)?;     // &lt;- error: '=&
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>engine.register_custom_operator(&quot;#&quot;, 160)?
+</span>// Register unary '#' operator
+engine.register_custom_operator(&quot;#&quot;, 160)?
       .register_fn(&quot;#&quot;, |x: i64| x * x);
 
-engine.eval::&lt;i64&gt;(&quot;1 + 2 * 3 # 4 - 5 / 6&quot;)?;   // error: function '# (i64, i64)' not found
+engine.eval::&lt;i64&gt;(&quot;# 42&quot;)?;                          // &lt;- syntax error
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="operator-precedence"><a class="header" href="#operator-precedence">Operator Precedence</a></h2>
@@ -10240,7 +10337,7 @@ print(hello);   // variable declared by a custom syntax persists!
 <h3 id="step-two--implementation"><a class="header" href="#step-two--implementation">Step Two – Implementation</a></h3>
 <p>Any custom syntax must include an <em>implementation</em> of it.</p>
 <h4 id="function-signature-3"><a class="header" href="#function-signature-3">Function signature</a></h4>
-<p>The function signature of an implementation is:</p>
+<p>The signature of an implementation function is as follows.</p>
 <blockquote>
 <p><code>Fn(context: &amp;mut EvalContext, inputs: &amp;[Expression]) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
@@ -10486,7 +10583,7 @@ together with the implementation function.</p>
 </ul>
 <p>Under this API, it is no longer restricted to be valid identifiers.</p>
 <h3 id="function-signature-4"><a class="header" href="#function-signature-4">Function Signature</a></h3>
-<p>The custom syntax parser has the following signature:</p>
+<p>The custom syntax parser has the following signature.</p>
 <blockquote>
 <p><code>Fn(symbols: &amp;[ImmutableString], look_ahead: &amp;str) -&gt; Result&lt;Option&lt;ImmutableString&gt;, ParseError&gt;</code></p>
 </blockquote>
@@ -10638,7 +10735,7 @@ a different <a href="patterns//book/vnext/start/features.html">features</a> set,
 └────────────┘
 
 [dependencies]
-rhai = { version = &quot;1.4.0&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;1.5.0&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
@@ -11649,7 +11746,7 @@ impl EnergizerBunny {
     pub fn new () -&gt; Self { ... }
     pub fn go (&amp;mut self) { ... }
     pub fn stop (&amp;mut self) { ... }
-    pub fn is_going (&amp;self) -&gt; bol { ... }
+    pub fn is_going (&amp;self) -&gt; bool { ... }
     pub fn get_speed (&amp;self) -&gt; i64 { ... }
     pub fn set_speed (&amp;mut self, speed: i64) { ... }
     pub fn turn (&amp;mut self, left_turn: bool) { ... }

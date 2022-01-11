@@ -150,9 +150,6 @@ without the conversions.</p>
 <h2 id="raw-function-registration"><a class="header" href="#raw-function-registration">Raw Function Registration</a></h2>
 <p>The <code>Engine::register_raw_fn</code> method is marked <em>volatile</em>, meaning that it may be changed without warning.</p>
 <p>If this is acceptable, then using this method to register a Rust function opens up more opportunities.</p>
-<p>The function signature includes the current <a href="/book/vnext/rust/context.html"><em>native call context</em></a> which
-exposes the current <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, among others, so the Rust function can recursively call methods on
-the same <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -198,7 +195,7 @@ engine.register_fn(&quot;increment_by&quot;, |x: &amp;mut i64, y: i64| *x += y);
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th align="center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>T</code></td><td align="center"><code>impl Clone</code></td><td>return type of the function</td></tr>
-<tr><td><code>context</code></td><td align="center"><a href="/book/vnext/rust/context.html"><code>NativeCallContext</code></a></td><td>the current <em>native call context</em></td></tr>
+<tr><td><code>context</code></td><td align="center"><a href="/book/vnext/rust/context.html"><code>NativeCallContext</code></a></td><td>the current <em>native call context</em>, useful for recursively calling functions on the same <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a></td></tr>
 <tr><td><code>args</code></td><td align="center"><code>&amp;mut [&amp;mut Dynamic]</code></td><td>a slice containing <code>&amp;mut</code> references to <a href="/book/vnext/language/dynamic.html"><code>Dynamic</code></a> values.<br/>The slice is guaranteed to contain enough arguments <em>of the correct types</em>.</td></tr>
 </tbody></table>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
@@ -231,8 +228,8 @@ references to <code>args</code>, otherwise the Rust borrow checker will complain
 <tr><td><code>()</code></td><td><code>args[n].as_unit().unwrap()</code></td><td align="center"><code>()</code></td><td align="center">untouched</td></tr>
 <tr><td><a href="/book/vnext/language/strings-chars.html">String</a></td><td><code>&amp;*args[n].read_lock::&lt;ImmutableString&gt;().unwrap()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>&amp;ImmutableString</code></a></td><td align="center">untouched</td></tr>
 <tr><td><a href="/book/vnext/language/strings-chars.html">String</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;ImmutableString&gt;()</code></td><td align="center"><a href="/book/vnext/rust/immutable-string.html"><code>ImmutableString</code></a></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
-<tr><td><a href="/book/vnext/rust/custom.html">Custom type</a></td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td align="center"><code>&amp;T</code></td><td align="center">untouched</td></tr>
-<tr><td><a href="/book/vnext/rust/custom.html">Custom type</a> (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td align="center"><code>T</code></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td>Others</td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td align="center"><code>&amp;T</code></td><td align="center">untouched</td></tr>
+<tr><td>Others (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td align="center"><code>T</code></td><td align="center"><a href="/book/vnext/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
 <h2 id="example--passing-a-callback-to-a-rust-function"><a class="header" href="#example--passing-a-callback-to-a-rust-function">Example – Passing a Callback to a Rust Function</a></h2>
 <p>The low-level API is useful when there is a need to interact with the scripting <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>

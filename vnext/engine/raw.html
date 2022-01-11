@@ -146,11 +146,18 @@
 via <code>print</code> or <code>debug</code>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
-<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of
-basic arithmetic and logical operators are supported (see below).</p>
+<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <code>Engine</code>, in which only a minimal set of <a href="/book/vnext/engine/builtin.html">built-in</a>
+basic arithmetic and logical operators are supported.</p>
 <p>To add more functionalities to a <em>raw</em> <code>Engine</code>, load <a href="/book/vnext/rust/packages/index.html">packages</a> into it.</p>
 <p>Since <a href="/book/vnext/rust/packages/index.html">packages</a> can be shared, this is an extremely efficient way to create multiple instances of
 the same <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
+<table><thead><tr><th></th><th align="center"><code>Engine::new</code></th><th align="center"><code>Engine::new_raw</code></th></tr></thead><tbody>
+<tr><td><a href="/book/vnext/engine/builtin.html">Built-in operators</a></td><td align="center">yes</td><td align="center">yes</td></tr>
+<tr><td><a href="/book/vnext/rust/packages/index.html">Package</a> loaded</td><td align="center"><code>StandardPackage</code></td><td align="center"><em>none</em></td></tr>
+<tr><td><a href="/book/vnext/rust/modules/resolvers.html">Module resolver</a></td><td align="center"><code>FileModuleResolver</code></td><td align="center"><em>none</em></td></tr>
+<tr><td><a href="/book/vnext/language/print-debug.html"><code>Engine::on_print</code></a></td><td align="center"><code>println!</code></td><td align="center"><em>none</em></td></tr>
+<tr><td><a href="/book/vnext/language/print-debug.html"><code>Engine::on_debug</code></a></td><td align="center"><code>println!</code> in debug format</td><td align="center"><em>none</em></td></tr>
+</tbody></table>
 <h2 id="built-in-operators"><a class="header" href="#built-in-operators">Built-in Operators</a></h2>
 <p>Even with a raw <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, some operators are built in and are always available.</p>
 <p>See <a href="/book/vnext/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>

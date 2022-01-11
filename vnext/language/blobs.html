@@ -207,9 +207,7 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);
 </span></code></pre></pre>
 <h2 id="writing-ascii-bytes"><a class="header" href="#writing-ascii-bytes">Writing ASCII Bytes</a></h2>
 <p>For many embedded applications, it is necessary to encode an ASCII <a href="/book/vnext/language/strings-chars.html">string</a> as a byte stream.</p>
-<p>Use the <code>write</code> method to write <a href="/book/vnext/language/strings-chars.html">strings</a> into any specific <a href="/book/vnext/language/ranges.html">range</a> within a BLOB.
-The <a href="/book/vnext/language/strings-chars.html">string</a> is always written in UTF-8 encoding, which is the same as ASCII encoding for
-strict ASCII <a href="/book/vnext/language/strings-chars.html">characters</a>.</p>
+<p>Use the <code>write_ascii</code> method to write ASCII <a href="/book/vnext/language/strings-chars.html">strings</a> into any specific <a href="/book/vnext/language/ranges.html">range</a> within a BLOB.</p>
 <p>The following is an example of a building a 16-byte command to send to an embedded device.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -228,11 +226,11 @@ let text = &quot;foo &amp; bar&quot;;     // text string to send to device
 buf[0] = 0x42;              // command code
 buf[1] = s.len();           // length of string
 
-buf.write(2..14, text);     // write the string
+buf.write_ascii(2..14, text);   // write the string
 
 let crc = buf.calc_crc();   // calculate CRC
 
-buf.write_le(14, 2, crc);    // write CRC
+buf.write_le(14, 2, crc);   // write CRC
 
 print(buf);                 // prints &quot;[4209666f6f202620 626172000000abcd]&quot;
                             //          ^^ command code              ^^^^ CRC
@@ -283,8 +281,10 @@ device.send(buf);           // send command to device
 <tr><td><code>write_le</code></td><td>1) <a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)<br/>2) integer or floating-point value</td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
 <tr><td><code>write_be</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of bytes to write, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>), none if ≤ 0<br/>3) integer or floating-point value</td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
 <tr><td><code>write_be</code></td><td>1) <a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)<br/>2) integer or floating-point value</td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) <a href="/book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
-<tr><td><code>write</code></td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) <a href="/book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_utf8</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of bytes to write, none if ≤ 0, to end if ≥ length<br/>3) <a href="/book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_utf8</code></td><td>1) <a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) <a href="/book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_ascii</code></td><td>1) start position, counting from end if &lt; 0, end if ≥ length<br/>2) number of <a href="/book/vnext/language/strings-chars.html">characters</a> to write, none if ≤ 0, to end if ≥ length<br/>3) <a href="/book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/book/vnext/language/strings-chars.html">characters</a> are skipped)</td></tr>
+<tr><td><code>write_ascii</code></td><td>1) <a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length<br/>2) <a href="/book/vnext/language/strings-chars.html">string</a> to write</td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/book/vnext/language/strings-chars.html">characters</a> are skipped)</td></tr>
 </tbody></table>
 
                     </main>

@@ -152,11 +152,7 @@ that implements <code>IntoIterator</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>┌──────┐
-│ Rust │
-└──────┘
-
-// Custom type
+</span>// Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec&lt;i64&gt; }
 
@@ -170,22 +166,22 @@ impl IntoIterator&lt;Item = i64&gt; for TestStruct {
     }
 }
 
+let mut engine = Engine::new();
+
 // Register API and type iterator for 'TestStruct'
 engine.register_type_with_name::&lt;TestStruct&gt;(&quot;TestStruct&quot;)
       .register_fn(&quot;new_ts&quot;, || TestStruct { fields: vec![1, 2, 3, 42] })
       .register_iterator::&lt;TestStruct&gt;();
 
+engine.run(
+&quot;
+    let ts = new_ts();
 
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
-let ts = new_ts();
-
-// Use 'for' statement to loop through items in 'ts'
-for value in ts {
-    ...
-}
+    // Use 'for' statement to loop through items in 'ts'
+    for value in ts {
+        ...
+    }
+&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 

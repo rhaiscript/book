@@ -152,7 +152,7 @@
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="/book/vnext/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> API is available only under the <a href="/book/vnext/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="/book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.4.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="/book/vnext/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.5.0/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="/book/vnext/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="/book/vnext/engine/compile.html"><code>AST</code></a>:</p>
@@ -225,7 +225,7 @@ that make up the <a href="/book/vnext/engine/compile.html"><code>AST</code></a>.
 <p>The <code>AST::walk</code> method takes a callback function and recursively walks the <a href="/book/vnext/engine/compile.html"><code>AST</code></a> in depth-first
 manner, with the parent node visited before its children.</p>
 <h3 id="callback-function-signature"><a class="header" href="#callback-function-signature">Callback function signature</a></h3>
-<p>The function signature of the callback function is:</p>
+<p>The signature of the callback function takes the following form.</p>
 <blockquote>
 <p><code>FnMut(&amp;[ASTNode]) -&gt; bool</code></p>
 </blockquote>

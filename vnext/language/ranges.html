@@ -165,12 +165,82 @@
 <tr><td><a href="/book/vnext/language/in.html"><code>in</code></a> expressions</td><td><code>if n in 0..100 { ... }</code></td></tr>
 <tr><td><a href="/book/vnext/language/switch.html"><code>switch</code></a> expressions</td><td><code>switch n { 0..100 =&gt; ... }</code></td></tr>
 <tr><td><a href="/book/vnext/language/bit-fields.html">Bit-fields</a> access</td><td><code>let x = n[2..6];</code></td></tr>
-<tr><td><a href="/book/vnext/language/arrays.html">Array</a> range-based API’s</td><td><code>array.extract(2..8)</code></td></tr>
-<tr><td><a href="/book/vnext/language/strings-chars.html">String</a> range-based API’s</td><td><code>string.sub_string(4..=12)</code></td></tr>
-<tr><td><a href="/book/vnext/language/blobs.html">BLOB</a> range-based API’s</td><td><code>blob.parse_le_int(4..8)</code></td></tr>
 <tr><td>Bits iteration</td><td><code>for bit in n.bits(2..=9) { ... }</code></td></tr>
+<tr><td><a href="/book/vnext/language/arrays.html">Array</a> range-based API’s</td><td><code>array.extract(2..8)</code></td></tr>
+<tr><td><a href="/book/vnext/language/blobs.html">BLOB</a> range-based API’s</td><td><code>blob.parse_le_int(4..8)</code></td></tr>
+<tr><td><a href="/book/vnext/language/strings-chars.html">String</a> range-based API’s</td><td><code>string.sub_string(4..=12)</code></td></tr>
 <tr><td><a href="/book/vnext/language/strings-chars.html">Characters</a> iteration</td><td><code>for ch in string.bits(4..=12) { ... }</code></td></tr>
+<tr><td><a href="/book/vnext/rust/custom.html">Custom types</a></td><td><code>my_obj.action(3..=15, &quot;foo&quot;);</code></td></tr>
 </tbody></table>
+<h2 id="use-as-parameter-type"><a class="header" href="#use-as-parameter-type">Use as Parameter Type</a></h2>
+<p>Native Rust functions that take parameters of type <code>std::ops::Range&lt;INT&gt;</code> or
+<code>std::ops::RangeInclusive&lt;INT&gt;</code>, when registered into an <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a>, accept ranges as arguments.</p>
+<p>However, beware that <code>..</code> (exclusive range) and <code>..=</code> (inclusive range) are <em>different</em> types
+to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
+be registered to handle both range styles.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::ops::{Range, RangeInclusive};
+
+/// The actual work function
+fn do_work(obj: &amp;mut TestStruct, from: i64, to: i64, inclusive: bool) {
+    ...
+}
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of API that accepts an exclusive range
+    .register_fn(&quot;do_work&quot;, |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;|
+        do_work(obj, range.start, range.end, false)
+    )
+    /// Version of API that accepts an inclusive range
+    .register_fn(&quot;do_work&quot;, |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;|
+        do_work(obj, range.start(), range.end(), true)
+    );
+
+engine.run(
+&quot;
+    let obj = new_ts();
+
+    obj.do_work(0..12);         // use exclusive range
+
+    obj.do_work(0..=11);        // use inclusive range
+&quot;)?;
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="indexers-using-ranges"><a class="header" href="#indexers-using-ranges">Indexers Using Ranges</a></h3>
+<p><a href="/book/vnext/rust/indexers.html">Indexers</a> commonly use ranges as parameters.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::ops::{Range, RangeInclusive};
+
+let mut engine = Engine::new();
+
+engine
+    /// Version of indexer that accepts an exclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: Range&lt;i64&gt;, value: bool| { ... },
+    )
+    /// Version of indexer that accepts an inclusive range
+    .register_indexer_get_set(
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;| -&gt; bool { ... },
+        |obj: &amp;mut TestStruct, range: RangeInclusive&lt;i64&gt;, value: bool| { ... },
+    );
+
+engine.run(
+&quot;
+    let obj = new_ts();
+
+    let x = obj[0..12];         // use exclusive range
+
+    obj[0..=11] = !x;           // use inclusive range
+&quot;)?;
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
 <p>The following methods (mostly defined in the <a href="/book/vnext/rust/packages/index.html"><code>BasicIteratorPackage</code></a> but excluded if
 using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on ranges.</p>

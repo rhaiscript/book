@@ -224,9 +224,7 @@ function named <code>contains</code> with the correct parameter types.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>┌──────┐
-│ Rust │
-└──────┘
+</span>let mut engine = Engine::new();
 
 engine.register_type::&lt;TestStruct&gt;()
       .register_fn(&quot;new_ts&quot;, || TestStruct::new())
@@ -235,21 +233,19 @@ engine.register_type::&lt;TestStruct&gt;()
           ts.contains(item)
       });
 
-
-┌─────────────┐
-│ Rhai script │
-└─────────────┘
-
 // Now the 'in' operator can be used for 'TestStruct' and integer
 
-let ts = new_ts();
+engine.run(
+r#&quot;
+    let ts = new_ts();
 
-if 42 in ts {                       // this calls the 'contains' function
-    print(&quot;I got 42!&quot;);
-}
+    if 42 in ts {                   // this calls the 'contains' function
+        print(&quot;I got 42!&quot;);
+    }
 
-let err = &quot;hello&quot; in ts;            // &lt;- runtime error: 'contains' not found
+    let err = &quot;hello&quot; in ts;        // &lt;- runtime error: 'contains' not found
                                     //    for 'TestStruct' and string
+&quot;#)?;
 <span class="boring">}
 </span></code></pre></pre>
 
