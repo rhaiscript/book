@@ -65,3 +65,19 @@ disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 ```rust no_run
 engine.disable_symbol("eval");  // disable usage of 'eval'
 ```
+
+
+TL;DR
+-----
+
+### Q: Do you regret implementing `eval` in Rhai?
+
+Or course we do.
+
+Having the possibility of an `eval` call disrupts any predictability in the Rhai script,
+thus disabling a large number of optimizations.
+
+
+### Q: Why did it then?
+
+Brendan Eich puts it well: "it is just too easy to implement." _(source wanted)_

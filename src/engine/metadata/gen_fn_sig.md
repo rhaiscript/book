@@ -1,5 +1,5 @@
-Generate Function Signatures
-===========================
+Get Function Signatures in Rust
+==============================
 
 {{#include ../../links.md}}
 

@@ -59,12 +59,19 @@ h::greet!();            // <- syntax error: not allowed in namespace-qualified c
 ```
 
 
+New Variables Are Not Retained
+-----------------------------
+
+[Variables] or [constants] defined within the [function] are _not_ retained.
+They remain local to the [function].
+
+
 The Caller's Scope Can be Mutated
 --------------------------------
 
 Changes to variables in the calling scope persist.
 
-Therefore, with this syntax, it is possible for a Rhai function to mutate its calling environment.
+Therefore, with this syntax, it is possible for a Rhai [function] to mutate its calling environment.
 
 
 Caveat Emptor

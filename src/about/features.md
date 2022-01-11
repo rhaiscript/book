@@ -1,5 +1,5 @@
-Features
-========
+Features of Rhai
+================
 
 {{#include ../links.md}}
 

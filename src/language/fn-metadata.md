@@ -1,5 +1,5 @@
-Functions Metadata
-==================
+Get Functions Metadata in Rhai Scripts
+=====================================
 
 {{#include ../links.md}}
 

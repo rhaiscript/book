@@ -84,23 +84,21 @@ Do not use them for non-[WASM] targets.
 Example
 -------
 
-The `Cargo.toml` configuration below turns on these six features:
-
-* `sync` (everything `Send + Sync`)
-* `unchecked` (disable all [checking][safety] &ndash; should not be used with untrusted user scripts)
-* `only_i32` (only 32-bit signed integers)
-* `no_float` (no floating point numbers)
-* `no_module` (no loading external [modules])
-* `no_function` (no defining [functions])
+The `Cargo.toml` configuration below:
 
 ```toml
-┌────────────┐
-│ Cargo.toml │
-└────────────┘
-
 [dependencies]
 rhai = { version = "{{version}}", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
 ```
+
+turns on these six features:
+
+* `sync` &ndash; everything `Send + Sync`
+* `unchecked` &ndash; disable all [checking][safety] (should not be used with untrusted user scripts)
+* `only_i32` &ndash; only 32-bit signed integers
+* `no_float` &ndash; no floating point numbers
+* `no_module` &ndash; no loading external [modules]
+* `no_function` &ndash; no defining [functions]
 
 The resulting scripting engine supports only the `i32` integer numeral type (and no others like `u32`, `i16` or `i64`),
 no floating-point, is `Send + Sync` (so it can be safely used across threads), and does not support defining [functions]

@@ -18,14 +18,12 @@ Package name: `RandomPackage`
 Dependency
 ----------
 
-```toml
-┌────────────┐
-│ Cargo.toml │
-└────────────┘
+`Cargo.toml`:
 
+```toml
 [dependencies]
 rhai = "{{version}}"
-rhai-rand = "0.1"
+rhai-rand = "0.1"       # use rhai-rand crate
 ```
 
 
@@ -58,11 +56,9 @@ Features
 
 ### Example &ndash; working with `no_float` in Rhai
 
-```toml
-┌────────────┐
-│ Cargo.toml │
-└────────────┘
+`Cargo.toml`:
 
+```toml
 [dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
 rhai = { version="{{version}}", features = ["no_float"] }

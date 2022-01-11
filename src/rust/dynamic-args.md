@@ -55,14 +55,14 @@ let mut engine = Engine::new();
 
 // Register all functions under the same name (order does not matter)
 
-engine.register_fn("foo", foo8)
+engine.register_fn("foo", foo5)
       .register_fn("foo", foo7)
-      .register_fn("foo", foo6)
-      .register_fn("foo", foo5)
-      .register_fn("foo", foo4)
-      .register_fn("foo", foo3)
       .register_fn("foo", foo2)
-      .register_fn("foo", foo1);
+      .register_fn("foo", foo8)
+      .register_fn("foo", foo1)
+      .register_fn("foo", foo3)
+      .register_fn("foo", foo6)
+      .register_fn("foo", foo4);
 ```
 
 

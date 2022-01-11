@@ -10,10 +10,6 @@ In order to compile a _minimal_ build &ndash; i.e. a build optimized for size &n
 compiling to [WASM], it is essential that the correct linker flags are used in `Cargo.toml`:
 
 ```toml
-┌────────────┐
-│ Cargo.toml │
-└────────────┘
-
 [profile.release]
 lto = "fat"         # turn on Link-Time Optimizations
 codegen-units = 1   # trade compile time with maximum optimization

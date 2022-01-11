@@ -12,23 +12,19 @@ Essentially, the concept is to create a Rust crate that specifies
 [`rhai`](https://crates.io/crates/rhai) as dependency.
 The main `lib.rs` module can contain the [package] being constructed.
 
-```toml
-┌────────────┐
-│ Cargo.toml │
-└────────────┘
+`Cargo.toml`:
 
+```toml
 [package]
 name = "my-package"     # 'my-package' crate
 
 [dependencies]
-rhai = "{{version}}"          # assuming {{version}} is the latest version
+rhai = "{{version}}"    # assuming {{version}} is the latest version
 ```
 
-```rust no_run
-┌────────┐
-│ lib.rs │
-└────────┘
+`lib.rs`:
 
+```rust no_run
 use rhai::def_package;
 use rhai::plugin::*;
 

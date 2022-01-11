@@ -56,10 +56,6 @@ a different [features] set, by their _sources_:
 Use the following configuration in `Cargo.toml` to pull in multiple copies of Rhai within the same project:
 
 ```toml
-┌────────────┐
-│ Cargo.toml │
-└────────────┘
-
 [dependencies]
 rhai = { version = "{{version}}", features = [ "no_float" ] }
 rhai_github = { git = "https://github.com/rhaiscript/rhai", features = [ "unchecked" ] }

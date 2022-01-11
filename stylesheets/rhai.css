@@ -1,1 +1,8 @@
 /* Custom styles for The Rhai Book */
+.part-title {
+  font-size: 130%;
+}
+
+.chapter > .chapter-item {
+  font-size: 110%;
+}

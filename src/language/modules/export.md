@@ -1,5 +1,5 @@
-Export Variables, Functions and Sub-Modules in Module
-===================================================
+Export Variables, Functions and Sub-Modules
+==========================================
 
 {{#include ../../links.md}}
 
