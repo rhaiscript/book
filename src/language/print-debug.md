@@ -23,7 +23,7 @@ Override `print` and `debug` with Callback Functions
 When embedding Rhai into an application, it is usually necessary to trap `print` and `debug` output
 (for logging into a tracking log, for example) with the `Engine::on_print` and `Engine::on_debug` methods.
 
-```rust no_run
+```rust,no_run
 // Any function or closure that takes an '&str' argument can be used to override 'print'.
 engine.on_print(|x| println!("hello: {}", x));
 
@@ -44,7 +44,7 @@ engine.on_debug(move |s, src, pos| log.write().unwrap().push(
                ));
 
 // Evaluate script
-engine.eval::<()>(script)?;
+engine.run(script)?;
 
 // 'logbook' captures all the 'print' and 'debug' output
 for entry in logbook.read().unwrap().iter() {
@@ -68,7 +68,7 @@ where:
 | `source`  | `Option<&str>` | source of the current evaluation, if any                        |
 | `pos`     |   `Position`   | position (line number and character offset) of the `debug` call |
 
-The _source_ of a script evaluation is any text string provided to an [`AST`] via the `AST::set_source` method.
+The _source_ of a script evaluation is any text string provided to an [`AST`] via `AST::set_source`.
 
 If a [module] is loaded via an [`import`] statement, then the _source_ of functions defined
 within the module will be the module's _path_.

@@ -1,12 +1,12 @@
-Compound Assignment Operators
-=============================
+Compound Assignments
+====================
 
 {{#include ../links.md}}
 
 
-```rust no_run
-let number = 9;
+Compound assignments are assignments with a [binary operator][operators] attached.
 
+```rust,no_run
 number += 8;            // number = number + 8
 
 number -= 7;            // number = number - 7
@@ -39,7 +39,7 @@ build-up operations for different data types.
 
 ### Build strings
 
-```rust no_run
+```rust,no_run
 let my_str = "abc";
 
 my_str += "ABC";
@@ -50,7 +50,7 @@ my_str == "abcABC12345"
 
 ### Concatenate arrays
 
-```rust no_run
+```rust,no_run
 let my_array = [1, 2, 3];
 
 my_array += [4, 5];
@@ -60,30 +60,30 @@ my_array == [1, 2, 3, 4, 5];
 
 ### Concatenate BLOB's
 
-```rust no_run
+```rust,no_run
 let my_blob = blob(3, 0x42);
 
-my_blob += blob(5, 0x99);
+my_blob += blob(5, 0x89);
 
-my_blob.to_string() == "[4242429999999999]";
+my_blob.to_string() == "[4242428989898989]";
 ```
 
 ### Mix two object maps together
 
-```rust no_run
+```rust,no_run
 let my_obj = #{ a:1, b:2 };
 
 my_obj += #{ c:3, d:4, e:5 };
 
-my_obj.len() == 5;
+my_obj == #{ a:1, b:2, c:3, d:4, e:5 };
 ```
 
-### Add to timestamps
+### Add seconds to timestamps
 
-```rust no_run
+```rust,no_run
 let now = timestamp();
 
-now += 42;
+now += 42.0;
 
-now - timestamp() == 42;
+(now - timestamp()).round() == 42.0;
 ```

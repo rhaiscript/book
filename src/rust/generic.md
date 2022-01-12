@@ -13,7 +13,7 @@ Due to its dynamic nature, Rhai cannot monomorphize generic functions automatica
 
 Monomorphization of generic functions must be performed manually.
 
-```rust no_run
+```rust,no_run
 use std::fmt::Display;
 
 use rhai::Engine;

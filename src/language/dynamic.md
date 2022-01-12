@@ -49,7 +49,7 @@ There is no easy way for Rust to decide, at run-time, what type the `Dynamic` va
 Type Checking and Casting
 ------------------------
 
-A `Dynamic` value's actual type can be checked via the `is` method.
+A `Dynamic` value's actual type can be checked via `Dynamic::is`.
 
 The `cast` method then converts the value into a specific, known type.
 
@@ -57,7 +57,7 @@ Alternatively, use the `try_cast` method which does not panic but returns `None`
 
 Use `clone_cast` for on a reference to `Dynamic`.
 
-```rust no_run
+```rust,no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0].clone();                 // an element in an 'Array' is 'Dynamic'
 
@@ -81,7 +81,7 @@ which can be `match`-ed against.
 This is a very simple and direct way to act on a `Dynamic` value based on the actual type of
 the data value.
 
-```rust no_run
+```rust,no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0];                         // an element in an 'Array' is 'Dynamic'
 

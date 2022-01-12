@@ -38,7 +38,7 @@ as the mapped token.
 Example
 -------
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, FLOAT, Token};
 
 let mut engine = Engine::new();

@@ -6,7 +6,7 @@ Anonymous Functions
 Sometimes it gets tedious to define separate [functions] only to dispatch them via single [function pointers].
 This scenario is especially common when simulating object-oriented programming ([OOP]).
 
-```rust no_run
+```rust,no_run
 // Define object
 let obj = #{
     data: 42,
@@ -24,7 +24,7 @@ fn print_obj() { print(this.data); }
 The above can be replaced by using _anonymous functions_ which have the same syntax as Rust's closures
 (but they are **NOT** real closures, merely syntactic sugar).
 
-```rust no_run
+```rust,no_run
 let obj = #{
     data: 42,
     increment: |x| this.data += x,      // one-liner
@@ -60,8 +60,8 @@ Anonymous functions can be disabled via [`Engine::set_allow_anonymous_function`]
 WARNING &ndash; NOT Real Closures
 --------------------------------
 
-Remember: anonymous functions, though having the same syntax as Rust _closures_, are themselves
-**NOT** real closures.
+Remember: anonymous functions, though having the same syntax as Rust _closures_,
+are themselves **NOT** real closures.
 
 In particular, they capture their execution environment via [automatic currying]
 (disabled via [`no_closure`]).

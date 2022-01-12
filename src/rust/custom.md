@@ -45,9 +45,9 @@ Notice that the custom type needs to be _registered_ using `Engine::register_typ
 or `Engine::register_type_with_name`.
 
 To use native methods on custom types in Rhai scripts, it is common to register an API for the type
-via the `Engine::register_XXX` methods.
+via the `Engine::register_XXX` API.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, EvalAltResult};
 
 #[derive(Debug, Clone)]
@@ -99,7 +99,7 @@ All other parameters in Rhai are passed by value (i.e. clones).
 If `Engine::register_type_with_name` is used to register the custom type with a special
 "pretty-print" name, [`type_of()`] will return that name instead.
 
-```rust no_run
+```rust,no_run
 engine.register_type::<TestStruct1>()
       .register_fn("new_ts1", TestStruct1::new)
       .register_type_with_name::<TestStruct2>("TestStruct")
@@ -127,7 +127,7 @@ Collection types usually contain the following list of methods.
 If the collection takes a [`Dynamic`] value (e.g. like an [array]), the type of such an add function
 can take a [`Dynamic`] parameter.
 
-```rust no_run
+```rust,no_run
 engine.register_fn("push",
     |col: &mut MyCollectionType, item: Dynamic| col.push(col)
 );
@@ -143,7 +143,7 @@ _comparable_, meaning that the `==` operator must be registered for the custom t
 For example, in order to use the [`in`] operator with a custom type for an [array],
 the `==` operator is used to check whether two values are the same.
 
-```rust no_run
+```rust,no_run
 // Assume 'TestStruct' implements `PartialEq`
 engine.register_fn("==",
     |item1: &mut TestStruct, item2: TestStruct| item1 == &item2

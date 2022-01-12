@@ -40,7 +40,7 @@ A variable defined within a statement block is _local_ to that block.
 
 Use `is_def_var` to detect if a variable is defined.
 
-```rust no_run
+```rust,no_run
 let x;              // ok - value is '()'
 let x = 3;          // ok
 let _x = 42;        // ok

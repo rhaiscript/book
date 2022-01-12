@@ -35,7 +35,7 @@ _Static_ [module] namespaces can also be registered into an [`Engine`] via `Engi
 
 They must be called or accessed in a _namespace-qualified_ manner.
 
-```rust no_run
+```js
 import "my_module" as m;        // new module namespace 'm' created via 'import'
 
 let x = m::calc_result();       // namespace-qualified function call
@@ -67,7 +67,7 @@ Therefore, function calls in Rhai are _late_ bound &ndash; meaning that the func
 determined or guaranteed; there is no way to _lock down_ the function being called.
 This aspect is very similar to JavaScript before ES6 modules.
 
-```rust no_run
+```rust,no_run
 // Compile a script into AST
 let ast1 = engine.compile(
 r#"
@@ -97,7 +97,7 @@ Therefore, care must be taken when _cross-calling_ [functions] to make sure that
 The only practical way to ensure that a [function] is a correct one is to use [modules] &ndash;
 i.e. define the [function] in a separate [module] and then [`import`] it:
 
-```rust no_run
+```js
 ┌──────────────┐
 │ message.rhai │
 └──────────────┘

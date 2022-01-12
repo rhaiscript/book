@@ -69,7 +69,7 @@ print(`The answer is: ${answer}`);
 
 ### Example
 
-```rust no_run
+```rust,no_run
 ┌────────────────┐
 │ my_module.rhai │
 └────────────────┘
@@ -116,7 +116,7 @@ exist, and only call those defined in the module script if none are found.
 
 One such situation is the need to provide a _default implementation_ to a simulated _virtual_ function:
 
-```rust no_run
+```rust,no_run
 ┌────────────────┐
 │ my_module.rhai │
 └────────────────┘
@@ -169,7 +169,7 @@ Loads [modules] that are statically added. This can be used under [`no_std`].
 
 Functions are searched in the [_global_ namespace][function namespace] by default.
 
-```rust no_run
+```rust,no_run
 use rhai::{Module, module_resolvers::StaticModuleResolver};
 
 let module: Module = create_a_module();
@@ -198,7 +198,7 @@ Set into `Engine`
 
 An [`Engine`]'s module resolver is set via a call to `Engine::set_module_resolver`:
 
-```rust no_run
+```rust,no_run
 use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
 
 // Create a module resolver

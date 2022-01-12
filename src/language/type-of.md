@@ -5,7 +5,7 @@
 
 The `type_of` function detects the actual type of a value.
 
-This is useful because all variables are [`Dynamic`] in nature.
+This is useful because all [variables] are [`Dynamic`] in nature.
 
 ```js
 // Use 'type_of()' to get the actual types of values
@@ -44,7 +44,7 @@ Custom Types
 
 * the full Rust type name, if registered via `Engine::register_type`
 
-```rust no_run
+```rust,no_run
 struct TestStruct1;
 struct TestStruct2;
 

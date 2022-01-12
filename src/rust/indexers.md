@@ -61,7 +61,7 @@ internally by Rhai, since built-in indexers may be added in future versions.
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 #[derive(Debug, Clone)]
 struct TestStruct {
     fields: Vec<i64>
@@ -115,7 +115,7 @@ Therefore, negative index values go from `-1` (last item) to `-length` (first it
 
 A typical implementation for negative index values is:
 
-```rust no_run
+```rust,no_run
 // The following assumes:
 //   'index' is 'INT', 'items_len: usize' is the number of elements
 let actual_index = if index < 0 {
@@ -141,7 +141,7 @@ and _inclusive_ [ranges] respectively.
 
 By convention, negative values are _not_ interpreted specially in indexers for [ranges].
 
-```rust no_run
+```rust,no_run
 use std::ops::{Range, RangeInclusive};
 
 let mut engine = Engine::new();
@@ -184,7 +184,7 @@ property name syntax.
 Defining such an indexer allows easy creation of _property bags_ (similar to [object maps])
 which can dynamically add/remove properties.
 
-```rust no_run
+```rust,no_run
 // Assume 'obj' has an indexer defined with string parameters...
 
 // Let's create a new key...
@@ -205,7 +205,7 @@ let x = obj.hello_world;
 The reverse, however, is not true &ndash; when an indexer fails or doesn't exist, the corresponding
 property [getter/setter][getters/setters], if any, is not called.
 
-```rust no_run
+```rust,no_run
 type MyType = HashMap<String, i64>;
 
 let mut engine = Engine::new();

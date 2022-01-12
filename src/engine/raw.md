@@ -4,17 +4,17 @@ Raw `Engine`
 {{#include ../links.md}}
 
 `Engine::new` creates a scripting [`Engine`] with common functionalities (e.g. printing to `stdout`
-via `print` or `debug`).
+via [`print`] or [`debug`]).
 
 In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.
 
-Use `Engine::new_raw` to create a _raw_ `Engine`, in which only a minimal set of [built-in][built-in operators]
-basic arithmetic and logical operators are supported.
+Use `Engine::new_raw` to create a _raw_ [`Engine`], in which only a minimal set of
+[built-in][built-in operators] basic arithmetic and logical operators are supported.
 
-To add more functionalities to a _raw_ `Engine`, load [packages] into it.
+To add more functionalities to a _raw_ [`Engine`], load [packages] into it.
 
-Since [packages] can be shared, this is an extremely efficient way to create multiple instances of
+Since [packages] can be _shared_, this is an extremely efficient way to create multiple instances of
 the same [`Engine`] with the same set of functions.
 
 |                               |       `Engine::new`        | `Engine::new_raw` |
@@ -39,7 +39,7 @@ Differences with `Engine::new`
 
 `Engine::new` is equivalent to:
 
-```rust no_run
+```rust,no_run
 use rhai::module_resolvers::FileModuleResolver;
 use rhai::packages::StandardPackage;
 

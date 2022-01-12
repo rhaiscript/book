@@ -41,6 +41,8 @@
 [built-in operators]: {{rootUrl}}/engine/builtin.md
 [package]: {{rootUrl}}/rust/packages/index.md
 [packages]: {{rootUrl}}/rust/packages/index.md
+[built-in package]: {{rootUrl}}/rust/packages/builtin.md
+[built-in packages]: {{rootUrl}}/rust/packages/builtin.md
 [custom package]: {{rootUrl}}/rust/packages/create.md
 [custom packages]: {{rootUrl}}/rust/packages/create.md
 [plugin]: {{rootUrl}}/plugins/index.md
@@ -86,8 +88,10 @@
 [`print`]: {{rootUrl}}/language/print-debug.md
 [`debug`]: {{rootUrl}}/language/print-debug.md
 
-[keywords]: {{rootUrl}}/appendix/keywords.md
 [keyword]: {{rootUrl}}/appendix/keywords.md
+[keywords]: {{rootUrl}}/appendix/keywords.md
+[operator]: {{rootUrl}}/appendix/operators.md#operators
+[operators]: {{rootUrl}}/appendix/operators.md#operators
 
 [variable]: {{rootUrl}}/language/variables.md
 [variables]: {{rootUrl}}/language/variables.md
@@ -194,5 +198,8 @@
 [`catch`]: {{rootUrl}}/language/try-catch.md
 [`import`]: {{rootUrl}}/language/modules/import.md
 [`export`]: {{rootUrl}}/language/modules/export.md
+
+[literal]: {{rootUrl}}/appendix/literals.md
+[literals]: {{rootUrl}}/appendix/literals.md
 
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md

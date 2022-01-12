@@ -20,7 +20,7 @@ variables defined there.
 Obviously, this is only meaningful for _scripted_ [functions], since native Rust functions can never
 access any scope anyway.
 
-```rust no_run
+```rust,no_run
 fn foo(y) {             // function accesses 'x' and 'y', but 'x' is not defined
     x += y;             // 'x' is modified in this function
     let z = 0;          // 'z' is defined in this function's scope

@@ -34,7 +34,7 @@ even across threads (under the [`sync`] feature).
 Therefore, a package only has to be created _once_ and essentially shared among multiple [`Engine`] instances.
 This is particularly useful when spawning large number of [raw `Engine`'s][raw `Engine`].
 
-```rust no_run
+```rust,no_run
 use rhai::Engine;
 use rhai::packages::Package         // load the 'Package' trait to use packages
 use rhai::packages::CorePackage;    // the 'core' package contains basic functionalities (e.g. arithmetic)

@@ -31,7 +31,7 @@ Use the `Dynamic::is_shared` function to check whether a particular value is a s
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 let x = 1;                          // a normal variable
 
 x.is_shared() == false;
@@ -46,11 +46,11 @@ x = 40;                             // changing 'x'...
 
 f.call(2) == 42;                    // the value of 'x' is 40 because 'x' is shared
 
-// The above de-sugars into this:
+// The above de-sugars into something like this:
 
 fn anon_0001(x, y) { x + y }        // parameter 'x' is inserted
 
-$make_shared$(x);                   // convert variable 'x' into a shared value
+make_shared(x);                     // convert variable 'x' into a shared value
 
 let f = Fn("anon_0001").curry(x);   // shared 'x' is curried
 ```
@@ -65,7 +65,7 @@ that may accompany capturing external [variables] in closures.
 It prints `9`, `9`, `9`, ... `9`, `9`, not `0`, `1`, `2`, ... `8`, `9`, because there is
 ever only _one_ captured [variable], and all ten closures capture the _same_ [variable].
 
-```rust no_run
+```rust,no_run
 let list = [];
 
 for i in 0..10 {
@@ -95,7 +95,7 @@ If a shared value is used as the `this` pointer in a method call to a closure fu
 then the same shared value _must not_ be captured inside that function, or a data race
 will occur and the script will terminate with an error.
 
-```rust no_run
+```rust,no_run
 let x = 20;
 
 x.is_shared() == false;             // 'x' is not shared, so no data race is possible
@@ -120,7 +120,7 @@ On the other hand, since the same thread (i.e. the [`Engine`] thread) that is ho
 is attempting to read it again, this may also [panic](https://doc.rust-lang.org/std/sync/struct.RwLock.html#panics-1)
 depending on the O/S.
 
-```rust no_run
+```rust,no_run
 let x = 20;
 
 let f = |a| this += x + a;          // 'x' is captured in this closure

@@ -17,7 +17,7 @@ definition/[import][`import`] results in a parse error.
 Turn on _Strict Variables_ mode if no [`Scope`] is to be provided for script evaluation runs.
 This way, variable access errors are caught during compile time instead of runtime.
 
-```rust no_run
+```rust,no_run
 let x = 42;
 
 let y = x * z;          // <- parse error under strict variables mode:

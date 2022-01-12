@@ -1,6 +1,12 @@
 /* Custom styles for The Rhai Book */
+blockquote em {
+  font-family: serif;
+  font-size: 110%;
+}
+
 .part-title {
-  font-size: 130%;
+  font-size: 150%;
+  font-variant-caps: small-caps;
 }
 
 .chapter > .chapter-item {

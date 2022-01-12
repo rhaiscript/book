@@ -42,8 +42,8 @@ due to 64-bit arithmetic requiring more CPU cycles to complete.
 Minimize Size of `Dynamic`
 -------------------------
 
-Turning on [`no_float`] (or [`f32_float`]) and [`only_i32`] on 32-bit targets makes the critical [`Dynamic`]
-data type only 8 bytes long for 32-bit targets.
+Turning on [`f32_float`] (or [`no_float`]) and [`only_i32`] on 32-bit targets makes the critical
+[`Dynamic`] data type only 8 bytes long for 32-bit targets.
 
 Normally [`Dynamic`] needs to be up 12-16 bytes long in order to hold an `i64` or `f64`.
 
@@ -53,15 +53,15 @@ A smaller [`Dynamic`] helps performance due to better cache efficiency.
 Use `ImmutableString`
 --------------------
 
-Internally, Rhai uses _immutable_ [strings] instead of the Rust `String` type.  This is mainly to avoid excessive
-cloning when passing function arguments.
+Internally, Rhai uses _immutable_ [strings] instead of the Rust `String` type.
+This is mainly to avoid excessive cloning when passing function arguments.
 
 Rhai's internal string type is [`ImmutableString`] (basically `Rc<SmartString>` or
 `Arc<SmartString>` depending on the [`sync`] feature). It is cheap to clone, but expensive to modify
 (a new copy of the string must be made in order to change it).
 
-Therefore, functions taking `String` parameters should use [`ImmutableString`] or `&str` (maps to [`ImmutableString`])
-for the best performance with Rhai.
+Therefore, functions taking `String` parameters should use [`ImmutableString`] or `&str`
+(maps to [`ImmutableString`]) for the best performance with Rhai.
 
 
 Disable Closures
@@ -69,8 +69,8 @@ Disable Closures
 
 Support for [closures] that capture _shared_ [variables] adds material overhead to script evaluation.
 
-This is because every data access must be checked whether it is a shared value and, if so, take a
-read lock before reading it.
+This is because every data access must be checked whether it is a shared value and, if so,
+take a read lock before reading it.
 
 As the vast majority of [variables] are _not_ shared, needless to say this is a non-trivial
 performance overhead.
@@ -108,10 +108,10 @@ Large data structures may incur material cloning overhead.
 Some functions accept the first parameter as a mutable reference (i.e. `&mut`), for example
 _methods_ for [custom types], and may avoid potentially-costly cloning.
 
-For example, the `+=` (append) assignment operator takes a mutable reference to the l-value while
+For example, the `+=` (append) compound assignment takes a mutable reference to the [variable] while
 the corresponding `+` (add) assignment usually doesn't.  The difference in performance can be huge:
 
-```rust no_run
+```rust,no_run
 let x = create_some_very_big_type();
 
 x = x + 1;
@@ -127,10 +127,10 @@ x += 1;             // <- 'x' is NOT cloned
 ### Simple variable references are optimized
 
 Rhai's script [optimizer][script optimization] is usually smart enough to rewrite function calls
-into _method-call_ style or _op-assignment_ style to take advantage of this.  However, there are
-limits to its intelligence, and only **simple variable references** are optimized.
+into _method-call_ style or _compound assignment_ style to take advantage of this.  However, there
+are limits to its intelligence, and only **simple variable references** are optimized.
 
-```rust no_run
+```rust,no_run
 x = x + 1;          // <- this statement...
 
 x += x;             // ... is rewritten as this

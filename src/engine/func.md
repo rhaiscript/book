@@ -10,7 +10,7 @@ Such a _closure_ is very useful as call-back functions.
 Creating them is accomplished via the `Func` trait which contains `create_from_script`
 (as well as its companion method `create_from_ast`):
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Func};       // use 'Func' for 'create_from_script'
 
 let engine = Engine::new();     // create a new 'Engine' just for this

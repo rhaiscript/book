@@ -39,20 +39,20 @@ Number Literals
 `_` separators can be added freely and are ignored within a number &ndash; except at the very beginning or right after
 a decimal point (`.`).
 
-| Sample             | Format                               |  Type   |  [`no_float`]  | [`no_float`] + [`decimal`] |
-| ------------------ | ------------------------------------ | :-----: | :------------: | :------------------------: |
-| `_123`             | _syntax error (improper separator)_  |         |                |                            |
-| `123_345`, `-42`   | decimal                              |  `INT`  |     `INT`      |           `INT`            |
-| `0o07_76`          | octal                                |  `INT`  |     `INT`      |           `INT`            |
-| `0xab_cd_ef`       | hex                                  |  `INT`  |     `INT`      |           `INT`            |
-| `0b0101_1001`      | binary                               |  `INT`  |     `INT`      |           `INT`            |
-| `123._456`         | _syntax error (improper separator)_  |         |                |                            |
-| `123_456.78_9`     | normal floating-point                | `FLOAT` | _syntax error_ | [`Decimal`][rust_decimal]  |
-| `-42.`             | ending with decimal point            | `FLOAT` | _syntax error_ | [`Decimal`][rust_decimal]  |
-| `123_456_.789e-10` | _scientific notation_                | `FLOAT` | _syntax error_ | [`Decimal`][rust_decimal]  |
-| `.456`             | _syntax error (missing leading `0`)_ |         |                |                            |
-| `123.456e_10`      | _syntax error (improper separator)_  |         |                |                            |
-| `123.e-10`         | _syntax error (missing decimal `0`)_ |         |                |                            |
+| Sample             | Format                    | Value type |  [`no_float`]  | [`no_float`] + [`decimal`] |
+| ------------------ | ------------------------- | :--------: | :------------: | :------------------------: |
+| `_123`             | _improper separator_      |            |                |                            |
+| `123_345`, `-42`   | decimal                   |   `INT`    |     `INT`      |           `INT`            |
+| `0o07_76`          | octal                     |   `INT`    |     `INT`      |           `INT`            |
+| `0xab_cd_ef`       | hex                       |   `INT`    |     `INT`      |           `INT`            |
+| `0b0101_1001`      | binary                    |   `INT`    |     `INT`      |           `INT`            |
+| `123._456`         | _improper separator_      |            |                |                            |
+| `123_456.78_9`     | normal floating-point     |  `FLOAT`   | _syntax error_ | [`Decimal`][rust_decimal]  |
+| `-42.`             | ending with decimal point |  `FLOAT`   | _syntax error_ | [`Decimal`][rust_decimal]  |
+| `123_456_.789e-10` | scientific notation       |  `FLOAT`   | _syntax error_ | [`Decimal`][rust_decimal]  |
+| `.456`             | _missing leading `0`_     |            |                |                            |
+| `123.456e_10`      | _improper separator_      |            |                |                            |
+| `123.e-10`         | _missing decimal `0`_     |            |                |                            |
 
 
 Warning &ndash; No Implicit Type Conversions

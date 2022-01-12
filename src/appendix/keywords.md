@@ -45,32 +45,32 @@ Keywords List
 Reserved Keywords
 -----------------
 
-| Keyword     | Potential usage       |
-| ----------- | --------------------- |
-| `var`       | variable declaration  |
-| `static`    | variable declaration  |
-| `shared`    | share value           |
-| `goto`      | control flow          |
-| `exit`      | control flow          |
-| `match`     | matching              |
-| `case`      | matching              |
-| `public`    | function/field access |
+|   Keyword   | Potential usage       |
+| :---------: | --------------------- |
+|    `var`    | variable declaration  |
+|  `static`   | variable declaration  |
+|  `shared`   | share value           |
+|   `goto`    | control flow          |
+|   `exit`    | control flow          |
+|   `match`   | matching              |
+|   `case`    | matching              |
+|  `public`   | function/field access |
 | `protected` | function/field access |
-| `new`       | constructor           |
-| `use`       | import namespace      |
-| `with`      | scope                 |
-| `is`        | type check            |
-| `module`    | module                |
-| `package`   | package               |
-| `super`     | base class/module     |
-| `thread`    | threading             |
-| `spawn`     | threading             |
-| `go`        | threading             |
-| `await`     | async                 |
-| `async`     | async                 |
-| `sync`      | async                 |
-| `yield`     | async                 |
-| `default`   | special value         |
-| `void`      | special value         |
-| `null`      | special value         |
-| `nil`       | special value         |
+|    `new`    | constructor           |
+|    `use`    | import namespace      |
+|   `with`    | scope                 |
+|    `is`     | type check            |
+|  `module`   | module                |
+|  `package`  | package               |
+|   `super`   | base class/module     |
+|  `thread`   | threading             |
+|   `spawn`   | threading             |
+|    `go`     | threading             |
+|   `await`   | async                 |
+|   `async`   | async                 |
+|   `sync`    | async                 |
+|   `yield`   | async                 |
+|  `default`  | special value         |
+|   `void`    | special value         |
+|   `null`    | special value         |
+|    `nil`    | special value         |

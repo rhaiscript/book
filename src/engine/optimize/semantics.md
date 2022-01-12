@@ -11,7 +11,7 @@ Some optimizations can alter subtle semantics of the script.
 
 For example:
 
-```rust no_run
+```rust,no_run
 if true {           // condition always true
     123.456;        // eliminated
     hello;          // eliminated, EVEN THOUGH the variable doesn't exist!
@@ -27,7 +27,7 @@ with a runtime error.
 
 In fact, any errors inside a statement that has been eliminated will silently _disappear_.
 
-```rust no_run
+```rust,no_run
 print("start!");
 if my_decision { /* do nothing... */ }  // eliminated due to no effect
 print("end!");
@@ -50,7 +50,7 @@ Eliminated Useless Work
 
 Another example is more subtle &ndash; that of an empty loop body.
 
-```rust no_run
+```rust,no_run
 // ... say, the 'Engine' is limited to no more than 10,000 operations...
 
 // The following should fail because it exceeds the operations limit:

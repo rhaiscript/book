@@ -6,7 +6,7 @@ Return Value
 The `return` statement is used to immediately stop evaluation and exist the current context
 (typically a [function] call) yielding a _return value_.
 
-```rust no_run
+```rust,no_run
 return;             // equivalent to return ();
 
 return 123 + 456;   // returns 579

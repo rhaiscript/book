@@ -10,7 +10,7 @@ Import Prelude
 When using the plugins system, the entire `rhai::plugin` module must be imported as a prelude
 because code generated will need these imports.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;
 ```
 
@@ -36,7 +36,7 @@ and variables into an existing [module], _flattening_ the namespace &ndash; i.e.
 are eliminated and their contents promoted to the top level.  This is typical for
 developing [custom packages].
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -103,7 +103,7 @@ with `/**` ... `*/`) on plugin functions are extracted into the functions' [_met
 The simplest way to register this into an [`Engine`] is to first use the `exported_module!` macro
 to turn it into a normal Rhai [module], then use the `Engine::register_global_module` method on it:
 
-```rust no_run
+```rust,no_run
 fn main() {
     let mut engine = Engine::new();
 
@@ -118,7 +118,7 @@ fn main() {
 The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`)
 are automatically registered into the [`Engine`] when `Engine::register_global_module` is called.
 
-```rust no_run
+```rust,no_run
 let x = greet("world");
 x == "hello, world!";
 
@@ -142,7 +142,7 @@ Variables as well as sub-modules are **ignored**.
 Another simple way to register this into an [`Engine`] is, again, to use the `exported_module!` macro
 to turn it into a normal Rhai [module], then use `Engine::register_static_module` on it.
 
-```rust no_run
+```rust,no_run
 fn main() {
     let mut engine = Engine::new();
 
@@ -157,7 +157,7 @@ fn main() {
 The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`),
 plus the constant `MY_NUMBER`, are automatically registered under the module namespace `service`:
 
-```rust no_run
+```rust,no_run
 let x = service::greet("world");
 x == "hello, world!";
 
@@ -184,7 +184,7 @@ is `#[rhai_fn(global)]` unless specifically overridden by `#[rhai_fn(internal)]`
 Therefore, in the example above, the `increment` method (defined with `#[rhai_fn(global)]`)
 works fine when called in method-call style:
 
-```rust no_run
+```rust,no_run
 let x = 42;
 x.increment();
 x == 43;
@@ -208,7 +208,7 @@ Due to this _flattening_, sub-modules are used conveniently as a _grouping_ mech
 especially to put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a
 large collection of functions without having to duplicate the gates onto individual functions.
 
-```rust no_run
+```rust,no_run
 #[export_module]
 mod my_module {
     // Always available
@@ -278,7 +278,7 @@ Operators (which require function names that are not valid for Rust) can also be
 
 Registering the same function name with the same parameter types will cause a parsing error.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -304,10 +304,10 @@ mod my_module {
 Getters, Setters and Indexers
 -----------------------------
 
-Functions can be marked as [getters/setters] and [indexers] for [custom types] via the `#[rhai_fn]`
-attribute, which is applied on a function level.
+Functions can be marked as [getters/setters] and [indexers] for [custom types]
+via the `#[rhai_fn]` attribute, which is applied on a function level.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -348,7 +348,7 @@ Parameters to the `#[rhai_fn(...)]` attribute can be applied multiple times.
 This is especially useful for the `name = "..."`, `get = "..."` and `set = "..."` parameters
 to give multiple alternative names to the same function.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -363,13 +363,13 @@ mod my_module {
 
 The above function can be called in five ways:
 
-| Parameter for `#[rhai_fn(...)]` |      Type       | Call style                                    |
-| ------------------------------- | :-------------: | --------------------------------------------- |
-| `name = "get_prop_value"`       | method function | `get_prop_value(x, 0)`, `x.get_prop_value(0)` |
-| `name = "prop"`                 | method function | `prop(x, 0)`, `x.prop(0)`                     |
-| `name = "+"`                    |    operator     | `x + 42`                                      |
-| `set = "prop"`                  |     setter      | `x.prop = 42`                                 |
-| `index_get`                     |  index getter   | `x[0]`                                        |
+| Parameter for `#[rhai_fn(...)]` |           Type            | Call style                                    |
+| ------------------------------- | :-----------------------: | --------------------------------------------- |
+| `name = "get_prop_value"`       |      method function      | `get_prop_value(x, 0)`, `x.get_prop_value(0)` |
+| `name = "prop"`                 |      method function      | `prop(x, 0)`, `x.prop(0)`                     |
+| `name = "+"`                    |        [operator]         | `x + 42`                                      |
+| `set = "prop"`                  | [setter][getters/setters] | `x.prop = 42`                                 |
+| `index_get`                     |  [index getter][indexer]  | `x[0]`                                        |
 
 
 Pure Functions
@@ -385,7 +385,7 @@ Therefore, pure functions can be passed a [constant] value as the first `&mut` p
 Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
 `EvalAltResult::ErrorAssignmentToConstant` error.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -421,7 +421,7 @@ mod my_module {
 
 When applied to a Rhai script:
 
-```rust no_run
+```rust,no_run
 // Constant
 const VECTOR = [1, 2, 3, 4, 5, 6, 7];
 
@@ -445,7 +445,7 @@ where `T` is any clonable type.
 A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not
 have the appropriate return type.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]

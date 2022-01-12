@@ -17,7 +17,7 @@ For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/pa
 `def_package!`
 --------------
 
-> ```rust no_run
+> ```rust,no_run
 > def_package! {
 >     /// Package description doc-comment
 >     root::name => |variable| {
@@ -53,7 +53,7 @@ where:
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 // Import necessary types and traits.
 use rhai::def_package;      // 'def_package!' macro
 use rhai::packages::{
@@ -95,7 +95,7 @@ are pulled up to the top level instead) and so there will not be any sub-modules
 
 Variables in the [plugin module] are ignored.
 
-```rust no_run
+```rust,no_run
 // Import necessary types and traits.
 use rhai::def_package;
 use rhai::packages::{

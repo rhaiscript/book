@@ -39,14 +39,14 @@ A custom syntax is simply a list of symbols.
 
 These symbol types can be used:
 
-* Standard [keywords]({{rootUrl}}/appendix/keywords.md)
-* Standard [operators]({{rootUrl}}/appendix/operators.md#operators).
+* Standard [keywords]
+* Standard [operators]
 * Reserved [symbols]({{rootUrl}}/appendix/operators.md#symbols).
 * Identifiers following the [variable] naming rules.
 * `$expr$` &ndash; any valid expression, statement or statement block.
 * `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` .. `}`).
 * `$ident$` &ndash; any [variable] name.
-* `$symbol$` &ndash; any [symbol]({{rootUrl}}/appendix/operators.md}}), active or reserved.
+* `$symbol$` &ndash; any [symbol][operator], active or reserved.
 * `$bool$` &ndash; a boolean value.
 * `$int$` &ndash; an integer number.
 * `$float$` &ndash; a floating-point number (if not [`no_float`]).
@@ -55,7 +55,7 @@ These symbol types can be used:
 #### The first symbol must be an identifier
 
 There is no specific limit on the combination and sequencing of each symbol type,
-except the _first_ symbol which must be a custom keyword that follows the naming rules
+except the _first_ symbol which must be a custom [keyword] that follows the naming rules
 of [variables].
 
 The first symbol also cannot be a normal [keyword] unless it is [disabled][disable keywords and operators].
@@ -71,7 +71,7 @@ Any new custom syntax definition using the same first symbol simply _overwrites_
 
 #### Example
 
-```rust no_run
+```rust,no_run
 exec [ $ident$ $symbol$ $int$ ] <- $expr$ : $block$
 ```
 
@@ -92,7 +92,7 @@ The above syntax is made up of a stream of symbols:
 
 This syntax matches the following sample code and generates three inputs (one for each non-keyword):
 
-```rust no_run
+```rust,no_run
 // Assuming the 'exec' custom syntax implementation declares the variable 'hello':
 let x = exec [hello < 42] <- foo(1, 2) : {
             hello += bar(hello);
@@ -165,7 +165,7 @@ To access a particular argument, use the following patterns:
 Several argument types represent literal constants that can be obtained directly via
 `Expression::get_literal_value<T>` or `Expression::get_string_value` (for [strings]).
 
-```rust no_run
+```rust,no_run
 let expression = &inputs[0];
 
 // Use 'get_literal_value' with a turbo-fish type to extract the value
@@ -188,7 +188,7 @@ if bool_value { ... }       // 'bool_value' inferred to be 'bool'
 Use the `EvalContext::eval_expression_tree` method to evaluate an arbitrary expression tree
 within the current evaluation context.
 
-```rust no_run
+```rust,no_run
 let expression = &inputs[0];
 let result = context.eval_expression_tree(expression)?;
 ```
@@ -203,7 +203,7 @@ However, beware that all new variables must be declared _prior_ to evaluating an
 In other words, any [`Scope`] calls that change the list of must come _before_ any
 `EvalContext::eval_expression_tree` calls.
 
-```rust no_run
+```rust,no_run
 let var_name = inputs[0].get_string_value().unwrap();
 let expression = &inputs[1];
 
@@ -222,7 +222,7 @@ with that symbol, the previous syntax will be overwritten.
 
 The syntax is passed simply as a slice of `&str`.
 
-```rust no_run
+```rust,no_run
 // Custom syntax implementation
 fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Result<Dynamic, Box<EvalAltResult>> {
     let var_name = inputs[0].get_string_value().unwrap();
@@ -272,7 +272,7 @@ engine.register_custom_syntax(
 
 Remember that a custom syntax acts as an _expression_, so it can show up practically anywhere:
 
-```rust no_run
+```rust,no_run
 // Use as an expression:
 let foo = (exec<x> -> { x += 1 } while x < 42) * 100;
 
@@ -297,13 +297,13 @@ When a DSL needs a custom syntax, most likely than not it is extremely specializ
 Therefore, many statement types actually may not make sense under the same usage scenario.
 
 So, while at it, better [disable][disable keywords and operators] those built-in keywords
-and operators that should not be used by the user.  The would leave only the bare minimum
+and [operators] that should not be used by the user.  The would leave only the bare minimum
 language surface exposed, together with the custom syntax that is tailor-designed for
 the scenario.
 
-A keyword or operator that is disabled can still be used in a custom syntax.
+A [keyword] or [operator] that is disabled can still be used in a custom syntax.
 
-In an extreme case, it is possible to disable _every_ keyword in the language, leaving only
+In an extreme case, it is possible to disable _every_ [keyword] in the language, leaving only
 custom syntax (plus possibly expressions).  But again, Don't Do It™ &ndash; unless you are certain
 of what you're doing.
 
@@ -325,7 +325,7 @@ The following example recreates a statement similar to the `var` variable declar
 JavaScript, which creates a global variable if one doesn't already exist.
 There is currently no equivalent in Rhai.
 
-```rust no_run
+```rust,no_run
 // Register the custom syntax: var x = ???
 engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |context, inputs| {
     let var_name = inputs[0].get_string_value().unwrap().to_string();
@@ -352,7 +352,7 @@ Really Advanced &ndash; Custom Parsers
 Sometimes it is desirable to have multiple custom syntax starting with the same symbol.
 This is especially common for _command-style_ syntax where the second symbol calls a particular command:
 
-```rust no_run
+```rust,no_run
 // The following simulates a command-style syntax, all starting with 'perform'.
 perform hello world;        // A fixed sequence of symbols
 perform action 42;          // Perform a system action with a parameter
@@ -365,7 +365,7 @@ perform remove something;   // Delete something from the system
 
 Alternatively, a custom syntax may have variable length, with a termination symbol:
 
-```rust no_run
+```rust,no_run
 // The following is a variable-length list terminated by '>'  
 tags < "foo", "bar", 123, ... , x+y, true >
 ```
@@ -386,7 +386,7 @@ The leading symbol for a custom parser can either be:
 
 * a identifier that isn't a normal [keyword] unless [disabled][disable keywords and operators], or
 
-* a valid symbol (see [list]({{rootUrl}}/appendix/operators.md)) which is not a normal operator unless [disabled][disable keywords and operators].
+* a valid symbol (see [list]({{rootUrl}}/appendix/operators.md)) which is not a normal [operator] unless [disabled][disable keywords and operators].
 
 Under this API, it is no longer restricted to be valid identifiers.
 
@@ -460,7 +460,7 @@ actually parsed.
 
 ### Example
 
-```rust no_run
+```rust,no_run
 engine.register_custom_syntax_raw(
     // The leading symbol - which needs not be an identifier.
     "perform",

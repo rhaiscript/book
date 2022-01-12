@@ -56,7 +56,7 @@ It is not advised to deviate from this common practice unless there is a _Very G
 Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
 same module during every iteration of the loop!
 
-```rust no_run
+```js
 import "hacker" as h;           // import module - visible globally
 
 if secured {                    // <- new block scope
@@ -94,7 +94,7 @@ cause a stack overflow in the [`Engine`], unless stopped by setting a limit for 
 
 For instance, importing itself always causes an infinite recursion:
 
-```rust no_run
+```js
 ┌────────────┐
 │ hello.rhai │
 └────────────┘
@@ -106,7 +106,7 @@ foo::do_something();
 
 Modules cross-referencing also cause infinite recursion:
 
-```rust no_run
+```js
 ┌────────────┐
 │ hello.rhai │
 └────────────┘

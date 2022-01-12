@@ -10,9 +10,9 @@ searches the [`Scope`] that is passed into the `Engine::eval` call.
 There is a built-in facility for advanced users to _hook_ into the [variable]
 resolution service and to override its default behavior.
 
-To do so, provide a closure to the [`Engine`] via the `Engine::on_var` method:
+To do so, provide a closure to the [`Engine`] via `Engine::on_var`.
 
-```rust no_run
+```rust,no_run
 let mut engine = Engine::new();
 
 // Register a variable resolver.
@@ -35,7 +35,7 @@ engine.on_var(|name, index, context| {
 Returned Values are Constants
 ----------------------------
 
-[Variable] values, if any returned, are treated as _constants_ by the script and cannot be assigned to.
+[Variable] values, if any returned, are treated as _[constants]_ by the script and cannot be assigned to.
 This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.
 
 In order to change these [variables], it is best to push them into a custom [`Scope`] instead of using
@@ -61,7 +61,7 @@ Function Signature
 The function signature passed to `Engine::on_var` takes the following form.
 
 > `Fn(name: &str, index: usize, context: &EvalContext)`  
-> &nbsp;&nbsp;&nbsp;&nbsp;`-> Result<Option<Dynamic>, Box<EvalAltResult>> + 'static`
+> &nbsp;&nbsp;&nbsp;&nbsp;`-> Result<Option<Dynamic>, Box<EvalAltResult>>`
 
 where:
 
@@ -89,8 +89,8 @@ and `EvalContext` is a type that encapsulates the current _evaluation context_ a
 
 The return value is `Result<Option<Dynamic>, Box<EvalAltResult>>` where:
 
-| Value                     | Description                                                                                                                                                                                                              |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Ok(None)`                | normal [variable] resolution process should continue, i.e. continue searching through the [`Scope`]                                                                                                                      |
-| `Ok(Some(Dynamic))`       | value of the [variable], treated as a constant                                                                                                                                                                           |
-| `Err(Box<EvalAltResult>)` | error that is reflected back to the [`Engine`].<br/>Normally this is `EvalAltResult::ErrorVariableNotFound(var_name, Position::NONE)` to indicate that the [variable] does not exist, but it can be any `EvalAltResult`. |
+| Value                     | Description                                                                                                                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Ok(None)`                | normal [variable] resolution process should continue, i.e. continue searching through the [`Scope`]                                                                                                          |
+| `Ok(Some(value))`         | value (a [`Dynamic`]) of the [variable], treated as a [constant]                                                                                                                                             |
+| `Err(Box<EvalAltResult>)` | error that is reflected back to the [`Engine`], normally `EvalAltResult::ErrorVariableNotFound(var_name, Position::NONE)` to indicate that the [variable] does not exist, but it can be any `EvalAltResult`. |

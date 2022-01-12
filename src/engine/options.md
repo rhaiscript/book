@@ -3,7 +3,7 @@ Engine Configuration Options
 
 {{#include ../links.md}}
 
-A number of other configuration options are available from the `Engine` to fine-tune behavior and safeguards.
+A number of other configuration options are available from the [`Engine`] to fine-tune behavior and safeguards.
 
 
 Language Features
@@ -11,12 +11,12 @@ Language Features
 
 | Method                                                             | Description                                                                              |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions](../language/if.md#if-expressions)                    |
+| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions](../language/if-expression.md)                        |
 | `set_allow_switch_expression`                                      | allows/disallows [`switch` expressions](../language/switch.md#expression-not-statement)  |
 | `set_allow_statement_expression`                                   | allows/disallows [statement expressions](../language/statements.md#statement-expression) |
 | `set_allow_anonymous_fn`<br/>(not available under [`no_function`]) | allows/disallows [anonymous functions]                                                   |
 | `set_allow_looping`                                                | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements)       |
-| `disable_symbol`                                                   | disables a certain keyword or operator (see [disable keywords and operators])            |
+| `disable_symbol`                                                   | disables a certain [keyword] or [operator] (see [disable keywords and operators])        |
 
 Compiler Behavior
 -----------------

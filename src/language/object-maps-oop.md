@@ -13,7 +13,7 @@ of using the `call` function keyword.
 When a property holding a [function pointer] or a [closure] is called like a method, it is replaced
 as a method call on the [object map] itself:
 
-```rust no_run
+```rust,no_run
 let obj = #{
                 data: 40,
                 action: || this.data += x    // 'action' holds a closure

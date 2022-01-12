@@ -20,7 +20,7 @@ Serialize/Deserialize a `Dynamic`
 With the [`serde`][features] feature turned on, [`Dynamic`] implements [`serde::Serialize`] and
 [`serde::Deserialize`], so it can easily be serialized and deserialized with [`serde`].
 
-```rust no_run
+```rust,no_run
 let value: Dynamic = ...;
 
 // Serialize 'Dynamic' to JSON
@@ -57,7 +57,7 @@ While it is also simple to serialize a Rust type to `JSON` via `serde`,
 then use [`Engine::parse_json`]({{rootUrl}}/language/json.md) to convert it into an [object map],
 `rhai::serde::to_dynamic` serializes it to [`Dynamic`] directly via `serde` without going through the `JSON` step.
 
-```rust no_run
+```rust,no_run
 use rhai::{Dynamic, Map};
 use rhai::serde::to_dynamic;
 
@@ -97,7 +97,7 @@ In particular, [object maps] are converted into Rust `struct`'s (or any type tha
 a `serde` map) while [arrays] are converted into Rust `Vec`'s (or any type that is marked
 as a `serde` sequence).
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Dynamic};
 use rhai::serde::from_dynamic;
 
@@ -159,7 +159,7 @@ Working with BLOB's
 For higher efficiency, it is necessary to specify [BLOB] fields via the
 `serde_bytes` attribute from the [`serde_bytes`](https://crates.io/crates/serde_bytes) crate.
 
-```rust no_run
+```rust,no_run
 use serde::{Deserialize, Serialize};
 
 // Use 'serde_bytes' to serialize the data as Dynamic BLOB's

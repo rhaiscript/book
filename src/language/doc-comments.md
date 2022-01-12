@@ -12,7 +12,7 @@ If [`metadata`] is not active, doc-comments are treated as normal [comments].
 Doc-comments can only appear in front of [function] definitions, not any other elements.
 Therefore, doc-comments are not available under [`no_function`].
 
-```rust no_run
+```rust,no_run
 /// This is a valid one-line doc-comment
 fn foo() {}
 
@@ -41,7 +41,7 @@ Special Cases
 Long streams of `//////`... and `/*****`... do _NOT_ form doc-comments.
 This is consistent with popular [comment] block styles for C-like languages.
 
-```rust no_run
+```rust,no_run
 ///////////////////////////////  <- this is not a doc-comment
 // This is not a doc-comment //  <- this is not a doc-comment
 ///////////////////////////////  <- this is not a doc-comment

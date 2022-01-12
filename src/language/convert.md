@@ -45,7 +45,7 @@ Parse String into Number
 | `parse_float` ([`no_float`]+[`decimal`]) | [string]  | [`Decimal`][rust_decimal] |
 | `parse_decimal` (requires [`decimal`])   | [string]  | [`Decimal`][rust_decimal] |
 
-```rust no_run
+```rust,no_run
 let x = parse_float("123.4");   // parse as floating-point
 x == 123.4;
 type_of(x) == "f64";
@@ -83,7 +83,7 @@ Formatting Numbers
 | `to_octal`  |   `INT`   | [string] |    octal (i.e. `0` ... `7`)    |
 | `to_hex`    |   `INT`   | [string] |     hex (i.e. `0` ... `f`)     |
 
-```rust no_run
+```rust,no_run
 let x = 0x1234abcd;
 
 x == 305441741;

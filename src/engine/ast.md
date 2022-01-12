@@ -62,7 +62,7 @@ The following methods merge one [`AST`] with another:
 
 When statements are appended, beware that this may change the semantics of the script.
 
-```rust no_run
+```rust,no_run
 // First script
 let ast1 = engine.compile(
 "
@@ -147,7 +147,7 @@ The order of visits to the children of each node type:
 | Indexing                                         | 1) LHS expression<br/>2) RHS (index) expression                                                                                                                              |
 | Field access/method call                         | 1) LHS expression<br/>2) RHS expression                                                                                                                                      |
 | `&&`, <code>\|\|</code>                          | 1) LHS expression<br/>2) RHS expression                                                                                                                                      |
-| [Function] call, operator expression             | each of the argument expressions, in order                                                                                                                                   |
+| [Function] call, [operator] expression           | each of the argument expressions, in order                                                                                                                                   |
 | [`let`][variable], [`const`][constant] statement | value expression                                                                                                                                                             |
 | Assignment statement                             | 1) l-value expression<br/>2) value expression                                                                                                                                |
 | Statements block                                 | each of the statements, in order                                                                                                                                             |

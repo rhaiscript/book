@@ -11,17 +11,6 @@ Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
 [`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
 
-[`type_of()`] an object map returns `"map"`.
-
-Object maps are disabled via the [`no_object`] feature.
-
-The maximum allowed size of an object map can be controlled via [`Engine::set_max_map_size`][options]
-(see [maximum size of object maps]).
-
-
-Object Map Literals
-------------------
-
 Object map literals are built within braces `#{` ... `}` (_name_ `:` _value_ syntax similar to Rust)
 and separated by commas `,`:
 
@@ -29,8 +18,15 @@ and separated by commas `,`:
 >
 > `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `,` `}`  `// trailing comma is OK`
 
-The property _name_ can be a simple variable name following the same naming rules as [variables], or
-a [string] literal without interpolation.
+The property _name_ can be a simple identifier following the same naming rules as [variables],
+or a [string literal][literals] without interpolation.
+
+[`type_of()`] an object map returns `"map"`.
+
+Object maps are disabled via the [`no_object`] feature.
+
+The maximum allowed size of an object map can be controlled via [`Engine::set_max_map_size`][options]
+(see [maximum size of object maps]).
 
 
 Access Properties
@@ -58,28 +54,28 @@ This is similar to JavaScript where accessing a non-existing property returns `u
 Built-in Functions
 -----------------
 
-The following methods (defined in the [`BasicMapPackage`][packages] but excluded if using a [raw `Engine`])
+The following methods (defined in the [`BasicMapPackage`][built-in packages] but excluded if using a [raw `Engine`])
 operate on object maps.
 
-| Function               | Parameter(s)                                 | Description                                                                                                                              |
-| ---------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `contains` operator    | property name                                | does the object map contain a property of a particular name?                                                                             |
-| `len`                  | _none_                                       | returns the number of properties                                                                                                         |
-| `clear`                | _none_                                       | empties the object map                                                                                                                   |
-| `remove`               | property name                                | removes a certain property and returns it ([`()`] if the property does not exist)                                                        |
-| `+=` operator, `mixin` | second object map                            | mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values) |
-| `+` operator           | 1) first object map<br/>2) second object map | merges the first object map with the second                                                                                              |
-| `==` operator          | 1) first object map<br/>2) second object map | are the two object map the same (elements compared with the `==` operator, if defined)?                                                  |
-| `!=` operator          | 1) first object map<br/>2) second object map | are the two object map different (elements compared with the `==` operator, if defined)?                                                 |
-| `fill_with`            | second object map                            | adds in all properties of the second object map that do not exist in the object map                                                      |
-| `keys`                 | _none_                                       | returns an [array] of all the property names (in random order), not available under [`no_index`]                                         |
-| `values`               | _none_                                       | returns an [array] of all the property values (in random order), not available under [`no_index`]                                        |
+| Function                    | Parameter(s)                                 | Description                                                                                                                              |
+| --------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `len`                       | _none_                                       | returns the number of properties                                                                                                         |
+| `clear`                     | _none_                                       | empties the object map                                                                                                                   |
+| `remove`                    | property name                                | removes a certain property and returns it ([`()`] if the property does not exist)                                                        |
+| `+=` operator, `mixin`      | second object map                            | mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values) |
+| `+` operator                | 1) first object map<br/>2) second object map | merges the first object map with the second                                                                                              |
+| `==` operator               | 1) first object map<br/>2) second object map | are the two object maps the same (elements compared with the `==` operator, if defined)?                                                 |
+| `!=` operator               | 1) first object map<br/>2) second object map | are the two object maps different (elements compared with the `==` operator, if defined)?                                                |
+| `fill_with`                 | second object map                            | adds in all properties of the second object map that do not exist in the object map                                                      |
+| `contains`, [`in`] operator | property name                                | does the object map contain a property of a particular name?                                                                             |
+| `keys`                      | _none_                                       | returns an [array] of all the property names (in random order), not available under [`no_index`]                                         |
+| `values`                    | _none_                                       | returns an [array] of all the property values (in random order), not available under [`no_index`]                                        |
 
 
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 let y = #{              // object map literal with 3 properties
     a: 1,
     bar: "hello",
@@ -163,7 +159,7 @@ for a `Map` will never be found &ndash; instead, the property will be looked up 
 
 Properties should be registered as _methods_ instead:
 
-```rust no_run
+```rust,no_run
 map.len                 // access property 'len', returns '()' if not found
 
 map.len()               // 'len' method - returns the number of properties

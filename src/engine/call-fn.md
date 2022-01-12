@@ -6,7 +6,7 @@ Call Rhai Functions from Rust
 Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted
 [function] from Rust via `Engine::call_fn`.
 
-```rust no_run
+```rust,no_run
 ┌─────────────┐
 │ Rhai script │
 └─────────────┘
@@ -89,7 +89,7 @@ Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
 Custom types (e.g. structures) can also implement [`FuncArgs`][traits] so they can be used for
 calling `Engine::call_fn`.
 
-```rust no_run
+```rust,no_run
 use std::iter::once;
 use rhai::FuncArgs;
 
@@ -118,10 +118,10 @@ let result: i64 = engine.call_fn(&mut scope, &ast, "hello", options)?;
 Low-Level API &ndash; `Engine::call_fn_raw`
 ------------------------------------------
 
-For more control, construct all arguments as `Dynamic` values and use `Engine::call_fn_raw`,
+For more control, construct all arguments as [`Dynamic`] values and use `Engine::call_fn_raw`,
 passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
 
-```rust no_run
+```rust,no_run
 let result = engine.call_fn_raw(
                 &mut scope,         // scope to use
                 &ast,               // AST containing the functions
@@ -160,7 +160,7 @@ When doing so, however, beware that all [variables]/[constants] defined at top l
 [function] or in the script body will _persist_ inside the custom [`Scope`].  If any of them are
 temporary and not intended to be retained, define them inside a statements block.
 
-```rust no_run
+```rust,no_run
 ┌─────────────┐
 │ Rhai script │
 └─────────────┘
@@ -205,7 +205,7 @@ engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
 This functionality is not available to `Engine::call_fn` which cannot call functions in
 _method-call_ style.
 
-```rust no_run
+```rust,no_run
 let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();

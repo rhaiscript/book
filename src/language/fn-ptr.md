@@ -14,7 +14,7 @@ Call a function pointer using the `call` method.
 Built-in Functions
 ------------------
 
-The following standard methods (mostly defined in the [`BasicFnPackage`][packages] but excluded if
+The following standard methods (mostly defined in the [`BasicFnPackage`][built-in packages] but excluded if
 using a [raw `Engine`]) operate on function pointers.
 
 | Function                           | Parameter(s) | Description                                                                                      |
@@ -27,7 +27,7 @@ using a [raw `Engine`]) operate on function pointers.
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 fn foo(x) { 41 + x }
 
 let func = Fn("foo");       // use the 'Fn' function to create a function pointer
@@ -65,7 +65,7 @@ Because of their dynamic nature, function pointers cannot refer to functions in 
 They can only refer to functions within the global [namespace][function namespace].
 See _[Function Namespaces]_ for more details.
 
-```rust no_run
+```js
 import "foo" as f;          // assume there is 'f::do_work()'
 
 f::do_work();               // works!
@@ -91,7 +91,7 @@ at runtime, which function to call among a group.
 Although it is possible to simulate dynamic dispatch via a number and a large `if-then-else-if` statement,
 using function pointers significantly simplifies the code.
 
-```rust no_run
+```rust,no_run
 let x = some_calculation();
 
 // These are the functions to call depending on the value of 'x'
@@ -141,7 +141,7 @@ to a function call while binding the object in the method call to the `this` poi
 
 To achieve this, pass the function pointer as the _first_ argument to `call`:
 
-```rust no_run
+```rust,no_run
 fn add(x) {                 // define function which uses 'this'
     this += x;
 }
@@ -181,7 +181,7 @@ The type [`NativeCallContext`] holds the _native call context_ of the particular
 registered Rust function. This type is normally provided by the [`Engine`] when a function is
 registered with the first parameter type being [`NativeCallContext`].
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, FnPtr, NativeCallContext};
 
 let mut engine = Engine::new();
@@ -207,7 +207,7 @@ The `FnPtr::call` method allows the function pointer to be called directly on an
 [`AST`], making it possible to reuse the `FnPtr` data type in may different calls and scripting
 environments.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, FnPtr};
 
 let engine = Engine::new();

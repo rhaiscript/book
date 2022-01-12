@@ -38,8 +38,8 @@ optimize the build for size.
 Removing the script [optimizer][script optimization] ([`no_optimize`]) yields a sizable code saving,
 at the expense of a less efficient script.
 
-Omitting arrays ([`no_index`]) yields the most code-size savings, followed by floating-point support
-([`no_float`]), safety checks ([`unchecked`]) and finally object maps and custom types ([`no_object`]).
+Omitting [arrays] ([`no_index`]) yields the most code-size savings, followed by floating-point support
+([`no_float`]), safety checks ([`unchecked`]) and finally [object maps] and [custom types] ([`no_object`]).
 
 Where the usage scenario does not call for loading externally-defined modules, use [`no_module`] to
 save some bytes. Disable script-defined functions ([`no_function`]) and possibly closures

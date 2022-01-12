@@ -1,5 +1,5 @@
-Range
-=====
+Ranges
+======
 
 {{#include ../links.md}}
 
@@ -59,7 +59,7 @@ However, beware that `..` (exclusive range) and `..=` (inclusive range) are _dif
 to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
 be registered to handle both range styles.
 
-```rust no_run
+```rust,no_run
 use std::ops::{Range, RangeInclusive};
 
 /// The actual work function
@@ -93,7 +93,7 @@ engine.run(
 
 [Indexers] commonly use ranges as parameters.
 
-```rust no_run
+```rust,no_run
 use std::ops::{Range, RangeInclusive};
 
 let mut engine = Engine::new();
@@ -120,17 +120,16 @@ engine.run(
 ")?;
 ```
 
-
 Built-in Functions
 -----------------
 
-The following methods (mostly defined in the [`BasicIteratorPackage`][packages] but excluded if
+The following methods (mostly defined in the [`BasicIteratorPackage`][built-in packages] but excluded if
 using a [raw `Engine`]) operate on ranges.
 
 | Function                           |  Parameter(s)   | Description                                   |
 | ---------------------------------- | :-------------: | --------------------------------------------- |
 | `start` method and property        |                 | beginning of the range                        |
 | `end` method and property          |                 | end of the range                              |
-| `contains`                         | number to check | does this range contain the specified number? |
+| `contains`, [`in`] operator        | number to check | does this range contain the specified number? |
 | `is_inclusive` method and property |                 | is the range inclusive?                       |
 | `is_exclusive` method and property |                 | is the range exclusive?                       |

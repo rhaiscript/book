@@ -6,9 +6,9 @@ Disable Certain Keywords and/or Operators
 For certain embedded usage, it is sometimes necessary to restrict the language to a strict subset of Rhai
 to prevent usage of certain language features.
 
-Rhai supports surgically disabling a keyword or operator via the `Engine::disable_symbol` method.
+Rhai supports surgically disabling a [keyword] or [operator] via `Engine::disable_symbol`.
 
-```rust no_run
+```rust,no_run
 use rhai::Engine;
 
 let mut engine = Engine::new();

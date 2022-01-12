@@ -3,7 +3,7 @@ For Loop
 
 {{#include ../links.md}}
 
-Iterating through a range or an [array], or any type with a registered [type iterator],
+Iterating through a numeric [range] or an [array], or any type with a registered [type iterator],
 is provided by the `for` ... `in` loop.
 
 There are two alternative syntaxes, one including a counter variable:
@@ -49,7 +49,7 @@ Iterate Through Arrays
 
 Iterating through an [array] yields cloned _copies_ of each element.
 
-```rust no_run
+```rust,no_run
 let a = [1, 3, 5, 7, 9, 42];
 
 // Loop through the array
@@ -72,7 +72,7 @@ as the number of characters to iterate (defaults all).
 
 `char` also accepts a [range] which can be created via the `..` (exclusive) and `..=` (inclusive) operators.
 
-```rust no_run
+```rust,no_run
 let s = "hello, world!";
 
 // Iterate through all the characters.
@@ -107,7 +107,7 @@ Iterate Through Numeric Ranges
 
 The `range` function similarly creates exclusive [ranges], plus allowing optional step values.
 
-```rust no_run
+```rust,no_run
 // Iterate starting from 0 and stopping at 49
 // The step is assumed to be 1 when omitted for integers
 for x in 0..50 {
@@ -201,7 +201,7 @@ of all property names and values of an [object map], respectively.
 
 These [arrays] can be iterated.
 
-```rust no_run
+```rust,no_run
 let map = #{a:1, b:3, c:5, d:7, e:9};
 
 // Property names are returned in unsorted, random order

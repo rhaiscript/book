@@ -1,5 +1,4 @@
-What is Rhai
-============
+{{#title The Rhai Book}}
 
 {{#include ../links.md}}
 

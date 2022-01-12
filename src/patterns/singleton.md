@@ -51,7 +51,7 @@ use the [Control Layer]({{rootUrl}}/patterns/control.md) pattern instead.
 
 Assume the following command object type:
 
-```rust no_run
+```rust,no_run
 struct EnergizerBunny { ... }
 
 impl EnergizerBunny {
@@ -67,13 +67,13 @@ impl EnergizerBunny {
 
 ### Wrap command object type as shared
 
-```rust no_run
+```rust,no_run
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
 ```
 
 or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
-```rust no_run
+```rust,no_run
 pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
 
 pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
@@ -81,7 +81,7 @@ pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
 
 ### Register the custom type
 
-```rust no_run
+```rust,no_run
 engine.register_type_with_name::<SharedBunny>("EnergizerBunny");
 ```
 
@@ -92,7 +92,7 @@ The easiest way to develop a complete set of API for a [custom type] is via a [p
 Notice that putting `pure` in `#[rhai_fn(...)]` allows a [getter/setter][getters/setters] to operate
 on a [constant] without raising an error.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;
 
 #[export_module]
@@ -159,13 +159,13 @@ engine.register_global_module(exported_module!(bunny_api).into());
 
 ### Compile script into AST
 
-```rust no_run
+```rust,no_run
 let ast = engine.compile(script)?;
 ```
 
 ### Push constant command object into custom scope and run AST
 
-```rust no_run
+```rust,no_run
 let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
 
 let mut scope = Scope::new();
@@ -185,7 +185,7 @@ engine.run_with_scope(&mut scope, script)?;
 
 ### Use the command API in script
 
-```rust no_run
+```rust,no_run
 // Access the command object via constant variable 'BUNNY'.
 
 if !BUNNY.power { BUNNY.power = true; }

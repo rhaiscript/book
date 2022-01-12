@@ -3,7 +3,7 @@ Use the Low-Level API to Register a Rust Function
 
 {{#include ../links.md}}
 
-When a native Rust function is registered with an `Engine` using the `register_XXX` API, Rhai
+When a native Rust function is registered with an [`Engine`] using the `register_XXX` API, Rhai
 transparently converts all function arguments from [`Dynamic`] into the correct types before calling
 the function.
 
@@ -18,7 +18,7 @@ The `Engine::register_raw_fn` method is marked _volatile_, meaning that it may b
 
 If this is acceptable, then using this method to register a Rust function opens up more opportunities.
 
-```rust no_run
+```rust,no_run
 engine.register_raw_fn(
     "increment_by",                                         // function name
     &[                                                      // a slice containing parameter types
@@ -58,8 +58,7 @@ Function Signature
 
 The function signature passed to `Engine::register_raw_fn` takes the following form.
 
-> `Fn(context: NativeCallContext, args: &mut [&mut Dynamic])`  
-> &nbsp;&nbsp;&nbsp;&nbsp;`-> Result<T, Box<EvalAltResult>> + 'static`
+> `Fn(context: NativeCallContext, args: &mut [&mut Dynamic]) -> Result<T, Box<EvalAltResult>>`
 
 where:
 
@@ -84,7 +83,7 @@ Extract The First `&mut` Argument (If Any)
 To extract the first `&mut` argument passed by reference from the `args` parameter (`&mut [&mut Dynamic]`),
 use the following to get a mutable reference to the underlying value:
 
-```rust no_run
+```rust,no_run
 let value: &mut T = &mut *args[0].write_lock::<T>().unwrap();
 
 *value = ...    // overwrite the existing value of the first `&mut` parameter
@@ -128,7 +127,7 @@ to a native Rust function.
 The example also showcases the use of `FnPtr::call_raw`, a low-level API which allows binding the
 `this` pointer to the function pointer call.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, FnPtr};
 
 let mut engine = Engine::new();
@@ -171,7 +170,7 @@ r#"
 TL;DR &ndash; Why `read_lock` and `write_lock`
 ---------------------------------------------
 
-The `Dynamic` API that casts it to a reference to a particular data type  is `read_lock`
+The [`Dynamic`] API that casts it to a reference to a particular data type  is `read_lock`
 (for an immutable reference) and `write_lock` (for a mutable reference).
 
 As the naming shows, something is _locked_ in order to allow this access, and that something
@@ -201,7 +200,7 @@ to the first argument, use one of the following tactics:
 
 3) use `split_first_mut` to partition the slice:
 
-```rust no_run
+```rust,no_run
 // Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 

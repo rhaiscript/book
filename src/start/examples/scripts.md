@@ -30,8 +30,8 @@ There are also a number of examples scripts that showcase Rhai's features, all i
 | [`op2.rhai`]({{repoHome}}/scripts/op2.rhai)                       | simple addition and multiplication                                   |
 | [`op3.rhai`]({{repoHome}}/scripts/op3.rhai)                       | change evaluation order with parenthesis                             |
 | [`string.rhai`]({{repoHome}}/scripts/string.rhai)                 | [string] operations, including _interpolation_                       |
-| [`switch.rhai`]({{repoHome}}/scripts/switch.rhai)                 | [`switch`] example                                                   |
 | [`strings_map.rhai`]({{repoHome}}/scripts/strings_map.rhai)       | [string] and [object map] operations                                 |
+| [`switch.rhai`]({{repoHome}}/scripts/switch.rhai)                 | [`switch`] example                                                   |
 | [`while.rhai`]({{repoHome}}/scripts/while.rhai)                   | [`while`] loop                                                       |
 
 

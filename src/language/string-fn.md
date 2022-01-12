@@ -1,13 +1,10 @@
-Built-in String Functions
+Standard String Functions
 =========================
 
 {{#include ../links.md}}
 
 
-Standard Functions
-------------------
-
-The following standard methods (mostly defined in the [`MoreStringPackage`][packages] but excluded if
+The following standard methods (mostly defined in the [`MoreStringPackage`][built-in packages] but excluded if
 using a [raw `Engine`]) operate on [strings] (and possibly characters).
 
 | Function                                           | Parameter(s)                                                                                                                 | Description                                                                                                                                                  |
@@ -66,7 +63,7 @@ When one (or both) of the operands is a [character], it is first converted into 
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 let full_name == " Bob C. Davis ";
 full_name.len == 14;
 

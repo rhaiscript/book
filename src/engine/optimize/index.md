@@ -1,6 +1,8 @@
 Script Optimization
 ===================
 
+{{#title Script Optimization}}
+
 {{#include ../../links.md}}
 
 Rhai includes an _optimizer_ that tries to optimize a script after parsing.
@@ -15,7 +17,7 @@ Dead Code Removal
 Rhai attempts to eliminate _dead code_ (i.e. code that does nothing, for example an expression by
 itself as a statement, which is allowed in Rhai).
 
-```rust no_run
+```rust,no_run
 {
     let x = 999;            // NOT eliminated: variable may be used later on (perhaps even an 'eval')
     
@@ -40,7 +42,7 @@ itself as a statement, which is allowed in Rhai).
 
 The above script optimizes to:
 
-```rust no_run
+```rust,no_run
 {
     let x = 999;
     foo(42);
@@ -57,7 +59,7 @@ Constants Propagation
 
 [Constants] propagation is used to remove dead code.
 
-```rust no_run
+```rust,no_run
 const ABC = true;
 
 if ABC || some_work() { print("done!"); }   // 'ABC' is constant so it is replaced by 'true'...
@@ -76,7 +78,7 @@ are spliced into the script text in order to turn on/off certain sections.
 For fixed script texts, the [constant] values can also be provided in a custom [`Scope`] object to
 the [`Engine`] for use in compilation and evaluation.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Scope};
 
 let engine = Engine::new();
@@ -99,7 +101,7 @@ engine.run_with_scope(&mut scope,
 
 [Constants] defined at _global_ level typically cannot be seen by script [functions] because they are _pure_.
 
-```rust no_run
+```rust,no_run
 const MY_CONSTANT = 42;     // <- constant defined at global level
 
 print(MY_CONSTANT);         // <- optimized to: print(42)
@@ -118,7 +120,7 @@ they are also propagated to [functions].
 This is usually the intuitive usage and behavior expected by regular users, even though it means
 that a script will behave differently (essentially a runtime error) when [script optimization] is disabled.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Scope};
 
 let engine = Engine::new();
@@ -145,7 +147,7 @@ are _pure_ and typically cannot see [constants] within the custom [`Scope`].
 
 Therefore, constants in [functions] now throw a runtime error.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Scope, OptimizationLevel};
 
 let mut engine = Engine::new();
@@ -177,7 +179,7 @@ engine.run_with_scope(&mut scope,
 This may have negative implications to performance if the [constant] value is expensive to clone
 (e.g. if the type is very large).
 
-```rust no_run
+```rust,no_run
 let mut scope = Scope::new();
 
 // Push a large constant into the scope...
@@ -205,7 +207,7 @@ If the [constants] are modified later on (yes, it is possible, via Rust _methods
 the modified values will not show up in the optimized script.
 Only the initialization values of [constants] are ever retained.
 
-```rust no_run
+```rust,no_run
 const MY_SECRET_ANSWER = 42;
 
 MY_SECRET_ANSWER.update_to(666);    // assume 'update_to(&mut i64)' is a Rust function
@@ -217,15 +219,15 @@ This is almost never a problem because real-world scripts seldom modify a [const
 but the possibility is always there.
 
 
-Op-Assignment Rewrite
----------------------
+Compound Assignment Rewrite
+--------------------------
 
-Usually, an _op-assignment_ operator (e.g. `+=` for append) takes a mutable first parameter
-(i.e. `&mut`) while the corresponding simple operator (i.e. `+`) does not.
+Usually, a _compound assignment_ (e.g. `+=` for append) takes a mutable first parameter
+(i.e. `&mut`) while the corresponding simple [operator] (i.e. `+`) does not.
 
 This has huge performance implications because arguments passed as reference are always cloned.
 
-```rust no_run
+```rust,no_run
 let big = create_some_very_big_type();
 
 big = big + 1;
@@ -238,19 +240,19 @@ big = temp_value;
 big += 1;           // <- 'big' is NOT cloned
 ```
 
-The script optimizer rewrites normal expressions into _op-assignment_ style wherever possible.
+The script optimizer rewrites normal assignments into _compound assignments_ wherever possible.
 
-However, and only those involving **simple variable references** are optimized.
+However, only those involving **simple variable references** are optimized.
 In other words, no _common sub-expression elimination_ is performed by Rhai.
 
-```rust no_run
+```rust,no_run
 x = x + 1;          // <- this statement...
 
-x += 1;             // ... is rewritten as this
+x += 1;             // <- ... is rewritten to this
 
 x[y] = x[y] + 1;    // <- but this is not, so this is MUCH slower...
 
-x[y] + 1;           // ... than this
+x[y] += 1;          // <- ... than this
 ```
 
 
@@ -262,12 +264,12 @@ so whether they are optimized away depends on the situation:
 
 * if the operands are not [constant] values, it is not optimized;
 
-* if the operator is [overloaded][operator overloading], it is not optimized because the overloading
+* if the [operator] is [overloaded][operator overloading], it is not optimized because the overloading
   function may not be _pure_ (i.e. may cause side-effects when called);
 
-* if the operator is not _built-in_ (see list of [built-in operators]), it is not optimized;
+* if the [operator] is not _built-in_ (see list of [built-in operators]), it is not optimized;
 
-* if the operator is a [built-in operator] for a [standard type][standard types],
+* if the [operator] is a [built-in operator] for a [standard type][standard types],
   it is called and replaced by a [constant] result.
 
 Rhai guarantees that no external function will be run (in order not to trigger side-effects) during the
@@ -301,7 +303,7 @@ switch DECISION {
 Because of the eager evaluation of [operators][built-in operators] for [standard types], many
 [constant] expressions will be evaluated and replaced by the result.
 
-```rust no_run
+```rust,no_run
 let x = (1+2)*3-4/5%6;          // will be replaced by 'let x = 9'
 
 let y = (1 > 2) || (3 <= 4);    // will be replaced by 'let y = true'
@@ -310,7 +312,7 @@ let y = (1 > 2) || (3 <= 4);    // will be replaced by 'let y = true'
 For operators that are not optimized away due to one of the above reasons, the function calls
 are simply left behind.
 
-```rust no_run
+```rust,no_run
 // Assume 'new_state' returns some custom type that is NOT one of the standard types.
 // Also assume that the '==' operator is defined for that custom type.
 const DECISION_1 = new_state(1);

@@ -49,7 +49,7 @@ Crate a BLOB
 The function `blob` allows creating an empty BLOB, optionally filling it to a required size with a
 particular value (default zero).
 
-```rust no_run
+```rust,no_run
 let x = blob();             // empty BLOB
 
 let x = blob(10);           // BLOB with ten zeros
@@ -64,7 +64,7 @@ write eight bytes at a time (four under [`only_i32`]) in big-endian byte order.
 
 If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.
 
-```rust no_run
+```rust,no_run
 let buf = blob(12, 0);      // BLOB with 12x zeros
 
 // Write eight bytes at a time, in big-endian order
@@ -93,7 +93,7 @@ Use the `write_ascii` method to write ASCII [strings] into any specific [range] 
 
 The following is an example of a building a 16-byte command to send to an embedded device.
 
-```rust no_run
+```rust,no_run
 // Assume the following 16-byte command for an embedded device:
 // ┌─────────┬───────────────┬──────────────────────────────────┬───────┐
 // │    0    │       1       │              2-13                │ 14-15 │
@@ -126,7 +126,7 @@ device.send(buf);           // send command to device
 Built-in Functions
 -----------------
 
-The following functions (mostly defined in the [`BasicBlobPackage`][packages] but excluded if using a [raw `Engine`]) operate on BLOB's.
+The following functions (mostly defined in the [`BasicBlobPackage`][built-in packages] but excluded if using a [raw `Engine`]) operate on BLOB's.
 
 | Functions                                               | Parameter(s)                                                                                                                                                                                       | Description                                                                                                                                          |
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -148,7 +148,7 @@ The following functions (mostly defined in the [`BasicBlobPackage`][packages] bu
 | `clear`                                                 | _none_                                                                                                                                                                                             | empties the BLOB                                                                                                                                     |
 | `truncate`                                              | target length                                                                                                                                                                                      | cuts off the BLOB at exactly a specified length (discarding all subsequent bytes)                                                                    |
 | `chop`                                                  | target length                                                                                                                                                                                      | cuts off the head of the BLOB, leaving the tail at exactly a specified length                                                                        |
-| `contains`                                              | byte value to find                                                                                                                                                                                 | does the BLOB contain a particular byte value?                                                                                                       |
+| `contains`, [`in`] operator                             | byte value to find                                                                                                                                                                                 | does the BLOB contain a particular byte value?                                                                                                       |
 | `split`                                                 | 1) BLOB<br/>2) position to split at, counting from end if < 0, end if ≥ length                                                                                                                     | splits the BLOB into two BLOB's, starting from a specified position                                                                                  |
 | `drain`                                                 | 1) start position, counting from end if < 0, end if ≥ length<br/>2) number of bytes to remove, none if ≤ 0                                                                                         | removes a portion of the BLOB, returning the removed bytes as a new BLOB                                                                             |
 | `drain`                                                 | [range] of bytes to remove, from beginning if ≤ 0, to end if ≥ length                                                                                                                              | removes a portion of the BLOB, returning the removed bytes as a new BLOB                                                                             |

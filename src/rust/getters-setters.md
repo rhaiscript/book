@@ -47,7 +47,7 @@ syntax will be interpreted as access to properties on the [object maps].
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 #[derive(Debug, Clone)]
 struct TestStruct {
     field: String
@@ -98,7 +98,7 @@ the property as the index value.
 
 In other words, [indexers] act as a _fallback_ to property getters/setters.
 
-```rust no_run
+```rust,no_run
 a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried
@@ -118,7 +118,7 @@ Rhai detects such modifications and updates the changed values all the way back 
 
 In the end, the syntax works as expected by intuition, automatically and without special attention.
 
-```rust no_run
+```rust,no_run
 // Assume a deeply-nested object...
 let root = get_new_container_object();
 

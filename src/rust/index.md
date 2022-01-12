@@ -1,6 +1,8 @@
 Extend Rhai with Rust
 ====================
 
+{{#title Extend Rhai with Rust}}
+
 {{#include ../links.md}}
 
 Most features and functionalities required by a Rhai script should actually be coded in Rust,

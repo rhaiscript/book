@@ -1,6 +1,8 @@
 Safety and Protection Against DoS Attacks
 ========================================
 
+{{#title Safety and Protection}}
+
 {{#include ../links.md}}
 
 For scripting systems open to untrusted user-land scripts, it is always best to limit the amount of

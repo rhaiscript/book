@@ -5,7 +5,7 @@ Functions
 
 Rhai supports defining functions in script (unless disabled with [`no_function`]).
 
-```rust no_run
+```rust,no_run
 fn add(x, y) {
     x + y
 }
@@ -27,7 +27,7 @@ Just like in Rust, an implicit return can be used. In fact, the last statement o
 _always_ the block's return value regardless of whether it is terminated with a semicolon `;`. This
 is different from Rust.
 
-```rust no_run
+```rust,no_run
 fn add(x, y) {      // implicit return:
     x + y;          // value of the last statement (no need for ending semicolon)
                     // is used as the return value
@@ -48,7 +48,7 @@ Global Definitions Only
 
 Functions can only be defined at the global level, never inside a block or another function.
 
-```rust no_run
+```rust,no_run
 // Global level is OK
 fn add(x, y) {
     x + y
@@ -73,7 +73,7 @@ own parameters.
 
 They cannot access variables external to the function itself.
 
-```rust no_run
+```rust,no_run
 let x = 42;
 
 fn foo() { x }          // <- syntax error: variable 'x' doesn't exist
@@ -85,7 +85,7 @@ But Can Call Other Functions and Access Modules
 
 All functions in the same [`AST`] can call each other.
 
-```rust no_run
+```rust,no_run
 fn foo(x) { x + 1 }     // function defined in the global namespace
 
 fn bar(x) { foo(x) }    // ok! function 'foo' can be called
@@ -93,7 +93,7 @@ fn bar(x) { foo(x) }    // ok! function 'foo' can be called
 
 In addition, [modules] [imported][`import`] at global level can be accessed.
 
-```rust no_run
+```js
 import "hello" as hey;
 import "world" as woo;
 
@@ -120,7 +120,7 @@ Functions can access those [constants] via the special [`global`] [module].
 
 Naturally, the automatic [`global`] [module] is not available under [`no_function`] nor [`no_module`].
 
-```rust no_run
+```rust,no_run
 const CONSTANT = 42;        // this constant is automatically added to 'global'
 
 let hello = 1;              // variables are not added to 'global'
@@ -149,7 +149,7 @@ a statement in the script can freely call a function defined afterwards.
 
 This is similar to Rust and many other modern languages, such as JavaScript's `function` keyword.
 
-```rust no_run
+```rust,no_run
 let x = foo(41);            // <- I can do this!
 
 fn foo(x) { x + 1 }         // <- define 'foo' after use
@@ -167,7 +167,7 @@ All arguments are passed by _value_, so all Rhai script-defined functions are _p
 
 Any update to an argument will **not** be reflected back to the caller.
 
-```rust no_run
+```rust,no_run
 fn change(s) {      // 's' is passed by value
     s = 42;         // only a COPY of 's' is changed
 }
@@ -186,7 +186,7 @@ x == 500;           // 'x' is NOT changed!
 Use `is_def_fn` (not available under [`no_function`]) to detect if a Rhai function is defined
 (and therefore callable) based on its name and the number of parameters.
 
-```rust no_run
+```rust,no_run
 fn foo(x) { x + 1 }
 
 is_def_fn("foo", 1) == true;

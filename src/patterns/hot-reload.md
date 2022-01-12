@@ -31,7 +31,7 @@ Implementation
 
 Say, a system has a Rhai [`Engine`] plus a compiled script (in [`AST`] form)...
 
-```rust no_run
+```rust,no_run
 // Main system object
 struct System {
     engine: Engine,
@@ -61,7 +61,7 @@ system.on_event(|sys: &System, event: &str, data: Map| {
 If the control scripts are small enough and changes are infrequent, it is much simpler just to
 recompile the whole set of script and replace the original [`AST`] with the new one.
 
-```rust no_run
+```rust,no_run
 // Watch for script file change
 system.watch(|sys: &mut System, file: &str| {
     // Compile the new script
@@ -77,7 +77,7 @@ system.watch(|sys: &mut System, file: &str| {
 If the control scripts are large and complicated, and if the system can detect changes to specific [functions],
 it is also possible to _patch_ just the changed [functions].
 
-```rust no_run
+```rust,no_run
 // Watch for changes in the script
 system.watch_for_script_change(|sys: &mut System, fn_name: &str| {
     // Get the script file that contains the function

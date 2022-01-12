@@ -15,7 +15,7 @@ Simulate an Enum API
 
 A [plugin module] is extremely handy in creating an entire API for a custom enum type.
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;
 use rhai::{Dynamic, Engine, EvalAltResult};
 
@@ -82,7 +82,7 @@ engine.register_type_with_name::<MyEnum>("MyEnum")
 
 With this API in place, working with enums feels almost the same as in Rust:
 
-```rust no_run
+```rust,no_run
 let x = MyEnum::Foo;
 
 let y = MyEnum::Bar(42);
@@ -142,7 +142,7 @@ Another way to work with Rust enums in a `switch` expression is through exposing
 (or at least those that act as effective _discriminants_) of each enum variant as a variable-length
 [array], usually with the name of the variant as the first item for convenience:
 
-```rust no_run
+```rust,no_run
 use rhai::Array;
 
 engine.register_get("enum_data", |my_enum: &mut MyEnum| {
@@ -161,7 +161,7 @@ engine.register_get("enum_data", |my_enum: &mut MyEnum| {
 });
 ```
 
-Then it is a simple matter to match an enum via the `switch` expression:
+Then it is a simple matter to match an enum via the `switch` expression.
 
 ```c , no_run
 // Assume 'value' = 'MyEnum::Baz("hello", true)'

@@ -44,7 +44,7 @@ because it only requires registering all API functions only once.
 In rare cases where handlers are created and destroyed in a tight loop, a new [`Engine`] instance
 can be created for each event. See [_One Engine Instance Per Call_](parallel.md) for more details.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Scope, AST, EvalAltResult};
 
 // Event handler
@@ -62,7 +62,7 @@ struct Handler {
 
 [Custom types] are often used to hold state. The easiest way to register an entire API is via a [plugin module].
 
-```rust no_run
+```rust,no_run
 use rhai::plugin::*;
 
 // A custom type to a hold state value.
@@ -114,7 +114,7 @@ Steps to initialize the event handler:
 6. Store the compiled [`AST`] for future evaluations,
 7. Run the [`AST`] to initialize event handler state variables.
 
-```rust no_run
+```rust,no_run
 impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into<PathBuf>) -> Self {
@@ -153,7 +153,7 @@ There is usually an interface or trait that gets called when an event comes from
 
 Mapping an event from the system into a scripted handler is straight-forward:
 
-```rust no_run
+```rust,no_run
 impl Handler {
     // Say there are three events: 'start', 'end', 'update'.
     // In a real application you'd be handling errors...
@@ -199,7 +199,7 @@ in the handler script to access and modify these state variables.
 
 The API registered with the [`Engine`] can be also used throughout the script.
 
-```rust no_run
+```rust,no_run
 // Initialize user-provided state (overrides system-provided state, if any).
 // When 'call_fn_raw' is used to call this, the scope is not rewound and
 // any new variables introduced will stay inside the custom 'Scope'.
@@ -267,7 +267,7 @@ When there are a large number of state variables, this style also makes it easy 
 defined in user functions to accidentally _shadow_ a state variable with a variable that just
 happens to be the same name.
 
-```rust no_run
+```rust,no_run
 // 'start' event handler
 fn start(data) {
     let bool_state = false; // <- oops! bad variable name!
@@ -290,7 +290,7 @@ Another style that allows new user state variables is to package them all inside
 which is then exposed via the `this` pointer.  State variables can be freely created inside the
 [object map] by _all_ [functions] (not just the initialization [function]).
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Scope, Map, AST, EvalAltResult};
 
 // Event handler
@@ -308,7 +308,7 @@ struct Handler {
 
 Initialization can simply be done via binding the `this` pointer.
 
-```rust no_run
+```rust,no_run
 // Use an object map to hold state
 let mut states: Dynamic = Map::new().into();
 
@@ -333,7 +333,7 @@ engine.call_fn_raw(&mut scope, &ast, false, true, "init", Some(&mut states), [])
 Events handling should also use `Engine::call_fn_raw` to bind the [object map] containing global
 states to the `this` pointer.
 
-```rust no_run
+```rust,no_run
 pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
     let engine = &self.engine;
     let states = &mut self.states;
@@ -355,7 +355,7 @@ pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
 Because the stored state is kept in an [object map], which in turn is mapped to `this`, it is
 necessary for [functions] to access and modify these state variables via the `this` pointer.
 
-```rust no_run
+```rust,no_run
 // Initialize user-provided state (overrides system-provided state, if any).
 // State is stored inside an object map bound to 'this'.
 fn init() {

@@ -3,7 +3,7 @@ Switch Expressions
 
 {{#include ../links.md}}
 
-The `switch` _expression_ allows matching on literal values, and it mostly follows Rust's `match` syntax.
+The `switch` _expression_ allows matching on [literal] values, and it mostly follows Rust's `match` syntax.
 
 ```js
 switch calc_secret_value(x) {
@@ -13,12 +13,18 @@ switch calc_secret_value(x) {
         print("Again!");
     }
     3 => print("Go!"),
-    // _ is the default when no cases match. It must be the last case.
+    // _ is the default when no case matches. It must be the last case.
     _ => print(`Oops! Something's wrong: ${x}`)
 }
 ```
 
-The _default_ case (i.e. when no other cases match), however, must be the _last_ case in the statement.
+
+Default Case
+------------
+
+A _default_ case (i.e. when no other cases match) can be specified with `_`.
+
+However, it must be the _last_ case in the `switch` expression.
 
 ```js
 switch wrong_default {
@@ -64,7 +70,7 @@ if foo == "hello" {
 Array and Object Map Literals Also Work
 --------------------------------------
 
-The `switch` expression can match against any _literal_, including [array] and [object map] literals.
+The `switch` expression can match against any _[literal]_, including [array] and [object map] [literals].
 
 ```js
 // Match on arrays
@@ -93,6 +99,8 @@ Case Conditions
 Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to `true` in order for the case to match.
 
+Unlike Rust, however, case conditions still do not allow the case values to duplicate.
+
 ```js
 let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) => 100,
@@ -114,7 +122,7 @@ let result = switch calc_secret_value(x) {
 Range Cases
 -----------
 
-Because of their popularity, literal integer [ranges] can also be used as `switch` cases,
+Because of their popularity, [literal] integer [ranges] can also be used as `switch` cases,
 but they must come _after_ all integer cases.
 
 Numeric [ranges] are only searched when the `switch` value is itself an integer (i.e. they never

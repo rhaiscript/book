@@ -6,14 +6,14 @@ Custom Operators
 For use as a DSL (Domain-Specific Languages), it is sometimes more convenient to augment Rhai with
 customized operators performing specific logic.
 
-`Engine::register_custom_operator` registers a keyword as a custom operator, giving it a particular
+`Engine::register_custom_operator` registers a [keyword] as a custom operator, giving it a particular
 _precedence_ (which cannot be zero).
 
 
 Example
 -------
 
-```rust no_run
+```rust,no_run
 use rhai::Engine;
 
 let mut engine = Engine::new();
@@ -38,7 +38,7 @@ Alternatives to a Custom Operator
 
 Custom operators are merely _syntactic sugar_.  They map directly to registered functions.
 
-```rust no_run
+```rust,no_run
 let mut engine = Engine::new();
 
 // Define 'foo' operator
@@ -63,7 +63,7 @@ All custom operators must be _identifiers_ that follow the same naming rules as 
 Alternatively, they can also be [reserved symbols]({{rootUrl}}/appendix/operators.md#symbols),
 [disabled operators or keywords][disable keywords and operators].
 
-```rust no_run
+```rust,no_run
 engine.register_custom_operator("foo", 20)?;          // 'foo' is a valid custom operator
 
 engine.register_custom_operator("#", 20)?;            // the reserved symbol '#' is also
@@ -81,7 +81,7 @@ Binary Operators Only
 All custom operators must be _binary_ (i.e. they take two operands).
 _Unary_ custom operators are not supported.
 
-```rust no_run
+```rust,no_run
 // Register unary '#' operator
 engine.register_custom_operator("#", 160)?
       .register_fn("#", |x: i64| x * x);

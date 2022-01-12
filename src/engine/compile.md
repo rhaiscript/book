@@ -8,7 +8,7 @@ To repeatedly evaluate a script, _compile_ it first with `Engine::compile` into 
 
 `Engine::eval_ast_XXX` and `Engine::run_ast_XXX` evaluate a pre-compiled `AST`.
 
-```rust no_run
+```rust,no_run
 // Compile to an AST and store it for later evaluations
 let ast = engine.compile("40 + 2")?;
 
@@ -20,21 +20,23 @@ for _ in 0..42 {
 ```
 
 Compiling a script file is also supported with `Engine::compile_file`
-(not available under [`no_std`] or in [WASM] builds):
+(not available under [`no_std`] or in [WASM] builds).
 
-```rust no_run
+```rust,no_run
 let ast = engine.compile_file("hello_world.rhai".into())?;
 ```
 
 
-Unix Shebangs
--------------
+Unix Shebangs in Script Files
+----------------------------
 
 On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
 
-If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
-`Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and `Engine::eval_file`.
+Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+
+This behavior is also present for non-Unix (e.g. Windows) environments.
 
 ```js
 #!/home/to/me/bin/rhai-run

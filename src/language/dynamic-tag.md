@@ -15,7 +15,7 @@ It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-b
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 let x = 42;
 
 x.tag == 0;             // tag defaults to zero
@@ -166,7 +166,7 @@ print(`Result check = ${my_result.tag[3]}`);
 
 Sometimes it is useful to return auxillary info from a [function].
 
-```rust no_run
+```rust,no_run
 // Verify Bell's Inequality by calculating a norm
 // and comparing it with a hypotenuse.
 // https://en.wikipedia.org/wiki/Bell%27s_theorem
@@ -212,7 +212,7 @@ additional information is small &ndash; e.g. in many cases, a single `bool`, or 
 To return a number of _small_ values from [functions], the tag value as a [bit-field] is an ideal
 container without resorting to a full-blown [object map] or [array].
 
-```rust no_run
+```rust,no_run
 // This function essentially returns a tuple of four numbers:
 // (result, a, b, c)
 fn complex_calc(x, y, z) {
@@ -235,3 +235,15 @@ let a = r.tag[0..8];
 let b = r.tag[8..16];
 let c = r.tag[16..32];
 ```
+
+
+TL;DR
+-----
+
+### Q: What is the point of adding value tags to `Dynamic`?
+
+Due to byte alignment requirements on modern CPU's, there are unused spaces in a [`Dynamic`] type,
+of the order of 4 bytes on 64-bit targets (2 bytes on 32-bit).
+
+It is empty space that can be put to good use and not wasted, especially when Rhai does not have
+built-in support of tuples in order to return multiple values from [functions].

@@ -8,7 +8,7 @@ Or "How to Shoot Yourself in the Foot even Easier"
 
 Saving the best for last, there is the ever-dreaded... `eval` function!
 
-```rust no_run
+```rust,no_run
 let x = 10;
 
 fn foo(x) { x += 12; x }
@@ -42,7 +42,7 @@ Cannot Define New Functions
 New [functions] cannot be defined within an `eval` call, since functions can only be defined at the _global_ level,
 not inside another [function] call!
 
-```rust no_run
+```rust,no_run
 let script = "x += 32";
 let x = 10;
 eval(script);                   // variable 'x' in the current scope is visible!
@@ -62,7 +62,7 @@ print(x);
 For those who subscribe to the (very sensible) motto of ["`eval` is evil"](http://linterrors.com/js/eval-is-evil),
 disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 
-```rust no_run
+```rust,no_run
 engine.disable_symbol("eval");  // disable usage of 'eval'
 ```
 

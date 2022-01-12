@@ -1,10 +1,10 @@
-`Scope` &ndash; Initializing and Maintaining State
-=================================================
+`Scope` &ndash; Maintaining State
+================================
 
 {{#include ../links.md}}
 
 By default, Rhai treats each [`Engine`] invocation as a fresh one, persisting only the functions
-that have been defined but no global state.
+that have been registered but no global state.
 
 This gives each evaluation a clean starting slate.
 
@@ -58,7 +58,7 @@ Example
 In the following example, a `Scope` is created with a few initialized variables, then it is threaded
 through multiple evaluations.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Scope, EvalAltResult};
 
 let engine = Engine::new();
@@ -76,7 +76,7 @@ scope.push("y", 42_i64)
      .set_value("s", "hello, world!");          // 'set_value' adds a variable when one doesn't exist
 
 // First invocation
-engine.eval_with_scope::<()>(&mut scope, 
+engine.run_with_scope(&mut scope, 
 "
     let x = 4 + 5 - y + z + MY_NUMBER + s.len;
     y = 1;
@@ -114,7 +114,7 @@ In fact, the names can easily be string slices referencing external data.  This 
 For applications where [variables] and/or [constants] are frequently pushed into and removed from
 a `Scope` in order to run custom scripts, this has significant performance implications.
 
-```rust no_run
+```rust,no_run
 let mut scope = Scope::new();
 
 scope.push("my_var", 42_i64);                   // &'static str

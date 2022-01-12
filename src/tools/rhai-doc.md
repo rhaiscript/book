@@ -5,8 +5,9 @@ Rhai Script Documentation Tool
 
 
 The Rhai Script Documentation Tool, `rhai-doc`, takes a source directory and scans for
-Rhai script files (recursively), building a web-based documentation site for all functions
-defined.  Documentation is taken from [MarkDown] [doc-comments] on the functions.
+Rhai script files (recursively), building a web-based documentation site for all [functions] defined.
+
+Documentation is taken from [MarkDown]-formatted [doc-comments] on the [functions].
 
 
 Author: [`@semirix`](https://github.com/semirix)

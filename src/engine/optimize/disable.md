@@ -14,7 +14,7 @@ When scripts:
 the optimization pass may be a waste of time and resources.
 In that case, turn optimization off by setting the optimization level to [`OptimizationLevel::None`].
 
-```rust no_run
+```rust,no_run
 let engine = rhai::Engine::new();
 
 // Turn off the optimizer

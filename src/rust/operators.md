@@ -6,15 +6,15 @@ Operator Overloading
 In Rhai, a lot of functionalities are actually implemented as functions, including basic operations
 such as arithmetic calculations.
 
-For example, in the expression "`a + b`", the `+` operator actually calls a function named "`+`"!
+For example, in the expression "`a + b`", the `+` [operator] actually calls a function named "`+`"!
 
-```rust no_run
+```rust,no_run
 let x = a + b;
 
 let x = +(a, b);        // <- the above is equivalent to this function call
 ```
 
-Similarly, comparison operators including `==`, `!=` etc. are all implemented as functions,
+Similarly, comparison [operators] including `==`, `!=` etc. are all implemented as functions,
 with the stark exception of `&&` and `||`.
 
 
@@ -28,14 +28,14 @@ handled specially and _not_ via a function; as a result, overriding them has no 
 Overload Operator via Rust Function
 ----------------------------------
 
-Operator functions cannot be defined in script because operators are usually not valid function names.
+[Operator] functions cannot be defined in script because [operators] are usually not valid function names.
 
-However, operator functions _can_ be registered via `Engine::register_fn`.
+However, [operator] functions _can_ be registered via `Engine::register_fn`.
 
-When a custom operator function is registered with the same name as an operator,
+When a custom [operator] function is registered with the same name as an [operator],
 it _overrides_ the built-in version.
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, EvalAltResult};
 
 let mut engine = Engine::new();
@@ -65,11 +65,12 @@ result == 43;                                       //    ... but not now
 Considerations
 --------------
 
-Normally, use operator overloading for [custom types] only.
+Normally, use [operator] overloading for [custom types] only.
 
-Be very careful when overriding built-in operators because users expect standard operators to behave
-in a consistent and predictable manner, and will be annoyed if an expression involving `+` turns into
-a subtraction, for example.  You may think it is amusing, but users who need to get things done won't.
+Be very careful when overriding built-in [operators] because users expect standard [operators] to
+behave in a consistent and predictable manner, and will be annoyed if an expression involving `+`
+turns into a subtraction, for example.  You may think it is amusing, but users who need to get
+things done won't.
 
-Operator overloading also impacts script optimization when using [`OptimizationLevel::Full`].
+[Operator] overloading also impacts script optimization when using [`OptimizationLevel::Full`].
 See the [script-optimization] for more details.

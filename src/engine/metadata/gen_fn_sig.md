@@ -10,7 +10,7 @@ Get Function Signatures in Rust
 As part of a _reflections_ API, `Engine::gen_fn_signatures` returns a list of function _signatures_
 (as `Vec<String>`), each corresponding to a particular function available to that [`Engine`] instance.
 
-> `fn_name ( param_1: type_1, param_2: type_2, ... , param_n : type_n ) -> return_type`
+> `fn_name ( param_1:` _type 1_`, param_2:` _type 2_`, ... , param_n :` _type n_ `) ->` _return type_
 
 The [`metadata`] feature must be used to turn on this API.
 
@@ -39,7 +39,7 @@ A function registered under the name `foo` with three parameters and unknown ret
 
 > `foo(_, _, _)`
 
-An operator function &ndash; again, unknown parameters and return type.
+An [operator] function &ndash; again, unknown parameters and return type.
 Notice that function names do not need to be valid identifiers.
 
 > `+(_, _)`
@@ -62,7 +62,7 @@ so no type information is needed:
 
 probably defined as:
 
-```rust no_run
+```rust,no_run
 fn foo(x, y, z) {
     ...
 }
@@ -83,7 +83,7 @@ For example, a plugin function `merge`:
 
 Notice that function names do not need to be valid identifiers.
 
-For example, an operator defined as a [fallible function] in a [plugin module] via
+For example, an [operator] defined as a [fallible function] in a [plugin module] via
 `#[rhai_fn(name="+=", return_raw)]` returns `Result<bool, Box<EvalAltResult>>`:
 
 > `+=(list: &mut MyStruct<i64>, num: usize, name: &str) -> Result<bool, Box<EvalAltResult>>`

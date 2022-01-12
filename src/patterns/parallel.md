@@ -50,7 +50,7 @@ Key Concepts
 Examples
 --------
 
-```rust no_run
+```rust,no_run
 use rhai::def_package;
 use rhai::packages::{Package, StandardPackage};
 

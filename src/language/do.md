@@ -8,7 +8,7 @@ Do Loop
 Like the [`while`] loop, `continue` can be used to skip to the next iteration, by-passing all following statements;
 `break` can be used to break out of the loop unconditionally.
 
-```rust no_run
+```rust,no_run
 let x = 10;
 
 do {

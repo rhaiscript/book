@@ -8,7 +8,7 @@ Create a Module from an AST
 ------------------------
 
 A [module] can be created from a single script (or pre-compiled [`AST`]) containing global [variables],
-[functions] and sub-modules via the `Module::eval_ast_as_new` method.
+[functions] and [sub-modules][module] via `Module::eval_ast_as_new`.
 
 See the section on [_Exporting Variables, Functions and Sub-Modules_][`export`] for details on how to
 prepare a Rhai script for this purpose as well as to control which functions/variables to export.
@@ -35,7 +35,7 @@ Examples
 Don't forget the [`export`] statement, otherwise there will be no [variables] exposed by the
 [module] other than non-[`private`] [functions] (unless that's intentional).
 
-```rust no_run
+```rust,no_run
 use rhai::{Engine, Module};
 
 let engine = Engine::new();
