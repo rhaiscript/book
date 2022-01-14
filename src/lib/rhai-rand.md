@@ -71,18 +71,21 @@ rhai-rand = { version="0.1", default-features = false, features = ["array"] }
 Package Functions
 -----------------
 
-The following functions are defined:
+The following functions are defined.
 
-|   Function   | Return type | Feature | Description                                                      |
-| :----------: | :---------: | :-----: | ---------------------------------------------------------------- |
-|    `rand`    |    `INT`    |         | generates a random number                                        |
-| `rand_float` |   `FLOAT`   | `float` | generates a random floating-point number between `0.0` and `1.0` |
-| `rand_bool`  |   `bool`    |         | generates a random boolean                                       |
+|      Function       | Return type | Feature | Description                                                                  |
+| :-----------------: | :---------: | :-----: | ---------------------------------------------------------------------------- |
+|      `rand()`       |    `INT`    |         | generates a random number                                                    |
+| `rand(start..end)`  |    `INT`    |         | generates a random number within the exclusive range `start..end`            |
+| `rand(start..=end)` |    `INT`    |         | generates a random number within the inclusive range `start..=end`           |
+|   `rand_float()`    |   `FLOAT`   | `float` | generates a random floating-point number between `0.0` and `1.0` (exclusive) |
+|    `rand_bool()`    |   `bool`    |         | generates a random boolean                                                   |
+|   `rand_bool(p)`    |   `bool`    | `float` | generates a random boolean with the probability `p` of being `true`          |
 
 
 ### Arrays
 
-The following methods are defined for [arrays] (requires the `array` feature):
+The following methods are defined for [arrays] (requires the `array` feature).
 
 |  Method   |                       Parameter(s)                        | Return type | Description                                                                |
 | :-------: | :-------------------------------------------------------: | :---------: | -------------------------------------------------------------------------- |
