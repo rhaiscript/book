@@ -145,3 +145,17 @@ x.some_func(1);     // ... is rewritten as this
 
 some_func(x[y], 1); // <- but this is not, so 'x[y]` is cloned
 ```
+
+
+Short Variable Names for 32-Bit Systems
+--------------------------------------
+
+On 32-bit systems, [variable] and [constant] names longer than 11 ASCII characters incur additional
+allocation overhead.
+
+This is particularly true for local variables inside a hot loop, where they are created and destroyed
+in rapid succession.
+
+Therefore, avoid long [variable] and [constant] names that are over this limit.
+
+On 64-bit systems, this limit is raised to 23 ASCII characters, which is almost always adequate.

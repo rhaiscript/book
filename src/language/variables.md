@@ -69,6 +69,20 @@ is_def_var("y") == false;
 ```
 
 
+Avoid Variable Names Longer Than 11 Characters on 32-Bit System
+--------------------------------------------------------------
+
+Internally, Rhai uses [`SmartString`] which avoids allocations unless a string is over its internal
+limits (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).
+
+On 64-bit systems, _most_ variable names are shorter than 23 characters, so this is unlikely to
+become an issue.
+
+However, on 32-bit systems, take care to limit, where possible, variable names to within 11 characters.
+This is particularly true for local variables inside a hot loop, where they are created and destroyed
+in rapid succession.
+
+
 Use Before Definition
 ---------------------
 
