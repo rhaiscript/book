@@ -31,7 +31,8 @@ itself will also be `Send + Sync`. This is extremely useful in multi-threaded ap
 | `push`, `push_constant`                       | add a new [variable]/[constant] into the `Scope` with a specified value                                                              |
 | `push_dynamic`, `push_constant_dynamic`       | add a new [variable]/[constant] into the `Scope` with a [`Dynamic`] value                                                            |
 | `contains`                                    | does the particular [variable] or [constant] exist in the `Scope`?                                                                   |
-| `get_value<T>`, `get_mut<T>`, `set_value<T>`  | get/set the value of a [variable] within the `Scope` (panics if trying to set the value of a [constant])                             |
+| `get_value<T>`, `get_mut<T>`                  | get the value of a [variable] within the `Scope`                                                                                     |
+| `set_value<T>`                                | set the value of a [variable] within the `Scope`, panics if it is [constant]                                                         |
 | `is_constant`                                 | is the particular [variable] in the `Scope` a [constant]?                                                                            |
 | `set_or_push<T>`                              | set the value of a [variable] within the `Scope` if it exists and is not [constant]; add a new [variable] into the `Scope` otherwise |
 | `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                    |
@@ -96,41 +97,15 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
 ```
 
 
-`Scope` Lifetime &ndash; Avoid Allocations for Variable Names
------------------------------------------------------------
+`Scope` Lifetime Parameter
+--------------------------
 
 The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
 automatically inferred to be `'static`.
 
-The reason for such a lifetime parameter is obviously due to something held inside the `Scope`
-itself being a reference with a lifetime, and that "something" is the name of each [variable] (and
-[constant]) stored within the `Scope`.
+Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
+as well as for possible future expansion when references can also be put into the `Scope`.
 
-Names of [variables] and [constants] are strings, but they do not need to be owned `String` types.
+The lifetime parameter is not guaranteed to remain unused for future versions.
 
-In fact, the names can easily be string slices referencing external data.  This way, no additional
-`String` allocations are needed in order to push a [variable] or [constant] into the `Scope`.
-
-For applications where [variables] and/or [constants] are frequently pushed into and removed from
-a `Scope` in order to run custom scripts, this has significant performance implications.
-
-```rust,no_run
-let mut scope = Scope::new();
-
-scope.push("my_var", 42_i64);                   // &'static str
-
-scope.push(String::from("also_var"),            // String
-    123_i64
-);
-
-// Read a bunch of configuration values from a database
-let items: Vec<_> = script_env.iter()
-                              .map(|id| read_from_db(id))
-                              .collect();
-
-for item in items {
-    // No String allocation for variable name
-    // 'scope' now has lifetime of 'items'
-    scope.push(&item.name, item.value);         // borrowed &str
-}
-```
+In order to put a `Scope` into a `struct`, use `Scope<'static>`.
