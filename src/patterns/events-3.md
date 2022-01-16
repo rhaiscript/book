@@ -4,8 +4,18 @@ Scriptable Event Handler with State<br/>Map Style
 {{#include ../links.md}}
 
 
+Example
+-------
+
+A runnable example of this implementation is included.
+
+See the [_Examples_]({{rootUrl}}/start/examples/index.md) section for details.
+
+
 I Hate `this`!  How Can I Get Rid of It?
 ---------------------------------------
+
+You're using Rust and you don't want people to think you're writing lowly JavaScript?
 
 Taking inspiration from the [_JS Style_](events-2.md), a slight modification of the
 [_Main Style_](events-1.md) is to store all states inside an [object map] inside a custom [`Scope`].
@@ -80,8 +90,8 @@ fn do_action() {
     // Access state: `state.xxx`
     state.number = 42;
 
-    // Add OOP functions
-    state.log = |x| ;
+    // Add OOP functions - you still need to use `this`...
+    state.log = |x| print(`State = ${this.value}, data = ${x}`);
 }
 ```
 

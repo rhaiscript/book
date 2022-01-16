@@ -4,6 +4,14 @@ Scriptable Event Handler with State<br/>JS Style
 {{#include ../links.md}}
 
 
+Example
+-------
+
+A runnable example of this implementation is included.
+
+See the [_Examples_]({{rootUrl}}/start/examples/index.md) section for details.
+
+
 Keep State in Object Map
 ------------------------
 
@@ -31,6 +39,7 @@ struct Handler {
     pub ast: AST
 }
 ```
+
 
 Bind Object Map to `this` Pointer
 --------------------------------
@@ -72,6 +81,7 @@ impl Handler {
 }
 ```
 
+
 Bind `this` Pointer During Events Handling
 -----------------------------------------
 
@@ -95,6 +105,7 @@ pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
     }
 }
 ```
+
 
 Handler Scripting Style
 -----------------------

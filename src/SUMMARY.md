@@ -202,6 +202,9 @@ Usage Patterns
 - [One Engine Instance Per Call](patterns/parallel.md)
 - [Multi-Threaded Synchronization](patterns/multi-threading.md)
 - [Scriptable Event Handler with State](patterns/events.md)
+  - [Main Style](patterns/events-1.md)
+  - [JS Style](patterns/events-2.md)
+  - [Map Style](patterns/events-3.md)
 - [Dynamic Constants Provider](patterns/dynamic-const.md)
 - [Multiple Instantiation](patterns/multiple.md)
 

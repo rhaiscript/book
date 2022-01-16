@@ -3,7 +3,11 @@ Rust Examples
 
 {{#include ../../links.md}}
 
-A number of examples can be found in the `examples` directory:
+
+Standard Examples
+-----------------
+
+A number of examples can be found under `examples`.
 
 | Example                                                                         | Description                                                                                                                     |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -17,6 +21,19 @@ A number of examples can be found in the `examples` directory:
 | [`threading`]({{repoHome}}/examples/threading.rs)                               | shows how to communicate with an [`Engine`] running in a separate thread via an MPSC channel                                    |
 
 
+Scriptable Event Handler With State Examples
+-------------------------------------------
+
+Because of its popularity, the pattern [_Scriptable Event Handler With State_]({{rootUrl}}/patterns/events.md)
+has sample implementations for different styles.
+
+| Example                                                                  | Handler Script                                                                           |                   Description                    |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | :----------------------------------------------: |
+| [`event_handler_main`]({{repoHome}}/examples/event_handler_main/main.rs) | [`event_handler_main/script.rhai`]({{repoHome}}/examples/event_handler_main/script.rhai) | [_Main Style_]({{rootUrl}}/patterns/events-1.md) |
+| [`event_handler_js`]({{repoHome}}/examples/event_handler_js/main.rs)     | [`event_handler_js/script.rhai`]({{repoHome}}/examples/event_handler_js/script.rhai)     |  [_JS Style_]({{rootUrl}}/patterns/events-2.md)  |
+| [`event_handler_map`]({{repoHome}}/examples/event_handler_map/main.rs)   | [`event_handler_map/script.rhai`]({{repoHome}}/examples/event_handler_map/script.rhai)   | [_Map Style_]({{rootUrl}}/patterns/events-3.md)  |
+
+
 Running Examples
 ----------------
 
@@ -26,20 +43,19 @@ Examples can be run with the following command:
 cargo run --example {example_name}
 ```
 
-`no-std` Samples
-----------------
+`no-std` Examples
+-----------------
 
-To illustrate `no-std` builds, a number of sample applications are available under the `no_std` directory:
+To illustrate `no-std` builds, a number of example applications are available under the `no_std` directory:
 
-| Sample                                           | Description                                                                                          | Optimization |                     Allocator                     | Panics |
+| Example                                          | Description                                                                                          | Optimization |                     Allocator                     | Panics |
 | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | :----------: | :-----------------------------------------------: | :----: |
 | [`no_std_test`]({{repoHome}}/no_std/no_std_test) | bare-bones test application that evaluates a Rhai expression and sets the result as the return value |     size     | [`wee_alloc`](https://crates.io/crates/wee_alloc) | abort  |
 
 
-Building the Samples
---------------------
+### Building the `no-std` examples
 
-`cargo run` cannot be used to run a `no-std` sample.  It must first be built:
+Currently, the nightly compiler must be used to build for `no-std`.
 
 ```sh
 cd no_std/no_std_test
