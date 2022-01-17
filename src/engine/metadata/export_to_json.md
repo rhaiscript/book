@@ -20,12 +20,10 @@ Functions from the following sources are included:
 
 1) Script-defined functions in an [`AST`] (for `Engine::gen_fn_metadata_with_ast_to_json`)
 2) Native Rust functions registered into the global namespace via the `Engine::register_XXX` API
-3) Native Rust functions in global modules registered via `Engine::register_global_module` (optional)
-4) _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in static modules
+3) _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in static modules
    registered via `Engine::register_static_module`
-
-Notice that if a function has been [overloaded][function overloading], only the overriding function's
-metadata is included.
+4) Native Rust functions in external [packages] registered via `Engine::register_global_module`
+5) Native Rust functions in [built-in packages] (optional)
 
 
 JSON Schema
