@@ -34,6 +34,16 @@ try out Rhai's language features in a standard REPL (**R**ead-**E**val-**P**rint
 
 Filenames passed to it as command line arguments are run and loaded before the REPL starts.
 
+### Test functions
+
+The following test functions are pre-registered, via `Engine::register_fn`, into `rhai-repl`.
+They are intended for testing purposes.
+
+| Function                             | Description                                |
+| ------------------------------------ | ------------------------------------------ |
+| `test(x: i64, y: i64)`               | returns a string with both numbers         |
+| `test(x: &mut i64, y: i64, z: &str)` | displays the parameters and add `y` to `x` |
+
 ### Example
 
 The following command first runs three scripts &ndash; `init1.rhai`, `init2.rhai` and
