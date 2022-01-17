@@ -59,6 +59,8 @@ operate on object maps.
 
 | Function                    | Parameter(s)                                 | Description                                                                                                                              |
 | --------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `get`                       | property name                                | gets a copy of the value of a certain property ([`()`] if the property does not exist)                                                   |
+| `set`                       | 1) property name<br/>2) new element          | sets a certain property to a new value (property is added if not already exists)                                                         |
 | `len`                       | _none_                                       | returns the number of properties                                                                                                         |
 | `clear`                     | _none_                                       | empties the object map                                                                                                                   |
 | `remove`                    | property name                                | removes a certain property and returns it ([`()`] if the property does not exist)                                                        |
