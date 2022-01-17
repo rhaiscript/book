@@ -3,7 +3,6 @@ Export a Rust Function to Rhai
 
 {{#include ../links.md}}
 
-
 Sometimes only a few ad hoc functions are required and it is simpler to register
 individual functions instead of a full-blown [plugin module].
 

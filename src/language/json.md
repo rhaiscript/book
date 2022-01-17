@@ -10,7 +10,7 @@ A valid JSON string does not start with a hash character `#` while a Rhai [objec
 that's the major difference!
 
 Use the `Engine::parse_json` method to parse a piece of JSON into an [object map].
-The JSON text must represent a single object hash (i.e. must be wrapped within "`{ .. }`")
+The JSON text must represent a single object hash (i.e. must be wrapped within "`{ ... }`")
 otherwise it returns a syntax error.
 
 ```rust,no_run

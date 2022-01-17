@@ -3,7 +3,6 @@
 
 {{#include ../links.md}}
 
-
 If the _first_ parameter of a function is of type `rhai::NativeCallContext`, then it is treated
 specially by the [`Engine`].
 

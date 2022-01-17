@@ -46,7 +46,7 @@ Syntax Highlighting
   Use `rust` when there is no [string interpolation][string]. This way, [closures] and [functions] (via
   the `fn` keyword) are styled properly. Elements not highlighted include:
   * [strings interpolation][string]
-  * the `switch`, [`import`] and [`export`] statements
+  * the [`switch`], [`import`] and [`export`] statements
   * the `this` and [`private`] keywords
   * built-in functions such as `Fn`, `call`, [`type_of`], `is_shared`, `is_def_var`, `is_def_fn`
 

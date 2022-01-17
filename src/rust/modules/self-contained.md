@@ -3,7 +3,6 @@ Compile to a Self-Contained `AST`
 
 {{#include ../../links.md}}
 
-
 When a script [imports][`import`] external [modules] that may not be available later on, it is
 possible to eagerly [_pre-resolve_][module resolver] these imports and embed them directly into a
 self-contained [`AST`].

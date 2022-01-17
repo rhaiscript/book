@@ -54,8 +54,8 @@ pub fn main() -> Result<(), Box<EvalAltResult>>
 ```
 
 
-Using Script Files
-------------------
+Use Script Files
+----------------
 
 Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`
 (not available under [`no_std`] or in [WASM] builds).

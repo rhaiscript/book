@@ -26,7 +26,7 @@ Bits in a bit-field are accessed with zero-based, non-negative integer indices:
 
 > _integer_ `[` _index from 0 to 63 or 31_ `]`
 >
-> _integer_ `[` _index from 0 to 63 or 31_ `] =` `true` _or_ `false` ;
+> _integer_ `[` _index from 0 to 63 or 31_ `] =` `true` or `false` ;
 
 [Ranges] can also be used:
 
@@ -49,7 +49,7 @@ _most-significant bit_, with &minus;1 being the _highest_ bit.
 
 > _integer_ `[` _index from &minus;1 to &minus;64 or &minus;32_ `]`
 >
-> _integer_ `[` _index from &minus;1 to &minus;64 or &minus;32_ `] =` `true` _or_ `false` ;
+> _integer_ `[` _index from &minus;1 to &minus;64 or &minus;32_ `] =` `true` or `false` ;
 
 The maximum bit number that can be accessed is &minus;64 (or &minus;32 under [`only_i32`]).
 

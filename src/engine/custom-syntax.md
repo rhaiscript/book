@@ -33,6 +33,9 @@ Where This Might Be Useful
 * Where you just want to confuse your user and make their lives miserable, because you can.
 
 
+How to Do It
+------------
+
 ### Step One &ndash; Design The Syntax
 
 A custom syntax is simply a list of symbols.
@@ -44,7 +47,7 @@ These symbol types can be used:
 * Reserved [symbols]({{rootUrl}}/appendix/operators.md#symbols).
 * Identifiers following the [variable] naming rules.
 * `$expr$` &ndash; any valid expression, statement or statement block.
-* `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` .. `}`).
+* `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` ... `}`).
 * `$ident$` &ndash; any [variable] name.
 * `$symbol$` &ndash; any [symbol][operator], active or reserved.
 * `$bool$` &ndash; a boolean value.
@@ -86,9 +89,9 @@ The above syntax is made up of a stream of symbols:
 |    4     |     2      |  `$int$`   | an integer number                                                                                        |
 |    5     |            |    `]`     | the right bracket symbol                                                                                 |
 |    6     |            |    `<-`    | the left-arrow symbol (which is a [reserved symbol]({{rootUrl}}/appendix/operators.md#symbols) in Rhai). |
-|    7     |     3      |  `$expr$`  | an expression, which may be enclosed with `{` .. `}`, or not.                                            |
+|    7     |     3      |  `$expr$`  | an expression, which may be enclosed with `{` ... `}`, or not.                                           |
 |    8     |            |    `:`     | the colon symbol                                                                                         |
-|    9     |     4      | `$block$`  | a statement block, which must be enclosed with `{` .. `}`.                                               |
+|    9     |     4      | `$block$`  | a statement block, which must be enclosed with `{` ... `}`.                                              |
 
 This syntax matches the following sample code and generates three inputs (one for each non-keyword):
 
@@ -442,11 +445,11 @@ A custom parser takes as input parameters two pieces of information:
 
 The return value is `Result<Option<ImmutableString>, ParseError>` where:
 
-| Value              | Description                                                                                                                                                                                                                         |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Ok(None)`         | parsing complete and there are no more symbols to match                                                                                                                                                                             |
-| `Ok(Some(symbol))` | the next symbol to match, which can also be `$expr$`, `$ident$` or `$block$`                                                                                                                                                        |
-| `Err(ParseError)`  | error that is reflected back to the [`Engine`] &ndash; normally `ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)` to indicate that there is a syntax error, but it can be any `ParseError`. |
+|       Value        | Description                                                                                                                                                                                                                           |
+| :----------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     `Ok(None)`     | parsing complete and there are no more symbols to match                                                                                                                                                                               |
+| `Ok(Some(symbol))` | the next `symbol` to match, which can also be `$expr$`, `$ident$` or `$block$`                                                                                                                                                        |
+|    `Err(error)`    | `error` that is reflected back to the [`Engine`] &ndash; normally `ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)` to indicate that there is a syntax error, but it can be any `ParseError`. |
 
 A custom parser always returns `Some` with the _next_ symbol expected (which can be `$ident$`,
 `$expr$`, `$block$` etc.) or `None` if parsing should terminate (_without_ reading the

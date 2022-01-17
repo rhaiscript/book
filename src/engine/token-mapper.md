@@ -46,7 +46,7 @@ let mut engine = Engine::new();
 // Register a token mapper function.
 engine.on_parse_token(|token, pos, state| {
     match token {
-        // Change 'begin' .. 'end' to '{' .. '}'
+        // Change 'begin' ... 'end' to '{' ... '}'
         Token::Identifier(s) if &s == "begin" => Token::LeftBrace,
         Token::Identifier(s) if &s == "end" => Token::RightBrace,
 

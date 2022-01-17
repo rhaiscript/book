@@ -14,7 +14,7 @@ metadata of one script-defined [function] in scope.
 3) [Modules] imported via the [`import`] statement (latest imports first),
 4) [Modules] added via [`Engine::register_static_module`]({{rootUrl}}/rust/modules/create.md) (latest registrations first)
 
-The return value is an [array] of [object maps] (so `get_fn_metadata_list` is not available under
+The return value is an [array] of [object maps] (so `get_fn_metadata_list` is also not available under
 [`no_index`] or [`no_object`]), containing the following fields.
 
 | Field          |         Type         | Optional? | Description                                                                         |

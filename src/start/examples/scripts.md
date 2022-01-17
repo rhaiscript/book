@@ -23,7 +23,7 @@ There are also a number of examples scripts that showcase Rhai's features, all i
 | [`function_decl4.rhai`]({{repoHome}}/scripts/function_decl4.rhai) | a [function] acting as a [method]({{rootUrl}}/language/fn-method.md) |
 | [`if1.rhai`]({{repoHome}}/scripts/if1.rhai)                       | [`if`] example                                                       |
 | [`if2.rhai`]({{repoHome}}/scripts/if2.rhai)                       | [`if`]-expression example                                            |
-| [`loop.rhai`]({{repoHome}}/scripts/loop.rhai)                     | count-down [`loop`] in Rhai, emulating a [`do`] .. `while` loop      |
+| [`loop.rhai`]({{repoHome}}/scripts/loop.rhai)                     | count-down [`loop`] in Rhai, emulating a [`do`] ... `while` loop     |
 | [`module.rhai`]({{repoHome}}/scripts/module.rhai)                 | import a script file as a module                                     |
 | [`oop.rhai`]({{repoHome}}/scripts/oop.rhai)                       | simulate [object-oriented programming (OOP)][OOP] with [closures]    |
 | [`op1.rhai`]({{repoHome}}/scripts/op1.rhai)                       | just simple addition                                                 |

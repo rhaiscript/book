@@ -12,8 +12,8 @@ Easy
 * Tight integration with native Rust [functions] and [types][custom types] including
   [getters/setters], [methods][custom type] and [indexers].
 
-* Freely pass Rust values into a script as [variables]/[constants] via an external [`Scope`] &ndash; all clonable
-  Rust types are supported seamlessly without the need to implement any special trait.
+* Freely pass Rust values into a script as [variables]/[constants] via an external [`Scope`] &ndash;
+  all clonable Rust types are supported seamlessly without the need to implement any special trait.
 
 * Easily [call a script-defined function]({{rootUrl}}/engine/call-fn.md) from Rust.
 

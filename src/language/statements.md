@@ -5,7 +5,7 @@ Statements
 
 
 Statements are terminated by semicolons `;` and they are mandatory,
-except for the _last_ statement in a _block_ (enclosed by `{` .. `}` pairs) where it can be omitted.
+except for the _last_ statement in a _block_ (enclosed by `{` ... `}` pairs) where it can be omitted.
 
 Semicolons can also be omitted for statement types that always end in a block &ndash; for example
 the [`if`], [`while`], [`for`],  [`loop`] and [`switch`] statements.

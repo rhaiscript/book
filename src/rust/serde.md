@@ -3,15 +3,14 @@ Serialization and Deserialization of `Dynamic` with `serde`
 
 {{#include ../links.md}}
 
-[`serde`]: https://crates.io/crates/serde
-[`serde::Serialize`]: https://docs.serde.rs/serde/trait.Serialize.html
-[`serde::Deserialize`]: https://docs.serde.rs/serde/trait.Deserialize.html
-
-
 Rhai's [`Dynamic`] type supports serialization and deserialization by
 [`serde`](https://crates.io/crates/serde) via the [`serde`][features] feature.
 
 [`Dynamic`] works _both_ as a _serialization format_ as well as a data type that is serializable.
+
+[`serde`]: https://crates.io/crates/serde
+[`serde::Serialize`]: https://docs.serde.rs/serde/trait.Serialize.html
+[`serde::Deserialize`]: https://docs.serde.rs/serde/trait.Deserialize.html
 
 
 Serialize/Deserialize a `Dynamic`

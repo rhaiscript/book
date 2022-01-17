@@ -22,8 +22,8 @@ if foo(x) {
 Braces Are Mandatory
 --------------------
 
-Unlike C, the condition expression does _not_ need to be enclosed in parentheses `(` .. `)`, but all
-branches of the `if` statement must be enclosed within braces `{` .. `}`, even when there is only
+Unlike C, the condition expression does _not_ need to be enclosed in parentheses `(` ... `)`, but all
+branches of the `if` statement must be enclosed within braces `{` ... `}`, even when there is only
 one statement inside the branch.
 
 Like Rust, there is no ambiguity regarding which `if` clause a branch belongs to.

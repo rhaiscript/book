@@ -17,6 +17,7 @@ print(`hello${x}`);     // prints hello42 to stdout
 debug("world!");        // prints "world!" to stdout using debug formatting
 ```
 
+
 Override `print` and `debug` with Callback Functions
 --------------------------------------------------
 

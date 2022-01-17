@@ -19,7 +19,7 @@ let obj = #{
                 action: || this.data += x    // 'action' holds a closure
            };
 
-obj.action(2);                               // calls the function pointer with `this` bound to 'obj'
+obj.action(2);                               // calls the function pointer with 'this' bound to 'obj'
 
 obj.call(obj.action, 2);                     // <- the above de-sugars to this
 
