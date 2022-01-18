@@ -56,6 +56,7 @@ Rust Integration
   - [Property Getters and Setters](rust/getters-setters.md)
   - [Indexers](rust/indexers.md)
   - [Call Method as Function](rust/methods.md)
+  - [Collection Types](rust/collections.md)
   - [Disable Custom Types](rust/disable-custom.md)
   - [Printing Custom Types](rust/print-custom.md)
 - [Modules](rust/modules/index.md)

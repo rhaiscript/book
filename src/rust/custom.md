@@ -113,27 +113,6 @@ println!("{}", ts1_type);               // prints 'TestStruct'
 ```
 
 
-Collection Types
-----------------
-
-Collection types usually contain the following list of methods.
-
-| Method                                | Description                                                       |
-| ------------------------------------- | ----------------------------------------------------------------- |
-| `push`, `append`<br/>or `+=` operator | adds a particular item to end of the collection                   |
-| `insert`                              | adds a particular item to the collection at a particular position |
-| `merge`<br/>or `+` operator           | merges two collections, yielding a new collection with all items  |
-
-If the collection takes a [`Dynamic`] value (e.g. like an [array]), the type of such an add function
-can take a [`Dynamic`] parameter.
-
-```rust,no_run
-engine.register_fn("push",
-    |col: &mut MyCollectionType, item: Dynamic| col.push(col)
-);
-```
-
-
 `==` Operator
 -------------
 

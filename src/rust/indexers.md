@@ -117,9 +117,9 @@ A typical implementation for negative index values is:
 
 ```rust,no_run
 // The following assumes:
-//   'index' is 'INT', 'items_len: usize' is the number of elements
+//   'index' is 'INT', 'items: usize' is the number of elements
 let actual_index = if index < 0 {
-    index.checked_abs().map_or(0, |n| items_len - (n as usize).min(items_len))
+    index.checked_abs().map_or(0, |n| items - (n as usize).min(items))
 } else {
     index as usize
 };
