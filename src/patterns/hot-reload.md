@@ -9,7 +9,8 @@ Usage Scenario
 
 * A system where scripts are used for behavioral control.
 
-* All or parts of the control scripts need to be modified dynamically without re-initializing the host system.
+* All or parts of the control scripts need to be modified dynamically without re-initializing the
+  host system.
 
 * New scripts must be active as soon as possible after modifications are detected.
 
@@ -19,7 +20,8 @@ Key Concepts
 
 * The Rhai [`Engine`] is _re-entrant_, meaning that it is decoupled from scripts.
 
-* A new script only needs to be recompiled and the new [`AST`] replaces the old for new behaviors to be active.
+* A new script only needs to be recompiled and the new [`AST`] replaces the old for new behaviors
+  to be active.
 
 * Surgically _patch_ scripts when only parts of the scripts are modified.
 
@@ -29,28 +31,29 @@ Implementation
 
 ### Embed scripting engine and script into system
 
-Say, a system has a Rhai [`Engine`] plus a compiled script (in [`AST`] form)...
+Say, a system has a Rhai [`Engine`] plus a compiled script (in [`AST`] form), with the [`AST`] kept
+with interior mutability...
 
 ```rust,no_run
 // Main system object
 struct System {
     engine: Engine,
-    script: AST,
+    script: Rc<RefCell<AST>>,
       :
 }
 
-let mut system = System::new();
-
 // Embed Rhai 'Engine' and control script
-system.engine = Engine::new();
-system.ast = system.engine.compile_file("config.rhai")?;
+let engine = Engine::new();
+let ast = engine.compile_file("config.rhai")?;
+
+let mut system = System { engine, script: Rc::new(RefCell::new(ast)) };
 
 // Handle events with script functions
 system.on_event(|sys: &System, event: &str, data: Map| {
     let mut scope = Scope::new();
 
     // Call script function which is the same name as the event
-    sys.engine.call_fn(&mut scope, &sys.ast, event, (data,)).unwrap();
+    sys.engine.call_fn(&mut scope, sys.script.borrow(), event, (data,)).unwrap();
 
     result
 });
@@ -63,16 +66,18 @@ recompile the whole set of script and replace the original [`AST`] with the new 
 
 ```rust,no_run
 // Watch for script file change
-system.watch(|sys: &mut System, file: &str| {
+system.watch(|sys: &System, file: &str| {
     // Compile the new script
     let ast = sys.engine.compile_file(file.into())?;
 
     // Hot reload - just replace the old script!
-    sys.ast = ast;
+    *sys.script.borrow_mut() = ast;
+
+    Ok(())
 });
 ```
 
-### Hot load specific functions via patching
+### Hot patch specific functions
 
 If the control scripts are large and complicated, and if the system can detect changes to specific [functions],
 it is also possible to _patch_ just the changed [functions].
@@ -91,6 +96,13 @@ system.watch_for_script_change(|sys: &mut System, fn_name: &str| {
     patch_ast.retain_functions(|_, _, name, _| name == fn_name);
 
     // Hot reload (via +=) only those functions in the script!
-    sys.ast += patch_ast;
+    *sys.script.borrow_mut() += patch_ast;
 });
 ```
+
+
+Multi-Threaded Considerations
+-----------------------------
+
+For a multi-threaded environments, replace `Rc` with `Arc`, `RefCell` with `RwLock` or `Mutex`, and
+turn on the [`sync`] feature.

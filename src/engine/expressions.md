@@ -3,9 +3,11 @@ Evaluate Expressions Only
 
 {{#include ../links.md}}
 
-Very often, a use case does not require a full-blown scripting _language_, but only needs to evaluate _expressions_.
+Very often, a use case does not require a full-blown scripting _language_, but only needs to
+evaluate _expressions_.
 
-In these cases, use the `Engine::compile_expression` and `Engine::eval_expression` methods or their `_with_scope` variants.
+In these cases, use the `Engine::compile_expression` and `Engine::eval_expression` methods or their
+`_with_scope` variants.
 
 ```rust,no_run
 let result = engine.eval_expression::<i64>("2 + (10 + 10) * 2")?;

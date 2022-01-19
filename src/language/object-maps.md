@@ -11,16 +11,6 @@ Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
 [`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
 
-Object map literals are built within braces `#{` ... `}` (_name_ `:` _value_ syntax similar to Rust)
-and separated by commas `,`:
-
-> `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `}`
->
-> `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `,` `}`  `// trailing comma is OK`
-
-The property _name_ can be a simple identifier following the same naming rules as [variables],
-or a [string literal][literals] without interpolation.
-
 [`type_of()`] an object map returns `"map"`.
 
 Object maps are disabled via the [`no_object`] feature.
@@ -29,8 +19,22 @@ The maximum allowed size of an object map can be controlled via [`Engine::set_ma
 (see [maximum size of object maps]).
 
 
-Access Properties
------------------
+Literal Syntax
+--------------
+
+Object map literals are built within braces `#{` ... `}` with _name_`:`_value_ pairs separated by
+commas `,`:
+
+> `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `}`
+>
+> `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `,` `}`  `// trailing comma is OK`
+
+The property _name_ can be a simple identifier following the same naming rules as [variables],
+or a [string literal][literals] without interpolation.
+
+
+Property Access Syntax
+----------------------
 
 ### Dot Notation
 

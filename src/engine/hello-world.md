@@ -7,8 +7,8 @@ Your First Script in Rhai
 Run a Script
 ------------
 
-To get going with Rhai is as simple as creating an instance of the scripting engine `rhai::Engine` via
-`Engine::new`, then calling `Engine::run`.
+To get going with Rhai is as simple as creating an instance of the scripting engine `rhai::Engine`
+via `Engine::new`, then calling `Engine::run`.
 
 ```rust,no_run
 use rhai::{Engine, EvalAltResult};
@@ -101,8 +101,8 @@ Unix Shebangs in Script Files
 On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
 
-If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and `Engine::eval_file`.
-Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
+`Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
 
 This behavior is also present for non-Unix (e.g. Windows) environments.
 

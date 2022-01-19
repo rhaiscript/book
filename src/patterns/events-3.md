@@ -20,8 +20,8 @@ You're using Rust and you don't want people to think you're writing lowly JavaSc
 Taking inspiration from the [_JS Style_](events-2.md), a slight modification of the
 [_Main Style_](events-1.md) is to store all states inside an [object map] inside a custom [`Scope`].
 
-Nevertheless, instead of writing `this.variable_name` everywhere to access a state variable (in the
-[_JS Style_](events-2.md)), you'd write `state.variable_name` instead.
+Nevertheless, instead of writing `this.variable_name` everywhere to access a state variable
+(in the [_JS Style_](events-2.md)), you'd write `state.variable_name` instead.
 
 It is up to you to decide whether this is an improvement!
 
@@ -34,8 +34,8 @@ Implementation wise, this style follows closely the [_Main Style_](events-1.md),
 
 Global [constants] can still be added to the custom [`Scope`] as normal and used through the script.
 
-Calls to the `init` [function] no longer need to avoid rewinding the [`Scope`] because state variables
-are added as properties under the states [object map].
+Calls to the `init` [function] no longer need to avoid rewinding the [`Scope`] because state
+[variables] are added as properties under the states [object map].
 
 ```rust,no_run
 impl Handler {

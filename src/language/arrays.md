@@ -5,12 +5,6 @@ Arrays
 
 Arrays are first-class citizens in Rhai.
 
-Array literals are built within square brackets `[` ... `]` and separated by commas `,`:
-
-> `[` _value_ `,` _value_ `,` `...` `,` _value_ `]`
->
-> `[` _value_ `,` _value_ `,` `...` `,` _value_ `,` `]`     `// trailing comma is OK`
-
 All elements stored in an array are [`Dynamic`], and the array can freely grow or shrink with
 elements added or removed.
 
@@ -24,8 +18,18 @@ The maximum allowed size of an array can be controlled via [`Engine::set_max_arr
 (see [maximum size of arrays]).
 
 
-Element Access
+Literal Syntax
 --------------
+
+Array literals are built within square brackets `[` ... `]` and separated by commas `,`:
+
+> `[` _value_ `,` _value_ `,` `...` `,` _value_ `]`
+>
+> `[` _value_ `,` _value_ `,` `...` `,` _value_ `,` `]`     `// trailing comma is OK`
+
+
+Element Access Syntax
+---------------------
 
 ### From beginning
 

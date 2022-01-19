@@ -11,8 +11,8 @@ Rhai's [features] are not strictly additive.  This is easily deduced from the [`
 which prepares the crate for `no-std` builds.  Obviously, turning on this feature has a material
 impact on how Rhai behaves.
 
-Many crates resolve this by going the opposite direction: build for `no-std` in default,
-but add a `std` feature, included by default, which builds for the `stdlib`.
+Many crates resolve this by going the opposite direction: build for `no-std` in default, but add a
+`std` feature, included by default, which builds for the `stdlib`.
 
 
 Rhai Language Features Are Not Additive
@@ -27,16 +27,16 @@ Floating-point numbers do not even parse under this case and will generate synta
 Assume that the project expects this behavior (why? perhaps integers are all that make sense
 within the project domain).
 
-Now, assume that a dependent crate also depends on Rhai. Under such circumstances,
-unless _exact_ versioning is used and the dependent crate depends on a _different_ version
-of Rhai, Cargo automatically _merges_ both dependencies, with the [`no_float`] feature turned on
-because Cargo features are _additive_.
+Now, assume that a dependent crate also depends on Rhai. Under such circumstances, unless _exact_
+versioning is used and the dependent crate depends on a _different_ version of Rhai, Cargo
+automatically _merges_ both dependencies, with the [`no_float`] feature turned on because Cargo
+features are _additive_.
 
-This will break the dependent crate, which does not by itself specify [`no_float`]
-and expects floating-point numbers and math to work normally.
+This will break the dependent crate, which does not by itself specify [`no_float`] and expects
+floating-point numbers and math to work normally.
 
-There is no way out of this dilemma.  Reversing the [features] set with a `float` feature
-causes the project to break because floating-point numbers are not rejected as expected.
+There is no way out of this dilemma.  Reversing the [features] set with a `float` feature causes the
+project to break because floating-point numbers are not rejected as expected.
 
 
 Multiple Instantiations of Rhai Within The Same Project
@@ -66,23 +66,23 @@ rhai_local = { path = "../rhai_copy" }
 The example above creates four different modules: `rhai`, `rhai_github`, `rhai_my_github` and
 `rhai_local`, each referring to a different Rhai copy with the appropriate [features] set.
 
-Only one crate of any particular version can be used from each source, because Cargo merges
-all candidate cases within the same source, adding all [features] together.
+Only one crate of any particular version can be used from each source, because Cargo merges all
+candidate cases within the same source, adding all [features] together.
 
-If more than four different instantiations of Rhai is necessary (why?), create more local repositories
-or GitHub forks or branches.
+If more than four different instantiations of Rhai is necessary (why?), create more local
+repositories or GitHub forks or branches.
 
 
 Caveat &ndash; No Way To Avoid Dependency Conflicts
 --------------------------------------------------
 
-Unfortunately, pulling in Rhai from different sources do not resolve the problem of
-[features] conflict between dependencies.  Even overriding `crates.io` via the `[patch]` manifest
-section doesn't work &ndash; all dependencies will eventually find the only one copy.
+Unfortunately, pulling in Rhai from different sources do not resolve the problem of [features]
+conflict between dependencies.  Even overriding `crates.io` via the `[patch]` manifest section
+doesn't work &ndash; all dependencies will eventually find the only one copy.
 
 What is necessary &ndash; multiple copies of Rhai, one for each dependent crate that requires it,
-together with their _unique_ [features] set intact.  In other words, turning off Cargo's
-crate merging feature _just for Rhai_.
+together with their _unique_ [features] set intact.  In other words, turning off Cargo's crate
+merging feature _just for Rhai_.
 
 Unfortunately, as of this writing, there is no known method to achieve it.
 

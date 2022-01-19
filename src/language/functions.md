@@ -3,7 +3,7 @@ Functions
 
 {{#include ../links.md}}
 
-Rhai supports defining functions in script (unless disabled with [`no_function`]).
+Rhai supports defining functions in script, with a syntax that is very similar to Rust without types.
 
 ```rust,no_run
 fn add(x, y) {
@@ -19,13 +19,15 @@ add(2, 3) == 5;
 sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 ```
 
+Defining functions can be disabled with [`no_function`].
+
 
 Implicit Return
 ---------------
 
 Just like in Rust, an implicit return can be used. In fact, the last statement of a block is
-_always_ the block's return value regardless of whether it is terminated with a semicolon `;`. This
-is different from Rust.
+_always_ the block's return value regardless of whether it is terminated with a semicolon `;`.
+This is different from Rust.
 
 ```rust,no_run
 fn add(x, y) {      // implicit return:
@@ -48,6 +50,8 @@ Global Definitions Only
 
 Functions can only be defined at the global level, never inside a block or another function.
 
+Again, this is different from Rust.
+
 ```rust,no_run
 // Global level is OK
 fn add(x, y) {
@@ -56,7 +60,7 @@ fn add(x, y) {
 
 // The following will not compile
 fn do_addition(x) {
-    fn add_y(n) {   // <- syntax error: functions cannot be defined inside another function
+    fn add_y(n) {   // <- syntax error:  cannot define inside another function
         n + y
     }
 
@@ -76,7 +80,9 @@ They cannot access variables external to the function itself.
 ```rust,no_run
 let x = 42;
 
-fn foo() { x }          // <- syntax error: variable 'x' doesn't exist
+fn foo() {
+    x               // <- error: variable 'x' not found
+}
 ```
 
 
@@ -86,9 +92,13 @@ But Can Call Other Functions and Access Modules
 All functions in the same [`AST`] can call each other.
 
 ```rust,no_run
-fn foo(x) { x + 1 }     // function defined in the global namespace
+fn foo(x) {         // function defined in the global namespace
+    x + 1
+}
 
-fn bar(x) { foo(x) }    // ok! function 'foo' can be called
+fn bar(x) {
+    foo(x)          // ok! function 'foo' can be called
+}
 ```
 
 In addition, [modules] [imported][`import`] at global level can be accessed.
@@ -144,15 +154,17 @@ Use Before Definition Allowed
 
 Unlike C/C++, functions in Rhai can be defined _anywhere_ at global level.
 
-A function does not need to be defined prior to being used in a script;
-a statement in the script can freely call a function defined afterwards.
+A function does not need to be defined prior to being used in a script; a statement in the script
+can freely call a function defined afterwards.
 
 This is similar to Rust and many other modern languages, such as JavaScript's `function` keyword.
 
 ```rust,no_run
-let x = foo(41);            // <- I can do this!
+let x = foo(41);    // <- I can do this!
 
-fn foo(x) { x + 1 }         // <- define 'foo' after use
+fn foo(x) {         // <- define 'foo' after use
+    x + 1
+}
 ```
 
 

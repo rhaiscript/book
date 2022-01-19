@@ -28,7 +28,8 @@ Key Concepts
 
 * User-provided state is initialized by a [function] called via [`Engine::call_fn_raw`][`call_fn`].
 
-* Upon an event, the appropriate event handler [function] in the script is called via [`Engine::call_fn`][`call_fn`].
+* Upon an event, the appropriate event handler [function] in the script is called via
+  [`Engine::call_fn`][`call_fn`].
 
 * Optionally, trap the `EvalAltResult::ErrorFunctionNotFound` error to provide a default implementation.
 

@@ -25,7 +25,9 @@ Key Concepts
 
 * Leverage [function overloading] to simplify the API design.
 
-* Since Rhai is _[sand-boxed]_, it cannot mutate the environment.  To perform external actions via an API, the command object type must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`]) and shared to the [`Engine`].
+* Since Rhai is _[sand-boxed]_, it cannot mutate the environment.  To perform external actions via
+  an API, the command object type must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`])
+  and shared to the [`Engine`].
 
 * Load each command object into a custom [`Scope`] as constant variables.
 
@@ -35,16 +37,16 @@ Key Concepts
 Implementation
 --------------
 
-There are two broad ways for Rhai to control an external system, both of which involve
-wrapping the system in a shared, interior-mutated object.
+There are two broad ways for Rhai to control an external system, both of which involve wrapping the
+system in a shared, interior-mutated object.
 
-This is the other way which involves directly exposing the data structures of the external system
-as a name singleton object in the scripting space.
+This is the other way which involves directly exposing the data structures of the external system as
+a name singleton object in the scripting space.
 
 Use this when the API is complex but has a clear object structure.
 
-For a relatively simple API that is action-based and not object-based,
-use the [Control Layer]({{rootUrl}}/patterns/control.md) pattern instead.
+For a relatively simple API that is action-based and not object-based, use the
+[Control Layer]({{rootUrl}}/patterns/control.md) pattern instead.
 
 
 ### Functional API

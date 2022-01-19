@@ -3,8 +3,8 @@ What Rhai Isn't
 
 {{#include ../links.md}}
 
-Rhai's purpose is to provide a dynamic layer over Rust code, in the same spirit of _zero cost abstractions_.
-It doesn't attempt to be a new language. For example:
+Rhai's purpose is to provide a dynamic layer over Rust code, in the same spirit of _zero cost
+abstractions_. It doesn't attempt to be a new language. For example:
 
 * **No classes**.  Well, Rust doesn't either. On the other hand...
 
@@ -13,9 +13,9 @@ It doesn't attempt to be a new language. For example:
 * **No structures/records/tuples** &ndash; define your types in Rust instead; Rhai can seamlessly
   work with _any Rust type_ that implements `Clone`.
 
-  There is, however, a built-in [object map] type which is adequate for most uses.
-  It is possible to simulate [object-oriented programming (OOP)][OOP] by storing [function pointers]
-  or [closures] in [object map] properties, turning them into _methods_.
+  There is, however, a built-in [object map] type which is adequate for most uses. It is possible to
+  simulate [object-oriented programming (OOP)][OOP] by storing [function pointers] or [closures] in
+  [object map] properties, turning them into _methods_.
 
 * **No first-class functions** &ndash; Code your functions in Rust instead, and register them with Rhai.
 
@@ -39,8 +39,8 @@ It doesn't attempt to be a new language. For example:
   
   In addition, Rhai's design deliberately avoids maintaining a _scope chain_ so function scopes do
   not pay any speed penalty.  This particular design also allows variables data to be kept together
-  in a contiguous block, avoiding allocations and fragmentation while being cache-friendly.
-  In a typical script evaluation run, no data is shared and nothing is locked.
+  in a contiguous block, avoiding allocations and fragmentation while being cache-friendly. In a
+  typical script evaluation run, no data is shared and nothing is locked.
 
   Still, the purpose of Rhai is not to be super _fast_, but to make it as easy and versatile as
   possible to integrate with native Rust applications.
@@ -57,12 +57,12 @@ Do Not Write The Next 4D VR Game in Rhai
 ---------------------------------------
 
 Due to this intended usage, Rhai deliberately keeps the language simple and small by omitting
-advanced language features such as classes, inheritance, interfaces, generics,
-first-class functions/closures, pattern matching, concurrency, byte-codes VM, JIT etc.
-Focus is on _flexibility_ and _ease of use_ instead of raw speed.
+advanced language features such as classes, inheritance, interfaces, generics, first-class
+functions/closures, pattern matching, concurrency, byte-codes VM, JIT etc. Focus is on _flexibility_
+and _ease of use_ instead of raw speed.
 
-Avoid the temptation to write full-fledge application logic entirely in Rhai -
-that use case is best fulfilled by more complete languages such as JavaScript or Lua.
+Avoid the temptation to write full-fledge application logic entirely in Rhai &ndash; that use case
+is best fulfilled by more complete languages such as JavaScript or Lua.
 
 
 Thin Dynamic Wrapper Layer Over Rust Code
@@ -76,6 +76,6 @@ This is similar to some dynamic languages where most of the core functionalities
 standard library.
 
 Another similar scenario is a web front-end driving back-end services written in a systems language.
-In this case, JavaScript takes the role of Rhai while the back-end language, well... it can actually also be Rust.
-Except that Rhai integrates with Rust _much_ more tightly, removing the need for interfaces such
-as XHR calls and payload encoding such as JSON.
+In this case, JavaScript takes the role of Rhai while the back-end language, well... it can actually
+also be Rust. Except that Rhai integrates with Rust _much_ more tightly, removing the need for
+interfaces such as XHR calls and payload encoding such as JSON.

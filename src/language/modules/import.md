@@ -4,7 +4,7 @@ Import a Module
 {{#include ../../links.md}}
 
 
-Before a module can be used (via an `import` statement) in a script, there must be a [module resolver]
+Before a [module] can be used (via an `import` statement) in a script, there must be a [module resolver]
 registered into the [`Engine`], the default being the `FileModuleResolver`.
 
 See the section on [_Module Resolvers_][module resolver] for more details.
@@ -13,11 +13,11 @@ See the section on [_Module Resolvers_][module resolver] for more details.
 `import` Statement
 -----------------
 
-A module can be _imported_ via the `import` statement, and be given a name.
+A [module] can be _imported_ via the `import` statement, and be given a name.
 Its members can be accessed via `::` similar to C++.
 
-A module that is only `import`-ed but not under any module name is commonly used for initialization purposes,
-where the module script contains initialization statements that puts the functions registered with the
+A [module] that is only `import`-ed but not under any [module] name is commonly used for initialization purposes,
+where the [module] script contains initialization statements that puts the [functions] registered with the
 [`Engine`] into a particular state.
 
 ```js
@@ -54,7 +54,7 @@ usually grouped at the beginning of a script so they have _global_ visibility.
 It is not advised to deviate from this common practice unless there is a _Very Good Reason™_.
 
 Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
-same module during every iteration of the loop!
+same [module] during every iteration of the loop!
 
 ```js
 import "hacker" as h;           // import module - visible globally
@@ -89,7 +89,7 @@ for x in 0..1000 {
 Recursive Imports
 ----------------
 
-Beware of _import cycles_ &ndash; i.e. recursively loading the same module. This is a sure-fire way to
+Beware of _import cycles_ &ndash; i.e. recursively loading the same [module]. This is a sure-fire way to
 cause a stack overflow in the [`Engine`], unless stopped by setting a limit for [maximum number of modules].
 
 For instance, importing itself always causes an infinite recursion:
@@ -104,7 +104,7 @@ import "hello" as foo;          // import itself - infinite recursion!
 foo::do_something();
 ```
 
-Modules cross-referencing also cause infinite recursion:
+[Modules] cross-referencing also cause infinite recursion:
 
 ```js
 ┌────────────┐

@@ -3,9 +3,8 @@ Extend Rhai with Custom Syntax
 
 {{#include ../links.md}}
 
-
-For the ultimate adventurous, there is a built-in facility to _extend_ the Rhai language
-with custom-defined _syntax_.
+For the ultimate adventurous, there is a built-in facility to _extend_ the Rhai language with
+custom-defined _syntax_.
 
 But before going off to define the next weird statement type, heed this warning:
 
@@ -15,8 +14,8 @@ Don't Do It™
 
 Stick with standard language syntax as much as possible.
 
-Having to learn Rhai is bad enough, no sane user would ever want to learn _yet_ another
-obscure language syntax just to do something.
+Having to learn Rhai is bad enough, no sane user would ever want to learn _yet_ another obscure
+language syntax just to do something.
 
 Try to use [custom operators] first.  Defining a custom syntax should be considered a _last resort_.
 
@@ -26,7 +25,8 @@ Where This Might Be Useful
 
 * Where an operation is used a _LOT_ and a custom syntax saves a lot of typing.
 
-* Where a custom syntax _significantly_ simplifies the code and _significantly_ enhances understanding of the code's intent.
+* Where a custom syntax _significantly_ simplifies the code and _significantly_ enhances
+  understanding of the code's intent.
 
 * Where certain logic cannot be easily encapsulated inside a function.
 

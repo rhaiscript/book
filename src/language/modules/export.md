@@ -1,30 +1,30 @@
-Export Variables, Functions and Sub-Modules
-==========================================
+Export Variables, Functions and Sub-Modules From a Script
+========================================================
 
 {{#include ../../links.md}}
 
 
-The easiest way to expose a collection of functions as a self-contained [module] is to do it via a Rhai script itself.
+The easiest way to expose a collection of [functions] as a self-contained [module] is to do it via a Rhai script itself.
 
 See the section on [_Creating a Module from AST_]({{rootUrl}}/rust/modules/ast.md) for more details.
 
-The script text is evaluated, variables are then selectively exposed via the [`export`] statement.
-Functions defined by the script are automatically exported.
+The script text is evaluated, [variables] are then selectively exposed via the [`export`] statement.
+[Functions] defined by the script are automatically exported.
 
-Modules loaded within this module at the global level become _sub-modules_ and are also automatically exported.
+Modules loaded within this [module] at the global level become _sub-modules_ and are also automatically exported.
 
 
 Export Global Variables
 ----------------------
 
-The `export` statement, which can only be at global level, exposes selected variables as members of a module.
+The `export` statement, which can only be at global level, exposes selected [variables] as members of a [module].
 
-Variables not exported are _private_ and hidden. They are merely used to initialize the module,
+[Variables] not exported are _private_ and hidden. They are merely used to initialize the [module],
 but cannot be accessed from outside.
 
-Everything exported from a module is **constant** (i.e. read-only).
+Everything exported from a [module] is **[constant]** (i.e. read-only).
 
-```
+```js
 // This is a module script.
 
 let hidden = 123;       // variable not exported - default hidden
@@ -50,9 +50,9 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 
 ### Multiple Exports
 
-One `export` statement can export multiple variables, even under multiple names.
+One `export` statement can export multiple [variables], even under multiple names.
 
-```
+```js
 // The following exports three variables:
 //   - 'x' as 'x' and 'hello'
 //   - 'y' as 'foo' and 'bar'
@@ -64,9 +64,9 @@ export x, x as hello, x as world, y as foo, y as bar, z;
 Export Functions
 ----------------
 
-All functions are automatically exported, _unless_ it is explicitly opt-out with the [`private`] prefix.
+All [functions] are automatically exported, _unless_ it is explicitly opt-out with the [`private`] prefix.
 
-Functions declared [`private`] are hidden to the outside.
+[Functions] declared [`private`] are hidden to the outside.
 
 ```rust,no_run
 // This is a module script.
@@ -76,19 +76,19 @@ fn inc(x) { x + 1 }     // script-defined function - default public
 private fn foo() {}     // private function - hidden
 ```
 
-[`private`] functions are commonly called to initialize the module.
+[`private`] [functions] are commonly called to initialize the [module].
 They cannot be called apart from this.
 
 
 Sub-Modules
 -----------
 
-All loaded modules are automatically exported as sub-modules.
+All loaded [modules] are automatically exported as sub-modules.
 
-To prevent a module from being exported, load it inside a block statement so that it goes away at the
+To prevent a [module] from being exported, load it inside a block statement so that it goes away at the
 end of the block.
 
-```
+```js
 // This is a module script.
 
 import "hello" as foo;      // exported as sub-module 'foo'

@@ -7,7 +7,7 @@ Each [`Dynamic`] value can contain a _tag_ that is `i32` and can contain any arb
 
 On 32-bit targets, however, the tag is only `i16`.
 
-The _tag_ defaults to zero.
+The tag defaults to zero.
 
 It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-bit targets).
 
@@ -112,7 +112,7 @@ for (data, i) in filtered {
 
 ### Identify code conditions
 
-The tag value may also contain a _[bit-field_ of up to 32 (16 under 32-bit targets) individual bits,
+The tag value may also contain a _[bit-field]_ of up to 32 (16 under 32-bit targets) individual bits,
 recording up to 32 (or 16 under 32-bit targets) logic conditions that contributed to the value.
 
 Again, after the script is verified, all tag assignment statements can simply be removed.
@@ -240,7 +240,7 @@ let c = r.tag[16..32];
 TL;DR
 -----
 
-### Q: What is the point of adding value tags to `Dynamic`?
+### Q: Tell me, really, what is the _point_?
 
 Due to byte alignment requirements on modern CPU's, there are unused spaces in a [`Dynamic`] type,
 of the order of 4 bytes on 64-bit targets (2 bytes on 32-bit).

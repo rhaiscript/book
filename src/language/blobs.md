@@ -5,7 +5,9 @@ BLOB's
 
 BLOB's (**B**inary **L**arge **OB**jects), used to hold packed arrays of bytes, have built-in support in Rhai.
 
-A BLOB has no literal representation, but is created via the `blob` function.
+A BLOB has no literal representation, but is created via the `blob` function, or simply returned as
+the result of a function call (e.g. `generate_thumbnail_image` that generates a thumbnail version of
+a large image as a BLOB).
 
 All items stored in a BLOB are bytes (i.e. `u8`) and the BLOB can freely grow or shrink with bytes
 added or removed.
@@ -20,8 +22,8 @@ The maximum allowed size of a BLOB can be controlled via [`Engine::set_max_array
 (see [maximum size of arrays]).
 
 
-Element Access
---------------
+Element Access Syntax
+---------------------
 
 ### From beginning
 

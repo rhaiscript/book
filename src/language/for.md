@@ -8,9 +8,9 @@ is provided by the `for` ... `in` loop.
 
 There are two alternative syntaxes, one including a counter variable:
 
-> `for` _variable-name_ `in` _expression_ `{` ... `}`
+> `for` _variable_ `in` _expression_ `{` ... `}`
 >
-> `for (` _variable-name_ `,` _counter-variable-name_ `)` `in` _expression_ `{` ... `}`
+> `for (` _variable_ `,` _counter_ `)` `in` _expression_ `{` ... `}`
 
 `for` loops can be disabled via [`Engine::set_allow_looping`][options].
 

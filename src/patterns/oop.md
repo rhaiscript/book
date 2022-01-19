@@ -17,20 +17,21 @@ Rhai's [object maps] has [special support for OOP]({{rootUrl}}/language/object-m
 | [Object map] properties holding values                | properties  |
 | [Object map] properties that hold [function pointers] |   methods   |
 
-When a property of an [object map] is called like a method function, and if it happens to hold
-a valid [function pointer] (perhaps defined via an [anonymous function] or more commonly as a [closure]),
-then the call will be dispatched to the actual function with `this` binding to the [object map] itself.
+When a property of an [object map] is called like a method function, and if it happens to hold a
+valid [function pointer] (perhaps defined via an [anonymous function] or more commonly as a [closure]),
+then the call will be dispatched to the actual function with `this` binding to the
+[object map] itself.
 
 
 Use Closures to Define Methods
 -----------------------------
 
-[Anonymous functions] or [closures] defined as values for [object map] properties take on
-a syntactic shape which resembles very closely that of class methods in an OOP language.
+[Anonymous functions] or [closures] defined as values for [object map] properties take on a
+syntactic shape which resembles very closely that of class methods in an OOP language.
 
-Closures also _[capture][automatic currying]_ variables from the defining environment, which is a very
-common language feature.  Capturing is accomplished via a feature called _[automatic currying]_ and
-can be turned off via the [`no_closure`] feature.
+Closures also _[capture][automatic currying]_ variables from the defining environment, which is a
+very common language feature.  Capturing is accomplished via a feature called _[automatic currying]_
+and can be turned off via the [`no_closure`] feature.
 
 ```rust,no_run
 let factor = 1;
@@ -60,8 +61,8 @@ obj.action();                               // prints 84
 Simulating Inheritance with Polyfills
 ------------------------------------
 
-The `fill_with` method of [object maps] can be conveniently used to _polyfill_ default
-method implementations from a _base class_, as per OOP lingo.
+The `fill_with` method of [object maps] can be conveniently used to _polyfill_ default method
+implementations from a _base class_, as per OOP lingo.
 
 Do not use the `mixin` method because it _overwrites_ existing fields.
 

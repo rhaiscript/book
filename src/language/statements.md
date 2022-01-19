@@ -30,16 +30,25 @@ if foo { a = 42 }
 ```
 
 
-Statement Expression
---------------------
+Closed Scope
+------------
 
-A statement can be used anywhere where an expression is expected. These are called, for lack of a more
-creative name, "statement expressions."
+A statement block forms a _closed_ scope. Any [variable] or [constant] defined within the block are
+removed outside the block.
 
-The _last_ statement of a statement block is _always_ the block's return value when used as a statement,
-_regardless_ of whether it is terminated by a semicolon or not. This is different from Rust where,
-if the last statement is terminated by a semicolon, the block's return value is taken to be `()`.
+```rust,no_run
+let x = 42;
+let y = 18;
 
-If the last statement has no return value (e.g. variable definitions, assignments) then it is assumed to be [`()`].
+{
+    const HELLO = 99;
+    let y = 0;
 
-Statement expressions can be disabled via [`Engine::set_allow_statement_expression`][options].
+    print(y + HELLO);   // prints 99 (y is zero)
+        :    
+}                       // <- 'HELLO' and 'y' go away here...
+
+print(x + y);           // prints 60 (y is still 18)
+
+print(HELLO);           // <- error: 'HELLO' not found
+```

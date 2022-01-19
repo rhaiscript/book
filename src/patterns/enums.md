@@ -112,12 +112,11 @@ z.field_0 == "hello";
 z.field_1 == true;
 ```
 
-Since enums are internally treated as [custom types], they are not _literals_ and cannot be
-used as a match case in `switch` expressions.  This is quite a limitation because the equivalent
-`match` statement is commonly used in Rust to work with enums and bind variables to
-variant-internal data.
+Since enums are internally treated as [custom types], they are not _literals_ and cannot be used as
+a match case in [`switch`] statements.  This is quite a limitation because the equivalent `match`
+statement is commonly used in Rust to work with enums and bind variables to variant-internal data.
 
-It is possible, however, to `switch` through enum variants based on their types:
+It is possible, however, to [`switch`] through enum variants based on their types:
 
 ```c , no_run
 switch my_enum.enum_type {
@@ -138,7 +137,7 @@ switch my_enum.enum_type {
 Use `switch` Through Arrays
 ---------------------------
 
-Another way to work with Rust enums in a `switch` expression is through exposing the internal data
+Another way to work with Rust enums in a [`switch`] statement is through exposing the internal data
 (or at least those that act as effective _discriminants_) of each enum variant as a variable-length
 [array], usually with the name of the variant as the first item for convenience:
 
@@ -161,7 +160,7 @@ engine.register_get("enum_data", |my_enum: &mut MyEnum| {
 });
 ```
 
-Then it is a simple matter to match an enum via the `switch` expression.
+Then it is a simple matter to match an enum via a [`switch`] expression.
 
 ```c , no_run
 // Assume 'value' = 'MyEnum::Baz("hello", true)'
@@ -188,11 +187,11 @@ let x = switch [value.type, value.field_0, value.field_1] {
 }
 ```
 
-Usually, a helper method returns an array of values that can uniquely determine
-the switch case based on actual usage requirements &ndash; which means that it probably
-skips fields that contain data instead of discriminants.
+Usually, a helper method returns an [array] of values that can uniquely determine the [`switch`] case
+based on actual usage requirements &ndash; which means that it probably skips fields that contain
+data instead of discriminants.
 
-Then `switch` is used to very quickly match through a large number of array shapes
-and jump to the appropriate case implementation.
+Then [`switch`] is used to very quickly match through a large number of [array] shapes and jump to the
+appropriate case implementation.
 
 Data fields can then be extracted from the enum independently.

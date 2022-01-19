@@ -10,7 +10,7 @@ definition including:
 
 2. Its access mode (public or [private][`private`])
 
-3. Its parameters and types (if any)
+3. Its parameter names and types (if any)
 
 4. Its return value and type (if any)
 
@@ -20,11 +20,11 @@ definition including:
 
 7. Its purpose, in the form of [doc-comments]
 
-8. Usage notes, warnings, etc., in the form of [doc-comments]
+8. Usage notes, warnings, examples etc., in the form of [doc-comments]
 
 A function's _signature_ encapsulates the first four pieces of information in a single
 concise line of definition:
 
-> `[private] fn_name ( param_1: type_1, param_2: type_2, ... , param_n : type_n ) -> return_type`
+> `[private]` _name_ `(`_param 1_`:`_type 1_`,` _param 2_`:`_type 2_`,` ... `,` _param n_`:`_type n_`) ->` _return type_
 
 Exporting metadata requires the [`metadata`] feature.

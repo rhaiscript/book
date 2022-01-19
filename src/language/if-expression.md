@@ -3,7 +3,6 @@ If Expression
 
 {{#include ../links.md}}
 
-
 Like Rust, [`if`] statements can also be used as _expressions_, replacing the `? :` conditional
 operators in other C-like languages.
 
@@ -16,4 +15,4 @@ let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 ```
 
-[`if`]-expressions can be disabled via [`Engine::set_allow_if_expression`][options].
+[`if`] expressions can be disabled via [`Engine::set_allow_if_expression`][options].

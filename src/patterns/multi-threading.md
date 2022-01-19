@@ -88,28 +88,30 @@ Considerations for [`sync`]
 `std::mpsc::Sender` and `std::mpsc::Receiver` are not `Sync`, therefore they cannot be used in
 registered functions if the [`sync`] feature is enabled.
 
-In that situation, it is possible to wrap the `Sender` and `Receiver` each in a `Mutex`,
-which makes them `Sync`. This, however, incurs the additional overhead of locking and unlocking
-the `Mutex` during every function call, which is technically not necessary because there are no
-other references to them.
+In that situation, it is possible to wrap the `Sender` and `Receiver` each in a `Mutex` or `RwLock`,
+which makes them `Sync`.
+
+This, however, incurs the additional overhead of locking and unlocking the `Mutex` or `RwLock`
+during every function call, which is technically not necessary because there are no other references
+to them.
 
 
 Regarding Async Functions
 -------------------------
 
-The example above highlights the fact that Rhai scripts can call any Rust function,
-including ones that are _blocking_.
+The example above highlights the fact that Rhai scripts can call any Rust function, including ones
+that are _blocking_.
 
-However, Rhai is essentially a blocking, single-threaded engine.
-Therefore it does _not_ provide an async API.
+However, Rhai is essentially a blocking, single-threaded engine. Therefore it does _not_ provide an
+async API.
 
 That means, although it is simple to use Rhai within a multi-threading environment where blocking a
-thread is acceptable or even expected, it is currently not possible to call _async_ functions
-within Rhai scripts because there is no mechanism in [`Engine`] to wrap the state of the call stack
-inside a future.
+thread is acceptable or even expected, it is currently not possible to call _async_ functions within
+Rhai scripts because there is no mechanism in [`Engine`] to wrap the state of the call stack inside
+a future.
 
-Fortunately an [`Engine`] is re-entrant so it can be shared among many async tasks.
-It is usually possible to split a script into multiple parts to avoid having to call async functions.
+Fortunately an [`Engine`] is re-entrant so it can be shared among many async tasks. It is usually
+possible to split a script into multiple parts to avoid having to call async functions.
 
 Creating an [`Engine`] is also relatively cheap (extremely cheap if creating a [raw `Engine`]),
 so it is also a valid pattern to spawn a new [`Engine`] instance for each task.

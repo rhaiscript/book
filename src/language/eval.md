@@ -6,7 +6,7 @@
 Or "How to Shoot Yourself in the Foot even Easier"
 ------------------------------------------------
 
-Saving the best for last, there is the ever-dreaded... `eval` function!
+Saving the best for last, there is the ever-dreaded... `eval` [function]!
 
 ```rust,no_run
 let x = 10;
@@ -31,16 +31,16 @@ print(z);                       // <- error: variable 'z' not found
 "print(42)".eval();             // <- nope... method-call style doesn't work with 'eval'
 ```
 
-Script segments passed to `eval` execute inside the current [`Scope`], so they can access and modify _everything_,
-including all variables that are visible at that position in code! It is almost as if the script segments were
-physically pasted in at the position of the `eval` call.
+Script segments passed to `eval` execute inside the current [`Scope`], so they can access and modify
+_everything_, including all variables that are visible at that position in code! It is almost as if
+the script segments were physically pasted in at the position of the `eval` call.
 
 
 Cannot Define New Functions
 --------------------------
 
-New [functions] cannot be defined within an `eval` call, since functions can only be defined at the _global_ level,
-not inside another [function] call!
+New [functions] cannot be defined within an `eval` call, since [functions] can only be defined at
+the _global_ level, not inside another [function] call!
 
 ```rust,no_run
 let script = "x += 32";

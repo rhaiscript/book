@@ -8,8 +8,8 @@ By default, Rhai includes all the standard functionalities in a small, tight pac
 Most features are here to opt-**out** of certain functionalities that are not needed.
 Notice that this deviates from Rust norm where features are _additive_.
 
-Excluding unneeded functionalities can result in smaller, faster builds as well as
-more control over what a script can (or cannot) do.
+Excluding unneeded functionalities can result in smaller, faster builds as well as more control over
+what a script can (or cannot) do.
 
 
 Features that Enable Special Functionalities
@@ -100,11 +100,12 @@ turns on these six features:
 * `no_module` &ndash; no loading external [modules]
 * `no_function` &ndash; no defining [functions]
 
-The resulting scripting engine supports only the `i32` integer numeral type (and no others like `u32`, `i16` or `i64`),
-no floating-point, is `Send + Sync` (so it can be safely used across threads), and does not support defining [functions]
-nor loading external [modules].
+The resulting scripting engine supports only the `i32` integer numeral type (and no others like
+`u32`, `i16` or `i64`), no floating-point, is `Send + Sync` (so it can be safely used across
+threads), and does not support defining [functions] nor loading external [modules].
 
-This configuration is perfect for an expression parser in a 32-bit embedded system without floating-point hardware.
+This configuration is perfect for an expression parser in a 32-bit embedded system without
+floating-point hardware.
 
 
 Caveat &ndash; Features Are Not Additive

@@ -13,8 +13,8 @@ Usage Scenario
 
 * Scripts need to be executed independently from each other, perhaps concurrently.
 
-* Scripts are used to [create Rust closures][`Func`] that are stored and may be called at any time, perhaps concurrently.
-  In this case, the [`Engine`] instance is usually moved into the closure itself.
+* Scripts are used to [create Rust closures][`Func`] that are stored and may be called at any time,
+  perhaps concurrently. In this case, the [`Engine`] instance is usually moved into the closure itself.
 
 
 Key Concepts
@@ -32,16 +32,16 @@ Key Concepts
 
 * Gather up all common custom functions into a [custom package].
 
-  This [custom package] should also include standard [packages] needed.
-  For example, to duplicate `Engine::new`, use a [`StandardPackage`]({{rootUrl}}/rust/packages/builtin.md).
+  This [custom package] should also include standard [packages] needed. For example, to duplicate
+  `Engine::new`, use a [`StandardPackage`]({{rootUrl}}/rust/packages/builtin.md).
   
   [Packages] are sharable, so using a [custom package] is _much cheaper_ than registering all the
   functions one by one.
 
 * Store a global [`AST`] for use with all [`Engine`] instances.
 
-* Always use `Engine::new_raw` to create a [raw `Engine`], instead of `Engine::new` which is _much_ more expensive.
-  A [raw `Engine`] is _extremely_ cheap to create.
+* Always use `Engine::new_raw` to create a [raw `Engine`], instead of `Engine::new` which is _much_
+  more expensive. A [raw `Engine`] is _extremely_ cheap to create.
 
 * Register the [custom package] with the [raw `Engine`] via `Engine::register_global_module`,
   using `Package::as_shared_module` to obtain a shared [module].

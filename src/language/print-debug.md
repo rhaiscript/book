@@ -6,13 +6,13 @@
 The `print` and `debug` functions default to printing to `stdout`, with `debug` using standard debug formatting.
 
 ```js
-print("hello");         // prints hello to stdout
+print("hello");         // prints "hello" to stdout
 
-print(1 + 2 + 3);       // prints 6 to stdout
+print(1 + 2 + 3);       // prints "6" to stdout
 
 let x = 42;
 
-print(`hello${x}`);     // prints hello42 to stdout
+print(`hello${x}`);     // prints "hello42" to stdout
 
 debug("world!");        // prints "world!" to stdout using debug formatting
 ```
@@ -30,19 +30,27 @@ engine.on_print(|x| println!("hello: {}", x));
 
 // Any function or closure that takes a '&str', an 'Option<&str>' and a 'Position' argument
 // can be used to override 'debug'.
-engine.on_debug(|x, src, pos| println!("DEBUG of {} at {:?}: {}", src.unwrap_or("unknown"), pos, x));
+engine.on_debug(|x, src, pos| {
+    let src = src.unwrap_or("unknown");
+    println!("DEBUG of {} at {:?}: {}", src, pos, x)
+});
 
 // Example: quick-'n-dirty logging
 let logbook = Arc::new(RwLock::new(Vec::<String>::new()));
 
 // Redirect print/debug output to 'log'
 let log = logbook.clone();
-engine.on_print(move |s| log.write().unwrap().push(format!("entry: {}", s)));
+engine.on_print(move |s| {
+    let entry = format!("entry: {}", s);
+    log.write().unwrap().push(entry);
+});
 
 let log = logbook.clone();
-engine.on_debug(move |s, src, pos| log.write().unwrap().push(
-                        format!("DEBUG of {} at {:?}: {}", src.unwrap_or("unknown"), pos, s)
-               ));
+engine.on_debug(move |s, src, pos| {
+    let src = src.unwrap_or("unknown");
+    let entry = format!("DEBUG of {} at {:?}: {}", src, pos, s);
+    log.write().unwrap().push(entry);
+});
 
 // Evaluate script
 engine.run(script)?;

@@ -3,12 +3,12 @@ Variable Resolver
 
 {{#include ../links.md}}
 
-By default, Rhai looks up access to [variables] from the enclosing block scope,
-working its way outwards until it reaches the top (global) level, then it
-searches the [`Scope`] that is passed into the `Engine::eval` call.
+By default, Rhai looks up access to [variables] from the enclosing block scope, working its way
+outwards until it reaches the top (global) level, then it searches the [`Scope`] that is passed into
+the `Engine::eval` call.
 
-There is a built-in facility for advanced users to _hook_ into the [variable]
-resolution service and to override its default behavior.
+There is a built-in facility for advanced users to _hook_ into the [variable] resolution service and
+to override its default behavior.
 
 To do so, provide a closure to the [`Engine`] via `Engine::on_var`.
 
@@ -38,19 +38,22 @@ Returned Values are Constants
 [Variable] values, if any returned, are treated as _[constants]_ by the script and cannot be assigned to.
 This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.
 
-In order to change these [variables], it is best to push them into a custom [`Scope`] instead of using
-a variable resolver. Then these [variables] can be assigned to and their updated values read back after
-the script is evaluated.
+In order to change these [variables], it is best to push them into a custom [`Scope`] instead of
+using a variable resolver. Then these [variables] can be assigned to and their updated values read
+back after the script is evaluated.
 
 
 Benefits of Using a Variable Resolver
 ------------------------------------
 
-1. Avoid having to maintain a custom [`Scope`] with all [variables] regardless of need (because a script may not use them all).
+1. Avoid having to maintain a custom [`Scope`] with all [variables] regardless of need
+   (because a script may not use them all).
 
 2. _Short-circuit_ [variable] access, essentially overriding standard behavior.
 
-3. _Lazy-load_ [variables] when they are accessed, not up-front. This benefits when the number of [variables] is very large, when they are timing-dependent, or when they are expensive to load.
+3. _Lazy-load_ [variables] when they are accessed, not up-front.
+   This benefits when the number of [variables] is very large, when they are timing-dependent,
+   or when they are expensive to load.
 
 4. Rename system [variables] on a script-by-script basis without having to construct different [`Scope`]'s.
 

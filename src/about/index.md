@@ -1,3 +1,6 @@
+The Rhai Book
+=============
+
 {{#title The Rhai Book}}
 
 {{#include ../links.md}}

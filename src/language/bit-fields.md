@@ -3,11 +3,11 @@ Integer as Bit-Fields
 
 {{#include ../links.md}}
 
-
 Since bit-wise operators are defined on integer numbers, individual bits can also be accessed and
 manipulated via an indexing syntax.
 
 If a bit is set (i.e. `1`), the index access returns `true`.
+
 If a bit is not set (i.e. `0`), the index access returns `false`.
 
 When a [range] is used, the bits within the [range] are shifted and extracted as an integer value.
@@ -16,11 +16,16 @@ There is nothing here that cannot be done via standard bit-manipulation (i.e. sh
 operations. However, this is an extremely useful, and performant, short-hand since it usually
 replaces a sequence of multiple steps.
 
+Bit-fields are very commonly used in embedded systems, thus a native way to handle them efficiently
+is called for.
+
 Indexing an integer as a bit-field is disabled via the [`no_index`] feature.
 
 
-From Least-Significant Bit (LSB)
--------------------------------
+Syntax
+------
+
+### From Least-Significant Bit (LSB)
 
 Bits in a bit-field are accessed with zero-based, non-negative integer indices:
 
@@ -41,8 +46,7 @@ Bits outside of the [range] are ignored.
 The maximum bit number that can be accessed is 63 (or 31 under [`only_i32`]).
 
 
-From Most-Significant Bit (MSB)
-------------------------------
+### From Most-Significant Bit (MSB)
 
 A _negative_ index accesses a bit in the bit-field counting from the _end_, or from the
 _most-significant bit_, with &minus;1 being the _highest_ bit.

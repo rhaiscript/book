@@ -3,14 +3,13 @@ Plugins
 
 {{#include ../links.md}}
 
-Rhai contains a robust _plugin_ system that greatly simplifies registration of custom
-functionality.
+Rhai contains a robust _plugin_ system that greatly simplifies registration of custom functionality.
 
 Instead of using the complicated `Engine::register_XXX` or [`Module`] API to register Rust functions,
 a _plugin_ simplifies the work of creating and registering new functionality in an [`Engine`].
 
-Plugins are processed via a set of procedural macros under the `rhai::plugin` module. These
-allow registering Rust functions directly in the Engine, or adding Rust modules as packages.
+Plugins are processed via a set of procedural macros under the `rhai::plugin` module. These allow
+registering Rust functions directly in the [`Engine`], or adding Rust modules as [packages].
 
 There are two types of plugins:
 

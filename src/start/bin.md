@@ -26,11 +26,12 @@ or specifically:
 cargo install --path . --bin rhai-run  --features decimal,metadata
 ```
 
+
 `rhai-repl` &ndash; The Rhai REPL Tool
 -------------------------------------
 
-`rhai-repl` is a particularly useful tool &ndash; it allows one to interactively
-try out Rhai's language features in a standard REPL (**R**ead-**E**val-**P**rint **L**oop).
+`rhai-repl` is a particularly useful tool &ndash; it allows one to interactively try out
+Rhai's language features in a standard REPL (**R**ead-**E**val-**P**rint **L**oop).
 
 Filenames passed to it as command line arguments are run and loaded before the REPL starts.
 
@@ -46,9 +47,8 @@ They are intended for testing purposes.
 
 ### Example
 
-The following command first runs three scripts &ndash; `init1.rhai`, `init2.rhai` and
-`init3.rhai` &ndash; loading the functions defined in each script into the _global_
-namespace.
+The following command first runs three scripts &ndash; `init1.rhai`, `init2.rhai` and `init3.rhai` &ndash;
+loading the functions defined in each script into the _global_ namespace.
 
 Then it enters an REPL, which can call the above functions freely.
 
@@ -66,8 +66,7 @@ Filenames passed to it as command line arguments are run in sequence.
 
 ### Example
 
-The following command runs the scripts `script1.rhai`, `script2.rhai` and `script3.rhai`
-in order.
+The following command runs the scripts `script1.rhai`, `script2.rhai` and `script3.rhai` in order.
 
 ```sh
 rhai-run script1.rhai script2.rhai script3.rhai

@@ -21,22 +21,24 @@ Key Concepts
 
 * Leverage [function overloading] to simplify the API design.
 
-* Since Rhai is _[sand-boxed]_, it cannot mutate the environment.  To perform external actions via an API, the actual system must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`]) and shared to the [`Engine`].
+* Since Rhai is _[sand-boxed]_, it cannot mutate the environment.  To perform external actions via
+  an API, the actual system must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`]) and
+  shared to the [`Engine`].
 
 
 Implementation
 --------------
 
-There are two broad ways for Rhai to control an external system, both of which involve
-wrapping the system in a shared, interior-mutated object.
+There are two broad ways for Rhai to control an external system, both of which involve wrapping the
+system in a shared, interior-mutated object.
 
 This is one way which does not involve exposing the data structures of the external system,
 but only through exposing an abstract API primarily made up of functions.
 
 Use this when the API is relatively simple and clean, and the number of functions is small enough.
 
-For a complex API involving lots of functions, or an API that has a clear object structure,
-use the [Singleton Command Object]({{rootUrl}}/patterns/singleton.md) pattern instead.
+For a complex API involving lots of functions, or an API that has a clear object structure, use the
+[Singleton Command Object]({{rootUrl}}/patterns/singleton.md) pattern instead.
 
 
 ### Functional API
@@ -75,8 +77,8 @@ pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
 The trick to building a Control API is to clone the shared API object and
 move it into each function registration via a closure.
 
-Therefore, it is not possible to use a [plugin module] to achieve this, and each function must
-be registered one after another.
+Therefore, it is not possible to use a [plugin module] to achieve this, and each function must be
+registered one after another.
 
 ```rust,no_run
 // Notice 'move' is used to move the shared API object into the closure.
@@ -135,11 +137,11 @@ if bunny_get_speed() > 50 { bunny_set_speed(50); }
 Caveat
 ------
 
-Although this usage pattern appears a perfect fit for _game_ logic, avoid writing the
-_entire game_ in Rhai.  Performance will not be acceptable.
+Although this usage pattern appears a perfect fit for _game_ logic, avoid writing the _entire game_
+in Rhai.  Performance will not be acceptable.
 
-Implement as much functionalities of the game engine in Rust as possible.
-Rhai integrates well with Rust so this is usually not a hinderance.
+Implement as much functionalities of the game engine in Rust as possible. Rhai integrates well with
+Rust so this is usually not a hinderance.
 
-Lift as much out of Rhai as possible.
-Use Rhai only for the logic that _must_ be dynamic or hot-loadable.
+Lift as much out of Rhai as possible. Use Rhai only for the logic that _must_ be dynamic or
+hot-loadable.

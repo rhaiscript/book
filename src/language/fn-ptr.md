@@ -4,9 +4,9 @@ Function Pointers
 {{#include ../links.md}}
 
 It is possible to store a _function pointer_ in a variable just like a normal value.
-In fact, internally a function pointer simply stores the _name_ of the function as a [string].
+In fact, internally a function pointer simply stores the _name_ of the [function] as a [string].
 
-A function pointer is created via the `Fn` function, which takes a [string] parameter.
+A function pointer is created via the `Fn` [function], which takes a [string] parameter.
 
 Call a function pointer using the `call` method.
 
@@ -19,9 +19,9 @@ using a [raw `Engine`]) operate on function pointers.
 
 | Function                           | Parameter(s) | Description                                                                                      |
 | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------ |
-| `name` method and property         | _none_       | returns the name of the function encapsulated by the function pointer                            |
+| `name` method and property         | _none_       | returns the name of the [function] encapsulated by the function pointer                          |
 | `is_anonymous` method and property | _none_       | does the function pointer refer to an [anonymous function]? Not available under [`no_function`]. |
-| `call`                             | _arguments_  | calls the function matching the function pointer's name with the _arguments_                     |
+| `call`                             | _arguments_  | calls the [function] matching the function pointer's name with the _arguments_                   |
 
 
 Examples
@@ -58,11 +58,21 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 ```
 
 
-Global Namespace Only
---------------------
+Warning &ndash; NOT First-Class Functions
+----------------------------------------
+
+Beware that function pointers are _not_ first-class functions.
+
+They are _syntactic sugar_ only, capturing the _name_ of a [function] to call.
+
+The actual [function] must be defined in order for the call to succeed.
+
+
+Warning &ndash; Global Namespace Only
+------------------------------------
 
 Because of their dynamic nature, function pointers cannot refer to functions in [`import`]-ed [modules].
-They can only refer to functions within the global [namespace][function namespace].
+They can only refer to [functions] within the global [namespace][function namespace].
 See _[Function Namespaces]_ for more details.
 
 ```js

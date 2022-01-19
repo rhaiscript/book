@@ -18,22 +18,22 @@ use rhai::plugin::*;
 `#[export_module]`
 ------------------
 
-When applied to a Rust module, the `#[export_module]` attribute generates the necessary
-code and metadata to allow Rhai access to its public (i.e. marked `pub`) functions, constants
-and sub-modules.
+When applied to a Rust module, the `#[export_module]` attribute generates the necessary code and
+metadata to allow Rhai access to its public (i.e. marked `pub`) functions, constants and
+sub-modules.
 
-This code is exactly what would need to be written by hand to achieve the same goal,
-and is custom fit to each exported item.
+This code is exactly what would need to be written by hand to achieve the same goal, and is custom
+fit to each exported item.
 
-All `pub` functions become registered functions, all `pub` constants become [module] constant variables,
-and all sub-modules become Rhai sub-modules.
+All `pub` functions become registered functions, all `pub` constants become [module] [constants],
+and all sub-modules become Rhai sub-[modules].
 
-This Rust module can then be registered into an [`Engine`] as a normal [module].
-This is done via the `exported_module!` macro.
+This Rust module can then be registered into an [`Engine`] as a normal [module]. This is done via
+the `exported_module!` macro.
 
-The macro `combine_with_exported_module!` can be used to _combine_ all the functions
-and variables into an existing [module], _flattening_ the namespace &ndash; i.e. all sub-modules
-are eliminated and their contents promoted to the top level.  This is typical for
+The macro `combine_with_exported_module!` can be used to _combine_ all the functions and variables
+into an existing [module], _flattening_ the [namespace][function namespace] &ndash; i.e. all
+sub-modules are eliminated and their contents promoted to the top level.  This is typical for
 developing [custom packages].
 
 ```rust,no_run
@@ -95,13 +95,13 @@ mod my_module {
 ### Doc-comments
 
 If the [`metadata`] feature is active, doc-comments (i.e. comments starting with `///` or wrapped
-with `/**` ... `*/`) on plugin functions are extracted into the functions' [_metadata_][functions metadata].
+with `/**` ... `*/`) on plugin functions are extracted into [_metadata_][functions metadata].
 
 
 ### Use `Engine::register_global_module`
 
-The simplest way to register this into an [`Engine`] is to first use the `exported_module!` macro
-to turn it into a normal Rhai [module], then use the `Engine::register_global_module` method on it:
+The simplest way to register this into an [`Engine`] is to first use the `exported_module!` macro to
+turn it into a normal Rhai [module], then use the `Engine::register_global_module` method on it:
 
 ```rust,no_run
 fn main() {
@@ -115,8 +115,8 @@ fn main() {
 }
 ```
 
-The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`)
-are automatically registered into the [`Engine`] when `Engine::register_global_module` is called.
+The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`) are
+automatically registered into the [`Engine`] when `Engine::register_global_module` is called.
 
 ```rust,no_run
 let x = greet("world");
@@ -139,8 +139,8 @@ Variables as well as sub-modules are **ignored**.
 
 ### Use `Engine::register_static_module`
 
-Another simple way to register this into an [`Engine`] is, again, to use the `exported_module!` macro
-to turn it into a normal Rhai [module], then use `Engine::register_static_module` on it.
+Another simple way to register this into an [`Engine`] is, again, to use the `exported_module!`
+macro to turn it into a normal Rhai [module], then use `Engine::register_static_module` on it.
 
 ```rust,no_run
 fn main() {
@@ -155,7 +155,7 @@ fn main() {
 ```
 
 The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`),
-plus the constant `MY_NUMBER`, are automatically registered under the module namespace `service`:
+plus the constant `MY_NUMBER`, are automatically registered under the module [namespace][function namespace] `service`:
 
 ```rust,no_run
 let x = service::greet("world");
@@ -175,11 +175,10 @@ x == 43;
 
 All functions (usually _methods_) defined in the module and marked with `#[rhai_fn(global)]`,
 as well as all [type iterators], are automatically exposed to the _global_ namespace, so
-[iteration][`for`], [getters/setters] and [indexers] for [custom types]
-can work as expected.
+[iteration][`for`], [getters/setters] and [indexers] for [custom types] can work as expected.
 
-In fact, the default for all [getters/setters] and [indexers] defined in a plugin module
-is `#[rhai_fn(global)]` unless specifically overridden by `#[rhai_fn(internal)]`.
+In fact, the default for all [getters/setters] and [indexers] defined in a plugin module is
+`#[rhai_fn(global)]` unless specifically overridden by `#[rhai_fn(internal)]`.
 
 Therefore, in the example above, the `increment` method (defined with `#[rhai_fn(global)]`)
 works fine when called in method-call style:
@@ -199,14 +198,14 @@ See the [module] section for more information.
 
 ### Combine into Custom Package
 
-Finally the plugin module can also be used to develop a [custom package], using
+Finally, the plugin module can also be used to develop a [custom package], using
 `combine_with_exported_module!` which automatically _flattens_ the module namespace so that all
-functions in sub-modules are promoted to the top level [namespace][function namespace],
-all sub-modules are eliminated, and all variables are ignored.
+functions in sub-modules are promoted to the top level [namespace][function namespace], all
+sub-modules are eliminated, and all variables are ignored.
 
-Due to this _flattening_, sub-modules are used conveniently as a _grouping_ mechanism,
-especially to put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a
-large collection of functions without having to duplicate the gates onto individual functions.
+Due to this _flattening_, sub-modules are used conveniently as a _grouping_ mechanism, especially to
+put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a large collection of functions
+without having to duplicate the gates onto individual functions.
 
 ```rust,no_run
 #[export_module]
@@ -304,8 +303,8 @@ mod my_module {
 Getters, Setters and Indexers
 -----------------------------
 
-Functions can be marked as [getters/setters] and [indexers] for [custom types]
-via the `#[rhai_fn]` attribute, which is applied on a function level.
+Functions can be marked as [getters/setters] and [indexers] for [custom types] via the
+`#[rhai_fn]` attribute, which is applied on a function level.
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -345,8 +344,8 @@ Multiple Registrations
 
 Parameters to the `#[rhai_fn(...)]` attribute can be applied multiple times.
 
-This is especially useful for the `name = "..."`, `get = "..."` and `set = "..."` parameters
-to give multiple alternative names to the same function.
+This is especially useful for the `name = "..."`, `get = "..."` and `set = "..."` parameters to give
+multiple alternative names to the same function.
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -442,8 +441,8 @@ To register [fallible functions] (i.e. functions that may return errors), apply 
 `#[rhai_fn(return_raw)]` attribute on functions that return `Result<T, Box<EvalAltResult>>`
 where `T` is any clonable type.
 
-A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not
-have the appropriate return type.
+A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not have the
+appropriate return type.
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -466,8 +465,8 @@ mod my_module {
 `NativeCallContext` Parameter
 ----------------------------
 
-The _first_ parameter of a function can also be [`NativeCallContext`], which is treated
-specially by the plugins system.
+The _first_ parameter of a function can also be [`NativeCallContext`], which is treated specially by
+the plugins system.
 
 
 `#[export_module]` Parameters

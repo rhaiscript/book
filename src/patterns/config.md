@@ -9,11 +9,14 @@ Usage Scenario
 
 * A system where settings and configurations are complex and logic-driven.
 
-* Where said system is too complex to configure via standard configuration file formats such as `JSON`, `TOML` or `YAML`.
+* Where said system is too complex to configure via standard configuration file formats such as
+  `JSON`, `TOML` or `YAML`.
 
-* The system is complex enough to require a full programming language to configure. Essentially _configuration by code_.
+* The system is complex enough to require a full programming language to configure.
+  Essentially _configuration by code_.
 
-* Yet the configuration must be flexible, late-bound and dynamically loadable, just like a configuration file.
+* Yet the configuration must be flexible, late-bound and dynamically loadable, just like a
+  configuration file.
 
 
 Key Concepts
@@ -21,11 +24,14 @@ Key Concepts
 
 * Leverage the loadable [modules] of Rhai.  The [`no_module`] feature must not be on.
 
-* Expose the configuration API.  Use separate scripts to configure that API.  Dynamically load scripts via the `import` statement.
+* Expose the configuration API.  Use separate scripts to configure that API.
+  Dynamically load scripts via the `import` statement.
 
 * Leverage [function overloading] to simplify the API design.
 
-* Since Rhai is _sand-boxed_, it cannot mutate the environment.  To modify the external configuration object via an API, it must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`]) and shared to the [`Engine`].
+* Since Rhai is _sand-boxed_, it cannot mutate the environment.  To modify the external
+  configuration object via an API, it must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for
+  [`sync`]) and shared to the [`Engine`].
 
 
 Implementation
@@ -59,11 +65,11 @@ let config: SharedConfig = Arc<Mutex<Config>>;
 
 ### Register config API
 
-The trick to building a Config API is to clone the shared configuration object and
-move it into each function registration via a closure.
+The trick to building a Config API is to clone the shared configuration object and move it into each
+function registration via a closure.
 
-Therefore, it is not possible to use a [plugin module] to achieve this, and each function must
-be registered one after another.
+Therefore, it is not possible to use a [plugin module] to achieve this, and each function must be
+registered one after another.
 
 ```rust,no_run
 // Notice 'move' is used to move the shared configuration object into the closure.

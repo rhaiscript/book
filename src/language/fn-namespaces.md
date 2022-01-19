@@ -6,9 +6,9 @@ Function Namespaces
 Each Function is a Separate Compilation Unit
 -------------------------------------------
 
-[Functions] in Rhai are _pure_ and they form individual _compilation units_.
-This means that individual [functions] can be separated, exported, re-grouped, imported,
-and generally mix-'n-matched with other completely unrelated scripts.
+[Functions] in Rhai are _pure_ and they form individual _compilation units_. This means that
+individual [functions] can be separated, exported, re-grouped, imported, and generally
+mix-'n-matched with other completely unrelated scripts.
 
 For example, the `AST::merge` and `AST::combine` methods (or the equivalent `+` and `+=` operators)
 allow combining all [functions] in one [`AST`] into another, forming a new, unified, group of [functions].
@@ -19,15 +19,15 @@ Namespace Types
 
 In general, there are two main types of _namespaces_ where [functions] are looked up:
 
-| Namespace | Quantity | Source                                                                                                                                                                                                                                          | Lookup                   | Sub-modules? | Variables? |
-| --------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | :----------: | :--------: |
-| Global    |   one    | 1) [`AST`] being evaluated<br/>2) `Engine::register_XXX` API<br/>3) global [modules] registered via `Engine::register_global_module`<br/>4) [functions] in static [modules] registered via `Engine::register_static_module` and marked _global_ | simple name              |   ignored    |  ignored   |
-| Module    |   many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                                     | namespace-qualified name |     yes      |    yes     |
+| Namespace | Quantity | Source                                                                                                                                                                                                                                 | Lookup                   | Sub-modules? | Variables? |
+| --------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | :----------: | :--------: |
+| Global    |   one    | 1) [`AST`] being evaluated<br/>2) `Engine::register_XXX` API<br/>3) global registered [modules]<br/>4) [functions] in [imported][`import`] [modules] marked _global_<br/>5) [functions] in registered static [modules] marked _global_ | simple name              |   ignored    |  ignored   |
+| Module    |   many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                            | namespace-qualified name |     yes      |    yes     |
 
 ### Module Namespaces
 
-There can be multiple [module] namespaces at any time during a script evaluation, usually loaded via the
-[`import`] statement.
+There can be multiple [module] namespaces at any time during a script evaluation, usually loaded via
+the [`import`] statement.
 
 _Static_ [module] namespaces can also be registered into an [`Engine`] via `Engine::register_static_module`.
 
@@ -54,11 +54,15 @@ There is one _global_ namespace for every [`Engine`], which includes (in the fol
 
 * all native Rust functions and iterators registered via the `Engine::register_XXX` API,
 
-* all functions and iterators defined in global [modules] that are registered into the [`Engine`] via `register_global_module`,
+* all functions and iterators defined in global [modules] that are registered into the [`Engine`]
+  via `register_global_module`,
 
-* [functions] defined in [modules] registered into the [`Engine`] via `register_static_module` that
-  are specifically marked for exposure to the global [namespace][function namespace] (e.g. via the
-  `#[rhai(global)]` attribute in a [plugin module]).
+* functions defined in [modules] registered into the [`Engine`] via `register_static_module` that
+  are specifically marked for exposure to the global namespace (e.g. via the `#[rhai(global)]`
+  attribute in a [plugin module]).
+
+* [functions] defined in [imported][`import`] [modules] that are specifically marked for exposure to
+  the global namespace (e.g. via the `#[rhai(global)]` attribute in a [plugin module]).
 
 Anywhere in a Rhai script, when a function call is made, the function is searched within the
 global namespace, in the above search order.

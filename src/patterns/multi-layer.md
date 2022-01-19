@@ -1,5 +1,5 @@
-Multi-Layer Functions
-=====================
+Multi-Layered Functions
+=======================
 
 {{#include ../links.md}}
 
@@ -13,13 +13,31 @@ Usage Scenario
 
 * Higher layers each provide progressively more specific implementations of the same [functions].
 
-* A more specific [function], if defined in a higher layer, always overrides the implementation in a lower layer.
+* A more specific [function], if defined in a higher layer, always overrides the implementation
+  in a lower layer.
 
 * This is akin to object-oriented programming but with [functions].
 
-* This type of system is extremely convenient for dynamic business rules configuration, setting corporate-wide
-  policies, granting permissions for specific roles etc. where specific, local rules need to override
-  corporate-wide defaults.
+* This type of system is extremely convenient for dynamic business rules configuration, setting
+  corporate-wide policies, granting permissions for specific roles etc. where specific, local rules
+  need to override corporate-wide defaults.
+
+
+Practical Scenario
+------------------
+
+Assuming a LOB (line-of-business) system for a large MNC (multi-national corporation) with branches,
+facilities and offices across the global.
+
+The system needs to provide basic, corporate-wide policies to be enforced through the worldwide
+organization, but also cater for country- or region-specific rules, practices and regulations.
+
+|    Layer    | Description                                         |
+| :---------: | --------------------------------------------------- |
+| `corporate` | corporate-wide policies                             |
+| `regional`  | regional policy overrides                           |
+|  `country`  | country-specific modifications for legal compliance |
+|  `office`   | special treatments for individual office locations  |
 
 
 Key Concepts
@@ -29,19 +47,19 @@ Key Concepts
 
 * The lowest layer script is compiled into a base [`AST`].
 
-* Higher layer scripts are also compiled into [`AST`] and _combined_ into the base using `AST::combine`
-  (or the `+=` operator), overriding any existing [functions].
+* Higher layer scripts are also compiled into [`AST`] and _combined_ into the base using
+  `AST::combine` (or the `+=` operator), overriding any existing [functions].
 
 
 Examples
 --------
 
-Assume the following four scripts:
+Assume the following four scripts, one for each layer:
 
 ```rust,no_run
-┌──────────────┐
-│ default.rhai │
-└──────────────┘
+┌────────────────┐
+│ corporate.rhai │
+└────────────────┘
 
 // Default implementation of 'foo'.
 fn foo(x) { x + 1 }
@@ -53,9 +71,9 @@ fn bar(x, y) { x + y }
 fn no_touch() { throw "do not touch me!"; }
 
 
-┌─────────────┐
-│ lowest.rhai │
-└─────────────┘
+┌───────────────┐
+│ regional.rhai │
+└───────────────┘
 
 // Specific implementation of 'foo'.
 fn foo(x) { x * 2 }
@@ -64,9 +82,9 @@ fn foo(x) { x * 2 }
 fn baz() { print("hello!"); }
 
 
-┌─────────────┐
-│ middle.rhai │
-└─────────────┘
+┌──────────────┐
+│ country.rhai │
+└──────────────┘
 
 // Specific implementation of 'bar'.
 fn bar(x, y) { x - y }
@@ -75,9 +93,9 @@ fn bar(x, y) { x - y }
 fn baz() { print("hey!"); }
 
 
-┌──────────────┐
-│ highest.rhai │
-└──────────────┘
+┌─────────────┐
+│ office.rhai │
+└─────────────┘
 
 // Specific implementation of 'foo'.
 fn foo(x) { x + 42 }
@@ -88,30 +106,30 @@ Load and combine them sequentially:
 ```rust,no_run
 let engine = Engine::new();
 
-// Compile the baseline default implementations.
-let mut ast = engine.compile_file("default.rhai".into())?;
+// Compile the baseline layer.
+let mut ast = engine.compile_file("corporate.rhai".into())?;
 
 // Combine the first layer.
-let lowest = engine.compile_file("lowest.rhai".into())?;
+let lowest = engine.compile_file("regional.rhai".into())?;
 ast += lowest;
 
 // Combine the second layer.
-let middle = engine.compile_file("middle.rhai".into())?;
+let middle = engine.compile_file("country.rhai".into())?;
 ast += lowest;
 
 // Combine the third layer.
-let highest = engine.compile_file("highest.rhai".into())?;
+let highest = engine.compile_file("office.rhai".into())?;
 ast += lowest;
 
 // Now, 'ast' contains the following functions:
 //
-// fn no_touch() {              // from 'default.rhai'
+// fn no_touch() {                // from 'corporate.rhai'
 //     throw "do not touch me!";
 // }
-// fn foo(x) { x + 42 }         // from 'highest.rhai'
-// fn bar(x, y) { x - y }       // from 'middle.rhai'
-// fn baz() { print("hey!"); }  // from 'middle.rhai'
+// fn foo(x) { x + 42 }           // from 'regional.rhai'
+// fn bar(x, y) { x - y }         // from 'country.rhai'
+// fn baz() { print("hey!"); }    // from 'office.rhai'
 ```
 
-Unfortunately, there is no `super` call that calls the base implementation
-(i.e. no way for a higher-layer function to call an equivalent lower-layer function).
+Unfortunately, there is no `super` call that calls the base implementation (i.e. no way for a
+higher-layer function to call an equivalent lower-layer function).

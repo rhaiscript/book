@@ -1,4 +1,4 @@
-Get Function Signatures in Rust
+Get Native Function Signatures
 ==============================
 
 {{#include ../../links.md}}
@@ -8,9 +8,9 @@ Get Function Signatures in Rust
 --------------------------
 
 As part of a _reflections_ API, `Engine::gen_fn_signatures` returns a list of function _signatures_
-(as `Vec<String>`), each corresponding to a particular function available to that [`Engine`] instance.
+(as `Vec<String>`), each corresponding to a particular native function available to that [`Engine`] instance.
 
-> `fn_name ( param_1:` _type 1_`, param_2:` _type 2_`, ... , param_n :` _type n_ `) ->` _return type_
+> _name_ `(`_param 1_`:`_type 1_`,` _param 2_`:`_type 2_`,` ... `,` _param n_`:`_type n_`) ->` _return type_
 
 The [`metadata`] feature must be used to turn on this API.
 
