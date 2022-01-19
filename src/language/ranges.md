@@ -133,3 +133,67 @@ using a [raw `Engine`]) operate on ranges.
 | `contains`, [`in`] operator        | number to check | does this range contain the specified number? |
 | `is_inclusive` method and property |                 | is the range inclusive?                       |
 | `is_exclusive` method and property |                 | is the range exclusive?                       |
+
+
+TL;DR
+-----
+
+### Q: What happened to the _open-ended_ ranges?
+
+Rust has _open-ended_ ranges, such as `start..`, `..end` and `..=end`.  They are not available in Rhai.
+
+They are not needed because Rhai can [overload][function overloading] functions.
+
+Typically, an API accepting ranges as parameters would have equivalent versions that accept a
+starting position and a length (the standard `start + len` pair), as well as a versions that accept
+only the starting position (the length assuming to the end).
+
+In fact, usually all versions redirect to a call to one single version.
+
+For example, a naive implementation of the `extract` method for [arrays] (without any error handling)
+would look like:
+
+```rust,no_run
+use std::ops::{Range, RangeInclusive};
+
+// Version with exclusive range
+#[rhai_fn(name = "extract", pure)]
+pub fn extract_range(array: &mut Array, range: Range<i64>) -> Array {
+    array[range].to_vec()
+}
+// Version with inclusive range
+#[rhai_fn(name = "extract", pure)]
+pub fn extract_range2(array: &mut Array, range: RangeInclusive<i64>) -> Array {
+    extract_range(array, range.start()..range.end() + 1)
+}
+// Version with start
+#[rhai_fn(name = "extract", pure)]
+pub fn extract_to_end(array: &mut Array, start: i64) -> Array {
+    extract_range(array, start..start + array.len())
+}
+// Version with start+len
+#[rhai_fn(name = "extract", pure)]
+pub fn extract(array: &mut Array, start: i64, len: i64) -> Array {
+    extract_range(array, start..start + len)
+}
+```
+
+Therefore, there should always be a function that can do what open-ended ranges are intended for.
+
+The left-open form (i.e. `..end` and `..=end`) is trivially replaced by using zero as the starting
+position with a length that corresponds to the end position (for `..end`).
+
+The right-open form (i.e. `start..`) is trivially replaced by the version taking a single starting position.
+
+```rust,no_run
+let x = [1, 2, 3, 4, 5];
+
+x.extract(0..3);    // normal range argument
+                    // copies 'x' from positions 0-2
+
+x.extract(2);       // copies 'x' from position 2 onwards
+                    // equivalent to '2..'
+
+x.extract(0, 2);    // copies 'x' from beginning for 2 items
+                    // equivalent to '..2'
+```
