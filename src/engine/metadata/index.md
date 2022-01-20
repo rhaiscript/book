@@ -14,16 +14,16 @@ definition including:
 
 4. Its return value and type (if any)
 
-5. Its nature (i.e. native Rust-based or Rhai script-based)
+5. Its nature (i.e. native Rust or Rhai-scripted)
 
-6. Its [namespace][function namespace] (module or global)
+6. Its [namespace][function namespace] ([module] or global)
 
 7. Its purpose, in the form of [doc-comments]
 
 8. Usage notes, warnings, examples etc., in the form of [doc-comments]
 
-A function's _signature_ encapsulates the first four pieces of information in a single
-concise line of definition:
+A function's _signature_ encapsulates the first four pieces of information in a single concise line
+of definition:
 
 > `[private]` _name_ `(`_param 1_`:`_type 1_`,` _param 2_`:`_type 2_`,` ... `,` _param n_`:`_type n_`) ->` _return type_
 

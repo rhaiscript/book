@@ -32,8 +32,8 @@ Beware, however, that not all function signatures contain parameters and return 
 
 ### `Engine::register_XXX`
 
-For instance, functions registered via `Engine::register_XXX` contain no information on
-the names of parameter because Rust simply does not make such metadata available natively.
+For instance, functions registered via `Engine::register_XXX` contain no information on the names of
+parameter because Rust simply does not make such metadata available natively.
 
 Type names, however, _are_ provided.
 
@@ -41,8 +41,7 @@ A function registered under the name `foo` with three parameters.
 
 > `foo(_: i64, _: char, _: &str) -> String`
 
-An [operator] function.
-Notice that function names do not need to be valid identifiers.
+An [operator] function. Notice that function names do not need to be valid identifiers.
 
 > `+=(_: &mut i64, _: i64)`
 
@@ -77,17 +76,17 @@ which is really the same as:
 Functions defined in [plugin modules] are the best.
 They contain all metadata describing the functions, including [doc-comments].
 
-For example, a plugin function `merge`:
+For example, a plugin function `combine`:
 
 > `/// This is a doc-comment, included in this function's metadata.`  
-> `merge(list: &mut MyStruct<i64>, num: usize, name: &str) -> bool`
+> `combine(list: &mut MyStruct<i64>, num: usize, name: &str) -> bool`
 
 Notice that function names do not need to be valid identifiers.
 
 For example, an [operator] defined as a [fallible function] in a [plugin module] via
 `#[rhai_fn(name="+=", return_raw)]` returns `Result<bool, Box<EvalAltResult>>`:
 
-> `+=(list: &mut MyStruct<i64>, num: usize, name: &str) -> Result<bool, Box<EvalAltResult>>`
+> `+=(list: &mut MyStruct<i64>, value: &str) -> Result<bool, Box<EvalAltResult>>`
 
 For example, a [property getter][getters/setters] defined in a [plugin module]:
 
