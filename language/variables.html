@@ -164,15 +164,21 @@
                     <main>
                         <h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
 <h2 id="valid-names"><a class="header" href="#valid-names">Valid Names</a></h2>
-<p>Variables in Rhai follow normal C naming rules – must contain only ASCII letters, digits and underscores <code>_</code>,
-and cannot start with a digit.</p>
-<p>For example: <code>_c3po</code> and <code>r2d2</code> are valid variable names, but <code>3abc</code> is not.</p>
-<p>However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII letter must come before any digit.
-In other words, the first character that is not an underscore <code>_</code> must be an ASCII letter and not a digit.</p>
-<p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.
-This restriction is to reduce confusion because, for instance, <code>_1</code> can easily be misread (or mistyped) as <code>-1</code>.</p>
+<p>Variables in Rhai follow normal C naming rules – must contain only ASCII letters, digits and underscores <code>_</code>.</p>
+<table><thead><tr><th style="text-align: center">Character set</th><th>Description</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>A</code> … <code>Z</code></td><td>Upper-case ASCII letters</td></tr>
+<tr><td style="text-align: center"><code>a</code> … <code>z</code></td><td>Lower-case ASCII letters</td></tr>
+<tr><td style="text-align: center"><code>0</code> … <code>9</code></td><td>Digit characters</td></tr>
+<tr><td style="text-align: center"><code>_</code></td><td>Underscore character</td></tr>
+</tbody></table>
+<p>However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII
+letter must come <em>before</em> any digits. In other words, the first character that is not an underscore <code>_</code>
+must be an ASCII letter and not a digit.</p>
+<p>This restriction is to reduce confusion because, for instance, <code>_1</code> can easily be misread (or mistyped) as <code>-1</code>.</p>
+<p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.</p>
+<p>For example: <code>c3po</code> and <code>_r2d2_</code> are valid variable names, but <code>3abc</code> and <code>____49steps</code> are not.</p>
 <p>Variable names are case <em>sensitive</em>.</p>
-<p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a>.</p>
+<p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a> (active or reserved).</p>
 <h3 id="unicode-standard-annex-31-identifiers"><a class="header" href="#unicode-standard-annex-31-identifiers">Unicode Standard Annex #31 Identifiers</a></h3>
 <p>The <a href="/book/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
 <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>.</p>
@@ -212,14 +218,24 @@ is_def_var(&quot;_x&quot;) == true;
 is_def_var(&quot;y&quot;) == false;
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="avoid-variable-names-longer-than-11-characters-on-32-bit-system"><a class="header" href="#avoid-variable-names-longer-than-11-characters-on-32-bit-system">Avoid Variable Names Longer Than 11 Characters on 32-Bit System</a></h2>
+<h2 id="avoid-variable-names-longer-than-11-letters-on-32-bit-targets"><a class="header" href="#avoid-variable-names-longer-than-11-letters-on-32-bit-targets">Avoid Variable Names Longer Than 11 Letters on 32-Bit Targets</a></h2>
 <p>Internally, Rhai uses <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> which avoids allocations unless a string is over its internal
 limits (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).</p>
-<p>On 64-bit systems, <em>most</em> variable names are shorter than 23 characters, so this is unlikely to
-become an issue.</p>
-<p>However, on 32-bit systems, take care to limit, where possible, variable names to within 11 characters.
-This is particularly true for local variables inside a hot loop, where they are created and destroyed
-in rapid succession.</p>
+<p>On 64-bit systems, <em>most</em> variable names are shorter than 23 letters, so this is unlikely to become
+an issue.</p>
+<p>However, on 32-bit systems, take care to limit, where possible, variable names to within 11 letters.
+This is particularly true for local variables inside a hot loop, where they are created and
+destroyed in rapid succession.</p>
+<pre><code class="language-js">// The following is SLOW on 32-bit
+for my_super_loop_variable in array {
+    print(`Super! ${my_super_loop_variable}`);
+}
+
+// Suggested revision:
+for loop_var in array {
+    print(`Super! ${loop_var}`);
+}
+</code></pre>
 <h2 id="use-before-definition"><a class="header" href="#use-before-definition">Use Before Definition</a></h2>
 <p>By default, variables do not need to be defined before they are used.
 If a variable accessed by a script is not defined previously, within the same script,

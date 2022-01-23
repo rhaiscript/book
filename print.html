@@ -165,7 +165,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.4.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.4.1</strong> of Rhai.</p>
 <p>For the latest development version, see <a href="about//book/vnext/">here</a>.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <h3 id="etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner"><a class="header" href="#etymology-of-the-name-rhai-as-per-rhais-author-johnathan-turner">Etymology of the name “Rhai” as per Rhai’s author Johnathan Turner</a></h3>
@@ -478,7 +478,7 @@ Scripts can be evaluated directly from the editor.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.4.0&quot;    # assuming 1.4.0 is the latest version
+rhai = &quot;1.4.1&quot;    # assuming 1.4.1 is the latest version
 </code></pre>
 <p>Or to automatically use the latest released crate version on <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
@@ -542,7 +542,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.4.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;1.4.1&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>turns on these six features:</p>
 <ul>
@@ -760,7 +760,7 @@ engine.on_print(|text| println!(&quot;{}&quot;, text));
 
 engine.on_debug(|text, source, pos| {
     if let Some(source) = source {
-        println!(&quot;{}{:?} | {}&quot;, source, pos, text);
+        println!(&quot;{} @ {:?} | {}&quot;, source, pos, text);
     } else if pos.is_none() {
         println!(&quot;{}&quot;, text);
     } else {
@@ -818,7 +818,7 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <tr><td><code>Extend::extend</code></td><td>add <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.4.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.4.1/rhai/struct.Scope.html">documentation</a> online.</p>
 <h2 id="shadowing"><a class="header" href="#shadowing">Shadowing</a></h2>
 <p>A newly-added <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/language/constants.html">constant</a> <em>shadows</em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="engine//book/language/variables.html">variables</a> and <a href="engine//book/language/constants.html">constants</a>, but only the latest ones can
@@ -2614,7 +2614,7 @@ which converts a normal Rust module into a Rhai <a href="rust/modules//book/rust
 <p>Manually creating a <a href="rust/modules//book/rust/modules/index.html">module</a> is possible via the <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, which is volatile and may
 change from time to time.</p>
 <p>For the complete <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.4.0/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.4.1/rhai/struct.Module.html">documentation</a> online.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <p>A <a href="rust/modules//book/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="rust/modules//book/engine/compile.html"><code>AST</code></a>) containing global <a href="rust/modules//book/language/variables.html">variables</a>,
@@ -3932,7 +3932,7 @@ The main <code>lib.rs</code> module can contain the <a href="rust/packages//book
 name = &quot;my-package&quot;     # 'my-package' crate
 
 [dependencies]
-rhai = &quot;1.4.0&quot;    # assuming 1.4.0 is the latest version
+rhai = &quot;1.4.1&quot;    # assuming 1.4.1 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -3989,7 +3989,7 @@ def_package! {
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.4.0&quot;
+rhai = &quot;1.4.1&quot;
 rhai-rand = &quot;0.1&quot;       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -4019,7 +4019,7 @@ engine.register_global_module(random.as_shared_module());
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version=&quot;1.4.0&quot;, features = [&quot;no_float&quot;] }
+rhai = { version=&quot;1.4.1&quot;, features = [&quot;no_float&quot;] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&quot;array&quot;] }
@@ -6471,15 +6471,21 @@ x[1][2].prop = do_calculation();
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
 <h2 id="valid-names"><a class="header" href="#valid-names">Valid Names</a></h2>
-<p>Variables in Rhai follow normal C naming rules – must contain only ASCII letters, digits and underscores <code>_</code>,
-and cannot start with a digit.</p>
-<p>For example: <code>_c3po</code> and <code>r2d2</code> are valid variable names, but <code>3abc</code> is not.</p>
-<p>However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII letter must come before any digit.
-In other words, the first character that is not an underscore <code>_</code> must be an ASCII letter and not a digit.</p>
-<p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.
-This restriction is to reduce confusion because, for instance, <code>_1</code> can easily be misread (or mistyped) as <code>-1</code>.</p>
+<p>Variables in Rhai follow normal C naming rules – must contain only ASCII letters, digits and underscores <code>_</code>.</p>
+<table><thead><tr><th style="text-align: center">Character set</th><th>Description</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>A</code> … <code>Z</code></td><td>Upper-case ASCII letters</td></tr>
+<tr><td style="text-align: center"><code>a</code> … <code>z</code></td><td>Lower-case ASCII letters</td></tr>
+<tr><td style="text-align: center"><code>0</code> … <code>9</code></td><td>Digit characters</td></tr>
+<tr><td style="text-align: center"><code>_</code></td><td>Underscore character</td></tr>
+</tbody></table>
+<p>However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII
+letter must come <em>before</em> any digits. In other words, the first character that is not an underscore <code>_</code>
+must be an ASCII letter and not a digit.</p>
+<p>This restriction is to reduce confusion because, for instance, <code>_1</code> can easily be misread (or mistyped) as <code>-1</code>.</p>
+<p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.</p>
+<p>For example: <code>c3po</code> and <code>_r2d2_</code> are valid variable names, but <code>3abc</code> and <code>____49steps</code> are not.</p>
 <p>Variable names are case <em>sensitive</em>.</p>
-<p>Variable names also cannot be the same as a <a href="language//book/appendix/keywords.html">keyword</a>.</p>
+<p>Variable names also cannot be the same as a <a href="language//book/appendix/keywords.html">keyword</a> (active or reserved).</p>
 <h3 id="unicode-standard-annex-31-identifiers"><a class="header" href="#unicode-standard-annex-31-identifiers">Unicode Standard Annex #31 Identifiers</a></h3>
 <p>The <a href="language//book/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
 <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>.</p>
@@ -6519,14 +6525,24 @@ is_def_var(&quot;_x&quot;) == true;
 is_def_var(&quot;y&quot;) == false;
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="avoid-variable-names-longer-than-11-characters-on-32-bit-system"><a class="header" href="#avoid-variable-names-longer-than-11-characters-on-32-bit-system">Avoid Variable Names Longer Than 11 Characters on 32-Bit System</a></h2>
+<h2 id="avoid-variable-names-longer-than-11-letters-on-32-bit-targets"><a class="header" href="#avoid-variable-names-longer-than-11-letters-on-32-bit-targets">Avoid Variable Names Longer Than 11 Letters on 32-Bit Targets</a></h2>
 <p>Internally, Rhai uses <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> which avoids allocations unless a string is over its internal
 limits (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).</p>
-<p>On 64-bit systems, <em>most</em> variable names are shorter than 23 characters, so this is unlikely to
-become an issue.</p>
-<p>However, on 32-bit systems, take care to limit, where possible, variable names to within 11 characters.
-This is particularly true for local variables inside a hot loop, where they are created and destroyed
-in rapid succession.</p>
+<p>On 64-bit systems, <em>most</em> variable names are shorter than 23 letters, so this is unlikely to become
+an issue.</p>
+<p>However, on 32-bit systems, take care to limit, where possible, variable names to within 11 letters.
+This is particularly true for local variables inside a hot loop, where they are created and
+destroyed in rapid succession.</p>
+<pre><code class="language-js">// The following is SLOW on 32-bit
+for my_super_loop_variable in array {
+    print(`Super! ${my_super_loop_variable}`);
+}
+
+// Suggested revision:
+for loop_var in array {
+    print(`Super! ${loop_var}`);
+}
+</code></pre>
 <h2 id="use-before-definition"><a class="header" href="#use-before-definition">Use Before Definition</a></h2>
 <p>By default, variables do not need to be defined before they are used.
 If a variable accessed by a script is not defined previously, within the same script,
@@ -6813,7 +6829,7 @@ fn foo(x) {
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="logic-operators"><a class="header" href="#logic-operators">Logic Operators</a></h1>
 <h2 id="comparison-operators"><a class="header" href="#comparison-operators">Comparison Operators</a></h2>
-<table><thead><tr><th style="text-align: center">Operator</th><th>Description<br/>(<code>x</code> <em>operator</em> <code>y</code>)</th><th style="text-align: center"><code>x</code>, <code>y</code> same type, or numeric</th><th style="text-align: center"><code>x</code>, <code>y</code> different types</th></tr></thead><tbody>
+<table><thead><tr><th style="text-align: center">Operator</th><th>Description<br/>(<code>x</code> <em>operator</em> <code>y</code>)</th><th style="text-align: center"><code>x</code>, <code>y</code> same type or are numeric</th><th style="text-align: center"><code>x</code>, <code>y</code> different types</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>==</code></td><td><code>x</code> is equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>!=</code></td><td><code>x</code> is not equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>true</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>&gt;</code></td><td><code>x</code> is greater than <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
@@ -6821,7 +6837,8 @@ fn foo(x) {
 <tr><td style="text-align: center"><code>&lt;</code></td><td><code>x</code> is less than <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 </tbody></table>
-<p>Comparison between most values of the same type are built in for all <a href="language//book/language/values-and-types.html">standard types</a>.</p>
+<p>Comparison operators between most values of the same type are built in for all <a href="language//book/language/values-and-types.html">standard types</a>.</p>
+<p>Others are defined in the <a href="language//book/rust/packages/builtin.html"><code>LogicPackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>.</p>
 <h3 id="floating-point-numbers-interoperate-with-integers"><a class="header" href="#floating-point-numbers-interoperate-with-integers">Floating-point numbers interoperate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code>) with an integer is also supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -8707,10 +8724,10 @@ definition including:</p>
 <p>Its return value and type (if any)</p>
 </li>
 <li>
-<p>Its nature (i.e. native Rust-based or Rhai script-based)</p>
+<p>Its nature (i.e. native Rust or Rhai-scripted)</p>
 </li>
 <li>
-<p>Its <a href="engine/metadata//book/language/fn-namespaces.html">namespace</a> (module or global)</p>
+<p>Its <a href="engine/metadata//book/language/fn-namespaces.html">namespace</a> (<a href="engine/metadata//book/rust/modules/index.html">module</a> or global)</p>
 </li>
 <li>
 <p>Its purpose, in the form of <a href="engine/metadata//book/language/doc-comments.html">doc-comments</a></p>
@@ -8719,21 +8736,28 @@ definition including:</p>
 <p>Usage notes, warnings, examples etc., in the form of <a href="engine/metadata//book/language/doc-comments.html">doc-comments</a></p>
 </li>
 </ol>
-<p>A function’s <em>signature</em> encapsulates the first four pieces of information in a single
-concise line of definition:</p>
+<p>A function’s <em>signature</em> encapsulates the first four pieces of information in a single concise line
+of definition:</p>
 <blockquote>
 <p><code>[private]</code> <em>name</em> <code>(</code><em>param 1</em><code>:</code><em>type 1</em><code>,</code> <em>param 2</em><code>:</code><em>type 2</em><code>,</code> … <code>,</code> <em>param n</em><code>:</code><em>type n</em><code>) -&gt;</code> <em>return type</em></p>
 </blockquote>
 <p>Exporting metadata requires the <a href="engine/metadata//book/start/features.html"><code>metadata</code></a> feature.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="get-functions-metadata-in-scripts"><a class="header" href="#get-functions-metadata-in-scripts">Get Functions Metadata in Scripts</a></h1>
-<p>The built-in function <code>get_fn_metadata_list</code> returns an array of <a href="language//book/language/object-maps.html">object maps</a>, each containing the
-metadata of one script-defined <a href="language//book/language/functions.html">function</a> in scope.</p>
+<p>The built-in function <code>get_fn_metadata_list</code> returns an <a href="language//book/language/arrays.html">array</a> of <a href="language//book/language/object-maps.html">object maps</a>, each containing
+the metadata of one script-defined <a href="language//book/language/functions.html">function</a> in scope.</p>
+<p><code>get_fn_metadata_list</code> has a few versions taking different parameters:</p>
+<table><thead><tr><th>Signature</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>get_fn_metadata_list()</code></td><td>returns an <a href="language//book/language/arrays.html">array</a> for <em>all</em> script-defined <a href="language//book/language/functions.html">functions</a></td></tr>
+<tr><td><code>get_fn_metadata_list(name)</code></td><td>returns an <a href="language//book/language/arrays.html">array</a> containing all script-defined <a href="language//book/language/functions.html">functions</a> matching a specified name</td></tr>
+<tr><td><code>get_fn_metadata_list(name, params)</code></td><td>returns an <a href="language//book/language/arrays.html">array</a> containing all script-defined <a href="language//book/language/functions.html">functions</a> matching a specified name and accepting the specified number of parameters</td></tr>
+</tbody></table>
 <p><a href="language//book/language/functions.html">Functions</a> from the following sources are returned, in order:</p>
 <ol>
 <li>Encapsulated script environment (e.g. when loading a <a href="language//book/rust/modules/index.html">module</a> from a script file),</li>
 <li>Current script,</li>
+<li><a href="language//book/rust/modules/index.html">Modules</a> registered via <code>Engine::register_global_module</code> (latest registrations first)</li>
 <li><a href="language//book/rust/modules/index.html">Modules</a> imported via the <a href="language//book/language/modules/import.html"><code>import</code></a> statement (latest imports first),</li>
-<li><a href="language//book/rust/modules/index.html">Modules</a> added via <a href="language//book/rust/modules/create.html"><code>Engine::register_static_module</code></a> (latest registrations first)</li>
+<li><a href="language//book/rust/modules/index.html">Modules</a> added via <code>Engine::register_static_module</code> (latest registrations first)</li>
 </ol>
 <p>The return value is an <a href="language//book/language/arrays.html">array</a> of <a href="language//book/language/object-maps.html">object maps</a> (so <code>get_fn_metadata_list</code> is also not available under
 <a href="language//book/start/features.html"><code>no_index</code></a> or <a href="language//book/start/features.html"><code>no_object</code></a>), containing the following fields.</p>
@@ -8764,15 +8788,14 @@ registered via <code>Engine::register_static_module</code>.</li>
 <h2 id="functions-metadata-1"><a class="header" href="#functions-metadata-1">Functions Metadata</a></h2>
 <p>Beware, however, that not all function signatures contain parameters and return value information.</p>
 <h3 id="engineregister_xxx"><a class="header" href="#engineregister_xxx"><code>Engine::register_XXX</code></a></h3>
-<p>For instance, functions registered via <code>Engine::register_XXX</code> contain no information on
-the names of parameter because Rust simply does not make such metadata available natively.</p>
+<p>For instance, functions registered via <code>Engine::register_XXX</code> contain no information on the names of
+parameter because Rust simply does not make such metadata available natively.</p>
 <p>Type names, however, <em>are</em> provided.</p>
 <p>A function registered under the name <code>foo</code> with three parameters.</p>
 <blockquote>
 <p><code>foo(_: i64, _: char, _: &amp;str) -&gt; String</code></p>
 </blockquote>
-<p>An <a href="engine/metadata//book/appendix/operators.html#operators">operator</a> function.
-Notice that function names do not need to be valid identifiers.</p>
+<p>An <a href="engine/metadata//book/appendix/operators.html#operators">operator</a> function. Notice that function names do not need to be valid identifiers.</p>
 <blockquote>
 <p><code>+=(_: &amp;mut i64, _: i64)</code></p>
 </blockquote>
@@ -8805,16 +8828,16 @@ fn foo(x, y, z) {
 <h3 id="plugin-functions"><a class="header" href="#plugin-functions">Plugin Functions</a></h3>
 <p>Functions defined in <a href="engine/metadata//book/plugins/module.html">plugin modules</a> are the best.
 They contain all metadata describing the functions, including <a href="engine/metadata//book/language/doc-comments.html">doc-comments</a>.</p>
-<p>For example, a plugin function <code>merge</code>:</p>
+<p>For example, a plugin function <code>combine</code>:</p>
 <blockquote>
 <p><code>/// This is a doc-comment, included in this function's metadata.</code><br />
-<code>merge(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; bool</code></p>
+<code>combine(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; bool</code></p>
 </blockquote>
 <p>Notice that function names do not need to be valid identifiers.</p>
 <p>For example, an <a href="engine/metadata//book/appendix/operators.html#operators">operator</a> defined as a <a href="engine/metadata//book/rust/fallible.html">fallible function</a> in a <a href="engine/metadata//book/plugins/module.html">plugin module</a> via
 <code>#[rhai_fn(name=&quot;+=&quot;, return_raw)]</code> returns <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code>:</p>
 <blockquote>
-<p><code>+=(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>+=(list: &amp;mut MyStruct&lt;i64&gt;, value: &amp;str) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>For example, a <a href="engine/metadata//book/rust/getters-setters.html">property getter</a> defined in a <a href="engine/metadata//book/plugins/module.html">plugin module</a>:</p>
 <blockquote>
@@ -10236,7 +10259,7 @@ the optimization level to <a href="engine/optimize//book/engine/optimize/optimiz
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/rust/modules/index.html">modules</a>
 are imported recursively.</p>
 <p>Most of the <a href="engine//book/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/start/features.html"><code>internals</code></a> feature.</p>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.4.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.4.1/rhai/struct.AST.html">documentation</a> online.</p>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/start/features.html"><code>no_function</code></a>, allow manipulation of the functions
 encapsulated within an <a href="engine//book/engine/compile.html"><code>AST</code></a>:</p>
@@ -10585,9 +10608,9 @@ a normal expression.</p>
 are parsed in the order defined within the custom syntax.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.4.1/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
 <p>The function <code>Engine::on_parse_token</code>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.4.1/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <h2 id="function-signature-2"><a class="header" href="#function-signature-2">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_parse_token</code> takes the following form.</p>
 <blockquote>
@@ -10595,9 +10618,9 @@ are parsed in the order defined within the custom syntax.</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
-<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.4.0/rhai/enum.Token.html">token</a></td></tr>
-<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.4.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.4.1/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.4.1/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.4.1/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
 <h3 id="raising-errors"><a class="header" href="#raising-errors">Raising errors</a></h3>
 <p>It is possible to raise a parsing error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
@@ -13194,7 +13217,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.4.0&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;1.4.1&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }

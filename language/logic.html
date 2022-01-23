@@ -164,7 +164,7 @@
                     <main>
                         <h1 id="logic-operators"><a class="header" href="#logic-operators">Logic Operators</a></h1>
 <h2 id="comparison-operators"><a class="header" href="#comparison-operators">Comparison Operators</a></h2>
-<table><thead><tr><th style="text-align: center">Operator</th><th>Description<br/>(<code>x</code> <em>operator</em> <code>y</code>)</th><th style="text-align: center"><code>x</code>, <code>y</code> same type, or numeric</th><th style="text-align: center"><code>x</code>, <code>y</code> different types</th></tr></thead><tbody>
+<table><thead><tr><th style="text-align: center">Operator</th><th>Description<br/>(<code>x</code> <em>operator</em> <code>y</code>)</th><th style="text-align: center"><code>x</code>, <code>y</code> same type or are numeric</th><th style="text-align: center"><code>x</code>, <code>y</code> different types</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>==</code></td><td><code>x</code> is equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>!=</code></td><td><code>x</code> is not equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>true</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>&gt;</code></td><td><code>x</code> is greater than <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
@@ -172,7 +172,8 @@
 <tr><td style="text-align: center"><code>&lt;</code></td><td><code>x</code> is less than <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 </tbody></table>
-<p>Comparison between most values of the same type are built in for all <a href="/book/language/values-and-types.html">standard types</a>.</p>
+<p>Comparison operators between most values of the same type are built in for all <a href="/book/language/values-and-types.html">standard types</a>.</p>
+<p>Others are defined in the <a href="/book/rust/packages/builtin.html"><code>LogicPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
 <h3 id="floating-point-numbers-interoperate-with-integers"><a class="header" href="#floating-point-numbers-interoperate-with-integers">Floating-point numbers interoperate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code>) with an integer is also supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">

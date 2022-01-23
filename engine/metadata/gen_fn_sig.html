@@ -182,15 +182,14 @@ registered via <code>Engine::register_static_module</code>.</li>
 <h2 id="functions-metadata"><a class="header" href="#functions-metadata">Functions Metadata</a></h2>
 <p>Beware, however, that not all function signatures contain parameters and return value information.</p>
 <h3 id="engineregister_xxx"><a class="header" href="#engineregister_xxx"><code>Engine::register_XXX</code></a></h3>
-<p>For instance, functions registered via <code>Engine::register_XXX</code> contain no information on
-the names of parameter because Rust simply does not make such metadata available natively.</p>
+<p>For instance, functions registered via <code>Engine::register_XXX</code> contain no information on the names of
+parameter because Rust simply does not make such metadata available natively.</p>
 <p>Type names, however, <em>are</em> provided.</p>
 <p>A function registered under the name <code>foo</code> with three parameters.</p>
 <blockquote>
 <p><code>foo(_: i64, _: char, _: &amp;str) -&gt; String</code></p>
 </blockquote>
-<p>An <a href="/book/appendix/operators.html#operators">operator</a> function.
-Notice that function names do not need to be valid identifiers.</p>
+<p>An <a href="/book/appendix/operators.html#operators">operator</a> function. Notice that function names do not need to be valid identifiers.</p>
 <blockquote>
 <p><code>+=(_: &amp;mut i64, _: i64)</code></p>
 </blockquote>
@@ -223,16 +222,16 @@ fn foo(x, y, z) {
 <h3 id="plugin-functions"><a class="header" href="#plugin-functions">Plugin Functions</a></h3>
 <p>Functions defined in <a href="/book/plugins/module.html">plugin modules</a> are the best.
 They contain all metadata describing the functions, including <a href="/book/language/doc-comments.html">doc-comments</a>.</p>
-<p>For example, a plugin function <code>merge</code>:</p>
+<p>For example, a plugin function <code>combine</code>:</p>
 <blockquote>
 <p><code>/// This is a doc-comment, included in this function's metadata.</code><br />
-<code>merge(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; bool</code></p>
+<code>combine(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; bool</code></p>
 </blockquote>
 <p>Notice that function names do not need to be valid identifiers.</p>
 <p>For example, an <a href="/book/appendix/operators.html#operators">operator</a> defined as a <a href="/book/rust/fallible.html">fallible function</a> in a <a href="/book/plugins/module.html">plugin module</a> via
 <code>#[rhai_fn(name=&quot;+=&quot;, return_raw)]</code> returns <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code>:</p>
 <blockquote>
-<p><code>+=(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>+=(list: &amp;mut MyStruct&lt;i64&gt;, value: &amp;str) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>For example, a <a href="/book/rust/getters-setters.html">property getter</a> defined in a <a href="/book/plugins/module.html">plugin module</a>:</p>
 <blockquote>
