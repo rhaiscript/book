@@ -187,6 +187,11 @@
 [custom operators]: {{rootUrl}}/engine/custom-op.md
 [custom syntax]: {{rootUrl}}/engine/custom-syntax.md
 
+[debugger]: {{rootUrl}}/engine/debugging/index.md
+[`debugger::Debugger`]: {{rootUrl}}/engine/debugging/index.md
+[break-point]: {{rootUrl}}/engine/debugging/break-points.md
+[break-points]: {{rootUrl}}/engine/debugging/break-points.md
+
 [`if`]: {{rootUrl}}/language/if.md
 [`switch`]: {{rootUrl}}/language/switch.md
 [`while`]: {{rootUrl}}/language/while.md

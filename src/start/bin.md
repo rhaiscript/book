@@ -9,6 +9,7 @@ A number of Rhai-driven tools can be found in the `src/bin` directory:
 | :----------------------------------------------: | ----------------------------------------------------------- |
 | [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) | a simple REPL, interactively evaluate statements from stdin |
 |  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  | runs each filename passed to it as a Rhai script            |
+|  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  | the _Rhai Debugger_                                         |
 
 
 Install Tools
@@ -70,6 +71,22 @@ The following command runs the scripts `script1.rhai`, `script2.rhai` and `scrip
 
 ```sh
 rhai-run script1.rhai script2.rhai script3.rhai
+```
+
+
+`rhai-dbg` &ndash; The Rhai Debugger
+-----------------------------------
+
+Use `rhai-dbg` to run Rhai scripts.
+
+Filenames passed to it as command line arguments are run in sequence.
+
+### Example
+
+The following command debugs the script `my_script.rhai`.
+
+```sh
+rhai-dbg my_script.rhai
 ```
 
 

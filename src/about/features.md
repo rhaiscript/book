@@ -91,3 +91,5 @@ Flexible
 * Surgically [disable keywords and operators] to restrict the language.
 
 * Use as a [DSL] by defining [custom operators] and/or extending the language with [custom syntax].
+
+* A [debugging][debugger] interface provides powerful debugging support.

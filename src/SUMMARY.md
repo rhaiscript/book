@@ -190,7 +190,10 @@ Advanced Topics
   - [Disable Looping](engine/disable-looping.md)
   - [Custom Operators](engine/custom-op.md)
   - [Extend with Custom Syntax](engine/custom-syntax.md)
-- [Debugging Interface](engine/debugging.md)
+- [Debugging Interface](engine/debugging/index.md)
+  - [Activate Debugger](engine/debugging/activate.md)
+  - [Call Stack](engine/debugging/call-stack.md)
+  - [Break-Points](engine/debugging/break-points.md)
 
 ----------------------
 

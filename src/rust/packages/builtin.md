@@ -21,7 +21,8 @@ Built-In Packages
 | `BasicArrayPackage`    | basic [array] functions (not available under [`no_index`])                                                  |    no     |      yes      |
 | `BasicBlobPackage`     | basic [BLOB] functions (not available under [`no_index`])                                                   |    no     |      yes      |
 | `BasicMapPackage`      | basic [object map] functions (not available under [`no_object`])                                            |    no     |      yes      |
-| `BasicFnPackage`       | basic methods for [function pointers].                                                                      |    yes    |      yes      |
+| `BasicFnPackage`       | basic methods for [function pointers]                                                                       |    yes    |      yes      |
+| `DebuggingPackage`     | basic functions for [debugging][debugger] (requires [`debugging`])                                          |    yes    |      yes      |
 | `CorePackage`          | basic essentials                                                                                            |    yes    |      yes      |
 | `StandardPackage`      | standard library (default for `Engine::new`)                                                                |    no     |      yes      |
 
