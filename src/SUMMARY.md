@@ -5,8 +5,8 @@ The Rhai Scripting Language
 
 ----------------------
 
-User Guide
-==========
+User’s Guide
+============
 
 - [Features of Rhai](about/features.md)
   - [Supported Targets and Builds](about/targets.md)
@@ -19,7 +19,7 @@ User Guide
   - [Optional Features](start/features.md)
   - [Packaged Utilities](start/bin.md)
 - [Using the `Engine`](engine/index.md)
-  - ["Hello, Rhai"](engine/hello-world.md)
+  - [“Hello, Rhai”](engine/hello-world.md)
   - [Compile to AST](engine/compile.md)
   - [Raw Engine](engine/raw.md)
     - [Built-in Operators](engine/builtin.md)
@@ -126,7 +126,7 @@ Language Reference
   - [Make a Custom Type Iterable](language/iterator.md)
 - [Return Value](language/return.md)
 - [Throw Exception on Error](language/throw.md)
-  - [Catch Exception](language/try-catch.md)
+  - [Catch Exceptions](language/try-catch.md)
 - [Functions](language/functions.md)
   - [Method Calls](language/fn-method.md)
   - [Overloading](language/overload.md)
@@ -183,12 +183,14 @@ Advanced Topics
 
 - [Manage AST's](engine/ast.md)
 - [Low-Level API to Register Functions](rust/register-raw.md)
+- [Evaluation Context](engine/eval-context.md)
 - [Use Rhai as a DSL](engine/dsl.md)
   - [Remap Tokens During Parsing](engine/token-mapper.md)
   - [Disable Keywords and/or Operators](engine/disable-keywords.md)
   - [Disable Looping](engine/disable-looping.md)
   - [Custom Operators](engine/custom-op.md)
   - [Extend with Custom Syntax](engine/custom-syntax.md)
+- [Debugging Interface](engine/debugging.md)
 
 ----------------------
 

@@ -18,6 +18,7 @@
 [`stdweb`]: {{rootUrl}}/start/features.md
 [`metadata`]: {{rootUrl}}/start/features.md
 [`internals`]: {{rootUrl}}/start/features.md
+[`debugging`]: {{rootUrl}}/start/features.md
 [`unicode-xid-ident`]: {{rootUrl}}/start/features.md
 
 [minimal builds]: {{rootUrl}}/start/builds/minimal.md
@@ -82,6 +83,7 @@
 [type iterator]: {{rootUrl}}/language/iterator.md
 [type iterators]: {{rootUrl}}/language/iterator.md
 [`NativeCallContext`]: {{rootUrl}}/rust/context.md
+[`EvalContext`]: {{rootUrl}}/language/eval-context.md
 
 [`instant::Instant`]: https://crates.io/crates/instant
 
