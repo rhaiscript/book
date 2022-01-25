@@ -7,20 +7,28 @@ Variables
 Valid Names
 -----------
 
-Variables in Rhai follow normal C naming rules &ndash; must contain only ASCII letters, digits and underscores `_`,
-and cannot start with a digit.
+Variables in Rhai follow normal C naming rules &ndash; must contain only ASCII letters, digits and underscores `_`.
 
-For example: `_c3po` and `r2d2` are valid variable names, but `3abc` is not.
+| Character set | Description              |
+| :-----------: | ------------------------ |
+|  `A` ... `Z`  | Upper-case ASCII letters |
+|  `a` ... `z`  | Lower-case ASCII letters |
+|  `0` ... `9`  | Digit characters         |
+|      `_`      | Underscore character     |
 
-However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII letter must come before any digit.
-In other words, the first character that is not an underscore `_` must be an ASCII letter and not a digit.
+However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII
+letter must come _before_ any digits. In other words, the first character that is not an underscore `_`
+must be an ASCII letter and not a digit.
+
+This restriction is to reduce confusion because, for instance, `_1` can easily be misread (or mistyped) as `-1`.
 
 Therefore, some names acceptable to Rust, like `_`, `_42foo`, `_1` etc., are not valid in Rhai.
-This restriction is to reduce confusion because, for instance, `_1` can easily be misread (or mistyped) as `-1`.
+
+For example: `c3po` and `_r2d2_` are valid variable names, but `3abc` and `____49steps` are not.
 
 Variable names are case _sensitive_.
 
-Variable names also cannot be the same as a [keyword].
+Variable names also cannot be the same as a [keyword] (active or reserved).
 
 ### Unicode Standard Annex #31 Identifiers
 
@@ -69,18 +77,30 @@ is_def_var("y") == false;
 ```
 
 
-Avoid Variable Names Longer Than 11 Characters on 32-Bit System
---------------------------------------------------------------
+Avoid Variable Names Longer Than 11 Letters on 32-Bit Targets
+------------------------------------------------------------
 
 Internally, Rhai uses [`SmartString`] which avoids allocations unless a string is over its internal
 limits (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).
 
-On 64-bit systems, _most_ variable names are shorter than 23 characters, so this is unlikely to
-become an issue.
+On 64-bit systems, _most_ variable names are shorter than 23 letters, so this is unlikely to become
+an issue.
 
-However, on 32-bit systems, take care to limit, where possible, variable names to within 11 characters.
-This is particularly true for local variables inside a hot loop, where they are created and destroyed
-in rapid succession.
+However, on 32-bit systems, take care to limit, where possible, variable names to within 11 letters.
+This is particularly true for local variables inside a hot loop, where they are created and
+destroyed in rapid succession.
+
+```js
+// The following is SLOW on 32-bit
+for my_super_loop_variable in array {
+    print(`Super! ${my_super_loop_variable}`);
+}
+
+// Suggested revision:
+for loop_var in array {
+    print(`Super! ${loop_var}`);
+}
+```
 
 
 Use Before Definition

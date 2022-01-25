@@ -8,7 +8,7 @@ It is impossible to know when, or even whether, a script run will end
 
 When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-[`Engine`] via `Engine::on_progress` method.
+[`Engine`] via `Engine::on_progress`.
 
 Progress tracking is disabled with the [`unchecked`] feature.
 

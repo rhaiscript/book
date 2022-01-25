@@ -6,16 +6,19 @@ Logic Operators
 Comparison Operators
 --------------------
 
-| Operator | Description<br/>(`x` _operator_ `y`) | `x`, `y` same type, or numeric | `x`, `y` different types |
-| :------: | ------------------------------------ | :----------------------------: | :----------------------: |
-|   `==`   | `x` is equals to `y`                 |      error if not defined      |  `false` if not defined  |
-|   `!=`   | `x` is not equals to `y`             |      error if not defined      |  `true` if not defined   |
-|   `>`    | `x` is greater than `y`              |      error if not defined      |  `false` if not defined  |
-|   `>=`   | `x` is greater than or equals to `y` |      error if not defined      |  `false` if not defined  |
-|   `<`    | `x` is less than `y`                 |      error if not defined      |  `false` if not defined  |
-|   `<=`   | `x` is less than or equals to `y`    |      error if not defined      |  `false` if not defined  |
+| Operator | Description<br/>(`x` _operator_ `y`) | `x`, `y` same type or are numeric | `x`, `y` different types |
+| :------: | ------------------------------------ | :-------------------------------: | :----------------------: |
+|   `==`   | `x` is equals to `y`                 |       error if not defined        |  `false` if not defined  |
+|   `!=`   | `x` is not equals to `y`             |       error if not defined        |  `true` if not defined   |
+|   `>`    | `x` is greater than `y`              |       error if not defined        |  `false` if not defined  |
+|   `>=`   | `x` is greater than or equals to `y` |       error if not defined        |  `false` if not defined  |
+|   `<`    | `x` is less than `y`                 |       error if not defined        |  `false` if not defined  |
+|   `<=`   | `x` is less than or equals to `y`    |       error if not defined        |  `false` if not defined  |
 
-Comparison between most values of the same type are built in for all [standard types].
+Comparison operators between most values of the same type are built in for all [standard types].
+
+Others are defined in the [`LogicPackage`][built-in packages] but excluded if using a [raw `Engine`].
+
 
 ### Floating-point numbers interoperate with integers
 

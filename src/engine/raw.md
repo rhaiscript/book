@@ -54,7 +54,7 @@ engine.on_print(|text| println!("{}", text));
 
 engine.on_debug(|text, source, pos| {
     if let Some(source) = source {
-        println!("{}{:?} | {}", source, pos, text);
+        println!("{} @ {:?} | {}", source, pos, text);
     } else if pos.is_none() {
         println!("{}", text);
     } else {
