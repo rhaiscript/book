@@ -42,7 +42,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 #[cfg(all(windows, target_env = "msvc"))]
 #[link(name = "msvcrt")]
 #[link(name = "libcmt")]
-extern {}
+extern "C" {}
 
 // Set up panic and error handlers
 #[alloc_error_handler]
@@ -64,6 +64,9 @@ extern "C" fn rust_eh_register_frames() {}
 
 #[no_mangle]
 extern "C" fn rust_eh_unregister_frames() {}
+
+#[no_mangle]
+extern "C" fn _Unwind_Resume() {}
 
 #[start]
 fn main(_argc: isize, _argv: *const *const u8) -> isize {
