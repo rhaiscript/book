@@ -64,11 +64,10 @@ r#"
     hello = `hello, ${foo} worlds!`;
 
     // Finally, export the variables and modules
-    export
-        x as abc,           // aliased variable name
-        foo,
-        hello,
-        extra as foobar;    // export sub-module
+    export x as abc;            // aliased variable name
+    export foo;
+    export hello;
+    export extra as foobar;     // export sub-module
 "#)?;
 
 // Convert the 'AST' into a module, using the 'Engine' to evaluate it first

@@ -17,7 +17,7 @@ Modules loaded within this [module] at the global level become _sub-modules_ and
 Export Global Variables
 ----------------------
 
-The `export` statement, which can only be at global level, exposes selected [variables] as members of a [module].
+The `export` statement, which can only be at global level, exposes a selected [variable] as member of a [module].
 
 [Variables] not exported are _private_ and hidden. They are merely used to initialize the [module],
 but cannot be accessed from outside.
@@ -57,7 +57,12 @@ One `export` statement can export multiple [variables], even under multiple name
 //   - 'x' as 'x' and 'hello'
 //   - 'y' as 'foo' and 'bar'
 //   - 'z' as 'z'
-export x, x as hello, x as world, y as foo, y as bar, z;
+export x;
+export x as hello;
+export y as foo;
+export x as world;
+export y as bar;
+export z;
 ```
 
 
