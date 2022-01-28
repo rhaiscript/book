@@ -192,6 +192,7 @@ Advanced Topics
   - [Extend with Custom Syntax](engine/custom-syntax.md)
 - [Debugging Interface](engine/debugging/index.md)
   - [Activate Debugger](engine/debugging/activate.md)
+  - [Debugger State](engine/debugging/state.md)
   - [Call Stack](engine/debugging/call-stack.md)
   - [Break-Points](engine/debugging/break-points.md)
 

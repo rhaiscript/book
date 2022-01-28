@@ -11,18 +11,31 @@ use rhai::debugger::*;
 
 let mut engine = Engine::new();
 
-engine.on_debugger(|context, node, source, pos| {
-    ...
+engine.on_debugger(
+    // Provide a callback to initialize the debugger state
+    || { ... },
+    // Provide a callback for each debugging step
+    |context, node, source, pos| {
+        ...
 
-    DebuggerCommand::StepOver
-});
+        DebuggerCommand::StepOver
+    }
+);
 ```
 
 
-Callback Function Signature
----------------------------
+Callback Functions Signature
+----------------------------
 
-The signature of a [debugger] callback is as follows.
+There are two callback functions to register for the [debugger].
+
+The first is simply a function to initialize the state of the [debugger] (a [`Dynamic`] value),
+with the following signature.
+
+> `Fn() -> Dynamic`
+
+The second callback is a function which will be called by the [debugger] during each step, with the
+following signature.
 
 > `Fn(context: &mut EvalContext, node: ASTNode, source: &str, pos: Position) -> Result<debugger::DebuggerCommand, Box<EvalAltResult>>`
 
@@ -39,11 +52,10 @@ and [`EvalContext`] is a type that encapsulates the current _evaluation context_
 
 ### Return value
 
-The closure passed to `Engine::on_debugger` will be called when stepping into or over expressions
+The second closure passed to `Engine::on_debugger` will be called when stepping into or over expressions
 and statements, or when [break-points] are hit.
 
-The return type of the closure provided to `Engine::on_debugger` is
-`Result<debugger::DebuggerCommand, Box<EvalAltResult>>`.
+The return type of the closure is `Result<debugger::DebuggerCommand, Box<EvalAltResult>>`.
 
 If an error is returned, the script evaluation at that particular instance returns with that particular error.
 It is thus possible to _abort_ the script evaluation by returning an error that is not _catchable_,
