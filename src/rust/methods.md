@@ -141,30 +141,19 @@ care must be taken when using _shared_ values with methods.
 Usually data races are not possible in Rhai because, for each function call, there is ever only one
 value that is mutable &ndash; the first argument of a method.  All other arguments are cloned.
 
-It is possible, however, to create a data race with a _shared_ value, when the same value is used
-both as the _object_ of a method call (including the `this` pointer) and also as an argument.
+It is possible, however, to create a data race with a _shared_ value, when the same value is
+_captured_ in a [closure] and then used again as the _object_ of calling that [closure]!
 
 ```rust,no_run
-// A method using the 'this' pointer and an argument
-fn foo(x) {
-    this + x
-}
+let x = 20;
 
-let value = 42;     // 'value' is not shared by default
+x.is_shared() == false;             // 'x' is not shared, so no data race is possible
 
-let f = || value;   // this closure captures 'value'
+let f = |a| this += x + a;          // 'x' is captured in this closure
 
-// ... at this point, 'value' is shared
+x.is_shared() == true;              // now 'x' is shared
 
-value.is_shared() == true;
-
-value.foo(value);   // <- error: data race detected!
+x.call(f, 2);                       // <- error: data race detected on 'x'
 ```
 
-The reason why it is a data race is because the variable `value` is _shared_, and cloning it merely
-clones a shared reference to it.  Using it as the method call object (i.e. the `this` pointer) takes
-a mutable reference to the underlying value, which then cause a data race because a non-mutable
-reference is already outstanding due to the argument (which uses the same variable).
-
-Shared values are typically created from [closures] which capture external variable, so data races
-are not possible in Rhai under the [`no_closure`] feature.
+Data races are not possible in Rhai under the [`no_closure`] feature because no sharing ever occurs.
