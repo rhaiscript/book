@@ -5,26 +5,29 @@ Packaged Utilities
 
 A number of Rhai-driven tools can be found in the `src/bin` directory:
 
-|                       Tool                       | Description                                                 |
-| :----------------------------------------------: | ----------------------------------------------------------- |
-| [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) | a simple REPL, interactively evaluate statements from stdin |
-|  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  | runs each filename passed to it as a Rhai script            |
-|  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  | the _Rhai Debugger_                                         |
+|                       Tool                       | Required feature(s) | Description                                       |
+| :----------------------------------------------: | :-----------------: | ------------------------------------------------- |
+| [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) |                     | a simple REPL, interactively evaluates statements |
+|  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  |     `rustyline`     | runs each filename passed to it as a Rhai script  |
+|  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  |    [`debugging`]    | the _Rhai Debugger_                               |
+
+Notice that some bin tools require certain [features] and will not be built by default without those
+[features] set.
 
 
 Install Tools
 -------------
 
-To install these tools (with [`decimal`] and [`metadata`] support), use the following command:
+To install all these tools (with [`decimal`] and [`metadata`] support), use the following command:
 
 ```sh
-cargo install --path . --bins  --features decimal,metadata
+cargo install --path . --bins  --features decimal,metadata,debugging,rustyline
 ```
 
 or specifically:
 
 ```sh
-cargo install --path . --bin rhai-run  --features decimal,metadata
+cargo install --path . --bin rhai-run  --features decimal,metadata,debugging,rustyline
 ```
 
 
@@ -77,9 +80,9 @@ rhai-run script1.rhai script2.rhai script3.rhai
 `rhai-dbg` &ndash; The Rhai Debugger
 -----------------------------------
 
-Use `rhai-dbg` to run Rhai scripts.
+Use `rhai-dbg` to debug a Rhai script.
 
-Filenames passed to it as command line arguments are run in sequence.
+Filename passed to it will be loaded as a Rhai script for debugging.
 
 ### Example
 
@@ -97,4 +100,10 @@ Tools can also be run with the following `cargo` command:
 
 ```sh
 cargo run --bin {program_name}
+```
+
+or with certain [features] turned on:
+
+```sh
+cargo run --bin {program_name} --features {feature1},{feature2},{feature3}
 ```
