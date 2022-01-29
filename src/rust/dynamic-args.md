@@ -85,3 +85,79 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
     // ... do something unspeakably evil with all those parameters ...
 }
 ```
+
+
+TL;DR
+-----
+
+### Q: How is this implemented?
+
+#### Hash lookup
+
+Since functions in Rhai can be [overloaded][function overloading], Rhai uses a single _hash_ number
+to quickly lookup the actual function, based on argument types.
+
+For each function call, a hash is calculated made up from:
+
+1) the function's [namespace], if any,
+2) the function's name,
+3) number of arguments,
+4) the unique ID of the type of each argument, if any.
+
+The correct function is then obtained via a simple hash lookup.
+
+#### Limitations
+
+This method is _fast_, but at the expense of flexibility (such as multiple argument types that must
+map to a single version).  That is because each type has a different ID, and thus they calculate to
+different hash numbers.
+
+This is the reason why [generic functions](generic.md) must be expanded into concrete types.
+
+The type ID of [`Dynamic`] is different from any other type, but it must match all types seamlessly.
+Needless to say, this creates a slight problem.
+
+#### Trying combinations
+
+If the combined hash calculated from the actual argument type ID's is not found, then the [`Engine`]
+calculates hashes for different _combinations_ of argument types and [`Dynamic`], systematically
+replacing different arguments with [`Dynamic`] _starting from the right-most parameter_.
+
+Thus, assuming a three-argument function call:
+
+```rust,no_run
+foo(42, "hello", true);
+```
+
+The following hashes will be calculated, in order.
+They will be _all different_.
+
+| Order | Hash calculation method                             |
+| :---: | --------------------------------------------------- |
+|   1   | `foo` + 3 + `i64` + `string` + `bool`               |
+|   2   | `foo` + 3 + `i64` + `string` + [`Dynamic`]          |
+|   3   | `foo` + 3 + `i64` + [`Dynamic`] + `bool`            |
+|   4   | `foo` + 3 + `i64` + [`Dynamic`] + [`Dynamic`]       |
+|   5   | `foo` + 3 + [`Dynamic`] + `string` + `bool`         |
+|   6   | `foo` + 3 + [`Dynamic`] + `string` + [`Dynamic`]    |
+|   7   | `foo` + 3 + [`Dynamic`] + [`Dynamic`] + `bool`      |
+|   8   | `foo` + 3 + [`Dynamic`] + [`Dynamic`] + [`Dynamic`] |
+
+Therefore, the version with all the correct parameter types will always be found first if it exists.
+
+At soon as a hash is found, the process stops.
+
+Otherwise, it goes on for up to 16 arguments, or at most 256 tries.
+That's where the 16 parameters limit comes from.
+
+
+### Q: What?!  It calculates 256 hashes for _each_ function call???!!!
+
+Of course not.
+
+Function hashes are _cached_, so this process only happens _once_, and only up to the number of
+rounds for the correct function to be found.
+
+If not, then yes, it will calculate up to 2<sup>_n_</sup> hashes where _n_ is the number of
+arguments (up to 16). But again, this will only be done _once_ for that particular
+combination of argument types.
