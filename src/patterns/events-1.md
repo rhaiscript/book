@@ -9,7 +9,7 @@ Example
 
 A runnable example of this implementation is included.
 
-See the [_Examples_]({{rootUrl}}/start/examples/index.md) section for details.
+See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
 
 
 Initialize Handler Instance with `Engine::call_fn_raw`

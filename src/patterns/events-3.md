@@ -9,7 +9,7 @@ Example
 
 A runnable example of this implementation is included.
 
-See the [_Examples_]({{rootUrl}}/start/examples/index.md) section for details.
+See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
 
 
 I Hate `this`!  How Can I Get Rid of It?
