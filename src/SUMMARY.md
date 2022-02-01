@@ -191,10 +191,11 @@ Advanced Topics
   - [Custom Operators](engine/custom-op.md)
   - [Extend with Custom Syntax](engine/custom-syntax.md)
 - [Debugging Interface](engine/debugging/index.md)
-  - [Activate Debugger](engine/debugging/activate.md)
-  - [Debugger State](engine/debugging/state.md)
-  - [Call Stack](engine/debugging/call-stack.md)
-  - [Break-Points](engine/debugging/break-points.md)
+  - [Debugger](engine/debugging/debugger.md)
+    - [State](engine/debugging/state.md)
+    - [Call Stack](engine/debugging/call-stack.md)
+    - [Break-Points](engine/debugging/break-points.md)
+  - [Debugging Server](engine/debugging/server.md)
 
 ----------------------
 

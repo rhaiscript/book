@@ -9,12 +9,12 @@ callback.
 A break-point is represented by the `debugger::BreakPoint` type, which is an `enum` with
 three variants.
 
-| `BreakPoint` variant                     | Description                                                                                                                                 |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AtPosition { source, pos, enabled }`    | breaks at the specified position in the specified source (empty if none);<br/>if `pos` is at beginning of line, breaks anywhere on the line |
-| `AtFunctionName { name, enabled }`       | breaks when a function matching the specified name is called (can be [operator])                                                            |
-| `AtFunctionCall { name, args, enabled }` | breaks when a function matching the specified name (can be [operator]) and the specified number of arguments is called                      |
-| `AtProperty { name, enabled }`           | breaks at the specified property access                                                                                                     |
+| `BreakPoint` variant                     | Not available under | Description                                                                                                                                 |
+| ---------------------------------------- | :-----------------: | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AtPosition { source, pos, enabled }`    |   [`no_position`]   | breaks at the specified position in the specified source (empty if none);<br/>if `pos` is at beginning of line, breaks anywhere on the line |
+| `AtFunctionName { name, enabled }`       |                     | breaks when a function matching the specified name is called (can be [operator])                                                            |
+| `AtFunctionCall { name, args, enabled }` |                     | breaks when a function matching the specified name (can be [operator]) and the specified number of arguments is called                      |
+| `AtProperty { name, enabled }`           |    [`no_object`]    | breaks at the specified property access                                                                                                     |
 
 The following [`debugger::Debugger`] methods allow access of break-points for manipulation.
 

@@ -5,13 +5,13 @@ Debugger State
 
 Sometimes it is useful to keep a persistent _state_ within the [debugger].
 
-The `Engine::on_debugger` API accepts a function that returns the initial value of the
+The `Engine::register_debugger` API accepts a function that returns the initial value of the
 [debugger's][debugger] state, which is a [`Dynamic`] and can hold any value.
 
 The state can easily be accessed during a [debugger] callback.
 
 ```rust,no_run
-engine.on_debugger(
+engine.register_debugger(
     || {
         // Say, use an object map for the debugger state
         let mut state = Map::new();

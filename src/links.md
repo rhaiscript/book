@@ -187,8 +187,9 @@
 [custom operators]: {{rootUrl}}/engine/custom-op.md
 [custom syntax]: {{rootUrl}}/engine/custom-syntax.md
 
-[debugger]: {{rootUrl}}/engine/debugging/index.md
-[`debugger::Debugger`]: {{rootUrl}}/engine/debugging/index.md
+[debugger]: {{rootUrl}}/engine/debugging/debugger.md
+[`Debugger`]: {{rootUrl}}/engine/debugging/debugger.md
+[`debugger::Debugger`]: {{rootUrl}}/engine/debugging/debugger.md
 [break-point]: {{rootUrl}}/engine/debugging/break-points.md
 [break-points]: {{rootUrl}}/engine/debugging/break-points.md
 
