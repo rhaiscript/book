@@ -103,6 +103,16 @@ for loop_var in array {
 ```
 
 
+Shadowing
+---------
+
+New variables automatically _shadow_ existing ones of the same name.  There is no error.
+This behavior is consistent with Rust.
+
+If shadowing is not desired, use [`Engine::set_allow_shadowing(false)`][options] to turn
+variables shadowing off.
+
+
 Use Before Definition
 ---------------------
 
