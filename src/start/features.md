@@ -82,6 +82,14 @@ Do not use them for non-[WASM] targets.
 | `stdweb`       |    no     | uses [`stdweb`](https://crates.io/crates/stdweb) to compile for [WASM]             |
 
 
+Features for Building Bin Tools
+------------------------------
+
+The feature `bin-features` include all the features necessary for building the [bin tools](bin.md).
+
+By default, it includes: `decimal`, `metadata`, `serde`, `debugging` and `rustyline`.
+
+
 Example
 -------
 

@@ -18,16 +18,16 @@ Notice that some bin tools require certain [features] and will not be built by d
 Install Tools
 -------------
 
-To install all these tools (with [`decimal`] and [`metadata`] support), use the following command:
+To install all these tools (with full features), use the following command:
 
 ```sh
-cargo install --path . --bins  --features decimal,metadata,debugging,rustyline
+cargo install --path . --bins  --features bin-features
 ```
 
 or specifically:
 
 ```sh
-cargo install --path . --bin rhai-run  --features decimal,metadata,debugging,rustyline
+cargo install --path . --bin rhai-run  --features bin-features
 ```
 
 
@@ -99,11 +99,5 @@ Running a Tool from Cargo
 Tools can also be run with the following `cargo` command:
 
 ```sh
-cargo run --bin {program_name}
-```
-
-or with certain [features] turned on:
-
-```sh
-cargo run --bin {program_name} --features {feature1},{feature2},{feature3}
+cargo run --features bin-features --bin {program_name}
 ```
