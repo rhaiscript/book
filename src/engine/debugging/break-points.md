@@ -7,7 +7,7 @@ A _break-point_ **always** stops the current evaluation and calls the [debugging
 callback.
 
 A break-point is represented by the `debugger::BreakPoint` type, which is an `enum` with
-three variants.
+the following variants.
 
 | `BreakPoint` variant                     | Not available under | Description                                                                                                                                 |
 | ---------------------------------------- | :-----------------: | ------------------------------------------------------------------------------------------------------------------------------------------- |

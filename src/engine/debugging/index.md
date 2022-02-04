@@ -27,14 +27,14 @@ Built-in Functions
 The following functions (defined in the [`DebuggingPackage`][built-in packages] but excluded if
 using a [raw `Engine`]) provides runtime information for debugging purposes.
 
-| Function      | Parameter(s) |      Not available under      | Description                                                                                    |
-| ------------- | ------------ | :---------------------------: | ---------------------------------------------------------------------------------------------- |
-| `stack_trace` | _none_       | [`no_function`], [`no_index`] | returns an [array] of [object maps] or [strings], each containing one level of [function] call |
+| Function     | Parameter(s) |      Not available under      | Description                                                                                                                                                 |
+| ------------ | ------------ | :---------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `back_trace` | _none_       | [`no_function`], [`no_index`] | returns an [array] of [object maps] or [strings], each containing one level of [function] call;</br>returns an empty [array] if no [debugger] is registered |
 
 ```rust,no_run
 // This recursive function prints its own call stack during each run
 fn foo(x) {
-    print(stack_trace());       // prints the current call stack
+    print(back_trace());        // prints the current call stack
 
     if x > 0 {
         foo(x - 1)

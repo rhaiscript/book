@@ -56,7 +56,7 @@ and [`EvalContext`] is a type that encapsulates the current _evaluation context_
 The `event` parameter of the second closure passed to `Engine::register_debugger` contains a
 `debugger::DebuggerEvent` which is an `enum` with the following variants.
 
-| Variant                          | Description                                                                                     |
+| `DebuggerEvent` variant          | Description                                                                                     |
 | -------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `Step`                           | the debugger is triggered at the next step of evaluation                                        |
 | `BreakPoint(`_n_`)`              | the debugger is triggered by the _n_-th [break-point]                                           |
@@ -77,13 +77,13 @@ not _catchable_, such as `EvalAltResult::ErrorTerminated`.
 If no error is returned, then the return `debugger::DebuggerCommand` variant determines the
 continued behavior of the debugger.
 
-| Variant        | Behavior                                                                                                                        | `gdb` equivalent |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------- | :--------------: |
-| `Continue`     | continue with normal script evaluation                                                                                          |    `continue`    |
-| `StepInto`     | run to the next expression or statement, diving into functions                                                                  |      `step`      |
-| `StepOver`     | run to the next expression or statement, skipping over functions                                                                |                  |
-| `Next`         | run to the next statement, skipping over functions                                                                              |      `next`      |
-| `FunctionExit` | run to the end of the current function call; debugger is triggered _before_ the function call returns and the [`Scope`] cleared |     `finish`     |
+| `DebuggerCommand` variant | Behavior                                                                                                                        | `gdb` equivalent |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | :--------------: |
+| `Continue`                | continue with normal script evaluation                                                                                          |    `continue`    |
+| `StepInto`                | run to the next expression or statement, diving into functions                                                                  |      `step`      |
+| `StepOver`                | run to the next expression or statement, skipping over functions                                                                |                  |
+| `Next`                    | run to the next statement, skipping over functions                                                                              |      `next`      |
+| `FunctionExit`            | run to the end of the current function call; debugger is triggered _before_ the function call returns and the [`Scope`] cleared |     `finish`     |
 
 
 Debugger
