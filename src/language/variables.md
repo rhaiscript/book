@@ -109,16 +109,24 @@ Shadowing
 New variables automatically _shadow_ existing ones of the same name.  There is no error.
 This behavior is consistent with Rust.
 
-If shadowing is not desired, use [`Engine::set_allow_shadowing(false)`][options] to turn
+If shadowing is not desired, set [`Engine::set_allow_shadowing`][options] to `false` to turn
 variables shadowing off.
+
+```rust,no_run
+let x = 42;
+
+let x = 123;        // <- syntax error: variable 'x' already defined
+                    //    when variables shadowing is disallowed
+```
 
 
 Use Before Definition
 ---------------------
 
 By default, variables do not need to be defined before they are used.
-If a variable accessed by a script is not defined previously, within the same script,
-it is searched for inside the [`Scope`] (if any) passed into the `Engine::eval_with_scope` call.
+
+If a variable accessed by a script is not defined previously, within the same script, it is searched
+for inside the [`Scope`] (if any) passed into the `Engine::eval_with_scope` call.
 
 If no [`Scope`] is used to evaluate the script, that an undefined variable causes a runtime
 error when accessed.
@@ -135,3 +143,12 @@ the same script directly causes a parse error when compiling the script.
 
 Turn on [strict variables] mode if no [`Scope`] is to be provided for script evaluation runs.
 This way, variable access errors are caught during compile time instead of runtime.
+
+```rust,no_run
+let x = 42;
+
+print(x);           // prints 42
+
+print(foo);         // <- parse error under strict variables mode:
+                    //    variable 'foo' is undefined
+```

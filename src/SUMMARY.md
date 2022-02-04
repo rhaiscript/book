@@ -109,6 +109,7 @@ Language Reference
 - [Assignments](language/assignment.md)
 - [Variables](language/variables.md)
   - [Strict Variables Mode](engine/strict-var.md)
+  - [Variable Definition Filter](engine/def-var.md)
   - [Variable Resolver](engine/var.md)
 - [Constants](language/constants.md)
   - [Automatic Global Module](language/global.md)
