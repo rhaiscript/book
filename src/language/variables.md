@@ -60,14 +60,21 @@ let _9 = 9;         // <- syntax error: illegal variable name
 
 let x = 42;         // variable is 'x', lower case
 let X = 123;        // variable is 'X', upper case
-x == 42;
-X == 123;
+
+print(x);           // prints 42
+print(X);           // prints 123
 
 {
     let x = 999;    // local variable 'x' shadows the 'x' in parent block
-    x == 999;       // access to local 'x'
+
+    print(x);       // prints 999
 }
-x == 42;            // the parent block's 'x' is not changed
+
+print(x);           // prints 42 - the parent block's 'x' is not changed
+
+let x = 0;          // new variable 'x' shadows the old 'x'
+
+print(x);           // prints 0
 
 is_def_var("x") == true;
 
@@ -103,33 +110,34 @@ for loop_var in array {
 ```
 
 
-Shadowing
----------
-
-New variables automatically _shadow_ existing ones of the same name.  There is no error.
-This behavior is consistent with Rust.
-
-If shadowing is not desired, set [`Engine::set_allow_shadowing`][options] to `false` to turn
-variables shadowing off.
-
-```rust,no_run
-let x = 42;
-
-let x = 123;        // <- syntax error: variable 'x' already defined
-                    //    when variables shadowing is disallowed
-```
-
-
 Use Before Definition
 ---------------------
 
 By default, variables do not need to be defined before they are used.
 
-If a variable accessed by a script is not defined previously, within the same script, it is searched
-for inside the [`Scope`] (if any) passed into the `Engine::eval_with_scope` call.
+If a variable accessed by a script is not defined previously within the same script, it is assumed
+to be provided via an external custom [`Scope`] passed to the [`Engine`] via the
+`Engine::XXX_with_scope` API.
 
-If no [`Scope`] is used to evaluate the script, that an undefined variable causes a runtime
-error when accessed.
+```rust,no_run
+let engine = Engine::new();
+
+engine.run("print(answer)")?;       // <- error: variable 'answer' not found
+
+// Create custom scope
+let mut scope = Scope::new();
+
+// Add variable to custom scope
+scope.push("answer", 42_i64);
+
+// Run with custom scope
+engine.run_with_scope(&mut scope,
+    "print(answer)"                 // <- prints 42
+)?;
+```
+
+If no [`Scope`] is used to evaluate the script (e.g. when using `Engine::run` instead of
+`Engine::run_with_scope`), only then will an undefined variable cause a runtime error when accessed.
 
 
 Strict Variables Mode

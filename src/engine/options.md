@@ -16,7 +16,7 @@ Language Features
 | `set_allow_statement_expression` |                     | allows/disallows [statement expressions](../language/statement-expression.md)      |
 | `set_allow_anonymous_fn`         |   [`no_function`]   | allows/disallows [anonymous functions]                                             |
 | `set_allow_looping`              |                     | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements) |
-| `set_allow_shadowing`            |                     | allows/disallows _shadowing_ of [variables]                                        |
+| `set_allow_shadowing`            |                     | allows/disallows _[shadowing]_ of [variables]                                      |
 | `disable_symbol`                 |                     | disables a certain [keyword] or [operator] (see [disable keywords and operators])  |
 
 Compiler Behavior

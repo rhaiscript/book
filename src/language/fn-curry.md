@@ -34,6 +34,6 @@ Automatic Currying
 ------------------
 
 [Anonymous functions] defined via a closure syntax _capture_ external [variables]
-that are not shadowed inside the [function's][function] scope.
+that are not [shadowed][shadow] inside the [function's][function] scope.
 
 This is accomplished via [automatic currying].

@@ -22,8 +22,8 @@ X = 123;            // <- syntax error: constant modified
 Manually Add Constant into Custom Scope
 --------------------------------------
 
-It is possible to add a constant into a custom [`Scope`] so it'll be available to scripts
-running with that [`Scope`].
+It is possible to add a constant into a custom [`Scope`] via `Scope::push_constant` so it'll be
+available to scripts running with that [`Scope`].
 
 It is very useful to have a constant value hold a [custom type], which essentially acts
 as a [_singleton_](../patterns/singleton.md).

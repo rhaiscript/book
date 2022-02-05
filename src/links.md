@@ -97,6 +97,9 @@
 
 [variable]: {{rootUrl}}/language/variables.md
 [variables]: {{rootUrl}}/language/variables.md
+[shadow]: {{rootUrl}}/language/shadow.md
+[shadowing]: {{rootUrl}}/language/shadow.md
+[variable shadowing]: {{rootUrl}}/language/shadow.md
 [constant]: {{rootUrl}}/language/constants.md
 [constants]: {{rootUrl}}/language/constants.md
 

@@ -119,11 +119,11 @@ New user state [variables] are introduced by evaluating a special initialization
 (e.g. `init`) that defines them, and `Engine::call_fn_raw` is used to keep them inside the custom [`Scope`].
 
 However, this has the disadvantage that no other [function] can introduce new state [variables],
-otherwise they'd simply _shadow_ existing [variables] in the custom [`Scope`].  Thus, [functions]
+otherwise they'd simply _[shadow]_ existing [variables] in the custom [`Scope`].  Thus, [functions]
 are called during events via `Engine::call_fn` which does not retain any [variables].
 
 When there are a large number of state [variables], this style also makes it easy for local
-[variables] defined in user [functions] to accidentally _shadow_ a state [variable] with a
+[variables] defined in user [functions] to accidentally _[shadow]_ a state [variable] with a
 [variable] that just happens to be the same name.
 
 ```rust,no_run

@@ -114,7 +114,7 @@ Because the stored state is kept in an [object map], which in turn is bound to `
 necessary for [functions] to always access or modify these state [variables] via the `this` pointer.
 
 As it is impossible to declare a local [variable] named `this`, there is no risk of accidentally
-_shadowing_ a state [variable].
+_[shadowing]_ a state [variable].
 
 Because an [object map] is used to hold state values, it is even possible to add user-defined
 [functions], leveraging the [OOP] support for [object maps].

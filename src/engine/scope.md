@@ -45,7 +45,7 @@ For details on the `Scope` API, refer to the
 Shadowing
 ---------
 
-A newly-added [variable] or [constant] _shadows_ previous ones of the same name.
+A newly-added [variable] or [constant] _[shadows][shadow]_ previous ones of the same name.
 
 In other words, all versions are kept for [variables] and [constants], but only the latest ones can
 be accessed via `get_value<T>`, `get_mut<T>` and `set_value<T>`.

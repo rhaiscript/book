@@ -51,7 +51,8 @@ Dynamic
 
 * Some support for [object-oriented programming (OOP)][OOP].
 
-* Hook into variables access via [variable resolver].
+* Hook into variables access via a [variable resolver], or control definition of variables via a
+  [variable definition filter]({{rootUrl}}/engine/def-var.md).
 
 
 Safe
