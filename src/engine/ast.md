@@ -10,7 +10,7 @@ When compiling a Rhai script to an [`AST`], the following data are packaged toge
 | -------------------------- | :---------------------------------------: | ---------------------------------------------------------------------------------------- | :----------------------------------: | :------------------------------------------------------------------------------------------------------------: |
 | Source name                |            [`ImmutableString`]            | optional text name to identify the source of the script                                  |                                      | `source(&self)`,<br/>`clone_source(&self)`,<br/>`set_source(&mut self, source)`,<br/>`clear_source(&mut self)` |
 | Statements                 |                `Vec<Stmt>`                | list of script statements at global level                                                |             `internals`              |                              `statements(&self)`,<br/>`statements_mut(&mut self)`                              |
-| Functions                  |       [`Shared<Module>`][`Module`]        | functions defined in the script                                                          | `internals`,<br/>not [`no_function`] |                                              `shared_lib(&self)`                                               |
+| Functions                  |       [`Shared<Module>`][`Module`]        | [functions] defined in the script                                                        | `internals`,<br/>not [`no_function`] |                                              `shared_lib(&self)`                                               |
 | Embedded [module resolver] | [`StaticModuleResolver`][module resolver] | embedded [module resolver] for [self-contained `AST`](../rust/modules/self-contained.md) |  `internals`,<br/>not [`no_module`]  |                                               `resolver(&self)`                                                |
 
 Use the source name to identify the source script in errors &ndash; useful when multiple [modules]
@@ -24,16 +24,16 @@ For the complete [`AST`] API, refer to the [documentation](https://docs.rs/rhai/
 Extract Only Functions
 ----------------------
 
-The following methods, not available under [`no_function`], allow manipulation of the functions
+The following methods, not available under [`no_function`], allow manipulation of the [functions]
 encapsulated within an [`AST`]:
 
-| Method                                         | Description                                                                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `clone_functions_only(&self)`                  | clone the [`AST`] into a new [`AST`] with only functions, excluding statements                                |
-| `clone_functions_only_filtered(&self, filter)` | clone the [`AST`] into a new [`AST`] with only functions that pass the filter predicate, excluding statements |
-| `retain_functions(&mut self, filter)`          | remove all functions in the [`AST`] that do not pass a particular predicate filter; statements are untouched  |
-| `iter_functions(&self)`                        | return an iterator on all the functions in the [`AST`]                                                        |
-| `clear_functions(&mut self)`                   | remove all functions from the [`AST`], leaving only statements                                                |
+| Method                                         | Description                                                                                                     |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `clone_functions_only(&self)`                  | clone the [`AST`] into a new [`AST`] with only [functions], excluding statements                                |
+| `clone_functions_only_filtered(&self, filter)` | clone the [`AST`] into a new [`AST`] with only [functions] that pass the filter predicate, excluding statements |
+| `retain_functions(&mut self, filter)`          | remove all [functions] in the [`AST`] that do not pass a particular predicate filter; statements are untouched  |
+| `iter_functions(&self)`                        | return an iterator on all the [functions] in the [`AST`]                                                        |
+| `clear_functions(&mut self)`                   | remove all [functions] from the [`AST`], leaving only statements                                                |
 
 
 Extract Only Statements
@@ -43,8 +43,8 @@ The following methods allow manipulation of the statements in an [`AST`]:
 
 | Method                                                | Description                                                                                     |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `clone_statements_only(&self)`                        | clone the [`AST`] into a new [`AST`] with only the statements, excluding functions              |
-| `clear_statements(&mut self)`                         | remove all statements from the [`AST`], leaving only functions                                  |
+| `clone_statements_only(&self)`                        | clone the [`AST`] into a new [`AST`] with only the statements, excluding [functions]            |
+| `clear_statements(&mut self)`                         | remove all statements from the [`AST`], leaving only [functions]                                |
 | `iter_literal_variables(&self, constants, variables)` | return an iterator on all top-level literal constant and/or variable definitions in the [`AST`] |
 
 
@@ -53,12 +53,12 @@ Merge and Combine AST's
 
 The following methods merge one [`AST`] with another:
 
-| Method                                        | Description                                                                                                                                                                                                                                                                                   |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `merge(&self, &ast)`,<br />`+` operator       | append the second [`AST`] to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                     |
-| `merge_filtered(&self, &ast, filter)`         | append the second [`AST`] (but only functions that pass the predicate filter) to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`] |
-| `combine(&mut self, ast)`,<br />`+=` operator | append the second [`AST`] to this [`AST`]; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                                                                              |
-| `combine_filtered(&mut self, ast, filter)`    | append the second [`AST`] (but only functions that pass the predicate filter) to this [`AST`]; statements are simply appended, functions in the second [`AST`] of the same name and arity override similar functions in this [`AST`]                                                          |
+| Method                                        | Description                                                                                                                                                                                                                                                                                         |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `merge(&self, &ast)`,<br />`+` operator       | append the second [`AST`] to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, [functions] in the second [`AST`] of the same name and arity override similar [functions] in this [`AST`]                                                       |
+| `merge_filtered(&self, &ast, filter)`         | append the second [`AST`] (but only [functions] that pass the predicate filter) to this [`AST`], yielding a new [`AST`] that is a combination of the two; statements are simply appended, [functions] in the second [`AST`] of the same name and arity override similar [functions] in this [`AST`] |
+| `combine(&mut self, ast)`,<br />`+=` operator | append the second [`AST`] to this [`AST`]; statements are simply appended, [functions] in the second [`AST`] of the same name and arity override similar [functions] in this [`AST`]                                                                                                                |
+| `combine_filtered(&mut self, ast, filter)`    | append the second [`AST`] (but only [functions] that pass the predicate filter) to this [`AST`]; statements are simply appended, [functions] in the second [`AST`] of the same name and arity override similar [functions] in this [`AST`]                                                          |
 
 When statements are appended, beware that this may change the semantics of the script.
 
