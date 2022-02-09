@@ -9,15 +9,16 @@ A number of other configuration options are available from the [`Engine`] to fin
 Language Features
 -----------------
 
-| Method                           | Not available under | Description                                                                        |
-| -------------------------------- | :-----------------: | ---------------------------------------------------------------------------------- |
-| `set_allow_if_expression`        |                     | allows/disallows [`if`-expressions](../language/if-expression.md)                  |
-| `set_allow_switch_expression`    |                     | allows/disallows [`switch` expressions](../language/switch-expression.md)          |
-| `set_allow_statement_expression` |                     | allows/disallows [statement expressions](../language/statement-expression.md)      |
-| `set_allow_anonymous_fn`         |   [`no_function`]   | allows/disallows [anonymous functions]                                             |
-| `set_allow_looping`              |                     | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements) |
-| `set_allow_shadowing`            |                     | allows/disallows _[shadowing]_ of [variables]                                      |
-| `disable_symbol`                 |                     | disables a certain [keyword] or [operator] (see [disable keywords and operators])  |
+| Method                             | Not available under | Description                                                                                                      |
+| ---------------------------------- | :-----------------: | ---------------------------------------------------------------------------------------------------------------- |
+| `set_allow_if_expression`          |                     | allows/disallows [`if`-expressions](../language/if-expression.md)                                                |
+| `set_allow_switch_expression`      |                     | allows/disallows [`switch` expressions](../language/switch-expression.md)                                        |
+| `set_allow_statement_expression`   |                     | allows/disallows [statement expressions](../language/statement-expression.md)                                    |
+| `set_allow_anonymous_fn`           |   [`no_function`]   | allows/disallows [anonymous functions]                                                                           |
+| `set_allow_looping`                |                     | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements)                               |
+| `set_fail_on_invalid_map_property` |    [`no_object`]    | sets whether to raise errors (instead of returning [`()`]) when invalid properties are accessed on [object maps] |
+| `set_allow_shadowing`              |                     | allows/disallows _[shadowing]_ of [variables]                                                                    |
+| `disable_symbol`                   |                     | disables a certain [keyword] or [operator] (see [disable keywords and operators])                                |
 
 Compiler Behavior
 -----------------

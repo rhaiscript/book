@@ -36,23 +36,26 @@ or a [string literal][literals] without interpolation.
 Property Access Syntax
 ----------------------
 
-### Dot Notation
+### Dot notation
 
 The _dot notation_ allows only property names that follow the same naming rules as [variables].
 
 > _object_ `.` _property_
 
-### Index Notation
+### Index notation
 
 The _index notation_ allows setting/getting properties of arbitrary names (even the empty [string]).
 
 > _object_ `[` _property_ `]`
 
-### Non-Existence
+### Non-existing property
 
 Trying to read a non-existing property returns [`()`] instead of causing an error.
 
 This is similar to JavaScript where accessing a non-existing property returns `undefined`.
+
+It is possible to force Rhai to return an `EvalAltResult::ErrorPropertyNotFound` error via
+[`Engine::set_fail_on_invalid_map_property`][options].
 
 
 Built-in Functions
@@ -61,21 +64,21 @@ Built-in Functions
 The following methods (defined in the [`BasicMapPackage`][built-in packages] but excluded if using a [raw `Engine`])
 operate on object maps.
 
-| Function                    | Parameter(s)                                 | Description                                                                                                                              |
-| --------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `get`                       | property name                                | gets a copy of the value of a certain property ([`()`] if the property does not exist)                                                   |
-| `set`                       | 1) property name<br/>2) new element          | sets a certain property to a new value (property is added if not already exists)                                                         |
-| `len`                       | _none_                                       | returns the number of properties                                                                                                         |
-| `clear`                     | _none_                                       | empties the object map                                                                                                                   |
-| `remove`                    | property name                                | removes a certain property and returns it ([`()`] if the property does not exist)                                                        |
-| `+=` operator, `mixin`      | second object map                            | mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values) |
-| `+` operator                | 1) first object map<br/>2) second object map | merges the first object map with the second                                                                                              |
-| `==` operator               | 1) first object map<br/>2) second object map | are the two object maps the same (elements compared with the `==` operator, if defined)?                                                 |
-| `!=` operator               | 1) first object map<br/>2) second object map | are the two object maps different (elements compared with the `==` operator, if defined)?                                                |
-| `fill_with`                 | second object map                            | adds in all properties of the second object map that do not exist in the object map                                                      |
-| `contains`, [`in`] operator | property name                                | does the object map contain a property of a particular name?                                                                             |
-| `keys`                      | _none_                                       | returns an [array] of all the property names (in random order), not available under [`no_index`]                                         |
-| `values`                    | _none_                                       | returns an [array] of all the property values (in random order), not available under [`no_index`]                                        |
+| Function                    | Parameter(s)                                 | Description                                                                                                                                                           |
+| --------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get`                       | property name                                | gets a copy of the value of a certain property ([`()`] if the property does not exist); behavior is not affected by [`Engine::fail_on_invalid_map_property`][options] |
+| `set`                       | 1) property name<br/>2) new element          | sets a certain property to a new value (property is added if not already exists)                                                                                      |
+| `len`                       | _none_                                       | returns the number of properties                                                                                                                                      |
+| `clear`                     | _none_                                       | empties the object map                                                                                                                                                |
+| `remove`                    | property name                                | removes a certain property and returns it ([`()`] if the property does not exist)                                                                                     |
+| `+=` operator, `mixin`      | second object map                            | mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values)                              |
+| `+` operator                | 1) first object map<br/>2) second object map | merges the first object map with the second                                                                                                                           |
+| `==` operator               | 1) first object map<br/>2) second object map | are the two object maps the same (elements compared with the `==` operator, if defined)?                                                                              |
+| `!=` operator               | 1) first object map<br/>2) second object map | are the two object maps different (elements compared with the `==` operator, if defined)?                                                                             |
+| `fill_with`                 | second object map                            | adds in all properties of the second object map that do not exist in the object map                                                                                   |
+| `contains`, [`in`] operator | property name                                | does the object map contain a property of a particular name?                                                                                                          |
+| `keys`                      | _none_                                       | returns an [array] of all the property names (in random order), not available under [`no_index`]                                                                      |
+| `values`                    | _none_                                       | returns an [array] of all the property values (in random order), not available under [`no_index`]                                                                     |
 
 
 Examples
