@@ -53,7 +53,7 @@ mod my_module {
 // Define the package 'MyPackage' which is exported for the crate.
 def_package! {
     /// My own personal super package in a new crate!
-    rhai:MyPackage => |module| {
+    pub MyPackage(module) {
         combine_with_exported_module!(module, "my-functions", my_module));
     }
 }

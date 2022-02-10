@@ -20,7 +20,7 @@ For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/pa
 > ```rust,no_run
 > def_package! {
 >     /// Package description doc-comment
->     root::name => |variable| {
+>     pub name(variable) {
 >                         :
 >         // package initialization code block
 >                         :
@@ -29,25 +29,32 @@ For an example, see the [_One Engine Instance Per Call_]({{rootUrl}}/patterns/pa
 >     // Multiple packages can be defined at the same time
 >
 >     /// Package description doc-comment
->     root::name => |variable| {
+>     pub(crate) name(variable) {
 >                         :
 >         // package initialization code block
 >                         :
 >     }
 > 
+>     /// A private package description doc-comment
+>     name(variable) {
+>                         :
+>         // private package initialization code block
+>                         :
+>     }
+>
 >     :
 > }
 > ```
 
 where:
 
-|  Parameter  | Description                                                                                             |
-| :---------: | ------------------------------------------------------------------------------------------------------- |
-| description | doc-comment for the package                                                                             |
-|    root     | root namespace, usually `rhai`                                                                          |
-|    name     | name of the package, usually ending in ...`Package`                                                     |
-|  variable   | a variable name holding a reference to the [module] forming the package, usually `module`, `m` or `lib` |
-| code block  | a code block that initializes the package                                                               |
+|   Element   | Description                                                                                          |
+| :---------: | ---------------------------------------------------------------------------------------------------- |
+| description | doc-comment for the [package]                                                                        |
+| `pub` etc.  | visibility of the [package]                                                                          |
+|    name     | name of the [package], usually ending in ...`Package`                                                |
+|  variable   | a variable name holding a reference to the [module] forming the [package], usually `module` or `lib` |
+| code block  | a code block that initializes the [package]                                                          |
 
 
 Examples
@@ -62,7 +69,7 @@ use rhai::packages::{
 
 def_package! {
     /// My own personal super package
-    rhai::MyPackage => |module| {
+    pub MyPackage(module) {
         // Aggregate other packages simply by calling 'init' on each.
         ArithmeticPackage::init(module);
         LogicPackage::init(module);
@@ -136,7 +143,7 @@ mod my_plugin_module {
 
 def_package! {
     /// My own personal super package
-    rhai::MyPackage => |module| {
+    pub MyPackage(module) {
         // Aggregate other packages simply by calling 'init' on each.
         ArithmeticPackage::init(module);
         LogicPackage::init(module);

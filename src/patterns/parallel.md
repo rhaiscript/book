@@ -55,10 +55,9 @@ use rhai::def_package;
 use rhai::packages::{Package, StandardPackage};
 
 // Define the custom package 'MyCustomPackage'.
-
 def_package! {
     /// My own personal super-duper custom package
-    rhai:MyCustomPackage => |module| {
+    pub MyCustomPackage(module) {
       // Aggregate other packages simply by calling 'init' on each.
       StandardPackage::init(module);
 
