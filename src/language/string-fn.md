@@ -11,10 +11,11 @@ using a [raw `Engine`]) operate on [strings] (and possibly characters).
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `len` method and property                          | _none_                                                                                                                          | returns the number of characters (**not** number of bytes) in the string                                                                                     |
 | `bytes` method and property                        | _none_                                                                                                                          | returns the number of bytes making up the UTF-8 string; for strings containing only ASCII characters, this is much faster than `len`                         |
+| `to_blob`<br/>(not available under [`no_index`])   | _none_                                                                                                                          | converts the string into an UTF-8 encoded byte-stream and returns it as a [BLOB].                                                                            |
 | `get`                                              | position, counting from end if < 0                                                                                              | gets the character at a certain position ([`()`] if the position is not valid)                                                                               |
 | `set`                                              | 1) position, counting from end if < 0<br/>2) new character                                                                      | sets a certain position to a new character (no effect if the position is not valid)                                                                          |
 | `pad`                                              | 1) target length<br/>2) character/string to pad                                                                                 | pads the string with a character or a string to at least a specified length                                                                                  |
-| `append`                                           | character/string to append                                                                                                      | adds a character or a string to the end of another string                                                                                                    |
+| `append`, `+=` operator                            | item to append                                                                                                                  | adds the display text of an item to the end of the string                                                                                                    |
 | `remove`                                           | character/string to remove                                                                                                      | removes a character or a string from the string                                                                                                              |
 | `pop`                                              | _(optional)_ number of characters to remove, none if ≤ 0, entire string if ≥ length                                             | removes the last character (if no parameter) and returns it ([`()`] if empty); otherwise, removes the last number of characters and returns them as a string |
 | `clear`                                            | _none_                                                                                                                          | empties the string                                                                                                                                           |
@@ -28,7 +29,7 @@ using a [raw `Engine`]) operate on [strings] (and possibly characters).
 | `sub_string`                                       | 1) start position, counting from end if < 0<br/>2) _(optional)_ number of characters to extract, none if ≤ 0, to end if omitted | extracts a sub-string                                                                                                                                        |
 | `sub_string`                                       | [range] of characters to extract, from beginning if ≤ 0, to end if ≥ length                                                     | extracts a sub-string                                                                                                                                        |
 | `split`<br/>(not available under [`no_index`])     | _none_                                                                                                                          | splits the string by individual characters, returning an [array] of characters                                                                               |
-| `split`<br/>(not available under [`no_index`])     | Position to split at (in number of characters), counting from end if < 0, end if ≥ length                                       | splits the string into two segments at the specified character position, returning an [array] of two string segments                                         |
+| `split`<br/>(not available under [`no_index`])     | position to split at (in number of characters), counting from end if < 0, end if ≥ length                                       | splits the string into two segments at the specified character position, returning an [array] of two string segments                                         |
 | `split`<br/>(not available under [`no_index`])     | 1) delimiter character/string<br/>2) _(optional)_ maximum number of segments, 1 if < 1                                          | splits the string by the specified delimiter, returning an [array] of string segments                                                                        |
 | `split_rev`<br/>(not available under [`no_index`]) | 1) delimiter character/string<br/>2) _(optional)_ maximum number of segments, 1 if < 1                                          | splits the string by the specified delimiter in reverse order, returning an [array] of string segments                                                       |
 | `crop`                                             | 1) start position, counting from end if < 0<br/>2) _(optional)_ number of characters to retain, none if ≤ 0, to end if omitted  | retains only a portion of the string                                                                                                                         |
@@ -50,16 +51,26 @@ The following standard operators inter-operate between [strings] and/or [charact
 When one (or both) of the operands is a [character], it is first converted into a one-character
 [string] before running the operator.
 
-| Operator  | Description                             |
-| --------- | --------------------------------------- |
-| `+`, `+=` | character/string concatenation          |
-| `-`, `-=` | remove character/sub-string from string |
-| `==`      | equals to                               |
-| `!=`      | not equals to                           |
-| `>`       | greater than                            |
-| `>=`      | greater than or equals to               |
-| `<`       | less than                               |
-| `<=`      | less than or equals to                  |
+| Operator  | Description                                   |
+| --------- | --------------------------------------------- |
+| `+`, `+=` | [character]/[string] concatenation            |
+| `-`, `-=` | remove [character]/sub-[string] from [string] |
+| `==`      | equals to                                     |
+| `!=`      | not equals to                                 |
+| `>`       | greater than                                  |
+| `>=`      | greater than or equals to                     |
+| `<`       | less than                                     |
+| `<=`      | less than or equals to                        |
+
+For convenience, when [BLOB's] are appended to a [string], it is treated as UTF-8 encoded data and
+automatically first converted into the appropriate [string] value.
+
+That is because it is rarely useful to append a [BLOB] into a string, but extremely useful to be
+able to directly manipulate UTF-8 encoded text.
+
+| Operator                                         | Description                                                 |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| `+`, `+=`<br/>(not available under [`no_index`]) | append a [BLOB] (as a UTF-8 encoded [string]) to a [string] |
 
 
 Examples

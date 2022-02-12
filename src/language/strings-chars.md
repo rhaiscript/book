@@ -142,6 +142,10 @@ The last result of the block is taken as the value for interpolation.
 Rhai uses [`to_string()`] to convert any value into a string, then physically joins all the
 sub-strings together.
 
+For convenience, if any interpolated value is a [BLOB], however, it is automatically treated as a
+UTF-8 encoded string.  That is because it is rarely useful to interpolate a [BLOB] into a string,
+but extremely useful to be able to directly manipulate UTF-8 encoded text.
+
 ```js
 let x = 42;
 let y = 123;
@@ -159,6 +163,15 @@ Undeniable logic:
 `;
 
 s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 > 42 then it is true!\n";
+
+let blob = blob(3, 0x21);
+
+print(blob);                            // prints [212121]
+
+print(`Data: ${blob}`);                 // prints "Data: !!!"
+                                        // BLOB is treated as UTF-8 encoded string
+
+print(`Data: ${blob.to_string()}`);     // prints "Data: [212121]"
 ```
 
 
@@ -230,7 +243,7 @@ c == 'r';
 
 // Escape sequences in strings
 record += " \u2764\n";                  // escape sequence of '❤' in Unicode
-record == "Bob C. Davis: age 42 ❤\n";   // '\n' = new-line
+record == "Bob C. Davis: age 42 ❤\n";  // '\n' = new-line
 
 // Unlike Rust, Rhai strings can be directly modified character-by-character
 // (disabled with 'no_index')
