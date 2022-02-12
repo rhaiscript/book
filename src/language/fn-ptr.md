@@ -233,7 +233,7 @@ r#"
 let fn_ptr = engine.eval_ast::<FnPtr>(&ast)?;
 
 // 'f' captures: the Engine, the AST, and the closure
-let f = move |x: i64| -> Result<String, Box<EvalAltResult>> {
+let f = move |x: i64| -> Result<String, _> {
             fn_ptr.call(&engine, &ast, (x,))
         };
 
