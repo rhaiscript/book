@@ -75,12 +75,12 @@ where:
 
 and [`EvalContext`] is a type that encapsulates the current _evaluation context_.
 
-### Return Value
+### Return value
 
 The return value is `Result<Option<Dynamic>, Box<EvalAltResult>>` where:
 
-| Value                     | Description                                                                                                                                                                                                  |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Ok(None)`                | normal [variable] resolution process should continue, i.e. continue searching through the [`Scope`]                                                                                                          |
-| `Ok(Some(value))`         | value (a [`Dynamic`]) of the [variable], treated as a [constant]                                                                                                                                             |
-| `Err(Box<EvalAltResult>)` | error that is reflected back to the [`Engine`], normally `EvalAltResult::ErrorVariableNotFound(var_name, Position::NONE)` to indicate that the [variable] does not exist, but it can be any `EvalAltResult`. |
+| Value                     | Description                                                                                                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Ok(None)`                | normal [variable] resolution process should continue, i.e. continue searching through the [`Scope`]                                                                                |
+| `Ok(Some(value))`         | value (a [`Dynamic`]) of the [variable], treated as a [constant]                                                                                                                   |
+| `Err(Box<EvalAltResult>)` | error that is reflected back to the [`Engine`], normally `EvalAltResult::ErrorVariableNotFound` to indicate that the [variable] does not exist, but it can be any `EvalAltResult`. |
