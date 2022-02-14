@@ -42,25 +42,27 @@ Implementation
 ```rust,no_run
 #[derive(Debug, Clone, Default)]
 struct Config {
-    pub id: String;
-    pub some_field: i64;
-    pub some_list: Vec<String>;
-    pub some_map: HashMap<String, bool>;
+    id: String,
+    some_field: i64,
+    some_list: Vec<String>,
+    some_map: HashMap<String, bool>,
 }
 ```
 
 ### Make shared object
 
 ```rust,no_run
-pub type SharedConfig = Rc<RefCell<Config>>;
+type SharedConfig = Rc<RefCell<Config>>;
+
+let config = SharedConfig::default();
 ```
 
 or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
 ```rust,no_run
-let config: SharedConfig = Arc<RwLock<Config>>;
+type SharedConfig = Arc<RwLock<Config>>;
 
-let config: SharedConfig = Arc<Mutex<Config>>;
+type SharedConfig = Arc<Mutex<Config>>;
 ```
 
 ### Register config API
@@ -74,13 +76,13 @@ registered one after another.
 ```rust,no_run
 // Notice 'move' is used to move the shared configuration object into the closure.
 let cfg = config.clone();
-engine.register_fn("config_set_id", move |id: String| *cfg.borrow_mut().id = id);
+engine.register_fn("config_set_id", move |id: String| cfg.borrow_mut().id = id);
 
 let cfg = config.clone();
 engine.register_fn("config_get_id", move || cfg.borrow().id.clone());
 
 let cfg = config.clone();
-engine.register_fn("config_set", move |value: i64| *cfg.borrow_mut().some_field = value);
+engine.register_fn("config_set", move |value: i64| cfg.borrow_mut().some_field = value);
 
 // Remember Rhai functions can be overloaded when designing the API.
 
