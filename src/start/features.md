@@ -23,7 +23,7 @@ Features that Enable Special Functionalities
 | `serde`             |    yes    | enables serialization/deserialization via `serde` (pulls in the [`serde`](https://crates.io/crates/serde) crate)                                                   |
 | `metadata`          |    yes    | enables exporting [functions metadata]; implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json)                              |
 | `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes); beware that Rhai internals are volatile and may change from version to version                              |
-| `debugging`         |    yes    | enables the [debugging] interface; implies `internals`                                                                                                             |
+| `debugging`         |    yes    | enables the [debugging][debugger] interface; implies `internals`                                                                                                   |
 
 
 Features that Disable Certain Language Features

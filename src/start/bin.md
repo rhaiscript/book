@@ -7,12 +7,21 @@ A number of Rhai-driven tools can be found in the `src/bin` directory:
 
 |                       Tool                       | Required feature(s) | Description                                       |
 | :----------------------------------------------: | :-----------------: | ------------------------------------------------- |
-| [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) |                     | a simple REPL, interactively evaluates statements |
-|  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  |     `rustyline`     | runs each filename passed to it as a Rhai script  |
+|  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  |                     | runs each filename passed to it as a Rhai script  |
+| [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) |     `rustyline`     | a simple REPL, interactively evaluates statements |
 |  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  |    [`debugging`]    | the _Rhai Debugger_                               |
 
 Notice that some bin tools require certain [features] and will not be built by default without those
 [features] set.
+
+For convenience, a feature named [`bin-features`][features] is available which is a combination of
+the following:
+
+* [`decimal`] &ndash; support for [decimal][rust_decimal] numbers
+* [`metadata`] &ndash; access [functions metadata]
+* [`serde`] &ndash; export [functions metadata] to JSON
+* [`debugging`] &ndash; required by `rhai-dbg`
+* `rustyline` &ndash; required by `rhai-repl`
 
 
 Install Tools
@@ -27,9 +36,20 @@ cargo install --path . --bins  --features bin-features
 or specifically:
 
 ```sh
-cargo install --path . --bin rhai-run  --features bin-features
+cargo install --path . --bin sample_app_to_run  --features bin-features
 ```
 
+
+Run a Tool from Cargo
+---------------------
+
+Tools can also be run with the following `cargo` command:
+
+```sh
+cargo run --features bin-features --bin sample_app_to_run
+```
+
+-----------
 
 `rhai-repl` &ndash; The Rhai REPL Tool
 -------------------------------------
@@ -60,6 +80,7 @@ Then it enters an REPL, which can call the above functions freely.
 rhai-repl init1.rhai init2.rhai init3.rhai
 ```
 
+-----------
 
 `rhai-run` &ndash; The Rhai Runner
 ---------------------------------
@@ -76,6 +97,7 @@ The following command runs the scripts `script1.rhai`, `script2.rhai` and `scrip
 rhai-run script1.rhai script2.rhai script3.rhai
 ```
 
+-----------
 
 `rhai-dbg` &ndash; The Rhai Debugger
 -----------------------------------
@@ -90,14 +112,4 @@ The following command debugs the script `my_script.rhai`.
 
 ```sh
 rhai-dbg my_script.rhai
-```
-
-
-Running a Tool from Cargo
--------------------------
-
-Tools can also be run with the following `cargo` command:
-
-```sh
-cargo run --features bin-features --bin {program_name}
 ```
