@@ -6,27 +6,32 @@ Engine Configuration Options
 A number of other configuration options are available from the [`Engine`] to fine-tune behavior and safeguards.
 
 
-Language Features
------------------
+Compile-Time Language Features
+-----------------------------
 
-| Method                             | Not available under | Description                                                                                                      |
-| ---------------------------------- | :-----------------: | ---------------------------------------------------------------------------------------------------------------- |
-| `set_allow_if_expression`          |                     | allows/disallows [`if`-expressions](../language/if-expression.md)                                                |
-| `set_allow_switch_expression`      |                     | allows/disallows [`switch` expressions](../language/switch-expression.md)                                        |
-| `set_allow_statement_expression`   |                     | allows/disallows [statement expressions](../language/statement-expression.md)                                    |
-| `set_allow_anonymous_fn`           |   [`no_function`]   | allows/disallows [anonymous functions]                                                                           |
-| `set_allow_looping`                |                     | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements)                               |
-| `set_fail_on_invalid_map_property` |    [`no_object`]    | sets whether to raise errors (instead of returning [`()`]) when invalid properties are accessed on [object maps] |
-| `set_allow_shadowing`              |                     | allows/disallows _[shadowing]_ of [variables]                                                                    |
-| `disable_symbol`                   |                     | disables a certain [keyword] or [operator] (see [disable keywords and operators])                                |
+| Method                                                             | Description                                                                        |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| `set_optimization_level`<br/>(not available under [`no_optimize`]) | sets the amount of script _optimizations_ performed (see [script optimization])    |
+| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions](../language/if-expression.md)                  |
+| `set_allow_switch_expression`                                      | allows/disallows [`switch` expressions](../language/switch-expression.md)          |
+| `set_allow_statement_expression`                                   | allows/disallows [statement expressions](../language/statement-expression.md)      |
+| `set_allow_anonymous_fn`<br/>(not available under [`no_function`]) | allows/disallows [anonymous functions]                                             |
+| `set_allow_looping`                                                | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements) |
+| `set_allow_shadowing`                                              | allows/disallows _[shadowing]_ of [variables]                                      |
+| `set_strict_variables`                                             | enables/disables [_Strict Variables_ mode][strict variables]                       |
+| `disable_symbol`                                                   | disables a certain [keyword] or [operator] (see [disable keywords and operators])  |
 
-Compiler Behavior
------------------
+Beware that these options activate during _compile-time_ only.  If an [`AST`] is compiled on an
+[`Engine`] but then evaluated on a different [`Engine`] with different configuration, disallowed
+features contained inside the [`AST`] will still run as normal.
 
-| Method                   | Not available under | Description                                                                     |
-| ------------------------ | :-----------------: | ------------------------------------------------------------------------------- |
-| `set_optimization_level` |   [`no_optimize`]   | sets the amount of script _optimizations_ performed (see [script optimization]) |
-| `set_strict_variables`   |                     | enables/disables [_Strict Variables_ mode][strict variables]                    |
+
+Runtime Behavior
+----------------
+
+| Method                                                                     | Description                                                                                                      |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `set_fail_on_invalid_map_property`<br/>(not available under [`no_object`]) | sets whether to raise errors (instead of returning [`()`]) when invalid properties are accessed on [object maps] |
 
 Safety Limits
 -------------
