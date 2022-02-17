@@ -40,6 +40,8 @@ The most important resources to watch out for are:
 _Don't Panic_ Guarantee &ndash; Any Panic is a Bug
 -------------------------------------------------
 
+![Don't Panic](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png)
+
 Rhai is designed to not bring down the host system, regardless of what a script may do to it.
 This is a central design goal &ndash; Rhai provides a [_Don't Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic) guarantee.
 
@@ -56,3 +58,26 @@ checks (even fatal ones such as stack overflow, arithmetic overflow and division
 This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.
 
 Under [`unchecked`], it is very possible for a malicious script to panic and bring down the host system.
+
+
+Beware of `internals`
+---------------------
+
+The [`internals`] feature allows third-party access to Rust internal data types and functions (for
+example, the [`AST`] and related types).
+
+This is usually a _Very Bad Idea™_ because:
+
+* Messing up Rhai's internal data structures will easily create panics that bring down the host
+  environment, violating the _Don't Panic_ guarantee.
+
+* Allowing access to internal types may open up new attack vectors.
+
+* Internal Rhai types and functions are volatile, so they may change from version to version and
+  break code.
+
+Use [`internals`] only if the operating environment has absolutely no safety concerns &ndash; you'd
+be surprised how few scenarios this assumption holds.
+
+One example of such an environment is a Rhai scripting [`Engine`] compiled to [WASM] where the
+[`AST`] is further translated to include environment-specific modifications.
