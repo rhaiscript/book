@@ -198,6 +198,7 @@ it is a severe security breach and may put the entire system at risk.</p>
 </li>
 </ul>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>
 <p>Rhai is designed to not bring down the host system, regardless of what a script may do to it.
 This is a central design goal – Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a> guarantee.</p>
 <p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
@@ -207,6 +208,27 @@ considered a bug in Rhai and should be reported as such.</p>
 checks (even fatal ones such as stack overflow, arithmetic overflow and division-by-zero).</p>
 <p>This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.</p>
 <p>Under <a href="/book/start/features.html"><code>unchecked</code></a>, it is very possible for a malicious script to panic and bring down the host system.</p>
+<h2 id="beware-of-internals"><a class="header" href="#beware-of-internals">Beware of <code>internals</code></a></h2>
+<p>The <a href="/book/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
+example, the <a href="/book/engine/compile.html"><code>AST</code></a> and related types).</p>
+<p>This is usually a <em>Very Bad Idea™</em> because:</p>
+<ul>
+<li>
+<p>Messing up Rhai’s internal data structures will easily create panics that bring down the host
+environment, violating the <em>Don’t Panic</em> guarantee.</p>
+</li>
+<li>
+<p>Allowing access to internal types may open up new attack vectors.</p>
+</li>
+<li>
+<p>Internal Rhai types and functions are volatile, so they may change from version to version and
+break code.</p>
+</li>
+</ul>
+<p>Use <a href="/book/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
+be surprised how few scenarios this assumption holds.</p>
+<p>One example of such an environment is a Rhai scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/book/start/builds/wasm.html">WASM</a> where the
+<a href="/book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
 
                     </main>
 

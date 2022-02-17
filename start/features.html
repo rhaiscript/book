@@ -175,8 +175,8 @@ what a script can (or cannot) do.</p>
 <tr><td><code>unicode-xid-ident</code></td><td style="text-align: center">no</td><td>allows <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a> as identifiers</td></tr>
 <tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate)</td></tr>
 <tr><td><code>metadata</code></td><td style="text-align: center">yes</td><td>enables exporting <a href="/book/engine/metadata/index.html">functions metadata</a>; implies <code>serde</code> and additionally pulls in <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td></tr>
-<tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="/book/engine/compile.html"><code>AST</code></a> nodes); beware that Rhai internals are volatile and may change from version to version</td></tr>
-<tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the [debugging] interface; implies <code>internals</code></td></tr>
+<tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="/book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><br/>• allowing access to internal types may enable external attack vectors<br/>• internal types and functions are volatile and may change from version to version</td></tr>
+<tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the <a href="/book/engine/debugging/debugger.html">debugging</a> interface; implies <code>internals</code></td></tr>
 </tbody></table>
 <h2 id="features-that-disable-certain-language-features"><a class="header" href="#features-that-disable-certain-language-features">Features that Disable Certain Language Features</a></h2>
 <table><thead><tr><th>Feature</th><th style="text-align: center">Additive?</th><th>Description</th></tr></thead><tbody>

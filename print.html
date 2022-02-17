@@ -340,28 +340,30 @@ simulate <a href="about//book/patterns/oop.html">object-oriented programming (OO
 <p><strong>No first-class closures</strong> – do your closure magic in Rust instead:
 <a href="about//book/engine/call-fn.html">turn a Rhai scripted function into a Rust closure</a>.</p>
 <p>There is, however, support for simulated <a href="about//book/language/fn-closure.html">closures</a> via <a href="about//book/language/fn-curry.html">currying</a> a <a href="about//book/language/fn-ptr.html">function pointer</a> with
-captured shared variables.</p>
+<a href="about//book/language/fn-closure.html">captured</a> shared <a href="about//book/language/variables.html">variables</a>.</p>
 </li>
 <li>
 <p><strong>No byte-codes/JIT</strong> – Rhai has an optimized AST-walking interpreter which is fast enough
 for most casual usage scenarios. Essential AST data structures are packed and kept together to
 maximize cache friendliness.</p>
-<p>Functions are dispatched based on pre-calculated hashes and accessing variables are mostly through
-pre-calculated offsets to the variables file (a <a href="about//book/engine/scope.html"><code>Scope</code></a>), so it is seldom necessary to look
-something up by text name.</p>
-<p>In addition, Rhai’s design deliberately avoids maintaining a <em>scope chain</em> so function scopes do
-not pay any speed penalty.  This particular design also allows variables data to be kept together
-in a contiguous block, avoiding allocations and fragmentation while being cache-friendly. In a
-typical script evaluation run, no data is shared and nothing is locked.</p>
+<p>Functions are dispatched based on pre-calculated hashes and accessing <a href="about//book/language/variables.html">variables</a> are mostly
+through pre-calculated offsets to the <a href="about//book/language/variables.html">variables</a> file (a <a href="about//book/engine/scope.html"><code>Scope</code></a>), so it is seldom necessary to
+look something up by text name.</p>
+<p>In addition, Rhai’s design deliberately avoids maintaining a <em>scope chain</em> so <a href="about//book/language/functions.html">function</a> scopes do
+not pay any speed penalty.  This particular design also allows <a href="about//book/language/variables.html">variables</a> data to be kept
+together in a contiguous block, avoiding allocations and fragmentation while being cache-friendly.
+In a typical script evaluation run, no data is shared and nothing is locked.</p>
 <p>Still, the purpose of Rhai is not to be super <em>fast</em>, but to make it as easy and versatile as
-possible to integrate with native Rust applications.</p>
+possible to integrate with native Rust applications.  However, what you lose from running an AST
+walker, you gain back from increased flexibility.</p>
 </li>
 <li>
 <p><strong>No formal language grammar</strong> – Rhai uses a hand-coded lexer, a hand-coded top-down
 recursive-descent parser for statements, and a hand-coded Pratt parser for expressions.</p>
 <p>This lack of formalism allows the <em>tokenizer</em> and <em>parser</em> themselves to be exposed as services in
-order to support <a href="about//book/engine/disable-keywords.html">disabling keywords/operators</a>, adding <a href="about//book/engine/custom-op.html">custom operators</a>,
-and defining <a href="about//book/engine/custom-syntax.html">custom syntax</a>.</p>
+order to support advanced features such as <a href="about//book/engine/disable-keywords.html">disabling keywords and operators</a>,
+dynamically <a href="about//book/engine/token-mapper.html">changing tokens</a> during parsing, adding
+<a href="about//book/engine/custom-op.html">custom operators</a>, defining <a href="about//book/engine/custom-syntax.html">custom syntax</a> and <a href="about//book/engine/def-var.html">filtering variables definition</a>.</p>
 </li>
 </ul>
 <h2 id="do-not-write-the-next-4d-vr-game-in-rhai"><a class="header" href="#do-not-write-the-next-4d-vr-game-in-rhai">Do Not Write The Next 4D VR Game in Rhai</a></h2>
@@ -507,8 +509,8 @@ what a script can (or cannot) do.</p>
 <tr><td><code>unicode-xid-ident</code></td><td style="text-align: center">no</td><td>allows <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a> as identifiers</td></tr>
 <tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate)</td></tr>
 <tr><td><code>metadata</code></td><td style="text-align: center">yes</td><td>enables exporting <a href="start//book/engine/metadata/index.html">functions metadata</a>; implies <code>serde</code> and additionally pulls in <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td></tr>
-<tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="start//book/engine/compile.html"><code>AST</code></a> nodes); beware that Rhai internals are volatile and may change from version to version</td></tr>
-<tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the [debugging] interface; implies <code>internals</code></td></tr>
+<tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="start//book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><br/>• allowing access to internal types may enable external attack vectors<br/>• internal types and functions are volatile and may change from version to version</td></tr>
+<tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the <a href="start//book/engine/debugging/debugger.html">debugging</a> interface; implies <code>internals</code></td></tr>
 </tbody></table>
 <h2 id="features-that-disable-certain-language-features"><a class="header" href="#features-that-disable-certain-language-features">Features that Disable Certain Language Features</a></h2>
 <table><thead><tr><th>Feature</th><th style="text-align: center">Additive?</th><th>Description</th></tr></thead><tbody>
@@ -574,19 +576,33 @@ floating-point hardware.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="packaged-utilities"><a class="header" href="#packaged-utilities">Packaged Utilities</a></h1>
 <p>A number of Rhai-driven tools can be found in the <code>src/bin</code> directory:</p>
 <table><thead><tr><th style="text-align: center">Tool</th><th style="text-align: center">Required feature(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/master/src/bin/rhai-repl.rs"><code>rhai-repl</code></a></td><td style="text-align: center"></td><td>a simple REPL, interactively evaluates statements</td></tr>
-<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/master/src/bin/rhai-run.rs"><code>rhai-run</code></a></td><td style="text-align: center"><code>rustyline</code></td><td>runs each filename passed to it as a Rhai script</td></tr>
+<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/master/src/bin/rhai-run.rs"><code>rhai-run</code></a></td><td style="text-align: center"></td><td>runs each filename passed to it as a Rhai script</td></tr>
+<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/master/src/bin/rhai-repl.rs"><code>rhai-repl</code></a></td><td style="text-align: center"><code>rustyline</code></td><td>a simple REPL, interactively evaluates statements</td></tr>
 <tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/master/src/bin/rhai-dbg.rs"><code>rhai-dbg</code></a></td><td style="text-align: center"><a href="start//book/start/features.html"><code>debugging</code></a></td><td>the <em>Rhai Debugger</em></td></tr>
 </tbody></table>
 <p>Notice that some bin tools require certain <a href="start//book/start/features.html">features</a> and will not be built by default without those
 <a href="start//book/start/features.html">features</a> set.</p>
+<p>For convenience, a feature named <a href="start//book/start/features.html"><code>bin-features</code></a> is available which is a combination of
+the following:</p>
+<ul>
+<li><a href="start//book/start/features.html"><code>decimal</code></a> – support for <a href="https://crates.io/crates/rust_decimal">decimal</a> numbers</li>
+<li><a href="start//book/start/features.html"><code>metadata</code></a> – access <a href="start//book/engine/metadata/index.html">functions metadata</a></li>
+<li><a href="start//book/rust/serde.html"><code>serde</code></a> – export <a href="start//book/engine/metadata/index.html">functions metadata</a> to JSON</li>
+<li><a href="start//book/start/features.html"><code>debugging</code></a> – required by <code>rhai-dbg</code></li>
+<li><code>rustyline</code> – required by <code>rhai-repl</code></li>
+</ul>
 <h2 id="install-tools"><a class="header" href="#install-tools">Install Tools</a></h2>
 <p>To install all these tools (with full features), use the following command:</p>
 <pre><code class="language-sh">cargo install --path . --bins  --features bin-features
 </code></pre>
 <p>or specifically:</p>
-<pre><code class="language-sh">cargo install --path . --bin rhai-run  --features bin-features
+<pre><code class="language-sh">cargo install --path . --bin sample_app_to_run  --features bin-features
 </code></pre>
+<h2 id="run-a-tool-from-cargo"><a class="header" href="#run-a-tool-from-cargo">Run a Tool from Cargo</a></h2>
+<p>Tools can also be run with the following <code>cargo</code> command:</p>
+<pre><code class="language-sh">cargo run --features bin-features --bin sample_app_to_run
+</code></pre>
+<hr />
 <h2 id="rhai-repl--the-rhai-repl-tool"><a class="header" href="#rhai-repl--the-rhai-repl-tool"><code>rhai-repl</code> – The Rhai REPL Tool</a></h2>
 <p><code>rhai-repl</code> is a particularly useful tool – it allows one to interactively try out
 Rhai’s language features in a standard REPL (<strong>R</strong>ead-<strong>E</strong>val-<strong>P</strong>rint <strong>L</strong>oop).</p>
@@ -604,6 +620,7 @@ loading the functions defined in each script into the <em>global</em> namespace.
 <p>Then it enters an REPL, which can call the above functions freely.</p>
 <pre><code class="language-sh">rhai-repl init1.rhai init2.rhai init3.rhai
 </code></pre>
+<hr />
 <h2 id="rhai-run--the-rhai-runner"><a class="header" href="#rhai-run--the-rhai-runner"><code>rhai-run</code> – The Rhai Runner</a></h2>
 <p>Use <code>rhai-run</code> to run Rhai scripts.</p>
 <p>Filenames passed to it as command line arguments are run in sequence.</p>
@@ -611,16 +628,13 @@ loading the functions defined in each script into the <em>global</em> namespace.
 <p>The following command runs the scripts <code>script1.rhai</code>, <code>script2.rhai</code> and <code>script3.rhai</code> in order.</p>
 <pre><code class="language-sh">rhai-run script1.rhai script2.rhai script3.rhai
 </code></pre>
+<hr />
 <h2 id="rhai-dbg--the-rhai-debugger"><a class="header" href="#rhai-dbg--the-rhai-debugger"><code>rhai-dbg</code> – The Rhai Debugger</a></h2>
 <p>Use <code>rhai-dbg</code> to debug a Rhai script.</p>
 <p>Filename passed to it will be loaded as a Rhai script for debugging.</p>
 <h3 id="example-3"><a class="header" href="#example-3">Example</a></h3>
 <p>The following command debugs the script <code>my_script.rhai</code>.</p>
 <pre><code class="language-sh">rhai-dbg my_script.rhai
-</code></pre>
-<h2 id="running-a-tool-from-cargo"><a class="header" href="#running-a-tool-from-cargo">Running a Tool from Cargo</a></h2>
-<p>Tools can also be run with the following <code>cargo</code> command:</p>
-<pre><code class="language-sh">cargo run --features bin-features --bin {program_name}
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="using-the-engine"><a class="header" href="#using-the-engine">Using the Engine</a></h1>
 <p>Rhai’s interpreter resides in the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> type under the master <code>rhai</code> namespace.</p>
@@ -918,21 +932,24 @@ let result = engine.eval_expression_with_scope::&lt;i64&gt;(&amp;mut scope, &quo
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="engine-configuration-options"><a class="header" href="#engine-configuration-options">Engine Configuration Options</a></h1>
 <p>A number of other configuration options are available from the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> to fine-tune behavior and safeguards.</p>
-<h2 id="language-features"><a class="header" href="#language-features">Language Features</a></h2>
-<table><thead><tr><th>Method</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>set_allow_if_expression</code></td><td style="text-align: center"></td><td>allows/disallows <a href="engine/../language/if-expression.html"><code>if</code>-expressions</a></td></tr>
-<tr><td><code>set_allow_switch_expression</code></td><td style="text-align: center"></td><td>allows/disallows <a href="engine/../language/switch-expression.html"><code>switch</code> expressions</a></td></tr>
-<tr><td><code>set_allow_statement_expression</code></td><td style="text-align: center"></td><td>allows/disallows <a href="engine/../language/statement-expression.html">statement expressions</a></td></tr>
-<tr><td><code>set_allow_anonymous_fn</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>no_function</code></a></td><td>allows/disallows <a href="engine//book/language/fn-anon.html">anonymous functions</a></td></tr>
-<tr><td><code>set_allow_looping</code></td><td style="text-align: center"></td><td>allows/disallows looping (i.e. <a href="engine//book/language/while.html"><code>while</code></a>, <a href="engine//book/language/loop.html"><code>loop</code></a>, <a href="engine//book/language/do.html"><code>do</code></a> and <a href="engine//book/language/for.html"><code>for</code></a> statements)</td></tr>
-<tr><td><code>set_fail_on_invalid_map_property</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>no_object</code></a></td><td>sets whether to raise errors (instead of returning <a href="engine//book/language/values-and-types.html"><code>()</code></a>) when invalid properties are accessed on <a href="engine//book/language/object-maps.html">object maps</a></td></tr>
-<tr><td><code>set_allow_shadowing</code></td><td style="text-align: center"></td><td>allows/disallows <em><a href="engine//book/language/shadow.html">shadowing</a></em> of <a href="engine//book/language/variables.html">variables</a></td></tr>
-<tr><td><code>disable_symbol</code></td><td style="text-align: center"></td><td>disables a certain <a href="engine//book/appendix/keywords.html">keyword</a> or <a href="engine//book/appendix/operators.html#operators">operator</a> (see <a href="engine//book/engine/disable-keywords.html">disable keywords and operators</a>)</td></tr>
+<h2 id="compile-time-language-features"><a class="header" href="#compile-time-language-features">Compile-Time Language Features</a></h2>
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>set_optimization_level</code><br/>(not available under <a href="engine//book/start/features.html"><code>no_optimize</code></a>)</td><td>sets the amount of script <em>optimizations</em> performed (see <a href="engine//book/engine/optimize/index.html">script optimization</a>)</td></tr>
+<tr><td><code>set_allow_if_expression</code></td><td>allows/disallows <a href="engine/../language/if-expression.html"><code>if</code>-expressions</a></td></tr>
+<tr><td><code>set_allow_switch_expression</code></td><td>allows/disallows <a href="engine/../language/switch-expression.html"><code>switch</code> expressions</a></td></tr>
+<tr><td><code>set_allow_statement_expression</code></td><td>allows/disallows <a href="engine/../language/statement-expression.html">statement expressions</a></td></tr>
+<tr><td><code>set_allow_anonymous_fn</code><br/>(not available under <a href="engine//book/start/features.html"><code>no_function</code></a>)</td><td>allows/disallows <a href="engine//book/language/fn-anon.html">anonymous functions</a></td></tr>
+<tr><td><code>set_allow_looping</code></td><td>allows/disallows looping (i.e. <a href="engine//book/language/while.html"><code>while</code></a>, <a href="engine//book/language/loop.html"><code>loop</code></a>, <a href="engine//book/language/do.html"><code>do</code></a> and <a href="engine//book/language/for.html"><code>for</code></a> statements)</td></tr>
+<tr><td><code>set_allow_shadowing</code></td><td>allows/disallows <em><a href="engine//book/language/shadow.html">shadowing</a></em> of <a href="engine//book/language/variables.html">variables</a></td></tr>
+<tr><td><code>set_strict_variables</code></td><td>enables/disables <a href="engine//book/engine/strict-var.html"><em>Strict Variables</em> mode</a></td></tr>
+<tr><td><code>disable_symbol</code></td><td>disables a certain <a href="engine//book/appendix/keywords.html">keyword</a> or <a href="engine//book/appendix/operators.html#operators">operator</a> (see <a href="engine//book/engine/disable-keywords.html">disable keywords and operators</a>)</td></tr>
 </tbody></table>
-<h2 id="compiler-behavior"><a class="header" href="#compiler-behavior">Compiler Behavior</a></h2>
-<table><thead><tr><th>Method</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>set_optimization_level</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>no_optimize</code></a></td><td>sets the amount of script <em>optimizations</em> performed (see <a href="engine//book/engine/optimize/index.html">script optimization</a>)</td></tr>
-<tr><td><code>set_strict_variables</code></td><td style="text-align: center"></td><td>enables/disables <a href="engine//book/engine/strict-var.html"><em>Strict Variables</em> mode</a></td></tr>
+<p>Beware that these options activate during <em>compile-time</em> only.  If an <a href="engine//book/engine/compile.html"><code>AST</code></a> is compiled on an
+<a href="engine//book/engine/hello-world.html"><code>Engine</code></a> but then evaluated on a different <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> with different configuration, disallowed
+features contained inside the <a href="engine//book/engine/compile.html"><code>AST</code></a> will still run as normal.</p>
+<h2 id="runtime-behavior"><a class="header" href="#runtime-behavior">Runtime Behavior</a></h2>
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>set_fail_on_invalid_map_property</code><br/>(not available under <a href="engine//book/start/features.html"><code>no_object</code></a>)</td><td>sets whether to raise errors (instead of returning <a href="engine//book/language/values-and-types.html"><code>()</code></a>) when invalid properties are accessed on <a href="engine//book/language/object-maps.html">object maps</a></td></tr>
 </tbody></table>
 <h2 id="safety-limits"><a class="header" href="#safety-limits">Safety Limits</a></h2>
 <table><thead><tr><th>Method</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
@@ -9457,6 +9474,7 @@ it is a severe security breach and may put the entire system at risk.</p>
 </li>
 </ul>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>
 <p>Rhai is designed to not bring down the host system, regardless of what a script may do to it.
 This is a central design goal – Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a> guarantee.</p>
 <p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
@@ -9466,6 +9484,27 @@ considered a bug in Rhai and should be reported as such.</p>
 checks (even fatal ones such as stack overflow, arithmetic overflow and division-by-zero).</p>
 <p>This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.</p>
 <p>Under <a href="safety//book/start/features.html"><code>unchecked</code></a>, it is very possible for a malicious script to panic and bring down the host system.</p>
+<h2 id="beware-of-internals"><a class="header" href="#beware-of-internals">Beware of <code>internals</code></a></h2>
+<p>The <a href="safety//book/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
+example, the <a href="safety//book/engine/compile.html"><code>AST</code></a> and related types).</p>
+<p>This is usually a <em>Very Bad Idea™</em> because:</p>
+<ul>
+<li>
+<p>Messing up Rhai’s internal data structures will easily create panics that bring down the host
+environment, violating the <em>Don’t Panic</em> guarantee.</p>
+</li>
+<li>
+<p>Allowing access to internal types may open up new attack vectors.</p>
+</li>
+<li>
+<p>Internal Rhai types and functions are volatile, so they may change from version to version and
+break code.</p>
+</li>
+</ul>
+<p>Use <a href="safety//book/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
+be surprised how few scenarios this assumption holds.</p>
+<p>One example of such an environment is a Rhai scripting <a href="safety//book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="safety//book/start/builds/wasm.html">WASM</a> where the
+<a href="safety//book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="sand-boxing--block-access-to-external-data"><a class="header" href="#sand-boxing--block-access-to-external-data">Sand-Boxing – Block Access to External Data</a></h1>
 <p>Rhai is <em>sand-boxed</em> so a script can never read from outside its own environment.</p>
 <p>Furthermore, an <a href="safety//book/engine/hello-world.html"><code>Engine</code></a> created non-<code>mut</code> cannot mutate any state, including itself

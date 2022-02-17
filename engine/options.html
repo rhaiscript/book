@@ -164,21 +164,24 @@
                     <main>
                         <h1 id="engine-configuration-options"><a class="header" href="#engine-configuration-options">Engine Configuration Options</a></h1>
 <p>A number of other configuration options are available from the <a href="/book/engine/hello-world.html"><code>Engine</code></a> to fine-tune behavior and safeguards.</p>
-<h2 id="language-features"><a class="header" href="#language-features">Language Features</a></h2>
-<table><thead><tr><th>Method</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>set_allow_if_expression</code></td><td style="text-align: center"></td><td>allows/disallows <a href="../language/if-expression.html"><code>if</code>-expressions</a></td></tr>
-<tr><td><code>set_allow_switch_expression</code></td><td style="text-align: center"></td><td>allows/disallows <a href="../language/switch-expression.html"><code>switch</code> expressions</a></td></tr>
-<tr><td><code>set_allow_statement_expression</code></td><td style="text-align: center"></td><td>allows/disallows <a href="../language/statement-expression.html">statement expressions</a></td></tr>
-<tr><td><code>set_allow_anonymous_fn</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_function</code></a></td><td>allows/disallows <a href="/book/language/fn-anon.html">anonymous functions</a></td></tr>
-<tr><td><code>set_allow_looping</code></td><td style="text-align: center"></td><td>allows/disallows looping (i.e. <a href="/book/language/while.html"><code>while</code></a>, <a href="/book/language/loop.html"><code>loop</code></a>, <a href="/book/language/do.html"><code>do</code></a> and <a href="/book/language/for.html"><code>for</code></a> statements)</td></tr>
-<tr><td><code>set_fail_on_invalid_map_property</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_object</code></a></td><td>sets whether to raise errors (instead of returning <a href="/book/language/values-and-types.html"><code>()</code></a>) when invalid properties are accessed on <a href="/book/language/object-maps.html">object maps</a></td></tr>
-<tr><td><code>set_allow_shadowing</code></td><td style="text-align: center"></td><td>allows/disallows <em><a href="/book/language/shadow.html">shadowing</a></em> of <a href="/book/language/variables.html">variables</a></td></tr>
-<tr><td><code>disable_symbol</code></td><td style="text-align: center"></td><td>disables a certain <a href="/book/appendix/keywords.html">keyword</a> or <a href="/book/appendix/operators.html#operators">operator</a> (see <a href="/book/engine/disable-keywords.html">disable keywords and operators</a>)</td></tr>
+<h2 id="compile-time-language-features"><a class="header" href="#compile-time-language-features">Compile-Time Language Features</a></h2>
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>set_optimization_level</code><br/>(not available under <a href="/book/start/features.html"><code>no_optimize</code></a>)</td><td>sets the amount of script <em>optimizations</em> performed (see <a href="/book/engine/optimize/index.html">script optimization</a>)</td></tr>
+<tr><td><code>set_allow_if_expression</code></td><td>allows/disallows <a href="../language/if-expression.html"><code>if</code>-expressions</a></td></tr>
+<tr><td><code>set_allow_switch_expression</code></td><td>allows/disallows <a href="../language/switch-expression.html"><code>switch</code> expressions</a></td></tr>
+<tr><td><code>set_allow_statement_expression</code></td><td>allows/disallows <a href="../language/statement-expression.html">statement expressions</a></td></tr>
+<tr><td><code>set_allow_anonymous_fn</code><br/>(not available under <a href="/book/start/features.html"><code>no_function</code></a>)</td><td>allows/disallows <a href="/book/language/fn-anon.html">anonymous functions</a></td></tr>
+<tr><td><code>set_allow_looping</code></td><td>allows/disallows looping (i.e. <a href="/book/language/while.html"><code>while</code></a>, <a href="/book/language/loop.html"><code>loop</code></a>, <a href="/book/language/do.html"><code>do</code></a> and <a href="/book/language/for.html"><code>for</code></a> statements)</td></tr>
+<tr><td><code>set_allow_shadowing</code></td><td>allows/disallows <em><a href="/book/language/shadow.html">shadowing</a></em> of <a href="/book/language/variables.html">variables</a></td></tr>
+<tr><td><code>set_strict_variables</code></td><td>enables/disables <a href="/book/engine/strict-var.html"><em>Strict Variables</em> mode</a></td></tr>
+<tr><td><code>disable_symbol</code></td><td>disables a certain <a href="/book/appendix/keywords.html">keyword</a> or <a href="/book/appendix/operators.html#operators">operator</a> (see <a href="/book/engine/disable-keywords.html">disable keywords and operators</a>)</td></tr>
 </tbody></table>
-<h2 id="compiler-behavior"><a class="header" href="#compiler-behavior">Compiler Behavior</a></h2>
-<table><thead><tr><th>Method</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>set_optimization_level</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_optimize</code></a></td><td>sets the amount of script <em>optimizations</em> performed (see <a href="/book/engine/optimize/index.html">script optimization</a>)</td></tr>
-<tr><td><code>set_strict_variables</code></td><td style="text-align: center"></td><td>enables/disables <a href="/book/engine/strict-var.html"><em>Strict Variables</em> mode</a></td></tr>
+<p>Beware that these options activate during <em>compile-time</em> only.  If an <a href="/book/engine/compile.html"><code>AST</code></a> is compiled on an
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> but then evaluated on a different <a href="/book/engine/hello-world.html"><code>Engine</code></a> with different configuration, disallowed
+features contained inside the <a href="/book/engine/compile.html"><code>AST</code></a> will still run as normal.</p>
+<h2 id="runtime-behavior"><a class="header" href="#runtime-behavior">Runtime Behavior</a></h2>
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>set_fail_on_invalid_map_property</code><br/>(not available under <a href="/book/start/features.html"><code>no_object</code></a>)</td><td>sets whether to raise errors (instead of returning <a href="/book/language/values-and-types.html"><code>()</code></a>) when invalid properties are accessed on <a href="/book/language/object-maps.html">object maps</a></td></tr>
 </tbody></table>
 <h2 id="safety-limits"><a class="header" href="#safety-limits">Safety Limits</a></h2>
 <table><thead><tr><th>Method</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
