@@ -15,9 +15,15 @@ print(x);           // prints 42
 
 let x = 88;         // <- 'x' is shadowed here
 
+// At this point, it is no longer possible to access the
+// original 'x' on the first line...
+
 print(x);           // prints 88
 
 let x = 0;          // <- 'x' is shadowed again
+
+// At this point, it is no longer possible to access both
+// previously-defined 'x'...
 
 print(x);           // prints 0
 

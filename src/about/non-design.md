@@ -27,30 +27,32 @@ abstractions_. It doesn't attempt to be a new language. For example:
   [turn a Rhai scripted function into a Rust closure]({{rootUrl}}/engine/call-fn.md).
 
   There is, however, support for simulated [closures] via [currying] a [function pointer] with
-  captured shared variables.
+  [captured][closure] shared [variables].
 
 * **No byte-codes/JIT** &ndash; Rhai has an optimized AST-walking interpreter which is fast enough
   for most casual usage scenarios. Essential AST data structures are packed and kept together to
   maximize cache friendliness.
 
-  Functions are dispatched based on pre-calculated hashes and accessing variables are mostly through
-  pre-calculated offsets to the variables file (a [`Scope`]), so it is seldom necessary to look
-  something up by text name.
+  Functions are dispatched based on pre-calculated hashes and accessing [variables] are mostly
+  through pre-calculated offsets to the [variables] file (a [`Scope`]), so it is seldom necessary to
+  look something up by text name.
   
-  In addition, Rhai's design deliberately avoids maintaining a _scope chain_ so function scopes do
-  not pay any speed penalty.  This particular design also allows variables data to be kept together
-  in a contiguous block, avoiding allocations and fragmentation while being cache-friendly. In a
-  typical script evaluation run, no data is shared and nothing is locked.
+  In addition, Rhai's design deliberately avoids maintaining a _scope chain_ so [function] scopes do
+  not pay any speed penalty.  This particular design also allows [variables] data to be kept
+  together in a contiguous block, avoiding allocations and fragmentation while being cache-friendly.
+  In a typical script evaluation run, no data is shared and nothing is locked.
 
   Still, the purpose of Rhai is not to be super _fast_, but to make it as easy and versatile as
-  possible to integrate with native Rust applications.
+  possible to integrate with native Rust applications.  What you lose from running an AST walker,
+  you gain back from increased flexibility.
 
 * **No formal language grammar** &ndash; Rhai uses a hand-coded lexer, a hand-coded top-down
   recursive-descent parser for statements, and a hand-coded Pratt parser for expressions.
   
   This lack of formalism allows the _tokenizer_ and _parser_ themselves to be exposed as services in
-  order to support [disabling keywords/operators][disable keywords and operators], adding [custom operators],
-  and defining [custom syntax].
+  order to support advanced features such as [disabling keywords and operators][disable keywords and operators],
+  dynamically [changing tokens]({{rootUrl}}/engine/token-mapper.md) during parsing, adding
+  [custom operators], defining [custom syntax] and [filtering variables definition]({{rootUrl}}/engine/def-var.md).
 
 
 Do Not Write The Next 4D VR Game in Rhai

@@ -74,7 +74,7 @@ let mut scope = Scope::new();
 scope.push("y", 42_i64)
      .push("z", 999_i64)
      .push_constant("MY_NUMBER", 123_i64)       // constants can also be added
-     .set_value("s", "hello, world!");          // 'set_value' adds a variable when one doesn't exist
+     .set_value("s", "hello, world!");          // 'set_value' adds a new variable when one doesn't exist
 
 // First invocation
 engine.run_with_scope(&mut scope, 
@@ -83,10 +83,11 @@ engine.run_with_scope(&mut scope,
     y = 1;
 ")?;
 
-// Second invocation using the same state
-let result = engine.eval_with_scope::<i64>(&mut scope, "x")?;
+// Second invocation using the same state.
+// Notice that the new variable 'x', defined previously, is still here.
+let result = engine.eval_with_scope::<i64>(&mut scope, "x + y")?;
 
-println!("result: {}", result);                 // prints 1102
+println!("result: {}", result);                 // prints 1103
 
 // Variable y is changed in the script - read it with 'get_value'
 assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 1);
@@ -108,4 +109,4 @@ as well as for possible future expansion when references can also be put into th
 
 The lifetime parameter is not guaranteed to remain unused for future versions.
 
-In order to put a `Scope` into a `struct`, use `Scope<'static>`.
+In order to put a `Scope` into a `struct`, for example, use `Scope<'static>`.
