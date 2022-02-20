@@ -3,7 +3,6 @@
 
 {{#include ../links.md}}
 
-
 Arguments passed to script-defined [functions] are always by _value_ because [functions] are _pure_.
 
 However, script-defined [functions] can also be called in _method-call_ style:

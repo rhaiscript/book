@@ -161,7 +161,7 @@ Safety and Protection
 - [Tracking Progress and Force-Termination](safety/progress.md)
 - [Maximum Number of Modules](safety/max-modules.md)
 - [Maximum Call Stack Depth](safety/max-call-stack.md)
-- [Maximum Statement Depth](safety/max-stmt-depth.md)
+- [Maximum Expression Depth](safety/max-stmt-depth.md)
 - [Turn Off Safety Checks](safety/checked.md)
 
 ----------------------

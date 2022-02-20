@@ -6,12 +6,15 @@ Parse an Object Map from JSON
 The syntax for an [object map] is extremely similar to the JSON representation of a object hash,
 with the exception of `null` values which can technically be mapped to [`()`].
 
-A valid JSON string does not start with a hash character `#` while a Rhai [object map] does &ndash;
-that's the major difference!
+```admonish info "Object map vs. JSON"
+
+A valid JSON string does not start with a hash character `#` while a Rhai [object map] does.
+That's the only major difference!
+```
 
 Use the `Engine::parse_json` method to parse a piece of JSON into an [object map].
-The JSON text must represent a single object hash (i.e. must be wrapped within "`{ ... }`")
-otherwise it returns a syntax error.
+The JSON text must represent a single object hash &ndash; i.e. must be wrapped within braces
+`{`...`}` &ndash; otherwise it returns a syntax error.
 
 ```rust,no_run
 // JSON string - notice that JSON property names are always quoted
@@ -40,17 +43,17 @@ let result = engine.eval_with_scope::<i64>(r#"map["^^^!!!"].len()"#)?;
 result == 3;          // the object map is successfully used in the script
 ```
 
-Representation of Numbers
-------------------------
+```admonish note "Representation of numbers"
 
 JSON numbers are all floating-point while Rhai supports integers (`INT`) and floating-point (`FLOAT`)
-(not available under [`no_float`]).
+(except under [`no_float`]).
 
 Most common generators of JSON data distinguish between integer and floating-point values by always
 serializing a floating-point number with a decimal point (i.e. `123.0` instead of `123` which is
 assumed to be an integer).
 
 This style can be used successfully with Rhai [object maps].
+```
 
 
 Parse JSON with Sub-Objects
@@ -92,4 +95,7 @@ serialization and deserialization to/from multiple formats, including JSON.
 
 Beware, though... the [`serde`](https://crates.io/crates/serde) crate is quite heavy.
 
+```admonish info "See also"
+
 See _[Serialization/Deserialization of `Dynamic` with `serde`][`serde`]_ for more details.
+```

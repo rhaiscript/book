@@ -6,7 +6,7 @@ language = "en"
 
 [output.html]
 no-section-label = true
-additional-css = [ "stylesheets/rhai.min.css" ]
+additional-css = [ "stylesheets/rhai.min.css" , 'stylesheets/mdbook-admonish.css']
 git-repository-url = "https://github.com/rhaiscript/rhai"
 edit-url-template = "https://github.com/rhaiscript/book/edit/master/{path}"
 curly-quotes = true
@@ -22,3 +22,6 @@ warning-policy = "ignore"
 
 [preprocessor.tera]
 command = "mdbook-tera --json ./src/context.json"
+
+[preprocessor.admonish]
+command = "mdbook-admonish"

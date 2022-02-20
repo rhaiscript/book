@@ -3,10 +3,6 @@ Maximum Length of Strings
 
 {{#include ../links.md}}
 
-
-Limit How Long Strings Can Grow
-------------------------------
-
 Rhai by default does not limit how long a [string] can be.
 
 This can be changed via the [`Engine::set_max_string_size`][options] method, with zero being unlimited (the default).
@@ -25,13 +21,11 @@ engine.set_max_string_size(500);    // allow strings only up to 500 bytes long (
 engine.set_max_string_size(0);      // allow unlimited string length
 ```
 
-
-Setting Maximum Length
----------------------
+```admonish danger "Maximum length"
 
 Be conservative when setting a maximum limit and always consider the fact that a registered function may grow
 a string's length without Rhai noticing until the very end.
 
 For instance, the built-in `+` operator for strings concatenates two strings together to form one longer string;
 if both strings are _slightly_ below the maximum length limit, the resultant string may be almost _twice_ the maximum length.
-
+```

@@ -42,6 +42,9 @@ for n in 0..5_i64 {
 }
 ```
 
+```admonish note "Constants propagation"
+
 Beware that [constants] inside the custom [`Scope`] will also be propagated to [functions] defined
 within the script while normally such [functions] are _pure_ and cannot see [variables]/[constants]
 within the global [`Scope`].
+```

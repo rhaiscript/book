@@ -3,14 +3,23 @@ Create a Custom Package as an Independent Crate
 
 {{#include ../../links.md}}
 
+Creating a custom [package] as an independent crate allows it to be shared by multiple projects.
+
+```admonish example
 The project [`rhai-rand`](https://rhaiscript/rhai-rand) shows a simple example of creating a
 custom [package] as an independent crate.
+```
 
-This allows the custom [package] to be used in multiple projects.
+```admonish abstract "Key concepts"
 
-Essentially, the concept is to create a Rust crate that specifies
-[`rhai`](https://crates.io/crates/rhai) as dependency.
-The main `lib.rs` module can contain the [package] being constructed.
+* Create a Rust crate that specifies [`rhai`](https://crates.io/crates/rhai) as dependency.
+
+* The main `lib.rs` module can contain the [package] being constructed.
+```
+
+
+Implementation
+--------------
 
 `Cargo.toml`:
 

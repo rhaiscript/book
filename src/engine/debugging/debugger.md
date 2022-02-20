@@ -86,8 +86,9 @@ continued behavior of the debugger.
 | `FunctionExit`            | run to the end of the current function call; debugger is triggered _before_ the function call returns and the [`Scope`] cleared |     `finish`     |
 
 
-Debugger
---------
+~~~admonish tip "The `Debugger`"
 
-`EvalContext::global_runtime_state_mut().debugger` (of type `debugger::Debugger`) allows access to
-the [`Engine`]'s debugger (of type `debugger::Debugger`) for manipulating [break-points], among others.
+The type `debugger::Debugger` allows for manipulating [break-points], among others.
+
+The [`Engine`]'s debugger instance can be accessed via `EvalContext::global_runtime_state_mut().debugger`.
+~~~

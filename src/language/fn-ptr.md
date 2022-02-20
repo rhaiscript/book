@@ -8,7 +8,17 @@ In fact, internally a function pointer simply stores the _name_ of the [function
 
 A function pointer is created via the `Fn` [function], which takes a [string] parameter.
 
-Call a function pointer using the `call` method.
+Call a function pointer via the `call` method.
+
+
+```admonish warning "NOT first-class functions"
+
+Beware that function pointers are _not_ first-class functions.
+
+They are _syntactic sugar_ only, capturing the _name_ of a [function] to call.
+
+The actual [function] must be defined in order for the call to succeed.
+```
 
 
 Built-in Functions
@@ -56,16 +66,6 @@ let hello = Fn(fn_name + "_world");
 
 hello.call(0);              // error: function not found - 'hello_world (i64)'
 ```
-
-
-Warning &ndash; NOT First-Class Functions
-----------------------------------------
-
-Beware that function pointers are _not_ first-class functions.
-
-They are _syntactic sugar_ only, capturing the _name_ of a [function] to call.
-
-The actual [function] must be defined in order for the call to succeed.
 
 
 Warning &ndash; Global Namespace Only

@@ -9,8 +9,9 @@ undesirable as it may not be supported by the application itself.
 
 Rhai looping constructs include the [`while`], [`loop`], [`do`] and [`for`] statements.
 
-Although it is possible to disable these keywords via [`Engine::disable_symbol`][disable keywords
-and operators], it is simpler to disable all looping via [`Engine::set_allow_looping`][options].
+Although it is possible to disable these keywords via
+[`Engine::disable_symbol`][disable keywords and operators], it is simpler to disable all looping
+via [`Engine::set_allow_looping`][options].
 
 ```rust,no_run
 use rhai::Engine;

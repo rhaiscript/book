@@ -29,10 +29,11 @@ where:
 | `pos`     |                                     `Position`                                      | location of the [token][`Token`] |
 | `state`   | [`&TokenizeState`](https://docs.rs/rhai/{{version}}/rhai/struct.TokenizeState.html) | current state of the tokenizer   |
 
-### Raising errors
+```admonish tip "Tip: Raising errors"
 
 It is possible to raise a parsing error by returning [`Token::LexError`](https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError)
 as the mapped token.
+```
 
 
 Example

@@ -34,8 +34,8 @@ number ^= 0x00ff;       // number = number ^ 0x00ff;
 The Flexible `+=`
 ----------------
 
-The the `+` and `+=` operators are often [overloaded][function overloading] to perform
-build-up operations for different data types.
+The the `+` and `+=` operators are often [overloaded][function overloading] to perform build-up
+operations for different data types.
 
 ### Build strings
 

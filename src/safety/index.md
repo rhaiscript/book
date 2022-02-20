@@ -49,8 +49,7 @@ When using Rhai, any panic outside of API's with explicitly documented panic con
 considered a bug in Rhai and should be reported as such.
 
 
-OK, Panic Anyway &ndash; `unchecked`
------------------------------------
+~~~admonish tip "OK, panic anyway &ndash; `unchecked`"
 
 All the above safe-guards can be turned off via the [`unchecked`] feature, which disables all safety
 checks (even fatal ones such as stack overflow, arithmetic overflow and division-by-zero).
@@ -58,10 +57,9 @@ checks (even fatal ones such as stack overflow, arithmetic overflow and division
 This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.
 
 Under [`unchecked`], it is very possible for a malicious script to panic and bring down the host system.
+~~~
 
-
-Beware of `internals`
----------------------
+~~~admonish warning "Beware of `internals`"
 
 The [`internals`] feature allows third-party access to Rust internal data types and functions (for
 example, the [`AST`] and related types).
@@ -81,3 +79,4 @@ be surprised how few scenarios this assumption holds.
 
 One example of such an environment is a Rhai scripting [`Engine`] compiled to [WASM] where the
 [`AST`] is further translated to include environment-specific modifications.
+```

@@ -12,10 +12,6 @@ loop { ... }                        // infinite loop
 while 1 < 2 { ... }                 // loop with always-true condition
 ```
 
-
-Limit How Long a Script Can Run
-------------------------------
-
 Rhai by default does not limit how much time or CPU a script consumes.
 
 This can be changed via the [`Engine::set_max_operations`][options] method, with zero being unlimited (the default).
@@ -35,8 +31,7 @@ engine.set_max_operations(0);       // allow unlimited operations
 ```
 
 
-What Does One _Operation_ Mean
------------------------------
+```admonish question "What does one _operation_ mean?"
 
 The concept of one single _operation_ in Rhai is volatile &ndash; it roughly equals one expression
 node, loading one [variable]/[constant], one [operator] call, one iteration of a loop, or one
@@ -52,3 +47,4 @@ though also counted as only one operation, may consume much more computing resou
 To help visualize, think of an _operation_ as roughly equals to one _instruction_ of a hypothetical CPU
 which includes _specialized_ instructions, such as _function call_, _load module_ etc., each taking up
 one CPU cycle to execute.
+```

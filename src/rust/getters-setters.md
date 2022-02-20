@@ -24,24 +24,28 @@ Getters and setters are disabled under the [`no_object`] feature.
 | `register_get_result` | `Fn(&mut T) -> Result<V, Box<EvalAltResult>>`                                    |      yes, but not advised      |
 | `register_set_result` | `Fn(&mut T, V) -> Result<(), Box<EvalAltResult>>`                                |              yes               |
 
+```admonish danger "No support for references"
 
-Getters Must Be Pure
---------------------
+Rhai does NOT support normal references (i.e. `&T`) as parameters.
+All references must be mutable (i.e. `&mut T`).
+```
+
+```admonish warning "Getters must be pure"
 
 By convention, property getters are assumed to be _pure_, meaning that they are not supposed to
 mutate the [custom type], although there is nothing that prevents this mutation in Rust.
 
 Even though a property getter function also takes `&mut` as the first parameter, Rhai assumes that
 no data is changed when the function is called.
+```
 
-
-Cannot Override Object Maps
---------------------------
+```admonish note "Cannot override object maps"
 
 Property getters and setters are mainly intended for [custom types].
 
 Any getter or setter function registered for [object maps] is simply _ignored_ because the get/set
 syntax will be interpreted as access to properties on the [object maps].
+```
 
 
 Examples
@@ -85,8 +89,6 @@ r#"
 
 println!("Answer: {}", result);                 // prints 42
 ```
-
-**IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
 
 
 Fallback to Indexer

@@ -3,8 +3,8 @@ Disable Certain Keywords and/or Operators
 
 {{#include ../links.md}}
 
-For certain embedded usage, it is sometimes necessary to restrict the language to a strict subset of Rhai
-to prevent usage of certain language features.
+For certain embedded usage, it is sometimes necessary to restrict the language to a strict subset of
+Rhai to prevent usage of certain language features.
 
 Rhai supports surgically disabling a [keyword] or [operator] via `Engine::disable_symbol`.
 

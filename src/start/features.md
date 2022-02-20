@@ -11,6 +11,17 @@ Notice that this deviates from Rust norm where features are _additive_.
 Excluding unneeded functionalities can result in smaller, faster builds as well as more control over
 what a script can (or cannot) do.
 
+```admonish warning "Features are not additive"
+
+Most Rhai features are not strictly _additive_, i.e. they do not only add optional functionalities.
+
+In fact, most features are _subtractive_, i.e. they _remove_ functionalities.
+
+There is a reason for this design, because the _lack_ of a language feature by itself is a feature (that's deep...).
+
+See [here]({{rootUrl}}/patterns/multiple.md) for more details.
+```
+
 
 Features that Enable Special Functionalities
 -------------------------------------------
@@ -115,15 +126,3 @@ threads), and does not support defining [functions] nor loading external [module
 
 This configuration is perfect for an expression parser in a 32-bit embedded system without
 floating-point hardware.
-
-
-Caveat &ndash; Features Are Not Additive
----------------------------------------
-
-Most Rhai features are not strictly _additive_ &ndash; i.e. they do not only add optional functionalities.
-
-In fact, most features are _subtractive_ &ndash; i.e. they _remove_ functionalities.
-
-There is a reason for this design, because the _lack_ of a language feature by itself is a feature.
-
-See [here]({{rootUrl}}/patterns/multiple.md) for more details.

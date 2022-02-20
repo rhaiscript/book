@@ -35,8 +35,7 @@ switch type_of(x) {
 ```
 
 
-Custom Types
-------------
+```admonish info "Custom types"
 
 `type_of()` a [custom type] returns:
 
@@ -44,7 +43,7 @@ Custom Types
 
 * the full Rust type name, if registered via `Engine::register_type`
 
-```rust,no_run
+~~~rust,no_run
 struct TestStruct1;
 struct TestStruct2;
 
@@ -53,4 +52,5 @@ engine
     .register_type::<TestStruct1>()
     // type_of(struct2) == "MyStruct"
     .register_type_with_name::<TestStruct2>("MyStruct");
+~~~
 ```

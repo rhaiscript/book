@@ -66,8 +66,7 @@ engine.register_fn("foo", foo5)
 ```
 
 
-Warning: Only the Right-Most 16 Parameters Can Be `Dynamic`
----------------------------------------------------------
+~~~admonish warning "Only the right-most 16 parameters can be `Dynamic`"
 
 The number of parameter permutations go up exponentially, and therefore there is a realistic limit
 of 16 parameters allowed to be [`Dynamic`], counting from the _right-most side_.
@@ -85,12 +84,13 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
     // ... do something unspeakably evil with all those parameters ...
 }
 ```
+~~~
 
 
 TL;DR
 -----
 
-### Q: How is this implemented?
+```admonish question "How is this implemented?"
 
 #### Hash lookup
 
@@ -125,9 +125,9 @@ replacing different arguments with [`Dynamic`] _starting from the right-most par
 
 Thus, assuming a three-argument function call:
 
-```rust,no_run
+~~~rust,no_run
 foo(42, "hello", true);
-```
+~~~
 
 The following hashes will be calculated, in order.
 They will be _all different_.
@@ -149,9 +149,9 @@ At soon as a hash is found, the process stops.
 
 Otherwise, it goes on for up to 16 arguments, or at most 256 tries.
 That's where the 16 parameters limit comes from.
+```
 
-
-### Q: What?!  It calculates 256 hashes for _each_ function call???!!!
+```admonish question "What?! It calculates 256 hashes for each function call???!!!"
 
 Of course not.
 
@@ -161,3 +161,4 @@ rounds for the correct function to be found.
 If not, then yes, it will calculate up to 2<sup>_n_</sup> hashes where _n_ is the number of
 arguments (up to 16). But again, this will only be done _once_ for that particular
 combination of argument types.
+```

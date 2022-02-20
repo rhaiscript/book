@@ -3,11 +3,24 @@ Working With Rust Enums
 
 {{#include ../links.md}}
 
-Enums in Rust are typically used with _pattern matching_.
+Enums in Rust can hold data and are typically used with _pattern matching_.
 
-Rhai is dynamic, so although it integrates with Rust enum variants just fine (treated transparently
-as [custom types]), it is impossible  (short of registering a complete API) to distinguish between
-individual enum variants or to extract internal data from them.
+Unlike Rust, Rhai does not have built-in pattern matching capabilities, so working with enum
+variants that contain embedded data is not an easy proposition.
+
+Since Rhai is dynamic and [variables] can hold any type of data, they are essentially enums
+by nature.  Distinct types can be used without merging them into a single enum as variants.
+
+This section outlines a number of possible solutions to work with Rust enums.
+
+```admonish question "Why enums are hard with dynamic languages"
+
+Rust enum variants are not considered separate types.
+
+Although Rhai integrates with Rust enums just fine (treated transparently as [custom types]),
+it is impossible  (short of registering a complete API) to distinguish between individual
+enum variants in order to extract internal data from them.
+```
 
 
 Simulate an Enum API

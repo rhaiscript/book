@@ -3,9 +3,7 @@ Assignments
 
 {{#include ../links.md}}
 
-
 Value assignments to [variables] use the `=` symbol.
-
 
 ```rust,no_run
 let foo = 42;

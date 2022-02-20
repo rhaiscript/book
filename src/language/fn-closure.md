@@ -23,9 +23,12 @@ Therefore, similar to closures in many languages, these captured shared values p
 reference counting, and may be read or modified even after the [variables] that hold them go out of
 scope and no longer exist.
 
-Use the `Dynamic::is_shared` function to check whether a particular value is a shared value.
-
 [Automatic currying] can be turned off via the [`no_closure`] feature.
+
+~~~admonish tip "Tip: `is_shared`"
+
+Use `Dynamic::is_shared` to check whether a particular [`Dynamic`] value is shared.
+~~~
 
 
 Examples
@@ -135,7 +138,7 @@ x.call(f, 2);
 TL;DR
 -----
 
-### Q: How is it actually implemented?
+```admonish question "How is it actually implemented?"
 
 The actual implementation of closures de-sugars to:
 
@@ -157,8 +160,9 @@ The actual implementation of closures de-sugars to:
 
    This process is called [_Automatic Currying_][automatic currying], and is the mechanism through
    which Rhai simulates normal closures.
+```
 
-### Q: Why are closures implemented as automatic currying?
+```admonish question "Why automatic currying?"
 
 In concept, a closure _closes_ over captured variables from the outer scope &ndash; that's why
 they are called _closures_.  When this happen, a typical language implementation hoists
@@ -192,3 +196,4 @@ structure as a single parameter.  This is the only difference.
 Therefore, in most languages, essentially all closures are implemented as automatic currying of
 shared variables hoisted into the heap, automatically passing those variables as parameters into
 the function. Rhai just brings this directly up to the front.
+```

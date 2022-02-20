@@ -8,11 +8,10 @@ The feature [`no_std`] automatically converts the scripting engine into a `no-st
 Usually, a `no-std` build goes hand-in-hand with [minimal builds] because typical embedded
 hardware (the primary target for `no-std`) has limited storage.
 
-
-Nightly Required
-----------------
+```admonish warning "Nightly required"
 
 Currently, [`no_std`] requires the nightly compiler due to the crates that it uses.
+```
 
 
 Implementation
@@ -74,9 +73,8 @@ fn main(_argc: isize, _argv: *const *const u8) -> isize {
 }
 ```
 
-
-Samples
--------
+```admonish example "Samples"
 
 Check out the [`no-std` sample applications](../examples/rust.md#no-std-samples)
 for different operating environments.
+```

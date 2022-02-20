@@ -4,10 +4,24 @@ Subtle Semantic Changes After Optimization
 {{#include ../../links.md}}
 
 
+Some optimizations can alter subtle semantics of the script, causing the script to behave
+differently when run with or without optimization.
+
+Typically, this involves some form of error that may arise in the original, unoptimized script but
+is optimized away by the [script optimizer][script optimization].
+
+```admonish danger "DO NOT depend on runtime errors"
+
+Needless to say, it is usually a _Very Bad Idea™_ to depend on a script failing with a runtime error
+or such kind of subtleties.
+
+If it turns out to be necessary (why? I would never guess), turn script optimization off by setting
+the optimization level to [`OptimizationLevel::None`].
+```
+
+
 Disappearing Runtime Errors
 --------------------------
-
-Some optimizations can alter subtle semantics of the script.
 
 For example:
 
@@ -69,13 +83,3 @@ be safely eliminated.
 Thus the script now runs silently to completion without errors.
 
 Without optimization, the script may fail by exceeding the [maximum number of operations] allowed.
-
-
-Do Not Depend on Runtime Errors
-------------------------------
-
-Needless to say, it is usually a _Very Bad Idea™_ to depend on a script failing with a runtime error
-or such kind of subtleties.
-
-If it turns out to be necessary (why? I would never guess), turn script optimization off by setting
-the optimization level to [`OptimizationLevel::None`].

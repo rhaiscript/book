@@ -4,21 +4,20 @@ Multi-Threaded Synchronization
 {{#include ../links.md}}
 
 
-Usage Scenarios
----------------
+```admonish info "Usage scenarios"
 
 * A system needs to communicate with an [`Engine`] running in a separate thread.
 
 * Multiple [`Engine`]s running in separate threads need to coordinate/synchronize with each other.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * An MPSC channel (or any other appropriate synchronization primitive) is used to send/receive
   messages to/from an [`Engine`] running in a separate thread.
 
 * An API is registered with the [`Engine`] that is essentially _blocking_ until synchronization is achieved.
+```
 
 
 Example
@@ -96,8 +95,7 @@ during every function call, which is technically not necessary because there are
 to them.
 
 
-Regarding Async Functions
--------------------------
+```admonish note "Async"
 
 The example above highlights the fact that Rhai scripts can call any Rust function, including ones
 that are _blocking_.
@@ -115,3 +113,4 @@ possible to split a script into multiple parts to avoid having to call async fun
 
 Creating an [`Engine`] is also relatively cheap (extremely cheap if creating a [raw `Engine`]),
 so it is also a valid pattern to spawn a new [`Engine`] instance for each task.
+```

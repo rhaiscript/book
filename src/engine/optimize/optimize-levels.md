@@ -6,6 +6,12 @@ Optimization Levels
 There are three levels of optimization: `None`, `Simple` and `Full`.
 The default is `Simple`.
 
+An [`Engine`]'s optimization level is set via [`Engine::set_optimization_level`][options].
+
+```rust,no_run
+// Turn on aggressive optimizations
+engine.set_optimization_level(rhai::OptimizationLevel::Full);
+```
 
 `None`
 ------
@@ -34,14 +40,3 @@ optimizer replaces an expression with its calculated value.
 `Full` is _much_ more aggressive, _including_ calling external functions on [constant] arguments to
 determine their results. One benefit to this is that many more optimization opportunities arise,
 especially with regards to comparison operators.
-
-
-Set Optimization Level
----------------------
-
-An [`Engine`]'s optimization level is set via a call to [`Engine::set_optimization_level`][options]:
-
-```rust,no_run
-// Turn on aggressive optimizations
-engine.set_optimization_level(rhai::OptimizationLevel::Full);
-```

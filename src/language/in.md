@@ -12,13 +12,11 @@ Internally the `in` operator is simply syntactic sugar for a call to the `contai
 ```rust,no_run
 42 in array;
 
-// The above is equivalent to:
-array.contains(42);
+array.contains(42);     // <- the above is equivalent to this
 ```
 
 
-Built-in Support
-----------------
+```admonish info "Built-in support"
 
 The following standard data types have built-in support for the `in` operator.
 
@@ -28,6 +26,7 @@ The following standard data types have built-in support for the `in` operator.
 |     [Array]     |           contained item            |
 |  [Object map]   |            property name            |
 |    [String]     | [sub-string][string] or [character] |
+```
 
 
 Examples

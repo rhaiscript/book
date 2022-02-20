@@ -4,8 +4,7 @@ One `Engine` Instance Per Call
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system where scripts are called a _lot_, in tight loops or in parallel.
 
@@ -15,10 +14,9 @@ Usage Scenario
 
 * Scripts are used to [create Rust closures][`Func`] that are stored and may be called at any time,
   perhaps concurrently. In this case, the [`Engine`] instance is usually moved into the closure itself.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * Rhai's [`AST`] structure is sharable &ndash; meaning that one copy of the [`AST`] can be run on
   multiple instances of [`Engine`] simultaneously.
@@ -27,16 +25,19 @@ Key Concepts
 
 * This means that [`Engine`] instances can be _decoupled_ from the base system ([packages] and
   [modules]) as well as the scripts ([`AST`]) so they can be created very cheaply.
+```
 
-### Procedure
+
+Procedure
+---------
 
 * Gather up all common custom functions into a [custom package].
 
-  This [custom package] should also include standard [packages] needed. For example, to duplicate
-  `Engine::new`, use a [`StandardPackage`]({{rootUrl}}/rust/packages/builtin.md).
+  * This [custom package] should also include standard [packages] needed. For example, to duplicate
+    `Engine::new`, use a [`StandardPackage`]({{rootUrl}}/rust/packages/builtin.md).
   
-  [Packages] are sharable, so using a [custom package] is _much cheaper_ than registering all the
-  functions one by one.
+  * [Packages] are sharable, so using a [custom package] is _much cheaper_ than registering all the
+    functions one by one.
 
 * Store a global [`AST`] for use with all [`Engine`] instances.
 

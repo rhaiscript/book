@@ -8,9 +8,7 @@ custom-defined _syntax_.
 
 But before going off to define the next weird statement type, heed this warning:
 
-
-Don't Do It™
-------------
+```admonish danger "Don't Do It™"
 
 Stick with standard language syntax as much as possible.
 
@@ -18,10 +16,9 @@ Having to learn Rhai is bad enough, no sane user would ever want to learn _yet_ 
 language syntax just to do something.
 
 Try to use [custom operators] first.  Defining a custom syntax should be considered a _last resort_.
+```
 
-
-Where This Might Be Useful
--------------------------
+```admonish success "Where this might be useful"
 
 * Where an operation is used a _LOT_ and a custom syntax saves a lot of typing.
 
@@ -31,6 +28,7 @@ Where This Might Be Useful
 * Where certain logic cannot be easily encapsulated inside a function.
 
 * Where you just want to confuse your user and make their lives miserable, because you can.
+```
 
 
 How to Do It
@@ -369,15 +367,16 @@ together with the implementation function.
 How Custom Parsers Work
 -----------------------
 
-### Leading symbol
+```admonish note "Leading symbol"
 
-The leading symbol for a custom parser can either be:
+Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
+It can either be:
 
 * a identifier that isn't a normal [keyword] unless [disabled][disable keywords and operators], or
 
 * a valid symbol (see [list]({{rootUrl}}/appendix/operators.md)) which is not a normal [operator] unless [disabled][disable keywords and operators].
 
-Under this API, it is no longer restricted to be valid identifiers.
+```
 
 ### Function Signature
 
@@ -387,10 +386,10 @@ The custom syntax parser has the following signature.
 
 where:
 
-| Parameter    |         Type         | Description                                                                                                                                                         |
-| ------------ | :------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `symbols`    | `&[ImmutableString]` | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
-| `look_ahead` |        `&str`        | a string slice containing the next symbol that is about to be read                                                                                                  |
+| Parameter    |            Type            | Description                                                                                                                                                         |
+| ------------ | :------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `symbols`    | `&[`[`ImmutableString`]`]` | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
+| `look_ahead` |           `&str`           | a string slice containing the next symbol that is about to be read                                                                                                  |
 
 Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.

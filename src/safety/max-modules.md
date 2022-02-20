@@ -5,15 +5,16 @@ Maximum Number of Modules
 
 Rhai by default does not limit how many [modules] can be loaded via [`import`] statements.
 
-This can be changed via the [`Engine::set_max_modules`][options] method. Notice that setting the maximum number
-of modules to zero does _not_ indicate unlimited modules, but disallows loading any module altogether.
+This can be changed via the [`Engine::set_max_modules`][options] method. Notice that setting the
+maximum number of modules to zero does _not_ indicate unlimited modules, but disallows loading any
+module altogether.
 
 A script attempting to load more than the maximum number of modules will terminate with an error result.
 
-This limit can also be used to stop [`import`-loops][`import`] (i.e. cycles of modules referring to each other).
+This limit can also be used to stop [`import`-loops][`import`] (i.e. cycles of modules referring to
+each other).
 
-This check can be disabled via the [`unchecked`] feature for higher performance
-(but higher risks as well).
+This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
 ```rust,no_run
 let mut engine = Engine::new();

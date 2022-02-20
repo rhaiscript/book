@@ -135,7 +135,7 @@
 [doc-comments]: {{rootUrl}}/language/doc-comments.md
 [function]: {{rootUrl}}/language/functions.md
 [functions]: {{rootUrl}}/language/functions.md
-[function overloading]: {{rootUrl}}/rust/functions.md#function-overloading
+[function overloading]: {{rootUrl}}/rust/functions.md
 [fallible function]: {{rootUrl}}/rust/fallible.md
 [fallible functions]: {{rootUrl}}/rust/fallible.md
 [exception]: {{rootUrl}}/language/throw.md

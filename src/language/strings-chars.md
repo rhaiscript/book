@@ -4,16 +4,24 @@ Strings and Characters
 {{#include ../links.md}}
 
 String in Rhai contain any text sequence of valid Unicode characters.
-Internally strings are stored in UTF-8 encoding.
 
-Strings can be built up from other strings and types via the `+` operator
-(provided by the [`MoreStringPackage`][built-in packages] but excluded if using a [raw `Engine`]).
-This is particularly useful when printing output.
+Internally strings are stored in UTF-8 encoding.
 
 [`type_of()`] a string returns `"string"`.
 
+```admonish tip "Maximum length"
+
 The maximum allowed length of a string can be controlled via [`Engine::set_max_string_size`][options]
 (see [maximum length of strings]).
+```
+
+```admonish tip "Tip: Building strings"
+
+Strings can be built up from other strings and types via the `+` operator
+(provided by the [`MoreStringPackage`][built-in packages] but excluded if using a [raw `Engine`]).
+
+This is particularly useful when printing output.
+```
 
 
 String and Character Literals
@@ -194,7 +202,7 @@ _last_ character.
 
 > _string_ `[` _index from &minus;1 to &minus;(total number of characters)_ `]`
 
-### Actual implementation
+```admonish warning "Character indexing can be SLOW"
 
 Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.
 
@@ -204,6 +212,7 @@ encoded bytes stream to extract individual Unicode characters, counting them on 
 Because of this, indexing can be a _slow_ procedure, especially for long strings.
 Along the same lines, getting the _length_ of a string (which returns the number of characters, not
 bytes) can also be slow.
+```
 
 
 Examples

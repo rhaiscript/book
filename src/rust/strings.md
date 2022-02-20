@@ -4,8 +4,7 @@
 {{#include ../links.md}}
 
 
-Avoid `String`
---------------
+~~~admonish warning "Avoid `String` parameters"
 
 As much as possible, avoid using `String` parameters in functions.
 
@@ -13,6 +12,7 @@ Each `String` argument is cloned during _every_ single call to that function &nd
 and the copy immediately thrown away right after the call.
 
 Needless to say, it is _extremely_ inefficient to use `String` parameters.
+~~~
 
 
 `&str` Maps to `ImmutableString`
@@ -49,8 +49,7 @@ let len = engine.eval::<i64>("len3(x)")?;   // 'x' is shared
 ```
 
 
-`&mut String` Does Not Work As Expected
---------------------------------------
+~~~admonish danger "`&mut String` does not work"
 
 A function with the first parameter being `&mut String` does not match a string argument passed to it,
 which has type `ImmutableString`.
@@ -69,3 +68,4 @@ engine.eval(r#"bad("hello")"#)?;            // <- error: function 'bad (string)'
 
 engine.eval(r#"good("hello")"#)?;           // <- this one works
 ```
+~~~

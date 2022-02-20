@@ -3,10 +3,6 @@ Maximum Size of Arrays
 
 {{#include ../links.md}}
 
-
-Limit How Large Arrays Can Grow
-------------------------------
-
 Rhai by default does not limit how large an [array] or a [BLOB] can be.
 
 This can be changed via the [`Engine::set_max_array_size`][options] method, with zero being unlimited (the default).
@@ -26,9 +22,7 @@ engine.set_max_array_size(500);     // allow arrays only up to 500 items
 engine.set_max_array_size(0);       // allow unlimited arrays
 ```
 
-
-Setting Maximum Size
--------------------
+```admonish danger "Maximum size"
 
 Be conservative when setting a maximum limit and always consider the fact that a registered function
 may grow an [array]'s or [BLOB]'s size without Rhai noticing until the very end.
@@ -43,7 +37,7 @@ up the sizes of all [strings], [arrays], [blobs] and [object maps] contained wit
 make sure that the _aggregate_ sizes of none of these data structures exceed their respective
 maximum size limits (if any).
 
-```rust,no_run
+~~~rust,no_run
 // Small, innocent array...
 let small_array = [42];             // 1-deep... 1 item, 1 array
 
@@ -64,4 +58,5 @@ let a = [ 42 ];
 loop {
     a[0] = a;       // <- only 1 item, but infinite number of arrays
 }
+~~~
 ```

@@ -24,24 +24,54 @@ The following primitive types are supported natively.
 | **Shared value** (a reference-counted, shared [`Dynamic`] value, created via [automatic currying], disabled with [`no_closure`]) |                                                                                                     | _the actual type_     | _actual value_                  |
 | **Nothing/void/nil/null/Unit** (or whatever it is called)                                                                        | `()`                                                                                                | `"()"`                | `""` _(empty string)_           |
 
-All types are treated strictly separate by Rhai, meaning that `i32` and `i64` and `u32` are completely different &nsash;
-they even cannot be added together. This is very similar to Rust.
 
-The default integer type is `i64`. If other integer types are not needed, it is possible to exclude them and make a
-smaller build with the [`only_i64`] feature.
+```admonish warning "All types are distinct"
+
+All types are treated strictly distinct by Rhai, meaning that `i32` and `i64` and `u32` are
+completely different. They cannot even be added together.
+
+This is very similar to Rust.
+```
+
+
+Default Types
+-------------
+
+The default integer type is `i64`. If other integer types are not needed, it is possible to exclude
+them and make a smaller build with the [`only_i64`] feature.
 
 If only 32-bit integers are needed, enabling the [`only_i32`] feature will remove support for all
 integer types other than `i32`, including `i64`.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.
 
+~~~admonish danger "Default integer is `i64`"
+
+Rhai's default integer type is `i64`, which is _DIFFERENT_ from Rust's `i32`.
+
+It is very easy to unsuspectingly set an `i32` into Rhai, which _still works_ but will incur a significant
+runtime performance hit since the [`Engine`] will treat `i32` as an opaque [custom type] (unless using the
+[`only_i32`] feature).
+~~~
+
+```admonish tip "Tip: Floating-point numbers"
+
 If no floating-point is needed or supported, use the [`no_float`] feature to remove it.
 
 Some applications require fixed-precision decimal numbers, which can be enabled via the [`decimal`] feature.
+```
+
+```admonish info "Strings"
 
 [Strings] in Rhai are _immutable_, meaning that they can be shared but not modified.
+
 Internally, the [`ImmutableString`] type is a wrapper over `Rc<String>` or `Arc<String>` (depending on [`sync`]).
+
 Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.
+```
+
+```admonish tip "Tip: Convert to string"
 
 The [`to_string()`] function converts a standard type into a [string] for display purposes.
 
 The [`to_debug()`] function converts a standard type into a [string] in debug format.
+```

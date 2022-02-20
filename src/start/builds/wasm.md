@@ -14,6 +14,12 @@ But anyhow, do it because you _can_!
 When building for WASM, certain features will not be available,
 such as the script file API's and loading modules from external script files.
 
+```admonish example "Sample"
+
+Check out the [_Online Playground_]({{rootUrl}}/tools/playground.md) project which is driven
+by a Rhai [`Engine`] compiled into [WASM].
+```
+
 
 JavaScript Interop
 ------------------

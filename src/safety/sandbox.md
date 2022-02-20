@@ -25,10 +25,10 @@ let engine = engine;
 ```
 
 
-Using Rhai to Control External Environment
------------------------------------------
+```admonish tip "Tip: Use Rhai to control external environment"
 
 How does a _sand-boxed_, immutable [`Engine`] control the external environment?
+
 This is necessary in order to use Rhai as a _dynamic control layer_ over a Rust core system.
 
 There are two general patterns, both involving wrapping the external system
@@ -37,3 +37,4 @@ in a shared, interior-mutated object (e.g. `Rc<RefCell<T>>`):
 * [Control Layer]({{rootUrl}}/patterns/control.md) pattern.
 
 * [Singleton Command Object]({{rootUrl}}/patterns/singleton.md) pattern.
+```

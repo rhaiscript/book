@@ -26,19 +26,14 @@ the same [`Engine`] with the same set of functions.
 | [`Engine::on_debug`][`debug`] | `println!` in debug format |      _none_       |
 
 
-Built-in Operators
-------------------
+```admonish info "Built-in operators"
 
 Even with a raw [`Engine`], some operators are built in and are always available.
 
 See [_Built-in Operators_][built-in operators] for a full list.
+```
 
-
-Differences with `Engine::new`
------------------------------
-
-`Engine::new` is equivalent to:
-
+~~~admonish tip "Tip: `Engine::new` is equivalent to..."
 ```rust,no_run
 use rhai::module_resolvers::FileModuleResolver;
 use rhai::packages::StandardPackage;
@@ -67,3 +62,4 @@ let package = StandardPackage::new().as_shared_module();
 
 engine.register_global_module(package);
 ```
+~~~

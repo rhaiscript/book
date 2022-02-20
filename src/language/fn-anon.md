@@ -3,7 +3,9 @@ Anonymous Functions
 
 {{#include ../links.md}}
 
-Many functions in the standard API expect [function pointer] as parameters.  For example:
+Many functions in the standard API expect [function pointer] as parameters.
+
+For example:
 
 ```rust,no_run
 // Function 'double' defined here - used only once
@@ -107,11 +109,11 @@ let obj = #{
 ```
 
 
-WARNING &ndash; NOT Real Closures
---------------------------------
+```admonish danger "NOT real closures"
 
 Remember: though having the same syntax as Rust _closures_, anonymous [functions] are themselves
 **NOT** real closures.
 
 In particular, they capture their execution environment via [automatic currying]
 (disabled via [`no_closure`]).
+```

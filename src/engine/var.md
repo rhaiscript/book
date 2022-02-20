@@ -31,20 +31,7 @@ engine.on_var(|name, index, context| {
 });
 ```
 
-
-Returned Values are Constants
-----------------------------
-
-[Variable] values, if any returned, are treated as _[constants]_ by the script and cannot be assigned to.
-This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.
-
-In order to change these [variables], it is best to push them into a custom [`Scope`] instead of
-using a variable resolver. Then these [variables] can be assigned to and their updated values read
-back after the script is evaluated.
-
-
-Benefits of Using a Variable Resolver
-------------------------------------
+```admonish info "Benefits of using a variable resolver"
 
 1. Avoid having to maintain a custom [`Scope`] with all [variables] regardless of need
    (because a script may not use them all).
@@ -56,6 +43,18 @@ Benefits of Using a Variable Resolver
    or when they are expensive to load.
 
 4. Rename system [variables] on a script-by-script basis without having to construct different [`Scope`]'s.
+```
+
+
+Returned Values are Constants
+----------------------------
+
+[Variable] values, if any returned, are treated as _[constants]_ by the script and cannot be assigned to.
+This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.
+
+In order to change these [variables], it is best to push them into a custom [`Scope`] instead of
+using a variable resolver. Then these [variables] can be assigned to and their updated values read
+back after the script is evaluated.
 
 
 Function Signature

@@ -13,16 +13,19 @@ let x = 10;
 
 fn foo(x) { x += 12; x }
 
-let script = "let y = x;";      // build a script
-script +=    "y += foo(y);";
-script +=    "x + y";
+let script =
+"
+    let y = x;
+    y += foo(y);
+    x + y
+";
 
 let result = eval(script);      // <- look, JavaScript, we can also do this!
 
 result == 42;
 
-x == 10;                        // prints 10: functions call arguments are passed by value
-y == 32;                        // prints 32: variables defined in 'eval' persist!
+x == 10;                        // prints 10 - arguments are passed by value
+y == 32;                        // prints 32 - variables defined in 'eval' persist!
 
 eval("{ let z = y }");          // to keep a variable local, use a statement block
 
@@ -31,18 +34,23 @@ print(z);                       // <- error: variable 'z' not found
 "print(42)".eval();             // <- nope... method-call style doesn't work with 'eval'
 ```
 
-Script segments passed to `eval` execute inside the current [`Scope`], so they can access and modify
-_everything_, including all variables that are visible at that position in code! It is almost as if
-the script segments were physically pasted in at the position of the `eval` call.
+~~~admonish danger "`eval` executes inside the current scope!"
 
+Script segments passed to `eval` execute inside the _current_ [`Scope`], so they can access and modify
+_everything_, including all [variables] that are visible at that position in code!
 
-Cannot Define New Functions
---------------------------
+In addition, `eval` can be used to define new [variables] and do other things normally forbidden inside
+a [function] call.
+
+It is almost as if the script segments were physically pasted in at the position of the `eval` call.
+~~~
+
+```admonish warning "Cannot define new functions"
 
 New [functions] cannot be defined within an `eval` call, since [functions] can only be defined at
 the _global_ level, not inside another [function] call!
 
-```rust,no_run
+~~~rust,no_run
 let script = "x += 32";
 let x = 10;
 eval(script);                   // variable 'x' in the current scope is visible!
@@ -53,6 +61,7 @@ let script = "x += 32";
 let x = 10;
 x += 32;
 print(x);
+~~~
 ```
 
 
@@ -70,14 +79,15 @@ engine.disable_symbol("eval");  // disable usage of 'eval'
 TL;DR
 -----
 
-### Q: Do you regret implementing `eval` in Rhai?
+~~~admonish question "Do you regret implementing `eval` in Rhai?"
 
 Or course we do.
 
 Having the possibility of an `eval` call disrupts any predictability in the Rhai script,
 thus disabling a large number of optimizations.
+~~~
 
-
-### Q: Why did it then?
+```admonish question "Why did it then???!!!"
 
 Brendan Eich puts it well: "it is just too easy to implement." _(source wanted)_
+```

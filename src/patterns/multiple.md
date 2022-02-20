@@ -3,10 +3,6 @@ Multiple Instantiation
 
 {{#include ../links.md}}
 
-
-Background
-----------
-
 Rhai's [features] are not strictly additive.  This is easily deduced from the [`no_std`] feature
 which prepares the crate for `no-std` builds.  Obviously, turning on this feature has a material
 impact on how Rhai behaves.
@@ -14,29 +10,39 @@ impact on how Rhai behaves.
 Many crates resolve this by going the opposite direction: build for `no-std` in default, but add a
 `std` feature, included by default, which builds for the `stdlib`.
 
+Rhai, however, is more complex.
+
 
 Rhai Language Features Are Not Additive
 --------------------------------------
 
-Rhai, however, is more complex.  Language features cannot be easily made _additive_.
+Language features cannot be easily made _additive_.
 
 That is because the _lack_ of a language feature is a feature by itself.
 
-For example, by including [`no_float`], a project sets the Rhai language to ignore floating-point math.
-Floating-point numbers do not even parse under this case and will generate syntax errors.
-Assume that the project expects this behavior (why? perhaps integers are all that make sense
-within the project domain).
+```admonish question "A practical illustration"
 
-Now, assume that a dependent crate also depends on Rhai. Under such circumstances, unless _exact_
-versioning is used and the dependent crate depends on a _different_ version of Rhai, Cargo
-automatically _merges_ both dependencies, with the [`no_float`] feature turned on because Cargo
-features are _additive_.
+Assume an _additive_ feature called `floating-point` that adds floating-point support.
 
-This will break the dependent crate, which does not by itself specify [`no_float`] and expects
-floating-point numbers and math to work normally.
+Assume also that the application _omits_ the `floating-point` feature (why? perhaps integers are all
+that make sense within the project domain). Floating-point numbers do not even parse under this
+configuration and will generate syntax errors.
 
-There is no way out of this dilemma.  Reversing the [features] set with a `float` feature causes the
-project to break because floating-point numbers are not rejected as expected.
+Now, assume that a dependent crate _also_ depends on Rhai, but a new version suddenly decides to
+_require_ floating-point support. That dependent crate would, naturally, specify the
+`floating-point` feature.
+
+Under such circumstances, unless _exact_ versioning is used and the dependent crate depends on a
+_different_ version of Rhai, Cargo automatically _merges_ both dependencies, with the `floating-point`
+feature turned on because features are _additive_.
+
+This will in turn break the application, which by itself specifically omits `floating-point` and
+expects floating-point numbers to be rejected, in unexpected ways. Suddenly and without warning,
+floating-point numbers show up in data which the application is not prepared to handle.
+
+There is no way out of this dilemma, because the _lack_ of a language feature can be depended upon
+as a feature.
+```
 
 
 Multiple Instantiations of Rhai Within The Same Project
@@ -73,8 +79,7 @@ If more than four different instantiations of Rhai is necessary (why?), create m
 repositories or GitHub forks or branches.
 
 
-Caveat &ndash; No Way To Avoid Dependency Conflicts
---------------------------------------------------
+```admonish danger "No way To avoid dependency conflicts"
 
 Unfortunately, pulling in Rhai from different sources do not resolve the problem of [features]
 conflict between dependencies.  Even overriding `crates.io` via the `[patch]` manifest section
@@ -87,3 +92,4 @@ merging feature _just for Rhai_.
 Unfortunately, as of this writing, there is no known method to achieve it.
 
 Therefore, moral of the story: avoid pulling in multiple crates that depend on Rhai.
+```

@@ -5,7 +5,10 @@ Module Resolvers
 
 When encountering an [`import`] statement, Rhai attempts to _resolve_ the [module] based on the path string.
 
+```admonish info "See also"
+
 See the section on [_Importing Modules_][`import`] for more details.
+```
 
 _Module Resolvers_ are service types that implement the [`ModuleResolver`][traits] trait.
 
@@ -14,8 +17,8 @@ Built-in Module Resolvers
 ------------------------
 
 There are a number of standard resolvers built into Rhai, the default being the `FileModuleResolver`
-which simply loads a script file based on the path (with `.rhai` extension attached)
-and execute it to form a [module].
+which simply loads a script file based on the path (with `.rhai` extension attached) and execute it
+to form a [module].
 
 Built-in [module] resolvers are grouped under the `rhai::module_resolvers`
 [module namespace][function namespace].

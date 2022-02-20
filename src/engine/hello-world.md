@@ -60,6 +60,11 @@ Use Script Files
 Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`
 (not available under [`no_std`] or in [WASM] builds).
 
+```admonish info "Script file extension"
+
+Rhai script files are customarily named with the extension `.rhai`.
+```
+
 ```rust,no_run
 let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
 //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -69,7 +74,25 @@ let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
 engine.run_file("hello_world.rhai".into())?;
 ```
 
-Rhai script files are customarily named with the extension `.rhai`.
+```admonish tip "Unix shebangs"
+
+On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
+script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
+
+If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
+`Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
+
+This behavior is also present for non-Unix (e.g. Windows) environments.
+
+~~~js
+#!/home/to/me/bin/rhai-run
+
+// This is a Rhai script
+
+let answer = 42;
+print(`The answer is: ${answer}`);
+~~~
+```
 
 
 Specify the Return Type
@@ -92,25 +115,4 @@ result.is::<i64>() == true;
 let result: Dynamic = engine.eval("boo()")?;    // use 'Dynamic' if you're not sure what type it'll be!
 
 let result = engine.eval::<String>("40 + 2")?;  // returns an error because the actual return type is i64, not String
-```
-
-
-Unix Shebangs in Script Files
-----------------------------
-
-On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
-
-If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
-`Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
-
-This behavior is also present for non-Unix (e.g. Windows) environments.
-
-```js
-#!/home/to/me/bin/rhai-run
-
-// This is a Rhai script
-
-let answer = 42;
-print(`The answer is: ${answer}`);
 ```

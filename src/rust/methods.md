@@ -32,13 +32,16 @@ let result = engine.eval::<i64>(
 println!("result: {}", result);     // prints 1
 ```
 
-Under [`no_object`], however, the _method-call_ style is no longer supported.
+~~~admonish warning "Unavailable under `no_object`"
+
+Under [`no_object`], the _method-call_ style is no longer supported.
 
 ```rust,no_run
 // Below is a syntax error under 'no_object'.
 let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
                                            // ^ cannot call method-style
 ```
+~~~
 
 
 First `&mut` Parameter
@@ -74,7 +77,11 @@ update(array[0]);   // <- 'array[0]' is an expression returning a calculated val
 array[0].update();  // <- call in method-call style will update 'a'
 ```
 
-**IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
+```admonish danger "No support for references"
+
+Rhai does NOT support normal references (i.e. `&T`) as parameters.
+All references must be mutable (i.e. `&mut T`).
+```
 
 
 Number of Parameters in Methods
