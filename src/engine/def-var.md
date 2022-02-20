@@ -71,5 +71,10 @@ The return value is `Result<bool, Box<EvalAltResult>>` where:
 | `Ok(false)`               | [throws][exception] a runtime or compilation error |
 | `Err(Box<EvalAltResult>)` | error that is reflected back to the [`Engine`]     |
 
+```admonish note "Error during compilation"
+
 During compilation (i.e. when `is_runtime` is `false`), `EvalAltResult::ErrorParsing` is passed
-through as the compilation error.  All other errors map to `ParseErrorType::ForbiddenVariable`.
+through as the compilation error.
+
+All other errors map to `ParseErrorType::ForbiddenVariable`.
+```

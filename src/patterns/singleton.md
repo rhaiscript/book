@@ -4,8 +4,7 @@ Singleton Command Object
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system provides core functionalities, but no driving logic.
 
@@ -16,10 +15,9 @@ Usage Scenario
 * The API is multiplexed, meaning that it can act on multiple system-provided entities, or
 
 * The API lends itself readily to an object-oriented (OO) representation.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * Expose a Command type with an API.  The [`no_object`] feature must not be on.
 
@@ -32,6 +30,7 @@ Key Concepts
 * Load each command object into a custom [`Scope`] as constant variables.
 
 * Control each command object in script via the constants.
+```
 
 
 Implementation

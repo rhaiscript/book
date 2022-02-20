@@ -18,6 +18,21 @@ let x = 123.to_float();
 print(x);       // what happens?
 ```
 
+```admonish tip "Tip: Monkey patching Rhai"
+
+Most of Rhai's built-in functionality resides in registered functions.
+
+If you dislike any built-in function, simply provide your own implementation to
+_override_ the built-in version.
+
+The ability to modify the operating environment dynamically at runtime is called
+"[monkey patching](https://en.wikipedia.org/wiki/Monkey_patch)."
+It is rarely recommended, but if you need it, you need it bad.
+
+In other words, do it only when _all else fails_.  Do not monkey patch Rhai simply
+because you don't like the default functionality.
+```
+
 
 Search Order of Functions
 -------------------------

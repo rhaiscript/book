@@ -68,8 +68,8 @@ engine.run_with_scope(&mut scope, script)?;
 Caveat &ndash; Constants Can be Modified via Rust
 ------------------------------------------------
 
-A [custom type] stored as a constant cannot be modified via script, but _can_ be modified via
-a registered Rust function that takes a first `&mut` parameter &ndash; because there is no way for
+A [custom type] stored as a constant cannot be modified via script, but _can_ be modified via a
+registered Rust function that takes a first `&mut` parameter &ndash; because there is no way for
 Rhai to know whether the Rust function modifies its argument!
 
 By default, native Rust functions with a first `&mut` parameter always allow constants to be passed
@@ -114,7 +114,7 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 X == 43;            // value of 'X' is unchanged by script
 ```
 
-### Pure plugin functions
+```admonish tip "Tip: Pure plugin functions"
 
 When functions are registered as part of a [plugin], `&mut` parameters are protected from being
 passed constant values.
@@ -124,8 +124,9 @@ parameter.
 
 However, if a [plugin function] is marked with the `#[export_fn(pure)]` or `#[rhai_fn(pure)]` attribute,
 it is considered _pure_ (i.e. assumed to not modify its arguments) and so constants are allowed.
+```
 
-### Implications on script optimization
+```admonish info "Implications on script optimization"
 
 Rhai _assumes_ that constants are never changed, even via Rust functions.
 
@@ -135,5 +136,6 @@ by default does _constant propagation_ as a operation.
 If a constant is eventually modified by a Rust function, the optimizer will not see
 the updated value and will propagate the original initialization value instead.
 
-`Dynamic::is_read_only` can be used to detect whether a [`Dynamic`] value is constant or not
-within a Rust function.
+`Dynamic::is_read_only` can be used to detect whether a [`Dynamic`] value is constant or not within
+a Rust function.
+```

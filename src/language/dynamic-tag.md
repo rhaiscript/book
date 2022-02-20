@@ -9,7 +9,10 @@ On 32-bit targets, however, the tag is only `i16`.
 
 The tag defaults to zero.
 
+```admonish bug "Value out of bounds"
+
 It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-bit targets).
+```
 
 
 Examples
@@ -240,10 +243,11 @@ let c = r.tag[16..32];
 TL;DR
 -----
 
-### Q: Tell me, really, what is the _point_?
+```admonish question "Tell me, really, what is the _point_?"
 
 Due to byte alignment requirements on modern CPU's, there are unused spaces in a [`Dynamic`] type,
 of the order of 4 bytes on 64-bit targets (2 bytes on 32-bit).
 
 It is empty space that can be put to good use and not wasted, especially when Rhai does not have
 built-in support of tuples in order to return multiple values from [functions].
+```

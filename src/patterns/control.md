@@ -4,18 +4,16 @@ Scriptable Control Layer Over Rust Backend
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system provides core functionalities, but no driving logic.
 
 * The driving logic must be dynamic and hot-loadable.
 
 * A script is used to drive the system and provide control intelligence.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * Expose a Control API.
 
@@ -24,6 +22,19 @@ Key Concepts
 * Since Rhai is _[sand-boxed]_, it cannot mutate the environment.  To perform external actions via
   an API, the actual system must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`]) and
   shared to the [`Engine`].
+```
+
+```admonish danger "Using Rhai for games"
+
+Although this usage pattern appears a perfect fit for _game_ logic, avoid writing the _entire game_
+in Rhai.  Performance will not be acceptable.
+
+Implement as much functionalities of the game engine in Rust as possible. Rhai integrates well with
+Rust so this is usually not a hinderance.
+
+Lift as much out of Rhai as possible. Use Rhai only for the logic that _must_ be dynamic or
+hot-loadable.
+```
 
 
 Implementation
@@ -132,16 +143,3 @@ if !bunny_is_going() { bunny_power(true); }
 
 if bunny_get_speed() > 50 { bunny_set_speed(50); }
 ```
-
-
-Caveat
-------
-
-Although this usage pattern appears a perfect fit for _game_ logic, avoid writing the _entire game_
-in Rhai.  Performance will not be acceptable.
-
-Implement as much functionalities of the game engine in Rust as possible. Rhai integrates well with
-Rust so this is usually not a hinderance.
-
-Lift as much out of Rhai as possible. Use Rhai only for the logic that _must_ be dynamic or
-hot-loadable.

@@ -3,10 +3,6 @@ Maximum Size of Object Maps
 
 {{#include ../links.md}}
 
-
-Limit How Large Object Maps Can Grow
------------------------------------
-
 Rhai by default does not limit how large (i.e. the number of properties) an [object map] can be.
 
 This can be changed via `Engine::set_max_map_size`, with zero being unlimited (the default).
@@ -26,8 +22,7 @@ engine.set_max_map_size(0);         // allow unlimited object maps
 ```
 
 
-Setting Maximum Size
--------------------
+```admonish danger "Maximum size"
 
 Be conservative when setting a maximum limit and always consider the fact that a registered function
 may grow an [object map]'s size without Rhai noticing until the very end.
@@ -42,7 +37,7 @@ adds up the sizes of all [strings], [arrays] and [object maps] contained within 
 make sure that the _aggregate_ sizes of none of these data structures exceed their respective
 maximum size limits (if any).
 
-```rust,no_run
+~~~rust,no_run
 // Small, innocent object map...
 let small_map: #{ x: 42 };          // 1-deep... 1 item, 1 object map
 
@@ -63,5 +58,5 @@ let map = #{ x: 42 };
 loop {
     map.x = map;    // <- only 1 item, but infinite number of object maps
 }
+~~~
 ```
-

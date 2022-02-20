@@ -4,8 +4,7 @@ Hot Reloading
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system where scripts are used for behavioral control.
 
@@ -13,10 +12,9 @@ Usage Scenario
   host system.
 
 * New scripts must be active as soon as possible after modifications are detected.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * The Rhai [`Engine`] is _re-entrant_, meaning that it is decoupled from scripts.
 
@@ -24,6 +22,7 @@ Key Concepts
   to be active.
 
 * Surgically _patch_ scripts when only parts of the scripts are modified.
+```
 
 
 Implementation
@@ -101,8 +100,8 @@ system.watch_for_script_change(|sys: &mut System, fn_name: &str| {
 ```
 
 
-Multi-Threaded Considerations
------------------------------
+```admonish tip "Tip: Multi-threaded considerations"
 
 For a multi-threaded environments, replace `Rc` with `Arc`, `RefCell` with `RwLock` or `Mutex`, and
 turn on the [`sync`] feature.
+```

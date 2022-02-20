@@ -3,12 +3,14 @@ Function Namespaces
 
 {{#include ../links.md}}
 
+
 Each Function is a Separate Compilation Unit
 -------------------------------------------
 
-[Functions] in Rhai are _pure_ and they form individual _compilation units_. This means that
-individual [functions] can be separated, exported, re-grouped, imported, and generally
-mix-'n-matched with other completely unrelated scripts.
+[Functions] in Rhai are _pure_ and they form individual _compilation units_.
+
+This means that individual [functions] can be separated, exported, re-grouped, imported, and
+generally mix-'n-matched with other completely unrelated scripts.
 
 For example, the `AST::merge` and `AST::combine` methods (or the equivalent `+` and `+=` operators)
 allow combining all [functions] in one [`AST`] into another, forming a new, unified, group of [functions].

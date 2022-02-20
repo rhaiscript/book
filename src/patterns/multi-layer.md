@@ -4,8 +4,7 @@ Multi-Layered Functions
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system is divided into separate _layers_, each providing logic in terms of scripted [functions].
 
@@ -21,13 +20,12 @@ Usage Scenario
 * This type of system is extremely convenient for dynamic business rules configuration, setting
   corporate-wide policies, granting permissions for specific roles etc. where specific, local rules
   need to override corporate-wide defaults.
+```
 
-
-Practical Scenario
-------------------
+```admonish tip "Practical scenario"
 
 Assuming a LOB (line-of-business) system for a large MNC (multi-national corporation) with branches,
-facilities and offices across the global.
+facilities and offices across the globe.
 
 The system needs to provide basic, corporate-wide policies to be enforced through the worldwide
 organization, but also cater for country- or region-specific rules, practices and regulations.
@@ -38,17 +36,17 @@ organization, but also cater for country- or region-specific rules, practices an
 | `regional`  | regional policy overrides                           |
 |  `country`  | country-specific modifications for legal compliance |
 |  `office`   | special treatments for individual office locations  |
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * Each layer is a separate script.
 
 * The lowest layer script is compiled into a base [`AST`].
 
 * Higher layer scripts are also compiled into [`AST`] and _combined_ into the base using
-  `AST::combine` (or the `+=` operator), overriding any existing [functions].
+  [`AST::combine`]({{rootUrl}}/engine/ast.md) (or the `+=` operator), overriding any existing [functions].
+```
 
 
 Examples
@@ -131,5 +129,8 @@ ast += lowest;
 // fn baz() { print("hey!"); }    // from 'office.rhai'
 ```
 
+```admonish failure "No super call"
+
 Unfortunately, there is no `super` call that calls the base implementation (i.e. no way for a
 higher-layer function to call an equivalent lower-layer function).
+```

@@ -92,14 +92,14 @@ mod my_module {
 }
 ```
 
-### Doc-comments
+```admonish tip "Doc-comments"
 
 If the [`metadata`] feature is active, doc-comments (i.e. comments starting with `///` or wrapped
 with `/**` ... `*/`) on plugin functions are extracted into [_metadata_][functions metadata].
 
 It is always a good idea to put [doc-comments] onto [plugin modules] and [plugin functions],
 as they can be used to auto-generate documentation later on.
-
+```
 
 ### Use `Engine::register_global_module`
 
@@ -465,11 +465,11 @@ mod my_module {
 ```
 
 
-`NativeCallContext` Parameter
-----------------------------
+~~~admonish info "`NativeCallContext` parameter"
 
 The _first_ parameter of a function can also be [`NativeCallContext`], which is treated specially by
 the plugins system.
+~~~
 
 
 `#[export_module]` Parameters

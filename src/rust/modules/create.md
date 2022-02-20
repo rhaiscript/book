@@ -17,5 +17,8 @@ The Hard Way &ndash; `Module` API
 Manually creating a [module] is possible via the [`Module`] public API, which is volatile and may
 change from time to time.
 
+```admonish info "See also"
+
 For the complete [`Module`] public API, refer to the
 [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.Module.html) online.
+```

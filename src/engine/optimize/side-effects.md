@@ -14,9 +14,10 @@ within a pruned code block).
 If custom functions are registered to overload [built-in operators], they will also be called when
 the operators are used (in an [`if`] statement, for example), potentially causing side-effects.
 
-Therefore, the rule-of-thumb is:
+```admonish tip "Rule of thumb"
 
 * _Always_ register custom types and functions _after_ compiling scripts if [`OptimizationLevel::Full`] is used.
 
 * _DO NOT_ depend on knowledge that the functions have no side-effects, because those functions can change later on and,
   when that happens, existing scripts may break in subtle ways.
+```

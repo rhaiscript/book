@@ -26,10 +26,17 @@ Indexers are disabled when the [`no_index`] and [`no_object`] features are used 
 | `register_indexer_get_result` | `Fn(&mut T, X) -> Result<Dynamic, Box<EvalAltResult>>`                                                        |      yes, but not advised      |
 | `register_indexer_set_result` | `Fn(&mut T, X, V) -> Result<(), Box<EvalAltResult>>`                                                          |              yes               |
 
+```admonish danger "No support for references"
+
+Rhai does NOT support normal references (i.e. `&T`) as parameters.
+All references must be mutable (i.e. `&mut T`).
+```
+
+```admonish warning "Getters must be pure"
+
 By convention, index [getters][getters/setters] are not supposed to mutate the [custom type],
 although there is nothing that prevents this mutation.
-
-**IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
+```
 
 
 Cannot Override Arrays, BLOB's, Object Maps, Strings and Integers
@@ -50,12 +57,19 @@ The following types have built-in indexer implementations that are fast and effi
 | `INT`                                     |                   `INT`                   |   boolean   | access a particular bit inside the integer number as a [bit-field]           |
 | `INT`                                     |                  [range]                  |    `INT`    | access a particular range of bits inside the integer number as a [bit-field] |
 
-Attempting to register indexers for an [array], [object map], [string] or `INT` panics when using
-the `Engine::register_indexer_XXX` API.  They can, however, be defined in a [plugin module], only to
-be ignored.
+```admonish failure "Cannot register indexers for certain types"
+
+Attempting to register indexers for an [array], [object map], [BLOB], [string] or `INT` panics
+when using the `Engine::register_indexer_XXX` API.
+
+They can, however, be defined in a [plugin module], only to be ignored.
+```
+
+```admonish warning "Do not overload indexers for built-in standard types"
 
 In general, it is a bad idea to overload indexers for any of the [standard types] supported
 internally by Rhai, since built-in indexers may be added in future versions.
+```
 
 
 Examples

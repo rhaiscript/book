@@ -55,14 +55,12 @@ Unicode characters.
 In Rhai, there are also no separate concepts of `String` and `&str` (a string slice) as in Rust.
 
 
-Performance Considerations of Character Indexing
------------------------------------------------
+```admonish warning "Performance considerations"
 
 Although Rhai exposes a [string] as a simple array of [characters] which can be directly indexed to
-get at a particular [character].
+get at a particular [character], such convenient syntax is an _illusion_.
 
-However, such convenient syntax is an _illusion_.  Internally the [string] is still stored in UTF-8
-(native Rust `String`s).
+Internally the [string] is still stored in UTF-8 (native Rust `String`s).
 
 All indexing operations actually require walking through the entire UTF-8 string to find the offset
 of the particular [character] position, and therefore is _much_ slower than the simple array
@@ -72,3 +70,4 @@ This implementation detail is hidden from the user but has a performance implica
 
 Avoid large scale [character]-based processing of [strings]; instead, build an actual [array] of
 [characters] (via the `split()` method) which can then be manipulated efficiently.
+```

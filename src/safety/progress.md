@@ -12,6 +12,16 @@ progress and force-terminate a script prematurely (for any reason), provide a cl
 
 Progress tracking is disabled with the [`unchecked`] feature.
 
+```admonish info "Operations count vs. progress percentage"
+
+Notice that the _operations count_ value passed into the closure does not indicate the _percentage_
+of work already done by the script (and thus it is not real _progress_ tracking), because it is
+impossible to determine how long a script may run.
+
+It is possible, however, to calculate this percentage based on an estimated total number of
+operations for a typical run.
+```
+
 ```rust,no_run
 let mut engine = Engine::new();
 
@@ -45,14 +55,3 @@ behind the termination decision.
 
 If the termination token is not needed, simply return `Some(Dynamic::UNIT)` to terminate the script
 run with [`()`] as the token.
-
-
-Operations Count vs. Progress Percentage
----------------------------------------
-
-Notice that the _operations count_ value passed into the closure does not indicate the _percentage_
-of work already done by the script (and thus it is not real _progress_ tracking), because it is
-impossible to determine how long a script may run.
-
-It is possible, however, to calculate this percentage based on an estimated total number of
-operations for a typical run.

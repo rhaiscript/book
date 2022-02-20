@@ -27,4 +27,7 @@ of definition:
 
 > `[private]` _name_ `(`_param 1_`:`_type 1_`,` _param 2_`:`_type 2_`,` ... `,` _param n_`:`_type n_`) ->` _return type_
 
+~~~admonish warning "Requires `metadata`"
+
 Exporting metadata requires the [`metadata`] feature.
+~~~

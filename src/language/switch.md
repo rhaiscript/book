@@ -58,8 +58,11 @@ switch map {
 }
 ```
 
+```admonish tip "Tip: Working with enums"
+
 Switching on [arrays] is very useful when working with Rust enums
-(see [this chapter]({{rootUrl}}/patterns/enums.md) for more details).
+(see [this section]({{rootUrl}}/patterns/enums.md) for more details).
+```
 
 
 Case Conditions
@@ -97,10 +100,6 @@ but they must come _after_ all integer cases.
 Numeric [ranges] are only searched when the `switch` value is itself an integer (i.e. they never
 match any other data types).
 
-[Range] cases can _overlap_. When more then one [range] contain the `switch` value, the _first_ one
-with a fulfilled condition (if any) is evaluated.  In other words, numeric [range] cases are tried
-in the order that they appear in the original script.
-
 ```js
 let x = 42;
 
@@ -121,6 +120,14 @@ switch x {
 
     42 => ...,              // <- syntax error: integer cases cannot follow range cases
 }
+```
+
+```admonish tip "Tip: Ranges can overlap"
+
+When more then one [range] contain the `switch` value, the _first_ one with a fulfilled condition
+(if any) is evaluated.
+
+Numeric [range] cases are tried in the order that they appear in the original script.
 ```
 
 

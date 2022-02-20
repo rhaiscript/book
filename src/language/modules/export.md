@@ -48,21 +48,23 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 }
 ```
 
-### Multiple Exports
+```admonish tip "Tip: Multiple exports"
 
-One `export` statement can export multiple [variables], even under multiple names.
+[Variables] can be exported under multiple names.
 
-```js
-// The following exports three variables:
-//   - 'x' as 'x' and 'hello'
-//   - 'y' as 'foo' and 'bar'
-//   - 'z' as 'z'
+The following exports three [variables]:
+* `x` as `x` and `hello`
+* `y` as `foo` and `bar`
+* `z` as `z`
+
+~~~js
 export x;
 export x as hello;
 export y as foo;
 export x as world;
 export y as bar;
 export z;
+~~~
 ```
 
 
@@ -81,8 +83,11 @@ fn inc(x) { x + 1 }     // script-defined function - default public
 private fn foo() {}     // private function - hidden
 ```
 
-[`private`] [functions] are commonly called to initialize the [module].
-They cannot be called apart from this.
+```admonish info "Private functions"
+
+[`private`] [functions] are commonly called to initialize the [module],
+because they cannot be accessed apart from this.
+```
 
 
 Sub-Modules

@@ -112,8 +112,8 @@ fn main() {
 ```
 
 
-`NativeCallContext` Parameter
-----------------------------
+~~~admonish info "`NativeCallContext` parameter"
 
 The _first_ parameter of a function can also be [`NativeCallContext`], which is treated specially by
 the plugins system.
+~~~

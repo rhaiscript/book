@@ -166,9 +166,35 @@ r#"
 "#)?;
 ```
 
+```admonish tip "Tip: Hold multiple references"
 
-TL;DR &ndash; Why `read_lock` and `write_lock`
----------------------------------------------
+In order to access a value argument that is expensive to clone _while_ holding a mutable reference
+to the first argument, use one of the following tactics:
+
+1) if it is a [primary type][standard types] other than [string], use `as_xxx()` as above
+
+2) directly _consume_ that argument via `std::mem::take` as above
+
+3) use `split_first_mut` to partition the slice:
+
+~~~rust,no_run
+// Partition the slice
+let (first, rest) = args.split_first_mut().unwrap();
+
+// Mutable reference to the first parameter, of type '&mut A'
+let this_ptr = &mut *first.write_lock::<A>().unwrap();
+
+// Immutable reference to the second value parameter, of type '&B'
+// This can be mutable but there is no point because the parameter is passed by value
+let value_ref = &*rest[0].read_lock::<B>().unwrap();
+~~~
+```
+
+
+TL;DR
+-----
+
+~~~admonish question "Why `read_lock` and `write_lock`?"
 
 The [`Dynamic`] API that casts it to a reference to a particular data type  is `read_lock`
 (for an immutable reference) and `write_lock` (for a mutable reference).
@@ -186,28 +212,4 @@ non-shared values.
 
 If the value _is_ a shared value, then it is first _locked_ and the returned _lock guard_
 allows access to the underlying value in the specified type.
-
-
-Hold Multiple References
-------------------------
-
-In order to access a value argument that is expensive to clone _while_ holding a mutable reference
-to the first argument, use one of the following tactics:
-
-1) if it is a [primary type][standard types] other than [string], use `as_xxx()` as above
-
-2) directly _consume_ that argument via `std::mem::take` as above
-
-3) use `split_first_mut` to partition the slice:
-
-```rust,no_run
-// Partition the slice
-let (first, rest) = args.split_first_mut().unwrap();
-
-// Mutable reference to the first parameter, of type '&mut A'
-let this_ptr = &mut *first.write_lock::<A>().unwrap();
-
-// Immutable reference to the second value parameter, of type '&B'
-// This can be mutable but there is no point because the parameter is passed by value
-let value_ref = &*rest[0].read_lock::<B>().unwrap();
-```
+~~~

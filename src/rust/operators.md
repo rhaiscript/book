@@ -17,12 +17,13 @@ let x = +(a, b);        // <- the above is equivalent to this function call
 Similarly, comparison [operators] including `==`, `!=` etc. are all implemented as functions,
 with the stark exception of `&&` and `||`.
 
-
-`&&` and `||` Cannot Be Overloaded
----------------------------------
+~~~admonish warning "`&&` and `||` cannot be overloaded"
 
 Because they [_short-circuit_]({{rootUrl}}/language/logic.md#boolean-operators), `&&` and `||` are
-handled specially and _not_ via a function; as a result, overriding them has no effect at all.
+handled specially and _not_ via a function.
+
+Overriding them has no effect at all.
+~~~
 
 
 Overload Operator via Rust Function
@@ -62,15 +63,15 @@ result == 43;                                       //    ... but not now
 ```
 
 
-Considerations
---------------
+```admonish danger "Considerations"
 
-Normally, use [operator] overloading for [custom types] only.
+Use [operator] overloading for [custom types] only.
 
-Be very careful when overriding built-in [operators] because users expect standard [operators] to
+Be **very careful** when overriding built-in [operators] because users expect standard [operators] to
 behave in a consistent and predictable manner, and will be annoyed if an expression involving `+`
 turns into a subtraction, for example.  You may think it is amusing, but users who need to get
 things done won't.
 
 [Operator] overloading also impacts script optimization when using [`OptimizationLevel::Full`].
-See the [script-optimization] for more details.
+See the section on [script optimization] for more details.
+```

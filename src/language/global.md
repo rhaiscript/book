@@ -25,8 +25,8 @@ fn foo(x) {
 ```
 
 
-Overriding `global`
--------------------
+Override `global`
+-----------------
 
 It is possible to _override_ the automatic global [module] by [importing][`import`] another [module]
 under the name `global`.

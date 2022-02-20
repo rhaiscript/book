@@ -4,8 +4,7 @@ Loadable Configuration
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system where settings and configurations are complex and logic-driven.
 
@@ -17,10 +16,9 @@ Usage Scenario
 
 * Yet the configuration must be flexible, late-bound and dynamically loadable, just like a
   configuration file.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * Leverage the loadable [modules] of Rhai.  The [`no_module`] feature must not be on.
 
@@ -32,6 +30,7 @@ Key Concepts
 * Since Rhai is _sand-boxed_, it cannot mutate the environment.  To modify the external
   configuration object via an API, it must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for
   [`sync`]) and shared to the [`Engine`].
+```
 
 
 Implementation
@@ -140,8 +139,7 @@ id == "hello";
 ```
 
 
-Consider a Custom Syntax
-------------------------
+```admonish tip "Tip: Consider a custom syntax"
 
 This is probably one of the few scenarios where a [custom syntax] can be recommended.
 
@@ -150,7 +148,7 @@ easy to understand and quick to modify.
 
 For example, the above configuration example may be expressed by this custom syntax:
 
-```rust,no_run
+~~~rust,no_run
 ┌────────────────┐
 │ my_config.rhai │
 └────────────────┘
@@ -167,6 +165,7 @@ map "bar" => true;
 if config contains "hey" || config is_set "hey" {
     map "baz" => false;
 }
-```
+~~~
 
-Notice that `contains` and `is_set` may be implemented as a [custom operator].
+Notice that `contains` and `is_set` may also be implemented as a [custom operator].
+```

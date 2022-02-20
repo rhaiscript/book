@@ -9,7 +9,15 @@ Free Typing
 
 Rhai works seamlessly with _any_ Rust type.
 
-The type can be _anything_; it does not have any prerequisites other than being `Clone`.
+The reason why it is termed a _custom_ type throughout this documentation is that Rhai natively
+supports a number of data types with fast, internal treatment (see the list of [standard types]).
+Any type outside of this list is considered _custom_.
+
+Any custom type is stored in Rhai as a Rust _trait object_ (specifically, a `dyn rhai::Variant`),
+with no restrictions other than being `Clone` (plus `Send + Sync` under the [`sync`] feature).
+
+```admonish tip
+The type literally can be _anything_. It does not have any prerequisite other than being `Clone`.
 
 It does not need to implement any other trait or use any custom `#[derive]`.
 
@@ -18,20 +26,20 @@ possible, usually silently and seamlessly.
 
 External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special `#[derive]`) can also be used easily with Rhai.
+```
 
-The reason why it is termed a _custom_ type throughout this documentation is that Rhai natively
-supports a number of data types with fast, internal treatment (see the list of [standard types]).
-
-Any type outside of this list is considered _custom_.
-
-Any type that does not have built-in support in Rhai is stored as a Rust _trait object_ (essentially
-a `dyn rhai::Variant`), with no restrictions other than being `Clone` (plus `Send + Sync` under the
-[`sync`] feature).
-
-Custom types may run slightly slower than built-in types due to this additional level of
-indirection, but for all other purposes there is no difference.
+Custom types run _significantly_ slower than [built-in types][standard types] due to this additional
+level of indirection, but for all purposes there is no difference.
 
 Support for custom types can be turned off via the [`no_object`] feature.
+
+
+```admonish tip "Tip: Working with enums"
+
+It is also possible to use Rust enums with Rhai.
+
+See the pattern [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
+```
 
 
 Register a Custom Type and its Methods
@@ -83,12 +91,20 @@ let result = engine.eval::<TestStruct>(
 println!("result: {}", result.field);   // prints 42
 ```
 
-Rhai follows the convention that _methods_ of custom types take a `&mut` first parameter
-to that type, so that invoking methods can always update it.
+
+First Parameter Must be `&mut`
+-----------------------------
+
+_Methods_ of custom types take a `&mut` first parameter to that type, so that invoking methods can
+always update it.
 
 All other parameters in Rhai are passed by value (i.e. clones).
 
-**IMPORTANT: Rhai does NOT support normal references (i.e. `&T`) as parameters.**
+```admonish danger "No support for references"
+
+Rhai does NOT support normal references (i.e. `&T`) as parameters.
+All references must be mutable (i.e. `&mut T`).
+```
 
 
 `type_of()` a Custom Type
@@ -132,11 +148,3 @@ engine.register_fn("==",
 let item = new_ts();        // construct a new 'TestStruct'
 item in array;              // 'in' operator uses '=='
 ```
-
-
-Working With Enums
-------------------
-
-It is quite easy to use Rust enums with Rhai.
-
-See the section on [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.

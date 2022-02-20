@@ -4,12 +4,12 @@ Scriptable Event Handler with State<br/>JS Style
 {{#include ../links.md}}
 
 
-Example
--------
+```admonish example
 
 A runnable example of this implementation is included.
 
 See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
+```
 
 
 Keep State in Object Map

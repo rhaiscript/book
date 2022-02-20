@@ -4,8 +4,7 @@ Scriptable Event Handler with State
 {{#include ../links.md}}
 
 
-Usage Scenario
---------------
+```admonish info "Usage scenario"
 
 * A system sends _events_ that must be handled.
 
@@ -16,10 +15,9 @@ Usage Scenario
 * State may be provided by the system or the user, or both.
 
 * Default implementations of event handlers can be provided.
+```
 
-
-Key Concepts
-------------
+```admonish abstract "Key concepts"
 
 * An _event handler_ object is declared that holds the following items:
   * [`Engine`] with registered functions serving as an API,
@@ -32,6 +30,7 @@ Key Concepts
   [`Engine::call_fn`][`call_fn`].
 
 * Optionally, trap the `EvalAltResult::ErrorFunctionNotFound` error to provide a default implementation.
+```
 
 
 Basic Infrastructure

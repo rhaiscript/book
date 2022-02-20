@@ -18,8 +18,11 @@ The Rust type of a Rhai BLOB is `rhai::Blob` which is an alias to `Vec<u8>`.
 
 BLOB's are disabled via the [`no_index`] feature.
 
+```admonish tip "Maximum size"
+
 The maximum allowed size of a BLOB can be controlled via [`Engine::set_max_array_size`][options]
 (see [maximum size of arrays]).
+```
 
 
 Element Access Syntax
@@ -38,15 +41,17 @@ _last_ element.
 
 > _blob_ `[` _index position from &minus;1 to &minus;length_ `]`
 
-### Byte values
+```admonish info "Byte values"
 
 The value of a particular byte in a BLOB is mapped to an `INT` (which can be 64-bit or 32-bit
-depending on the [`only_i32`] feature).  Only the lowest 8 bits are significant, all other bits are
-ignored.
+depending on the [`only_i32`] feature).
+
+Only the lowest 8 bits are significant, all other bits are ignored.
+```
 
 
-Crate a BLOB
-------------
+Create a BLOB
+-------------
 
 The function `blob` allows creating an empty BLOB, optionally filling it to a required size with a
 particular value (default zero).
@@ -59,14 +64,14 @@ let x = blob(10);           // BLOB with ten zeros
 let x = blob(50, 42);       // BLOB with 50x 42's
 ```
 
-### Initialize with byte stream
+```admonish tip "Tip: Initialize with byte stream"
 
 To quickly initialize a BLOB with a particular byte stream, the `write_be` method can be used to
 write eight bytes at a time (four under [`only_i32`]) in big-endian byte order.
 
 If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.
 
-```rust,no_run
+~~~rust,no_run
 let buf = blob(12, 0);      // BLOB with 12x zeros
 
 // Write eight bytes at a time, in big-endian order
@@ -83,6 +88,7 @@ buf[10] == 0x0c;
 buf.write_be(0, 4, 0xab_cd_ef_12);
 buf.write_be(4, 4, 0x34_56_78_90);
 buf.write_be(8, 4, 0x0a_0b_0c_0d);
+~~~
 ```
 
 
@@ -92,6 +98,11 @@ Writing ASCII Bytes
 For many embedded applications, it is necessary to encode an ASCII [string] as a byte stream.
 
 Use the `write_ascii` method to write ASCII [strings] into any specific [range] within a BLOB.
+
+```admonish warning "Non-ASCII characters"
+
+Non-ASCII characters (i.e. characters not within 1-127) are ignored by `write_ascii`.
+```
 
 The following is an example of a building a 16-byte command to send to an embedded device.
 
@@ -122,6 +133,12 @@ print(buf);                 // prints "[4209666f6f202620 626172000000abcd]"
                             //              ^^^^^^^^^^^^^^^^^^^ foo & bar
 
 device.send(buf);           // send command to device
+```
+
+```admonish question "What if I need UTF-8?"
+
+The `write_utf8` function writes a string in UTF-8 encoding.
+UTF-8 is, however, not very commonly used in embedded systems.
 ```
 
 

@@ -10,15 +10,15 @@ Peeking Out of The Pure Box
 Rhai [functions] are _pure_, meaning that they depend on on their arguments and have no access to
 the calling environment.
 
-When a [function] accesses a [variable] that is not defined within that [function]'s scope, it
-raises an evaluation error.
+When a [function] accesses a [variable] that is not defined within that [function]'s [`Scope`],
+it raises an evaluation error.
 
-It is possible, through a special syntax, to actually run the [function] call within the scope of
-the parent caller &ndash; i.e. the scope that makes the [function] call &ndash; and access/mutate
-variables defined there.
+It is possible, through a special syntax, to actually run the [function] call within the [`Scope`]
+of the parent caller &ndash; i.e. the [`Scope`] that makes the [function] call &ndash; and
+access/mutate variables defined there.
 
 Obviously, this is only meaningful for _scripted_ [functions], since native Rust functions can never
-access any scope anyway.
+access any [`Scope`] anyway (other than through a [`NativeCallContext`]).
 
 ```rust,no_run
 fn foo(y) {             // function accesses 'x' and 'y', but 'x' is not defined
@@ -59,31 +59,35 @@ h::greet!();            // <- syntax error: not allowed in namespace-qualified c
 ```
 
 
-New Variables Are Not Retained
------------------------------
+```admonish warning "New variables are not retained"
 
 [Variables] or [constants] defined within the [function] are _not_ retained.
+
 They remain local to the [function].
 
+So, although the syntax resembles a Rust _macro_ invocation, it is still a [function] call.
+```
 
-The Caller's Scope Can be Mutated
---------------------------------
+```admonish danger "The caller's scope can be mutated"
 
-Changes to variables in the calling scope persist.
+Changes to [variables] in the calling [`Scope`] persist.
 
 Therefore, with this syntax, it is possible for a Rhai [function] to mutate its calling environment.
+```
 
 
 Caveat Emptor
 -------------
 
-Functions relying on the calling scope is often a _Very Bad Idea™_ because it makes code almost
-impossible to reason about and maintain, as their behaviors are volatile and unpredictable.
+[Functions] relying on the calling [`Scope`] is often a _Very Bad Idea™_ because it makes code
+almost impossible to reason about and maintain, as their behaviors are volatile and unpredictable.
 
-Rhai functions are normally _pure_, meaning that you can rely on the fact that they never mutate the
-outside environment.  Using this syntax breaks this guarantee.
+Rhai [functions] are normally _pure_, meaning that you can rely on the fact that they never mutate
+the outside environment.  Using this syntax breaks this guarantee.
 
-Functions called in this manner behave more like macros that are expanded inline than actual
+[Functions] called in this manner behave more like macros that are expanded inline than actual
 function calls, thus the syntax is also similar to Rust's macro invocations.
 
-This usage should be at the last resort. **YOU HAVE BEEN WARNED**.
+This usage should be at the last resort.
+
+**YOU HAVE BEEN WARNED**.

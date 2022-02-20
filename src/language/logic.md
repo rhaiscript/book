@@ -3,6 +3,7 @@ Logic Operators
 
 {{#include ../links.md}}
 
+
 Comparison Operators
 --------------------
 
@@ -135,14 +136,16 @@ ts == ts;           // true: '==' defined
 ts != ts;           // error: '!=' not defined, even though '==' is
 ```
 
+```admonish tip "Tip: Always define the full set"
 It is strongly recommended that, when defining operators for [custom types], always define the full set
 of six operators (or at least the `==` and `!=` pair) together.
+```
 
 
 Boolean operators
 -----------------
 
-|     Operator      | Description   | Arity  | Short-Circuits? |
+|     Operator      | Description   | Arity  | Short-circuits? |
 | :---------------: | ------------- | :----: | :-------------: |
 |  `!` _(prefix)_   | boolean _NOT_ | unary  |       no        |
 |       `&&`        | boolean _AND_ | binary |       yes       |
@@ -165,4 +168,7 @@ a() | b();          // both a() and b() are evaluated
 a() & b();          // both a() and b() are evaluated
 ```
 
+```admonish note
+
 All boolean operators are [built in][built-in operators] for the `bool` data type.
+```

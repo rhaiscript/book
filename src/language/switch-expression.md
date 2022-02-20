@@ -3,8 +3,10 @@ Switch Expression
 
 {{#include ../links.md}}
 
-Like [`if`], [`switch`] also works as an _expression_. This means that a [`switch`] expression can
-appear anywhere a regular expression can, e.g. as function call arguments.
+Like [`if`], [`switch`] also works as an _expression_.
+
+This means that a [`switch`] expression can appear anywhere a regular expression can,
+e.g. as [function] call arguments.
 
 ```js
 let x = switch foo { 1 => true, _ => false };

@@ -8,8 +8,13 @@ Like Rust, a statement can be used anywhere where an _expression_ is expected.
 These are called, for lack of a more creative name, "statement expressions."
 
 The _last_ statement of a statement block is _always_ the block's return value when used as a statement,
-_regardless_ of whether it is terminated by a semicolon or not. This is different from Rust where,
-if the last statement is terminated by a semicolon, the block's return value defaults to `()`.
+_regardless_ of whether it is terminated by a semicolon or not.
+
+```admonish warning "Differs from Rust"
+
+This is different from Rust where, if the last statement is terminated by a semicolon, the block's
+return value defaults to `()`.
+```
 
 If the last statement has no return value (e.g. variable definitions, assignments) then it is
 assumed to be [`()`].

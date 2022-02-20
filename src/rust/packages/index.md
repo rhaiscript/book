@@ -3,14 +3,14 @@ Packages
 
 {{#include ../../links.md}}
 
-The built-in library of Rhai is provided as various _packages_ that can be
-turned into _shared_ [modules], which in turn can be registered into the
-_global namespace_ of an [`Engine`] via `Engine::register_global_module`.
+The built-in library of Rhai is provided as various _packages_ that can be turned into _shared_
+[modules], which in turn can be registered into the _global namespace_ of an [`Engine`] via
+`Engine::register_global_module`.
 
-Packages reside under `rhai::packages::*` and the trait `rhai::packages::Package`
-must be loaded in order for packages to be used.
+Packages reside under `rhai::packages::*` and the trait `rhai::packages::Package` must be loaded in
+order for packages to be used.
 
-### Packages _are_ Modules
+```admonish tip "Trivia: Packages _are_ modules!"
 
 Internally, a _package_ is a [module], with some conveniences to make it easier to define and use as
 a standard _library_ for an [`Engine`].
@@ -20,6 +20,7 @@ All _top-level_ functions in a package are available under the _global namespace
 (i.e. they're available without namespace qualifiers).
 
 Sub-[modules] and [variables] are ignored in packages.
+```
 
 
 Share a Package Among Multiple `Engine`'s

@@ -18,11 +18,21 @@ register the following methods.
 | `remove`, `-=` operator   | removes a particular item from the collection                    |
 | `merge` or `+` operator   | merges two collections, yielding a new collection with all items |
 
-If the collection takes a [`Dynamic`] value (e.g. like an [array]), these functions can take
-[`Dynamic`] parameters.
+~~~admonish tip "Tip: `Dynamic` values"
 
-Furthermore, it is customary to use `Engine::register_iterator` to allow iterating the collection if
+If the collection holds [`Dynamic`] values (e.g. like an [array]), these functions can take
+[`Dynamic`] parameters.
+~~~
+
+```admonish tip "Tip: Define type iterator"
+
+Collections are typically iterable.
+
+It is customary to use `Engine::register_iterator` to allow iterating the collection if
 it implements `IntoIterator`.
+
+Alternative, register a specific [type iterator] for the custom type.
+```
 
 
 Example

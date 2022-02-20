@@ -6,11 +6,15 @@ Doc-Comments
 Similar to Rust, [comments] starting with `///` (three slashes) or `/**` (two asterisks)
 are _doc-comments_.
 
-They are only supported under the [`metadata`] feature.
-If [`metadata`] is not active, doc-comments are treated as normal [comments].
-
 Doc-comments can only appear in front of [function] definitions, not any other elements.
 Therefore, doc-comments are not available under [`no_function`].
+
+~~~admonish warning "Requires `metadata`"
+
+Doc-comments are only supported under the [`metadata`] feature.
+
+If [`metadata`] is not active, doc-comments are treated as normal [comments].
+~~~
 
 ```rust,no_run
 /// This is a valid one-line doc-comment
@@ -67,9 +71,9 @@ Using Doc-Comments
 
 Doc-comments are stored within the script's [`AST`] after compilation.
 
-The `AST::iter_functions` method provides a `ScriptFnMetadata` instance
-for each function defined within the script, which includes doc-comments.
+The `AST::iter_functions` method provides a `ScriptFnMetadata` instance for each function defined
+within the script, which includes doc-comments.
 
-Doc-comments never affect the evaluation of a script nor do they incur
-significant performance overhead.  However, third party tools can take advantage
-of this information to auto-generate documentation for Rhai script functions.
+Doc-comments never affect the evaluation of a script nor do they incur significant performance overhead.
+However, third party tools can take advantage of this information to auto-generate documentation for
+Rhai script functions.

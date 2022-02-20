@@ -6,17 +6,30 @@ Object Maps
 Object maps are hash dictionaries. Properties are all [`Dynamic`] and can be freely added and retrieved.
 
 The Rust type of a Rhai object map is `rhai::Map`.
-
 Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
+
+~~~admonish question "Why `BTreeMap` and not `HashMap`?"
+
+The vast majority of object maps contain just a few properties.
+
+`BTreeMap` performs significantly better than `HashMap` when the number of entries is small.
+~~~
+
+~~~admonish question "Why `SmartString`?"
+
 [`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
+~~~
 
 [`type_of()`] an object map returns `"map"`.
 
 Object maps are disabled via the [`no_object`] feature.
 
+```admonish tip "Maximum size"
+
 The maximum allowed size of an object map can be controlled via [`Engine::set_max_map_size`][options]
 (see [maximum size of object maps]).
+```
 
 
 Literal Syntax
@@ -25,9 +38,9 @@ Literal Syntax
 Object map literals are built within braces `#{` ... `}` with _name_`:`_value_ pairs separated by
 commas `,`:
 
-> `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `}`
+> `#{` _property_ `:` _value_`,` ... `,` _property_ `:` _value_ `}`
 >
-> `#{` _property_ `:` _value_ `,` `...` `,` _property_ `:` _value_ `,` `}`  `// trailing comma is OK`
+> `#{` _property_ `:` _value_`,` ... `,` _property_ `:` _value_ `,` `}`     `// trailing comma is OK`
 
 The property _name_ can be a simple identifier following the same naming rules as [variables],
 or a [string literal][literals] without interpolation.
@@ -54,8 +67,11 @@ Trying to read a non-existing property returns [`()`] instead of causing an erro
 
 This is similar to JavaScript where accessing a non-existing property returns `undefined`.
 
-It is possible to force Rhai to return an `EvalAltResult::ErrorPropertyNotFound` error via
+```admonish tip "Tip: Force error"
+
+It is possible to force Rhai to return an `EvalAltResult::ErrorPropertyNotFound` via
 [`Engine::set_fail_on_invalid_map_property`][options].
+```
 
 
 Built-in Functions

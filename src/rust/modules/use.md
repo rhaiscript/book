@@ -11,6 +11,7 @@ Use Case 1 &ndash; Make the Module Globally Available
 [_global_ namespace][function namespace].
 
 All [functions] and [type iterators] can be accessed without _namespace qualifiers_.
+
 Variables and sub-modules are **ignored**.
 
 This is by far the easiest way to expose a [module]'s functionalities to Rhai.

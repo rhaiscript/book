@@ -7,22 +7,26 @@ For many applications in which Rhai is embedded, it is necessary to customize th
 are resolved.  For instance, modules may need to be loaded from script texts stored in a database,
 not in the file system.
 
-A module resolver must implement the [`ModuleResolver`][traits] trait,
-which contains only one required function: `resolve`.
+A module resolver must implement the [`ModuleResolver`][traits] trait, which contains only one
+required function: `resolve`.
 
 When Rhai prepares to load a module, `ModuleResolver::resolve` is called with the name
 of the _module path_ (i.e. the path specified in the [`import`] statement).
 
-* Upon success, it should return an [`Rc<Module>`][module] (or [`Arc<Module>`][module] under [`sync`]).
+```admonish success
+Upon success, it should return a shared [module] wrapped by `Rc` (or `Arc` under [`sync`]).
   
-  The module should call `Module::build_index` on the target module before returning.
-  This method flattens the entire module tree and _indexes_ it for fast function name resolution.
-  If the module is already indexed, calling this method has no effect.
+The module resolver should call `Module::build_index` on the target [module] before returning it.
+* This method flattens the entire module tree and _indexes_ it for fast function name resolution.
+* If the module is already indexed, calling this method has no effect.
+```
+
+```admonish failure
 
 * If the path does not resolve to a valid module, return `EvalAltResult::ErrorModuleNotFound`.
 
 * If the module failed to load, return `EvalAltResult::ErrorInModule`.
-
+```
 
 Example of a Custom Module Resolver
 ----------------------------------
@@ -75,8 +79,8 @@ r#"
 ```
 
 
-Implementing `ModuleResolver::resolve_ast`
------------------------------------------
+Advanced &ndash; `ModuleResolver::resolve_ast`
+---------------------------------------------
 
 There is another function in the [`ModuleResolver`][traits] trait, `resolve_ast`, which is a
 low-level API intended for advanced usage scenarios.

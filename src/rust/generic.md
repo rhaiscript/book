@@ -7,11 +7,13 @@ Rust generic functions can be used in Rhai, but separate instances for each conc
 registered separately.
 
 This essentially _overloads_ the function with different parameter types as Rhai does not natively
-support generics but Rhai does support _function overloading_.
+support generics but Rhai does support _[function overloading]_.
 
 Due to its dynamic nature, Rhai cannot monomorphize generic functions automatically.
-
 Monomorphization of generic functions must be performed manually.
+
+The example below shows how to register multiple functions (or, in this case, multiple overloaded
+versions of the same function) under the same name.
 
 ```rust,no_run
 use std::fmt::Display;
@@ -28,6 +30,3 @@ engine.register_fn("print", show_it::<i64>)
       .register_fn("print", show_it::<bool>)
       .register_fn("print", show_it::<ImmutableString>);
 ```
-
-The above example shows how to register multiple functions (or, in this case, multiple overloaded
-versions of the same function) under the same name.

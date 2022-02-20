@@ -30,25 +30,44 @@ if foo { a = 42 }
 ```
 
 
-Closed Scope
-------------
+Statement Block
+---------------
 
-A statement block forms a _closed_ scope. Any [variable] or [constant] defined within the block are
-removed outside the block.
+### Syntax
+
+Statement blocks in Rhai are formed by enclosing zero or more statements within braces `{`...`}`.
+
+> `{` _statement_`;` _statement_`;` ... _statement_ `}`
+>
+> `{` _statement_`;` _statement_`;` ... _statement_`;` `}`      `// trailing semi-colon is optional`
+
+### Closed scope
+
+A statement block forms a _closed_ scope.
+
+Any [variable] and/or [constant] defined within the block are removed outside the block, so are
+[modules] [imported][`import`] within the block.
 
 ```rust,no_run
 let x = 42;
 let y = 18;
 
 {
+    import "hello" as h;
     const HELLO = 99;
     let y = 0;
 
+    h::greet();         // ok
+
     print(y + HELLO);   // prints 99 (y is zero)
+
+        :    
         :    
 }                       // <- 'HELLO' and 'y' go away here...
 
 print(x + y);           // prints 60 (y is still 18)
 
 print(HELLO);           // <- error: 'HELLO' not found
+
+h::greet();             // <- error: module 'h' not found
 ```

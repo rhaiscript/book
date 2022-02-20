@@ -3,7 +3,12 @@ Dynamic Values
 
 {{#include ../links.md}}
 
-A `Dynamic` value can be _any_ type. However, under [`sync`], all types must be `Send + Sync`.
+A `Dynamic` value can be _any_ type, as long as it implements `Clone`.
+
+~~~admonish warning "`Send + Sync`"
+
+Under the [`sync`] feature, all types must also be `Send + Sync`.
+~~~
 
 
 Use `type_of()` to Get Value Type
@@ -35,17 +40,6 @@ switch type_of(mystery) {
 ```
 
 
-Functions Returning `Dynamic`
-----------------------------
-
-In Rust, sometimes a `Dynamic` forms part of a returned value &ndash; a good example is an [array]
-which contains `Dynamic` elements, or an [object map] which contains `Dynamic` property values.
-
-To get the _real_ values, the actual value types _must_ be known in advance.
-There is no easy way for Rust to decide, at run-time, what type the `Dynamic` value is
-(short of using the `type_name` function and match against the name).
-
-
 Type Checking and Casting
 ------------------------
 
@@ -71,6 +65,7 @@ let value = item.try_cast::<i64>()?;        // 'try_cast' does not panic when th
 let value = list[0].clone_cast::<i64>();    // use 'clone_cast' on '&Dynamic'
 let value: i64 = list[0].clone_cast();
 ```
+
 
 Type Name and Matching Types
 ----------------------------
@@ -102,9 +97,13 @@ match item.type_name() {                    // 'type_name' returns the name of t
 }
 ```
 
-**Note:** `type_name` always returns the _full_ Rust path name of the type, even when the type
-has been registered with a friendly name via `Engine::register_type_with_name`.  This behavior
-is different from that of the [`type_of`][`type_of()`] function in Rhai.
+```admonish info
+
+`type_name` always returns the _full_ Rust path name of the type, even when the type
+has been registered with a friendly name via `Engine::register_type_with_name`.
+
+This behavior is different from that of the [`type_of`][`type_of()`] function in Rhai.
+```
 
 
 Methods and Traits

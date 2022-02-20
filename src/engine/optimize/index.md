@@ -172,7 +172,7 @@ engine.run_with_scope(&mut scope,
 ")?;
 ```
 
-### Caveat &ndash; beware large constants
+### Caveat &ndash; beware of large constants
 
 [Constants] propagation replaces each usage of the [constant] with a clone of its value.
 

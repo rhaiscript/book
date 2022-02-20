@@ -24,4 +24,7 @@ The following are reserved keywords in Rhai.
 | [`type_of`], [`print`], [`debug`], [`eval`], `is_def_var`                  |                                                            | special functions                   |                                |
 |                                                                            | `default`, `void`, `null`, `nil`                           | special values                      |                                |
 
-Keywords cannot become the name of a [function] or [variable], even when they are disabled.
+```admonish warning
+Keywords cannot become the name of a [function] or [variable], even when they are
+[disabled][disable keywords and operators].
+```

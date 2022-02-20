@@ -11,7 +11,12 @@ a normal method in method-call syntax.  This is a _short-hand_ to avoid the more
 of using the `call` function keyword.
 
 When a property holding a [function pointer] or a [closure] is called like a method, it is replaced
-as a method call on the [object map] itself:
+as a method call on the [object map] itself.
+
+```admonish info "See also"
+
+See the pattern on [_Simulating Object-Oriented Programming_][OOP] for more details.
+```
 
 ```rust,no_run
 let obj = #{

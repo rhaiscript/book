@@ -14,10 +14,16 @@ How to Build from Source
 cargo install mdbook
 ```
 
-* Install [`mdbook-tera`](https://github.com/avitex/mdbook-tera) (for templating)
+* Install [`mdbook-tera`](https://crates.io/crates/mdbook-tera) (for templating)
 
 ```sh
 cargo install mdbook-tera
+```
+
+* Install [`mdbook-admonish`](https://crates.io/crates/mdbook-admonish) (for styling)
+
+```sh
+cargo install mdbook-admonish
 ```
 
 * Run `build`
@@ -25,6 +31,13 @@ cargo install mdbook-tera
 ```sh
 mdbook build
 ```
+
+### Warning: Recompile when `mdbook` is updated
+
+`mdbook-tera` and `mdbook-admonish` depend on particular versions of `mdbook`.
+
+When `mdbook` is updated, it is best to reinstall both plugins to make sure that there are no
+version conflicts.
 
 
 Configuration Settings

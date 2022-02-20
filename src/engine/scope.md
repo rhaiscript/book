@@ -17,6 +17,16 @@ values of any type.
 Under [`sync`], however, only types that are `Send + Sync` are supported, and the entire `Scope`
 itself will also be `Send + Sync`. This is extremely useful in multi-threaded applications.
 
+```admonish info "Shadowing"
+
+A newly-added [variable] or [constant] _[shadows][shadow]_ previous ones of the same name.
+
+In other words, all versions are kept for [variables] and [constants], but only the latest ones can
+be accessed via `get_value<T>`, `get_mut<T>` and `set_value<T>`.
+
+Essentially, a `Scope` is always searched in _reverse order_.
+```
+
 
 `Scope` API
 -----------
@@ -38,19 +48,24 @@ itself will also be `Send + Sync`. This is extremely useful in multi-threaded ap
 | `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                    |
 | `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                                                           |
 
+```admonish info "See also"
+
 For details on the `Scope` API, refer to the
 [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.Scope.html) online.
+```
 
+```admonish tip "Tip: The lifetime parameter"
 
-Shadowing
----------
+The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
+automatically inferred to be `'static`.
 
-A newly-added [variable] or [constant] _[shadows][shadow]_ previous ones of the same name.
+Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
+as well as for possible future expansion when references can also be put into the `Scope`.
 
-In other words, all versions are kept for [variables] and [constants], but only the latest ones can
-be accessed via `get_value<T>`, `get_mut<T>` and `set_value<T>`.
+The lifetime parameter is not guaranteed to remain unused for future versions.
 
-Essentially, a `Scope` is always searched in _reverse order_.
+In order to put a `Scope` into a `struct`, use `Scope<'static>`.
+```
 
 
 Example
@@ -96,17 +111,3 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 1);
 scope.set_value("y", 42_i64);
 assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
 ```
-
-
-`Scope` Lifetime Parameter
---------------------------
-
-The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
-automatically inferred to be `'static`.
-
-Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
-as well as for possible future expansion when references can also be put into the `Scope`.
-
-The lifetime parameter is not guaranteed to remain unused for future versions.
-
-In order to put a `Scope` into a `struct`, for example, use `Scope<'static>`.

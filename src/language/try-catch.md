@@ -4,12 +4,11 @@ Catch Exceptions
 {{#include ../links.md}}
 
 
-When an [exception] is thrown via a [`throw`] statement, evaluation of the script halts
-and the [`Engine`] returns with `Err(Box<EvalAltResult::ErrorRuntime>)` containing the
-exception value that has been thrown.
+When an [exception] is thrown via a [`throw`] statement, evaluation of the script halts and the
+[`Engine`] returns with `EvalAltResult::ErrorRuntime` containing the exception value thrown.
 
-It is possible, via the `try` ... `catch` statement, to _catch_ exceptions, optionally
-with an _error variable_.
+It is possible, via the `try` ... `catch` statement, to _catch_ exceptions, optionally with an
+_error variable_.
 
 ```js
 // Catch an exception and capturing its value
@@ -50,9 +49,8 @@ catch
 Re-Throw Exception
 ------------------
 
-Like the `try` ... `catch` syntax in most languages, it is possible to _re-throw_
-an exception within the `catch` block simply by another [`throw`] statement without
-a value.
+Like the `try` ... `catch` syntax in most languages, it is possible to _re-throw_ an exception
+within the `catch` block simply by another [`throw`] statement without a value.
 
 
 ```js

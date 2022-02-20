@@ -3,22 +3,17 @@ Maximum Call Stack Depth
 
 {{#include ../links.md}}
 
-
 In Rhai, it is trivial for a function call to perform _infinite recursion_ such that all stack space
 is exhausted.
 
 ```rust,no_run
-// This is a function that, when called, recurse forever.
+// This is a function that, when called, recurses forever.
 fn recurse_forever() {
     recurse_forever();
 }
 ```
 
-
-Limit How Stack Usage by Scripts
--------------------------------
-
-Rhai by default limits function calls to a maximum depth of 64 levels (8 levels in debug build).
+Rhai, by default, limits function calls to a maximum depth of 64 levels (8 levels in debug build).
 
 This limit may be changed via the [`Engine::set_max_call_levels`][options] method.
 
@@ -35,8 +30,7 @@ engine.set_max_call_levels(0);      // allow no function calls at all (max depth
 ```
 
 
-Additional Considerations
--------------------------
+```admonish info "Additional considerations"
 
 When setting this limit, care must be also be taken to the evaluation depth of each _statement_
 within a function.
@@ -44,7 +38,7 @@ within a function.
 It is entirely possible for a malicious script to embed a recursive call deep inside a nested
 expression or statement block (see [maximum statement depth]).
 
-```rust,no_run
+~~~rust,no_run
 fn bad_function(n) {
     // Bail out long before reaching the limit
     if n > 10 {
@@ -69,4 +63,5 @@ fn bad_function(n) {
 
 // The function call below may still overflow the stack!
 bad_function(0);
+~~~
 ```

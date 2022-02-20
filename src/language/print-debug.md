@@ -79,5 +79,5 @@ where:
 
 The _source_ of a script evaluation is any text string provided to an [`AST`] via `AST::set_source`.
 
-If a [module] is loaded via an [`import`] statement, then the _source_ of functions defined
-within the module will be the module's _path_.
+If a [module] is loaded via an [`import`] statement, then the _source_ of functions defined within
+the module will be the module's _path_.

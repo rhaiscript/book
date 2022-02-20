@@ -138,7 +138,7 @@ using a [raw `Engine`]) operate on ranges.
 TL;DR
 -----
 
-### Q: What happened to the _open-ended_ ranges?
+```admonish question "What happened to the _open-ended_ ranges?"
 
 Rust has _open-ended_ ranges, such as `start..`, `..end` and `..=end`.  They are not available in Rhai.
 
@@ -153,7 +153,7 @@ In fact, usually all versions redirect to a call to one single version.
 For example, a naive implementation of the `extract` method for [arrays] (without any error handling)
 would look like:
 
-```rust,no_run
+~~~rust,no_run
 use std::ops::{Range, RangeInclusive};
 
 // Version with exclusive range
@@ -176,7 +176,7 @@ pub fn extract_to_end(array: &mut Array, start: i64) -> Array {
 pub fn extract(array: &mut Array, start: i64, len: i64) -> Array {
     extract_range(array, start..start + len)
 }
-```
+~~~
 
 Therefore, there should always be a function that can do what open-ended ranges are intended for.
 
@@ -185,7 +185,7 @@ position with a length that corresponds to the end position (for `..end`).
 
 The right-open form (i.e. `start..`) is trivially replaced by the version taking a single starting position.
 
-```rust,no_run
+~~~rust,no_run
 let x = [1, 2, 3, 4, 5];
 
 x.extract(0..3);    // normal range argument
@@ -196,4 +196,5 @@ x.extract(2);       // copies 'x' from position 2 onwards
 
 x.extract(0, 2);    // copies 'x' from beginning for 2 items
                     // equivalent to '..2'
+~~~
 ```

@@ -4,8 +4,8 @@ Import a Module
 {{#include ../../links.md}}
 
 
-Before a [module] can be used (via an `import` statement) in a script, there must be a [module resolver]
-registered into the [`Engine`], the default being the `FileModuleResolver`.
+Before a [module] can be used (via an `import` statement) in a script, there must be a
+[module resolver] registered into the [`Engine`], the default being the `FileModuleResolver`.
 
 See the section on [_Module Resolvers_][module resolver] for more details.
 
@@ -16,9 +16,9 @@ See the section on [_Module Resolvers_][module resolver] for more details.
 A [module] can be _imported_ via the `import` statement, and be given a name.
 Its members can be accessed via `::` similar to C++.
 
-A [module] that is only `import`-ed but not under any [module] name is commonly used for initialization purposes,
-where the [module] script contains initialization statements that puts the [functions] registered with the
-[`Engine`] into a particular state.
+A [module] that is only `import`-ed but not under any [module] name is commonly used for
+initialization purposes, where the [module] script contains initialization statements that puts the
+[functions] registered with the [`Engine`] into a particular state.
 
 ```js
 import "crypto_init";           // run the script file 'crypto_init.rhai' without creating an imported module
@@ -47,14 +47,6 @@ Scoped Imports
 --------------
 
 `import` statements are _scoped_, meaning that they are only accessible inside the scope that they're imported.
-
-They can appear anywhere a normal statement can be, but in the vast majority of cases `import` statements are
-usually grouped at the beginning of a script so they have _global_ visibility.
-
-It is not advised to deviate from this common practice unless there is a _Very Good Reason™_.
-
-Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
-same [module] during every iteration of the loop!
 
 ```js
 import "hacker" as h;           // import module - visible globally
@@ -85,9 +77,18 @@ for x in 0..1000 {
 }
 ```
 
+~~~admonish note "Place `import` statements at the top"
 
-Recursive Imports
-----------------
+`import` statements can appear anywhere a normal statement can be, but in the vast majority of cases they are
+usually grouped at the top (beginning) of a script for manageability and visibility.
+
+It is not advised to deviate from this common practice unless there is a _Very Good Reason™_.
+
+Especially, do not place an `import` statement within a loop; doing so will repeatedly re-load the
+same [module] during every iteration of the loop!
+~~~
+
+~~~admonish danger "Recursive imports"
 
 Beware of _import cycles_ &ndash; i.e. recursively loading the same [module]. This is a sure-fire way to
 cause a stack overflow in the [`Engine`], unless stopped by setting a limit for [maximum number of modules].
@@ -122,3 +123,4 @@ foo::do_something();
 import "hello" as bar;
 bar::do_something_else();
 ```
+~~~

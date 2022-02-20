@@ -30,10 +30,10 @@ curried.call(2) == 42;          // <- de-sugars to 'func.call(21, 2)'
 ```
 
 
-Automatic Currying
-------------------
+```admonish info "Automatic currying"
 
 [Anonymous functions] defined via a closure syntax _capture_ external [variables]
 that are not [shadowed][shadow] inside the [function's][function] scope.
 
 This is accomplished via [automatic currying].
+```

@@ -16,12 +16,20 @@ the following variants.
 | `AtFunctionCall { name, args, enabled }` |                     | breaks when a function matching the specified name (can be [operator]) and the specified number of arguments is called                      |
 | `AtProperty { name, enabled }`           |    [`no_object`]    | breaks at the specified property access                                                                                                     |
 
-The following [`debugger::Debugger`] methods allow access of break-points for manipulation.
+
+Access Break-Points
+-------------------
+
+The following [`debugger::Debugger`] methods allow access to break-points for manipulation.
 
 | Method             |      Return type       | Description                                       |
 | ------------------ | :--------------------: | ------------------------------------------------- |
 | `break_points`     |    `&[BreakPoint]`     | returns a slice of all `BreakPoint`'s             |
 | `break_points_mut` | `&mut Vec<BreakPoint>` | returns a mutable reference to all `BreakPoint`'s |
+
+
+Example
+-------
 
 ```rust,no_run
 use rhai::debugger::*;
