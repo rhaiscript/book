@@ -36,29 +36,6 @@ The most important resources to watch out for are:
 * **Data**: A malicious script may attempt to read from and/or write to data that it does not own. If this happens,
   it is a severe security breach and may put the entire system at risk.
 
-
-_Don't Panic_ Guarantee &ndash; Any Panic is a Bug
--------------------------------------------------
-
-![Don't Panic](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png)
-
-Rhai is designed to not bring down the host system, regardless of what a script may do to it.
-This is a central design goal &ndash; Rhai provides a [_Don't Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic) guarantee.
-
-When using Rhai, any panic outside of API's with explicitly documented panic conditions is
-considered a bug in Rhai and should be reported as such.
-
-
-~~~admonish tip "OK, panic anyway &ndash; `unchecked`"
-
-All the above safe-guards can be turned off via the [`unchecked`] feature, which disables all safety
-checks (even fatal ones such as stack overflow, arithmetic overflow and division-by-zero).
-
-This increases script evaluation performance somewhat, but at the expense of breaking the no-panic guarantee.
-
-Under [`unchecked`], it is very possible for a malicious script to panic and bring down the host system.
-~~~
-
 ~~~admonish warning "Beware of `internals`"
 
 The [`internals`] feature allows third-party access to Rust internal data types and functions (for
@@ -79,4 +56,25 @@ be surprised how few scenarios this assumption holds.
 
 One example of such an environment is a Rhai scripting [`Engine`] compiled to [WASM] where the
 [`AST`] is further translated to include environment-specific modifications.
+~~~
+
+
+_Don't Panic_ Guarantee &ndash; Any Panic is a Bug
+-------------------------------------------------
+
+```admonish tip.side-wide "OK, panic anyway"
+
+All these safe-guards can be turned off via the [`unchecked`] feature, which disables all safety
+checks (even fatal ones).
+
+This increases script evaluation performance somewhat, but very easy for a malicious script
+to bring down the host system.
 ```
+
+![Don't Panic](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png)
+
+Rhai is designed to not bring down the host system, regardless of what a script may do to it.
+This is a central design goal &ndash; Rhai provides a [_Don't Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic) guarantee.
+
+When using Rhai, any panic outside of API's with explicitly documented panic conditions is
+considered a bug in Rhai and should be reported as such.

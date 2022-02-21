@@ -3,6 +3,11 @@ Arrays
 
 {{#include ../links.md}}
 
+```admonish tip.side "Safety"
+
+Always limit the [maximum size of arrays].
+```
+
 Arrays are first-class citizens in Rhai.
 
 All elements stored in an array are [`Dynamic`], and the array can freely grow or shrink with
@@ -13,12 +18,6 @@ The Rust type of a Rhai array is `rhai::Array` which is an alias to `Vec<Dynamic
 [`type_of()`] an array returns `"array"`.
 
 Arrays are disabled via the [`no_index`] feature.
-
-```admonish tip "Maximum size"
-
-The maximum allowed size of an array can be controlled via [`Engine::set_max_array_size`][options]
-(see [maximum size of arrays]).
-```
 
 
 Literal Syntax
@@ -97,14 +96,14 @@ The following methods (mostly defined in the [`BasicArrayPackage`][built-in pack
 | `sort`                      | _none_                                                                                                                                                                     | sorts a _homogeneous_ array containing only elements of the same comparable built-in type (`INT`, `FLOAT`, [`Decimal`][rust_decimal], [string], [character], `bool`, [`()`])                                                 |
 
 
-Use Custom Types With Arrays
----------------------------
+```admonish tip "Tip: Use custom types with arrays"
 
-To use a [custom type] with arrays, a number of array functions need to be manually implemented,
+To use a [custom type] with arrays, a number of functions need to be manually implemented,
 in particular the `==` operator in order to support the [`in`] operator which uses `==` (via the
 `contains` method) to compare elements.
 
 See the section on [custom types] for more details.
+```
 
 
 Examples

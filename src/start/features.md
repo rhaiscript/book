@@ -113,12 +113,14 @@ rhai = { version = "{{version}}", features = [ "sync", "unchecked", "only_i32", 
 
 turns on these six features:
 
-* `sync` &ndash; everything `Send + Sync`
-* `unchecked` &ndash; disable all [checking][safety] (should not be used with untrusted user scripts)
-* `only_i32` &ndash; only 32-bit signed integers
-* `no_float` &ndash; no floating point numbers
-* `no_module` &ndash; no loading external [modules]
-* `no_function` &ndash; no defining [functions]
+|    Feature    | Description                                                                          |
+| :-----------: | ------------------------------------------------------------------------------------ |
+|    `sync`     | everything is `Send + Sync`                                                          |
+|  `unchecked`  | disable all [safety checks][safety] (should not be used with untrusted user scripts) |
+|  `only_i32`   | use only 32-bit signed integers and no others                                        |
+|  `no_float`   | no floating point numbers                                                            |
+|  `no_module`  | no loading external [modules]                                                        |
+| `no_function` | no defining [functions]                                                              |
 
 The resulting scripting engine supports only the `i32` integer numeral type (and no others like
 `u32`, `i16` or `i64`), no floating-point, is `Send + Sync` (so it can be safely used across

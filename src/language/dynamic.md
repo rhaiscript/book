@@ -97,7 +97,7 @@ match item.type_name() {                    // 'type_name' returns the name of t
 }
 ```
 
-```admonish info
+```admonish warning "Always full path name"
 
 `type_name` always returns the _full_ Rust path name of the type, even when the type
 has been registered with a friendly name via `Engine::register_type_with_name`.

@@ -3,6 +3,14 @@ Integer as Bit-Fields
 
 {{#include ../links.md}}
 
+```admonish note.side-wide
+
+Nothing here cannot be done via standard bit-manipulation (i.e. shifting and masking).
+
+Built-in support is more elegant and performant since it usually replaces a sequence of multiple steps.
+
+```
+
 Since bit-wise operators are defined on integer numbers, individual bits can also be accessed and
 manipulated via an indexing syntax.
 
@@ -12,15 +20,8 @@ If a bit is not set (i.e. `0`), the index access returns `false`.
 
 When a [range] is used, the bits within the [range] are shifted and extracted as an integer value.
 
-```admonish note
-
-There is nothing here that cannot be done via standard bit-manipulation (i.e. shifting and masking)
-operations. However, this is an extremely useful, and performant, short-hand since it usually
-replaces a sequence of multiple steps.
-
-Bit-fields are very commonly used in embedded systems, thus a native way to handle them efficiently
-is called for.
-```
+Bit-fields are very commonly used in embedded systems which must squeeze data into limited memory.
+Built-in support makes handling them efficient.
 
 Indexing an integer as a bit-field is disabled for the [`no_index`] feature.
 

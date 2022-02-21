@@ -54,9 +54,7 @@ abstractions_. It doesn't attempt to be a new language. For example:
   dynamically [changing tokens]({{rootUrl}}/engine/token-mapper.md) during parsing, adding
   [custom operators], defining [custom syntax] and [filtering variables definition]({{rootUrl}}/engine/def-var.md).
 
-
-Do Not Write The Next 4D VR Game in Rhai
----------------------------------------
+```admonish danger "Do not write the next 4D VR game in Rhai"
 
 Due to this intended usage, Rhai deliberately keeps the language simple and small by omitting
 advanced language features such as classes, inheritance, interfaces, generics, first-class
@@ -65,10 +63,9 @@ and _ease of use_ instead of raw speed.
 
 Avoid the temptation to write full-fledge application logic entirely in Rhai &ndash; that use case
 is best fulfilled by more complete languages such as JavaScript or Lua.
+```
 
-
-Thin Dynamic Wrapper Layer Over Rust Code
-----------------------------------------
+```admonish tip "Thin dynamic wrapper layer over Rust code"
 
 In actual practice, it is usually best to expose a Rust API into Rhai for scripts to call.
 
@@ -81,3 +78,4 @@ Another similar scenario is a web front-end driving back-end services written in
 In this case, JavaScript takes the role of Rhai while the back-end language, well... it can actually
 also be Rust. Except that Rhai integrates with Rust _much_ more tightly, removing the need for
 interfaces such as XHR calls and payload encoding such as JSON.
+```

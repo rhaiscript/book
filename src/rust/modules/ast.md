@@ -7,14 +7,14 @@ Create a Module from an AST
 `Module::eval_ast_as_new`
 ------------------------
 
-A [module] can be created from a single script (or pre-compiled [`AST`]) containing global
-[variables], [functions] and [sub-modules][module] via `Module::eval_ast_as_new`.
-
-```admonish info "See also"
+```admonish info.side-wide "See also"
 
 See the section on [_Exporting Variables, Functions and Sub-Modules_][`export`] for details on how
 to prepare a Rhai script for this purpose as well as to control which [functions]/[variables] to export.
 ```
+
+A [module] can be created from a single script (or pre-compiled [`AST`]) containing global
+[variables], [functions] and [sub-modules][module] via `Module::eval_ast_as_new`.
 
 When given an [`AST`], it is first evaluated (usually to [import][`import`] [modules] and set up global
 [constants] used by [functions]), then the following items are exposed as members of the new [module]:

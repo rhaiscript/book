@@ -33,13 +33,15 @@ engine.set_max_expr_depths(50, 5);  // allow nesting up to 50 layers of expressi
                                     // at global level, but only 5 inside functions
 ```
 
-Beware that there may be multiple layers for a simple language construct, even though it may correspond
-to only one AST node. That is because the Rhai _parser_ internally runs a recursive chain of function calls
-and it is important that a malicious script does not panic the parser in the first place.
+```admonish warning
+Multiple layers of expressions may be generated for a simple language construct, even though it may correspond
+to only one AST node.
 
+That is because the Rhai _parser_ internally runs a recursive chain of function calls and it is important that
+a malicious script does not panic the parser in the first place.
+```
 
-Beware of Recursion
--------------------
+~~~admonish danger "Beware of recursion"
 
 _[Functions]_ are placed under stricter limits because of the multiplicative effect of _recursion_.
 
@@ -67,3 +69,4 @@ In general, make sure that `C x ( 5 + F ) + S` layered calls do not cause a stac
 * `C` = maximum call stack depth,
 * `F` = maximum statement depth for [functions],
 * `S` = maximum statement depth at global level.
+~~~

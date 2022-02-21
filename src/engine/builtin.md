@@ -18,7 +18,7 @@ All built-in operators are binary, and are supported for both operands of the sa
 | `>`, `>=`, `<`, `<=`      |                               | &bull; `INT`<br/>&bull; `FLOAT` (if not [`no_float`])<br/>&bull; [`Decimal`][rust_decimal] (requires [`decimal`])<br/>&bull; `char`<br/>&bull; [string]<br/>&bull; `()`                                                                |
 | [`in`]                    |                               | &bull; [string]<br/>&bull; `char`/[string]<br/>&bull; [string]/[object map] (if not [`no_object`])<br/>&bull;`INT`/[BLOB] (if not [`no_index`])<br/>&bull;`INT`/numeric [range]                                                        |
 
-```admonish note
+```admonish note.small
 
 `FLOAT` and [`Decimal`][rust_decimal] also inter-operate with `INT`, while [strings] inter-operate
 with [characters][string] for certain operators (e.g. `+`).

@@ -3,20 +3,21 @@ Special Support for OOP via Object Maps
 
 {{#include ../links.md}}
 
+```admonish info.side "See also"
+
+See the pattern on [_Simulating Object-Oriented Programming_][OOP] for more details.
+```
+
 [Object maps] can be used to simulate [object-oriented programming (OOP)][OOP] by storing data
 as properties and methods as properties holding [function pointers].
 
 If an [object map]'s property holds a [function pointer], the property can simply be called like
-a normal method in method-call syntax.  This is a _short-hand_ to avoid the more verbose syntax
-of using the `call` function keyword.
+a normal method in method-call syntax.
+
+This is a _short-hand_ to avoid the more verbose syntax of using the `call` function keyword.
 
 When a property holding a [function pointer] or a [closure] is called like a method, it is replaced
 as a method call on the [object map] itself.
-
-```admonish info "See also"
-
-See the pattern on [_Simulating Object-Oriented Programming_][OOP] for more details.
-```
 
 ```rust,no_run
 let obj = #{

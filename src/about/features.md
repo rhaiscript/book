@@ -4,8 +4,7 @@ Features of Rhai
 {{#include ../links.md}}
 
 
-Easy
-----
+```admonish success "Easy"
 
 * Simple language similar to JavaScript+Rust with dynamic typing.
 
@@ -23,20 +22,18 @@ Easy
   pulled in to provide for missing functionalities.
 
 * [Plugins] system powered by procedural macros simplifies custom API development.
+```
 
-
-Fast
-----
+```admonish danger "Fast"
 
 * Fairly efficient evaluation (1 million iterations in 0.3 sec on a single-core, 2.3 GHz Linux VM).
 
 * Compile once to [AST][`AST`] for repeated evaluations.
 
 * Scripts are [optimized][script optimization] (useful for template-based machine-generated scripts).
+```
 
-
-Dynamic
--------
+```admonish tip "Dynamic"
 
 * [Function overloading]({{rootUrl}}/language/overload.md).
 
@@ -53,19 +50,17 @@ Dynamic
 
 * Hook into variables access via a [variable resolver], or control definition of variables via a
   [variable definition filter]({{rootUrl}}/engine/def-var.md).
+```
 
-
-Safe
-----
+```admonish warning "Safe"
 
 * Relatively little `unsafe` code (yes there are some for performance reasons).
 
 * Sand-boxed &ndash; the scripting [`Engine`], if declared immutable, cannot mutate the containing
   environment unless [explicitly permitted]({{rootUrl}}/patterns/control.md).
+```
 
-
-Rugged
-------
+```admonish bug "Rugged"
 
 * [_Don't Panic_][safety] guarantee &ndash; Any panic is a bug. It never panics the host system.
 
@@ -74,10 +69,9 @@ Rugged
   etc.) that may come from untrusted third-party user-land scripts.
 
 * Track script evaluation [progress] and manually terminate a script run.
+```
 
-
-Flexible
---------
+```admonish example "Flexible"
 
 * Re-entrant scripting [`Engine`] can be made `Send + Sync` (via the [`sync`] feature).
 
@@ -94,3 +88,4 @@ Flexible
 * Use as a [DSL] by defining [custom operators] and/or extending the language with [custom syntax].
 
 * A [debugging][debugger] interface provides powerful debugging support.
+```

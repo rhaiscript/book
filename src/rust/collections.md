@@ -3,11 +3,18 @@ Custom Collection Types
 
 {{#include ../links.md}}
 
+~~~admonish tip.side "Tip"
+
+Collections can also hold [`Dynamic`] values (e.g. like an [array]).
+~~~
+
 A _collection_ type holds a... well... _collection_ of items.  It can be homogeneous (all items are
 the same type) or heterogeneous (items are of different types, use [`Dynamic`] to hold).
 
 Because their only purpose for existence is to hold a number of items, collection types commonly
 register the following methods.
+
+<section></section>
 
 | Method                    | Description                                                      |
 | ------------------------- | ---------------------------------------------------------------- |
@@ -17,12 +24,6 @@ register the following methods.
 | `add`, `+=` operator      | adds a particular item to the collection                         |
 | `remove`, `-=` operator   | removes a particular item from the collection                    |
 | `merge` or `+` operator   | merges two collections, yielding a new collection with all items |
-
-~~~admonish tip "Tip: `Dynamic` values"
-
-If the collection holds [`Dynamic`] values (e.g. like an [array]), these functions can take
-[`Dynamic`] parameters.
-~~~
 
 ```admonish tip "Tip: Define type iterator"
 

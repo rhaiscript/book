@@ -3,6 +3,13 @@ Track Progress and Force-Termination
 
 {{#include ../links.md}}
 
+```admonish info.side-wide "Operations count vs. progress percentage"
+
+_Operations count_ does not indicate the _amount_ of work already done &ndash; thus it is not real _progress_ tracking.
+
+The real progress can be _estimated_ based on the expected number of operations in a typical run.
+```
+
 It is impossible to know when, or even whether, a script run will end
 (a.k.a. the [Halting Problem](http://en.wikipedia.org/wiki/Halting_problem)).
 
@@ -11,16 +18,6 @@ progress and force-terminate a script prematurely (for any reason), provide a cl
 [`Engine`] via `Engine::on_progress`.
 
 Progress tracking is disabled with the [`unchecked`] feature.
-
-```admonish info "Operations count vs. progress percentage"
-
-Notice that the _operations count_ value passed into the closure does not indicate the _percentage_
-of work already done by the script (and thus it is not real _progress_ tracking), because it is
-impossible to determine how long a script may run.
-
-It is possible, however, to calculate this percentage based on an estimated total number of
-operations for a typical run.
-```
 
 ```rust,no_run
 let mut engine = Engine::new();

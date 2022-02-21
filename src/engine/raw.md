@@ -3,6 +3,13 @@ Raw `Engine`
 
 {{#include ../links.md}}
 
+```admonish info.side "Built-in operators"
+
+Even with a raw [`Engine`], some operators are built in and are always available.
+
+See [_Built-in Operators_][built-in operators] for a full list.
+```
+
 `Engine::new` creates a scripting [`Engine`] with common functionalities (e.g. printing to `stdout`
 via [`print`] or [`debug`]).
 
@@ -25,13 +32,6 @@ the same [`Engine`] with the same set of functions.
 | [`Engine::on_print`][`print`] |         `println!`         |      _none_       |
 | [`Engine::on_debug`][`debug`] | `println!` in debug format |      _none_       |
 
-
-```admonish info "Built-in operators"
-
-Even with a raw [`Engine`], some operators are built in and are always available.
-
-See [_Built-in Operators_][built-in operators] for a full list.
-```
 
 ~~~admonish tip "Tip: `Engine::new` is equivalent to..."
 ```rust,no_run

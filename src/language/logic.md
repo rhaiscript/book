@@ -109,6 +109,12 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 
 ### Caution: Beware operators for custom types
 
+```admonish tip.side-wide "Tip: Always the full set"
+
+It is strongly recommended that, when defining operators for [custom types], always define the
+**full set** of six operators together, or at least the `==` and `!=` pair.
+```
+
 Operators are completely separate from each other.  For example:
 
 * `!=` does not equal `!(==)`
@@ -136,22 +142,22 @@ ts == ts;           // true: '==' defined
 ts != ts;           // error: '!=' not defined, even though '==' is
 ```
 
-```admonish tip "Tip: Always define the full set"
-It is strongly recommended that, when defining operators for [custom types], always define the full set
-of six operators (or at least the `==` and `!=` pair) together.
-```
-
 
 Boolean operators
 -----------------
 
-|     Operator      | Description   | Arity  | Short-circuits? |
-| :---------------: | ------------- | :----: | :-------------: |
-|  `!` _(prefix)_   | boolean _NOT_ | unary  |       no        |
-|       `&&`        | boolean _AND_ | binary |       yes       |
-|        `&`        | boolean _AND_ | binary |       no        |
-| <code>\|\|</code> | boolean _OR_  | binary |       yes       |
-|  <code>\|</code>  | boolean _OR_  | binary |       no        |
+```admonish note.side
+
+All boolean operators are [built in][built-in operators] for the `bool` data type.
+```
+
+|     Operator      | Description | Arity  | Short-circuits? |
+| :---------------: | :---------: | :----: | :-------------: |
+|  `!` _(prefix)_   |    _NOT_    | unary  |       no        |
+|       `&&`        |    _AND_    | binary |       yes       |
+|        `&`        |    _AND_    | binary |       no        |
+| <code>\|\|</code> |    _OR_     | binary |       yes       |
+|  <code>\|</code>  |    _OR_     | binary |       no        |
 
 Double boolean operators `&&` and `||` _short-circuit_ &ndash; meaning that the second operand will not be evaluated
 if the first one already proves the condition wrong.
@@ -166,9 +172,4 @@ a() && b();         // b() is not evaluated if a() is false
 a() | b();          // both a() and b() are evaluated
 
 a() & b();          // both a() and b() are evaluated
-```
-
-```admonish note
-
-All boolean operators are [built in][built-in operators] for the `bool` data type.
 ```

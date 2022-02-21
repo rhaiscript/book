@@ -57,13 +57,13 @@ pub fn main() -> Result<(), Box<EvalAltResult>>
 Use Script Files
 ----------------
 
-Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`
-(not available under [`no_std`] or in [WASM] builds).
-
-```admonish info "Script file extension"
+```admonish info.side-wide "Script file extension"
 
 Rhai script files are customarily named with the extension `.rhai`.
 ```
+
+Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`
+(not available under [`no_std`] or in [WASM] builds).
 
 ```rust,no_run
 let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
@@ -74,7 +74,7 @@ let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
 engine.run_file("hello_world.rhai".into())?;
 ```
 
-```admonish tip "Unix shebangs"
+```admonish tip "Tip: Unix shebangs"
 
 On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).

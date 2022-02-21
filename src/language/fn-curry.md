@@ -3,6 +3,14 @@ Function Pointer Currying
 
 {{#include ../links.md}}
 
+```admonish info.side-wide "Automatic currying"
+
+[Anonymous functions] defined via a closure syntax _capture_ external [variables]
+that are not [shadowed][shadow] inside the [function's][function] scope.
+
+This is accomplished via [automatic currying].
+```
+
 It is possible to _curry_ a [function pointer] by providing partial (or all) arguments.
 
 Currying is done via the `curry` keyword and produces a new [function pointer] which carries
@@ -27,13 +35,4 @@ let curried = curry(func, 21);  // function-call style also works
 
 curried.call(2) == 42;          // <- de-sugars to 'func.call(21, 2)'
                                 //    only one argument is now required
-```
-
-
-```admonish info "Automatic currying"
-
-[Anonymous functions] defined via a closure syntax _capture_ external [variables]
-that are not [shadowed][shadow] inside the [function's][function] scope.
-
-This is accomplished via [automatic currying].
 ```

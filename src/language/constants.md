@@ -68,6 +68,16 @@ engine.run_with_scope(&mut scope, script)?;
 Caveat &ndash; Constants Can be Modified via Rust
 ------------------------------------------------
 
+```admonish tip.side-wide "Tip: Plugin functions"
+
+In [plugin functions], `&mut` parameters disallow constant values by default.
+
+This is different from the `Engine::register_XXX` API.
+
+However, if a [plugin function] is marked with `#[export_fn(pure)]` or `#[rhai_fn(pure)]`,
+it is assumed _pure_ (i.e. will not modify its arguments) and so constants are allowed.
+```
+
 A [custom type] stored as a constant cannot be modified via script, but _can_ be modified via a
 registered Rust function that takes a first `&mut` parameter &ndash; because there is no way for
 Rhai to know whether the Rust function modifies its argument!
@@ -112,18 +122,6 @@ y == 2;             // value of 'y' is changed as expected
 X.double();         // since 'X' is constant, a COPY is passed to 'this'
 
 X == 43;            // value of 'X' is unchanged by script
-```
-
-```admonish tip "Tip: Pure plugin functions"
-
-When functions are registered as part of a [plugin], `&mut` parameters are protected from being
-passed constant values.
-
-By default, [plugin functions] that take a first `&mut` parameter disallow passing constants as that
-parameter.
-
-However, if a [plugin function] is marked with the `#[export_fn(pure)]` or `#[rhai_fn(pure)]` attribute,
-it is considered _pure_ (i.e. assumed to not modify its arguments) and so constants are allowed.
 ```
 
 ```admonish info "Implications on script optimization"

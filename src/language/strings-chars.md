@@ -3,25 +3,16 @@ Strings and Characters
 
 {{#include ../links.md}}
 
+```admonish tip.side "Safety"
+
+Always limit the [maximum length of strings].
+```
+
 String in Rhai contain any text sequence of valid Unicode characters.
 
 Internally strings are stored in UTF-8 encoding.
 
 [`type_of()`] a string returns `"string"`.
-
-```admonish tip "Maximum length"
-
-The maximum allowed length of a string can be controlled via [`Engine::set_max_string_size`][options]
-(see [maximum length of strings]).
-```
-
-```admonish tip "Tip: Building strings"
-
-Strings can be built up from other strings and types via the `+` operator
-(provided by the [`MoreStringPackage`][built-in packages] but excluded if using a [raw `Engine`]).
-
-This is particularly useful when printing output.
-```
 
 
 String and Character Literals
@@ -34,6 +25,14 @@ String and character literals follow JavaScript-style syntax.
 | Normal string             |   `"..."`   |   yes    |   with `\`    |       no       |
 | Multi-line literal string | `` `...` `` |    no    |      no       | with `${...}`  |
 | Character                 |   `'...'`   |   yes    |      no       |       no       |
+
+```admonish tip "Tip: Building strings"
+
+Strings can be built up from other strings and types via the `+` operator
+(provided by the [`MoreStringPackage`][built-in packages] but excluded if using a [raw `Engine`]).
+
+This is particularly useful when printing output.
+```
 
 
 Standard Escape Sequences

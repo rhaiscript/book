@@ -3,6 +3,15 @@ Custom Type Property Getters and Setters
 
 {{#include ../links.md}}
 
+```admonish warning.side-wide-narrow "Cannot override object maps"
+
+Property getters and setters are intended for [custom types].
+
+Any getter or setter function registered for [object maps] is simply _ignored_.
+
+Get/set syntax on [object maps] is interpreted as access to properties.
+```
+
 A [custom type] can also expose properties by registering `get` and/or `set` functions.
 
 Properties can be accessed in a Rust-like syntax:
@@ -15,6 +24,8 @@ Property getter and setter functions are called behind the scene.
 They each take a `&mut` reference to the first parameter.
 
 Getters and setters are disabled under the [`no_object`] feature.
+
+<section></section>
 
 | `Engine` API          | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
 | --------------------- | -------------------------------------------------------------------------------- | :----------------------------: |
@@ -37,14 +48,6 @@ mutate the [custom type], although there is nothing that prevents this mutation 
 
 Even though a property getter function also takes `&mut` as the first parameter, Rhai assumes that
 no data is changed when the function is called.
-```
-
-```admonish note "Cannot override object maps"
-
-Property getters and setters are mainly intended for [custom types].
-
-Any getter or setter function registered for [object maps] is simply _ignored_ because the get/set
-syntax will be interpreted as access to properties on the [object maps].
 ```
 
 

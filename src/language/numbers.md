@@ -108,6 +108,14 @@ engine.eval_with_scope::<bool>(&mut scope, "f == 42.0")?;
 Floating-Point vs. Decimal
 --------------------------
 
+~~~admonish tip.side "Tip: `no_float` + `decimal`"
+
+When both [`no_float`] and [`decimal`] features are turned on, [`Decimal`][rust_decimal] _replaces_
+the standard floating-point type.
+
+Floating-point number literals in scripts parse to [`Decimal`][rust_decimal] values.
+~~~
+
 [`Decimal`][rust_decimal] (enabled via the [`decimal`] feature) represents a fixed-precision
 floating-point number which is popular with financial calculations and other usage scenarios where
 round-off errors are not acceptable.
@@ -120,12 +128,3 @@ For most situations, the standard floating-point number type `FLOAT` (`f64` or `
 
 It is possible to use both `FLOAT` and [`Decimal`][rust_decimal] together with just the [`decimal`] feature
 &ndash; use [`parse_decimal`] or [`to_decimal`] to create a [`Decimal`][rust_decimal] value.
-
-
-~~~admonish tip "Tip: Use `no_float` and `decimal` together"
-
-When both [`no_float`] and [`decimal`] features are turned on, [`Decimal`][rust_decimal] _replaces_
-the standard floating-point type.
-
-Floating-point number literals in scripts parse to [`Decimal`][rust_decimal] values.
-~~~

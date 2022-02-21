@@ -34,16 +34,15 @@ level of indirection, but for all purposes there is no difference.
 Support for custom types can be turned off via the [`no_object`] feature.
 
 
-```admonish tip "Tip: Working with enums"
+Register a Custom Type and its Methods
+-------------------------------------
+
+```admonish tip.side-wide-narrow "Tip: Working with enums"
 
 It is also possible to use Rust enums with Rhai.
 
 See the pattern [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
 ```
-
-
-Register a Custom Type and its Methods
--------------------------------------
 
 Any custom type must implement the `Clone` trait as this allows the [`Engine`] to pass by value.
 

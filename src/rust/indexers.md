@@ -42,11 +42,18 @@ although there is nothing that prevents this mutation.
 Cannot Override Arrays, BLOB's, Object Maps, Strings and Integers
 ---------------------------------------------------------------
 
+```admonish failure.side "Plugins"
+
+They can be defined in a [plugin module], but will be ignored.
+```
+
 For efficiency reasons, indexers **cannot** be used to overload (i.e. override)
 built-in indexing operations for [arrays], [object maps], [strings] and integers
 (acting as [bit-field] operation).
 
 The following types have built-in indexer implementations that are fast and efficient.
+
+<section></section>
 
 | Type                                      |                Index type                 | Return type | Description                                                                  |
 | ----------------------------------------- | :---------------------------------------: | :---------: | ---------------------------------------------------------------------------- |
@@ -56,14 +63,6 @@ The following types have built-in indexer implementations that are fast and effi
 | [`ImmutableString`],<br/>`String`, `&str` |                   `INT`                   | [character] | access a particular [character] inside the [string]                          |
 | `INT`                                     |                   `INT`                   |   boolean   | access a particular bit inside the integer number as a [bit-field]           |
 | `INT`                                     |                  [range]                  |    `INT`    | access a particular range of bits inside the integer number as a [bit-field] |
-
-```admonish failure "Cannot register indexers for certain types"
-
-Attempting to register indexers for an [array], [object map], [BLOB], [string] or `INT` panics
-when using the `Engine::register_indexer_XXX` API.
-
-They can, however, be defined in a [plugin module], only to be ignored.
-```
 
 ```admonish warning "Do not overload indexers for built-in standard types"
 

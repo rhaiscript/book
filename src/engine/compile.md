@@ -27,7 +27,7 @@ let ast = engine.compile_file("hello_world.rhai".into())?;
 ```
 
 
-~~~admonish info "`AST` manipulation API"
+~~~admonish info.small "`AST` manipulation API"
 
 Advanced users who may want to manipulate an `AST`, especially the functions contained within,
 should see the section on [_Manage AST's_](ast.md) for more details.

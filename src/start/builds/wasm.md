@@ -14,7 +14,7 @@ But anyhow, do it because you _can_!
 When building for WASM, certain features will not be available,
 such as the script file API's and loading modules from external script files.
 
-```admonish example "Sample"
+```admonish example.small "Sample"
 
 Check out the [_Online Playground_]({{rootUrl}}/tools/playground.md) project which is driven
 by a Rhai [`Engine`] compiled into [WASM].
@@ -71,3 +71,4 @@ The following features are typically _not_ used because they don't make sense in
 |  [`no_std`]   | `std` lib works fine with WASM                                                                        |
 | [`metadata`]  | WASM usually doesn't need access to Rhai functions metadata                                           |
 | [`internals`] | WASM usually doesn't need to access Rhai internal data structures, unless you are walking the [`AST`] |
+| [`debugging`] | unless debugging is needed                                                                            |

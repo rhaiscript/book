@@ -58,7 +58,7 @@ switch map {
 }
 ```
 
-```admonish tip "Tip: Working with enums"
+```admonish tip.small "Tip: Working with enums"
 
 Switching on [arrays] is very useful when working with Rust enums
 (see [this section]({{rootUrl}}/patterns/enums.md) for more details).
@@ -122,7 +122,7 @@ switch x {
 }
 ```
 
-```admonish tip "Tip: Ranges can overlap"
+```admonish tip.small "Tip: Ranges can overlap"
 
 When more then one [range] contain the `switch` value, the _first_ one with a fulfilled condition
 (if any) is evaluated.

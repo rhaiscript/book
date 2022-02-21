@@ -9,6 +9,8 @@ Rhai is licensed under either of the following, at your choice:
 
 * [MIT license]({{repoHome}}/LICENSE-MIT.txt).
 
+```admonish abstract "Notice"
 Unless explicitly stated otherwise, any contribution intentionally submitted for inclusion in this
 crate, as defined in the Apache-2.0 license, shall be dual-licensed as above, without any additional
 terms or conditions.
+```

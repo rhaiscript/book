@@ -3,6 +3,11 @@ BLOB's
 
 {{#include ../links.md}}
 
+```admonish tip.side "Safety"
+
+Always limit the [maximum size of arrays].
+```
+
 BLOB's (**B**inary **L**arge **OB**jects), used to hold packed arrays of bytes, have built-in support in Rhai.
 
 A BLOB has no literal representation, but is created via the `blob` function, or simply returned as
@@ -17,12 +22,6 @@ The Rust type of a Rhai BLOB is `rhai::Blob` which is an alias to `Vec<u8>`.
 [`type_of()`] a BLOB returns `"blob"`.
 
 BLOB's are disabled via the [`no_index`] feature.
-
-```admonish tip "Maximum size"
-
-The maximum allowed size of a BLOB can be controlled via [`Engine::set_max_array_size`][options]
-(see [maximum size of arrays]).
-```
 
 
 Element Access Syntax
@@ -95,14 +94,14 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);
 Writing ASCII Bytes
 -------------------
 
+```admonish warning.side "Non-ASCII"
+
+Non-ASCII characters (i.e. characters not within 1-127) are ignored.
+```
+
 For many embedded applications, it is necessary to encode an ASCII [string] as a byte stream.
 
 Use the `write_ascii` method to write ASCII [strings] into any specific [range] within a BLOB.
-
-```admonish warning "Non-ASCII characters"
-
-Non-ASCII characters (i.e. characters not within 1-127) are ignored by `write_ascii`.
-```
 
 The following is an example of a building a 16-byte command to send to an embedded device.
 
@@ -138,6 +137,7 @@ device.send(buf);           // send command to device
 ```admonish question "What if I need UTF-8?"
 
 The `write_utf8` function writes a string in UTF-8 encoding.
+
 UTF-8 is, however, not very commonly used in embedded systems.
 ```
 

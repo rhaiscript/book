@@ -15,10 +15,7 @@ Internally the `in` operator is simply syntactic sugar for a call to the `contai
 array.contains(42);     // <- the above is equivalent to this
 ```
 
-
-```admonish info "Built-in support"
-
-The following standard data types have built-in support for the `in` operator.
+```admonish info.small "Built-in support for standard data types"
 
 |    Data type    |              Check for              |
 | :-------------: | :---------------------------------: |

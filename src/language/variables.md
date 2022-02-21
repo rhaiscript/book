@@ -7,6 +7,12 @@ Variables
 Valid Names
 -----------
 
+```admonish tip.side-wide "Tip: Unicode Standard Annex #31 identifiers"
+
+The [`unicode-xid-ident`] feature expands the allowed characters for variable names to the set defined by
+[Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/).
+```
+
 Variables in Rhai follow normal C naming rules &ndash; must contain only ASCII letters, digits and underscores `_`.
 
 | Character set | Description              |
@@ -20,11 +26,7 @@ However, unlike Rust, a variable name must also contain at least one ASCII lette
 letter must come _before_ any digits. In other words, the first character that is not an underscore `_`
 must be an ASCII letter and not a digit.
 
-Therefore, some names acceptable to Rust, like `_`, `_42foo`, `_1` etc., are not valid in Rhai.
-
-For example: `c3po` and `_r2d2_` are valid variable names, but `3abc` and `____49steps` are not.
-
-```admonish question "Why this restriction?"
+```admonish question.side-wide "Why this restriction?"
 
 To reduce confusion (and subtle bugs) because, for instance, `_1` can easily be misread (or mistyped)
 as `-1`.
@@ -32,15 +34,13 @@ as `-1`.
 Rhai is dynamic without type checking, so there is no compiler to catch these typos.
 ```
 
+Therefore, some names acceptable to Rust, like `_`, `_42foo`, `_1` etc., are not valid in Rhai.
+
+For example: `c3po` and `_r2d2_` are valid variable names, but `3abc` and `____49steps` are not.
+
 Variable names are case _sensitive_.
 
 Variable names also cannot be the same as a [keyword] (active or reserved).
-
-```admonish tip "Tip: Unicode Standard Annex #31 identifiers"
-
-The [`unicode-xid-ident`] feature expands the allowed characters for variable names to the set defined by
-[Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/).
-```
 
 ```admonish warning "Avoid names longer than 11 letters on 32-Bit"
 

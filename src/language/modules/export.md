@@ -71,6 +71,12 @@ export z;
 Export Functions
 ----------------
 
+```admonish info.side-wide "Private functions"
+
+[`private`] [functions] are commonly called to initialize the [module].
+They cannot be accessed otherwise.
+```
+
 All [functions] are automatically exported, _unless_ it is explicitly opt-out with the [`private`] prefix.
 
 [Functions] declared [`private`] are hidden to the outside.
@@ -81,12 +87,6 @@ All [functions] are automatically exported, _unless_ it is explicitly opt-out wi
 fn inc(x) { x + 1 }     // script-defined function - default public
 
 private fn foo() {}     // private function - hidden
-```
-
-```admonish info "Private functions"
-
-[`private`] [functions] are commonly called to initialize the [module],
-because they cannot be accessed apart from this.
 ```
 
 

@@ -267,6 +267,11 @@ combine_with_exported_module!(module, "my_module_ID", my_module);
 Functions Overloading and Operators
 ----------------------------------
 
+~~~admonish info.side "`NativeCallContext` parameter"
+
+The _first_ parameter of a function can also be [`NativeCallContext`].
+~~~
+
 Operators and overloaded functions can be specified via applying the `#[rhai_fn(name = "...")]`
 attribute to individual functions.
 
@@ -463,13 +468,6 @@ mod my_module {
     }
 }
 ```
-
-
-~~~admonish info "`NativeCallContext` parameter"
-
-The _first_ parameter of a function can also be [`NativeCallContext`], which is treated specially by
-the plugins system.
-~~~
 
 
 `#[export_module]` Parameters

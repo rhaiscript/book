@@ -27,6 +27,19 @@ be accessed via `get_value<T>`, `get_mut<T>` and `set_value<T>`.
 Essentially, a `Scope` is always searched in _reverse order_.
 ```
 
+```admonish tip "Tip: The lifetime parameter"
+
+The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
+automatically inferred to be `'static`.
+
+Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
+as well as for possible future expansion when references can also be put into the `Scope`.
+
+The lifetime parameter is not guaranteed to remain unused for future versions.
+
+In order to put a `Scope` into a `struct`, use `Scope<'static>`.
+```
+
 
 `Scope` API
 -----------
@@ -48,23 +61,10 @@ Essentially, a `Scope` is always searched in _reverse order_.
 | `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                    |
 | `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                                                           |
 
-```admonish info "See also"
+```admonish info.small "See also"
 
 For details on the `Scope` API, refer to the
 [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.Scope.html) online.
-```
-
-```admonish tip "Tip: The lifetime parameter"
-
-The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
-automatically inferred to be `'static`.
-
-Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
-as well as for possible future expansion when references can also be put into the `Scope`.
-
-The lifetime parameter is not guaranteed to remain unused for future versions.
-
-In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 ```
 
 

@@ -4,8 +4,7 @@ Related Resources
 {{#include ../links.md}}
 
 
-Online Resources for Rhai
--------------------------
+```admonish danger "Online resources"
 
 * [GitHub](https://github.com/rhaiscript) &ndash; Rhai organization
 
@@ -22,18 +21,16 @@ Online Resources for Rhai
 * [Zulip Chat](https://rhaiscript.zulipchat.com) &ndash; Rhai organization
 
 * [Reddit](https://www.reddit.com/r/Rhai) &ndash; Rhai community
+```
 
-
-External Tools
---------------
+```admonish tip "External tools"
 
 * [Online Playground][playground] &ndash; Run Rhai scripts directly from an editor in the browser
 
 * [`rhai-doc`] &ndash; Rhai script documentation tool
+```
 
-
-Syntax Highlighting
--------------------
+~~~admonish note "Syntax highlighting"
 
 * [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=rhaiscript.vscode-rhai)
   &ndash; Support `.rhai` script files syntax highlighting for Visual Studio Code
@@ -55,13 +52,13 @@ Syntax Highlighting
   * [functions] definition (via the `fn` keyword)
   * [closures] (via the Rust-like `|...| { ... }` syntax)
   * built-in functions such as `Fn`, `call`, [`type_of`], `is_shared`, `is_def_var`, `is_def_fn`
+~~~
 
-
-Other Cool Projects
--------------------
+```admonish abstract "Other cool projects"
 
 * [ChaiScript](http://chaiscript.com) &ndash; A strong inspiration for Rhai.
   An embedded scripting language for C++.
 
 * Check out the list of [scripting languages for Rust](https://github.com/rust-unofficial/awesome-rust#scripting)
   on [awesome-rust](https://github.com/rust-unofficial/awesome-rust)
+```

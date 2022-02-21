@@ -11,17 +11,20 @@ A number of Rhai-driven tools can be found in the `src/bin` directory:
 | [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) |     `rustyline`     | a simple REPL, interactively evaluates statements |
 |  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  |    [`debugging`]    | the _Rhai Debugger_                               |
 
-Notice that some bin tools require certain [features] and will not be built by default without those
-[features] set.
+~~~admonish tip "Tip: `bin-features`"
+Some bin tools require certain [features] and will not be built by default without those [features] set.
 
 For convenience, a feature named [`bin-features`][features] is available which is a combination of
 the following:
 
-* [`decimal`] &ndash; support for [decimal][rust_decimal] numbers
-* [`metadata`] &ndash; access [functions metadata]
-* [`serde`] &ndash; export [functions metadata] to JSON
-* [`debugging`] &ndash; required by `rhai-dbg`
-* `rustyline` &ndash; required by `rhai-repl`
+|    Feature    | Description                                 |
+| :-----------: | ------------------------------------------- |
+|  [`decimal`]  | support for [decimal][rust_decimal] numbers |
+| [`metadata`]  | access [functions metadata]                 |
+|   [`serde`]   | export [functions metadata] to JSON         |
+| [`debugging`] | required by `rhai-dbg`                      |
+|  `rustyline`  | required by `rhai-repl`                     |
+~~~
 
 
 Install Tools

@@ -6,6 +6,11 @@ Simulating Closures
 Capture External Variables via Automatic Currying
 ------------------------------------------------
 
+~~~admonish tip.side "Tip: `is_shared`"
+
+Use `Dynamic::is_shared` to check whether a particular [`Dynamic`] value is shared.
+~~~
+
 Since [anonymous functions] de-sugar to standard function definitions, they retain all the behaviors
 of Rhai functions, including being _pure_, having no access to external [variables].
 
@@ -24,11 +29,6 @@ reference counting, and may be read or modified even after the [variables] that 
 scope and no longer exist.
 
 [Automatic currying] can be turned off via the [`no_closure`] feature.
-
-~~~admonish tip "Tip: `is_shared`"
-
-Use `Dynamic::is_shared` to check whether a particular [`Dynamic`] value is shared.
-~~~
 
 
 Examples

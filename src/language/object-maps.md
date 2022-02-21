@@ -3,10 +3,19 @@ Object Maps
 
 {{#include ../links.md}}
 
+```admonish tip.side "Safety"
+
+Always limit the [maximum size of object maps].
+```
+
 Object maps are hash dictionaries. Properties are all [`Dynamic`] and can be freely added and retrieved.
 
 The Rust type of a Rhai object map is `rhai::Map`.
 Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
+
+[`type_of()`] an object map returns `"map"`.
+
+Object maps are disabled via the [`no_object`] feature.
 
 ~~~admonish question "Why `BTreeMap` and not `HashMap`?"
 
@@ -20,16 +29,6 @@ The vast majority of object maps contain just a few properties.
 [`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
 ~~~
-
-[`type_of()`] an object map returns `"map"`.
-
-Object maps are disabled via the [`no_object`] feature.
-
-```admonish tip "Maximum size"
-
-The maximum allowed size of an object map can be controlled via [`Engine::set_max_map_size`][options]
-(see [maximum size of object maps]).
-```
 
 
 Literal Syntax
@@ -63,15 +62,15 @@ The _index notation_ allows setting/getting properties of arbitrary names (even 
 
 ### Non-existing property
 
+```admonish tip.side-wide "Tip: Force error"
+
+It is possible to force Rhai to return an `EvalAltResult:: ErrorPropertyNotFound` via
+[`Engine:: set_fail_on_invalid_map_property`][options].
+```
+
 Trying to read a non-existing property returns [`()`] instead of causing an error.
 
 This is similar to JavaScript where accessing a non-existing property returns `undefined`.
-
-```admonish tip "Tip: Force error"
-
-It is possible to force Rhai to return an `EvalAltResult::ErrorPropertyNotFound` via
-[`Engine::set_fail_on_invalid_map_property`][options].
-```
 
 
 Built-in Functions

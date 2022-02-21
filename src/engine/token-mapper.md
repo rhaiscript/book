@@ -17,6 +17,12 @@ _mapper function_ that converts (remaps) a [`Token`] into another.
 Function Signature
 ------------------
 
+```admonish tip.side "Tip: Raising errors"
+
+Raise a parsing error by returning [`Token::LexError`](https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError)
+as the mapped token.
+```
+
 The function signature passed to `Engine::on_parse_token` takes the following form.
 
 > `Fn(token: Token, pos: Position, state: &TokenizeState) -> Token`
@@ -28,12 +34,6 @@ where:
 | `token`   |                                      [`Token`]                                      | the next symbol parsed           |
 | `pos`     |                                     `Position`                                      | location of the [token][`Token`] |
 | `state`   | [`&TokenizeState`](https://docs.rs/rhai/{{version}}/rhai/struct.TokenizeState.html) | current state of the tokenizer   |
-
-```admonish tip "Tip: Raising errors"
-
-It is possible to raise a parsing error by returning [`Token::LexError`](https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError)
-as the mapped token.
-```
 
 
 Example

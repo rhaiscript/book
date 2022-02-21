@@ -21,6 +21,11 @@ Macros
 `#[export_fn]` and `register_exported_fn!`
 -----------------------------------------
 
+~~~admonish info.side "`NativeCallContext` parameter"
+
+The _first_ parameter of a function can also be [`NativeCallContext`].
+~~~
+
 Apply `#[export_fn]` onto a function defined at _Rust module level_ to convert it into a Rhai plugin function.
 
 The function cannot be nested inside another function &ndash; it can only be defined directly under
@@ -110,10 +115,3 @@ fn main() {
     register_exported_fn!(engine, "+", double_and_divide);
 }
 ```
-
-
-~~~admonish info "`NativeCallContext` parameter"
-
-The _first_ parameter of a function can also be [`NativeCallContext`], which is treated specially by
-the plugins system.
-~~~

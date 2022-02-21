@@ -3,16 +3,17 @@ Parse an Object Map from JSON
 
 {{#include ../links.md}}
 
-The syntax for an [object map] is extremely similar to the JSON representation of a object hash,
-with the exception of `null` values which can technically be mapped to [`()`].
-
-```admonish info "Object map vs. JSON"
+```admonish info.side-wide "Object map vs. JSON"
 
 A valid JSON string does not start with a hash character `#` while a Rhai [object map] does.
 That's the only major difference!
 ```
 
+The syntax for an [object map] is extremely similar to the JSON representation of a object hash,
+with the exception of `null` values which can technically be mapped to [`()`].
+
 Use the `Engine::parse_json` method to parse a piece of JSON into an [object map].
+
 The JSON text must represent a single object hash &ndash; i.e. must be wrapped within braces
 `{`...`}` &ndash; otherwise it returns a syntax error.
 
@@ -87,6 +88,11 @@ map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
 Use `serde` to Serialize/Deserialize to/from JSON
 ------------------------------------------------
 
+```admonish info.side "See also"
+
+See _[Serialization/ Deserialization of `Dynamic` with `serde`][`serde`]_ for more details.
+```
+
 Remember, `Engine::parse_json` is nothing more than a _cheap_ alternative to true JSON parsing.
 
 If correctness is needed, or for more configuration possibilities, turn on the [`serde`][features]
@@ -94,8 +100,3 @@ feature to pull in the [`serde`](https://crates.io/crates/serde) crate which ena
 serialization and deserialization to/from multiple formats, including JSON.
 
 Beware, though... the [`serde`](https://crates.io/crates/serde) crate is quite heavy.
-
-```admonish info "See also"
-
-See _[Serialization/Deserialization of `Dynamic` with `serde`][`serde`]_ for more details.
-```

@@ -3,6 +3,14 @@ Call Stack
 
 {{#include ../../links.md}}
 
+```admonish info.side-wide "Call stack frames"
+
+Each "frame" in the call stack corresponds to one layer of [function] call (script-defined
+or native Rust).
+
+A call stack frame has the type `debugger::CallStackFrame`.
+```
+
 The [debugger] keeps a _call stack_ of [function] calls with argument values.
 
 This call stack can be examined to determine the control flow at any particular point.
@@ -21,12 +29,4 @@ let depth = debugger.call_stack().len();
 for frame in debugger.call_stack().iter() {
     println!("{}", frame);
 }
-```
-
-```admonish info "Call stack frames"
-
-Each "frame" in the call stack corresponds to one layer of [function] call (script-defined
-[functions] or native Rust functions).
-
-A call stack frame has the type `debugger::CallStackFrame`.
 ```
