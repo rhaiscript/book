@@ -67,6 +67,39 @@ export z;
 ~~~
 ```
 
+~~~admonish danger "Do not export closures"
+
+A [function pointer], [anonymous function] or [closure], is not a _first-class function_.
+It is _syntactic sugar_ only, capturing the _name_ of a [function] to call.
+
+The actual [function] may not reside in the appropriate [namespace][function namespace],
+so the call will fail.
+
+```js
+┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
+
+fn increment(x) {
+    x + 1
+}
+
+export let inc = Fn("increment");   // exports a function pointer
+
+
+┌───────────┐
+│ main.rhai │
+└───────────┘
+
+import "my_module" as my_mod;
+
+print(my_mod::increment(41));       // ok!
+
+let x = my_mod::inc.call(41);       // runtime error:
+                                    //    function 'increment' not found
+```
+~~~
+
 
 Export Functions
 ----------------

@@ -108,7 +108,6 @@ let obj = #{
 };
 ```
 
-
 ```admonish danger "NOT real closures"
 
 Remember: though having the same syntax as Rust _closures_, anonymous [functions] are themselves

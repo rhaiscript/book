@@ -11,16 +11,6 @@ A function pointer is created via the `Fn` [function], which takes a [string] pa
 Call a function pointer via the `call` method.
 
 
-```admonish warning "NOT first-class functions"
-
-Beware that function pointers are _not_ first-class functions.
-
-They are _syntactic sugar_ only, capturing the _name_ of a [function] to call.
-
-The actual [function] must be defined in order for the call to succeed.
-```
-
-
 Built-in Functions
 ------------------
 
@@ -65,6 +55,46 @@ let fn_name = "hello";      // the function name does not have to exist yet
 let hello = Fn(fn_name + "_world");
 
 hello.call(0);              // error: function not found - 'hello_world (i64)'
+```
+
+
+Warning &ndash; Not First-Class Functions
+----------------------------------------
+
+Beware that function pointers are _not_ first-class functions.
+
+They are _syntactic sugar_ only, capturing only the _name_ of a [function] to call.
+They do not hold the actual [functions].
+
+The actual [function] must be defined in the appropriate [namespace][function namespace]
+for the call to succeed.
+
+For example, [exporting][`export`] a function pointer (or an [anonymous function] or [closure])
+from a [module] referring to a local [function] will fail at runtime because the target
+[function] cannot be found in the caller's [namespace][function namespace].
+
+```js
+┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
+
+fn increment(x) {
+    x + 1
+}
+
+export let inc = Fn("increment");   // exports a function pointer
+
+
+┌───────────┐
+│ main.rhai │
+└───────────┘
+
+import "my_module" as my_mod;
+
+print(my_mod::increment(41));       // ok!
+
+let x = my_mod::inc.call(41);       // runtime error:
+                                    //    function 'increment' not found
 ```
 
 
