@@ -164,6 +164,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="blobs"><a class="header" href="#blobs">BLOB’s</a></h1>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>
+<p>Safety</p>
+</p>
+</div>
+<div>
+<p>
+<p>Always limit the <a href="/book/safety/max-array-size.html">maximum size of arrays</a>.</p>
+</p>
+</div>
+</div>
 <p>BLOB’s (<strong>B</strong>inary <strong>L</strong>arge <strong>OB</strong>jects), used to hold packed arrays of bytes, have built-in support in Rhai.</p>
 <p>A BLOB has no literal representation, but is created via the <code>blob</code> function, or simply returned as
 the result of a function call (e.g. <code>generate_thumbnail_image</code> that generates a thumbnail version of
@@ -173,19 +185,6 @@ added or removed.</p>
 <p>The Rust type of a Rhai BLOB is <code>rhai::Blob</code> which is an alias to <code>Vec&lt;u8&gt;</code>.</p>
 <p><a href="/book/language/type-of.html"><code>type_of()</code></a> a BLOB returns <code>&quot;blob&quot;</code>.</p>
 <p>BLOB’s are disabled via the <a href="/book/start/features.html"><code>no_index</code></a> feature.</p>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>
-<p>Maximum size</p>
-</p>
-</div>
-<div>
-<p>
-<p>The maximum allowed size of a BLOB can be controlled via <a href="/book/engine/options.html"><code>Engine::set_max_array_size</code></a>
-(see <a href="/book/safety/max-array-size.html">maximum size of arrays</a>).</p>
-</p>
-</div>
-</div>
 <h2 id="element-access-syntax"><a class="header" href="#element-access-syntax">Element Access Syntax</a></h2>
 <h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
 <p>Like <a href="/book/language/arrays.html">arrays</a>, BLOB’s are accessed with zero-based, non-negative integer indices:</p>
@@ -198,7 +197,7 @@ added or removed.</p>
 <blockquote>
 <p><em>blob</em> <code>[</code> <em>index position from −1 to −length</em> <code>]</code></p>
 </blockquote>
-<div class="admonition info">
+<div class="admonition info ">
 <div class="admonition-title">
 <p>
 <p>Byte values</p>
@@ -225,7 +224,7 @@ let x = blob(10);           // BLOB with ten zeros
 let x = blob(50, 42);       // BLOB with 50x 42's
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip ">
 <div class="admonition-title">
 <p>
 <p>Tip: Initialize with byte stream</p>
@@ -261,20 +260,20 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);
 </div>
 </div>
 <h2 id="writing-ascii-bytes"><a class="header" href="#writing-ascii-bytes">Writing ASCII Bytes</a></h2>
-<p>For many embedded applications, it is necessary to encode an ASCII <a href="/book/language/strings-chars.html">string</a> as a byte stream.</p>
-<p>Use the <code>write_ascii</code> method to write ASCII <a href="/book/language/strings-chars.html">strings</a> into any specific <a href="/book/language/ranges.html">range</a> within a BLOB.</p>
-<div class="admonition warning">
+<div class="admonition warning side">
 <div class="admonition-title">
 <p>
-<p>Non-ASCII characters</p>
+<p>Non-ASCII</p>
 </p>
 </div>
 <div>
 <p>
-<p>Non-ASCII characters (i.e. characters not within 1-127) are ignored by <code>write_ascii</code>.</p>
+<p>Non-ASCII characters (i.e. characters not within 1-127) are ignored.</p>
 </p>
 </div>
 </div>
+<p>For many embedded applications, it is necessary to encode an ASCII <a href="/book/language/strings-chars.html">string</a> as a byte stream.</p>
+<p>Use the <code>write_ascii</code> method to write ASCII <a href="/book/language/strings-chars.html">strings</a> into any specific <a href="/book/language/ranges.html">range</a> within a BLOB.</p>
 <p>The following is an example of a building a 16-byte command to send to an embedded device.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -307,7 +306,7 @@ print(buf);                 // prints &quot;[4209666f6f202620 626172000000abcd]&
 device.send(buf);           // send command to device
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition question">
+<div class="admonition question ">
 <div class="admonition-title">
 <p>
 <p>What if I need UTF-8?</p>
@@ -315,8 +314,8 @@ device.send(buf);           // send command to device
 </div>
 <div>
 <p>
-<p>The <code>write_utf8</code> function writes a string in UTF-8 encoding.
-UTF-8 is, however, not very commonly used in embedded systems.</p>
+<p>The <code>write_utf8</code> function writes a string in UTF-8 encoding.</p>
+<p>UTF-8 is, however, not very commonly used in embedded systems.</p>
 </p>
 </div>
 </div>

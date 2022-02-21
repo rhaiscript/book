@@ -164,13 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="track-progress-and-force-termination"><a class="header" href="#track-progress-and-force-termination">Track Progress and Force-Termination</a></h1>
-<p>It is impossible to know when, or even whether, a script run will end
-(a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
-<p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
-progress and force-terminate a script prematurely (for any reason), provide a closure to the
-<a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::on_progress</code>.</p>
-<p>Progress tracking is disabled with the <a href="/book/start/features.html"><code>unchecked</code></a> feature.</p>
-<div class="admonition info">
+<div class="admonition info side-wide">
 <div class="admonition-title">
 <p>
 <p>Operations count vs. progress percentage</p>
@@ -178,14 +172,17 @@ progress and force-terminate a script prematurely (for any reason), provide a cl
 </div>
 <div>
 <p>
-<p>Notice that the <em>operations count</em> value passed into the closure does not indicate the <em>percentage</em>
-of work already done by the script (and thus it is not real <em>progress</em> tracking), because it is
-impossible to determine how long a script may run.</p>
-<p>It is possible, however, to calculate this percentage based on an estimated total number of
-operations for a typical run.</p>
+<p><em>Operations count</em> does not indicate the <em>amount</em> of work already done – thus it is not real <em>progress</em> tracking.</p>
+<p>The real progress can be <em>estimated</em> based on the expected number of operations in a typical run.</p>
 </p>
 </div>
 </div>
+<p>It is impossible to know when, or even whether, a script run will end
+(a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
+<p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
+progress and force-terminate a script prematurely (for any reason), provide a closure to the
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::on_progress</code>.</p>
+<p>Progress tracking is disabled with the <a href="/book/start/features.html"><code>unchecked</code></a> feature.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

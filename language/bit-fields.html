@@ -164,12 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="integer-as-bit-fields"><a class="header" href="#integer-as-bit-fields">Integer as Bit-Fields</a></h1>
-<p>Since bit-wise operators are defined on integer numbers, individual bits can also be accessed and
-manipulated via an indexing syntax.</p>
-<p>If a bit is set (i.e. <code>1</code>), the index access returns <code>true</code>.</p>
-<p>If a bit is not set (i.e. <code>0</code>), the index access returns <code>false</code>.</p>
-<p>When a <a href="/book/language/ranges.html">range</a> is used, the bits within the <a href="/book/language/ranges.html">range</a> are shifted and extracted as an integer value.</p>
-<div class="admonition note">
+<div class="admonition note side-wide">
 <div class="admonition-title">
 <p>
 <p>Note</p>
@@ -177,14 +172,18 @@ manipulated via an indexing syntax.</p>
 </div>
 <div>
 <p>
-<p>There is nothing here that cannot be done via standard bit-manipulation (i.e. shifting and masking)
-operations. However, this is an extremely useful, and performant, short-hand since it usually
-replaces a sequence of multiple steps.</p>
-<p>Bit-fields are very commonly used in embedded systems, thus a native way to handle them efficiently
-is called for.</p>
+<p>Nothing here cannot be done via standard bit-manipulation (i.e. shifting and masking).</p>
+<p>Built-in support is more elegant and performant since it usually replaces a sequence of multiple steps.</p>
 </p>
 </div>
 </div>
+<p>Since bit-wise operators are defined on integer numbers, individual bits can also be accessed and
+manipulated via an indexing syntax.</p>
+<p>If a bit is set (i.e. <code>1</code>), the index access returns <code>true</code>.</p>
+<p>If a bit is not set (i.e. <code>0</code>), the index access returns <code>false</code>.</p>
+<p>When a <a href="/book/language/ranges.html">range</a> is used, the bits within the <a href="/book/language/ranges.html">range</a> are shifted and extracted as an integer value.</p>
+<p>Bit-fields are very commonly used in embedded systems which must squeeze data into limited memory.
+Built-in support makes handling them efficient.</p>
 <p>Indexing an integer as a bit-field is disabled for the <a href="/book/start/features.html"><code>no_index</code></a> feature.</p>
 <h2 id="syntax"><a class="header" href="#syntax">Syntax</a></h2>
 <h3 id="from-least-significant-bit-lsb"><a class="header" href="#from-least-significant-bit-lsb">From Least-Significant Bit (LSB)</a></h3>
@@ -200,7 +199,7 @@ is called for.</p>
 <p><em>integer</em> <code>[</code> <em>start</em> <code>..</code> <em>end</em> <code>] =</code> <em>new integer value</em> ;<br />
 <em>integer</em> <code>[</code> <em>start</em> <code>..=</code> <em>end</em> <code>] =</code> <em>new integer value</em> ;</p>
 </blockquote>
-<div class="admonition warning">
+<div class="admonition warning ">
 <div class="admonition-title">
 <p>
 <p>Number of bits</p>
@@ -221,7 +220,7 @@ is called for.</p>
 <p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>] =</code> <code>true</code> or <code>false</code> ;</p>
 </blockquote>
 <p><a href="/book/language/ranges.html">Ranges</a> always count from the least-significant bit (LSB) and has no support for negative positions.</p>
-<div class="admonition warning">
+<div class="admonition warning ">
 <div class="admonition-title">
 <p>
 <p>Number of bits</p>

@@ -181,7 +181,7 @@ value at a particular index:</p>
 <tr><td><code>register_indexer_get_result</code></td><td><code>Fn(&amp;mut T, X) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes, but not advised</td></tr>
 <tr><td><code>register_indexer_set_result</code></td><td><code>Fn(&amp;mut T, X, V) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes</td></tr>
 </tbody></table>
-<div class="admonition danger">
+<div class="admonition danger ">
 <div class="admonition-title">
 <p>
 <p>No support for references</p>
@@ -194,7 +194,7 @@ All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </p>
 </div>
 </div>
-<div class="admonition warning">
+<div class="admonition warning ">
 <div class="admonition-title">
 <p>
 <p>Getters must be pure</p>
@@ -208,10 +208,23 @@ although there is nothing that prevents this mutation.</p>
 </div>
 </div>
 <h2 id="cannot-override-arrays-blobs-object-maps-strings-and-integers"><a class="header" href="#cannot-override-arrays-blobs-object-maps-strings-and-integers">Cannot Override Arrays, BLOB’s, Object Maps, Strings and Integers</a></h2>
+<div class="admonition failure side">
+<div class="admonition-title">
+<p>
+<p>Plugins</p>
+</p>
+</div>
+<div>
+<p>
+<p>They can be defined in a <a href="/book/plugins/module.html">plugin module</a>, but will be ignored.</p>
+</p>
+</div>
+</div>
 <p>For efficiency reasons, indexers <strong>cannot</strong> be used to overload (i.e. override)
 built-in indexing operations for <a href="/book/language/arrays.html">arrays</a>, <a href="/book/language/object-maps.html">object maps</a>, <a href="/book/language/strings-chars.html">strings</a> and integers
 (acting as <a href="/book/language/bit-fields.html">bit-field</a> operation).</p>
 <p>The following types have built-in indexer implementations that are fast and efficient.</p>
+<section></section>
 <table><thead><tr><th>Type</th><th style="text-align: center">Index type</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="/book/language/arrays.html"><code>Array</code></a></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Dynamic</code></a></td><td>access a particular element inside the <a href="/book/language/arrays.html">array</a></td></tr>
 <tr><td><a href="/book/language/blobs.html"><code>Blob</code></a></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><code>INT</code></td><td>access a particular byte value inside the <a href="/book/language/blobs.html">BLOB</a></td></tr>
@@ -220,21 +233,7 @@ built-in indexing operations for <a href="/book/language/arrays.html">arrays</a>
 <tr><td><code>INT</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center">boolean</td><td>access a particular bit inside the integer number as a <a href="/book/language/bit-fields.html">bit-field</a></td></tr>
 <tr><td><code>INT</code></td><td style="text-align: center"><a href="/book/language/ranges.html">range</a></td><td style="text-align: center"><code>INT</code></td><td>access a particular range of bits inside the integer number as a <a href="/book/language/bit-fields.html">bit-field</a></td></tr>
 </tbody></table>
-<div class="admonition failure">
-<div class="admonition-title">
-<p>
-<p>Cannot register indexers for certain types</p>
-</p>
-</div>
-<div>
-<p>
-<p>Attempting to register indexers for an <a href="/book/language/arrays.html">array</a>, <a href="/book/language/object-maps.html">object map</a>, <a href="/book/language/blobs.html">BLOB</a>, <a href="/book/language/strings-chars.html">string</a> or <code>INT</code> panics
-when using the <code>Engine::register_indexer_XXX</code> API.</p>
-<p>They can, however, be defined in a <a href="/book/plugins/module.html">plugin module</a>, only to be ignored.</p>
-</p>
-</div>
-</div>
-<div class="admonition warning">
+<div class="admonition warning ">
 <div class="admonition-title">
 <p>
 <p>Do not overload indexers for built-in standard types</p>

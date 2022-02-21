@@ -203,9 +203,7 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 }
 </code></pre></pre>
 <h2 id="use-script-files"><a class="header" href="#use-script-files">Use Script Files</a></h2>
-<p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>
-(not available under <a href="/book/start/features.html"><code>no_std</code></a> or in <a href="/book/start/builds/wasm.html">WASM</a> builds).</p>
-<div class="admonition info">
+<div class="admonition info side-wide">
 <div class="admonition-title">
 <p>
 <p>Script file extension</p>
@@ -217,6 +215,8 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 </p>
 </div>
 </div>
+<p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>
+(not available under <a href="/book/start/features.html"><code>no_std</code></a> or in <a href="/book/start/builds/wasm.html">WASM</a> builds).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -228,10 +228,10 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 engine.run_file(&quot;hello_world.rhai&quot;.into())?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip ">
 <div class="admonition-title">
 <p>
-<p>Unix shebangs</p>
+<p>Tip: Unix shebangs</p>
 </p>
 </div>
 <div>

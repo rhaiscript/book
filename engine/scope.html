@@ -173,7 +173,7 @@ that have been registered but no global state.</p>
 values of any type.</p>
 <p>Under <a href="/book/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
 itself will also be <code>Send + Sync</code>. This is extremely useful in multi-threaded applications.</p>
-<div class="admonition info">
+<div class="admonition info ">
 <div class="admonition-title">
 <p>
 <p>Shadowing</p>
@@ -185,6 +185,23 @@ itself will also be <code>Send + Sync</code>. This is extremely useful in multi-
 <p>In other words, all versions are kept for <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a>, but only the latest ones can
 be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> and <code>set_value&lt;T&gt;</code>.</p>
 <p>Essentially, a <code>Scope</code> is always searched in <em>reverse order</em>.</p>
+</p>
+</div>
+</div>
+<div class="admonition tip ">
+<div class="admonition-title">
+<p>
+<p>Tip: The lifetime parameter</p>
+</p>
+</div>
+<div>
+<p>
+<p>The <code>Scope</code> has a <em>lifetime</em> parameter, in the vast majority of cases it can be omitted and
+automatically inferred to be <code>'static</code>.</p>
+<p>Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
+as well as for possible future expansion when references can also be put into the <code>Scope</code>.</p>
+<p>The lifetime parameter is not guaranteed to remain unused for future versions.</p>
+<p>In order to put a <code>Scope</code> into a <code>struct</code>, use <code>Scope&lt;'static&gt;</code>.</p>
 </p>
 </div>
 </div>
@@ -205,7 +222,7 @@ be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> a
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>
 <p>See also</p>
@@ -215,23 +232,6 @@ be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> a
 <p>
 <p>For details on the <code>Scope</code> API, refer to the
 <a href="https://docs.rs/rhai/1.5.0/rhai/struct.Scope.html">documentation</a> online.</p>
-</p>
-</div>
-</div>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>
-<p>Tip: The lifetime parameter</p>
-</p>
-</div>
-<div>
-<p>
-<p>The <code>Scope</code> has a <em>lifetime</em> parameter, in the vast majority of cases it can be omitted and
-automatically inferred to be <code>'static</code>.</p>
-<p>Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
-as well as for possible future expansion when references can also be put into the <code>Scope</code>.</p>
-<p>The lifetime parameter is not guaranteed to remain unused for future versions.</p>
-<p>In order to put a <code>Scope</code> into a <code>struct</code>, use <code>Scope&lt;'static&gt;</code>.</p>
 </p>
 </div>
 </div>

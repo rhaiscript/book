@@ -164,25 +164,24 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="arrays"><a class="header" href="#arrays">Arrays</a></h1>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>
+<p>Safety</p>
+</p>
+</div>
+<div>
+<p>
+<p>Always limit the <a href="/book/safety/max-array-size.html">maximum size of arrays</a>.</p>
+</p>
+</div>
+</div>
 <p>Arrays are first-class citizens in Rhai.</p>
 <p>All elements stored in an array are <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, and the array can freely grow or shrink with
 elements added or removed.</p>
 <p>The Rust type of a Rhai array is <code>rhai::Array</code> which is an alias to <code>Vec&lt;Dynamic&gt;</code>.</p>
 <p><a href="/book/language/type-of.html"><code>type_of()</code></a> an array returns <code>&quot;array&quot;</code>.</p>
 <p>Arrays are disabled via the <a href="/book/start/features.html"><code>no_index</code></a> feature.</p>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>
-<p>Maximum size</p>
-</p>
-</div>
-<div>
-<p>
-<p>The maximum allowed size of an array can be controlled via <a href="/book/engine/options.html"><code>Engine::set_max_array_size</code></a>
-(see <a href="/book/safety/max-array-size.html">maximum size of arrays</a>).</p>
-</p>
-</div>
-</div>
 <h2 id="literal-syntax"><a class="header" href="#literal-syntax">Literal Syntax</a></h2>
 <p>Array literals are built within square brackets <code>[</code> … <code>]</code> and separated by commas <code>,</code>:</p>
 <blockquote>
@@ -245,11 +244,21 @@ elements added or removed.</p>
 <tr><td><code>sort</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="/book/language/fn-closure.html">closure</a>), or the function name as a <a href="/book/language/strings-chars.html">string</a></td><td>sorts the array with a comparison function:<br/>1st parameter: first item<br/>2nd parameter: second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="/book/language/strings-chars.html">string</a>, <a href="/book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="/book/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
-<h2 id="use-custom-types-with-arrays"><a class="header" href="#use-custom-types-with-arrays">Use Custom Types With Arrays</a></h2>
-<p>To use a <a href="/book/rust/custom.html">custom type</a> with arrays, a number of array functions need to be manually implemented,
+<div class="admonition tip ">
+<div class="admonition-title">
+<p>
+<p>Tip: Use custom types with arrays</p>
+</p>
+</div>
+<div>
+<p>
+<p>To use a <a href="/book/rust/custom.html">custom type</a> with arrays, a number of functions need to be manually implemented,
 in particular the <code>==</code> operator in order to support the <a href="/book/language/in.html"><code>in</code></a> operator which uses <code>==</code> (via the
 <code>contains</code> method) to compare elements.</p>
 <p>See the section on <a href="/book/rust/custom.html">custom types</a> for more details.</p>
+</p>
+</div>
+</div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

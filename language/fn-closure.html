@@ -165,6 +165,18 @@
                     <main>
                         <h1 id="simulating-closures"><a class="header" href="#simulating-closures">Simulating Closures</a></h1>
 <h2 id="capture-external-variables-via-automatic-currying"><a class="header" href="#capture-external-variables-via-automatic-currying">Capture External Variables via Automatic Currying</a></h2>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>
+<p>Tip: <code>is_shared</code></p>
+</p>
+</div>
+<div>
+<p>
+<p>Use <code>Dynamic::is_shared</code> to check whether a particular <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value is shared.</p>
+</p>
+</div>
+</div>
 <p>Since <a href="/book/language/fn-anon.html">anonymous functions</a> de-sugar to standard function definitions, they retain all the behaviors
 of Rhai functions, including being <em>pure</em>, having no access to external <a href="/book/language/variables.html">variables</a>.</p>
 <p>The <a href="/book/language/fn-anon.html">anonymous function</a> syntax, however, automatically <em>captures</em> <a href="/book/language/variables.html">variables</a> that are not defined
@@ -178,18 +190,6 @@ as long as they are not shadowed by local <a href="/book/language/variables.html
 reference counting, and may be read or modified even after the <a href="/book/language/variables.html">variables</a> that hold them go out of
 scope and no longer exist.</p>
 <p><a href="/book/language/fn-closure.html">Automatic currying</a> can be turned off via the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>
-<p>Tip: <code>is_shared</code></p>
-</p>
-</div>
-<div>
-<p>
-<p>Use <code>Dynamic::is_shared</code> to check whether a particular <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value is shared.</p>
-</p>
-</div>
-</div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -283,7 +283,7 @@ x.call(f, 2);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question">
+<div class="admonition question ">
 <div class="admonition-title">
 <p>
 <p>How is it actually implemented?</p>
@@ -319,7 +319,7 @@ which Rhai simulates normal closures.</p>
 </p>
 </div>
 </div>
-<div class="admonition question">
+<div class="admonition question ">
 <div class="admonition-title">
 <p>
 <p>Why automatic currying?</p>

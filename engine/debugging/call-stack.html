@@ -164,6 +164,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="call-stack"><a class="header" href="#call-stack">Call Stack</a></h1>
+<div class="admonition info side-wide">
+<div class="admonition-title">
+<p>
+<p>Call stack frames</p>
+</p>
+</div>
+<div>
+<p>
+<p>Each “frame” in the call stack corresponds to one layer of <a href="/book/language/functions.html">function</a> call (script-defined
+or native Rust).</p>
+<p>A call stack frame has the type <code>debugger::CallStackFrame</code>.</p>
+</p>
+</div>
+</div>
 <p>The <a href="/book/engine/debugging/debugger.html">debugger</a> keeps a <em>call stack</em> of <a href="/book/language/functions.html">function</a> calls with argument values.</p>
 <p>This call stack can be examined to determine the control flow at any particular point.</p>
 <p>The <code>Debugger::call_stack</code> method returns a slice of all call stack frames.</p>
@@ -183,20 +197,6 @@ for frame in debugger.call_stack().iter() {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
-<div class="admonition-title">
-<p>
-<p>Call stack frames</p>
-</p>
-</div>
-<div>
-<p>
-<p>Each “frame” in the call stack corresponds to one layer of <a href="/book/language/functions.html">function</a> call (script-defined
-<a href="/book/language/functions.html">functions</a> or native Rust functions).</p>
-<p>A call stack frame has the type <code>debugger::CallStackFrame</code>.</p>
-</p>
-</div>
-</div>
 
                     </main>
 

@@ -196,7 +196,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
     export inner;       // &lt;- syntax error: cannot export a local variable
 }
 </code></pre>
-<div class="admonition tip">
+<div class="admonition tip ">
 <div class="admonition-title">
 <p>
 <p>Tip: Multiple exports</p>
@@ -222,6 +222,19 @@ export z;
 </div>
 </div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
+<div class="admonition info side-wide">
+<div class="admonition-title">
+<p>
+<p>Private functions</p>
+</p>
+</div>
+<div>
+<p>
+<p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called to initialize the <a href="/book/rust/modules/index.html">module</a>.
+They cannot be accessed otherwise.</p>
+</p>
+</div>
+</div>
 <p>All <a href="/book/language/functions.html">functions</a> are automatically exported, <em>unless</em> it is explicitly opt-out with the <a href="/book/language/modules/export.html"><code>private</code></a> prefix.</p>
 <p><a href="/book/language/functions.html">Functions</a> declared <a href="/book/language/modules/export.html"><code>private</code></a> are hidden to the outside.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -234,19 +247,6 @@ fn inc(x) { x + 1 }     // script-defined function - default public
 private fn foo() {}     // private function - hidden
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
-<div class="admonition-title">
-<p>
-<p>Private functions</p>
-</p>
-</div>
-<div>
-<p>
-<p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called to initialize the <a href="/book/rust/modules/index.html">module</a>,
-because they cannot be accessed apart from this.</p>
-</p>
-</div>
-</div>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>All loaded <a href="/book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
 <p>To prevent a <a href="/book/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the

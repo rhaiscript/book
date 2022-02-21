@@ -191,10 +191,29 @@ engine.set_max_expr_depths(50, 5);  // allow nesting up to 50 layers of expressi
                                     // at global level, but only 5 inside functions
 <span class="boring">}
 </span></code></pre></pre>
-<p>Beware that there may be multiple layers for a simple language construct, even though it may correspond
-to only one AST node. That is because the Rhai <em>parser</em> internally runs a recursive chain of function calls
-and it is important that a malicious script does not panic the parser in the first place.</p>
-<h2 id="beware-of-recursion"><a class="header" href="#beware-of-recursion">Beware of Recursion</a></h2>
+<div class="admonition warning ">
+<div class="admonition-title">
+<p>
+<p>Warning</p>
+</p>
+</div>
+<div>
+<p>
+<p>Multiple layers of expressions may be generated for a simple language construct, even though it may correspond
+to only one AST node.</p>
+<p>That is because the Rhai <em>parser</em> internally runs a recursive chain of function calls and it is important that
+a malicious script does not panic the parser in the first place.</p>
+</p>
+</div>
+</div>
+<div class="admonition danger ">
+<div class="admonition-title">
+<p>
+<p>Beware of recursion</p>
+</p>
+</div>
+<div>
+<p>
 <p><em><a href="/book/language/functions.html">Functions</a></em> are placed under stricter limits because of the multiplicative effect of <em>recursion</em>.</p>
 <p>A <a href="/book/language/functions.html">function</a> can effectively call itself while deep inside an expression chain within the <a href="/book/language/functions.html">function</a>
 body, thereby overflowing the stack even when the level of recursion is within limit.</p>
@@ -221,6 +240,9 @@ overflow can be expected.</p>
 <li><code>F</code> = maximum statement depth for <a href="/book/language/functions.html">functions</a>,</li>
 <li><code>S</code> = maximum statement depth at global level.</li>
 </ul>
+</p>
+</div>
+</div>
 
                     </main>
 

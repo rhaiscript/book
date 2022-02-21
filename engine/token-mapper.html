@@ -169,6 +169,19 @@
 <p>The function <code>Engine::on_parse_token</code>, available only under <a href="/book/start/features.html"><code>internals</code></a>, allows registration of a
 <em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.5.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>
+<p>Tip: Raising errors</p>
+</p>
+</div>
+<div>
+<p>
+<p>Raise a parsing error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
+as the mapped token.</p>
+</p>
+</div>
+</div>
 <p>The function signature passed to <code>Engine::on_parse_token</code> takes the following form.</p>
 <blockquote>
 <p><code>Fn(token: Token, pos: Position, state: &amp;TokenizeState) -&gt; Token</code></p>
@@ -179,19 +192,6 @@
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.5.0/rhai/enum.Token.html">token</a></td></tr>
 <tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.5.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>
-<p>Tip: Raising errors</p>
-</p>
-</div>
-<div>
-<p>
-<p>It is possible to raise a parsing error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
-as the mapped token.</p>
-</p>
-</div>
-</div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

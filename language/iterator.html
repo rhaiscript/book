@@ -164,12 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="make-a-custom-type-iterable"><a class="header" href="#make-a-custom-type-iterable">Make a Custom Type Iterable</a></h1>
-<p>If a <a href="/book/rust/custom.html">custom type</a> is iterable, the <a href="/book/language/for.html"><code>for</code></a> loop can be used to iterate through
-its items in sequence, as long as it has a <em>type iterator</em> registered.</p>
-<p><code>Engine::register_iterator&lt;T&gt;</code> allows registration of a type iterator for any type
-that implements <code>IntoIterator</code>.</p>
-<p>With a type iterator registered, the <a href="/book/rust/custom.html">custom type</a> can be iterated through.</p>
-<div class="admonition info">
+<div class="admonition info side-wide">
 <div class="admonition-title">
 <p>
 <p>Built-in type iterators</p>
@@ -183,6 +178,11 @@ that implements <code>IntoIterator</code>.</p>
 </p>
 </div>
 </div>
+<p>If a <a href="/book/rust/custom.html">custom type</a> is iterable, the <a href="/book/language/for.html"><code>for</code></a> loop can be used to iterate through
+its items in sequence, as long as it has a <em>type iterator</em> registered.</p>
+<p><code>Engine::register_iterator&lt;T&gt;</code> allows registration of a type iterator for any type
+that implements <code>IntoIterator</code>.</p>
+<p>With a type iterator registered, the <a href="/book/rust/custom.html">custom type</a> can be iterated through.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

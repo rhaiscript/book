@@ -164,6 +164,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="function-pointer-currying"><a class="header" href="#function-pointer-currying">Function Pointer Currying</a></h1>
+<div class="admonition info side-wide">
+<div class="admonition-title">
+<p>
+<p>Automatic currying</p>
+</p>
+</div>
+<div>
+<p>
+<p><a href="/book/language/fn-anon.html">Anonymous functions</a> defined via a closure syntax <em>capture</em> external <a href="/book/language/variables.html">variables</a>
+that are not <a href="/book/language/shadow.html">shadowed</a> inside the <a href="/book/language/functions.html">function’s</a> scope.</p>
+<p>This is accomplished via <a href="/book/language/fn-closure.html">automatic currying</a>.</p>
+</p>
+</div>
+</div>
 <p>It is possible to <em>curry</em> a <a href="/book/language/fn-ptr.html">function pointer</a> by providing partial (or all) arguments.</p>
 <p>Currying is done via the <code>curry</code> keyword and produces a new <a href="/book/language/fn-ptr.html">function pointer</a> which carries
 the curried arguments.</p>
@@ -189,20 +203,6 @@ curried.call(2) == 42;          // &lt;- de-sugars to 'func.call(21, 2)'
                                 //    only one argument is now required
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
-<div class="admonition-title">
-<p>
-<p>Automatic currying</p>
-</p>
-</div>
-<div>
-<p>
-<p><a href="/book/language/fn-anon.html">Anonymous functions</a> defined via a closure syntax <em>capture</em> external <a href="/book/language/variables.html">variables</a>
-that are not <a href="/book/language/shadow.html">shadowed</a> inside the <a href="/book/language/functions.html">function’s</a> scope.</p>
-<p>This is accomplished via <a href="/book/language/fn-closure.html">automatic currying</a>.</p>
-</p>
-</div>
-</div>
 
                     </main>
 

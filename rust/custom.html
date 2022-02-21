@@ -171,7 +171,7 @@ supports a number of data types with fast, internal treatment (see the list of <
 Any type outside of this list is considered <em>custom</em>.</p>
 <p>Any custom type is stored in Rhai as a Rust <em>trait object</em> (specifically, a <code>dyn rhai::Variant</code>),
 with no restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
-<div class="admonition tip">
+<div class="admonition tip ">
 <div class="admonition-title">
 <p>
 <p>Tip</p>
@@ -191,7 +191,8 @@ traits or use special <code>#[derive]</code>) can also be used easily with Rhai.
 <p>Custom types run <em>significantly</em> slower than <a href="/book/language/values-and-types.html">built-in types</a> due to this additional
 level of indirection, but for all purposes there is no difference.</p>
 <p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
-<div class="admonition tip">
+<h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
+<div class="admonition tip side-wide-narrow">
 <div class="admonition-title">
 <p>
 <p>Tip: Working with enums</p>
@@ -204,7 +205,6 @@ level of indirection, but for all purposes there is no difference.</p>
 </p>
 </div>
 </div>
-<h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
 <p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/book/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
 <p>If the <a href="/book/start/features.html"><code>sync</code></a> feature is used, it must also be <code>Send + Sync</code>.</p>
 <p>Notice that the custom type needs to be <em>registered</em> using <code>Engine::register_type</code>
@@ -253,7 +253,7 @@ println!(&quot;result: {}&quot;, result.field);   // prints 42
 <p><em>Methods</em> of custom types take a <code>&amp;mut</code> first parameter to that type, so that invoking methods can
 always update it.</p>
 <p>All other parameters in Rhai are passed by value (i.e. clones).</p>
-<div class="admonition danger">
+<div class="admonition danger ">
 <div class="admonition-title">
 <p>
 <p>No support for references</p>

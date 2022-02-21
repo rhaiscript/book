@@ -164,11 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="statement-expression"><a class="header" href="#statement-expression">Statement Expression</a></h1>
-<p>Like Rust, a statement can be used anywhere where an <em>expression</em> is expected.</p>
-<p>These are called, for lack of a more creative name, “statement expressions.”</p>
-<p>The <em>last</em> statement of a statement block is <em>always</em> the block’s return value when used as a statement,
-<em>regardless</em> of whether it is terminated by a semicolon or not.</p>
-<div class="admonition warning">
+<div class="admonition warning side">
 <div class="admonition-title">
 <p>
 <p>Differs from Rust</p>
@@ -181,6 +177,10 @@ return value defaults to <code>()</code>.</p>
 </p>
 </div>
 </div>
+<p>Like Rust, a statement can be used anywhere where an <em>expression</em> is expected.</p>
+<p>These are called, for lack of a more creative name, “statement expressions.”</p>
+<p>The <em>last</em> statement of a statement block is <em>always</em> the block’s return value when used as a statement,
+<em>regardless</em> of whether it is terminated by a semicolon or not.</p>
 <p>If the last statement has no return value (e.g. variable definitions, assignments) then it is
 assumed to be <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">

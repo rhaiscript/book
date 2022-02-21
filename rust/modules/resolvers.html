@@ -164,11 +164,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="module-resolvers"><a class="header" href="#module-resolvers">Module Resolvers</a></h1>
-<p>When encountering an <a href="/book/language/modules/import.html"><code>import</code></a> statement, Rhai attempts to <em>resolve</em> the <a href="/book/rust/modules/index.html">module</a> based on the path string.</p>
-<div class="admonition info">
+<div class="admonition info side-wide">
 <div class="admonition-title">
 <p>
-<p>See also</p>
+<p><code>import</code> statements</p>
 </p>
 </div>
 <div>
@@ -177,6 +176,7 @@
 </p>
 </div>
 </div>
+<p>When encountering an <a href="/book/language/modules/import.html"><code>import</code></a> statement, Rhai attempts to <em>resolve</em> the <a href="/book/rust/modules/index.html">module</a> based on the path string.</p>
 <p><em>Module Resolvers</em> are service types that implement the <a href="/book/rust/traits.html"><code>ModuleResolver</code></a> trait.</p>
 <h2 id="built-in-module-resolvers"><a class="header" href="#built-in-module-resolvers">Built-in Module Resolvers</a></h2>
 <p>There are a number of standard resolvers built into Rhai, the default being the <code>FileModuleResolver</code>

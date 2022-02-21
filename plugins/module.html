@@ -245,7 +245,7 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip ">
 <div class="admonition-title">
 <p>
 <p>Doc-comments</p>
@@ -410,6 +410,18 @@ combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
+<div class="admonition info side">
+<div class="admonition-title">
+<p>
+<p><code>NativeCallContext</code> parameter</p>
+</p>
+</div>
+<div>
+<p>
+<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>.</p>
+</p>
+</div>
+</div>
 <p>Operators and overloaded functions can be specified via applying the <code>#[rhai_fn(name = &quot;...&quot;)]</code>
 attribute to individual functions.</p>
 <p>The text string given as the <code>name</code> parameter to <code>#[rhai_fn]</code> is used to register the function with
@@ -590,19 +602,6 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
-<div class="admonition-title">
-<p>
-<p><code>NativeCallContext</code> parameter</p>
-</p>
-</div>
-<div>
-<p>
-<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>, which is treated specially by
-the plugins system.</p>
-</p>
-</div>
-</div>
 <h2 id="export_module-parameters"><a class="header" href="#export_module-parameters"><code>#[export_module]</code> Parameters</a></h2>
 <p>Parameters can be applied to the <code>#[export_module]</code> attribute to override its default behavior.</p>
 <table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>

@@ -239,19 +239,10 @@ engine.eval_with_scope::&lt;bool&gt;(&amp;mut scope, &quot;f == 42.0&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="floating-point-vs-decimal"><a class="header" href="#floating-point-vs-decimal">Floating-Point vs. Decimal</a></h2>
-<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature) represents a fixed-precision
-floating-point number which is popular with financial calculations and other usage scenarios where
-round-off errors are not acceptable.</p>
-<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> takes up more space (16 bytes) than a standard <code>FLOAT</code> (4-8 bytes) and is
-much slower in calculations due to the lack of CPU hardware support. Use it only when necessary.</p>
-<p>For most situations, the standard floating-point number type <code>FLOAT</code> (<code>f64</code> or <code>f32</code> with
-<a href="/book/start/features.html"><code>f32_float</code></a>) is enough and is faster than <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>.</p>
-<p>It is possible to use both <code>FLOAT</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> together with just the <a href="/book/start/features.html"><code>decimal</code></a> feature
-– use <a href="/book/language/convert.html"><code>parse_decimal</code></a> or <a href="/book/language/convert.html"><code>to_decimal</code></a> to create a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> value.</p>
-<div class="admonition tip">
+<div class="admonition tip side">
 <div class="admonition-title">
 <p>
-<p>Tip: Use <code>no_float</code> and <code>decimal</code> together</p>
+<p>Tip: <code>no_float</code> + <code>decimal</code></p>
 </p>
 </div>
 <div>
@@ -262,6 +253,15 @@ the standard floating-point type.</p>
 </p>
 </div>
 </div>
+<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature) represents a fixed-precision
+floating-point number which is popular with financial calculations and other usage scenarios where
+round-off errors are not acceptable.</p>
+<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> takes up more space (16 bytes) than a standard <code>FLOAT</code> (4-8 bytes) and is
+much slower in calculations due to the lack of CPU hardware support. Use it only when necessary.</p>
+<p>For most situations, the standard floating-point number type <code>FLOAT</code> (<code>f64</code> or <code>f32</code> with
+<a href="/book/start/features.html"><code>f32_float</code></a>) is enough and is faster than <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>.</p>
+<p>It is possible to use both <code>FLOAT</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> together with just the <a href="/book/start/features.html"><code>decimal</code></a> feature
+– use <a href="/book/language/convert.html"><code>parse_decimal</code></a> or <a href="/book/language/convert.html"><code>to_decimal</code></a> to create a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> value.</p>
 
                     </main>
 

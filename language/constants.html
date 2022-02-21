@@ -223,6 +223,21 @@ engine.run_with_scope(&amp;mut scope, script)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="caveat--constants-can-be-modified-via-rust"><a class="header" href="#caveat--constants-can-be-modified-via-rust">Caveat – Constants Can be Modified via Rust</a></h2>
+<div class="admonition tip side-wide">
+<div class="admonition-title">
+<p>
+<p>Tip: Plugin functions</p>
+</p>
+</div>
+<div>
+<p>
+<p>In <a href="/book/plugins/function.html">plugin functions</a>, <code>&amp;mut</code> parameters disallow constant values by default.</p>
+<p>This is different from the <code>Engine::register_XXX</code> API.</p>
+<p>However, if a <a href="/book/plugins/function.html">plugin function</a> is marked with <code>#[export_fn(pure)]</code> or <code>#[rhai_fn(pure)]</code>,
+it is assumed <em>pure</em> (i.e. will not modify its arguments) and so constants are allowed.</p>
+</p>
+</div>
+</div>
 <p>A <a href="/book/rust/custom.html">custom type</a> stored as a constant cannot be modified via script, but <em>can</em> be modified via a
 registered Rust function that takes a first <code>&amp;mut</code> parameter – because there is no way for
 Rhai to know whether the Rust function modifies its argument!</p>
@@ -266,24 +281,7 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 X == 43;            // value of 'X' is unchanged by script
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>
-<p>Tip: Pure plugin functions</p>
-</p>
-</div>
-<div>
-<p>
-<p>When functions are registered as part of a <a href="/book/plugins/index.html">plugin</a>, <code>&amp;mut</code> parameters are protected from being
-passed constant values.</p>
-<p>By default, <a href="/book/plugins/function.html">plugin functions</a> that take a first <code>&amp;mut</code> parameter disallow passing constants as that
-parameter.</p>
-<p>However, if a <a href="/book/plugins/function.html">plugin function</a> is marked with the <code>#[export_fn(pure)]</code> or <code>#[rhai_fn(pure)]</code> attribute,
-it is considered <em>pure</em> (i.e. assumed to not modify its arguments) and so constants are allowed.</p>
-</p>
-</div>
-</div>
-<div class="admonition info">
+<div class="admonition info ">
 <div class="admonition-title">
 <p>
 <p>Implications on script optimization</p>

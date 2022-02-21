@@ -174,6 +174,18 @@ functions instead of a full-blown <a href="/book/plugins/module.html">plugin mod
 <tr><td><code>set_exported_global_fn!</code></td><td><code>set_exported_global_fn!(&amp;mut</code> <em>module</em><code>,</code> <code>&quot;</code><em>name</em><code>&quot;,</code> <em>function</em><code>)</code></td><td>registers the function into a <a href="/book/rust/modules/index.html"><code>Module</code></a> under a specific name, exposing it to the <a href="/book/language/fn-namespaces.html">global namespace</a></td></tr>
 </tbody></table>
 <h2 id="export_fn-and-register_exported_fn"><a class="header" href="#export_fn-and-register_exported_fn"><code>#[export_fn]</code> and <code>register_exported_fn!</code></a></h2>
+<div class="admonition info side">
+<div class="admonition-title">
+<p>
+<p><code>NativeCallContext</code> parameter</p>
+</p>
+</div>
+<div>
+<p>
+<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>.</p>
+</p>
+</div>
+</div>
 <p>Apply <code>#[export_fn]</code> onto a function defined at <em>Rust module level</em> to convert it into a Rhai plugin function.</p>
 <p>The function cannot be nested inside another function – it can only be defined directly under
 a Rust module.</p>
@@ -246,19 +258,6 @@ fn main() {
     register_exported_fn!(engine, &quot;+&quot;, double_and_divide);
 }
 </code></pre></pre>
-<div class="admonition info">
-<div class="admonition-title">
-<p>
-<p><code>NativeCallContext</code> parameter</p>
-</p>
-</div>
-<div>
-<p>
-<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>, which is treated specially by
-the plugins system.</p>
-</p>
-</div>
-</div>
 
                     </main>
 
