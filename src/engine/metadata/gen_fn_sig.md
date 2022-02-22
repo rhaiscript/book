@@ -18,11 +18,11 @@ The [`metadata`] feature must be used to turn on this API.
 
 Functions from the following sources are included, in order:
 
-1) Native Rust functions registered into the global namespace via the `Engine::register_XXX` API
-2) _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in global sub-modules
+1. Native Rust functions registered into the global namespace via the `Engine::register_XXX` API
+2. _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in global sub-modules
    registered via `Engine::register_static_module`.
-3) Native Rust functions in external [packages] registered via `Engine::register_global_module`
-4) Native Rust functions in [built-in packages] (optional)
+3. Native Rust functions in external [packages] registered via `Engine::register_global_module`
+4. Native Rust functions in [built-in packages] (optional)
 
 
 Functions Metadata

@@ -16,11 +16,11 @@ the metadata of one script-defined [function] in scope.
 
 [Functions] from the following sources are returned, in order:
 
-1) Encapsulated script environment (e.g. when loading a [module] from a script file),
-2) Current script,
-3) [Modules] registered via `Engine::register_global_module` (latest registrations first)
-4) [Modules] imported via the [`import`] statement (latest imports first),
-5) [Modules] added via `Engine::register_static_module` (latest registrations first)
+1. Encapsulated script environment (e.g. when loading a [module] from a script file),
+2. Current script,
+3. [Modules] registered via `Engine::register_global_module` (latest registrations first)
+4. [Modules] imported via the [`import`] statement (latest imports first),
+5. [Modules] added via `Engine::register_static_module` (latest registrations first)
 
 The return value is an [array] of [object maps] (so `get_fn_metadata_list` is also not available under
 [`no_index`] or [`no_object`]), containing the following fields.

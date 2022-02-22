@@ -182,8 +182,8 @@ into reference-counted locked values, also allocated on the heap.  The process i
 
 Closures are usually implemented as a data structure containing two items:
 
-1) A function pointer to the function body of the closure,
-2) A data structure containing references to the captured shared variables on the heap.
+1. A function pointer to the function body of the closure,
+2. A data structure containing references to the captured shared variables on the heap.
 
 Usually a language implementation passes the structure containing references to captured
 shared variables into the function pointer, the function body taking this data structure

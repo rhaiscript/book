@@ -171,11 +171,11 @@ r#"
 In order to access a value argument that is expensive to clone _while_ holding a mutable reference
 to the first argument, use one of the following tactics:
 
-1) if it is a [primary type][standard types] other than [string], use `as_xxx()` as above
+1. If it is a [primary type][standard types] other than [string], use `as_xxx()` as above;
 
-2) directly _consume_ that argument via `std::mem::take` as above
+2. Directly _consume_ that argument via `std::mem::take` as above;
 
-3) use `split_first_mut` to partition the slice:
+3. Use `split_first_mut` to partition the slice:
 
 ~~~rust,no_run
 // Partition the slice

@@ -21,10 +21,10 @@ Namespace Types
 
 In general, there are two main types of _namespaces_ where [functions] are looked up:
 
-| Namespace | Quantity | Source                                                                                                                                                                                                                                 | Lookup                   | Sub-modules? | Variables? |
-| --------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | :----------: | :--------: |
-| Global    |   one    | 1) [`AST`] being evaluated<br/>2) `Engine::register_XXX` API<br/>3) global registered [modules]<br/>4) [functions] in [imported][`import`] [modules] marked _global_<br/>5) [functions] in registered static [modules] marked _global_ | simple name              |   ignored    |  ignored   |
-| Module    |   many   | 1) [Module] registered via `Engine::register_static_module`<br/>2) [Module] loaded via [`import`] statement                                                                                                                            | namespace-qualified name |     yes      |    yes     |
+| Namespace | Quantity | Source                                                                                                                                                                                                                                                    | Lookup                   | Sub-modules? | Variables? |
+| --------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | :----------: | :--------: |
+| Global    |   one    | <ol><li>[`AST`] being evaluated</li><li>`Engine::register_XXX` API</li><li>global registered [modules]</li><li>[functions] in [imported][`import`] [modules] marked _global_</li><li>[functions] in registered static [modules] marked _global_</li></ol> | simple name              |   ignored    |  ignored   |
+| Module    |   many   | <ol><li>[Module] registered via `Engine::register_static_module`</li><li>[Module] loaded via [`import`] statement</li></ol>                                                                                                                               | namespace-qualified name |     yes      |    yes     |
 
 ### Module Namespaces
 

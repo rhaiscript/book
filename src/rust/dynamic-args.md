@@ -99,10 +99,10 @@ to quickly lookup the actual function, based on argument types.
 
 For each function call, a hash is calculated made up from:
 
-1) the function's [namespace], if any,
-2) the function's name,
-3) number of arguments,
-4) the unique ID of the type of each argument, if any.
+1. the function's [namespace], if any,
+2. the function's name,
+3. number of arguments,
+4. the unique ID of the type of each argument, if any.
 
 The correct function is then obtained via a simple hash lookup.
 

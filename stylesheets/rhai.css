@@ -13,6 +13,12 @@ blockquote em {
 	font-size: 110%;
 }
 
+td > ul, td > ol {
+	margin: 0;
+	padding: 0;
+	padding-left: inherit;
+}
+
 main > section, main > pre, h1, h2, h3, .admonition {
 	clear: both;
 }

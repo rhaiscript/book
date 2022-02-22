@@ -21,12 +21,12 @@ The [`metadata`] feature is required for this API, which also pulls in the
 
 Functions from the following sources are included:
 
-1) Script-defined functions in an [`AST`] (for `Engine::gen_fn_metadata_with_ast_to_json`)
-2) Native Rust functions registered into the global namespace via the `Engine::register_XXX` API
-3) _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in static modules
+1. Script-defined functions in an [`AST`] (for `Engine::gen_fn_metadata_with_ast_to_json`)
+2. Native Rust functions registered into the global namespace via the `Engine::register_XXX` API
+3. _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in static modules
    registered via `Engine::register_static_module`
-4) Native Rust functions in external [packages] registered via `Engine::register_global_module`
-5) Native Rust functions in [built-in packages] (optional)
+4. Native Rust functions in external [packages] registered via `Engine::register_global_module`
+5. Native Rust functions in [built-in packages] (optional)
 
 
 JSON Schema

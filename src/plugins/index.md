@@ -13,6 +13,6 @@ registering Rust functions directly in the [`Engine`], or adding Rust modules as
 
 There are two types of plugins:
 
-1) [Plugin Functions]
+1. [Plugin Functions]
 
-2) [Plugin Modules]
+2. [Plugin Modules]

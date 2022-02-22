@@ -78,16 +78,16 @@ using a [raw `Engine`]) operate on `INT` bit-fields.
 
 These functions are available even under the [`no_index`] feature.
 
-| Function                   | Parameter(s)                                                                                                                                   | Description                                               |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `get_bit`                  | bit number, counting from MSB if < 0                                                                                                           | returns the state of a bit: `true` if `1`, `false` if `0` |
-| `set_bit`                  | 1) bit number, counting from MSB if < 0<br/>2) new state: `true` if `1`, `false` if `0`                                                        | sets the state of a bit                                   |
-| `get_bits`                 | 1) starting bit number, counting from MSB if < 0<br/>2) number of bits to extract, none if < 1, to MSB if ≥ _length_                           | extracts a number of bits, shifted towards LSB            |
-| `get_bits`                 | [range] of bits                                                                                                                                | extracts a number of bits, shifted towards LSB            |
-| `set_bits`                 | 1) starting bit number, counting from MSB if < 0<br/>2) number of bits to set, none if < 1, to MSB if ≥ _length_<br/>3) new value              | sets a number of bits from the new value                  |
-| `set_bits`                 | 1) [range] of bits<br/>2) new value                                                                                                            | sets a number of bits from the new value                  |
-| `bits` method and property | 1) _(optional)_ starting bit number, counting from MSB if < 0<br/>2) _(optional)_ number of bits to extract, none if < 1, to MSB if ≥ _length_ | allows iteration over the bits of a bit-field             |
-| `bits`                     | [range] of bits                                                                                                                                | allows iteration over the bits of a bit-field             |
+| Function                   | Parameter(s)                                                                                                                                                   | Description                                               |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `get_bit`                  | bit number, counting from MSB if < 0                                                                                                                           | returns the state of a bit: `true` if `1`, `false` if `0` |
+| `set_bit`                  | <ol><li>bit number, counting from MSB if < 0</li><li>new state: `true` if `1`, `false` if `0`</li></ol>                                                        | sets the state of a bit                                   |
+| `get_bits`                 | <ol><li>starting bit number, counting from MSB if < 0</li><li>number of bits to extract, none if < 1, to MSB if ≥ _length_</li></ol>                           | extracts a number of bits, shifted towards LSB            |
+| `get_bits`                 | [range] of bits                                                                                                                                                | extracts a number of bits, shifted towards LSB            |
+| `set_bits`                 | <ol><li>starting bit number, counting from MSB if < 0</li><li>number of bits to set, none if < 1, to MSB if ≥ _length_<br/>3) new value</li></ol>              | sets a number of bits from the new value                  |
+| `set_bits`                 | <ol><li>[range] of bits</li><li>new value</li></ol>                                                                                                            | sets a number of bits from the new value                  |
+| `bits` method and property | <ol><li>_(optional)_ starting bit number, counting from MSB if < 0</li><li>_(optional)_ number of bits to extract, none if < 1, to MSB if ≥ _length_</li></ol> | allows iteration over the bits of a bit-field             |
+| `bits`                     | [range] of bits                                                                                                                                                | allows iteration over the bits of a bit-field             |
 
 
 Example
