@@ -122,19 +122,19 @@ The following methods are available when working with `Dynamic`:
 
 ### Constructor instance methods
 
-| Method           | Not available under |                           Value type                            |         Data type         |
-| ---------------- | :-----------------: | :-------------------------------------------------------------: | :-----------------------: |
-| `from_bool`      |                     |                             `bool`                              |          `bool`           |
-| `from_int`       |                     |                              `INT`                              |      integer number       |
-| `from_float`     |    [`no_float`]     |                             `FLOAT`                             |   floating-point number   |
-| `from_decimal`   |   non-[`decimal`]   |                    [`Decimal`][rust_decimal]                    | [`Decimal`][rust_decimal] |
-| `from_str`       |                     |                             `&str`                              |         [string]          |
-| `from_char`      |                     |                             `char`                              |        [character]        |
-| `from_array`     |    [`no_index`]     |                            `Vec<T>`                             |          [array]          |
-| `from_blob`      |    [`no_index`]     |                            `Vec<u8>`                            |          [BLOB]           |
-| `from_map`       |    [`no_object`]    |                              `Map`                              |       [object map]        |
-| `from_timestamp` |     [`no_std`]      | `std::time::Instant`<br/>([`instant::Instant`] if [WASM] build) |        [timestamp]        |
-| `from<T>`        |                     |                                                                 |                           |
+| Method           | Not available under |                         Value type                          |         Data type         |
+| ---------------- | :-----------------: | :---------------------------------------------------------: | :-----------------------: |
+| `from_bool`      |                     |                           `bool`                            |          `bool`           |
+| `from_int`       |                     |                            `INT`                            |      integer number       |
+| `from_float`     |    [`no_float`]     |                           `FLOAT`                           |   floating-point number   |
+| `from_decimal`   |   non-[`decimal`]   |                  [`Decimal`][rust_decimal]                  | [`Decimal`][rust_decimal] |
+| `from_str`       |                     |                           `&str`                            |         [string]          |
+| `from_char`      |                     |                           `char`                            |        [character]        |
+| `from_array`     |    [`no_index`]     |                          `Vec<T>`                           |          [array]          |
+| `from_blob`      |    [`no_index`]     |                          `Vec<u8>`                          |          [BLOB]           |
+| `from_map`       |    [`no_object`]    |                            `Map`                            |       [object map]        |
+| `from_timestamp` |     [`no_std`]      | `std::time::Instant` ([`instant::Instant`] if [WASM] build) |        [timestamp]        |
+| `from<T>`        |                     |                             `T`                             |       [custom type]       |
 
 ### Detection methods
 
@@ -163,8 +163,8 @@ The following methods cast a `Dynamic` into a specific type:
 | `as_char`               |                     |                 `Result<char, &str>`                 |
 | `into_string`           |                     |                `Result<String, &str>`                |
 | `into_immutable_string` |                     | [`Result<ImmutableString, &str>`][`ImmutableString`] |
-| `into_array`            |    [`no_index`]     |             `Result<Array, &str>`[array]             |
-| `into_blob`             |    [`no_index`]     |             `Result<Blob, &str>`[array]              |
+| `into_array`            |    [`no_index`]     |            [`Result<Array, &str>`][array]            |
+| `into_blob`             |    [`no_index`]     |             [`Result<Blob, &str>`][BLOB]             |
 | `into_typed_array<T>`   |    [`no_index`]     |                `Result<Vec<T>, &str>`                |
 
 ### Constructor traits
