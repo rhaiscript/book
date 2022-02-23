@@ -179,19 +179,15 @@ engine.set_max_string_size(500);    // allow strings only up to 500 bytes long (
 engine.set_max_string_size(0);      // allow unlimited string length
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>Maximum length</p>
-</p>
 </div>
 <div>
-<p>
 <p>Be conservative when setting a maximum limit and always consider the fact that a registered function may grow
 a string’s length without Rhai noticing until the very end.</p>
 <p>For instance, the built-in <code>+</code> operator for strings concatenates two strings together to form one longer string;
 if both strings are <em>slightly</em> below the maximum length limit, the resultant string may be almost <em>twice</em> the maximum length.</p>
-</p>
 </div>
 </div>
 

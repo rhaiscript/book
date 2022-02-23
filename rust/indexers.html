@@ -181,43 +181,31 @@ value at a particular index:</p>
 <tr><td><code>register_indexer_get_result</code></td><td><code>Fn(&amp;mut T, X) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes, but not advised</td></tr>
 <tr><td><code>register_indexer_set_result</code></td><td><code>Fn(&amp;mut T, X, V) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes</td></tr>
 </tbody></table>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>No support for references</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.
 All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
-</p>
 </div>
 </div>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Getters must be pure</p>
-</p>
 </div>
 <div>
-<p>
 <p>By convention, index <a href="/book/rust/getters-setters.html">getters</a> are not supposed to mutate the <a href="/book/rust/custom.html">custom type</a>,
 although there is nothing that prevents this mutation.</p>
-</p>
 </div>
 </div>
 <h2 id="cannot-override-arrays-blobs-object-maps-strings-and-integers"><a class="header" href="#cannot-override-arrays-blobs-object-maps-strings-and-integers">Cannot Override Arrays, BLOB’s, Object Maps, Strings and Integers</a></h2>
 <div class="admonition failure side">
 <div class="admonition-title">
-<p>
 <p>Plugins</p>
-</p>
 </div>
 <div>
-<p>
 <p>They can be defined in a <a href="/book/plugins/module.html">plugin module</a>, but will be ignored.</p>
-</p>
 </div>
 </div>
 <p>For efficiency reasons, indexers <strong>cannot</strong> be used to overload (i.e. override)
@@ -233,17 +221,13 @@ built-in indexing operations for <a href="/book/language/arrays.html">arrays</a>
 <tr><td><code>INT</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center">boolean</td><td>access a particular bit inside the integer number as a <a href="/book/language/bit-fields.html">bit-field</a></td></tr>
 <tr><td><code>INT</code></td><td style="text-align: center"><a href="/book/language/ranges.html">range</a></td><td style="text-align: center"><code>INT</code></td><td>access a particular range of bits inside the integer number as a <a href="/book/language/bit-fields.html">bit-field</a></td></tr>
 </tbody></table>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Do not overload indexers for built-in standard types</p>
-</p>
 </div>
 <div>
-<p>
 <p>In general, it is a bad idea to overload indexers for any of the <a href="/book/language/values-and-types.html">standard types</a> supported
 internally by Rhai, since built-in indexers may be added in future versions.</p>
-</p>
 </div>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>

@@ -203,16 +203,12 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 }
 </code></pre></pre>
 <h2 id="use-script-files"><a class="header" href="#use-script-files">Use Script Files</a></h2>
-<div class="admonition info side-wide">
+<div class="admonition info side wide">
 <div class="admonition-title">
-<p>
 <p>Script file extension</p>
-</p>
 </div>
 <div>
-<p>
-<p>Rhai script files are customarily named with the extension <code>.rhai</code>.</p>
-</p>
+<p>Rhai script files are customarily named with extension <code>.rhai</code>.</p>
 </div>
 </div>
 <p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>
@@ -228,19 +224,16 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 engine.run_file(&quot;hello_world.rhai&quot;.into())?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Unix shebangs</p>
-</p>
 </div>
 <div>
-<p>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
-<p>This behavior is also present for non-Unix (e.g. Windows) environments.</p>
+<p>This behavior is also present for non-Unix (e.g. Windows) environments so scripts are portable.</p>
 <pre><code class="language-js">#!/home/to/me/bin/rhai-run
 
 // This is a Rhai script
@@ -248,26 +241,44 @@ script with an interpreter (for Rhai this would be <a href="/book/start/bin.html
 let answer = 42;
 print(`The answer is: ${answer}`);
 </code></pre>
-</p>
 </div>
 </div>
 <h2 id="specify-the-return-type"><a class="header" href="#specify-the-return-type">Specify the Return Type</a></h2>
-<p>The type parameter for <code>Engine::eval_XXX</code> methods is used to specify the type of the return value,
-which <em>must</em> match the actual type or an error is returned. Rhai is very strict here.</p>
-<p>There are two ways to specify the return type – <em>turbofish</em> notation, or type inference.</p>
-<p>Use <a href="/book/language/dynamic.html"><code>Dynamic</code></a> for uncertain return types.</p>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>Tip: <code>Dynamic</code></p>
+</div>
+<div>
+<p>Use <a href="/book/language/dynamic.html"><code>Dynamic</code></a> if you’re uncertain of the return type.</p>
+</div>
+</div>
+<p>The type parameter for <code>Engine::eval</code> is used to specify the type of the return value, which <em>must</em>
+match the actual type or an error is returned. Rhai is very strict here.</p>
+<p>There are two ways to specify the return type: <em>turbofish</em> notation, or type inference.</p>
+<h3 id="turbofish"><a class="header" href="#turbofish">Turbofish</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let result = engine.eval::&lt;i64&gt;(&quot;40 + 2&quot;)?;     // return type is i64, specified using 'turbofish' notation
+</span>let result = engine.eval::&lt;i64&gt;(&quot;40 + 2&quot;)?;     // return type is i64
 
-let result: i64 = engine.eval(&quot;40 + 2&quot;)?;       // return type is inferred to be i64
+result.is::&lt;i64&gt;() == true;
+
+let result = engine.eval::&lt;Dynamic&gt;(&quot;boo()&quot;)?;  // use 'Dynamic' if you're not sure what type it'll be!
+
+let result = engine.eval::&lt;String&gt;(&quot;40 + 2&quot;)?;  // returns an error because the actual return type is i64, not String
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="type-inference"><a class="header" href="#type-inference">Type inference</a></h3>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let result: i64 = engine.eval(&quot;40 + 2&quot;)?;       // return type is inferred to be i64
 
 result.is::&lt;i64&gt;() == true;
 
 let result: Dynamic = engine.eval(&quot;boo()&quot;)?;    // use 'Dynamic' if you're not sure what type it'll be!
 
-let result = engine.eval::&lt;String&gt;(&quot;40 + 2&quot;)?;  // returns an error because the actual return type is i64, not String
+let result: String = engine.eval(&quot;40 + 2&quot;)?;    // returns an error because the actual return type is i64, not String
 <span class="boring">}
 </span></code></pre></pre>
 

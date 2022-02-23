@@ -165,17 +165,13 @@
                     <main>
                         <h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
-<div class="admonition info side-wide">
+<div class="admonition info side wide">
 <div class="admonition-title">
-<p>
 <p>See also</p>
-</p>
 </div>
 <div>
-<p>
-<p>See the section on <a href="/book/language/modules/export.html"><em>Exporting Variables, Functions and Sub-Modules</em></a> for details on how
-to prepare a Rhai script for this purpose as well as to control which <a href="/book/language/functions.html">functions</a>/<a href="/book/language/variables.html">variables</a> to export.</p>
-</p>
+<p>See <a href="/book/language/modules/export.html"><em>Export Variables, Functions and Sub-Modules from Script</em></a> for details on how to prepare
+a Rhai script for this purpose as well as to control which <a href="/book/language/functions.html">functions</a>/<a href="/book/language/variables.html">variables</a> to export.</p>
 </div>
 </div>
 <p>A <a href="/book/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="/book/engine/compile.html"><code>AST</code></a>) containing global
@@ -194,18 +190,14 @@ to prepare a Rhai script for this purpose as well as to control which <a href="/
 <p>imported <a href="/book/rust/modules/index.html">modules</a> that remain in the <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
-<div class="admonition info ">
+<div class="admonition info">
 <div class="admonition-title">
-<p>
 <p>Encapsulated environment</p>
-</p>
 </div>
 <div>
-<p>
 <p><code>Module::eval_ast_as_new</code> encapsulates the entire <code>AST</code> into each function call, merging the
 <a href="/book/language/fn-namespaces.html">module namespace</a> with the <a href="/book/language/fn-namespaces.html">global namespace</a>.</p>
 <p>Therefore, <a href="/book/language/functions.html">functions</a> defined within the same <a href="/book/rust/modules/index.html">module</a> script can cross-call each other.</p>
-</p>
 </div>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -223,13 +215,14 @@ let ast = engine.compile(
 r#&quot;
     // Functions become module functions
     fn calc(x) {
-        x + 1
+        x + add_len(x, 1)       // functions within the same module
+                                // can always cross-call each other!
     }
     fn add_len(x, y) {
         x + y.len
     }
 
-    // Imported modules can become sub-modules
+    // Imported modules become sub-modules
     import &quot;another module&quot; as extra;
 
     // Variables defined at global level can become module variables
@@ -245,7 +238,6 @@ r#&quot;
     export x as abc;            // aliased variable name
     export foo;
     export hello;
-    export extra as foobar;     // export sub-module
 &quot;#)?;
 
 // Convert the 'AST' into a module, using the 'Engine' to evaluate it first
@@ -254,7 +246,7 @@ r#&quot;
 let module = Module::eval_ast_as_new(Scope::new(), &amp;ast, &amp;engine)?;
 
 // 'module' now contains:
-//   - sub-module: 'foobar' (renamed from 'extra')
+//   - sub-module: 'extra'
 //   - functions: 'calc', 'add_len'
 //   - constants: 'abc' (renamed from 'x'), 'foo', 'hello'
 <span class="boring">}

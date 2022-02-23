@@ -173,6 +173,15 @@
 <p><a href="/book/start/builds/no-std.html"><code>no-std</code></a></p>
 </li>
 </ul>
+<div class="admonition warning">
+<div class="admonition-title">
+<p>32-bit big endian not supported</p>
+</div>
+<div>
+<p>Due to the <a href="https://crates.io/crates/smartstring"><code>smartstring</code></a> crate, 32-bit big endian
+CPU architectures (e.g. PowerPC) are not supported.</p>
+</div>
+</div>
 <h2 id="minimum-rust-version"><a class="header" href="#minimum-rust-version">Minimum Rust Version</a></h2>
 <p>The minimum version of Rust required to compile Rhai is <code>1.51</code>.</p>
 

@@ -261,17 +261,13 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="caution-beware-operators-for-custom-types"><a class="header" href="#caution-beware-operators-for-custom-types">Caution: Beware operators for custom types</a></h3>
-<div class="admonition tip side-wide">
+<div class="admonition tip side wide">
 <div class="admonition-title">
-<p>
 <p>Tip: Always the full set</p>
-</p>
 </div>
 <div>
-<p>
 <p>It is strongly recommended that, when defining operators for <a href="/book/rust/custom.html">custom types</a>, always define the
 <strong>full set</strong> of six operators together, or at least the <code>==</code> and <code>!=</code> pair.</p>
-</p>
 </div>
 </div>
 <p>Operators are completely separate from each other.  For example:</p>
@@ -309,14 +305,10 @@ ts != ts;           // error: '!=' not defined, even though '==' is
 <h2 id="boolean-operators"><a class="header" href="#boolean-operators">Boolean operators</a></h2>
 <div class="admonition note side">
 <div class="admonition-title">
-<p>
 <p>Note</p>
-</p>
 </div>
 <div>
-<p>
 <p>All boolean operators are <a href="/book/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
-</p>
 </div>
 </div>
 <table><thead><tr><th style="text-align: center">Operator</th><th style="text-align: center">Description</th><th style="text-align: center">Arity</th><th style="text-align: center">Short-circuits?</th></tr></thead><tbody>

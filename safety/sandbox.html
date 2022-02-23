@@ -184,14 +184,11 @@ let engine = engine;
 // 'engine' is immutable...
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Use Rhai to control external environment</p>
-</p>
 </div>
 <div>
-<p>
 <p>How does a <em>sand-boxed</em>, immutable <a href="/book/engine/hello-world.html"><code>Engine</code></a> control the external environment?</p>
 <p>This is necessary in order to use Rhai as a <em>dynamic control layer</em> over a Rust core system.</p>
 <p>There are two general patterns, both involving wrapping the external system
@@ -204,7 +201,6 @@ in a shared, interior-mutated object (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</cod
 <p><a href="/book/patterns/singleton.html">Singleton Command Object</a> pattern.</p>
 </li>
 </ul>
-</p>
 </div>
 </div>
 

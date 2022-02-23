@@ -241,16 +241,12 @@ engine.eval_with_scope::&lt;bool&gt;(&amp;mut scope, &quot;f == 42.0&quot;)?;
 <h2 id="floating-point-vs-decimal"><a class="header" href="#floating-point-vs-decimal">Floating-Point vs. Decimal</a></h2>
 <div class="admonition tip side">
 <div class="admonition-title">
-<p>
 <p>Tip: <code>no_float</code> + <code>decimal</code></p>
-</p>
 </div>
 <div>
-<p>
 <p>When both <a href="/book/start/features.html"><code>no_float</code></a> and <a href="/book/start/features.html"><code>decimal</code></a> features are turned on, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> <em>replaces</em>
 the standard floating-point type.</p>
 <p>Floating-point number literals in scripts parse to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> values.</p>
-</p>
 </div>
 </div>
 <p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature) represents a fixed-precision

@@ -189,14 +189,11 @@ engine.set_max_call_levels(10);     // allow only up to 10 levels of function ca
 engine.set_max_call_levels(0);      // allow no function calls at all (max depth = zero)
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info ">
+<div class="admonition info">
 <div class="admonition-title">
-<p>
 <p>Additional considerations</p>
-</p>
 </div>
 <div>
-<p>
 <p>When setting this limit, care must be also be taken to the evaluation depth of each <em>statement</em>
 within a function.</p>
 <p>It is entirely possible for a malicious script to embed a recursive call deep inside a nested
@@ -230,7 +227,6 @@ expression or statement block (see <a href="/book/safety/max-stmt-depth.html">ma
 bad_function(0);
 <span class="boring">}
 </span></code></pre></pre>
-</p>
 </div>
 </div>
 

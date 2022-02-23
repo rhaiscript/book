@@ -176,14 +176,11 @@ let x = 123.to_float();
 
 print(x);       // what happens?
 </code></pre>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Monkey patching Rhai</p>
-</p>
 </div>
 <div>
-<p>
 <p>Most of Rhai’s built-in functionality resides in registered functions.</p>
 <p>If you dislike any built-in function, simply provide your own implementation to
 <em>override</em> the built-in version.</p>
@@ -191,13 +188,12 @@ print(x);       // what happens?
 “<a href="https://en.wikipedia.org/wiki/Monkey_patch">monkey patching</a>.”
 It is rarely recommended, but if you need it, you need it bad.</p>
 <p>In other words, do it only when <em>all else fails</em>.  Do not monkey patch Rhai simply
-because you don’t like the default functionality.</p>
-</p>
+because you <em>can</em>.</p>
 </div>
 </div>
 <h2 id="search-order-of-functions"><a class="header" href="#search-order-of-functions">Search Order of Functions</a></h2>
 <p>Rhai searches for the correct implementation of a function in the following order:</p>
-<ul>
+<ol>
 <li>
 <p>Rhai script-defined <a href="/book/language/functions.html">functions</a>,</p>
 </li>
@@ -220,7 +216,7 @@ the global <a href="/book/language/fn-namespaces.html">namespace</a> (e.g. via t
 <li>
 <p><a href="/book/engine/builtin.html">built-in</a> functions.</p>
 </li>
-</ul>
+</ol>
 
                     </main>
 

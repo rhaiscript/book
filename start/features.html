@@ -169,19 +169,15 @@
 Notice that this deviates from Rust norm where features are <em>additive</em>.</p>
 <p>Excluding unneeded functionalities can result in smaller, faster builds as well as more control over
 what a script can (or cannot) do.</p>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Features are not additive</p>
-</p>
 </div>
 <div>
-<p>
 <p>Most Rhai features are not strictly <em>additive</em>, i.e. they do not only add optional functionalities.</p>
 <p>In fact, most features are <em>subtractive</em>, i.e. they <em>remove</em> functionalities.</p>
 <p>There is a reason for this design, because the <em>lack</em> of a language feature by itself is a feature (that’s deep…).</p>
 <p>See <a href="/book/patterns/multiple.html">here</a> for more details.</p>
-</p>
 </div>
 </div>
 <h2 id="features-that-enable-special-functionalities"><a class="header" href="#features-that-enable-special-functionalities">Features that Enable Special Functionalities</a></h2>
@@ -191,7 +187,7 @@ what a script can (or cannot) do.</p>
 <tr><td><code>unicode-xid-ident</code></td><td style="text-align: center">no</td><td>allows <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a> as identifiers</td></tr>
 <tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate)</td></tr>
 <tr><td><code>metadata</code></td><td style="text-align: center">yes</td><td>enables exporting <a href="/book/engine/metadata/index.html">functions metadata</a>; implies <code>serde</code> and additionally pulls in <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td></tr>
-<tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="/book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><br/>• allowing access to internal types may enable external attack vectors<br/>• internal types and functions are volatile and may change from version to version</td></tr>
+<tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="/book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><ul><li>allowing access to internal types may enable external attack vectors</li><li>internal types and functions are volatile and may change from version to version</li></ul></td></tr>
 <tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the <a href="/book/engine/debugging/debugger.html">debugging</a> interface; implies <code>internals</code></td></tr>
 </tbody></table>
 <h2 id="features-that-disable-certain-language-features"><a class="header" href="#features-that-disable-certain-language-features">Features that Disable Certain Language Features</a></h2>
@@ -237,14 +233,14 @@ Do not use them for non-<a href="/book/start/builds/wasm.html">WASM</a> targets.
 rhai = { version = &quot;1.5.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>turns on these six features:</p>
-<ul>
-<li><code>sync</code> – everything <code>Send + Sync</code></li>
-<li><code>unchecked</code> – disable all <a href="/book/safety/index.html">checking</a> (should not be used with untrusted user scripts)</li>
-<li><code>only_i32</code> – only 32-bit signed integers</li>
-<li><code>no_float</code> – no floating point numbers</li>
-<li><code>no_module</code> – no loading external <a href="/book/rust/modules/index.html">modules</a></li>
-<li><code>no_function</code> – no defining <a href="/book/language/functions.html">functions</a></li>
-</ul>
+<table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>sync</code></td><td>everything is <code>Send + Sync</code></td></tr>
+<tr><td style="text-align: center"><code>unchecked</code></td><td>disable all <a href="/book/safety/index.html">safety checks</a> (should not be used with untrusted user scripts)</td></tr>
+<tr><td style="text-align: center"><code>only_i32</code></td><td>use only 32-bit signed integers and no others</td></tr>
+<tr><td style="text-align: center"><code>no_float</code></td><td>no floating point numbers</td></tr>
+<tr><td style="text-align: center"><code>no_module</code></td><td>no loading external <a href="/book/rust/modules/index.html">modules</a></td></tr>
+<tr><td style="text-align: center"><code>no_function</code></td><td>no defining <a href="/book/language/functions.html">functions</a></td></tr>
+</tbody></table>
 <p>The resulting scripting engine supports only the <code>i32</code> integer numeral type (and no others like
 <code>u32</code>, <code>i16</code> or <code>i64</code>), no floating-point, is <code>Send + Sync</code> (so it can be safely used across
 threads), and does not support defining <a href="/book/language/functions.html">functions</a> nor loading external <a href="/book/rust/modules/index.html">modules</a>.</p>

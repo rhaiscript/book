@@ -177,18 +177,14 @@ let x = +(a, b);        // &lt;- the above is equivalent to this function call
 </span></code></pre></pre>
 <p>Similarly, comparison <a href="/book/appendix/operators.html#operators">operators</a> including <code>==</code>, <code>!=</code> etc. are all implemented as functions,
 with the stark exception of <code>&amp;&amp;</code> and <code>||</code>.</p>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p><code>&amp;&amp;</code> and <code>||</code> cannot be overloaded</p>
-</p>
 </div>
 <div>
-<p>
 <p>Because they <a href="/book/language/logic.html#boolean-operators"><em>short-circuit</em></a>, <code>&amp;&amp;</code> and <code>||</code> are
 handled specially and <em>not</em> via a function.</p>
 <p>Overriding them has no effect at all.</p>
-</p>
 </div>
 </div>
 <h2 id="overload-operator-via-rust-function"><a class="header" href="#overload-operator-via-rust-function">Overload Operator via Rust Function</a></h2>
@@ -224,14 +220,11 @@ let result: i64 = engine.eval(&quot;1 + true&quot;);          // &lt;- normally 
 result == 43;                                       //    ... but not now
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>Considerations</p>
-</p>
 </div>
 <div>
-<p>
 <p>Use <a href="/book/appendix/operators.html#operators">operator</a> overloading for <a href="/book/rust/custom.html">custom types</a> only.</p>
 <p>Be <strong>very careful</strong> when overriding built-in <a href="/book/appendix/operators.html#operators">operators</a> because users expect standard <a href="/book/appendix/operators.html#operators">operators</a> to
 behave in a consistent and predictable manner, and will be annoyed if an expression involving <code>+</code>
@@ -239,7 +232,6 @@ turns into a subtraction, for example.  You may think it is amusing, but users w
 things done won’t.</p>
 <p><a href="/book/appendix/operators.html#operators">Operator</a> overloading also impacts script optimization when using <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>.
 See the section on <a href="/book/engine/optimize/index.html">script optimization</a> for more details.</p>
-</p>
 </div>
 </div>
 

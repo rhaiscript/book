@@ -171,31 +171,24 @@ not in the file system.</p>
 required function: <code>resolve</code>.</p>
 <p>When Rhai prepares to load a module, <code>ModuleResolver::resolve</code> is called with the name
 of the <em>module path</em> (i.e. the path specified in the <a href="/book/language/modules/import.html"><code>import</code></a> statement).</p>
-<div class="admonition success ">
+<div class="admonition success">
 <div class="admonition-title">
-<p>
 <p>Success</p>
-</p>
 </div>
 <div>
-<p>
 <p>Upon success, it should return a shared <a href="/book/rust/modules/index.html">module</a> wrapped by <code>Rc</code> (or <code>Arc</code> under <a href="/book/start/features.html"><code>sync</code></a>).</p>
 <p>The module resolver should call <code>Module::build_index</code> on the target <a href="/book/rust/modules/index.html">module</a> before returning it.</p>
 <ul>
 <li>This method flattens the entire module tree and <em>indexes</em> it for fast function name resolution.</li>
 <li>If the module is already indexed, calling this method has no effect.</li>
 </ul>
-</p>
 </div>
 </div>
-<div class="admonition failure ">
+<div class="admonition failure">
 <div class="admonition-title">
-<p>
 <p>Failure</p>
-</p>
 </div>
 <div>
-<p>
 <ul>
 <li>
 <p>If the path does not resolve to a valid module, return <code>EvalAltResult::ErrorModuleNotFound</code>.</p>
@@ -204,7 +197,6 @@ of the <em>module path</em> (i.e. the path specified in the <a href="/book/langu
 <p>If the module failed to load, return <code>EvalAltResult::ErrorInModule</code>.</p>
 </li>
 </ul>
-</p>
 </div>
 </div>
 <h2 id="example-of-a-custom-module-resolver"><a class="header" href="#example-of-a-custom-module-resolver">Example of a Custom Module Resolver</a></h2>

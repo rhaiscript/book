@@ -164,7 +164,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="evalcontext"><a class="header" href="#evalcontext"><code>EvalContext</code></a></h1>
-<p><code>EvalContext</code> is a type that encapsulates the current <em>evaluation context</em> and exposes the following:</p>
+<div class="admonition info side wide">
+<div class="admonition-title">
+<p>Usage</p>
+</div>
+<div>
+<p>Many functions in advanced API’s contain an <code>EvalContext</code> parameter in order to allow
+the current evaluation state to be accessed and/or modified.</p>
+</div>
+</div>
+<p><code>EvalContext</code> is a type that encapsulates the current <em>evaluation context</em> and exposes the following methods.</p>
 <table><thead><tr><th>Method</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>scope()</code></td><td style="text-align: center"><code>&amp;Scope</code></td><td>reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
 <tr><td><code>scope_mut()</code></td><td style="text-align: center"><code>&amp;mut &amp;mut Scope</code></td><td>mutable reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a>; <a href="/book/language/variables.html">variables</a> can be added to/removed from it</td></tr>
@@ -178,8 +187,6 @@
 <tr><td><code>this_ptr()</code></td><td style="text-align: center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of <a href="/book/language/functions.html">function</a> calls</td></tr>
 </tbody></table>
-<p><code>EvalContext</code> is a parameter passed to many callback functions in advanced API’s in order to allow
-the current state of an evaluation to be accessed and/or modified.</p>
 
                     </main>
 

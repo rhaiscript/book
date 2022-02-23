@@ -165,44 +165,42 @@
                     <main>
                         <h1 id="register-any-rust-type-and-its-methods"><a class="header" href="#register-any-rust-type-and-its-methods">Register any Rust Type and its Methods</a></h1>
 <h2 id="free-typing"><a class="header" href="#free-typing">Free Typing</a></h2>
-<p>Rhai works seamlessly with <em>any</em> Rust type.</p>
-<p>The reason why it is termed a <em>custom</em> type throughout this documentation is that Rhai natively
-supports a number of data types with fast, internal treatment (see the list of <a href="/book/language/values-and-types.html">standard types</a>).
-Any type outside of this list is considered <em>custom</em>.</p>
-<p>Any custom type is stored in Rhai as a Rust <em>trait object</em> (specifically, a <code>dyn rhai::Variant</code>),
-with no restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
-<div class="admonition tip ">
+<div class="admonition question side wide">
 <div class="admonition-title">
-<p>
-<p>Tip</p>
-</p>
+<p>Why “Custom”?</p>
 </div>
 <div>
-<p>
-<p>The type literally can be <em>anything</em>. It does not have any prerequisite other than being <code>Clone</code>.</p>
+<p>Rhai internally supports a number of standard data types (see <a href="/book/language/values-and-types.html">this list</a>).</p>
+<p>Any type outside of the list is considered <em>custom</em>.</p>
+</div>
+</div>
+<p>Rhai works seamlessly with <em>any</em> Rust type.</p>
+<p>A custom type is stored in Rhai as a Rust <em>trait object</em> (specifically, a <code>dyn rhai::Variant</code>),
+with no restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
+<p>The type literally does not have any prerequisite other than being <code>Clone</code>.</p>
 <p>It does not need to implement any other trait or use any custom <code>#[derive]</code>.</p>
 <p>This allows Rhai to be integrated into an existing Rust code base with as little plumbing as
 possible, usually silently and seamlessly.</p>
 <p>External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
-</p>
-</div>
-</div>
-<p>Custom types run <em>significantly</em> slower than <a href="/book/language/values-and-types.html">built-in types</a> due to this additional
-level of indirection, but for all purposes there is no difference.</p>
 <p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
-<h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
-<div class="admonition tip side-wide-narrow">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
-<p>Tip: Working with enums</p>
-</p>
+<p>Custom types are slower</p>
 </div>
 <div>
-<p>
+<p>Custom types run <em>slower</em> than <a href="/book/language/values-and-types.html">built-in types</a> due to an additional
+level of indirection, but for all other purposes there is no difference.</p>
+</div>
+</div>
+<h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
+<div class="admonition tip side wide-narrow">
+<div class="admonition-title">
+<p>Tip: Working with enums</p>
+</div>
+<div>
 <p>It is also possible to use Rust enums with Rhai.</p>
 <p>See the pattern <a href="/book/patterns/enums.html">Working with Enums</a> for more details.</p>
-</p>
 </div>
 </div>
 <p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/book/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
@@ -253,17 +251,13 @@ println!(&quot;result: {}&quot;, result.field);   // prints 42
 <p><em>Methods</em> of custom types take a <code>&amp;mut</code> first parameter to that type, so that invoking methods can
 always update it.</p>
 <p>All other parameters in Rhai are passed by value (i.e. clones).</p>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>No support for references</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.
 All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
-</p>
 </div>
 </div>
 <h2 id="type_of-a-custom-type"><a class="header" href="#type_of-a-custom-type"><code>type_of()</code> a Custom Type</a></h2>

@@ -167,14 +167,10 @@
 <h2 id="capture-external-variables-via-automatic-currying"><a class="header" href="#capture-external-variables-via-automatic-currying">Capture External Variables via Automatic Currying</a></h2>
 <div class="admonition tip side">
 <div class="admonition-title">
-<p>
 <p>Tip: <code>is_shared</code></p>
-</p>
 </div>
 <div>
-<p>
 <p>Use <code>Dynamic::is_shared</code> to check whether a particular <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value is shared.</p>
-</p>
 </div>
 </div>
 <p>Since <a href="/book/language/fn-anon.html">anonymous functions</a> de-sugar to standard function definitions, they retain all the behaviors
@@ -283,14 +279,11 @@ x.call(f, 2);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>How is it actually implemented?</p>
-</p>
 </div>
 <div>
-<p>
 <p>The actual implementation of closures de-sugars to:</p>
 <ol>
 <li>
@@ -316,17 +309,13 @@ essentially carrying a reference to that shared value and inserting it into futu
 which Rhai simulates normal closures.</p>
 </li>
 </ol>
-</p>
 </div>
 </div>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>Why automatic currying?</p>
-</p>
 </div>
 <div>
-<p>
 <p>In concept, a closure <em>closes</em> over captured variables from the outer scope – that’s why
 they are called <em>closures</em>.  When this happen, a typical language implementation hoists
 those variables that are captured away from the stack frame and into heap-allocated storage.
@@ -353,7 +342,6 @@ structure as a single parameter.  This is the only difference.</p>
 <p>Therefore, in most languages, essentially all closures are implemented as automatic currying of
 shared variables hoisted into the heap, automatically passing those variables as parameters into
 the function. Rhai just brings this directly up to the front.</p>
-</p>
 </div>
 </div>
 

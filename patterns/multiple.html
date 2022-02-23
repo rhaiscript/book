@@ -173,14 +173,11 @@ impact on how Rhai behaves.</p>
 <h2 id="rhai-language-features-are-not-additive"><a class="header" href="#rhai-language-features-are-not-additive">Rhai Language Features Are Not Additive</a></h2>
 <p>Language features cannot be easily made <em>additive</em>.</p>
 <p>That is because the <em>lack</em> of a language feature is a feature by itself.</p>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>A practical illustration</p>
-</p>
 </div>
 <div>
-<p>
 <p>Assume an <em>additive</em> feature called <code>floating-point</code> that adds floating-point support.</p>
 <p>Assume also that the application <em>omits</em> the <code>floating-point</code> feature (why? perhaps integers are all
 that make sense within the project domain). Floating-point numbers do not even parse under this
@@ -196,7 +193,6 @@ expects floating-point numbers to be rejected, in unexpected ways. Suddenly and 
 floating-point numbers show up in data which the application is not prepared to handle.</p>
 <p>There is no way out of this dilemma, because the <em>lack</em> of a language feature can be depended upon
 as a feature.</p>
-</p>
 </div>
 </div>
 <h2 id="multiple-instantiations-of-rhai-within-the-same-project"><a class="header" href="#multiple-instantiations-of-rhai-within-the-same-project">Multiple Instantiations of Rhai Within The Same Project</a></h2>
@@ -229,14 +225,11 @@ rhai_local = { path = &quot;../rhai_copy&quot; }
 candidate cases within the same source, adding all <a href="/book/start/features.html">features</a> together.</p>
 <p>If more than four different instantiations of Rhai is necessary (why?), create more local
 repositories or GitHub forks or branches.</p>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>No way To avoid dependency conflicts</p>
-</p>
 </div>
 <div>
-<p>
 <p>Unfortunately, pulling in Rhai from different sources do not resolve the problem of <a href="/book/start/features.html">features</a>
 conflict between dependencies.  Even overriding <code>crates.io</code> via the <code>[patch]</code> manifest section
 doesn’t work – all dependencies will eventually find the only one copy.</p>
@@ -245,7 +238,6 @@ together with their <em>unique</em> <a href="/book/start/features.html">features
 merging feature <em>just for Rhai</em>.</p>
 <p>Unfortunately, as of this writing, there is no known method to achieve it.</p>
 <p>Therefore, moral of the story: avoid pulling in multiple crates that depend on Rhai.</p>
-</p>
 </div>
 </div>
 

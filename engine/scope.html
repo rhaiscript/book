@@ -173,36 +173,28 @@ that have been registered but no global state.</p>
 values of any type.</p>
 <p>Under <a href="/book/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
 itself will also be <code>Send + Sync</code>. This is extremely useful in multi-threaded applications.</p>
-<div class="admonition info ">
+<div class="admonition info">
 <div class="admonition-title">
-<p>
 <p>Shadowing</p>
-</p>
 </div>
 <div>
-<p>
 <p>A newly-added <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> <em><a href="/book/language/shadow.html">shadows</a></em> previous ones of the same name.</p>
 <p>In other words, all versions are kept for <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a>, but only the latest ones can
 be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> and <code>set_value&lt;T&gt;</code>.</p>
 <p>Essentially, a <code>Scope</code> is always searched in <em>reverse order</em>.</p>
-</p>
 </div>
 </div>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: The lifetime parameter</p>
-</p>
 </div>
 <div>
-<p>
 <p>The <code>Scope</code> has a <em>lifetime</em> parameter, in the vast majority of cases it can be omitted and
 automatically inferred to be <code>'static</code>.</p>
 <p>Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
 as well as for possible future expansion when references can also be put into the <code>Scope</code>.</p>
 <p>The lifetime parameter is not guaranteed to remain unused for future versions.</p>
 <p>In order to put a <code>Scope</code> into a <code>struct</code>, use <code>Scope&lt;'static&gt;</code>.</p>
-</p>
 </div>
 </div>
 <h2 id="scope-api"><a class="header" href="#scope-api"><code>Scope</code> API</a></h2>
@@ -224,15 +216,11 @@ as well as for possible future expansion when references can also be put into th
 </tbody></table>
 <div class="admonition info small">
 <div class="admonition-title">
-<p>
-<p>See also</p>
-</p>
+<p><code>Scope</code> public API</p>
 </div>
 <div>
-<p>
 <p>For details on the <code>Scope</code> API, refer to the
 <a href="https://docs.rs/rhai/1.5.0/rhai/struct.Scope.html">documentation</a> online.</p>
-</p>
 </div>
 </div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -278,6 +266,83 @@ scope.set_value(&quot;y&quot;, 42_i64);
 assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y should exist&quot;), 42);
 <span class="boring">}
 </span></code></pre></pre>
+<h2 id="engine-api-using-scope"><a class="header" href="#engine-api-using-scope"><code>Engine</code> API Using <code>Scope</code></a></h2>
+<p><a href="/book/engine/hello-world.html"><code>Engine</code></a> API methods that accept a <code>Scope</code> parameter all end with <code>_with_scope</code>, making that
+<code>Scope</code> (and everything inside it) available to the script:</p>
+<ul>
+<li><code>Engine::eval_with_scope</code></li>
+<li><code>Engine::eval_ast_with_scope</code></li>
+<li><code>Engine::eval_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
+<li><code>Engine::eval_expression_with_scope</code></li>
+<li><code>Engine::run_with_scope</code></li>
+<li><code>Engine::run_ast_with_scope</code></li>
+<li><code>Engine::run_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
+<li><code>Engine::compile_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
+<li><code>Engine::compile_expression_with_scope</code></li>
+</ul>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>Don’t forget to <code>rewind</code></p>
+</div>
+<div>
+<p><a href="/book/language/variables.html">Variables</a> or <a href="/book/language/constants.html">constants</a> defined at the global level of a script persist inside the custom <code>Scope</code>
+even after the script ends.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut scope = Scope::new();
+
+engine.run_with_scope(&amp;mut scope, &quot;let x = 42;&quot;)?;
+
+// Variable 'x' stays inside the custom scope!
+engine.run_with_scope(&amp;mut scope, &quot;print(x);&quot;)?;    //  prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<p>Due to <a href="/book/language/shadow.html">variable shadowing</a>, new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> are simply added on top of
+existing ones (even when they already exist), so care must be taken that new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a>
+inside the custom <code>Scope</code> do not grow without bounds.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut scope = Scope::new();
+
+// Don't do this - this creates 1 million variables named 'x'
+//                 inside 'scope'!!!
+for _ in 0..1_000_000 {
+    engine.run_with_scope(&amp;mut scope, &quot;let x = 42;&quot;)?;
+}
+
+// The 'scope' contains a LOT of variables...
+assert_eq!(scope.len(), 1_000_000);
+
+// Variable 'x' stays inside the custom scope!
+engine.run_with_scope(&amp;mut scope, &quot;print(x);&quot;)?;    //  prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<p>In order to remove <a href="/book/language/variables.html">variables</a> or <a href="/book/language/constants.html">constants</a> introduced by a script, use the <code>rewind</code> method.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Run a million times
+for _ in 0..1_000_000 {
+    // Save the current size of the 'scope'
+    let orig_scope_size = scope.len();
+
+    engine.run_with_scope(&amp;mut scope, &quot;let x = 42;&quot;)?;
+
+    // Rewind the 'scope' to the original size
+    scope.rewind(orig_scope_size);
+}
+
+// The 'scope' is empty
+assert_eq!(scope.len(), 0);
+
+// Variable 'x' is no longer inside 'scope'!
+engine.run_with_scope(&amp;mut scope, &quot;print(x);&quot;)?;    //  error: variable 'x' not found
+<span class="boring">}
+</span></code></pre></pre>
+</div>
+</div>
 
                     </main>
 

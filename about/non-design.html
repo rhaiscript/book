@@ -217,14 +217,24 @@ dynamically <a href="/book/engine/token-mapper.html">changing tokens</a> during 
 <a href="/book/engine/custom-op.html">custom operators</a>, defining <a href="/book/engine/custom-syntax.html">custom syntax</a> and <a href="/book/engine/def-var.html">filtering variables definition</a>.</p>
 </li>
 </ul>
-<h2 id="do-not-write-the-next-4d-vr-game-in-rhai"><a class="header" href="#do-not-write-the-next-4d-vr-game-in-rhai">Do Not Write The Next 4D VR Game in Rhai</a></h2>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>Do not write the next 4D VR game in Rhai</p>
+</div>
+<div>
 <p>Due to this intended usage, Rhai deliberately keeps the language simple and small by omitting
 advanced language features such as classes, inheritance, interfaces, generics, first-class
 functions/closures, pattern matching, concurrency, byte-codes VM, JIT etc. Focus is on <em>flexibility</em>
 and <em>ease of use</em> instead of raw speed.</p>
 <p>Avoid the temptation to write full-fledge application logic entirely in Rhai – that use case
 is best fulfilled by more complete languages such as JavaScript or Lua.</p>
-<h2 id="thin-dynamic-wrapper-layer-over-rust-code"><a class="header" href="#thin-dynamic-wrapper-layer-over-rust-code">Thin Dynamic Wrapper Layer Over Rust Code</a></h2>
+</div>
+</div>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Use Rhai as a thin dynamic wrapper layer over Rust code</p>
+</div>
+<div>
 <p>In actual practice, it is usually best to expose a Rust API into Rhai for scripts to call.</p>
 <p>All the core functionalities should be written in Rust, with Rhai being the dynamic <em>control</em> layer.</p>
 <p>This is similar to some dynamic languages where most of the core functionalities reside in a C/C++
@@ -233,6 +243,8 @@ standard library.</p>
 In this case, JavaScript takes the role of Rhai while the back-end language, well… it can actually
 also be Rust. Except that Rhai integrates with Rust <em>much</em> more tightly, removing the need for
 interfaces such as XHR calls and payload encoding such as JSON.</p>
+</div>
+</div>
 
                     </main>
 

@@ -183,18 +183,14 @@
 <tr><td><strong>Shared value</strong> (a reference-counted, shared <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value, created via <a href="/book/language/fn-closure.html">automatic currying</a>, disabled with <a href="/book/start/features.html"><code>no_closure</code></a>)</td><td></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
 <tr><td><strong>Nothing/void/nil/null/Unit</strong> (or whatever it is called)</td><td><code>()</code></td><td><code>&quot;()&quot;</code></td><td><code>&quot;&quot;</code> <em>(empty string)</em></td></tr>
 </tbody></table>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>All types are distinct</p>
-</p>
 </div>
 <div>
-<p>
 <p>All types are treated strictly distinct by Rhai, meaning that <code>i32</code> and <code>i64</code> and <code>u32</code> are
 completely different. They cannot even be added together.</p>
 <p>This is very similar to Rust.</p>
-</p>
 </div>
 </div>
 <h2 id="default-types"><a class="header" href="#default-types">Default Types</a></h2>
@@ -203,59 +199,43 @@ them and make a smaller build with the <a href="/book/start/features.html"><code
 <p>If only 32-bit integers are needed, enabling the <a href="/book/start/features.html"><code>only_i32</code></a> feature will remove support for all
 integer types other than <code>i32</code>, including <code>i64</code>.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.</p>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>Default integer is <code>i64</code></p>
-</p>
 </div>
 <div>
-<p>
 <p>Rhai’s default integer type is <code>i64</code>, which is <em>DIFFERENT</em> from Rust’s <code>i32</code>.</p>
 <p>It is very easy to unsuspectingly set an <code>i32</code> into Rhai, which <em>still works</em> but will incur a significant
 runtime performance hit since the <a href="/book/engine/hello-world.html"><code>Engine</code></a> will treat <code>i32</code> as an opaque <a href="/book/rust/custom.html">custom type</a> (unless using the
 <a href="/book/start/features.html"><code>only_i32</code></a> feature).</p>
-</p>
 </div>
 </div>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Floating-point numbers</p>
-</p>
 </div>
 <div>
-<p>
 <p>If no floating-point is needed or supported, use the <a href="/book/start/features.html"><code>no_float</code></a> feature to remove it.</p>
 <p>Some applications require fixed-precision decimal numbers, which can be enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature.</p>
-</p>
 </div>
 </div>
-<div class="admonition info ">
+<div class="admonition info">
 <div class="admonition-title">
-<p>
 <p>Strings</p>
-</p>
 </div>
 <div>
-<p>
 <p><a href="/book/language/strings-chars.html">Strings</a> in Rhai are <em>immutable</em>, meaning that they can be shared but not modified.</p>
 <p>Internally, the <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> type is a wrapper over <code>Rc&lt;String&gt;</code> or <code>Arc&lt;String&gt;</code> (depending on <a href="/book/start/features.html"><code>sync</code></a>).</p>
 <p>Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.</p>
-</p>
 </div>
 </div>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Convert to string</p>
-</p>
 </div>
 <div>
-<p>
 <p>The <a href="/book/rust/print-custom.html"><code>to_string()</code></a> function converts a standard type into a <a href="/book/language/strings-chars.html">string</a> for display purposes.</p>
 <p>The <a href="/book/rust/print-custom.html"><code>to_debug()</code></a> function converts a standard type into a <a href="/book/language/strings-chars.html">string</a> in debug format.</p>
-</p>
 </div>
 </div>
 

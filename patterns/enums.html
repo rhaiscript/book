@@ -170,19 +170,15 @@ variants that contain embedded data is not an easy proposition.</p>
 <p>Since Rhai is dynamic and <a href="/book/language/variables.html">variables</a> can hold any type of data, they are essentially enums
 by nature.  Distinct types can be used without merging them into a single enum as variants.</p>
 <p>This section outlines a number of possible solutions to work with Rust enums.</p>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>Why enums are hard with dynamic languages</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rust enum variants are not considered separate types.</p>
 <p>Although Rhai integrates with Rust enums just fine (treated transparently as <a href="/book/rust/custom.html">custom types</a>),
 it is impossible  (short of registering a complete API) to distinguish between individual
 enum variants in order to extract internal data from them.</p>
-</p>
 </div>
 </div>
 <h2 id="simulate-an-enum-api"><a class="header" href="#simulate-an-enum-api">Simulate an Enum API</a></h2>

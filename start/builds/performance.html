@@ -225,22 +225,27 @@ the corresponding <code>+</code> (add) assignment usually doesn’t.  The differ
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let x = create_some_very_big_type();
+</span>let x = create_some_very_big_and_expensive_type();
 
 x = x + 1;
 //  ^ 'x' is cloned here
 
 // The above is equivalent to:
-let temp_value = x + 1;
+let temp_value = x.clone() + 1;
 x = temp_value;
 
 x += 1;             // &lt;- 'x' is NOT cloned
 <span class="boring">}
 </span></code></pre></pre>
-<h3 id="simple-variable-references-are-optimized"><a class="header" href="#simple-variable-references-are-optimized">Simple variable references are optimized</a></h3>
-<p>Rhai’s script <a href="/book/engine/optimize/index.html">optimizer</a> is usually smart enough to rewrite function calls
-into <em>method-call</em> style or <em>compound assignment</em> style to take advantage of this.  However, there
-are limits to its intelligence, and only <strong>simple variable references</strong> are optimized.</p>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Simple variable references are already optimized</p>
+</div>
+<div>
+<p>Rhai’s script <a href="/book/engine/optimize/index.html">optimizer</a> is usually smart enough to <em>rewrite</em> function calls
+into <a href="/book/rust/methods.html"><em>method-call</em></a> style or <a href="/book/language/assignment-op.html"><em>compound assignment</em></a>
+style to take advantage of this.</p>
+<p>However, there are limits to its intelligence, and only <strong>simple variable references</strong> are optimized.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -250,7 +255,7 @@ x += x;             // ... is rewritten as this
 
 x[y] = x[y] + 1;    // &lt;- but this is not, so this is MUCH slower...
 
-x[y] + 1;           // ... than this
+x[y] += 1;          // ... than this
 
 some_func(x, 1);    // &lt;- this statement...
 
@@ -259,6 +264,8 @@ x.some_func(1);     // ... is rewritten as this
 some_func(x[y], 1); // &lt;- but this is not, so 'x[y]` is cloned
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <h2 id="short-variable-names-for-32-bit-systems"><a class="header" href="#short-variable-names-for-32-bit-systems">Short Variable Names for 32-Bit Systems</a></h2>
 <p>On 32-bit systems, <a href="/book/language/variables.html">variable</a> and <a href="/book/language/constants.html">constant</a> names longer than 11 ASCII characters incur additional
 allocation overhead.</p>

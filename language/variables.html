@@ -165,17 +165,13 @@
                     <main>
                         <h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
 <h2 id="valid-names"><a class="header" href="#valid-names">Valid Names</a></h2>
-<div class="admonition tip side-wide">
+<div class="admonition tip side wide">
 <div class="admonition-title">
-<p>
 <p>Tip: Unicode Standard Annex #31 identifiers</p>
-</p>
 </div>
 <div>
-<p>
 <p>The <a href="/book/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
 <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>.</p>
-</p>
 </div>
 </div>
 <p>Variables in Rhai follow normal C naming rules – must contain only ASCII letters, digits and underscores <code>_</code>.</p>
@@ -188,32 +184,25 @@
 <p>However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII
 letter must come <em>before</em> any digits. In other words, the first character that is not an underscore <code>_</code>
 must be an ASCII letter and not a digit.</p>
-<div class="admonition question side-wide">
+<div class="admonition question side wide">
 <div class="admonition-title">
-<p>
 <p>Why this restriction?</p>
-</p>
 </div>
 <div>
-<p>
 <p>To reduce confusion (and subtle bugs) because, for instance, <code>_1</code> can easily be misread (or mistyped)
 as <code>-1</code>.</p>
 <p>Rhai is dynamic without type checking, so there is no compiler to catch these typos.</p>
-</p>
 </div>
 </div>
 <p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.</p>
 <p>For example: <code>c3po</code> and <code>_r2d2_</code> are valid variable names, but <code>3abc</code> and <code>____49steps</code> are not.</p>
 <p>Variable names are case <em>sensitive</em>.</p>
 <p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a> (active or reserved).</p>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Avoid names longer than 11 letters on 32-Bit</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rhai uses <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> which avoids allocations unless a string is over its internal limit
 (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).</p>
 <p>On 64-bit systems, <em>most</em> variable names are shorter than 23 letters, so this is unlikely to become
@@ -231,7 +220,6 @@ for loop_var in array {
     print(`Super! ${loop_var}`);
 }
 </code></pre>
-</p>
 </div>
 </div>
 <h2 id="declare-a-variable"><a class="header" href="#declare-a-variable">Declare a Variable</a></h2>

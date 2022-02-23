@@ -194,30 +194,23 @@ print(z);                       // &lt;- error: variable 'z' not found
 &quot;print(42)&quot;.eval();             // &lt;- nope... method-call style doesn't work with 'eval'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p><code>eval</code> executes inside the current scope!</p>
-</p>
 </div>
 <div>
-<p>
 <p>Script segments passed to <code>eval</code> execute inside the <em>current</em> <a href="/book/engine/scope.html"><code>Scope</code></a>, so they can access and modify
 <em>everything</em>, including all <a href="/book/language/variables.html">variables</a> that are visible at that position in code!</p>
-<p>In addition, <code>eval</code> can be used to define new <a href="/book/language/variables.html">variables</a> and do other things normally forbidden inside
+<p><code>eval</code> can also be used to define new <a href="/book/language/variables.html">variables</a> and do other things normally forbidden inside
 a <a href="/book/language/functions.html">function</a> call.</p>
-<p>It is almost as if the script segments were physically pasted in at the position of the <code>eval</code> call.</p>
-</p>
+<p>Treat it as if the script segments are physically pasted in at the position of the <code>eval</code> call.</p>
 </div>
 </div>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Cannot define new functions</p>
-</p>
 </div>
 <div>
-<p>
 <p>New <a href="/book/language/functions.html">functions</a> cannot be defined within an <code>eval</code> call, since <a href="/book/language/functions.html">functions</a> can only be defined at
 the <em>global</em> level, not inside another <a href="/book/language/functions.html">function</a> call!</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -235,10 +228,13 @@ x += 32;
 print(x);
 <span class="boring">}
 </span></code></pre></pre>
-</p>
 </div>
 </div>
-<h2 id="eval-is-evil"><a class="header" href="#eval-is-evil"><code>eval</code> is Evil</a></h2>
+<div class="admonition failure">
+<div class="admonition-title">
+<p><code>eval</code> is evil</p>
+</div>
+<div>
 <p>For those who subscribe to the (very sensible) motto of <a href="http://linterrors.com/js/eval-is-evil">“<code>eval</code> is evil”</a>,
 disable <code>eval</code> via <a href="/book/engine/disable-keywords.html"><code>Engine::disable_symbol</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -247,31 +243,25 @@ disable <code>eval</code> via <a href="/book/engine/disable-keywords.html"><code
 </span>engine.disable_symbol(&quot;eval&quot;);  // disable usage of 'eval'
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>Do you regret implementing <code>eval</code> in Rhai?</p>
-</p>
 </div>
 <div>
-<p>
 <p>Or course we do.</p>
 <p>Having the possibility of an <code>eval</code> call disrupts any predictability in the Rhai script,
 thus disabling a large number of optimizations.</p>
-</p>
 </div>
 </div>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>Why did it then???!!!</p>
-</p>
 </div>
 <div>
-<p>
 <p>Brendan Eich puts it well: “it is just too easy to implement.” <em>(source wanted)</em></p>
-</p>
 </div>
 </div>
 

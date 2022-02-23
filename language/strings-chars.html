@@ -166,14 +166,10 @@
                         <h1 id="strings-and-characters"><a class="header" href="#strings-and-characters">Strings and Characters</a></h1>
 <div class="admonition tip side">
 <div class="admonition-title">
-<p>
 <p>Safety</p>
-</p>
 </div>
 <div>
-<p>
 <p>Always limit the <a href="/book/safety/max-string-size.html">maximum length of strings</a>.</p>
-</p>
 </div>
 </div>
 <p>String in Rhai contain any text sequence of valid Unicode characters.</p>
@@ -186,18 +182,14 @@
 <tr><td>Multi-line literal string</td><td style="text-align: center"><code>`...`</code></td><td style="text-align: center">no</td><td style="text-align: center">no</td><td style="text-align: center">with <code>${...}</code></td></tr>
 <tr><td>Character</td><td style="text-align: center"><code>'...'</code></td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 </tbody></table>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Building strings</p>
-</p>
 </div>
 <div>
-<p>
 <p>Strings can be built up from other strings and types via the <code>+</code> operator
 (provided by the <a href="/book/rust/packages/builtin.html"><code>MoreStringPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>).</p>
 <p>This is particularly useful when printing output.</p>
-</p>
 </div>
 </div>
 <h2 id="standard-escape-sequences"><a class="header" href="#standard-escape-sequences">Standard Escape Sequences</a></h2>
@@ -329,21 +321,17 @@ This is similar to many modern languages but different from Rust.</p>
 <blockquote>
 <p><em>string</em> <code>[</code> <em>index from −1 to −(total number of characters)</em> <code>]</code></p>
 </blockquote>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Character indexing can be SLOW</p>
-</p>
 </div>
 <div>
-<p>
 <p>Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.</p>
 <p>Therefore, getting the character at a particular index involves walking through the entire UTF-8
 encoded bytes stream to extract individual Unicode characters, counting them on the way.</p>
 <p>Because of this, indexing can be a <em>slow</em> procedure, especially for long strings.
 Along the same lines, getting the <em>length</em> of a string (which returns the number of characters, not
 bytes) can also be slow.</p>
-</p>
 </div>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>

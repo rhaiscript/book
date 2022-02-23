@@ -245,19 +245,15 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Doc-comments</p>
-</p>
 </div>
 <div>
-<p>
 <p>If the <a href="/book/start/features.html"><code>metadata</code></a> feature is active, doc-comments (i.e. comments starting with <code>///</code> or wrapped
 with <code>/**</code> … <code>*/</code>) on plugin functions are extracted into <a href="/book/engine/metadata/index.html"><em>metadata</em></a>.</p>
 <p>It is always a good idea to put <a href="/book/language/doc-comments.html">doc-comments</a> onto <a href="/book/plugins/module.html">plugin modules</a> and <a href="/book/plugins/function.html">plugin functions</a>,
 as they can be used to auto-generate documentation later on.</p>
-</p>
 </div>
 </div>
 <h3 id="use-engineregister_global_module"><a class="header" href="#use-engineregister_global_module">Use <code>Engine::register_global_module</code></a></h3>
@@ -412,14 +408,10 @@ combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
 <div class="admonition info side">
 <div class="admonition-title">
-<p>
 <p><code>NativeCallContext</code> parameter</p>
-</p>
 </div>
 <div>
-<p>
 <p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>.</p>
-</p>
 </div>
 </div>
 <p>Operators and overloaded functions can be specified via applying the <code>#[rhai_fn(name = &quot;...&quot;)]</code>

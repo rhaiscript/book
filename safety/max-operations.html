@@ -189,14 +189,11 @@ engine.set_max_operations(500);     // allow only up to 500 operations for this 
 engine.set_max_operations(0);       // allow unlimited operations
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>What does one <em>operation</em> mean?</p>
-</p>
 </div>
 <div>
-<p>
 <p>The concept of one single <em>operation</em> in Rhai is volatile – it roughly equals one expression
 node, loading one <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a>, one <a href="/book/appendix/operators.html#operators">operator</a> call, one iteration of a loop, or one
 <a href="/book/language/functions.html">function</a> call etc. with sub-expressions, statements and <a href="/book/language/functions.html">function</a> calls executed inside these
@@ -208,7 +205,6 @@ though also counted as only one operation, may consume much more computing resou
 <p>To help visualize, think of an <em>operation</em> as roughly equals to one <em>instruction</em> of a hypothetical CPU
 which includes <em>specialized</em> instructions, such as <em>function call</em>, <em>load module</em> etc., each taking up
 one CPU cycle to execute.</p>
-</p>
 </div>
 </div>
 

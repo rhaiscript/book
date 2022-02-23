@@ -231,17 +231,13 @@ continued behavior of the debugger.</p>
 <tr><td><code>Next</code></td><td>run to the next statement, skipping over functions</td><td style="text-align: center"><code>next</code></td></tr>
 <tr><td><code>FunctionExit</code></td><td>run to the end of the current function call; debugger is triggered <em>before</em> the function call returns and the <a href="/book/engine/scope.html"><code>Scope</code></a> cleared</td><td style="text-align: center"><code>finish</code></td></tr>
 </tbody></table>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>The <code>Debugger</code></p>
-</p>
 </div>
 <div>
-<p>
 <p>The type <code>debugger::Debugger</code> allows for manipulating <a href="/book/engine/debugging/break-points.html">break-points</a>, among others.</p>
 <p>The <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>EvalContext::global_runtime_state_mut().debugger</code>.</p>
-</p>
 </div>
 </div>
 

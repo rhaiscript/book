@@ -164,24 +164,34 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="webassembly-wasm-build"><a class="header" href="#webassembly-wasm-build">WebAssembly (WASM) Build</a></h1>
-<p>It is possible to use Rhai when compiling to WebAssembly (WASM).
-This yields a scripting engine (and language) that can be run in a standard web browser.</p>
-<p>Why you would <em>want</em> to is another matter… as there is already a nice, fast, complete scripting language
-for the the common WASM environment (i.e. a browser) – and it is called JavaScript.</p>
-<p>But anyhow, do it because you <em>can</em>!</p>
-<p>When building for WASM, certain features will not be available,
-such as the script file API’s and loading modules from external script files.</p>
-<div class="admonition example small">
+<div class="admonition question side wide">
 <div class="admonition-title">
-<p>
-<p>Sample</p>
-</p>
+<p>Why would you do that?</p>
 </div>
 <div>
-<p>
+<p>There is already a fast and powerful scripting language that integrates nicely with WASM – <strong>JavaScript</strong>.</p>
+<p>Anyhow, do it because you <em>can</em>!</p>
+</div>
+</div>
+<p>It is possible to use Rhai when compiling to WebAssembly (WASM).</p>
+<p>This yields a scripting engine (and language) that can be run in a standard web browser,
+among other places.</p>
+<div class="admonition warning">
+<div class="admonition-title">
+<p>Unavailable features</p>
+</div>
+<div>
+<p>When building for WASM, certain features will not be available,
+such as the script file API’s and loading <a href="/book/rust/modules/index.html">modules</a> from external script files.</p>
+</div>
+</div>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Sample</p>
+</div>
+<div>
 <p>Check out the <a href="/book/tools/playground.html"><em>Online Playground</em></a> project which is driven
 by a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled into <a href="/book/start/builds/wasm.html">WASM</a>.</p>
-</p>
 </div>
 </div>
 <h2 id="javascript-interop"><a class="header" href="#javascript-interop">JavaScript Interop</a></h2>
@@ -213,6 +223,7 @@ are typically used for a WASM build:</p>
 <tr><td style="text-align: center"><a href="/book/start/features.html"><code>no_std</code></a></td><td><code>std</code> lib works fine with WASM</td></tr>
 <tr><td style="text-align: center"><a href="/book/start/features.html"><code>metadata</code></a></td><td>WASM usually doesn’t need access to Rhai functions metadata</td></tr>
 <tr><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td>WASM usually doesn’t need to access Rhai internal data structures, unless you are walking the <a href="/book/engine/compile.html"><code>AST</code></a></td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>debugging</code></a></td><td>unless debugging is needed</td></tr>
 </tbody></table>
 
                     </main>

@@ -167,19 +167,15 @@
 <p>Rhai’s scripting engine is very lightweight.  It gets most of its abilities from functions.</p>
 <p>To call these functions, they need to be <em>registered</em> via <code>Engine::register_fn</code> or
 <code>Engine::register_result_fn</code> (see <a href="/book/rust/fallible.html">fallible functions</a>).</p>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Function overloading</p>
-</p>
 </div>
 <div>
-<p>
 <p>Functions registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be <em>overloaded</em> as long as the <em>signature</em> is unique,
 i.e. different functions can have the same name as long as their parameters are of different types
 or different number.</p>
 <p>New definitions <em>overwrite</em> previous definitions of the same name and same number/types of parameters.</p>
-</p>
 </div>
 </div>
 <pre><pre class="playground"><code class="language-rust no_run">

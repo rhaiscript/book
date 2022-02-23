@@ -185,16 +185,12 @@ print(&quot;10:25AM&quot;);                   // the function call is replaced b
 <em>non-volatile</em>, so when it finds <a href="/book/language/constants.html">constant</a> arguments (or none) it eagerly executes the function
 call and replaces it with the result.</p>
 <p>This causes the script to behave differently from the intended semantics.</p>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>Warning</p>
-</p>
 </div>
 <div>
-<p>
 <p><strong>Avoid using <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a></strong> if volatile custom functions are involved.</p>
-</p>
 </div>
 </div>
 

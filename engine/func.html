@@ -164,8 +164,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="create-a-rust-closure-from-a-rhai-function"><a class="header" href="#create-a-rust-closure-from-a-rhai-function">Create a Rust Closure from a Rhai Function</a></h1>
-<p>It is possible to further encapsulate a script in Rust such that it becomes a normal Rust function.</p>
-<p>Such a <em>closure</em> is very useful as call-back functions.</p>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
+<p>Very useful as callback functions!</p>
+</div>
+</div>
+<p>It is possible to further encapsulate a script in Rust such that it becomes a normal Rust closure.</p>
 <p>Creating them is accomplished via the <code>Func</code> trait which contains <code>create_from_script</code>
 (as well as its companion method <code>create_from_ast</code>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">

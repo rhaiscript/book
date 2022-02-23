@@ -180,14 +180,11 @@ engine.set_max_array_size(500);     // allow arrays only up to 500 items
 engine.set_max_array_size(0);       // allow unlimited arrays
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>Maximum size</p>
-</p>
 </div>
 <div>
-<p>
 <p>Be conservative when setting a maximum limit and always consider the fact that a registered function
 may grow an <a href="/book/language/arrays.html">array</a>’s or <a href="/book/language/blobs.html">BLOB</a>’s size without Rhai noticing until the very end.</p>
 <p>For instance, the built-in <code>+</code> operator for <a href="/book/language/arrays.html">arrays</a> and <a href="/book/language/blobs.html">BLOB’s</a> concatenates two of them together
@@ -223,7 +220,6 @@ loop {
 }
 <span class="boring">}
 </span></code></pre></pre>
-</p>
 </div>
 </div>
 

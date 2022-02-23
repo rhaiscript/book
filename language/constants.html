@@ -183,7 +183,7 @@ X = 123;            // &lt;- syntax error: constant modified
 <p>It is possible to add a constant into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> via <code>Scope::push_constant</code> so it’ll be
 available to scripts running with that <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <p>It is very useful to have a constant value hold a <a href="/book/rust/custom.html">custom type</a>, which essentially acts
-as a <a href="../patterns/singleton.html"><em>singleton</em></a>.</p>
+as a <a href="/book/patterns/singleton.html"><em>singleton</em></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -223,19 +223,15 @@ engine.run_with_scope(&amp;mut scope, script)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="caveat--constants-can-be-modified-via-rust"><a class="header" href="#caveat--constants-can-be-modified-via-rust">Caveat – Constants Can be Modified via Rust</a></h2>
-<div class="admonition tip side-wide">
+<div class="admonition tip side wide">
 <div class="admonition-title">
-<p>
 <p>Tip: Plugin functions</p>
-</p>
 </div>
 <div>
-<p>
 <p>In <a href="/book/plugins/function.html">plugin functions</a>, <code>&amp;mut</code> parameters disallow constant values by default.</p>
 <p>This is different from the <code>Engine::register_XXX</code> API.</p>
 <p>However, if a <a href="/book/plugins/function.html">plugin function</a> is marked with <code>#[export_fn(pure)]</code> or <code>#[rhai_fn(pure)]</code>,
 it is assumed <em>pure</em> (i.e. will not modify its arguments) and so constants are allowed.</p>
-</p>
 </div>
 </div>
 <p>A <a href="/book/rust/custom.html">custom type</a> stored as a constant cannot be modified via script, but <em>can</em> be modified via a
@@ -281,14 +277,11 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 X == 43;            // value of 'X' is unchanged by script
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info ">
+<div class="admonition info">
 <div class="admonition-title">
-<p>
 <p>Implications on script optimization</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rhai <em>assumes</em> that constants are never changed, even via Rust functions.</p>
 <p>This is important to keep in mind because the script <a href="/book/engine/optimize/index.html">optimizer</a>
 by default does <em>constant propagation</em> as a operation.</p>
@@ -296,7 +289,6 @@ by default does <em>constant propagation</em> as a operation.</p>
 the updated value and will propagate the original initialization value instead.</p>
 <p><code>Dynamic::is_read_only</code> can be used to detect whether a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value is constant or not within
 a Rust function.</p>
-</p>
 </div>
 </div>
 

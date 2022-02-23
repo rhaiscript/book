@@ -167,29 +167,22 @@
 <p>For the ultimate adventurous, there is a built-in facility to <em>extend</em> the Rhai language with
 custom-defined <em>syntax</em>.</p>
 <p>But before going off to define the next weird statement type, heed this warning:</p>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>Don’t Do It™</p>
-</p>
 </div>
 <div>
-<p>
 <p>Stick with standard language syntax as much as possible.</p>
 <p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another obscure
 language syntax just to do something.</p>
 <p>Try to use <a href="/book/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
-</p>
 </div>
 </div>
-<div class="admonition success ">
+<div class="admonition success">
 <div class="admonition-title">
-<p>
 <p>Where this might be useful</p>
-</p>
 </div>
 <div>
-<p>
 <ul>
 <li>
 <p>Where an operation is used a <em>LOT</em> and a custom syntax saves a lot of typing.</p>
@@ -205,7 +198,6 @@ understanding of the code’s intent.</p>
 <p>Where you just want to confuse your user and make their lives miserable, because you can.</p>
 </li>
 </ul>
-</p>
 </div>
 </div>
 <h2 id="how-to-do-it"><a class="header" href="#how-to-do-it">How to Do It</a></h2>
@@ -496,14 +488,11 @@ tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
 <p>Use <code>Engine::register_custom_syntax_raw</code> to register a custom syntax <em>parser</em>
 together with the implementation function.</p>
 <h2 id="how-custom-parsers-work"><a class="header" href="#how-custom-parsers-work">How Custom Parsers Work</a></h2>
-<div class="admonition note ">
+<div class="admonition note">
 <div class="admonition-title">
-<p>
 <p>Leading symbol</p>
-</p>
 </div>
 <div>
-<p>
 <p>Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
 It can either be:</p>
 <ul>
@@ -514,7 +503,6 @@ It can either be:</p>
 <p>a valid symbol (see <a href="/book/appendix/operators.html">list</a>) which is not a normal <a href="/book/appendix/operators.html#operators">operator</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>.</p>
 </li>
 </ul>
-</p>
 </div>
 </div>
 <h3 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h3>

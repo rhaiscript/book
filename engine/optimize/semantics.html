@@ -168,19 +168,15 @@
 differently when run with or without optimization.</p>
 <p>Typically, this involves some form of error that may arise in the original, unoptimized script but
 is optimized away by the <a href="/book/engine/optimize/index.html">script optimizer</a>.</p>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>DO NOT depend on runtime errors</p>
-</p>
 </div>
 <div>
-<p>
 <p>Needless to say, it is usually a <em>Very Bad Idea™</em> to depend on a script failing with a runtime error
 or such kind of subtleties.</p>
 <p>If it turns out to be necessary (why? I would never guess), turn script optimization off by setting
 the optimization level to <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::None</code></a>.</p>
-</p>
 </div>
 </div>
 <h2 id="disappearing-runtime-errors"><a class="header" href="#disappearing-runtime-errors">Disappearing Runtime Errors</a></h2>

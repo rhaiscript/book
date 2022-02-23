@@ -165,9 +165,32 @@
                     <main>
                         <h1 id="call-method-as-function"><a class="header" href="#call-method-as-function">Call Method as Function</a></h1>
 <h2 id="method-call-style-vs-function-call-style"><a class="header" href="#method-call-style-vs-function-call-style">Method-Call Style vs. Function-Call Style</a></h2>
-<p>Any registered function with a first argument that is a <code>&amp;mut</code> reference can be used as method
-because internally they are the same thing: methods on a <a href="/book/rust/custom.html">custom type</a> is implemented as a functions
-taking a <code>&amp;mut</code> first argument.</p>
+<h3 id="method-call-syntax"><a class="header" href="#method-call-syntax">Method-call syntax</a></h3>
+<blockquote>
+<p><em>object</em> <code>.</code> <em>function</em> <code>(</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
+</blockquote>
+<div class="admonition warning">
+<div class="admonition-title">
+<p><em>method-call</em> style is not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
+</div>
+<div>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Below is a syntax error under 'no_object'.
+let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
+                                           // ^ cannot call method-style
+<span class="boring">}
+</span></code></pre></pre>
+</div>
+</div>
+<h3 id="function-call-syntax"><a class="header" href="#function-call-syntax">Function-call syntax</a></h3>
+<blockquote>
+<p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
+</blockquote>
+<h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
+<p>Internally, methods on a <a href="/book/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
+the object’s type. Therefore, methods and functions can be called interchangeably.</p>
 <p>This design is similar to Rust.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -190,26 +213,6 @@ let result = engine.eval::&lt;i64&gt;(
 println!(&quot;result: {}&quot;, result);     // prints 1
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning ">
-<div class="admonition-title">
-<p>
-<p>Unavailable under <code>no_object</code></p>
-</p>
-</div>
-<div>
-<p>
-<p>Under <a href="/book/start/features.html"><code>no_object</code></a>, the <em>method-call</em> style is no longer supported.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Below is a syntax error under 'no_object'.
-let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
-                                           // ^ cannot call method-style
-<span class="boring">}
-</span></code></pre></pre>
-</p>
-</div>
-</div>
 <h2 id="first-mut-parameter"><a class="header" href="#first-mut-parameter">First <code>&amp;mut</code> Parameter</a></h2>
 <p>The opposite direction also works – <a href="/book/rust/custom.html">methods</a> in a Rust <a href="/book/rust/custom.html">custom type</a> registered
 with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
@@ -239,17 +242,13 @@ update(array[0]);   // &lt;- 'array[0]' is an expression returning a calculated 
 array[0].update();  // &lt;- call in method-call style will update 'a'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger ">
+<div class="admonition danger">
 <div class="admonition-title">
-<p>
 <p>No support for references</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.
 All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
-</p>
 </div>
 </div>
 <h2 id="number-of-parameters-in-methods"><a class="header" href="#number-of-parameters-in-methods">Number of Parameters in Methods</a></h2>

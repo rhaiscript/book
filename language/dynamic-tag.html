@@ -167,16 +167,12 @@
 <p>Each <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can contain a <em>tag</em> that is <code>i32</code> and can contain any arbitrary data.</p>
 <p>On 32-bit targets, however, the tag is only <code>i16</code>.</p>
 <p>The tag defaults to zero.</p>
-<div class="admonition bug ">
+<div class="admonition bug">
 <div class="admonition-title">
-<p>
 <p>Value out of bounds</p>
-</p>
 </div>
 <div>
-<p>
 <p>It is an error to set a tag to a value beyond the bounds of <code>i32</code> (<code>i16</code> on 32-bit targets).</p>
-</p>
 </div>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -382,19 +378,15 @@ let c = r.tag[16..32];
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>Tell me, really, what is the <em>point</em>?</p>
-</p>
 </div>
 <div>
-<p>
 <p>Due to byte alignment requirements on modern CPU’s, there are unused spaces in a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> type,
 of the order of 4 bytes on 64-bit targets (2 bytes on 32-bit).</p>
 <p>It is empty space that can be put to good use and not wasted, especially when Rhai does not have
 built-in support of tuples in order to return multiple values from <a href="/book/language/functions.html">functions</a>.</p>
-</p>
 </div>
 </div>
 

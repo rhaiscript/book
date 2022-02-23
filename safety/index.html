@@ -166,46 +166,75 @@
                         <h1 id="safety-and-protection-against-dos-attacks"><a class="header" href="#safety-and-protection-against-dos-attacks">Safety and Protection Against DoS Attacks</a></h1>
 <p>For scripting systems open to untrusted user-land scripts, it is always best to limit the amount of
 resources used by a script so that it does not consume more resources that it is allowed to.</p>
-<p>The most important resources to watch out for are:</p>
-<ul>
-<li>
-<p><strong>Memory</strong>: A malicious script may continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
-<p>It may also create a large <a href="/book/language/arrays.html">array</a> or <a href="/book/language/object-maps.html">object map</a> literal that exhausts all memory during parsing.</p>
-</li>
-<li>
-<p><strong>CPU</strong>: A malicious script may run an infinite tight loop that consumes all CPU cycles.</p>
-</li>
-<li>
-<p><strong>Time</strong>: A malicious script may run indefinitely, thereby blocking the calling system which is waiting for a result.</p>
-</li>
-<li>
-<p><strong>Stack</strong>: A malicious script may attempt an infinite recursive call that exhausts the call stack.</p>
-<p>Alternatively, it may create a degenerated deep expression with so many levels that the parser exhausts the call stack
-when parsing the expression; or even deeply-nested statement blocks, if nested deep enough.</p>
-<p>Another way to cause a stack overflow is to load a <a href="/book/language/modules/import.html">self-referencing module</a>.</p>
-</li>
-<li>
-<p><strong>Overflows</strong>: A malicious script may deliberately cause numeric over-flows and/or under-flows, divide by zero, and/or
-create bad floating-point representations, in order to crash the system.</p>
-</li>
-<li>
-<p><strong>Files</strong>: A malicious script may continuously <a href="/book/language/modules/import.html"><code>import</code></a> an external module within an infinite loop,
-thereby putting heavy load on the file-system (or even the network if the file is not local).</p>
-<p>Even when modules are not created from files, they still typically consume a lot of resources to load.</p>
-</li>
-<li>
-<p><strong>Data</strong>: A malicious script may attempt to read from and/or write to data that it does not own. If this happens,
-it is a severe security breach and may put the entire system at risk.</p>
-</li>
-</ul>
-<div class="admonition warning ">
+<h2 id="most-important-resources"><a class="header" href="#most-important-resources">Most Important Resources</a></h2>
+<div class="admonition bug">
 <div class="admonition-title">
-<p>
-<p>Beware of <code>internals</code></p>
-</p>
+<p>Memory</p>
 </div>
 <div>
-<p>
+<p>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
+<p>Or create a large <a href="/book/language/arrays.html">array</a> or <a href="/book/language/object-maps.html">object map</a> literal that exhausts all memory during parsing.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>CPU</p>
+</div>
+<div>
+<p>Run an infinite tight loop that consumes all CPU cycles.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Time</p>
+</div>
+<div>
+<p>Run indefinitely, thereby blocking the calling system which is waiting for a result.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Stack</p>
+</div>
+<div>
+<p>Infinite recursive call that exhausts the call stack.</p>
+<p>Or create a degenerated deep expression with so many levels that the parser exhausts the call stack when
+parsing the expression; or even deeply-nested statement blocks, if nested deep enough.</p>
+<p>Or load a <a href="/book/language/modules/import.html">self-referencing module</a>.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Overflows or Underflows</p>
+</div>
+<div>
+<p>Numeric overflows and/or underflows, divide by zero, or bad floating-point representations.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Files</p>
+</div>
+<div>
+<p>Continuously <a href="/book/language/modules/import.html"><code>import</code></a> an external <a href="/book/rust/modules/index.html">module</a> within an infinite loop, thereby putting heavy load on the file-system
+(or even the network if the file is not local).</p>
+<p>Even when <a href="/book/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Private data</p>
+</div>
+<div>
+<p>Read from and/or write to private, secret, sensitive data.</p>
+<p>Such security breach may put the entire system at risk.</p>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>The <a href="/book/start/features.html"><code>internals</code></a> feature</p>
+</div>
+<div>
 <p>The <a href="/book/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
 example, the <a href="/book/engine/compile.html"><code>AST</code></a> and related types).</p>
 <p>This is usually a <em>Very Bad Idea™</em> because:</p>
@@ -226,23 +255,18 @@ break code.</p>
 be surprised how few scenarios this assumption holds.</p>
 <p>One example of such an environment is a Rhai scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/book/start/builds/wasm.html">WASM</a> where the
 <a href="/book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
-</p>
 </div>
 </div>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
-<div class="admonition tip side-wide">
+<div class="admonition tip side wide">
 <div class="admonition-title">
-<p>
 <p>OK, panic anyway</p>
-</p>
 </div>
 <div>
-<p>
 <p>All these safe-guards can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature, which disables all safety
 checks (even fatal ones).</p>
 <p>This increases script evaluation performance somewhat, but very easy for a malicious script
 to bring down the host system.</p>
-</p>
 </div>
 </div>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>

@@ -274,14 +274,11 @@ using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on 
 <tr><td><code>is_exclusive</code> method and property</td><td style="text-align: center"></td><td>is the range exclusive?</td></tr>
 </tbody></table>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>What happened to the <em>open-ended</em> ranges?</p>
-</p>
 </div>
 <div>
-<p>
 <p>Rust has <em>open-ended</em> ranges, such as <code>start..</code>, <code>..end</code> and <code>..=end</code>.  They are not available in Rhai.</p>
 <p>They are not needed because Rhai can <a href="/book/rust/functions.html">overload</a> functions.</p>
 <p>Typically, an API accepting ranges as parameters would have equivalent versions that accept a
@@ -336,7 +333,6 @@ x.extract(0, 2);    // copies 'x' from beginning for 2 items
                     // equivalent to '..2'
 <span class="boring">}
 </span></code></pre></pre>
-</p>
 </div>
 </div>
 

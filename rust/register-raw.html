@@ -301,25 +301,22 @@ r#&quot;
 &quot;#)?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Hold multiple references</p>
-</p>
 </div>
 <div>
-<p>
 <p>In order to access a value argument that is expensive to clone <em>while</em> holding a mutable reference
 to the first argument, use one of the following tactics:</p>
 <ol>
 <li>
-<p>if it is a <a href="/book/language/values-and-types.html">primary type</a> other than <a href="/book/language/strings-chars.html">string</a>, use <code>as_xxx()</code> as above</p>
+<p>If it is a <a href="/book/language/values-and-types.html">primary type</a> other than <a href="/book/language/strings-chars.html">string</a>, use <code>as_xxx()</code> as above;</p>
 </li>
 <li>
-<p>directly <em>consume</em> that argument via <code>std::mem::take</code> as above</p>
+<p>Directly <em>consume</em> that argument via <code>std::mem::take</code> as above;</p>
 </li>
 <li>
-<p>use <code>split_first_mut</code> to partition the slice:</p>
+<p>Use <code>split_first_mut</code> to partition the slice:</p>
 </li>
 </ol>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -336,18 +333,14 @@ let this_ptr = &amp;mut *first.write_lock::&lt;A&gt;().unwrap();
 let value_ref = &amp;*rest[0].read_lock::&lt;B&gt;().unwrap();
 <span class="boring">}
 </span></code></pre></pre>
-</p>
 </div>
 </div>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question ">
+<div class="admonition question">
 <div class="admonition-title">
-<p>
 <p>Why <code>read_lock</code> and <code>write_lock</code>?</p>
-</p>
 </div>
 <div>
-<p>
 <p>The <a href="/book/language/dynamic.html"><code>Dynamic</code></a> API that casts it to a reference to a particular data type  is <code>read_lock</code>
 (for an immutable reference) and <code>write_lock</code> (for a mutable reference).</p>
 <p>As the naming shows, something is <em>locked</em> in order to allow this access, and that something
@@ -359,7 +352,6 @@ no <a href="/book/language/fn-closure.html">capturing</a>, this API de-sugars to
 non-shared values.</p>
 <p>If the value <em>is</em> a shared value, then it is first <em>locked</em> and the returned <em>lock guard</em>
 allows access to the underlying value in the specified type.</p>
-</p>
 </div>
 </div>
 

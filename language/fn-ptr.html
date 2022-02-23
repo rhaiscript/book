@@ -168,20 +168,6 @@
 In fact, internally a function pointer simply stores the <em>name</em> of the <a href="/book/language/functions.html">function</a> as a <a href="/book/language/strings-chars.html">string</a>.</p>
 <p>A function pointer is created via the <code>Fn</code> <a href="/book/language/functions.html">function</a>, which takes a <a href="/book/language/strings-chars.html">string</a> parameter.</p>
 <p>Call a function pointer via the <code>call</code> method.</p>
-<div class="admonition warning ">
-<div class="admonition-title">
-<p>
-<p>NOT first-class functions</p>
-</p>
-</div>
-<div>
-<p>
-<p>Beware that function pointers are <em>not</em> first-class functions.</p>
-<p>They are <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/book/language/functions.html">function</a> to call.</p>
-<p>The actual <a href="/book/language/functions.html">function</a> must be defined in order for the call to succeed.</p>
-</p>
-</div>
-</div>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
 <p>The following standard methods (mostly defined in the <a href="/book/rust/packages/builtin.html"><code>BasicFnPackage</code></a> but excluded if
 using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on function pointers.</p>
@@ -223,6 +209,37 @@ let hello = Fn(fn_name + &quot;_world&quot;);
 hello.call(0);              // error: function not found - 'hello_world (i64)'
 <span class="boring">}
 </span></code></pre></pre>
+<h2 id="warning--not-first-class-functions"><a class="header" href="#warning--not-first-class-functions">Warning – Not First-Class Functions</a></h2>
+<p>Beware that function pointers are <em>not</em> first-class functions.</p>
+<p>They are <em>syntactic sugar</em> only, capturing only the <em>name</em> of a <a href="/book/language/functions.html">function</a> to call.
+They do not hold the actual <a href="/book/language/functions.html">functions</a>.</p>
+<p>The actual <a href="/book/language/functions.html">function</a> must be defined in the appropriate <a href="/book/language/fn-namespaces.html">namespace</a>
+for the call to succeed.</p>
+<p>For example, <a href="/book/language/modules/export.html">exporting</a> a function pointer (or an <a href="/book/language/fn-anon.html">anonymous function</a> or <a href="/book/language/fn-closure.html">closure</a>)
+from a <a href="/book/rust/modules/index.html">module</a> referring to a local <a href="/book/language/functions.html">function</a> will fail at runtime because the target
+<a href="/book/language/functions.html">function</a> cannot be found in the caller’s <a href="/book/language/fn-namespaces.html">namespace</a>.</p>
+<pre><code class="language-js">┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
+
+fn increment(x) {
+    x + 1
+}
+
+export let inc = Fn(&quot;increment&quot;);   // exports a function pointer
+
+
+┌───────────┐
+│ main.rhai │
+└───────────┘
+
+import &quot;my_module&quot; as my_mod;
+
+print(my_mod::increment(41));       // ok!
+
+let x = my_mod::inc.call(41);       // runtime error:
+                                    //    function 'increment' not found
+</code></pre>
 <h2 id="warning--global-namespace-only"><a class="header" href="#warning--global-namespace-only">Warning – Global Namespace Only</a></h2>
 <p>Because of their dynamic nature, function pointers cannot refer to functions in <a href="/book/language/modules/import.html"><code>import</code></a>-ed <a href="/book/rust/modules/index.html">modules</a>.
 They can only refer to <a href="/book/language/functions.html">functions</a> within the global <a href="/book/language/fn-namespaces.html">namespace</a>.

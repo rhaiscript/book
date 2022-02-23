@@ -172,14 +172,11 @@ custom types and functions are registered.</p>
 within a pruned code block).</p>
 <p>If custom functions are registered to overload <a href="/book/engine/builtin.html">built-in operators</a>, they will also be called when
 the operators are used (in an <a href="/book/language/if.html"><code>if</code></a> statement, for example), potentially causing side-effects.</p>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Rule of thumb</p>
-</p>
 </div>
 <div>
-<p>
 <ul>
 <li>
 <p><em>Always</em> register custom types and functions <em>after</em> compiling scripts if <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a> is used.</p>
@@ -189,7 +186,6 @@ the operators are used (in an <a href="/book/language/if.html"><code>if</code></
 when that happens, existing scripts may break in subtle ways.</p>
 </li>
 </ul>
-</p>
 </div>
 </div>
 

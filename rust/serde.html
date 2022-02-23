@@ -274,45 +274,34 @@ r#&quot;
 let x: MyStruct = from_dynamic(&amp;result)?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Cannot deserialize shared values</p>
-</p>
 </div>
 <div>
-<p>
 <p>A <a href="/book/language/dynamic.html"><code>Dynamic</code></a> containing a <em>shared</em> value cannot be deserialized.
 It will give a type error.</p>
 <p>Use <code>Dynamic::flatten</code> to obtain a cloned copy before deserialization
 (if the value is not shared, it is simply returned and not cloned).</p>
 <p>Shared values are turned off via the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
-</p>
 </div>
 </div>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Lighter alternative</p>
-</p>
 </div>
 <div>
-<p>
 <p>The <a href="https://crates.io/crates/serde"><code>serde</code></a> crate is quite heavy.</p>
 <p>If only <em>simple</em> JSON parsing (i.e. only deserialization) of a hash object into a Rhai <a href="/book/language/object-maps.html">object map</a> is required,
 the <a href="/book/language/json.html"><code>Engine::parse_json</code></a> method is available as a <em>cheap</em> alternative,
 but it does not provide the same level of correctness, nor are there any configurable options.</p>
-</p>
 </div>
 </div>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Working with BLOB’s</p>
-</p>
 </div>
 <div>
-<p>
 <p><a href="/book/language/blobs.html">BLOB’s</a>, or byte-arrays, are normally serialized and deserialized as simple <a href="/book/language/arrays.html">arrays</a>.</p>
 <p>For higher efficiency, it is necessary to specify <a href="/book/language/blobs.html">BLOB</a> fields via the
 <code>serde_bytes</code> attribute from the <a href="https://crates.io/crates/serde_bytes"><code>serde_bytes</code></a> crate.</p>
@@ -340,7 +329,6 @@ let bytes_ref: &amp;[u8] = from_dynamic::&lt;serde_bytes::Bytes&gt;(&amp;blob)?.
 let bytes: Vec&lt;u8&gt; = from_dynamic::&lt;serde_bytes::ByteBuf&gt;(&amp;blob)?.into_vec();
 <span class="boring">}
 </span></code></pre></pre>
-</p>
 </div>
 </div>
 

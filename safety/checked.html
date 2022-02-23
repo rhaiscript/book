@@ -165,10 +165,17 @@
                     <main>
                         <h1 id="turning-off-safety-checks"><a class="header" href="#turning-off-safety-checks">Turning Off Safety Checks</a></h1>
 <h2 id="checked-arithmetic"><a class="header" href="#checked-arithmetic">Checked Arithmetic</a></h2>
+<div class="admonition bug side">
+<div class="admonition-title">
+<p>Don’t Panic</p>
+</div>
+<div>
+<p>Scripts under normal builds of Rhai never crash the host system – any panic is a bug.</p>
+</div>
+</div>
 <p>By default, all arithmetic calculations in Rhai are <em>checked</em>, meaning that the script terminates
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.</p>
-<p>Scripts under normal builds of Rhai never crash the host system – any panic is a bug.</p>
 <p>This checking can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance
 (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">

@@ -164,10 +164,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="export-variables-functions-and-sub-modules-from-a-script"><a class="header" href="#export-variables-functions-and-sub-modules-from-a-script">Export Variables, Functions and Sub-Modules From a Script</a></h1>
+<div class="admonition info side">
+<div class="admonition-title">
+<p>See also</p>
+</div>
+<div>
+<p>See <a href="/book/rust/modules/ast.html"><em>Create a Module from AST</em></a> for more details.</p>
+</div>
+</div>
 <p>The easiest way to expose a collection of <a href="/book/language/functions.html">functions</a> as a self-contained <a href="/book/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
-<p>See the section on <a href="/book/rust/modules/ast.html"><em>Creating a Module from AST</em></a> for more details.</p>
-<p>The script text is evaluated, <a href="/book/language/variables.html">variables</a> are then selectively exposed via the <a href="/book/language/modules/export.html"><code>export</code></a> statement.
-<a href="/book/language/functions.html">Functions</a> defined by the script are automatically exported.</p>
+<p>The script text is evaluated.</p>
+<p><a href="/book/language/variables.html">Variables</a> are then selectively exposed via the <a href="/book/language/modules/export.html"><code>export</code></a> statement.</p>
+<p><a href="/book/language/functions.html">Functions</a> defined by the script are automatically exported, unless marked as <a href="/book/language/modules/export.html">private</a>.</p>
 <p>Modules loaded within this <a href="/book/rust/modules/index.html">module</a> at the global level become <em>sub-modules</em> and are also automatically exported.</p>
 <h2 id="export-global-variables"><a class="header" href="#export-global-variables">Export Global Variables</a></h2>
 <p>The <code>export</code> statement, which can only be at global level, exposes a selected <a href="/book/language/variables.html">variable</a> as member of a <a href="/book/rust/modules/index.html">module</a>.</p>
@@ -196,16 +204,13 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
     export inner;       // &lt;- syntax error: cannot export a local variable
 }
 </code></pre>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Tip: Multiple exports</p>
-</p>
 </div>
 <div>
-<p>
-<p><a href="/book/language/variables.html">Variables</a> can be exported under multiple names.</p>
-<p>The following exports three <a href="/book/language/variables.html">variables</a>:</p>
+<p><a href="/book/language/variables.html">Variables</a> can be exported under multiple names.
+For example, the following exports three <a href="/book/language/variables.html">variables</a>:</p>
 <ul>
 <li><code>x</code> as <code>x</code> and <code>hello</code></li>
 <li><code>y</code> as <code>foo</code> and <code>bar</code></li>
@@ -218,21 +223,49 @@ export x as world;
 export y as bar;
 export z;
 </code></pre>
-</p>
+</div>
+</div>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>Do not export closures</p>
+</div>
+<div>
+<p>A <a href="/book/language/fn-ptr.html">function pointer</a>, <a href="/book/language/fn-anon.html">anonymous function</a> or <a href="/book/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
+It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/book/language/functions.html">function</a> to call.</p>
+<p>The actual <a href="/book/language/functions.html">function</a> may not reside in the appropriate <a href="/book/language/fn-namespaces.html">namespace</a>,
+so the call will fail.</p>
+<pre><code class="language-js">┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
+
+fn increment(x) {
+    x + 1
+}
+
+export let inc = Fn(&quot;increment&quot;);   // exports a function pointer
+
+
+┌───────────┐
+│ main.rhai │
+└───────────┘
+
+import &quot;my_module&quot; as my_mod;
+
+print(my_mod::increment(41));       // ok!
+
+let x = my_mod::inc.call(41);       // runtime error:
+                                    //    function 'increment' not found
+</code></pre>
 </div>
 </div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
-<div class="admonition info side-wide">
+<div class="admonition info side wide">
 <div class="admonition-title">
-<p>
 <p>Private functions</p>
-</p>
 </div>
 <div>
-<p>
 <p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called to initialize the <a href="/book/rust/modules/index.html">module</a>.
 They cannot be accessed otherwise.</p>
-</p>
 </div>
 </div>
 <p>All <a href="/book/language/functions.html">functions</a> are automatically exported, <em>unless</em> it is explicitly opt-out with the <a href="/book/language/modules/export.html"><code>private</code></a> prefix.</p>

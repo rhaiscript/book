@@ -199,14 +199,11 @@ not as UTF-8 but as arrays of UCS-16 or UCS-32.</p>
 <p>Individual characters within a Rhai string can also be replaced just as if the string is an array of
 Unicode characters.</p>
 <p>In Rhai, there are also no separate concepts of <code>String</code> and <code>&amp;str</code> (a string slice) as in Rust.</p>
-<div class="admonition warning ">
+<div class="admonition warning">
 <div class="admonition-title">
-<p>
 <p>Performance considerations</p>
-</p>
 </div>
 <div>
-<p>
 <p>Although Rhai exposes a <a href="/book/language/strings-chars.html">string</a> as a simple array of <a href="/book/language/strings-chars.html">characters</a> which can be directly indexed to
 get at a particular <a href="/book/language/strings-chars.html">character</a>, such convenient syntax is an <em>illusion</em>.</p>
 <p>Internally the <a href="/book/language/strings-chars.html">string</a> is still stored in UTF-8 (native Rust <code>String</code>s).</p>
@@ -216,7 +213,6 @@ indexing for other scripting languages.</p>
 <p>This implementation detail is hidden from the user but has a performance implication.</p>
 <p>Avoid large scale <a href="/book/language/strings-chars.html">character</a>-based processing of <a href="/book/language/strings-chars.html">strings</a>; instead, build an actual <a href="/book/language/arrays.html">array</a> of
 <a href="/book/language/strings-chars.html">characters</a> (via the <code>split()</code> method) which can then be manipulated efficiently.</p>
-</p>
 </div>
 </div>
 

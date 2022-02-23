@@ -169,21 +169,17 @@
 <code>Engine::register_global_module</code>.</p>
 <p>Packages reside under <code>rhai::packages::*</code> and the trait <code>rhai::packages::Package</code> must be loaded in
 order for packages to be used.</p>
-<div class="admonition tip ">
+<div class="admonition tip">
 <div class="admonition-title">
-<p>
 <p>Trivia: Packages <em>are</em> modules!</p>
-</p>
 </div>
 <div>
-<p>
 <p>Internally, a <em>package</em> is a <a href="/book/rust/modules/index.html">module</a>, with some conveniences to make it easier to define and use as
 a standard <em>library</em> for an <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 <p>Packages typically contain Rust functions that are callable within a Rhai script.
 All <em>top-level</em> functions in a package are available under the <em>global namespace</em>
 (i.e. they’re available without namespace qualifiers).</p>
 <p>Sub-<a href="/book/rust/modules/index.html">modules</a> and <a href="/book/language/variables.html">variables</a> are ignored in packages.</p>
-</p>
 </div>
 </div>
 <h2 id="share-a-package-among-multiple-engines"><a class="header" href="#share-a-package-among-multiple-engines">Share a Package Among Multiple <code>Engine</code>’s</a></h2>

@@ -164,7 +164,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="features-of-rhai"><a class="header" href="#features-of-rhai">Features of Rhai</a></h1>
-<h2 id="easy"><a class="header" href="#easy">Easy</a></h2>
+<div class="admonition success">
+<div class="admonition-title">
+<p>Easy</p>
+</div>
+<div>
 <ul>
 <li>
 <p>Simple language similar to JavaScript+Rust with dynamic typing.</p>
@@ -190,7 +194,13 @@ pulled in to provide for missing functionalities.</p>
 <p><a href="/book/plugins/index.html">Plugins</a> system powered by procedural macros simplifies custom API development.</p>
 </li>
 </ul>
-<h2 id="fast"><a class="header" href="#fast">Fast</a></h2>
+</div>
+</div>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>Fast</p>
+</div>
+<div>
 <ul>
 <li>
 <p>Fairly efficient evaluation (1 million iterations in 0.3 sec on a single-core, 2.3 GHz Linux VM).</p>
@@ -202,7 +212,13 @@ pulled in to provide for missing functionalities.</p>
 <p>Scripts are <a href="/book/engine/optimize/index.html">optimized</a> (useful for template-based machine-generated scripts).</p>
 </li>
 </ul>
-<h2 id="dynamic"><a class="header" href="#dynamic">Dynamic</a></h2>
+</div>
+</div>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Dynamic</p>
+</div>
+<div>
 <ul>
 <li>
 <p><a href="/book/language/overload.html">Function overloading</a>.</p>
@@ -228,7 +244,13 @@ pulled in to provide for missing functionalities.</p>
 <a href="/book/engine/def-var.html">variable definition filter</a>.</p>
 </li>
 </ul>
-<h2 id="safe"><a class="header" href="#safe">Safe</a></h2>
+</div>
+</div>
+<div class="admonition warning">
+<div class="admonition-title">
+<p>Safe</p>
+</div>
+<div>
 <ul>
 <li>
 <p>Relatively little <code>unsafe</code> code (yes there are some for performance reasons).</p>
@@ -238,7 +260,13 @@ pulled in to provide for missing functionalities.</p>
 environment unless <a href="/book/patterns/control.html">explicitly permitted</a>.</p>
 </li>
 </ul>
-<h2 id="rugged"><a class="header" href="#rugged">Rugged</a></h2>
+</div>
+</div>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Rugged</p>
+</div>
+<div>
 <ul>
 <li>
 <p><a href="/book/safety/index.html"><em>Don’t Panic</em></a> guarantee – Any panic is a bug. It never panics the host system.</p>
@@ -252,7 +280,13 @@ etc.) that may come from untrusted third-party user-land scripts.</p>
 <p>Track script evaluation <a href="/book/safety/progress.html">progress</a> and manually terminate a script run.</p>
 </li>
 </ul>
-<h2 id="flexible"><a class="header" href="#flexible">Flexible</a></h2>
+</div>
+</div>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Flexible</p>
+</div>
+<div>
 <ul>
 <li>
 <p>Re-entrant scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be made <code>Send + Sync</code> (via the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
@@ -279,6 +313,8 @@ etc.) that may come from untrusted third-party user-land scripts.</p>
 <p>A <a href="/book/engine/debugging/debugger.html">debugging</a> interface provides powerful debugging support.</p>
 </li>
 </ul>
+</div>
+</div>
 
                     </main>
 
