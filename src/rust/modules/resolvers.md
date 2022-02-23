@@ -3,7 +3,7 @@ Module Resolvers
 
 {{#include ../../links.md}}
 
-~~~admonish info.side-wide "`import` statements"
+~~~admonish info.side.wide "`import` statements"
 
 See the section on [_Importing Modules_][`import`] for more details.
 ~~~

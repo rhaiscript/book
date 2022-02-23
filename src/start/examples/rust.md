@@ -56,7 +56,10 @@ To illustrate `no-std` builds, a number of example applications are available un
 
 ### Building the `no-std` examples
 
+```admonish warning "Nightly required"
+
 Currently, the nightly compiler must be used to build for `no-std`.
+```
 
 ```sh
 cd no_std/no_std_test

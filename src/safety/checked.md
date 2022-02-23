@@ -7,11 +7,14 @@ Turning Off Safety Checks
 Checked Arithmetic
 ------------------
 
+```admonish bug.side "Don't Panic"
+
+Scripts under normal builds of Rhai never crash the host system &ndash; any panic is a bug.
+```
+
 By default, all arithmetic calculations in Rhai are _checked_, meaning that the script terminates
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.
-
-Scripts under normal builds of Rhai never crash the host system &ndash; any panic is a bug.
 
 This checking can be turned off via the [`unchecked`] feature for higher performance
 (but higher risks as well).

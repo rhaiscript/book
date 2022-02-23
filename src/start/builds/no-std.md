@@ -75,6 +75,6 @@ fn main(_argc: isize, _argv: *const *const u8) -> isize {
 
 ```admonish example.small "Samples"
 
-Check out the [`no-std` sample applications](../examples/rust.md#no-std-samples)
+Check out the [`no-std` sample applications]({{rootUrl}}/examples/rust.md#no-std-samples)
 for different operating environments.
 ```

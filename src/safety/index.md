@@ -8,35 +8,55 @@ Safety and Protection Against DoS Attacks
 For scripting systems open to untrusted user-land scripts, it is always best to limit the amount of
 resources used by a script so that it does not consume more resources that it is allowed to.
 
-The most important resources to watch out for are:
+Most Important Resources
+------------------------
 
-* **Memory**: A malicious script may continuously grow a [string], an [array], a [BLOB] or [object map] until all memory is consumed.
+```admonish bug "Memory"
+Continuously grow a [string], an [array], a [BLOB] or [object map] until all memory is consumed.
 
-  It may also create a large [array] or [object map] literal that exhausts all memory during parsing.
+Or create a large [array] or [object map] literal that exhausts all memory during parsing.
+```
 
-* **CPU**: A malicious script may run an infinite tight loop that consumes all CPU cycles.
+```admonish bug "CPU"
 
-* **Time**: A malicious script may run indefinitely, thereby blocking the calling system which is waiting for a result.
+Run an infinite tight loop that consumes all CPU cycles.
+```
 
-* **Stack**: A malicious script may attempt an infinite recursive call that exhausts the call stack.
+```admonish bug "Time"
 
-  Alternatively, it may create a degenerated deep expression with so many levels that the parser exhausts the call stack
-  when parsing the expression; or even deeply-nested statement blocks, if nested deep enough.
+Run indefinitely, thereby blocking the calling system which is waiting for a result.
+```
 
-  Another way to cause a stack overflow is to load a [self-referencing module][`import`].
+```admonish bug "Stack"
 
-* **Overflows**: A malicious script may deliberately cause numeric over-flows and/or under-flows, divide by zero, and/or
-  create bad floating-point representations, in order to crash the system.
+Infinite recursive call that exhausts the call stack.
 
-* **Files**: A malicious script may continuously [`import`] an external module within an infinite loop,
-  thereby putting heavy load on the file-system (or even the network if the file is not local).
+Or create a degenerated deep expression with so many levels that the parser exhausts the call stack when
+parsing the expression; or even deeply-nested statement blocks, if nested deep enough.
 
-  Even when modules are not created from files, they still typically consume a lot of resources to load.
+Or load a [self-referencing module][`import`].
+```
 
-* **Data**: A malicious script may attempt to read from and/or write to data that it does not own. If this happens,
-  it is a severe security breach and may put the entire system at risk.
+```admonish bug "Overflows or Underflows"
 
-~~~admonish warning "Beware of `internals`"
+Numeric overflows and/or underflows, divide by zero, or bad floating-point representations.
+```
+
+```admonish bug "Files"
+
+Continuously [`import`] an external [module] within an infinite loop, thereby putting heavy load on the file-system
+(or even the network if the file is not local).
+
+Even when [modules] are not created from files, they still typically consume a lot of resources to load.
+```
+
+```admonish bug "Private data"
+Read from and/or write to private, secret, sensitive data.
+
+Such security breach may put the entire system at risk.
+```
+
+~~~admonish bug "The [`internals`] feature"
 
 The [`internals`] feature allows third-party access to Rust internal data types and functions (for
 example, the [`AST`] and related types).
@@ -62,7 +82,7 @@ One example of such an environment is a Rhai scripting [`Engine`] compiled to [W
 _Don't Panic_ Guarantee &ndash; Any Panic is a Bug
 -------------------------------------------------
 
-```admonish tip.side-wide "OK, panic anyway"
+```admonish tip.side.wide "OK, panic anyway"
 
 All these safe-guards can be turned off via the [`unchecked`] feature, which disables all safety
 checks (even fatal ones).

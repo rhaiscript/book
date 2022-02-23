@@ -3,9 +3,12 @@ Create a Rust Closure from a Rhai Function
 
 {{#include ../links.md}}
 
-It is possible to further encapsulate a script in Rust such that it becomes a normal Rust function.
+```admonish tip.side "Tip"
 
-Such a _closure_ is very useful as call-back functions.
+Very useful as callback functions!
+```
+
+It is possible to further encapsulate a script in Rust such that it becomes a normal Rust closure.
 
 Creating them is accomplished via the `Func` trait which contains `create_from_script`
 (as well as its companion method `create_from_ast`).

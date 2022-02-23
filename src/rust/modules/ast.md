@@ -7,10 +7,10 @@ Create a Module from an AST
 `Module::eval_ast_as_new`
 ------------------------
 
-```admonish info.side-wide "See also"
+```admonish info.side.wide "See also"
 
-See the section on [_Exporting Variables, Functions and Sub-Modules_][`export`] for details on how
-to prepare a Rhai script for this purpose as well as to control which [functions]/[variables] to export.
+See [_Export Variables, Functions and Sub-Modules from Script_][`export`] for details on how to prepare
+a Rhai script for this purpose as well as to control which [functions]/[variables] to export.
 ```
 
 A [module] can be created from a single script (or pre-compiled [`AST`]) containing global
@@ -51,13 +51,14 @@ let ast = engine.compile(
 r#"
     // Functions become module functions
     fn calc(x) {
-        x + 1
+        x + add_len(x, 1)       // functions within the same module
+                                // can always cross-call each other!
     }
     fn add_len(x, y) {
         x + y.len
     }
 
-    // Imported modules can become sub-modules
+    // Imported modules become sub-modules
     import "another module" as extra;
 
     // Variables defined at global level can become module variables
@@ -73,7 +74,6 @@ r#"
     export x as abc;            // aliased variable name
     export foo;
     export hello;
-    export extra as foobar;     // export sub-module
 "#)?;
 
 // Convert the 'AST' into a module, using the 'Engine' to evaluate it first
@@ -82,7 +82,7 @@ r#"
 let module = Module::eval_ast_as_new(Scope::new(), &ast, &engine)?;
 
 // 'module' now contains:
-//   - sub-module: 'foobar' (renamed from 'extra')
+//   - sub-module: 'extra'
 //   - functions: 'calc', 'add_len'
 //   - constants: 'abc' (renamed from 'x'), 'foo', 'hello'
 ```

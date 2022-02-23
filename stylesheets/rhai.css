@@ -35,16 +35,18 @@ main > section, main > pre, h1, h2, h3, .admonition {
 	max-width: 70%;
 }
 
-@media only screen and (min-width: 600px) {
-	.admonition.side-wide {
-		float: right;
-		margin: 0.3rem 0 1rem 1rem;
-		max-width: 35%;
-	}
+.admonition.side.wide {
+	max-width: inherit;
+}
 
+@media only screen and (min-width: 600px) {
 	.admonition.side {
 		float: right;
 		margin: 0.3rem 0 1rem 1rem;
 		max-width: 25%;
+	}
+
+	.admonition.side.wide {
+		max-width: 35%;
 	}
 }

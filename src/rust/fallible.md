@@ -6,7 +6,10 @@ Register a Fallible Rust Function
 If a function is _fallible_ (i.e. it returns a `Result<_, _>`), it can be registered with via
 `Engine::register_result_fn`.
 
+```admonish warning.small "Return type"
+
 The function must return `Result<T, Box<EvalAltResult>>` where `T` is any clonable type.
+```
 
 ```rust,no_run
 use rhai::{Engine, EvalAltResult, Position};

@@ -3,7 +3,7 @@ Call Stack
 
 {{#include ../../links.md}}
 
-```admonish info.side-wide "Call stack frames"
+```admonish info.side.wide "Call stack frames"
 
 Each "frame" in the call stack corresponds to one layer of [function] call (script-defined
 or native Rust).

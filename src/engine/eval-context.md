@@ -3,7 +3,13 @@
 
 {{#include ../links.md}}
 
-`EvalContext` is a type that encapsulates the current _evaluation context_ and exposes the following:
+```admonish info.side.wide "Usage"
+
+Many functions in advanced API's contain an `EvalContext` parameter in order to allow
+the current evaluation state to be accessed and/or modified.
+```
+
+`EvalContext` is a type that encapsulates the current _evaluation context_ and exposes the following methods.
 
 | Method                       |               Return type               | Description                                                                                                                                                          |
 | ---------------------------- | :-------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -18,6 +24,3 @@
 | `namespaces()`               |              `&[&Module]`               | reference to the [namespaces][function namespaces] (as [modules]) containing all script-defined [functions]                                                          |
 | `this_ptr()`                 |           `Option<&Dynamic>`            | reference to the current bound `this` pointer, if any                                                                                                                |
 | `call_level()`               |                 `usize`                 | the current nesting level of [function] calls                                                                                                                        |
-
-`EvalContext` is a parameter passed to many callback functions in advanced API's in order to allow
-the current state of an evaluation to be accessed and/or modified.

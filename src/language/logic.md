@@ -109,7 +109,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 
 ### Caution: Beware operators for custom types
 
-```admonish tip.side-wide "Tip: Always the full set"
+```admonish tip.side.wide "Tip: Always the full set"
 
 It is strongly recommended that, when defining operators for [custom types], always define the
 **full set** of six operators together, or at least the `==` and `!=` pair.

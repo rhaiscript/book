@@ -3,7 +3,7 @@ Integer as Bit-Fields
 
 {{#include ../links.md}}
 
-```admonish note.side-wide
+```admonish note.side.wide
 
 Nothing here cannot be done via standard bit-manipulation (i.e. shifting and masking).
 

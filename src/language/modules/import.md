@@ -3,11 +3,13 @@ Import a Module
 
 {{#include ../../links.md}}
 
+```admonish info.side "See also"
+
+See [_Module Resolvers_][module resolver] for more details.
+```
 
 Before a [module] can be used (via an `import` statement) in a script, there must be a
 [module resolver] registered into the [`Engine`], the default being the `FileModuleResolver`.
-
-See the section on [_Module Resolvers_][module resolver] for more details.
 
 
 `import` Statement
@@ -16,12 +18,14 @@ See the section on [_Module Resolvers_][module resolver] for more details.
 A [module] can be _imported_ via the `import` statement, and be given a name.
 Its members can be accessed via `::` similar to C++.
 
-A [module] that is only `import`-ed but not under any [module] name is commonly used for
-initialization purposes, where the [module] script contains initialization statements that puts the
-[functions] registered with the [`Engine`] into a particular state.
+```admonish tip.small "Tip"
+
+A [module] that is only `import`-ed but not given any name is simply run.
+This is a very simple way to run another script file from within a script.
+```
 
 ```js
-import "crypto_init";           // run the script file 'crypto_init.rhai' without creating an imported module
+import "crypto_banner";         // run the script file 'crypto_banner.rhai' without creating an imported module
 
 import "crypto" as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
 
@@ -43,12 +47,11 @@ lock::status = "off";           // <- runtime error: cannot modify a constant
 ```
 
 
-Scoped Imports
---------------
+```admonish info "Imports are _scoped_"
 
-`import` statements are _scoped_, meaning that they are only accessible inside the scope that they're imported.
+[Modules] imported via `import` statements are only accessible inside the relevant block scope.
 
-```js
+~~~js
 import "hacker" as h;           // import module - visible globally
 
 if secured {                    // <- new block scope
@@ -75,6 +78,7 @@ for x in 0..1000 {
 
     c.encrypt(something);
 }
+~~~
 ```
 
 ~~~admonish note "Place `import` statements at the top"

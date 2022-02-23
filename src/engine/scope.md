@@ -61,11 +61,11 @@ In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 | `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                    |
 | `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                                                           |
 
-```admonish info.small "See also"
+~~~admonish info.small "`Scope` public API"
 
 For details on the `Scope` API, refer to the
 [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.Scope.html) online.
-```
+~~~
 
 
 Example
@@ -111,3 +111,76 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 1);
 scope.set_value("y", 42_i64);
 assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
 ```
+
+
+`Engine` API Using `Scope`
+--------------------------
+
+[`Engine`] API methods that accept a `Scope` parameter all end with `_with_scope`, making that
+`Scope` (and everything inside it) available to the script:
+
+* `Engine::eval_with_scope`
+* `Engine::eval_ast_with_scope`
+* `Engine::eval_file_with_scope` (not available under [`no_std`])
+* `Engine::eval_expression_with_scope`
+* `Engine::run_with_scope`
+* `Engine::run_ast_with_scope`
+* `Engine::run_file_with_scope` (not available under [`no_std`])
+* `Engine::compile_file_with_scope` (not available under [`no_std`])
+* `Engine::compile_expression_with_scope`
+
+~~~admonish danger "Don't forget to `rewind`"
+
+[Variables] or [constants] defined at the global level of a script persist inside the custom `Scope`
+even after the script ends.
+
+```rust,no_run
+let mut scope = Scope::new();
+
+engine.run_with_scope(&mut scope, "let x = 42;")?;
+
+// Variable 'x' stays inside the custom scope!
+engine.run_with_scope(&mut scope, "print(x);")?;    //  prints 42
+```
+
+Due to [variable shadowing][shadowing], new [variables]/[constants] are simply added on top of
+existing ones (even when they already exist), so care must be taken that new [variables]/[constants]
+inside the custom `Scope` do not grow without bounds.
+
+```rust,no_run
+let mut scope = Scope::new();
+
+// Don't do this - this creates 1 million variables named 'x'
+//                 inside 'scope'!!!
+for _ in 0..1_000_000 {
+    engine.run_with_scope(&mut scope, "let x = 42;")?;
+}
+
+// The 'scope' contains a LOT of variables...
+assert_eq!(scope.len(), 1_000_000);
+
+// Variable 'x' stays inside the custom scope!
+engine.run_with_scope(&mut scope, "print(x);")?;    //  prints 42
+```
+
+In order to remove [variables] or [constants] introduced by a script, use the `rewind` method.
+
+```rust,no_run
+// Run a million times
+for _ in 0..1_000_000 {
+    // Save the current size of the 'scope'
+    let orig_scope_size = scope.len();
+
+    engine.run_with_scope(&mut scope, "let x = 42;")?;
+
+    // Rewind the 'scope' to the original size
+    scope.rewind(orig_scope_size);
+}
+
+// The 'scope' is empty
+assert_eq!(scope.len(), 0);
+
+// Variable 'x' is no longer inside 'scope'!
+engine.run_with_scope(&mut scope, "print(x);")?;    //  error: variable 'x' not found
+```
+~~~

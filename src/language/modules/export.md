@@ -3,13 +3,18 @@ Export Variables, Functions and Sub-Modules From a Script
 
 {{#include ../../links.md}}
 
+```admonish info.side "See also"
+
+See [_Create a Module from AST_]({{rootUrl}}/rust/modules/ast.md) for more details.
+```
 
 The easiest way to expose a collection of [functions] as a self-contained [module] is to do it via a Rhai script itself.
 
-See the section on [_Creating a Module from AST_]({{rootUrl}}/rust/modules/ast.md) for more details.
+The script text is evaluated.
 
-The script text is evaluated, [variables] are then selectively exposed via the [`export`] statement.
-[Functions] defined by the script are automatically exported.
+[Variables] are then selectively exposed via the [`export`] statement.
+
+[Functions] defined by the script are automatically exported, unless marked as [private][`private`].
 
 Modules loaded within this [module] at the global level become _sub-modules_ and are also automatically exported.
 
@@ -51,8 +56,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 ```admonish tip "Tip: Multiple exports"
 
 [Variables] can be exported under multiple names.
-
-The following exports three [variables]:
+For example, the following exports three [variables]:
 * `x` as `x` and `hello`
 * `y` as `foo` and `bar`
 * `z` as `z`
@@ -104,7 +108,7 @@ let x = my_mod::inc.call(41);       // runtime error:
 Export Functions
 ----------------
 
-```admonish info.side-wide "Private functions"
+```admonish info.side.wide "Private functions"
 
 [`private`] [functions] are commonly called to initialize the [module].
 They cannot be accessed otherwise.

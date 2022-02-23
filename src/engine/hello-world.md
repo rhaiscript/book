@@ -57,9 +57,9 @@ pub fn main() -> Result<(), Box<EvalAltResult>>
 Use Script Files
 ----------------
 
-```admonish info.side-wide "Script file extension"
+```admonish info.side.wide "Script file extension"
 
-Rhai script files are customarily named with the extension `.rhai`.
+Rhai script files are customarily named with extension `.rhai`.
 ```
 
 Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`
@@ -82,7 +82,7 @@ script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/star
 If a script file starts with `#!`, the entire first line is skipped by `Engine::compile_file` and
 `Engine::eval_file`. Because of this, Rhai scripts with shebangs at the beginning need no special processing.
 
-This behavior is also present for non-Unix (e.g. Windows) environments.
+This behavior is also present for non-Unix (e.g. Windows) environments so scripts are portable.
 
 ~~~js
 #!/home/to/me/bin/rhai-run
@@ -98,21 +98,36 @@ print(`The answer is: ${answer}`);
 Specify the Return Type
 -----------------------
 
-The type parameter for `Engine::eval_XXX` methods is used to specify the type of the return value,
-which _must_ match the actual type or an error is returned. Rhai is very strict here.
+~~~admonish tip.side "Tip: `Dynamic`"
 
-There are two ways to specify the return type &ndash; _turbofish_ notation, or type inference.
+Use [`Dynamic`] if you're uncertain of the return type.
+~~~
 
-Use [`Dynamic`] for uncertain return types.
+The type parameter for `Engine::eval` is used to specify the type of the return value, which _must_
+match the actual type or an error is returned. Rhai is very strict here.
+
+There are two ways to specify the return type: _turbofish_ notation, or type inference.
+
+### Turbofish
 
 ```rust,no_run
-let result = engine.eval::<i64>("40 + 2")?;     // return type is i64, specified using 'turbofish' notation
+let result = engine.eval::<i64>("40 + 2")?;     // return type is i64
 
+result.is::<i64>() == true;
+
+let result = engine.eval::<Dynamic>("boo()")?;  // use 'Dynamic' if you're not sure what type it'll be!
+
+let result = engine.eval::<String>("40 + 2")?;  // returns an error because the actual return type is i64, not String
+```
+
+### Type inference
+
+```rust,no_run
 let result: i64 = engine.eval("40 + 2")?;       // return type is inferred to be i64
 
 result.is::<i64>() == true;
 
 let result: Dynamic = engine.eval("boo()")?;    // use 'Dynamic' if you're not sure what type it'll be!
 
-let result = engine.eval::<String>("40 + 2")?;  // returns an error because the actual return type is i64, not String
+let result: String = engine.eval("40 + 2")?;    // returns an error because the actual return type is i64, not String
 ```

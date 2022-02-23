@@ -18,9 +18,9 @@ expressions only.
 Unicode Standard Annex #31 Identifiers
 -------------------------------------
 
-Variable names and other identifiers do not necessarily need to be ASCII-only.
+[Variable] names and other identifiers do not necessarily need to be ASCII-only.
 
-The [`unicode-xid-ident`] feature, when turned on, causes Rhai to allow variable names and
+The [`unicode-xid-ident`] feature, when turned on, causes Rhai to allow [variable] names and
 identifiers that follow [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/).
 
 This is sometimes useful in a non-English DSL.
@@ -40,8 +40,8 @@ It is possible, in Rhai, to surgically [disable keywords and operators].
 Custom Operators
 ----------------
 
-On the other hand, some DSL scenarios require special operators that make sense only for that
-specific environment.  In such cases, it is possible to define [custom operators] in Rhai.
+Some DSL scenarios require special operators that make sense only for that specific environment.
+In such cases, it is possible to define [custom operators] in Rhai.
 
 ```rust,no_run
 let animal = "rabbit";

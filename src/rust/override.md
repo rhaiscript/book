@@ -30,7 +30,7 @@ The ability to modify the operating environment dynamically at runtime is called
 It is rarely recommended, but if you need it, you need it bad.
 
 In other words, do it only when _all else fails_.  Do not monkey patch Rhai simply
-because you don't like the default functionality.
+because you _can_.
 ```
 
 
@@ -39,18 +39,18 @@ Search Order of Functions
 
 Rhai searches for the correct implementation of a function in the following order:
 
-* Rhai script-defined [functions],
+1. Rhai script-defined [functions],
 
-* native Rust functions registered directly via the `Engine::register_XXX` API,
+2. native Rust functions registered directly via the `Engine::register_XXX` API,
 
-* native Rust functions in [packages] that have been loaded via `Engine::register_global_module`,
+3. native Rust functions in [packages] that have been loaded via `Engine::register_global_module`,
 
-* native Rust or Rhai script-defined functions in [imported][`import`] [modules] that are exposed to
-  the global [namespace][function namespace] (e.g. via the `#[rhai_fn(global)]` attribute in a
-  [plugin module]),
+4. native Rust or Rhai script-defined functions in [imported][`import`] [modules] that are exposed to
+   the global [namespace][function namespace] (e.g. via the `#[rhai_fn(global)]` attribute in a
+   [plugin module]),
 
-* native Rust or Rhai script-defined functions in [modules] loaded via
-  `Engine::register_static_module` that are exposed to the global [namespace][function namespace]
-  (e.g. via the `#[rhai_fn(global)]` attribute in a [plugin module]),
+5. native Rust or Rhai script-defined functions in [modules] loaded via
+   `Engine::register_static_module` that are exposed to the global [namespace][function namespace]
+   (e.g. via the `#[rhai_fn(global)]` attribute in a [plugin module]),
 
-* [built-in][built-in operators] functions.
+6. [built-in][built-in operators] functions.

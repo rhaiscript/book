@@ -13,3 +13,6 @@ having to install anything.
 
 The playground provides a syntax-highlighting script editor with example snippets.
 Scripts can be evaluated directly from the editor.
+
+
+[![Online Playground]({{rootUrl}}/images/playground.png)][playground]

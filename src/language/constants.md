@@ -26,7 +26,7 @@ It is possible to add a constant into a custom [`Scope`] via `Scope::push_consta
 available to scripts running with that [`Scope`].
 
 It is very useful to have a constant value hold a [custom type], which essentially acts
-as a [_singleton_](../patterns/singleton.md).
+as a [_singleton_]({{rootUrl}}/patterns/singleton.md).
 
 ```rust,no_run
 use rhai::{Engine, Scope};
@@ -68,7 +68,7 @@ engine.run_with_scope(&mut scope, script)?;
 Caveat &ndash; Constants Can be Modified via Rust
 ------------------------------------------------
 
-```admonish tip.side-wide "Tip: Plugin functions"
+```admonish tip.side.wide "Tip: Plugin functions"
 
 In [plugin functions], `&mut` parameters disallow constant values by default.
 

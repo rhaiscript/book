@@ -3,7 +3,7 @@ Parse an Object Map from JSON
 
 {{#include ../links.md}}
 
-```admonish info.side-wide "Object map vs. JSON"
+```admonish info.side.wide "Object map vs. JSON"
 
 A valid JSON string does not start with a hash character `#` while a Rhai [object map] does.
 That's the only major difference!

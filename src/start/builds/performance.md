@@ -112,38 +112,41 @@ For example, the `+=` (append) compound assignment takes a mutable reference to 
 the corresponding `+` (add) assignment usually doesn't.  The difference in performance can be huge:
 
 ```rust,no_run
-let x = create_some_very_big_type();
+let x = create_some_very_big_and_expensive_type();
 
 x = x + 1;
 //  ^ 'x' is cloned here
 
 // The above is equivalent to:
-let temp_value = x + 1;
+let temp_value = x.clone() + 1;
 x = temp_value;
 
 x += 1;             // <- 'x' is NOT cloned
 ```
 
-### Simple variable references are optimized
+```admonish tip "Tip: Simple variable references are already optimized"
 
-Rhai's script [optimizer][script optimization] is usually smart enough to rewrite function calls
-into _method-call_ style or _compound assignment_ style to take advantage of this.  However, there
-are limits to its intelligence, and only **simple variable references** are optimized.
+Rhai's script [optimizer][script optimization] is usually smart enough to _rewrite_ function calls
+into [_method-call_]({{rootUrl}}/rust/methods.md) style or [_compound assignment_]({{rootUrl}}/language/assignment-op.md)
+style to take advantage of this.
 
-```rust,no_run
+However, there are limits to its intelligence, and only **simple variable references** are optimized.
+
+~~~rust,no_run
 x = x + 1;          // <- this statement...
 
 x += x;             // ... is rewritten as this
 
 x[y] = x[y] + 1;    // <- but this is not, so this is MUCH slower...
 
-x[y] + 1;           // ... than this
+x[y] += 1;          // ... than this
 
 some_func(x, 1);    // <- this statement...
 
 x.some_func(1);     // ... is rewritten as this
 
 some_func(x[y], 1); // <- but this is not, so 'x[y]` is cloned
+~~~
 ```
 
 

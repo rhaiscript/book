@@ -65,7 +65,7 @@ Avoid the temptation to write full-fledge application logic entirely in Rhai &nd
 is best fulfilled by more complete languages such as JavaScript or Lua.
 ```
 
-```admonish tip "Thin dynamic wrapper layer over Rust code"
+```admonish tip "Tip: Use Rhai as a thin dynamic wrapper layer over Rust code"
 
 In actual practice, it is usually best to expose a Rust API into Rhai for scripts to call.
 

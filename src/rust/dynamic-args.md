@@ -4,30 +4,34 @@
 {{#include ../links.md}}
 
 It is possible for Rust functions to contain parameters of type [`Dynamic`].
-Any clonable value can be set into a [`Dynamic`] value.
 
-Any parameter in a registered Rust function with a specific type has higher precedence over the
-[`Dynamic`] type, so it is important to understand which _version_ of a function will be used.
+A [`Dynamic`] value can hold any clonable type.
 
-For example, the `push` method of an [array] is implemented as follows (minus code that protects
-against [over-sized arrays][maximum size of arrays]), making the function applicable for all
-item types.
+```admonish example
 
-```rust,no_run
+The `push` method of an [array] is implemented as follows (minus code for [safety] protection
+against [over-sized arrays][maximum size of arrays]), allowing the function to be called with
+all item types.
+
+~~~rust,no_run
 // 'item: Dynamic' matches all data types
 fn push(array: &mut Array, item: Dynamic) {
     array.push(item);
 }
+~~~
 ```
 
 
-Examples
---------
+Precedence
+----------
 
-A [`Dynamic`] value has less precedence than a value of a specific type, and parameter matching starts
-from the left to the right. Candidate functions will be matched in order of parameter types.
+Any parameter in a registered Rust function with a specific type has higher _precedence_ over
+[`Dynamic`], so it is important to understand which _version_ of a function will be used.
 
-Therefore, always leave [`Dynamic`] parameters as far to the right as possible.
+Parameter matching starts from the left to the right.
+Candidate functions will be matched in order of parameter types.
+
+Therefore, always leave [`Dynamic`] parameters (up to 16, see below) as far to the right as possible.
 
 ```rust,no_run
 use rhai::{Engine, Dynamic};
@@ -147,15 +151,22 @@ Therefore, the version with all the correct parameter types will always be found
 
 At soon as a hash is found, the process stops.
 
-Otherwise, it goes on for up to 16 arguments, or at most 256 tries.
+Otherwise, it goes on for up to 16 arguments, or at most 65,536 tries.
 That's where the 16 parameters limit comes from.
 ```
 
-```admonish question "What?! It calculates 256 hashes for each function call???!!!"
+```admonish question "What?! It calculates 65,536 hashes for each function call???!!!"
 
-Of course not.
+Of course not. Don't be silly.
 
-Function hashes are _cached_, so this process only happens _once_, and only up to the number of
+First of all, not every function has 16 parameters.
+
+In fact, you have a problem if you write such a function that you need to call regularly.
+It would be far more efficient to group some of those parameters into [object maps].
+
+#### Caching to the rescue
+
+Also, function hashes are _cached_, so this process only happens _once_, and only up to the number of
 rounds for the correct function to be found.
 
 If not, then yes, it will calculate up to 2<sup>_n_</sup> hashes where _n_ is the number of

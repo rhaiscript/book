@@ -9,17 +9,17 @@ A number of other configuration options are available from the [`Engine`] to fin
 Compile-Time Language Features
 -----------------------------
 
-| Method                                                             | Description                                                                        |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| `set_optimization_level`<br/>(not available under [`no_optimize`]) | sets the amount of script _optimizations_ performed (see [script optimization])    |
-| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions](../language/if-expression.md)                  |
-| `set_allow_switch_expression`                                      | allows/disallows [`switch` expressions](../language/switch-expression.md)          |
-| `set_allow_statement_expression`                                   | allows/disallows [statement expressions](../language/statement-expression.md)      |
-| `set_allow_anonymous_fn`<br/>(not available under [`no_function`]) | allows/disallows [anonymous functions]                                             |
-| `set_allow_looping`                                                | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements) |
-| `set_allow_shadowing`                                              | allows/disallows _[shadowing]_ of [variables]                                      |
-| `set_strict_variables`                                             | enables/disables [_Strict Variables_ mode][strict variables]                       |
-| `disable_symbol`                                                   | disables a certain [keyword] or [operator] (see [disable keywords and operators])  |
+| Method                                                             | Description                                                                            |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| `set_optimization_level`<br/>(not available under [`no_optimize`]) | sets the amount of script _optimizations_ performed (see [script optimization])        |
+| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions]({{rootUrl}}/language/if-expression.md)             |
+| `set_allow_switch_expression`                                      | allows/disallows [`switch` expressions]({{rootUrl}}/language/switch-expression.md)     |
+| `set_allow_statement_expression`                                   | allows/disallows [statement expressions]({{rootUrl}}/language/statement-expression.md) |
+| `set_allow_anonymous_fn`<br/>(not available under [`no_function`]) | allows/disallows [anonymous functions]                                                 |
+| `set_allow_looping`                                                | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements)     |
+| `set_allow_shadowing`                                              | allows/disallows _[shadowing]_ of [variables]                                          |
+| `set_strict_variables`                                             | enables/disables [_Strict Variables_ mode][strict variables]                           |
+| `disable_symbol`                                                   | disables a certain [keyword] or [operator] (see [disable keywords and operators])      |
 
 Beware that these options activate during _compile-time_ only.  If an [`AST`] is compiled on an
 [`Engine`] but then evaluated on a different [`Engine`] with different configuration, disallowed

@@ -62,7 +62,7 @@ The _index notation_ allows setting/getting properties of arbitrary names (even 
 
 ### Non-existing property
 
-```admonish tip.side-wide "Tip: Force error"
+```admonish tip.side.wide "Tip: Force error"
 
 It is possible to force Rhai to return an `EvalAltResult:: ErrorPropertyNotFound` via
 [`Engine:: set_fail_on_invalid_map_property`][options].

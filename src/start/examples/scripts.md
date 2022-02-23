@@ -48,10 +48,10 @@ The following scripts are for benchmarking the speed of Rhai:
 | [`mat_mul.rhai`]({{repoHome}}/scripts/mat_mul.rhai)       | matrix multiplication test to measure the speed of multi-dimensional array access      |
 
 
-Running Example Scripts
-----------------------
+Run Example Scripts
+-------------------
 
-The [`rhai-run`](../bin.md) utility can be used to run Rhai scripts:
+The [`rhai-run`]({{rootUrl}}/bin.md) utility can be used to run Rhai scripts:
 
 ```sh
 cargo run --bin rhai-run scripts/any_script.rhai

@@ -3,7 +3,7 @@ Custom Type Property Getters and Setters
 
 {{#include ../links.md}}
 
-```admonish warning.side-wide-narrow "Cannot override object maps"
+```admonish warning.side.wide-narrow "Cannot override object maps"
 
 Property getters and setters are intended for [custom types].
 

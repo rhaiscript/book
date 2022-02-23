@@ -3,18 +3,25 @@ WebAssembly (WASM) Build
 
 {{#include ../../links.md}}
 
+```admonish question.side.wide "Why would you do that?"
+
+There is already a fast and powerful scripting language that integrates nicely with WASM &ndash; **JavaScript**.
+
+Anyhow, do it because you _can_!
+```
+
 It is possible to use Rhai when compiling to WebAssembly (WASM).
-This yields a scripting engine (and language) that can be run in a standard web browser.
 
-Why you would _want_ to is another matter... as there is already a nice, fast, complete scripting language
-for the the common WASM environment (i.e. a browser) &ndash; and it is called JavaScript.
+This yields a scripting engine (and language) that can be run in a standard web browser,
+among other places.
 
-But anyhow, do it because you _can_!
+```admonish warning "Unavailable features"
 
 When building for WASM, certain features will not be available,
-such as the script file API's and loading modules from external script files.
+such as the script file API's and loading [modules] from external script files.
+```
 
-```admonish example.small "Sample"
+```admonish example "Sample"
 
 Check out the [_Online Playground_]({{rootUrl}}/tools/playground.md) project which is driven
 by a Rhai [`Engine`] compiled into [WASM].

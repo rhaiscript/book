@@ -39,10 +39,10 @@ print(z);                       // <- error: variable 'z' not found
 Script segments passed to `eval` execute inside the _current_ [`Scope`], so they can access and modify
 _everything_, including all [variables] that are visible at that position in code!
 
-In addition, `eval` can be used to define new [variables] and do other things normally forbidden inside
+`eval` can also be used to define new [variables] and do other things normally forbidden inside
 a [function] call.
 
-It is almost as if the script segments were physically pasted in at the position of the `eval` call.
+Treat it as if the script segments are physically pasted in at the position of the `eval` call.
 ~~~
 
 ```admonish warning "Cannot define new functions"
@@ -65,8 +65,7 @@ print(x);
 ```
 
 
-`eval` is Evil
---------------
+~~~admonish failure "`eval` is evil"
 
 For those who subscribe to the (very sensible) motto of ["`eval` is evil"](http://linterrors.com/js/eval-is-evil),
 disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
@@ -74,6 +73,7 @@ disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 ```rust,no_run
 engine.disable_symbol("eval");  // disable usage of 'eval'
 ```
+~~~
 
 
 TL;DR

@@ -3,7 +3,7 @@ Function Pointer Currying
 
 {{#include ../links.md}}
 
-```admonish info.side-wide "Automatic currying"
+```admonish info.side.wide "Automatic currying"
 
 [Anonymous functions] defined via a closure syntax _capture_ external [variables]
 that are not [shadowed][shadow] inside the [function's][function] scope.

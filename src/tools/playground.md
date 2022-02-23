@@ -13,3 +13,6 @@ Author : [`@alvinhochun`](https://github.com/alvinhochun)
 Repo : [on GitHub](https://github.com/rhaiscript/playground)
 
 URL : [link to Online Playground][playground]
+
+
+[![Online Playground]({{rootUrl}}/images/playground.png)][playground]

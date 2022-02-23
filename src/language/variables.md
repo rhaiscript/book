@@ -7,7 +7,7 @@ Variables
 Valid Names
 -----------
 
-```admonish tip.side-wide "Tip: Unicode Standard Annex #31 identifiers"
+```admonish tip.side.wide "Tip: Unicode Standard Annex #31 identifiers"
 
 The [`unicode-xid-ident`] feature expands the allowed characters for variable names to the set defined by
 [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/).
@@ -26,7 +26,7 @@ However, unlike Rust, a variable name must also contain at least one ASCII lette
 letter must come _before_ any digits. In other words, the first character that is not an underscore `_`
 must be an ASCII letter and not a digit.
 
-```admonish question.side-wide "Why this restriction?"
+```admonish question.side.wide "Why this restriction?"
 
 To reduce confusion (and subtle bugs) because, for instance, `_1` can easily be misread (or mistyped)
 as `-1`.

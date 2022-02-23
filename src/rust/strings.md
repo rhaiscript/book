@@ -4,7 +4,7 @@
 {{#include ../links.md}}
 
 
-~~~admonish warning "Avoid `String` parameters"
+~~~admonish danger "Warning: Avoid `String` parameters"
 
 As much as possible, avoid using `String` parameters in functions.
 
@@ -24,12 +24,12 @@ to [`ImmutableString`] which is the type that Rhai uses to represent [strings] i
 The parameter type `String` involves always converting an [`ImmutableString`] into a `String`
 which mandates cloning it.
 
-Using `ImmutableString` or `&str` is much more efficient.
+Using [`ImmutableString`] or `&str` is much more efficient.
 
 A common mistake made by novice Rhai users is to register functions with `String` parameters.
 
 ```rust,no_run
-fn get_len1(s: String) -> i64 {             // very inefficient!!!
+fn get_len1(s: String) -> i64 {             // BAD!!! Very inefficient!!!
     s.len() as i64
 }
 fn get_len2(s: &str) -> i64 {               // this is better
@@ -43,13 +43,13 @@ engine.register_fn("len1", get_len1)
       .register_fn("len2", get_len2)
       .register_fn("len3", get_len3);
 
-let len = engine.eval::<i64>("len1(x)")?;   // 'x' is cloned, very inefficient!
+let len = engine.eval::<i64>("len1(x)")?;   // 'x' cloned, very inefficient!!!
 let len = engine.eval::<i64>("len2(x)")?;   // 'x' is shared
 let len = engine.eval::<i64>("len3(x)")?;   // 'x' is shared
 ```
 
 
-~~~admonish danger "`&mut String` does not work"
+~~~admonish danger "`&mut String` does not work &ndash; use `&mut ImmutableString` instead"
 
 A function with the first parameter being `&mut String` does not match a string argument passed to it,
 which has type `ImmutableString`.

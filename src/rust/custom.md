@@ -7,17 +7,19 @@ Register any Rust Type and its Methods
 Free Typing
 -----------
 
+```admonish question.side.wide "Why \\"Custom\\"?"
+
+Rhai internally supports a number of standard data types (see [this list][standard types]).
+
+Any type outside of the list is considered _custom_.
+```
+
 Rhai works seamlessly with _any_ Rust type.
 
-The reason why it is termed a _custom_ type throughout this documentation is that Rhai natively
-supports a number of data types with fast, internal treatment (see the list of [standard types]).
-Any type outside of this list is considered _custom_.
-
-Any custom type is stored in Rhai as a Rust _trait object_ (specifically, a `dyn rhai::Variant`),
+A custom type is stored in Rhai as a Rust _trait object_ (specifically, a `dyn rhai::Variant`),
 with no restrictions other than being `Clone` (plus `Send + Sync` under the [`sync`] feature).
 
-```admonish tip
-The type literally can be _anything_. It does not have any prerequisite other than being `Clone`.
+The type literally does not have any prerequisite other than being `Clone`.
 
 It does not need to implement any other trait or use any custom `#[derive]`.
 
@@ -26,18 +28,20 @@ possible, usually silently and seamlessly.
 
 External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special `#[derive]`) can also be used easily with Rhai.
-```
-
-Custom types run _significantly_ slower than [built-in types][standard types] due to this additional
-level of indirection, but for all purposes there is no difference.
 
 Support for custom types can be turned off via the [`no_object`] feature.
+
+```admonish warning "Custom types are slower"
+
+Custom types run _slower_ than [built-in types][standard types] due to an additional
+level of indirection, but for all other purposes there is no difference.
+```
 
 
 Register a Custom Type and its Methods
 -------------------------------------
 
-```admonish tip.side-wide-narrow "Tip: Working with enums"
+```admonish tip.side.wide-narrow "Tip: Working with enums"
 
 It is also possible to use Rust enums with Rhai.
 

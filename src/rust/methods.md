@@ -7,9 +7,26 @@ Call Method as Function
 Method-Call Style vs. Function-Call Style
 ----------------------------------------
 
-Any registered function with a first argument that is a `&mut` reference can be used as method
-because internally they are the same thing: methods on a [custom type] is implemented as a functions
-taking a `&mut` first argument.
+### Method-call syntax
+
+> _object_ `.` _function_ `(` _parameter_`,` ... `,` _parameter_`)`
+
+~~~admonish warning "_method-call_ style is not supported under [`no_object`]"
+```rust,no_run
+// Below is a syntax error under 'no_object'.
+let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
+                                           // ^ cannot call method-style
+```
+~~~
+
+### Function-call syntax
+
+> _function_ `(` _object_`,` _parameter_`,` ... `,` _parameter_`)`
+
+### Equivalence
+
+Internally, methods on a [custom type] is _the same_ as a function taking a `&mut` first argument of
+the object's type. Therefore, methods and functions can be called interchangeably.
 
 This design is similar to Rust.
 
@@ -31,17 +48,6 @@ let result = engine.eval::<i64>(
 
 println!("result: {}", result);     // prints 1
 ```
-
-~~~admonish warning "Unavailable under `no_object`"
-
-Under [`no_object`], the _method-call_ style is no longer supported.
-
-```rust,no_run
-// Below is a syntax error under 'no_object'.
-let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
-                                           // ^ cannot call method-style
-```
-~~~
 
 
 First `&mut` Parameter
