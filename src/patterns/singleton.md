@@ -176,7 +176,7 @@ let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
 
 let mut scope = Scope::new();
 
-// Add the command object into a custom Scope.
+// Add the singleton command object into a custom Scope.
 // Constants, as a convention, are named with all-capital letters.
 scope.push_constant("BUNNY", bunny.clone());
 
@@ -189,6 +189,17 @@ engine.run_ast_with_scope(&mut scope, &ast)?;
 engine.run_with_scope(&mut scope, script)?;
 ```
 
+```admonish tip "Tip: Prevent shadowing"
+
+It is usually desirable to prevent [shadowing] of the singleton command object.
+This can be easily achieved via a [variable definition filter].
+
+~~~rust,no_run
+// Now the script can no longer define a variable named 'BUNNY'
+engine.on_def_var(|_, info, _| Ok(info.name == "BUNNY"));
+~~~
+```
+
 ### Use the command API in script
 
 ```rust,no_run
@@ -199,4 +210,6 @@ if !BUNNY.power { BUNNY.power = true; }
 if BUNNY.speed > 50 { BUNNY.speed = 50; }
 
 BUNNY.turn_left();
+
+let BUNNY = 42;     // <- syntax error if variable definition filter is set
 ```

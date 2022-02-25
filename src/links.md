@@ -97,11 +97,12 @@
 
 [variable]: {{rootUrl}}/language/variables.md
 [variables]: {{rootUrl}}/language/variables.md
+[constant]: {{rootUrl}}/language/constants.md
+[constants]: {{rootUrl}}/language/constants.md
 [shadow]: {{rootUrl}}/language/shadow.md
 [shadowing]: {{rootUrl}}/language/shadow.md
 [variable shadowing]: {{rootUrl}}/language/shadow.md
-[constant]: {{rootUrl}}/language/constants.md
-[constants]: {{rootUrl}}/language/constants.md
+[variable definition filter]: {{rootUrl}}/engine/def-var.md
 
 [string]: {{rootUrl}}/language/strings-chars.md
 [strings]: {{rootUrl}}/language/strings-chars.md

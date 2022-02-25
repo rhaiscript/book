@@ -52,7 +52,7 @@ abstractions_. It doesn't attempt to be a new language. For example:
   This lack of formalism allows the _tokenizer_ and _parser_ themselves to be exposed as services in
   order to support advanced features such as [disabling keywords and operators][disable keywords and operators],
   dynamically [changing tokens]({{rootUrl}}/engine/token-mapper.md) during parsing, adding
-  [custom operators], defining [custom syntax] and [filtering variables definition]({{rootUrl}}/engine/def-var.md).
+  [custom operators], defining [custom syntax] and [filtering variables definition][variable definition filter].
 
 ```admonish danger "Do not write the next 4D VR game in Rhai"
 
