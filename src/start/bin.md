@@ -5,13 +5,18 @@ Packaged Utilities
 
 A number of Rhai-driven tools can be found in the `src/bin` directory:
 
+```admonish tip.side "Tip: Domain-specific tools"
+
+It is possible to turn these tools into [_Domain-Specific Tools_](../patterns/domain-tools.md).
+```
+
 |                       Tool                       | Required feature(s) | Description            |
 | :----------------------------------------------: | :-----------------: | ---------------------- |
 |  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  |                     | runs Rhai script files |
 | [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) |     `rustyline`     | a simple REPL tool     |
 |  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  |    [`debugging`]    | the _Rhai Debugger_    |
 
-~~~admonish tip.small "Tip: `bin-features`"
+~~~admonish tip "Tip: `bin-features`"
 Some bin tools require certain [features] and will not be built by default without those [features] set.
 
 For convenience, a feature named [`bin-features`][features] is available which is a combination of
