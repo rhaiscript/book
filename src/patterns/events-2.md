@@ -110,6 +110,11 @@ pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
 Handler Scripting Style
 -----------------------
 
+```admonish note.side "No shadowing"
+
+Notice that `this` can never be [shadowed][shadowing] because it is not a valid [variable] name.
+```
+
 Because the stored state is kept in an [object map], which in turn is bound to `this`, it is
 necessary for [functions] to always access or modify these state [variables] via the `this` pointer.
 

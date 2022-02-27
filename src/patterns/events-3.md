@@ -29,6 +29,11 @@ It is up to you to decide whether this is an improvement!
 Handler Initialization
 ----------------------
 
+```admonish note.side "No shadowing 'state'"
+
+Notice that a [variable definition filter] is used to prevent [shadowing] of the states [object map].
+```
+
 Implementation wise, this style follows closely the [_Main Style_](events-1.md), but a single
 [object map] is added to the custom [`Scope`] which holds all state values.
 
@@ -42,6 +47,9 @@ impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into<PathBuf>) -> Self {
         let mut engine = Engine::new();
+
+        // Forbid shadowing of 'state' variable
+        engine.on_def_var(|_, info, _| Ok(info.name != "state"));
 
                     :
             // Code omitted

@@ -196,7 +196,7 @@ This can be easily achieved via a [variable definition filter].
 
 ~~~rust,no_run
 // Now the script can no longer define a variable named 'BUNNY'
-engine.on_def_var(|_, info, _| Ok(info.name == "BUNNY"));
+engine.on_def_var(|_, info, _| Ok(info.name != "BUNNY"));
 ~~~
 ```
 
