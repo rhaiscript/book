@@ -164,7 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dynamic-value-tag"><a class="header" href="#dynamic-value-tag">Dynamic Value Tag</a></h1>
-<p>Each <a href="/language/dynamic.html"><code>Dynamic</code></a> value can contain a <em>tag</em> that is <code>i32</code> and can contain any arbitrary data.</p>
+<p>Each <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can contain a <em>tag</em> that is <code>i32</code> and can contain any arbitrary data.</p>
 <p>On 32-bit targets, however, the tag is only <code>i16</code>.</p>
 <p>The tag defaults to zero.</p>
 <div class="admonition bug">
@@ -260,7 +260,7 @@ for (data, i) in filtered {
 }
 </code></pre>
 <h3 id="identify-code-conditions"><a class="header" href="#identify-code-conditions">Identify code conditions</a></h3>
-<p>The tag value may also contain a <em><a href="/language/bit-fields.html">bit-field</a></em> of up to 32 (16 under 32-bit targets) individual bits,
+<p>The tag value may also contain a <em><a href="/book/language/bit-fields.html">bit-field</a></em> of up to 32 (16 under 32-bit targets) individual bits,
 recording up to 32 (or 16 under 32-bit targets) logic conditions that contributed to the value.</p>
 <p>Again, after the script is verified, all tag assignment statements can simply be removed.</p>
 <pre><code class="language-js">
@@ -307,7 +307,7 @@ print(`Third condition = ${my_result.tag[2]}`);
 print(`Result check = ${my_result.tag[3]}`);
 </code></pre>
 <h3 id="return-auxillary-info"><a class="header" href="#return-auxillary-info">Return auxillary info</a></h3>
-<p>Sometimes it is useful to return auxillary info from a <a href="/language/functions.html">function</a>.</p>
+<p>Sometimes it is useful to return auxillary info from a <a href="/book/language/functions.html">function</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -346,11 +346,11 @@ if dist.tag == 1 {
 <h3 id="poor-mans-tuples"><a class="header" href="#poor-mans-tuples">Poor-man’s tuples</a></h3>
 <p>Rust has <em>tuples</em> but Rhai does not (nor does JavaScript in this sense).</p>
 <p>Similar to the JavaScript situation, practical alternatives using Rhai include returning an
-<a href="/language/object-maps.html">object map</a> or an <a href="/language/arrays.html">array</a>.</p>
+<a href="/book/language/object-maps.html">object map</a> or an <a href="/book/language/arrays.html">array</a>.</p>
 <p>Both of these alternatives, however, incur overhead that may be wasteful when the amount of
 additional information is small – e.g. in many cases, a single <code>bool</code>, or a small number.</p>
-<p>To return a number of <em>small</em> values from <a href="/language/functions.html">functions</a>, the tag value as a <a href="/language/bit-fields.html">bit-field</a> is an ideal
-container without resorting to a full-blown <a href="/language/object-maps.html">object map</a> or <a href="/language/arrays.html">array</a>.</p>
+<p>To return a number of <em>small</em> values from <a href="/book/language/functions.html">functions</a>, the tag value as a <a href="/book/language/bit-fields.html">bit-field</a> is an ideal
+container without resorting to a full-blown <a href="/book/language/object-maps.html">object map</a> or <a href="/book/language/arrays.html">array</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -383,10 +383,10 @@ let c = r.tag[16..32];
 <p>Tell me, really, what is the <em>point</em>?</p>
 </div>
 <div>
-<p>Due to byte alignment requirements on modern CPU’s, there are unused spaces in a <a href="/language/dynamic.html"><code>Dynamic</code></a> type,
+<p>Due to byte alignment requirements on modern CPU’s, there are unused spaces in a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> type,
 of the order of 4 bytes on 64-bit targets (2 bytes on 32-bit).</p>
 <p>It is empty space that can be put to good use and not wasted, especially when Rhai does not have
-built-in support of tuples in order to return multiple values from <a href="/language/functions.html">functions</a>.</p>
+built-in support of tuples in order to return multiple values from <a href="/book/language/functions.html">functions</a>.</p>
 </div>
 </div>
 

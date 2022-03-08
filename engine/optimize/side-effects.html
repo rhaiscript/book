@@ -166,12 +166,12 @@
                         <h1 id="side-effect-considerations-for-full-optimization-level"><a class="header" href="#side-effect-considerations-for-full-optimization-level">Side-Effect Considerations for Full Optimization Level</a></h1>
 <p>All of Rhai’s built-in functions (and operators which are implemented as functions) are <em>pure</em>
 (i.e. they do not mutate state nor cause any side-effects, with the exception of <code>print</code> and <code>debug</code>
-which are handled specially) so using <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a> is usually quite safe <em>unless</em>
+which are handled specially) so using <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a> is usually quite safe <em>unless</em>
 custom types and functions are registered.</p>
 <p>If custom functions are registered, they <em>may</em> be called (or maybe not, if the calls happen to lie
 within a pruned code block).</p>
-<p>If custom functions are registered to overload <a href="/engine/builtin.html">built-in operators</a>, they will also be called when
-the operators are used (in an <a href="/language/if.html"><code>if</code></a> statement, for example), potentially causing side-effects.</p>
+<p>If custom functions are registered to overload <a href="/book/engine/builtin.html">built-in operators</a>, they will also be called when
+the operators are used (in an <a href="/book/language/if.html"><code>if</code></a> statement, for example), potentially causing side-effects.</p>
 <div class="admonition tip">
 <div class="admonition-title">
 <p>Rule of thumb</p>
@@ -179,7 +179,7 @@ the operators are used (in an <a href="/language/if.html"><code>if</code></a> st
 <div>
 <ul>
 <li>
-<p><em>Always</em> register custom types and functions <em>after</em> compiling scripts if <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a> is used.</p>
+<p><em>Always</em> register custom types and functions <em>after</em> compiling scripts if <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a> is used.</p>
 </li>
 <li>
 <p><em>DO NOT</em> depend on knowledge that the functions have no side-effects, because those functions can change later on and,

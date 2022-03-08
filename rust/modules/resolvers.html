@@ -169,24 +169,24 @@
 <p><code>import</code> statements</p>
 </div>
 <div>
-<p>See the section on <a href="/language/modules/import.html"><em>Importing Modules</em></a> for more details.</p>
+<p>See the section on <a href="/book/language/modules/import.html"><em>Importing Modules</em></a> for more details.</p>
 </div>
 </div>
-<p>When encountering an <a href="/language/modules/import.html"><code>import</code></a> statement, Rhai attempts to <em>resolve</em> the <a href="/rust/modules/index.html">module</a> based on the path string.</p>
-<p><em>Module Resolvers</em> are service types that implement the <a href="/rust/traits.html"><code>ModuleResolver</code></a> trait.</p>
+<p>When encountering an <a href="/book/language/modules/import.html"><code>import</code></a> statement, Rhai attempts to <em>resolve</em> the <a href="/book/rust/modules/index.html">module</a> based on the path string.</p>
+<p><em>Module Resolvers</em> are service types that implement the <a href="/book/rust/traits.html"><code>ModuleResolver</code></a> trait.</p>
 <h2 id="built-in-module-resolvers"><a class="header" href="#built-in-module-resolvers">Built-in Module Resolvers</a></h2>
 <p>There are a number of standard resolvers built into Rhai, the default being the <code>FileModuleResolver</code>
 which simply loads a script file based on the path (with <code>.rhai</code> extension attached) and execute it
-to form a <a href="/rust/modules/index.html">module</a>.</p>
-<p>Built-in <a href="/rust/modules/index.html">module</a> resolvers are grouped under the <code>rhai::module_resolvers</code>
-<a href="/language/fn-namespaces.html">module namespace</a>.</p>
+to form a <a href="/book/rust/modules/index.html">module</a>.</p>
+<p>Built-in <a href="/book/rust/modules/index.html">module</a> resolvers are grouped under the <code>rhai::module_resolvers</code>
+<a href="/book/language/fn-namespaces.html">module namespace</a>.</p>
 <h2 id="filemoduleresolver-default"><a class="header" href="#filemoduleresolver-default"><code>FileModuleResolver</code> (default)</a></h2>
-<p>The <em>default</em> <a href="/rust/modules/index.html">module</a> resolution service, not available for <a href="/start/features.html"><code>no_std</code></a> or <a href="/start/builds/wasm.html">WASM</a> builds.
+<p>The <em>default</em> <a href="/book/rust/modules/index.html">module</a> resolution service, not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds.
 Loads a script file (based off the current directory or a specified one) with <code>.rhai</code> extension.</p>
 <h3 id="function-namespace"><a class="header" href="#function-namespace">Function namespace</a></h3>
-<p>All functions in the <a href="/language/fn-namespaces.html"><em>global</em> namespace</a>, plus all those defined in the same
-<a href="/rust/modules/index.html">module</a>, are <em>merged</em> into a <em>unified</em> <a href="/language/fn-namespaces.html">namespace</a>.</p>
-<p>All <a href="/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="/language/modules/import.html"><code>import</code></a> statements become sub-<a href="/rust/modules/index.html">modules</a>,
+<p>All functions in the <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>, plus all those defined in the same
+<a href="/book/rust/modules/index.html">module</a>, are <em>merged</em> into a <em>unified</em> <a href="/book/language/fn-namespaces.html">namespace</a>.</p>
+<p>All <a href="/book/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="/book/language/modules/import.html"><code>import</code></a> statements become sub-<a href="/book/rust/modules/index.html">modules</a>,
 which are also available to functions defined within the same script file.</p>
 <h3 id="base-directory"><a class="header" href="#base-directory">Base directory</a></h3>
 <p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory (if set).
@@ -194,12 +194,12 @@ The base directory can be set via <code>FileModuleResolver::new_with_path</code>
 <p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then it is based off the
 directory holding the loading script. This allows scripts to simply load each other.</p>
 <h3 id="caching"><a class="header" href="#caching">Caching</a></h3>
-<p>By default, <a href="/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
+<p>By default, <a href="/book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
 repeatedly imported.</p>
 <p>Use <code>FileModuleResolver::enable_cache</code> to enable/disable the script file cache.</p>
 <h3 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h3>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be <a href="/start/bin.html"><code>rhai-run</code></a>).</p>
+script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped.
 Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
 <pre><code class="language-js">#!/home/to/me/bin/rhai-run
@@ -245,10 +245,10 @@ m::greet_main();                // prints &quot;main here!&quot;
 <h3 id="simulating-virtual-functions"><a class="header" href="#simulating-virtual-functions">Simulating virtual functions</a></h3>
 <p>When calling a namespace-qualified function defined within a module, other functions defined within
 the same module script override any similar-named functions (with the same number of parameters)
-defined in the <a href="/language/fn-namespaces.html">global namespace</a>.  This is to ensure that a module acts as a
+defined in the <a href="/book/language/fn-namespaces.html">global namespace</a>.  This is to ensure that a module acts as a
 self-contained unit and functions defined in the calling script do not override module code.</p>
 <p>In some situations, however, it is actually beneficial to do it in reverse: have module code call
-functions defined in the calling script (i.e. in the <a href="/language/fn-namespaces.html">global namespace</a>) if they
+functions defined in the calling script (i.e. in the <a href="/book/language/fn-namespaces.html">global namespace</a>) if they
 exist, and only call those defined in the module script if none are found.</p>
 <p>One such situation is the need to provide a <em>default implementation</em> to a simulated <em>virtual</em> function:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -299,8 +299,8 @@ m::greet();                         // prints &quot;hello! from module!&quot;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="staticmoduleresolver"><a class="header" href="#staticmoduleresolver"><code>StaticModuleResolver</code></a></h2>
-<p>Loads <a href="/rust/modules/index.html">modules</a> that are statically added. This can be used under <a href="/start/features.html"><code>no_std</code></a>.</p>
-<p>Functions are searched in the <a href="/language/fn-namespaces.html"><em>global</em> namespace</a> by default.</p>
+<p>Loads <a href="/book/rust/modules/index.html">modules</a> that are statically added. This can be used under <a href="/book/start/features.html"><code>no_std</code></a>.</p>
+<p>Functions are searched in the <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a> by default.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -313,12 +313,12 @@ resolver.insert(&quot;my_module&quot;, module);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="moduleresolverscollection"><a class="header" href="#moduleresolverscollection"><code>ModuleResolversCollection</code></a></h2>
-<p>A collection of module resolvers. <a href="/rust/modules/index.html">Modules</a> will be resolved from each resolver in sequential order.</p>
-<p>This is useful when multiple types of <a href="/rust/modules/index.html">modules</a> are needed simultaneously.</p>
+<p>A collection of module resolvers. <a href="/book/rust/modules/index.html">Modules</a> will be resolved from each resolver in sequential order.</p>
+<p>This is useful when multiple types of <a href="/book/rust/modules/index.html">modules</a> are needed simultaneously.</p>
 <h2 id="dummyresolverscollection"><a class="header" href="#dummyresolverscollection"><code>DummyResolversCollection</code></a></h2>
 <p>This module resolver acts as a <em>dummy</em> and always fails all module resolution calls.</p>
 <h2 id="set-into-engine"><a class="header" href="#set-into-engine">Set into <code>Engine</code></a></h2>
-<p>An <a href="/engine/hello-world.html"><code>Engine</code></a>’s module resolver is set via a call to <code>Engine::set_module_resolver</code>:</p>
+<p>An <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s module resolver is set via a call to <code>Engine::set_module_resolver</code>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

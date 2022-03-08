@@ -190,10 +190,10 @@ host system.</p>
 <div>
 <ul>
 <li>
-<p>The Rhai <a href="/engine/hello-world.html"><code>Engine</code></a> is <em>re-entrant</em>, meaning that it is decoupled from scripts.</p>
+<p>The Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> is <em>re-entrant</em>, meaning that it is decoupled from scripts.</p>
 </li>
 <li>
-<p>A new script only needs to be recompiled and the new <a href="/engine/compile.html"><code>AST</code></a> replaces the old for new behaviors
+<p>A new script only needs to be recompiled and the new <a href="/book/engine/compile.html"><code>AST</code></a> replaces the old for new behaviors
 to be active.</p>
 </li>
 <li>
@@ -204,7 +204,7 @@ to be active.</p>
 </div>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <h3 id="embed-scripting-engine-and-script-into-system"><a class="header" href="#embed-scripting-engine-and-script-into-system">Embed scripting engine and script into system</a></h3>
-<p>Say, a system has a Rhai <a href="/engine/hello-world.html"><code>Engine</code></a> plus a compiled script (in <a href="/engine/compile.html"><code>AST</code></a> form), with the <a href="/engine/compile.html"><code>AST</code></a> kept
+<p>Say, a system has a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> plus a compiled script (in <a href="/book/engine/compile.html"><code>AST</code></a> form), with the <a href="/book/engine/compile.html"><code>AST</code></a> kept
 with interior mutability…</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -235,7 +235,7 @@ system.on_event(|sys: &amp;System, event: &amp;str, data: Map| {
 </span></code></pre></pre>
 <h3 id="hot-reload-entire-script-upon-change"><a class="header" href="#hot-reload-entire-script-upon-change">Hot reload entire script upon change</a></h3>
 <p>If the control scripts are small enough and changes are infrequent, it is much simpler just to
-recompile the whole set of script and replace the original <a href="/engine/compile.html"><code>AST</code></a> with the new one.</p>
+recompile the whole set of script and replace the original <a href="/book/engine/compile.html"><code>AST</code></a> with the new one.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -252,8 +252,8 @@ system.watch(|sys: &amp;System, file: &amp;str| {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="hot-patch-specific-functions"><a class="header" href="#hot-patch-specific-functions">Hot patch specific functions</a></h3>
-<p>If the control scripts are large and complicated, and if the system can detect changes to specific <a href="/language/functions.html">functions</a>,
-it is also possible to <em>patch</em> just the changed <a href="/language/functions.html">functions</a>.</p>
+<p>If the control scripts are large and complicated, and if the system can detect changes to specific <a href="/book/language/functions.html">functions</a>,
+it is also possible to <em>patch</em> just the changed <a href="/book/language/functions.html">functions</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -280,7 +280,7 @@ system.watch_for_script_change(|sys: &amp;mut System, fn_name: &amp;str| {
 </div>
 <div>
 <p>For a multi-threaded environments, replace <code>Rc</code> with <code>Arc</code>, <code>RefCell</code> with <code>RwLock</code> or <code>Mutex</code>, and
-turn on the <a href="/start/features.html"><code>sync</code></a> feature.</p>
+turn on the <a href="/book/start/features.html"><code>sync</code></a> feature.</p>
 </div>
 </div>
 

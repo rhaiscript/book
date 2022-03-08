@@ -171,10 +171,10 @@
 <div>
 <ul>
 <li>
-<p>A system needs to communicate with an <a href="/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
+<p>A system needs to communicate with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
 </li>
 <li>
-<p>Multiple <a href="/engine/hello-world.html"><code>Engine</code></a>s running in separate threads need to coordinate/synchronize with each other.</p>
+<p>Multiple <a href="/book/engine/hello-world.html"><code>Engine</code></a>s running in separate threads need to coordinate/synchronize with each other.</p>
 </li>
 </ul>
 </div>
@@ -187,10 +187,10 @@
 <ul>
 <li>
 <p>An MPSC channel (or any other appropriate synchronization primitive) is used to send/receive
-messages to/from an <a href="/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
+messages to/from an <a href="/book/engine/hello-world.html"><code>Engine</code></a> running in a separate thread.</p>
 </li>
 <li>
-<p>An API is registered with the <a href="/engine/hello-world.html"><code>Engine</code></a> that is essentially <em>blocking</em> until synchronization is achieved.</p>
+<p>An API is registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> that is essentially <em>blocking</em> until synchronization is achieved.</p>
 </li>
 </ul>
 </div>
@@ -251,9 +251,9 @@ fn main() {
     }
 }
 </code></pre></pre>
-<h2 id="considerations-for-sync"><a class="header" href="#considerations-for-sync">Considerations for <a href="/start/features.html"><code>sync</code></a></a></h2>
+<h2 id="considerations-for-sync"><a class="header" href="#considerations-for-sync">Considerations for <a href="/book/start/features.html"><code>sync</code></a></a></h2>
 <p><code>std::mpsc::Sender</code> and <code>std::mpsc::Receiver</code> are not <code>Sync</code>, therefore they cannot be used in
-registered functions if the <a href="/start/features.html"><code>sync</code></a> feature is enabled.</p>
+registered functions if the <a href="/book/start/features.html"><code>sync</code></a> feature is enabled.</p>
 <p>In that situation, it is possible to wrap the <code>Sender</code> and <code>Receiver</code> each in a <code>Mutex</code> or <code>RwLock</code>,
 which makes them <code>Sync</code>.</p>
 <p>This, however, incurs the additional overhead of locking and unlocking the <code>Mutex</code> or <code>RwLock</code>
@@ -270,12 +270,12 @@ that are <em>blocking</em>.</p>
 async API.</p>
 <p>That means, although it is simple to use Rhai within a multi-threading environment where blocking a
 thread is acceptable or even expected, it is currently not possible to call <em>async</em> functions within
-Rhai scripts because there is no mechanism in <a href="/engine/hello-world.html"><code>Engine</code></a> to wrap the state of the call stack inside
+Rhai scripts because there is no mechanism in <a href="/book/engine/hello-world.html"><code>Engine</code></a> to wrap the state of the call stack inside
 a future.</p>
-<p>Fortunately an <a href="/engine/hello-world.html"><code>Engine</code></a> is re-entrant so it can be shared among many async tasks. It is usually
+<p>Fortunately an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is re-entrant so it can be shared among many async tasks. It is usually
 possible to split a script into multiple parts to avoid having to call async functions.</p>
-<p>Creating an <a href="/engine/hello-world.html"><code>Engine</code></a> is also relatively cheap (extremely cheap if creating a <a href="/engine/raw.html">raw <code>Engine</code></a>),
-so it is also a valid pattern to spawn a new <a href="/engine/hello-world.html"><code>Engine</code></a> instance for each task.</p>
+<p>Creating an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is also relatively cheap (extremely cheap if creating a <a href="/book/engine/raw.html">raw <code>Engine</code></a>),
+so it is also a valid pattern to spawn a new <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance for each task.</p>
 </div>
 </div>
 

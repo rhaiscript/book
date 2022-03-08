@@ -169,16 +169,16 @@
 <p>Built-in type iterators</p>
 </div>
 <div>
-<p>Type iterators are already defined for built-in <a href="/language/values-and-types.html">standard types</a> such as <a href="/language/strings-chars.html">strings</a>, <a href="/language/ranges.html">ranges</a>,
-<a href="/language/bit-fields.html">bit-fields</a>, <a href="/language/arrays.html">arrays</a> and <a href="/language/object-maps.html">object maps</a>.</p>
-<p>That’s why they can be used with the <a href="/language/for.html"><code>for</code></a> loop.</p>
+<p>Type iterators are already defined for built-in <a href="/book/language/values-and-types.html">standard types</a> such as <a href="/book/language/strings-chars.html">strings</a>, <a href="/book/language/ranges.html">ranges</a>,
+<a href="/book/language/bit-fields.html">bit-fields</a>, <a href="/book/language/arrays.html">arrays</a> and <a href="/book/language/object-maps.html">object maps</a>.</p>
+<p>That’s why they can be used with the <a href="/book/language/for.html"><code>for</code></a> loop.</p>
 </div>
 </div>
-<p>If a <a href="/rust/custom.html">custom type</a> is iterable, the <a href="/language/for.html"><code>for</code></a> loop can be used to iterate through
+<p>If a <a href="/book/rust/custom.html">custom type</a> is iterable, the <a href="/book/language/for.html"><code>for</code></a> loop can be used to iterate through
 its items in sequence, as long as it has a <em>type iterator</em> registered.</p>
 <p><code>Engine::register_iterator&lt;T&gt;</code> allows registration of a type iterator for any type
 that implements <code>IntoIterator</code>.</p>
-<p>With a type iterator registered, the <a href="/rust/custom.html">custom type</a> can be iterated through.</p>
+<p>With a type iterator registered, the <a href="/book/rust/custom.html">custom type</a> can be iterated through.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

@@ -202,8 +202,8 @@ number = -5 - +5;
 <tr><td style="text-align: center"><code>&gt;=</code></td><td>greater than or equals to</td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>&lt;</code></td><td>less than</td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>&lt;=</code></td><td>less than or equals to</td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
-<tr><td style="text-align: center"><code>..</code></td><td>exclusive range</td><td style="text-align: center"><a href="/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>..=</code></td><td>inclusive range</td><td style="text-align: center"><a href="/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>..</code></td><td>exclusive range</td><td style="text-align: center"><a href="/book/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>..=</code></td><td>inclusive range</td><td style="text-align: center"><a href="/book/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -223,7 +223,7 @@ let bit_op = 42 | 99;           // bit masking
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="floating-point-interoperates-with-integers"><a class="header" href="#floating-point-interoperates-with-integers">Floating-Point Interoperates with Integers</a></h2>
-<p>When one of the operands to a binary arithmetic <a href="/appendix/operators.html#operators">operator</a> is floating-point, it works with <code>INT</code> for
+<p>When one of the operands to a binary arithmetic <a href="/book/appendix/operators.html#operators">operator</a> is floating-point, it works with <code>INT</code> for
 the other operand and the result is floating-point.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -242,7 +242,7 @@ type_of(x) == &quot;f64&quot;;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="decimal-interoperates-with-integers"><a class="header" href="#decimal-interoperates-with-integers">Decimal Interoperates with Integers</a></h2>
-<p>When one of the operands to a binary arithmetic <a href="/appendix/operators.html#operators">operator</a> is <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>,
+<p>When one of the operands to a binary arithmetic <a href="/book/appendix/operators.html#operators">operator</a> is <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>,
 it works with <code>INT</code> for the other operand and the result is <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

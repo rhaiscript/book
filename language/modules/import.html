@@ -169,20 +169,20 @@
 <p>See also</p>
 </div>
 <div>
-<p>See <a href="/rust/modules/resolvers.html"><em>Module Resolvers</em></a> for more details.</p>
+<p>See <a href="/book/rust/modules/resolvers.html"><em>Module Resolvers</em></a> for more details.</p>
 </div>
 </div>
-<p>Before a <a href="/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
-<a href="/rust/modules/resolvers.html">module resolver</a> registered into the <a href="/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
+<p>Before a <a href="/book/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
+<a href="/book/rust/modules/resolvers.html">module resolver</a> registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
 <h2 id="import-statement"><a class="header" href="#import-statement"><code>import</code> Statement</a></h2>
-<p>A <a href="/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.
+<p>A <a href="/book/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.
 Its members can be accessed via <code>::</code> similar to C++.</p>
 <div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip</p>
 </div>
 <div>
-<p>A <a href="/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.
+<p>A <a href="/book/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.
 This is a very simple way to run another script file from within a script.</p>
 </div>
 </div>
@@ -211,7 +211,7 @@ lock::status = &quot;off&quot;;           // &lt;- runtime error: cannot modify 
 <p>Imports are <em>scoped</em></p>
 </div>
 <div>
-<p><a href="/rust/modules/index.html">Modules</a> imported via <code>import</code> statements are only accessible inside the relevant block scope.</p>
+<p><a href="/book/rust/modules/index.html">Modules</a> imported via <code>import</code> statements are only accessible inside the relevant block scope.</p>
 <pre><code class="language-js">import &quot;hacker&quot; as h;           // import module - visible globally
 
 if secured {                    // &lt;- new block scope
@@ -250,7 +250,7 @@ for x in 0..1000 {
 usually grouped at the top (beginning) of a script for manageability and visibility.</p>
 <p>It is not advised to deviate from this common practice unless there is a <em>Very Good Reason™</em>.</p>
 <p>Especially, do not place an <code>import</code> statement within a loop; doing so will repeatedly re-load the
-same <a href="/rust/modules/index.html">module</a> during every iteration of the loop!</p>
+same <a href="/book/rust/modules/index.html">module</a> during every iteration of the loop!</p>
 </div>
 </div>
 <div class="admonition danger">
@@ -258,8 +258,8 @@ same <a href="/rust/modules/index.html">module</a> during every iteration of the
 <p>Recursive imports</p>
 </div>
 <div>
-<p>Beware of <em>import cycles</em> – i.e. recursively loading the same <a href="/rust/modules/index.html">module</a>. This is a sure-fire way to
-cause a stack overflow in the <a href="/engine/hello-world.html"><code>Engine</code></a>, unless stopped by setting a limit for <a href="/safety/max-modules.html">maximum number of modules</a>.</p>
+<p>Beware of <em>import cycles</em> – i.e. recursively loading the same <a href="/book/rust/modules/index.html">module</a>. This is a sure-fire way to
+cause a stack overflow in the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, unless stopped by setting a limit for <a href="/book/safety/max-modules.html">maximum number of modules</a>.</p>
 <p>For instance, importing itself always causes an infinite recursion:</p>
 <pre><code class="language-js">┌────────────┐
 │ hello.rhai │
@@ -269,7 +269,7 @@ import &quot;hello&quot; as foo;          // import itself - infinite recursion!
 
 foo::do_something();
 </code></pre>
-<p><a href="/rust/modules/index.html">Modules</a> cross-referencing also cause infinite recursion:</p>
+<p><a href="/book/rust/modules/index.html">Modules</a> cross-referencing also cause infinite recursion:</p>
 <pre><code class="language-js">┌────────────┐
 │ hello.rhai │
 └────────────┘

@@ -164,10 +164,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="rhai-rand-random-number-generation-shuffling-and-sampling"><a class="header" href="#rhai-rand-random-number-generation-shuffling-and-sampling"><code>rhai-rand</code>: Random Number Generation, Shuffling and Sampling</a></h1>
-<p><code>rhai-rand</code> is an independent Rhai <a href="/rust/packages/index.html">package</a> that provides:</p>
+<p><code>rhai-rand</code> is an independent Rhai <a href="/book/rust/packages/index.html">package</a> that provides:</p>
 <ul>
 <li>random number generation using the <a href="https://crates.io/crates/rand"><code>rand</code></a> crate</li>
-<li><a href="/language/arrays.html">array</a> shuffling and sampling</li>
+<li><a href="/book/language/arrays.html">array</a> shuffling and sampling</li>
 </ul>
 <p>On <code>crates.io</code>: <a href="https://crates.io/crates/rhai-rand"><code>rhai-rand</code></a></p>
 <p>On <code>GitHub</code>: <a href="https://github.com/rhaiscript/rhai-rand"><code>rhaiscript/rhai-rand</code></a></p>
@@ -178,7 +178,7 @@
 rhai = &quot;1.5.0&quot;
 rhai-rand = &quot;0.1&quot;       # use rhai-rand crate
 </code></pre>
-<h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/engine/hello-world.html"><code>Engine</code></a></a></h2>
+<h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -197,9 +197,9 @@ engine.register_global_module(random.as_shared_module());
 </span></code></pre></pre>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <table><thead><tr><th style="text-align: center">Feature</th><th>Description</th><th style="text-align: center">Default?</th><th style="text-align: center">Should not be used with Rhai feature</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>float</code></td><td>enables random floating-point number generation</td><td style="text-align: center">yes</td><td style="text-align: center"><a href="/start/features.html"><code>no_float</code></a></td></tr>
-<tr><td style="text-align: center"><code>array</code></td><td>enables methods for <a href="/language/arrays.html">arrays</a></td><td style="text-align: center">yes</td><td style="text-align: center"><a href="/start/features.html"><code>no_index</code></a></td></tr>
-<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/engine/metadata/index.html">functions metadata</a> (turns on <a href="/start/features.html"><code>metadata</code></a> in Rhai)</td><td style="text-align: center">no</td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center"><code>float</code></td><td>enables random floating-point number generation</td><td style="text-align: center">yes</td><td style="text-align: center"><a href="/book/start/features.html"><code>no_float</code></a></td></tr>
+<tr><td style="text-align: center"><code>array</code></td><td>enables methods for <a href="/book/language/arrays.html">arrays</a></td><td style="text-align: center">yes</td><td style="text-align: center"><a href="/book/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/book/engine/metadata/index.html">functions metadata</a> (turns on <a href="/book/start/features.html"><code>metadata</code></a> in Rhai)</td><td style="text-align: center">no</td><td style="text-align: center"></td></tr>
 </tbody></table>
 <h3 id="example--working-with-no_float-in-rhai"><a class="header" href="#example--working-with-no_float-in-rhai">Example – working with <code>no_float</code> in Rhai</a></h3>
 <p><code>Cargo.toml</code>:</p>
@@ -221,11 +221,11 @@ rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&qu
 <tr><td style="text-align: center"><code>rand_bool(p)</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>float</code></td><td>generates a random boolean with the probability <code>p</code> of being <code>true</code></td></tr>
 </tbody></table>
 <h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
-<p>The following methods are defined for <a href="/language/arrays.html">arrays</a> (requires the <code>array</code> feature).</p>
+<p>The following methods are defined for <a href="/book/language/arrays.html">arrays</a> (requires the <code>array</code> feature).</p>
 <table><thead><tr><th style="text-align: center">Method</th><th style="text-align: center">Parameter(s)</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>shuffle</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"></td><td>shuffles the items in the <a href="/language/arrays.html">array</a></td></tr>
-<tr><td style="text-align: center"><code>sample</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"><a href="/language/dynamic.html"><code>Dynamic</code></a></td><td>returns a random item from the <a href="/language/arrays.html">array</a></td></tr>
-<tr><td style="text-align: center"><code>sample</code></td><td style="text-align: center">number of items to sample (empty if ≤ 0, all if ≥ length)</td><td style="text-align: center"><a href="/language/arrays.html"><code>Array</code></a></td><td>returns a non-repeating <em>shuffled</em> random sample of items from the <a href="/language/arrays.html">array</a></td></tr>
+<tr><td style="text-align: center"><code>shuffle</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"></td><td>shuffles the items in the <a href="/book/language/arrays.html">array</a></td></tr>
+<tr><td style="text-align: center"><code>sample</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Dynamic</code></a></td><td>returns a random item from the <a href="/book/language/arrays.html">array</a></td></tr>
+<tr><td style="text-align: center"><code>sample</code></td><td style="text-align: center">number of items to sample (empty if ≤ 0, all if ≥ length)</td><td style="text-align: center"><a href="/book/language/arrays.html"><code>Array</code></a></td><td>returns a non-repeating <em>shuffled</em> random sample of items from the <a href="/book/language/arrays.html">array</a></td></tr>
 </tbody></table>
 
                     </main>

@@ -175,7 +175,7 @@ custom-defined <em>syntax</em>.</p>
 <p>Stick with standard language syntax as much as possible.</p>
 <p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another obscure
 language syntax just to do something.</p>
-<p>Try to use <a href="/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
+<p>Try to use <a href="/book/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
 </div>
 </div>
 <div class="admonition success">
@@ -205,25 +205,25 @@ understanding of the code’s intent.</p>
 <p>A custom syntax is simply a list of symbols.</p>
 <p>These symbol types can be used:</p>
 <ul>
-<li>Standard <a href="/appendix/keywords.html">keywords</a></li>
-<li>Standard <a href="/appendix/operators.html#operators">operators</a></li>
-<li>Reserved <a href="/appendix/operators.html#symbols">symbols</a>.</li>
-<li>Identifiers following the <a href="/language/variables.html">variable</a> naming rules.</li>
+<li>Standard <a href="/book/appendix/keywords.html">keywords</a></li>
+<li>Standard <a href="/book/appendix/operators.html#operators">operators</a></li>
+<li>Reserved <a href="/book/appendix/operators.html#symbols">symbols</a>.</li>
+<li>Identifiers following the <a href="/book/language/variables.html">variable</a> naming rules.</li>
 <li><code>$expr$</code> – any valid expression, statement or statement block.</li>
 <li><code>$block$</code> – any valid statement block (i.e. must be enclosed by <code>{</code> … <code>}</code>).</li>
-<li><code>$ident$</code> – any <a href="/language/variables.html">variable</a> name.</li>
-<li><code>$symbol$</code> – any <a href="/appendix/operators.html#operators">symbol</a>, active or reserved.</li>
+<li><code>$ident$</code> – any <a href="/book/language/variables.html">variable</a> name.</li>
+<li><code>$symbol$</code> – any <a href="/book/appendix/operators.html#operators">symbol</a>, active or reserved.</li>
 <li><code>$bool$</code> – a boolean value.</li>
 <li><code>$int$</code> – an integer number.</li>
-<li><code>$float$</code> – a floating-point number (if not <a href="/start/features.html"><code>no_float</code></a>).</li>
-<li><code>$string$</code> – a <a href="/language/strings-chars.html">string</a> literal.</li>
+<li><code>$float$</code> – a floating-point number (if not <a href="/book/start/features.html"><code>no_float</code></a>).</li>
+<li><code>$string$</code> – a <a href="/book/language/strings-chars.html">string</a> literal.</li>
 </ul>
 <h4 id="the-first-symbol-must-be-an-identifier"><a class="header" href="#the-first-symbol-must-be-an-identifier">The first symbol must be an identifier</a></h4>
 <p>There is no specific limit on the combination and sequencing of each symbol type,
-except the <em>first</em> symbol which must be a custom <a href="/appendix/keywords.html">keyword</a> that follows the naming rules
-of <a href="/language/variables.html">variables</a>.</p>
-<p>The first symbol also cannot be a normal <a href="/appendix/keywords.html">keyword</a> unless it is <a href="/engine/disable-keywords.html">disabled</a>.
-Any valid identifier that is not an active <a href="/appendix/keywords.html">keyword</a> works fine, even if it is a reserved <a href="/appendix/keywords.html">keyword</a>.</p>
+except the <em>first</em> symbol which must be a custom <a href="/book/appendix/keywords.html">keyword</a> that follows the naming rules
+of <a href="/book/language/variables.html">variables</a>.</p>
+<p>The first symbol also cannot be a normal <a href="/book/appendix/keywords.html">keyword</a> unless it is <a href="/book/engine/disable-keywords.html">disabled</a>.
+Any valid identifier that is not an active <a href="/book/appendix/keywords.html">keyword</a> works fine, even if it is a reserved <a href="/book/appendix/keywords.html">keyword</a>.</p>
 <h4 id="the-first-symbol-must-be-unique"><a class="header" href="#the-first-symbol-must-be-unique">The first symbol must be unique</a></h4>
 <p>Rhai uses the <em>first</em> symbol as a clue to parse custom syntax.</p>
 <p>Therefore, at any one time, there can only be <em>one</em> custom syntax starting with each unique symbol.</p>
@@ -243,7 +243,7 @@ Any valid identifier that is not an active <a href="/appendix/keywords.html">key
 <tr><td style="text-align: center">3</td><td style="text-align: center">1</td><td style="text-align: center"><code>$symbol$</code></td><td>the operator</td></tr>
 <tr><td style="text-align: center">4</td><td style="text-align: center">2</td><td style="text-align: center"><code>$int$</code></td><td>an integer number</td></tr>
 <tr><td style="text-align: center">5</td><td style="text-align: center"></td><td style="text-align: center"><code>]</code></td><td>the right bracket symbol</td></tr>
-<tr><td style="text-align: center">6</td><td style="text-align: center"></td><td style="text-align: center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
+<tr><td style="text-align: center">6</td><td style="text-align: center"></td><td style="text-align: center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/book/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
 <tr><td style="text-align: center">7</td><td style="text-align: center">3</td><td style="text-align: center"><code>$expr$</code></td><td>an expression, which may be enclosed with <code>{</code> … <code>}</code>, or not.</td></tr>
 <tr><td style="text-align: center">8</td><td style="text-align: center"></td><td style="text-align: center"><code>:</code></td><td>the colon symbol</td></tr>
 <tr><td style="text-align: center">9</td><td style="text-align: center">4</td><td style="text-align: center"><code>$block$</code></td><td>a statement block, which must be enclosed with <code>{</code> … <code>}</code>.</td></tr>
@@ -272,10 +272,10 @@ print(hello);   // variable declared by a custom syntax persists!
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/language/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/language/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
 <tr><td><code>inputs</code></td><td style="text-align: center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
 </tbody></table>
-<p>and <a href="/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h4 id="return-value"><a class="header" href="#return-value">Return value</a></h4>
 <p>Return value is the result of evaluating the custom syntax expression.</p>
 <h4 id="access-arguments"><a class="header" href="#access-arguments">Access arguments</a></h4>
@@ -284,17 +284,17 @@ and statement blocks (<code>$block$</code>) are provided.</p>
 <p>To access a particular argument, use the following patterns:</p>
 <table><thead><tr><th style="text-align: center">Argument type</th><th>Pattern (<code>n</code> = slot in <code>inputs</code>)</th><th style="text-align: center">Result type</th><th>Description</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>$ident$</code></td><td><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><code>&amp;str</code></td><td>variable name</td></tr>
-<tr><td style="text-align: center"><code>$symbol$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td style="text-align: center"><a href="/rust/immutable-string.html"><code>ImmutableString</code></a></td><td>symbol literal</td></tr>
+<tr><td style="text-align: center"><code>$symbol$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a></td><td>symbol literal</td></tr>
 <tr><td style="text-align: center"><code>$expr$</code></td><td><code>&amp;inputs[n]</code></td><td style="text-align: center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
 <tr><td style="text-align: center"><code>$block$</code></td><td><code>&amp;inputs[n]</code></td><td style="text-align: center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
 <tr><td style="text-align: center"><code>$bool$</code></td><td><code>inputs[n].get_literal_value::&lt;bool&gt;().unwrap()</code></td><td style="text-align: center"><code>bool</code></td><td>boolean value</td></tr>
 <tr><td style="text-align: center"><code>$int$</code></td><td><code>inputs[n].get_literal_value::&lt;INT&gt;().unwrap()</code></td><td style="text-align: center"><code>INT</code></td><td>integer number</td></tr>
 <tr><td style="text-align: center"><code>$float$</code></td><td><code>inputs[n].get_literal_value::&lt;FLOAT&gt;().unwrap()</code></td><td style="text-align: center"><code>FLOAT</code></td><td>floating-point number</td></tr>
-<tr><td style="text-align: center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code><br/><br/><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><a href="/rust/immutable-string.html"><code>ImmutableString</code></a><br/><br/><code>&amp;str</code></td><td><a href="/language/strings-chars.html">string</a> text</td></tr>
+<tr><td style="text-align: center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code><br/><br/><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a><br/><br/><code>&amp;str</code></td><td><a href="/book/language/strings-chars.html">string</a> text</td></tr>
 </tbody></table>
 <h4 id="get-literal-constants"><a class="header" href="#get-literal-constants">Get literal constants</a></h4>
 <p>Several argument types represent literal constants that can be obtained directly via
-<code>Expression::get_literal_value&lt;T&gt;</code> or <code>Expression::get_string_value</code> (for <a href="/language/strings-chars.html">strings</a>).</p>
+<code>Expression::get_literal_value&lt;T&gt;</code> or <code>Expression::get_string_value</code> (for <a href="/book/language/strings-chars.html">strings</a>).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -327,9 +327,9 @@ let result = context.eval_expression_tree(expression)?;
 </span></code></pre></pre>
 <h4 id="declare-variables"><a class="header" href="#declare-variables">Declare variables</a></h4>
 <p>New variables maybe declared (usually with a variable name that is passed in via <code>$ident$</code>).</p>
-<p>It can simply be pushed into the <a href="/engine/scope.html"><code>Scope</code></a>.</p>
+<p>It can simply be pushed into the <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <p>However, beware that all new variables must be declared <em>prior</em> to evaluating any expression tree.
-In other words, any <a href="/engine/scope.html"><code>Scope</code></a> calls that change the list of must come <em>before</em> any
+In other words, any <a href="/book/engine/scope.html"><code>Scope</code></a> calls that change the list of must come <em>before</em> any
 <code>EvalContext::eval_expression_tree</code> calls.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -421,12 +421,12 @@ exec&lt;x&gt; -&gt; { x += 1 } while x &lt; 0;
 <h3 id="step-four--disable-unneeded-statement-types"><a class="header" href="#step-four--disable-unneeded-statement-types">Step Four – Disable Unneeded Statement Types</a></h3>
 <p>When a DSL needs a custom syntax, most likely than not it is extremely specialized.
 Therefore, many statement types actually may not make sense under the same usage scenario.</p>
-<p>So, while at it, better <a href="/engine/disable-keywords.html">disable</a> those built-in keywords
-and <a href="/appendix/operators.html#operators">operators</a> that should not be used by the user.  The would leave only the bare minimum
+<p>So, while at it, better <a href="/book/engine/disable-keywords.html">disable</a> those built-in keywords
+and <a href="/book/appendix/operators.html#operators">operators</a> that should not be used by the user.  The would leave only the bare minimum
 language surface exposed, together with the custom syntax that is tailor-designed for
 the scenario.</p>
-<p>A <a href="/appendix/keywords.html">keyword</a> or <a href="/appendix/operators.html#operators">operator</a> that is disabled can still be used in a custom syntax.</p>
-<p>In an extreme case, it is possible to disable <em>every</em> <a href="/appendix/keywords.html">keyword</a> in the language, leaving only
+<p>A <a href="/book/appendix/keywords.html">keyword</a> or <a href="/book/appendix/operators.html#operators">operator</a> that is disabled can still be used in a custom syntax.</p>
+<p>In an extreme case, it is possible to disable <em>every</em> <a href="/book/appendix/keywords.html">keyword</a> in the language, leaving only
 custom syntax (plus possibly expressions).  But again, Don’t Do It™ – unless you are certain
 of what you’re doing.</p>
 <h3 id="step-five--document"><a class="header" href="#step-five--document">Step Five – Document</a></h3>
@@ -497,10 +497,10 @@ together with the implementation function.</p>
 It can either be:</p>
 <ul>
 <li>
-<p>a identifier that isn’t a normal <a href="/appendix/keywords.html">keyword</a> unless <a href="/engine/disable-keywords.html">disabled</a>, or</p>
+<p>a identifier that isn’t a normal <a href="/book/appendix/keywords.html">keyword</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>, or</p>
 </li>
 <li>
-<p>a valid symbol (see <a href="/appendix/operators.html">list</a>) which is not a normal <a href="/appendix/operators.html#operators">operator</a> unless <a href="/engine/disable-keywords.html">disabled</a>.</p>
+<p>a valid symbol (see <a href="/book/appendix/operators.html">list</a>) which is not a normal <a href="/book/appendix/operators.html#operators">operator</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>.</p>
 </li>
 </ul>
 </div>
@@ -512,18 +512,18 @@ It can either be:</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>symbols</code></td><td style="text-align: center"><code>&amp;[</code><a href="/rust/immutable-string.html"><code>ImmutableString</code></a><code>]</code></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
+<tr><td><code>symbols</code></td><td style="text-align: center"><code>&amp;[</code><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a><code>]</code></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
 <tr><td><code>look_ahead</code></td><td style="text-align: center"><code>&amp;str</code></td><td>a string slice containing the next symbol that is about to be read</td></tr>
 </tbody></table>
-<p>Most strings are <a href="/rust/immutable-string.html"><code>ImmutableString</code></a>’s so it is usually more efficient to just <code>clone</code> the appropriate one
+<p>Most strings are <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a>’s so it is usually more efficient to just <code>clone</code> the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.</p>
 <h3 id="parameters"><a class="header" href="#parameters">Parameters</a></h3>
 <p>A custom parser takes as input parameters two pieces of information:</p>
 <ul>
 <li>
-<p>The symbols (as <a href="/rust/immutable-string.html"><code>ImmutableString</code></a>s) parsed so far:</p>
+<p>The symbols (as <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a>s) parsed so far:</p>
 <table><thead><tr><th style="text-align: center">Argument type</th><th>Value</th></tr></thead><tbody>
-<tr><td style="text-align: center">text <a href="/language/strings-chars.html">string</a></td><td>text value</td></tr>
+<tr><td style="text-align: center">text <a href="/book/language/strings-chars.html">string</a></td><td>text value</td></tr>
 <tr><td style="text-align: center"><code>$ident$</code></td><td>identifier name</td></tr>
 <tr><td style="text-align: center"><code>$symbol$</code></td><td>symbol literal</td></tr>
 <tr><td style="text-align: center"><code>$expr$</code></td><td><code>$expr$</code></td></tr>
@@ -531,7 +531,7 @@ It can either be:</p>
 <tr><td style="text-align: center"><code>$bool$</code></td><td><code>true</code> or <code>false</code></td></tr>
 <tr><td style="text-align: center"><code>$int$</code></td><td>value of number</td></tr>
 <tr><td style="text-align: center"><code>$float$</code></td><td>value of number</td></tr>
-<tr><td style="text-align: center"><code>$string$</code></td><td><a href="/language/strings-chars.html">string</a> text</td></tr>
+<tr><td style="text-align: center"><code>$string$</code></td><td><a href="/book/language/strings-chars.html">string</a> text</td></tr>
 </tbody></table>
 <p>The custom parser can inspect this symbols stream to determine the next symbol to parse.</p>
 </li>
@@ -551,7 +551,7 @@ and Rhai will fail with a parse error containing information about the expected 
 <table><thead><tr><th style="text-align: center">Value</th><th>Description</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>Ok(None)</code></td><td>parsing complete and there are no more symbols to match</td></tr>
 <tr><td style="text-align: center"><code>Ok(Some(symbol))</code></td><td>the next <code>symbol</code> to match, which can also be <code>$expr$</code>, <code>$ident$</code> or <code>$block$</code></td></tr>
-<tr><td style="text-align: center"><code>Err(error)</code></td><td><code>error</code> that is reflected back to the <a href="/engine/hello-world.html"><code>Engine</code></a> – normally <code>ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)</code> to indicate that there is a syntax error, but it can be any <code>ParseError</code>.</td></tr>
+<tr><td style="text-align: center"><code>Err(error)</code></td><td><code>error</code> that is reflected back to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> – normally <code>ParseError(ParseErrorType::BadInput(LexError::ImproperSymbol(message)), Position::NONE)</code> to indicate that there is a syntax error, but it can be any <code>ParseError</code>.</td></tr>
 </tbody></table>
 <p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
 <code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the

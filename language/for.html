@@ -164,14 +164,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="for-loop"><a class="header" href="#for-loop">For Loop</a></h1>
-<p>Iterating through a numeric <a href="/language/ranges.html">range</a> or an <a href="/language/arrays.html">array</a>, or any type with a registered <a href="/language/iterator.html">type iterator</a>,
+<p>Iterating through a numeric <a href="/book/language/ranges.html">range</a> or an <a href="/book/language/arrays.html">array</a>, or any type with a registered <a href="/book/language/iterator.html">type iterator</a>,
 is provided by the <code>for</code> … <code>in</code> loop.</p>
 <p>There are two alternative syntaxes, one including a counter variable:</p>
 <blockquote>
 <p><code>for</code> <em>variable</em> <code>in</code> <em>expression</em> <code>{</code> … <code>}</code></p>
 <p><code>for (</code> <em>variable</em> <code>,</code> <em>counter</em> <code>)</code> <code>in</code> <em>expression</em> <code>{</code> … <code>}</code></p>
 </blockquote>
-<p><code>for</code> loops can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+<p><code>for</code> loops can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 <h2 id="counter-variable"><a class="header" href="#counter-variable">Counter Variable</a></h2>
 <p>The counter variable, if specified, starts from zero, incrementing upwards.</p>
 <pre><code class="language-js   no_run">let a = [42, 123, 999, 0, true, &quot;hello&quot;, &quot;world!&quot;, 987.6543];
@@ -193,7 +193,7 @@ for (item, count) in a {
 <p>Like C, <code>continue</code> can be used to skip to the next iteration, by-passing all following statements;
 <code>break</code> can be used to break out of the loop unconditionally.</p>
 <h2 id="iterate-through-arrays"><a class="header" href="#iterate-through-arrays">Iterate Through Arrays</a></h2>
-<p>Iterating through an <a href="/language/arrays.html">array</a> yields cloned <em>copies</em> of each element.</p>
+<p>Iterating through an <a href="/book/language/arrays.html">array</a> yields cloned <em>copies</em> of each element.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -210,10 +210,10 @@ for x in a {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="iterate-through-strings"><a class="header" href="#iterate-through-strings">Iterate Through Strings</a></h2>
-<p>The <code>chars</code> method allows iterating through a <a href="/language/strings-chars.html">string</a>, yielding characters.</p>
+<p>The <code>chars</code> method allows iterating through a <a href="/book/language/strings-chars.html">string</a>, yielding characters.</p>
 <p><code>chars</code> optionally accepts the character to start from (counting from the end if negative), as well
 as the number of characters to iterate (defaults all).</p>
-<p><code>char</code> also accepts a <a href="/language/ranges.html">range</a> which can be created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
+<p><code>char</code> also accepts a <a href="/book/language/ranges.html">range</a> which can be created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -244,8 +244,8 @@ for ch in s.chars(2..s.len) {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="iterate-through-numeric-ranges"><a class="header" href="#iterate-through-numeric-ranges">Iterate Through Numeric Ranges</a></h2>
-<p><a href="/language/ranges.html">Ranges</a> are created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
-<p>The <code>range</code> function similarly creates exclusive <a href="/language/ranges.html">ranges</a>, plus allowing optional step values.</p>
+<p><a href="/book/language/ranges.html">Ranges</a> are created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
+<p>The <code>range</code> function similarly creates exclusive <a href="/book/language/ranges.html">ranges</a>, plus allowing optional step values.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -297,10 +297,10 @@ for x in range(5.0, 0.0, -2.0) {    // step down by -2.0
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="iterate-through-bit-fields"><a class="header" href="#iterate-through-bit-fields">Iterate Through Bit-Fields</a></h2>
-<p>The <code>bits</code> function allows iterating through an integer as a <a href="/language/bit-fields.html">bit-field</a>.</p>
+<p>The <code>bits</code> function allows iterating through an integer as a <a href="/book/language/bit-fields.html">bit-field</a>.</p>
 <p><code>bits</code> optionally accepts the bit number to start from (counting from the most-significant-bit if
 negative), as well as the number of bits to iterate (defaults all).</p>
-<p><code>bits</code> also accepts a <a href="/language/ranges.html">range</a> which can be created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
+<p><code>bits</code> also accepts a <a href="/book/language/ranges.html">range</a> which can be created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
 <pre><code class="language-js   no_run">let x = 0b_1001110010_1101100010_1100010100;
 let num_on = 0;
 
@@ -328,9 +328,9 @@ for (bit, index) in x.bits(3..=12) {
 }
 </code></pre>
 <h2 id="iterate-through-object-maps"><a class="header" href="#iterate-through-object-maps">Iterate Through Object Maps</a></h2>
-<p>Two methods, <code>keys</code> and <code>values</code>, return <a href="/language/arrays.html">arrays</a> containing cloned <em>copies</em>
-of all property names and values of an <a href="/language/object-maps.html">object map</a>, respectively.</p>
-<p>These <a href="/language/arrays.html">arrays</a> can be iterated.</p>
+<p>Two methods, <code>keys</code> and <code>values</code>, return <a href="/book/language/arrays.html">arrays</a> containing cloned <em>copies</em>
+of all property names and values of an <a href="/book/language/object-maps.html">object map</a>, respectively.</p>
+<p>These <a href="/book/language/arrays.html">arrays</a> can be iterated.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

@@ -169,14 +169,14 @@
 <p>Safety</p>
 </div>
 <div>
-<p>Always limit the <a href="/safety/max-map-size.html">maximum size of object maps</a>.</p>
+<p>Always limit the <a href="/book/safety/max-map-size.html">maximum size of object maps</a>.</p>
 </div>
 </div>
-<p>Object maps are hash dictionaries. Properties are all <a href="/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
+<p>Object maps are hash dictionaries. Properties are all <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
 <p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
 Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
-<p>Object maps are disabled via the <a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
+<p>Object maps are disabled via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <div class="admonition question">
 <div class="admonition-title">
 <p>Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
@@ -202,16 +202,16 @@ commas <code>,</code>:</p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em><code>,</code> … <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>}</code></p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em><code>,</code> … <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>}</code>     <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>The property <em>name</em> can be a simple identifier following the same naming rules as <a href="/language/variables.html">variables</a>,
-or a <a href="/appendix/literals.html">string literal</a> without interpolation.</p>
+<p>The property <em>name</em> can be a simple identifier following the same naming rules as <a href="/book/language/variables.html">variables</a>,
+or a <a href="/book/appendix/literals.html">string literal</a> without interpolation.</p>
 <h2 id="property-access-syntax"><a class="header" href="#property-access-syntax">Property Access Syntax</a></h2>
 <h3 id="dot-notation"><a class="header" href="#dot-notation">Dot notation</a></h3>
-<p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/language/variables.html">variables</a>.</p>
+<p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/book/language/variables.html">variables</a>.</p>
 <blockquote>
 <p><em>object</em> <code>.</code> <em>property</em></p>
 </blockquote>
 <h3 id="index-notation"><a class="header" href="#index-notation">Index notation</a></h3>
-<p>The <em>index notation</em> allows setting/getting properties of arbitrary names (even the empty <a href="/language/strings-chars.html">string</a>).</p>
+<p>The <em>index notation</em> allows setting/getting properties of arbitrary names (even the empty <a href="/book/language/strings-chars.html">string</a>).</p>
 <blockquote>
 <p><em>object</em> <code>[</code> <em>property</em> <code>]</code></p>
 </blockquote>
@@ -222,28 +222,28 @@ or a <a href="/appendix/literals.html">string literal</a> without interpolation.
 </div>
 <div>
 <p>It is possible to force Rhai to return an <code>EvalAltResult:: ErrorPropertyNotFound</code> via
-<a href="/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>.</p>
+<a href="/book/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>.</p>
 </div>
 </div>
-<p>Trying to read a non-existing property returns <a href="/language/values-and-types.html"><code>()</code></a> instead of causing an error.</p>
+<p>Trying to read a non-existing property returns <a href="/book/language/values-and-types.html"><code>()</code></a> instead of causing an error.</p>
 <p>This is similar to JavaScript where accessing a non-existing property returns <code>undefined</code>.</p>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
-<p>The following methods (defined in the <a href="/rust/packages/builtin.html"><code>BasicMapPackage</code></a> but excluded if using a <a href="/engine/raw.html">raw <code>Engine</code></a>)
+<p>The following methods (defined in the <a href="/book/rust/packages/builtin.html"><code>BasicMapPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>)
 operate on object maps.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>get</code></td><td>property name</td><td>gets a copy of the value of a certain property (<a href="/language/values-and-types.html"><code>()</code></a> if the property does not exist); behavior is not affected by <a href="/engine/options.html"><code>Engine::fail_on_invalid_map_property</code></a></td></tr>
+<tr><td><code>get</code></td><td>property name</td><td>gets a copy of the value of a certain property (<a href="/book/language/values-and-types.html"><code>()</code></a> if the property does not exist); behavior is not affected by <a href="/book/engine/options.html"><code>Engine::fail_on_invalid_map_property</code></a></td></tr>
 <tr><td><code>set</code></td><td><ol><li>property name</li><li>new element</li></ol></td><td>sets a certain property to a new value (property is added if not already exists)</td></tr>
 <tr><td><code>len</code></td><td><em>none</em></td><td>returns the number of properties</td></tr>
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the object map</td></tr>
-<tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
+<tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/book/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
 <tr><td><code>+=</code> operator, <code>mixin</code></td><td>second object map</td><td>mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values)</td></tr>
 <tr><td><code>+</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>merges the first object map with the second</td></tr>
 <tr><td><code>==</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>are the two object maps the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>!=</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>are the two object maps different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>fill_with</code></td><td>second object map</td><td>adds in all properties of the second object map that do not exist in the object map</td></tr>
-<tr><td><code>contains</code>, <a href="/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
-<tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/start/features.html"><code>no_index</code></a></td></tr>
-<tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>contains</code>, <a href="/book/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
+<tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -321,9 +321,9 @@ y.len() == 0;
 </span></code></pre></pre>
 <h2 id="no-support-for-property-getters"><a class="header" href="#no-support-for-property-getters">No Support for Property Getters</a></h2>
 <p>In order not to affect the speed of accessing properties in an object map, new
-<a href="/rust/getters-setters.html">property getters</a> cannot be registered because they conflict with the syntax of
+<a href="/book/rust/getters-setters.html">property getters</a> cannot be registered because they conflict with the syntax of
 property access.</p>
-<p>A <a href="/rust/getters-setters.html">property getter</a> function registered via <code>Engine::register_get</code>, for example,
+<p>A <a href="/book/rust/getters-setters.html">property getter</a> function registered via <code>Engine::register_get</code>, for example,
 for a <code>Map</code> will never be found – instead, the property will be looked up in the object map.</p>
 <p>Properties should be registered as <em>methods</em> instead:</p>
 <pre><pre class="playground"><code class="language-rust no_run">

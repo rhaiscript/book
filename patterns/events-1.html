@@ -170,12 +170,12 @@
 </div>
 <div>
 <p>A runnable example of this implementation is included.</p>
-<p>See the <a href="/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
+<p>See the <a href="/book/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
 </div>
 </div>
 <h2 id="initialize-handler-instance-with-enginecall_fn_raw"><a class="header" href="#initialize-handler-instance-with-enginecall_fn_raw">Initialize Handler Instance with <code>Engine::call_fn_raw</code></a></h2>
-<p>Use <code>Engine::call_fn_raw</code> instead of <code>Engine::call_fn</code> in order to retain new <a href="/language/variables.html">variables</a> defined
-inside the custom <a href="/engine/scope.html"><code>Scope</code></a> when running the <code>init</code> function.</p>
+<p>Use <code>Engine::call_fn_raw</code> instead of <code>Engine::call_fn</code> in order to retain new <a href="/book/language/variables.html">variables</a> defined
+inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a> when running the <code>init</code> function.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -203,9 +203,9 @@ inside the custom <a href="/engine/scope.html"><code>Scope</code></a> when runni
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="handler-scripting-style"><a class="header" href="#handler-scripting-style">Handler Scripting Style</a></h2>
-<p>Because the stored state is kept in a custom <a href="/engine/scope.html"><code>Scope</code></a>, it is possible for all <a href="/language/functions.html">functions</a> defined
+<p>Because the stored state is kept in a custom <a href="/book/engine/scope.html"><code>Scope</code></a>, it is possible for all <a href="/book/language/functions.html">functions</a> defined
 in the handler script to access and modify these state variables.</p>
-<p>The API registered with the <a href="/engine/hello-world.html"><code>Engine</code></a> can be also used throughout the script.</p>
+<p>The API registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be also used throughout the script.</p>
 <h3 id="sample-script"><a class="header" href="#sample-script">Sample script</a></h3>
 <pre><code class="language-js">/// Initialize user-provided state (shadows system-provided state, if any).
 /// Because 'call_fn_raw' is used to call this, new variables introduced
@@ -263,14 +263,14 @@ fn update(data) {
 </code></pre>
 <h2 id="disadvantages-of-this-style"><a class="header" href="#disadvantages-of-this-style">Disadvantages of This Style</a></h2>
 <p>This style is simple to implement and intuitive to use, but it is not very flexible.</p>
-<p>New user state <a href="/language/variables.html">variables</a> are introduced by evaluating a special initialization script <a href="/language/functions.html">function</a>
-(e.g. <code>init</code>) that defines them, and <code>Engine::call_fn_raw</code> is used to keep them inside the custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
-<p>However, this has the disadvantage that no other <a href="/language/functions.html">function</a> can introduce new state <a href="/language/variables.html">variables</a>,
-otherwise they’d simply <em><a href="/language/shadow.html">shadow</a></em> existing <a href="/language/variables.html">variables</a> in the custom <a href="/engine/scope.html"><code>Scope</code></a>.  Thus, <a href="/language/functions.html">functions</a>
-are called during events via <code>Engine::call_fn</code> which does not retain any <a href="/language/variables.html">variables</a>.</p>
-<p>When there are a large number of state <a href="/language/variables.html">variables</a>, this style also makes it easy for local
-<a href="/language/variables.html">variables</a> defined in user <a href="/language/functions.html">functions</a> to accidentally <em><a href="/language/shadow.html">shadow</a></em> a state <a href="/language/variables.html">variable</a> with a
-<a href="/language/variables.html">variable</a> that just happens to be the same name.</p>
+<p>New user state <a href="/book/language/variables.html">variables</a> are introduced by evaluating a special initialization script <a href="/book/language/functions.html">function</a>
+(e.g. <code>init</code>) that defines them, and <code>Engine::call_fn_raw</code> is used to keep them inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>However, this has the disadvantage that no other <a href="/book/language/functions.html">function</a> can introduce new state <a href="/book/language/variables.html">variables</a>,
+otherwise they’d simply <em><a href="/book/language/shadow.html">shadow</a></em> existing <a href="/book/language/variables.html">variables</a> in the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.  Thus, <a href="/book/language/functions.html">functions</a>
+are called during events via <code>Engine::call_fn</code> which does not retain any <a href="/book/language/variables.html">variables</a>.</p>
+<p>When there are a large number of state <a href="/book/language/variables.html">variables</a>, this style also makes it easy for local
+<a href="/book/language/variables.html">variables</a> defined in user <a href="/book/language/functions.html">functions</a> to accidentally <em><a href="/book/language/shadow.html">shadow</a></em> a state <a href="/book/language/variables.html">variable</a> with a
+<a href="/book/language/variables.html">variable</a> that just happens to be the same name.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

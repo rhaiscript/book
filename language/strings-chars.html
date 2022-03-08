@@ -169,12 +169,12 @@
 <p>Safety</p>
 </div>
 <div>
-<p>Always limit the <a href="/safety/max-string-size.html">maximum length of strings</a>.</p>
+<p>Always limit the <a href="/book/safety/max-string-size.html">maximum length of strings</a>.</p>
 </div>
 </div>
 <p>String in Rhai contain any text sequence of valid Unicode characters.</p>
 <p>Internally strings are stored in UTF-8 encoding.</p>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> a string returns <code>&quot;string&quot;</code>.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> a string returns <code>&quot;string&quot;</code>.</p>
 <h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
 <p>String and character literals follow JavaScript-style syntax.</p>
 <table><thead><tr><th>Type</th><th style="text-align: center">Quotes</th><th style="text-align: center">Escapes?</th><th style="text-align: center">Continuation?</th><th style="text-align: center">Interpolation?</th></tr></thead><tbody>
@@ -188,7 +188,7 @@
 </div>
 <div>
 <p>Strings can be built up from other strings and types via the <code>+</code> operator
-(provided by the <a href="/rust/packages/builtin.html"><code>MoreStringPackage</code></a> but excluded if using a <a href="/engine/raw.html">raw <code>Engine</code></a>).</p>
+(provided by the <a href="/book/rust/packages/builtin.html"><code>MoreStringPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>).</p>
 <p>This is particularly useful when printing output.</p>
 </div>
 </div>
@@ -276,10 +276,10 @@ let x = &quot;I have a quote \&quot; as well as a back-tick ` here.&quot;;
 <p><code>${</code> … <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
 statements block, including another interpolated string!
 The last result of the block is taken as the value for interpolation.</p>
-<p>Rhai uses <a href="/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
+<p>Rhai uses <a href="/book/rust/print-custom.html"><code>to_string()</code></a> to convert any value into a string, then physically joins all the
 sub-strings together.</p>
-<p>For convenience, if any interpolated value is a <a href="/language/blobs.html">BLOB</a>, however, it is automatically treated as a
-UTF-8 encoded string.  That is because it is rarely useful to interpolate a <a href="/language/blobs.html">BLOB</a> into a string,
+<p>For convenience, if any interpolated value is a <a href="/book/language/blobs.html">BLOB</a>, however, it is automatically treated as a
+UTF-8 encoded string.  That is because it is rarely useful to interpolate a <a href="/book/language/blobs.html">BLOB</a> into a string,
 but extremely useful to be able to directly manipulate UTF-8 encoded text.</p>
 <pre><code class="language-js">let x = 42;
 let y = 123;

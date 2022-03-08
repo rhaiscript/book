@@ -166,7 +166,7 @@
                         <h1 id="script-optimization"><a class="header" href="#script-optimization">Script Optimization</a></h1>
 <p>Rhai includes an <em>optimizer</em> that tries to optimize a script after parsing.
 This can reduce resource utilization and increase execution speed.</p>
-<p>Script optimization can be turned off via the <a href="/start/features.html"><code>no_optimize</code></a> feature.</p>
+<p>Script optimization can be turned off via the <a href="/book/start/features.html"><code>no_optimize</code></a> feature.</p>
 <h2 id="dead-code-removal"><a class="header" href="#dead-code-removal">Dead Code Removal</a></h2>
 <p>Rhai attempts to eliminate <em>dead code</em> (i.e. code that does nothing, for example an expression by
 itself as a statement, which is allowed in Rhai).</p>
@@ -207,9 +207,9 @@ itself as a statement, which is allowed in Rhai).</p>
 <span class="boring">}
 </span></code></pre></pre>
 <p>Normally, nobody deliberately writes scripts with dead code, but it is extremely common for
-template-based machine-generated scripts, especially where <a href="/language/constants.html">constants</a> are involved.</p>
+template-based machine-generated scripts, especially where <a href="/book/language/constants.html">constants</a> are involved.</p>
 <h2 id="constants-propagation"><a class="header" href="#constants-propagation">Constants Propagation</a></h2>
-<p><a href="/language/constants.html">Constants</a> propagation is used to remove dead code.</p>
+<p><a href="/book/language/constants.html">Constants</a> propagation is used to remove dead code.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -225,10 +225,10 @@ print(&quot;done!&quot;);                             // &lt;- the line above is
                                             //    because the condition is always true
 <span class="boring">}
 </span></code></pre></pre>
-<p>These are quite effective for template-based machine-generated scripts where certain <a href="/language/constants.html">constant</a> values
+<p>These are quite effective for template-based machine-generated scripts where certain <a href="/book/language/constants.html">constant</a> values
 are spliced into the script text in order to turn on/off certain sections.</p>
-<p>For fixed script texts, the <a href="/language/constants.html">constant</a> values can also be provided in a custom <a href="/engine/scope.html"><code>Scope</code></a> object to
-the <a href="/engine/hello-world.html"><code>Engine</code></a> for use in compilation and evaluation.</p>
+<p>For fixed script texts, the <a href="/book/language/constants.html">constant</a> values can also be provided in a custom <a href="/book/engine/scope.html"><code>Scope</code></a> object to
+the <a href="/book/engine/hello-world.html"><code>Engine</code></a> for use in compilation and evaluation.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -251,7 +251,7 @@ engine.run_with_scope(&amp;mut scope,
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="caveat--constants-in-custom-scope-are-also-propagated-into-functions"><a class="header" href="#caveat--constants-in-custom-scope-are-also-propagated-into-functions">Caveat – constants in custom scope are also propagated into functions</a></h3>
-<p><a href="/language/constants.html">Constants</a> defined at <em>global</em> level typically cannot be seen by script <a href="/language/functions.html">functions</a> because they are <em>pure</em>.</p>
+<p><a href="/book/language/constants.html">Constants</a> defined at <em>global</em> level typically cannot be seen by script <a href="/book/language/functions.html">functions</a> because they are <em>pure</em>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -266,11 +266,11 @@ fn foo() {
 print(foo());               // error: 'MY_CONSTANT' not found
 <span class="boring">}
 </span></code></pre></pre>
-<p>When <a href="/language/constants.html">constants</a> are provided in a custom <a href="/engine/scope.html"><code>Scope</code></a> (e.g. via <code>Engine::compile_with_scope</code>,
+<p>When <a href="/book/language/constants.html">constants</a> are provided in a custom <a href="/book/engine/scope.html"><code>Scope</code></a> (e.g. via <code>Engine::compile_with_scope</code>,
 <code>Engine::eval_with_scope</code> or <code>Engine::run_with_scope</code>) instead of defined within the same script,
-they are also propagated to <a href="/language/functions.html">functions</a>.</p>
+they are also propagated to <a href="/book/language/functions.html">functions</a>.</p>
 <p>This is usually the intuitive usage and behavior expected by regular users, even though it means
-that a script will behave differently (essentially a runtime error) when <a href="/engine/optimize/index.html">script optimization</a> is disabled.</p>
+that a script will behave differently (essentially a runtime error) when <a href="/book/engine/optimize/index.html">script optimization</a> is disabled.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -295,9 +295,9 @@ engine.run_with_scope(&amp;mut scope,
 &quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
-<p>The script will act differently when <a href="/engine/optimize/index.html">script optimization</a> is disabled because script <a href="/language/functions.html">functions</a>
-are <em>pure</em> and typically cannot see <a href="/language/constants.html">constants</a> within the custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
-<p>Therefore, constants in <a href="/language/functions.html">functions</a> now throw a runtime error.</p>
+<p>The script will act differently when <a href="/book/engine/optimize/index.html">script optimization</a> is disabled because script <a href="/book/language/functions.html">functions</a>
+are <em>pure</em> and typically cannot see <a href="/book/language/constants.html">constants</a> within the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>Therefore, constants in <a href="/book/language/functions.html">functions</a> now throw a runtime error.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -326,8 +326,8 @@ engine.run_with_scope(&amp;mut scope,
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="caveat--beware-of-large-constants"><a class="header" href="#caveat--beware-of-large-constants">Caveat – beware of large constants</a></h3>
-<p><a href="/language/constants.html">Constants</a> propagation replaces each usage of the <a href="/language/constants.html">constant</a> with a clone of its value.</p>
-<p>This may have negative implications to performance if the <a href="/language/constants.html">constant</a> value is expensive to clone
+<p><a href="/book/language/constants.html">Constants</a> propagation replaces each usage of the <a href="/book/language/constants.html">constant</a> with a clone of its value.</p>
+<p>This may have negative implications to performance if the <a href="/book/language/constants.html">constant</a> value is expensive to clone
 (e.g. if the type is very large).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -349,13 +349,13 @@ let result = engine.run_with_scope(&amp;mut scope,
 &quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
-<p>To avoid this, compile the script first to an <a href="/engine/compile.html"><code>AST</code></a> <em>without</em> the <a href="/language/constants.html">constants</a>, then evaluate the
-<a href="/engine/compile.html"><code>AST</code></a> (e.g. with <code>Engine::eval_ast_with_scope</code> or <code>Engine::run_ast_with_scope</code>) together with
-the <a href="/language/constants.html">constants</a>.</p>
+<p>To avoid this, compile the script first to an <a href="/book/engine/compile.html"><code>AST</code></a> <em>without</em> the <a href="/book/language/constants.html">constants</a>, then evaluate the
+<a href="/book/engine/compile.html"><code>AST</code></a> (e.g. with <code>Engine::eval_ast_with_scope</code> or <code>Engine::run_ast_with_scope</code>) together with
+the <a href="/book/language/constants.html">constants</a>.</p>
 <h3 id="caveat--constants-may-be-modified-by-rust-methods"><a class="header" href="#caveat--constants-may-be-modified-by-rust-methods">Caveat – constants may be modified by Rust methods</a></h3>
-<p>If the <a href="/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust <em>methods</em>),
+<p>If the <a href="/book/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust <em>methods</em>),
 the modified values will not show up in the optimized script.
-Only the initialization values of <a href="/language/constants.html">constants</a> are ever retained.</p>
+Only the initialization values of <a href="/book/language/constants.html">constants</a> are ever retained.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -366,11 +366,11 @@ MY_SECRET_ANSWER.update_to(666);    // assume 'update_to(&amp;mut i64)' is a Rus
 print(MY_SECRET_ANSWER);            // prints 42 because the constant is propagated
 <span class="boring">}
 </span></code></pre></pre>
-<p>This is almost never a problem because real-world scripts seldom modify a <a href="/language/constants.html">constant</a>,
+<p>This is almost never a problem because real-world scripts seldom modify a <a href="/book/language/constants.html">constant</a>,
 but the possibility is always there.</p>
 <h2 id="compound-assignment-rewrite"><a class="header" href="#compound-assignment-rewrite">Compound Assignment Rewrite</a></h2>
 <p>Usually, a <em>compound assignment</em> (e.g. <code>+=</code> for append) takes a mutable first parameter
-(i.e. <code>&amp;mut</code>) while the corresponding simple <a href="/appendix/operators.html#operators">operator</a> (i.e. <code>+</code>) does not.</p>
+(i.e. <code>&amp;mut</code>) while the corresponding simple <a href="/book/appendix/operators.html#operators">operator</a> (i.e. <code>+</code>) does not.</p>
 <p>This has huge performance implications because arguments passed as reference are always cloned.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -407,22 +407,22 @@ x[y] += 1;          // &lt;- ... than this
 so whether they are optimized away depends on the situation:</p>
 <ul>
 <li>
-<p>if the operands are not <a href="/language/constants.html">constant</a> values, it is not optimized;</p>
+<p>if the operands are not <a href="/book/language/constants.html">constant</a> values, it is not optimized;</p>
 </li>
 <li>
-<p>if the <a href="/appendix/operators.html#operators">operator</a> is <a href="/rust/operators.html">overloaded</a>, it is not optimized because the overloading
+<p>if the <a href="/book/appendix/operators.html#operators">operator</a> is <a href="/book/rust/operators.html">overloaded</a>, it is not optimized because the overloading
 function may not be <em>pure</em> (i.e. may cause side-effects when called);</p>
 </li>
 <li>
-<p>if the <a href="/appendix/operators.html#operators">operator</a> is not <em>built-in</em> (see list of <a href="/engine/builtin.html">built-in operators</a>), it is not optimized;</p>
+<p>if the <a href="/book/appendix/operators.html#operators">operator</a> is not <em>built-in</em> (see list of <a href="/book/engine/builtin.html">built-in operators</a>), it is not optimized;</p>
 </li>
 <li>
-<p>if the <a href="/appendix/operators.html#operators">operator</a> is a <a href="/engine/builtin.html">built-in operator</a> for a <a href="/language/values-and-types.html">standard type</a>,
-it is called and replaced by a <a href="/language/constants.html">constant</a> result.</p>
+<p>if the <a href="/book/appendix/operators.html#operators">operator</a> is a <a href="/book/engine/builtin.html">built-in operator</a> for a <a href="/book/language/values-and-types.html">standard type</a>,
+it is called and replaced by a <a href="/book/language/constants.html">constant</a> result.</p>
 </li>
 </ul>
 <p>Rhai guarantees that no external function will be run (in order not to trigger side-effects) during the
-optimization process (unless the optimization level is set to <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>).</p>
+optimization process (unless the optimization level is set to <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>).</p>
 <pre><code class="language-js   no_run">// The following is most likely generated by machine.
 
 const DECISION = 1;             // this is an integer, one of the standard types
@@ -446,8 +446,8 @@ switch DECISION {
     _ =&gt; ...                    // this statement is eliminated
 }
 </code></pre>
-<p>Because of the eager evaluation of <a href="/engine/builtin.html">operators</a> for <a href="/language/values-and-types.html">standard types</a>, many
-<a href="/language/constants.html">constant</a> expressions will be evaluated and replaced by the result.</p>
+<p>Because of the eager evaluation of <a href="/book/engine/builtin.html">operators</a> for <a href="/book/language/values-and-types.html">standard types</a>, many
+<a href="/book/language/constants.html">constant</a> expressions will be evaluated and replaced by the result.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -479,7 +479,7 @@ if DECISION == 1 {              // NOT optimized away because the operator is no
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Alternatively, turn the optimizer to <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>.</p>
+<p>Alternatively, turn the optimizer to <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>.</p>
 
                     </main>
 

@@ -166,15 +166,15 @@
                         <h1 id="literals-syntax"><a class="header" href="#literals-syntax">Literals Syntax</a></h1>
 <table><thead><tr><th style="text-align: center">Type</th><th>Literal syntax</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>INT</code></td><td>decimal: <code>42</code>, <code>-123</code>, <code>0</code><br/>hex: <code>0x????..</code><br/>binary: <code>0b????..</code><br/>octal: <code>0o????..</code></td></tr>
-<tr><td style="text-align: center"><code>FLOAT</code>,<br/><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/start/features.html"><code>no_float</code></a>+<a href="/start/features.html"><code>decimal</code></a>)</td><td><code>42.0</code>, <code>-123.456</code>, <code>123.</code>, <code>123.456e-10</code></td></tr>
-<tr><td style="text-align: center"><a href="/language/ranges.html">Ranges</a> in <a href="/language/switch.html"><code>switch</code></a> cases</td><td><code>-10..10</code> (exclusive), <code>0..=50</code> (inclusive)</td></tr>
-<tr><td style="text-align: center">Normal <a href="/language/strings-chars.html">string</a></td><td><code>&quot;... \x?? \u???? \U???????? ...&quot;</code></td></tr>
-<tr><td style="text-align: center"><a href="/language/strings-chars.html">String</a> with continuation</td><td><code>&quot;this is the first line\</code><br/><code>second line\</code><br/><code>the third line&quot;</code></td></tr>
-<tr><td style="text-align: center">Multi-line literal <a href="/language/strings-chars.html">string</a></td><td><code> `this is the first line</code><br/><code>second line</code></br><code>the last line` </code></td></tr>
-<tr><td style="text-align: center">Multi-line literal <a href="/language/strings-chars.html">string</a> with interpolation</td><td><code> `this is the first field: ${obj.field1}</code><br/><code>second field: {obj.field2}</code></br><code>the last field: ${obj.field3}` </code></td></tr>
-<tr><td style="text-align: center"><a href="/language/strings-chars.html">Character</a></td><td>single: <code>'?'</code><br/>ASCII hex: <code>'\x??'</code><br/>Unicode: <code>'\u????'</code>, <code>'\U????????'</code></td></tr>
-<tr><td style="text-align: center"><a href="/language/arrays.html"><code>Array</code></a></td><td><code>[ ???, ???, ??? ]</code></td></tr>
-<tr><td style="text-align: center"><a href="/language/object-maps.html">Object map</a></td><td><code>#{ a: ???, b: ???, c: ???, &quot;def&quot;: ??? }</code></td></tr>
+<tr><td style="text-align: center"><code>FLOAT</code>,<br/><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>no_float</code></a>+<a href="/book/start/features.html"><code>decimal</code></a>)</td><td><code>42.0</code>, <code>-123.456</code>, <code>123.</code>, <code>123.456e-10</code></td></tr>
+<tr><td style="text-align: center"><a href="/book/language/ranges.html">Ranges</a> in <a href="/book/language/switch.html"><code>switch</code></a> cases</td><td><code>-10..10</code> (exclusive), <code>0..=50</code> (inclusive)</td></tr>
+<tr><td style="text-align: center">Normal <a href="/book/language/strings-chars.html">string</a></td><td><code>&quot;... \x?? \u???? \U???????? ...&quot;</code></td></tr>
+<tr><td style="text-align: center"><a href="/book/language/strings-chars.html">String</a> with continuation</td><td><code>&quot;this is the first line\</code><br/><code>second line\</code><br/><code>the third line&quot;</code></td></tr>
+<tr><td style="text-align: center">Multi-line literal <a href="/book/language/strings-chars.html">string</a></td><td><code> `this is the first line</code><br/><code>second line</code></br><code>the last line` </code></td></tr>
+<tr><td style="text-align: center">Multi-line literal <a href="/book/language/strings-chars.html">string</a> with interpolation</td><td><code> `this is the first field: ${obj.field1}</code><br/><code>second field: {obj.field2}</code></br><code>the last field: ${obj.field3}` </code></td></tr>
+<tr><td style="text-align: center"><a href="/book/language/strings-chars.html">Character</a></td><td>single: <code>'?'</code><br/>ASCII hex: <code>'\x??'</code><br/>Unicode: <code>'\u????'</code>, <code>'\U????????'</code></td></tr>
+<tr><td style="text-align: center"><a href="/book/language/arrays.html"><code>Array</code></a></td><td><code>[ ???, ???, ??? ]</code></td></tr>
+<tr><td style="text-align: center"><a href="/book/language/object-maps.html">Object map</a></td><td><code>#{ a: ???, b: ???, c: ???, &quot;def&quot;: ??? }</code></td></tr>
 <tr><td style="text-align: center">Boolean true</td><td><code>true</code></td></tr>
 <tr><td style="text-align: center">Boolean false</td><td><code>false</code></td></tr>
 <tr><td style="text-align: center"><code>Nothing</code>/<code>null</code>/<code>nil</code>/<code>void</code>/Unit</td><td><code>()</code></td></tr>

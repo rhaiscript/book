@@ -174,14 +174,14 @@
 <p>A system where scripts are called a <em>lot</em>, in tight loops or in parallel.</p>
 </li>
 <li>
-<p>Keeping a global <a href="/engine/hello-world.html"><code>Engine</code></a> instance is sub-optimal due to contention and locking.</p>
+<p>Keeping a global <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance is sub-optimal due to contention and locking.</p>
 </li>
 <li>
 <p>Scripts need to be executed independently from each other, perhaps concurrently.</p>
 </li>
 <li>
-<p>Scripts are used to <a href="/engine/func.html">create Rust closures</a> that are stored and may be called at any time,
-perhaps concurrently. In this case, the <a href="/engine/hello-world.html"><code>Engine</code></a> instance is usually moved into the closure itself.</p>
+<p>Scripts are used to <a href="/book/engine/func.html">create Rust closures</a> that are stored and may be called at any time,
+perhaps concurrently. In this case, the <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance is usually moved into the closure itself.</p>
 </li>
 </ul>
 </div>
@@ -193,15 +193,15 @@ perhaps concurrently. In this case, the <a href="/engine/hello-world.html"><code
 <div>
 <ul>
 <li>
-<p>Rhai’s <a href="/engine/compile.html"><code>AST</code></a> structure is sharable – meaning that one copy of the <a href="/engine/compile.html"><code>AST</code></a> can be run on
-multiple instances of <a href="/engine/hello-world.html"><code>Engine</code></a> simultaneously.</p>
+<p>Rhai’s <a href="/book/engine/compile.html"><code>AST</code></a> structure is sharable – meaning that one copy of the <a href="/book/engine/compile.html"><code>AST</code></a> can be run on
+multiple instances of <a href="/book/engine/hello-world.html"><code>Engine</code></a> simultaneously.</p>
 </li>
 <li>
-<p>Rhai’s <a href="/rust/packages/index.html">packages</a> and <a href="/rust/modules/index.html">modules</a> are also sharable.</p>
+<p>Rhai’s <a href="/book/rust/packages/index.html">packages</a> and <a href="/book/rust/modules/index.html">modules</a> are also sharable.</p>
 </li>
 <li>
-<p>This means that <a href="/engine/hello-world.html"><code>Engine</code></a> instances can be <em>decoupled</em> from the base system (<a href="/rust/packages/index.html">packages</a> and
-<a href="/rust/modules/index.html">modules</a>) as well as the scripts (<a href="/engine/compile.html"><code>AST</code></a>) so they can be created very cheaply.</p>
+<p>This means that <a href="/book/engine/hello-world.html"><code>Engine</code></a> instances can be <em>decoupled</em> from the base system (<a href="/book/rust/packages/index.html">packages</a> and
+<a href="/book/rust/modules/index.html">modules</a>) as well as the scripts (<a href="/book/engine/compile.html"><code>AST</code></a>) so they can be created very cheaply.</p>
 </li>
 </ul>
 </div>
@@ -209,28 +209,28 @@ multiple instances of <a href="/engine/hello-world.html"><code>Engine</code></a>
 <h2 id="procedure"><a class="header" href="#procedure">Procedure</a></h2>
 <ul>
 <li>
-<p>Gather up all common custom functions into a <a href="/rust/packages/create.html">custom package</a>.</p>
+<p>Gather up all common custom functions into a <a href="/book/rust/packages/create.html">custom package</a>.</p>
 <ul>
 <li>
-<p>This <a href="/rust/packages/create.html">custom package</a> should also include standard <a href="/rust/packages/index.html">packages</a> needed. For example, to duplicate
-<code>Engine::new</code>, use a <a href="/rust/packages/builtin.html"><code>StandardPackage</code></a>.</p>
+<p>This <a href="/book/rust/packages/create.html">custom package</a> should also include standard <a href="/book/rust/packages/index.html">packages</a> needed. For example, to duplicate
+<code>Engine::new</code>, use a <a href="/book/rust/packages/builtin.html"><code>StandardPackage</code></a>.</p>
 </li>
 <li>
-<p><a href="/rust/packages/index.html">Packages</a> are sharable, so using a <a href="/rust/packages/create.html">custom package</a> is <em>much cheaper</em> than registering all the
+<p><a href="/book/rust/packages/index.html">Packages</a> are sharable, so using a <a href="/book/rust/packages/create.html">custom package</a> is <em>much cheaper</em> than registering all the
 functions one by one.</p>
 </li>
 </ul>
 </li>
 <li>
-<p>Store a global <a href="/engine/compile.html"><code>AST</code></a> for use with all <a href="/engine/hello-world.html"><code>Engine</code></a> instances.</p>
+<p>Store a global <a href="/book/engine/compile.html"><code>AST</code></a> for use with all <a href="/book/engine/hello-world.html"><code>Engine</code></a> instances.</p>
 </li>
 <li>
-<p>Always use <code>Engine::new_raw</code> to create a <a href="/engine/raw.html">raw <code>Engine</code></a>, instead of <code>Engine::new</code> which is <em>much</em>
-more expensive. A <a href="/engine/raw.html">raw <code>Engine</code></a> is <em>extremely</em> cheap to create.</p>
+<p>Always use <code>Engine::new_raw</code> to create a <a href="/book/engine/raw.html">raw <code>Engine</code></a>, instead of <code>Engine::new</code> which is <em>much</em>
+more expensive. A <a href="/book/engine/raw.html">raw <code>Engine</code></a> is <em>extremely</em> cheap to create.</p>
 </li>
 <li>
-<p>Register the <a href="/rust/packages/create.html">custom package</a> with the <a href="/engine/raw.html">raw <code>Engine</code></a> via <code>Engine::register_global_module</code>,
-using <code>Package::as_shared_module</code> to obtain a shared <a href="/rust/modules/index.html">module</a>.</p>
+<p>Register the <a href="/book/rust/packages/create.html">custom package</a> with the <a href="/book/engine/raw.html">raw <code>Engine</code></a> via <code>Engine::register_global_module</code>,
+using <code>Package::as_shared_module</code> to obtain a shared <a href="/book/rust/modules/index.html">module</a>.</p>
 </li>
 </ul>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>

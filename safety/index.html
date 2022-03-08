@@ -172,8 +172,8 @@ resources used by a script so that it does not consume more resources that it is
 <p>Memory</p>
 </div>
 <div>
-<p>Continuously grow a <a href="/language/strings-chars.html">string</a>, an <a href="/language/arrays.html">array</a>, a <a href="/language/blobs.html">BLOB</a> or <a href="/language/object-maps.html">object map</a> until all memory is consumed.</p>
-<p>Or create a large <a href="/language/arrays.html">array</a> or <a href="/language/object-maps.html">object map</a> literal that exhausts all memory during parsing.</p>
+<p>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
+<p>Or create a large <a href="/book/language/arrays.html">array</a> or <a href="/book/language/object-maps.html">object map</a> literal that exhausts all memory during parsing.</p>
 </div>
 </div>
 <div class="admonition bug">
@@ -200,7 +200,7 @@ resources used by a script so that it does not consume more resources that it is
 <p>Infinite recursive call that exhausts the call stack.</p>
 <p>Or create a degenerated deep expression with so many levels that the parser exhausts the call stack when
 parsing the expression; or even deeply-nested statement blocks, if nested deep enough.</p>
-<p>Or load a <a href="/language/modules/import.html">self-referencing module</a>.</p>
+<p>Or load a <a href="/book/language/modules/import.html">self-referencing module</a>.</p>
 </div>
 </div>
 <div class="admonition bug">
@@ -216,9 +216,9 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 <p>Files</p>
 </div>
 <div>
-<p>Continuously <a href="/language/modules/import.html"><code>import</code></a> an external <a href="/rust/modules/index.html">module</a> within an infinite loop, thereby putting heavy load on the file-system
+<p>Continuously <a href="/book/language/modules/import.html"><code>import</code></a> an external <a href="/book/rust/modules/index.html">module</a> within an infinite loop, thereby putting heavy load on the file-system
 (or even the network if the file is not local).</p>
-<p>Even when <a href="/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
+<p>Even when <a href="/book/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
 </div>
 </div>
 <div class="admonition bug">
@@ -232,11 +232,11 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </div>
 <div class="admonition bug">
 <div class="admonition-title">
-<p>The <a href="/start/features.html"><code>internals</code></a> feature</p>
+<p>The <a href="/book/start/features.html"><code>internals</code></a> feature</p>
 </div>
 <div>
-<p>The <a href="/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
-example, the <a href="/engine/compile.html"><code>AST</code></a> and related types).</p>
+<p>The <a href="/book/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
+example, the <a href="/book/engine/compile.html"><code>AST</code></a> and related types).</p>
 <p>This is usually a <em>Very Bad Idea™</em> because:</p>
 <ul>
 <li>
@@ -251,10 +251,10 @@ environment, violating the <em>Don’t Panic</em> guarantee.</p>
 break code.</p>
 </li>
 </ul>
-<p>Use <a href="/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
+<p>Use <a href="/book/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
 be surprised how few scenarios this assumption holds.</p>
-<p>One example of such an environment is a Rhai scripting <a href="/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/start/builds/wasm.html">WASM</a> where the
-<a href="/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
+<p>One example of such an environment is a Rhai scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/book/start/builds/wasm.html">WASM</a> where the
+<a href="/book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
 </div>
 </div>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
@@ -263,7 +263,7 @@ be surprised how few scenarios this assumption holds.</p>
 <p>OK, panic anyway</p>
 </div>
 <div>
-<p>All these safe-guards can be turned off via the <a href="/start/features.html"><code>unchecked</code></a> feature, which disables all safety
+<p>All these safe-guards can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature, which disables all safety
 checks (even fatal ones).</p>
 <p>This increases script evaluation performance somewhat, but very easy for a malicious script
 to bring down the host system.</p>

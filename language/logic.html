@@ -173,8 +173,8 @@
 <tr><td style="text-align: center"><code>&lt;</code></td><td><code>x</code> is less than <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 <tr><td style="text-align: center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 </tbody></table>
-<p>Comparison operators between most values of the same type are built in for all <a href="/language/values-and-types.html">standard types</a>.</p>
-<p>Others are defined in the <a href="/rust/packages/builtin.html"><code>LogicPackage</code></a> but excluded if using a <a href="/engine/raw.html">raw <code>Engine</code></a>.</p>
+<p>Comparison operators between most values of the same type are built in for all <a href="/book/language/values-and-types.html">standard types</a>.</p>
+<p>Others are defined in the <a href="/book/rust/packages/builtin.html"><code>LogicPackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
 <h3 id="floating-point-numbers-interoperate-with-integers"><a class="header" href="#floating-point-numbers-interoperate-with-integers">Floating-point numbers interoperate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code>) with an integer is also supported.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -210,8 +210,8 @@ d &lt; 42;             // false
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="strings-interoperate-with-characters"><a class="header" href="#strings-interoperate-with-characters">Strings interoperate with characters</a></h3>
-<p>Comparing a <a href="/language/strings-chars.html">string</a> with a <a href="/language/strings-chars.html">character</a> is also supported, with the character first turned into a
-<a href="/language/strings-chars.html">string</a> before performing the comparison.</p>
+<p>Comparing a <a href="/book/language/strings-chars.html">string</a> with a <a href="/book/language/strings-chars.html">character</a> is also supported, with the character first turned into a
+<a href="/book/language/strings-chars.html">string</a> before performing the comparison.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -266,7 +266,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <p>Tip: Always the full set</p>
 </div>
 <div>
-<p>It is strongly recommended that, when defining operators for <a href="/rust/custom.html">custom types</a>, always define the
+<p>It is strongly recommended that, when defining operators for <a href="/book/rust/custom.html">custom types</a>, always define the
 <strong>full set</strong> of six operators together, or at least the <code>==</code> and <code>!=</code> pair.</p>
 </div>
 </div>
@@ -285,7 +285,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <p><code>&lt;=</code> does not imply <code>&lt;</code></p>
 </li>
 </ul>
-<p>Therefore, if a <a href="/rust/custom.html">custom type</a> misses an <a href="/appendix/operators.html#operators">operator</a> definition, it simply raises an error
+<p>Therefore, if a <a href="/book/rust/custom.html">custom type</a> misses an <a href="/book/appendix/operators.html#operators">operator</a> definition, it simply raises an error
 or returns the default.</p>
 <p>This behavior can be counter-intuitive.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -308,7 +308,7 @@ ts != ts;           // error: '!=' not defined, even though '==' is
 <p>Note</p>
 </div>
 <div>
-<p>All boolean operators are <a href="/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
+<p>All boolean operators are <a href="/book/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
 </div>
 </div>
 <table><thead><tr><th style="text-align: center">Operator</th><th style="text-align: center">Description</th><th style="text-align: center">Arity</th><th style="text-align: center">Short-circuits?</th></tr></thead><tbody>

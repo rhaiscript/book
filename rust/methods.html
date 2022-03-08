@@ -171,7 +171,7 @@
 </blockquote>
 <div class="admonition warning">
 <div class="admonition-title">
-<p><em>method-call</em> style is not supported under <a href="/start/features.html"><code>no_object</code></a></p>
+<p><em>method-call</em> style is not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
 </div>
 <div>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -189,7 +189,7 @@ let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
 <p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
-<p>Internally, methods on a <a href="/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
+<p>Internally, methods on a <a href="/book/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
 the object’s type. Therefore, methods and functions can be called interchangeably.</p>
 <p>This design is similar to Rust.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -214,15 +214,15 @@ println!(&quot;result: {}&quot;, result);     // prints 1
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="first-mut-parameter"><a class="header" href="#first-mut-parameter">First <code>&amp;mut</code> Parameter</a></h2>
-<p>The opposite direction also works – <a href="/rust/custom.html">methods</a> in a Rust <a href="/rust/custom.html">custom type</a> registered
-with the <a href="/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
-are registered as regular <a href="/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
+<p>The opposite direction also works – <a href="/book/rust/custom.html">methods</a> in a Rust <a href="/book/rust/custom.html">custom type</a> registered
+with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
+are registered as regular <a href="/book/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
 <p>Unlike functions defined in script (for which all arguments are passed by <em>value</em>),
 native Rust functions may mutate the first <code>&amp;mut</code> argument.</p>
 <p>Sometimes, however, there are more subtle differences. Methods called in normal function-call style
 may end up not muting the object afterall – see the example below.</p>
-<p>Custom types, <a href="/rust/getters-setters.html">properties</a>, <a href="/rust/indexers.html">indexers</a> and methods are disabled under the
-<a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Custom types, <a href="/book/rust/getters-setters.html">properties</a>, <a href="/book/rust/indexers.html">indexers</a> and methods are disabled under the
+<a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -252,7 +252,7 @@ All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 </div>
 <h2 id="number-of-parameters-in-methods"><a class="header" href="#number-of-parameters-in-methods">Number of Parameters in Methods</a></h2>
-<p>Native Rust methods registered with an <a href="/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
+<p>Native Rust methods registered with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
 an equivalent method coded in script, where the object is accessed via the <code>this</code> pointer instead.</p>
 <p>The following table illustrates the differences:</p>
 <table><thead><tr><th style="text-align: center">Function type</th><th style="text-align: center">No. of parameters</th><th style="text-align: center">Object reference</th><th style="text-align: center">Function signature</th></tr></thead><tbody>
@@ -301,7 +301,7 @@ care must be taken when using <em>shared</em> values with methods.</p>
 <p>Usually data races are not possible in Rhai because, for each function call, there is ever only one
 value that is mutable – the first argument of a method.  All other arguments are cloned.</p>
 <p>It is possible, however, to create a data race with a <em>shared</em> value, when the same value is
-<em>captured</em> in a <a href="/language/fn-closure.html">closure</a> and then used again as the <em>object</em> of calling that <a href="/language/fn-closure.html">closure</a>!</p>
+<em>captured</em> in a <a href="/book/language/fn-closure.html">closure</a> and then used again as the <em>object</em> of calling that <a href="/book/language/fn-closure.html">closure</a>!</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -316,7 +316,7 @@ x.is_shared() == true;              // now 'x' is shared
 x.call(f, 2);                       // &lt;- error: data race detected on 'x'
 <span class="boring">}
 </span></code></pre></pre>
-<p>Data races are not possible in Rhai under the <a href="/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
+<p>Data races are not possible in Rhai under the <a href="/book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
 
                     </main>
 

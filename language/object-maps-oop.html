@@ -169,16 +169,16 @@
 <p>See also</p>
 </div>
 <div>
-<p>See the pattern on <a href="/patterns/oop.html"><em>Simulating Object-Oriented Programming</em></a> for more details.</p>
+<p>See the pattern on <a href="/book/patterns/oop.html"><em>Simulating Object-Oriented Programming</em></a> for more details.</p>
 </div>
 </div>
-<p><a href="/language/object-maps.html">Object maps</a> can be used to simulate <a href="/patterns/oop.html">object-oriented programming (OOP)</a> by storing data
-as properties and methods as properties holding <a href="/language/fn-ptr.html">function pointers</a>.</p>
-<p>If an <a href="/language/object-maps.html">object map</a>’s property holds a <a href="/language/fn-ptr.html">function pointer</a>, the property can simply be called like
+<p><a href="/book/language/object-maps.html">Object maps</a> can be used to simulate <a href="/book/patterns/oop.html">object-oriented programming (OOP)</a> by storing data
+as properties and methods as properties holding <a href="/book/language/fn-ptr.html">function pointers</a>.</p>
+<p>If an <a href="/book/language/object-maps.html">object map</a>’s property holds a <a href="/book/language/fn-ptr.html">function pointer</a>, the property can simply be called like
 a normal method in method-call syntax.</p>
 <p>This is a <em>short-hand</em> to avoid the more verbose syntax of using the <code>call</code> function keyword.</p>
-<p>When a property holding a <a href="/language/fn-ptr.html">function pointer</a> or a <a href="/language/fn-closure.html">closure</a> is called like a method, it is replaced
-as a method call on the <a href="/language/object-maps.html">object map</a> itself.</p>
+<p>When a property holding a <a href="/book/language/fn-ptr.html">function pointer</a> or a <a href="/book/language/fn-closure.html">closure</a> is called like a method, it is replaced
+as a method call on the <a href="/book/language/object-maps.html">object map</a> itself.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

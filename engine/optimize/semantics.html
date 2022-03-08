@@ -167,7 +167,7 @@
 <p>Some optimizations can alter subtle semantics of the script, causing the script to behave
 differently when run with or without optimization.</p>
 <p>Typically, this involves some form of error that may arise in the original, unoptimized script but
-is optimized away by the <a href="/engine/optimize/index.html">script optimizer</a>.</p>
+is optimized away by the <a href="/book/engine/optimize/index.html">script optimizer</a>.</p>
 <div class="admonition danger">
 <div class="admonition-title">
 <p>DO NOT depend on runtime errors</p>
@@ -176,7 +176,7 @@ is optimized away by the <a href="/engine/optimize/index.html">script optimizer<
 <p>Needless to say, it is usually a <em>Very Bad Idea™</em> to depend on a script failing with a runtime error
 or such kind of subtleties.</p>
 <p>If it turns out to be necessary (why? I would never guess), turn script optimization off by setting
-the optimization level to <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::None</code></a>.</p>
+the optimization level to <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::None</code></a>.</p>
 </div>
 </div>
 <h2 id="disappearing-runtime-errors"><a class="header" href="#disappearing-runtime-errors">Disappearing Runtime Errors</a></h2>
@@ -212,7 +212,7 @@ print(&quot;end!&quot;);
 </span></code></pre></pre>
 <p>In the script above, if <code>my_decision</code> holds anything other than a boolean value,
 the script should have been terminated due to a type error.</p>
-<p>However, after optimization, the entire <a href="/language/if.html"><code>if</code></a> statement is removed (because an access to
+<p>However, after optimization, the entire <a href="/book/language/if.html"><code>if</code></a> statement is removed (because an access to
 <code>my_decision</code> produces no side-effects), thus the script silently runs to completion without errors.</p>
 <h2 id="eliminated-useless-work"><a class="header" href="#eliminated-useless-work">Eliminated Useless Work</a></h2>
 <p>Another example is more subtle – that of an empty loop body.</p>
@@ -231,10 +231,10 @@ for n in 0..42000 {
 ()
 <span class="boring">}
 </span></code></pre></pre>
-<p>Normally, and empty loop body inside a <a href="/language/for.html"><code>for</code></a> statement with a pure iterator does nothing and can
+<p>Normally, and empty loop body inside a <a href="/book/language/for.html"><code>for</code></a> statement with a pure iterator does nothing and can
 be safely eliminated.</p>
 <p>Thus the script now runs silently to completion without errors.</p>
-<p>Without optimization, the script may fail by exceeding the <a href="/safety/max-operations.html">maximum number of operations</a> allowed.</p>
+<p>Without optimization, the script may fail by exceeding the <a href="/book/safety/max-operations.html">maximum number of operations</a> allowed.</p>
 
                     </main>
 

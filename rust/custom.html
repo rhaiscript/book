@@ -170,26 +170,26 @@
 <p>Why “Custom”?</p>
 </div>
 <div>
-<p>Rhai internally supports a number of standard data types (see <a href="/language/values-and-types.html">this list</a>).</p>
+<p>Rhai internally supports a number of standard data types (see <a href="/book/language/values-and-types.html">this list</a>).</p>
 <p>Any type outside of the list is considered <em>custom</em>.</p>
 </div>
 </div>
 <p>Rhai works seamlessly with <em>any</em> Rust type.</p>
 <p>A custom type is stored in Rhai as a Rust <em>trait object</em> (specifically, a <code>dyn rhai::Variant</code>),
-with no restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/start/features.html"><code>sync</code></a> feature).</p>
+with no restrictions other than being <code>Clone</code> (plus <code>Send + Sync</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
 <p>The type literally does not have any prerequisite other than being <code>Clone</code>.</p>
 <p>It does not need to implement any other trait or use any custom <code>#[derive]</code>.</p>
 <p>This allows Rhai to be integrated into an existing Rust code base with as little plumbing as
 possible, usually silently and seamlessly.</p>
 <p>External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
-<p>Support for custom types can be turned off via the <a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <div class="admonition warning">
 <div class="admonition-title">
 <p>Custom types are slower</p>
 </div>
 <div>
-<p>Custom types run <em>slower</em> than <a href="/language/values-and-types.html">built-in types</a> due to an additional
+<p>Custom types run <em>slower</em> than <a href="/book/language/values-and-types.html">built-in types</a> due to an additional
 level of indirection, but for all other purposes there is no difference.</p>
 </div>
 </div>
@@ -200,11 +200,11 @@ level of indirection, but for all other purposes there is no difference.</p>
 </div>
 <div>
 <p>It is also possible to use Rust enums with Rhai.</p>
-<p>See the pattern <a href="/patterns/enums.html">Working with Enums</a> for more details.</p>
+<p>See the pattern <a href="/book/patterns/enums.html">Working with Enums</a> for more details.</p>
 </div>
 </div>
-<p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
-<p>If the <a href="/start/features.html"><code>sync</code></a> feature is used, it must also be <code>Send + Sync</code>.</p>
+<p>Any custom type must implement the <code>Clone</code> trait as this allows the <a href="/book/engine/hello-world.html"><code>Engine</code></a> to pass by value.</p>
+<p>If the <a href="/book/start/features.html"><code>sync</code></a> feature is used, it must also be <code>Send + Sync</code>.</p>
 <p>Notice that the custom type needs to be <em>registered</em> using <code>Engine::register_type</code>
 or <code>Engine::register_type_with_name</code>.</p>
 <p>To use native methods on custom types in Rhai scripts, it is common to register an API for the type
@@ -261,9 +261,9 @@ All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 </div>
 <h2 id="type_of-a-custom-type"><a class="header" href="#type_of-a-custom-type"><code>type_of()</code> a Custom Type</a></h2>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
 <p>If <code>Engine::register_type_with_name</code> is used to register the custom type with a special
-“pretty-print” name, <a href="/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
+“pretty-print” name, <a href="/book/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -282,7 +282,7 @@ println!(&quot;{}&quot;, ts1_type);               // prints 'TestStruct'
 <h2 id="-operator"><a class="header" href="#-operator"><code>==</code> Operator</a></h2>
 <p>Many standard functions (e.g. filtering, searching and sorting) expect a custom type to be
 <em>comparable</em>, meaning that the <code>==</code> operator must be registered for the custom type.</p>
-<p>For example, in order to use the <a href="/language/in.html"><code>in</code></a> operator with a custom type for an <a href="/language/arrays.html">array</a>,
+<p>For example, in order to use the <a href="/book/language/in.html"><code>in</code></a> operator with a custom type for an <a href="/book/language/arrays.html">array</a>,
 the <code>==</code> operator is used to check whether two values are the same.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

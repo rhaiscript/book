@@ -164,18 +164,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="break-points"><a class="header" href="#break-points">Break-Points</a></h1>
-<p>A <em>break-point</em> <strong>always</strong> stops the current evaluation and calls the <a href="/engine/debugging/debugger.html">debugging</a>
+<p>A <em>break-point</em> <strong>always</strong> stops the current evaluation and calls the <a href="/book/engine/debugging/debugger.html">debugging</a>
 callback.</p>
 <p>A break-point is represented by the <code>debugger::BreakPoint</code> type, which is an <code>enum</code> with
 the following variants.</p>
 <table><thead><tr><th><code>BreakPoint</code> variant</th><th style="text-align: center">Not available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>AtPosition { source, pos, enabled }</code></td><td style="text-align: center"><a href="/start/features.html"><code>no_position</code></a></td><td>breaks at the specified position in the specified source (empty if none);<br/>if <code>pos</code> is at beginning of line, breaks anywhere on the line</td></tr>
-<tr><td><code>AtFunctionName { name, enabled }</code></td><td style="text-align: center"></td><td>breaks when a function matching the specified name is called (can be <a href="/appendix/operators.html#operators">operator</a>)</td></tr>
-<tr><td><code>AtFunctionCall { name, args, enabled }</code></td><td style="text-align: center"></td><td>breaks when a function matching the specified name (can be <a href="/appendix/operators.html#operators">operator</a>) and the specified number of arguments is called</td></tr>
-<tr><td><code>AtProperty { name, enabled }</code></td><td style="text-align: center"><a href="/start/features.html"><code>no_object</code></a></td><td>breaks at the specified property access</td></tr>
+<tr><td><code>AtPosition { source, pos, enabled }</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_position</code></a></td><td>breaks at the specified position in the specified source (empty if none);<br/>if <code>pos</code> is at beginning of line, breaks anywhere on the line</td></tr>
+<tr><td><code>AtFunctionName { name, enabled }</code></td><td style="text-align: center"></td><td>breaks when a function matching the specified name is called (can be <a href="/book/appendix/operators.html#operators">operator</a>)</td></tr>
+<tr><td><code>AtFunctionCall { name, args, enabled }</code></td><td style="text-align: center"></td><td>breaks when a function matching the specified name (can be <a href="/book/appendix/operators.html#operators">operator</a>) and the specified number of arguments is called</td></tr>
+<tr><td><code>AtProperty { name, enabled }</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_object</code></a></td><td>breaks at the specified property access</td></tr>
 </tbody></table>
 <h2 id="access-break-points"><a class="header" href="#access-break-points">Access Break-Points</a></h2>
-<p>The following <a href="/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> methods allow access to break-points for manipulation.</p>
+<p>The following <a href="/book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> methods allow access to break-points for manipulation.</p>
 <table><thead><tr><th>Method</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>break_points</code></td><td style="text-align: center"><code>&amp;[BreakPoint]</code></td><td>returns a slice of all <code>BreakPoint</code>’s</td></tr>
 <tr><td><code>break_points_mut</code></td><td style="text-align: center"><code>&amp;mut Vec&lt;BreakPoint&gt;</code></td><td>returns a mutable reference to all <code>BreakPoint</code>’s</td></tr>

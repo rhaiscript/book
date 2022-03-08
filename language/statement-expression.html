@@ -178,7 +178,7 @@ return value defaults to <code>()</code>.</p>
 <p>The <em>last</em> statement of a statement block is <em>always</em> the block’s return value when used as a statement,
 <em>regardless</em> of whether it is terminated by a semicolon or not.</p>
 <p>If the last statement has no return value (e.g. variable definitions, assignments) then it is
-assumed to be <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+assumed to be <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -217,7 +217,7 @@ do_work(x, y, { let z = foo(x, y); print(z); z });
            //       statement expression
 <span class="boring">}
 </span></code></pre></pre>
-<p>Statement expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_statement_expression</code></a>.</p>
+<p>Statement expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_statement_expression</code></a>.</p>
 
                     </main>
 

@@ -164,7 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="switch-statement"><a class="header" href="#switch-statement">Switch Statement</a></h1>
-<p>The <code>switch</code> statement allows matching on <a href="/appendix/literals.html">literal</a> values, and it mostly follows Rust’s <code>match</code> syntax.</p>
+<p>The <code>switch</code> statement allows matching on <a href="/book/appendix/literals.html">literal</a> values, and it mostly follows Rust’s <code>match</code> syntax.</p>
 <pre><code class="language-js">switch calc_secret_value(x) {
     1 =&gt; print(&quot;It's one!&quot;),
     2 =&gt; {
@@ -187,7 +187,7 @@
 }
 </code></pre>
 <h2 id="array-and-object-map-literals-also-work"><a class="header" href="#array-and-object-map-literals-also-work">Array and Object Map Literals Also Work</a></h2>
-<p>The <code>switch</code> expression can match against any <em><a href="/appendix/literals.html">literal</a></em>, including <a href="/language/arrays.html">array</a> and <a href="/language/object-maps.html">object map</a> <a href="/appendix/literals.html">literals</a>.</p>
+<p>The <code>switch</code> expression can match against any <em><a href="/book/appendix/literals.html">literal</a></em>, including <a href="/book/language/arrays.html">array</a> and <a href="/book/language/object-maps.html">object map</a> <a href="/book/appendix/literals.html">literals</a>.</p>
 <pre><code class="language-js">// Match on arrays
 switch [foo, bar, baz] {
     [&quot;hello&quot;, 42, true] =&gt; ...,
@@ -208,8 +208,8 @@ switch map {
 <p>Tip: Working with enums</p>
 </div>
 <div>
-<p>Switching on <a href="/language/arrays.html">arrays</a> is very useful when working with Rust enums
-(see <a href="/patterns/enums.html">this section</a> for more details).</p>
+<p>Switching on <a href="/book/language/arrays.html">arrays</a> is very useful when working with Rust enums
+(see <a href="/book/patterns/enums.html">this section</a> for more details).</p>
 </div>
 </div>
 <h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
@@ -232,9 +232,9 @@ that must evaluate to <code>true</code> in order for the case to match.</p>
 };
 </code></pre>
 <h2 id="range-cases"><a class="header" href="#range-cases">Range Cases</a></h2>
-<p>Because of their popularity, <a href="/appendix/literals.html">literal</a> integer <a href="/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases,
+<p>Because of their popularity, <a href="/book/appendix/literals.html">literal</a> integer <a href="/book/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases,
 but they must come <em>after</em> all integer cases.</p>
-<p>Numeric <a href="/language/ranges.html">ranges</a> are only searched when the <code>switch</code> value is itself an integer (i.e. they never
+<p>Numeric <a href="/book/language/ranges.html">ranges</a> are only searched when the <code>switch</code> value is itself an integer (i.e. they never
 match any other data types).</p>
 <pre><code class="language-js">let x = 42;
 
@@ -261,32 +261,32 @@ switch x {
 <p>Tip: Ranges can overlap</p>
 </div>
 <div>
-<p>When more then one <a href="/language/ranges.html">range</a> contain the <code>switch</code> value, the <em>first</em> one with a fulfilled condition
+<p>When more then one <a href="/book/language/ranges.html">range</a> contain the <code>switch</code> value, the <em>first</em> one with a fulfilled condition
 (if any) is evaluated.</p>
-<p>Numeric <a href="/language/ranges.html">range</a> cases are tried in the order that they appear in the original script.</p>
+<p>Numeric <a href="/book/language/ranges.html">range</a> cases are tried in the order that they appear in the original script.</p>
 </div>
 </div>
 <h2 id="difference-from-if-else-if-chain"><a class="header" href="#difference-from-if-else-if-chain">Difference From <code>if</code>-<code>else if</code> Chain</a></h2>
-<p>Although a <code>switch</code> expression looks <em>almost</em> the same as an <a href="/language/if.html"><code>if</code>-<code>else if</code></a> chain, there are
+<p>Although a <code>switch</code> expression looks <em>almost</em> the same as an <a href="/book/language/if.html"><code>if</code>-<code>else if</code></a> chain, there are
 subtle differences between the two.</p>
 <h3 id="look-up-table-vs-x--y"><a class="header" href="#look-up-table-vs-x--y">Look-up Table vs <code>x == y</code></a></h3>
 <p>A <code>switch</code> expression matches through <em>hashing</em> via a look-up table. Therefore, matching is very
-fast.  Walking down an <a href="/language/if.html"><code>if</code>-<code>else if</code></a> chain is <em>much</em> slower.</p>
-<p>On the other hand, operators can be <a href="/rust/operators.html">overloaded</a> in Rhai, meaning that it is
+fast.  Walking down an <a href="/book/language/if.html"><code>if</code>-<code>else if</code></a> chain is <em>much</em> slower.</p>
+<p>On the other hand, operators can be <a href="/book/rust/operators.html">overloaded</a> in Rhai, meaning that it is
 possible to override the <code>==</code> operator for integers such that <code>x == y</code> returns a different result
 from the built-in default.</p>
 <p><code>switch</code> expressions do <em>not</em> use the <code>==</code> operator for comparison; instead, they <em>hash</em> the data
 values and jump directly to the correct statements via a pre-compiled look-up table.  This makes
-matching extremely efficient, but it also means that <a href="/rust/operators.html">overloading</a> the <code>==</code>
+matching extremely efficient, but it also means that <a href="/book/rust/operators.html">overloading</a> the <code>==</code>
 operator will have no effect.</p>
-<p>Therefore, in environments where it is desirable to <a href="/rust/operators.html">overload</a> the <code>==</code>
-operator for <a href="/language/values-and-types.html">standard types</a> – though it is difficult to think of valid scenarios where you’d
+<p>Therefore, in environments where it is desirable to <a href="/book/rust/operators.html">overload</a> the <code>==</code>
+operator for <a href="/book/language/values-and-types.html">standard types</a> – though it is difficult to think of valid scenarios where you’d
 want <code>1 == 1</code> to return something other than <code>true</code> – avoid using the <code>switch</code> expression.</p>
 <h3 id="efficiency"><a class="header" href="#efficiency">Efficiency</a></h3>
 <p>Because the <code>switch</code> expression works through a look-up table, it is very efficient even for <em>large</em>
 number of cases; in fact, switching is an O(1) operation regardless of the size of the data and
 number of cases to match.</p>
-<p>A long <a href="/language/if.html"><code>if</code>-<code>else if</code></a> chain becomes increasingly slower with each additional case because
+<p>A long <a href="/book/language/if.html"><code>if</code>-<code>else if</code></a> chain becomes increasingly slower with each additional case because
 essentially an O(n) <em>linear scan</em> is performed.</p>
 
                     </main>

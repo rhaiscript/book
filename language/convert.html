@@ -167,8 +167,8 @@
 <h2 id="convert-between-integer-and-floating-point"><a class="header" href="#convert-between-integer-and-floating-point">Convert Between Integer and Floating-Point</a></h2>
 <table><thead><tr><th>Function</th><th style="text-align: center">Not available under</th><th style="text-align: center">From type</th><th style="text-align: center">To type</th></tr></thead><tbody>
 <tr><td><code>to_int</code></td><td style="text-align: center"></td><td style="text-align: center"><code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td style="text-align: center"><code>INT</code></td></tr>
-<tr><td><code>to_float</code></td><td style="text-align: center"><a href="/start/features.html"><code>no_float</code></a></td><td style="text-align: center"><code>INT</code>,  <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td style="text-align: center"><code>FLOAT</code></td></tr>
-<tr><td><code>to_decimal</code></td><td style="text-align: center">non-<a href="/start/features.html"><code>decimal</code></a></td><td style="text-align: center"><code>INT</code>, <code>FLOAT</code></td><td style="text-align: center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>to_float</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_float</code></a></td><td style="text-align: center"><code>INT</code>,  <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td><td style="text-align: center"><code>FLOAT</code></td></tr>
+<tr><td><code>to_decimal</code></td><td style="text-align: center">non-<a href="/book/start/features.html"><code>decimal</code></a></td><td style="text-align: center"><code>INT</code>, <code>FLOAT</code></td><td style="text-align: center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
 <p>That’s it; for other conversions, register custom conversion functions.</p>
 <pre><code class="language-js">let x = 42;                     // 'x' is an integer
@@ -189,11 +189,11 @@ print(`c is '${c}' and its code is ${c.to_int()}`); // prints &quot;c is 'X' and
 </code></pre>
 <h2 id="parse-string-into-number"><a class="header" href="#parse-string-into-number">Parse String into Number</a></h2>
 <table><thead><tr><th>Function</th><th style="text-align: center">From type</th><th style="text-align: center">To type</th></tr></thead><tbody>
-<tr><td><code>parse_int</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center"><code>INT</code></td></tr>
-<tr><td><code>parse_int</code> with radix 2-36</td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center"><code>INT</code> (specified radix)</td></tr>
-<tr><td><code>parse_float</code> (not <a href="/start/features.html"><code>no_float</code></a>)</td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center"><code>FLOAT</code></td></tr>
-<tr><td><code>parse_float</code> (<a href="/start/features.html"><code>no_float</code></a>+<a href="/start/features.html"><code>decimal</code></a>)</td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
-<tr><td><code>parse_decimal</code> (requires <a href="/start/features.html"><code>decimal</code></a>)</td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>parse_int</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center"><code>INT</code></td></tr>
+<tr><td><code>parse_int</code> with radix 2-36</td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center"><code>INT</code> (specified radix)</td></tr>
+<tr><td><code>parse_float</code> (not <a href="/book/start/features.html"><code>no_float</code></a>)</td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center"><code>FLOAT</code></td></tr>
+<tr><td><code>parse_float</code> (<a href="/book/start/features.html"><code>no_float</code></a>+<a href="/book/start/features.html"><code>decimal</code></a>)</td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>parse_decimal</code> (requires <a href="/book/start/features.html"><code>decimal</code></a>)</td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center"><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -227,9 +227,9 @@ type_of(hex) == &quot;i64&quot;;
 </span></code></pre></pre>
 <h2 id="formatting-numbers"><a class="header" href="#formatting-numbers">Formatting Numbers</a></h2>
 <table><thead><tr><th>Function</th><th style="text-align: center">From type</th><th style="text-align: center">To type</th><th style="text-align: center">Format</th></tr></thead><tbody>
-<tr><td><code>to_binary</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center">binary (i.e. only <code>1</code> and <code>0</code>)</td></tr>
-<tr><td><code>to_octal</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center">octal (i.e. <code>0</code> … <code>7</code>)</td></tr>
-<tr><td><code>to_hex</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center">hex (i.e. <code>0</code> … <code>f</code>)</td></tr>
+<tr><td><code>to_binary</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center">binary (i.e. only <code>1</code> and <code>0</code>)</td></tr>
+<tr><td><code>to_octal</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center">octal (i.e. <code>0</code> … <code>7</code>)</td></tr>
+<tr><td><code>to_hex</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center">hex (i.e. <code>0</code> … <code>f</code>)</td></tr>
 </tbody></table>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

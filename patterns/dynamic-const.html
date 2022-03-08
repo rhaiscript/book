@@ -177,7 +177,7 @@
 <p>The system constants are expensive to load.</p>
 </li>
 <li>
-<p>The system constants set is too massive to push into a custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
+<p>The system constants set is too massive to push into a custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 </li>
 <li>
 <p>The values of system constants are volatile and call-dependent.</p>
@@ -192,7 +192,7 @@
 <div>
 <ul>
 <li>
-<p>Use a <a href="/engine/var.html">variable resolver</a> to intercept variable access.</p>
+<p>Use a <a href="/book/engine/var.html">variable resolver</a> to intercept variable access.</p>
 </li>
 <li>
 <p>Only load a variable when it is being used.</p>
@@ -229,7 +229,7 @@ engine.on_var(move |name, _, _, _| Ok(db.get(name).map(Dynamic::from)));
 <p>Values are constants</p>
 </div>
 <div>
-<p>All values provided by a <a href="/engine/var.html">variable resolver</a> are <em><a href="/language/constants.html">constants</a></em> due to their dynamic nature.
+<p>All values provided by a <a href="/book/engine/var.html">variable resolver</a> are <em><a href="/book/language/constants.html">constants</a></em> due to their dynamic nature.
 They cannot be assigned to.</p>
 <p>In order to change values in an external system, register a dedicated API for that purpose.</p>
 </div>

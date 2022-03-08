@@ -164,12 +164,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="variable-resolver"><a class="header" href="#variable-resolver">Variable Resolver</a></h1>
-<p>By default, Rhai looks up access to <a href="/language/variables.html">variables</a> from the enclosing block scope, working its way
-outwards until it reaches the top (global) level, then it searches the <a href="/engine/scope.html"><code>Scope</code></a> that is passed into
+<p>By default, Rhai looks up access to <a href="/book/language/variables.html">variables</a> from the enclosing block scope, working its way
+outwards until it reaches the top (global) level, then it searches the <a href="/book/engine/scope.html"><code>Scope</code></a> that is passed into
 the <code>Engine::eval</code> call.</p>
-<p>There is a built-in facility for advanced users to <em>hook</em> into the <a href="/language/variables.html">variable</a> resolution service and
+<p>There is a built-in facility for advanced users to <em>hook</em> into the <a href="/book/language/variables.html">variable</a> resolution service and
 to override its default behavior.</p>
-<p>To do so, provide a closure to the <a href="/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::on_var</code>.</p>
+<p>To do so, provide a closure to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::on_var</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -198,28 +198,28 @@ engine.on_var(|name, index, context| {
 <div>
 <ol>
 <li>
-<p>Avoid having to maintain a custom <a href="/engine/scope.html"><code>Scope</code></a> with all <a href="/language/variables.html">variables</a> regardless of need
+<p>Avoid having to maintain a custom <a href="/book/engine/scope.html"><code>Scope</code></a> with all <a href="/book/language/variables.html">variables</a> regardless of need
 (because a script may not use them all).</p>
 </li>
 <li>
-<p><em>Short-circuit</em> <a href="/language/variables.html">variable</a> access, essentially overriding standard behavior.</p>
+<p><em>Short-circuit</em> <a href="/book/language/variables.html">variable</a> access, essentially overriding standard behavior.</p>
 </li>
 <li>
-<p><em>Lazy-load</em> <a href="/language/variables.html">variables</a> when they are accessed, not up-front.
-This benefits when the number of <a href="/language/variables.html">variables</a> is very large, when they are timing-dependent,
+<p><em>Lazy-load</em> <a href="/book/language/variables.html">variables</a> when they are accessed, not up-front.
+This benefits when the number of <a href="/book/language/variables.html">variables</a> is very large, when they are timing-dependent,
 or when they are expensive to load.</p>
 </li>
 <li>
-<p>Rename system <a href="/language/variables.html">variables</a> on a script-by-script basis without having to construct different <a href="/engine/scope.html"><code>Scope</code></a>’s.</p>
+<p>Rename system <a href="/book/language/variables.html">variables</a> on a script-by-script basis without having to construct different <a href="/book/engine/scope.html"><code>Scope</code></a>’s.</p>
 </li>
 </ol>
 </div>
 </div>
 <h2 id="returned-values-are-constants"><a class="header" href="#returned-values-are-constants">Returned Values are Constants</a></h2>
-<p><a href="/language/variables.html">Variable</a> values, if any returned, are treated as <em><a href="/language/constants.html">constants</a></em> by the script and cannot be assigned to.
+<p><a href="/book/language/variables.html">Variable</a> values, if any returned, are treated as <em><a href="/book/language/constants.html">constants</a></em> by the script and cannot be assigned to.
 This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.</p>
-<p>In order to change these <a href="/language/variables.html">variables</a>, it is best to push them into a custom <a href="/engine/scope.html"><code>Scope</code></a> instead of
-using a variable resolver. Then these <a href="/language/variables.html">variables</a> can be assigned to and their updated values read
+<p>In order to change these <a href="/book/language/variables.html">variables</a>, it is best to push them into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> instead of
+using a variable resolver. Then these <a href="/book/language/variables.html">variables</a> can be assigned to and their updated values read
 back after the script is evaluated.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_var</code> takes the following form.</p>
@@ -228,17 +228,17 @@ back after the script is evaluated.</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/language/variables.html">variable</a> name</td></tr>
-<tr><td><code>index</code></td><td style="text-align: center"><code>usize</code></td><td>an offset from the bottom of the current <a href="/engine/scope.html"><code>Scope</code></a> that the <a href="/language/variables.html">variable</a> is supposed to reside.<br/>Offsets start from 1, with 1 meaning the last <a href="/language/variables.html">variable</a> in the current <a href="/engine/scope.html"><code>Scope</code></a>.  Essentially the correct <a href="/language/variables.html">variable</a> is at position <code>scope.len() - index</code>.<br/>If <code>index</code> is zero, then there is no pre-calculated offset position and a search through the current <a href="/engine/scope.html"><code>Scope</code></a> must be performed.</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/language/eval-context.html"><code>&amp;EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/book/language/variables.html">variable</a> name</td></tr>
+<tr><td><code>index</code></td><td style="text-align: center"><code>usize</code></td><td>an offset from the bottom of the current <a href="/book/engine/scope.html"><code>Scope</code></a> that the <a href="/book/language/variables.html">variable</a> is supposed to reside.<br/>Offsets start from 1, with 1 meaning the last <a href="/book/language/variables.html">variable</a> in the current <a href="/book/engine/scope.html"><code>Scope</code></a>.  Essentially the correct <a href="/book/language/variables.html">variable</a> is at position <code>scope.len() - index</code>.<br/>If <code>index</code> is zero, then there is no pre-calculated offset position and a search through the current <a href="/book/engine/scope.html"><code>Scope</code></a> must be performed.</td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/language/eval-context.html"><code>&amp;EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 </tbody></table>
-<p>and <a href="/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>Ok(None)</code></td><td>normal <a href="/language/variables.html">variable</a> resolution process should continue, i.e. continue searching through the <a href="/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td><code>Ok(Some(value))</code></td><td>value (a <a href="/language/dynamic.html"><code>Dynamic</code></a>) of the <a href="/language/variables.html">variable</a>, treated as a <a href="/language/constants.html">constant</a></td></tr>
-<tr><td><code>Err(Box&lt;EvalAltResult&gt;)</code></td><td>error that is reflected back to the <a href="/engine/hello-world.html"><code>Engine</code></a>, normally <code>EvalAltResult::ErrorVariableNotFound</code> to indicate that the <a href="/language/variables.html">variable</a> does not exist, but it can be any <code>EvalAltResult</code>.</td></tr>
+<tr><td><code>Ok(None)</code></td><td>normal <a href="/book/language/variables.html">variable</a> resolution process should continue, i.e. continue searching through the <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td><code>Ok(Some(value))</code></td><td>value (a <a href="/book/language/dynamic.html"><code>Dynamic</code></a>) of the <a href="/book/language/variables.html">variable</a>, treated as a <a href="/book/language/constants.html">constant</a></td></tr>
+<tr><td><code>Err(Box&lt;EvalAltResult&gt;)</code></td><td>error that is reflected back to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, normally <code>EvalAltResult::ErrorVariableNotFound</code> to indicate that the <a href="/book/language/variables.html">variable</a> does not exist, but it can be any <code>EvalAltResult</code>.</td></tr>
 </tbody></table>
 
                     </main>

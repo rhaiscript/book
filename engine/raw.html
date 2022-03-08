@@ -164,8 +164,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="raw-engine"><a class="header" href="#raw-engine">Raw <code>Engine</code></a></h1>
-<p><code>Engine::new</code> creates a scripting <a href="/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
-via <a href="/language/print-debug.html"><code>print</code></a> or <a href="/language/print-debug.html"><code>debug</code></a>).</p>
+<p><code>Engine::new</code> creates a scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
+via <a href="/book/language/print-debug.html"><code>print</code></a> or <a href="/book/language/print-debug.html"><code>debug</code></a>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
 <div class="admonition info side wide">
@@ -173,21 +173,21 @@ application code storage space.</p>
 <p>Built-in operators</p>
 </div>
 <div>
-<p>Even with a raw <a href="/engine/hello-world.html"><code>Engine</code></a>, some operators are built-in and always available.</p>
-<p>See <a href="/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
+<p>Even with a raw <a href="/book/engine/hello-world.html"><code>Engine</code></a>, some operators are built-in and always available.</p>
+<p>See <a href="/book/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
 </div>
 </div>
-<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <a href="/engine/hello-world.html"><code>Engine</code></a>, in which only a minimal set of
-<a href="/engine/builtin.html">built-in</a> basic arithmetic and logical operators are supported.</p>
-<p>To add more functionalities to a <em>raw</em> <a href="/engine/hello-world.html"><code>Engine</code></a>, load <a href="/rust/packages/index.html">packages</a> into it.</p>
-<p>Since <a href="/rust/packages/index.html">packages</a> can be <em>shared</em>, this is an extremely efficient way to create multiple instances of
-the same <a href="/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
+<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <a href="/book/engine/hello-world.html"><code>Engine</code></a>, in which only a minimal set of
+<a href="/book/engine/builtin.html">built-in</a> basic arithmetic and logical operators are supported.</p>
+<p>To add more functionalities to a <em>raw</em> <a href="/book/engine/hello-world.html"><code>Engine</code></a>, load <a href="/book/rust/packages/index.html">packages</a> into it.</p>
+<p>Since <a href="/book/rust/packages/index.html">packages</a> can be <em>shared</em>, this is an extremely efficient way to create multiple instances of
+the same <a href="/book/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
 <table><thead><tr><th></th><th style="text-align: center"><code>Engine::new</code></th><th style="text-align: center"><code>Engine::new_raw</code></th></tr></thead><tbody>
-<tr><td><a href="/engine/builtin.html">Built-in operators</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><a href="/rust/packages/index.html">Package</a> loaded</td><td style="text-align: center"><code>StandardPackage</code></td><td style="text-align: center"><em>none</em></td></tr>
-<tr><td><a href="/rust/modules/resolvers.html">Module resolver</a></td><td style="text-align: center"><code>FileModuleResolver</code></td><td style="text-align: center"><em>none</em></td></tr>
-<tr><td><a href="/language/print-debug.html"><code>on_print</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
-<tr><td><a href="/language/print-debug.html"><code>on_debug</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/engine/builtin.html">Built-in operators</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><a href="/book/rust/packages/index.html">Package</a> loaded</td><td style="text-align: center"><code>StandardPackage</code></td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/rust/modules/resolvers.html">Module resolver</a></td><td style="text-align: center"><code>FileModuleResolver</code></td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/language/print-debug.html"><code>on_print</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/language/print-debug.html"><code>on_debug</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
 </tbody></table>
 <div class="admonition tip">
 <div class="admonition-title">

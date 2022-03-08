@@ -169,13 +169,13 @@
 <p>See also</p>
 </div>
 <div>
-<p>See also the <a href="/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
+<p>See also the <a href="/book/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
 </div>
 </div>
-<p>The macro <code>def_package!</code> can be used to create a custom <a href="/rust/packages/index.html">package</a>.</p>
-<p>A custom <a href="/rust/packages/index.html">package</a> can aggregate many other <a href="/rust/packages/index.html">packages</a> into a single self-contained unit.
+<p>The macro <code>def_package!</code> can be used to create a custom <a href="/book/rust/packages/index.html">package</a>.</p>
+<p>A custom <a href="/book/rust/packages/index.html">package</a> can aggregate many other <a href="/book/rust/packages/index.html">packages</a> into a single self-contained unit.
 More functions can be added on top of others.</p>
-<p>Custom <a href="/rust/packages/index.html">packages</a> are extremely useful when multiple <a href="/engine/raw.html">raw <code>Engine</code></a> instances must be created such
+<p>Custom <a href="/book/rust/packages/index.html">packages</a> are extremely useful when multiple <a href="/book/engine/raw.html">raw <code>Engine</code></a> instances must be created such
 that they all share the same set of functions.</p>
 <h2 id="def_package"><a class="header" href="#def_package"><code>def_package!</code></a></h2>
 <blockquote>
@@ -213,11 +213,11 @@ that they all share the same set of functions.</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th style="text-align: center">Element</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center">description</td><td>doc-comment for the <a href="/rust/packages/index.html">package</a></td></tr>
-<tr><td style="text-align: center"><code>pub</code> etc.</td><td>visibility of the <a href="/rust/packages/index.html">package</a></td></tr>
-<tr><td style="text-align: center">name</td><td>name of the <a href="/rust/packages/index.html">package</a>, usually ending in …<code>Package</code></td></tr>
-<tr><td style="text-align: center">variable</td><td>a variable name holding a reference to the <a href="/rust/modules/index.html">module</a> forming the <a href="/rust/packages/index.html">package</a>, usually <code>module</code> or <code>lib</code></td></tr>
-<tr><td style="text-align: center">code block</td><td>a code block that initializes the <a href="/rust/packages/index.html">package</a></td></tr>
+<tr><td style="text-align: center">description</td><td>doc-comment for the <a href="/book/rust/packages/index.html">package</a></td></tr>
+<tr><td style="text-align: center"><code>pub</code> etc.</td><td>visibility of the <a href="/book/rust/packages/index.html">package</a></td></tr>
+<tr><td style="text-align: center">name</td><td>name of the <a href="/book/rust/packages/index.html">package</a>, usually ending in …<code>Package</code></td></tr>
+<tr><td style="text-align: center">variable</td><td>a variable name holding a reference to the <a href="/book/rust/modules/index.html">module</a> forming the <a href="/book/rust/packages/index.html">package</a>, usually <code>module</code> or <code>lib</code></td></tr>
+<tr><td style="text-align: center">code block</td><td>a code block that initializes the <a href="/book/rust/packages/index.html">package</a></td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -250,13 +250,13 @@ def_package! {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="create-a-custom-package-from-a-plugin-module"><a class="header" href="#create-a-custom-package-from-a-plugin-module">Create a Custom Package from a Plugin Module</a></h2>
-<p>By far the easiest way to create a custom <a href="/rust/packages/index.html">package</a> is to call <code>plugin::combine_with_exported_module!</code>
-from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/plugins/module.html">plugin module</a>.</p>
-<p>In fact, this exactly is how Rhai’s built-in <a href="/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are implemented.</p>
-<p>Due to specific requirements of a <a href="/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
-<em>flattens</em> all sub-modules (i.e. all functions and <a href="/language/iterator.html">type iterators</a> defined within sub-modules
-are pulled up to the top level instead) and so there will not be any sub-modules added to the <a href="/rust/packages/index.html">package</a>.</p>
-<p>Variables in the <a href="/plugins/module.html">plugin module</a> are ignored.</p>
+<p>By far the easiest way to create a custom <a href="/book/rust/packages/index.html">package</a> is to call <code>plugin::combine_with_exported_module!</code>
+from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/book/plugins/module.html">plugin module</a>.</p>
+<p>In fact, this exactly is how Rhai’s built-in <a href="/book/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are implemented.</p>
+<p>Due to specific requirements of a <a href="/book/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
+<em>flattens</em> all sub-modules (i.e. all functions and <a href="/book/language/iterator.html">type iterators</a> defined within sub-modules
+are pulled up to the top level instead) and so there will not be any sub-modules added to the <a href="/book/rust/packages/index.html">package</a>.</p>
+<p>Variables in the <a href="/book/plugins/module.html">plugin module</a> are ignored.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

@@ -164,12 +164,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="maximum-size-of-arrays"><a class="header" href="#maximum-size-of-arrays">Maximum Size of Arrays</a></h1>
-<p>Rhai by default does not limit how large an <a href="/language/arrays.html">array</a> or a <a href="/language/blobs.html">BLOB</a> can be.</p>
-<p>This can be changed via the <a href="/engine/options.html"><code>Engine::set_max_array_size</code></a> method, with zero being unlimited (the default).</p>
-<p>A script attempting to create an <a href="/language/arrays.html">array</a> literal larger than the maximum will terminate with a parse error.</p>
-<p>Any script operation that produces an <a href="/language/arrays.html">array</a> or a <a href="/language/blobs.html">BLOB</a> larger than the maximum also terminates
+<p>Rhai by default does not limit how large an <a href="/book/language/arrays.html">array</a> or a <a href="/book/language/blobs.html">BLOB</a> can be.</p>
+<p>This can be changed via the <a href="/book/engine/options.html"><code>Engine::set_max_array_size</code></a> method, with zero being unlimited (the default).</p>
+<p>A script attempting to create an <a href="/book/language/arrays.html">array</a> literal larger than the maximum will terminate with a parse error.</p>
+<p>Any script operation that produces an <a href="/book/language/arrays.html">array</a> or a <a href="/book/language/blobs.html">BLOB</a> larger than the maximum also terminates
 the script with an error result.</p>
-<p>This check can be disabled via the <a href="/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -186,13 +186,13 @@ engine.set_max_array_size(0);       // allow unlimited arrays
 </div>
 <div>
 <p>Be conservative when setting a maximum limit and always consider the fact that a registered function
-may grow an <a href="/language/arrays.html">array</a>’s or <a href="/language/blobs.html">BLOB</a>’s size without Rhai noticing until the very end.</p>
-<p>For instance, the built-in <code>+</code> operator for <a href="/language/arrays.html">arrays</a> and <a href="/language/blobs.html">BLOB’s</a> concatenates two of them together
-to form one larger <a href="/language/arrays.html">array</a> or <a href="/language/blobs.html">BLOB</a>; if both sources are <em>slightly</em> below the maximum size limit,
+may grow an <a href="/book/language/arrays.html">array</a>’s or <a href="/book/language/blobs.html">BLOB</a>’s size without Rhai noticing until the very end.</p>
+<p>For instance, the built-in <code>+</code> operator for <a href="/book/language/arrays.html">arrays</a> and <a href="/book/language/blobs.html">BLOB’s</a> concatenates two of them together
+to form one larger <a href="/book/language/arrays.html">array</a> or <a href="/book/language/blobs.html">BLOB</a>; if both sources are <em>slightly</em> below the maximum size limit,
 the result may be almost <em>twice</em> the maximum size.</p>
-<p>As a malicious script may also create a deeply-nested <a href="/language/arrays.html">array</a> which consumes huge amounts of memory
-while each individual <a href="/language/arrays.html">array</a> still stays under the maximum size limit, Rhai also <em>recursively</em> adds
-up the sizes of all <a href="/language/strings-chars.html">strings</a>, <a href="/language/arrays.html">arrays</a>, [blobs] and <a href="/language/object-maps.html">object maps</a> contained within each <a href="/language/arrays.html">array</a> to
+<p>As a malicious script may also create a deeply-nested <a href="/book/language/arrays.html">array</a> which consumes huge amounts of memory
+while each individual <a href="/book/language/arrays.html">array</a> still stays under the maximum size limit, Rhai also <em>recursively</em> adds
+up the sizes of all <a href="/book/language/strings-chars.html">strings</a>, <a href="/book/language/arrays.html">arrays</a>, [blobs] and <a href="/book/language/object-maps.html">object maps</a> contained within each <a href="/book/language/arrays.html">array</a> to
 make sure that the <em>aggregate</em> sizes of none of these data structures exceed their respective
 maximum size limits (if any).</p>
 <pre><pre class="playground"><code class="language-rust no_run">

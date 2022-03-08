@@ -164,11 +164,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="maximum-length-of-strings"><a class="header" href="#maximum-length-of-strings">Maximum Length of Strings</a></h1>
-<p>Rhai by default does not limit how long a <a href="/language/strings-chars.html">string</a> can be.</p>
-<p>This can be changed via the <a href="/engine/options.html"><code>Engine::set_max_string_size</code></a> method, with zero being unlimited (the default).</p>
+<p>Rhai by default does not limit how long a <a href="/book/language/strings-chars.html">string</a> can be.</p>
+<p>This can be changed via the <a href="/book/engine/options.html"><code>Engine::set_max_string_size</code></a> method, with zero being unlimited (the default).</p>
 <p>A script attempting to create a string literal longer than the maximum length will terminate with a parse error.</p>
 <p>Any script operation that produces a string longer than the maximum also terminates the script with an error result.</p>
-<p>This check can be disabled via the <a href="/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

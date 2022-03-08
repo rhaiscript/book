@@ -181,8 +181,8 @@ print(&quot;10:25AM&quot;);                   // the function call is replaced b
                                     // its result at the time of optimization!
 <span class="boring">}
 </span></code></pre></pre>
-<p>The optimizer, when using <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>, <em>merrily assumes</em> that all functions are
-<em>non-volatile</em>, so when it finds <a href="/language/constants.html">constant</a> arguments (or none) it eagerly executes the function
+<p>The optimizer, when using <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a>, <em>merrily assumes</em> that all functions are
+<em>non-volatile</em>, so when it finds <a href="/book/language/constants.html">constant</a> arguments (or none) it eagerly executes the function
 call and replaces it with the result.</p>
 <p>This causes the script to behave differently from the intended semantics.</p>
 <div class="admonition danger">
@@ -190,7 +190,7 @@ call and replaces it with the result.</p>
 <p>Warning</p>
 </div>
 <div>
-<p><strong>Avoid using <a href="/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a></strong> if volatile custom functions are involved.</p>
+<p><strong>Avoid using <a href="/book/engine/optimize/optimize-levels.html"><code>OptimizationLevel::Full</code></a></strong> if volatile custom functions are involved.</p>
 </div>
 </div>
 

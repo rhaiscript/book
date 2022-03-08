@@ -170,22 +170,30 @@
 </div>
 <div>
 <p>A runnable example of this implementation is included.</p>
-<p>See the <a href="/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
+<p>See the <a href="/book/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
 </div>
 </div>
 <h2 id="i-hate-this--how-can-i-get-rid-of-it"><a class="header" href="#i-hate-this--how-can-i-get-rid-of-it">I Hate <code>this</code>!  How Can I Get Rid of It?</a></h2>
 <p>You’re using Rust and you don’t want people to think you’re writing lowly JavaScript?</p>
 <p>Taking inspiration from the <a href="events-2.html"><em>JS Style</em></a>, a slight modification of the
-<a href="events-1.html"><em>Main Style</em></a> is to store all states inside an <a href="/language/object-maps.html">object map</a> inside a custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
+<a href="events-1.html"><em>Main Style</em></a> is to store all states inside an <a href="/book/language/object-maps.html">object map</a> inside a custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <p>Nevertheless, instead of writing <code>this.variable_name</code> everywhere to access a state variable
 (in the <a href="events-2.html"><em>JS Style</em></a>), you’d write <code>state.variable_name</code> instead.</p>
 <p>It is up to you to decide whether this is an improvement!</p>
 <h2 id="handler-initialization"><a class="header" href="#handler-initialization">Handler Initialization</a></h2>
+<div class="admonition note side">
+<div class="admonition-title">
+<p>No shadowing ‘state’</p>
+</div>
+<div>
+<p>Notice that a <a href="/book/engine/def-var.html">variable definition filter</a> is used to prevent <a href="/book/language/shadow.html">shadowing</a> of the states <a href="/book/language/object-maps.html">object map</a>.</p>
+</div>
+</div>
 <p>Implementation wise, this style follows closely the <a href="events-1.html"><em>Main Style</em></a>, but a single
-<a href="/language/object-maps.html">object map</a> is added to the custom <a href="/engine/scope.html"><code>Scope</code></a> which holds all state values.</p>
-<p>Global <a href="/language/constants.html">constants</a> can still be added to the custom <a href="/engine/scope.html"><code>Scope</code></a> as normal and used through the script.</p>
-<p>Calls to the <code>init</code> <a href="/language/functions.html">function</a> no longer need to avoid rewinding the <a href="/engine/scope.html"><code>Scope</code></a> because state
-<a href="/language/variables.html">variables</a> are added as properties under the states <a href="/language/object-maps.html">object map</a>.</p>
+<a href="/book/language/object-maps.html">object map</a> is added to the custom <a href="/book/engine/scope.html"><code>Scope</code></a> which holds all state values.</p>
+<p>Global <a href="/book/language/constants.html">constants</a> can still be added to the custom <a href="/book/engine/scope.html"><code>Scope</code></a> as normal and used through the script.</p>
+<p>Calls to the <code>init</code> <a href="/book/language/functions.html">function</a> no longer need to avoid rewinding the <a href="/book/engine/scope.html"><code>Scope</code></a> because state
+<a href="/book/language/variables.html">variables</a> are added as properties under the states <a href="/book/language/object-maps.html">object map</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -193,6 +201,9 @@
     // Create a new 'Handler'.
     pub fn new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
         let mut engine = Engine::new();
+
+        // Forbid shadowing of 'state' variable
+        engine.on_def_var(|_, info, _| Ok(info.name != &quot;state&quot;));
 
                     :
             // Code omitted
@@ -221,12 +232,12 @@
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="handler-scripting-style"><a class="header" href="#handler-scripting-style">Handler Scripting Style</a></h2>
-<p>The stored state is kept in an <a href="/language/object-maps.html">object map</a> in the custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
-<p>In this example, that <a href="/language/object-maps.html">object map</a> is named <code>state</code>, but it can be any name.</p>
+<p>The stored state is kept in an <a href="/book/language/object-maps.html">object map</a> in the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>In this example, that <a href="/book/language/object-maps.html">object map</a> is named <code>state</code>, but it can be any name.</p>
 <h3 id="user-defined-functions-in-state"><a class="header" href="#user-defined-functions-in-state">User-defined functions in state</a></h3>
-<p>Because an <a href="/language/object-maps.html">object map</a> is used to hold state values, it is even possible to add user-defined
-<a href="/language/functions.html">functions</a>, leveraging the <a href="/patterns/oop.html">OOP</a> support for <a href="/language/object-maps.html">object maps</a>.</p>
-<p>However, within these user-defined <a href="/language/functions.html">functions</a>, the <code>this</code> pointer binds to the <a href="/language/object-maps.html">object map</a>.
+<p>Because an <a href="/book/language/object-maps.html">object map</a> is used to hold state values, it is even possible to add user-defined
+<a href="/book/language/functions.html">functions</a>, leveraging the <a href="/book/patterns/oop.html">OOP</a> support for <a href="/book/language/object-maps.html">object maps</a>.</p>
+<p>However, within these user-defined <a href="/book/language/functions.html">functions</a>, the <code>this</code> pointer binds to the <a href="/book/language/object-maps.html">object map</a>.
 Therefore, the variable-accessing syntax is different from the main body of the script.</p>
 <pre><code class="language-js">fn do_action() {
     // Access state: `state.xxx`

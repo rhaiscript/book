@@ -164,8 +164,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="the-immutablestring-type"><a class="header" href="#the-immutablestring-type">The <code>ImmutableString</code> Type</a></h1>
-<p>All <a href="/language/strings-chars.html">strings</a> in Rhai are implemented as <code>ImmutableString</code>, which is an alias to
-<code>Rc&lt;SmartString&gt;</code> (or <code>Arc&lt;SmartString&gt;</code> under the <a href="/start/features.html"><code>sync</code></a> feature).</p>
+<p>All <a href="/book/language/strings-chars.html">strings</a> in Rhai are implemented as <code>ImmutableString</code>, which is an alias to
+<code>Rc&lt;SmartString&gt;</code> (or <code>Arc&lt;SmartString&gt;</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
 <p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because many strings in scripts are short (fewer than 24 ASCII characters).</p>
 <p>An <code>ImmutableString</code> is immutable (i.e. never changes) and therefore can be shared among many users.
 Cloning an <code>ImmutableString</code> is cheap since it only copies an immutable reference.</p>
@@ -176,7 +176,7 @@ Therefore, direct string modifications are expensive.</p>
 is very inefficient (the argument is cloned during every function call).</p>
 <p>A alternative is to use <code>&amp;str</code> which de-sugars to <code>ImmutableString</code>.</p>
 <p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,
-which has type <code>ImmutableString</code>.  In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/rust/custom.html">custom type</a>.</p>
+which has type <code>ImmutableString</code>.  In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/rust/custom.html">custom type</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -192,7 +192,7 @@ fn bad(s: &amp;mut String) { ... }                  // '&amp;mut String' will no
 <h2 id="differences-from-rust-strings"><a class="header" href="#differences-from-rust-strings">Differences from Rust Strings</a></h2>
 <p>Internally Rhai strings are stored as UTF-8 just like Rust (they <em>are</em> Rust <code>String</code>s!),
 but nevertheless there are major differences.</p>
-<p>In Rhai a <a href="/language/strings-chars.html">string</a> is semantically the same as an array of Unicode characters and can be directly
+<p>In Rhai a <a href="/book/language/strings-chars.html">string</a> is semantically the same as an array of Unicode characters and can be directly
 indexed (unlike Rust).</p>
 <p>This is similar to most other languages (e.g. JavaScript, C#) where strings are stored internally
 not as UTF-8 but as arrays of UCS-16 or UCS-32.</p>
@@ -204,15 +204,15 @@ Unicode characters.</p>
 <p>Performance considerations</p>
 </div>
 <div>
-<p>Although Rhai exposes a <a href="/language/strings-chars.html">string</a> as a simple array of <a href="/language/strings-chars.html">characters</a> which can be directly indexed to
-get at a particular <a href="/language/strings-chars.html">character</a>, such convenient syntax is an <em>illusion</em>.</p>
-<p>Internally the <a href="/language/strings-chars.html">string</a> is still stored in UTF-8 (native Rust <code>String</code>s).</p>
+<p>Although Rhai exposes a <a href="/book/language/strings-chars.html">string</a> as a simple array of <a href="/book/language/strings-chars.html">characters</a> which can be directly indexed to
+get at a particular <a href="/book/language/strings-chars.html">character</a>, such convenient syntax is an <em>illusion</em>.</p>
+<p>Internally the <a href="/book/language/strings-chars.html">string</a> is still stored in UTF-8 (native Rust <code>String</code>s).</p>
 <p>All indexing operations actually require walking through the entire UTF-8 string to find the offset
-of the particular <a href="/language/strings-chars.html">character</a> position, and therefore is <em>much</em> slower than the simple array
+of the particular <a href="/book/language/strings-chars.html">character</a> position, and therefore is <em>much</em> slower than the simple array
 indexing for other scripting languages.</p>
 <p>This implementation detail is hidden from the user but has a performance implication.</p>
-<p>Avoid large scale <a href="/language/strings-chars.html">character</a>-based processing of <a href="/language/strings-chars.html">strings</a>; instead, build an actual <a href="/language/arrays.html">array</a> of
-<a href="/language/strings-chars.html">characters</a> (via the <code>split()</code> method) which can then be manipulated efficiently.</p>
+<p>Avoid large scale <a href="/book/language/strings-chars.html">character</a>-based processing of <a href="/book/language/strings-chars.html">strings</a>; instead, build an actual <a href="/book/language/arrays.html">array</a> of
+<a href="/book/language/strings-chars.html">characters</a> (via the <code>split()</code> method) which can then be manipulated efficiently.</p>
 </div>
 </div>
 

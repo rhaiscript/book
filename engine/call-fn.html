@@ -165,7 +165,7 @@
                     <main>
                         <h1 id="call-rhai-functions-from-rust"><a class="header" href="#call-rhai-functions-from-rust">Call Rhai Functions from Rust</a></h1>
 <p>Rhai also allows working <em>backwards</em> from the other direction – i.e. calling a Rhai-scripted
-<a href="/language/functions.html">function</a> from Rust via <code>Engine::call_fn</code>.</p>
+<a href="/book/language/functions.html">function</a> from Rust via <code>Engine::call_fn</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -230,17 +230,17 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ()
 //                                                          ^^ unit = tuple of zero
 <span class="boring">}
 </span></code></pre></pre>
-<p>When using <code>Engine::call_fn</code>, the <a href="/engine/compile.html"><code>AST</code></a> is first evaluated before the <a href="/language/functions.html">function</a> is called.
-This is usually desirable in order to <a href="/language/modules/import.html">import</a> the necessary external <a href="/rust/modules/index.html">modules</a> that are
-needed by the <a href="/language/functions.html">function</a>.</p>
-<p>All new <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> introduced are, by default, <em>not</em> retained inside the <a href="/engine/scope.html"><code>Scope</code></a>.
-In other words, the <a href="/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> to the initial size after each call.</p>
+<p>When using <code>Engine::call_fn</code>, the <a href="/book/engine/compile.html"><code>AST</code></a> is first evaluated before the <a href="/book/language/functions.html">function</a> is called.
+This is usually desirable in order to <a href="/book/language/modules/import.html">import</a> the necessary external <a href="/book/rust/modules/index.html">modules</a> that are
+needed by the <a href="/book/language/functions.html">function</a>.</p>
+<p>All new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> introduced are, by default, <em>not</em> retained inside the <a href="/book/engine/scope.html"><code>Scope</code></a>.
+In other words, the <a href="/book/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> to the initial size after each call.</p>
 <p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> trait</a></h2>
-<p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="/rust/traits.html"><code>FuncArgs</code></a> trait,
-which is used to parse a data type into individual argument values for the <a href="/language/functions.html">function</a> call.</p>
-<p>Rhai implements <a href="/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
-<p>Custom types (e.g. structures) can also implement <a href="/rust/traits.html"><code>FuncArgs</code></a> so they can be used for
+<p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="/book/rust/traits.html"><code>FuncArgs</code></a> trait,
+which is used to parse a data type into individual argument values for the <a href="/book/language/functions.html">function</a> call.</p>
+<p>Rhai implements <a href="/book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
+<p>Custom types (e.g. structures) can also implement <a href="/book/rust/traits.html"><code>FuncArgs</code></a> so they can be used for
 calling <code>Engine::call_fn</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -270,7 +270,7 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, op
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="low-level-api--enginecall_fn_raw"><a class="header" href="#low-level-api--enginecall_fn_raw">Low-Level API – <code>Engine::call_fn_raw</code></a></h2>
-<p>For more control, construct all arguments as <a href="/language/dynamic.html"><code>Dynamic</code></a> values and use <code>Engine::call_fn_raw</code>,
+<p>For more control, construct all arguments as <a href="/book/language/dynamic.html"><code>Dynamic</code></a> values and use <code>Engine::call_fn_raw</code>,
 passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -288,23 +288,23 @@ passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as
 </span></code></pre></pre>
 <p><code>Engine::call_fn_raw</code> extends control to the following:</p>
 <ul>
-<li>Whether to skip evaluation of the <a href="/engine/compile.html"><code>AST</code></a> before calling the target <a href="/language/functions.html">function</a></li>
-<li>Whether to rewind the custom <a href="/engine/scope.html"><code>Scope</code></a> at the end of the <a href="/language/functions.html">function</a> call</li>
+<li>Whether to skip evaluation of the <a href="/book/engine/compile.html"><code>AST</code></a> before calling the target <a href="/book/language/functions.html">function</a></li>
+<li>Whether to rewind the custom <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of the <a href="/book/language/functions.html">function</a> call</li>
 <li>Whether to bind the <code>this</code> pointer to a specific value</li>
 </ul>
 <h3 id="skip-evaluation-of-the-ast"><a class="header" href="#skip-evaluation-of-the-ast">Skip evaluation of the <code>AST</code></a></h3>
-<p>By default, the <a href="/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="/language/functions.html">function</a>.
+<p>By default, the <a href="/book/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="/book/language/functions.html">function</a>.
 A parameter can be passed to skip this evaluation.</p>
 <h3 id="keep-new-variablesconstants"><a class="header" href="#keep-new-variablesconstants">Keep new variables/constants</a></h3>
-<p>By default, the <a href="/engine/hello-world.html"><code>Engine</code></a> <em>rewinds</em> the custom <a href="/engine/scope.html"><code>Scope</code></a> after each call to the initial size,
-so any new <a href="/language/variables.html">variable</a>/<a href="/language/constants.html">constant</a> defined are cleared and will not spill into the custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
-<p>This keeps the <a href="/engine/scope.html"><code>Scope</code></a> from being continuously polluted by new <a href="/language/variables.html">variables</a> and is usually the
+<p>By default, the <a href="/book/engine/hello-world.html"><code>Engine</code></a> <em>rewinds</em> the custom <a href="/book/engine/scope.html"><code>Scope</code></a> after each call to the initial size,
+so any new <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a> defined are cleared and will not spill into the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>This keeps the <a href="/book/engine/scope.html"><code>Scope</code></a> from being continuously polluted by new <a href="/book/language/variables.html">variables</a> and is usually the
 expected intuitive behavior.</p>
-<p>A parameter can be passed to keep new <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> within the custom <a href="/engine/scope.html"><code>Scope</code></a>.
-This allows the <a href="/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
-custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
-<p>When doing so, however, beware that all <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> defined at top level of the
-<a href="/language/functions.html">function</a> or in the script body will <em>persist</em> inside the custom <a href="/engine/scope.html"><code>Scope</code></a>.  If any of them are
+<p>A parameter can be passed to keep new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.
+This allows the <a href="/book/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
+custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>When doing so, however, beware that all <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> defined at top level of the
+<a href="/book/language/functions.html">function</a> or in the script body will <em>persist</em> inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.  If any of them are
 temporary and not intended to be retained, define them inside a statements block.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -347,7 +347,7 @@ engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="bind-the-this-pointer"><a class="header" href="#bind-the-this-pointer">Bind the <code>this</code> pointer</a></h3>
-<p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/language/functions.html">function</a>.</p>
+<p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/book/language/functions.html">function</a>.</p>
 <p>This functionality is not available to <code>Engine::call_fn</code> which cannot call functions in
 <em>method-call</em> style.</p>
 <pre><pre class="playground"><code class="language-rust no_run">

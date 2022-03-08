@@ -197,17 +197,17 @@
 <li>
 <p>An <em>event handler</em> object is declared that holds the following items:</p>
 <ul>
-<li><a href="/engine/hello-world.html"><code>Engine</code></a> with registered functions serving as an API,</li>
-<li><a href="/engine/compile.html"><code>AST</code></a> of the user script,</li>
-<li><a href="/engine/scope.html"><code>Scope</code></a> containing system-provided default state.</li>
+<li><a href="/book/engine/hello-world.html"><code>Engine</code></a> with registered functions serving as an API,</li>
+<li><a href="/book/engine/compile.html"><code>AST</code></a> of the user script,</li>
+<li><a href="/book/engine/scope.html"><code>Scope</code></a> containing system-provided default state.</li>
 </ul>
 </li>
 <li>
-<p>User-provided state is initialized by a <a href="/language/functions.html">function</a> called via <a href="/engine/call-fn.html"><code>Engine::call_fn_raw</code></a>.</p>
+<p>User-provided state is initialized by a <a href="/book/language/functions.html">function</a> called via <a href="/book/engine/call-fn.html"><code>Engine::call_fn_raw</code></a>.</p>
 </li>
 <li>
-<p>Upon an event, the appropriate event handler <a href="/language/functions.html">function</a> in the script is called via
-<a href="/engine/call-fn.html"><code>Engine::call_fn</code></a>.</p>
+<p>Upon an event, the appropriate event handler <a href="/book/language/functions.html">function</a> in the script is called via
+<a href="/book/engine/call-fn.html"><code>Engine::call_fn</code></a>.</p>
 </li>
 <li>
 <p>Optionally, trap the <code>EvalAltResult::ErrorFunctionNotFound</code> error to provide a default implementation.</p>
@@ -217,9 +217,9 @@
 </div>
 <h2 id="basic-infrastructure"><a class="header" href="#basic-infrastructure">Basic Infrastructure</a></h2>
 <h3 id="declare-handler-object"><a class="header" href="#declare-handler-object">Declare handler object</a></h3>
-<p>In most cases, it would be simpler to store an <a href="/engine/hello-world.html"><code>Engine</code></a> instance together with the handler object
+<p>In most cases, it would be simpler to store an <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance together with the handler object
 because it only requires registering all API functions only once.</p>
-<p>In rare cases where handlers are created and destroyed in a tight loop, a new <a href="/engine/hello-world.html"><code>Engine</code></a> instance
+<p>In rare cases where handlers are created and destroyed in a tight loop, a new <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance
 can be created for each event. See <a href="parallel.html"><em>One Engine Instance Per Call</em></a> for more details.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -238,7 +238,7 @@ struct Handler {
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="register-api-for-custom-types"><a class="header" href="#register-api-for-custom-types">Register API for custom types</a></h3>
-<p><a href="/rust/custom.html">Custom types</a> are often used to hold state. The easiest way to register an entire API is via a <a href="/plugins/module.html">plugin module</a>.</p>
+<p><a href="/book/rust/custom.html">Custom types</a> are often used to hold state. The easiest way to register an entire API is via a <a href="/book/plugins/module.html">plugin module</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -282,15 +282,15 @@ mod test_struct_api {
 <h3 id="initialize-handler-object"><a class="header" href="#initialize-handler-object">Initialize handler object</a></h3>
 <p>Steps to initialize the event handler:</p>
 <ol>
-<li>Register an API with the <a href="/engine/hello-world.html"><code>Engine</code></a>,</li>
-<li>Create a custom <a href="/engine/scope.html"><code>Scope</code></a> to serve as the stored state,</li>
-<li>Add default state <a href="/language/variables.html">variables</a> into the custom <a href="/engine/scope.html"><code>Scope</code></a>,</li>
-<li>Optionally, call an initiation <a href="/language/functions.html">function</a> to create new state <a href="/language/variables.html">variables</a>; <code>Engine::call_fn_raw</code>
-is used instead of <code>Engine::call_fn</code> so that <a href="/language/variables.html">variables</a> created inside the <a href="/language/functions.html">function</a> will not
-be removed from the custom <a href="/engine/scope.html"><code>Scope</code></a> upon exit,</li>
-<li>Get the handler script and <a href="/engine/compile.html">compile</a> it,</li>
-<li>Store the compiled <a href="/engine/compile.html"><code>AST</code></a> for future evaluations,</li>
-<li>Run the <a href="/engine/compile.html"><code>AST</code></a> to initialize event handler state <a href="/language/variables.html">variables</a>.</li>
+<li>Register an API with the <a href="/book/engine/hello-world.html"><code>Engine</code></a>,</li>
+<li>Create a custom <a href="/book/engine/scope.html"><code>Scope</code></a> to serve as the stored state,</li>
+<li>Add default state <a href="/book/language/variables.html">variables</a> into the custom <a href="/book/engine/scope.html"><code>Scope</code></a>,</li>
+<li>Optionally, call an initiation <a href="/book/language/functions.html">function</a> to create new state <a href="/book/language/variables.html">variables</a>; <code>Engine::call_fn_raw</code>
+is used instead of <code>Engine::call_fn</code> so that <a href="/book/language/variables.html">variables</a> created inside the <a href="/book/language/functions.html">function</a> will not
+be removed from the custom <a href="/book/engine/scope.html"><code>Scope</code></a> upon exit,</li>
+<li>Get the handler script and <a href="/book/engine/compile.html">compile</a> it,</li>
+<li>Store the compiled <a href="/book/engine/compile.html"><code>AST</code></a> for future evaluations,</li>
+<li>Run the <a href="/book/engine/compile.html"><code>AST</code></a> to initialize event handler state <a href="/book/language/variables.html">variables</a>.</li>
 </ol>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -376,16 +376,16 @@ be removed from the custom <a href="/engine/scope.html"><code>Scope</code></a> u
 <h2 id="scripting-styles"><a class="header" href="#scripting-styles">Scripting Styles</a></h2>
 <p>Depending on needs and scripting style, there are three different ways to implement this pattern.</p>
 <table><thead><tr><th></th><th style="text-align: center"><a href="events-1.html">Main style</a></th><th style="text-align: center"><a href="events-2.html">JS style</a></th><th style="text-align: center"><a href="events-3.html">Map style</a></th></tr></thead><tbody>
-<tr><td>States store</td><td style="text-align: center">custom <a href="/engine/scope.html"><code>Scope</code></a></td><td style="text-align: center"><a href="/language/object-maps.html">object map</a> bound to <code>this</code></td><td style="text-align: center"><a href="/language/object-maps.html">object map</a> in custom <a href="/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td>Access state <a href="/language/variables.html">variable</a></td><td style="text-align: center">normal <a href="/language/variables.html">variable</a></td><td style="text-align: center"><a href="/language/object-maps.html">property</a> of <code>this</code></td><td style="text-align: center"><a href="/language/object-maps.html">property</a> of state variable</td></tr>
-<tr><td>Access global <a href="/language/constants.html">constants</a>?</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td>Add new state <a href="/language/variables.html">variable</a>?</td><td style="text-align: center"><code>init</code> <a href="/language/functions.html">function</a> only</td><td style="text-align: center">all <a href="/language/functions.html">functions</a></td><td style="text-align: center">all <a href="/language/functions.html">functions</a></td></tr>
-<tr><td>Add new global <a href="/language/constants.html">constants</a>?</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
-<tr><td><a href="/patterns/oop.html">OOP</a>-style <a href="/language/functions.html">functions</a> on states?</td><td style="text-align: center">no</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td>States store</td><td style="text-align: center">custom <a href="/book/engine/scope.html"><code>Scope</code></a></td><td style="text-align: center"><a href="/book/language/object-maps.html">object map</a> bound to <code>this</code></td><td style="text-align: center"><a href="/book/language/object-maps.html">object map</a> in custom <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td>Access state <a href="/book/language/variables.html">variable</a></td><td style="text-align: center">normal <a href="/book/language/variables.html">variable</a></td><td style="text-align: center"><a href="/book/language/object-maps.html">property</a> of <code>this</code></td><td style="text-align: center"><a href="/book/language/object-maps.html">property</a> of state variable</td></tr>
+<tr><td>Access global <a href="/book/language/constants.html">constants</a>?</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td>Add new state <a href="/book/language/variables.html">variable</a>?</td><td style="text-align: center"><code>init</code> <a href="/book/language/functions.html">function</a> only</td><td style="text-align: center">all <a href="/book/language/functions.html">functions</a></td><td style="text-align: center">all <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td>Add new global <a href="/book/language/constants.html">constants</a>?</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td><a href="/book/patterns/oop.html">OOP</a>-style <a href="/book/language/functions.html">functions</a> on states?</td><td style="text-align: center">no</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
 <tr><td>Detect system-provided initial states?</td><td style="text-align: center">no</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td>Local <a href="/language/variables.html">variable</a> may <em><a href="/language/shadow.html">shadow</a></em> state <a href="/language/variables.html">variable</a>?</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">yes</td></tr>
+<tr><td>Local <a href="/book/language/variables.html">variable</a> may <em><a href="/book/language/shadow.html">shadow</a></em> state <a href="/book/language/variables.html">variable</a>?</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td>Benefits</td><td style="text-align: center">simple</td><td style="text-align: center">fewer surprises</td><td style="text-align: center">versatile</td></tr>
-<tr><td>Disadvantages</td><td style="text-align: center"><ul><li>no new variables in <a href="/language/functions.html">functions</a> (apart from <code>init</code>)</li><li>easy variable name collisions</li></ul></td><td style="text-align: center"><ul><li><code>this.xxx</code> all over the place</li><li>more complex implementation</li></ul></td><td style="text-align: center"><ul><li><code>state.xxx</code> all over the place</li><li>inconsistent syntax</li></ul></td></tr>
+<tr><td>Disadvantages</td><td style="text-align: center"><ul><li>no new variables in <a href="/book/language/functions.html">functions</a> (apart from <code>init</code>)</li><li>easy variable name collisions</li></ul></td><td style="text-align: center"><ul><li><code>this.xxx</code> all over the place</li><li>more complex implementation</li></ul></td><td style="text-align: center"><ul><li><code>state.xxx</code> all over the place</li><li>inconsistent syntax</li></ul></td></tr>
 </tbody></table>
 
                     </main>

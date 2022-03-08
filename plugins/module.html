@@ -179,14 +179,14 @@ metadata to allow Rhai access to its public (i.e. marked <code>pub</code>) funct
 sub-modules.</p>
 <p>This code is exactly what would need to be written by hand to achieve the same goal, and is custom
 fit to each exported item.</p>
-<p>All <code>pub</code> functions become registered functions, all <code>pub</code> constants become <a href="/rust/modules/index.html">module</a> <a href="/language/constants.html">constants</a>,
-and all sub-modules become Rhai sub-<a href="/rust/modules/index.html">modules</a>.</p>
-<p>This Rust module can then be registered into an <a href="/engine/hello-world.html"><code>Engine</code></a> as a normal <a href="/rust/modules/index.html">module</a>. This is done via
+<p>All <code>pub</code> functions become registered functions, all <code>pub</code> constants become <a href="/book/rust/modules/index.html">module</a> <a href="/book/language/constants.html">constants</a>,
+and all sub-modules become Rhai sub-<a href="/book/rust/modules/index.html">modules</a>.</p>
+<p>This Rust module can then be registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> as a normal <a href="/book/rust/modules/index.html">module</a>. This is done via
 the <code>exported_module!</code> macro.</p>
 <p>The macro <code>combine_with_exported_module!</code> can be used to <em>combine</em> all the functions and variables
-into an existing <a href="/rust/modules/index.html">module</a>, <em>flattening</em> the <a href="/language/fn-namespaces.html">namespace</a> – i.e. all
+into an existing <a href="/book/rust/modules/index.html">module</a>, <em>flattening</em> the <a href="/book/language/fn-namespaces.html">namespace</a> – i.e. all
 sub-modules are eliminated and their contents promoted to the top level.  This is typical for
-developing <a href="/rust/packages/create.html">custom packages</a>.</p>
+developing <a href="/book/rust/packages/create.html">custom packages</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -250,15 +250,15 @@ mod my_module {
 <p>Doc-comments</p>
 </div>
 <div>
-<p>If the <a href="/start/features.html"><code>metadata</code></a> feature is active, doc-comments (i.e. comments starting with <code>///</code> or wrapped
-with <code>/**</code> … <code>*/</code>) on plugin functions are extracted into <a href="/engine/metadata/index.html"><em>metadata</em></a>.</p>
-<p>It is always a good idea to put <a href="/language/doc-comments.html">doc-comments</a> onto <a href="/plugins/module.html">plugin modules</a> and <a href="/plugins/function.html">plugin functions</a>,
+<p>If the <a href="/book/start/features.html"><code>metadata</code></a> feature is active, doc-comments (i.e. comments starting with <code>///</code> or wrapped
+with <code>/**</code> … <code>*/</code>) on plugin functions are extracted into <a href="/book/engine/metadata/index.html"><em>metadata</em></a>.</p>
+<p>It is always a good idea to put <a href="/book/language/doc-comments.html">doc-comments</a> onto <a href="/book/plugins/module.html">plugin modules</a> and <a href="/book/plugins/function.html">plugin functions</a>,
 as they can be used to auto-generate documentation later on.</p>
 </div>
 </div>
 <h3 id="use-engineregister_global_module"><a class="header" href="#use-engineregister_global_module">Use <code>Engine::register_global_module</code></a></h3>
-<p>The simplest way to register this into an <a href="/engine/hello-world.html"><code>Engine</code></a> is to first use the <code>exported_module!</code> macro to
-turn it into a normal Rhai <a href="/rust/modules/index.html">module</a>, then use the <code>Engine::register_global_module</code> method on it:</p>
+<p>The simplest way to register this into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is to first use the <code>exported_module!</code> macro to
+turn it into a normal Rhai <a href="/book/rust/modules/index.html">module</a>, then use the <code>Engine::register_global_module</code> method on it:</p>
 <pre><pre class="playground"><code class="language-rust no_run">fn main() {
     let mut engine = Engine::new();
 
@@ -270,7 +270,7 @@ turn it into a normal Rhai <a href="/rust/modules/index.html">module</a>, then u
 }
 </code></pre></pre>
 <p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code> and <code>increment</code>) are
-automatically registered into the <a href="/engine/hello-world.html"><code>Engine</code></a> when <code>Engine::register_global_module</code> is called.</p>
+automatically registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> when <code>Engine::register_global_module</code> is called.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -287,12 +287,12 @@ increment(x);
 x == 43;
 <span class="boring">}
 </span></code></pre></pre>
-<p>Notice that, when using a <a href="/rust/modules/index.html">module</a> as a <a href="/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
+<p>Notice that, when using a <a href="/book/rust/modules/index.html">module</a> as a <a href="/book/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
 can be accessed.</p>
 <p>Variables as well as sub-modules are <strong>ignored</strong>.</p>
 <h3 id="use-engineregister_static_module"><a class="header" href="#use-engineregister_static_module">Use <code>Engine::register_static_module</code></a></h3>
-<p>Another simple way to register this into an <a href="/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code>
-macro to turn it into a normal Rhai <a href="/rust/modules/index.html">module</a>, then use <code>Engine::register_static_module</code> on it.</p>
+<p>Another simple way to register this into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code>
+macro to turn it into a normal Rhai <a href="/book/rust/modules/index.html">module</a>, then use <code>Engine::register_static_module</code> on it.</p>
 <pre><pre class="playground"><code class="language-rust no_run">fn main() {
     let mut engine = Engine::new();
 
@@ -304,7 +304,7 @@ macro to turn it into a normal Rhai <a href="/rust/modules/index.html">module</a
 }
 </code></pre></pre>
 <p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code> and <code>increment</code>),
-plus the constant <code>MY_NUMBER</code>, are automatically registered under the module <a href="/language/fn-namespaces.html">namespace</a> <code>service</code>:</p>
+plus the constant <code>MY_NUMBER</code>, are automatically registered under the module <a href="/book/language/fn-namespaces.html">namespace</a> <code>service</code>:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -324,9 +324,9 @@ x == 43;
 <span class="boring">}
 </span></code></pre></pre>
 <p>All functions (usually <em>methods</em>) defined in the module and marked with <code>#[rhai_fn(global)]</code>,
-as well as all <a href="/language/iterator.html">type iterators</a>, are automatically exposed to the <em>global</em> namespace, so
-<a href="/language/for.html">iteration</a>, <a href="/rust/getters-setters.html">getters/setters</a> and <a href="/rust/indexers.html">indexers</a> for <a href="/rust/custom.html">custom types</a> can work as expected.</p>
-<p>In fact, the default for all <a href="/rust/getters-setters.html">getters/setters</a> and <a href="/rust/indexers.html">indexers</a> defined in a plugin module is
+as well as all <a href="/book/language/iterator.html">type iterators</a>, are automatically exposed to the <em>global</em> namespace, so
+<a href="/book/language/for.html">iteration</a>, <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> for <a href="/book/rust/custom.html">custom types</a> can work as expected.</p>
+<p>In fact, the default for all <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> defined in a plugin module is
 <code>#[rhai_fn(global)]</code> unless specifically overridden by <code>#[rhai_fn(internal)]</code>.</p>
 <p>Therefore, in the example above, the <code>increment</code> method (defined with <code>#[rhai_fn(global)]</code>)
 works fine when called in method-call style:</p>
@@ -339,13 +339,13 @@ x == 43;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="use-dynamically"><a class="header" href="#use-dynamically">Use Dynamically</a></h3>
-<p>Using this directly as a dynamically-loadable Rhai <a href="/rust/modules/index.html">module</a> is almost the same, except that a
-<a href="/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
-<p>See the <a href="/rust/modules/index.html">module</a> section for more information.</p>
+<p>Using this directly as a dynamically-loadable Rhai <a href="/book/rust/modules/index.html">module</a> is almost the same, except that a
+<a href="/book/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
+<p>See the <a href="/book/rust/modules/index.html">module</a> section for more information.</p>
 <h3 id="combine-into-custom-package"><a class="header" href="#combine-into-custom-package">Combine into Custom Package</a></h3>
-<p>Finally, the plugin module can also be used to develop a <a href="/rust/packages/create.html">custom package</a>, using
+<p>Finally, the plugin module can also be used to develop a <a href="/book/rust/packages/create.html">custom package</a>, using
 <code>combine_with_exported_module!</code> which automatically <em>flattens</em> the module namespace so that all
-functions in sub-modules are promoted to the top level <a href="/language/fn-namespaces.html">namespace</a>, all
+functions in sub-modules are promoted to the top level <a href="/book/language/fn-namespaces.html">namespace</a>, all
 sub-modules are eliminated, and all variables are ignored.</p>
 <p>Due to this <em>flattening</em>, sub-modules are used conveniently as a <em>grouping</em> mechanism, especially to
 put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a large collection of functions
@@ -411,13 +411,13 @@ combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <p><code>NativeCallContext</code> parameter</p>
 </div>
 <div>
-<p>The <em>first</em> parameter of a function can also be <a href="/rust/context.html"><code>NativeCallContext</code></a>.</p>
+<p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>.</p>
 </div>
 </div>
 <p>Operators and overloaded functions can be specified via applying the <code>#[rhai_fn(name = &quot;...&quot;)]</code>
 attribute to individual functions.</p>
 <p>The text string given as the <code>name</code> parameter to <code>#[rhai_fn]</code> is used to register the function with
-the <a href="/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
+the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
 <p>With <code>#[rhai_fn(name = &quot;...&quot;)]</code>, multiple functions may be registered under the same name in Rhai,
 so long as they have different parameters.</p>
 <p>Operators (which require function names that are not valid for Rust) can also be registered this way.</p>
@@ -447,7 +447,7 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="getters-setters-and-indexers"><a class="header" href="#getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
-<p>Functions can be marked as <a href="/rust/getters-setters.html">getters/setters</a> and <a href="/rust/indexers.html">indexers</a> for <a href="/rust/custom.html">custom types</a> via the
+<p>Functions can be marked as <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> for <a href="/book/rust/custom.html">custom types</a> via the
 <code>#[rhai_fn]</code> attribute, which is applied on a function level.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -506,16 +506,16 @@ mod my_module {
 <table><thead><tr><th>Parameter for <code>#[rhai_fn(...)]</code></th><th style="text-align: center">Type</th><th>Call style</th></tr></thead><tbody>
 <tr><td><code>name = &quot;get_prop_value&quot;</code></td><td style="text-align: center">method function</td><td><code>get_prop_value(x, 0)</code>, <code>x.get_prop_value(0)</code></td></tr>
 <tr><td><code>name = &quot;prop&quot;</code></td><td style="text-align: center">method function</td><td><code>prop(x, 0)</code>, <code>x.prop(0)</code></td></tr>
-<tr><td><code>name = &quot;+&quot;</code></td><td style="text-align: center"><a href="/appendix/operators.html#operators">operator</a></td><td><code>x + 42</code></td></tr>
-<tr><td><code>set = &quot;prop&quot;</code></td><td style="text-align: center"><a href="/rust/getters-setters.html">setter</a></td><td><code>x.prop = 42</code></td></tr>
-<tr><td><code>index_get</code></td><td style="text-align: center"><a href="/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
+<tr><td><code>name = &quot;+&quot;</code></td><td style="text-align: center"><a href="/book/appendix/operators.html#operators">operator</a></td><td><code>x + 42</code></td></tr>
+<tr><td><code>set = &quot;prop&quot;</code></td><td style="text-align: center"><a href="/book/rust/getters-setters.html">setter</a></td><td><code>x.prop = 42</code></td></tr>
+<tr><td><code>index_get</code></td><td style="text-align: center"><a href="/book/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
 </tbody></table>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
 to mark it as  <em>pure</em>.</p>
 <p>Pure functions <em>MUST NOT</em> modify the value of the <code>&amp;mut</code> parameter.</p>
-<p>Therefore, pure functions can be passed a <a href="/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
-<p>Non-pure functions, when passed a <a href="/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
+<p>Therefore, pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
 <code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -570,7 +570,7 @@ let r = VECTOR.first2;      // runtime error: constant modified
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="fallible-functions"><a class="header" href="#fallible-functions">Fallible Functions</a></h2>
-<p>To register <a href="/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
+<p>To register <a href="/book/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[rhai_fn(return_raw)]</code> attribute on functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
 <p>A syntax error is generated if the function with <code>#[rhai_fn(return_raw)]</code> does not have the
@@ -606,15 +606,15 @@ mod my_module {
 <p><code>#[rhai_fn]</code> is applied to functions, while <code>#[rhai_mod]</code> is applied to sub-modules.</p>
 <p>Parameters should be set on inner attributes to specify the desired behavior.</p>
 <table><thead><tr><th>Attribute Parameter</th><th>Use with</th><th>Apply to</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/<a href="/rust/modules/index.html">sub-module</a></td></tr>
-<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global <a href="/language/fn-namespaces.html">namespace</a></td></tr>
-<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module <a href="/language/fn-namespaces.html">namespace</a></td></tr>
-<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/<a href="/rust/modules/index.html">sub-module</a> under the specified name</td></tr>
-<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; ValueType</code></td><td>registers a property <a href="/rust/getters-setters.html">getter</a> for the named property</td></tr>
-<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ValueType)</code></td><td>registers a property <a href="/rust/getters-setters.html">setter</a> for the named property</td></tr>
-<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType) -&gt; ValueType</code></td><td>registers an <a href="/rust/indexers.html">index getter</a></td></tr>
-<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType, ValueType)</code></td><td>registers an <a href="/rust/indexers.html">index setter</a></td></tr>
-<tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Type, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="/rust/fallible.html">fallible function</a></td></tr>
+<tr><td><code>skip</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/<a href="/book/rust/modules/index.html">sub-module</a></td></tr>
+<tr><td><code>global</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>expose this function to the global <a href="/book/language/fn-namespaces.html">namespace</a></td></tr>
+<tr><td><code>internal</code></td><td><code>#[rhai_fn]</code></td><td>function</td><td>keep this function within the internal module <a href="/book/language/fn-namespaces.html">namespace</a></td></tr>
+<tr><td><code>name = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>registers function/<a href="/book/rust/modules/index.html">sub-module</a> under the specified name</td></tr>
+<tr><td><code>get = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type) -&gt; ValueType</code></td><td>registers a property <a href="/book/rust/getters-setters.html">getter</a> for the named property</td></tr>
+<tr><td><code>set = &quot;...&quot;</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ValueType)</code></td><td>registers a property <a href="/book/rust/getters-setters.html">setter</a> for the named property</td></tr>
+<tr><td><code>index_get</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType) -&gt; ValueType</code></td><td>registers an <a href="/book/rust/indexers.html">index getter</a></td></tr>
+<tr><td><code>index_set</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, IndexType, ValueType)</code></td><td>registers an <a href="/book/rust/indexers.html">index setter</a></td></tr>
+<tr><td><code>return_raw</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (...) -&gt; Result&lt;Type, Box&lt;EvalAltResult&gt;&gt;</code></td><td>marks this as a <a href="/book/rust/fallible.html">fallible function</a></td></tr>
 <tr><td><code>pure</code></td><td><code>#[rhai_fn]</code></td><td><code>pub fn (&amp;mut Type, ...) -&gt; ...</code></td><td>marks this as a <em>pure</em> function</td></tr>
 </tbody></table>
 

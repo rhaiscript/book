@@ -174,11 +174,11 @@ while 1 &lt; 2 { ... }                 // loop with always-true condition
 <span class="boring">}
 </span></code></pre></pre>
 <p>Rhai by default does not limit how much time or CPU a script consumes.</p>
-<p>This can be changed via the <a href="/engine/options.html"><code>Engine::set_max_operations</code></a> method, with zero being unlimited (the default).</p>
+<p>This can be changed via the <a href="/book/engine/options.html"><code>Engine::set_max_operations</code></a> method, with zero being unlimited (the default).</p>
 <p>The <em>operations count</em> is intended to be a very course-grained measurement of the amount of CPU that a script
 has consumed, allowing the system to impose a hard upper limit on computing resources.</p>
 <p>A script exceeding the maximum operations count terminates with an error result.
-This can be disabled via the <a href="/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+This can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -195,12 +195,12 @@ engine.set_max_operations(0);       // allow unlimited operations
 </div>
 <div>
 <p>The concept of one single <em>operation</em> in Rhai is volatile – it roughly equals one expression
-node, loading one <a href="/language/variables.html">variable</a>/<a href="/language/constants.html">constant</a>, one <a href="/appendix/operators.html#operators">operator</a> call, one iteration of a loop, or one
-<a href="/language/functions.html">function</a> call etc. with sub-expressions, statements and <a href="/language/functions.html">function</a> calls executed inside these
+node, loading one <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a>, one <a href="/book/appendix/operators.html#operators">operator</a> call, one iteration of a loop, or one
+<a href="/book/language/functions.html">function</a> call etc. with sub-expressions, statements and <a href="/book/language/functions.html">function</a> calls executed inside these
 contexts accumulated on top.</p>
 <p>A good rule-of-thumb is that one simple non-trivial expression consumes on average 5-10 operations.</p>
 <p>One <em>operation</em> can take an unspecified amount of time and real CPU cycles, depending on the particulars.
-For example, loading a <a href="/language/constants.html">constant</a> consumes very few CPU cycles, while calling an external Rust function,
+For example, loading a <a href="/book/language/constants.html">constant</a> consumes very few CPU cycles, while calling an external Rust function,
 though also counted as only one operation, may consume much more computing resources.</p>
 <p>To help visualize, think of an <em>operation</em> as roughly equals to one <em>instruction</em> of a hypothetical CPU
 which includes <em>specialized</em> instructions, such as <em>function call</em>, <em>load module</em> etc., each taking up

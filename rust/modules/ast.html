@@ -170,24 +170,24 @@
 <p>See also</p>
 </div>
 <div>
-<p>See <a href="/language/modules/export.html"><em>Export Variables, Functions and Sub-Modules from Script</em></a> for details on how to prepare
-a Rhai script for this purpose as well as to control which <a href="/language/functions.html">functions</a>/<a href="/language/variables.html">variables</a> to export.</p>
+<p>See <a href="/book/language/modules/export.html"><em>Export Variables, Functions and Sub-Modules from Script</em></a> for details on how to prepare
+a Rhai script for this purpose as well as to control which <a href="/book/language/functions.html">functions</a>/<a href="/book/language/variables.html">variables</a> to export.</p>
 </div>
 </div>
-<p>A <a href="/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="/engine/compile.html"><code>AST</code></a>) containing global
-<a href="/language/variables.html">variables</a>, <a href="/language/functions.html">functions</a> and <a href="/rust/modules/index.html">sub-modules</a> via <code>Module::eval_ast_as_new</code>.</p>
-<p>When given an <a href="/engine/compile.html"><code>AST</code></a>, it is first evaluated (usually to <a href="/language/modules/import.html">import</a> <a href="/rust/modules/index.html">modules</a> and set up global
-<a href="/language/constants.html">constants</a> used by <a href="/language/functions.html">functions</a>), then the following items are exposed as members of the new <a href="/rust/modules/index.html">module</a>:</p>
+<p>A <a href="/book/rust/modules/index.html">module</a> can be created from a single script (or pre-compiled <a href="/book/engine/compile.html"><code>AST</code></a>) containing global
+<a href="/book/language/variables.html">variables</a>, <a href="/book/language/functions.html">functions</a> and <a href="/book/rust/modules/index.html">sub-modules</a> via <code>Module::eval_ast_as_new</code>.</p>
+<p>When given an <a href="/book/engine/compile.html"><code>AST</code></a>, it is first evaluated (usually to <a href="/book/language/modules/import.html">import</a> <a href="/book/rust/modules/index.html">modules</a> and set up global
+<a href="/book/language/constants.html">constants</a> used by <a href="/book/language/functions.html">functions</a>), then the following items are exposed as members of the new <a href="/book/rust/modules/index.html">module</a>:</p>
 <ul>
 <li>
-<p>global <a href="/language/variables.html">variables</a> and <a href="/language/constants.html">constants</a> – all <a href="/language/variables.html">variables</a> and <a href="/language/constants.html">constants</a> exported via the
-<a href="/language/modules/export.html"><code>export</code></a> statement (those not exported remain hidden),</p>
+<p>global <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> – all <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> exported via the
+<a href="/book/language/modules/export.html"><code>export</code></a> statement (those not exported remain hidden),</p>
 </li>
 <li>
-<p><a href="/language/functions.html">functions</a> not specifically marked <a href="/language/modules/export.html"><code>private</code></a>,</p>
+<p><a href="/book/language/functions.html">functions</a> not specifically marked <a href="/book/language/modules/export.html"><code>private</code></a>,</p>
 </li>
 <li>
-<p>imported <a href="/rust/modules/index.html">modules</a> that remain in the <a href="/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
+<p>imported <a href="/book/rust/modules/index.html">modules</a> that remain in the <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
 <div class="admonition info">
@@ -196,13 +196,13 @@ a Rhai script for this purpose as well as to control which <a href="/language/fu
 </div>
 <div>
 <p><code>Module::eval_ast_as_new</code> encapsulates the entire <code>AST</code> into each function call, merging the
-<a href="/language/fn-namespaces.html">module namespace</a> with the <a href="/language/fn-namespaces.html">global namespace</a>.</p>
-<p>Therefore, <a href="/language/functions.html">functions</a> defined within the same <a href="/rust/modules/index.html">module</a> script can cross-call each other.</p>
+<a href="/book/language/fn-namespaces.html">module namespace</a> with the <a href="/book/language/fn-namespaces.html">global namespace</a>.</p>
+<p>Therefore, <a href="/book/language/functions.html">functions</a> defined within the same <a href="/book/rust/modules/index.html">module</a> script can cross-call each other.</p>
 </div>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
-<p>Don’t forget the <a href="/language/modules/export.html"><code>export</code></a> statement, otherwise there will be no <a href="/language/variables.html">variables</a> exposed by the
-<a href="/rust/modules/index.html">module</a> other than non-<a href="/language/modules/export.html"><code>private</code></a> <a href="/language/functions.html">functions</a> (unless that’s intentional).</p>
+<p>Don’t forget the <a href="/book/language/modules/export.html"><code>export</code></a> statement, otherwise there will be no <a href="/book/language/variables.html">variables</a> exposed by the
+<a href="/book/rust/modules/index.html">module</a> other than non-<a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> (unless that’s intentional).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

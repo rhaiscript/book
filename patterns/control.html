@@ -192,12 +192,12 @@
 <p>Expose a Control API.</p>
 </li>
 <li>
-<p>Leverage <a href="/rust/functions.html">function overloading</a> to simplify the API design.</p>
+<p>Leverage <a href="/book/rust/functions.html">function overloading</a> to simplify the API design.</p>
 </li>
 <li>
-<p>Since Rhai is <em><a href="/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate the environment.  To perform external actions via
-an API, the actual system must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for <a href="/start/features.html"><code>sync</code></a>) and
-shared to the <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>Since Rhai is <em><a href="/book/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate the environment.  To perform external actions via
+an API, the actual system must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/start/features.html"><code>sync</code></a>) and
+shared to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 </ul>
 </div>
@@ -222,7 +222,7 @@ system in a shared, interior-mutated object.</p>
 but only through exposing an abstract API primarily made up of functions.</p>
 <p>Use this when the API is relatively simple and clean, and the number of functions is small enough.</p>
 <p>For a complex API involving lots of functions, or an API that has a clear object structure, use the
-<a href="/patterns/singleton.html">Singleton Command Object</a> pattern instead.</p>
+<a href="/book/patterns/singleton.html">Singleton Command Object</a> pattern instead.</p>
 <h3 id="functional-api"><a class="header" href="#functional-api">Functional API</a></h3>
 <p>Assume that a system provides the following functional API:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -247,7 +247,7 @@ impl EnergizerBunny {
 </span>pub type SharedBunny = Rc&lt;RefCell&lt;EnergizerBunny&gt;&gt;;
 <span class="boring">}
 </span></code></pre></pre>
-<p>or in multi-threaded environments with the <a href="/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
+<p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -259,7 +259,7 @@ pub type SharedBunny = Arc&lt;Mutex&lt;EnergizerBunny&gt;&gt;;
 <h3 id="register-control-api"><a class="header" href="#register-control-api">Register control API</a></h3>
 <p>The trick to building a Control API is to clone the shared API object and
 move it into each function registration via a closure.</p>
-<p>Therefore, it is not possible to use a <a href="/plugins/module.html">plugin module</a> to achieve this, and each function must be
+<p>Therefore, it is not possible to use a <a href="/book/plugins/module.html">plugin module</a> to achieve this, and each function must be
 registered one after another.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

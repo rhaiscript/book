@@ -164,22 +164,22 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="scope--maintaining-state"><a class="header" href="#scope--maintaining-state"><code>Scope</code> – Maintaining State</a></h1>
-<p>By default, Rhai treats each <a href="/engine/hello-world.html"><code>Engine</code></a> invocation as a fresh one, persisting only the functions
+<p>By default, Rhai treats each <a href="/book/engine/hello-world.html"><code>Engine</code></a> invocation as a fresh one, persisting only the functions
 that have been registered but no global state.</p>
 <p>This gives each evaluation a clean starting slate.</p>
 <p>In order to continue using the same global state from one invocation to the next, such a state
 (a <code>Scope</code>) must be manually created and passed in.</p>
-<p>All <code>Scope</code> <a href="/language/variables.html">variables</a> and <a href="/language/constants.html">constants</a> have values that are <a href="/language/dynamic.html"><code>Dynamic</code></a>, meaning they can store
+<p>All <code>Scope</code> <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a> have values that are <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, meaning they can store
 values of any type.</p>
-<p>Under <a href="/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
+<p>Under <a href="/book/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
 itself will also be <code>Send + Sync</code>. This is extremely useful in multi-threaded applications.</p>
 <div class="admonition info">
 <div class="admonition-title">
 <p>Shadowing</p>
 </div>
 <div>
-<p>A newly-added <a href="/language/variables.html">variable</a> or <a href="/language/constants.html">constant</a> <em><a href="/language/shadow.html">shadows</a></em> previous ones of the same name.</p>
-<p>In other words, all versions are kept for <a href="/language/variables.html">variables</a> and <a href="/language/constants.html">constants</a>, but only the latest ones can
+<p>A newly-added <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> <em><a href="/book/language/shadow.html">shadows</a></em> previous ones of the same name.</p>
+<p>In other words, all versions are kept for <a href="/book/language/variables.html">variables</a> and <a href="/book/language/constants.html">constants</a>, but only the latest ones can
 be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> and <code>set_value&lt;T&gt;</code>.</p>
 <p>Essentially, a <code>Scope</code> is always searched in <em>reverse order</em>.</p>
 </div>
@@ -200,19 +200,19 @@ as well as for possible future expansion when references can also be put into th
 <h2 id="scope-api"><a class="header" href="#scope-api"><code>Scope</code> API</a></h2>
 <table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>new</code> <em>instance method</em></td><td>create a new empty <code>Scope</code></td></tr>
-<tr><td><code>len</code></td><td>number of <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> currently within the <code>Scope</code></td></tr>
-<tr><td><code>rewind</code></td><td><em>rewind</em> (i.e. reset) the <code>Scope</code> to a particular number of <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a></td></tr>
-<tr><td><code>clear</code></td><td>remove all <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> from the <code>Scope</code>, making it empty</td></tr>
+<tr><td><code>len</code></td><td>number of <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> currently within the <code>Scope</code></td></tr>
+<tr><td><code>rewind</code></td><td><em>rewind</em> (i.e. reset) the <code>Scope</code> to a particular number of <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a></td></tr>
+<tr><td><code>clear</code></td><td>remove all <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> from the <code>Scope</code>, making it empty</td></tr>
 <tr><td><code>is_empty</code></td><td>is the <code>Scope</code> empty?</td></tr>
-<tr><td><code>push</code>, <code>push_constant</code></td><td>add a new <a href="/language/variables.html">variable</a>/<a href="/language/constants.html">constant</a> into the <code>Scope</code> with a specified value</td></tr>
-<tr><td><code>push_dynamic</code>, <code>push_constant_dynamic</code></td><td>add a new <a href="/language/variables.html">variable</a>/<a href="/language/constants.html">constant</a> into the <code>Scope</code> with a <a href="/language/dynamic.html"><code>Dynamic</code></a> value</td></tr>
-<tr><td><code>contains</code></td><td>does the particular <a href="/language/variables.html">variable</a> or <a href="/language/constants.html">constant</a> exist in the <code>Scope</code>?</td></tr>
-<tr><td><code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code></td><td>get the value of a <a href="/language/variables.html">variable</a> within the <code>Scope</code></td></tr>
-<tr><td><code>set_value&lt;T&gt;</code></td><td>set the value of a <a href="/language/variables.html">variable</a> within the <code>Scope</code>, panics if it is <a href="/language/constants.html">constant</a></td></tr>
-<tr><td><code>is_constant</code></td><td>is the particular <a href="/language/variables.html">variable</a> in the <code>Scope</code> a <a href="/language/constants.html">constant</a>?</td></tr>
-<tr><td><code>set_or_push&lt;T&gt;</code></td><td>set the value of a <a href="/language/variables.html">variable</a> within the <code>Scope</code> if it exists and is not <a href="/language/constants.html">constant</a>; add a new <a href="/language/variables.html">variable</a> into the <code>Scope</code> otherwise</td></tr>
-<tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
-<tr><td><code>Extend::extend</code></td><td>add <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
+<tr><td><code>push</code>, <code>push_constant</code></td><td>add a new <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a> into the <code>Scope</code> with a specified value</td></tr>
+<tr><td><code>push_dynamic</code>, <code>push_constant_dynamic</code></td><td>add a new <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a> into the <code>Scope</code> with a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value</td></tr>
+<tr><td><code>contains</code></td><td>does the particular <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> exist in the <code>Scope</code>?</td></tr>
+<tr><td><code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code></td><td>get the value of a <a href="/book/language/variables.html">variable</a> within the <code>Scope</code></td></tr>
+<tr><td><code>set_value&lt;T&gt;</code></td><td>set the value of a <a href="/book/language/variables.html">variable</a> within the <code>Scope</code>, panics if it is <a href="/book/language/constants.html">constant</a></td></tr>
+<tr><td><code>is_constant</code></td><td>is the particular <a href="/book/language/variables.html">variable</a> in the <code>Scope</code> a <a href="/book/language/constants.html">constant</a>?</td></tr>
+<tr><td><code>set_or_push&lt;T&gt;</code></td><td>set the value of a <a href="/book/language/variables.html">variable</a> within the <code>Scope</code> if it exists and is not <a href="/book/language/constants.html">constant</a>; add a new <a href="/book/language/variables.html">variable</a> into the <code>Scope</code> otherwise</td></tr>
+<tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
+<tr><td><code>Extend::extend</code></td><td>add <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
 <div class="admonition info small">
 <div class="admonition-title">
@@ -267,17 +267,17 @@ assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y s
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="engine-api-using-scope"><a class="header" href="#engine-api-using-scope"><code>Engine</code> API Using <code>Scope</code></a></h2>
-<p><a href="/engine/hello-world.html"><code>Engine</code></a> API methods that accept a <code>Scope</code> parameter all end with <code>_with_scope</code>, making that
+<p><a href="/book/engine/hello-world.html"><code>Engine</code></a> API methods that accept a <code>Scope</code> parameter all end with <code>_with_scope</code>, making that
 <code>Scope</code> (and everything inside it) available to the script:</p>
 <ul>
 <li><code>Engine::eval_with_scope</code></li>
 <li><code>Engine::eval_ast_with_scope</code></li>
-<li><code>Engine::eval_file_with_scope</code> (not available under <a href="/start/features.html"><code>no_std</code></a>)</li>
+<li><code>Engine::eval_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
 <li><code>Engine::eval_expression_with_scope</code></li>
 <li><code>Engine::run_with_scope</code></li>
 <li><code>Engine::run_ast_with_scope</code></li>
-<li><code>Engine::run_file_with_scope</code> (not available under <a href="/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::compile_file_with_scope</code> (not available under <a href="/start/features.html"><code>no_std</code></a>)</li>
+<li><code>Engine::run_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
+<li><code>Engine::compile_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
 <li><code>Engine::compile_expression_with_scope</code></li>
 </ul>
 <div class="admonition danger">
@@ -285,7 +285,7 @@ assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y s
 <p>Don’t forget to <code>rewind</code></p>
 </div>
 <div>
-<p><a href="/language/variables.html">Variables</a> or <a href="/language/constants.html">constants</a> defined at the global level of a script persist inside the custom <code>Scope</code>
+<p><a href="/book/language/variables.html">Variables</a> or <a href="/book/language/constants.html">constants</a> defined at the global level of a script persist inside the custom <code>Scope</code>
 even after the script ends.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -298,8 +298,8 @@ engine.run_with_scope(&amp;mut scope, &quot;let x = 42;&quot;)?;
 engine.run_with_scope(&amp;mut scope, &quot;print(x);&quot;)?;    //  prints 42
 <span class="boring">}
 </span></code></pre></pre>
-<p>Due to <a href="/language/shadow.html">variable shadowing</a>, new <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> are simply added on top of
-existing ones (even when they already exist), so care must be taken that new <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a>
+<p>Due to <a href="/book/language/shadow.html">variable shadowing</a>, new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> are simply added on top of
+existing ones (even when they already exist), so care must be taken that new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a>
 inside the custom <code>Scope</code> do not grow without bounds.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -319,7 +319,7 @@ assert_eq!(scope.len(), 1_000_000);
 engine.run_with_scope(&amp;mut scope, &quot;print(x);&quot;)?;    //  prints 42
 <span class="boring">}
 </span></code></pre></pre>
-<p>In order to remove <a href="/language/variables.html">variables</a> or <a href="/language/constants.html">constants</a> introduced by a script, use the <code>rewind</code> method.</p>
+<p>In order to remove <a href="/book/language/variables.html">variables</a> or <a href="/book/language/constants.html">constants</a> introduced by a script, use the <code>rewind</code> method.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

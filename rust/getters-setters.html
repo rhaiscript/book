@@ -169,12 +169,12 @@
 <p>Cannot override object maps</p>
 </div>
 <div>
-<p>Property getters and setters are intended for <a href="/rust/custom.html">custom types</a>.</p>
-<p>Any getter or setter function registered for <a href="/language/object-maps.html">object maps</a> is simply <em>ignored</em>.</p>
-<p>Get/set syntax on <a href="/language/object-maps.html">object maps</a> is interpreted as access to properties.</p>
+<p>Property getters and setters are intended for <a href="/book/rust/custom.html">custom types</a>.</p>
+<p>Any getter or setter function registered for <a href="/book/language/object-maps.html">object maps</a> is simply <em>ignored</em>.</p>
+<p>Get/set syntax on <a href="/book/language/object-maps.html">object maps</a> is interpreted as access to properties.</p>
 </div>
 </div>
-<p>A <a href="/rust/custom.html">custom type</a> can also expose properties by registering <code>get</code> and/or <code>set</code> functions.</p>
+<p>A <a href="/book/rust/custom.html">custom type</a> can also expose properties by registering <code>get</code> and/or <code>set</code> functions.</p>
 <p>Properties can be accessed in a Rust-like syntax:</p>
 <blockquote>
 <p><em>object</em> <code>.</code> <em>property</em></p>
@@ -182,7 +182,7 @@
 </blockquote>
 <p>Property getter and setter functions are called behind the scene.
 They each take a <code>&amp;mut</code> reference to the first parameter.</p>
-<p>Getters and setters are disabled under the <a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Getters and setters are disabled under the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <section></section>
 <table><thead><tr><th><code>Engine</code> API</th><th>Function signature(s)<br/>(<code>T: Clone</code> = custom type,<br/><code>V: Clone</code> = data type)</th><th style="text-align: center">Can mutate <code>T</code>?</th></tr></thead><tbody>
 <tr><td><code>register_get</code></td><td><code>Fn(&amp;mut T) -&gt; V</code></td><td style="text-align: center">yes, but not advised</td></tr>
@@ -206,7 +206,7 @@ All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 <div>
 <p>By convention, property getters are assumed to be <em>pure</em>, meaning that they are not supposed to
-mutate the <a href="/rust/custom.html">custom type</a>, although there is nothing that prevents this mutation in Rust.</p>
+mutate the <a href="/book/rust/custom.html">custom type</a>, although there is nothing that prevents this mutation in Rust.</p>
 <p>Even though a property getter function also takes <code>&amp;mut</code> as the first parameter, Rhai assumes that
 no data is changed when the function is called.</p>
 </div>
@@ -254,10 +254,10 @@ println!(&quot;Answer: {}&quot;, result);                 // prints 42
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="fallback-to-indexer"><a class="header" href="#fallback-to-indexer">Fallback to Indexer</a></h2>
-<p>If the getter/setter of a particular property is not defined, but an <a href="/rust/indexers.html">indexer</a> is defined on the
-<a href="/rust/custom.html">custom type</a> with <a href="/language/strings-chars.html">string</a> index, then the corresponding <a href="/rust/indexers.html">indexer</a> will be called with the name of
+<p>If the getter/setter of a particular property is not defined, but an <a href="/book/rust/indexers.html">indexer</a> is defined on the
+<a href="/book/rust/custom.html">custom type</a> with <a href="/book/language/strings-chars.html">string</a> index, then the corresponding <a href="/book/rust/indexers.html">indexer</a> will be called with the name of
 the property as the index value.</p>
-<p>In other words, <a href="/rust/indexers.html">indexers</a> act as a <em>fallback</em> to property getters/setters.</p>
+<p>In other words, <a href="/book/rust/indexers.html">indexers</a> act as a <em>fallback</em> to property getters/setters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -266,10 +266,10 @@ the property as the index value.</p>
 a[&quot;foo&quot;]        // an indexer (if any) is tried
 <span class="boring">}
 </span></code></pre></pre>
-<p>This feature makes it very easy for <a href="/rust/custom.html">custom types</a> to act as <em>property bags</em>
-(similar to an <a href="/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
+<p>This feature makes it very easy for <a href="/book/rust/custom.html">custom types</a> to act as <em>property bags</em>
+(similar to an <a href="/book/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
 <h2 id="chaining-updates"><a class="header" href="#chaining-updates">Chaining Updates</a></h2>
-<p>It is possible to <em>chain</em> property accesses and/or indexing (via <a href="/rust/indexers.html">indexers</a>) together to modify a
+<p>It is possible to <em>chain</em> property accesses and/or indexing (via <a href="/book/rust/indexers.html">indexers</a>) together to modify a
 particular property value at the end of the chain.</p>
 <p>Rhai detects such modifications and updates the changed values all the way back up the chain.</p>
 <p>In the end, the syntax works as expected by intuition, automatically and without special attention.</p>

@@ -166,7 +166,7 @@
                         <h1 id="custom-operators"><a class="header" href="#custom-operators">Custom Operators</a></h1>
 <p>For use as a DSL (Domain-Specific Languages), it is sometimes more convenient to augment Rhai with
 customized operators performing specific logic.</p>
-<p><code>Engine::register_custom_operator</code> registers a <a href="/appendix/keywords.html">keyword</a> as a custom operator, giving it a particular
+<p><code>Engine::register_custom_operator</code> registers a <a href="/book/appendix/keywords.html">keyword</a> as a custom operator, giving it a particular
 <em>precedence</em> (which cannot be zero).</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -209,9 +209,9 @@ engine.eval::&lt;i64&gt;(&quot;1 + foo(2 * 3, 4) - 5 / 6&quot;)?;     // &lt;- a
 into a syntax that uses the corresponding function calls.</p>
 <p>Using <code>Engine::register_custom_operator</code> merely enables a convenient shortcut.</p>
 <h2 id="must-be-a-valid-identifier-or-reserved-symbol"><a class="header" href="#must-be-a-valid-identifier-or-reserved-symbol">Must be a Valid Identifier or Reserved Symbol</a></h2>
-<p>All custom operators must be <em>identifiers</em> that follow the same naming rules as <a href="/language/variables.html">variables</a>.</p>
-<p>Alternatively, they can also be <a href="/appendix/operators.html#symbols">reserved symbols</a>,
-<a href="/engine/disable-keywords.html">disabled operators or keywords</a>.</p>
+<p>All custom operators must be <em>identifiers</em> that follow the same naming rules as <a href="/book/language/variables.html">variables</a>.</p>
+<p>Alternatively, they can also be <a href="/book/appendix/operators.html#symbols">reserved symbols</a>,
+<a href="/book/engine/disable-keywords.html">disabled operators or keywords</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

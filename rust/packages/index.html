@@ -165,7 +165,7 @@
                     <main>
                         <h1 id="packages"><a class="header" href="#packages">Packages</a></h1>
 <p>The built-in library of Rhai is provided as various <em>packages</em> that can be turned into <em>shared</em>
-<a href="/rust/modules/index.html">modules</a>, which in turn can be registered into the <em>global namespace</em> of an <a href="/engine/hello-world.html"><code>Engine</code></a> via
+<a href="/book/rust/modules/index.html">modules</a>, which in turn can be registered into the <em>global namespace</em> of an <a href="/book/engine/hello-world.html"><code>Engine</code></a> via
 <code>Engine::register_global_module</code>.</p>
 <p>Packages reside under <code>rhai::packages::*</code> and the trait <code>rhai::packages::Package</code> must be loaded in
 order for packages to be used.</p>
@@ -174,21 +174,21 @@ order for packages to be used.</p>
 <p>Trivia: Packages <em>are</em> modules!</p>
 </div>
 <div>
-<p>Internally, a <em>package</em> is a <a href="/rust/modules/index.html">module</a>, with some conveniences to make it easier to define and use as
-a standard <em>library</em> for an <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>Internally, a <em>package</em> is a <a href="/book/rust/modules/index.html">module</a>, with some conveniences to make it easier to define and use as
+a standard <em>library</em> for an <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 <p>Packages typically contain Rust functions that are callable within a Rhai script.
 All <em>top-level</em> functions in a package are available under the <em>global namespace</em>
 (i.e. they’re available without namespace qualifiers).</p>
-<p>Sub-<a href="/rust/modules/index.html">modules</a> and <a href="/language/variables.html">variables</a> are ignored in packages.</p>
+<p>Sub-<a href="/book/rust/modules/index.html">modules</a> and <a href="/book/language/variables.html">variables</a> are ignored in packages.</p>
 </div>
 </div>
 <h2 id="share-a-package-among-multiple-engines"><a class="header" href="#share-a-package-among-multiple-engines">Share a Package Among Multiple <code>Engine</code>’s</a></h2>
-<p><code>Engine::register_global_module</code> and <code>Engine::register_static_module</code> both require <em>shared</em> <a href="/rust/modules/index.html">modules</a>.</p>
-<p>Once a package is created (e.g. via <code>Package::new</code>), it can create <em>shared</em> <a href="/rust/modules/index.html">modules</a>
-(via <code>Package::as_shared_module</code>) and register into multiple instances of <a href="/engine/hello-world.html"><code>Engine</code></a>,
-even across threads (under the <a href="/start/features.html"><code>sync</code></a> feature).</p>
-<p>Therefore, a package only has to be created <em>once</em> and essentially shared among multiple <a href="/engine/hello-world.html"><code>Engine</code></a> instances.
-This is particularly useful when spawning large number of <a href="/engine/raw.html">raw <code>Engine</code>’s</a>.</p>
+<p><code>Engine::register_global_module</code> and <code>Engine::register_static_module</code> both require <em>shared</em> <a href="/book/rust/modules/index.html">modules</a>.</p>
+<p>Once a package is created (e.g. via <code>Package::new</code>), it can create <em>shared</em> <a href="/book/rust/modules/index.html">modules</a>
+(via <code>Package::as_shared_module</code>) and register into multiple instances of <a href="/book/engine/hello-world.html"><code>Engine</code></a>,
+even across threads (under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
+<p>Therefore, a package only has to be created <em>once</em> and essentially shared among multiple <a href="/book/engine/hello-world.html"><code>Engine</code></a> instances.
+This is particularly useful when spawning large number of <a href="/book/engine/raw.html">raw <code>Engine</code>’s</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

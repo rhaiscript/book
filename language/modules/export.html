@@ -169,19 +169,19 @@
 <p>See also</p>
 </div>
 <div>
-<p>See <a href="/rust/modules/ast.html"><em>Create a Module from AST</em></a> for more details.</p>
+<p>See <a href="/book/rust/modules/ast.html"><em>Create a Module from AST</em></a> for more details.</p>
 </div>
 </div>
-<p>The easiest way to expose a collection of <a href="/language/functions.html">functions</a> as a self-contained <a href="/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
+<p>The easiest way to expose a collection of <a href="/book/language/functions.html">functions</a> as a self-contained <a href="/book/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
 <p>The script text is evaluated.</p>
-<p><a href="/language/variables.html">Variables</a> are then selectively exposed via the <a href="/language/modules/export.html"><code>export</code></a> statement.</p>
-<p><a href="/language/functions.html">Functions</a> defined by the script are automatically exported, unless marked as <a href="/language/modules/export.html">private</a>.</p>
-<p>Modules loaded within this <a href="/rust/modules/index.html">module</a> at the global level become <em>sub-modules</em> and are also automatically exported.</p>
+<p><a href="/book/language/variables.html">Variables</a> are then selectively exposed via the <a href="/book/language/modules/export.html"><code>export</code></a> statement.</p>
+<p><a href="/book/language/functions.html">Functions</a> defined by the script are automatically exported, unless marked as <a href="/book/language/modules/export.html">private</a>.</p>
+<p>Modules loaded within this <a href="/book/rust/modules/index.html">module</a> at the global level become <em>sub-modules</em> and are also automatically exported.</p>
 <h2 id="export-global-variables"><a class="header" href="#export-global-variables">Export Global Variables</a></h2>
-<p>The <code>export</code> statement, which can only be at global level, exposes a selected <a href="/language/variables.html">variable</a> as member of a <a href="/rust/modules/index.html">module</a>.</p>
-<p><a href="/language/variables.html">Variables</a> not exported are <em>private</em> and hidden. They are merely used to initialize the <a href="/rust/modules/index.html">module</a>,
+<p>The <code>export</code> statement, which can only be at global level, exposes a selected <a href="/book/language/variables.html">variable</a> as member of a <a href="/book/rust/modules/index.html">module</a>.</p>
+<p><a href="/book/language/variables.html">Variables</a> not exported are <em>private</em> and hidden. They are merely used to initialize the <a href="/book/rust/modules/index.html">module</a>,
 but cannot be accessed from outside.</p>
-<p>Everything exported from a <a href="/rust/modules/index.html">module</a> is <strong><a href="/language/constants.html">constant</a></strong> (i.e. read-only).</p>
+<p>Everything exported from a <a href="/book/rust/modules/index.html">module</a> is <strong><a href="/book/language/constants.html">constant</a></strong> (i.e. read-only).</p>
 <pre><code class="language-js">// This is a module script.
 
 let hidden = 123;       // variable not exported - default hidden
@@ -209,8 +209,8 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 <p>Tip: Multiple exports</p>
 </div>
 <div>
-<p><a href="/language/variables.html">Variables</a> can be exported under multiple names.
-For example, the following exports three <a href="/language/variables.html">variables</a>:</p>
+<p><a href="/book/language/variables.html">Variables</a> can be exported under multiple names.
+For example, the following exports three <a href="/book/language/variables.html">variables</a>:</p>
 <ul>
 <li><code>x</code> as <code>x</code> and <code>hello</code></li>
 <li><code>y</code> as <code>foo</code> and <code>bar</code></li>
@@ -230,9 +230,9 @@ export z;
 <p>Do not export closures</p>
 </div>
 <div>
-<p>A <a href="/language/fn-ptr.html">function pointer</a>, <a href="/language/fn-anon.html">anonymous function</a> or <a href="/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
-It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/language/functions.html">function</a> to call.</p>
-<p>The actual <a href="/language/functions.html">function</a> may not reside in the appropriate <a href="/language/fn-namespaces.html">namespace</a>,
+<p>A <a href="/book/language/fn-ptr.html">function pointer</a>, <a href="/book/language/fn-anon.html">anonymous function</a> or <a href="/book/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
+It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/book/language/functions.html">function</a> to call.</p>
+<p>The actual <a href="/book/language/functions.html">function</a> may not reside in the appropriate <a href="/book/language/fn-namespaces.html">namespace</a>,
 so the call will fail.</p>
 <pre><code class="language-js">┌────────────────┐
 │ my_module.rhai │
@@ -264,12 +264,12 @@ let x = my_mod::inc.call(41);       // runtime error:
 <p>Private functions</p>
 </div>
 <div>
-<p><a href="/language/modules/export.html"><code>private</code></a> <a href="/language/functions.html">functions</a> are commonly called to initialize the <a href="/rust/modules/index.html">module</a>.
+<p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called to initialize the <a href="/book/rust/modules/index.html">module</a>.
 They cannot be accessed otherwise.</p>
 </div>
 </div>
-<p>All <a href="/language/functions.html">functions</a> are automatically exported, <em>unless</em> it is explicitly opt-out with the <a href="/language/modules/export.html"><code>private</code></a> prefix.</p>
-<p><a href="/language/functions.html">Functions</a> declared <a href="/language/modules/export.html"><code>private</code></a> are hidden to the outside.</p>
+<p>All <a href="/book/language/functions.html">functions</a> are automatically exported, <em>unless</em> it is explicitly opt-out with the <a href="/book/language/modules/export.html"><code>private</code></a> prefix.</p>
+<p><a href="/book/language/functions.html">Functions</a> declared <a href="/book/language/modules/export.html"><code>private</code></a> are hidden to the outside.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -281,8 +281,8 @@ private fn foo() {}     // private function - hidden
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
-<p>All loaded <a href="/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
-<p>To prevent a <a href="/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the
+<p>All loaded <a href="/book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
+<p>To prevent a <a href="/book/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the
 end of the block.</p>
 <pre><code class="language-js">// This is a module script.
 
