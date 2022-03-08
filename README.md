@@ -45,8 +45,8 @@ Configuration Settings
 
 Settings are stored in `src/context.json`:
 
-| Setting    | Description                                                                             |
-| ---------- | --------------------------------------------------------------------------------------- |
-| `version`  | version of Rhai                                                                         |
-| `repoHome` | points to the [root of the GitHub repo](https://github.com/rhaiscript/rhai/blob/master) |
-| `rootUrl`  | sub-directory for _The Book_, e.g. `/book`                                              |
+| Setting    | Description                                                                 |
+| ---------- | ----------------------------------------------------------------------------|
+| `version`  | version of Rhai                                                             |
+| `repoHome` | points to the [root of the GitHub repo](https://github.com/rhaiscript/rhai) |
+| `rootUrl`  | sub-directory for _The Book_, e.g. `/book`                                  |
