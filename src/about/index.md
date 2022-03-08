@@ -44,7 +44,7 @@ logically the `C` was changed to an `R` to make it "RhaiScript", or just "Rhai".
 ```admonish question "Origin of the Rhai logo"
 
 <div style="float:right;text-align:center;width:20%">
-    <img src="images/logo/rhai_logo_old.png" title="Prototype Rhai logo">
+    <img src="{{rootUrl}}/images/logo/rhai_logo_old.png" title="Prototype Rhai logo">
     <div style="font-size:60%">Original prototype</div>
 </div>
 
