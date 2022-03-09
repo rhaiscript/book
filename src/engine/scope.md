@@ -54,9 +54,10 @@ In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 | `push`, `push_constant`                       | add a new [variable]/[constant] into the `Scope` with a specified value                                                              |
 | `push_dynamic`, `push_constant_dynamic`       | add a new [variable]/[constant] into the `Scope` with a [`Dynamic`] value                                                            |
 | `contains`                                    | does the particular [variable] or [constant] exist in the `Scope`?                                                                   |
-| `get_value<T>`, `get_mut<T>`                  | get the value of a [variable] within the `Scope`                                                                                     |
+| `get_value<T>`, `get_mut<T>`                  | get the value of a [variable]/[constant] within the `Scope`                                                                          |
 | `set_value<T>`                                | set the value of a [variable] within the `Scope`, panics if it is [constant]                                                         |
-| `is_constant`                                 | is the particular [variable] in the `Scope` a [constant]?                                                                            |
+| `set_alias`                                   | [exported][`export`] a [variable]/[constant] within the `Scope` under a particular name                                              |
+| `is_constant`                                 | is the particular [variable]/[constant]  in the `Scope` a [constant]?                                                                |
 | `set_or_push<T>`                              | set the value of a [variable] within the `Scope` if it exists and is not [constant]; add a new [variable] into the `Scope` otherwise |
 | `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                    |
 | `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                                                           |
