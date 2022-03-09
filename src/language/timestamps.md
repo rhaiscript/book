@@ -29,9 +29,9 @@ The following methods (defined in the [`BasicTimePackage`][built-in packages] bu
 
 The following methods are defined in the [`LanguageCorePackage`][built-in packages] but excluded if using a [raw `Engine`].
 
-| Function | Parameter(s)               | Description                                                 |
-| -------- | -------------------------- | ----------------------------------------------------------- |
-| `sleep`  | number of seconds to sleep | blocks the current thread for a specified number of seconds |
+| Function | Not available under | Parameter(s)               | Description                                                 |
+| -------- | :-----------------: | -------------------------- | ----------------------------------------------------------- |
+| `sleep`  |     [`no_std`]      | number of seconds to sleep | blocks the current thread for a specified number of seconds |
 
 
 Examples
