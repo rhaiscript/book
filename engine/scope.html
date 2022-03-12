@@ -269,17 +269,17 @@ assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y s
 <h2 id="engine-api-using-scope"><a class="header" href="#engine-api-using-scope"><code>Engine</code> API Using <code>Scope</code></a></h2>
 <p><a href="/book/engine/hello-world.html"><code>Engine</code></a> API methods that accept a <code>Scope</code> parameter all end with <code>_with_scope</code>, making that
 <code>Scope</code> (and everything inside it) available to the script:</p>
-<ul>
-<li><code>Engine::eval_with_scope</code></li>
-<li><code>Engine::eval_ast_with_scope</code></li>
-<li><code>Engine::eval_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::eval_expression_with_scope</code></li>
-<li><code>Engine::run_with_scope</code></li>
-<li><code>Engine::run_ast_with_scope</code></li>
-<li><code>Engine::run_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::compile_file_with_scope</code> (not available under <a href="/book/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::compile_expression_with_scope</code></li>
-</ul>
+<table><thead><tr><th><code>Engine</code> API</th><th style="text-align: center">Not available under</th></tr></thead><tbody>
+<tr><td><code>Engine::eval_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::eval_ast_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::eval_file_with_scope</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_std</code></a></td></tr>
+<tr><td><code>Engine::eval_expression_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::run_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::run_ast_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::run_file_with_scope</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_std</code></a></td></tr>
+<tr><td><code>Engine::compile_file_with_scope</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_std</code></a></td></tr>
+<tr><td><code>Engine::compile_expression_with_scope</code></td><td style="text-align: center"></td></tr>
+</tbody></table>
 <div class="admonition danger">
 <div class="admonition-title">
 <p>Don’t forget to <code>rewind</code></p>

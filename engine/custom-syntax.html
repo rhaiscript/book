@@ -167,7 +167,7 @@
 <p>For the ultimate adventurous, there is a built-in facility to <em>extend</em> the Rhai language with
 custom-defined <em>syntax</em>.</p>
 <p>But before going off to define the next weird statement type, heed this warning:</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Don’t Do It™</p>
 </div>
@@ -175,10 +175,10 @@ custom-defined <em>syntax</em>.</p>
 <p>Stick with standard language syntax as much as possible.</p>
 <p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another obscure
 language syntax just to do something.</p>
-<p>Try to use <a href="/book/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
+<p>Try <a href="/book/engine/custom-op.html">custom operators</a> first.  A custom syntax should be considered a <em>last resort</em>.</p>
 </div>
 </div>
-<div class="admonition success">
+<div class="admonition success small">
 <div class="admonition-title">
 <p>Where this might be useful</p>
 </div>
@@ -488,23 +488,17 @@ tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
 <p>Use <code>Engine::register_custom_syntax_raw</code> to register a custom syntax <em>parser</em>
 together with the implementation function.</p>
 <h2 id="how-custom-parsers-work"><a class="header" href="#how-custom-parsers-work">How Custom Parsers Work</a></h2>
-<div class="admonition note">
-<div class="admonition-title">
-<p>Leading symbol</p>
-</div>
-<div>
+<h3 id="leading-symbol"><a class="header" href="#leading-symbol">Leading Symbol</a></h3>
 <p>Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
 It can either be:</p>
 <ul>
 <li>
-<p>a identifier that isn’t a normal <a href="/book/appendix/keywords.html">keyword</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>, or</p>
+<p>an identifier that isn’t a normal <a href="/book/appendix/keywords.html">keyword</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>, or</p>
 </li>
 <li>
 <p>a valid symbol (see <a href="/book/appendix/operators.html">list</a>) which is not a normal <a href="/book/appendix/operators.html#operators">operator</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>.</p>
 </li>
 </ul>
-</div>
-</div>
 <h3 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h3>
 <p>The custom syntax parser has the following signature.</p>
 <blockquote>
@@ -556,10 +550,18 @@ and Rhai will fail with a parse error containing information about the expected 
 <p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
 <code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
-<p>A return symbol starting with <code>$$</code> is treated specially. Like returning <code>None</code>, it also
-terminates parsing, but at the same time it adds this symbol as text into the <em>inputs</em> stream at the end.
-This is typically used to inform the implementation function which custom syntax variant was
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: <code>$$</code></p>
+</div>
+<div>
+<p>A return symbol starting with <code>$$</code> is treated specially.</p>
+<p>Like <code>None</code>, it also terminates parsing, but at the same time it adds this symbol as text into the
+<em>inputs</em> stream at the end.</p>
+<p>This is typically used to inform the implementation function which custom syntax variant was
 actually parsed.</p>
+</div>
+</div>
 <h3 id="example-1"><a class="header" href="#example-1">Example</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

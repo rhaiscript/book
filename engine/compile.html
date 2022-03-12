@@ -180,14 +180,21 @@ for _ in 0..42 {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Compiling a script file is also supported with <code>Engine::compile_file</code>
-(not available under <a href="/book/start/features.html"><code>no_std</code></a> or in <a href="/book/start/builds/wasm.html">WASM</a> builds).</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Compile script file</p>
+</div>
+<div>
+<p>Compiling script files is also supported via <code>Engine::compile_file</code>
+(not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let ast = engine.compile_file(&quot;hello_world.rhai&quot;.into())?;
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <div class="admonition info small">
 <div class="admonition-title">
 <p><code>AST</code> manipulation API</p>

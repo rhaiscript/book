@@ -164,9 +164,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="the-immutablestring-type"><a class="header" href="#the-immutablestring-type">The <code>ImmutableString</code> Type</a></h1>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Why <code>SmartString</code>?</p>
+</div>
+<div>
+<p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because many strings in scripts are short (fewer than 24 ASCII characters).</p>
+</div>
+</div>
 <p>All <a href="/book/language/strings-chars.html">strings</a> in Rhai are implemented as <code>ImmutableString</code>, which is an alias to
 <code>Rc&lt;SmartString&gt;</code> (or <code>Arc&lt;SmartString&gt;</code> under the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
-<p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because many strings in scripts are short (fewer than 24 ASCII characters).</p>
 <p>An <code>ImmutableString</code> is immutable (i.e. never changes) and therefore can be shared among many users.
 Cloning an <code>ImmutableString</code> is cheap since it only copies an immutable reference.</p>
 <p>Modifying an <code>ImmutableString</code> causes it first to be cloned, and then the modification made to the copy.

@@ -167,6 +167,14 @@
 <p>Infinite loops follow Rust syntax.</p>
 <p>Like Rust, <code>continue</code> can be used to skip to the next iteration, by-passing all following statements;
 <code>break</code> can be used to break out of the loop unconditionally.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>loop</code></p>
+</div>
+<div>
+<p><code>loop</code> can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -183,7 +191,7 @@ loop {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Remember the <code>break</code> statement</p>
 </div>
@@ -192,7 +200,6 @@ loop {
 There is no way for the loop to stop iterating.</p>
 </div>
 </div>
-<p><code>loop</code> statements can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 
                     </main>
 

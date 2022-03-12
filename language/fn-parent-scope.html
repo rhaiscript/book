@@ -170,8 +170,8 @@
 <p>Only scripts</p>
 </div>
 <div>
-<p>This is only meaningful for <em>scripted</em> <a href="/book/language/functions.html">functions</a>, since native Rust functions can never
-access any <a href="/book/engine/scope.html"><code>Scope</code></a> anyway.</p>
+<p>This is only meaningful for <em>scripted</em> <a href="/book/language/functions.html">functions</a>.</p>
+<p>Native Rust functions can never access any <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 </div>
 </div>
 <p>Rhai <a href="/book/language/functions.html">functions</a> are <em>pure</em>, meaning that they depend on on their arguments and have no access to
@@ -221,26 +221,30 @@ import &quot;hello&quot; as h;
 h::greet!();            // &lt;- syntax error: not allowed in namespace-qualified calls
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
-<div class="admonition-title">
-<p>New variables are not retained</p>
-</div>
-<div>
-<p><a href="/book/language/variables.html">Variables</a> or <a href="/book/language/constants.html">constants</a> defined within the <a href="/book/language/functions.html">function</a> are <em>not</em> retained.</p>
-<p>They remain local to the <a href="/book/language/functions.html">function</a>.</p>
-<p>So, although the syntax resembles a Rust <em>macro</em> invocation, it is still a <a href="/book/language/functions.html">function</a> call.</p>
-</div>
-</div>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>The caller’s scope can be mutated</p>
 </div>
 <div>
 <p>Changes to <a href="/book/language/variables.html">variables</a> in the calling <a href="/book/engine/scope.html"><code>Scope</code></a> persist.</p>
-<p>Therefore, with this syntax, it is possible for a Rhai <a href="/book/language/functions.html">function</a> to mutate its calling environment.</p>
+<p>With this syntax, it is possible for a Rhai <a href="/book/language/functions.html">function</a> to mutate its calling environment.</p>
 </div>
 </div>
-<h2 id="caveat-emptor"><a class="header" href="#caveat-emptor">Caveat Emptor</a></h2>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>New variables are not retained</p>
+</div>
+<div>
+<p><a href="/book/language/variables.html">Variables</a> or <a href="/book/language/constants.html">constants</a> defined within the <a href="/book/language/functions.html">function</a> are <em>not</em> retained.
+They remain local to the <a href="/book/language/functions.html">function</a>.</p>
+<p>Although the syntax resembles a Rust <em>macro</em> invocation, it is still a <a href="/book/language/functions.html">function</a> call.</p>
+</div>
+</div>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>Caveat emptor</p>
+</div>
+<div>
 <p><a href="/book/language/functions.html">Functions</a> relying on the calling <a href="/book/engine/scope.html"><code>Scope</code></a> is often a <em>Very Bad Idea™</em> because it makes code
 almost impossible to reason about and maintain, as their behaviors are volatile and unpredictable.</p>
 <p>Rhai <a href="/book/language/functions.html">functions</a> are normally <em>pure</em>, meaning that you can rely on the fact that they never mutate
@@ -249,6 +253,8 @@ the outside environment.  Using this syntax breaks this guarantee.</p>
 function calls, thus the syntax is also similar to Rust’s macro invocations.</p>
 <p>This usage should be at the last resort.</p>
 <p><strong>YOU HAVE BEEN WARNED</strong>.</p>
+</div>
+</div>
 
                     </main>
 

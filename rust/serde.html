@@ -166,7 +166,14 @@
                         <h1 id="serialization-and-deserialization-of-dynamic-with-serde"><a class="header" href="#serialization-and-deserialization-of-dynamic-with-serde">Serialization and Deserialization of <code>Dynamic</code> with <code>serde</code></a></h1>
 <p>Rhai’s <a href="/book/language/dynamic.html"><code>Dynamic</code></a> type supports serialization and deserialization by
 <a href="https://crates.io/crates/serde"><code>serde</code></a> via the <a href="/book/start/features.html"><code>serde</code></a> feature.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
 <p><a href="/book/language/dynamic.html"><code>Dynamic</code></a> works <em>both</em> as a <em>serialization format</em> as well as a data type that is serializable.</p>
+</div>
+</div>
 <h2 id="serializedeserialize-a-dynamic"><a class="header" href="#serializedeserialize-a-dynamic">Serialize/Deserialize a <code>Dynamic</code></a></h2>
 <p>With the <a href="/book/start/features.html"><code>serde</code></a> feature turned on, <a href="/book/language/dynamic.html"><code>Dynamic</code></a> implements <a href="https://docs.serde.rs/serde/trait.Serialize.html"><code>serde::Serialize</code></a> and
 <a href="https://docs.serde.rs/serde/trait.Deserialize.html"><code>serde::Deserialize</code></a>, so it can easily be serialized and deserialized with <a href="/book/rust/serde.html"><code>serde</code></a>.</p>
@@ -274,7 +281,7 @@ r#&quot;
 let x: MyStruct = from_dynamic(&amp;result)?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Cannot deserialize shared values</p>
 </div>

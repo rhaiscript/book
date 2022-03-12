@@ -199,9 +199,12 @@ print(x);           // prints 0 - shadowing within the block goes away
 print(y);           // prints 123 - 'y' is not shadowed
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="disable-shadowing"><a class="header" href="#disable-shadowing">Disable Shadowing</a></h2>
-<p>If shadowing is not desired, set <a href="/book/engine/options.html"><code>Engine::set_allow_shadowing</code></a> to <code>false</code> to turn
-<a href="/book/language/variables.html">variables</a> shadowing off.</p>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Disable shadowing</p>
+</div>
+<div>
+<p>Set <a href="/book/engine/options.html"><code>Engine::set_allow_shadowing</code></a> to <code>false</code> to turn <a href="/book/language/variables.html">variables</a> shadowing off.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -211,6 +214,8 @@ let x = 123;        // &lt;- syntax error: variable 'x' already defined
                     //    when variables shadowing is disallowed
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 
                     </main>
 

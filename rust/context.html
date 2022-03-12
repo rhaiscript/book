@@ -181,7 +181,11 @@ and exposes the following.</p>
 <tr><td><code>call_fn()</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
 <tr><td><code>call_fn_raw()</code></td><td style="text-align: center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
-<h2 id="example--implement-safety-checks"><a class="header" href="#example--implement-safety-checks">Example – Implement Safety Checks</a></h2>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Example – Implement Safety Checks</p>
+</div>
+<div>
 <p>The native call context is useful for protecting a function from malicious scripts.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -215,7 +219,13 @@ pub fn grow(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, Box&lt
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="example--call-a-function-within-a-function"><a class="header" href="#example--call-a-function-within-a-function">Example – Call a Function Within a Function</a></h2>
+</div>
+</div>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Example – Call a Function Within a Function</p>
+</div>
+<div>
 <p>The <em>native call context</em> can be used to call a <a href="/book/language/functions.html">function</a> within the current evaluation
 via <code>call_fn</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -236,7 +246,13 @@ fn super_call(context: NativeCallContext, value: i64) -&gt; Result&lt;i64, Box&l
 engine.register_result_fn(&quot;super_call&quot;, super_call);
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="example--implement-a-callback"><a class="header" href="#example--implement-a-callback">Example – Implement a Callback</a></h2>
+</div>
+</div>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Example – Implement a Callback</p>
+</div>
+<div>
 <p>The <em>native call context</em> can be used to call a <a href="/book/language/fn-ptr.html">function pointer</a> or <a href="/book/language/fn-closure.html">closure</a> that has been passed
 as a parameter to the function (via <code>FnPtr::call_with_context</code>), thereby implementing a <em>callback</em>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -252,6 +268,8 @@ pub fn greet(context: NativeCallContext, callback: FnPtr) -&gt; Result&lt;String
 }
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 
                     </main>
 

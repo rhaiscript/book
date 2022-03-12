@@ -598,42 +598,59 @@ on <a href="https://github.com/rust-unofficial/awesome-rust">awesome-rust</a></p
 </div>
 <p>Rhai provides an <a href="https://rhai.rs/playground">online playground</a> to try out its language and engine features without
 having to install anything.</p>
-<p>The playground provides a syntax-highlighting script editor with example snippets.
-Scripts can be evaluated directly from the editor.</p>
+<p>The playground provides a syntax-highlighting script editor with example snippets.</p>
+<p>Scripts can be evaluated directly from the editor.</p>
 <p><a href="https://rhai.rs/playground"><img src="start//book/images/playground.png" alt="Online Playground" /></a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-the-rhai-crate"><a class="header" href="#install-the-rhai-crate">Install the Rhai Crate</a></h1>
 <p>In order to use Rhai in a project, the Rhai crate must first be made a dependency.</p>
-<h2 id="use-specific-version"><a class="header" href="#use-specific-version">Use Specific Version</a></h2>
+<div class="admonition info">
+<div class="admonition-title">
+<p>Use specific version</p>
+</div>
+<div>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 rhai = &quot;1.5.0&quot;    # assuming 1.5.0 is the latest version
 </code></pre>
-<h2 id="use-latest-release-version"><a class="header" href="#use-latest-release-version">Use Latest Release Version</a></h2>
+</div>
+</div>
+<div class="admonition note">
+<div class="admonition-title">
+<p>Use latest release version</p>
+</div>
+<div>
 <p>Automatically use the latest released crate version on <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>:</p>
 <pre><code class="language-toml">[dependencies]
 rhai = &quot;*&quot;
 </code></pre>
-<h2 id="use-latest-development-version"><a class="header" href="#use-latest-development-version">Use Latest Development Version</a></h2>
+</div>
+</div>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Use latest development version</p>
+</div>
+<div>
 <p>Crate versions are released on <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a> infrequently,
 so to track the latest features, enhancements and bug fixes, pull directly from
 <a href="https://github.com/rhaiscript/rhai">GitHub</a>:</p>
 <pre><code class="language-toml">[dependencies]
 rhai = { git = &quot;https://github.com/rhaiscript/rhai&quot; }
 </code></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="optional-features"><a class="header" href="#optional-features">Optional Features</a></h1>
 <p>By default, Rhai includes all the standard functionalities in a small, tight package.</p>
-<p>Most features are here to opt-<strong>out</strong> of certain functionalities that are not needed.
-Notice that this deviates from Rust norm where features are <em>additive</em>.</p>
-<p>Excluding unneeded functionalities can result in smaller, faster builds as well as more control over
-what a script can (or cannot) do.</p>
 <div class="admonition warning">
 <div class="admonition-title">
 <p>Features are not additive</p>
 </div>
 <div>
 <p>Most Rhai features are not strictly <em>additive</em>, i.e. they do not only add optional functionalities.</p>
-<p>In fact, most features are <em>subtractive</em>, i.e. they <em>remove</em> functionalities.</p>
+<p>In fact, most features are <em>subtractive</em>, i.e. they opt-<strong>out</strong> of unneeded functionalities.
+Notice that this deviates from Rust norm where features are <em>additive</em>.</p>
+<p>Excluding functionalities result in smaller, faster builds as well as more control over
+what scripts can (or cannot) do.</p>
 <p>There is a reason for this design, because the <em>lack</em> of a language feature by itself is a feature (that’s deep…).</p>
 <p>See <a href="start//book/patterns/multiple.html">here</a> for more details.</p>
 </div>
@@ -848,8 +865,8 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 <p>Rhai script files are customarily named with extension <code>.rhai</code>.</p>
 </div>
 </div>
-<p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>
-(not available under <a href="engine//book/start/features.html"><code>no_std</code></a> or in <a href="engine//book/start/builds/wasm.html">WASM</a> builds).</p>
+<p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>.</p>
+<p>Loading and running script files is not available for <a href="engine//book/start/features.html"><code>no_std</code></a> or <a href="engine//book/start/builds/wasm.html">WASM</a> builds.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -935,14 +952,21 @@ for _ in 0..42 {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Compiling a script file is also supported with <code>Engine::compile_file</code>
-(not available under <a href="engine//book/start/features.html"><code>no_std</code></a> or in <a href="engine//book/start/builds/wasm.html">WASM</a> builds).</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Compile script file</p>
+</div>
+<div>
+<p>Compiling script files is also supported via <code>Engine::compile_file</code>
+(not available for <a href="engine//book/start/features.html"><code>no_std</code></a> or <a href="engine//book/start/builds/wasm.html">WASM</a> builds).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let ast = engine.compile_file(&quot;hello_world.rhai&quot;.into())?;
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <div class="admonition info small">
 <div class="admonition-title">
 <p><code>AST</code> manipulation API</p>
@@ -978,9 +1002,9 @@ the same <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> 
 <tr><td><a href="engine//book/language/print-debug.html"><code>on_print</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
 <tr><td><a href="engine//book/language/print-debug.html"><code>on_debug</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
 </tbody></table>
-<div class="admonition tip">
+<div class="admonition example">
 <div class="admonition-title">
-<p>Tip: <code>Engine::new</code> is equivalent to…</p>
+<p><code>Engine::new</code> is equivalent to…</p>
 </div>
 <div>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -1029,9 +1053,9 @@ engine.register_global_module(package);
 <tr><td><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></td><td></td><td><ul><li><code>INT</code></li><li><code>FLOAT</code> (if not <a href="engine//book/start/features.html"><code>no_float</code></a>)</li><li><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="engine//book/start/features.html"><code>decimal</code></a>)</li><li><code>char</code></li><li><a href="engine//book/language/strings-chars.html">string</a></li><li><code>()</code></li></ul></td></tr>
 <tr><td><a href="engine//book/language/in.html"><code>in</code></a></td><td></td><td><ul><li><a href="engine//book/language/strings-chars.html">string</a></li><li><code>char</code>/<a href="engine//book/language/strings-chars.html">string</a></li><li><a href="engine//book/language/strings-chars.html">string</a>/<a href="engine//book/language/object-maps.html">object map</a> (if not <a href="engine//book/start/features.html"><code>no_object</code></a>)</li><li><code>INT</code>/<a href="engine//book/language/blobs.html">BLOB</a> (if not <a href="engine//book/start/features.html"><code>no_index</code></a>)</li><li><code>INT</code>/numeric <a href="engine//book/language/ranges.html">range</a></li></ul></td></tr>
 </tbody></table>
-<div class="admonition note small">
+<div class="admonition tip small">
 <div class="admonition-title">
-<p>Note</p>
+<p>Tip</p>
 </div>
 <div>
 <p><code>FLOAT</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> also inter-operate with <code>INT</code>, while <a href="engine//book/language/strings-chars.html">strings</a> inter-operate
@@ -1144,17 +1168,17 @@ assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y s
 <h2 id="engine-api-using-scope"><a class="header" href="#engine-api-using-scope"><code>Engine</code> API Using <code>Scope</code></a></h2>
 <p><a href="engine//book/engine/hello-world.html"><code>Engine</code></a> API methods that accept a <code>Scope</code> parameter all end with <code>_with_scope</code>, making that
 <code>Scope</code> (and everything inside it) available to the script:</p>
-<ul>
-<li><code>Engine::eval_with_scope</code></li>
-<li><code>Engine::eval_ast_with_scope</code></li>
-<li><code>Engine::eval_file_with_scope</code> (not available under <a href="engine//book/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::eval_expression_with_scope</code></li>
-<li><code>Engine::run_with_scope</code></li>
-<li><code>Engine::run_ast_with_scope</code></li>
-<li><code>Engine::run_file_with_scope</code> (not available under <a href="engine//book/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::compile_file_with_scope</code> (not available under <a href="engine//book/start/features.html"><code>no_std</code></a>)</li>
-<li><code>Engine::compile_expression_with_scope</code></li>
-</ul>
+<table><thead><tr><th><code>Engine</code> API</th><th style="text-align: center">Not available under</th></tr></thead><tbody>
+<tr><td><code>Engine::eval_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::eval_ast_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::eval_file_with_scope</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>no_std</code></a></td></tr>
+<tr><td><code>Engine::eval_expression_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::run_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::run_ast_with_scope</code></td><td style="text-align: center"></td></tr>
+<tr><td><code>Engine::run_file_with_scope</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>no_std</code></a></td></tr>
+<tr><td><code>Engine::compile_file_with_scope</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>no_std</code></a></td></tr>
+<tr><td><code>Engine::compile_expression_with_scope</code></td><td style="text-align: center"></td></tr>
+</tbody></table>
 <div class="admonition danger">
 <div class="admonition-title">
 <p>Don’t forget to <code>rewind</code></p>
@@ -1250,7 +1274,7 @@ let result: i64 = engine.eval_expression_with_scope(&amp;mut scope,
                   )?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition failure">
+<div class="admonition bug">
 <div class="admonition-title">
 <p>No statements allowed</p>
 </div>
@@ -1699,15 +1723,15 @@ which leverages the superior native run-time speed.</p>
 <p>Rhai’s scripting engine is very lightweight.  It gets most of its abilities from functions.</p>
 <p>To call these functions, they need to be <em>registered</em> via <code>Engine::register_fn</code> or
 <code>Engine::register_result_fn</code> (see <a href="rust//book/rust/fallible.html">fallible functions</a>).</p>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Function overloading</p>
 </div>
 <div>
 <p>Functions registered with the <a href="rust//book/engine/hello-world.html"><code>Engine</code></a> can be <em>overloaded</em> as long as the <em>signature</em> is unique,
 i.e. different functions can have the same name as long as their parameters are of different types
-or different number.</p>
-<p>New definitions <em>overwrite</em> previous definitions of the same name and same number/types of parameters.</p>
+or different numbers (i.e. <em>arity</em>).</p>
+<p>New definitions <em>overwrite</em> previous definitions of the same name, same arity and same parameter types.</p>
 </div>
 </div>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -1748,20 +1772,29 @@ let result = engine.eval::&lt;i64&gt;(&quot;get_any_value()&quot;)?;
 println!(&quot;Answer: {}&quot;, result);         // prints 42
 <span class="boring">}
 </span></code></pre></pre>
-<p>To create a <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> value, use the <code>Dynamic::from</code> method.
-<a href="rust//book/language/values-and-types.html">Standard types</a> in Rhai can also use <code>.into()</code>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Create a <code>Dynamic</code></p>
+</div>
+<div>
+<p>To create a <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> value, use <code>Dynamic::from</code>.</p>
+<p><a href="rust//book/language/values-and-types.html">Standard types</a> in Rhai can also use <code>.into()</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use rhai::Dynamic;
 
-let x = 42_i64.into();                  // '.into()' works for standard types
+let x = Dynamic::from(TestStruct::new());
+
+// '.into()' works for standard types
+
+let x = 42_i64.into();
 
 let y = &quot;hello!&quot;.into();
-
-let x = Dynamic::from(TestStruct::new());
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="string-parameters-in-rust-functions"><a class="header" href="#string-parameters-in-rust-functions"><code>String</code> Parameters in Rust Functions</a></h1>
 <div class="admonition danger">
 <div class="admonition-title">
@@ -1775,12 +1808,19 @@ and the copy immediately thrown away right after the call.</p>
 </div>
 </div>
 <h2 id="str-maps-to-immutablestring"><a class="header" href="#str-maps-to-immutablestring"><code>&amp;str</code> Maps to <code>ImmutableString</code></a></h2>
+<div class="admonition warning side">
+<div class="admonition-title">
+<p>Common mistake</p>
+</div>
+<div>
+<p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
+</div>
+</div>
 <p>Rust functions accepting parameters of <code>String</code> should use <code>&amp;str</code> instead because it maps directly
 to <a href="rust//book/rust/immutable-string.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="rust//book/language/strings-chars.html">strings</a> internally.</p>
 <p>The parameter type <code>String</code> involves always converting an <a href="rust//book/rust/immutable-string.html"><code>ImmutableString</code></a> into a <code>String</code>
 which mandates cloning it.</p>
 <p>Using <a href="rust//book/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code> is much more efficient.</p>
-<p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1898,7 +1938,7 @@ if let Err(error) = engine.eval::&lt;i64&gt;(&quot;divide(40, 0)&quot;) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Create a <code>Box&lt;EvalAltResult&gt;</code></p>
 </div>
@@ -1912,7 +1952,7 @@ which should be hit rarely.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-parameters-in-rust-functions"><a class="header" href="#dynamic-parameters-in-rust-functions"><code>Dynamic</code> Parameters in Rust Functions</a></h1>
 <p>It is possible for Rust functions to contain parameters of type <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a>.</p>
 <p>A <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
-<div class="admonition example">
+<div class="admonition example small">
 <div class="admonition-title">
 <p>Example</p>
 </div>
@@ -2008,12 +2048,12 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
 <h4 id="hash-lookup"><a class="header" href="#hash-lookup">Hash lookup</a></h4>
 <p>Since functions in Rhai can be <a href="rust//book/rust/functions.html">overloaded</a>, Rhai uses a single <em>hash</em> number
 to quickly lookup the actual function, based on argument types.</p>
-<p>For each function call, a hash is calculated made up from:</p>
+<p>For each function call, a hash is calculated from:</p>
 <ol>
-<li>the function’s [namespace], if any,</li>
+<li>the function’s <a href="rust//book/language/fn-namespaces.html">namespace</a>, if any,</li>
 <li>the function’s name,</li>
-<li>number of arguments,</li>
-<li>the unique ID of the type of each argument, if any.</li>
+<li>number of arguments (its <em>arity</em>),</li>
+<li>unique ID of the type of each argument, if any.</li>
 </ol>
 <p>The correct function is then obtained via a simple hash lookup.</p>
 <h4 id="limitations"><a class="header" href="#limitations">Limitations</a></h4>
@@ -2087,7 +2127,11 @@ and exposes the following.</p>
 <tr><td><code>call_fn()</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
 <tr><td><code>call_fn_raw()</code></td><td style="text-align: center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
-<h2 id="example--implement-safety-checks"><a class="header" href="#example--implement-safety-checks">Example – Implement Safety Checks</a></h2>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Example – Implement Safety Checks</p>
+</div>
+<div>
 <p>The native call context is useful for protecting a function from malicious scripts.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -2121,7 +2165,13 @@ pub fn grow(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, Box&lt
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="example--call-a-function-within-a-function"><a class="header" href="#example--call-a-function-within-a-function">Example – Call a Function Within a Function</a></h2>
+</div>
+</div>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Example – Call a Function Within a Function</p>
+</div>
+<div>
 <p>The <em>native call context</em> can be used to call a <a href="rust//book/language/functions.html">function</a> within the current evaluation
 via <code>call_fn</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -2142,7 +2192,13 @@ fn super_call(context: NativeCallContext, value: i64) -&gt; Result&lt;i64, Box&l
 engine.register_result_fn(&quot;super_call&quot;, super_call);
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="example--implement-a-callback"><a class="header" href="#example--implement-a-callback">Example – Implement a Callback</a></h2>
+</div>
+</div>
+<div class="admonition example">
+<div class="admonition-title">
+<p>Example – Implement a Callback</p>
+</div>
+<div>
 <p>The <em>native call context</em> can be used to call a <a href="rust//book/language/fn-ptr.html">function pointer</a> or <a href="rust//book/language/fn-closure.html">closure</a> that has been passed
 as a parameter to the function (via <code>FnPtr::call_with_context</code>), thereby implementing a <em>callback</em>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -2158,6 +2214,8 @@ pub fn greet(context: NativeCallContext, callback: FnPtr) -&gt; Result&lt;String
 }
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="call-rhai-functions-from-rust"><a class="header" href="#call-rhai-functions-from-rust">Call Rhai Functions from Rust</a></h1>
 <p>Rhai also allows working <em>backwards</em> from the other direction – i.e. calling a Rhai-scripted
 <a href="engine//book/language/functions.html">function</a> from Rust via <code>Engine::call_fn</code>.</p>
@@ -2225,16 +2283,30 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ()
 //                                                          ^^ unit = tuple of zero
 <span class="boring">}
 </span></code></pre></pre>
-<p>When using <code>Engine::call_fn</code>, the <a href="engine//book/engine/compile.html"><code>AST</code></a> is first evaluated before the <a href="engine//book/language/functions.html">function</a> is called.
-This is usually desirable in order to <a href="engine//book/language/modules/import.html">import</a> the necessary external <a href="engine//book/rust/modules/index.html">modules</a> that are
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Default behavior</p>
+</div>
+<div>
+<p>When using <code>Engine::call_fn</code>, the <a href="engine//book/engine/compile.html"><code>AST</code></a> is always evaluated <em>before</em> the <a href="engine//book/language/functions.html">function</a> is called.</p>
+<p>This is usually desirable in order to <a href="engine//book/language/modules/import.html">import</a> the necessary external <a href="engine//book/rust/modules/index.html">modules</a> that are
 needed by the <a href="engine//book/language/functions.html">function</a>.</p>
 <p>All new <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> introduced are, by default, <em>not</em> retained inside the <a href="engine//book/engine/scope.html"><code>Scope</code></a>.
-In other words, the <a href="engine//book/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> to the initial size after each call.</p>
+In other words, the <a href="engine//book/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> before each call.</p>
 <p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
+</div>
+</div>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> trait</a></h2>
+<div class="admonition note side">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<div>
+<p>Rhai implements <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
+</div>
+</div>
 <p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> trait,
 which is used to parse a data type into individual argument values for the <a href="engine//book/language/functions.html">function</a> call.</p>
-<p>Rhai implements <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
 <p>Custom types (e.g. structures) can also implement <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> so they can be used for
 calling <code>Engine::call_fn</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -2298,9 +2370,17 @@ expected intuitive behavior.</p>
 <p>A parameter can be passed to keep new <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> within the custom <a href="engine//book/engine/scope.html"><code>Scope</code></a>.
 This allows the <a href="engine//book/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
 custom <a href="engine//book/engine/scope.html"><code>Scope</code></a>.</p>
-<p>When doing so, however, beware that all <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> defined at top level of the
-<a href="engine//book/language/functions.html">function</a> or in the script body will <em>persist</em> inside the custom <a href="engine//book/engine/scope.html"><code>Scope</code></a>.  If any of them are
-temporary and not intended to be retained, define them inside a statements block.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Warning: new variables persist in <code>Scope</code></p>
+</div>
+<div>
+<p>If the <a href="engine//book/engine/scope.html"><code>Scope</code></a> is not rewound, beware that all <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> defined at top level of the
+<a href="engine//book/language/functions.html">function</a> or in the script body will <em>persist</em> inside the custom <a href="engine//book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>If any of them are temporary and not intended to be retained, define them inside a statements block
+(see example below).</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2342,9 +2422,16 @@ engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="bind-the-this-pointer"><a class="header" href="#bind-the-this-pointer">Bind the <code>this</code> pointer</a></h3>
+<div class="admonition note side wide">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<div>
+<p><code>Engine::call_fn</code> cannot call functions in <em>method-call</em> style.</p>
+</div>
+</div>
 <p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="engine//book/language/functions.html">function</a>.</p>
-<p>This functionality is not available to <code>Engine::call_fn</code> which cannot call functions in
-<em>method-call</em> style.</p>
+<p>It is possible, then, to call a <a href="engine//book/language/functions.html">function</a> that uses <code>this</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2439,32 +2526,38 @@ It is rarely recommended, but if you need it, you need it bad.</p>
 because you <em>can</em>.</p>
 </div>
 </div>
-<h2 id="search-order-of-functions"><a class="header" href="#search-order-of-functions">Search Order of Functions</a></h2>
+<div class="admonition info">
+<div class="admonition-title">
+<p>Search order for functions</p>
+</div>
+<div>
 <p>Rhai searches for the correct implementation of a function in the following order:</p>
 <ol>
 <li>
 <p>Rhai script-defined <a href="rust//book/language/functions.html">functions</a>,</p>
 </li>
 <li>
-<p>native Rust functions registered directly via the <code>Engine::register_XXX</code> API,</p>
+<p>Native Rust functions registered directly via the <code>Engine::register_XXX</code> API,</p>
 </li>
 <li>
-<p>native Rust functions in <a href="rust//book/rust/packages/index.html">packages</a> that have been loaded via <code>Engine::register_global_module</code>,</p>
+<p>Native Rust functions in <a href="rust//book/rust/packages/index.html">packages</a> that have been loaded via <code>Engine::register_global_module</code>,</p>
 </li>
 <li>
-<p>native Rust or Rhai script-defined functions in <a href="rust//book/language/modules/import.html">imported</a> <a href="rust//book/rust/modules/index.html">modules</a> that are exposed to
+<p>Native Rust or Rhai script-defined functions in <a href="rust//book/language/modules/import.html">imported</a> <a href="rust//book/rust/modules/index.html">modules</a> that are exposed to
 the global <a href="rust//book/language/fn-namespaces.html">namespace</a> (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a
 <a href="rust//book/plugins/module.html">plugin module</a>),</p>
 </li>
 <li>
-<p>native Rust or Rhai script-defined functions in <a href="rust//book/rust/modules/index.html">modules</a> loaded via
+<p>Native Rust or Rhai script-defined functions in <a href="rust//book/rust/modules/index.html">modules</a> loaded via
 <code>Engine::register_static_module</code> that are exposed to the global <a href="rust//book/language/fn-namespaces.html">namespace</a>
 (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a <a href="rust//book/plugins/module.html">plugin module</a>),</p>
 </li>
 <li>
-<p><a href="rust//book/engine/builtin.html">built-in</a> functions.</p>
+<p><a href="rust//book/engine/builtin.html">Built-in</a> functions.</p>
 </li>
 </ol>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="operator-overloading"><a class="header" href="#operator-overloading">Operator Overloading</a></h1>
 <p>In Rhai, a lot of functionalities are actually implemented as functions, including basic operations
 such as arithmetic calculations.</p>
@@ -2479,7 +2572,7 @@ let x = +(a, b);        // &lt;- the above is equivalent to this function call
 </span></code></pre></pre>
 <p>Similarly, comparison <a href="rust//book/appendix/operators.html#operators">operators</a> including <code>==</code>, <code>!=</code> etc. are all implemented as functions,
 with the stark exception of <code>&amp;&amp;</code> and <code>||</code>.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p><code>&amp;&amp;</code> and <code>||</code> cannot be overloaded</p>
 </div>
@@ -2522,7 +2615,7 @@ let result: i64 = engine.eval(&quot;1 + true&quot;);          // &lt;- normally 
 result == 43;                                       //    ... but not now
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Considerations</p>
 </div>
@@ -2557,7 +2650,7 @@ possible, usually silently and seamlessly.</p>
 <p>External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
 <p>Support for custom types can be turned off via the <a href="rust//book/start/features.html"><code>no_object</code></a> feature.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Custom types are slower</p>
 </div>
@@ -2624,7 +2717,7 @@ println!(&quot;result: {}&quot;, result.field);   // prints 42
 <p><em>Methods</em> of custom types take a <code>&amp;mut</code> first parameter to that type, so that invoking methods can
 always update it.</p>
 <p>All other parameters in Rhai are passed by value (i.e. clones).</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -2698,7 +2791,7 @@ They each take a <code>&amp;mut</code> reference to the first parameter.</p>
 <tr><td><code>register_get_result</code></td><td><code>Fn(&amp;mut T) -&gt; Result&lt;V, Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes, but not advised</td></tr>
 <tr><td><code>register_set_result</code></td><td><code>Fn(&amp;mut T, V) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes</td></tr>
 </tbody></table>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -2707,7 +2800,7 @@ They each take a <code>&amp;mut</code> reference to the first parameter.</p>
 All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 </div>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Getters must be pure</p>
 </div>
@@ -2761,6 +2854,15 @@ println!(&quot;Answer: {}&quot;, result);                 // prints 42
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="fallback-to-indexer"><a class="header" href="#fallback-to-indexer">Fallback to Indexer</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Property bag</p>
+</div>
+<div>
+<p>This feature makes it very easy for <a href="rust//book/rust/custom.html">custom types</a> to act as <em>property bags</em>
+(similar to an <a href="rust//book/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
+</div>
+</div>
 <p>If the getter/setter of a particular property is not defined, but an <a href="rust//book/rust/indexers.html">indexer</a> is defined on the
 <a href="rust//book/rust/custom.html">custom type</a> with <a href="rust//book/language/strings-chars.html">string</a> index, then the corresponding <a href="rust//book/rust/indexers.html">indexer</a> will be called with the name of
 the property as the index value.</p>
@@ -2773,8 +2875,6 @@ the property as the index value.</p>
 a[&quot;foo&quot;]        // an indexer (if any) is tried
 <span class="boring">}
 </span></code></pre></pre>
-<p>This feature makes it very easy for <a href="rust//book/rust/custom.html">custom types</a> to act as <em>property bags</em>
-(similar to an <a href="rust//book/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
 <h2 id="chaining-updates"><a class="header" href="#chaining-updates">Chaining Updates</a></h2>
 <p>It is possible to <em>chain</em> property accesses and/or indexing (via <a href="rust//book/rust/indexers.html">indexers</a>) together to modify a
 particular property value at the end of the chain.</p>
@@ -2828,7 +2928,7 @@ value at a particular index:</p>
 <tr><td><code>register_indexer_get_result</code></td><td><code>Fn(&amp;mut T, X) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes, but not advised</td></tr>
 <tr><td><code>register_indexer_set_result</code></td><td><code>Fn(&amp;mut T, X, V) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes</td></tr>
 </tbody></table>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -2837,12 +2937,12 @@ value at a particular index:</p>
 All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 </div>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Getters must be pure</p>
 </div>
 <div>
-<p>By convention, index <a href="rust//book/rust/getters-setters.html">getters</a> are not supposed to mutate the <a href="rust//book/rust/custom.html">custom type</a>,
+<p>By convention, index getters are not supposed to mutate the <a href="rust//book/rust/custom.html">custom type</a>,
 although there is nothing that prevents this mutation.</p>
 </div>
 </div>
@@ -2868,7 +2968,7 @@ built-in indexing operations for <a href="rust//book/language/arrays.html">array
 <tr><td><code>INT</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center">boolean</td><td>access a particular bit inside the integer number as a <a href="rust//book/language/bit-fields.html">bit-field</a></td></tr>
 <tr><td><code>INT</code></td><td style="text-align: center"><a href="rust//book/language/ranges.html">range</a></td><td style="text-align: center"><code>INT</code></td><td>access a particular range of bits inside the integer number as a <a href="rust//book/language/bit-fields.html">bit-field</a></td></tr>
 </tbody></table>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Do not overload indexers for built-in standard types</p>
 </div>
@@ -2942,11 +3042,18 @@ let actual_index = if index &lt; 0 {
 <a href="rust//book/language/bit-fields.html">bit-field</a>, the <em>start</em> is the <em>least-significant-bit</em> (LSB) while the <code>end</code> is the
 <em>most-significant-bit</em> (MSB).</p>
 <h2 id="convention-for-range-index"><a class="header" href="#convention-for-range-index">Convention for Range Index</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Negative values</p>
+</div>
+<div>
+<p>By convention, negative values are <em>not</em> interpreted specially in indexers for <a href="rust//book/language/ranges.html">ranges</a>.</p>
+</div>
+</div>
 <p>It is very common for <a href="rust//book/language/ranges.html">ranges</a> to be used as indexer parameters via the types
 <code>std::ops::Range&lt;INT&gt;</code> (exclusive) and <code>std::ops::RangeInclusive&lt;INT&gt;</code> (inclusive).</p>
 <p>One complication is that two versions of the same indexer must be defined to support <em>exclusive</em>
 and <em>inclusive</em> <a href="rust//book/language/ranges.html">ranges</a> respectively.</p>
-<p>By convention, negative values are <em>not</em> interpreted specially in indexers for <a href="rust//book/language/ranges.html">ranges</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2977,14 +3084,21 @@ engine.run(
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="indexer-as-property-access-fallback"><a class="header" href="#indexer-as-property-access-fallback">Indexer as Property Access Fallback</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Property bag</p>
+</div>
+<div>
+<p>Such an indexer allows easy creation of <em>property bags</em> (similar to <a href="rust//book/language/object-maps.html">object maps</a>)
+which can dynamically add/remove properties.</p>
+</div>
+</div>
 <p>An indexer taking a <a href="rust//book/language/strings-chars.html">string</a> index is a special case – it acts as a <em>fallback</em> to property
 <a href="rust//book/rust/getters-setters.html">getters/setters</a>.</p>
 <p>During a property access, if the appropriate property <a href="rust//book/rust/getters-setters.html">getter/setter</a> is not
 defined, an indexer is called and passed the string name of the property.</p>
 <p>This is also extremely useful as a short-hand for indexers, when the <a href="rust//book/language/strings-chars.html">string</a> keys conform to
 property name syntax.</p>
-<p>Defining such an indexer allows easy creation of <em>property bags</em> (similar to <a href="rust//book/language/object-maps.html">object maps</a>)
-which can dynamically add/remove properties.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3054,17 +3168,17 @@ engine.run(r#&quot;let ts = new_ts(); print(ts[&quot;hello&quot;]);&quot;#);
 <blockquote>
 <p><em>object</em> <code>.</code> <em>function</em> <code>(</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
-<p><em>method-call</em> style is not supported under <a href="rust//book/start/features.html"><code>no_object</code></a></p>
+<p><em>method-call</em> style not supported under <a href="rust//book/start/features.html"><code>no_object</code></a></p>
 </div>
 <div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Below is a syntax error under 'no_object'.
-let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
-                                           // ^ cannot call method-style
+engine.run(&quot;let x = [42]; x.clear();&quot;)?;
+                        // ^ cannot call method-style
 <span class="boring">}
 </span></code></pre></pre>
 </div>
@@ -3074,9 +3188,16 @@ let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
 <p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
+<div class="admonition note side wide">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<div>
+<p>This design is similar to Rust.</p>
+</div>
+</div>
 <p>Internally, methods on a <a href="rust//book/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
 the object’s type. Therefore, methods and functions can be called interchangeably.</p>
-<p>This design is similar to Rust.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3099,13 +3220,13 @@ println!(&quot;result: {}&quot;, result);     // prints 1
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="first-mut-parameter"><a class="header" href="#first-mut-parameter">First <code>&amp;mut</code> Parameter</a></h2>
-<p>The opposite direction also works – <a href="rust//book/rust/custom.html">methods</a> in a Rust <a href="rust//book/rust/custom.html">custom type</a> registered
+<p>The opposite direction also works — <a href="rust//book/rust/custom.html">methods</a> in a Rust <a href="rust//book/rust/custom.html">custom type</a> registered
 with the <a href="rust//book/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
 are registered as regular <a href="rust//book/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
 <p>Unlike functions defined in script (for which all arguments are passed by <em>value</em>),
 native Rust functions may mutate the first <code>&amp;mut</code> argument.</p>
 <p>Sometimes, however, there are more subtle differences. Methods called in normal function-call style
-may end up not muting the object afterall – see the example below.</p>
+may end up not muting the object afterall — see the example below.</p>
 <p>Custom types, <a href="rust//book/rust/getters-setters.html">properties</a>, <a href="rust//book/rust/indexers.html">indexers</a> and methods are disabled under the
 <a href="rust//book/start/features.html"><code>no_object</code></a> feature.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -3127,7 +3248,7 @@ update(array[0]);   // &lt;- 'array[0]' is an expression returning a calculated 
 array[0].update();  // &lt;- call in method-call style will update 'a'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -3181,6 +3302,14 @@ fn add_method(obj: &amp;mut VeryComplexType, offset: i64) -&gt; i64 {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="data-race-considerations"><a class="header" href="#data-race-considerations">Data Race Considerations</a></h2>
+<div class="admonition note side wide">
+<div class="admonition-title">
+<p>Data races</p>
+</div>
+<div>
+<p>Data races are not possible in Rhai under the <a href="rust//book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
+</div>
+</div>
 <p>Because methods always take a mutable reference as the first argument, even it the value is never changed,
 care must be taken when using <em>shared</em> values with methods.</p>
 <p>Usually data races are not possible in Rhai because, for each function call, there is ever only one
@@ -3201,7 +3330,6 @@ x.is_shared() == true;              // now 'x' is shared
 x.call(f, 2);                       // &lt;- error: data race detected on 'x'
 <span class="boring">}
 </span></code></pre></pre>
-<p>Data races are not possible in Rhai under the <a href="rust//book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="custom-collection-types"><a class="header" href="#custom-collection-types">Custom Collection Types</a></h1>
 <div class="admonition tip side">
 <div class="admonition-title">
@@ -3224,7 +3352,7 @@ register the following methods.</p>
 <tr><td><code>remove</code>, <code>-=</code> operator</td><td>removes a particular item from the collection</td></tr>
 <tr><td><code>merge</code> or <code>+</code> operator</td><td>merges two collections, yielding a new collection with all items</td></tr>
 </tbody></table>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Define type iterator</p>
 </div>
@@ -3232,7 +3360,7 @@ register the following methods.</p>
 <p>Collections are typically iterable.</p>
 <p>It is customary to use <code>Engine::register_iterator</code> to allow iterating the collection if
 it implements <code>IntoIterator</code>.</p>
-<p>Alternative, register a specific <a href="rust//book/language/iterator.html">type iterator</a> for the custom type.</p>
+<p>Alternative, register a specific <a href="rust//book/language/iterator.html">type iterator</a> for the <a href="rust//book/rust/custom.html">custom type</a>.</p>
 </div>
 </div>
 <h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
@@ -3349,7 +3477,7 @@ a Rhai script for this purpose as well as to control which <a href="rust/modules
 <p>imported <a href="rust/modules//book/rust/modules/index.html">modules</a> that remain in the <a href="rust/modules//book/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Encapsulated environment</p>
 </div>
@@ -3414,9 +3542,23 @@ let module = Module::eval_ast_as_new(Scope::new(), &amp;ast, &amp;engine)?;
 <h2 id="use-case-1--make-the-module-globally-available"><a class="header" href="#use-case-1--make-the-module-globally-available">Use Case 1 – Make the Module Globally Available</a></h2>
 <p><code>Engine::register_global_module</code> registers a shared <a href="rust/modules//book/rust/modules/index.html">module</a> into the
 <a href="rust/modules//book/language/fn-namespaces.html"><em>global</em> namespace</a>.</p>
-<p>All <a href="rust/modules//book/language/functions.html">functions</a> and <a href="rust/modules//book/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.</p>
-<p>Variables and sub-modules are <strong>ignored</strong>.</p>
 <p>This is by far the easiest way to expose a <a href="rust/modules//book/rust/modules/index.html">module</a>’s functionalities to Rhai.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: No qualifiers</p>
+</div>
+<div>
+<p>All <a href="rust/modules//book/language/functions.html">functions</a> and <a href="rust/modules//book/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.</p>
+</div>
+</div>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Warning</p>
+</div>
+<div>
+<p>Variables and sub-modules are <strong>ignored</strong>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3439,10 +3581,19 @@ engine.register_global_module(module.into());
 engine.eval::&lt;i64&gt;(&quot;inc(41)&quot;)? == 42;       // no need to import module
 <span class="boring">}
 </span></code></pre></pre>
+<h3 id="equivalent-to-engineregister_xxx"><a class="header" href="#equivalent-to-engineregister_xxx">Equivalent to <code>Engine::register_XXX</code></a></h3>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Rhai internals</p>
+</div>
+<div>
+<p><code>Engine::register_fn</code> etc. are actually implemented by adding functions to an
+internal <a href="rust/modules//book/rust/modules/index.html">module</a>!</p>
+</div>
+</div>
 <p>Registering a <a href="rust/modules//book/rust/modules/index.html">module</a> via <code>Engine::register_global_module</code> is essentially the <em>same</em>
 as calling <code>Engine::register_fn</code> (or any of the <code>Engine::register_XXX</code> API) individually
-on each top-level function within that <a href="rust/modules//book/rust/modules/index.html">module</a>.  In fact, the actual implementation of
-<code>Engine::register_fn</code> etc. simply adds the function to an internal <a href="rust/modules//book/rust/modules/index.html">module</a>!</p>
+on each top-level function within that <a href="rust/modules//book/rust/modules/index.html">module</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3482,11 +3633,18 @@ engine.eval::&lt;i64&gt;(&quot;services::calc::inc(41)&quot;)? == 42;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="expose-functions-to-the-global-namespace"><a class="header" href="#expose-functions-to-the-global-namespace">Expose Functions to the Global Namespace</a></h3>
-<p>The <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> API can optionally expose functions to the <a href="rust/modules//book/language/fn-namespaces.html"><em>global</em> namespace</a>
-by setting the <code>namespace</code> parameter to <code>FnNamespace::Global</code>, so <a href="rust/modules//book/rust/getters-setters.html">getters/setters</a> and <a href="rust/modules//book/rust/indexers.html">indexers</a>
-for <a href="rust/modules//book/rust/custom.html">custom types</a> can work as expected.</p>
-<p><a href="rust/modules//book/language/iterator.html">Type iterators</a>, because of their special nature, are <em>always</em> exposed to the
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Type iterators</p>
+</div>
+<div>
+<p><a href="rust/modules//book/language/iterator.html">Type iterators</a> are special — they are <em>always</em> exposed to the
 <a href="rust/modules//book/language/fn-namespaces.html"><em>global</em> namespace</a>.</p>
+</div>
+</div>
+<p>The <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> API can optionally expose functions to the <a href="rust/modules//book/language/fn-namespaces.html"><em>global</em> namespace</a>
+by setting the <code>namespace</code> parameter to <code>FnNamespace::Global</code>.</p>
+<p>This way, <a href="rust/modules//book/rust/getters-setters.html">getters/setters</a> and <a href="rust/modules//book/rust/indexers.html">indexers</a> for <a href="rust/modules//book/rust/custom.html">custom types</a> can work as expected.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3585,14 +3743,29 @@ Loads a script file (based off the current directory or a specified one) with <c
 <p>All <a href="rust/modules//book/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="rust/modules//book/language/modules/import.html"><code>import</code></a> statements become sub-<a href="rust/modules//book/rust/modules/index.html">modules</a>,
 which are also available to functions defined within the same script file.</p>
 <h3 id="base-directory"><a class="header" href="#base-directory">Base directory</a></h3>
-<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory (if set).
-The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
-<p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then it is based off the
-directory holding the loading script. This allows scripts to simply load each other.</p>
+<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory.</p>
+<p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: No base directory</p>
+</div>
+<div>
+<p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then relative paths are
+based off the directory of the loading script.</p>
+<p>This allows scripts to simply load each other.</p>
+</div>
+</div>
 <h3 id="caching"><a class="header" href="#caching">Caching</a></h3>
 <p>By default, <a href="rust/modules//book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
 repeatedly imported.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Enable/disable caching</p>
+</div>
+<div>
 <p>Use <code>FileModuleResolver::enable_cache</code> to enable/disable the script file cache.</p>
+</div>
+</div>
 <h3 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h3>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be <a href="rust/modules//book/start/bin.html"><code>rhai-run</code></a>).</p>
@@ -3695,7 +3868,15 @@ m::greet();                         // prints &quot;hello! from module!&quot;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="staticmoduleresolver"><a class="header" href="#staticmoduleresolver"><code>StaticModuleResolver</code></a></h2>
-<p>Loads <a href="rust/modules//book/rust/modules/index.html">modules</a> that are statically added. This can be used under <a href="rust/modules//book/start/features.html"><code>no_std</code></a>.</p>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Typical usage</p>
+</div>
+<div>
+<p>Often used in <a href="rust/modules//book/start/features.html"><code>no_std</code></a> or embedded environments without a file system.</p>
+</div>
+</div>
+<p>Loads <a href="rust/modules//book/rust/modules/index.html">modules</a> that are statically added.</p>
 <p>Functions are searched in the <a href="rust/modules//book/language/fn-namespaces.html"><em>global</em> namespace</a> by default.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -3709,7 +3890,8 @@ resolver.insert(&quot;my_module&quot;, module);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="moduleresolverscollection"><a class="header" href="#moduleresolverscollection"><code>ModuleResolversCollection</code></a></h2>
-<p>A collection of module resolvers. <a href="rust/modules//book/rust/modules/index.html">Modules</a> will be resolved from each resolver in sequential order.</p>
+<p>A collection of module resolvers.</p>
+<p><a href="rust/modules//book/rust/modules/index.html">Modules</a> are resolved from each resolver in sequential order.</p>
 <p>This is useful when multiple types of <a href="rust/modules//book/rust/modules/index.html">modules</a> are needed simultaneously.</p>
 <h2 id="dummyresolverscollection"><a class="header" href="#dummyresolverscollection"><code>DummyResolversCollection</code></a></h2>
 <p>This module resolver acts as a <em>dummy</em> and always fails all module resolution calls.</p>
@@ -3829,6 +4011,15 @@ which indicates that this API is not supported by the <a href="rust/modules//boo
 <p><code>ModuleResolver::resolve_ast</code> should not return an error if <code>ModuleResolver::resolve</code> will not.
 On the other hand, the same error should be returned if <code>ModuleResolver::resolve</code> will return one.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="compile-to-a-self-contained-ast"><a class="header" href="#compile-to-a-self-contained-ast">Compile to a Self-Contained <code>AST</code></a></h1>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
+<p>It does not matter where the <a href="rust/modules//book/language/modules/import.html"><code>import</code></a> statement occurs — e.g. deep within statement blocks
+or within function bodies.</p>
+</div>
+</div>
 <p>When a script <a href="rust/modules//book/language/modules/import.html">imports</a> external <a href="rust/modules//book/rust/modules/index.html">modules</a> that may not be available later on, it is
 possible to eagerly <a href="rust/modules//book/rust/modules/resolvers.html"><em>pre-resolve</em></a> these imports and embed them directly into a
 self-contained <a href="rust/modules//book/engine/compile.html"><code>AST</code></a>.</p>
@@ -3859,8 +4050,6 @@ engine.run(&amp;ast)?;
 <h2 id="only-static-paths"><a class="header" href="#only-static-paths">Only Static Paths</a></h2>
 <p><code>Engine::compile_into_self_contained</code> only pre-resolves <a href="rust/modules//book/language/modules/import.html"><code>import</code></a> statements in the script
 that are <em>static</em>, i.e. with a path that is a <a href="rust/modules//book/language/strings-chars.html">string</a> literal.</p>
-<p>It does not matter where the <a href="rust/modules//book/language/modules/import.html"><code>import</code></a> statement occurs (e.g. deep within statement blocks,
-within function bodies).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3984,7 +4173,7 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Doc-comments</p>
 </div>
@@ -4026,9 +4215,15 @@ increment(x);
 x == 43;
 <span class="boring">}
 </span></code></pre></pre>
-<p>Notice that, when using a <a href="plugins//book/rust/modules/index.html">module</a> as a <a href="plugins//book/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
-can be accessed.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Only functions</p>
+</div>
+<div>
+<p>When using a <a href="plugins//book/rust/modules/index.html">module</a> as a <a href="plugins//book/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em> can be accessed.</p>
 <p>Variables as well as sub-modules are <strong>ignored</strong>.</p>
+</div>
+</div>
 <h3 id="use-engineregister_static_module"><a class="header" href="#use-engineregister_static_module">Use <code>Engine::register_static_module</code></a></h3>
 <p>Another simple way to register this into an <a href="plugins//book/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code>
 macro to turn it into a normal Rhai <a href="plugins//book/rust/modules/index.html">module</a>, then use <code>Engine::register_static_module</code> on it.</p>
@@ -4078,17 +4273,31 @@ x == 43;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="use-dynamically"><a class="header" href="#use-dynamically">Use Dynamically</a></h3>
+<div class="admonition info side wide">
+<div class="admonition-title">
+<p>See also</p>
+</div>
+<div>
+<p>See the <a href="plugins//book/rust/modules/index.html">module</a> section for more information.</p>
+</div>
+</div>
 <p>Using this directly as a dynamically-loadable Rhai <a href="plugins//book/rust/modules/index.html">module</a> is almost the same, except that a
 <a href="plugins//book/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
-<p>See the <a href="plugins//book/rust/modules/index.html">module</a> section for more information.</p>
 <h3 id="combine-into-custom-package"><a class="header" href="#combine-into-custom-package">Combine into Custom Package</a></h3>
 <p>Finally, the plugin module can also be used to develop a <a href="plugins//book/rust/packages/create.html">custom package</a>, using
 <code>combine_with_exported_module!</code> which automatically <em>flattens</em> the module namespace so that all
 functions in sub-modules are promoted to the top level <a href="plugins//book/language/fn-namespaces.html">namespace</a>, all
 sub-modules are eliminated, and all variables are ignored.</p>
-<p>Due to this <em>flattening</em>, sub-modules are used conveniently as a <em>grouping</em> mechanism, especially to
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Feature gating</p>
+</div>
+<div>
+<p>Due to <em>flattening</em>, sub-modules are often used conveniently as a <em>grouping</em> mechanism, especially to
 put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a large collection of functions
-without having to duplicate the gates onto individual functions.</p>
+without having to duplicate the gates onto each individual function.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4145,9 +4354,9 @@ combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
-<div class="admonition info side">
+<div class="admonition tip side">
 <div class="admonition-title">
-<p><code>NativeCallContext</code> parameter</p>
+<p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
 <div>
 <p>The <em>first</em> parameter of a function can also be <a href="plugins//book/rust/context.html"><code>NativeCallContext</code></a>.</p>
@@ -4159,8 +4368,22 @@ attribute to individual functions.</p>
 the <a href="plugins//book/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
 <p>With <code>#[rhai_fn(name = &quot;...&quot;)]</code>, multiple functions may be registered under the same name in Rhai,
 so long as they have different parameters.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Operators</p>
+</div>
+<div>
 <p>Operators (which require function names that are not valid for Rust) can also be registered this way.</p>
-<p>Registering the same function name with the same parameter types will cause a parsing error.</p>
+</div>
+</div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Duplicated functions</p>
+</div>
+<div>
+<p>Registering the same function name with the same parameter types will cause a parse error.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4186,8 +4409,22 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="getters-setters-and-indexers"><a class="header" href="#getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>Tip: Global namespace</p>
+</div>
+<div>
+<p><a href="plugins//book/rust/getters-setters.html">Getters/setters</a> and <a href="plugins//book/rust/indexers.html">indexers</a> default to <code>#[rhai_fn(global)]</code> unless overridden by <code>#[rhai_fn(internal)]</code>.</p>
+</div>
+</div>
 <p>Functions can be marked as <a href="plugins//book/rust/getters-setters.html">getters/setters</a> and <a href="plugins//book/rust/indexers.html">indexers</a> for <a href="plugins//book/rust/custom.html">custom types</a> via the
 <code>#[rhai_fn]</code> attribute, which is applied on a function level.</p>
+<table><thead><tr><th style="text-align: center">Attribute</th><th style="text-align: center">Description</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>#[rhai_fn(get = &quot;</code><em>property</em><code>&quot;)]</code></td><td style="text-align: center">property getter</td></tr>
+<tr><td style="text-align: center"><code>#[rhai_fn(set = &quot;</code><em>property</em><code>&quot;)]</code></td><td style="text-align: center">property setter</td></tr>
+<tr><td style="text-align: center"><code>#[rhai_fn(index_get)]</code></td><td style="text-align: center">index getter</td></tr>
+<tr><td style="text-align: center"><code>#[rhai_fn(index_set)]</code></td><td style="text-align: center">index setter</td></tr>
+</tbody></table>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4223,9 +4460,16 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="multiple-registrations"><a class="header" href="#multiple-registrations">Multiple Registrations</a></h2>
-<p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times.</p>
-<p>This is especially useful for the <code>name = &quot;...&quot;</code>, <code>get = &quot;...&quot;</code> and <code>set = &quot;...&quot;</code> parameters to give
+<p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times, separated by commas.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Overloaded names</p>
+</div>
+<div>
+<p>Multiple registrations is useful for <code>name = &quot;...&quot;</code>, <code>get = &quot;...&quot;</code> and <code>set = &quot;...&quot;</code> to give
 multiple alternative names to the same function.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4250,12 +4494,36 @@ mod my_module {
 <tr><td><code>index_get</code></td><td style="text-align: center"><a href="plugins//book/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
 </tbody></table>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
+<div class="admonition bug side wide">
+<div class="admonition-title">
+<p>Error</p>
+</div>
+<div>
+<p>Non-pure functions, when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
+runtime error.</p>
+</div>
+</div>
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
-to mark it as  <em>pure</em>.</p>
-<p>Pure functions <em>MUST NOT</em> modify the value of the <code>&amp;mut</code> parameter.</p>
-<p>Therefore, pure functions can be passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
-<p>Non-pure functions, when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
-<code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
+to mark it as  <em>pure</em> – i.e. it does not modify the <code>&amp;mut</code> parameter.</p>
+<p>This is often done to avoid expensive cloning for methods or <a href="plugins//book/rust/getters-setters.html">property getters</a>
+that return information about a <a href="plugins//book/rust/custom.html">custom type</a> and does not modify it.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must not modify <code>&amp;mut</code> parameter</p>
+</div>
+<div>
+<p>Pure functions <em>MUST NOT</em> modify the <code>&amp;mut</code> parameter.
+There is no checking.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Constants OK</p>
+</div>
+<div>
+<p>Pure functions can be passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4312,8 +4580,6 @@ let r = VECTOR.first2;      // runtime error: constant modified
 <p>To register <a href="plugins//book/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[rhai_fn(return_raw)]</code> attribute on functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
-<p>A syntax error is generated if the function with <code>#[rhai_fn(return_raw)]</code> does not have the
-appropriate return type.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4333,6 +4599,17 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error</p>
+</div>
+<div>
+<p>A compilation error — usually something that says <code>Result</code> does not implement
+<code>Clone</code> — is generated if a fallible function is missing <code>#[rhai_fn(return_raw)]</code>.</p>
+<p>It is another compilation error for the reverse — a function with
+<code>#[rhai_fn(return_raw)]</code> does not have the appropriate return type.</p>
+</div>
+</div>
 <h2 id="export_module-parameters"><a class="header" href="#export_module-parameters"><code>#[export_module]</code> Parameters</a></h2>
 <p>Parameters can be applied to the <code>#[export_module]</code> attribute to override its default behavior.</p>
 <table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
@@ -4341,8 +4618,15 @@ mod my_module {
 <tr><td><code>export_prefix = &quot;...&quot;</code></td><td>exports functions (including private, non-<code>pub</code> functions) with names starting with a specific prefix</td></tr>
 </tbody></table>
 <h2 id="inner-attributes"><a class="header" href="#inner-attributes">Inner Attributes</a></h2>
-<p>Inner attributes can be applied to the inner items of a module to tweak the export process.</p>
+<div class="admonition info side wide">
+<div class="admonition-title">
+<p><code>rhai_fn</code> vs <code>rhai_mod</code></p>
+</div>
+<div>
 <p><code>#[rhai_fn]</code> is applied to functions, while <code>#[rhai_mod]</code> is applied to sub-modules.</p>
+</div>
+</div>
+<p>Inner attributes can be applied to the inner items of a module to tweak the export process.</p>
 <p>Parameters should be set on inner attributes to specify the desired behavior.</p>
 <table><thead><tr><th>Attribute Parameter</th><th>Use with</th><th>Apply to</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>skip</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/<a href="plugins//book/rust/modules/index.html">sub-module</a></td></tr>
@@ -4367,19 +4651,34 @@ functions instead of a full-blown <a href="plugins//book/plugins/module.html">pl
 <tr><td><code>set_exported_global_fn!</code></td><td><code>set_exported_global_fn!(&amp;mut</code> <em>module</em><code>,</code> <code>&quot;</code><em>name</em><code>&quot;,</code> <em>function</em><code>)</code></td><td>registers the function into a <a href="plugins//book/rust/modules/index.html"><code>Module</code></a> under a specific name, exposing it to the <a href="plugins//book/language/fn-namespaces.html">global namespace</a></td></tr>
 </tbody></table>
 <h2 id="export_fn-and-register_exported_fn"><a class="header" href="#export_fn-and-register_exported_fn"><code>#[export_fn]</code> and <code>register_exported_fn!</code></a></h2>
-<div class="admonition info side">
+<div class="admonition tip side">
 <div class="admonition-title">
-<p><code>NativeCallContext</code> parameter</p>
+<p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
 <div>
 <p>The <em>first</em> parameter of a function can also be <a href="plugins//book/rust/context.html"><code>NativeCallContext</code></a>.</p>
 </div>
 </div>
 <p>Apply <code>#[export_fn]</code> onto a function defined at <em>Rust module level</em> to convert it into a Rhai plugin function.</p>
+<p>To register the plugin function, simply call <code>register_exported_fn!</code>.</p>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Global scope only</p>
+</div>
+<div>
 <p>The function cannot be nested inside another function – it can only be defined directly under
 a Rust module.</p>
-<p>To register the plugin function, simply call <code>register_exported_fn!</code>.  The name of the function can be
-any text string, so it is possible to register <em>overloaded</em> functions as well as operators.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Overloading</p>
+</div>
+<div>
+<p>The name of the function can be any text string, so it is possible to register <em>overloaded</em> functions
+as well as operators.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">use rhai::plugin::*;        // import macros
 
 #[export_fn]
@@ -4395,15 +4694,37 @@ fn main() {
 }
 </code></pre></pre>
 <h2 id="pure-functions-1"><a class="header" href="#pure-functions-1">Pure Functions</a></h2>
+<div class="admonition bug side wide">
+<div class="admonition-title">
+<p>Error</p>
+</div>
+<div>
+<p>Non-pure functions, when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
+runtime error.</p>
+</div>
+</div>
 <p>Some functions are <em>pure</em> – i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as <code>&amp;mut</code> (e.g. for a method function).</p>
-<p>This is most commonly done to avoid expensive cloning for methods or <a href="plugins//book/rust/getters-setters.html">property getters</a>
+<p>This is often done to avoid expensive cloning for methods or <a href="plugins//book/rust/getters-setters.html">property getters</a>
 that return information about a <a href="plugins//book/rust/custom.html">custom type</a> and does not modify it.</p>
 <p>Apply the <code>#[export_fn(pure)]</code> attribute on a plugin function to mark it as  <em>pure</em>.</p>
-<p>Pure functions can be passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter. The condition is that
-they <em>MUST NOT</em> modify that value.</p>
-<p>Non-pure functions, when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
-<code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must not modify <code>&amp;mut</code> parameter</p>
+</div>
+<div>
+<p>Pure functions <em>MUST NOT</em> modify the <code>&amp;mut</code> parameter.
+There is no checking.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Constants OK</p>
+</div>
+<div>
+<p>Pure functions can be passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4427,8 +4748,6 @@ pub fn clear(my_type: &amp;mut TestStruct) {
 <p>To register <a href="plugins//book/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[export_fn(return_raw)]</code> attribute on plugin functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
-<p>A syntax error is generated if the function with <code>#[export_fn(return_raw)]</code> does not have the
-appropriate return type.</p>
 <pre><pre class="playground"><code class="language-rust no_run">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 #[export_fn(return_raw)]
@@ -4447,15 +4766,26 @@ fn main() {
     register_exported_fn!(engine, &quot;+&quot;, double_and_divide);
 }
 </code></pre></pre>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error</p>
+</div>
+<div>
+<p>A compilation error — usually something that says <code>Result</code> does not implement
+<code>Clone</code> — is generated if a fallible function is missing <code>#[rhai_fn(return_raw)]</code>.</p>
+<p>It is another compilation error for the reverse — a function with
+<code>#[rhai_fn(return_raw)]</code> does not have the appropriate return type.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="packages"><a class="header" href="#packages">Packages</a></h1>
 <p>The built-in library of Rhai is provided as various <em>packages</em> that can be turned into <em>shared</em>
 <a href="rust/packages//book/rust/modules/index.html">modules</a>, which in turn can be registered into the <em>global namespace</em> of an <a href="rust/packages//book/engine/hello-world.html"><code>Engine</code></a> via
 <code>Engine::register_global_module</code>.</p>
 <p>Packages reside under <code>rhai::packages::*</code> and the trait <code>rhai::packages::Package</code> must be loaded in
 order for packages to be used.</p>
-<div class="admonition tip">
+<div class="admonition question small">
 <div class="admonition-title">
-<p>Trivia: Packages <em>are</em> modules!</p>
+<p>Rhai internals: Packages <em>are</em> modules!</p>
 </div>
 <div>
 <p>Internally, a <em>package</em> is a <a href="rust/packages//book/rust/modules/index.html">module</a>, with some conveniences to make it easier to define and use as
@@ -4471,8 +4801,15 @@ All <em>top-level</em> functions in a package are available under the <em>global
 <p>Once a package is created (e.g. via <code>Package::new</code>), it can create <em>shared</em> <a href="rust/packages//book/rust/modules/index.html">modules</a>
 (via <code>Package::as_shared_module</code>) and register into multiple instances of <a href="rust/packages//book/engine/hello-world.html"><code>Engine</code></a>,
 even across threads (under the <a href="rust/packages//book/start/features.html"><code>sync</code></a> feature).</p>
-<p>Therefore, a package only has to be created <em>once</em> and essentially shared among multiple <a href="rust/packages//book/engine/hello-world.html"><code>Engine</code></a> instances.
-This is particularly useful when spawning large number of <a href="rust/packages//book/engine/raw.html">raw <code>Engine</code>’s</a>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Sharing package</p>
+</div>
+<div>
+<p>A package only has to be created <em>once</em> and essentially shared among multiple <a href="rust/packages//book/engine/hello-world.html"><code>Engine</code></a> instances.</p>
+<p>This is particularly useful when spawning large number of <a href="rust/packages//book/engine/raw.html">raw <code>Engine</code>’s</a>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -4620,9 +4957,16 @@ def_package! {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="create-a-custom-package-from-a-plugin-module"><a class="header" href="#create-a-custom-package-from-a-plugin-module">Create a Custom Package from a Plugin Module</a></h2>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Rhai internals</p>
+</div>
+<div>
+<p>This is exactly how Rhai’s built-in <a href="rust/packages//book/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are actually implemented.</p>
+</div>
+</div>
 <p>By far the easiest way to create a custom <a href="rust/packages//book/rust/packages/index.html">package</a> is to call <code>plugin::combine_with_exported_module!</code>
 from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="rust/packages//book/plugins/module.html">plugin module</a>.</p>
-<p>In fact, this exactly is how Rhai’s built-in <a href="rust/packages//book/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are implemented.</p>
 <p>Due to specific requirements of a <a href="rust/packages//book/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
 <em>flattens</em> all sub-modules (i.e. all functions and <a href="rust/packages//book/language/iterator.html">type iterators</a> defined within sub-modules
 are pulled up to the top level instead) and so there will not be any sub-modules added to the <a href="rust/packages//book/rust/packages/index.html">package</a>.</p>
@@ -4867,7 +5211,7 @@ end of the line.</p>
 are <em>doc-comments</em>.</p>
 <p>Doc-comments can only appear in front of <a href="language//book/language/functions.html">function</a> definitions, not any other elements.
 Therefore, doc-comments are not available under <a href="language//book/start/features.html"><code>no_function</code></a>.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Requires <code>metadata</code></p>
 </div>
@@ -4958,7 +5302,7 @@ Rhai script functions.</p>
 <tr><td><strong>Shared value</strong> (a reference-counted, shared <a href="language//book/language/dynamic.html"><code>Dynamic</code></a> value, created via <a href="language//book/language/fn-closure.html">automatic currying</a>, disabled with <a href="language//book/start/features.html"><code>no_closure</code></a>)</td><td></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
 <tr><td><strong>Nothing/void/nil/null/Unit</strong> (or whatever it is called)</td><td><code>()</code></td><td><code>&quot;()&quot;</code></td><td><code>&quot;&quot;</code> <em>(empty string)</em></td></tr>
 </tbody></table>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>All types are distinct</p>
 </div>
@@ -4974,7 +5318,7 @@ them and make a smaller build with the <a href="language//book/start/features.ht
 <p>If only 32-bit integers are needed, enabling the <a href="language//book/start/features.html"><code>only_i32</code></a> feature will remove support for all
 integer types other than <code>i32</code>, including <code>i64</code>.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Default integer is <code>i64</code></p>
 </div>
@@ -4985,7 +5329,7 @@ runtime performance hit since the <a href="language//book/engine/hello-world.htm
 <a href="language//book/start/features.html"><code>only_i32</code></a> feature).</p>
 </div>
 </div>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Floating-point numbers</p>
 </div>
@@ -4994,7 +5338,7 @@ runtime performance hit since the <a href="language//book/engine/hello-world.htm
 <p>Some applications require fixed-precision decimal numbers, which can be enabled via the <a href="language//book/start/features.html"><code>decimal</code></a> feature.</p>
 </div>
 </div>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Strings</p>
 </div>
@@ -5004,7 +5348,7 @@ runtime performance hit since the <a href="language//book/engine/hello-world.htm
 <p>Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.</p>
 </div>
 </div>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Convert to string</p>
 </div>
@@ -5015,7 +5359,7 @@ runtime performance hit since the <a href="language//book/engine/hello-world.htm
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-values"><a class="header" href="#dynamic-values">Dynamic Values</a></h1>
 <p>A <code>Dynamic</code> value can be <em>any</em> type, as long as it implements <code>Clone</code>.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p><code>Send + Sync</code></p>
 </div>
@@ -5047,10 +5391,17 @@ switch type_of(mystery) {
 }
 </code></pre>
 <h2 id="type-checking-and-casting"><a class="header" href="#type-checking-and-casting">Type Checking and Casting</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: <code>Dynamic::try_cast</code></p>
+</div>
+<div>
+<p>The <code>try_cast</code> method does not panic but returns <code>None</code> upon failure.</p>
+</div>
+</div>
 <p>A <code>Dynamic</code> value’s actual type can be checked via <code>Dynamic::is</code>.</p>
 <p>The <code>cast</code> method then converts the value into a specific, known type.</p>
-<p>Alternatively, use the <code>try_cast</code> method which does not panic but returns <code>None</code> when the cast fails.</p>
-<p>Use <code>clone_cast</code> for on a reference to <code>Dynamic</code>.</p>
+<p>Use <code>clone_cast</code> to clone a reference to <code>Dynamic</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -5096,7 +5447,7 @@ match item.type_name() {                    // 'type_name' returns the name of t
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Always full path name</p>
 </div>
@@ -5239,7 +5590,7 @@ engine
 <p>Each <a href="language//book/language/dynamic.html"><code>Dynamic</code></a> value can contain a <em>tag</em> that is <code>i32</code> and can contain any arbitrary data.</p>
 <p>On 32-bit targets, however, the tag is only <code>i16</code>.</p>
 <p>The tag defaults to zero.</p>
-<div class="admonition bug">
+<div class="admonition bug small">
 <div class="admonition-title">
 <p>Value out of bounds</p>
 </div>
@@ -5464,7 +5815,14 @@ built-in support of tuples in order to return multiple values from <a href="lang
 <div style="break-before: page; page-break-before: always;"></div><h1 id="serialization-and-deserialization-of-dynamic-with-serde"><a class="header" href="#serialization-and-deserialization-of-dynamic-with-serde">Serialization and Deserialization of <code>Dynamic</code> with <code>serde</code></a></h1>
 <p>Rhai’s <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> type supports serialization and deserialization by
 <a href="https://crates.io/crates/serde"><code>serde</code></a> via the <a href="rust//book/start/features.html"><code>serde</code></a> feature.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
 <p><a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> works <em>both</em> as a <em>serialization format</em> as well as a data type that is serializable.</p>
+</div>
+</div>
 <h2 id="serializedeserialize-a-dynamic"><a class="header" href="#serializedeserialize-a-dynamic">Serialize/Deserialize a <code>Dynamic</code></a></h2>
 <p>With the <a href="rust//book/start/features.html"><code>serde</code></a> feature turned on, <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> implements <a href="https://docs.serde.rs/serde/trait.Serialize.html"><code>serde::Serialize</code></a> and
 <a href="https://docs.serde.rs/serde/trait.Deserialize.html"><code>serde::Deserialize</code></a>, so it can easily be serialized and deserialized with <a href="rust//book/rust/serde.html"><code>serde</code></a>.</p>
@@ -5572,7 +5930,7 @@ r#&quot;
 let x: MyStruct = from_dynamic(&amp;result)?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Cannot deserialize shared values</p>
 </div>
@@ -5631,12 +5989,26 @@ let bytes: Vec&lt;u8&gt; = from_dynamic::&lt;serde_bytes::ByteBuf&gt;(&amp;blob)
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="numbers"><a class="header" href="#numbers">Numbers</a></h1>
 <h2 id="integers"><a class="header" href="#integers">Integers</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Bit-fields</p>
+</div>
+<div>
+<p>Integers can also be conveniently manipulated as <a href="language//book/language/bit-fields.html">bit-fields</a>.</p>
+</div>
+</div>
 <p>Integer numbers follow C-style format with support for decimal, binary (<code>0b</code>), octal (<code>0o</code>) and hex (<code>0x</code>) notations.</p>
 <p>The default system integer type (also aliased to <code>INT</code>) is <code>i64</code>. It can be turned into <code>i32</code> via the <a href="language//book/start/features.html"><code>only_i32</code></a> feature.</p>
-<p>Integers can also be conveniently manipulated as <a href="language//book/language/bit-fields.html">bit-fields</a>.</p>
 <h2 id="floating-point-numbers"><a class="header" href="#floating-point-numbers">Floating-Point Numbers</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Notations</p>
+</div>
+<div>
+<p>Both decimal and scientific notations can be used to represent floating-point numbers.</p>
+</div>
+</div>
 <p>Floating-point numbers are also supported if not disabled with <a href="language//book/start/features.html"><code>no_float</code></a>.</p>
-<p>Both decimal and scientific notations can be used.</p>
 <p>The default system floating-point type is <code>f64</code> (also aliased to <code>FLOAT</code>).
 It can be turned into <code>f32</code> via the <a href="language//book/start/features.html"><code>f32_float</code></a> feature.</p>
 <h2 id="decimal-numbers"><a class="header" href="#decimal-numbers"><code>Decimal</code> Numbers</a></h2>
@@ -5666,10 +6038,16 @@ numeric types.</p>
 <p>For example, a <code>u8</code> is never implicitly converted to <code>i64</code> when used as a parameter in a function
 call or as a comparison operand.  <code>f32</code> is never implicitly converted to <code>f64</code>.</p>
 <p>This is exactly the same as Rust where all numeric types are distinct.  Rhai is written in Rust afterall.</p>
-<p>Therefore, care must be taken especially with regards to integer variables pushed inside a custom <a href="language//book/engine/scope.html"><code>Scope</code></a>
-that they are of the intended type.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Warning</p>
+</div>
+<div>
+<p>Integer variables pushed inside a custom <a href="language//book/engine/scope.html"><code>Scope</code></a> must be the correct type.</p>
 <p>It is extremely easy to mess up numeric types since the Rust default integer type is <code>i32</code> while for
-Rhai it is <code>i64</code> (without <a href="language//book/start/features.html"><code>only_i32</code></a>).</p>
+Rhai it is <code>i64</code> (unless under <a href="language//book/start/features.html"><code>only_i32</code></a>).</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -5705,7 +6083,7 @@ engine.eval_with_scope::&lt;bool&gt;(&amp;mut scope, &quot;f == 42.0&quot;)?;
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="floating-point-vs-decimal"><a class="header" href="#floating-point-vs-decimal">Floating-Point vs. Decimal</a></h2>
-<div class="admonition tip side">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: <code>no_float</code> + <code>decimal</code></p>
 </div>
@@ -5983,7 +6361,7 @@ hex == 0xab;
 type_of(hex) == &quot;i64&quot;;
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="formatting-numbers"><a class="header" href="#formatting-numbers">Formatting Numbers</a></h2>
+<h2 id="format-numbers"><a class="header" href="#format-numbers">Format Numbers</a></h2>
 <table><thead><tr><th>Function</th><th style="text-align: center">From type</th><th style="text-align: center">To type</th><th style="text-align: center">Format</th></tr></thead><tbody>
 <tr><td><code>to_binary</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="language//book/language/strings-chars.html">string</a></td><td style="text-align: center">binary (i.e. only <code>1</code> and <code>0</code>)</td></tr>
 <tr><td><code>to_octal</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><a href="language//book/language/strings-chars.html">string</a></td><td style="text-align: center">octal (i.e. <code>0</code> … <code>7</code>)</td></tr>
@@ -6039,9 +6417,16 @@ x.to_hex() == &quot;1234abcd&quot;;
 <h2 id="use-as-parameter-type"><a class="header" href="#use-as-parameter-type">Use as Parameter Type</a></h2>
 <p>Native Rust functions that take parameters of type <code>std::ops::Range&lt;INT&gt;</code> or
 <code>std::ops::RangeInclusive&lt;INT&gt;</code>, when registered into an <a href="language//book/engine/hello-world.html"><code>Engine</code></a>, accept ranges as arguments.</p>
-<p>However, beware that <code>..</code> (exclusive range) and <code>..=</code> (inclusive range) are <em>different</em> types
-to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
-be registered to handle both range styles.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Different types</p>
+</div>
+<div>
+<p><code>..</code> (exclusive range) and <code>..=</code> (inclusive range) are <em>different</em> types to Rhai
+and they do not interoperate.</p>
+<p>Two different versions of the same API must be registered to handle both range styles.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -6209,7 +6594,7 @@ Built-in support makes handling them efficient.</p>
 <p><em>integer</em> <code>[</code> <em>start</em> <code>..</code> <em>end</em> <code>] =</code> <em>new integer value</em> ;<br />
 <em>integer</em> <code>[</code> <em>start</em> <code>..=</code> <em>end</em> <code>] =</code> <em>new integer value</em> ;</p>
 </blockquote>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Number of bits</p>
 </div>
@@ -6226,7 +6611,7 @@ Built-in support makes handling them efficient.</p>
 <p><em>integer</em> <code>[</code> <em>index from −1 to −64 or −32</em> <code>] =</code> <code>true</code> or <code>false</code> ;</p>
 </blockquote>
 <p><a href="language//book/language/ranges.html">Ranges</a> always count from the least-significant bit (LSB) and has no support for negative positions.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Number of bits</p>
 </div>
@@ -6297,7 +6682,7 @@ switch command {
 <tr><td>Multi-line literal string</td><td style="text-align: center"><code>`...`</code></td><td style="text-align: center">no</td><td style="text-align: center">no</td><td style="text-align: center">with <code>${...}</code></td></tr>
 <tr><td>Character</td><td style="text-align: center"><code>'...'</code></td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 </tbody></table>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Building strings</p>
 </div>
@@ -6436,7 +6821,7 @@ This is similar to many modern languages but different from Rust.</p>
 <blockquote>
 <p><em>string</em> <code>[</code> <em>index from −1 to −(total number of characters)</em> <code>]</code></p>
 </blockquote>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Character indexing can be SLOW</p>
 </div>
@@ -6501,9 +6886,16 @@ for ch in record {
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-immutablestring-type"><a class="header" href="#the-immutablestring-type">The <code>ImmutableString</code> Type</a></h1>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Why <code>SmartString</code>?</p>
+</div>
+<div>
+<p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because many strings in scripts are short (fewer than 24 ASCII characters).</p>
+</div>
+</div>
 <p>All <a href="rust//book/language/strings-chars.html">strings</a> in Rhai are implemented as <code>ImmutableString</code>, which is an alias to
 <code>Rc&lt;SmartString&gt;</code> (or <code>Arc&lt;SmartString&gt;</code> under the <a href="rust//book/start/features.html"><code>sync</code></a> feature).</p>
-<p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because many strings in scripts are short (fewer than 24 ASCII characters).</p>
 <p>An <code>ImmutableString</code> is immutable (i.e. never changes) and therefore can be shared among many users.
 Cloning an <code>ImmutableString</code> is cheap since it only copies an immutable reference.</p>
 <p>Modifying an <code>ImmutableString</code> causes it first to be cloned, and then the modification made to the copy.
@@ -6730,7 +7122,7 @@ elements added or removed.</p>
 <tr><td><code>sort</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first item</li><li>second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/language/strings-chars.html">string</a>, <a href="language//book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Use custom types with arrays</p>
 </div>
@@ -6929,7 +7321,7 @@ added or removed.</p>
 <blockquote>
 <p><em>blob</em> <code>[</code> <em>index position from −1 to −length</em> <code>]</code></p>
 </blockquote>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Byte values</p>
 </div>
@@ -7026,13 +7418,13 @@ print(buf);                 // prints &quot;[4209666f6f202620 626172000000abcd]&
 device.send(buf);           // send command to device
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition question">
+<div class="admonition question small">
 <div class="admonition-title">
 <p>What if I need UTF-8?</p>
 </div>
 <div>
 <p>The <code>write_utf8</code> function writes a string in UTF-8 encoding.</p>
-<p>UTF-8 is, however, not very commonly used in embedded systems.</p>
+<p>UTF-8 is, however, not very commonly used in embedded applications.</p>
 </div>
 </div>
 <h2 id="built-in-functions-2"><a class="header" href="#built-in-functions-2">Built-in Functions</a></h2>
@@ -7086,7 +7478,7 @@ device.send(buf);           // send command to device
 <tr><td><code>write_ascii</code></td><td><ol><li><a href="language//book/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="language//book/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="language//book/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="language//book/language/strings-chars.html">characters</a> are skipped)</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
-<div class="admonition tip side">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Safety</p>
 </div>
@@ -7094,21 +7486,7 @@ device.send(buf);           // send command to device
 <p>Always limit the <a href="language//book/safety/max-map-size.html">maximum size of object maps</a>.</p>
 </div>
 </div>
-<p>Object maps are hash dictionaries. Properties are all <a href="language//book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
-<p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
-Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
-<p><a href="language//book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
-<p>Object maps are disabled via the <a href="language//book/start/features.html"><code>no_object</code></a> feature.</p>
-<div class="admonition question">
-<div class="admonition-title">
-<p>Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
-</div>
-<div>
-<p>The vast majority of object maps contain just a few properties.</p>
-<p><code>BTreeMap</code> performs significantly better than <code>HashMap</code> when the number of entries is small.</p>
-</div>
-</div>
-<div class="admonition question">
+<div class="admonition question side wide">
 <div class="admonition-title">
 <p>Why <code>SmartString</code>?</p>
 </div>
@@ -7117,6 +7495,20 @@ Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.</p>
 </div>
 </div>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
+</div>
+<div>
+<p>The vast majority of object maps contain just a few properties.</p>
+<p><code>BTreeMap</code> performs significantly better than <code>HashMap</code> when the number of entries is small.</p>
+</div>
+</div>
+<p>Object maps are hash dictionaries. Properties are all <a href="language//book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
+<p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
+Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
+<p><a href="language//book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
+<p>Object maps are disabled via the <a href="language//book/start/features.html"><code>no_object</code></a> feature.</p>
 <h2 id="literal-syntax-1"><a class="header" href="#literal-syntax-1">Literal Syntax</a></h2>
 <p>Object map literals are built within braces <code>#{</code> … <code>}</code> with <em>name</em><code>:</code><em>value</em> pairs separated by
 commas <code>,</code>:</p>
@@ -7308,7 +7700,7 @@ let result = engine.eval_with_scope::&lt;i64&gt;(r#&quot;map[&quot;^^^!!!&quot;]
 result == 3;          // the object map is successfully used in the script
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition note">
+<div class="admonition note small">
 <div class="admonition-title">
 <p>Representation of numbers</p>
 </div>
@@ -7409,15 +7801,9 @@ via the <code>timestamp</code> function.</p>
 <p>The following methods (defined in the <a href="language//book/rust/packages/builtin.html"><code>BasicTimePackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) operate on timestamps.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>elapsed</code> method and property</td><td><em>none</em></td><td>returns the number of seconds since the timestamp</td></tr>
-<tr><td><code>+</code> operator</td><td>number of seconds to add</td><td>returns a new timestamp with a specified number of seconds added</td></tr>
-<tr><td><code>+=</code> operator</td><td>number of seconds to add</td><td>adds a specified number of seconds to the timestamp</td></tr>
-<tr><td><code>-</code> operator</td><td>number of seconds to subtract</td><td>returns a new timestamp with a specified number of seconds subtracted</td></tr>
-<tr><td><code>-=</code> operator</td><td>number of seconds to subtract</td><td>subtracts a specified number of seconds from the timestamp</td></tr>
 <tr><td><code>-</code> operator</td><td><ol><li>later timestamp</li><li>earlier timestamp</li></ol></td><td>returns the number of seconds between the two timestamps</td></tr>
-</tbody></table>
-<p>The following methods are defined in the <a href="language//book/rust/packages/builtin.html"><code>LanguageCorePackage</code></a> but excluded if using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>.</p>
-<table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>sleep</code></td><td>number of seconds to sleep</td><td>blocks the current thread for a specified number of seconds</td></tr>
+<tr><td><code>+</code> operator</td><td>number of seconds to add</td><td>returns a new timestamp</td></tr>
+<tr><td><code>-</code> operator</td><td>number of seconds to subtract</td><td>returns a new timestamp</td></tr>
 </tbody></table>
 <h2 id="examples-11"><a class="header" href="#examples-11">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -7640,10 +8026,31 @@ for loop_var in array {
 </div>
 <h2 id="declare-a-variable"><a class="header" href="#declare-a-variable">Declare a Variable</a></h2>
 <p>Variables are declared using the <code>let</code> keyword.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: No initial value</p>
+</div>
+<div>
 <p>Variables do not have to be given an initial value.
 If none is provided, it defaults to <a href="language//book/language/values-and-types.html"><code>()</code></a>.</p>
-<p>A variable defined within a statement block is <em>local</em> to that block.</p>
+</div>
+</div>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Variables are local</p>
+</div>
+<div>
+<p>A variable defined within a <a href="language/statements.html">statement block</a> is <em>local</em> to that block.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: <code>is_def_var</code></p>
+</div>
+<div>
 <p>Use <code>is_def_var</code> to detect if a variable is defined.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -7705,15 +8112,20 @@ engine.run_with_scope(&amp;mut scope,
 )?;
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>No <code>Scope</code></p>
+</div>
+<div>
 <p>If no <a href="language//book/engine/scope.html"><code>Scope</code></a> is used to evaluate the script (e.g. when using <code>Engine::run</code> instead of
-<code>Engine::run_with_scope</code>), only then will an undefined variable cause a runtime error when accessed.</p>
+<code>Engine::run_with_scope</code>), an undefined variable causes a runtime error when accessed.</p>
+</div>
+</div>
 <h2 id="strict-variables-mode"><a class="header" href="#strict-variables-mode">Strict Variables Mode</a></h2>
 <p>With <a href="language//book/engine/options.html"><code>Engine::set_strict_variables</code></a>, it is possible to turn on
 <a href="language//book/engine/strict-var.html"><em>Strict Variables</em></a> mode.</p>
 <p>When <a href="language//book/engine/strict-var.html">strict variables</a> mode is active, accessing a variable not previously defined within
 the same script directly causes a parse error when compiling the script.</p>
-<p>Turn on <a href="language//book/engine/strict-var.html">strict variables</a> mode if no <a href="language//book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
-This way, variable access errors are caught during compile time instead of runtime.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -7725,6 +8137,15 @@ print(foo);         // &lt;- parse error under strict variables mode:
                     //    variable 'foo' is undefined
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
+<p>Turn on <a href="language//book/engine/strict-var.html">strict variables</a> mode if no <a href="language//book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
+This way, variable access errors are caught during compile time instead of runtime.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variable-shadowing"><a class="header" href="#variable-shadowing">Variable Shadowing</a></h1>
 <p>In Rhai, new <a href="language//book/language/variables.html">variables</a> automatically <em>shadow</em> existing ones of the same name.  There is no error.</p>
 <p>This behavior is consistent with Rust.</p>
@@ -7761,9 +8182,12 @@ print(x);           // prints 0 - shadowing within the block goes away
 print(y);           // prints 123 - 'y' is not shadowed
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="disable-shadowing"><a class="header" href="#disable-shadowing">Disable Shadowing</a></h2>
-<p>If shadowing is not desired, set <a href="language//book/engine/options.html"><code>Engine::set_allow_shadowing</code></a> to <code>false</code> to turn
-<a href="language//book/language/variables.html">variables</a> shadowing off.</p>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Disable shadowing</p>
+</div>
+<div>
+<p>Set <a href="language//book/engine/options.html"><code>Engine::set_allow_shadowing</code></a> to <code>false</code> to turn <a href="language//book/language/variables.html">variables</a> shadowing off.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -7773,17 +8197,20 @@ let x = 123;        // &lt;- syntax error: variable 'x' already defined
                     //    when variables shadowing is disallowed
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="strict-variables-mode-1"><a class="header" href="#strict-variables-mode-1">Strict Variables Mode</a></h1>
 <p>By default, Rhai looks up access to <a href="engine//book/language/variables.html">variables</a> from the enclosing block scope,
 working its way outwards until it reaches the top (global) level, then it
 searches the <a href="engine//book/engine/scope.html"><code>Scope</code></a> (if any) that is passed into the <code>Engine::eval_with_scope</code> call.</p>
 <p>Setting <a href="engine//book/engine/options.html"><code>Engine::set_strict_variables</code></a> to <code>true</code> turns on <em>Strict Variables Mode</em>,
-which requires that all <a href="engine//book/language/variables.html">variables</a> be defined within the same script before use.
-<a href="engine//book/rust/modules/index.html">Modules</a> must be <a href="engine//book/language/modules/import.html">imported</a>, also within the same script, before use.</p>
+which requires that:</p>
+<ul>
+<li>all <a href="engine//book/language/variables.html">variables</a> be defined within the same script before use,</li>
+<li><a href="engine//book/rust/modules/index.html">modules</a> must be <a href="engine//book/language/modules/import.html">imported</a>, also within the same script, before use.</li>
+</ul>
 <p>Within <em>Strict Variables</em> mode, any attempt to access a <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/rust/modules/index.html">module</a> before
 definition/<a href="engine//book/language/modules/import.html">import</a> results in a parse error.</p>
-<p>Turn on <em>Strict Variables</em> mode if no <a href="engine//book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
-This way, variable access errors are caught during compile time instead of runtime.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -7808,6 +8235,15 @@ let x = abc::def;       // &lt;- parse error under strict variables mode:
                         //    module 'abc' is undefined
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
+<p>Turn on <em>Strict Variables</em> mode if no <a href="engine//book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
+This way, variable access errors are caught during compile time instead of runtime.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variable-definition-filter"><a class="header" href="#variable-definition-filter">Variable Definition Filter</a></h1>
 <p>Although it is easy to disable variable <em><a href="engine//book/language/shadow.html">shadowing</a></em> via <a href="engine//book/engine/options.html"><code>Engine::set_allow_shadowing</code></a>,
 sometimes more fine-grained control is needed.</p>
@@ -7864,7 +8300,7 @@ engine.on_def_var(|is_runtime, info, context| {
 <tr><td><code>Ok(false)</code></td><td><a href="engine//book/language/throw.html">throws</a> a runtime or compilation error</td></tr>
 <tr><td><code>Err(Box&lt;EvalAltResult&gt;)</code></td><td>error that is reflected back to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a></td></tr>
 </tbody></table>
-<div class="admonition bug">
+<div class="admonition bug small">
 <div class="admonition-title">
 <p>Error during compilation</p>
 </div>
@@ -7902,7 +8338,7 @@ engine.on_var(|name, index, context| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Benefits of using a variable resolver</p>
 </div>
@@ -7926,12 +8362,17 @@ or when they are expensive to load.</p>
 </ol>
 </div>
 </div>
-<h2 id="returned-values-are-constants"><a class="header" href="#returned-values-are-constants">Returned Values are Constants</a></h2>
-<p><a href="engine//book/language/variables.html">Variable</a> values, if any returned, are treated as <em><a href="engine//book/language/constants.html">constants</a></em> by the script and cannot be assigned to.
-This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.</p>
-<p>In order to change these <a href="engine//book/language/variables.html">variables</a>, it is best to push them into a custom <a href="engine//book/engine/scope.html"><code>Scope</code></a> instead of
-using a variable resolver. Then these <a href="engine//book/language/variables.html">variables</a> can be assigned to and their updated values read
-back after the script is evaluated.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Returned values are constants</p>
+</div>
+<div>
+<p><a href="engine//book/language/variables.html">Variable</a> values returned by a variable resolver are treated as <em><a href="engine//book/language/constants.html">constants</a></em>.</p>
+<p>This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.</p>
+<p>To change these <a href="engine//book/language/variables.html">variables</a>, better push them into a custom <a href="engine//book/engine/scope.html"><code>Scope</code></a> instead of
+using a variable resolver.</p>
+</div>
+</div>
 <h2 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_var</code> takes the following form.</p>
 <blockquote>
@@ -7953,8 +8394,6 @@ back after the script is evaluated.</p>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
 <p>Constants can be defined using the <code>const</code> keyword and are immutable.</p>
-<p>Constants follow the same naming rules as <a href="language//book/language/variables.html">variables</a>, but as a convention are often named with
-all-capital letters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -7967,11 +8406,27 @@ print(X * 2);       // prints 84
 X = 123;            // &lt;- syntax error: constant modified
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Naming</p>
+</div>
+<div>
+<p>Constants follow the same naming rules as <a href="language//book/language/variables.html">variables</a>, but as a convention are often named with
+all-capital letters.</p>
+</div>
+</div>
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Singleton</p>
+</div>
+<div>
+<p>A constant value holding a <a href="language//book/rust/custom.html">custom type</a> essentially acts
+as a <a href="language//book/patterns/singleton.html"><em>singleton</em></a>.</p>
+</div>
+</div>
 <p>It is possible to add a constant into a custom <a href="language//book/engine/scope.html"><code>Scope</code></a> via <code>Scope::push_constant</code> so it’ll be
 available to scripts running with that <a href="language//book/engine/scope.html"><code>Scope</code></a>.</p>
-<p>It is very useful to have a constant value hold a <a href="language//book/rust/custom.html">custom type</a>, which essentially acts
-as a <a href="language//book/patterns/singleton.html"><em>singleton</em></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8065,7 +8520,7 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 X == 43;            // value of 'X' is unchanged by script
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Implications on script optimization</p>
 </div>
@@ -8129,6 +8584,11 @@ x[1][2].prop = do_calculation();
 <p>The left-hand-side (LHS) of an assignment statement must be a valid
 <em><a href="https://en.wikipedia.org/wiki/Value_(computer_science)">l-value</a></em>, which must be rooted in a
 <a href="language//book/language/variables.html">variable</a>, potentially extended via indexing or properties.</p>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Assigning to invalid l-value</p>
+</div>
+<div>
 <p>Expressions that are not valid <em>l-values</em> cannot be assigned to.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -8146,6 +8606,8 @@ x.foo() = 42;           // syntax error: method call is not an l-value
 (x + y) = 42;           // syntax error: binary expression is not an l-value
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="compound-assignments"><a class="header" href="#compound-assignments">Compound Assignments</a></h1>
 <p>Compound assignments are assignments with a <a href="language//book/appendix/operators.html#operators">binary operator</a> attached.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -8404,9 +8866,16 @@ a() &amp; b();          // both a() and b() are evaluated
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="in-operator"><a class="header" href="#in-operator">In Operator</a></h1>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Rhai internals</p>
+</div>
+<div>
+<p>The <code>in</code> operator is simply syntactic sugar for a call to the <code>contains</code> function.</p>
+</div>
+</div>
 <p>The <code>in</code> operator is used to check for <em>containment</em> – i.e. whether a particular collection
 data type <em>contains</em> a particular item.</p>
-<p>Internally the <code>in</code> operator is simply syntactic sugar for a call to the <code>contains</code> function.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8415,19 +8884,13 @@ data type <em>contains</em> a particular item.</p>
 array.contains(42);     // &lt;- the above is equivalent to this
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info small">
-<div class="admonition-title">
-<p>Built-in support for standard data types</p>
-</div>
-<div>
+<h2 id="built-in-support-for-standard-data-types"><a class="header" href="#built-in-support-for-standard-data-types">Built-in Support for Standard Data Types</a></h2>
 <table><thead><tr><th style="text-align: center">Data type</th><th style="text-align: center">Check for</th></tr></thead><tbody>
 <tr><td style="text-align: center">Numeric <a href="language//book/language/ranges.html">range</a></td><td style="text-align: center">integer number</td></tr>
 <tr><td style="text-align: center"><a href="language//book/language/arrays.html">Array</a></td><td style="text-align: center">contained item</td></tr>
 <tr><td style="text-align: center"><a href="language//book/language/object-maps.html">Object map</a></td><td style="text-align: center">property name</td></tr>
 <tr><td style="text-align: center"><a href="language//book/language/strings-chars.html">String</a></td><td style="text-align: center"><a href="language//book/language/strings-chars.html">sub-string</a> or <a href="language//book/language/strings-chars.html">character</a></td></tr>
 </tbody></table>
-</div>
-</div>
 <h2 id="examples-12"><a class="header" href="#examples-12">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -8454,9 +8917,15 @@ let map = #{
 <h2 id="array-items-comparison"><a class="header" href="#array-items-comparison">Array Items Comparison</a></h2>
 <p>The default implementation of the <code>in</code> operator for <a href="language//book/language/arrays.html">arrays</a> uses the <code>==</code> operator (if defined)
 to compare items.</p>
-<p>Beware that, for a <a href="language//book/rust/custom.html">custom type</a>, <code>==</code> defaults to <code>false</code> when comparing it with a value of of the
-same type.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p><code>==</code> defaults to <code>false</code></p>
+</div>
+<div>
+<p>For a <a href="language//book/rust/custom.html">custom type</a>, <code>==</code> defaults to <code>false</code> when comparing it with a value of of the same type.</p>
 <p>See the section on <a href="language/logic.html"><em>Logic Operators</em></a> for more details.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8532,7 +9001,7 @@ r#&quot;
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Braces are mandatory</p>
 </div>
@@ -8546,7 +9015,7 @@ one statement inside the branch.</p>
 </span><span class="boring">fn main() {
 </span>// Rhai is not C!
 if (decision) print(42);
-//            ^ syntax error, expecting '{' in statement block
+//            ^ syntax error, expecting '{'
 <span class="boring">}
 </span></code></pre></pre>
 </div>
@@ -8554,6 +9023,14 @@ if (decision) print(42);
 <div style="break-before: page; page-break-before: always;"></div><h1 id="if-expression"><a class="header" href="#if-expression">If Expression</a></h1>
 <p>Like Rust, <a href="language//book/language/if.html"><code>if</code></a> statements can also be used as <em>expressions</em>, replacing the <code>? :</code> conditional
 operators in other C-like languages.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>if</code> expressions</p>
+</div>
+<div>
+<p><a href="language//book/language/if.html"><code>if</code></a> expressions can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_if_expression</code></a>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8565,7 +9042,6 @@ let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 <span class="boring">}
 </span></code></pre></pre>
-<p><a href="language//book/language/if.html"><code>if</code></a> expressions can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_if_expression</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="switch-statement"><a class="header" href="#switch-statement">Switch Statement</a></h1>
 <p>The <code>switch</code> statement allows matching on <a href="language//book/appendix/literals.html">literal</a> values, and it mostly follows Rust’s <code>match</code> syntax.</p>
 <pre><code class="language-js">switch calc_secret_value(x) {
@@ -8581,7 +9057,14 @@ x == ();
 </code></pre>
 <h2 id="default-case"><a class="header" href="#default-case">Default Case</a></h2>
 <p>A <em>default</em> case (i.e. when no other cases match) can be specified with <code>_</code>.</p>
-<p>However, it must be the <em>last</em> case in the <code>switch</code> statement.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must be last</p>
+</div>
+<div>
+<p>The default case must be the <em>last</em> case in the <code>switch</code> statement.</p>
+</div>
+</div>
 <pre><code class="language-js">switch wrong_default {
     1 =&gt; 2,
     _ =&gt; 9,     // &lt;- syntax error: default case not the last
@@ -8618,7 +9101,7 @@ switch map {
 <h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
 <p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to <code>true</code> in order for the case to match.</p>
-<p>Unlike Rust, however, case conditions still do not allow the case values to duplicate.</p>
+<p>Unlike Rust, however, case conditions do not allow the case values to duplicate.</p>
 <pre><code class="language-js">let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) =&gt; 100,
 
@@ -8635,10 +9118,17 @@ that must evaluate to <code>true</code> in order for the case to match.</p>
 };
 </code></pre>
 <h2 id="range-cases"><a class="header" href="#range-cases">Range Cases</a></h2>
-<p>Because of their popularity, <a href="language//book/appendix/literals.html">literal</a> integer <a href="language//book/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases,
-but they must come <em>after</em> all integer cases.</p>
+<p>Because of their popularity, <a href="language//book/appendix/literals.html">literal</a> integer <a href="language//book/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases.</p>
 <p>Numeric <a href="language//book/language/ranges.html">ranges</a> are only searched when the <code>switch</code> value is itself an integer (i.e. they never
 match any other data types).</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must come after integer cases</p>
+</div>
+<div>
+<p>Range cases must come <em>after</em> all integer cases.</p>
+</div>
+</div>
 <pre><code class="language-js">let x = 42;
 
 switch x {
@@ -8693,8 +9183,23 @@ number of cases to match.</p>
 essentially an O(n) <em>linear scan</em> is performed.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="switch-expression"><a class="header" href="#switch-expression">Switch Expression</a></h1>
 <p>Like <a href="language//book/language/if.html"><code>if</code></a>, <a href="language//book/language/switch.html"><code>switch</code></a> also works as an <em>expression</em>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
 <p>This means that a <a href="language//book/language/switch.html"><code>switch</code></a> expression can appear anywhere a regular expression can,
 e.g. as <a href="language//book/language/functions.html">function</a> call arguments.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>switch</code> expressions</p>
+</div>
+<div>
+<p><a href="language//book/language/switch.html"><code>switch</code></a> expressions can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_switch_expression</code></a>.</p>
+</div>
+</div>
 <pre><code class="language-js">let x = switch foo { 1 =&gt; true, _ =&gt; false };
 
 func(switch foo {
@@ -8715,11 +9220,18 @@ if foo == &quot;hello&quot; {
     func(0);
 }
 </code></pre>
-<p><a href="language//book/language/switch.html"><code>switch</code></a> expressions can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_switch_expression</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="while-loop"><a class="header" href="#while-loop">While Loop</a></h1>
 <p><code>while</code> loops follow C syntax.</p>
 <p>Like C, <code>continue</code> can be used to skip to the next iteration, by-passing all following statements;
 <code>break</code> can be used to break out of the loop unconditionally.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>while</code> loops</p>
+</div>
+<div>
+<p><code>while</code> loops can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8733,11 +9245,18 @@ while x &gt; 0 {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p><code>while</code> loops can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="do-loop"><a class="header" href="#do-loop">Do Loop</a></h1>
 <p><code>do</code> loops have two opposite variants: <code>do</code> … <code>while</code> and <code>do</code> … <code>until</code>.</p>
 <p>Like the <a href="language//book/language/while.html"><code>while</code></a> loop, <code>continue</code> can be used to skip to the next iteration, by-passing all
 following statements; <code>break</code> can be used to break out of the loop unconditionally.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>do</code> loops</p>
+</div>
+<div>
+<p><code>do</code> loops can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8759,11 +9278,18 @@ do {
 } until x == 0;
 <span class="boring">}
 </span></code></pre></pre>
-<p><code>do</code> loops can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="infinite-loop"><a class="header" href="#infinite-loop">Infinite Loop</a></h1>
 <p>Infinite loops follow Rust syntax.</p>
 <p>Like Rust, <code>continue</code> can be used to skip to the next iteration, by-passing all following statements;
 <code>break</code> can be used to break out of the loop unconditionally.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>loop</code></p>
+</div>
+<div>
+<p><code>loop</code> can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -8780,7 +9306,7 @@ loop {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Remember the <code>break</code> statement</p>
 </div>
@@ -8789,7 +9315,6 @@ loop {
 There is no way for the loop to stop iterating.</p>
 </div>
 </div>
-<p><code>loop</code> statements can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="for-loop"><a class="header" href="#for-loop">For Loop</a></h1>
 <p>Iterating through a numeric <a href="language//book/language/ranges.html">range</a> or an <a href="language//book/language/arrays.html">array</a>, or any type with a registered <a href="language//book/language/iterator.html">type iterator</a>,
 is provided by the <code>for</code> … <code>in</code> loop.</p>
@@ -8798,7 +9323,14 @@ is provided by the <code>for</code> … <code>in</code> loop.</p>
 <p><code>for</code> <em>variable</em> <code>in</code> <em>expression</em> <code>{</code> … <code>}</code></p>
 <p><code>for (</code> <em>variable</em> <code>,</code> <em>counter</em> <code>)</code> <code>in</code> <em>expression</em> <code>{</code> … <code>}</code></p>
 </blockquote>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>for</code> loops</p>
+</div>
+<div>
 <p><code>for</code> loops can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+</div>
+</div>
 <h2 id="counter-variable"><a class="header" href="#counter-variable">Counter Variable</a></h2>
 <p>The counter variable, if specified, starts from zero, incrementing upwards.</p>
 <pre><code class="language-js   no_run">let a = [42, 123, 999, 0, true, &quot;hello&quot;, &quot;world!&quot;, 987.6543];
@@ -9126,7 +9658,11 @@ catch
                     // throws a new exception
 }
 </code></pre>
-<h2 id="re-throw-exception"><a class="header" href="#re-throw-exception">Re-Throw Exception</a></h2>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Re-throw exception</p>
+</div>
+<div>
 <p>Like the <code>try</code> … <code>catch</code> syntax in most languages, it is possible to <em>re-throw</em> an exception
 within the <code>catch</code> block simply by another <a href="language//book/language/throw.html"><code>throw</code></a> statement without a value.</p>
 <pre><code class="language-js">try
@@ -9143,7 +9679,13 @@ catch
 }
 
 </code></pre>
-<h2 id="catchable-exceptions"><a class="header" href="#catchable-exceptions">Catchable Exceptions</a></h2>
+</div>
+</div>
+<div class="admonition success">
+<div class="admonition-title">
+<p>Catchable exceptions</p>
+</div>
+<div>
 <p>Many script-oriented exceptions can be caught via <code>try</code> … <code>catch</code>.</p>
 <table><thead><tr><th>Error type</th><th style="text-align: center">Error value</th></tr></thead><tbody>
 <tr><td>Runtime error thrown by a <a href="language//book/language/throw.html"><code>throw</code></a> statement</td><td style="text-align: center">value in <a href="language//book/language/throw.html"><code>throw</code></a> statement</td></tr>
@@ -9164,7 +9706,13 @@ catch
 <p>The error value in the <code>catch</code> clause is an <a href="language//book/language/object-maps.html">object map</a> containing information on the particular error,
 including its type, line and character position (if any), and source etc.</p>
 <p>When the <a href="language//book/start/features.html"><code>no_object</code></a> feature is turned on, however, the error value is a simple <a href="language//book/language/strings-chars.html">string</a> description.</p>
-<h2 id="non-catchable-exceptions"><a class="header" href="#non-catchable-exceptions">Non-Catchable Exceptions</a></h2>
+</div>
+</div>
+<div class="admonition failure">
+<div class="admonition-title">
+<p>Non-catchable exceptions</p>
+</div>
+<div>
 <p>Some exceptions <em>cannot</em> be caught.</p>
 <table><thead><tr><th>Error type</th><th>Notes</th></tr></thead><tbody>
 <tr><td>System error – e.g. script file not found</td><td>system errors are not recoverable</td></tr>
@@ -9173,6 +9721,8 @@ including its type, line and character position (if any), and source etc.</p>
 <tr><td>Script evaluation metrics exceeding <a href="language//book/safety/index.html">limits</a></td><td><a href="language//book/safety/index.html">safety</a> protection</td></tr>
 <tr><td>Script evaluation manually <a href="language//book/safety/progress.html">terminated</a></td><td><a href="language//book/safety/index.html">safety</a> protection</td></tr>
 </tbody></table>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
 <p>Rhai supports defining functions in script, with a syntax that is very similar to Rust without types.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -9191,7 +9741,37 @@ add(2, 3) == 5;
 sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 <span class="boring">}
 </span></code></pre></pre>
-<p>Defining functions can be disabled with <a href="language//book/start/features.html"><code>no_function</code></a>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable functions</p>
+</div>
+<div>
+<p>Defining functions can be disabled via the <a href="language//book/start/features.html"><code>no_function</code></a> feature.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: <code>is_def_fn</code></p>
+</div>
+<div>
+<p>Use <code>is_def_fn</code> (not available under <a href="language//book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
+(and therefore callable) based on its name and the number of parameters (<em>arity</em>).</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo(x) { x + 1 }
+
+is_def_fn(&quot;foo&quot;, 1) == true;
+
+is_def_fn(&quot;foo&quot;, 0) == false;
+
+is_def_fn(&quot;foo&quot;, 2) == false;
+
+is_def_fn(&quot;bar&quot;, 1) == false;
+<span class="boring">}
+</span></code></pre></pre>
+</div>
+</div>
 <h2 id="implicit-return"><a class="header" href="#implicit-return">Implicit Return</a></h2>
 <p>Just like in Rust, an implicit return can be used. In fact, the last statement of a block is
 <em>always</em> the block’s return value regardless of whether it is terminated with a semicolon <code>;</code>.
@@ -9337,24 +9917,15 @@ change(x);
 x == 500;           // 'x' is NOT changed!
 <span class="boring">}
 </span></code></pre></pre>
-<h2 id="is_def_fn"><a class="header" href="#is_def_fn"><code>is_def_fn</code></a></h2>
-<p>Use <code>is_def_fn</code> (not available under <a href="language//book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
-(and therefore callable) based on its name and the number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(x) { x + 1 }
-
-is_def_fn(&quot;foo&quot;, 1) == true;
-
-is_def_fn(&quot;foo&quot;, 0) == false;
-
-is_def_fn(&quot;foo&quot;, 2) == false;
-
-is_def_fn(&quot;bar&quot;, 1) == false;
-<span class="boring">}
-</span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="this--simulating-an-object-method"><a class="header" href="#this--simulating-an-object-method"><code>this</code> – Simulating an Object Method</a></h1>
+<div class="admonition warning side wide">
+<div class="admonition-title">
+<p>Functions are pure</p>
+</div>
+<div>
+<p>The only way for a script-defined <a href="language//book/language/functions.html">function</a> to change an external value is via <code>this</code>.</p>
+</div>
+</div>
 <p>Arguments passed to script-defined <a href="language//book/language/functions.html">functions</a> are always by <em>value</em> because <a href="language//book/language/functions.html">functions</a> are <em>pure</em>.</p>
 <p>However, script-defined <a href="language//book/language/functions.html">functions</a> can also be called in <em>method-call</em> style:</p>
 <blockquote>
@@ -9362,7 +9933,6 @@ is_def_fn(&quot;bar&quot;, 1) == false;
 </blockquote>
 <p>When a <a href="language//book/language/functions.html">function</a> is called this way, the keyword <code>this</code> binds to the object in the method call and
 can be changed.</p>
-<p>The only way for a script-defined <a href="language//book/language/functions.html">function</a> to change an external value is via <code>this</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -9513,8 +10083,15 @@ fn say_hello() {
 say_hello();
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="function-pointers"><a class="header" href="#function-pointers">Function Pointers</a></h1>
-<p>It is possible to store a <em>function pointer</em> in a variable just like a normal value.
-In fact, internally a function pointer simply stores the <em>name</em> of the <a href="language//book/language/functions.html">function</a> as a <a href="language//book/language/strings-chars.html">string</a>.</p>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Rhai internals</p>
+</div>
+<div>
+<p>A function pointer simply stores the <em>name</em> of the <a href="language//book/language/functions.html">function</a> as a <a href="language//book/language/strings-chars.html">string</a>.</p>
+</div>
+</div>
+<p>It is possible to store a <em>function pointer</em> in a variable just like a normal value.</p>
 <p>A function pointer is created via the <code>Fn</code> <a href="language//book/language/functions.html">function</a>, which takes a <a href="language//book/language/strings-chars.html">string</a> parameter.</p>
 <p>Call a function pointer via the <code>call</code> method.</p>
 <h2 id="built-in-functions-5"><a class="header" href="#built-in-functions-5">Built-in Functions</a></h2>
@@ -9564,9 +10141,15 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 They do not hold the actual <a href="language//book/language/functions.html">functions</a>.</p>
 <p>The actual <a href="language//book/language/functions.html">function</a> must be defined in the appropriate <a href="language//book/language/fn-namespaces.html">namespace</a>
 for the call to succeed.</p>
-<p>For example, <a href="language//book/language/modules/export.html">exporting</a> a function pointer (or an <a href="language//book/language/fn-anon.html">anonymous function</a> or <a href="language//book/language/fn-closure.html">closure</a>)
-from a <a href="language//book/rust/modules/index.html">module</a> referring to a local <a href="language//book/language/functions.html">function</a> will fail at runtime because the target
-<a href="language//book/language/functions.html">function</a> cannot be found in the caller’s <a href="language//book/language/fn-namespaces.html">namespace</a>.</p>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Cannot export function pointer</p>
+</div>
+<div>
+<p><a href="language//book/language/modules/export.html">Exporting</a> a function pointer (or an <a href="language//book/language/fn-anon.html">anonymous function</a> or <a href="language//book/language/fn-closure.html">closure</a>)
+from a <a href="language//book/rust/modules/index.html">module</a> referring to a local <a href="language//book/language/functions.html">function</a> fails at runtime.</p>
+<p>That is because the target <a href="language//book/language/functions.html">function</a> is not supposed to be found in the caller’s
+<a href="language//book/language/fn-namespaces.html">namespace</a>.</p>
 <pre><code class="language-js">┌────────────────┐
 │ my_module.rhai │
 └────────────────┘
@@ -9589,10 +10172,19 @@ print(my_mod::increment(41));       // ok!
 let x = my_mod::inc.call(41);       // runtime error:
                                     //    function 'increment' not found
 </code></pre>
+</div>
+</div>
 <h2 id="warning--global-namespace-only"><a class="header" href="#warning--global-namespace-only">Warning – Global Namespace Only</a></h2>
-<p>Because of their dynamic nature, function pointers cannot refer to functions in <a href="language//book/language/modules/import.html"><code>import</code></a>-ed <a href="language//book/rust/modules/index.html">modules</a>.
-They can only refer to <a href="language//book/language/functions.html">functions</a> within the global <a href="language//book/language/fn-namespaces.html">namespace</a>.
-See <em><a href="language//book/language/fn-namespaces.html">Function Namespaces</a></em> for more details.</p>
+<div class="admonition info side wide">
+<div class="admonition-title">
+<p>See also</p>
+</div>
+<div>
+<p>See <em><a href="language//book/language/fn-namespaces.html">Function Namespaces</a></em> for more details.</p>
+</div>
+</div>
+<p>Because of their dynamic nature, function pointers cannot refer to functions in <a href="language//book/language/modules/import.html"><code>import</code></a>-ed <a href="language//book/rust/modules/index.html">modules</a>.</p>
+<p>They can only refer to <a href="language//book/language/functions.html">functions</a> within the global <a href="language//book/language/fn-namespaces.html">namespace</a>.</p>
 <pre><code class="language-js">import &quot;foo&quot; as f;          // assume there is 'f::do_work()'
 
 f::do_work();               // works!
@@ -9688,11 +10280,8 @@ the <code>this</code> pointer (for syntactic reasons).</p>
 <p>It is completely normal to register a Rust function with an <a href="language//book/engine/hello-world.html"><code>Engine</code></a> that takes parameters
 whose types are function pointers.  The Rust type in question is <code>rhai::FnPtr</code>.</p>
 <p>A function pointer in Rhai is essentially syntactic sugar wrapping the <em>name</em> of a function
-to call in script.  Therefore, the script’s <em>execution context</em> is needed in order to call a
-function pointer.</p>
-<p>The type <a href="language//book/rust/context.html"><code>NativeCallContext</code></a> holds the <em>native call context</em> of the particular call to a
-registered Rust function. This type is normally provided by the <a href="language//book/engine/hello-world.html"><code>Engine</code></a> when a function is
-registered with the first parameter type being <a href="language//book/rust/context.html"><code>NativeCallContext</code></a>.</p>
+to call in script.  Therefore, the script’s <em>execution context</em> (i.e. <a href="language//book/rust/context.html"><code>NativeCallContext</code></a>)
+is needed in order to call a function pointer.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -9759,8 +10348,8 @@ that are not <a href="language//book/language/shadow.html">shadowed</a> inside t
 <p>It is possible to <em>curry</em> a <a href="language//book/language/fn-ptr.html">function pointer</a> by providing partial (or all) arguments.</p>
 <p>Currying is done via the <code>curry</code> keyword and produces a new <a href="language//book/language/fn-ptr.html">function pointer</a> which carries
 the curried arguments.</p>
-<p>When the curried <a href="language//book/language/fn-ptr.html">function pointer</a> is called, the curried arguments are inserted starting from the left.
-The actual call arguments should be reduced by the number of curried arguments.</p>
+<p>When the curried <a href="language//book/language/fn-ptr.html">function pointer</a> is called, the curried arguments are inserted starting from the <em>left</em>.</p>
+<p>The actual call arguments should be reduced by the number of curried arguments.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -9826,12 +10415,12 @@ let obj = #{
 <p>Anonymous <a href="language//book/language/functions.html">functions</a> have a syntax similar to Rust’s <em>closures</em> (they are <em>not</em> the same).</p>
 <blockquote>
 <p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>|</code> <em>statement</em></p>
-<p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>| {</code> … <code>}</code></p>
+<p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>| {</code> <em>statements</em>… <code>}</code></p>
 </blockquote>
 <p>No parameters:</p>
 <blockquote>
 <p><code>||</code> <em>statement</em></p>
-<p><code>|| {</code> … <code>}</code></p>
+<p><code>|| {</code> <em>statements</em>… <code>}</code></p>
 </blockquote>
 <p>Anonymous functions can be disabled via <a href="language//book/engine/options.html"><code>Engine::set_allow_anonymous_function</code></a>.</p>
 <h2 id="rewrite-using-anonymous-functions"><a class="header" href="#rewrite-using-anonymous-functions">Rewrite Using Anonymous Functions</a></h2>
@@ -9880,12 +10469,12 @@ let obj = #{
 };
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>NOT real closures</p>
 </div>
 <div>
-<p>Remember: though having the same syntax as Rust <em>closures</em>, anonymous <a href="language//book/language/functions.html">functions</a> are themselves
+<p>Remember: though having the same syntax as Rust <em>closures</em>, anonymous functions are themselves
 <strong>NOT</strong> real closures.</p>
 <p>In particular, they capture their execution environment via <a href="language//book/language/fn-closure.html">automatic currying</a>
 (disabled via <a href="language//book/start/features.html"><code>no_closure</code></a>).</p>
@@ -9913,7 +10502,14 @@ as long as they are not shadowed by local <a href="language//book/language/varia
 <p>Therefore, similar to closures in many languages, these captured shared values persist through
 reference counting, and may be read or modified even after the <a href="language//book/language/variables.html">variables</a> that hold them go out of
 scope and no longer exist.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable closures</p>
+</div>
+<div>
 <p><a href="language//book/language/fn-closure.html">Automatic currying</a> can be turned off via the <a href="language//book/start/features.html"><code>no_closure</code></a> feature.</p>
+</div>
+</div>
 <h2 id="examples-14"><a class="header" href="#examples-14">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -10376,8 +10972,15 @@ for entry in logbook.read().unwrap().iter() {
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>position (line number and character offset) of the <code>debug</code> call</td></tr>
 </tbody></table>
 <p>The <em>source</em> of a script evaluation is any text string provided to an <a href="language//book/engine/compile.html"><code>AST</code></a> via <code>AST::set_source</code>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
 <p>If a <a href="language//book/rust/modules/index.html">module</a> is loaded via an <a href="language//book/language/modules/import.html"><code>import</code></a> statement, then the <em>source</em> of functions defined within
 the module will be the module’s <em>path</em>.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="modules-1"><a class="header" href="#modules-1">Modules</a></h1>
 <p>Rhai allows organizing code (functions, both Rust-based or script-based, and variables) into <em>modules</em>.
 Modules can be disabled via the <a href="language/modules//book/start/features.html"><code>no_module</code></a> feature.</p>
@@ -10427,7 +11030,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
     export inner;       // &lt;- syntax error: cannot export a local variable
 }
 </code></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Multiple exports</p>
 </div>
@@ -10448,37 +11051,14 @@ export z;
 </code></pre>
 </div>
 </div>
-<div class="admonition danger">
+<div class="admonition bug small">
 <div class="admonition-title">
 <p>Do not export closures</p>
 </div>
 <div>
 <p>A <a href="language/modules//book/language/fn-ptr.html">function pointer</a>, <a href="language/modules//book/language/fn-anon.html">anonymous function</a> or <a href="language/modules//book/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
 It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="language/modules//book/language/functions.html">function</a> to call.</p>
-<p>The actual <a href="language/modules//book/language/functions.html">function</a> may not reside in the appropriate <a href="language/modules//book/language/fn-namespaces.html">namespace</a>,
-so the call will fail.</p>
-<pre><code class="language-js">┌────────────────┐
-│ my_module.rhai │
-└────────────────┘
-
-fn increment(x) {
-    x + 1
-}
-
-export let inc = Fn(&quot;increment&quot;);   // exports a function pointer
-
-
-┌───────────┐
-│ main.rhai │
-└───────────┘
-
-import &quot;my_module&quot; as my_mod;
-
-print(my_mod::increment(41));       // ok!
-
-let x = my_mod::inc.call(41);       // runtime error:
-                                    //    function 'increment' not found
-</code></pre>
+<p>Exporting them causes a runtime error.</p>
 </div>
 </div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
@@ -10487,7 +11067,7 @@ let x = my_mod::inc.call(41);       // runtime error:
 <p>Private functions</p>
 </div>
 <div>
-<p><a href="language/modules//book/language/modules/export.html"><code>private</code></a> <a href="language/modules//book/language/functions.html">functions</a> are commonly called to initialize the <a href="language/modules//book/rust/modules/index.html">module</a>.
+<p><a href="language/modules//book/language/modules/export.html"><code>private</code></a> <a href="language/modules//book/language/functions.html">functions</a> are commonly called within the <a href="language/modules//book/rust/modules/index.html">module</a> only.
 They cannot be accessed otherwise.</p>
 </div>
 </div>
@@ -10505,17 +11085,23 @@ private fn foo() {}     // private function - hidden
 </span></code></pre></pre>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>All loaded <a href="language/modules//book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Skip exporting a module</p>
+</div>
+<div>
 <p>To prevent a <a href="language/modules//book/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the
 end of the block.</p>
 <pre><code class="language-js">// This is a module script.
 
-import &quot;hello&quot; as foo;      // exported as sub-module 'foo'
+import &quot;hello&quot; as foo;      // &lt;- exported
 
 {
-    import &quot;world&quot; as bar;  // not exported - the module disappears at the end
-                            //                of the statement block and is not 'global'
+    import &quot;world&quot; as bar;  // &lt;- not exported
 }
 </code></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="import-a-module"><a class="header" href="#import-a-module">Import a Module</a></h1>
 <div class="admonition info side">
 <div class="admonition-title">
@@ -10528,17 +11114,17 @@ import &quot;hello&quot; as foo;      // exported as sub-module 'foo'
 <p>Before a <a href="language/modules//book/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
 <a href="language/modules//book/rust/modules/resolvers.html">module resolver</a> registered into the <a href="language/modules//book/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
 <h2 id="import-statement"><a class="header" href="#import-statement"><code>import</code> Statement</a></h2>
-<p>A <a href="language/modules//book/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.
-Its members can be accessed via <code>::</code> similar to C++.</p>
-<div class="admonition tip small">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip</p>
 </div>
 <div>
-<p>A <a href="language/modules//book/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.
-This is a very simple way to run another script file from within a script.</p>
+<p>A <a href="language/modules//book/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.</p>
+<p>This is a very simple way to run another script file from within a script.</p>
 </div>
 </div>
+<p>A <a href="language/modules//book/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.</p>
+<p>Its members can be accessed via <code>::</code> similar to C++.</p>
 <pre><code class="language-js">import &quot;crypto_banner&quot;;         // run the script file 'crypto_banner.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'
@@ -10671,32 +11257,21 @@ print(z);                       // &lt;- error: variable 'z' not found
 &quot;print(42)&quot;.eval();             // &lt;- nope... method-call style doesn't work with 'eval'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p><code>eval</code> executes inside the current scope!</p>
 </div>
 <div>
 <p>Script segments passed to <code>eval</code> execute inside the <em>current</em> <a href="language//book/engine/scope.html"><code>Scope</code></a>, so they can access and modify
 <em>everything</em>, including all <a href="language//book/language/variables.html">variables</a> that are visible at that position in code!</p>
-<p><code>eval</code> can also be used to define new <a href="language//book/language/variables.html">variables</a> and do other things normally forbidden inside
-a <a href="language//book/language/functions.html">function</a> call.</p>
-<p>Treat it as if the script segments are physically pasted in at the position of the <code>eval</code> call.</p>
-</div>
-</div>
-<div class="admonition warning">
-<div class="admonition-title">
-<p>Cannot define new functions</p>
-</div>
-<div>
-<p>New <a href="language//book/language/functions.html">functions</a> cannot be defined within an <code>eval</code> call, since <a href="language//book/language/functions.html">functions</a> can only be defined at
-the <em>global</em> level, not inside another <a href="language//book/language/functions.html">function</a> call!</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let script = &quot;x += 32&quot;;
+
 let x = 10;
-eval(script);                   // variable 'x' in the current scope is visible!
-print(x);                       // prints 42
+eval(script);       // variable 'x' is visible!
+print(x);           // prints 42
 
 // The above is equivalent to:
 let script = &quot;x += 32&quot;;
@@ -10705,9 +11280,29 @@ x += 32;
 print(x);
 <span class="boring">}
 </span></code></pre></pre>
+<p><code>eval</code> can also be used to define new <a href="language//book/language/variables.html">variables</a> and do other things normally forbidden inside
+a <a href="language//book/language/functions.html">function</a> call.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let script = &quot;let x = 42&quot;;
+eval(script);
+print(x);           // prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<p>Treat it as if the script segments are physically pasted in at the position of the <code>eval</code> call.</p>
 </div>
 </div>
-<div class="admonition failure">
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Cannot define new functions</p>
+</div>
+<div>
+<p>New <a href="language//book/language/functions.html">functions</a> cannot be defined within an <code>eval</code> call, since <a href="language//book/language/functions.html">functions</a> can only be defined at
+the <em>global</em> level!</p>
+</div>
+</div>
+<div class="admonition failure small">
 <div class="admonition-title">
 <p><code>eval</code> is evil</p>
 </div>
@@ -10717,7 +11312,8 @@ disable <code>eval</code> via <a href="language//book/engine/disable-keywords.ht
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>engine.disable_symbol(&quot;eval&quot;);  // disable usage of 'eval'
+</span>// Disable usage of 'eval'
+engine.disable_symbol(&quot;eval&quot;);
 <span class="boring">}
 </span></code></pre></pre>
 </div>
@@ -10873,7 +11469,7 @@ let engine = engine;
 // 'engine' is immutable...
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Use Rhai to control external environment</p>
 </div>
@@ -10908,7 +11504,7 @@ engine.set_max_string_size(500);    // allow strings only up to 500 bytes long (
 engine.set_max_string_size(0);      // allow unlimited string length
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Maximum length</p>
 </div>
@@ -11062,7 +11658,7 @@ engine.set_max_operations(500);     // allow only up to 500 operations for this 
 engine.set_max_operations(0);       // allow unlimited operations
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition question">
+<div class="admonition question small">
 <div class="admonition-title">
 <p>What does one <em>operation</em> mean?</p>
 </div>
@@ -11239,7 +11835,7 @@ let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));
 </span></code></pre></pre>
 <p>This limit may be changed via <a href="safety//book/engine/options.html"><code>Engine::set_max_expr_depths</code></a>.</p>
 <p>There are two limits to set, one for the maximum depth at global level, and the other for function bodies.</p>
-<p>A script exceeding the maximum nesting depths will terminate with a parsing error.
+<p>A script exceeding the maximum nesting depths will terminate with a parse error.
 The malicious <a href="safety//book/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
 <p>This check can be disabled via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -11773,7 +12369,7 @@ for n in 0..5_i64 {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition note">
+<div class="admonition note small">
 <div class="admonition-title">
 <p>Constants propagation</p>
 </div>
@@ -11788,7 +12384,7 @@ within the global <a href="engine/optimize//book/engine/scope.html"><code>Scope<
 differently when run with or without optimization.</p>
 <p>Typically, this involves some form of error that may arise in the original, unoptimized script but
 is optimized away by the <a href="engine/optimize//book/engine/optimize/index.html">script optimizer</a>.</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>DO NOT depend on runtime errors</p>
 </div>
@@ -11886,7 +12482,7 @@ custom types and functions are registered.</p>
 within a pruned code block).</p>
 <p>If custom functions are registered to overload <a href="engine/optimize//book/engine/builtin.html">built-in operators</a>, they will also be called when
 the operators are used (in an <a href="engine/optimize//book/language/if.html"><code>if</code></a> statement, for example), potentially causing side-effects.</p>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Rule of thumb</p>
 </div>
@@ -11924,7 +12520,7 @@ print(&quot;10:25AM&quot;);                   // the function call is replaced b
 <em>non-volatile</em>, so when it finds <a href="engine/optimize//book/language/constants.html">constant</a> arguments (or none) it eagerly executes the function
 call and replaces it with the result.</p>
 <p>This causes the script to behave differently from the intended semantics.</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Warning</p>
 </div>
@@ -11940,10 +12536,24 @@ call and replaces it with the result.</p>
 <tr><td>Functions</td><td style="text-align: center"><a href="engine//book/rust/modules/index.html"><code>Shared&lt;Module&gt;</code></a></td><td><a href="engine//book/language/functions.html">functions</a> defined in the script</td><td style="text-align: center"><code>internals</code>,<br/>not <a href="engine//book/start/features.html"><code>no_function</code></a></td><td style="text-align: center"><code>shared_lib(&amp;self)</code></td></tr>
 <tr><td>Embedded <a href="engine//book/rust/modules/resolvers.html">module resolver</a></td><td style="text-align: center"><a href="engine//book/rust/modules/resolvers.html"><code>StaticModuleResolver</code></a></td><td>embedded <a href="engine//book/rust/modules/resolvers.html">module resolver</a> for <a href="engine//book/rust/modules/self-contained.html">self-contained <code>AST</code></a></td><td style="text-align: center"><code>internals</code>,<br/>not <a href="engine//book/start/features.html"><code>no_module</code></a></td><td style="text-align: center"><code>resolver(&amp;self)</code></td></tr>
 </tbody></table>
+<p>Most of the <a href="engine//book/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/start/features.html"><code>internals</code></a> feature.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Source name</p>
+</div>
+<div>
 <p>Use the source name to identify the source script in errors – useful when multiple <a href="engine//book/rust/modules/index.html">modules</a>
 are imported recursively.</p>
-<p>Most of the <a href="engine//book/engine/compile.html"><code>AST</code></a> API is available only under the <a href="engine//book/start/features.html"><code>internals</code></a> feature.</p>
+</div>
+</div>
+<div class="admonition info small">
+<div class="admonition-title">
+<p><code>AST</code> Public API</p>
+</div>
+<div>
 <p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.5.0/rhai/struct.AST.html">documentation</a> online.</p>
+</div>
+</div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
 <p>The following methods, not available under <a href="engine//book/start/features.html"><code>no_function</code></a>, allow manipulation of the <a href="engine//book/language/functions.html">functions</a>
 encapsulated within an <a href="engine//book/engine/compile.html"><code>AST</code></a>:</p>
@@ -12136,7 +12746,7 @@ references to <code>args</code>, otherwise the Rust borrow checker will complain
 <tr><td>Others</td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td style="text-align: center"><code>&amp;T</code></td><td style="text-align: center">untouched</td></tr>
 <tr><td>Others (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td style="text-align: center"><code>T</code></td><td style="text-align: center"><a href="rust//book/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
-<h2 id="example--passing-a-callback-to-a-rust-function"><a class="header" href="#example--passing-a-callback-to-a-rust-function">Example – Passing a Callback to a Rust Function</a></h2>
+<h2 id="example--pass-a-callback-to-a-rust-function"><a class="header" href="#example--pass-a-callback-to-a-rust-function">Example – Pass a Callback to a Rust Function</a></h2>
 <p>The low-level API is useful when there is a need to interact with the scripting <a href="rust//book/engine/hello-world.html"><code>Engine</code></a>
 within a function.</p>
 <p>The following example registers a function that takes a <a href="rust//book/language/fn-ptr.html">function pointer</a> as an argument,
@@ -12269,8 +12879,8 @@ the current evaluation state to be accessed and/or modified.</p>
 <p>Only scripts</p>
 </div>
 <div>
-<p>This is only meaningful for <em>scripted</em> <a href="language//book/language/functions.html">functions</a>, since native Rust functions can never
-access any <a href="language//book/engine/scope.html"><code>Scope</code></a> anyway.</p>
+<p>This is only meaningful for <em>scripted</em> <a href="language//book/language/functions.html">functions</a>.</p>
+<p>Native Rust functions can never access any <a href="language//book/engine/scope.html"><code>Scope</code></a>.</p>
 </div>
 </div>
 <p>Rhai <a href="language//book/language/functions.html">functions</a> are <em>pure</em>, meaning that they depend on on their arguments and have no access to
@@ -12320,26 +12930,30 @@ import &quot;hello&quot; as h;
 h::greet!();            // &lt;- syntax error: not allowed in namespace-qualified calls
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
-<div class="admonition-title">
-<p>New variables are not retained</p>
-</div>
-<div>
-<p><a href="language//book/language/variables.html">Variables</a> or <a href="language//book/language/constants.html">constants</a> defined within the <a href="language//book/language/functions.html">function</a> are <em>not</em> retained.</p>
-<p>They remain local to the <a href="language//book/language/functions.html">function</a>.</p>
-<p>So, although the syntax resembles a Rust <em>macro</em> invocation, it is still a <a href="language//book/language/functions.html">function</a> call.</p>
-</div>
-</div>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>The caller’s scope can be mutated</p>
 </div>
 <div>
 <p>Changes to <a href="language//book/language/variables.html">variables</a> in the calling <a href="language//book/engine/scope.html"><code>Scope</code></a> persist.</p>
-<p>Therefore, with this syntax, it is possible for a Rhai <a href="language//book/language/functions.html">function</a> to mutate its calling environment.</p>
+<p>With this syntax, it is possible for a Rhai <a href="language//book/language/functions.html">function</a> to mutate its calling environment.</p>
 </div>
 </div>
-<h2 id="caveat-emptor"><a class="header" href="#caveat-emptor">Caveat Emptor</a></h2>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>New variables are not retained</p>
+</div>
+<div>
+<p><a href="language//book/language/variables.html">Variables</a> or <a href="language//book/language/constants.html">constants</a> defined within the <a href="language//book/language/functions.html">function</a> are <em>not</em> retained.
+They remain local to the <a href="language//book/language/functions.html">function</a>.</p>
+<p>Although the syntax resembles a Rust <em>macro</em> invocation, it is still a <a href="language//book/language/functions.html">function</a> call.</p>
+</div>
+</div>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>Caveat emptor</p>
+</div>
+<div>
 <p><a href="language//book/language/functions.html">Functions</a> relying on the calling <a href="language//book/engine/scope.html"><code>Scope</code></a> is often a <em>Very Bad Idea™</em> because it makes code
 almost impossible to reason about and maintain, as their behaviors are volatile and unpredictable.</p>
 <p>Rhai <a href="language//book/language/functions.html">functions</a> are normally <em>pure</em>, meaning that you can rely on the fact that they never mutate
@@ -12348,6 +12962,8 @@ the outside environment.  Using this syntax breaks this guarantee.</p>
 function calls, thus the syntax is also similar to Rust’s macro invocations.</p>
 <p>This usage should be at the last resort.</p>
 <p><strong>YOU HAVE BEEN WARNED</strong>.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="use-rhai-as-a-domain-specific-language-dsl"><a class="header" href="#use-rhai-as-a-domain-specific-language-dsl">Use Rhai as a Domain-Specific Language (DSL)</a></h1>
 <p>Rhai can be successfully used as a domain-specific language (DSL).</p>
 <h2 id="expressions-only"><a class="header" href="#expressions-only">Expressions Only</a></h2>
@@ -12424,7 +13040,7 @@ are parsed in the order defined within the custom syntax.</p>
 <p>Tip: Raising errors</p>
 </div>
 <div>
-<p>Raise a parsing error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
+<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>
 </div>
 </div>
@@ -12520,7 +13136,7 @@ engine.compile(&quot;for n in 0..10 { print(n); }&quot;)?;
 <p>For use as a DSL (Domain-Specific Languages), it is sometimes more convenient to augment Rhai with
 customized operators performing specific logic.</p>
 <p><code>Engine::register_custom_operator</code> registers a <a href="engine//book/appendix/keywords.html">keyword</a> as a custom operator, giving it a particular
-<em>precedence</em> (which cannot be zero).</p>
+<em>precedence</em> (which cannot be zero, see below).</p>
 <h2 id="example-10"><a class="header" href="#example-10">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -12600,21 +13216,21 @@ engine.eval::&lt;i64&gt;(&quot;# 42&quot;)?;                          // &lt;- s
 <tr><td>Logic and bit masks</td><td style="text-align: center"><code>||</code>,  <code>|</code>, <code>^</code></td><td style="text-align: center">left</td><td style="text-align: center">30</td></tr>
 <tr><td>Logic and bit masks</td><td style="text-align: center"><code>&amp;&amp;</code>, <code>&amp;</code></td><td style="text-align: center">left</td><td style="text-align: center">60</td></tr>
 <tr><td>Comparisons</td><td style="text-align: center"><code>==</code>, <code>!=</code></td><td style="text-align: center">left</td><td style="text-align: center">90</td></tr>
-<tr><td>Containment</td><td style="text-align: center">[<code>in</code></td><td style="text-align: center">left</td><td style="text-align: center">110</td></tr>
+<tr><td>Containment</td><td style="text-align: center"><a href="engine//book/language/in.html"><code>in</code></a></td><td style="text-align: center">left</td><td style="text-align: center">110</td></tr>
 <tr><td>Comparisons</td><td style="text-align: center"><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></td><td style="text-align: center">left</td><td style="text-align: center">130</td></tr>
 <tr><td>Ranges</td><td style="text-align: center"><code>..</code>, <code>..=</code></td><td style="text-align: center">left</td><td style="text-align: center">140</td></tr>
 <tr><td>Arithmetic</td><td style="text-align: center"><code>+</code>, <code>-</code></td><td style="text-align: center">left</td><td style="text-align: center">150</td></tr>
 <tr><td>Arithmetic</td><td style="text-align: center"><code>*</code>, <code>/</code>, <code>%</code></td><td style="text-align: center">left</td><td style="text-align: center">180</td></tr>
 <tr><td>Arithmetic</td><td style="text-align: center"><code>**</code></td><td style="text-align: center">right</td><td style="text-align: center">190</td></tr>
 <tr><td>Bit-shifts</td><td style="text-align: center"><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td><td style="text-align: center">left</td><td style="text-align: center">210</td></tr>
-<tr><td>Unary operators</td><td style="text-align: center">unary <code>+</code>, <code>-</code>, <code>!</code></td><td style="text-align: center">right</td><td style="text-align: center">highest</td></tr>
+<tr><td>Unary operators</td><td style="text-align: center"><code>+</code>, <code>-</code>, <code>!</code></td><td style="text-align: center">right</td><td style="text-align: center">highest</td></tr>
 <tr><td>Object field access</td><td style="text-align: center"><code>.</code></td><td style="text-align: center">right</td><td style="text-align: center">highest</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="extend-rhai-with-custom-syntax"><a class="header" href="#extend-rhai-with-custom-syntax">Extend Rhai with Custom Syntax</a></h1>
 <p>For the ultimate adventurous, there is a built-in facility to <em>extend</em> the Rhai language with
 custom-defined <em>syntax</em>.</p>
 <p>But before going off to define the next weird statement type, heed this warning:</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Don’t Do It™</p>
 </div>
@@ -12622,10 +13238,10 @@ custom-defined <em>syntax</em>.</p>
 <p>Stick with standard language syntax as much as possible.</p>
 <p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another obscure
 language syntax just to do something.</p>
-<p>Try to use <a href="engine//book/engine/custom-op.html">custom operators</a> first.  Defining a custom syntax should be considered a <em>last resort</em>.</p>
+<p>Try <a href="engine//book/engine/custom-op.html">custom operators</a> first.  A custom syntax should be considered a <em>last resort</em>.</p>
 </div>
 </div>
-<div class="admonition success">
+<div class="admonition success small">
 <div class="admonition-title">
 <p>Where this might be useful</p>
 </div>
@@ -12935,23 +13551,17 @@ tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
 <p>Use <code>Engine::register_custom_syntax_raw</code> to register a custom syntax <em>parser</em>
 together with the implementation function.</p>
 <h2 id="how-custom-parsers-work"><a class="header" href="#how-custom-parsers-work">How Custom Parsers Work</a></h2>
-<div class="admonition note">
-<div class="admonition-title">
-<p>Leading symbol</p>
-</div>
-<div>
+<h3 id="leading-symbol"><a class="header" href="#leading-symbol">Leading Symbol</a></h3>
 <p>Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
 It can either be:</p>
 <ul>
 <li>
-<p>a identifier that isn’t a normal <a href="engine//book/appendix/keywords.html">keyword</a> unless <a href="engine//book/engine/disable-keywords.html">disabled</a>, or</p>
+<p>an identifier that isn’t a normal <a href="engine//book/appendix/keywords.html">keyword</a> unless <a href="engine//book/engine/disable-keywords.html">disabled</a>, or</p>
 </li>
 <li>
 <p>a valid symbol (see <a href="engine//book/appendix/operators.html">list</a>) which is not a normal <a href="engine//book/appendix/operators.html#operators">operator</a> unless <a href="engine//book/engine/disable-keywords.html">disabled</a>.</p>
 </li>
 </ul>
-</div>
-</div>
 <h3 id="function-signature-6"><a class="header" href="#function-signature-6">Function Signature</a></h3>
 <p>The custom syntax parser has the following signature.</p>
 <blockquote>
@@ -13003,10 +13613,18 @@ and Rhai will fail with a parse error containing information about the expected 
 <p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
 <code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
-<p>A return symbol starting with <code>$$</code> is treated specially. Like returning <code>None</code>, it also
-terminates parsing, but at the same time it adds this symbol as text into the <em>inputs</em> stream at the end.
-This is typically used to inform the implementation function which custom syntax variant was
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: <code>$$</code></p>
+</div>
+<div>
+<p>A return symbol starting with <code>$$</code> is treated specially.</p>
+<p>Like <code>None</code>, it also terminates parsing, but at the same time it adds this symbol as text into the
+<em>inputs</em> stream at the end.</p>
+<p>This is typically used to inform the implementation function which custom syntax variant was
 actually parsed.</p>
+</div>
+</div>
 <h3 id="example-12"><a class="header" href="#example-12">Example</a></h3>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -13073,7 +13691,7 @@ such as <a href="engine/debugging//book/engine/debugging/break-points.html">brea
 <p>For these advanced scenarios, Rhai contains a <em>Debugging</em> interface, turned on via the <a href="engine/debugging//book/start/features.html"><code>debugging</code></a>
 feature (which implies the <a href="engine/debugging//book/start/features.html"><code>internals</code></a> feature).</p>
 <p>The debugging interface resides under the <code>debugger</code> sub-module.</p>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>The Rhai Debugger</p>
 </div>
@@ -13169,7 +13787,7 @@ continued behavior of the debugger.</p>
 <tr><td><code>Next</code></td><td>run to the next statement, skipping over functions</td><td style="text-align: center"><code>next</code></td></tr>
 <tr><td><code>FunctionExit</code></td><td>run to the end of the current function call; debugger is triggered <em>before</em> the function call returns and the <a href="engine/debugging//book/engine/scope.html"><code>Scope</code></a> cleared</td><td style="text-align: center"><code>finish</code></td></tr>
 </tbody></table>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>The <code>Debugger</code></p>
 </div>
@@ -13554,23 +14172,25 @@ let obj3 = ChildClass;                      // a copy of 'ChildClass'
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-rust-enums"><a class="header" href="#working-with-rust-enums">Working With Rust Enums</a></h1>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Why enums are hard</p>
+</div>
+<div>
+<p>Rust enum variants are not considered separate types.</p>
+<p>Although Rhai integrates fine with Rust enums (treated transparently as <a href="patterns//book/rust/custom.html">custom types</a>),
+it is impossible (short of registering a complete API) to distinguish between individual
+variants and to extract internal data from them.</p>
+</div>
+</div>
 <p>Enums in Rust can hold data and are typically used with <em>pattern matching</em>.</p>
 <p>Unlike Rust, Rhai does not have built-in pattern matching capabilities, so working with enum
 variants that contain embedded data is not an easy proposition.</p>
 <p>Since Rhai is dynamic and <a href="patterns//book/language/variables.html">variables</a> can hold any type of data, they are essentially enums
-by nature.  Distinct types can be used without merging them into a single enum as variants.</p>
+by nature.</p>
+<p>Multiple distinct types can be stored in a single <a href="patterns//book/language/dynamic.html"><code>Dynamic</code></a> without merging them into an enum
+as variants.</p>
 <p>This section outlines a number of possible solutions to work with Rust enums.</p>
-<div class="admonition question">
-<div class="admonition-title">
-<p>Why enums are hard with dynamic languages</p>
-</div>
-<div>
-<p>Rust enum variants are not considered separate types.</p>
-<p>Although Rhai integrates with Rust enums just fine (treated transparently as <a href="patterns//book/rust/custom.html">custom types</a>),
-it is impossible  (short of registering a complete API) to distinguish between individual
-enum variants in order to extract internal data from them.</p>
-</div>
-</div>
 <h2 id="simulate-an-enum-api"><a class="header" href="#simulate-an-enum-api">Simulate an Enum API</a></h2>
 <p>A <a href="patterns//book/plugins/module.html">plugin module</a> is extremely handy in creating an entire API for a custom enum type.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -13901,11 +14521,7 @@ let id = config_get_id();
 id == &quot;hello&quot;;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
-<div class="admonition-title">
-<p>Tip: Consider a custom syntax</p>
-</div>
-<div>
+<h2 id="consider-a-custom-syntax"><a class="header" href="#consider-a-custom-syntax">Consider a Custom Syntax</a></h2>
 <p>This is probably one of the few scenarios where a <a href="patterns//book/engine/custom-syntax.html">custom syntax</a> can be recommended.</p>
 <p>A properly-designed <a href="patterns//book/engine/custom-syntax.html">custom syntax</a> can make the configuration file clean, simple to write,
 easy to understand and quick to modify.</p>
@@ -13932,8 +14548,6 @@ if config contains &quot;hey&quot; || config is_set &quot;hey&quot; {
 <span class="boring">}
 </span></code></pre></pre>
 <p>Notice that <code>contains</code> and <code>is_set</code> may also be implemented as a <a href="patterns//book/engine/custom-op.html">custom operator</a>.</p>
-</div>
-</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hot-reloading"><a class="header" href="#hot-reloading">Hot Reloading</a></h1>
 <div class="admonition info">
 <div class="admonition-title">
@@ -14045,7 +14659,7 @@ system.watch_for_script_change(|sys: &amp;mut System, fn_name: &amp;str| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Multi-threaded considerations</p>
 </div>
@@ -14412,7 +15026,7 @@ engine.run_ast_with_scope(&amp;mut scope, &amp;ast)?;
 engine.run_with_scope(&amp;mut scope, script)?;
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Prevent shadowing</p>
 </div>
@@ -14590,7 +15204,7 @@ ast += lowest;
 // fn baz() { print(&quot;hey!&quot;); }    // from 'office.rhai'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition failure">
+<div class="admonition failure small">
 <div class="admonition-title">
 <p>No super call</p>
 </div>
@@ -15547,7 +16161,7 @@ let db = provider.clone();
 engine.on_var(move |name, _, _, _| Ok(db.get(name).map(Dynamic::from)));
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition note">
+<div class="admonition note small">
 <div class="admonition-title">
 <p>Values are constants</p>
 </div>
@@ -15750,7 +16364,7 @@ rhai_local = { path = &quot;../rhai_copy&quot; }
 candidate cases within the same source, adding all <a href="patterns//book/start/features.html">features</a> together.</p>
 <p>If more than four different instantiations of Rhai is necessary (why?), create more local
 repositories or GitHub forks or branches.</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No way To avoid dependency conflicts</p>
 </div>
@@ -15846,7 +16460,7 @@ link = &quot;https://example.com/tools&quot;
 <tr><td>• <code>name</code></td><td>string</td><td style="text-align: center"><em>none</em></td><td>• title of external link</td></tr>
 <tr><td>• <code>link</code></td><td>URL string</td><td style="text-align: center"><em>none</em></td><td>• URL of external link</td></tr>
 </tbody></table>
-<div class="admonition abstract">
+<div class="admonition abstract small">
 <div class="admonition-title">
 <p>MarkDown pages</p>
 </div>

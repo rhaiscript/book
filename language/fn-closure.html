@@ -185,7 +185,14 @@ as long as they are not shadowed by local <a href="/book/language/variables.html
 <p>Therefore, similar to closures in many languages, these captured shared values persist through
 reference counting, and may be read or modified even after the <a href="/book/language/variables.html">variables</a> that hold them go out of
 scope and no longer exist.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable closures</p>
+</div>
+<div>
 <p><a href="/book/language/fn-closure.html">Automatic currying</a> can be turned off via the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
+</div>
+</div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]

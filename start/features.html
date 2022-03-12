@@ -165,17 +165,16 @@
                     <main>
                         <h1 id="optional-features"><a class="header" href="#optional-features">Optional Features</a></h1>
 <p>By default, Rhai includes all the standard functionalities in a small, tight package.</p>
-<p>Most features are here to opt-<strong>out</strong> of certain functionalities that are not needed.
-Notice that this deviates from Rust norm where features are <em>additive</em>.</p>
-<p>Excluding unneeded functionalities can result in smaller, faster builds as well as more control over
-what a script can (or cannot) do.</p>
 <div class="admonition warning">
 <div class="admonition-title">
 <p>Features are not additive</p>
 </div>
 <div>
 <p>Most Rhai features are not strictly <em>additive</em>, i.e. they do not only add optional functionalities.</p>
-<p>In fact, most features are <em>subtractive</em>, i.e. they <em>remove</em> functionalities.</p>
+<p>In fact, most features are <em>subtractive</em>, i.e. they opt-<strong>out</strong> of unneeded functionalities.
+Notice that this deviates from Rust norm where features are <em>additive</em>.</p>
+<p>Excluding functionalities result in smaller, faster builds as well as more control over
+what scripts can (or cannot) do.</p>
 <p>There is a reason for this design, because the <em>lack</em> of a language feature by itself is a feature (that’s deep…).</p>
 <p>See <a href="/book/patterns/multiple.html">here</a> for more details.</p>
 </div>

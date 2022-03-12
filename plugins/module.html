@@ -245,7 +245,7 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Doc-comments</p>
 </div>
@@ -287,9 +287,15 @@ increment(x);
 x == 43;
 <span class="boring">}
 </span></code></pre></pre>
-<p>Notice that, when using a <a href="/book/rust/modules/index.html">module</a> as a <a href="/book/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em>
-can be accessed.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Only functions</p>
+</div>
+<div>
+<p>When using a <a href="/book/rust/modules/index.html">module</a> as a <a href="/book/rust/packages/index.html">package</a>, only functions registered at the <em>top level</em> can be accessed.</p>
 <p>Variables as well as sub-modules are <strong>ignored</strong>.</p>
+</div>
+</div>
 <h3 id="use-engineregister_static_module"><a class="header" href="#use-engineregister_static_module">Use <code>Engine::register_static_module</code></a></h3>
 <p>Another simple way to register this into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> is, again, to use the <code>exported_module!</code>
 macro to turn it into a normal Rhai <a href="/book/rust/modules/index.html">module</a>, then use <code>Engine::register_static_module</code> on it.</p>
@@ -339,17 +345,31 @@ x == 43;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="use-dynamically"><a class="header" href="#use-dynamically">Use Dynamically</a></h3>
+<div class="admonition info side wide">
+<div class="admonition-title">
+<p>See also</p>
+</div>
+<div>
+<p>See the <a href="/book/rust/modules/index.html">module</a> section for more information.</p>
+</div>
+</div>
 <p>Using this directly as a dynamically-loadable Rhai <a href="/book/rust/modules/index.html">module</a> is almost the same, except that a
 <a href="/book/rust/modules/resolvers.html">module resolver</a> must be used to serve the module, and the module is loaded via <code>import</code> statements.</p>
-<p>See the <a href="/book/rust/modules/index.html">module</a> section for more information.</p>
 <h3 id="combine-into-custom-package"><a class="header" href="#combine-into-custom-package">Combine into Custom Package</a></h3>
 <p>Finally, the plugin module can also be used to develop a <a href="/book/rust/packages/create.html">custom package</a>, using
 <code>combine_with_exported_module!</code> which automatically <em>flattens</em> the module namespace so that all
 functions in sub-modules are promoted to the top level <a href="/book/language/fn-namespaces.html">namespace</a>, all
 sub-modules are eliminated, and all variables are ignored.</p>
-<p>Due to this <em>flattening</em>, sub-modules are used conveniently as a <em>grouping</em> mechanism, especially to
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Feature gating</p>
+</div>
+<div>
+<p>Due to <em>flattening</em>, sub-modules are often used conveniently as a <em>grouping</em> mechanism, especially to
 put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)]</code>) on a large collection of functions
-without having to duplicate the gates onto individual functions.</p>
+without having to duplicate the gates onto each individual function.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -406,9 +426,9 @@ combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
-<div class="admonition info side">
+<div class="admonition tip side">
 <div class="admonition-title">
-<p><code>NativeCallContext</code> parameter</p>
+<p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
 <div>
 <p>The <em>first</em> parameter of a function can also be <a href="/book/rust/context.html"><code>NativeCallContext</code></a>.</p>
@@ -420,8 +440,22 @@ attribute to individual functions.</p>
 the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
 <p>With <code>#[rhai_fn(name = &quot;...&quot;)]</code>, multiple functions may be registered under the same name in Rhai,
 so long as they have different parameters.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Operators</p>
+</div>
+<div>
 <p>Operators (which require function names that are not valid for Rust) can also be registered this way.</p>
-<p>Registering the same function name with the same parameter types will cause a parsing error.</p>
+</div>
+</div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Duplicated functions</p>
+</div>
+<div>
+<p>Registering the same function name with the same parameter types will cause a parse error.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -447,8 +481,22 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="getters-setters-and-indexers"><a class="header" href="#getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
+<div class="admonition tip side">
+<div class="admonition-title">
+<p>Tip: Global namespace</p>
+</div>
+<div>
+<p><a href="/book/rust/getters-setters.html">Getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> default to <code>#[rhai_fn(global)]</code> unless overridden by <code>#[rhai_fn(internal)]</code>.</p>
+</div>
+</div>
 <p>Functions can be marked as <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> for <a href="/book/rust/custom.html">custom types</a> via the
 <code>#[rhai_fn]</code> attribute, which is applied on a function level.</p>
+<table><thead><tr><th style="text-align: center">Attribute</th><th style="text-align: center">Description</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>#[rhai_fn(get = &quot;</code><em>property</em><code>&quot;)]</code></td><td style="text-align: center">property getter</td></tr>
+<tr><td style="text-align: center"><code>#[rhai_fn(set = &quot;</code><em>property</em><code>&quot;)]</code></td><td style="text-align: center">property setter</td></tr>
+<tr><td style="text-align: center"><code>#[rhai_fn(index_get)]</code></td><td style="text-align: center">index getter</td></tr>
+<tr><td style="text-align: center"><code>#[rhai_fn(index_set)]</code></td><td style="text-align: center">index setter</td></tr>
+</tbody></table>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -484,9 +532,16 @@ mod my_module {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="multiple-registrations"><a class="header" href="#multiple-registrations">Multiple Registrations</a></h2>
-<p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times.</p>
-<p>This is especially useful for the <code>name = &quot;...&quot;</code>, <code>get = &quot;...&quot;</code> and <code>set = &quot;...&quot;</code> parameters to give
+<p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times, separated by commas.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Overloaded names</p>
+</div>
+<div>
+<p>Multiple registrations is useful for <code>name = &quot;...&quot;</code>, <code>get = &quot;...&quot;</code> and <code>set = &quot;...&quot;</code> to give
 multiple alternative names to the same function.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -511,12 +566,36 @@ mod my_module {
 <tr><td><code>index_get</code></td><td style="text-align: center"><a href="/book/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
 </tbody></table>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
+<div class="admonition bug side wide">
+<div class="admonition-title">
+<p>Error</p>
+</div>
+<div>
+<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
+runtime error.</p>
+</div>
+</div>
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
-to mark it as  <em>pure</em>.</p>
-<p>Pure functions <em>MUST NOT</em> modify the value of the <code>&amp;mut</code> parameter.</p>
-<p>Therefore, pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
-<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise an
-<code>EvalAltResult::ErrorAssignmentToConstant</code> error.</p>
+to mark it as  <em>pure</em> – i.e. it does not modify the <code>&amp;mut</code> parameter.</p>
+<p>This is often done to avoid expensive cloning for methods or <a href="/book/rust/getters-setters.html">property getters</a>
+that return information about a <a href="/book/rust/custom.html">custom type</a> and does not modify it.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must not modify <code>&amp;mut</code> parameter</p>
+</div>
+<div>
+<p>Pure functions <em>MUST NOT</em> modify the <code>&amp;mut</code> parameter.
+There is no checking.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Constants OK</p>
+</div>
+<div>
+<p>Pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -573,8 +652,6 @@ let r = VECTOR.first2;      // runtime error: constant modified
 <p>To register <a href="/book/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[rhai_fn(return_raw)]</code> attribute on functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
-<p>A syntax error is generated if the function with <code>#[rhai_fn(return_raw)]</code> does not have the
-appropriate return type.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -594,6 +671,17 @@ mod my_module {
 }
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error</p>
+</div>
+<div>
+<p>A compilation error — usually something that says <code>Result</code> does not implement
+<code>Clone</code> — is generated if a fallible function is missing <code>#[rhai_fn(return_raw)]</code>.</p>
+<p>It is another compilation error for the reverse — a function with
+<code>#[rhai_fn(return_raw)]</code> does not have the appropriate return type.</p>
+</div>
+</div>
 <h2 id="export_module-parameters"><a class="header" href="#export_module-parameters"><code>#[export_module]</code> Parameters</a></h2>
 <p>Parameters can be applied to the <code>#[export_module]</code> attribute to override its default behavior.</p>
 <table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
@@ -602,8 +690,15 @@ mod my_module {
 <tr><td><code>export_prefix = &quot;...&quot;</code></td><td>exports functions (including private, non-<code>pub</code> functions) with names starting with a specific prefix</td></tr>
 </tbody></table>
 <h2 id="inner-attributes"><a class="header" href="#inner-attributes">Inner Attributes</a></h2>
-<p>Inner attributes can be applied to the inner items of a module to tweak the export process.</p>
+<div class="admonition info side wide">
+<div class="admonition-title">
+<p><code>rhai_fn</code> vs <code>rhai_mod</code></p>
+</div>
+<div>
 <p><code>#[rhai_fn]</code> is applied to functions, while <code>#[rhai_mod]</code> is applied to sub-modules.</p>
+</div>
+</div>
+<p>Inner attributes can be applied to the inner items of a module to tweak the export process.</p>
 <p>Parameters should be set on inner attributes to specify the desired behavior.</p>
 <table><thead><tr><th>Attribute Parameter</th><th>Use with</th><th>Apply to</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>skip</code></td><td><code>#[rhai_fn]</code><br/><code>#[rhai_mod]</code></td><td>function or sub-module</td><td>do not export this function/<a href="/book/rust/modules/index.html">sub-module</a></td></tr>

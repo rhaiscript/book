@@ -175,17 +175,17 @@
 <p>Before a <a href="/book/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
 <a href="/book/rust/modules/resolvers.html">module resolver</a> registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
 <h2 id="import-statement"><a class="header" href="#import-statement"><code>import</code> Statement</a></h2>
-<p>A <a href="/book/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.
-Its members can be accessed via <code>::</code> similar to C++.</p>
-<div class="admonition tip small">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip</p>
 </div>
 <div>
-<p>A <a href="/book/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.
-This is a very simple way to run another script file from within a script.</p>
+<p>A <a href="/book/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.</p>
+<p>This is a very simple way to run another script file from within a script.</p>
 </div>
 </div>
+<p>A <a href="/book/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.</p>
+<p>Its members can be accessed via <code>::</code> similar to C++.</p>
 <pre><code class="language-js">import &quot;crypto_banner&quot;;         // run the script file 'crypto_banner.rhai' without creating an imported module
 
 import &quot;crypto&quot; as lock;        // run the script file 'crypto.rhai' and import it as a module named 'lock'

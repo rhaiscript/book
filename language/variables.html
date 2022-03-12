@@ -224,10 +224,31 @@ for loop_var in array {
 </div>
 <h2 id="declare-a-variable"><a class="header" href="#declare-a-variable">Declare a Variable</a></h2>
 <p>Variables are declared using the <code>let</code> keyword.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: No initial value</p>
+</div>
+<div>
 <p>Variables do not have to be given an initial value.
 If none is provided, it defaults to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
-<p>A variable defined within a statement block is <em>local</em> to that block.</p>
+</div>
+</div>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Variables are local</p>
+</div>
+<div>
+<p>A variable defined within a <a href="statements.html">statement block</a> is <em>local</em> to that block.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: <code>is_def_var</code></p>
+</div>
+<div>
 <p>Use <code>is_def_var</code> to detect if a variable is defined.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -289,15 +310,20 @@ engine.run_with_scope(&amp;mut scope,
 )?;
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>No <code>Scope</code></p>
+</div>
+<div>
 <p>If no <a href="/book/engine/scope.html"><code>Scope</code></a> is used to evaluate the script (e.g. when using <code>Engine::run</code> instead of
-<code>Engine::run_with_scope</code>), only then will an undefined variable cause a runtime error when accessed.</p>
+<code>Engine::run_with_scope</code>), an undefined variable causes a runtime error when accessed.</p>
+</div>
+</div>
 <h2 id="strict-variables-mode"><a class="header" href="#strict-variables-mode">Strict Variables Mode</a></h2>
 <p>With <a href="/book/engine/options.html"><code>Engine::set_strict_variables</code></a>, it is possible to turn on
 <a href="/book/engine/strict-var.html"><em>Strict Variables</em></a> mode.</p>
 <p>When <a href="/book/engine/strict-var.html">strict variables</a> mode is active, accessing a variable not previously defined within
 the same script directly causes a parse error when compiling the script.</p>
-<p>Turn on <a href="/book/engine/strict-var.html">strict variables</a> mode if no <a href="/book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
-This way, variable access errors are caught during compile time instead of runtime.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -309,6 +335,15 @@ print(foo);         // &lt;- parse error under strict variables mode:
                     //    variable 'foo' is undefined
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
+<p>Turn on <a href="/book/engine/strict-var.html">strict variables</a> mode if no <a href="/book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
+This way, variable access errors are caught during compile time instead of runtime.</p>
+</div>
+</div>
 
                     </main>
 

@@ -164,23 +164,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="working-with-rust-enums"><a class="header" href="#working-with-rust-enums">Working With Rust Enums</a></h1>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Why enums are hard</p>
+</div>
+<div>
+<p>Rust enum variants are not considered separate types.</p>
+<p>Although Rhai integrates fine with Rust enums (treated transparently as <a href="/book/rust/custom.html">custom types</a>),
+it is impossible (short of registering a complete API) to distinguish between individual
+variants and to extract internal data from them.</p>
+</div>
+</div>
 <p>Enums in Rust can hold data and are typically used with <em>pattern matching</em>.</p>
 <p>Unlike Rust, Rhai does not have built-in pattern matching capabilities, so working with enum
 variants that contain embedded data is not an easy proposition.</p>
 <p>Since Rhai is dynamic and <a href="/book/language/variables.html">variables</a> can hold any type of data, they are essentially enums
-by nature.  Distinct types can be used without merging them into a single enum as variants.</p>
+by nature.</p>
+<p>Multiple distinct types can be stored in a single <a href="/book/language/dynamic.html"><code>Dynamic</code></a> without merging them into an enum
+as variants.</p>
 <p>This section outlines a number of possible solutions to work with Rust enums.</p>
-<div class="admonition question">
-<div class="admonition-title">
-<p>Why enums are hard with dynamic languages</p>
-</div>
-<div>
-<p>Rust enum variants are not considered separate types.</p>
-<p>Although Rhai integrates with Rust enums just fine (treated transparently as <a href="/book/rust/custom.html">custom types</a>),
-it is impossible  (short of registering a complete API) to distinguish between individual
-enum variants in order to extract internal data from them.</p>
-</div>
-</div>
 <h2 id="simulate-an-enum-api"><a class="header" href="#simulate-an-enum-api">Simulate an Enum API</a></h2>
 <p>A <a href="/book/plugins/module.html">plugin module</a> is extremely handy in creating an entire API for a custom enum type.</p>
 <pre><pre class="playground"><code class="language-rust no_run">

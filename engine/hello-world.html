@@ -211,8 +211,8 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 <p>Rhai script files are customarily named with extension <code>.rhai</code>.</p>
 </div>
 </div>
-<p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>
-(not available under <a href="/book/start/features.html"><code>no_std</code></a> or in <a href="/book/start/builds/wasm.html">WASM</a> builds).</p>
+<p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>.</p>
+<p>Loading and running script files is not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

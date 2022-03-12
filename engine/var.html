@@ -191,7 +191,7 @@ engine.on_var(|name, index, context| {
 });
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Benefits of using a variable resolver</p>
 </div>
@@ -215,12 +215,17 @@ or when they are expensive to load.</p>
 </ol>
 </div>
 </div>
-<h2 id="returned-values-are-constants"><a class="header" href="#returned-values-are-constants">Returned Values are Constants</a></h2>
-<p><a href="/book/language/variables.html">Variable</a> values, if any returned, are treated as <em><a href="/book/language/constants.html">constants</a></em> by the script and cannot be assigned to.
-This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.</p>
-<p>In order to change these <a href="/book/language/variables.html">variables</a>, it is best to push them into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> instead of
-using a variable resolver. Then these <a href="/book/language/variables.html">variables</a> can be assigned to and their updated values read
-back after the script is evaluated.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Returned values are constants</p>
+</div>
+<div>
+<p><a href="/book/language/variables.html">Variable</a> values returned by a variable resolver are treated as <em><a href="/book/language/constants.html">constants</a></em>.</p>
+<p>This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.</p>
+<p>To change these <a href="/book/language/variables.html">variables</a>, better push them into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> instead of
+using a variable resolver.</p>
+</div>
+</div>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_var</code> takes the following form.</p>
 <blockquote>

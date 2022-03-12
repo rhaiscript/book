@@ -201,7 +201,11 @@ catch
                     // throws a new exception
 }
 </code></pre>
-<h2 id="re-throw-exception"><a class="header" href="#re-throw-exception">Re-Throw Exception</a></h2>
+<div class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Re-throw exception</p>
+</div>
+<div>
 <p>Like the <code>try</code> … <code>catch</code> syntax in most languages, it is possible to <em>re-throw</em> an exception
 within the <code>catch</code> block simply by another <a href="/book/language/throw.html"><code>throw</code></a> statement without a value.</p>
 <pre><code class="language-js">try
@@ -218,7 +222,13 @@ catch
 }
 
 </code></pre>
-<h2 id="catchable-exceptions"><a class="header" href="#catchable-exceptions">Catchable Exceptions</a></h2>
+</div>
+</div>
+<div class="admonition success">
+<div class="admonition-title">
+<p>Catchable exceptions</p>
+</div>
+<div>
 <p>Many script-oriented exceptions can be caught via <code>try</code> … <code>catch</code>.</p>
 <table><thead><tr><th>Error type</th><th style="text-align: center">Error value</th></tr></thead><tbody>
 <tr><td>Runtime error thrown by a <a href="/book/language/throw.html"><code>throw</code></a> statement</td><td style="text-align: center">value in <a href="/book/language/throw.html"><code>throw</code></a> statement</td></tr>
@@ -239,7 +249,13 @@ catch
 <p>The error value in the <code>catch</code> clause is an <a href="/book/language/object-maps.html">object map</a> containing information on the particular error,
 including its type, line and character position (if any), and source etc.</p>
 <p>When the <a href="/book/start/features.html"><code>no_object</code></a> feature is turned on, however, the error value is a simple <a href="/book/language/strings-chars.html">string</a> description.</p>
-<h2 id="non-catchable-exceptions"><a class="header" href="#non-catchable-exceptions">Non-Catchable Exceptions</a></h2>
+</div>
+</div>
+<div class="admonition failure">
+<div class="admonition-title">
+<p>Non-catchable exceptions</p>
+</div>
+<div>
 <p>Some exceptions <em>cannot</em> be caught.</p>
 <table><thead><tr><th>Error type</th><th>Notes</th></tr></thead><tbody>
 <tr><td>System error – e.g. script file not found</td><td>system errors are not recoverable</td></tr>
@@ -248,6 +264,8 @@ including its type, line and character position (if any), and source etc.</p>
 <tr><td>Script evaluation metrics exceeding <a href="/book/safety/index.html">limits</a></td><td><a href="/book/safety/index.html">safety</a> protection</td></tr>
 <tr><td>Script evaluation manually <a href="/book/safety/progress.html">terminated</a></td><td><a href="/book/safety/index.html">safety</a> protection</td></tr>
 </tbody></table>
+</div>
+</div>
 
                     </main>
 

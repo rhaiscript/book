@@ -178,6 +178,11 @@ x[1][2].prop = do_calculation();
 <p>The left-hand-side (LHS) of an assignment statement must be a valid
 <em><a href="https://en.wikipedia.org/wiki/Value_(computer_science)">l-value</a></em>, which must be rooted in a
 <a href="/book/language/variables.html">variable</a>, potentially extended via indexing or properties.</p>
+<div class="admonition bug">
+<div class="admonition-title">
+<p>Assigning to invalid l-value</p>
+</div>
+<div>
 <p>Expressions that are not valid <em>l-values</em> cannot be assigned to.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -195,6 +200,8 @@ x.foo() = 42;           // syntax error: method call is not an l-value
 (x + y) = 42;           // syntax error: binary expression is not an l-value
 <span class="boring">}
 </span></code></pre></pre>
+</div>
+</div>
 
                     </main>
 

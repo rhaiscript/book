@@ -165,8 +165,6 @@
                     <main>
                         <h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
 <p>Constants can be defined using the <code>const</code> keyword and are immutable.</p>
-<p>Constants follow the same naming rules as <a href="/book/language/variables.html">variables</a>, but as a convention are often named with
-all-capital letters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -179,11 +177,27 @@ print(X * 2);       // prints 84
 X = 123;            // &lt;- syntax error: constant modified
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Naming</p>
+</div>
+<div>
+<p>Constants follow the same naming rules as <a href="/book/language/variables.html">variables</a>, but as a convention are often named with
+all-capital letters.</p>
+</div>
+</div>
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Singleton</p>
+</div>
+<div>
+<p>A constant value holding a <a href="/book/rust/custom.html">custom type</a> essentially acts
+as a <a href="/book/patterns/singleton.html"><em>singleton</em></a>.</p>
+</div>
+</div>
 <p>It is possible to add a constant into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> via <code>Scope::push_constant</code> so it’ll be
 available to scripts running with that <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
-<p>It is very useful to have a constant value hold a <a href="/book/rust/custom.html">custom type</a>, which essentially acts
-as a <a href="/book/patterns/singleton.html"><em>singleton</em></a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -277,7 +291,7 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 X == 43;            // value of 'X' is unchanged by script
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Implications on script optimization</p>
 </div>

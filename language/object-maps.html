@@ -164,7 +164,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
-<div class="admonition tip side">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Safety</p>
 </div>
@@ -172,21 +172,7 @@
 <p>Always limit the <a href="/book/safety/max-map-size.html">maximum size of object maps</a>.</p>
 </div>
 </div>
-<p>Object maps are hash dictionaries. Properties are all <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
-<p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
-Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
-<p><a href="/book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
-<p>Object maps are disabled via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
-<div class="admonition question">
-<div class="admonition-title">
-<p>Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
-</div>
-<div>
-<p>The vast majority of object maps contain just a few properties.</p>
-<p><code>BTreeMap</code> performs significantly better than <code>HashMap</code> when the number of entries is small.</p>
-</div>
-</div>
-<div class="admonition question">
+<div class="admonition question side wide">
 <div class="admonition-title">
 <p>Why <code>SmartString</code>?</p>
 </div>
@@ -195,6 +181,20 @@ Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.</p>
 </div>
 </div>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
+</div>
+<div>
+<p>The vast majority of object maps contain just a few properties.</p>
+<p><code>BTreeMap</code> performs significantly better than <code>HashMap</code> when the number of entries is small.</p>
+</div>
+</div>
+<p>Object maps are hash dictionaries. Properties are all <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
+<p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
+Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>&quot;map&quot;</code>.</p>
+<p>Object maps are disabled via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <h2 id="literal-syntax"><a class="header" href="#literal-syntax">Literal Syntax</a></h2>
 <p>Object map literals are built within braces <code>#{</code> … <code>}</code> with <em>name</em><code>:</code><em>value</em> pairs separated by
 commas <code>,</code>:</p>

@@ -166,7 +166,7 @@
                         <h1 id="dynamic-parameters-in-rust-functions"><a class="header" href="#dynamic-parameters-in-rust-functions"><code>Dynamic</code> Parameters in Rust Functions</a></h1>
 <p>It is possible for Rust functions to contain parameters of type <a href="/book/language/dynamic.html"><code>Dynamic</code></a>.</p>
 <p>A <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
-<div class="admonition example">
+<div class="admonition example small">
 <div class="admonition-title">
 <p>Example</p>
 </div>
@@ -262,12 +262,12 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
 <h4 id="hash-lookup"><a class="header" href="#hash-lookup">Hash lookup</a></h4>
 <p>Since functions in Rhai can be <a href="/book/rust/functions.html">overloaded</a>, Rhai uses a single <em>hash</em> number
 to quickly lookup the actual function, based on argument types.</p>
-<p>For each function call, a hash is calculated made up from:</p>
+<p>For each function call, a hash is calculated from:</p>
 <ol>
-<li>the function’s [namespace], if any,</li>
+<li>the function’s <a href="/book/language/fn-namespaces.html">namespace</a>, if any,</li>
 <li>the function’s name,</li>
-<li>number of arguments,</li>
-<li>the unique ID of the type of each argument, if any.</li>
+<li>number of arguments (its <em>arity</em>),</li>
+<li>unique ID of the type of each argument, if any.</li>
 </ol>
 <p>The correct function is then obtained via a simple hash lookup.</p>
 <h4 id="limitations"><a class="header" href="#limitations">Limitations</a></h4>

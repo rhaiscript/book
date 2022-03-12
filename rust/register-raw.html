@@ -252,7 +252,7 @@ references to <code>args</code>, otherwise the Rust borrow checker will complain
 <tr><td>Others</td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td style="text-align: center"><code>&amp;T</code></td><td style="text-align: center">untouched</td></tr>
 <tr><td>Others (consumed)</td><td><code>std::mem::take(args[n]).cast::&lt;T&gt;()</code></td><td style="text-align: center"><code>T</code></td><td style="text-align: center"><a href="/book/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
-<h2 id="example--passing-a-callback-to-a-rust-function"><a class="header" href="#example--passing-a-callback-to-a-rust-function">Example – Passing a Callback to a Rust Function</a></h2>
+<h2 id="example--pass-a-callback-to-a-rust-function"><a class="header" href="#example--pass-a-callback-to-a-rust-function">Example – Pass a Callback to a Rust Function</a></h2>
 <p>The low-level API is useful when there is a need to interact with the scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a>
 within a function.</p>
 <p>The following example registers a function that takes a <a href="/book/language/fn-ptr.html">function pointer</a> as an argument,

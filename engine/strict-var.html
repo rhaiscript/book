@@ -168,12 +168,13 @@
 working its way outwards until it reaches the top (global) level, then it
 searches the <a href="/book/engine/scope.html"><code>Scope</code></a> (if any) that is passed into the <code>Engine::eval_with_scope</code> call.</p>
 <p>Setting <a href="/book/engine/options.html"><code>Engine::set_strict_variables</code></a> to <code>true</code> turns on <em>Strict Variables Mode</em>,
-which requires that all <a href="/book/language/variables.html">variables</a> be defined within the same script before use.
-<a href="/book/rust/modules/index.html">Modules</a> must be <a href="/book/language/modules/import.html">imported</a>, also within the same script, before use.</p>
+which requires that:</p>
+<ul>
+<li>all <a href="/book/language/variables.html">variables</a> be defined within the same script before use,</li>
+<li><a href="/book/rust/modules/index.html">modules</a> must be <a href="/book/language/modules/import.html">imported</a>, also within the same script, before use.</li>
+</ul>
 <p>Within <em>Strict Variables</em> mode, any attempt to access a <a href="/book/language/variables.html">variable</a> or <a href="/book/rust/modules/index.html">module</a> before
 definition/<a href="/book/language/modules/import.html">import</a> results in a parse error.</p>
-<p>Turn on <em>Strict Variables</em> mode if no <a href="/book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
-This way, variable access errors are caught during compile time instead of runtime.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -198,6 +199,15 @@ let x = abc::def;       // &lt;- parse error under strict variables mode:
                         //    module 'abc' is undefined
 <span class="boring">}
 </span></code></pre></pre>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
+<p>Turn on <em>Strict Variables</em> mode if no <a href="/book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
+This way, variable access errors are caught during compile time instead of runtime.</p>
+</div>
+</div>
 
                     </main>
 

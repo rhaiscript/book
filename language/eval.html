@@ -194,32 +194,21 @@ print(z);                       // &lt;- error: variable 'z' not found
 &quot;print(42)&quot;.eval();             // &lt;- nope... method-call style doesn't work with 'eval'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p><code>eval</code> executes inside the current scope!</p>
 </div>
 <div>
 <p>Script segments passed to <code>eval</code> execute inside the <em>current</em> <a href="/book/engine/scope.html"><code>Scope</code></a>, so they can access and modify
 <em>everything</em>, including all <a href="/book/language/variables.html">variables</a> that are visible at that position in code!</p>
-<p><code>eval</code> can also be used to define new <a href="/book/language/variables.html">variables</a> and do other things normally forbidden inside
-a <a href="/book/language/functions.html">function</a> call.</p>
-<p>Treat it as if the script segments are physically pasted in at the position of the <code>eval</code> call.</p>
-</div>
-</div>
-<div class="admonition warning">
-<div class="admonition-title">
-<p>Cannot define new functions</p>
-</div>
-<div>
-<p>New <a href="/book/language/functions.html">functions</a> cannot be defined within an <code>eval</code> call, since <a href="/book/language/functions.html">functions</a> can only be defined at
-the <em>global</em> level, not inside another <a href="/book/language/functions.html">function</a> call!</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let script = &quot;x += 32&quot;;
+
 let x = 10;
-eval(script);                   // variable 'x' in the current scope is visible!
-print(x);                       // prints 42
+eval(script);       // variable 'x' is visible!
+print(x);           // prints 42
 
 // The above is equivalent to:
 let script = &quot;x += 32&quot;;
@@ -228,9 +217,29 @@ x += 32;
 print(x);
 <span class="boring">}
 </span></code></pre></pre>
+<p><code>eval</code> can also be used to define new <a href="/book/language/variables.html">variables</a> and do other things normally forbidden inside
+a <a href="/book/language/functions.html">function</a> call.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let script = &quot;let x = 42&quot;;
+eval(script);
+print(x);           // prints 42
+<span class="boring">}
+</span></code></pre></pre>
+<p>Treat it as if the script segments are physically pasted in at the position of the <code>eval</code> call.</p>
 </div>
 </div>
-<div class="admonition failure">
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Cannot define new functions</p>
+</div>
+<div>
+<p>New <a href="/book/language/functions.html">functions</a> cannot be defined within an <code>eval</code> call, since <a href="/book/language/functions.html">functions</a> can only be defined at
+the <em>global</em> level!</p>
+</div>
+</div>
+<div class="admonition failure small">
 <div class="admonition-title">
 <p><code>eval</code> is evil</p>
 </div>
@@ -240,7 +249,8 @@ disable <code>eval</code> via <a href="/book/engine/disable-keywords.html"><code
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>engine.disable_symbol(&quot;eval&quot;);  // disable usage of 'eval'
+</span>// Disable usage of 'eval'
+engine.disable_symbol(&quot;eval&quot;);
 <span class="boring">}
 </span></code></pre></pre>
 </div>

@@ -181,7 +181,37 @@ add(2, 3) == 5;
 sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 <span class="boring">}
 </span></code></pre></pre>
-<p>Defining functions can be disabled with <a href="/book/start/features.html"><code>no_function</code></a>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable functions</p>
+</div>
+<div>
+<p>Defining functions can be disabled via the <a href="/book/start/features.html"><code>no_function</code></a> feature.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: <code>is_def_fn</code></p>
+</div>
+<div>
+<p>Use <code>is_def_fn</code> (not available under <a href="/book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
+(and therefore callable) based on its name and the number of parameters (<em>arity</em>).</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn foo(x) { x + 1 }
+
+is_def_fn(&quot;foo&quot;, 1) == true;
+
+is_def_fn(&quot;foo&quot;, 0) == false;
+
+is_def_fn(&quot;foo&quot;, 2) == false;
+
+is_def_fn(&quot;bar&quot;, 1) == false;
+<span class="boring">}
+</span></code></pre></pre>
+</div>
+</div>
 <h2 id="implicit-return"><a class="header" href="#implicit-return">Implicit Return</a></h2>
 <p>Just like in Rust, an implicit return can be used. In fact, the last statement of a block is
 <em>always</em> the block’s return value regardless of whether it is terminated with a semicolon <code>;</code>.
@@ -325,23 +355,6 @@ let x = 500;
 change(x);
 
 x == 500;           // 'x' is NOT changed!
-<span class="boring">}
-</span></code></pre></pre>
-<h2 id="is_def_fn"><a class="header" href="#is_def_fn"><code>is_def_fn</code></a></h2>
-<p>Use <code>is_def_fn</code> (not available under <a href="/book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
-(and therefore callable) based on its name and the number of parameters.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn foo(x) { x + 1 }
-
-is_def_fn(&quot;foo&quot;, 1) == true;
-
-is_def_fn(&quot;foo&quot;, 0) == false;
-
-is_def_fn(&quot;foo&quot;, 2) == false;
-
-is_def_fn(&quot;bar&quot;, 1) == false;
 <span class="boring">}
 </span></code></pre></pre>
 

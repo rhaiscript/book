@@ -169,17 +169,17 @@
 <blockquote>
 <p><em>object</em> <code>.</code> <em>function</em> <code>(</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
-<p><em>method-call</em> style is not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
+<p><em>method-call</em> style not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
 </div>
 <div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// Below is a syntax error under 'no_object'.
-let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
-                                           // ^ cannot call method-style
+engine.run(&quot;let x = [42]; x.clear();&quot;)?;
+                        // ^ cannot call method-style
 <span class="boring">}
 </span></code></pre></pre>
 </div>
@@ -189,9 +189,16 @@ let result = engine.eval(&quot;let x = [1, 2, 3]; x.clear();&quot;)?;
 <p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
+<div class="admonition note side wide">
+<div class="admonition-title">
+<p>Note</p>
+</div>
+<div>
+<p>This design is similar to Rust.</p>
+</div>
+</div>
 <p>Internally, methods on a <a href="/book/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
 the object’s type. Therefore, methods and functions can be called interchangeably.</p>
-<p>This design is similar to Rust.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -214,13 +221,13 @@ println!(&quot;result: {}&quot;, result);     // prints 1
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="first-mut-parameter"><a class="header" href="#first-mut-parameter">First <code>&amp;mut</code> Parameter</a></h2>
-<p>The opposite direction also works – <a href="/book/rust/custom.html">methods</a> in a Rust <a href="/book/rust/custom.html">custom type</a> registered
+<p>The opposite direction also works — <a href="/book/rust/custom.html">methods</a> in a Rust <a href="/book/rust/custom.html">custom type</a> registered
 with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods
 are registered as regular <a href="/book/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
 <p>Unlike functions defined in script (for which all arguments are passed by <em>value</em>),
 native Rust functions may mutate the first <code>&amp;mut</code> argument.</p>
 <p>Sometimes, however, there are more subtle differences. Methods called in normal function-call style
-may end up not muting the object afterall – see the example below.</p>
+may end up not muting the object afterall — see the example below.</p>
 <p>Custom types, <a href="/book/rust/getters-setters.html">properties</a>, <a href="/book/rust/indexers.html">indexers</a> and methods are disabled under the
 <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
@@ -242,7 +249,7 @@ update(array[0]);   // &lt;- 'array[0]' is an expression returning a calculated 
 array[0].update();  // &lt;- call in method-call style will update 'a'
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -296,6 +303,14 @@ fn add_method(obj: &amp;mut VeryComplexType, offset: i64) -&gt; i64 {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="data-race-considerations"><a class="header" href="#data-race-considerations">Data Race Considerations</a></h2>
+<div class="admonition note side wide">
+<div class="admonition-title">
+<p>Data races</p>
+</div>
+<div>
+<p>Data races are not possible in Rhai under the <a href="/book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
+</div>
+</div>
 <p>Because methods always take a mutable reference as the first argument, even it the value is never changed,
 care must be taken when using <em>shared</em> values with methods.</p>
 <p>Usually data races are not possible in Rhai because, for each function call, there is ever only one
@@ -316,7 +331,6 @@ x.is_shared() == true;              // now 'x' is shared
 x.call(f, 2);                       // &lt;- error: data race detected on 'x'
 <span class="boring">}
 </span></code></pre></pre>
-<p>Data races are not possible in Rhai under the <a href="/book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
 
                     </main>
 

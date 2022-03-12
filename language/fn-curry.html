@@ -177,8 +177,8 @@ that are not <a href="/book/language/shadow.html">shadowed</a> inside the <a hre
 <p>It is possible to <em>curry</em> a <a href="/book/language/fn-ptr.html">function pointer</a> by providing partial (or all) arguments.</p>
 <p>Currying is done via the <code>curry</code> keyword and produces a new <a href="/book/language/fn-ptr.html">function pointer</a> which carries
 the curried arguments.</p>
-<p>When the curried <a href="/book/language/fn-ptr.html">function pointer</a> is called, the curried arguments are inserted starting from the left.
-The actual call arguments should be reduced by the number of curried arguments.</p>
+<p>When the curried <a href="/book/language/fn-ptr.html">function pointer</a> is called, the curried arguments are inserted starting from the <em>left</em>.</p>
+<p>The actual call arguments should be reduced by the number of curried arguments.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

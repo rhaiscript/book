@@ -208,12 +208,12 @@ let obj = #{
 <p>Anonymous <a href="/book/language/functions.html">functions</a> have a syntax similar to Rust’s <em>closures</em> (they are <em>not</em> the same).</p>
 <blockquote>
 <p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>|</code> <em>statement</em></p>
-<p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>| {</code> … <code>}</code></p>
+<p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>| {</code> <em>statements</em>… <code>}</code></p>
 </blockquote>
 <p>No parameters:</p>
 <blockquote>
 <p><code>||</code> <em>statement</em></p>
-<p><code>|| {</code> … <code>}</code></p>
+<p><code>|| {</code> <em>statements</em>… <code>}</code></p>
 </blockquote>
 <p>Anonymous functions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_anonymous_function</code></a>.</p>
 <h2 id="rewrite-using-anonymous-functions"><a class="header" href="#rewrite-using-anonymous-functions">Rewrite Using Anonymous Functions</a></h2>
@@ -262,12 +262,12 @@ let obj = #{
 };
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>NOT real closures</p>
 </div>
 <div>
-<p>Remember: though having the same syntax as Rust <em>closures</em>, anonymous <a href="/book/language/functions.html">functions</a> are themselves
+<p>Remember: though having the same syntax as Rust <em>closures</em>, anonymous functions are themselves
 <strong>NOT</strong> real closures.</p>
 <p>In particular, they capture their execution environment via <a href="/book/language/fn-closure.html">automatic currying</a>
 (disabled via <a href="/book/start/features.html"><code>no_closure</code></a>).</p>

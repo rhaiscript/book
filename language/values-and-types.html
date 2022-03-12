@@ -183,7 +183,7 @@
 <tr><td><strong>Shared value</strong> (a reference-counted, shared <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value, created via <a href="/book/language/fn-closure.html">automatic currying</a>, disabled with <a href="/book/start/features.html"><code>no_closure</code></a>)</td><td></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
 <tr><td><strong>Nothing/void/nil/null/Unit</strong> (or whatever it is called)</td><td><code>()</code></td><td><code>&quot;()&quot;</code></td><td><code>&quot;&quot;</code> <em>(empty string)</em></td></tr>
 </tbody></table>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>All types are distinct</p>
 </div>
@@ -199,7 +199,7 @@ them and make a smaller build with the <a href="/book/start/features.html"><code
 <p>If only 32-bit integers are needed, enabling the <a href="/book/start/features.html"><code>only_i32</code></a> feature will remove support for all
 integer types other than <code>i32</code>, including <code>i64</code>.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>Default integer is <code>i64</code></p>
 </div>
@@ -210,7 +210,7 @@ runtime performance hit since the <a href="/book/engine/hello-world.html"><code>
 <a href="/book/start/features.html"><code>only_i32</code></a> feature).</p>
 </div>
 </div>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Floating-point numbers</p>
 </div>
@@ -219,7 +219,7 @@ runtime performance hit since the <a href="/book/engine/hello-world.html"><code>
 <p>Some applications require fixed-precision decimal numbers, which can be enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature.</p>
 </div>
 </div>
-<div class="admonition info">
+<div class="admonition info small">
 <div class="admonition-title">
 <p>Strings</p>
 </div>
@@ -229,7 +229,7 @@ runtime performance hit since the <a href="/book/engine/hello-world.html"><code>
 <p>Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.</p>
 </div>
 </div>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Convert to string</p>
 </div>

@@ -176,12 +176,19 @@ and the copy immediately thrown away right after the call.</p>
 </div>
 </div>
 <h2 id="str-maps-to-immutablestring"><a class="header" href="#str-maps-to-immutablestring"><code>&amp;str</code> Maps to <code>ImmutableString</code></a></h2>
+<div class="admonition warning side">
+<div class="admonition-title">
+<p>Common mistake</p>
+</div>
+<div>
+<p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
+</div>
+</div>
 <p>Rust functions accepting parameters of <code>String</code> should use <code>&amp;str</code> instead because it maps directly
 to <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/book/language/strings-chars.html">strings</a> internally.</p>
 <p>The parameter type <code>String</code> involves always converting an <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> into a <code>String</code>
 which mandates cloning it.</p>
 <p>Using <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code> is much more efficient.</p>
-<p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

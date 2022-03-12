@@ -250,9 +250,16 @@ def_package! {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="create-a-custom-package-from-a-plugin-module"><a class="header" href="#create-a-custom-package-from-a-plugin-module">Create a Custom Package from a Plugin Module</a></h2>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Rhai internals</p>
+</div>
+<div>
+<p>This is exactly how Rhai’s built-in <a href="/book/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are actually implemented.</p>
+</div>
+</div>
 <p>By far the easiest way to create a custom <a href="/book/rust/packages/index.html">package</a> is to call <code>plugin::combine_with_exported_module!</code>
 from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/book/plugins/module.html">plugin module</a>.</p>
-<p>In fact, this exactly is how Rhai’s built-in <a href="/book/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are implemented.</p>
 <p>Due to specific requirements of a <a href="/book/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
 <em>flattens</em> all sub-modules (i.e. all functions and <a href="/book/language/iterator.html">type iterators</a> defined within sub-modules
 are pulled up to the top level instead) and so there will not be any sub-modules added to the <a href="/book/rust/packages/index.html">package</a>.</p>

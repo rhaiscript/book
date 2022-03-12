@@ -178,7 +178,14 @@
 </code></pre>
 <h2 id="default-case"><a class="header" href="#default-case">Default Case</a></h2>
 <p>A <em>default</em> case (i.e. when no other cases match) can be specified with <code>_</code>.</p>
-<p>However, it must be the <em>last</em> case in the <code>switch</code> statement.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must be last</p>
+</div>
+<div>
+<p>The default case must be the <em>last</em> case in the <code>switch</code> statement.</p>
+</div>
+</div>
 <pre><code class="language-js">switch wrong_default {
     1 =&gt; 2,
     _ =&gt; 9,     // &lt;- syntax error: default case not the last
@@ -215,7 +222,7 @@ switch map {
 <h2 id="case-conditions"><a class="header" href="#case-conditions">Case Conditions</a></h2>
 <p>Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to <code>true</code> in order for the case to match.</p>
-<p>Unlike Rust, however, case conditions still do not allow the case values to duplicate.</p>
+<p>Unlike Rust, however, case conditions do not allow the case values to duplicate.</p>
 <pre><code class="language-js">let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) =&gt; 100,
 
@@ -232,10 +239,17 @@ that must evaluate to <code>true</code> in order for the case to match.</p>
 };
 </code></pre>
 <h2 id="range-cases"><a class="header" href="#range-cases">Range Cases</a></h2>
-<p>Because of their popularity, <a href="/book/appendix/literals.html">literal</a> integer <a href="/book/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases,
-but they must come <em>after</em> all integer cases.</p>
+<p>Because of their popularity, <a href="/book/appendix/literals.html">literal</a> integer <a href="/book/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases.</p>
 <p>Numeric <a href="/book/language/ranges.html">ranges</a> are only searched when the <code>switch</code> value is itself an integer (i.e. they never
 match any other data types).</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Must come after integer cases</p>
+</div>
+<div>
+<p>Range cases must come <em>after</em> all integer cases.</p>
+</div>
+</div>
 <pre><code class="language-js">let x = 42;
 
 switch x {

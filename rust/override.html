@@ -191,32 +191,38 @@ It is rarely recommended, but if you need it, you need it bad.</p>
 because you <em>can</em>.</p>
 </div>
 </div>
-<h2 id="search-order-of-functions"><a class="header" href="#search-order-of-functions">Search Order of Functions</a></h2>
+<div class="admonition info">
+<div class="admonition-title">
+<p>Search order for functions</p>
+</div>
+<div>
 <p>Rhai searches for the correct implementation of a function in the following order:</p>
 <ol>
 <li>
 <p>Rhai script-defined <a href="/book/language/functions.html">functions</a>,</p>
 </li>
 <li>
-<p>native Rust functions registered directly via the <code>Engine::register_XXX</code> API,</p>
+<p>Native Rust functions registered directly via the <code>Engine::register_XXX</code> API,</p>
 </li>
 <li>
-<p>native Rust functions in <a href="/book/rust/packages/index.html">packages</a> that have been loaded via <code>Engine::register_global_module</code>,</p>
+<p>Native Rust functions in <a href="/book/rust/packages/index.html">packages</a> that have been loaded via <code>Engine::register_global_module</code>,</p>
 </li>
 <li>
-<p>native Rust or Rhai script-defined functions in <a href="/book/language/modules/import.html">imported</a> <a href="/book/rust/modules/index.html">modules</a> that are exposed to
+<p>Native Rust or Rhai script-defined functions in <a href="/book/language/modules/import.html">imported</a> <a href="/book/rust/modules/index.html">modules</a> that are exposed to
 the global <a href="/book/language/fn-namespaces.html">namespace</a> (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a
 <a href="/book/plugins/module.html">plugin module</a>),</p>
 </li>
 <li>
-<p>native Rust or Rhai script-defined functions in <a href="/book/rust/modules/index.html">modules</a> loaded via
+<p>Native Rust or Rhai script-defined functions in <a href="/book/rust/modules/index.html">modules</a> loaded via
 <code>Engine::register_static_module</code> that are exposed to the global <a href="/book/language/fn-namespaces.html">namespace</a>
 (e.g. via the <code>#[rhai_fn(global)]</code> attribute in a <a href="/book/plugins/module.html">plugin module</a>),</p>
 </li>
 <li>
-<p><a href="/book/engine/builtin.html">built-in</a> functions.</p>
+<p><a href="/book/engine/builtin.html">Built-in</a> functions.</p>
 </li>
 </ol>
+</div>
+</div>
 
                     </main>
 

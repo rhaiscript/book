@@ -224,7 +224,7 @@ let db = provider.clone();
 engine.on_var(move |name, _, _, _| Ok(db.get(name).map(Dynamic::from)));
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition note">
+<div class="admonition note small">
 <div class="admonition-title">
 <p>Values are constants</p>
 </div>

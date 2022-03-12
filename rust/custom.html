@@ -184,7 +184,7 @@ possible, usually silently and seamlessly.</p>
 <p>External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
 <p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Custom types are slower</p>
 </div>
@@ -251,7 +251,7 @@ println!(&quot;result: {}&quot;, result.field);   // prints 42
 <p><em>Methods</em> of custom types take a <code>&amp;mut</code> first parameter to that type, so that invoking methods can
 always update it.</p>
 <p>All other parameters in Rhai are passed by value (i.e. clones).</p>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>

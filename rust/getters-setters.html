@@ -191,7 +191,7 @@ They each take a <code>&amp;mut</code> reference to the first parameter.</p>
 <tr><td><code>register_get_result</code></td><td><code>Fn(&amp;mut T) -&gt; Result&lt;V, Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes, but not advised</td></tr>
 <tr><td><code>register_set_result</code></td><td><code>Fn(&amp;mut T, V) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;</code></td><td style="text-align: center">yes</td></tr>
 </tbody></table>
-<div class="admonition danger">
+<div class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -200,7 +200,7 @@ They each take a <code>&amp;mut</code> reference to the first parameter.</p>
 All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 </div>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Getters must be pure</p>
 </div>
@@ -254,6 +254,15 @@ println!(&quot;Answer: {}&quot;, result);                 // prints 42
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="fallback-to-indexer"><a class="header" href="#fallback-to-indexer">Fallback to Indexer</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Property bag</p>
+</div>
+<div>
+<p>This feature makes it very easy for <a href="/book/rust/custom.html">custom types</a> to act as <em>property bags</em>
+(similar to an <a href="/book/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
+</div>
+</div>
 <p>If the getter/setter of a particular property is not defined, but an <a href="/book/rust/indexers.html">indexer</a> is defined on the
 <a href="/book/rust/custom.html">custom type</a> with <a href="/book/language/strings-chars.html">string</a> index, then the corresponding <a href="/book/rust/indexers.html">indexer</a> will be called with the name of
 the property as the index value.</p>
@@ -266,8 +275,6 @@ the property as the index value.</p>
 a[&quot;foo&quot;]        // an indexer (if any) is tried
 <span class="boring">}
 </span></code></pre></pre>
-<p>This feature makes it very easy for <a href="/book/rust/custom.html">custom types</a> to act as <em>property bags</em>
-(similar to an <a href="/book/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
 <h2 id="chaining-updates"><a class="header" href="#chaining-updates">Chaining Updates</a></h2>
 <p>It is possible to <em>chain</em> property accesses and/or indexing (via <a href="/book/rust/indexers.html">indexers</a>) together to modify a
 particular property value at the end of the chain.</p>

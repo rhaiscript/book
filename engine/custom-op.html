@@ -167,7 +167,7 @@
 <p>For use as a DSL (Domain-Specific Languages), it is sometimes more convenient to augment Rhai with
 customized operators performing specific logic.</p>
 <p><code>Engine::register_custom_operator</code> registers a <a href="/book/appendix/keywords.html">keyword</a> as a custom operator, giving it a particular
-<em>precedence</em> (which cannot be zero).</p>
+<em>precedence</em> (which cannot be zero, see below).</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
@@ -247,14 +247,14 @@ engine.eval::&lt;i64&gt;(&quot;# 42&quot;)?;                          // &lt;- s
 <tr><td>Logic and bit masks</td><td style="text-align: center"><code>||</code>,  <code>|</code>, <code>^</code></td><td style="text-align: center">left</td><td style="text-align: center">30</td></tr>
 <tr><td>Logic and bit masks</td><td style="text-align: center"><code>&amp;&amp;</code>, <code>&amp;</code></td><td style="text-align: center">left</td><td style="text-align: center">60</td></tr>
 <tr><td>Comparisons</td><td style="text-align: center"><code>==</code>, <code>!=</code></td><td style="text-align: center">left</td><td style="text-align: center">90</td></tr>
-<tr><td>Containment</td><td style="text-align: center">[<code>in</code></td><td style="text-align: center">left</td><td style="text-align: center">110</td></tr>
+<tr><td>Containment</td><td style="text-align: center"><a href="/book/language/in.html"><code>in</code></a></td><td style="text-align: center">left</td><td style="text-align: center">110</td></tr>
 <tr><td>Comparisons</td><td style="text-align: center"><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></td><td style="text-align: center">left</td><td style="text-align: center">130</td></tr>
 <tr><td>Ranges</td><td style="text-align: center"><code>..</code>, <code>..=</code></td><td style="text-align: center">left</td><td style="text-align: center">140</td></tr>
 <tr><td>Arithmetic</td><td style="text-align: center"><code>+</code>, <code>-</code></td><td style="text-align: center">left</td><td style="text-align: center">150</td></tr>
 <tr><td>Arithmetic</td><td style="text-align: center"><code>*</code>, <code>/</code>, <code>%</code></td><td style="text-align: center">left</td><td style="text-align: center">180</td></tr>
 <tr><td>Arithmetic</td><td style="text-align: center"><code>**</code></td><td style="text-align: center">right</td><td style="text-align: center">190</td></tr>
 <tr><td>Bit-shifts</td><td style="text-align: center"><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td><td style="text-align: center">left</td><td style="text-align: center">210</td></tr>
-<tr><td>Unary operators</td><td style="text-align: center">unary <code>+</code>, <code>-</code>, <code>!</code></td><td style="text-align: center">right</td><td style="text-align: center">highest</td></tr>
+<tr><td>Unary operators</td><td style="text-align: center"><code>+</code>, <code>-</code>, <code>!</code></td><td style="text-align: center">right</td><td style="text-align: center">highest</td></tr>
 <tr><td>Object field access</td><td style="text-align: center"><code>.</code></td><td style="text-align: center">right</td><td style="text-align: center">highest</td></tr>
 </tbody></table>
 

@@ -197,9 +197,16 @@
 <h2 id="use-as-parameter-type"><a class="header" href="#use-as-parameter-type">Use as Parameter Type</a></h2>
 <p>Native Rust functions that take parameters of type <code>std::ops::Range&lt;INT&gt;</code> or
 <code>std::ops::RangeInclusive&lt;INT&gt;</code>, when registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a>, accept ranges as arguments.</p>
-<p>However, beware that <code>..</code> (exclusive range) and <code>..=</code> (inclusive range) are <em>different</em> types
-to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
-be registered to handle both range styles.</p>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Different types</p>
+</div>
+<div>
+<p><code>..</code> (exclusive range) and <code>..=</code> (inclusive range) are <em>different</em> types to Rhai
+and they do not interoperate.</p>
+<p>Two different versions of the same API must be registered to handle both range styles.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

@@ -173,15 +173,9 @@ via the <code>timestamp</code> function.</p>
 <p>The following methods (defined in the <a href="/book/rust/packages/builtin.html"><code>BasicTimePackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on timestamps.</p>
 <table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>elapsed</code> method and property</td><td><em>none</em></td><td>returns the number of seconds since the timestamp</td></tr>
-<tr><td><code>+</code> operator</td><td>number of seconds to add</td><td>returns a new timestamp with a specified number of seconds added</td></tr>
-<tr><td><code>+=</code> operator</td><td>number of seconds to add</td><td>adds a specified number of seconds to the timestamp</td></tr>
-<tr><td><code>-</code> operator</td><td>number of seconds to subtract</td><td>returns a new timestamp with a specified number of seconds subtracted</td></tr>
-<tr><td><code>-=</code> operator</td><td>number of seconds to subtract</td><td>subtracts a specified number of seconds from the timestamp</td></tr>
 <tr><td><code>-</code> operator</td><td><ol><li>later timestamp</li><li>earlier timestamp</li></ol></td><td>returns the number of seconds between the two timestamps</td></tr>
-</tbody></table>
-<p>The following methods are defined in the <a href="/book/rust/packages/builtin.html"><code>LanguageCorePackage</code></a> but excluded if using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
-<table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>sleep</code></td><td>number of seconds to sleep</td><td>blocks the current thread for a specified number of seconds</td></tr>
+<tr><td><code>+</code> operator</td><td>number of seconds to add</td><td>returns a new timestamp</td></tr>
+<tr><td><code>-</code> operator</td><td>number of seconds to subtract</td><td>returns a new timestamp</td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><pre class="playground"><code class="language-rust no_run">

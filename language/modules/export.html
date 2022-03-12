@@ -204,7 +204,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
     export inner;       // &lt;- syntax error: cannot export a local variable
 }
 </code></pre>
-<div class="admonition tip">
+<div class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Multiple exports</p>
 </div>
@@ -225,37 +225,14 @@ export z;
 </code></pre>
 </div>
 </div>
-<div class="admonition danger">
+<div class="admonition bug small">
 <div class="admonition-title">
 <p>Do not export closures</p>
 </div>
 <div>
 <p>A <a href="/book/language/fn-ptr.html">function pointer</a>, <a href="/book/language/fn-anon.html">anonymous function</a> or <a href="/book/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
 It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/book/language/functions.html">function</a> to call.</p>
-<p>The actual <a href="/book/language/functions.html">function</a> may not reside in the appropriate <a href="/book/language/fn-namespaces.html">namespace</a>,
-so the call will fail.</p>
-<pre><code class="language-js">┌────────────────┐
-│ my_module.rhai │
-└────────────────┘
-
-fn increment(x) {
-    x + 1
-}
-
-export let inc = Fn(&quot;increment&quot;);   // exports a function pointer
-
-
-┌───────────┐
-│ main.rhai │
-└───────────┘
-
-import &quot;my_module&quot; as my_mod;
-
-print(my_mod::increment(41));       // ok!
-
-let x = my_mod::inc.call(41);       // runtime error:
-                                    //    function 'increment' not found
-</code></pre>
+<p>Exporting them causes a runtime error.</p>
 </div>
 </div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
@@ -264,7 +241,7 @@ let x = my_mod::inc.call(41);       // runtime error:
 <p>Private functions</p>
 </div>
 <div>
-<p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called to initialize the <a href="/book/rust/modules/index.html">module</a>.
+<p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called within the <a href="/book/rust/modules/index.html">module</a> only.
 They cannot be accessed otherwise.</p>
 </div>
 </div>
@@ -282,17 +259,23 @@ private fn foo() {}     // private function - hidden
 </span></code></pre></pre>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>All loaded <a href="/book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Skip exporting a module</p>
+</div>
+<div>
 <p>To prevent a <a href="/book/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the
 end of the block.</p>
 <pre><code class="language-js">// This is a module script.
 
-import &quot;hello&quot; as foo;      // exported as sub-module 'foo'
+import &quot;hello&quot; as foo;      // &lt;- exported
 
 {
-    import &quot;world&quot; as bar;  // not exported - the module disappears at the end
-                            //                of the statement block and is not 'global'
+    import &quot;world&quot; as bar;  // &lt;- not exported
 }
 </code></pre>
+</div>
+</div>
 
                     </main>
 

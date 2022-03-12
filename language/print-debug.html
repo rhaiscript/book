@@ -229,8 +229,15 @@ for entry in logbook.read().unwrap().iter() {
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>position (line number and character offset) of the <code>debug</code> call</td></tr>
 </tbody></table>
 <p>The <em>source</em> of a script evaluation is any text string provided to an <a href="/book/engine/compile.html"><code>AST</code></a> via <code>AST::set_source</code>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
 <p>If a <a href="/book/rust/modules/index.html">module</a> is loaded via an <a href="/book/language/modules/import.html"><code>import</code></a> statement, then the <em>source</em> of functions defined within
 the module will be the module’s <em>path</em>.</p>
+</div>
+</div>
 
                     </main>
 

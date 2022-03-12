@@ -165,7 +165,7 @@
                     <main>
                         <h1 id="dynamic-values"><a class="header" href="#dynamic-values">Dynamic Values</a></h1>
 <p>A <code>Dynamic</code> value can be <em>any</em> type, as long as it implements <code>Clone</code>.</p>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p><code>Send + Sync</code></p>
 </div>
@@ -197,10 +197,17 @@ switch type_of(mystery) {
 }
 </code></pre>
 <h2 id="type-checking-and-casting"><a class="header" href="#type-checking-and-casting">Type Checking and Casting</a></h2>
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: <code>Dynamic::try_cast</code></p>
+</div>
+<div>
+<p>The <code>try_cast</code> method does not panic but returns <code>None</code> upon failure.</p>
+</div>
+</div>
 <p>A <code>Dynamic</code> value’s actual type can be checked via <code>Dynamic::is</code>.</p>
 <p>The <code>cast</code> method then converts the value into a specific, known type.</p>
-<p>Alternatively, use the <code>try_cast</code> method which does not panic but returns <code>None</code> when the cast fails.</p>
-<p>Use <code>clone_cast</code> for on a reference to <code>Dynamic</code>.</p>
+<p>Use <code>clone_cast</code> to clone a reference to <code>Dynamic</code>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -246,7 +253,7 @@ match item.type_name() {                    // 'type_name' returns the name of t
 }
 <span class="boring">}
 </span></code></pre></pre>
-<div class="admonition warning">
+<div class="admonition warning small">
 <div class="admonition-title">
 <p>Always full path name</p>
 </div>

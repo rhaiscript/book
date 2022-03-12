@@ -167,9 +167,23 @@
 <h2 id="use-case-1--make-the-module-globally-available"><a class="header" href="#use-case-1--make-the-module-globally-available">Use Case 1 – Make the Module Globally Available</a></h2>
 <p><code>Engine::register_global_module</code> registers a shared <a href="/book/rust/modules/index.html">module</a> into the
 <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>.</p>
-<p>All <a href="/book/language/functions.html">functions</a> and <a href="/book/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.</p>
-<p>Variables and sub-modules are <strong>ignored</strong>.</p>
 <p>This is by far the easiest way to expose a <a href="/book/rust/modules/index.html">module</a>’s functionalities to Rhai.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: No qualifiers</p>
+</div>
+<div>
+<p>All <a href="/book/language/functions.html">functions</a> and <a href="/book/language/iterator.html">type iterators</a> can be accessed without <em>namespace qualifiers</em>.</p>
+</div>
+</div>
+<div class="admonition warning small">
+<div class="admonition-title">
+<p>Warning</p>
+</div>
+<div>
+<p>Variables and sub-modules are <strong>ignored</strong>.</p>
+</div>
+</div>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -192,10 +206,19 @@ engine.register_global_module(module.into());
 engine.eval::&lt;i64&gt;(&quot;inc(41)&quot;)? == 42;       // no need to import module
 <span class="boring">}
 </span></code></pre></pre>
+<h3 id="equivalent-to-engineregister_xxx"><a class="header" href="#equivalent-to-engineregister_xxx">Equivalent to <code>Engine::register_XXX</code></a></h3>
+<div class="admonition question side wide">
+<div class="admonition-title">
+<p>Rhai internals</p>
+</div>
+<div>
+<p><code>Engine::register_fn</code> etc. are actually implemented by adding functions to an
+internal <a href="/book/rust/modules/index.html">module</a>!</p>
+</div>
+</div>
 <p>Registering a <a href="/book/rust/modules/index.html">module</a> via <code>Engine::register_global_module</code> is essentially the <em>same</em>
 as calling <code>Engine::register_fn</code> (or any of the <code>Engine::register_XXX</code> API) individually
-on each top-level function within that <a href="/book/rust/modules/index.html">module</a>.  In fact, the actual implementation of
-<code>Engine::register_fn</code> etc. simply adds the function to an internal <a href="/book/rust/modules/index.html">module</a>!</p>
+on each top-level function within that <a href="/book/rust/modules/index.html">module</a>.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -235,11 +258,18 @@ engine.eval::&lt;i64&gt;(&quot;services::calc::inc(41)&quot;)? == 42;
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="expose-functions-to-the-global-namespace"><a class="header" href="#expose-functions-to-the-global-namespace">Expose Functions to the Global Namespace</a></h3>
-<p>The <a href="/book/rust/modules/index.html"><code>Module</code></a> API can optionally expose functions to the <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>
-by setting the <code>namespace</code> parameter to <code>FnNamespace::Global</code>, so <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a>
-for <a href="/book/rust/custom.html">custom types</a> can work as expected.</p>
-<p><a href="/book/language/iterator.html">Type iterators</a>, because of their special nature, are <em>always</em> exposed to the
+<div class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Type iterators</p>
+</div>
+<div>
+<p><a href="/book/language/iterator.html">Type iterators</a> are special — they are <em>always</em> exposed to the
 <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>.</p>
+</div>
+</div>
+<p>The <a href="/book/rust/modules/index.html"><code>Module</code></a> API can optionally expose functions to the <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>
+by setting the <code>namespace</code> parameter to <code>FnNamespace::Global</code>.</p>
+<p>This way, <a href="/book/rust/getters-setters.html">getters/setters</a> and <a href="/book/rust/indexers.html">indexers</a> for <a href="/book/rust/custom.html">custom types</a> can work as expected.</p>
 <pre><pre class="playground"><code class="language-rust no_run">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

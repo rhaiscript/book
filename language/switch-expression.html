@@ -165,8 +165,23 @@
                     <main>
                         <h1 id="switch-expression"><a class="header" href="#switch-expression">Switch Expression</a></h1>
 <p>Like <a href="/book/language/if.html"><code>if</code></a>, <a href="/book/language/switch.html"><code>switch</code></a> also works as an <em>expression</em>.</p>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip</p>
+</div>
+<div>
 <p>This means that a <a href="/book/language/switch.html"><code>switch</code></a> expression can appear anywhere a regular expression can,
 e.g. as <a href="/book/language/functions.html">function</a> call arguments.</p>
+</div>
+</div>
+<div class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Disable <code>switch</code> expressions</p>
+</div>
+<div>
+<p><a href="/book/language/switch.html"><code>switch</code></a> expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_switch_expression</code></a>.</p>
+</div>
+</div>
 <pre><code class="language-js">let x = switch foo { 1 =&gt; true, _ =&gt; false };
 
 func(switch foo {
@@ -187,7 +202,6 @@ if foo == &quot;hello&quot; {
     func(0);
 }
 </code></pre>
-<p><a href="/book/language/switch.html"><code>switch</code></a> expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_switch_expression</code></a>.</p>
 
                     </main>
 
