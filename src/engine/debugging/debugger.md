@@ -86,7 +86,7 @@ continued behavior of the debugger.
 | `FunctionExit`            | run to the end of the current function call; debugger is triggered _before_ the function call returns and the [`Scope`] cleared |     `finish`     |
 
 
-~~~admonish tip "The `Debugger`"
+~~~admonish tip.small "The `Debugger`"
 
 The type `debugger::Debugger` allows for manipulating [break-points], among others.
 

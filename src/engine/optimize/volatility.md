@@ -26,7 +26,7 @@ call and replaces it with the result.
 
 This causes the script to behave differently from the intended semantics.
 
-```admonish danger "Warning"
+```admonish danger.small "Warning"
 
 **Avoid using [`OptimizationLevel::Full`]** if volatile custom functions are involved.
 ```

@@ -18,6 +18,11 @@ Needless to say, it is _extremely_ inefficient to use `String` parameters.
 `&str` Maps to `ImmutableString`
 -------------------------------
 
+```admonish warning.side "Common mistake"
+
+A common mistake made by novice Rhai users is to register functions with `String` parameters.
+```
+
 Rust functions accepting parameters of `String` should use `&str` instead because it maps directly
 to [`ImmutableString`] which is the type that Rhai uses to represent [strings] internally.
 
@@ -25,8 +30,6 @@ The parameter type `String` involves always converting an [`ImmutableString`] in
 which mandates cloning it.
 
 Using [`ImmutableString`] or `&str` is much more efficient.
-
-A common mistake made by novice Rhai users is to register functions with `String` parameters.
 
 ```rust,no_run
 fn get_len1(s: String) -> i64 {             // BAD!!! Very inefficient!!!

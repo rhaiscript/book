@@ -15,14 +15,16 @@ Before a [module] can be used (via an `import` statement) in a script, there mus
 `import` Statement
 -----------------
 
-A [module] can be _imported_ via the `import` statement, and be given a name.
-Its members can be accessed via `::` similar to C++.
-
-```admonish tip.small "Tip"
+```admonish tip.side.wide "Tip"
 
 A [module] that is only `import`-ed but not given any name is simply run.
+
 This is a very simple way to run another script file from within a script.
 ```
+
+A [module] can be _imported_ via the `import` statement, and be given a name.
+
+Its members can be accessed via `::` similar to C++.
 
 ```js
 import "crypto_banner";         // run the script file 'crypto_banner.rhai' without creating an imported module

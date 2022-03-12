@@ -10,11 +10,17 @@ Use Case 1 &ndash; Make the Module Globally Available
 `Engine::register_global_module` registers a shared [module] into the
 [_global_ namespace][function namespace].
 
+This is by far the easiest way to expose a [module]'s functionalities to Rhai.
+
+```admonish tip.small "Tip: No qualifiers"
+
 All [functions] and [type iterators] can be accessed without _namespace qualifiers_.
+```
+
+```admonish warning.small
 
 Variables and sub-modules are **ignored**.
-
-This is by far the easiest way to expose a [module]'s functionalities to Rhai.
+```
 
 ```rust,no_run
 use rhai::{Engine, Module};
@@ -36,10 +42,17 @@ engine.register_global_module(module.into());
 engine.eval::<i64>("inc(41)")? == 42;       // no need to import module
 ```
 
+### Equivalent to `Engine::register_XXX`
+
+```admonish question.side.wide "Rhai internals"
+
+`Engine::register_fn` etc. are actually implemented by adding functions to an
+internal [module]!
+```
+
 Registering a [module] via `Engine::register_global_module` is essentially the _same_
 as calling `Engine::register_fn` (or any of the `Engine::register_XXX` API) individually
-on each top-level function within that [module].  In fact, the actual implementation of
-`Engine::register_fn` etc. simply adds the function to an internal [module]!
+on each top-level function within that [module].
 
 ```rust,no_run
 // The above is essentially the same as:
@@ -81,12 +94,16 @@ engine.eval::<i64>("services::calc::inc(41)")? == 42;
 
 ### Expose Functions to the Global Namespace
 
-The [`Module`] API can optionally expose functions to the [_global_ namespace][function namespace]
-by setting the `namespace` parameter to `FnNamespace::Global`, so [getters/setters] and [indexers]
-for [custom types] can work as expected.
+```admonish tip.side.wide "Tip: Type iterators"
 
-[Type iterators], because of their special nature, are _always_ exposed to the
+[Type iterators] are special &mdash; they are _always_ exposed to the
 [_global_ namespace][function namespace].
+```
+
+The [`Module`] API can optionally expose functions to the [_global_ namespace][function namespace]
+by setting the `namespace` parameter to `FnNamespace::Global`.
+
+This way, [getters/setters] and [indexers] for [custom types] can work as expected.
 
 ```rust,no_run
 use rhai::{Engine, Module, FnNamespace};

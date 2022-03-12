@@ -9,8 +9,9 @@ Peeking Out of The Pure Box
 
 ```admonish info.side "Only scripts"
 
-This is only meaningful for _scripted_ [functions], since native Rust functions can never
-access any [`Scope`] anyway.
+This is only meaningful for _scripted_ [functions].
+
+Native Rust functions can never access any [`Scope`].
 ```
 
 Rhai [functions] are _pure_, meaning that they depend on on their arguments and have no access to
@@ -62,26 +63,23 @@ import "hello" as h;
 h::greet!();            // <- syntax error: not allowed in namespace-qualified calls
 ```
 
-
-```admonish warning "New variables are not retained"
-
-[Variables] or [constants] defined within the [function] are _not_ retained.
-
-They remain local to the [function].
-
-So, although the syntax resembles a Rust _macro_ invocation, it is still a [function] call.
-```
-
-```admonish danger "The caller's scope can be mutated"
+```admonish danger.small "The caller's scope can be mutated"
 
 Changes to [variables] in the calling [`Scope`] persist.
 
-Therefore, with this syntax, it is possible for a Rhai [function] to mutate its calling environment.
+With this syntax, it is possible for a Rhai [function] to mutate its calling environment.
+```
+
+```admonish warning.small "New variables are not retained"
+
+[Variables] or [constants] defined within the [function] are _not_ retained.
+They remain local to the [function].
+
+Although the syntax resembles a Rust _macro_ invocation, it is still a [function] call.
 ```
 
 
-Caveat Emptor
--------------
+```admonish danger "Caveat emptor"
 
 [Functions] relying on the calling [`Scope`] is often a _Very Bad Idea™_ because it makes code
 almost impossible to reason about and maintain, as their behaviors are volatile and unpredictable.
@@ -95,3 +93,4 @@ function calls, thus the syntax is also similar to Rust's macro invocations.
 This usage should be at the last resort.
 
 **YOU HAVE BEEN WARNED**.
+```

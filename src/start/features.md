@@ -5,17 +5,15 @@ Optional Features
 
 By default, Rhai includes all the standard functionalities in a small, tight package.
 
-Most features are here to opt-**out** of certain functionalities that are not needed.
-Notice that this deviates from Rust norm where features are _additive_.
-
-Excluding unneeded functionalities can result in smaller, faster builds as well as more control over
-what a script can (or cannot) do.
-
 ```admonish warning "Features are not additive"
 
 Most Rhai features are not strictly _additive_, i.e. they do not only add optional functionalities.
 
-In fact, most features are _subtractive_, i.e. they _remove_ functionalities.
+In fact, most features are _subtractive_, i.e. they opt-**out** of unneeded functionalities.
+Notice that this deviates from Rust norm where features are _additive_.
+
+Excluding functionalities result in smaller, faster builds as well as more control over
+what scripts can (or cannot) do.
 
 There is a reason for this design, because the _lack_ of a language feature by itself is a feature (that's deep...).
 

@@ -5,9 +5,6 @@ Constants
 
 Constants can be defined using the `const` keyword and are immutable.
 
-Constants follow the same naming rules as [variables], but as a convention are often named with
-all-capital letters.
-
 ```rust,no_run
 const X;            // 'X' is a constant '()'
 
@@ -18,15 +15,24 @@ print(X * 2);       // prints 84
 X = 123;            // <- syntax error: constant modified
 ```
 
+```admonish tip.small "Tip: Naming"
+
+Constants follow the same naming rules as [variables], but as a convention are often named with
+all-capital letters.
+```
+
 
 Manually Add Constant into Custom Scope
 --------------------------------------
 
+```admonish tip.side.wide "Tip: Singleton"
+
+A constant value holding a [custom type] essentially acts
+as a [_singleton_]({{rootUrl}}/patterns/singleton.md).
+```
+
 It is possible to add a constant into a custom [`Scope`] via `Scope::push_constant` so it'll be
 available to scripts running with that [`Scope`].
-
-It is very useful to have a constant value hold a [custom type], which essentially acts
-as a [_singleton_]({{rootUrl}}/patterns/singleton.md).
 
 ```rust,no_run
 use rhai::{Engine, Scope};
@@ -124,7 +130,7 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 X == 43;            // value of 'X' is unchanged by script
 ```
 
-```admonish info "Implications on script optimization"
+```admonish info.small "Implications on script optimization"
 
 Rhai _assumes_ that constants are never changed, even via Rust functions.
 

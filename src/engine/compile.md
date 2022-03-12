@@ -19,13 +19,15 @@ for _ in 0..42 {
 }
 ```
 
-Compiling a script file is also supported with `Engine::compile_file`
-(not available under [`no_std`] or in [WASM] builds).
+~~~admonish tip.small "Tip: Compile script file"
+
+Compiling script files is also supported via `Engine::compile_file`
+(not available for [`no_std`] or [WASM] builds).
 
 ```rust,no_run
 let ast = engine.compile_file("hello_world.rhai".into())?;
 ```
-
+~~~
 
 ~~~admonish info.small "`AST` manipulation API"
 

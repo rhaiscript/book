@@ -8,6 +8,11 @@ Do Loop
 Like the [`while`] loop, `continue` can be used to skip to the next iteration, by-passing all
 following statements; `break` can be used to break out of the loop unconditionally.
 
+~~~admonish tip.small "Tip: Disable `do` loops"
+
+`do` loops can be disabled via [`Engine::set_allow_looping`][options].
+~~~
+
 ```rust,no_run
 let x = 10;
 
@@ -26,5 +31,3 @@ do {
     if x == 5 { break; }    // break out of do loop
 } until x == 0;
 ```
-
-`do` loops can be disabled via [`Engine::set_allow_looping`][options].

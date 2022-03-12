@@ -51,13 +51,13 @@ Anonymous [functions] have a syntax similar to Rust's _closures_ (they are _not_
 
 > `|`_param 1_`,` _param 2_`,` ... `,` _param n_`|` _statement_  
 >
-> `|`_param 1_`,` _param 2_`,` ... `,` _param n_`| {` ... `}`  
+> `|`_param 1_`,` _param 2_`,` ... `,` _param n_`| {` _statements_... `}`  
 
 No parameters:
 
 > `||` _statement_  
 >
-> `|| {` ... `}`
+> `|| {` _statements_... `}`
 
 Anonymous functions can be disabled via [`Engine::set_allow_anonymous_function`][options].
 
@@ -108,9 +108,9 @@ let obj = #{
 };
 ```
 
-```admonish danger "NOT real closures"
+```admonish danger.small "NOT real closures"
 
-Remember: though having the same syntax as Rust _closures_, anonymous [functions] are themselves
+Remember: though having the same syntax as Rust _closures_, anonymous functions are themselves
 **NOT** real closures.
 
 In particular, they capture their execution environment via [automatic currying]

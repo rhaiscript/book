@@ -11,11 +11,11 @@ Method-Call Style vs. Function-Call Style
 
 > _object_ `.` _function_ `(` _parameter_`,` ... `,` _parameter_`)`
 
-~~~admonish warning "_method-call_ style is not supported under [`no_object`]"
+~~~admonish warning.small "_method-call_ style not supported under [`no_object`]"
 ```rust,no_run
 // Below is a syntax error under 'no_object'.
-let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
-                                           // ^ cannot call method-style
+engine.run("let x = [42]; x.clear();")?;
+                        // ^ cannot call method-style
 ```
 ~~~
 
@@ -25,10 +25,13 @@ let result = engine.eval("let x = [1, 2, 3]; x.clear();")?;
 
 ### Equivalence
 
-Internally, methods on a [custom type] is _the same_ as a function taking a `&mut` first argument of
-the object's type. Therefore, methods and functions can be called interchangeably.
+```admonish note.side.wide
 
 This design is similar to Rust.
+```
+
+Internally, methods on a [custom type] is _the same_ as a function taking a `&mut` first argument of
+the object's type. Therefore, methods and functions can be called interchangeably.
 
 ```rust,no_run
 impl TestStruct {
@@ -53,7 +56,7 @@ println!("result: {}", result);     // prints 1
 First `&mut` Parameter
 ----------------------
 
-The opposite direction also works &ndash; [methods][custom types] in a Rust [custom type] registered
+The opposite direction also works &mdash; [methods][custom types] in a Rust [custom type] registered
 with the [`Engine`] can be called just like a regular function.  In fact, like Rust, object methods
 are registered as regular [functions] in Rhai that take a first `&mut` parameter.
 
@@ -61,7 +64,7 @@ Unlike functions defined in script (for which all arguments are passed by _value
 native Rust functions may mutate the first `&mut` argument.
 
 Sometimes, however, there are more subtle differences. Methods called in normal function-call style
-may end up not muting the object afterall &ndash; see the example below.
+may end up not muting the object afterall &mdash; see the example below.
 
 Custom types, [properties][getters/setters], [indexers] and methods are disabled under the
 [`no_object`] feature.
@@ -83,7 +86,7 @@ update(array[0]);   // <- 'array[0]' is an expression returning a calculated val
 array[0].update();  // <- call in method-call style will update 'a'
 ```
 
-```admonish danger "No support for references"
+```admonish danger.small "No support for references"
 
 Rhai does NOT support normal references (i.e. `&T`) as parameters.
 All references must be mutable (i.e. `&mut T`).
@@ -148,6 +151,11 @@ fn add_method(obj: &mut VeryComplexType, offset: i64) -> i64 {
 Data Race Considerations
 ------------------------
 
+```admonish note.side.wide "Data races"
+
+Data races are not possible in Rhai under the [`no_closure`] feature because no sharing ever occurs.
+```
+
 Because methods always take a mutable reference as the first argument, even it the value is never changed,
 care must be taken when using _shared_ values with methods.
 
@@ -168,5 +176,3 @@ x.is_shared() == true;              // now 'x' is shared
 
 x.call(f, 2);                       // <- error: data race detected on 'x'
 ```
-
-Data races are not possible in Rhai under the [`no_closure`] feature because no sharing ever occurs.

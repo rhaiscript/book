@@ -12,7 +12,10 @@ There are two alternative syntaxes, one including a counter variable:
 >
 > `for (` _variable_ `,` _counter_ `)` `in` _expression_ `{` ... `}`
 
+~~~admonish tip.small "Tip: Disable `for` loops"
+
 `for` loops can be disabled via [`Engine::set_allow_looping`][options].
+~~~
 
 
 Counter Variable

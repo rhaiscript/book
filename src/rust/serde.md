@@ -6,7 +6,10 @@ Serialization and Deserialization of `Dynamic` with `serde`
 Rhai's [`Dynamic`] type supports serialization and deserialization by
 [`serde`](https://crates.io/crates/serde) via the [`serde`][features] feature.
 
+```admonish tip.small
+
 [`Dynamic`] works _both_ as a _serialization format_ as well as a data type that is serializable.
+```
 
 [`serde`]: https://crates.io/crates/serde
 [`serde::Serialize`]: https://docs.serde.rs/serde/trait.Serialize.html
@@ -130,7 +133,7 @@ r#"
 let x: MyStruct = from_dynamic(&result)?;
 ```
 
-```admonish warning "Cannot deserialize shared values"
+```admonish warning.small "Cannot deserialize shared values"
 
 A [`Dynamic`] containing a _shared_ value cannot be deserialized.
 It will give a type error.

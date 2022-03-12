@@ -13,12 +13,18 @@ When compiling a Rhai script to an [`AST`], the following data are packaged toge
 | Functions                  |       [`Shared<Module>`][`Module`]        | [functions] defined in the script                                                                 | `internals`,<br/>not [`no_function`] |                                              `shared_lib(&self)`                                               |
 | Embedded [module resolver] | [`StaticModuleResolver`][module resolver] | embedded [module resolver] for [self-contained `AST`]({{rootUrl}}/rust/modules/self-contained.md) |  `internals`,<br/>not [`no_module`]  |                                               `resolver(&self)`                                                |
 
-Use the source name to identify the source script in errors &ndash; useful when multiple [modules]
-are imported recursively.
-
 Most of the [`AST`] API is available only under the [`internals`] feature.
 
+```admonish tip.small "Tip: Source name"
+
+Use the source name to identify the source script in errors &ndash; useful when multiple [modules]
+are imported recursively.
+```
+
+~~~admonish info.small "`AST` Public API"
+
 For the complete [`AST`] API, refer to the [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.AST.html) online.
+~~~
 
 
 Extract Only Functions

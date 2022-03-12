@@ -31,7 +31,7 @@ let result: i64 = engine.eval_expression_with_scope(&mut scope,
                   )?;
 ```
 
-```admonish failure "No statements allowed"
+```admonish bug "No statements allowed"
 
 When evaluating _expressions_, no full-blown statement (e.g. [`if`], [`while`], [`for`], `fn`)
 &ndash; not even [variable] assignment &ndash; is supported and will be considered syntax errors.

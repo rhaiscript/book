@@ -28,7 +28,10 @@ Therefore, similar to closures in many languages, these captured shared values p
 reference counting, and may be read or modified even after the [variables] that hold them go out of
 scope and no longer exist.
 
+```admonish tip.small "Tip: Disable closures"
+
 [Automatic currying] can be turned off via the [`no_closure`] feature.
+```
 
 
 Examples

@@ -8,13 +8,13 @@ Rhai's scripting engine is very lightweight.  It gets most of its abilities from
 To call these functions, they need to be _registered_ via `Engine::register_fn` or
 `Engine::register_result_fn` (see [fallible functions]).
 
-```admonish tip "Tip: Function overloading"
+```admonish tip.small "Tip: Function overloading"
 
 Functions registered with the [`Engine`] can be _overloaded_ as long as the _signature_ is unique,
 i.e. different functions can have the same name as long as their parameters are of different types
-or different number.
+or different numbers (i.e. _arity_).
 
-New definitions _overwrite_ previous definitions of the same name and same number/types of parameters.
+New definitions _overwrite_ previous definitions of the same name, same arity and same parameter types.
 ```
 
 ```rust,no_run
@@ -53,15 +53,21 @@ let result = engine.eval::<i64>("get_any_value()")?;
 println!("Answer: {}", result);         // prints 42
 ```
 
-To create a [`Dynamic`] value, use the `Dynamic::from` method.
+~~~admonish tip.small "Tip: Create a `Dynamic`"
+
+To create a [`Dynamic`] value, use `Dynamic::from`.
+
 [Standard types] in Rhai can also use `.into()`.
 
 ```rust,no_run
 use rhai::Dynamic;
 
-let x = 42_i64.into();                  // '.into()' works for standard types
+let x = Dynamic::from(TestStruct::new());
+
+// '.into()' works for standard types
+
+let x = 42_i64.into();
 
 let y = "hello!".into();
-
-let x = Dynamic::from(TestStruct::new());
 ```
+~~~

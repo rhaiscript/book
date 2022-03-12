@@ -25,7 +25,7 @@ let engine = engine;
 ```
 
 
-```admonish tip "Tip: Use Rhai to control external environment"
+```admonish tip.small "Tip: Use Rhai to control external environment"
 
 How does a _sand-boxed_, immutable [`Engine`] control the external environment?
 

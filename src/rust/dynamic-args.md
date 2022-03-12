@@ -7,7 +7,7 @@ It is possible for Rust functions to contain parameters of type [`Dynamic`].
 
 A [`Dynamic`] value can hold any clonable type.
 
-```admonish example
+```admonish example.small
 
 The `push` method of an [array] is implemented as follows (minus code for [safety] protection
 against [over-sized arrays][maximum size of arrays]), allowing the function to be called with
@@ -101,12 +101,12 @@ TL;DR
 Since functions in Rhai can be [overloaded][function overloading], Rhai uses a single _hash_ number
 to quickly lookup the actual function, based on argument types.
 
-For each function call, a hash is calculated made up from:
+For each function call, a hash is calculated from:
 
-1. the function's [namespace], if any,
+1. the function's [namespace][function namespace], if any,
 2. the function's name,
-3. number of arguments,
-4. the unique ID of the type of each argument, if any.
+3. number of arguments (its _arity_),
+4. unique ID of the type of each argument, if any.
 
 The correct function is then obtained via a simple hash lookup.
 

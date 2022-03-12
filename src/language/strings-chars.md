@@ -26,7 +26,7 @@ String and character literals follow JavaScript-style syntax.
 | Multi-line literal string | `` `...` `` |    no    |      no       | with `${...}`  |
 | Character                 |   `'...'`   |   yes    |      no       |       no       |
 
-```admonish tip "Tip: Building strings"
+```admonish tip.small "Tip: Building strings"
 
 Strings can be built up from other strings and types via the `+` operator
 (provided by the [`MoreStringPackage`][built-in packages] but excluded if using a [raw `Engine`]).
@@ -201,7 +201,7 @@ _last_ character.
 
 > _string_ `[` _index from &minus;1 to &minus;(total number of characters)_ `]`
 
-```admonish warning "Character indexing can be SLOW"
+```admonish warning.small "Character indexing can be SLOW"
 
 Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.
 

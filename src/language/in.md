@@ -3,11 +3,13 @@ In Operator
 
 {{#include ../links.md}}
 
+```admonish question.side.wide "Rhai internals"
+
+The `in` operator is simply syntactic sugar for a call to the `contains` function.
+```
 
 The `in` operator is used to check for _containment_ &ndash; i.e. whether a particular collection
 data type _contains_ a particular item.
-
-Internally the `in` operator is simply syntactic sugar for a call to the `contains` function.
 
 ```rust,no_run
 42 in array;
@@ -15,7 +17,9 @@ Internally the `in` operator is simply syntactic sugar for a call to the `contai
 array.contains(42);     // <- the above is equivalent to this
 ```
 
-```admonish info.small "Built-in support for standard data types"
+
+Built-in Support for Standard Data Types
+---------------------------------------
 
 |    Data type    |              Check for              |
 | :-------------: | :---------------------------------: |
@@ -23,7 +27,6 @@ array.contains(42);     // <- the above is equivalent to this
 |     [Array]     |           contained item            |
 |  [Object map]   |            property name            |
 |    [String]     | [sub-string][string] or [character] |
-```
 
 
 Examples
@@ -56,10 +59,12 @@ Array Items Comparison
 The default implementation of the `in` operator for [arrays] uses the `==` operator (if defined)
 to compare items.
 
-Beware that, for a [custom type], `==` defaults to `false` when comparing it with a value of of the
-same type.
+~~~admonish warning.small "`==` defaults to `false`"
+
+For a [custom type], `==` defaults to `false` when comparing it with a value of of the same type.
 
 See the section on [_Logic Operators_](logic.md) for more details.
+~~~
 
 ```rust,no_run
 let ts = new_ts();                  // assume 'new_ts' returns a custom type

@@ -24,7 +24,10 @@ Default Case
 
 A _default_ case (i.e. when no other cases match) can be specified with `_`.
 
-However, it must be the _last_ case in the `switch` statement.
+```admonish warning.small "Must be last"
+
+The default case must be the _last_ case in the `switch` statement.
+```
 
 ```js
 switch wrong_default {
@@ -71,7 +74,7 @@ Case Conditions
 Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to `true` in order for the case to match.
 
-Unlike Rust, however, case conditions still do not allow the case values to duplicate.
+Unlike Rust, however, case conditions do not allow the case values to duplicate.
 
 ```js
 let result = switch calc_secret_value(x) {
@@ -94,11 +97,15 @@ let result = switch calc_secret_value(x) {
 Range Cases
 -----------
 
-Because of their popularity, [literal] integer [ranges] can also be used as `switch` cases,
-but they must come _after_ all integer cases.
+Because of their popularity, [literal] integer [ranges] can also be used as `switch` cases.
 
 Numeric [ranges] are only searched when the `switch` value is itself an integer (i.e. they never
 match any other data types).
+
+```admonish warning.small "Must come after integer cases"
+
+Range cases must come _after_ all integer cases.
+```
 
 ```js
 let x = 42;

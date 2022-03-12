@@ -40,18 +40,27 @@ which are also available to functions defined within the same script file.
 
 ### Base directory
 
-_Relative_ paths are resolved relative to a _root_ directory, which is usually the base directory (if set).
+_Relative_ paths are resolved relative to a _root_ directory, which is usually the base directory.
+
 The base directory can be set via `FileModuleResolver::new_with_path` or `FileModuleResolver::set_base_path`.
 
-If the base directory is not set (e.g. using `FileModuleResolver::new`), then it is based off the
-directory holding the loading script. This allows scripts to simply load each other.
+```admonish tip.small "Tip: No base directory"
+
+If the base directory is not set (e.g. using `FileModuleResolver::new`), then relative paths are
+based off the directory of the loading script.
+
+This allows scripts to simply load each other.
+```
 
 ### Caching
 
 By default, [modules] are also _cached_ so a script file is only evaluated _once_, even when
 repeatedly imported.
 
+```admonish tip.small "Tip: Enable/disable caching"
+
 Use `FileModuleResolver::enable_cache` to enable/disable the script file cache.
+```
 
 ### Unix Shebangs
 
@@ -168,7 +177,12 @@ m::greet();                         // prints "hello! from module!"
 `StaticModuleResolver`
 ---------------------
 
-Loads [modules] that are statically added. This can be used under [`no_std`].
+```admonish tip.side.wide "Tip: Typical usage"
+
+Often used in [`no_std`] or embedded environments without a file system.
+```
+
+Loads [modules] that are statically added.
 
 Functions are searched in the [_global_ namespace][function namespace] by default.
 
@@ -185,7 +199,9 @@ resolver.insert("my_module", module);
 `ModuleResolversCollection`
 --------------------------
 
-A collection of module resolvers. [Modules] will be resolved from each resolver in sequential order.
+A collection of module resolvers.
+
+[Modules] are resolved from each resolver in sequential order.
 
 This is useful when multiple types of [modules] are needed simultaneously.
 

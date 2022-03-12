@@ -3,6 +3,11 @@
 
 {{#include ../links.md}}
 
+```admonish warning.side.wide "Functions are pure"
+
+The only way for a script-defined [function] to change an external value is via `this`.
+```
+
 Arguments passed to script-defined [functions] are always by _value_ because [functions] are _pure_.
 
 However, script-defined [functions] can also be called in _method-call_ style:
@@ -11,8 +16,6 @@ However, script-defined [functions] can also be called in _method-call_ style:
 
 When a [function] is called this way, the keyword `this` binds to the object in the method call and
 can be changed.
-
-The only way for a script-defined [function] to change an external value is via `this`.
 
 ```rust,no_run
 fn change() {       // note that the method does not need a parameter

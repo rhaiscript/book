@@ -92,7 +92,7 @@ mod my_module {
 }
 ```
 
-```admonish tip "Doc-comments"
+```admonish tip.small "Doc-comments"
 
 If the [`metadata`] feature is active, doc-comments (i.e. comments starting with `///` or wrapped
 with `/**` ... `*/`) on plugin functions are extracted into [_metadata_][functions metadata].
@@ -135,10 +135,12 @@ increment(x);
 x == 43;
 ```
 
-Notice that, when using a [module] as a [package], only functions registered at the _top level_
-can be accessed.
+```admonish warning.small "Only functions"
+
+When using a [module] as a [package], only functions registered at the _top level_ can be accessed.
 
 Variables as well as sub-modules are **ignored**.
+```
 
 ### Use `Engine::register_static_module`
 
@@ -194,10 +196,13 @@ x == 43;
 
 ### Use Dynamically
 
-Using this directly as a dynamically-loadable Rhai [module] is almost the same, except that a
-[module resolver] must be used to serve the module, and the module is loaded via `import` statements.
+```admonish info.side.wide "See also"
 
 See the [module] section for more information.
+```
+
+Using this directly as a dynamically-loadable Rhai [module] is almost the same, except that a
+[module resolver] must be used to serve the module, and the module is loaded via `import` statements.
 
 ### Combine into Custom Package
 
@@ -206,9 +211,12 @@ Finally, the plugin module can also be used to develop a [custom package], using
 functions in sub-modules are promoted to the top level [namespace][function namespace], all
 sub-modules are eliminated, and all variables are ignored.
 
-Due to this _flattening_, sub-modules are used conveniently as a _grouping_ mechanism, especially to
+```admonish tip.small "Tip: Feature gating"
+
+Due to _flattening_, sub-modules are often used conveniently as a _grouping_ mechanism, especially to
 put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a large collection of functions
-without having to duplicate the gates onto individual functions.
+without having to duplicate the gates onto each individual function.
+```
 
 ```rust,no_run
 #[export_module]
@@ -267,7 +275,7 @@ combine_with_exported_module!(module, "my_module_ID", my_module);
 Functions Overloading and Operators
 ----------------------------------
 
-~~~admonish info.side "`NativeCallContext` parameter"
+~~~admonish tip.side "Tip: `NativeCallContext` parameter"
 
 The _first_ parameter of a function can also be [`NativeCallContext`].
 ~~~
@@ -281,9 +289,15 @@ the [`Engine`], disregarding the actual name of the function.
 With `#[rhai_fn(name = "...")]`, multiple functions may be registered under the same name in Rhai,
 so long as they have different parameters.
 
-Operators (which require function names that are not valid for Rust) can also be registered this way.
+```admonish tip.small "Tip: Operators"
 
-Registering the same function name with the same parameter types will cause a parsing error.
+Operators (which require function names that are not valid for Rust) can also be registered this way.
+```
+
+```admonish bug.small "Duplicated functions"
+
+Registering the same function name with the same parameter types will cause a parse error.
+```
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -311,8 +325,20 @@ mod my_module {
 Getters, Setters and Indexers
 -----------------------------
 
+```admonish tip.side "Tip: Global namespace"
+
+[Getters/setters] and [indexers] default to `#[rhai_fn(global)]` unless overridden by `#[rhai_fn(internal)]`.
+```
+
 Functions can be marked as [getters/setters] and [indexers] for [custom types] via the
 `#[rhai_fn]` attribute, which is applied on a function level.
+
+|             Attribute              |   Description   |
+| :--------------------------------: | :-------------: |
+| `#[rhai_fn(get = "`_property_`")]` | property getter |
+| `#[rhai_fn(set = "`_property_`")]` | property setter |
+|      `#[rhai_fn(index_get)]`       |  index getter   |
+|      `#[rhai_fn(index_set)]`       |  index setter   |
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -350,10 +376,13 @@ mod my_module {
 Multiple Registrations
 ----------------------
 
-Parameters to the `#[rhai_fn(...)]` attribute can be applied multiple times.
+Parameters to the `#[rhai_fn(...)]` attribute can be applied multiple times, separated by commas.
 
-This is especially useful for the `name = "..."`, `get = "..."` and `set = "..."` parameters to give
+```admonish tip.small "Tip: Overloaded names"
+
+Multiple registrations is useful for `name = "..."`, `get = "..."` and `set = "..."` to give
 multiple alternative names to the same function.
+```
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -382,15 +411,28 @@ The above function can be called in five ways:
 Pure Functions
 --------------
 
+```admonish bug.side.wide "Error"
+
+Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise a
+runtime error.
+```
+
 Apply the `#[rhai_fn(pure)]` attribute on a method function (i.e. one taking a `&mut` first parameter)
-to mark it as  _pure_.
+to mark it as  _pure_ &ndash; i.e. it does not modify the `&mut` parameter.
 
-Pure functions _MUST NOT_ modify the value of the `&mut` parameter.
+This is often done to avoid expensive cloning for methods or [property getters][getters/setters]
+that return information about a [custom type] and does not modify it.
 
-Therefore, pure functions can be passed a [constant] value as the first `&mut` parameter.
+~~~admonish warning.small "Must not modify `&mut` parameter"
 
-Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
-`EvalAltResult::ErrorAssignmentToConstant` error.
+Pure functions _MUST NOT_ modify the `&mut` parameter.
+There is no checking.
+~~~
+
+```admonish tip.small "Tip: Constants OK"
+
+Pure functions can be passed a [constant] value as the first `&mut` parameter.
+```
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -449,9 +491,6 @@ To register [fallible functions] (i.e. functions that may return errors), apply 
 `#[rhai_fn(return_raw)]` attribute on functions that return `Result<T, Box<EvalAltResult>>`
 where `T` is any clonable type.
 
-A syntax error is generated if the function with `#[rhai_fn(return_raw)]` does not have the
-appropriate return type.
-
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
@@ -467,6 +506,15 @@ mod my_module {
         }
     }
 }
+```
+
+```admonish bug.small "Error"
+
+A compilation error &mdash; usually something that says `Result` does not implement
+`Clone` &mdash; is generated if a fallible function is missing `#[rhai_fn(return_raw)]`.
+
+It is another compilation error for the reverse &mdash; a function with
+`#[rhai_fn(return_raw)]` does not have the appropriate return type.
 ```
 
 
@@ -485,9 +533,12 @@ Parameters can be applied to the `#[export_module]` attribute to override its de
 Inner Attributes
 ----------------
 
-Inner attributes can be applied to the inner items of a module to tweak the export process.
+~~~admonish info.side.wide "`rhai_fn` vs `rhai_mod`"
 
 `#[rhai_fn]` is applied to functions, while `#[rhai_mod]` is applied to sub-modules.
+~~~
+
+Inner attributes can be applied to the inner items of a module to tweak the export process.
 
 Parameters should be set on inner attributes to specify the desired behavior.
 

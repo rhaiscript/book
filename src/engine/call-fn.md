@@ -68,23 +68,30 @@ let result: i64 = engine.call_fn(&mut scope, &ast, "hello", () )?;
 //                                                          ^^ unit = tuple of zero
 ```
 
-When using `Engine::call_fn`, the [`AST`] is first evaluated before the [function] is called.
+~~~admonish warning.small "Default behavior"
+
+When using `Engine::call_fn`, the [`AST`] is always evaluated _before_ the [function] is called.
+
 This is usually desirable in order to [import][`import`] the necessary external [modules] that are
 needed by the [function].
 
 All new [variables]/[constants] introduced are, by default, _not_ retained inside the [`Scope`].
-In other words, the [`Scope`] is _rewound_ to the initial size after each call.
+In other words, the [`Scope`] is _rewound_ before each call.
 
 If these default behaviors are not desirable, use `Engine::call_fn_raw`.
+~~~
 
 
 `FuncArgs` trait
 ----------------
 
-`Engine::call_fn` takes a parameter of any type that implements the [`FuncArgs`][traits] trait,
-which is used to parse a data type into individual argument values for the [function] call.
+```admonish note.side
 
 Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
+```
+
+`Engine::call_fn` takes a parameter of any type that implements the [`FuncArgs`][traits] trait,
+which is used to parse a data type into individual argument values for the [function] call.
 
 Custom types (e.g. structures) can also implement [`FuncArgs`][traits] so they can be used for
 calling `Engine::call_fn`.
@@ -156,9 +163,14 @@ A parameter can be passed to keep new [variables]/[constants] within the custom 
 This allows the [function] to easily pass values back to the caller by leaving them inside the
 custom [`Scope`].
 
-When doing so, however, beware that all [variables]/[constants] defined at top level of the
-[function] or in the script body will _persist_ inside the custom [`Scope`].  If any of them are
-temporary and not intended to be retained, define them inside a statements block.
+~~~admonish warning.small "Warning: new variables persist in `Scope`"
+
+If the [`Scope`] is not rewound, beware that all [variables]/[constants] defined at top level of the
+[function] or in the script body will _persist_ inside the custom [`Scope`].
+
+If any of them are temporary and not intended to be retained, define them inside a statements block
+(see example below).
+~~~
 
 ```rust,no_run
 ┌─────────────┐
@@ -200,10 +212,14 @@ engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
 
 ### Bind the `this` pointer
 
+```admonish note.side.wide
+
+`Engine::call_fn` cannot call functions in _method-call_ style.
+```
+
 `Engine::call_fn_raw` can also bind a value to the `this` pointer of a script-defined [function].
 
-This functionality is not available to `Engine::call_fn` which cannot call functions in
-_method-call_ style.
+It is possible, then, to call a [function] that uses `this`.
 
 ```rust,no_run
 let ast = engine.compile("fn action(x) { this += x; }")?;

@@ -94,10 +94,13 @@ def_package! {
 Create a Custom Package from a Plugin Module
 -------------------------------------------
 
+```admonish question.side.wide "Rhai internals"
+
+This is exactly how Rhai's built-in [packages], such as `BasicMathPackage`, are actually implemented.
+```
+
 By far the easiest way to create a custom [package] is to call `plugin::combine_with_exported_module!`
 from within `def_package!` which simply merges in all the functions defined within a [plugin module].
-
-In fact, this exactly is how Rhai's built-in [packages], such as `BasicMathPackage`, are implemented.
 
 Due to specific requirements of a [package], `plugin::combine_with_exported_module!`
 _flattens_ all sub-modules (i.e. all functions and [type iterators] defined within sub-modules

@@ -53,7 +53,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 }
 ```
 
-```admonish tip "Tip: Multiple exports"
+```admonish tip.small "Tip: Multiple exports"
 
 [Variables] can be exported under multiple names.
 For example, the following exports three [variables]:
@@ -71,38 +71,13 @@ export z;
 ~~~
 ```
 
-~~~admonish danger "Do not export closures"
+```admonish bug.small "Do not export closures"
 
 A [function pointer], [anonymous function] or [closure], is not a _first-class function_.
 It is _syntactic sugar_ only, capturing the _name_ of a [function] to call.
 
-The actual [function] may not reside in the appropriate [namespace][function namespace],
-so the call will fail.
-
-```js
-┌────────────────┐
-│ my_module.rhai │
-└────────────────┘
-
-fn increment(x) {
-    x + 1
-}
-
-export let inc = Fn("increment");   // exports a function pointer
-
-
-┌───────────┐
-│ main.rhai │
-└───────────┘
-
-import "my_module" as my_mod;
-
-print(my_mod::increment(41));       // ok!
-
-let x = my_mod::inc.call(41);       // runtime error:
-                                    //    function 'increment' not found
+Exporting them causes a runtime error.
 ```
-~~~
 
 
 Export Functions
@@ -110,7 +85,7 @@ Export Functions
 
 ```admonish info.side.wide "Private functions"
 
-[`private`] [functions] are commonly called to initialize the [module].
+[`private`] [functions] are commonly called within the [module] only.
 They cannot be accessed otherwise.
 ```
 
@@ -132,16 +107,18 @@ Sub-Modules
 
 All loaded [modules] are automatically exported as sub-modules.
 
+~~~admonish tip.small "Tip: Skip exporting a module"
+
 To prevent a [module] from being exported, load it inside a block statement so that it goes away at the
 end of the block.
 
 ```js
 // This is a module script.
 
-import "hello" as foo;      // exported as sub-module 'foo'
+import "hello" as foo;      // <- exported
 
 {
-    import "world" as bar;  // not exported - the module disappears at the end
-                            //                of the statement block and is not 'global'
+    import "world" as bar;  // <- not exported
 }
 ```
+~~~

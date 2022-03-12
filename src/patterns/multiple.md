@@ -79,7 +79,7 @@ If more than four different instantiations of Rhai is necessary (why?), create m
 repositories or GitHub forks or branches.
 
 
-```admonish danger "No way To avoid dependency conflicts"
+```admonish danger.small "No way To avoid dependency conflicts"
 
 Unfortunately, pulling in Rhai from different sources do not resolve the problem of [features]
 conflict between dependencies.  Even overriding `crates.io` via the `[patch]` manifest section

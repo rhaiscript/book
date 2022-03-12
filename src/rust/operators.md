@@ -17,7 +17,7 @@ let x = +(a, b);        // <- the above is equivalent to this function call
 Similarly, comparison [operators] including `==`, `!=` etc. are all implemented as functions,
 with the stark exception of `&&` and `||`.
 
-~~~admonish warning "`&&` and `||` cannot be overloaded"
+~~~admonish warning.small "`&&` and `||` cannot be overloaded"
 
 Because they [_short-circuit_]({{rootUrl}}/language/logic.md#boolean-operators), `&&` and `||` are
 handled specially and _not_ via a function.
@@ -63,7 +63,7 @@ result == 43;                                       //    ... but not now
 ```
 
 
-```admonish danger "Considerations"
+```admonish danger.small "Considerations"
 
 Use [operator] overloading for [custom types] only.
 

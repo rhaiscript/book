@@ -7,19 +7,25 @@ Numbers
 Integers
 --------
 
+```admonish tip.side.wide "Tip: Bit-fields"
+
+Integers can also be conveniently manipulated as [bit-fields].
+```
+
 Integer numbers follow C-style format with support for decimal, binary (`0b`), octal (`0o`) and hex (`0x`) notations.
 
 The default system integer type (also aliased to `INT`) is `i64`. It can be turned into `i32` via the [`only_i32`] feature.
-
-Integers can also be conveniently manipulated as [bit-fields].
 
 
 Floating-Point Numbers
 ----------------------
 
-Floating-point numbers are also supported if not disabled with [`no_float`].
+```admonish tip.side.wide "Tip: Notations"
 
-Both decimal and scientific notations can be used.
+Both decimal and scientific notations can be used to represent floating-point numbers.
+```
+
+Floating-point numbers are also supported if not disabled with [`no_float`].
 
 The default system floating-point type is `f64` (also aliased to `FLOAT`).
 It can be turned into `f32` via the [`f32_float`] feature.
@@ -66,11 +72,13 @@ call or as a comparison operand.  `f32` is never implicitly converted to `f64`.
 
 This is exactly the same as Rust where all numeric types are distinct.  Rhai is written in Rust afterall.
 
-Therefore, care must be taken especially with regards to integer variables pushed inside a custom [`Scope`]
-that they are of the intended type.
+```admonish warning.small
+
+Integer variables pushed inside a custom [`Scope`] must be the correct type.
 
 It is extremely easy to mess up numeric types since the Rust default integer type is `i32` while for
-Rhai it is `i64` (without [`only_i32`]).
+Rhai it is `i64` (unless under [`only_i32`]).
+```
 
 ```rust
 use rhai::{Engine, Scope, INT};
@@ -108,7 +116,7 @@ engine.eval_with_scope::<bool>(&mut scope, "f == 42.0")?;
 Floating-Point vs. Decimal
 --------------------------
 
-~~~admonish tip.side "Tip: `no_float` + `decimal`"
+~~~admonish tip.side.wide "Tip: `no_float` + `decimal`"
 
 When both [`no_float`] and [`decimal`] features are turned on, [`Decimal`][rust_decimal] _replaces_
 the standard floating-point type.

@@ -7,7 +7,7 @@ For use as a DSL (Domain-Specific Languages), it is sometimes more convenient to
 customized operators performing specific logic.
 
 `Engine::register_custom_operator` registers a [keyword] as a custom operator, giving it a particular
-_precedence_ (which cannot be zero).
+_precedence_ (which cannot be zero, see below).
 
 
 Example
@@ -106,12 +106,12 @@ The following _precedence table_ shows the built-in precedence of standard Rhai 
 | Logic and bit masks | <code>\|\|</code>,  <code>\|</code>, `^` |  left   |         30         |
 | Logic and bit masks |                `&&`, `&`                 |  left   |         60         |
 | Comparisons         |                `==`, `!=`                |  left   |         90         |
-| Containment         |                  [`in`                   |  left   |        110         |
+| Containment         |                  [`in`]                  |  left   |        110         |
 | Comparisons         |           `>`, `>=`, `<`, `<=`           |  left   |        130         |
 | Ranges              |               `..`, `..=`                |  left   |        140         |
 | Arithmetic          |                 `+`, `-`                 |  left   |        150         |
 | Arithmetic          |              `*`, `/`, `%`               |  left   |        180         |
 | Arithmetic          |                   `**`                   |  right  |        190         |
 | Bit-shifts          |                `<<`, `>>`                |  left   |        210         |
-| Unary operators     |           unary `+`, `-`, `!`            |  right  |      highest       |
+| Unary operators     |              `+`, `-`, `!`               |  right  |      highest       |
 | Object field access |                   `.`                    |  right  |      highest       |

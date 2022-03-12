@@ -40,7 +40,7 @@ _last_ element.
 
 > _blob_ `[` _index position from &minus;1 to &minus;length_ `]`
 
-```admonish info "Byte values"
+```admonish info.small "Byte values"
 
 The value of a particular byte in a BLOB is mapped to an `INT` (which can be 64-bit or 32-bit
 depending on the [`only_i32`] feature).
@@ -134,11 +134,11 @@ print(buf);                 // prints "[4209666f6f202620 626172000000abcd]"
 device.send(buf);           // send command to device
 ```
 
-```admonish question "What if I need UTF-8?"
+```admonish question.small "What if I need UTF-8?"
 
 The `write_utf8` function writes a string in UTF-8 encoding.
 
-UTF-8 is, however, not very commonly used in embedded systems.
+UTF-8 is, however, not very commonly used in embedded applications.
 ```
 
 

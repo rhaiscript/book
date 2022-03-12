@@ -46,7 +46,7 @@ engine.on_var(move |name, _, _, _| Ok(db.get(name).map(Dynamic::from)));
 ```
 
 
-```admonish note "Values are constants"
+```admonish note.small "Values are constants"
 
 All values provided by a [variable resolver] are _[constants]_ due to their dynamic nature.
 They cannot be assigned to.

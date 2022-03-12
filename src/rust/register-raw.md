@@ -114,8 +114,8 @@ To extract an argument passed by value from the `args` parameter (`&mut [&mut Dy
 | Others (consumed)         | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
 
 
-Example &ndash; Passing a Callback to a Rust Function
-----------------------------------------------------
+Example &ndash; Pass a Callback to a Rust Function
+-------------------------------------------------
 
 The low-level API is useful when there is a need to interact with the scripting [`Engine`]
 within a function.
@@ -166,7 +166,7 @@ r#"
 "#)?;
 ```
 
-```admonish tip "Tip: Hold multiple references"
+~~~admonish tip "Tip: Hold multiple references"
 
 In order to access a value argument that is expensive to clone _while_ holding a mutable reference
 to the first argument, use one of the following tactics:
@@ -177,7 +177,7 @@ to the first argument, use one of the following tactics:
 
 3. Use `split_first_mut` to partition the slice:
 
-~~~rust,no_run
+```rust,no_run
 // Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 
@@ -187,8 +187,8 @@ let this_ptr = &mut *first.write_lock::<A>().unwrap();
 // Immutable reference to the second value parameter, of type '&B'
 // This can be mutable but there is no point because the parameter is passed by value
 let value_ref = &*rest[0].read_lock::<B>().unwrap();
-~~~
 ```
+~~~
 
 
 TL;DR

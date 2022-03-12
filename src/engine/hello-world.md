@@ -62,8 +62,9 @@ Use Script Files
 Rhai script files are customarily named with extension `.rhai`.
 ```
 
-Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`
-(not available under [`no_std`] or in [WASM] builds).
+Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file`.
+
+Loading and running script files is not available for [`no_std`] or [WASM] builds.
 
 ```rust,no_run
 let result = engine.eval_file::<i64>("hello_world.rhai".into())?;

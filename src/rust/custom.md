@@ -31,7 +31,7 @@ traits or use special `#[derive]`) can also be used easily with Rhai.
 
 Support for custom types can be turned off via the [`no_object`] feature.
 
-```admonish warning "Custom types are slower"
+```admonish warning.small "Custom types are slower"
 
 Custom types run _slower_ than [built-in types][standard types] due to an additional
 level of indirection, but for all other purposes there is no difference.
@@ -103,7 +103,7 @@ always update it.
 
 All other parameters in Rhai are passed by value (i.e. clones).
 
-```admonish danger "No support for references"
+```admonish danger.small "No support for references"
 
 Rhai does NOT support normal references (i.e. `&T`) as parameters.
 All references must be mutable (i.e. `&mut T`).

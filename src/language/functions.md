@@ -19,7 +19,28 @@ add(2, 3) == 5;
 sub(2, 3,) == -1;   // trailing comma in arguments list is OK
 ```
 
-Defining functions can be disabled with [`no_function`].
+```admonish tip.small "Tip: Disable functions"
+
+Defining functions can be disabled via the [`no_function`] feature.
+```
+
+~~~admonish tip.small "Tip: `is_def_fn`"
+
+Use `is_def_fn` (not available under [`no_function`]) to detect if a Rhai function is defined
+(and therefore callable) based on its name and the number of parameters (_arity_).
+
+```rust,no_run
+fn foo(x) { x + 1 }
+
+is_def_fn("foo", 1) == true;
+
+is_def_fn("foo", 0) == false;
+
+is_def_fn("foo", 2) == false;
+
+is_def_fn("bar", 1) == false;
+```
+~~~
 
 
 Implicit Return
@@ -189,23 +210,4 @@ let x = 500;
 change(x);
 
 x == 500;           // 'x' is NOT changed!
-```
-
-
-`is_def_fn`
------------
-
-Use `is_def_fn` (not available under [`no_function`]) to detect if a Rhai function is defined
-(and therefore callable) based on its name and the number of parameters.
-
-```rust,no_run
-fn foo(x) { x + 1 }
-
-is_def_fn("foo", 1) == true;
-
-is_def_fn("foo", 0) == false;
-
-is_def_fn("foo", 2) == false;
-
-is_def_fn("bar", 1) == false;
 ```

@@ -26,15 +26,15 @@ Indexers are disabled when the [`no_index`] and [`no_object`] features are used 
 | `register_indexer_get_result` | `Fn(&mut T, X) -> Result<Dynamic, Box<EvalAltResult>>`                                                        |      yes, but not advised      |
 | `register_indexer_set_result` | `Fn(&mut T, X, V) -> Result<(), Box<EvalAltResult>>`                                                          |              yes               |
 
-```admonish danger "No support for references"
+```admonish danger.small "No support for references"
 
 Rhai does NOT support normal references (i.e. `&T`) as parameters.
 All references must be mutable (i.e. `&mut T`).
 ```
 
-```admonish warning "Getters must be pure"
+```admonish warning.small "Getters must be pure"
 
-By convention, index [getters][getters/setters] are not supposed to mutate the [custom type],
+By convention, index getters are not supposed to mutate the [custom type],
 although there is nothing that prevents this mutation.
 ```
 
@@ -64,7 +64,7 @@ The following types have built-in indexer implementations that are fast and effi
 | `INT`                                     |                   `INT`                   |   boolean   | access a particular bit inside the integer number as a [bit-field]           |
 | `INT`                                     |                  [range]                  |    `INT`    | access a particular range of bits inside the integer number as a [bit-field] |
 
-```admonish warning "Do not overload indexers for built-in standard types"
+```admonish warning.small "Do not overload indexers for built-in standard types"
 
 In general, it is a bad idea to overload indexers for any of the [standard types] supported
 internally by Rhai, since built-in indexers may be added in future versions.
@@ -146,13 +146,16 @@ _most-significant-bit_ (MSB).
 Convention for Range Index
 --------------------------
 
+```admonish tip.side.wide "Tip: Negative values"
+
+By convention, negative values are _not_ interpreted specially in indexers for [ranges].
+```
+
 It is very common for [ranges] to be used as indexer parameters via the types
 `std::ops::Range<INT>` (exclusive) and `std::ops::RangeInclusive<INT>` (inclusive).
 
 One complication is that two versions of the same indexer must be defined to support _exclusive_
 and _inclusive_ [ranges] respectively.
-
-By convention, negative values are _not_ interpreted specially in indexers for [ranges].
 
 ```rust,no_run
 use std::ops::{Range, RangeInclusive};
@@ -185,6 +188,12 @@ engine.run(
 Indexer as Property Access Fallback
 ----------------------------------
 
+```admonish tip.side.wide "Tip: Property bag"
+
+Such an indexer allows easy creation of _property bags_ (similar to [object maps])
+which can dynamically add/remove properties.
+```
+
 An indexer taking a [string] index is a special case &ndash; it acts as a _fallback_ to property
 [getters/setters].
 
@@ -193,9 +202,6 @@ defined, an indexer is called and passed the string name of the property.
 
 This is also extremely useful as a short-hand for indexers, when the [string] keys conform to
 property name syntax.
-
-Defining such an indexer allows easy creation of _property bags_ (similar to [object maps])
-which can dynamically add/remove properties.
 
 ```rust,no_run
 // Assume 'obj' has an indexer defined with string parameters...

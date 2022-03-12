@@ -33,24 +33,23 @@ In other words, do it only when _all else fails_.  Do not monkey patch Rhai simp
 because you _can_.
 ```
 
-
-Search Order of Functions
--------------------------
+```admonish info "Search order for functions"
 
 Rhai searches for the correct implementation of a function in the following order:
 
 1. Rhai script-defined [functions],
 
-2. native Rust functions registered directly via the `Engine::register_XXX` API,
+2. Native Rust functions registered directly via the `Engine::register_XXX` API,
 
-3. native Rust functions in [packages] that have been loaded via `Engine::register_global_module`,
+3. Native Rust functions in [packages] that have been loaded via `Engine::register_global_module`,
 
-4. native Rust or Rhai script-defined functions in [imported][`import`] [modules] that are exposed to
+4. Native Rust or Rhai script-defined functions in [imported][`import`] [modules] that are exposed to
    the global [namespace][function namespace] (e.g. via the `#[rhai_fn(global)]` attribute in a
    [plugin module]),
 
-5. native Rust or Rhai script-defined functions in [modules] loaded via
+5. Native Rust or Rhai script-defined functions in [modules] loaded via
    `Engine::register_static_module` that are exposed to the global [namespace][function namespace]
    (e.g. via the `#[rhai_fn(global)]` attribute in a [plugin module]),
 
-6. [built-in][built-in operators] functions.
+6. [Built-in][built-in operators] functions.
+```

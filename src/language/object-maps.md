@@ -3,10 +3,23 @@ Object Maps
 
 {{#include ../links.md}}
 
-```admonish tip.side "Safety"
+```admonish tip.side.wide "Safety"
 
 Always limit the [maximum size of object maps].
 ```
+
+~~~admonish question.side.wide "Why `SmartString`?"
+
+[`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
+and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
+~~~
+
+~~~admonish question.side.wide "Why `BTreeMap` and not `HashMap`?"
+
+The vast majority of object maps contain just a few properties.
+
+`BTreeMap` performs significantly better than `HashMap` when the number of entries is small.
+~~~
 
 Object maps are hash dictionaries. Properties are all [`Dynamic`] and can be freely added and retrieved.
 
@@ -16,19 +29,6 @@ Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
 [`type_of()`] an object map returns `"map"`.
 
 Object maps are disabled via the [`no_object`] feature.
-
-~~~admonish question "Why `BTreeMap` and not `HashMap`?"
-
-The vast majority of object maps contain just a few properties.
-
-`BTreeMap` performs significantly better than `HashMap` when the number of entries is small.
-~~~
-
-~~~admonish question "Why `SmartString`?"
-
-[`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
-and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
-~~~
 
 
 Literal Syntax

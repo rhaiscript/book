@@ -55,9 +55,13 @@ Use as Parameter Type
 Native Rust functions that take parameters of type `std::ops::Range<INT>` or
 `std::ops::RangeInclusive<INT>`, when registered into an [`Engine`], accept ranges as arguments.
 
-However, beware that `..` (exclusive range) and `..=` (inclusive range) are _different_ types
-to Rhai and they do not interoperate.  Therefore, two different versions of the same API must
-be registered to handle both range styles.
+```admonish warning.small "Different types"
+
+`..` (exclusive range) and `..=` (inclusive range) are _different_ types to Rhai
+and they do not interoperate.
+
+Two different versions of the same API must be registered to handle both range styles.
+```
 
 ```rust,no_run
 use std::ops::{Range, RangeInclusive};

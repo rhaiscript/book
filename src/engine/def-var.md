@@ -71,7 +71,7 @@ The return value is `Result<bool, Box<EvalAltResult>>` where:
 | `Ok(false)`               | [throws][exception] a runtime or compilation error |
 | `Err(Box<EvalAltResult>)` | error that is reflected back to the [`Engine`]     |
 
-```admonish bug "Error during compilation"
+```admonish bug.small "Error during compilation"
 
 During compilation (i.e. when `is_runtime` is `false`), `EvalAltResult::ErrorParsing` is passed
 through as the compilation error.

@@ -17,6 +17,8 @@ The left-hand-side (LHS) of an assignment statement must be a valid
 _[l-value](https://en.wikipedia.org/wiki/Value_(computer_science))_, which must be rooted in a
 [variable], potentially extended via indexing or properties.
 
+~~~admonish bug "Assigning to invalid l-value"
+
 Expressions that are not valid _l-values_ cannot be assigned to.
 
 ```rust,no_run
@@ -32,3 +34,4 @@ x.foo() = 42;           // syntax error: method call is not an l-value
 
 (x + y) = 42;           // syntax error: binary expression is not an l-value
 ```
+~~~

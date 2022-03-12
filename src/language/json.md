@@ -44,7 +44,7 @@ let result = engine.eval_with_scope::<i64>(r#"map["^^^!!!"].len()"#)?;
 result == 3;          // the object map is successfully used in the script
 ```
 
-```admonish note "Representation of numbers"
+```admonish note.small "Representation of numbers"
 
 JSON numbers are all floating-point while Rhai supports integers (`INT`) and floating-point (`FLOAT`)
 (except under [`no_float`]).

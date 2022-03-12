@@ -100,7 +100,7 @@ system.watch_for_script_change(|sys: &mut System, fn_name: &str| {
 ```
 
 
-```admonish tip "Tip: Multi-threaded considerations"
+```admonish tip.small "Tip: Multi-threaded considerations"
 
 For a multi-threaded environments, replace `Rc` with `Arc`, `RefCell` with `RwLock` or `Mutex`, and
 turn on the [`sync`] feature.

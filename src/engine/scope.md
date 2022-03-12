@@ -119,15 +119,17 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
 [`Engine`] API methods that accept a `Scope` parameter all end with `_with_scope`, making that
 `Scope` (and everything inside it) available to the script:
 
-* `Engine::eval_with_scope`
-* `Engine::eval_ast_with_scope`
-* `Engine::eval_file_with_scope` (not available under [`no_std`])
-* `Engine::eval_expression_with_scope`
-* `Engine::run_with_scope`
-* `Engine::run_ast_with_scope`
-* `Engine::run_file_with_scope` (not available under [`no_std`])
-* `Engine::compile_file_with_scope` (not available under [`no_std`])
-* `Engine::compile_expression_with_scope`
+| `Engine` API                            | Not available under |
+| --------------------------------------- | :-----------------: |
+| `Engine::eval_with_scope`               |                     |
+| `Engine::eval_ast_with_scope`           |                     |
+| `Engine::eval_file_with_scope`          |     [`no_std`]      |
+| `Engine::eval_expression_with_scope`    |                     |
+| `Engine::run_with_scope`                |                     |
+| `Engine::run_ast_with_scope`            |                     |
+| `Engine::run_file_with_scope`           |     [`no_std`]      |
+| `Engine::compile_file_with_scope`       |     [`no_std`]      |
+| `Engine::compile_expression_with_scope` |                     |
 
 ~~~admonish danger "Don't forget to `rewind`"
 

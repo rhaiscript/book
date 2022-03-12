@@ -21,18 +21,26 @@ Macros
 `#[export_fn]` and `register_exported_fn!`
 -----------------------------------------
 
-~~~admonish info.side "`NativeCallContext` parameter"
+~~~admonish tip.side "Tip: `NativeCallContext` parameter"
 
 The _first_ parameter of a function can also be [`NativeCallContext`].
 ~~~
 
 Apply `#[export_fn]` onto a function defined at _Rust module level_ to convert it into a Rhai plugin function.
 
+To register the plugin function, simply call `register_exported_fn!`.
+
+```admonish bug.small "Global scope only"
+
 The function cannot be nested inside another function &ndash; it can only be defined directly under
 a Rust module.
+```
 
-To register the plugin function, simply call `register_exported_fn!`.  The name of the function can be
-any text string, so it is possible to register _overloaded_ functions as well as operators.
+```admonish tip.small "Tip: Overloading"
+
+The name of the function can be any text string, so it is possible to register _overloaded_ functions
+as well as operators.
+```
 
 ```rust,no_run
 use rhai::plugin::*;        // import macros
@@ -54,19 +62,30 @@ fn main() {
 Pure Functions
 --------------
 
+```admonish bug.side.wide "Error"
+
+Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise a
+runtime error.
+```
+
 Some functions are _pure_ &ndash; i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as `&mut` (e.g. for a method function).
 
-This is most commonly done to avoid expensive cloning for methods or [property getters][getters/setters]
+This is often done to avoid expensive cloning for methods or [property getters][getters/setters]
 that return information about a [custom type] and does not modify it.
 
 Apply the `#[export_fn(pure)]` attribute on a plugin function to mark it as  _pure_.
 
-Pure functions can be passed a [constant] value as the first `&mut` parameter. The condition is that
-they _MUST NOT_ modify that value.
+~~~admonish warning.small "Must not modify `&mut` parameter"
 
-Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise an
-`EvalAltResult::ErrorAssignmentToConstant` error.
+Pure functions _MUST NOT_ modify the `&mut` parameter.
+There is no checking.
+~~~
+
+```admonish tip.small "Tip: Constants OK"
+
+Pure functions can be passed a [constant] value as the first `&mut` parameter.
+```
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
@@ -93,9 +112,6 @@ To register [fallible functions] (i.e. functions that may return errors), apply 
 `#[export_fn(return_raw)]` attribute on plugin functions that return `Result<T, Box<EvalAltResult>>`
 where `T` is any clonable type.
 
-A syntax error is generated if the function with `#[export_fn(return_raw)]` does not have the
-appropriate return type.
-
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
@@ -114,4 +130,13 @@ fn main() {
     // Overloads the operator '+' with the Engine.
     register_exported_fn!(engine, "+", double_and_divide);
 }
+```
+
+```admonish bug.small "Error"
+
+A compilation error &mdash; usually something that says `Result` does not implement
+`Clone` &mdash; is generated if a fallible function is missing `#[rhai_fn(return_raw)]`.
+
+It is another compilation error for the reverse &mdash; a function with
+`#[rhai_fn(return_raw)]` does not have the appropriate return type.
 ```

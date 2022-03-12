@@ -25,7 +25,7 @@ The following primitive types are supported natively.
 | **Nothing/void/nil/null/Unit** (or whatever it is called)                                                                        | `()`                                                                                                | `"()"`                | `""` _(empty string)_           |
 
 
-```admonish warning "All types are distinct"
+```admonish warning.small "All types are distinct"
 
 All types are treated strictly distinct by Rhai, meaning that `i32` and `i64` and `u32` are
 completely different. They cannot even be added together.
@@ -44,7 +44,7 @@ If only 32-bit integers are needed, enabling the [`only_i32`] feature will remov
 integer types other than `i32`, including `i64`.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.
 
-~~~admonish danger "Default integer is `i64`"
+~~~admonish danger.small "Default integer is `i64`"
 
 Rhai's default integer type is `i64`, which is _DIFFERENT_ from Rust's `i32`.
 
@@ -53,14 +53,14 @@ runtime performance hit since the [`Engine`] will treat `i32` as an opaque [cust
 [`only_i32`] feature).
 ~~~
 
-```admonish tip "Tip: Floating-point numbers"
+```admonish tip.small "Tip: Floating-point numbers"
 
 If no floating-point is needed or supported, use the [`no_float`] feature to remove it.
 
 Some applications require fixed-precision decimal numbers, which can be enabled via the [`decimal`] feature.
 ```
 
-```admonish info "Strings"
+```admonish info.small "Strings"
 
 [Strings] in Rhai are _immutable_, meaning that they can be shared but not modified.
 
@@ -69,7 +69,7 @@ Internally, the [`ImmutableString`] type is a wrapper over `Rc<String>` or `Arc<
 Any modification done to a Rhai string causes the string to be cloned and the modifications made to the copy.
 ```
 
-```admonish tip "Tip: Convert to string"
+```admonish tip.small "Tip: Convert to string"
 
 The [`to_string()`] function converts a standard type into a [string] for display purposes.
 

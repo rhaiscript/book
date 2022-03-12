@@ -189,16 +189,16 @@ engine.run_ast_with_scope(&mut scope, &ast)?;
 engine.run_with_scope(&mut scope, script)?;
 ```
 
-```admonish tip "Tip: Prevent shadowing"
+~~~admonish tip.small "Tip: Prevent shadowing"
 
 It is usually desirable to prevent [shadowing] of the singleton command object.
 This can be easily achieved via a [variable definition filter].
 
-~~~rust,no_run
+```rust,no_run
 // Now the script can no longer define a variable named 'BUNNY'
 engine.on_def_var(|_, info, _| Ok(info.name != "BUNNY"));
-~~~
 ```
+~~~
 
 ### Use the command API in script
 

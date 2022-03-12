@@ -73,12 +73,21 @@ Declare a Variable
 
 Variables are declared using the `let` keyword.
 
+```admonish tip.small "Tip: No initial value"
+
 Variables do not have to be given an initial value.
 If none is provided, it defaults to [`()`].
+```
 
-A variable defined within a statement block is _local_ to that block.
+```admonish warning.small "Variables are local"
+
+A variable defined within a [statement block](statements.md) is _local_ to that block.
+```
+
+~~~admonish tip.small "Tip: `is_def_var`"
 
 Use `is_def_var` to detect if a variable is defined.
+~~~
 
 ```rust,no_run
 let x;              // ok - value is '()'
@@ -142,8 +151,11 @@ engine.run_with_scope(&mut scope,
 )?;
 ```
 
+~~~admonish bug.small "No `Scope`"
+
 If no [`Scope`] is used to evaluate the script (e.g. when using `Engine::run` instead of
-`Engine::run_with_scope`), only then will an undefined variable cause a runtime error when accessed.
+`Engine::run_with_scope`), an undefined variable causes a runtime error when accessed.
+~~~
 
 
 Strict Variables Mode
@@ -155,9 +167,6 @@ With [`Engine::set_strict_variables`][options], it is possible to turn on
 When [strict variables] mode is active, accessing a variable not previously defined within
 the same script directly causes a parse error when compiling the script.
 
-Turn on [strict variables] mode if no [`Scope`] is to be provided for script evaluation runs.
-This way, variable access errors are caught during compile time instead of runtime.
-
 ```rust,no_run
 let x = 42;
 
@@ -165,4 +174,10 @@ print(x);           // prints 42
 
 print(foo);         // <- parse error under strict variables mode:
                     //    variable 'foo' is undefined
+```
+
+```admonish tip.small
+
+Turn on [strict variables] mode if no [`Scope`] is to be provided for script evaluation runs.
+This way, variable access errors are caught during compile time instead of runtime.
 ```

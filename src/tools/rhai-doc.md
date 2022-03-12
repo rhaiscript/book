@@ -104,7 +104,7 @@ Configuration Options
 | &bull; `link`      | URL string               |     _none_      | &bull; URL of external link                                                             |
 
 
-~~~admonish abstract "MarkDown pages"
+~~~admonish abstract.small "MarkDown pages"
 
 By default, `rhai-doc` will generate documentation pages from a `pages` sub-directory
 under the scripts directory. The pages are assumed to be in [MarkDown].

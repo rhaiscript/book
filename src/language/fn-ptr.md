@@ -3,8 +3,12 @@ Function Pointers
 
 {{#include ../links.md}}
 
+```admonish question.side.wide "Rhai internals"
+
+A function pointer simply stores the _name_ of the [function] as a [string].
+```
+
 It is possible to store a _function pointer_ in a variable just like a normal value.
-In fact, internally a function pointer simply stores the _name_ of the [function] as a [string].
 
 A function pointer is created via the `Fn` [function], which takes a [string] parameter.
 
@@ -69,9 +73,13 @@ They do not hold the actual [functions].
 The actual [function] must be defined in the appropriate [namespace][function namespace]
 for the call to succeed.
 
-For example, [exporting][`export`] a function pointer (or an [anonymous function] or [closure])
-from a [module] referring to a local [function] will fail at runtime because the target
-[function] cannot be found in the caller's [namespace][function namespace].
+~~~admonish bug "Cannot export function pointer"
+
+[Exporting][`export`] a function pointer (or an [anonymous function] or [closure])
+from a [module] referring to a local [function] fails at runtime.
+
+That is because the target [function] is not supposed to be found in the caller's
+[namespace][function namespace].
 
 ```js
 ┌────────────────┐
@@ -96,14 +104,20 @@ print(my_mod::increment(41));       // ok!
 let x = my_mod::inc.call(41);       // runtime error:
                                     //    function 'increment' not found
 ```
+~~~
 
 
 Warning &ndash; Global Namespace Only
 ------------------------------------
 
-Because of their dynamic nature, function pointers cannot refer to functions in [`import`]-ed [modules].
-They can only refer to [functions] within the global [namespace][function namespace].
+```admonish info.side.wide "See also"
+
 See _[Function Namespaces]_ for more details.
+```
+
+Because of their dynamic nature, function pointers cannot refer to functions in [`import`]-ed [modules].
+
+They can only refer to [functions] within the global [namespace][function namespace].
 
 ```js
 import "foo" as f;          // assume there is 'f::do_work()'
@@ -214,12 +228,8 @@ It is completely normal to register a Rust function with an [`Engine`] that take
 whose types are function pointers.  The Rust type in question is `rhai::FnPtr`.
 
 A function pointer in Rhai is essentially syntactic sugar wrapping the _name_ of a function
-to call in script.  Therefore, the script's _execution context_ is needed in order to call a
-function pointer.
-
-The type [`NativeCallContext`] holds the _native call context_ of the particular call to a
-registered Rust function. This type is normally provided by the [`Engine`] when a function is
-registered with the first parameter type being [`NativeCallContext`].
+to call in script.  Therefore, the script's _execution context_ (i.e. [`NativeCallContext`])
+is needed in order to call a function pointer.
 
 ```rust,no_run
 use rhai::{Engine, FnPtr, NativeCallContext};

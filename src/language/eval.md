@@ -34,44 +34,51 @@ print(z);                       // <- error: variable 'z' not found
 "print(42)".eval();             // <- nope... method-call style doesn't work with 'eval'
 ```
 
-~~~admonish danger "`eval` executes inside the current scope!"
+~~~admonish danger.small "`eval` executes inside the current scope!"
 
 Script segments passed to `eval` execute inside the _current_ [`Scope`], so they can access and modify
 _everything_, including all [variables] that are visible at that position in code!
 
-`eval` can also be used to define new [variables] and do other things normally forbidden inside
-a [function] call.
-
-Treat it as if the script segments are physically pasted in at the position of the `eval` call.
-~~~
-
-```admonish warning "Cannot define new functions"
-
-New [functions] cannot be defined within an `eval` call, since [functions] can only be defined at
-the _global_ level, not inside another [function] call!
-
-~~~rust,no_run
+```rust,no_run
 let script = "x += 32";
+
 let x = 10;
-eval(script);                   // variable 'x' in the current scope is visible!
-print(x);                       // prints 42
+eval(script);       // variable 'x' is visible!
+print(x);           // prints 42
 
 // The above is equivalent to:
 let script = "x += 32";
 let x = 10;
 x += 32;
 print(x);
-~~~
 ```
 
+`eval` can also be used to define new [variables] and do other things normally forbidden inside
+a [function] call.
 
-~~~admonish failure "`eval` is evil"
+```rust,no_run
+let script = "let x = 42";
+eval(script);
+print(x);           // prints 42
+```
+
+Treat it as if the script segments are physically pasted in at the position of the `eval` call.
+~~~
+
+~~~admonish warning.small "Cannot define new functions"
+
+New [functions] cannot be defined within an `eval` call, since [functions] can only be defined at
+the _global_ level!
+~~~
+
+~~~admonish failure.small "`eval` is evil"
 
 For those who subscribe to the (very sensible) motto of ["`eval` is evil"](http://linterrors.com/js/eval-is-evil),
 disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 
 ```rust,no_run
-engine.disable_symbol("eval");  // disable usage of 'eval'
+// Disable usage of 'eval'
+engine.disable_symbol("eval");
 ```
 ~~~
 

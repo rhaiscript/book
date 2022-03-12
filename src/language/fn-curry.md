@@ -16,7 +16,8 @@ It is possible to _curry_ a [function pointer] by providing partial (or all) arg
 Currying is done via the `curry` keyword and produces a new [function pointer] which carries
 the curried arguments.
 
-When the curried [function pointer] is called, the curried arguments are inserted starting from the left.
+When the curried [function pointer] is called, the curried arguments are inserted starting from the _left_.
+
 The actual call arguments should be reduced by the number of curried arguments.
 
 ```rust,no_run

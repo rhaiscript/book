@@ -5,8 +5,16 @@ Switch Expression
 
 Like [`if`], [`switch`] also works as an _expression_.
 
+```admonish tip.small "Tip"
+
 This means that a [`switch`] expression can appear anywhere a regular expression can,
 e.g. as [function] call arguments.
+```
+
+~~~admonish tip.small "Tip: Disable `switch` expressions"
+
+[`switch`] expressions can be disabled via [`Engine::set_allow_switch_expression`][options].
+~~~
 
 ```js
 let x = switch foo { 1 => true, _ => false };
@@ -29,5 +37,3 @@ if foo == "hello" {
     func(0);
 }
 ```
-
-[`switch`] expressions can be disabled via [`Engine::set_allow_switch_expression`][options].

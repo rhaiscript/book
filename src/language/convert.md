@@ -74,8 +74,8 @@ type_of(hex) == "i64";
 ```
 
 
-Formatting Numbers
-------------------
+Format Numbers
+--------------
 
 | Function    | From type | To type  |             Format             |
 | ----------- | :-------: | :------: | :----------------------------: |

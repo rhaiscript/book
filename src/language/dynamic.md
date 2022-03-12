@@ -5,7 +5,7 @@ Dynamic Values
 
 A `Dynamic` value can be _any_ type, as long as it implements `Clone`.
 
-~~~admonish warning "`Send + Sync`"
+~~~admonish warning.small "`Send + Sync`"
 
 Under the [`sync`] feature, all types must also be `Send + Sync`.
 ~~~
@@ -43,13 +43,16 @@ switch type_of(mystery) {
 Type Checking and Casting
 ------------------------
 
+~~~admonish tip.side.wide "Tip: `Dynamic::try_cast`"
+
+The `try_cast` method does not panic but returns `None` upon failure.
+~~~
+
 A `Dynamic` value's actual type can be checked via `Dynamic::is`.
 
 The `cast` method then converts the value into a specific, known type.
 
-Alternatively, use the `try_cast` method which does not panic but returns `None` when the cast fails.
-
-Use `clone_cast` for on a reference to `Dynamic`.
+Use `clone_cast` to clone a reference to `Dynamic`.
 
 ```rust,no_run
 let list: Array = engine.eval("...")?;      // return type is 'Array'
@@ -97,7 +100,7 @@ match item.type_name() {                    // 'type_name' returns the name of t
 }
 ```
 
-```admonish warning "Always full path name"
+```admonish warning.small "Always full path name"
 
 `type_name` always returns the _full_ Rust path name of the type, even when the type
 has been registered with a friendly name via `Engine::register_type_with_name`.

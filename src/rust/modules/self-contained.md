@@ -3,6 +3,12 @@ Compile to a Self-Contained `AST`
 
 {{#include ../../links.md}}
 
+```admonish tip.side "Tip"
+
+It does not matter where the [`import`] statement occurs &mdash; e.g. deep within statement blocks
+or within function bodies.
+```
+
 When a script [imports][`import`] external [modules] that may not be available later on, it is
 possible to eagerly [_pre-resolve_][module resolver] these imports and embed them directly into a
 self-contained [`AST`].
@@ -11,7 +17,6 @@ For instance, a system may periodically connect to a central source (e.g. a data
 scripts and compile them to [`AST`] form. Afterwards, in order to conserve bandwidth (or due to
 other physical limitations), it is disconnected from the central source for self-contained
 operation.
-
 
 Compile a script into a _self-contained_ [`AST`] via `Engine::compile_into_self_contained`.
 
@@ -39,9 +44,6 @@ Only Static Paths
 
 `Engine::compile_into_self_contained` only pre-resolves [`import`] statements in the script
 that are _static_, i.e. with a path that is a [string] literal.
-
-It does not matter where the [`import`] statement occurs (e.g. deep within statement blocks,
-within function bodies).
 
 ```rust,no_run
 // The following import is pre-resolved.

@@ -25,14 +25,14 @@ register the following methods.
 | `remove`, `-=` operator   | removes a particular item from the collection                    |
 | `merge` or `+` operator   | merges two collections, yielding a new collection with all items |
 
-```admonish tip "Tip: Define type iterator"
+```admonish tip.small "Tip: Define type iterator"
 
 Collections are typically iterable.
 
 It is customary to use `Engine::register_iterator` to allow iterating the collection if
 it implements `IntoIterator`.
 
-Alternative, register a specific [type iterator] for the custom type.
+Alternative, register a specific [type iterator] for the [custom type].
 ```
 
 

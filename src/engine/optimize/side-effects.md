@@ -14,7 +14,7 @@ within a pruned code block).
 If custom functions are registered to overload [built-in operators], they will also be called when
 the operators are used (in an [`if`] statement, for example), potentially causing side-effects.
 
-```admonish tip "Rule of thumb"
+```admonish tip.small "Rule of thumb"
 
 * _Always_ register custom types and functions _after_ compiling scripts if [`OptimizationLevel::Full`] is used.
 

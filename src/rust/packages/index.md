@@ -10,7 +10,7 @@ The built-in library of Rhai is provided as various _packages_ that can be turne
 Packages reside under `rhai::packages::*` and the trait `rhai::packages::Package` must be loaded in
 order for packages to be used.
 
-```admonish tip "Trivia: Packages _are_ modules!"
+```admonish question.small "Rhai internals: Packages _are_ modules!"
 
 Internally, a _package_ is a [module], with some conveniences to make it easier to define and use as
 a standard _library_ for an [`Engine`].
@@ -32,8 +32,12 @@ Once a package is created (e.g. via `Package::new`), it can create _shared_ [mod
 (via `Package::as_shared_module`) and register into multiple instances of [`Engine`],
 even across threads (under the [`sync`] feature).
 
-Therefore, a package only has to be created _once_ and essentially shared among multiple [`Engine`] instances.
+```admonish tip.small "Tip: Sharing package"
+
+A package only has to be created _once_ and essentially shared among multiple [`Engine`] instances.
+
 This is particularly useful when spawning large number of [raw `Engine`'s][raw `Engine`].
+```
 
 ```rust,no_run
 use rhai::Engine;

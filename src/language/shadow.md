@@ -39,11 +39,9 @@ print(y);           // prints 123 - 'y' is not shadowed
 ```
 
 
-Disable Shadowing
------------------
+~~~admonish tip "Tip: Disable shadowing"
 
-If shadowing is not desired, set [`Engine::set_allow_shadowing`][options] to `false` to turn
-[variables] shadowing off.
+Set [`Engine::set_allow_shadowing`][options] to `false` to turn [variables] shadowing off.
 
 ```rust,no_run
 let x = 42;
@@ -51,3 +49,4 @@ let x = 42;
 let x = 123;        // <- syntax error: variable 'x' already defined
                     //    when variables shadowing is disallowed
 ```
+~~~

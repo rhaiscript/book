@@ -21,7 +21,7 @@ This limit may be changed via [`Engine::set_max_expr_depths`][options].
 
 There are two limits to set, one for the maximum depth at global level, and the other for function bodies.
 
-A script exceeding the maximum nesting depths will terminate with a parsing error.
+A script exceeding the maximum nesting depths will terminate with a parse error.
 The malicious [`AST`] will not be able to get past parsing in the first place.
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).

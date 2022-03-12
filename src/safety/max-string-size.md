@@ -21,7 +21,7 @@ engine.set_max_string_size(500);    // allow strings only up to 500 bytes long (
 engine.set_max_string_size(0);      // allow unlimited string length
 ```
 
-```admonish danger "Maximum length"
+```admonish danger.small "Maximum length"
 
 Be conservative when setting a maximum limit and always consider the fact that a registered function may grow
 a string's length without Rhai noticing until the very end.

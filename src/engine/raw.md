@@ -33,7 +33,7 @@ the same [`Engine`] with the same set of functions.
 | [`on_debug`][`debug`] |         yes          |      _none_       |
 
 
-~~~admonish tip "Tip: `Engine::new` is equivalent to..."
+~~~admonish example "`Engine::new` is equivalent to..."
 ```rust,no_run
 use rhai::module_resolvers::FileModuleResolver;
 use rhai::packages::StandardPackage;

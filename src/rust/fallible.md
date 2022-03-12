@@ -35,7 +35,7 @@ if let Err(error) = engine.eval::<i64>("divide(40, 0)") {
 ```
 
 
-~~~admonish tip "Tip: Create a `Box<EvalAltResult>`"
+~~~admonish tip.small "Tip: Create a `Box<EvalAltResult>`"
 
 `Box<EvalAltResult>` implements `From<&str>` and `From<String>` etc.
 and the error text gets converted into `Box<EvalAltResult::ErrorRuntime>`.

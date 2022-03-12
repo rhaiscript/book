@@ -24,8 +24,7 @@ and exposes the following.
 | `call_fn_raw()`          |  `Result<Dynamic, Box<EvalAltResult>>`  | call a function with the supplied arguments; this is an advanced method                                                                                                                                                                    |
 
 
-Example &ndash; Implement Safety Checks
---------------------------------------
+~~~admonish example "Example &ndash; Implement Safety Checks"
 
 The native call context is useful for protecting a function from malicious scripts.
 
@@ -58,10 +57,9 @@ pub fn grow(context: NativeCallContext, size: i64) -> Result<Array, Box<EvalAltR
     OK(array)
 }
 ```
+~~~
 
-
-Example &ndash; Call a Function Within a Function
-------------------------------------------------
+~~~admonish example "Example &ndash; Call a Function Within a Function"
 
 The _native call context_ can be used to call a [function] within the current evaluation
 via `call_fn`.
@@ -81,10 +79,9 @@ fn super_call(context: NativeCallContext, value: i64) -> Result<i64, Box<EvalAlt
 
 engine.register_result_fn("super_call", super_call);
 ```
+~~~
 
-
-Example &ndash; Implement a Callback
------------------------------------
+~~~admonish example "Example &ndash; Implement a Callback"
 
 The _native call context_ can be used to call a [function pointer] or [closure] that has been passed
 as a parameter to the function (via `FnPtr::call_with_context`), thereby implementing a _callback_.
@@ -99,3 +96,4 @@ pub fn greet(context: NativeCallContext, callback: FnPtr) -> Result<String, Box<
     Ok(format!("hello, {}!", name))
 }
 ```
+~~~

@@ -96,7 +96,7 @@ The following methods (mostly defined in the [`BasicArrayPackage`][built-in pack
 | `sort`                      | _none_                                                                                                                                                                                     | sorts a _homogeneous_ array containing only elements of the same comparable built-in type (`INT`, `FLOAT`, [`Decimal`][rust_decimal], [string], [character], `bool`, [`()`])                                                         |
 
 
-```admonish tip "Tip: Use custom types with arrays"
+```admonish tip.small "Tip: Use custom types with arrays"
 
 To use a [custom type] with arrays, a number of functions need to be manually implemented,
 in particular the `==` operator in order to support the [`in`] operator which uses `==` (via the

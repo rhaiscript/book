@@ -19,7 +19,7 @@ if foo(x) {
 }
 ```
 
-```admonish warning "Braces are mandatory"
+~~~admonish warning.small "Braces are mandatory"
 
 Unlike C, the condition expression does _not_ need to be enclosed in parentheses `(`...`)`, but all
 branches of the `if` statement must be enclosed within braces `{`...`}`, even when there is only
@@ -27,9 +27,9 @@ one statement inside the branch.
 
 Like Rust, there is no ambiguity regarding which `if` clause a branch belongs to.
 
-~~~rust,no_run
+```rust,no_run
 // Rhai is not C!
 if (decision) print(42);
-//            ^ syntax error, expecting '{' in statement block
-~~~
+//            ^ syntax error, expecting '{'
 ```
+~~~

@@ -12,6 +12,7 @@ Rhai provides an [online playground][playground] to try out its language and eng
 having to install anything.
 
 The playground provides a syntax-highlighting script editor with example snippets.
+
 Scripts can be evaluated directly from the editor.
 
 

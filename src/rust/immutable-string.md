@@ -3,10 +3,13 @@ The `ImmutableString` Type
 
 {{#include ../links.md}}
 
-All [strings] in Rhai are implemented as `ImmutableString`, which is an alias to
-`Rc<SmartString>` (or `Arc<SmartString>` under the [`sync`] feature).
+~~~admonish question.side.wide "Why `SmartString`?"
 
 [`SmartString`] is used because many strings in scripts are short (fewer than 24 ASCII characters).
+~~~
+
+All [strings] in Rhai are implemented as `ImmutableString`, which is an alias to
+`Rc<SmartString>` (or `Arc<SmartString>` under the [`sync`] feature).
 
 An `ImmutableString` is immutable (i.e. never changes) and therefore can be shared among many users.
 Cloning an `ImmutableString` is cheap since it only copies an immutable reference.

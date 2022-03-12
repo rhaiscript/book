@@ -45,7 +45,7 @@ Bits in a bit-field are accessed with zero-based, non-negative integer indices:
 > _integer_ `[` _start_ `..` _end_ `] =` _new integer value_ ;  
 > _integer_ `[` _start_ `..=` _end_ `] =` _new integer value_ ;
 
-```admonish warning "Number of bits"
+```admonish warning.small "Number of bits"
 
 The maximum bit number that can be accessed is 63 (or 31 under [`only_i32`]).
 
@@ -64,7 +64,7 @@ _most-significant bit_, with &minus;1 being the _highest_ bit.
 
 [Ranges] always count from the least-significant bit (LSB) and has no support for negative positions.
 
-```admonish warning "Number of bits"
+```admonish warning.small "Number of bits"
 
 The maximum bit number that can be accessed is &minus;64 (or &minus;32 under [`only_i32`]).
 ```

@@ -139,7 +139,8 @@ id == "hello";
 ```
 
 
-```admonish tip "Tip: Consider a custom syntax"
+Consider a Custom Syntax
+------------------------
 
 This is probably one of the few scenarios where a [custom syntax] can be recommended.
 
@@ -148,7 +149,7 @@ easy to understand and quick to modify.
 
 For example, the above configuration example may be expressed by this custom syntax:
 
-~~~rust,no_run
+```rust,no_run
 ┌────────────────┐
 │ my_config.rhai │
 └────────────────┘
@@ -165,7 +166,6 @@ map "bar" => true;
 if config contains "hey" || config is_set "hey" {
     map "baz" => false;
 }
-~~~
+```
 
 Notice that `contains` and `is_set` may also be implemented as a [custom operator].
-```

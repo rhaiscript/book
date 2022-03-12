@@ -8,17 +8,17 @@ custom-defined _syntax_.
 
 But before going off to define the next weird statement type, heed this warning:
 
-```admonish danger "Don't Do It™"
+```admonish danger.small "Don't Do It™"
 
 Stick with standard language syntax as much as possible.
 
 Having to learn Rhai is bad enough, no sane user would ever want to learn _yet_ another obscure
 language syntax just to do something.
 
-Try to use [custom operators] first.  Defining a custom syntax should be considered a _last resort_.
+Try [custom operators] first.  A custom syntax should be considered a _last resort_.
 ```
 
-```admonish success "Where this might be useful"
+```admonish success.small "Where this might be useful"
 
 * Where an operation is used a _LOT_ and a custom syntax saves a lot of typing.
 
@@ -367,16 +367,14 @@ together with the implementation function.
 How Custom Parsers Work
 -----------------------
 
-```admonish note "Leading symbol"
+### Leading Symbol
 
 Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
 It can either be:
 
-* a identifier that isn't a normal [keyword] unless [disabled][disable keywords and operators], or
+* an identifier that isn't a normal [keyword] unless [disabled][disable keywords and operators], or
 
 * a valid symbol (see [list]({{rootUrl}}/appendix/operators.md)) which is not a normal [operator] unless [disabled][disable keywords and operators].
-
-```
 
 ### Function Signature
 
@@ -440,10 +438,16 @@ A custom parser always returns `Some` with the _next_ symbol expected (which can
 `$expr$`, `$block$` etc.) or `None` if parsing should terminate (_without_ reading the
 look-ahead symbol).
 
-A return symbol starting with `$$` is treated specially. Like returning `None`, it also
-terminates parsing, but at the same time it adds this symbol as text into the _inputs_ stream at the end.
+~~~admonish tip.small "Tip: `$$`"
+
+A return symbol starting with `$$` is treated specially.
+
+Like `None`, it also terminates parsing, but at the same time it adds this symbol as text into the
+_inputs_ stream at the end.
+
 This is typically used to inform the implementation function which custom syntax variant was
 actually parsed.
+~~~
 
 
 ### Example

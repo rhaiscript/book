@@ -21,7 +21,7 @@ feature (which implies the [`internals`] feature).
 The debugging interface resides under the `debugger` sub-module.
 
 
-```admonish tip "The Rhai Debugger"
+```admonish tip.small "The Rhai Debugger"
 
 The [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs) bin tool shows a simple example of
 employing the debugging interface to create a debugger for Rhai scripts!

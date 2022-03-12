@@ -26,7 +26,7 @@ When given an [`AST`], it is first evaluated (usually to [import][`import`] [mod
 
 * imported [modules] that remain in the [`Scope`] at the end of a script run become sub-modules.
 
-```admonish info "Encapsulated environment"
+```admonish info.small "Encapsulated environment"
 
 `Module::eval_ast_as_new` encapsulates the entire `AST` into each function call, merging the
 [module namespace][function namespace] with the [global namespace][function namespace].

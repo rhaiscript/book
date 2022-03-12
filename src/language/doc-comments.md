@@ -9,7 +9,7 @@ are _doc-comments_.
 Doc-comments can only appear in front of [function] definitions, not any other elements.
 Therefore, doc-comments are not available under [`no_function`].
 
-~~~admonish warning "Requires `metadata`"
+~~~admonish warning.small "Requires `metadata`"
 
 Doc-comments are only supported under the [`metadata`] feature.
 

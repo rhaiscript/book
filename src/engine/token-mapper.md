@@ -19,7 +19,7 @@ Function Signature
 
 ```admonish tip.side "Tip: Raising errors"
 
-Raise a parsing error by returning [`Token::LexError`](https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError)
+Raise a parse error by returning [`Token::LexError`](https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError)
 as the mapped token.
 ```
 

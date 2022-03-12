@@ -129,7 +129,7 @@ ast += lowest;
 // fn baz() { print("hey!"); }    // from 'office.rhai'
 ```
 
-```admonish failure "No super call"
+```admonish failure.small "No super call"
 
 Unfortunately, there is no `super` call that calls the base implementation (i.e. no way for a
 higher-layer function to call an equivalent lower-layer function).

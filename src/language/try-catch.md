@@ -46,8 +46,7 @@ catch
 ```
 
 
-Re-Throw Exception
-------------------
+~~~admonish tip "Tip: Re-throw exception"
 
 Like the `try` ... `catch` syntax in most languages, it is possible to _re-throw_ an exception
 within the `catch` block simply by another [`throw`] statement without a value.
@@ -68,10 +67,9 @@ catch
 }
 
 ```
+~~~
 
-
-Catchable Exceptions
---------------------
+```admonish success "Catchable exceptions"
 
 Many script-oriented exceptions can be caught via `try` ... `catch`.
 
@@ -96,10 +94,9 @@ The error value in the `catch` clause is an [object map] containing information 
 including its type, line and character position (if any), and source etc.
 
 When the [`no_object`] feature is turned on, however, the error value is a simple [string] description.
+```
 
-
-Non-Catchable Exceptions
-------------------------
+```admonish failure "Non-catchable exceptions"
 
 Some exceptions _cannot_ be caught.
 
@@ -110,3 +107,4 @@ Some exceptions _cannot_ be caught.
 | [Custom syntax] mismatch error                                          | incompatible [`Engine`] instance  |
 | Script evaluation metrics exceeding [limits][safety]                    | [safety] protection               |
 | Script evaluation manually [terminated]({{rootUrl}}/safety/progress.md) | [safety] protection               |
+```

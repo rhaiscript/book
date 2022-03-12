@@ -35,13 +35,13 @@ Getters and setters are disabled under the [`no_object`] feature.
 | `register_get_result` | `Fn(&mut T) -> Result<V, Box<EvalAltResult>>`                                    |      yes, but not advised      |
 | `register_set_result` | `Fn(&mut T, V) -> Result<(), Box<EvalAltResult>>`                                |              yes               |
 
-```admonish danger "No support for references"
+```admonish danger.small "No support for references"
 
 Rhai does NOT support normal references (i.e. `&T`) as parameters.
 All references must be mutable (i.e. `&mut T`).
 ```
 
-```admonish warning "Getters must be pure"
+```admonish warning.small "Getters must be pure"
 
 By convention, property getters are assumed to be _pure_, meaning that they are not supposed to
 mutate the [custom type], although there is nothing that prevents this mutation in Rust.
@@ -97,6 +97,12 @@ println!("Answer: {}", result);                 // prints 42
 Fallback to Indexer
 -------------------
 
+```admonish tip.side.wide "Tip: Property bag"
+
+This feature makes it very easy for [custom types] to act as _property bags_
+(similar to an [object map]) which can add/remove properties at will.
+```
+
 If the getter/setter of a particular property is not defined, but an [indexer] is defined on the
 [custom type] with [string] index, then the corresponding [indexer] will be called with the name of
 the property as the index value.
@@ -108,9 +114,6 @@ a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried
 ```
-
-This feature makes it very easy for [custom types] to act as _property bags_
-(similar to an [object map]) which can add/remove properties at will.
 
 
 Chaining Updates

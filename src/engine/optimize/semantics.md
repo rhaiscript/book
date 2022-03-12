@@ -10,7 +10,7 @@ differently when run with or without optimization.
 Typically, this involves some form of error that may arise in the original, unoptimized script but
 is optimized away by the [script optimizer][script optimization].
 
-```admonish danger "DO NOT depend on runtime errors"
+```admonish danger.small "DO NOT depend on runtime errors"
 
 Needless to say, it is usually a _Very Bad Idea™_ to depend on a script failing with a runtime error
 or such kind of subtleties.
