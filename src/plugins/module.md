@@ -3,6 +3,9 @@ Export a Rust Module to Rhai
 
 {{#include ../links.md}}
 
+[type alias]: https://doc.rust-lang.org/reference/items/type-aliases.html
+[type aliases]: https://doc.rust-lang.org/reference/items/type-aliases.html
+
 
 Import Prelude
 --------------
@@ -19,28 +22,36 @@ use rhai::plugin::*;
 ------------------
 
 When applied to a Rust module, the `#[export_module]` attribute generates the necessary code and
-metadata to allow Rhai access to its public (i.e. marked `pub`) functions, constants and
-sub-modules.
+metadata to allow Rhai access to its public (i.e. marked `pub`) functions, constants, [type aliases],
+and sub-modules.
 
 This code is exactly what would need to be written by hand to achieve the same goal, and is custom
 fit to each exported item.
 
-All `pub` functions become registered functions, all `pub` constants become [module] [constants],
-and all sub-modules become Rhai sub-[modules].
+All `pub` functions become registered functions, constants become [module] [constants], [type
+aliases] become [custom types], and sub-modules become Rhai [sub-modules][module].
 
-This Rust module can then be registered into an [`Engine`] as a normal [module]. This is done via
-the `exported_module!` macro.
-
-The macro `combine_with_exported_module!` can be used to _combine_ all the functions and variables
-into an existing [module], _flattening_ the [namespace][function namespace] &ndash; i.e. all
-sub-modules are eliminated and their contents promoted to the top level.  This is typical for
-developing [custom packages].
+|   Module element   |          Example           | Rhai [module] equivalent |
+| :----------------: | :------------------------: | :----------------------: |
+|   `pub` constant   | `pub const FOO: i64 = 42;` |        [constant]        |
+| `pub` [type alias] | `pub type Foo = Bar<i64>`  |      [custom type]       |
+|   `pub` function   | `pub fn foo(...) { ... }`  |         function         |
+|  `pub` sub-module  |   `pub mod foo { ... }`    |   [sub-module][module]   |
 
 ```rust,no_run
 use rhai::plugin::*;        // a "prelude" import for macros
 
+// My custom type
+pub struct TestStruct {
+    pub value: i64
+}
+
 #[export_module]
 mod my_module {
+    // This type alias will register the friendly name 'ABC' for the
+    // custom type 'TestStruct'.
+    pub type ABC = TestStruct;
+
     // This constant will be registered as the constant variable 'MY_NUMBER'.
     // Ignored when registered as a global module.
     pub const MY_NUMBER: i64 = 42;
@@ -57,11 +68,20 @@ mod my_module {
     pub fn get_num() -> i64 {
         mystic_number()
     }
+    /// This function will be registered as 'create_abc'.
+    pub fn create_abc(value: i64) -> ABC {
+        ABC { value }
+    }
+    /// This function will be registered as the 'value' property of type 'ABC'.
+    #[rhai_fn(get = "value")]
+    pub fn get_value(ts: &mut ABC) -> i64 {
+        ts.value
+    }
     // This function will be registered as 'increment'.
     // It will also be exposed to the global namespace since 'global' is set.
     #[rhai_fn(global)]
-    pub fn increment(num: &mut i64) {
-        *num += 1;
+    pub fn increment(ts: &mut ABC) {
+        ts.value += 1;
     }
     // This function is not 'pub', so NOT registered.
     fn mystic_number() -> i64 {
@@ -101,10 +121,24 @@ It is always a good idea to put [doc-comments] onto [plugin modules] and [plugin
 as they can be used to auto-generate documentation later on.
 ```
 
-### Use `Engine::register_global_module`
+### Usage
 
-The simplest way to register this into an [`Engine`] is to first use the `exported_module!` macro to
-turn it into a normal Rhai [module], then use the `Engine::register_global_module` method on it:
+The [plugin module] can be registered into an [`Engine`] as a normal [module].
+
+This is usually done via the `exported_module!` macro.
+
+The macro `combine_with_exported_module!` can also be used to _combine_ all the functions and variables
+into an existing [module], _flattening_ the [namespace][function namespace] &ndash; i.e. all
+sub-modules are eliminated and their contents promoted to the top level.  This is typical for
+developing [custom packages].
+
+
+### Register with `Engine::register_global_module`
+
+The simplest way to register the [plugin module] into an [`Engine`] is:
+
+1) use the `exported_module!` macro to turn it into a normal Rhai [module],
+2) call `Engine::register_global_module` to register it
 
 ```rust,no_run
 fn main() {
@@ -118,8 +152,10 @@ fn main() {
 }
 ```
 
-The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`) are
-automatically registered into the [`Engine`] when `Engine::register_global_module` is called.
+The functions contained within the module definition (i.e. `greet`, `get_num`, `create_abc` and
+`increment`, the `value` [property getter][getters/setters]), and the `TestStruct` [custom type]
+(with friendly name `ABC`) are automatically registered into the [`Engine`] when
+`Engine::register_global_module` is called.
 
 ```rust,no_run
 let x = greet("world");
@@ -131,8 +167,15 @@ x == "hello, 42!";
 let x = get_num();
 x == 42;
 
-increment(x);
-x == 43;
+let abc = create_abc(x);
+
+type_of(abc) == "ABC";
+
+abc.value == 42;
+
+abc.increment();
+
+abc.value == 43;
 ```
 
 ```admonish warning.small "Only functions"
@@ -142,10 +185,14 @@ When using a [module] as a [package], only functions registered at the _top leve
 Variables as well as sub-modules are **ignored**.
 ```
 
-### Use `Engine::register_static_module`
 
-Another simple way to register this into an [`Engine`] is, again, to use the `exported_module!`
-macro to turn it into a normal Rhai [module], then use `Engine::register_static_module` on it.
+### Register with `Engine::register_static_module`
+
+Another simple way to register the [plugin module] into an [`Engine`] is, again:
+
+1) use the `exported_module!` macro to turn it into a normal Rhai [module],
+2) call `Engine::register_static_module` to register it under a particular [module
+   namespace][function namespace]
 
 ```rust,no_run
 fn main() {
@@ -159,8 +206,8 @@ fn main() {
 }
 ```
 
-The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`),
-plus the constant `MY_NUMBER`, are automatically registered under the module [namespace][function namespace] `service`:
+The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`), plus
+the constant `MY_NUMBER`, are automatically registered under the [module namespace][function namespace] `service`:
 
 ```rust,no_run
 let x = service::greet("world");
@@ -174,16 +221,26 @@ x == "hello, 42!";
 let x = service::get_num();
 x == 42;
 
-service::increment(x);
-x == 43;
+let abc = service::create_abc(x);
+
+type_of(abc) == "ABC";
+
+abc.value == 42;
+
+service::increment(abc);
+
+abc.value == 43;
 ```
 
-All functions (usually _methods_) defined in the module and marked with `#[rhai_fn(global)]`,
-as well as all [type iterators], are automatically exposed to the _global_ namespace, so
-[iteration][`for`], [getters/setters] and [indexers] for [custom types] can work as expected.
+```admonish tip.side.wide "Tip: Default global"
 
-In fact, the default for all [getters/setters] and [indexers] defined in a plugin module is
+The default for all [getters/setters] and [indexers] defined in a [plugin module] is
 `#[rhai_fn(global)]` unless specifically overridden by `#[rhai_fn(internal)]`.
+```
+
+All functions (usually _methods_) defined in the module and marked with `#[rhai_fn(global)]`, all
+[type iterators] and all [custom types] are automatically exposed to the _global_ namespace, so
+[iteration][`for`], [getters/setters] and [indexers] for [custom types] can work as expected.
 
 Therefore, in the example above, the `increment` method (defined with `#[rhai_fn(global)]`)
 works fine when called in method-call style:
@@ -194,7 +251,7 @@ x.increment();
 x == 43;
 ```
 
-### Use Dynamically
+### Load Dynamically
 
 ```admonish info.side.wide "See also"
 
@@ -203,6 +260,7 @@ See the [module] section for more information.
 
 Using this directly as a dynamically-loadable Rhai [module] is almost the same, except that a
 [module resolver] must be used to serve the module, and the module is loaded via `import` statements.
+
 
 ### Combine into Custom Package
 

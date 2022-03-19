@@ -35,6 +35,11 @@ it implements `IntoIterator`.
 Alternative, register a specific [type iterator] for the [custom type].
 ```
 
+```admonish tip.small "Tip: Use a plugin module"
+
+A [plugin module] makes defining an entire API for a [custom type] a snap.
+```
+
 
 Example
 -------

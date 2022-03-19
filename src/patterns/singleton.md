@@ -80,12 +80,6 @@ pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
 pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
 ```
 
-### Register the custom type
-
-```rust,no_run
-engine.register_type_with_name::<SharedBunny>("EnergizerBunny");
-```
-
 ### Develop a plugin with methods and getters/setters
 
 The easiest way to develop a complete set of API for a [custom type] is via a [plugin module].
@@ -96,19 +90,22 @@ on a [constant] without raising an error.  Therefore, it is needed on _all_ func
 ```rust,no_run
 use rhai::plugin::*;
 
-// Remember to put 'pure' on all functions,
-// otherwise they'll choke on constants!
+// Remember to put 'pure' on all functions, or they'll choke on constants!
 
 #[export_module]
 pub mod bunny_api {
+    // Custom type 'SharedBunny' will be called 'EnergizerBunny' in scripts
+    pub type EnergizerBunny = SharedBunny;
+
+    // This constant is also available to scripts
     pub const MAX_SPEED: i64 = 100;
 
     #[rhai_fn(get = "power", pure)]
-    pub fn get_power(bunny: &mut SharedBunny) -> bool {
+    pub fn get_power(bunny: &mut EnergizerBunny) -> bool {
         bunny.borrow().is_going()
     }
     #[rhai_fn(set = "power", pure)]
-    pub fn set_power(bunny: &mut SharedBunny, on: bool) {
+    pub fn set_power(bunny: &mut EnergizerBunny, on: bool) {
         if on {
             if bunny.borrow().is_going() {
                 println!("Still going...");
@@ -124,7 +121,7 @@ pub mod bunny_api {
         }
     }
     #[rhai_fn(get = "speed", pure)]
-    pub fn get_speed(bunny: &mut SharedBunny) -> i64 {
+    pub fn get_speed(bunny: &mut EnergizerBunny) -> i64 {
         if bunny.borrow().is_going() {
             bunny.borrow().get_speed()
         } else {
@@ -132,7 +129,7 @@ pub mod bunny_api {
         }
     }
     #[rhai_fn(set = "speed", pure, return_raw)]
-    pub fn set_speed(bunny: &mut SharedBunny, speed: i64)
+    pub fn set_speed(bunny: &mut EnergizerBunny, speed: i64)
             -> Result<(), Box<EvalAltResult>>
     {
         if speed <= 0 {
@@ -147,13 +144,13 @@ pub mod bunny_api {
         }
     }
     #[rhai_fn(pure)]
-    pub fn turn_left(bunny: &mut SharedBunny) {
+    pub fn turn_left(bunny: &mut EnergizerBunny) {
         if bunny.borrow().is_going() {
             bunny.borrow_mut().turn(true);
         }
     }
     #[rhai_fn(pure)]
-    pub fn turn_right(bunny: &mut SharedBunny) {
+    pub fn turn_right(bunny: &mut EnergizerBunny) {
         if bunny.borrow().is_going() {
             bunny.borrow_mut().turn(false);
         }
@@ -161,6 +158,14 @@ pub mod bunny_api {
 }
 
 engine.register_global_module(exported_module!(bunny_api).into());
+```
+
+```admonish tip.small "Tip: Friendly name for custom type"
+
+It is customary to register a _friendly display name_ for any [custom type]
+involved in the plugin.
+
+This can easily be done via a _type alias_ in the plugin module.
 ```
 
 ### Compile script into AST
@@ -192,6 +197,7 @@ engine.run_with_scope(&mut scope, script)?;
 ~~~admonish tip.small "Tip: Prevent shadowing"
 
 It is usually desirable to prevent [shadowing] of the singleton command object.
+
 This can be easily achieved via a [variable definition filter].
 
 ```rust,no_run
