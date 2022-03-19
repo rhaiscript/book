@@ -21,7 +21,7 @@ Use the source name to identify the source script in errors &ndash; useful when 
 are imported recursively.
 ```
 
-~~~admonish info.small "`AST` Public API"
+~~~admonish info.small "`AST` public API"
 
 For the complete [`AST`] API, refer to the [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.AST.html) online.
 ~~~

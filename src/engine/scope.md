@@ -17,7 +17,7 @@ values of any type.
 Under [`sync`], however, only types that are `Send + Sync` are supported, and the entire `Scope`
 itself will also be `Send + Sync`. This is extremely useful in multi-threaded applications.
 
-```admonish info "Shadowing"
+```admonish info.small "Shadowing"
 
 A newly-added [variable] or [constant] _[shadows][shadow]_ previous ones of the same name.
 
@@ -27,7 +27,7 @@ be accessed via `get_value<T>`, `get_mut<T>` and `set_value<T>`.
 Essentially, a `Scope` is always searched in _reverse order_.
 ```
 
-```admonish tip "Tip: The lifetime parameter"
+```admonish tip.small "Tip: The lifetime parameter"
 
 The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
 automatically inferred to be `'static`.
