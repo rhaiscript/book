@@ -18,7 +18,7 @@ New definitions _overwrite_ previous definitions of the same name, same arity an
 ```
 
 ```rust,no_run
-use rhai::{Dynamic, Engine, EvalAltResult, ImmutableString};
+use rhai::{Dynamic, Engine, ImmutableString};
 
 // Normal function that returns a standard type
 // Remember to use 'ImmutableString' and not 'String'
@@ -26,8 +26,8 @@ fn add_len(x: i64, s: ImmutableString) -> i64 {
     x + s.len()
 }
 // Alternatively, '&str' maps directly to 'ImmutableString'
-fn add_len_str(x: i64, s: &str) -> i64 {
-    x + s.len()
+fn add_len_count(x: i64, s: &str, c: i64) -> i64 {
+    x + s.len() * c
 }
 // Function that returns a 'Dynamic' value
 fn get_any_value() -> Dynamic {
@@ -37,21 +37,42 @@ fn get_any_value() -> Dynamic {
 let mut engine = Engine::new();
 
 engine.register_fn("add", add_len)
-      .register_fn("add_str", add_len_str)
-      .register_fn("get_any_value", get_any_value);
+      .register_fn("add", add_len_count)
+      .register_fn("add", get_any_value)
+      .register_fn("inc", |x: i64| {    // closure is also OK!
+          x + 1
+      })
+      .register_fn("log", |label: &str, x: i64| {
+          println!("{} = {}", label, x);
+      });
 
 let result = engine.eval::<i64>(r#"add(40, "xx")"#)?;
 
 println!("Answer: {}", result);         // prints 42
 
-let result = engine.eval::<i64>(r#"add_str(40, "xx")"#)?;
+let result = engine.eval::<i64>(r#"add(40, "x", 2)"#)?;
 
 println!("Answer: {}", result);         // prints 42
 
-let result = engine.eval::<i64>("get_any_value()")?;
+let result = engine.eval::<i64>("add()")?;
 
 println!("Answer: {}", result);         // prints 42
+
+let result = engine.eval::<i64>("inc(41)")?;
+
+println!("Answer: {}", result);         // prints 42
+
+engine.run(r#"log("value", 42)"#)?;     // prints "value = 42"
 ```
+
+~~~admonish tip.small "Tip: Use closures"
+
+It is common for short functions to be registered via a _closure_.
+
+```rust,no_run
+engine.register_fn("foo", |x: i64, y: bool| ...);
+```
+~~~
 
 ~~~admonish tip.small "Tip: Create a `Dynamic`"
 
@@ -62,7 +83,9 @@ To create a [`Dynamic`] value, use `Dynamic::from`.
 ```rust,no_run
 use rhai::Dynamic;
 
-let x = Dynamic::from(TestStruct::new());
+let obj = TestStruct::new();
+
+let x = Dynamic::from(obj);
 
 // '.into()' works for standard types
 
