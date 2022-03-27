@@ -25,6 +25,6 @@ Usage Patterns
 
 | Usage          |                API                |          Lookup          | Sub-modules? | Variables? |
 | -------------- | :-------------------------------: | :----------------------: | :----------: | :--------: |
-| Global module  | `Engine:: register_global_module` |       simple name        |   ignored    |  ignored   |
+| Global module  | `Engine:: register_global_module` |       simple name        |   ignored    |    yes     |
 | Static module  | `Engine:: register_static_module` | namespace-qualified name |     yes      |    yes     |
 | Dynamic module |       [`import`] statement        | namespace-qualified name |     yes      |    yes     |

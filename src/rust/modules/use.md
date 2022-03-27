@@ -14,12 +14,13 @@ This is by far the easiest way to expose a [module]'s functionalities to Rhai.
 
 ```admonish tip.small "Tip: No qualifiers"
 
-All [functions] and [type iterators] can be accessed without _namespace qualifiers_.
+All [functions], [variables]/[constants] and [type iterators] can be accessed without
+_namespace qualifiers_.
 ```
 
 ```admonish warning.small
 
-Variables and sub-modules are **ignored**.
+[Sub-modules][module] are **ignored**.
 ```
 
 ```rust,no_run
@@ -35,16 +36,20 @@ let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
 // 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
+// Use 'Module::set_var' to add variables.
+module.set_var("MYSTIC_NUMBER", 41_i64);
+
 // Register the module into the global namespace of the Engine.
 let mut engine = Engine::new();
 engine.register_global_module(module.into());
 
-engine.eval::<i64>("inc(41)")? == 42;       // no need to import module
+// No need to import module...
+engine.eval::<i64>("inc(MYSTIC_NUMBER)")? == 42;
 ```
 
 ### Equivalent to `Engine::register_XXX`
 
-```admonish question.side.wide "Rhai internals"
+```admonish question.side.wide "Trivia"
 
 `Engine::register_fn` etc. are actually implemented by adding functions to an
 internal [module]!
@@ -83,13 +88,16 @@ let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
 // 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: i64", "i64"]);
 
+// Use 'Module::set_var' to add variables.
+module.set_var("MYSTIC_NUMBER", 41_i64);
+
 // Register the module into the Engine as the static module namespace path
 // 'services::calc'
 let mut engine = Engine::new();
 engine.register_static_module("services::calc", module.into());
 
-// refer to the 'services::calc' module
-engine.eval::<i64>("services::calc::inc(41)")? == 42;
+// Refer to the 'services::calc' module...
+engine.eval::<i64>("services::calc::inc(services::calc::MYSTIC_NUMBER)")? == 42;
 ```
 
 ### Expose functions to the global namespace
@@ -110,26 +118,31 @@ use rhai::{Engine, Module, FnNamespace};
 
 let mut module = Module::new();             // new module
 
-// Expose method 'inc' to the global namespace (default is 'FnNamespace::Internal')
+// Use 'Module::set_native_fn' to add functions.
 let hash = module.set_native_fn("inc", |x: &mut i64| Ok(x + 1));
-module.update_fn_namespace(hash, FnNamespace::Global);
 
 // Remember to update the parameter names/types and return type metadata
 // when using the 'metadata' feature.
 // 'Module::set_native_fn' by default does not set function metadata.
 module.update_fn_metadata(hash, &["x: &mut i64", "i64"]);
 
+// Expose method 'inc' to the global namespace (default is 'FnNamespace::Internal')
+module.update_fn_namespace(hash, FnNamespace::Global);
+
+// Use 'Module::set_var' to add variables.
+module.set_var("MYSTIC_NUMBER", 41_i64);
+
 // Register the module into the Engine as a static module namespace 'calc'
 let mut engine = Engine::new();
 engine.register_static_module("calc", module.into());
 
 // 'inc' works when qualified by the namespace
-engine.eval::<i64>("calc::inc(41)")? == 42;
+engine.eval::<i64>("calc::inc(calc::MYSTIC_NUMBER)")? == 42;
 
 // 'inc' also works without a namespace qualifier
 // because it is exposed to the global namespace
-engine.eval::<i64>("let x = 41; x.inc()")? == 42;
-engine.eval::<i64>("let x = 41; inc(x)")? == 42;
+engine.eval::<i64>("let x = calc::MYSTIC_NUMBER; x.inc()")? == 42;
+engine.eval::<i64>("let x = calc::MYSTIC_NUMBER; inc(x)")? == 42;
 ```
 
 
