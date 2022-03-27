@@ -3,7 +3,7 @@ Function Pointers
 
 {{#include ../links.md}}
 
-```admonish question.side.wide "Rhai internals"
+```admonish question.side.wide "Trivia"
 
 A function pointer simply stores the _name_ of the [function] as a [string].
 ```

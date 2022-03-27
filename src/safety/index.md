@@ -8,13 +8,12 @@ Safety and Protection Against DoS Attacks
 For scripting systems open to untrusted user-land scripts, it is always best to limit the amount of
 resources used by a script so that it does not consume more resources that it is allowed to.
 
+
 Most Important Resources
 ------------------------
 
 ```admonish bug "Memory"
 Continuously grow a [string], an [array], a [BLOB] or [object map] until all memory is consumed.
-
-Or create a large [array] or [object map] literal that exhausts all memory during parsing.
 ```
 
 ```admonish bug "CPU"
@@ -29,22 +28,28 @@ Run indefinitely, thereby blocking the calling system which is waiting for a res
 
 ```admonish bug "Stack"
 
-Infinite recursive call that exhausts the call stack.
+* Infinite recursive call that exhausts the call stack.
 
-Or create a degenerated deep expression with so many levels that the parser exhausts the call stack when
-parsing the expression; or even deeply-nested statement blocks, if nested deep enough.
+* Create a large [array] or [object map] literal that exhausts the stack during parsing.
 
-Or load a [self-referencing module][`import`].
+* Create a degenerated deep expression with so many levels that the parser exhausts the call stack when
+  parsing the expression; or even deeply-nested statement blocks, if nested deep enough.
+
+* Load a [self-referencing module][`import`].
 ```
 
 ```admonish bug "Overflows or Underflows"
 
-Numeric overflows and/or underflows, divide by zero, or bad floating-point representations.
+* Numeric overflows and/or underflows.
+
+* Divide by zero.
+
+* Bad floating-point representations.
 ```
 
 ```admonish bug "Files"
 
-Continuously [`import`] an external [module] within an infinite loop, thereby putting heavy load on the file-system
+Continuously [`import`] an external [module] within an infinite loop, thus putting heavy load on the file-system
 (or even the network if the file is not local).
 
 Even when [modules] are not created from files, they still typically consume a lot of resources to load.

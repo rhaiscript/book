@@ -39,43 +39,48 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
 
 ```json
 {
-  "modules":
-  {
-    "sub_module_1":
+    "modules":
     {
-      "modules":
-      {
-        "sub_sub_module_A":
+        /* namespace 'sub_module_1' */
+        "sub_module_1":
         {
-          "functions":  /* functions exported in 'sub_sub_module_A' */
-          [
-            { ... function metadata ... },
-            { ... function metadata ... },
-            { ... function metadata ... },
-            { ... function metadata ... },
-            ...
-          ]
+            "modules":
+            {
+                /* namespace 'sub_module_1::sub_sub_module_A' */
+                "sub_sub_module_A":
+                {
+                    /* functions exported in 'sub_module_1::sub_sub_module_A' */
+                    "functions":
+                    [
+                        { ... function metadata ... },
+                        { ... function metadata ... },
+                        { ... function metadata ... },
+                        { ... function metadata ... },
+                        ...
+                    ]
+                },
+                /* namespace 'sub_module_1::sub_sub_module_B' */
+                "sub_sub_module_B":
+                {
+                    ...
+                }
+            }
         },
-        "sub_sub_module_B":
+        "sub_module_2":
         {
             ...
-        }
-      }
+        },
+        ...
     },
-    "sub_module_2":
-    {
-      ...
-    },
-    ...
-  },
-  "functions":  /* functions defined in the 'AST' */
-  [
-    { ... function metadata ... },
-    { ... function metadata ... },
-    { ... function metadata ... },
-    { ... function metadata ... },
-    ...
-  ]
+    /* functions registered globally or in the 'AST' */
+    "functions":
+    [
+        { ... function metadata ... },
+        { ... function metadata ... },
+        { ... function metadata ... },
+        { ... function metadata ... },
+        ...
+    ]
 }
 ```
 
@@ -83,28 +88,28 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
 
 ```json
 {
-  "baseHash": 9876543210,  /* partial hash with only number of parameters */
-  "fullHash": 1234567890,  /* full hash with actual parameter types */
-  "namespace": "internal" | "global",
-  "access": "public" | "private",
-  "name": "fn_name",
-  "type": "native" | "script",
-  "numParams": 42,  /* number of parameters */
-  "params":  /* omitted if no parameters */
-  [
-    { "name": "param_1", "type": "type_1" },
-    { "name": "param_2" },  /* no type name */
-    { "type": "type_3" },   /* no parameter name */
-    ...
-  ],
-  "returnType": "ret_type",  /* omitted if () or unknown */
-  "signature": "[private] fn_name(param_1: type_1, param_2, _: type_3) -> ret_type",
-  "docComments":  /* omitted if none */
-  [
-    "/// doc-comment line 1",
-    "/// doc-comment line 2",
-    "/** doc-comment block */",
-    ...
-  ]
+    "baseHash": 9876543210,  /* partial hash with only number of parameters */
+    "fullHash": 1234567890,  /* full hash with actual parameter types */
+    "namespace": "internal" | "global",
+    "access": "public" | "private",
+    "name": "fn_name",
+    "type": "native" | "script",
+    "numParams": 42,  /* number of parameters */
+    "params":  /* omitted if no parameters */
+    [
+        { "name": "param_1", "type": "type_1" },
+        { "name": "param_2" },  /* no type name */
+        { "type": "type_3" },   /* no parameter name */
+        ...
+    ],
+    "returnType": "ret_type",  /* omitted if () or unknown */
+    "signature": "[private] fn_name(param_1: type_1, param_2, _: type_3) -> ret_type",
+    "docComments":  /* omitted if none */
+    [
+        "/// doc-comment line 1",
+        "/// doc-comment line 2",
+        "/** doc-comment block */",
+        ...
+    ]
 }
 ```

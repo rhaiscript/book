@@ -94,7 +94,7 @@ def_package! {
 Create a Custom Package from a Plugin Module
 -------------------------------------------
 
-```admonish question.side.wide "Rhai internals"
+```admonish question.side.wide "Trivia"
 
 This is exactly how Rhai's built-in [packages], such as `BasicMathPackage`, are actually implemented.
 ```

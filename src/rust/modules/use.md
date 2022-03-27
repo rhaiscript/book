@@ -4,8 +4,8 @@ Make a Module Available to Scripts
 {{#include ../../links.md}}
 
 
-Use Case 1 &ndash; Make the Module Globally Available
-----------------------------------------------------
+Use Case 1 &ndash; Make It Globally Available
+--------------------------------------------
 
 `Engine::register_global_module` registers a shared [module] into the
 [_global_ namespace][function namespace].
@@ -64,8 +64,8 @@ engine.eval::<i64>("inc(41)")? == 42;       // no need to import module
 ```
 
 
-Use Case 2 &ndash; Make the Module a Static Module
--------------------------------------------------
+Use Case 2 &ndash; Make It a Static Namespace
+--------------------------------------------
 
 `Engine::register_static_module` registers a [module] and under a specific
 [module namespace][function namespace].
@@ -92,7 +92,7 @@ engine.register_static_module("services::calc", module.into());
 engine.eval::<i64>("services::calc::inc(41)")? == 42;
 ```
 
-### Expose Functions to the Global Namespace
+### Expose functions to the global namespace
 
 ```admonish tip.side.wide "Tip: Type iterators"
 
@@ -133,8 +133,8 @@ engine.eval::<i64>("let x = 41; inc(x)")? == 42;
 ```
 
 
-Use Case 3 &ndash; Make the `Module` Dynamically Loadable
---------------------------------------------------------
+Use Case 3 &ndash; Make It Dynamically Loadable
+----------------------------------------------
 
 In order to dynamically load a custom module, there must be a [module resolver] which serves
 the module when loaded via `import` statements.

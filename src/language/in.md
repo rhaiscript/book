@@ -3,7 +3,7 @@ In Operator
 
 {{#include ../links.md}}
 
-```admonish question.side.wide "Rhai internals"
+```admonish question.side.wide "Trivia"
 
 The `in` operator is simply syntactic sugar for a call to the `contains` function.
 ```

@@ -93,7 +93,7 @@ fn create_scripting_engine(config: MySystemConfig) -> Engine {
 
     // Plugin modules can be used to easily and quickly
     // register an entire API
-    engine.register_global_module(exported_module!(my_domain_api));
+    engine.register_global_module(exported_module!(my_domain_api).into());
 
     // Configuration options in 'MySystemConfig' may be used
     // to control the Engine's behavior

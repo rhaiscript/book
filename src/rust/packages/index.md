@@ -10,7 +10,7 @@ The built-in library of Rhai is provided as various _packages_ that can be turne
 Packages reside under `rhai::packages::*` and the trait `rhai::packages::Package` must be loaded in
 order for packages to be used.
 
-```admonish question.small "Rhai internals: Packages _are_ modules!"
+```admonish question.small "Trivia: Packages _are_ modules!"
 
 Internally, a _package_ is a [module], with some conveniences to make it easier to define and use as
 a standard _library_ for an [`Engine`].
