@@ -170,7 +170,11 @@ Script Optimization
 ===================
 
 - [Introduction](engine/optimize/index.md)
-- [Optimization Levels](engine/optimize/optimize-levels.md)
+  - [Optimization Levels](engine/optimize/optimize-levels.md)
+  - [Dead Code Elimination](engine/optimize/dead-code.md)
+  - [Constants Propagation](engine/optimize/constants.md)
+  - [Compound Assignment Rewrite](engine/optimize/rewrite.md)
+  - [Eager Operator Evaluation](engine/optimize/op-eval.md)
 - [Re-Optimize an AST](engine/optimize/reoptimize.md)
 - [Subtle Semantic Changes](engine/optimize/semantics.md)
 - [Eager Function Evaluation](engine/optimize/eager.md)

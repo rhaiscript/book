@@ -26,17 +26,24 @@ engine.set_optimization_level(rhai::OptimizationLevel::Full);
 relies on static analysis and [built-in operators] for [constant] [standard types], and will not
 perform any external function calls).
 
-However, it is important to bear the caveat in mind that, when _constants propagation_ is performed,
-and if the [constants] are modified later (yes, it is possible, via Rust functions), the modified
-values will _not_ show up in the optimized script.  Only the initialization values of [constants]
-are ever retained.
+```admonish warning.small
+After _constants propagation_ is performed, if the [constants] are then modified (yes, it is possible, via Rust functions),
+the modified values will _not_ show up in the optimized script.
 
-Furthermore, overriding a [built-in operator] in the [`Engine`] afterwards has no effect after the
+Only the initialization values of [constants] are ever retained.
+```
+
+```admonish warning.small
+
+Overriding a [built-in operator] in the [`Engine`] afterwards has no effect after the
 optimizer replaces an expression with its calculated value.
+```
 
 `Full`
 ------
 
 `Full` is _much_ more aggressive, _including_ calling external functions on [constant] arguments to
-determine their results. One benefit to this is that many more optimization opportunities arise,
-especially with regards to comparison operators.
+determine their results.
+
+One benefit to this is that many more optimization opportunities arise, especially with regards to
+comparison operators.
