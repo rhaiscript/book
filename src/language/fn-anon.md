@@ -7,7 +7,7 @@ Many functions in the standard API expect [function pointer] as parameters.
 
 For example:
 
-```rust,no_run
+```rust
 // Function 'double' defined here - used only once
 fn double(x) { 2 * x }
 
@@ -28,7 +28,7 @@ essentially, those [functions] are only ever called in one place.
 
 This scenario is especially common when simulating object-oriented programming ([OOP]).
 
-```rust,no_run
+```rust
 // Define functions one-by-one
 fn obj_inc(x, y) { this.data += x * y; }
 fn obj_dec(x) { this.data -= x; }
@@ -67,7 +67,7 @@ Rewrite Using Anonymous Functions
 
 The above can be rewritten using _anonymous [functions]_.
 
-```rust,no_run
+```rust
 let x = [1, 2, 3, 4, 5];
 
 let y = x.map(|x| 2 * x);
@@ -86,7 +86,7 @@ let obj = #{
 
 This de-sugars to:
 
-```rust,no_run
+```rust
 // Automatically generated...
 fn anon_fn_0001(x) { 2 * x }
 fn anon_fn_0002(x) { x * x }

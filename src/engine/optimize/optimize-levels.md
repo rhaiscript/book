@@ -8,7 +8,7 @@ The default is `Simple`.
 
 An [`Engine`]'s optimization level is set via [`Engine::set_optimization_level`][options].
 
-```rust,no_run
+```rust
 // Turn on aggressive optimizations
 engine.set_optimization_level(rhai::OptimizationLevel::Full);
 ```

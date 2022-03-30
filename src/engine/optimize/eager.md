@@ -9,7 +9,7 @@ to replace the call.
 
 This also applies to all operators (which are implemented as functions).
 
-```rust,no_run
+```rust
 // When compiling the following with OptimizationLevel::Full...
 
 const DECISION = 1;

@@ -30,7 +30,7 @@ Dynamic Constants Provider
 Implementation
 --------------
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 // Create shared data provider.

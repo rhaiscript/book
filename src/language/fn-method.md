@@ -17,7 +17,7 @@ However, script-defined [functions] can also be called in _method-call_ style:
 When a [function] is called this way, the keyword `this` binds to the object in the method call and
 can be changed.
 
-```rust,no_run
+```rust
 fn change() {       // note that the method does not need a parameter
     this = 42;      // 'this' binds to the object in method-call
 }

@@ -5,7 +5,7 @@ Assignments
 
 Value assignments to [variables] use the `=` symbol.
 
-```rust,no_run
+```rust
 let foo = 42;
 
 bar = 123 * 456 - 789;
@@ -21,7 +21,7 @@ _[l-value](https://en.wikipedia.org/wiki/Value_(computer_science))_, which must 
 
 Expressions that are not valid _l-values_ cannot be assigned to.
 
-```rust,no_run
+```rust
 x = 42;                 // variable is an l-value
 
 x[1][2][3] = 42         // variable indexing is an l-value

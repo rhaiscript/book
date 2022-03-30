@@ -75,7 +75,7 @@ Example
 In the following example, a `Scope` is created with a few initialized variables, then it is threaded
 through multiple evaluations.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope, EvalAltResult};
 
 let engine = Engine::new();
@@ -137,7 +137,7 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
 [Variables] or [constants] defined at the global level of a script persist inside the custom `Scope`
 even after the script ends.
 
-```rust,no_run
+```rust
 let mut scope = Scope::new();
 
 engine.run_with_scope(&mut scope, "let x = 42;")?;
@@ -150,7 +150,7 @@ Due to [variable shadowing][shadowing], new [variables]/[constants] are simply a
 existing ones (even when they already exist), so care must be taken that new [variables]/[constants]
 inside the custom `Scope` do not grow without bounds.
 
-```rust,no_run
+```rust
 let mut scope = Scope::new();
 
 // Don't do this - this creates 1 million variables named 'x'
@@ -168,7 +168,7 @@ engine.run_with_scope(&mut scope, "print(x);")?;    //  prints 42
 
 In order to remove [variables] or [constants] introduced by a script, use the `rewind` method.
 
-```rust,no_run
+```rust
 // Run a million times
 for _ in 0..1_000_000 {
     // Save the current size of the 'scope'

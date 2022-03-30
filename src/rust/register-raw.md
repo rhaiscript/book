@@ -18,7 +18,7 @@ The `Engine::register_raw_fn` method is marked _volatile_, meaning that it may b
 
 If this is acceptable, then using this method to register a Rust function opens up more opportunities.
 
-```rust,no_run
+```rust
 engine.register_raw_fn(
     "increment_by",                                         // function name
     &[                                                      // a slice containing parameter types
@@ -83,7 +83,7 @@ Extract The First `&mut` Argument (If Any)
 To extract the first `&mut` argument passed by reference from the `args` parameter (`&mut [&mut Dynamic]`),
 use the following to get a mutable reference to the underlying value:
 
-```rust,no_run
+```rust
 let value: &mut T = &mut *args[0].write_lock::<T>().unwrap();
 
 *value = ...    // overwrite the existing value of the first `&mut` parameter
@@ -127,7 +127,7 @@ to a native Rust function.
 The example also showcases the use of `FnPtr::call_raw`, a low-level API which allows binding the
 `this` pointer to the function pointer call.
 
-```rust,no_run
+```rust
 use rhai::{Engine, FnPtr};
 
 let mut engine = Engine::new();
@@ -177,7 +177,7 @@ to the first argument, use one of the following tactics:
 
 3. Use `split_first_mut` to partition the slice:
 
-```rust,no_run
+```rust
 // Partition the slice
 let (first, rest) = args.split_first_mut().unwrap();
 

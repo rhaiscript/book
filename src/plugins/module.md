@@ -13,7 +13,7 @@ Import Prelude
 When using the plugins system, the entire `rhai::plugin` module must be imported as a prelude
 because code generated will need these imports.
 
-```rust,no_run
+```rust
 use rhai::plugin::*;
 ```
 
@@ -38,7 +38,7 @@ aliases] become [custom types], and sub-modules become Rhai [sub-modules][module
 |   `pub` function   | `pub fn foo(...) { ... }`  |         function         |
 |  `pub` sub-module  |   `pub mod foo { ... }`    |   [sub-module][module]   |
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 // My custom type
@@ -140,7 +140,7 @@ The simplest way to register the [plugin module] into an [`Engine`] is:
 1) use the `exported_module!` macro to turn it into a normal Rhai [module],
 2) call `Engine::register_global_module` to register it
 
-```rust,no_run
+```rust
 fn main() {
     let mut engine = Engine::new();
 
@@ -157,7 +157,7 @@ The functions contained within the module definition (i.e. `greet`, `get_num`, `
 (with friendly name `ABC`) are automatically registered into the [`Engine`] when
 `Engine::register_global_module` is called.
 
-```rust,no_run
+```rust
 let x = greet("world");
 x == "hello, world!";
 
@@ -194,7 +194,7 @@ Another simple way to register the [plugin module] into an [`Engine`] is, again:
 2) call `Engine::register_static_module` to register it under a particular [module
    namespace][function namespace]
 
-```rust,no_run
+```rust
 fn main() {
     let mut engine = Engine::new();
 
@@ -209,7 +209,7 @@ fn main() {
 The functions contained within the module definition (i.e. `greet`, `get_num` and `increment`), plus
 the constant `MY_NUMBER`, are automatically registered under the [module namespace][function namespace] `service`:
 
-```rust,no_run
+```rust
 let x = service::greet("world");
 x == "hello, world!";
 
@@ -245,7 +245,7 @@ All functions (usually _methods_) defined in the module and marked with `#[rhai_
 Therefore, in the example above, the `increment` method (defined with `#[rhai_fn(global)]`)
 works fine when called in method-call style:
 
-```rust,no_run
+```rust
 let x = 42;
 x.increment();
 x == 43;
@@ -276,7 +276,7 @@ put _feature gates_ or _compile-time gates_ (i.e. `#[cfg(...)]`) on a large coll
 without having to duplicate the gates onto each individual function.
 ```
 
-```rust,no_run
+```rust
 #[export_module]
 mod my_module {
     // Always available
@@ -357,7 +357,7 @@ Operators (which require function names that are not valid for Rust) can also be
 Registering the same function name with the same parameter types will cause a parse error.
 ```
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -398,7 +398,7 @@ Functions can be marked as [getters/setters] and [indexers] for [custom types] v
 |      `#[rhai_fn(index_get)]`       |  index getter   |
 |      `#[rhai_fn(index_set)]`       |  index setter   |
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -442,7 +442,7 @@ Multiple registrations is useful for `name = "..."`, `get = "..."` and `set = ".
 multiple alternative names to the same function.
 ```
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -492,7 +492,7 @@ There is no checking.
 Pure functions can be passed a [constant] value as the first `&mut` parameter.
 ```
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]
@@ -528,7 +528,7 @@ mod my_module {
 
 When applied to a Rhai script:
 
-```rust,no_run
+```rust
 // Constant
 const VECTOR = [1, 2, 3, 4, 5, 6, 7];
 
@@ -549,7 +549,7 @@ To register [fallible functions] (i.e. functions that may return errors), apply 
 `#[rhai_fn(return_raw)]` attribute on functions that return `Result<T, Box<EvalAltResult>>`
 where `T` is any clonable type.
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_module]

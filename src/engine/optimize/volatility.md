@@ -9,7 +9,7 @@ i.e. it _depends_ on the external environment and is not _pure_.
 A perfect example is a function that gets the current time &ndash; obviously each run will return a
 different value!
 
-```rust,no_run
+```rust
 print(get_current_time(true));      // prints the current time
                                     // notice the call to 'get_current_time'
                                     // has constant arguments

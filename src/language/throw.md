@@ -19,7 +19,7 @@ throw;              // defaults to '()'
 Exceptions thrown via `throw` in the script can be captured in Rust by matching
 `EvalAltResult::ErrorRuntime(value, position)` with the exception value captured by `value`.
 
-```rust,no_run
+```rust
 let result = engine.eval::<i64>(
 "
     let x = 42;

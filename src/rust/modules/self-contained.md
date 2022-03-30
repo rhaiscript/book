@@ -20,7 +20,7 @@ operation.
 
 Compile a script into a _self-contained_ [`AST`] via `Engine::compile_into_self_contained`.
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 // Compile script into self-contained AST using the current
@@ -45,7 +45,7 @@ Only Static Paths
 `Engine::compile_into_self_contained` only pre-resolves [`import`] statements in the script
 that are _static_, i.e. with a path that is a [string] literal.
 
-```rust,no_run
+```rust
 // The following import is pre-resolved.
 import "hello" as h;
 

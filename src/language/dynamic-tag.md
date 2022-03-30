@@ -18,7 +18,7 @@ It is an error to set a tag to a value beyond the bounds of `i32` (`i16` on 32-b
 Examples
 --------
 
-```rust,no_run
+```rust
 let x = 42;
 
 x.tag == 0;             // tag defaults to zero
@@ -169,7 +169,7 @@ print(`Result check = ${my_result.tag[3]}`);
 
 Sometimes it is useful to return auxillary info from a [function].
 
-```rust,no_run
+```rust
 // Verify Bell's Inequality by calculating a norm
 // and comparing it with a hypotenuse.
 // https://en.wikipedia.org/wiki/Bell%27s_theorem
@@ -215,7 +215,7 @@ additional information is small &ndash; e.g. in many cases, a single `bool`, or 
 To return a number of _small_ values from [functions], the tag value as a [bit-field] is an ideal
 container without resorting to a full-blown [object map] or [array].
 
-```rust,no_run
+```rust
 // This function essentially returns a tuple of four numbers:
 // (result, a, b, c)
 fn complex_calc(x, y, z) {

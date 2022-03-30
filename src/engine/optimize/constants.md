@@ -16,7 +16,7 @@ Effective in template-based machine-generated scripts to turn on/off certain sec
 
 * [pre-calculate](op-eval.md) [constant] expressions.
 
-```rust,no_run
+```rust
 const ABC = true;
 const X = 41;
 
@@ -37,7 +37,7 @@ print("done!");                             // <- the line above is further simp
 [Constant] values can be provided in a custom [`Scope`] object to the [`Engine`]
 for optimization purposes.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope};
 
 let engine = Engine::new();
@@ -62,7 +62,7 @@ r#"
 [Constants] defined in [modules] that are registered into an [`Engine`] via
 `Engine::register_global_module` are used in optimization.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Module};
 
 let mut engine = Engine::new();
@@ -89,7 +89,7 @@ r#"
 
 [Constants] defined at _global_ level typically cannot be seen by script [functions] because they are _pure_.
 
-```rust,no_run
+```rust
 const MY_CONSTANT = 42;     // <- constant defined at global level
 
 print(MY_CONSTANT);         // <- optimized to: print(42)
@@ -109,7 +109,7 @@ propagated to [functions].
 This is usually the intuitive usage and behavior expected by regular users, even though it means
 that a script will behave differently (essentially a runtime error) when [script optimization] is disabled.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope};
 
 let engine = Engine::new();
@@ -136,7 +136,7 @@ are _pure_ and typically cannot see [constants] within the custom [`Scope`].
 
 Therefore, constants in [functions] now throw a runtime error.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope, OptimizationLevel};
 
 let mut engine = Engine::new();
@@ -169,7 +169,7 @@ engine.run_with_scope(&mut scope,
 This may have negative implications to performance if the [constant] value is expensive to clone
 (e.g. if the type is very large).
 
-```rust,no_run
+```rust
 let mut scope = Scope::new();
 
 // Push a large constant into the scope...
@@ -199,7 +199,7 @@ If the [constants] are modified later on (yes, it is possible, via Rust _methods
 the modified values will not show up in the optimized script.
 Only the initialization values of [constants] are ever retained.
 
-```rust,no_run
+```rust
 const MY_SECRET_ANSWER = 42;
 
 MY_SECRET_ANSWER.update_to(666);    // assume 'update_to(&mut i64)' is a Rust function

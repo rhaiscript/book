@@ -13,7 +13,7 @@ Like C, `continue` can be used to skip to the next iteration, by-passing all fol
 `while` loops can be disabled via [`Engine::set_allow_looping`][options].
 ~~~
 
-```rust,no_run
+```rust
 let x = 10;
 
 while x > 0 {

@@ -23,7 +23,7 @@ _namespace qualifiers_.
 [Sub-modules][module] are **ignored**.
 ```
 
-```rust,no_run
+```rust
 use rhai::{Engine, Module};
 
 let mut module = Module::new();             // new module
@@ -59,7 +59,7 @@ Registering a [module] via `Engine::register_global_module` is essentially the _
 as calling `Engine::register_fn` (or any of the `Engine::register_XXX` API) individually
 on each top-level function within that [module].
 
-```rust,no_run
+```rust
 // The above is essentially the same as:
 let mut engine = Engine::new();
 
@@ -75,7 +75,7 @@ Use Case 2 &ndash; Make It a Static Namespace
 `Engine::register_static_module` registers a [module] and under a specific
 [module namespace][function namespace].
 
-```rust,no_run
+```rust
 use rhai::{Engine, Module};
 
 let mut module = Module::new();             // new module
@@ -113,7 +113,7 @@ by setting the `namespace` parameter to `FnNamespace::Global`.
 
 This way, [getters/setters] and [indexers] for [custom types] can work as expected.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Module, FnNamespace};
 
 let mut module = Module::new();             // new module
@@ -155,7 +155,7 @@ the module when loaded via `import` statements.
 The easiest way is to use, for example, the [`StaticModuleResolver`][module resolver] to hold such
 a custom module.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope, Module};
 use rhai::module_resolvers::StaticModuleResolver;
 

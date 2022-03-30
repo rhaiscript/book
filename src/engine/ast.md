@@ -68,7 +68,7 @@ The following methods merge one [`AST`] with another:
 
 When statements are appended, beware that this may change the semantics of the script.
 
-```rust,no_run
+```rust
 // First script
 let ast1 = engine.compile(
 "

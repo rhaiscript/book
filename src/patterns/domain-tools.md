@@ -55,7 +55,7 @@ rhai-dbg.rs -> /path/to/my_project/examples/db.rs
 
 Assume the project already contains configuration code for a customized [`Engine`].
 
-```rust,no_run
+```rust
 use rhai::Engine;
 use rhai::plugin::*;
 
@@ -112,7 +112,7 @@ Each [bin tool] contains a line that creates the main script [`Engine`].
 
 Modify it to call the project's creation function.
 
-```rust,no_run
+```rust
 // Initialize scripting engine
 let mut engine = Engine::new();
 

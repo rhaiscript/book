@@ -8,7 +8,7 @@ Or "How to Shoot Yourself in the Foot even Easier"
 
 Saving the best for last, there is the ever-dreaded... `eval` [function]!
 
-```rust,no_run
+```rust
 let x = 10;
 
 fn foo(x) { x += 12; x }
@@ -39,7 +39,7 @@ print(z);                       // <- error: variable 'z' not found
 Script segments passed to `eval` execute inside the _current_ [`Scope`], so they can access and modify
 _everything_, including all [variables] that are visible at that position in code!
 
-```rust,no_run
+```rust
 let script = "x += 32";
 
 let x = 10;
@@ -56,7 +56,7 @@ print(x);
 `eval` can also be used to define new [variables] and do other things normally forbidden inside
 a [function] call.
 
-```rust,no_run
+```rust
 let script = "let x = 42";
 eval(script);
 print(x);           // prints 42
@@ -76,7 +76,7 @@ the _global_ level!
 For those who subscribe to the (very sensible) motto of ["`eval` is evil"](http://linterrors.com/js/eval-is-evil),
 disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 
-```rust,no_run
+```rust
 // Disable usage of 'eval'
 engine.disable_symbol("eval");
 ```

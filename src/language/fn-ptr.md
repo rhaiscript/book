@@ -31,7 +31,7 @@ using a [raw `Engine`]) operate on function pointers.
 Examples
 --------
 
-```rust,no_run
+```rust
 fn foo(x) { 41 + x }
 
 let func = Fn("foo");       // use the 'Fn' function to create a function pointer
@@ -145,7 +145,7 @@ at runtime, which function to call among a group.
 Although it is possible to simulate dynamic dispatch via a number and a large `if-then-else-if` statement,
 using function pointers significantly simplifies the code.
 
-```rust,no_run
+```rust
 let x = some_calculation();
 
 // These are the functions to call depending on the value of 'x'
@@ -195,7 +195,7 @@ to a function call while binding the object in the method call to the `this` poi
 
 To achieve this, pass the function pointer as the _first_ argument to `call`:
 
-```rust,no_run
+```rust
 fn add(x) {                 // define function which uses 'this'
     this += x;
 }
@@ -231,7 +231,7 @@ A function pointer in Rhai is essentially syntactic sugar wrapping the _name_ of
 to call in script.  Therefore, the script's _execution context_ (i.e. [`NativeCallContext`])
 is needed in order to call a function pointer.
 
-```rust,no_run
+```rust
 use rhai::{Engine, FnPtr, NativeCallContext};
 
 let mut engine = Engine::new();
@@ -257,7 +257,7 @@ The `FnPtr::call` method allows the function pointer to be called directly on an
 [`AST`], making it possible to reuse the `FnPtr` data type in may different calls and scripting
 environments.
 
-```rust,no_run
+```rust
 use rhai::{Engine, FnPtr};
 
 let engine = Engine::new();

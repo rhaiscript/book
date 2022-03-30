@@ -5,7 +5,7 @@ If Statement
 
 `if` statements follow C syntax.
 
-```rust,no_run
+```rust
 if foo(x) {
     print("It's true!");
 } else if bar == baz {
@@ -27,7 +27,7 @@ one statement inside the branch.
 
 Like Rust, there is no ambiguity regarding which `if` clause a branch belongs to.
 
-```rust,no_run
+```rust
 // Rhai is not C!
 if (decision) print(42);
 //            ^ syntax error, expecting '{'

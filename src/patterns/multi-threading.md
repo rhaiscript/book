@@ -23,7 +23,7 @@ Multi-Threaded Synchronization
 Example
 -------
 
-```rust,no_run
+```rust
 use rhai::{Engine};
 
 fn main() {

@@ -13,7 +13,7 @@ Like Rust, `continue` can be used to skip to the next iteration, by-passing all 
 `loop` can be disabled via [`Engine::set_allow_looping`][options].
 ~~~
 
-```rust,no_run
+```rust
 let x = 10;
 
 loop {

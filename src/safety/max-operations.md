@@ -6,7 +6,7 @@ Maximum Number of Operations
 
 In Rhai, it is trivial to construct _infinite loops_, or scripts that run for a very long time.
 
-```rust,no_run
+```rust
 loop { ... }                        // infinite loop
 
 while 1 < 2 { ... }                 // loop with always-true condition
@@ -22,7 +22,7 @@ has consumed, allowing the system to impose a hard upper limit on computing reso
 A script exceeding the maximum operations count terminates with an error result.
 This can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.set_max_operations(500);     // allow only up to 500 operations for this script

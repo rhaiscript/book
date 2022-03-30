@@ -19,7 +19,7 @@ _regardless_ of whether it is terminated by a semicolon or not.
 If the last statement has no return value (e.g. variable definitions, assignments) then it is
 assumed to be [`()`].
 
-```rust,no_run
+```rust
 let x = {
     let foo = calc_something();
     let bar = foo + baz;

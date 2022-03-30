@@ -29,7 +29,7 @@ A alternative is to use `&str` which de-sugars to `ImmutableString`.
 A function with the first parameter being `&mut String` does not match a string argument passed to it,
 which has type `ImmutableString`.  In fact, `&mut String` is treated as an opaque [custom type].
 
-```rust,no_run
+```rust
 fn slow(s: String) -> i64 { ... }               // string is cloned each call
 
 fn fast1(s: ImmutableString) -> i64 { ... }     // cloning 'ImmutableString' is cheap

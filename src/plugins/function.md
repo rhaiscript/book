@@ -42,7 +42,7 @@ The name of the function can be any text string, so it is possible to register _
 as well as operators.
 ```
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // import macros
 
 #[export_fn]
@@ -87,7 +87,7 @@ There is no checking.
 Pure functions can be passed a [constant] value as the first `&mut` parameter.
 ```
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 // This method is pure, so 'len' can be used on a constant 'TestStruct'.
@@ -112,7 +112,7 @@ To register [fallible functions] (i.e. functions that may return errors), apply 
 `#[export_fn(return_raw)]` attribute on plugin functions that return `Result<T, Box<EvalAltResult>>`
 where `T` is any clonable type.
 
-```rust,no_run
+```rust
 use rhai::plugin::*;        // a "prelude" import for macros
 
 #[export_fn(return_raw)]

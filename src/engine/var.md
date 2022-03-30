@@ -12,7 +12,7 @@ to override its default behavior.
 
 To do so, provide a closure to the [`Engine`] via `Engine::on_var`.
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 // Register a variable resolver.

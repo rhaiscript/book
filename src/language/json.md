@@ -17,7 +17,7 @@ Use the `Engine::parse_json` method to parse a piece of JSON into an [object map
 The JSON text must represent a single object hash &ndash; i.e. must be wrapped within braces
 `{`...`}` &ndash; otherwise it returns a syntax error.
 
-```rust,no_run
+```rust
 // JSON string - notice that JSON property names are always quoted
 //               notice also that comments are acceptable within the JSON string
 let json = r#"{
@@ -71,7 +71,7 @@ then it is possible to parse it by first replacing all occupance of `{` with `#{
 
 A JSON object hash starting with `#{` is handled transparently by `Engine::parse_json`.
 
-```rust,no_run
+```rust
 // JSON with sub-object 'b'.
 let json = r#"{"a":1, "b":{"x":true, "y":false}}"#;
 

@@ -52,7 +52,7 @@ For a relatively simple API that is action-based and not object-based, use the
 
 Assume the following command object type:
 
-```rust,no_run
+```rust
 struct EnergizerBunny { ... }
 
 impl EnergizerBunny {
@@ -68,13 +68,13 @@ impl EnergizerBunny {
 
 ### Wrap command object type as shared
 
-```rust,no_run
+```rust
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
 ```
 
 or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
-```rust,no_run
+```rust
 pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
 
 pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
@@ -87,7 +87,7 @@ The easiest way to develop a complete set of API for a [custom type] is via a [p
 Notice that putting `pure` in `#[rhai_fn(...)]` allows a [getter/setter][getters/setters] to operate
 on a [constant] without raising an error.  Therefore, it is needed on _all_ functions.
 
-```rust,no_run
+```rust
 use rhai::plugin::*;
 
 // Remember to put 'pure' on all functions, or they'll choke on constants!
@@ -170,13 +170,13 @@ This can easily be done via a _type alias_ in the plugin module.
 
 ### Compile script into AST
 
-```rust,no_run
+```rust
 let ast = engine.compile(script)?;
 ```
 
 ### Push constant command object into custom scope and run AST
 
-```rust,no_run
+```rust
 let bunny: SharedBunny = Rc::new(RefCell::new(EnergizerBunny::new()));
 
 let mut scope = Scope::new();
@@ -200,7 +200,7 @@ It is usually desirable to prevent [shadowing] of the singleton command object.
 
 This can be easily achieved via a [variable definition filter].
 
-```rust,no_run
+```rust
 // Now the script can no longer define a variable named 'BUNNY'
 engine.on_def_var(|_, info, _| Ok(info.name != "BUNNY"));
 ```
@@ -208,7 +208,7 @@ engine.on_def_var(|_, info, _| Ok(info.name != "BUNNY"));
 
 ### Use the command API in script
 
-```rust,no_run
+```rust
 // Access the command object via constant variable 'BUNNY'.
 
 if !BUNNY.power { BUNNY.power = true; }

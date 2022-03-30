@@ -93,7 +93,7 @@ All [functions] are automatically exported, _unless_ it is explicitly opt-out wi
 
 [Functions] declared [`private`] are hidden to the outside.
 
-```rust,no_run
+```rust
 // This is a module script.
 
 fn inc(x) { x + 1 }     // script-defined function - default public

@@ -63,7 +63,7 @@ and they do not interoperate.
 Two different versions of the same API must be registered to handle both range styles.
 ```
 
-```rust,no_run
+```rust
 use std::ops::{Range, RangeInclusive};
 
 /// The actual work function
@@ -97,7 +97,7 @@ engine.run(
 
 [Indexers] commonly use ranges as parameters.
 
-```rust,no_run
+```rust
 use std::ops::{Range, RangeInclusive};
 
 let mut engine = Engine::new();
@@ -157,7 +157,7 @@ In fact, usually all versions redirect to a call to one single version.
 For example, a naive implementation of the `extract` method for [arrays] (without any error handling)
 would look like:
 
-~~~rust,no_run
+~~~rust
 use std::ops::{Range, RangeInclusive};
 
 // Version with exclusive range
@@ -189,7 +189,7 @@ position with a length that corresponds to the end position (for `..end`).
 
 The right-open form (i.e. `start..`) is trivially replaced by the version taking a single starting position.
 
-~~~rust,no_run
+~~~rust
 let x = [1, 2, 3, 4, 5];
 
 x.extract(0..3);    // normal range argument

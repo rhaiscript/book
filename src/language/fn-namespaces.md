@@ -73,7 +73,7 @@ Therefore, function calls in Rhai are _late_ bound &ndash; meaning that the func
 determined or guaranteed; there is no way to _lock down_ the function being called.
 This aspect is very similar to JavaScript before ES6 modules.
 
-```rust,no_run
+```rust
 // Compile a script into AST
 let ast1 = engine.compile(
 r#"

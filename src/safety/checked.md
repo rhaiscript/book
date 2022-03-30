@@ -19,7 +19,7 @@ floating-point operation.
 This checking can be turned off via the [`unchecked`] feature for higher performance
 (but higher risks as well).
 
-```rust,no_run
+```rust
 let x = 1_000_000_000_000;
 
 x * x;      // Normal build - runtime error: multiplication overflow
@@ -41,7 +41,7 @@ In addition to overflows, there are many other safety checks performed by Rhai a
 
 ### [Infinite loops][maximum number of operations]
 
-```rust,no_run
+```rust
 // Normal build - runtime error: exceeds maximum number of operations
 loop {
     foo();
@@ -55,7 +55,7 @@ loop {
 
 ### [Infinite recursion][maximum call stack depth]
 
-```rust,no_run
+```rust
 fn foo() {
     foo();
 }
@@ -67,7 +67,7 @@ foo();      // 'unchecked' build - panic due to stack overflow!
 
 ### [Gigantic data structures][maximum size of arrays]
 
-```rust,no_run
+```rust
 let x = [];
 
 // Normal build - runtime error: array exceeds maximum size
@@ -83,7 +83,7 @@ loop {
 
 ### Improper range iteration
 
-```rust,no_run
+```rust
 // Normal build - runtime error: zero step
 for x in range(0, 10, 0) { ... }
 

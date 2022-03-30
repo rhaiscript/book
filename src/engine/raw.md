@@ -34,7 +34,7 @@ the same [`Engine`] with the same set of functions.
 
 
 ~~~admonish example "`Engine::new` is equivalent to..."
-```rust,no_run
+```rust
 use rhai::module_resolvers::FileModuleResolver;
 use rhai::packages::StandardPackage;
 

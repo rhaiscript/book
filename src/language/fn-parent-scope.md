@@ -25,7 +25,7 @@ of the parent caller &ndash; i.e. the [`Scope`] that makes the [function] call &
 access/mutate [variables] defined there.
 
 
-```rust,no_run
+```rust
 fn foo(y) {             // function accesses 'x' and 'y', but 'x' is not defined
     x += y;             // 'x' is modified in this function
     let z = 0;          // 'z' is defined in this function's scope

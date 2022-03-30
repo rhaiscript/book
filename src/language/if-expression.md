@@ -11,7 +11,7 @@ operators in other C-like languages.
 [`if`] expressions can be disabled via [`Engine::set_allow_if_expression`][options].
 ~~~
 
-```rust,no_run
+```rust
 // The following is equivalent to C: int x = 1 + (decision ? 42 : 123) / 2;
 let x = 1 + if decision { 42 } else { 123 } / 2;
 x == 22;

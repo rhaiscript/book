@@ -6,7 +6,7 @@ Compound Assignments
 
 Compound assignments are assignments with a [binary operator][operators] attached.
 
-```rust,no_run
+```rust
 number += 8;            // number = number + 8
 
 number -= 7;            // number = number - 7
@@ -39,7 +39,7 @@ operations for different data types.
 
 ### Build strings
 
-```rust,no_run
+```rust
 let my_str = "abc";
 
 my_str += "ABC";
@@ -50,7 +50,7 @@ my_str == "abcABC12345"
 
 ### Concatenate arrays
 
-```rust,no_run
+```rust
 let my_array = [1, 2, 3];
 
 my_array += [4, 5];
@@ -60,7 +60,7 @@ my_array == [1, 2, 3, 4, 5];
 
 ### Concatenate BLOB's
 
-```rust,no_run
+```rust
 let my_blob = blob(3, 0x42);
 
 my_blob += blob(5, 0x89);
@@ -70,7 +70,7 @@ my_blob.to_string() == "[4242428989898989]";
 
 ### Mix two object maps together
 
-```rust,no_run
+```rust
 let my_obj = #{ a:1, b:2 };
 
 my_obj += #{ c:3, d:4, e:5 };
@@ -80,7 +80,7 @@ my_obj == #{ a:1, b:2, c:3, d:4, e:5 };
 
 ### Add seconds to timestamps
 
-```rust,no_run
+```rust
 let now = timestamp();
 
 now += 42.0;

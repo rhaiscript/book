@@ -6,7 +6,7 @@ Call Rhai Functions from Rust
 Rhai also allows working _backwards_ from the other direction &ndash; i.e. calling a Rhai-scripted
 [function] from Rust via `Engine::call_fn`.
 
-```rust,no_run
+```rust
 ┌─────────────┐
 │ Rhai script │
 └─────────────┘
@@ -96,7 +96,7 @@ which is used to parse a data type into individual argument values for the [func
 Custom types (e.g. structures) can also implement [`FuncArgs`][traits] so they can be used for
 calling `Engine::call_fn`.
 
-```rust,no_run
+```rust
 use std::iter::once;
 use rhai::FuncArgs;
 
@@ -128,7 +128,7 @@ Low-Level API &ndash; `Engine::call_fn_raw`
 For more control, construct all arguments as [`Dynamic`] values and use `Engine::call_fn_raw`,
 passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
 
-```rust,no_run
+```rust
 let result = engine.call_fn_raw(
                 &mut scope,         // scope to use
                 &ast,               // AST containing the functions
@@ -172,7 +172,7 @@ If any of them are temporary and not intended to be retained, define them inside
 (see example below).
 ~~~
 
-```rust,no_run
+```rust
 ┌─────────────┐
 │ Rhai script │
 └─────────────┘
@@ -221,7 +221,7 @@ engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
 
 It is possible, then, to call a [function] that uses `this`.
 
-```rust,no_run
+```rust
 let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();

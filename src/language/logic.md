@@ -25,7 +25,7 @@ Others are defined in the [`LogicPackage`][built-in packages] but excluded if us
 
 Comparing a floating-point number (`FLOAT`) with an integer is also supported.
 
-```rust,no_run
+```rust
 42 == 42.0;         // true
 
 42.0 == 42;         // true
@@ -41,7 +41,7 @@ Comparing a floating-point number (`FLOAT`) with an integer is also supported.
 
 Comparing a [`Decimal`][rust_decimal] number with an integer is also supported.
 
-```rust,no_run
+```rust
 let d = parse_decimal("42");
 
 42 == d;            // true
@@ -60,7 +60,7 @@ d < 42;             // false
 Comparing a [string] with a [character] is also supported, with the character first turned into a
 [string] before performing the comparison.
 
-```rust,no_run
+```rust
 'x' == "x";         // true
 
 "" < 'a';           // true
@@ -75,7 +75,7 @@ functions have been registered.
 
 The exception is `!=` (not equals) which defaults to `true`. This is in line with intuition.
 
-```rust,no_run
+```rust
 42 > "42";          // false: i64 cannot be compared with string
 
 42 <= "42";         // false: i64 cannot be compared with string
@@ -95,7 +95,7 @@ Beware that the above default does _NOT_ apply to numeric values of different ty
 (e.g. comparison between `i64` and `u16`, `i32` and `f64`) &ndash; when multiple numeric types are
 used it is too easy to mess up and for subtle errors to creep in.
 
-```rust,no_run
+```rust
 // Assume variable 'x' = 42_u16, 'y' = 42_u16 (both types of u16)
 
 x == y;             // true: '==' operator for u16 is built-in
@@ -130,7 +130,7 @@ or returns the default.
 
 This behavior can be counter-intuitive.
 
-```rust,no_run
+```rust
 let ts = new_ts();  // custom type with '<=' and '==' defined
 
 ts <= ts;           // true: '<=' defined
@@ -164,7 +164,7 @@ if the first one already proves the condition wrong.
 
 Single boolean operators `&` and `|` always evaluate both operands.
 
-```rust,no_run
+```rust
 a() || b();         // b() is not evaluated if a() is true
 
 a() && b();         // b() is not evaluated if a() is false

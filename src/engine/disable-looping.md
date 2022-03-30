@@ -13,7 +13,7 @@ Although it is possible to disable these keywords via
 [`Engine::disable_symbol`][disable keywords and operators], it is simpler to disable all looping
 via [`Engine::set_allow_looping`][options].
 
-```rust,no_run
+```rust
 use rhai::Engine;
 
 let mut engine = Engine::new();

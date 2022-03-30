@@ -16,6 +16,9 @@ curly-quotes = true
 enable = true
 level = 4
 
+[output.html.playground]
+runnable = false
+
 [outputX.linkcheck]
 follow-web-links = false
 traverse-parent-directories = false

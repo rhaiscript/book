@@ -111,7 +111,7 @@ _methods_ for [custom types], and may avoid potentially-costly cloning.
 For example, the `+=` (append) compound assignment takes a mutable reference to the [variable] while
 the corresponding `+` (add) assignment usually doesn't.  The difference in performance can be huge:
 
-```rust,no_run
+```rust
 let x = create_some_very_big_and_expensive_type();
 
 x = x + 1;
@@ -132,7 +132,7 @@ style to take advantage of this.
 
 However, there are limits to its intelligence, and only **simple variable references** are optimized.
 
-~~~rust,no_run
+~~~rust
 x = x + 1;          // <- this statement...
 
 x += x;             // ... is rewritten as this

@@ -5,7 +5,7 @@ Constants
 
 Constants can be defined using the `const` keyword and are immutable.
 
-```rust,no_run
+```rust
 const X;            // 'X' is a constant '()'
 
 const X = 40 + 2;   // 'X' is a constant 42
@@ -34,7 +34,7 @@ as a [_singleton_]({{rootUrl}}/patterns/singleton.md).
 It is possible to add a constant into a custom [`Scope`] via `Scope::push_constant` so it'll be
 available to scripts running with that [`Scope`].
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope};
 
 #[derive(Debug, Clone)]
@@ -100,7 +100,7 @@ If it is called as a [method], however, the Rust function will be able to modify
 Also, property [setters][getters/setters] and [indexers] are always assumed to mutate the first
 `&mut` parameter and so they always raise errors when passed constants by default.
 
-```rust,no_run
+```rust
 // For the below, assume 'increment' is a Rust function with '&mut' first parameter
 
 const X = 42;       // a constant

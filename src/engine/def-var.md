@@ -16,7 +16,7 @@ statements) in a Rhai script.
 
 The filter is called when a [variable] or [constant] is defined both during runtime and compilation.
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 // Register a variable definition filter.

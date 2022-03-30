@@ -13,7 +13,7 @@ The `push` method of an [array] is implemented as follows (minus code for [safet
 against [over-sized arrays][maximum size of arrays]), allowing the function to be called with
 all item types.
 
-~~~rust,no_run
+~~~rust
 // 'item: Dynamic' matches all data types
 fn push(array: &mut Array, item: Dynamic) {
     array.push(item);
@@ -33,7 +33,7 @@ Candidate functions will be matched in order of parameter types.
 
 Therefore, always leave [`Dynamic`] parameters (up to 16, see below) as far to the right as possible.
 
-```rust,no_run
+```rust
 use rhai::{Engine, Dynamic};
 
 // Different versions of the same function 'foo'
@@ -78,7 +78,7 @@ of 16 parameters allowed to be [`Dynamic`], counting from the _right-most side_.
 For example, Rhai will not find the following function &ndash; Oh! and those 16 parameters to the right
 certainly have nothing to do with it!
 
-```rust,no_run
+```rust
 // The 'd' parameter counts 17th from the right!
 fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
                              x5: i64, x6: i64, x7: i64, x8: i64,
@@ -129,7 +129,7 @@ replacing different arguments with [`Dynamic`] _starting from the right-most par
 
 Thus, assuming a three-argument function call:
 
-~~~rust,no_run
+~~~rust
 foo(42, "hello", true);
 ~~~
 

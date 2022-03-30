@@ -20,7 +20,7 @@ that they all share the same set of functions.
 `def_package!`
 --------------
 
-> ```rust,no_run
+> ```rust
 > def_package! {
 >     /// Package description doc-comment
 >     pub name(variable) {
@@ -63,7 +63,7 @@ where:
 Examples
 --------
 
-```rust,no_run
+```rust
 // Import necessary types and traits.
 use rhai::def_package;      // 'def_package!' macro
 use rhai::packages::{
@@ -108,7 +108,7 @@ are pulled up to the top level instead) and so there will not be any sub-modules
 
 Variables in the [plugin module] are ignored.
 
-```rust,no_run
+```rust
 // Import necessary types and traits.
 use rhai::def_package;
 use rhai::packages::{

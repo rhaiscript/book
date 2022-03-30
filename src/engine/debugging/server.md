@@ -19,7 +19,7 @@ Example
 The following example assumes bi-direction, blocking messaging channels, such as a WebSocket
 connection, with a server that accepts connections and creates those channels.
 
-```rust,no_run
+```rust
 use rhai::debugger::{ASTNode, DebuggerCommand};
 
 let mut engine = Engine::new();

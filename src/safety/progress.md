@@ -25,7 +25,7 @@ Progress tracking is disabled with the [`unchecked`] feature.
 Example
 -------
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.on_progress(|count| {    // parameter is number of operations already performed

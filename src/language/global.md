@@ -10,7 +10,7 @@ When a [constant] is declared at global scope, it is added to a special [module]
 
 Naturally, the automatic `global` [module] is not available under [`no_function`] nor [`no_module`].
 
-```rust,no_run
+```rust
 const CONSTANT = 42;        // this constant is automatically added to 'global'
 
 {
@@ -31,7 +31,7 @@ Override `global`
 It is possible to _override_ the automatic global [module] by [importing][`import`] another [module]
 under the name `global`.
 
-```rust,no_run
+```rust
 import "foo" as global;     // import a module as 'global'
 
 const CONSTANT = 42;        // this constant is NOT added to 'global'

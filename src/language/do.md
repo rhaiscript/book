@@ -13,7 +13,7 @@ following statements; `break` can be used to break out of the loop unconditional
 `do` loops can be disabled via [`Engine::set_allow_looping`][options].
 ~~~
 
-```rust,no_run
+```rust
 let x = 10;
 
 do {

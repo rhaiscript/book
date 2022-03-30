@@ -17,7 +17,7 @@ This call stack can be examined to determine the control flow at any particular 
 
 The `Debugger::call_stack` method returns a slice of all call stack frames.
 
-```rust,no_run
+```rust
 use rhai::debugger::*;
 
 let debugger = &mut context.global_runtime_state_mut().debugger;

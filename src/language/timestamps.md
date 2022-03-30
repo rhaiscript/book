@@ -37,7 +37,7 @@ The following methods are defined in the [`LanguageCorePackage`][built-in packag
 Examples
 --------
 
-```rust,no_run
+```rust
 let now = timestamp();
 
 // Do some lengthy operation...

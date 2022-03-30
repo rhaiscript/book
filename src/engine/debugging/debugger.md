@@ -6,7 +6,7 @@ Register with the Debugger
 Hooking up a debugging interface is as simple as providing closures to the [`Engine`]'s built-in
 debugger via `Engine::register_debugger`.
 
-```rust,no_run
+```rust
 use rhai::debugger::{ASTNode, DebuggerCommand};
 
 let mut engine = Engine::new();

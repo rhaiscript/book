@@ -13,7 +13,7 @@ Any script operation that produces a string longer than the maximum also termina
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.set_max_string_size(500);    // allow strings only up to 500 bytes long (in UTF-8 format)

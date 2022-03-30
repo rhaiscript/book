@@ -78,7 +78,7 @@ able to directly manipulate UTF-8 encoded text.
 Examples
 --------
 
-```rust,no_run
+```rust
 let full_name == " Bob C. Davis ";
 full_name.len == 14;
 

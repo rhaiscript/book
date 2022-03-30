@@ -43,7 +43,7 @@ switch type_of(x) {
 
 * the full Rust type name, if registered via `Engine::register_type`
 
-~~~rust,no_run
+~~~rust
 struct TestStruct1;
 struct TestStruct2;
 

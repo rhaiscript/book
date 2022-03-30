@@ -10,7 +10,7 @@ Furthermore, an [`Engine`] created non-`mut` cannot mutate any state, including 
 
 It is highly recommended that [`Engine`]'s be created immutable as much as possible.
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 // Use the fluent API to configure an 'Engine'

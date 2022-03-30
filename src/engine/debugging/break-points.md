@@ -31,7 +31,7 @@ The following [`debugger::Debugger`] methods allow access to break-points for ma
 Example
 -------
 
-```rust,no_run
+```rust
 use rhai::debugger::*;
 
 let debugger = &mut context.global_runtime_state_mut().debugger;

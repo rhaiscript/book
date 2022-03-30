@@ -14,7 +14,7 @@ the script with an error result.
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.set_max_array_size(500);     // allow arrays only up to 500 items
@@ -37,7 +37,7 @@ up the sizes of all [strings], [arrays], [blobs] and [object maps] contained wit
 make sure that the _aggregate_ sizes of none of these data structures exceed their respective
 maximum size limits (if any).
 
-```rust,no_run
+```rust
 // Small, innocent array...
 let small_array = [42];             // 1-deep... 1 item, 1 array
 

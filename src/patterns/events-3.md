@@ -42,7 +42,7 @@ Global [constants] can still be added to the custom [`Scope`] as normal and used
 Calls to the `init` [function] no longer need to avoid rewinding the [`Scope`] because state
 [variables] are added as properties under the states [object map].
 
-```rust,no_run
+```rust
 impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into<PathBuf>) -> Self {

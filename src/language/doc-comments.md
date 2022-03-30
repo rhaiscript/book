@@ -16,7 +16,7 @@ Doc-comments are only supported under the [`metadata`] feature.
 If [`metadata`] is not active, doc-comments are treated as normal [comments].
 ~~~
 
-```rust,no_run
+```rust
 /// This is a valid one-line doc-comment
 fn foo() {}
 
@@ -44,7 +44,7 @@ let x = 42;
 Long streams of `//////`... and `/*****`... do _NOT_ form doc-comments.
 This is consistent with popular [comment] block styles for C-like languages.
 
-```rust,no_run
+```rust
 ///////////////////////////////  <- this is not a doc-comment
 // This is not a doc-comment //  <- this is not a doc-comment
 ///////////////////////////////  <- this is not a doc-comment

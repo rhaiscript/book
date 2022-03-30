@@ -31,7 +31,7 @@ The module resolver should call `Module::build_index` on the target [module] bef
 Example of a Custom Module Resolver
 ----------------------------------
 
-```rust,no_run
+```rust
 use rhai::{ModuleResolver, Module, Engine, EvalAltResult};
 
 // Define a custom module resolver.

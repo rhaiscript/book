@@ -13,7 +13,7 @@ Any script operation that produces an [object map] with more properties than the
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.set_max_map_size(500);       // allow object maps with only up to 500 properties
@@ -37,7 +37,7 @@ adds up the sizes of all [strings], [arrays] and [object maps] contained within 
 make sure that the _aggregate_ sizes of none of these data structures exceed their respective
 maximum size limits (if any).
 
-```rust,no_run
+```rust
 // Small, innocent object map...
 let small_map: #{ x: 42 };          // 1-deep... 1 item, 1 object map
 

@@ -89,7 +89,7 @@ A variable defined within a [statement block](statements.md) is _local_ to that 
 Use `is_def_var` to detect if a variable is defined.
 ~~~
 
-```rust,no_run
+```rust
 let x;              // ok - value is '()'
 let x = 3;          // ok
 let _x = 42;        // ok
@@ -134,7 +134,7 @@ If a variable accessed by a script is not defined previously within the same scr
 to be provided via an external custom [`Scope`] passed to the [`Engine`] via the
 `Engine::XXX_with_scope` API.
 
-```rust,no_run
+```rust
 let engine = Engine::new();
 
 engine.run("print(answer)")?;       // <- error: variable 'answer' not found
@@ -167,7 +167,7 @@ With [`Engine::set_strict_variables`][options], it is possible to turn on
 When [strict variables] mode is active, accessing a variable not previously defined within
 the same script directly causes a parse error when compiling the script.
 
-```rust,no_run
+```rust
 let x = 42;
 
 print(x);           // prints 42

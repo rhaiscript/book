@@ -99,7 +99,7 @@ operate on object maps.
 Examples
 --------
 
-```rust,no_run
+```rust
 let y = #{              // object map literal with 3 properties
     a: 1,
     bar: "hello",
@@ -183,7 +183,7 @@ for a `Map` will never be found &ndash; instead, the property will be looked up 
 
 Properties should be registered as _methods_ instead:
 
-```rust,no_run
+```rust
 map.len                 // access property 'len', returns '()' if not found
 
 map.len()               // 'len' method - returns the number of properties

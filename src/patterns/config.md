@@ -38,7 +38,7 @@ Implementation
 
 ### Configuration type
 
-```rust,no_run
+```rust
 #[derive(Debug, Clone, Default)]
 struct Config {
     id: String,
@@ -50,7 +50,7 @@ struct Config {
 
 ### Make shared object
 
-```rust,no_run
+```rust
 type SharedConfig = Rc<RefCell<Config>>;
 
 let config = SharedConfig::default();
@@ -58,7 +58,7 @@ let config = SharedConfig::default();
 
 or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
-```rust,no_run
+```rust
 type SharedConfig = Arc<RwLock<Config>>;
 
 type SharedConfig = Arc<Mutex<Config>>;
@@ -72,7 +72,7 @@ function registration via a closure.
 Therefore, it is not possible to use a [plugin module] to achieve this, and each function must be
 registered one after another.
 
-```rust,no_run
+```rust
 // Notice 'move' is used to move the shared configuration object into the closure.
 let cfg = config.clone();
 engine.register_fn("config_set_id", move |id: String| cfg.borrow_mut().id = id);
@@ -113,7 +113,7 @@ engine.register_fn("config_is_set", move |value: String|
 
 ### Configuration script
 
-```rust,no_run
+```rust
 ┌────────────────┐
 │ my_config.rhai │
 └────────────────┘
@@ -130,7 +130,7 @@ if config_contains("hey") || config_is_set("hey") {
 
 ### Load the configuration
 
-```rust,no_run
+```rust
 import "my_config";         // run configuration script without creating a module
 
 let id = config_get_id();
@@ -149,7 +149,7 @@ easy to understand and quick to modify.
 
 For example, the above configuration example may be expressed by this custom syntax:
 
-```rust,no_run
+```rust
 ┌────────────────┐
 │ my_config.rhai │
 └────────────────┘

@@ -37,7 +37,7 @@ scope and no longer exist.
 Examples
 --------
 
-```rust,no_run
+```rust
 let x = 1;                          // a normal variable
 
 x.is_shared() == false;
@@ -71,7 +71,7 @@ that may accompany capturing external [variables] in closures.
 It prints `9`, `9`, `9`, ... `9`, `9`, not `0`, `1`, `2`, ... `8`, `9`, because there is
 ever only _one_ captured [variable], and all ten closures capture the _same_ [variable].
 
-```rust,no_run
+```rust
 let list = [];
 
 for i in 0..10 {
@@ -101,7 +101,7 @@ If a shared value is used as the `this` pointer in a method call to a closure fu
 then the same shared value _must not_ be captured inside that function, or a data race
 will occur and the script will terminate with an error.
 
-```rust,no_run
+```rust
 let x = 20;
 
 x.is_shared() == false;             // 'x' is not shared, so no data race is possible
@@ -126,7 +126,7 @@ On the other hand, since the same thread (i.e. the [`Engine`] thread) that is ho
 is attempting to read it again, this may also [panic](https://doc.rust-lang.org/std/sync/struct.RwLock.html#panics-1)
 depending on the O/S.
 
-```rust,no_run
+```rust
 let x = 20;
 
 let f = |a| this += x + a;          // 'x' is captured in this closure

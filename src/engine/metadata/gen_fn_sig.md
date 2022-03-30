@@ -60,7 +60,7 @@ Since _all_ parameters, as well as the return value, are [`Dynamic`] the types a
 
 is probably defined simply as:
 
-```rust,no_run
+```rust
 /// This is a doc-comment, included in this function's metadata.
 fn foo(x, y, z) {
     ...

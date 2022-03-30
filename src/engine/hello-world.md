@@ -10,7 +10,7 @@ Run a Script
 To get going with Rhai is as simple as creating an instance of the scripting engine `rhai::Engine`
 via `Engine::new`, then calling `Engine::run`.
 
-```rust,no_run
+```rust
 use rhai::{Engine, EvalAltResult};
 
 pub fn main() -> Result<(), Box<EvalAltResult>>
@@ -37,7 +37,7 @@ Get a Return Value
 
 To return a value from the script, use `Engine::eval` instead.
 
-```rust,no_run
+```rust
 use rhai::{Engine, EvalAltResult};
 
 pub fn main() -> Result<(), Box<EvalAltResult>>
@@ -66,7 +66,7 @@ Or evaluate a script file directly with `Engine::run_file` or `Engine::eval_file
 
 Loading and running script files is not available for [`no_std`] or [WASM] builds.
 
-```rust,no_run
+```rust
 let result = engine.eval_file::<i64>("hello_world.rhai".into())?;
 //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
 //                                   a 'PathBuf' is needed
@@ -111,7 +111,7 @@ There are two ways to specify the return type: _turbofish_ notation, or type inf
 
 ### Turbofish
 
-```rust,no_run
+```rust
 let result = engine.eval::<i64>("40 + 2")?;     // return type is i64
 
 result.is::<i64>() == true;
@@ -123,7 +123,7 @@ let result = engine.eval::<String>("40 + 2")?;  // returns an error because the 
 
 ### Type inference
 
-```rust,no_run
+```rust
 let result: i64 = engine.eval("40 + 2")?;       // return type is inferred to be i64
 
 result.is::<i64>() == true;

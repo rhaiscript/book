@@ -10,7 +10,7 @@ The `Engine::register_debugger` API accepts a function that returns the initial 
 
 The state can easily be accessed during a [debugger] callback.
 
-```rust,no_run
+```rust
 engine.register_debugger(
     || {
         // Say, use an object map for the debugger state

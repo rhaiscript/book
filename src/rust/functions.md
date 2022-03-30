@@ -17,7 +17,7 @@ or different numbers (i.e. _arity_).
 New definitions _overwrite_ previous definitions of the same name, same arity and same parameter types.
 ```
 
-```rust,no_run
+```rust
 use rhai::{Dynamic, Engine, ImmutableString};
 
 // Normal function that returns a standard type
@@ -69,7 +69,7 @@ engine.run(r#"log("value", 42)"#)?;     // prints "value = 42"
 
 It is common for short functions to be registered via a _closure_.
 
-```rust,no_run
+```rust
 engine.register_fn("foo", |x: i64, y: bool| ...);
 ```
 ~~~
@@ -80,7 +80,7 @@ To create a [`Dynamic`] value, use `Dynamic::from`.
 
 [Standard types] in Rhai can also use `.into()`.
 
-```rust,no_run
+```rust
 use rhai::Dynamic;
 
 let obj = TestStruct::new();

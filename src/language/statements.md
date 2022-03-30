@@ -10,7 +10,7 @@ except for the _last_ statement in a _block_ (enclosed by `{` ... `}` pairs) whe
 Semicolons can also be omitted for statement types that always end in a block &ndash; for example
 the [`if`], [`while`], [`for`],  [`loop`] and [`switch`] statements.
 
-```rust,no_run
+```rust
 let a = 42;             // normal assignment statement
 let a = foo(42);        // normal function call statement
 foo < 42;               // normal expression as statement
@@ -48,7 +48,7 @@ A statement block forms a _closed_ scope.
 Any [variable] and/or [constant] defined within the block are removed outside the block, so are
 [modules] [imported][`import`] within the block.
 
-```rust,no_run
+```rust
 let x = 42;
 let y = 18;
 

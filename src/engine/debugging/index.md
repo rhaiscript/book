@@ -38,7 +38,7 @@ using a [raw `Engine`]) provides runtime information for debugging purposes.
 | ------------ | ------------ | :---------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `back_trace` | _none_       | [`no_function`], [`no_index`] | returns an [array] of [object maps] or [strings], each containing one level of [function] call;</br>returns an empty [array] if no [debugger] is registered |
 
-```rust,no_run
+```rust
 // This recursive function prints its own call stack during each run
 fn foo(x) {
     print(back_trace());        // prints the current call stack

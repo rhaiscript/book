@@ -54,7 +54,7 @@ Examples
 
 Assume the following four scripts, one for each layer:
 
-```rust,no_run
+```rust
 ┌────────────────┐
 │ corporate.rhai │
 └────────────────┘
@@ -101,7 +101,7 @@ fn foo(x) { x + 42 }
 
 Load and combine them sequentially:
 
-```rust,no_run
+```rust
 let engine = Engine::new();
 
 // Compile the baseline layer.

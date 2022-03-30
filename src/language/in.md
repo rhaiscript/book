@@ -11,7 +11,7 @@ The `in` operator is simply syntactic sugar for a call to the `contains` functio
 The `in` operator is used to check for _containment_ &ndash; i.e. whether a particular collection
 data type _contains_ a particular item.
 
-```rust,no_run
+```rust
 42 in array;
 
 array.contains(42);     // <- the above is equivalent to this
@@ -32,7 +32,7 @@ Built-in Support for Standard Data Types
 Examples
 --------
 
-```rust,no_run
+```rust
 let array = [1, "abc", 42, ()];
 
 42 in array == true;                // check array for item
@@ -66,7 +66,7 @@ For a [custom type], `==` defaults to `false` when comparing it with a value of 
 See the section on [_Logic Operators_](logic.md) for more details.
 ~~~
 
-```rust,no_run
+```rust
 let ts = new_ts();                  // assume 'new_ts' returns a custom type
 
 let array = [1, 2, 3, ts, 42, 999];
@@ -83,7 +83,7 @@ Custom Implementation of `contains`
 
 The `in` operator maps directly to a call to a function `contains` with the two operands switched.
 
-```rust,no_run
+```rust
 // This expression...
 item in container
 
@@ -97,7 +97,7 @@ container.contains(item)
 Support for the `in` operator can be easily extended to other types by registering a custom binary
 function named `contains` with the correct parameter types.
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.register_type::<TestStruct>()

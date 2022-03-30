@@ -12,7 +12,7 @@ For debug builds, these limits are set further downwards to 32 and 16 respective
 That is because it is possible to overflow the [`Engine`]'s stack when it tries to
 recursively parse an extremely deeply-nested code stream.
 
-```rust,no_run
+```rust
 // The following, if long enough, can easily cause stack overflow during parsing.
 let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));
 ```
@@ -26,7 +26,7 @@ The malicious [`AST`] will not be able to get past parsing in the first place.
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.set_max_expr_depths(50, 5);  // allow nesting up to 50 layers of expressions/statements
@@ -48,7 +48,7 @@ _[Functions]_ are placed under stricter limits because of the multiplicative eff
 A [function] can effectively call itself while deep inside an expression chain within the [function]
 body, thereby overflowing the stack even when the level of recursion is within limit.
 
-```rust,no_run
+```rust
 fn deep_calc(a, n) {
     (a+(a+(a+(a+(a+(a+(a+(a+(a+ ... (a+deep_calc(a,n+1)) ... )))))))))
     //                                 ^^^^^^^^^^^^^^^^ recursive call!

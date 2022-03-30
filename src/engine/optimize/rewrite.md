@@ -14,7 +14,7 @@ Usually, a _compound assignment_ (e.g. `+=` for append) takes a mutable first pa
 The script optimizer rewrites normal assignments into _compound assignments_ wherever possible in
 order to avoid unnecessary cloning.
 
-```rust,no_run
+```rust
 let big = create_some_very_big_type();
 
 big = big + 1;
@@ -34,7 +34,7 @@ Only _simple variable references_ are optimized.
 No [_common sub-expression elimination_](https://en.wikipedia.org/wiki/Common_subexpression_elimination)
 is performed by Rhai.
 
-```rust,no_run
+```rust
 x = x + 1;          // <- this statement...
 
 x += 1;             // <- ... is rewritten to this

@@ -17,7 +17,7 @@ Rhai attempts to eliminate _dead code_.
 Example is an pure expression by itself as a statement (allowed in Rhai).
 The result of the expression is calculated then immediately discarded and not used.
 
-```rust,no_run
+```rust
 {
     let x = 999;            // NOT eliminated: variable may be used later on (perhaps even an 'eval')
     
@@ -42,7 +42,7 @@ The result of the expression is calculated then immediately discarded and not us
 
 The above script optimizes to:
 
-```rust,no_run
+```rust
 {
     let x = 999;
     foo(42);

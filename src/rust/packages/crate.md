@@ -33,7 +33,7 @@ rhai = "{{version}}"    # assuming {{version}} is the latest version
 
 `lib.rs`:
 
-```rust,no_run
+```rust
 use rhai::def_package;
 use rhai::plugin::*;
 

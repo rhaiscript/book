@@ -16,7 +16,7 @@ each other).
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
-```rust,no_run
+```rust
 let mut engine = Engine::new();
 
 engine.set_max_modules(5);      // allow loading only up to 5 modules

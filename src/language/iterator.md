@@ -19,7 +19,7 @@ that implements `IntoIterator`.
 
 With a type iterator registered, the [custom type] can be iterated through.
 
-```rust,no_run
+```rust
 // Custom type
 #[derive(Debug, Clone)]
 struct TestStruct { fields: Vec<i64> }

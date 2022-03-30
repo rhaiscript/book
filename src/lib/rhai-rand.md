@@ -30,7 +30,7 @@ rhai-rand = "0.1"       # use rhai-rand crate
 Load Package into [`Engine`]
 ---------------------------
 
-```rust,no_run
+```rust
 use rhai::Engine;
 use rhai::packages::Package;    // needed for 'as_shared_module'
 use rhai_rand::RandomPackage;

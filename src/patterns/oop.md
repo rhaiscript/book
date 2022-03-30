@@ -47,7 +47,7 @@ Closures also _[capture][automatic currying]_ variables from the defining enviro
 very common language feature.  Capturing is accomplished via a feature called _[automatic currying]_
 and can be turned off via the [`no_closure`] feature.
 
-```rust,no_run
+```rust
 let factor = 1;
 
 // Define the object
@@ -80,7 +80,7 @@ implementations from a _base class_, as per OOP lingo.
 
 Do not use the `mixin` method because it _overwrites_ existing fields.
 
-```rust,no_run
+```rust
 // Define base class
 let BaseClass = #{
     factor: 1,
@@ -129,7 +129,7 @@ _prototype_ object.
 It is possible to simulate this form of inheritance using [object maps], leveraging the fact that,
 in Rhai, all values are cloned and there are no pointers. This significantly simplifies coding logic.
 
-```rust,no_run
+```rust
 // Define prototype 'class'
 
 const PrototypeClass = #{

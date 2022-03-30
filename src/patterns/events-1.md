@@ -18,7 +18,7 @@ Initialize Handler Instance with `Engine::call_fn_raw`
 Use `Engine::call_fn_raw` instead of `Engine::call_fn` in order to retain new [variables] defined
 inside the custom [`Scope`] when running the `init` function.
 
-```rust,no_run
+```rust
 impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into<PathBuf>) -> Self {
@@ -126,7 +126,7 @@ When there are a large number of state [variables], this style also makes it eas
 [variables] defined in user [functions] to accidentally _[shadow]_ a state [variable] with a
 [variable] that just happens to be the same name.
 
-```rust,no_run
+```rust
 // 'start' event handler
 fn start(data) {
     let bool_state = false; // <- oops! bad variable name!

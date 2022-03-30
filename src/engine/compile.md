@@ -8,7 +8,7 @@ To repeatedly evaluate a script, _compile_ it first with `Engine::compile` into 
 
 `Engine::eval_ast_XXX` and `Engine::run_ast_XXX` evaluate a pre-compiled `AST`.
 
-```rust,no_run
+```rust
 // Compile to an AST and store it for later evaluations
 let ast = engine.compile("40 + 2")?;
 
@@ -24,7 +24,7 @@ for _ in 0..42 {
 Compiling script files is also supported via `Engine::compile_file`
 (not available for [`no_std`] or [WASM] builds).
 
-```rust,no_run
+```rust
 let ast = engine.compile_file("hello_world.rhai".into())?;
 ```
 ~~~

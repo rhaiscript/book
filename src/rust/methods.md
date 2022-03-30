@@ -12,7 +12,7 @@ Method-Call Style vs. Function-Call Style
 > _object_ `.` _function_ `(` _parameter_`,` ... `,` _parameter_`)`
 
 ~~~admonish warning.small "_method-call_ style not supported under [`no_object`]"
-```rust,no_run
+```rust
 // Below is a syntax error under 'no_object'.
 engine.run("let x = [42]; x.clear();")?;
                         // ^ cannot call method-style
@@ -33,7 +33,7 @@ This design is similar to Rust.
 Internally, methods on a [custom type] is _the same_ as a function taking a `&mut` first argument of
 the object's type. Therefore, methods and functions can be called interchangeably.
 
-```rust,no_run
+```rust
 impl TestStruct {
     fn foo(&mut self) -> i64 {
         self.field
@@ -69,7 +69,7 @@ may end up not muting the object afterall &mdash; see the example below.
 Custom types, [properties][getters/setters], [indexers] and methods are disabled under the
 [`no_object`] feature.
 
-```rust,no_run
+```rust
 let a = new_ts();   // constructor function
 a.field = 500;      // property setter
 a.update();         // method call, 'a' can be modified
@@ -123,7 +123,7 @@ copies of argument values), this may result in a significant performance boost.
 For primary types that are cheap to clone (e.g. those that implement `Copy`), including `ImmutableString`,
 this is not necessary.
 
-```rust,no_run
+```rust
 // This is a type that is very expensive to clone.
 #[derive(Debug, Clone)]
 struct VeryComplexType { ... }
@@ -165,7 +165,7 @@ value that is mutable &ndash; the first argument of a method.  All other argumen
 It is possible, however, to create a data race with a _shared_ value, when the same value is
 _captured_ in a [closure] and then used again as the _object_ of calling that [closure]!
 
-```rust,no_run
+```rust
 let x = 20;
 
 x.is_shared() == false;             // 'x' is not shared, so no data race is possible

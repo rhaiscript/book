@@ -31,7 +31,7 @@ which mandates cloning it.
 
 Using [`ImmutableString`] or `&str` is much more efficient.
 
-```rust,no_run
+```rust
 fn get_len1(s: String) -> i64 {             // BAD!!! Very inefficient!!!
     s.len() as i64
 }
@@ -59,7 +59,7 @@ which has type `ImmutableString`.
 
 In fact, `&mut String` is treated as an opaque [custom type].
 
-```rust,no_run
+```rust
 fn bad(s: &mut String) { ... }              // '&mut String' will not match string values
 
 fn good(s: &mut ImmutableString) { ... }

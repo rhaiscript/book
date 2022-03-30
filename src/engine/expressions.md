@@ -14,7 +14,7 @@ evaluate _expressions_.
 In these cases, use the `Engine::compile_expression` and `Engine::eval_expression` methods or their
 `_with_scope` variants.
 
-```rust,no_run
+```rust
 let result: i64 = engine.eval_expression("2 + (10 + 10) * 2")?;
 
 let result: Dynamic = engine.eval_expression("get_value(42)")?;
@@ -39,7 +39,7 @@ When evaluating _expressions_, no full-blown statement (e.g. [`if`], [`while`], 
 The is true even for [`if` expressions]({{rootUrl}}/language/if-expression.md), [`switch` expressions]({{rootUrl}}/language/switch-expression.md),
 [statement expressions]({{rootUrl}}/language/statement-expression.md) and [anonymous functions]/[closures].
 
-~~~rust,no_run
+~~~rust
 // The following are all syntax errors because the script
 // is not a strict expression.
 

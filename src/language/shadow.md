@@ -7,7 +7,7 @@ In Rhai, new [variables] automatically _shadow_ existing ones of the same name. 
 
 This behavior is consistent with Rust.
 
-```rust,no_run
+```rust
 let x = 42;
 let y = 123;
 
@@ -43,7 +43,7 @@ print(y);           // prints 123 - 'y' is not shadowed
 
 Set [`Engine::set_allow_shadowing`][options] to `false` to turn [variables] shadowing off.
 
-```rust,no_run
+```rust
 let x = 42;
 
 let x = 123;        // <- syntax error: variable 'x' already defined

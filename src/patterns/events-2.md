@@ -24,7 +24,7 @@ State variables can be freely created by _all_ [functions] (not just the `init` 
 
 The event handler type needs to hold this [object map] instead of a custom [`Scope`].
 
-```rust,no_run
+```rust
 use rhai::{Engine, Scope, Dynamic, AST};
 
 // Event handler
@@ -47,7 +47,7 @@ Bind Object Map to `this` Pointer
 Initialization can simply be done via binding the [object map] containing global states to the
 `this` pointer.
 
-```rust,no_run
+```rust
 impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into<PathBuf>) -> Self {
@@ -88,7 +88,7 @@ Bind `this` Pointer During Events Handling
 Events handling should also use `Engine::call_fn_raw` to bind the [object map] containing global
 states to the `this` pointer.
 
-```rust,no_run
+```rust
 pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
     let engine = &self.engine;
     let scope = &mut self.scope;

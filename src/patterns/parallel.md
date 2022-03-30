@@ -51,7 +51,7 @@ Procedure
 Examples
 --------
 
-```rust,no_run
+```rust
 use rhai::def_package;
 use rhai::packages::{Package, StandardPackage};
 

@@ -20,7 +20,7 @@ When the curried [function pointer] is called, the curried arguments are inserte
 
 The actual call arguments should be reduced by the number of curried arguments.
 
-```rust,no_run
+```rust
 fn mul(x, y) {                  // function with two parameters
     x * y
 }

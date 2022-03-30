@@ -39,7 +39,7 @@ where:
 Example
 -------
 
-```rust,no_run
+```rust
 use rhai::{Engine, FLOAT, Token};
 
 let mut engine = Engine::new();

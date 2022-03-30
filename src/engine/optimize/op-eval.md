@@ -54,7 +54,7 @@ Pre-Evaluation of Constant Expressions
 Because of the eager evaluation of [operators][built-in operators] for [standard types], many
 [constant] expressions will be evaluated and replaced by the result.
 
-```rust,no_run
+```rust
 let x = (1+2) * 3 - 4/5 % 6;    // will be replaced by 'let x = 9'
 
 let y = (1 > 2) || (3 <= 4);    // will be replaced by 'let y = true'
@@ -63,7 +63,7 @@ let y = (1 > 2) || (3 <= 4);    // will be replaced by 'let y = true'
 For operators that are not optimized away due to one of the above reasons, the function calls are
 simply left behind.
 
-```rust,no_run
+```rust
 // Assume 'new_state' returns some custom type that is NOT one of the standard types.
 // Also assume that the '==' operator is defined for that custom type.
 const DECISION_1 = new_state(1);

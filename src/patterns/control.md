@@ -56,7 +56,7 @@ For a complex API involving lots of functions, or an API that has a clear object
 
 Assume that a system provides the following functional API:
 
-```rust,no_run
+```rust
 struct EnergizerBunny;
 
 impl EnergizerBunny {
@@ -71,13 +71,13 @@ impl EnergizerBunny {
 
 ### Wrap API in shared object
 
-```rust,no_run
+```rust
 pub type SharedBunny = Rc<RefCell<EnergizerBunny>>;
 ```
 
 or in multi-threaded environments with the [`sync`] feature, use one of the following:
 
-```rust,no_run
+```rust
 pub type SharedBunny = Arc<RwLock<EnergizerBunny>>;
 
 pub type SharedBunny = Arc<Mutex<EnergizerBunny>>;
@@ -91,7 +91,7 @@ move it into each function registration via a closure.
 Therefore, it is not possible to use a [plugin module] to achieve this, and each function must be
 registered one after another.
 
-```rust,no_run
+```rust
 // Notice 'move' is used to move the shared API object into the closure.
 let b = bunny.clone();
 engine.register_fn("bunny_power", move |on: bool| {
@@ -138,7 +138,7 @@ engine.register_result_fn("bunny_set_speed", move |speed: i64|
 
 ### Use the API
 
-```rust,no_run
+```rust
 if !bunny_is_going() { bunny_power(true); }
 
 if bunny_get_speed() > 50 { bunny_set_speed(50); }

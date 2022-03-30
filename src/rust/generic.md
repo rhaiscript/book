@@ -19,7 +19,7 @@ support generics but Rhai does support _[function overloading]_.
 The example below shows how to register multiple functions (or, in this case, multiple overloaded
 versions of the same function) under the same name.
 
-```rust,no_run
+```rust
 use std::fmt::Display;
 
 use rhai::Engine;

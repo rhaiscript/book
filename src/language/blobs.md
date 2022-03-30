@@ -55,7 +55,7 @@ Create a BLOB
 The function `blob` allows creating an empty BLOB, optionally filling it to a required size with a
 particular value (default zero).
 
-```rust,no_run
+```rust
 let x = blob();             // empty BLOB
 
 let x = blob(10);           // BLOB with ten zeros
@@ -70,7 +70,7 @@ write eight bytes at a time (four under [`only_i32`]) in big-endian byte order.
 
 If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.
 
-~~~rust,no_run
+~~~rust
 let buf = blob(12, 0);      // BLOB with 12x zeros
 
 // Write eight bytes at a time, in big-endian order
@@ -105,7 +105,7 @@ Use the `write_ascii` method to write ASCII [strings] into any specific [range] 
 
 The following is an example of a building a 16-byte command to send to an embedded device.
 
-```rust,no_run
+```rust
 // Assume the following 16-byte command for an embedded device:
 // ┌─────────┬───────────────┬──────────────────────────────────┬───────┐
 // │    0    │       1       │              2-13                │ 14-15 │

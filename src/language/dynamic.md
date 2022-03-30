@@ -54,7 +54,7 @@ The `cast` method then converts the value into a specific, known type.
 
 Use `clone_cast` to clone a reference to `Dynamic`.
 
-```rust,no_run
+```rust
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0].clone();                 // an element in an 'Array' is 'Dynamic'
 
@@ -79,7 +79,7 @@ which can be `match`-ed against.
 This is a very simple and direct way to act on a `Dynamic` value based on the actual type of
 the data value.
 
-```rust,no_run
+```rust
 let list: Array = engine.eval("...")?;      // return type is 'Array'
 let item = list[0];                         // an element in an 'Array' is 'Dynamic'
 

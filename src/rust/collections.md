@@ -44,7 +44,7 @@ A [plugin module] makes defining an entire API for a [custom type] a snap.
 Example
 -------
 
-```rust,no_run
+```rust
 type MyBag = HashSet<MyItem>;
 
 engine

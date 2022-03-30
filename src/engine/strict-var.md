@@ -16,7 +16,7 @@ which requires that:
 Within _Strict Variables_ mode, any attempt to access a [variable] or [module] before
 definition/[import][`import`] results in a parse error.
 
-```rust,no_run
+```rust
 let x = 42;
 
 let y = x * z;          // <- parse error under strict variables mode:
