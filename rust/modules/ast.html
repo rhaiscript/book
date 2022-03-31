@@ -44,7 +44,6 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../../stylesheets/rhai.min.css">
-        <link rel="stylesheet" href="../../stylesheets/mdbook-admonish.css">
 
     </head>
     <body>
@@ -167,6 +166,16 @@
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <div class="admonition info side wide">
 <div class="admonition-title">
+<p>Encapsulated environment</p>
+</div>
+<div>
+<p><code>Module::eval_ast_as_new</code> encapsulates the entire <a href="/book/engine/compile.html"><code>AST</code></a> into each function call, merging the
+<a href="/book/language/fn-namespaces.html">module namespace</a> with the <a href="/book/language/fn-namespaces.html">global namespace</a>.</p>
+<p>Therefore, <a href="/book/language/functions.html">functions</a> defined within the same <a href="/book/rust/modules/index.html">module</a> script can cross-call each other.</p>
+</div>
+</div>
+<div class="admonition info side wide">
+<div class="admonition-title">
 <p>See also</p>
 </div>
 <div>
@@ -190,16 +199,6 @@ a Rhai script for this purpose as well as to control which <a href="/book/langua
 <p>imported <a href="/book/rust/modules/index.html">modules</a> that remain in the <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
-<div class="admonition info small">
-<div class="admonition-title">
-<p>Encapsulated environment</p>
-</div>
-<div>
-<p><code>Module::eval_ast_as_new</code> encapsulates the entire <code>AST</code> into each function call, merging the
-<a href="/book/language/fn-namespaces.html">module namespace</a> with the <a href="/book/language/fn-namespaces.html">global namespace</a>.</p>
-<p>Therefore, <a href="/book/language/functions.html">functions</a> defined within the same <a href="/book/rust/modules/index.html">module</a> script can cross-call each other.</p>
-</div>
-</div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <p>Don’t forget the <a href="/book/language/modules/export.html"><code>export</code></a> statement, otherwise there will be no <a href="/book/language/variables.html">variables</a> exposed by the
 <a href="/book/rust/modules/index.html">module</a> other than non-<a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> (unless that’s intentional).</p>

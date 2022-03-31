@@ -44,7 +44,6 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../stylesheets/rhai.min.css">
-        <link rel="stylesheet" href="../stylesheets/mdbook-admonish.css">
 
     </head>
     <body>
@@ -217,15 +216,6 @@ fn main() {
 }
 </code></pre>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
-<div class="admonition bug side wide">
-<div class="admonition-title">
-<p>Error</p>
-</div>
-<div>
-<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
-runtime error.</p>
-</div>
-</div>
 <p>Some functions are <em>pure</em> – i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as <code>&amp;mut</code> (e.g. for a method function).</p>
 <p>This is often done to avoid expensive cloning for methods or <a href="/book/rust/getters-setters.html">property getters</a>
@@ -240,9 +230,17 @@ that return information about a <a href="/book/rust/custom.html">custom type</a>
 There is no checking.</p>
 </div>
 </div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error: Constants Not OK for non-pure</p>
+</div>
+<div>
+<p>Non-pure functions raise a runtime error when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <div class="admonition tip small">
 <div class="admonition-title">
-<p>Tip: Constants OK</p>
+<p>Tip: Constants OK for pure</p>
 </div>
 <div>
 <p>Pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
@@ -287,7 +285,7 @@ fn main() {
 </code></pre>
 <div class="admonition bug small">
 <div class="admonition-title">
-<p>Error</p>
+<p>Missing <code>#[rhai_fn(return_raw)]</code></p>
 </div>
 <div>
 <p>A compilation error — usually something that says <code>Result</code> does not implement

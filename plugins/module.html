@@ -44,7 +44,6 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../stylesheets/rhai.min.css">
-        <link rel="stylesheet" href="../stylesheets/mdbook-admonish.css">
 
     </head>
     <body>
@@ -457,7 +456,7 @@ mod my_module_alternate {
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 </code></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
-<div class="admonition tip side">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
@@ -585,15 +584,6 @@ mod my_module {
 <tr><td><code>index_get</code></td><td style="text-align: center"><a href="/book/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
 </tbody></table>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
-<div class="admonition bug side wide">
-<div class="admonition-title">
-<p>Error</p>
-</div>
-<div>
-<p>Non-pure functions, when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
-runtime error.</p>
-</div>
-</div>
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
 to mark it as  <em>pure</em> – i.e. it does not modify the <code>&amp;mut</code> parameter.</p>
 <p>This is often done to avoid expensive cloning for methods or <a href="/book/rust/getters-setters.html">property getters</a>
@@ -607,9 +597,17 @@ that return information about a <a href="/book/rust/custom.html">custom type</a>
 There is no checking.</p>
 </div>
 </div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error: Constants Not OK for non-pure</p>
+</div>
+<div>
+<p>Non-pure functions raise a runtime error when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <div class="admonition tip small">
 <div class="admonition-title">
-<p>Tip: Constants OK</p>
+<p>Tip: Constants OK for pure</p>
 </div>
 <div>
 <p>Pure functions can be passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
@@ -680,7 +678,7 @@ mod my_module {
 </code></pre>
 <div class="admonition bug small">
 <div class="admonition-title">
-<p>Error</p>
+<p>Missing <code>#[rhai_fn(return_raw)]</code></p>
 </div>
 <div>
 <p>A compilation error — usually something that says <code>Result</code> does not implement

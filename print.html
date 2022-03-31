@@ -45,7 +45,6 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="stylesheets/rhai.min.css">
-        <link rel="stylesheet" href="stylesheets/mdbook-admonish.css">
 
     </head>
     <body>
@@ -499,6 +498,9 @@ terms or conditions.</p>
 </li>
 <li>
 <p><a href="https://discord.gg/HquqbYFcZ9">Discord Chat</a> – Rhai channel</p>
+</li>
+<li>
+<p><a href="https://rhai.discourse.group/">Discussion Forum</a> – Rhai Forum</p>
 </li>
 <li>
 <p><a href="https://rhaiscript.zulipchat.com">Zulip Chat</a> – Rhai organization</p>
@@ -1888,9 +1890,9 @@ which should be hit rarely.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dynamic-parameters-in-rust-functions"><a class="header" href="#dynamic-parameters-in-rust-functions"><code>Dynamic</code> Parameters in Rust Functions</a></h1>
 <p>It is possible for Rust functions to contain parameters of type <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a>.</p>
 <p>A <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
-<div class="admonition example small">
+<div class="admonition question small">
 <div class="admonition-title">
-<p>Example</p>
+<p>Trivia</p>
 </div>
 <div>
 <p>The <code>push</code> method of an <a href="rust//book/language/arrays.html">array</a> is implemented as follows (minus code for <a href="rust//book/safety/index.html">safety</a> protection
@@ -2536,7 +2538,7 @@ level of indirection, but for all other purposes there is no difference.</p>
 </div>
 </div>
 <h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
-<div class="admonition tip side wide-narrow">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Working with enums</p>
 </div>
@@ -2628,7 +2630,7 @@ let item = new_ts();        // construct a new 'TestStruct'
 item in array;              // 'in' operator uses '=='
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="custom-type-property-getters-and-setters"><a class="header" href="#custom-type-property-getters-and-setters">Custom Type Property Getters and Setters</a></h1>
-<div class="admonition warning side wide-narrow">
+<div class="admonition warning side wide">
 <div class="admonition-title">
 <p>Cannot override object maps</p>
 </div>
@@ -3002,7 +3004,7 @@ engine.run(r#&quot;let ts = new_ts(); print(ts[&quot;hello&quot;]);&quot;#);
 </blockquote>
 <div class="admonition warning small">
 <div class="admonition-title">
-<p><em>method-call</em> style not supported under <a href="rust//book/start/features.html"><code>no_object</code></a></p>
+<p><em>Method-call</em> style not supported under <a href="rust//book/start/features.html"><code>no_object</code></a></p>
 </div>
 <div>
 <pre><code class="language-rust">// Below is a syntax error under 'no_object'.
@@ -3016,7 +3018,7 @@ engine.run(&quot;let x = [42]; x.clear();&quot;)?;
 <p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
-<div class="admonition note side wide">
+<div class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>
 </div>
@@ -3025,7 +3027,8 @@ engine.run(&quot;let x = [42]; x.clear();&quot;)?;
 </div>
 </div>
 <p>Internally, methods on a <a href="rust//book/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
-the object’s type. Therefore, methods and functions can be called interchangeably.</p>
+the object’s type.</p>
+<p>Therefore, methods and functions can be called interchangeably.</p>
 <pre><code class="language-rust">impl TestStruct {
     fn foo(&amp;mut self) -&gt; i64 {
         self.field
@@ -3270,6 +3273,16 @@ change from time to time.</p>
 <h2 id="moduleeval_ast_as_new"><a class="header" href="#moduleeval_ast_as_new"><code>Module::eval_ast_as_new</code></a></h2>
 <div class="admonition info side wide">
 <div class="admonition-title">
+<p>Encapsulated environment</p>
+</div>
+<div>
+<p><code>Module::eval_ast_as_new</code> encapsulates the entire <a href="rust/modules//book/engine/compile.html"><code>AST</code></a> into each function call, merging the
+<a href="rust/modules//book/language/fn-namespaces.html">module namespace</a> with the <a href="rust/modules//book/language/fn-namespaces.html">global namespace</a>.</p>
+<p>Therefore, <a href="rust/modules//book/language/functions.html">functions</a> defined within the same <a href="rust/modules//book/rust/modules/index.html">module</a> script can cross-call each other.</p>
+</div>
+</div>
+<div class="admonition info side wide">
+<div class="admonition-title">
 <p>See also</p>
 </div>
 <div>
@@ -3293,16 +3306,6 @@ a Rhai script for this purpose as well as to control which <a href="rust/modules
 <p>imported <a href="rust/modules//book/rust/modules/index.html">modules</a> that remain in the <a href="rust/modules//book/engine/scope.html"><code>Scope</code></a> at the end of a script run become sub-modules.</p>
 </li>
 </ul>
-<div class="admonition info small">
-<div class="admonition-title">
-<p>Encapsulated environment</p>
-</div>
-<div>
-<p><code>Module::eval_ast_as_new</code> encapsulates the entire <code>AST</code> into each function call, merging the
-<a href="rust/modules//book/language/fn-namespaces.html">module namespace</a> with the <a href="rust/modules//book/language/fn-namespaces.html">global namespace</a>.</p>
-<p>Therefore, <a href="rust/modules//book/language/functions.html">functions</a> defined within the same <a href="rust/modules//book/rust/modules/index.html">module</a> script can cross-call each other.</p>
-</div>
-</div>
 <h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
 <p>Don’t forget the <a href="rust/modules//book/language/modules/export.html"><code>export</code></a> statement, otherwise there will be no <a href="rust/modules//book/language/variables.html">variables</a> exposed by the
 <a href="rust/modules//book/rust/modules/index.html">module</a> other than non-<a href="rust/modules//book/language/modules/export.html"><code>private</code></a> <a href="rust/modules//book/language/functions.html">functions</a> (unless that’s intentional).</p>
@@ -3523,9 +3526,9 @@ r#&quot;
 &quot;#)? == 42;
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="module-resolvers"><a class="header" href="#module-resolvers">Module Resolvers</a></h1>
-<div class="admonition info side wide">
+<div class="admonition info side">
 <div class="admonition-title">
-<p><code>import</code> statements</p>
+<p><code>import</code></p>
 </div>
 <div>
 <p>See the section on <a href="rust/modules//book/language/modules/import.html"><em>Importing Modules</em></a> for more details.</p>
@@ -3533,13 +3536,31 @@ r#&quot;
 </div>
 <p>When encountering an <a href="rust/modules//book/language/modules/import.html"><code>import</code></a> statement, Rhai attempts to <em>resolve</em> the <a href="rust/modules//book/rust/modules/index.html">module</a> based on the path string.</p>
 <p><em>Module Resolvers</em> are service types that implement the <a href="rust/modules//book/rust/traits.html"><code>ModuleResolver</code></a> trait.</p>
+<h2 id="set-into-engine"><a class="header" href="#set-into-engine">Set into <code>Engine</code></a></h2>
+<p>An <a href="rust/modules//book/engine/hello-world.html"><code>Engine</code></a>’s module resolver is set via a call to <code>Engine::set_module_resolver</code>:</p>
+<pre><code class="language-rust">use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
+
+// Create a module resolver
+let resolver = StaticModuleResolver::new();
+
+// Register functions into 'resolver'...
+
+// Use the module resolver
+engine.set_module_resolver(resolver);
+
+// Effectively disable 'import' statements by setting module resolver to
+// the 'DummyModuleResolver' which acts as... well... a dummy.
+engine.set_module_resolver(DummyModuleResolver::new());
+</code></pre>
 <h2 id="built-in-module-resolvers"><a class="header" href="#built-in-module-resolvers">Built-in Module Resolvers</a></h2>
 <p>There are a number of standard resolvers built into Rhai, the default being the <code>FileModuleResolver</code>
 which simply loads a script file based on the path (with <code>.rhai</code> extension attached) and execute it
 to form a <a href="rust/modules//book/rust/modules/index.html">module</a>.</p>
 <p>Built-in <a href="rust/modules//book/rust/modules/index.html">module</a> resolvers are grouped under the <code>rhai::module_resolvers</code>
 <a href="rust/modules//book/language/fn-namespaces.html">module namespace</a>.</p>
-<h2 id="filemoduleresolver-default"><a class="header" href="#filemoduleresolver-default"><code>FileModuleResolver</code> (default)</a></h2>
+<h2 id="dummyresolverscollection-default-for-no-std"><a class="header" href="#dummyresolverscollection-default-for-no-std"><code>DummyResolversCollection</code> (default for <code>no-std</code>)</a></h2>
+<p>This module resolver acts as a <em>dummy</em> and fails all module resolution calls.</p>
+<h2 id="filemoduleresolver-normal-default"><a class="header" href="#filemoduleresolver-normal-default"><code>FileModuleResolver</code> (normal default)</a></h2>
 <p>The <em>default</em> <a href="rust/modules//book/rust/modules/index.html">module</a> resolution service, not available for <a href="rust/modules//book/start/features.html"><code>no_std</code></a> or <a href="rust/modules//book/start/builds/wasm.html">WASM</a> builds.
 Loads a script file (based off the current directory or a specified one) with <code>.rhai</code> extension.</p>
 <h3 id="function-namespace"><a class="header" href="#function-namespace">Function namespace</a></h3>
@@ -3552,7 +3573,7 @@ which are also available to functions defined within the same script file.</p>
 <p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
 <div class="admonition tip small">
 <div class="admonition-title">
-<p>Tip: No base directory</p>
+<p>Tip: Default base directory</p>
 </div>
 <div>
 <p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then relative paths are
@@ -3674,7 +3695,8 @@ m::greet();                         // prints &quot;hello! from module!&quot;
 <p>Tip: Typical usage</p>
 </div>
 <div>
-<p>Often used in <a href="rust/modules//book/start/features.html"><code>no_std</code></a> or embedded environments without a file system.</p>
+<p><code>StaticModuleResolver</code> is often used in <a href="rust/modules//book/start/features.html"><code>no_std</code></a> or embedded environments
+without a file system.</p>
 </div>
 </div>
 <p>Loads <a href="rust/modules//book/rust/modules/index.html">modules</a> that are statically added.</p>
@@ -3690,24 +3712,6 @@ resolver.insert(&quot;my_module&quot;, module);
 <p>A collection of module resolvers.</p>
 <p><a href="rust/modules//book/rust/modules/index.html">Modules</a> are resolved from each resolver in sequential order.</p>
 <p>This is useful when multiple types of <a href="rust/modules//book/rust/modules/index.html">modules</a> are needed simultaneously.</p>
-<h2 id="dummyresolverscollection"><a class="header" href="#dummyresolverscollection"><code>DummyResolversCollection</code></a></h2>
-<p>This module resolver acts as a <em>dummy</em> and always fails all module resolution calls.</p>
-<h2 id="set-into-engine"><a class="header" href="#set-into-engine">Set into <code>Engine</code></a></h2>
-<p>An <a href="rust/modules//book/engine/hello-world.html"><code>Engine</code></a>’s module resolver is set via a call to <code>Engine::set_module_resolver</code>:</p>
-<pre><code class="language-rust">use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
-
-// Create a module resolver
-let resolver = StaticModuleResolver::new();
-
-// Register functions into 'resolver'...
-
-// Use the module resolver
-engine.set_module_resolver(resolver);
-
-// Effectively disable 'import' statements by setting module resolver to
-// the 'DummyModuleResolver' which acts as... well... a dummy.
-engine.set_module_resolver(DummyModuleResolver::new());
-</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="implement-a-custom-module-resolver"><a class="header" href="#implement-a-custom-module-resolver">Implement a Custom Module Resolver</a></h1>
 <p>For many applications in which Rhai is embedded, it is necessary to customize the way that modules
 are resolved.  For instance, modules may need to be loaded from script texts stored in a database,
@@ -4166,7 +4170,7 @@ mod my_module_alternate {
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 </code></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
-<div class="admonition tip side">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
@@ -4294,15 +4298,6 @@ mod my_module {
 <tr><td><code>index_get</code></td><td style="text-align: center"><a href="plugins//book/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
 </tbody></table>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
-<div class="admonition bug side wide">
-<div class="admonition-title">
-<p>Error</p>
-</div>
-<div>
-<p>Non-pure functions, when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
-runtime error.</p>
-</div>
-</div>
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
 to mark it as  <em>pure</em> – i.e. it does not modify the <code>&amp;mut</code> parameter.</p>
 <p>This is often done to avoid expensive cloning for methods or <a href="plugins//book/rust/getters-setters.html">property getters</a>
@@ -4316,9 +4311,17 @@ that return information about a <a href="plugins//book/rust/custom.html">custom 
 There is no checking.</p>
 </div>
 </div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error: Constants Not OK for non-pure</p>
+</div>
+<div>
+<p>Non-pure functions raise a runtime error when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <div class="admonition tip small">
 <div class="admonition-title">
-<p>Tip: Constants OK</p>
+<p>Tip: Constants OK for pure</p>
 </div>
 <div>
 <p>Pure functions can be passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
@@ -4389,7 +4392,7 @@ mod my_module {
 </code></pre>
 <div class="admonition bug small">
 <div class="admonition-title">
-<p>Error</p>
+<p>Missing <code>#[rhai_fn(return_raw)]</code></p>
 </div>
 <div>
 <p>A compilation error — usually something that says <code>Result</code> does not implement
@@ -4482,15 +4485,6 @@ fn main() {
 }
 </code></pre>
 <h2 id="pure-functions-1"><a class="header" href="#pure-functions-1">Pure Functions</a></h2>
-<div class="admonition bug side wide">
-<div class="admonition-title">
-<p>Error</p>
-</div>
-<div>
-<p>Non-pure functions, when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
-runtime error.</p>
-</div>
-</div>
 <p>Some functions are <em>pure</em> – i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as <code>&amp;mut</code> (e.g. for a method function).</p>
 <p>This is often done to avoid expensive cloning for methods or <a href="plugins//book/rust/getters-setters.html">property getters</a>
@@ -4505,9 +4499,17 @@ that return information about a <a href="plugins//book/rust/custom.html">custom 
 There is no checking.</p>
 </div>
 </div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error: Constants Not OK for non-pure</p>
+</div>
+<div>
+<p>Non-pure functions raise a runtime error when passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <div class="admonition tip small">
 <div class="admonition-title">
-<p>Tip: Constants OK</p>
+<p>Tip: Constants OK for pure</p>
 </div>
 <div>
 <p>Pure functions can be passed a <a href="plugins//book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
@@ -4552,7 +4554,7 @@ fn main() {
 </code></pre>
 <div class="admonition bug small">
 <div class="admonition-title">
-<p>Error</p>
+<p>Missing <code>#[rhai_fn(return_raw)]</code></p>
 </div>
 <div>
 <p>A compilation error — usually something that says <code>Result</code> does not implement
@@ -4810,16 +4812,7 @@ def_package! {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-custom-package-as-an-independent-crate"><a class="header" href="#create-a-custom-package-as-an-independent-crate">Create a Custom Package as an Independent Crate</a></h1>
 <p>Creating a custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an independent crate allows it to be shared by multiple projects.</p>
-<div class="admonition example">
-<div class="admonition-title">
-<p>Example</p>
-</div>
-<div>
-<p>The project <a href="https://rhaiscript/rhai-rand"><code>rhai-rand</code></a> shows a simple example of creating a
-custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an independent crate.</p>
-</div>
-</div>
-<div class="admonition abstract">
+<div class="admonition abstract small">
 <div class="admonition-title">
 <p>Key concepts</p>
 </div>
@@ -4832,6 +4825,15 @@ custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an 
 <p>The main <code>lib.rs</code> module can contain the <a href="rust/packages//book/rust/packages/index.html">package</a> being constructed.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="admonition example small">
+<div class="admonition-title">
+<p>Example</p>
+</div>
+<div>
+<p>The project <a href="https://rhaiscript/rhai-rand"><code>rhai-rand</code></a> shows a simple example of creating a
+custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an independent crate.</p>
 </div>
 </div>
 <h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>

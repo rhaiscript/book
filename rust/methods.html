@@ -44,7 +44,6 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../stylesheets/rhai.min.css">
-        <link rel="stylesheet" href="../stylesheets/mdbook-admonish.css">
 
     </head>
     <body>
@@ -171,7 +170,7 @@
 </blockquote>
 <div class="admonition warning small">
 <div class="admonition-title">
-<p><em>method-call</em> style not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
+<p><em>Method-call</em> style not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
 </div>
 <div>
 <pre><code class="language-rust">// Below is a syntax error under 'no_object'.
@@ -185,7 +184,7 @@ engine.run(&quot;let x = [42]; x.clear();&quot;)?;
 <p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
-<div class="admonition note side wide">
+<div class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>
 </div>
@@ -194,7 +193,8 @@ engine.run(&quot;let x = [42]; x.clear();&quot;)?;
 </div>
 </div>
 <p>Internally, methods on a <a href="/book/rust/custom.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
-the object’s type. Therefore, methods and functions can be called interchangeably.</p>
+the object’s type.</p>
+<p>Therefore, methods and functions can be called interchangeably.</p>
 <pre><code class="language-rust">impl TestStruct {
     fn foo(&amp;mut self) -&gt; i64 {
         self.field
