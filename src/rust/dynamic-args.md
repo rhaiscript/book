@@ -7,7 +7,7 @@ It is possible for Rust functions to contain parameters of type [`Dynamic`].
 
 A [`Dynamic`] value can hold any clonable type.
 
-```admonish example.small
+```admonish question.small "Trivia"
 
 The `push` method of an [array] is implemented as follows (minus code for [safety] protection
 against [over-sized arrays][maximum size of arrays]), allowing the function to be called with

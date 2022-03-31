@@ -333,7 +333,7 @@ combine_with_exported_module!(module, "my_module_ID", my_module);
 Functions Overloading and Operators
 ----------------------------------
 
-~~~admonish tip.side "Tip: `NativeCallContext` parameter"
+~~~admonish tip.side.wide "Tip: `NativeCallContext` parameter"
 
 The _first_ parameter of a function can also be [`NativeCallContext`].
 ~~~
@@ -469,12 +469,6 @@ The above function can be called in five ways:
 Pure Functions
 --------------
 
-```admonish bug.side.wide "Error"
-
-Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise a
-runtime error.
-```
-
 Apply the `#[rhai_fn(pure)]` attribute on a method function (i.e. one taking a `&mut` first parameter)
 to mark it as  _pure_ &ndash; i.e. it does not modify the `&mut` parameter.
 
@@ -487,7 +481,12 @@ Pure functions _MUST NOT_ modify the `&mut` parameter.
 There is no checking.
 ~~~
 
-```admonish tip.small "Tip: Constants OK"
+```admonish bug.small "Error: Constants Not OK for non-pure"
+
+Non-pure functions raise a runtime error when passed a [constant] value as the first `&mut` parameter.
+```
+
+```admonish tip.small "Tip: Constants OK for pure"
 
 Pure functions can be passed a [constant] value as the first `&mut` parameter.
 ```
@@ -566,14 +565,14 @@ mod my_module {
 }
 ```
 
-```admonish bug.small "Error"
+~~~admonish bug.small "Missing `#[rhai_fn(return_raw)]`"
 
 A compilation error &mdash; usually something that says `Result` does not implement
 `Clone` &mdash; is generated if a fallible function is missing `#[rhai_fn(return_raw)]`.
 
 It is another compilation error for the reverse &mdash; a function with
 `#[rhai_fn(return_raw)]` does not have the appropriate return type.
-```
+~~~
 
 
 `#[export_module]` Parameters

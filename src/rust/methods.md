@@ -11,7 +11,7 @@ Method-Call Style vs. Function-Call Style
 
 > _object_ `.` _function_ `(` _parameter_`,` ... `,` _parameter_`)`
 
-~~~admonish warning.small "_method-call_ style not supported under [`no_object`]"
+~~~admonish warning.small "_Method-call_ style not supported under [`no_object`]"
 ```rust
 // Below is a syntax error under 'no_object'.
 engine.run("let x = [42]; x.clear();")?;
@@ -25,13 +25,15 @@ engine.run("let x = [42]; x.clear();")?;
 
 ### Equivalence
 
-```admonish note.side.wide
+```admonish note.side
 
 This design is similar to Rust.
 ```
 
 Internally, methods on a [custom type] is _the same_ as a function taking a `&mut` first argument of
-the object's type. Therefore, methods and functions can be called interchangeably.
+the object's type.
+
+Therefore, methods and functions can be called interchangeably.
 
 ```rust
 impl TestStruct {

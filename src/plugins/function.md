@@ -62,12 +62,6 @@ fn main() {
 Pure Functions
 --------------
 
-```admonish bug.side.wide "Error"
-
-Non-pure functions, when passed a [constant] value as the first `&mut` parameter, will raise a
-runtime error.
-```
-
 Some functions are _pure_ &ndash; i.e. they do not mutate any parameter, even though the first
 parameter may be passed in as `&mut` (e.g. for a method function).
 
@@ -82,7 +76,12 @@ Pure functions _MUST NOT_ modify the `&mut` parameter.
 There is no checking.
 ~~~
 
-```admonish tip.small "Tip: Constants OK"
+```admonish bug.small "Error: Constants Not OK for non-pure"
+
+Non-pure functions raise a runtime error when passed a [constant] value as the first `&mut` parameter.
+```
+
+```admonish tip.small "Tip: Constants OK for pure"
 
 Pure functions can be passed a [constant] value as the first `&mut` parameter.
 ```
@@ -132,11 +131,11 @@ fn main() {
 }
 ```
 
-```admonish bug.small "Error"
+~~~admonish bug.small "Missing `#[rhai_fn(return_raw)]`"
 
 A compilation error &mdash; usually something that says `Result` does not implement
 `Clone` &mdash; is generated if a fallible function is missing `#[rhai_fn(return_raw)]`.
 
 It is another compilation error for the reverse &mdash; a function with
 `#[rhai_fn(return_raw)]` does not have the appropriate return type.
-```
+~~~

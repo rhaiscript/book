@@ -3,7 +3,7 @@ Module Resolvers
 
 {{#include ../../links.md}}
 
-~~~admonish info.side.wide "`import` statements"
+~~~admonish info.side "`import`"
 
 See the section on [_Importing Modules_][`import`] for more details.
 ~~~
@@ -11,6 +11,28 @@ See the section on [_Importing Modules_][`import`] for more details.
 When encountering an [`import`] statement, Rhai attempts to _resolve_ the [module] based on the path string.
 
 _Module Resolvers_ are service types that implement the [`ModuleResolver`][traits] trait.
+
+
+Set into `Engine`
+-----------------
+
+An [`Engine`]'s module resolver is set via a call to `Engine::set_module_resolver`:
+
+```rust
+use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
+
+// Create a module resolver
+let resolver = StaticModuleResolver::new();
+
+// Register functions into 'resolver'...
+
+// Use the module resolver
+engine.set_module_resolver(resolver);
+
+// Effectively disable 'import' statements by setting module resolver to
+// the 'DummyModuleResolver' which acts as... well... a dummy.
+engine.set_module_resolver(DummyModuleResolver::new());
+```
 
 
 Built-in Module Resolvers
@@ -24,8 +46,14 @@ Built-in [module] resolvers are grouped under the `rhai::module_resolvers`
 [module namespace][function namespace].
 
 
-`FileModuleResolver` (default)
------------------------------
+`DummyResolversCollection` (default for `no-std`)
+-------------------------------------------------
+
+This module resolver acts as a _dummy_ and fails all module resolution calls.
+
+
+`FileModuleResolver` (normal default)
+-------------------------------------
 
 The _default_ [module] resolution service, not available for [`no_std`] or [WASM] builds.
 Loads a script file (based off the current directory or a specified one) with `.rhai` extension.
@@ -44,7 +72,7 @@ _Relative_ paths are resolved relative to a _root_ directory, which is usually t
 
 The base directory can be set via `FileModuleResolver::new_with_path` or `FileModuleResolver::set_base_path`.
 
-```admonish tip.small "Tip: No base directory"
+```admonish tip.small "Tip: Default base directory"
 
 If the base directory is not set (e.g. using `FileModuleResolver::new`), then relative paths are
 based off the directory of the loading script.
@@ -179,7 +207,8 @@ m::greet();                         // prints "hello! from module!"
 
 ```admonish tip.side.wide "Tip: Typical usage"
 
-Often used in [`no_std`] or embedded environments without a file system.
+`StaticModuleResolver` is often used in [`no_std`] or embedded environments
+without a file system.
 ```
 
 Loads [modules] that are statically added.
@@ -204,31 +233,3 @@ A collection of module resolvers.
 [Modules] are resolved from each resolver in sequential order.
 
 This is useful when multiple types of [modules] are needed simultaneously.
-
-
-`DummyResolversCollection`
--------------------------
-
-This module resolver acts as a _dummy_ and always fails all module resolution calls.
-
-
-Set into `Engine`
------------------
-
-An [`Engine`]'s module resolver is set via a call to `Engine::set_module_resolver`:
-
-```rust
-use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
-
-// Create a module resolver
-let resolver = StaticModuleResolver::new();
-
-// Register functions into 'resolver'...
-
-// Use the module resolver
-engine.set_module_resolver(resolver);
-
-// Effectively disable 'import' statements by setting module resolver to
-// the 'DummyModuleResolver' which acts as... well... a dummy.
-engine.set_module_resolver(DummyModuleResolver::new());
-```

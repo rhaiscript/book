@@ -41,7 +41,7 @@ level of indirection, but for all other purposes there is no difference.
 Register a Custom Type and its Methods
 -------------------------------------
 
-```admonish tip.side.wide-narrow "Tip: Working with enums"
+```admonish tip.side.wide "Tip: Working with enums"
 
 It is also possible to use Rust enums with Rhai.
 

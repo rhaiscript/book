@@ -7,6 +7,14 @@ Create a Module from an AST
 `Module::eval_ast_as_new`
 ------------------------
 
+```admonish info.side.wide "Encapsulated environment"
+
+`Module::eval_ast_as_new` encapsulates the entire [`AST`] into each function call, merging the
+[module namespace][function namespace] with the [global namespace][function namespace].
+
+Therefore, [functions] defined within the same [module] script can cross-call each other.
+```
+
 ```admonish info.side.wide "See also"
 
 See [_Export Variables, Functions and Sub-Modules from Script_][`export`] for details on how to prepare
@@ -25,14 +33,6 @@ When given an [`AST`], it is first evaluated (usually to [import][`import`] [mod
 * [functions] not specifically marked [`private`],
 
 * imported [modules] that remain in the [`Scope`] at the end of a script run become sub-modules.
-
-```admonish info.small "Encapsulated environment"
-
-`Module::eval_ast_as_new` encapsulates the entire `AST` into each function call, merging the
-[module namespace][function namespace] with the [global namespace][function namespace].
-
-Therefore, [functions] defined within the same [module] script can cross-call each other.
-```
 
 
 Examples
