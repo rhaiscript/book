@@ -1,5 +1,5 @@
 Call Rhai Functions from Rust
-============================
+=============================
 
 {{#include ../links.md}}
 
@@ -82,7 +82,7 @@ If these default behaviors are not desirable, use `Engine::call_fn_raw`.
 ~~~
 
 
-`FuncArgs` trait
+`FuncArgs` Trait
 ----------------
 
 ```admonish note.side
@@ -123,7 +123,7 @@ let result: i64 = engine.call_fn(&mut scope, &ast, "hello", options)?;
 
 
 Low-Level API &ndash; `Engine::call_fn_raw`
-------------------------------------------
+-------------------------------------------
 
 For more control, construct all arguments as [`Dynamic`] values and use `Engine::call_fn_raw`,
 passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):

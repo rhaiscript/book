@@ -12,7 +12,7 @@ which converts a normal Rust module into a Rhai [module] via procedural macros.
 
 
 The Hard Way &ndash; `Module` API
---------------------------------
+---------------------------------
 
 Manually creating a [module] is possible via the [`Module`] public API, which is volatile and may
 change from time to time.

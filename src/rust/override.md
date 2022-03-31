@@ -1,5 +1,5 @@
 Override a Built-in Function
-===========================
+============================
 
 {{#include ../links.md}}
 

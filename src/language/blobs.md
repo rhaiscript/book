@@ -143,7 +143,7 @@ UTF-8 is, however, not very commonly used in embedded applications.
 
 
 Built-in Functions
------------------
+------------------
 
 The following functions (mostly defined in the [`BasicBlobPackage`][built-in packages] but excluded if using a [raw `Engine`]) operate on BLOB's.
 

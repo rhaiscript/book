@@ -331,7 +331,7 @@ combine_with_exported_module!(module, "my_module_ID", my_module);
 
 
 Functions Overloading and Operators
-----------------------------------
+-----------------------------------
 
 ~~~admonish tip.side.wide "Tip: `NativeCallContext` parameter"
 
@@ -576,7 +576,7 @@ It is another compilation error for the reverse &mdash; a function with
 
 
 `#[export_module]` Parameters
-----------------------------
+-----------------------------
 
 Parameters can be applied to the `#[export_module]` attribute to override its default behavior.
 

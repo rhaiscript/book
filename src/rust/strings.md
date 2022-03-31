@@ -1,5 +1,5 @@
 `String` Parameters in Rust Functions
-====================================
+=====================================
 
 {{#include ../links.md}}
 
@@ -16,7 +16,7 @@ Needless to say, it is _extremely_ inefficient to use `String` parameters.
 
 
 `&str` Maps to `ImmutableString`
--------------------------------
+--------------------------------
 
 ```admonish warning.side "Common mistake"
 

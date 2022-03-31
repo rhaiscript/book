@@ -1,5 +1,5 @@
 Values and Types
-===============
+================
 
 {{#include ../links.md}}
 

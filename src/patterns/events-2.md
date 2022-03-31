@@ -1,5 +1,5 @@
 Scriptable Event Handler with State<br/>JS Style
-===============================================
+================================================
 
 {{#include ../links.md}}
 
@@ -42,7 +42,7 @@ struct Handler {
 
 
 Bind Object Map to `this` Pointer
---------------------------------
+---------------------------------
 
 Initialization can simply be done via binding the [object map] containing global states to the
 `this` pointer.
@@ -83,7 +83,7 @@ impl Handler {
 
 
 Bind `this` Pointer During Events Handling
------------------------------------------
+------------------------------------------
 
 Events handling should also use `Engine::call_fn_raw` to bind the [object map] containing global
 states to the `this` pointer.

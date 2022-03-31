@@ -12,7 +12,7 @@ Under the [`sync`] feature, all types must also be `Send + Sync`.
 
 
 Use `type_of()` to Get Value Type
---------------------------------
+---------------------------------
 
 Because [`type_of()`] a `Dynamic` value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value's type.
@@ -41,7 +41,7 @@ switch type_of(mystery) {
 
 
 Type Checking and Casting
-------------------------
+-------------------------
 
 ~~~admonish tip.side.wide "Tip: `Dynamic::try_cast`"
 

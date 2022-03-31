@@ -40,7 +40,7 @@ switch wrong_default {
 
 
 Array and Object Map Literals Also Work
---------------------------------------
+---------------------------------------
 
 The `switch` expression can match against any _[literal]_, including [array] and [object map] [literals].
 
@@ -139,7 +139,7 @@ Numeric [range] cases are tried in the order that they appear in the original sc
 
 
 Difference From `if`-`else if` Chain
------------------------------------
+------------------------------------
 
 Although a `switch` expression looks _almost_ the same as an [`if`-`else if`][`if`] chain, there are
 subtle differences between the two.

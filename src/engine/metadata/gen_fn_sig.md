@@ -5,7 +5,7 @@ Get Native Function Signatures
 
 
 `Engine::gen_fn_signatures`
---------------------------
+---------------------------
 
 As part of a _reflections_ API, `Engine::gen_fn_signatures` returns a list of function _signatures_
 (as `Vec<String>`), each corresponding to a particular native function available to that [`Engine`] instance.

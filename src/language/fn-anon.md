@@ -63,7 +63,7 @@ Anonymous functions can be disabled via [`Engine::set_allow_anonymous_function`]
 
 
 Rewrite Using Anonymous Functions
---------------------------------
+---------------------------------
 
 The above can be rewritten using _anonymous [functions]_.
 

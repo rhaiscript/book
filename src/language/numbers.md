@@ -62,7 +62,7 @@ a decimal point (`.`).
 
 
 Warning &ndash; No Implicit Type Conversions
--------------------------------------------
+--------------------------------------------
 
 Unlike most C-like languages, Rhai does _not_ provide implicit type conversions between different
 numeric types.

@@ -1,5 +1,5 @@
 Serialization and Deserialization of `Dynamic` with `serde`
-=========================================================
+===========================================================
 
 {{#include ../links.md}}
 
@@ -17,7 +17,7 @@ Rhai's [`Dynamic`] type supports serialization and deserialization by
 
 
 Serialize/Deserialize a `Dynamic`
---------------------------------
+---------------------------------
 
 With the [`serde`][features] feature turned on, [`Dynamic`] implements [`serde::Serialize`] and
 [`serde::Deserialize`], so it can easily be serialized and deserialized with [`serde`].
@@ -36,7 +36,7 @@ let result: Dynamic = serde_json::from_str(&json);
 
 
 `Dynamic` as Serialization Format
---------------------------------
+---------------------------------
 
 A [`Dynamic`] can be seamlessly converted to and from any type that implements [`serde::Serialize`]
 and/or [`serde::Deserialize`], acting as a serialization format.

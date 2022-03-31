@@ -36,7 +36,7 @@ engine.set_module_resolver(DummyModuleResolver::new());
 
 
 Built-in Module Resolvers
-------------------------
+-------------------------
 
 There are a number of standard resolvers built into Rhai, the default being the `FileModuleResolver`
 which simply loads a script file based on the path (with `.rhai` extension attached) and execute it
@@ -203,7 +203,7 @@ m::greet();                         // prints "hello! from module!"
 
 
 `StaticModuleResolver`
----------------------
+----------------------
 
 ```admonish tip.side.wide "Tip: Typical usage"
 
@@ -226,7 +226,7 @@ resolver.insert("my_module", module);
 
 
 `ModuleResolversCollection`
---------------------------
+---------------------------
 
 A collection of module resolvers.
 

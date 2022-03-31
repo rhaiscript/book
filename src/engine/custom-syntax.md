@@ -1,5 +1,5 @@
 Extend Rhai with Custom Syntax
-=============================
+==============================
 
 {{#include ../links.md}}
 
@@ -306,7 +306,7 @@ Make sure there are _lots_ of examples for users to follow.
 
 
 Practical Example &ndash; Recreating JavaScript's `var` Statement
----------------------------------------------------------------
+-----------------------------------------------------------------
 
 The following example recreates a statement similar to the `var` variable declaration syntax in
 JavaScript, which creates a global variable if one doesn't already exist.
@@ -334,7 +334,7 @@ engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |conte
 
 
 Really Advanced &ndash; Custom Parsers
--------------------------------------
+--------------------------------------
 
 Sometimes it is desirable to have multiple custom syntax starting with the same symbol.
 This is especially common for _command-style_ syntax where the second symbol calls a particular command:

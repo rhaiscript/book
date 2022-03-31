@@ -1,5 +1,5 @@
 Custom Type Indexers
-===================
+====================
 
 {{#include ../links.md}}
 
@@ -40,7 +40,7 @@ although there is nothing that prevents this mutation.
 
 
 Cannot Override Arrays, BLOB's, Object Maps, Strings and Integers
----------------------------------------------------------------
+-----------------------------------------------------------------
 
 ```admonish failure.side "Plugins"
 
@@ -186,7 +186,7 @@ engine.run(
 
 
 Indexer as Property Access Fallback
-----------------------------------
+-----------------------------------
 
 ```admonish tip.side.wide "Tip: Property bag"
 

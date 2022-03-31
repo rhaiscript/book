@@ -1,5 +1,5 @@
 `Dynamic` Parameters in Rust Functions
-=====================================
+======================================
 
 {{#include ../links.md}}
 

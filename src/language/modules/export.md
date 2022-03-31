@@ -1,5 +1,5 @@
 Export Variables, Functions and Sub-Modules From a Script
-========================================================
+=========================================================
 
 {{#include ../../links.md}}
 
@@ -20,7 +20,7 @@ Modules loaded within this [module] at the global level become _sub-modules_ and
 
 
 Export Global Variables
-----------------------
+-----------------------
 
 The `export` statement, which can only be at global level, exposes a selected [variable] as member of a [module].
 

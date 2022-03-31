@@ -29,7 +29,7 @@ employing the debugging interface to create a debugger for Rhai scripts!
 
 
 Built-in Functions
------------------
+------------------
 
 The following functions (defined in the [`DebuggingPackage`][built-in packages] but excluded if
 using a [raw `Engine`]) provides runtime information for debugging purposes.

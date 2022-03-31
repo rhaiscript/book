@@ -1,5 +1,5 @@
 Rust Examples
-============
+=============
 
 {{#include ../../links.md}}
 
@@ -23,7 +23,7 @@ A number of examples can be found under `examples`.
 
 
 Scriptable Event Handler With State Examples
--------------------------------------------
+--------------------------------------------
 
 Because of its popularity, the pattern [_Scriptable Event Handler With State_]({{rootUrl}}/patterns/events.md)
 has sample implementations for different styles.

@@ -1,5 +1,5 @@
 Operators and Symbols
-====================
+=====================
 
 {{#include ../links.md}}
 

@@ -1,5 +1,5 @@
 Operator Overloading
-===================
+====================
 
 {{#include ../links.md}}
 
@@ -27,7 +27,7 @@ Overriding them has no effect at all.
 
 
 Overload Operator via Rust Function
-----------------------------------
+-----------------------------------
 
 [Operator] functions cannot be defined in script because [operators] are usually not valid function names.
 

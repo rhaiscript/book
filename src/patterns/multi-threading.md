@@ -1,5 +1,5 @@
 Multi-Threaded Synchronization
-=============================
+==============================
 
 {{#include ../links.md}}
 
@@ -82,7 +82,7 @@ fn main() {
 
 
 Considerations for [`sync`]
---------------------------
+---------------------------
 
 `std::mpsc::Sender` and `std::mpsc::Receiver` are not `Sync`, therefore they cannot be used in
 registered functions if the [`sync`] feature is enabled.

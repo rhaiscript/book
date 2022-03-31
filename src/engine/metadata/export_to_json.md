@@ -1,11 +1,11 @@
 Export Functions Metadata to JSON
-================================
+=================================
 
 {{#include ../../links.md}}
 
 
 `Engine::gen_fn_metadata_to_json`<br/>`Engine::gen_fn_metadata_with_ast_to_json`
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 As part of a _reflections_ API, `Engine::gen_fn_metadata_to_json` and the corresponding
 `Engine::gen_fn_metadata_with_ast_to_json` export the full list of [functions metadata]

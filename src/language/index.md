@@ -1,5 +1,5 @@
 Rhai Language Reference
-======================
+=======================
 
 {{#include ../links.md}}
 

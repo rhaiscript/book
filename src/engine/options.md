@@ -1,5 +1,5 @@
 Engine Configuration Options
-===========================
+============================
 
 {{#include ../links.md}}
 
@@ -7,7 +7,7 @@ A number of other configuration options are available from the [`Engine`] to fin
 
 
 Compile-Time Language Features
------------------------------
+------------------------------
 
 | Method                                                             | Description                                                                            |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |

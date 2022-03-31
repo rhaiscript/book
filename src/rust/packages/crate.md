@@ -1,5 +1,5 @@
 Create a Custom Package as an Independent Crate
-==============================================
+===============================================
 
 {{#include ../../links.md}}
 

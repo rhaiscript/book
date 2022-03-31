@@ -34,7 +34,7 @@ result == 15;
 
 
 Alternatives to a Custom Operator
---------------------------------
+---------------------------------
 
 Custom operators are merely _syntactic sugar_.  They map directly to registered functions.
 
@@ -56,7 +56,7 @@ Using `Engine::register_custom_operator` merely enables a convenient shortcut.
 
 
 Must be a Valid Identifier or Reserved Symbol
---------------------------------------------
+---------------------------------------------
 
 All custom operators must be _identifiers_ that follow the same naming rules as [variables].
 

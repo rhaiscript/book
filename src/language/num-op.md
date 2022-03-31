@@ -69,7 +69,7 @@ let bit_op = 42 | 99;           // bit masking
 
 
 Floating-Point Interoperates with Integers
------------------------------------------
+------------------------------------------
 
 When one of the operands to a binary arithmetic [operator] is floating-point, it works with `INT` for
 the other operand and the result is floating-point.
@@ -90,7 +90,7 @@ type_of(x) == "f64";
 
 
 Decimal Interoperates with Integers
-----------------------------------
+-----------------------------------
 
 When one of the operands to a binary arithmetic [operator] is [`Decimal`][rust_decimal],
 it works with `INT` for the other operand and the result is [`Decimal`][rust_decimal].

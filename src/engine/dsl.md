@@ -1,5 +1,5 @@
 Use Rhai as a Domain-Specific Language (DSL)
-===========================================
+============================================
 
 {{#include ../links.md}}
 
@@ -16,7 +16,7 @@ expressions only.
 
 
 Unicode Standard Annex #31 Identifiers
--------------------------------------
+--------------------------------------
 
 [Variable] names and other identifiers do not necessarily need to be ASCII-only.
 
@@ -27,7 +27,7 @@ This is sometimes useful in a non-English DSL.
 
 
 Disable Keywords and/or Operators
---------------------------------
+---------------------------------
 
 In some DSL scenarios, it is necessary to further restrict the language to exclude certain
 language features that are not necessary or dangerous to the application.

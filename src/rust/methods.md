@@ -5,7 +5,7 @@ Call Method as Function
 
 
 Method-Call Style vs. Function-Call Style
-----------------------------------------
+-----------------------------------------
 
 ### Method-call syntax
 
@@ -96,7 +96,7 @@ All references must be mutable (i.e. `&mut T`).
 
 
 Number of Parameters in Methods
-------------------------------
+-------------------------------
 
 Native Rust methods registered with an [`Engine`] take _one additional parameter_ more than
 an equivalent method coded in script, where the object is accessed via the `this` pointer instead.
@@ -110,7 +110,7 @@ The following table illustrates the differences:
 
 
 `&mut` is Efficient, Except for `&mut ImmutableString`
-----------------------------------------------------
+------------------------------------------------------
 
 Using a `&mut` first parameter is highly encouraged when using types that are expensive to clone,
 even when the intention is not to mutate that argument, because it avoids cloning that argument value.

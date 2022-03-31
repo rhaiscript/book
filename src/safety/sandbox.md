@@ -1,5 +1,5 @@
 Sand-Boxing &ndash; Block Access to External Data
-================================================
+=================================================
 
 {{#include ../links.md}}
 

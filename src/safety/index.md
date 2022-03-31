@@ -1,5 +1,5 @@
 Safety and Protection Against DoS Attacks
-========================================
+=========================================
 
 {{#title Safety and Protection}}
 
@@ -85,7 +85,7 @@ One example of such an environment is a Rhai scripting [`Engine`] compiled to [W
 
 
 _Don't Panic_ Guarantee &ndash; Any Panic is a Bug
--------------------------------------------------
+--------------------------------------------------
 
 ```admonish tip.side.wide "OK, panic anyway"
 

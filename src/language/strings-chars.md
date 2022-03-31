@@ -16,7 +16,7 @@ Internally strings are stored in UTF-8 encoding.
 
 
 String and Character Literals
-----------------------------
+-----------------------------
 
 String and character literals follow JavaScript-style syntax.
 

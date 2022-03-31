@@ -1,5 +1,5 @@
 Maximum Number of Modules
-========================
+=========================
 
 {{#include ../links.md}}
 

@@ -1,5 +1,5 @@
 Register any Rust Type and its Methods
-=====================================
+======================================
 
 {{#include ../links.md}}
 
@@ -39,7 +39,7 @@ level of indirection, but for all other purposes there is no difference.
 
 
 Register a Custom Type and its Methods
--------------------------------------
+--------------------------------------
 
 ```admonish tip.side.wide "Tip: Working with enums"
 
@@ -96,7 +96,7 @@ println!("result: {}", result.field);   // prints 42
 
 
 First Parameter Must be `&mut`
------------------------------
+------------------------------
 
 _Methods_ of custom types take a `&mut` first parameter to that type, so that invoking methods can
 always update it.

@@ -1,5 +1,5 @@
 Scriptable Event Handler with State<br/>Main Style
-=================================================
+==================================================
 
 {{#include ../links.md}}
 
@@ -13,7 +13,7 @@ See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
 
 
 Initialize Handler Instance with `Engine::call_fn_raw`
-----------------------------------------------------
+------------------------------------------------------
 
 Use `Engine::call_fn_raw` instead of `Engine::call_fn` in order to retain new [variables] defined
 inside the custom [`Scope`] when running the `init` function.

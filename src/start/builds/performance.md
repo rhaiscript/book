@@ -20,7 +20,7 @@ When the above feature flags are used, performance may increase by around 15-20%
 
 
 Use Only One Integer Type
-------------------------
+-------------------------
 
 If only a single integer type is needed in scripts &ndash; most of the time this is the case &ndash;
 it is best to avoid registering lots of functions related to other integer types that will never be used.
@@ -30,7 +30,7 @@ The [`only_i32`] and [`only_i64`] features disable all integer types except `i32
 
 
 Use Only 32-Bit Numbers
-----------------------
+-----------------------
 
 If only 32-bit integers are needed &ndash; again, most of the time this is the case &ndash; turn on [`only_i32`].
 Under this feature, only `i32` is supported as a built-in integer type and no others.
@@ -40,7 +40,7 @@ due to 64-bit arithmetic requiring more CPU cycles to complete.
 
 
 Minimize Size of `Dynamic`
--------------------------
+--------------------------
 
 Turning on [`f32_float`] (or [`no_float`]) and [`only_i32`] on 32-bit targets makes the critical
 [`Dynamic`] data type only 8 bytes long for 32-bit targets.
@@ -51,7 +51,7 @@ A smaller [`Dynamic`] helps performance due to better cache efficiency.
 
 
 Use `ImmutableString`
---------------------
+---------------------
 
 Internally, Rhai uses _immutable_ [strings] instead of the Rust `String` type.
 This is mainly to avoid excessive cloning when passing function arguments.
@@ -151,7 +151,7 @@ some_func(x[y], 1); // <- but this is not, so 'x[y]` is cloned
 
 
 Short Variable Names for 32-Bit Systems
---------------------------------------
+---------------------------------------
 
 On 32-bit systems, [variable] and [constant] names longer than 11 ASCII characters incur additional
 allocation overhead.

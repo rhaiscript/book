@@ -1,5 +1,5 @@
 Install the Rhai Crate
-=====================
+======================
 
 {{#include ../links.md}}
 

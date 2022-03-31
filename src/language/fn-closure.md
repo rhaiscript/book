@@ -4,7 +4,7 @@ Simulating Closures
 {{#include ../links.md}}
 
 Capture External Variables via Automatic Currying
-------------------------------------------------
+-------------------------------------------------
 
 ~~~admonish tip.side "Tip: `is_shared`"
 
@@ -63,7 +63,7 @@ let f = Fn("anon_0001").curry(x);   // shared 'x' is curried
 
 
 Beware: Captured Variables are Truly Shared
-------------------------------------------
+-------------------------------------------
 
 The example below is a typical tutorial sample for many languages to illustrate the traps
 that may accompany capturing external [variables] in closures.
@@ -89,7 +89,7 @@ for f in list {
 
 
 Therefore &ndash; Be Careful to Prevent Data Races
--------------------------------------------------
+--------------------------------------------------
 
 Rust does not have data races, but that doesn't mean Rhai doesn't.
 
@@ -115,7 +115,7 @@ x.call(f, 2);                       // <- error: data race detected on 'x'
 
 
 Data Races in `sync` Builds Can Become Deadlocks
------------------------------------------------
+------------------------------------------------
 
 Under the [`sync`] feature, shared values are guarded with a `RwLock`, meaning that data race
 conditions no longer raise an error.

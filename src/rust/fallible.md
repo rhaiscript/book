@@ -1,5 +1,5 @@
 Register a Fallible Rust Function
-================================
+=================================
 
 {{#include ../links.md}}
 

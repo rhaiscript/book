@@ -1,5 +1,5 @@
 Maximum Size of Arrays
-=====================
+======================
 
 {{#include ../links.md}}
 

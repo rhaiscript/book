@@ -20,6 +20,7 @@ level = 4
 runnable = false
 
 [outputX.linkcheck]
+optional = true
 follow-web-links = false
 traverse-parent-directories = false
 warning-policy = "ignore"

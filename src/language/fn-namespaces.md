@@ -1,11 +1,11 @@
 Function Namespaces
-==================
+===================
 
 {{#include ../links.md}}
 
 
 Each Function is a Separate Compilation Unit
--------------------------------------------
+--------------------------------------------
 
 [Functions] in Rhai are _pure_ and they form individual _compilation units_.
 

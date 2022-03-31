@@ -1,5 +1,5 @@
 Register a Rust Function for Use in Rhai Scripts
-===============================================
+================================================
 
 {{#include ../links.md}}
 

@@ -1,5 +1,5 @@
 `rhai-rand`: Random Number Generation, Shuffling and Sampling
-===========================================================
+=============================================================
 
 {{#include ../links.md}}
 
@@ -28,7 +28,7 @@ rhai-rand = "0.1"       # use rhai-rand crate
 
 
 Load Package into [`Engine`]
----------------------------
+----------------------------
 
 ```rust
 use rhai::Engine;

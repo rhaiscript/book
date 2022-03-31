@@ -1,5 +1,5 @@
 Numeric Functions
-================
+=================
 
 {{#include ../links.md}}
 
@@ -39,7 +39,7 @@ using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [
 
 
 Floating-Point Functions
------------------------
+------------------------
 
 The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but excluded if
 using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal]

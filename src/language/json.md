@@ -1,5 +1,5 @@
 Parse an Object Map from JSON
-============================
+=============================
 
 {{#include ../links.md}}
 
@@ -58,7 +58,7 @@ This style can be used successfully with Rhai [object maps].
 
 
 Parse JSON with Sub-Objects
---------------------------
+---------------------------
 
 `Engine::parse_json` depends on the fact that the [object map] literal syntax in Rhai is _almost_
 the same as a JSON object.  However, it is _almost_ because the syntax for a sub-object in JSON
@@ -86,7 +86,7 @@ map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
 
 
 Use `serde` to Serialize/Deserialize to/from JSON
-------------------------------------------------
+-------------------------------------------------
 
 ```admonish info.side "See also"
 

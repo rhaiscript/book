@@ -41,7 +41,7 @@ fn bad(s: &mut String) { ... }                  // '&mut String' will not match 
 
 
 Differences from Rust Strings
-----------------------------
+-----------------------------
 
 Internally Rhai strings are stored as UTF-8 just like Rust (they _are_ Rust `String`s!),
 but nevertheless there are major differences.

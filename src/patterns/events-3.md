@@ -1,5 +1,5 @@
 Scriptable Event Handler with State<br/>Map Style
-================================================
+=================================================
 
 {{#include ../links.md}}
 
@@ -13,7 +13,7 @@ See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
 
 
 I Hate `this`!  How Can I Get Rid of It?
----------------------------------------
+----------------------------------------
 
 You're using Rust and you don't want people to think you're writing lowly JavaScript?
 

@@ -1,5 +1,5 @@
 Create a Rust Closure from a Rhai Function
-=========================================
+==========================================
 
 {{#include ../links.md}}
 

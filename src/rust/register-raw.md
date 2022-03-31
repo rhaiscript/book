@@ -1,5 +1,5 @@
 Use the Low-Level API to Register a Rust Function
-================================================
+=================================================
 
 {{#include ../links.md}}
 
@@ -78,7 +78,7 @@ will be on the cloned copy.
 
 
 Extract The First `&mut` Argument (If Any)
------------------------------------------
+------------------------------------------
 
 To extract the first `&mut` argument passed by reference from the `args` parameter (`&mut [&mut Dynamic]`),
 use the following to get a mutable reference to the underlying value:
@@ -96,7 +96,7 @@ Therefore, always extract the mutable reference last, _after_ all other argument
 
 
 Extract Other Pass-By-Value Arguments
-------------------------------------
+-------------------------------------
 
 To extract an argument passed by value from the `args` parameter (`&mut [&mut Dynamic]`), use the following statements.
 
@@ -115,7 +115,7 @@ To extract an argument passed by value from the `args` parameter (`&mut [&mut Dy
 
 
 Example &ndash; Pass a Callback to a Rust Function
--------------------------------------------------
+--------------------------------------------------
 
 The low-level API is useful when there is a need to interact with the scripting [`Engine`]
 within a function.

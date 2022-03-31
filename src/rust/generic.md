@@ -1,5 +1,5 @@
 Register a Generic Rust Function
-===============================
+================================
 
 {{#include ../links.md}}
 

@@ -1,5 +1,5 @@
 Side-Effect Considerations for Full Optimization Level
-====================================================
+======================================================
 
 {{#include ../../links.md}}
 

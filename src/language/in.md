@@ -19,7 +19,7 @@ array.contains(42);     // <- the above is equivalent to this
 
 
 Built-in Support for Standard Data Types
----------------------------------------
+----------------------------------------
 
 |    Data type    |              Check for              |
 | :-------------: | :---------------------------------: |
@@ -79,7 +79,7 @@ let array = [1, 2, 3, ts, 42, 999];
 
 
 Custom Implementation of `contains`
-----------------------------------
+-----------------------------------
 
 The `in` operator maps directly to a call to a function `contains` with the two operands switched.
 

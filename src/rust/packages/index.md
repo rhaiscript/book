@@ -24,7 +24,7 @@ Sub-[modules] and [variables] are ignored in packages.
 
 
 Share a Package Among Multiple `Engine`'s
-----------------------------------------
+-----------------------------------------
 
 `Engine::register_global_module` and `Engine::register_static_module` both require _shared_ [modules].
 

@@ -1,5 +1,5 @@
 Implement a Custom Module Resolver
-=================================
+==================================
 
 {{#include ../../links.md}}
 
@@ -29,7 +29,7 @@ The module resolver should call `Module::build_index` on the target [module] bef
 ```
 
 Example of a Custom Module Resolver
-----------------------------------
+-----------------------------------
 
 ```rust
 use rhai::{ModuleResolver, Module, Engine, EvalAltResult};
@@ -80,7 +80,7 @@ r#"
 
 
 Advanced &ndash; `ModuleResolver::resolve_ast`
----------------------------------------------
+----------------------------------------------
 
 There is another function in the [`ModuleResolver`][traits] trait, `resolve_ast`, which is a
 low-level API intended for advanced usage scenarios.

@@ -19,7 +19,7 @@ debug("world!");        // prints "world!" to stdout using debug formatting
 
 
 Override `print` and `debug` with Callback Functions
---------------------------------------------------
+----------------------------------------------------
 
 When embedding Rhai into an application, it is usually necessary to trap `print` and `debug` output
 (for logging into a tracking log, for example) with the `Engine::on_print` and `Engine::on_debug` methods.

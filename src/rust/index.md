@@ -1,5 +1,5 @@
 Extend Rhai with Rust
-====================
+=====================
 
 {{#title Extend Rhai with Rust}}
 

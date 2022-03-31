@@ -14,7 +14,7 @@ Rhai, however, is more complex.
 
 
 Rhai Language Features Are Not Additive
---------------------------------------
+---------------------------------------
 
 Language features cannot be easily made _additive_.
 
@@ -46,7 +46,7 @@ as a feature.
 
 
 Multiple Instantiations of Rhai Within The Same Project
-------------------------------------------------------
+-------------------------------------------------------
 
 The trick is to differentiate between multiple identical copies of Rhai, each having
 a different [features] set, by their _sources_:

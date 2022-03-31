@@ -1,5 +1,5 @@
 Singleton Command Object
-=======================
+========================
 
 {{#include ../links.md}}
 

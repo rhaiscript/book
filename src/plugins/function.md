@@ -1,5 +1,5 @@
 Export a Rust Function to Rhai
-=============================
+==============================
 
 {{#include ../links.md}}
 
@@ -19,7 +19,7 @@ Macros
 
 
 `#[export_fn]` and `register_exported_fn!`
------------------------------------------
+------------------------------------------
 
 ~~~admonish tip.side "Tip: `NativeCallContext` parameter"
 

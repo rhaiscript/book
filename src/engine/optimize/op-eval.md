@@ -49,7 +49,7 @@ switch DECISION {
 
 
 Pre-Evaluation of Constant Expressions
--------------------------------------
+--------------------------------------
 
 Because of the eager evaluation of [operators][built-in operators] for [standard types], many
 [constant] expressions will be evaluated and replaced by the result.

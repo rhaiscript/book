@@ -1,5 +1,5 @@
 Optional Features
-================
+=================
 
 {{#include ../links.md}}
 
@@ -22,7 +22,7 @@ See [here]({{rootUrl}}/patterns/multiple.md) for more details.
 
 
 Features that Enable Special Functionalities
--------------------------------------------
+--------------------------------------------
 
 | Feature             | Additive? | Description                                                                                                                                                                                                                                                        |
 | ------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -36,7 +36,7 @@ Features that Enable Special Functionalities
 
 
 Features that Disable Certain Language Features
-----------------------------------------------
+-----------------------------------------------
 
 | Feature       | Additive? | Description                                                                                                                                                                                         |
 | ------------- | :-------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -49,7 +49,7 @@ Features that Disable Certain Language Features
 
 
 Features that Disable Certain Engine Features
---------------------------------------------
+---------------------------------------------
 
 | Feature       | Additive? | Description                                                                                                                                                                                                                                                                                                                                                   |
 | ------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -59,7 +59,7 @@ Features that Disable Certain Engine Features
 
 
 Features that Configure the Engine
----------------------------------
+----------------------------------
 
 | Feature     | Additive? | Description                                                                                         |
 | ----------- | :-------: | --------------------------------------------------------------------------------------------------- |
@@ -69,7 +69,7 @@ Features that Configure the Engine
 
 
 Features for `no-std` Builds
----------------------------
+----------------------------
 
 The following features are provided exclusively for [`no-std`] targets.
 Do not use them when not compiling for [`no-std`].
@@ -80,7 +80,7 @@ Do not use them when not compiling for [`no-std`].
 
 
 Features for WebAssembly (WASM) Builds
--------------------------------------
+--------------------------------------
 
 The following features are provided exclusively for [WASM] targets.
 Do not use them for non-[WASM] targets.
@@ -92,7 +92,7 @@ Do not use them for non-[WASM] targets.
 
 
 Features for Building Bin Tools
-------------------------------
+-------------------------------
 
 The feature `bin-features` include all the features necessary for building the [bin tools](bin.md).
 

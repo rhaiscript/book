@@ -5,7 +5,7 @@ Value Conversions
 
 
 Convert Between Integer and Floating-Point
------------------------------------------
+------------------------------------------
 
 | Function     | Not available under |             From type              |          To type          |
 | ------------ | :-----------------: | :--------------------------------: | :-----------------------: |

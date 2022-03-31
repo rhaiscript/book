@@ -1,5 +1,5 @@
 Object-Oriented Programming (OOP)
-================================
+=================================
 
 {{#include ../links.md}}
 
@@ -21,7 +21,7 @@ it possible to write Rhai in "the OOP way."
 
 
 Use Object Maps to Simulate OOP
-------------------------------
+-------------------------------
 
 Rhai's [object maps] has [special support for OOP]({{rootUrl}}/language/object-maps-oop.md).
 
@@ -38,7 +38,7 @@ then the call will be dispatched to the actual function with `this` binding to t
 
 
 Use Closures to Define Methods
------------------------------
+------------------------------
 
 [Anonymous functions] or [closures] defined as values for [object map] properties take on a
 syntactic shape which resembles very closely that of class methods in an OOP language.
@@ -73,7 +73,7 @@ obj.action();                               // prints 84
 
 
 Simulating Inheritance with Polyfills
-------------------------------------
+-------------------------------------
 
 The `fill_with` method of [object maps] can be conveniently used to _polyfill_ default method
 implementations from a _base class_, as per OOP lingo.

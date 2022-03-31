@@ -1,5 +1,5 @@
 Throw Exception on Error
-=======================
+========================
 
 {{#include ../links.md}}
 

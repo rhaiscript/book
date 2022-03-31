@@ -1,5 +1,5 @@
 Maximum Number of Operations
-===========================
+============================
 
 {{#include ../links.md}}
 

@@ -1,11 +1,11 @@
 Create a Module from an AST
-==========================
+===========================
 
 {{#include ../../links.md}}
 
 
 `Module::eval_ast_as_new`
-------------------------
+-------------------------
 
 ```admonish info.side.wide "Encapsulated environment"
 

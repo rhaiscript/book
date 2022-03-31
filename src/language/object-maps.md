@@ -74,7 +74,7 @@ This is similar to JavaScript where accessing a non-existing property returns `u
 
 
 Built-in Functions
------------------
+------------------
 
 The following methods (defined in the [`BasicMapPackage`][built-in packages] but excluded if using a [raw `Engine`])
 operate on object maps.
@@ -172,7 +172,7 @@ y.len() == 0;
 
 
 No Support for Property Getters
-------------------------------
+-------------------------------
 
 In order not to affect the speed of accessing properties in an object map, new
 [property getters][getters/setters] cannot be registered because they conflict with the syntax of

@@ -67,7 +67,7 @@ add2(42) == 44;
 
 
 Global Definitions Only
-----------------------
+-----------------------
 
 Functions can only be defined at the global level, never inside a block or another function.
 
@@ -91,7 +91,7 @@ fn do_addition(x) {
 
 
 No Access to External Scope
---------------------------
+---------------------------
 
 Functions are not _closures_. They do not capture the calling environment and can only access their
 own parameters.
@@ -108,7 +108,7 @@ fn foo() {
 
 
 But Can Call Other Functions and Access Modules
-----------------------------------------------
+-----------------------------------------------
 
 All functions in the same [`AST`] can call each other.
 
@@ -171,7 +171,7 @@ fn foo(x) {
 
 
 Use Before Definition Allowed
-----------------------------
+-----------------------------
 
 Unlike C/C++, functions in Rhai can be defined _anywhere_ at global level.
 
@@ -190,7 +190,7 @@ fn foo(x) {         // <- define 'foo' after use
 
 
 Arguments are Passed by Value
-----------------------------
+-----------------------------
 
 Functions defined in script always take [`Dynamic`] parameters (i.e. they can be of any types).
 Therefore, functions with the same name and same _number_ of parameters are equivalent.

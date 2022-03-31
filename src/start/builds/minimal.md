@@ -29,7 +29,7 @@ If, for some reason, 64-bit long integers must be supported, use [`only_i64`] in
 
 
 Opt-Out of Features
-------------------
+-------------------
 
 Opt out of as many features as possible, if they are not needed, to reduce code size because,
 remember, by default all code is compiled into the final binary since what a script requires cannot
@@ -53,7 +53,7 @@ related to position tracking.
 
 
 Use a Raw [`Engine`]
--------------------
+--------------------
 
 [`Engine::new_raw`][raw `Engine`] creates a _raw_ engine. A _raw_ engine supports, out of the box,
 only a very [restricted set][built-in operators] of basic arithmetic and logical operators.

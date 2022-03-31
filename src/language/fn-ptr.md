@@ -63,7 +63,7 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 
 
 Warning &ndash; Not First-Class Functions
-----------------------------------------
+-----------------------------------------
 
 Beware that function pointers are _not_ first-class functions.
 
@@ -108,7 +108,7 @@ let x = my_mod::inc.call(41);       // runtime error:
 
 
 Warning &ndash; Global Namespace Only
-------------------------------------
+-------------------------------------
 
 ```admonish info.side.wide "See also"
 
@@ -222,7 +222,7 @@ Therefore, obviously, binding the `this` pointer is unsupported under [`no_objec
 
 
 Call a Function Pointer within a Rust Function (as a Callback)
-------------------------------------------------------------
+--------------------------------------------------------------
 
 It is completely normal to register a Rust function with an [`Engine`] that takes parameters
 whose types are function pointers.  The Rust type in question is `rhai::FnPtr`.
@@ -251,7 +251,7 @@ engine.register_result_fn("super_call", super_call);
 
 
 Call a Function Pointer Directly
--------------------------------
+--------------------------------
 
 The `FnPtr::call` method allows the function pointer to be called directly on any [`Engine`] and
 [`AST`], making it possible to reuse the `FnPtr` data type in may different calls and scripting

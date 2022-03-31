@@ -23,7 +23,7 @@ all-capital letters.
 
 
 Manually Add Constant into Custom Scope
---------------------------------------
+---------------------------------------
 
 ```admonish tip.side.wide "Tip: Singleton"
 
@@ -72,7 +72,7 @@ engine.run_with_scope(&mut scope, script)?;
 
 
 Caveat &ndash; Constants Can be Modified via Rust
-------------------------------------------------
+-------------------------------------------------
 
 ```admonish tip.side.wide "Tip: Plugin functions"
 

@@ -1,5 +1,5 @@
 Subtle Semantic Changes After Optimization
-=========================================
+==========================================
 
 {{#include ../../links.md}}
 
@@ -21,7 +21,7 @@ the optimization level to [`OptimizationLevel::None`].
 
 
 Disappearing Runtime Errors
---------------------------
+---------------------------
 
 For example:
 

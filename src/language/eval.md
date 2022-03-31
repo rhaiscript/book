@@ -4,7 +4,7 @@
 {{#include ../links.md}}
 
 Or "How to Shoot Yourself in the Foot even Easier"
-------------------------------------------------
+--------------------------------------------------
 
 Saving the best for last, there is the ever-dreaded... `eval` [function]!
 

@@ -1,5 +1,5 @@
 Scriptable Event Handler with State
-==================================
+===================================
 
 {{#include ../links.md}}
 

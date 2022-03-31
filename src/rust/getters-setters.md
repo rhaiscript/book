@@ -1,5 +1,5 @@
 Custom Type Property Getters and Setters
-=======================================
+========================================
 
 {{#include ../links.md}}
 

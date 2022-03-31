@@ -1,10 +1,10 @@
 Example Scripts
-==============
+===============
 
 {{#include ../../links.md}}
 
 Language Feature Scripts
------------------------
+------------------------
 
 There are also a number of examples scripts that showcase Rhai's features, all in the `scripts` directory:
 
@@ -36,7 +36,7 @@ There are also a number of examples scripts that showcase Rhai's features, all i
 
 
 Benchmark Scripts
-----------------
+-----------------
 
 The following scripts are for benchmarking the speed of Rhai:
 

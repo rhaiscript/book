@@ -1,5 +1,5 @@
 Logic Operators
-==============
+===============
 
 {{#include ../links.md}}
 
@@ -143,7 +143,7 @@ ts != ts;           // error: '!=' not defined, even though '==' is
 ```
 
 
-Boolean operators
+Boolean Operators
 -----------------
 
 ```admonish note.side

@@ -104,7 +104,7 @@ for ch in s.chars(2..s.len) {
 
 
 Iterate Through Numeric Ranges
------------------------------
+------------------------------
 
 [Ranges] are created via the `..` (exclusive) and `..=` (inclusive) operators.
 
@@ -197,7 +197,7 @@ for (bit, index) in x.bits(3..=12) {
 ```
 
 Iterate Through Object Maps
---------------------------
+---------------------------
 
 Two methods, `keys` and `values`, return [arrays] containing cloned _copies_
 of all property names and values of an [object map], respectively.
