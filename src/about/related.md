@@ -18,6 +18,8 @@ Related Resources
 
 * [Discord Chat](https://discord.gg/HquqbYFcZ9) &ndash; Rhai channel
 
+* [Discussion Forum](https://rhai.discourse.group/) &ndash; Rhai Forum
+
 * [Zulip Chat](https://rhaiscript.zulipchat.com) &ndash; Rhai organization
 
 * [Reddit](https://www.reddit.com/r/Rhai) &ndash; Rhai community
