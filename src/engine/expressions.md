@@ -36,7 +36,7 @@ let result: i64 = engine.eval_expression_with_scope(&mut scope,
 When evaluating _expressions_, no full-blown statement (e.g. [`if`], [`while`], [`for`], `fn`)
 &ndash; not even [variable] assignment &ndash; is supported and will be considered syntax errors.
 
-The is true even for [`if` expressions]({{rootUrl}}/language/if-expression.md), [`switch` expressions]({{rootUrl}}/language/switch-expression.md),
+This is true even for [`if` expressions]({{rootUrl}}/language/if-expression.md), [`switch` expressions]({{rootUrl}}/language/switch-expression.md),
 [statement expressions]({{rootUrl}}/language/statement-expression.md) and [anonymous functions]/[closures].
 
 ~~~rust
