@@ -20,7 +20,7 @@ let mut engine = Engine::new();
 
 // Register a custom operator '#' and give it a precedence of 160
 // (i.e. between +|- and *|/)
-// Also register the implementation of the customer operator as a function
+// Also register the implementation of the custom operator as a function
 engine.register_custom_operator("#", 160)?
       .register_fn("#", |x: i64, y: i64| (x * y) - (x + y));
 
