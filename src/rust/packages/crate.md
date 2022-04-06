@@ -13,8 +13,7 @@ Creating a custom [package] as an independent crate allows it to be shared by mu
 ```
 
 ```admonish example.small
-The project [`rhai-rand`](https://rhaiscript/rhai-rand) shows a simple example of creating a
-custom [package] as an independent crate.
+The project [`rhai-rand`] shows a simple example of creating a custom [package] as an independent crate.
 ```
 
 
