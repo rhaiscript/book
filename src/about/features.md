@@ -58,6 +58,8 @@ Features of Rhai
 
 * Sand-boxed &ndash; the scripting [`Engine`], if declared immutable, cannot mutate the containing
   environment unless [explicitly permitted]({{rootUrl}}/patterns/control.md).
+
+* Passes Miri.
 ```
 
 ```admonish bug "Rugged"
