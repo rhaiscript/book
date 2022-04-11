@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -185,7 +185,7 @@ are imported recursively.</p>
 <p><code>AST</code> public API</p>
 </div>
 <div>
-<p>For the complete <a href="/book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.6.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="/book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.6.1/rhai/struct.AST.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>

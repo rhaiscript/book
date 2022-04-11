@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -295,15 +295,32 @@ That’s where the 16 parameters limit comes from.</p>
 </div>
 <div>
 <p>Of course not. Don’t be silly.</p>
-<p>First of all, not every function has 16 parameters.</p>
-<p>In fact, you have a problem if you write such a function that you need to call regularly.
-It would be far more efficient to group some of those parameters into <a href="/book/language/object-maps.html">object maps</a>.</p>
+<h4 id="not-every-function-has-16-parameters"><a class="header" href="#not-every-function-has-16-parameters">Not every function has 16 parameters</a></h4>
+<p>Studies have repeatedly shown that most functions accepts few parameters, with the mean between
+2-3 parameters per function.  Functions with more than 5 parameters are rare in normal code bases.
+If at all, they are usually <a href="/book/language/fn-closure.html">closures</a> that <em>capture</em> lots of external variables, bumping up the
+parameter count.</p>
+<p>In fact, you have a bigger problem if you write such a function that you need to call regularly.
+It would be far more efficient to group those parameters into <a href="/book/language/object-maps.html">object maps</a>.</p>
 <h4 id="caching-to-the-rescue"><a class="header" href="#caching-to-the-rescue">Caching to the rescue</a></h4>
-<p>Also, function hashes are <em>cached</em>, so this process only happens <em>once</em>, and only up to the number of
+<p>Function hashes are <em>cached</em>, so this process only happens <em>once</em>, and only up to the number of
 rounds for the correct function to be found.</p>
 <p>If not, then yes, it will calculate up to 2<sup><em>n</em></sup> hashes where <em>n</em> is the number of
 arguments (up to 16). But again, this will only be done <em>once</em> for that particular
 combination of argument types.</p>
+</div>
+</div>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>But then… beware module functions</p>
+</div>
+<div>
+<p>The functions resolution <em>cache</em> resides only in the <a href="/book/language/fn-namespaces.html">global namespace</a>.
+This is a limitation.</p>
+<p>Therefore, calls to functions in an <a href="/book/language/modules/import.html"><code>import</code></a>ed <a href="/book/rust/modules/index.html">module</a> (i.e. <em>qualified</em> with
+a <a href="/book/language/fn-namespaces.html">namespace</a> path) do not have the benefit of a cache.</p>
+<p>Thus, up to 2<sup><em>n</em></sup> hashes are calculated during <em>every</em> function call.
+This is unlikely to cause a performance issue since most functions accept only a few parameters.</p>
 </div>
 </div>
 

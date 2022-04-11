@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../../theme/rhai.min.css">
 
     </head>
     <body>
@@ -184,8 +184,7 @@
 <p>Example</p>
 </div>
 <div>
-<p>The project <a href="https://rhaiscript/rhai-rand"><code>rhai-rand</code></a> shows a simple example of creating a
-custom <a href="/book/rust/packages/index.html">package</a> as an independent crate.</p>
+<p>The project <a href="/book/lib/rhai-rand.html"><code>rhai-rand</code></a> shows a simple example of creating a custom <a href="/book/rust/packages/index.html">package</a> as an independent crate.</p>
 </div>
 </div>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
@@ -194,7 +193,7 @@ custom <a href="/book/rust/packages/index.html">package</a> as an independent cr
 name = &quot;my-package&quot;     # 'my-package' crate
 
 [dependencies]
-rhai = &quot;1.6.0&quot;    # assuming 1.6.0 is the latest version
+rhai = &quot;1.6.1&quot;    # assuming 1.6.1 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><code class="language-rust">use rhai::def_package;

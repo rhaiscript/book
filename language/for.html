@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -212,14 +212,15 @@ for x in a {
 }
 </code></pre>
 <h2 id="iterate-through-strings"><a class="header" href="#iterate-through-strings">Iterate Through Strings</a></h2>
-<p>The <code>chars</code> method allows iterating through a <a href="/book/language/strings-chars.html">string</a>, yielding characters.</p>
-<p><code>chars</code> optionally accepts the character to start from (counting from the end if negative), as well
-as the number of characters to iterate (defaults all).</p>
+<p>Iterating through a <a href="/book/language/strings-chars.html">string</a> yields individual <a href="/book/language/strings-chars.html">characters</a>.</p>
+<p>The <code>chars</code> method also allow iterating through characters in a <a href="/book/language/strings-chars.html">string</a>, optionally accepting the
+character position to start from (counting from the end if negative), as well as the number of
+characters to iterate (defaults to all).</p>
 <p><code>char</code> also accepts a <a href="/book/language/ranges.html">range</a> which can be created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
 <pre><code class="language-rust">let s = &quot;hello, world!&quot;;
 
 // Iterate through all the characters.
-for ch in s.chars() {
+for ch in s {
     print(ch);
 }
 

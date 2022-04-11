@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -277,7 +277,7 @@ ts == ts;           // true: '==' defined
 
 ts != ts;           // error: '!=' not defined, even though '==' is
 </code></pre>
-<h2 id="boolean-operators"><a class="header" href="#boolean-operators">Boolean operators</a></h2>
+<h2 id="boolean-operators"><a class="header" href="#boolean-operators">Boolean Operators</a></h2>
 <div class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>

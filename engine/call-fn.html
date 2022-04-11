@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -238,7 +238,7 @@ In other words, the <a href="/book/engine/scope.html"><code>Scope</code></a> is 
 <p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
 </div>
 </div>
-<h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> trait</a></h2>
+<h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> Trait</a></h2>
 <div class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>

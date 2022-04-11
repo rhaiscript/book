@@ -13,7 +13,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -44,7 +44,7 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="theme/rhai.min.css">
 
     </head>
     <body>
@@ -165,7 +165,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.6.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.6.1</strong> of Rhai.</p>
 <p>For the latest development version, see <a href="about//book/vnext/">here</a>.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <div class="admonition question">
@@ -303,6 +303,9 @@ a number of additional dependencies are pulled in to provide for missing functio
 <li>
 <p>Sand-boxed – the scripting <a href="about//book/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing
 environment unless <a href="about//book/patterns/control.html">explicitly permitted</a>.</p>
+</li>
+<li>
+<p>Passes Miri.</p>
 </li>
 </ul>
 </div>
@@ -604,7 +607,7 @@ having to install anything.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.6.0&quot;    # assuming 1.6.0 is the latest version
+rhai = &quot;1.6.1&quot;    # assuming 1.6.1 is the latest version
 </code></pre>
 </div>
 </div>
@@ -698,7 +701,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.6.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;1.6.1&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>turns on these six features:</p>
 <table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
@@ -1089,7 +1092,7 @@ as well as for possible future expansion when references can also be put into th
 </div>
 <div>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.6.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.6.1/rhai/struct.Scope.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="example-4"><a class="header" href="#example-4">Example</a></h2>
@@ -1231,7 +1234,7 @@ let result: i64 = engine.eval_expression_with_scope(&amp;mut scope,
 <div>
 <p>When evaluating <em>expressions</em>, no full-blown statement (e.g. <a href="engine//book/language/if.html"><code>if</code></a>, <a href="engine//book/language/while.html"><code>while</code></a>, <a href="engine//book/language/for.html"><code>for</code></a>, <code>fn</code>)
 – not even <a href="engine//book/language/variables.html">variable</a> assignment – is supported and will be considered syntax errors.</p>
-<p>The is true even for <a href="engine//book/language/if-expression.html"><code>if</code> expressions</a>, <a href="engine//book/language/switch-expression.html"><code>switch</code> expressions</a>,
+<p>This is true even for <a href="engine//book/language/if-expression.html"><code>if</code> expressions</a>, <a href="engine//book/language/switch-expression.html"><code>switch</code> expressions</a>,
 <a href="engine//book/language/statement-expression.html">statement expressions</a> and <a href="engine//book/language/fn-anon.html">anonymous functions</a>/<a href="engine//book/language/fn-closure.html">closures</a>.</p>
 <pre><code class="language-rust">// The following are all syntax errors because the script
 // is not a strict expression.
@@ -1452,7 +1455,7 @@ style to take advantage of this.</p>
 <p>However, there are limits to its intelligence, and only <strong>simple variable references</strong> are optimized.</p>
 <pre><code class="language-rust">x = x + 1;          // &lt;- this statement...
 
-x += x;             // ... is rewritten as this
+x += 1;             // ... is rewritten as this
 
 x[y] = x[y] + 1;    // &lt;- but this is not, so this is MUCH slower...
 
@@ -2020,15 +2023,32 @@ That’s where the 16 parameters limit comes from.</p>
 </div>
 <div>
 <p>Of course not. Don’t be silly.</p>
-<p>First of all, not every function has 16 parameters.</p>
-<p>In fact, you have a problem if you write such a function that you need to call regularly.
-It would be far more efficient to group some of those parameters into <a href="rust//book/language/object-maps.html">object maps</a>.</p>
+<h4 id="not-every-function-has-16-parameters"><a class="header" href="#not-every-function-has-16-parameters">Not every function has 16 parameters</a></h4>
+<p>Studies have repeatedly shown that most functions accepts few parameters, with the mean between
+2-3 parameters per function.  Functions with more than 5 parameters are rare in normal code bases.
+If at all, they are usually <a href="rust//book/language/fn-closure.html">closures</a> that <em>capture</em> lots of external variables, bumping up the
+parameter count.</p>
+<p>In fact, you have a bigger problem if you write such a function that you need to call regularly.
+It would be far more efficient to group those parameters into <a href="rust//book/language/object-maps.html">object maps</a>.</p>
 <h4 id="caching-to-the-rescue"><a class="header" href="#caching-to-the-rescue">Caching to the rescue</a></h4>
-<p>Also, function hashes are <em>cached</em>, so this process only happens <em>once</em>, and only up to the number of
+<p>Function hashes are <em>cached</em>, so this process only happens <em>once</em>, and only up to the number of
 rounds for the correct function to be found.</p>
 <p>If not, then yes, it will calculate up to 2<sup><em>n</em></sup> hashes where <em>n</em> is the number of
 arguments (up to 16). But again, this will only be done <em>once</em> for that particular
 combination of argument types.</p>
+</div>
+</div>
+<div class="admonition danger">
+<div class="admonition-title">
+<p>But then… beware module functions</p>
+</div>
+<div>
+<p>The functions resolution <em>cache</em> resides only in the <a href="rust//book/language/fn-namespaces.html">global namespace</a>.
+This is a limitation.</p>
+<p>Therefore, calls to functions in an <a href="rust//book/language/modules/import.html"><code>import</code></a>ed <a href="rust//book/rust/modules/index.html">module</a> (i.e. <em>qualified</em> with
+a <a href="rust//book/language/fn-namespaces.html">namespace</a> path) do not have the benefit of a cache.</p>
+<p>Thus, up to 2<sup><em>n</em></sup> hashes are calculated during <em>every</em> function call.
+This is unlikely to cause a performance issue since most functions accept only a few parameters.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nativecallcontext"><a class="header" href="#nativecallcontext"><code>NativeCallContext</code></a></h1>
@@ -2202,7 +2222,7 @@ In other words, the <a href="engine//book/engine/scope.html"><code>Scope</code><
 <p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
 </div>
 </div>
-<h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> trait</a></h2>
+<h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> Trait</a></h2>
 <div class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>
@@ -3266,7 +3286,7 @@ change from time to time.</p>
 </div>
 <div>
 <p>For the complete <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.6.0/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.6.1/rhai/struct.Module.html">documentation</a> online.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
@@ -4832,8 +4852,7 @@ def_package! {
 <p>Example</p>
 </div>
 <div>
-<p>The project <a href="https://rhaiscript/rhai-rand"><code>rhai-rand</code></a> shows a simple example of creating a
-custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an independent crate.</p>
+<p>The project <a href="rust/packages//book/lib/rhai-rand.html"><code>rhai-rand</code></a> shows a simple example of creating a custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an independent crate.</p>
 </div>
 </div>
 <h2 id="implementation-1"><a class="header" href="#implementation-1">Implementation</a></h2>
@@ -4842,7 +4861,7 @@ custom <a href="rust/packages//book/rust/packages/index.html">package</a> as an 
 name = &quot;my-package&quot;     # 'my-package' crate
 
 [dependencies]
-rhai = &quot;1.6.0&quot;    # assuming 1.6.0 is the latest version
+rhai = &quot;1.6.1&quot;    # assuming 1.6.1 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><code class="language-rust">use rhai::def_package;
@@ -4895,7 +4914,7 @@ def_package! {
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.6.0&quot;
+rhai = &quot;1.6.1&quot;
 rhai-rand = &quot;0.1&quot;       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -4921,7 +4940,7 @@ engine.register_global_module(random.as_shared_module());
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version=&quot;1.6.0&quot;, features = [&quot;no_float&quot;] }
+rhai = { version=&quot;1.6.1&quot;, features = [&quot;no_float&quot;] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&quot;array&quot;] }
@@ -6597,6 +6616,7 @@ using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) op
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of characters (<strong>not</strong> number of bytes) in the string</td></tr>
 <tr><td><code>bytes</code> method and property</td><td><em>none</em></td><td>returns the number of bytes making up the UTF-8 string; for strings containing only ASCII characters, this is much faster than <code>len</code></td></tr>
 <tr><td><code>to_blob</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td><em>none</em></td><td>converts the string into an UTF-8 encoded byte-stream and returns it as a <a href="language//book/language/blobs.html">BLOB</a>.</td></tr>
+<tr><td><code>to_chars</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td><em>none</em></td><td>splits the string by individual characters, returning them as an <a href="language//book/language/arrays.html">array</a></td></tr>
 <tr><td><code>get</code></td><td>position, counting from end if &lt; 0</td><td>gets the character at a certain position (<a href="language//book/language/values-and-types.html"><code>()</code></a> if the position is not valid)</td></tr>
 <tr><td><code>set</code></td><td><ol><li>position, counting from end if &lt; 0</li><li>new character</li></ol></td><td>sets a certain position to a new character (no effect if the position is not valid)</td></tr>
 <tr><td><code>pad</code></td><td><ol><li>target length</li><li>character/string to pad</li></ol></td><td>pads the string with a character or a string to at least a specified length</td></tr>
@@ -6616,7 +6636,7 @@ using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a>) op
 <tr><td><code>index_of</code></td><td><ol><li>character/sub-string to search for</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position that a certain character or sub-string occurs in the string, or −1 if not found</td></tr>
 <tr><td><code>sub_string</code></td><td><ol><li>start position, counting from end if &lt; 0</li><li><em>(optional)</em> number of characters to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a sub-string</td></tr>
 <tr><td><code>sub_string</code></td><td><a href="language//book/language/ranges.html">range</a> of characters to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a sub-string</td></tr>
-<tr><td><code>split</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td><em>none</em></td><td>splits the string by individual characters, returning an <a href="language//book/language/arrays.html">array</a> of characters</td></tr>
+<tr><td><code>split</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td><em>none</em></td><td>splits the string by whitespaces, returning an <a href="language//book/language/arrays.html">array</a> of string segments</td></tr>
 <tr><td><code>split</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td>position to split at (in number of characters), counting from end if &lt; 0, end if ≥ length</td><td>splits the string into two segments at the specified character position, returning an <a href="language//book/language/arrays.html">array</a> of two string segments</td></tr>
 <tr><td><code>split</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td><ol><li>delimiter character/string</li><li><em>(optional)</em> maximum number of segments, 1 if &lt; 1</li></ol></td><td>splits the string by the specified delimiter, returning an <a href="language//book/language/arrays.html">array</a> of string segments</td></tr>
 <tr><td><code>split_rev</code><br/>(not available under <a href="language//book/start/features.html"><code>no_index</code></a>)</td><td><ol><li>delimiter character/string</li><li><em>(optional)</em> maximum number of segments, 1 if &lt; 1</li></ol></td><td>splits the string by the specified delimiter in reverse order, returning an <a href="language//book/language/arrays.html">array</a> of string segments</td></tr>
@@ -8324,7 +8344,7 @@ ts == ts;           // true: '==' defined
 
 ts != ts;           // error: '!=' not defined, even though '==' is
 </code></pre>
-<h2 id="boolean-operators"><a class="header" href="#boolean-operators">Boolean operators</a></h2>
+<h2 id="boolean-operators"><a class="header" href="#boolean-operators">Boolean Operators</a></h2>
 <div class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>
@@ -8807,14 +8827,15 @@ for x in a {
 }
 </code></pre>
 <h2 id="iterate-through-strings"><a class="header" href="#iterate-through-strings">Iterate Through Strings</a></h2>
-<p>The <code>chars</code> method allows iterating through a <a href="language//book/language/strings-chars.html">string</a>, yielding characters.</p>
-<p><code>chars</code> optionally accepts the character to start from (counting from the end if negative), as well
-as the number of characters to iterate (defaults all).</p>
+<p>Iterating through a <a href="language//book/language/strings-chars.html">string</a> yields individual <a href="language//book/language/strings-chars.html">characters</a>.</p>
+<p>The <code>chars</code> method also allow iterating through characters in a <a href="language//book/language/strings-chars.html">string</a>, optionally accepting the
+character position to start from (counting from the end if negative), as well as the number of
+characters to iterate (defaults to all).</p>
 <p><code>char</code> also accepts a <a href="language//book/language/ranges.html">range</a> which can be created via the <code>..</code> (exclusive) and <code>..=</code> (inclusive) operators.</p>
 <pre><code class="language-rust">let s = &quot;hello, world!&quot;;
 
 // Iterate through all the characters.
-for ch in s.chars() {
+for ch in s {
     print(ch);
 }
 
@@ -11822,7 +11843,7 @@ are imported recursively.</p>
 <p><code>AST</code> public API</p>
 </div>
 <div>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.6.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.6.1/rhai/struct.AST.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
@@ -12270,9 +12291,9 @@ a normal expression.</p>
 are parsed in the order defined within the custom syntax.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.6.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
 <p>The function <code>Engine::on_parse_token</code>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.6.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <h2 id="function-signature-4"><a class="header" href="#function-signature-4">Function Signature</a></h2>
 <div class="admonition tip side">
 <div class="admonition-title">
@@ -12289,9 +12310,9 @@ as the mapped token.</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
-<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.6.0/rhai/enum.Token.html">token</a></td></tr>
-<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
 <h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
 <pre><code class="language-rust">use rhai::{Engine, FLOAT, Token};
@@ -12371,7 +12392,7 @@ let mut engine = Engine::new();
 
 // Register a custom operator '#' and give it a precedence of 160
 // (i.e. between +|- and *|/)
-// Also register the implementation of the customer operator as a function
+// Also register the implementation of the custom operator as a function
 engine.register_custom_operator(&quot;#&quot;, 160)?
       .register_fn(&quot;#&quot;, |x: i64, y: i64| (x * y) - (x + y));
 
@@ -15264,7 +15285,7 @@ let mut engine = create_scripting_engine(my_config);
 <h3 id="make-sure-that-rhai-has-the-appropriate-features"><a class="header" href="#make-sure-that-rhai-has-the-appropriate-features">Make sure that Rhai has the appropriate feature(s)</a></h3>
 <p>In the project’s <code>Cargo.toml</code>, specify the Rhai dependency with <code>bin-features</code>.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.6.0&quot;, features = [&quot;bin-features&quot;] }
+rhai = { version = &quot;1.6.1&quot;, features = [&quot;bin-features&quot;] }
 </code></pre>
 <h3 id="rebuild"><a class="header" href="#rebuild">Rebuild</a></h3>
 <p>Rebuild the project, which should automatically build all the customized tools.</p>
@@ -15322,7 +15343,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.6.0&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;1.6.1&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }

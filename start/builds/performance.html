@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../../theme/rhai.min.css">
 
     </head>
     <body>
@@ -243,7 +243,7 @@ style to take advantage of this.</p>
 <p>However, there are limits to its intelligence, and only <strong>simple variable references</strong> are optimized.</p>
 <pre><code class="language-rust">x = x + 1;          // &lt;- this statement...
 
-x += x;             // ... is rewritten as this
+x += 1;             // ... is rewritten as this
 
 x[y] = x[y] + 1;    // &lt;- but this is not, so this is MUCH slower...
 

@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -197,7 +197,7 @@ let result: i64 = engine.eval_expression_with_scope(&amp;mut scope,
 <div>
 <p>When evaluating <em>expressions</em>, no full-blown statement (e.g. <a href="/book/language/if.html"><code>if</code></a>, <a href="/book/language/while.html"><code>while</code></a>, <a href="/book/language/for.html"><code>for</code></a>, <code>fn</code>)
 – not even <a href="/book/language/variables.html">variable</a> assignment – is supported and will be considered syntax errors.</p>
-<p>The is true even for <a href="/book/language/if-expression.html"><code>if</code> expressions</a>, <a href="/book/language/switch-expression.html"><code>switch</code> expressions</a>,
+<p>This is true even for <a href="/book/language/if-expression.html"><code>if</code> expressions</a>, <a href="/book/language/switch-expression.html"><code>switch</code> expressions</a>,
 <a href="/book/language/statement-expression.html">statement expressions</a> and <a href="/book/language/fn-anon.html">anonymous functions</a>/<a href="/book/language/fn-closure.html">closures</a>.</p>
 <pre><code class="language-rust">// The following are all syntax errors because the script
 // is not a strict expression.
