@@ -135,7 +135,7 @@ However, there are limits to its intelligence, and only **simple variable refere
 ~~~rust
 x = x + 1;          // <- this statement...
 
-x += x;             // ... is rewritten as this
+x += 1;             // ... is rewritten as this
 
 x[y] = x[y] + 1;    // <- but this is not, so this is MUCH slower...
 
