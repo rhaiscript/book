@@ -68,10 +68,11 @@ for x in a {
 Iterate Through Strings
 -----------------------
 
-The `chars` method allows iterating through a [string], yielding characters.
+Iterating through a [string] yields individual [characters].
 
-`chars` optionally accepts the character to start from (counting from the end if negative), as well
-as the number of characters to iterate (defaults all).
+The `chars` method also allow iterating through characters in a [string], optionally accepting the
+character position to start from (counting from the end if negative), as well as the number of
+characters to iterate (defaults to all).
 
 `char` also accepts a [range] which can be created via the `..` (exclusive) and `..=` (inclusive) operators.
 
@@ -79,7 +80,7 @@ as the number of characters to iterate (defaults all).
 let s = "hello, world!";
 
 // Iterate through all the characters.
-for ch in s.chars() {
+for ch in s {
     print(ch);
 }
 

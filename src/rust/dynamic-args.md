@@ -159,17 +159,34 @@ That's where the 16 parameters limit comes from.
 
 Of course not. Don't be silly.
 
-First of all, not every function has 16 parameters.
+#### Not every function has 16 parameters
 
-In fact, you have a problem if you write such a function that you need to call regularly.
-It would be far more efficient to group some of those parameters into [object maps].
+Studies have repeatedly shown that most functions accepts few parameters, with the mean between
+2-3 parameters per function.  Functions with more than 5 parameters are rare in normal code bases.
+If at all, they are usually [closures] that _capture_ lots of external variables, bumping up the
+parameter count.
+
+In fact, you have a bigger problem if you write such a function that you need to call regularly.
+It would be far more efficient to group those parameters into [object maps].
 
 #### Caching to the rescue
 
-Also, function hashes are _cached_, so this process only happens _once_, and only up to the number of
+Function hashes are _cached_, so this process only happens _once_, and only up to the number of
 rounds for the correct function to be found.
 
 If not, then yes, it will calculate up to 2<sup>_n_</sup> hashes where _n_ is the number of
 arguments (up to 16). But again, this will only be done _once_ for that particular
 combination of argument types.
+```
+
+```admonish danger "But then... beware module functions"
+
+The functions resolution _cache_ resides only in the [global namespace][function namespace].
+This is a limitation.
+
+Therefore, calls to functions in an [`import`]ed [module] (i.e. _qualified_ with
+a [namespace][function namespace] path) do not have the benefit of a cache.
+
+Thus, up to 2<sup>_n_</sup> hashes are calculated during _every_ function call.
+This is unlikely to cause a performance issue since most functions accept only a few parameters.
 ```
