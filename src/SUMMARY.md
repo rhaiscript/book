@@ -222,6 +222,7 @@ Usage Patterns
   - [JS Style](patterns/events-2.md)
   - [Map Style](patterns/events-3.md)
 - [Dynamic Constants Provider](patterns/dynamic-const.md)
+- [Simulate Macros to Simplify Scripts](patterns/macros.md)
 - [Domain-Specific Tools](patterns/domain-tools.md)
 - [Multiple Instantiation](patterns/multiple.md)
 
