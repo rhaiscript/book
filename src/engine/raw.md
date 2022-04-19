@@ -39,7 +39,7 @@ use rhai::module_resolvers::FileModuleResolver;
 use rhai::packages::StandardPackage;
 
 // Create a raw scripting Engine
-let mut engine = Self::new_raw();
+let mut engine = Engine::new_raw();
 
 // Use the file-based module resolver
 engine.set_module_resolver(FileModuleResolver::new());
