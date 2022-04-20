@@ -44,10 +44,23 @@ Size
 Also look into [minimal builds] to reduce generated WASM size.
 
 As of this version, a typical, full-featured Rhai scripting engine compiles to a single WASM file
-less than 200KB gzipped.
+less than 300KB gzipped.
 
 When excluding features that are marginal in WASM environment, the gzipped payload can be
 further shrunk to 160KB.
+
+The following standard [packages][built-in packages], when excluded, provide the corresponding size savings:
+
+|       Package       | WASM size saving |
+| :-----------------: | :--------------: |
+|    `CorePackage`    |      18 KB       |
+|  `BitFieldPackage`  |       1 KB       |
+|   `LogicPackage`    |      < 1 KB      |
+| `BasicMathPackage`  |       1 KB       |
+| `BasicArrayPackage` |      15 KB       |
+| `BasicBlobPackage`  |       7 KB       |
+|  `BasicMapPackage`  |       4 KB       |
+| `MoreStringPackage` |      34 KB       |
 
 
 Speed
