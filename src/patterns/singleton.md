@@ -23,9 +23,9 @@ Singleton Command Object
 
 * Leverage [function overloading] to simplify the API design.
 
-* Since Rhai is _[sand-boxed]_, it cannot mutate the environment.  To perform external actions via
-  an API, the command object type must be wrapped in a `RefCell` (or `RwLock`/`Mutex` for [`sync`])
-  and shared to the [`Engine`].
+* Since Rhai is _[sand-boxed]_, it cannot mutate anything outside of its internal environment.
+  To perform external actions via an API, the command object type must be wrapped in a `RefCell`
+  (or `RwLock`/`Mutex` for [`sync`]) and shared to the [`Engine`].
 
 * Load each command object into a custom [`Scope`] as constant variables.
 
