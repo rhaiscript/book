@@ -19,7 +19,7 @@ Function Signature
 
 ```admonish tip.side "Tip: Raising errors"
 
-Raise a parse error by returning [`Token::LexError`](https://docs.rs/rhai/1.0.5/rhai/enum.Token.html#variant.LexError)
+Raise a parse error by returning [`Token::LexError`](https://docs.rs/rhai/{{version}}/rhai/enum.Token.html#variant.LexError)
 as the mapped token.
 ```
 
@@ -54,6 +54,11 @@ engine.on_parse_token(|token, pos, state| {
         // Change all integer literals to floating-point
         Token::IntegerConstant(n) => Token::FloatConstant((n as FLOAT).into()),
         
+        // Disallow '()'
+        Token::Unit => Token::LexError(
+            LexError::ImproperSymbol("()".to_string(), "".to_string()).into()
+        ),
+
         // Pass through all other tokens unchanged
         _ => token
     }
