@@ -12,7 +12,7 @@
 <script>
     var localAddrs = ["localhost", "127.0.0.1", ""];
 
-    // make sure we don't activate google analytics if the developer is inspecting the book locally...
+    // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
     if (localAddrs.indexOf(document.location.hostname) === -1) {
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -43,8 +43,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../stylesheets/rhai.min.css">
-        <link rel="stylesheet" href="../stylesheets/mdbook-admonish.css">
+        <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
     <body>
@@ -96,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../about/index.html">What is Rhai</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User’s Guide</li><li class="chapter-item expanded "><a href="../about/features.html">Features of Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="../start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">“Hello, Rhai”</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/builtin.html">Built-in Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Options</a></li></ol></li><li class="chapter-item expanded "><a href="../start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li><li class="chapter-item expanded "><a href="../start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Rust Integration</li><li class="chapter-item expanded "><a href="../rust/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters</a></li><li class="chapter-item expanded "><a href="../rust/generic.html">Generic Functions</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Fallible Functions</a></li><li class="chapter-item expanded "><a href="../rust/dynamic-args.html">Dynamic Parameters</a></li><li class="chapter-item expanded "><a href="../rust/context.html">NativeCallContext</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="../rust/custom.html">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="../rust/methods.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="../rust/collections.html">Collection Types</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create in Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/use.html">Use a Module</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/self-contained.html">Self-Contained AST</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/module.html" class="active">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="../plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Create Custom Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/crate.html">Create Packages as Crates</a></li><li class="chapter-item expanded "><a href="../lib/index.html">External Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lib/rhai-rand.html">Random Number Generation, Shuffling and Sampling</a></li><li class="spacer"></li></ol></li></ol></li><li class="chapter-item expanded "><li class="part-title">Language Reference</li><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/dynamic-tag.html">Value Tag</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li></ol></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Standard Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="../language/ranges.html">Ranges</a></li><li class="chapter-item expanded "><a href="../language/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/immutable-string.html">ImmutableString</a></li><li class="chapter-item expanded "><a href="../language/string-fn.html">Standard Functions and Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/blobs.html">BLOB's (Byte Arrays)</a></li></ol></li><li class="chapter-item expanded "><a href="../language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Timestamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/statement-expression.html">Statement Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/shadow.html">Variable Shadowing</a></li><li class="chapter-item expanded "><a href="../engine/strict-var.html">Strict Variables Mode</a></li><li class="chapter-item expanded "><a href="../engine/def-var.html">Variable Definition Filter</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li></ol></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/global.html">Automatic Global Module</a></li></ol></li><li class="chapter-item expanded "><a href="../language/assignment.html">Assignments</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Compound Assignments</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/in.html">In Operator</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/if-expression.html">If Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/switch-expression.html">Switch Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iterator.html">Make a Custom Type Iterable</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Value</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-metadata.html">Get Scripted Functions Metadata in Rhai</a></li><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Get Native Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export All Functions Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules from Script</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Safety and Protection</li><li class="chapter-item expanded "><a href="../safety/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a></li><li class="chapter-item expanded "><a href="../safety/progress.html">Tracking Progress and Force-Termination</a></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Expression Depth</a></li><li class="chapter-item expanded "><a href="../safety/checked.html">Turn Off Safety Checks</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Script Optimization</li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Introduction</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="../engine/optimize/dead-code.html">Dead Code Elimination</a></li><li class="chapter-item expanded "><a href="../engine/optimize/constants.html">Constants Propagation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/rewrite.html">Compound Assignment Rewrite</a></li><li class="chapter-item expanded "><a href="../engine/optimize/op-eval.html">Eager Operator Evaluation</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Advanced Topics</li><li class="chapter-item expanded "><a href="../engine/ast.html">Manage AST's</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API to Register Functions</a></li><li class="chapter-item expanded "><a href="../engine/eval-context.html">Evaluation Context</a></li><li class="chapter-item expanded "><a href="../language/fn-parent-scope.html">Call Function Within Caller's Scope</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use Rhai as a DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/token-mapper.html">Remap Tokens During Parsing</a></li><li class="chapter-item expanded "><a href="../engine/disable-keywords.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/disable-looping.html">Disable Looping</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html">Extend with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/index.html">Debugging Interface</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/debugger.html">Debugger</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/state.html">State</a></li><li class="chapter-item expanded "><a href="../engine/debugging/call-stack.html">Call Stack</a></li><li class="chapter-item expanded "><a href="../engine/debugging/break-points.html">Break-Points</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/server.html">Debugging Server</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Usage Patterns</li><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/hot-reload.html">Hot Reloading</a></li><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer Over Rust Backend</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command Object</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layered Functions</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/multi-threading.html">Multi-Threaded Synchronization</a></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/events-1.html">Main Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-2.html">JS Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-3.html">Map Style</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li><li class="chapter-item expanded "><a href="../patterns/domain-tools.html">Domain-Specific Tools</a></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../about/index.html">What is Rhai</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User’s Guide</li><li class="chapter-item expanded "><a href="../about/features.html">Features of Rhai</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="../start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/index.html">Using the Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">“Hello, Rhai”</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/builtin.html">Built-in Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Options</a></li></ol></li><li class="chapter-item expanded "><a href="../start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li><li class="chapter-item expanded "><a href="../start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Rust Integration</li><li class="chapter-item expanded "><a href="../rust/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters</a></li><li class="chapter-item expanded "><a href="../rust/generic.html">Generic Functions</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Fallible Functions</a></li><li class="chapter-item expanded "><a href="../rust/dynamic-args.html">Dynamic Parameters</a></li><li class="chapter-item expanded "><a href="../rust/context.html">NativeCallContext</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="../rust/custom.html">Register any Rust Type and its Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="../rust/methods.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="../rust/collections.html">Collection Types</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create in Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/use.html">Use a Module</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/self-contained.html">Self-Contained AST</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/module.html" class="active">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="../plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Create Custom Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/crate.html">Create Packages as Crates</a></li><li class="chapter-item expanded "><a href="../lib/index.html">External Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lib/rhai-rand.html">Random Number Generation, Shuffling and Sampling</a></li><li class="spacer"></li></ol></li></ol></li><li class="chapter-item expanded "><li class="part-title">Language Reference</li><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/dynamic-tag.html">Value Tag</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li></ol></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Standard Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="../language/ranges.html">Ranges</a></li><li class="chapter-item expanded "><a href="../language/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/immutable-string.html">ImmutableString</a></li><li class="chapter-item expanded "><a href="../language/string-fn.html">Standard Functions and Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/blobs.html">BLOB's (Byte Arrays)</a></li></ol></li><li class="chapter-item expanded "><a href="../language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Timestamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/statement-expression.html">Statement Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/shadow.html">Variable Shadowing</a></li><li class="chapter-item expanded "><a href="../engine/strict-var.html">Strict Variables Mode</a></li><li class="chapter-item expanded "><a href="../engine/def-var.html">Variable Definition Filter</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li></ol></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/global.html">Automatic Global Module</a></li></ol></li><li class="chapter-item expanded "><a href="../language/assignment.html">Assignments</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Compound Assignments</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/in.html">In Operator</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/if-expression.html">If Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/switch-expression.html">Switch Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iterator.html">Make a Custom Type Iterable</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Value</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-metadata.html">Get Scripted Functions Metadata in Rhai</a></li><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Get Native Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export All Functions Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules from Script</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Safety and Protection</li><li class="chapter-item expanded "><a href="../safety/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a></li><li class="chapter-item expanded "><a href="../safety/progress.html">Tracking Progress and Force-Termination</a></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Expression Depth</a></li><li class="chapter-item expanded "><a href="../safety/checked.html">Turn Off Safety Checks</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Script Optimization</li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Introduction</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/optimize-levels.html">Optimization Levels</a></li><li class="chapter-item expanded "><a href="../engine/optimize/dead-code.html">Dead Code Elimination</a></li><li class="chapter-item expanded "><a href="../engine/optimize/constants.html">Constants Propagation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/rewrite.html">Compound Assignment Rewrite</a></li><li class="chapter-item expanded "><a href="../engine/optimize/op-eval.html">Eager Operator Evaluation</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Advanced Topics</li><li class="chapter-item expanded "><a href="../engine/ast.html">Manage AST's</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API to Register Functions</a></li><li class="chapter-item expanded "><a href="../engine/eval-context.html">Evaluation Context</a></li><li class="chapter-item expanded "><a href="../language/fn-parent-scope.html">Call Function Within Caller's Scope</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use Rhai as a DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/token-mapper.html">Remap Tokens During Parsing</a></li><li class="chapter-item expanded "><a href="../engine/disable-keywords.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/disable-looping.html">Disable Looping</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html">Extend with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/index.html">Debugging Interface</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/debugger.html">Debugger</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/state.html">State</a></li><li class="chapter-item expanded "><a href="../engine/debugging/call-stack.html">Call Stack</a></li><li class="chapter-item expanded "><a href="../engine/debugging/break-points.html">Break-Points</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/server.html">Debugging Server</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Usage Patterns</li><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working With Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/hot-reload.html">Hot Reloading</a></li><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer Over Rust Backend</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command Object</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layered Functions</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/multi-threading.html">Multi-Threaded Synchronization</a></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/events-1.html">Main Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-2.html">JS Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-3.html">Map Style</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li><li class="chapter-item expanded "><a href="../patterns/macros.html">Simulate Macros to Simplify Scripts</a></li><li class="chapter-item expanded "><a href="../patterns/domain-tools.html">Domain-Specific Tools</a></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,12 +166,8 @@
 <h2 id="import-prelude"><a class="header" href="#import-prelude">Import Prelude</a></h2>
 <p>When using the plugins system, the entire <code>rhai::plugin</code> module must be imported as a prelude
 because code generated will need these imports.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;
-<span class="boring">}
-</span></code></pre></pre>
+<pre><code class="language-rust">use rhai::plugin::*;
+</code></pre>
 <h2 id="export_module"><a class="header" href="#export_module"><code>#[export_module]</code></a></h2>
 <p>When applied to a Rust module, the <code>#[export_module]</code> attribute generates the necessary code and
 metadata to allow Rhai access to its public (i.e. marked <code>pub</code>) functions, constants, <a href="https://doc.rust-lang.org/reference/items/type-aliases.html">type aliases</a>,
@@ -187,10 +182,7 @@ aliases</a> become <a href="/book/vnext/rust/custom.html">custom types</a>, and 
 <tr><td style="text-align: center"><code>pub</code> function</td><td style="text-align: center"><code>pub fn foo(...) { ... }</code></td><td style="text-align: center">function</td></tr>
 <tr><td style="text-align: center"><code>pub</code> sub-module</td><td style="text-align: center"><code>pub mod foo { ... }</code></td><td style="text-align: center"><a href="/book/vnext/rust/modules/index.html">sub-module</a></td></tr>
 </tbody></table>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+<pre><code class="language-rust">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 // My custom type
 pub struct TestStruct {
@@ -261,8 +253,7 @@ mod my_module {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <div class="admonition tip small">
 <div class="admonition-title">
 <p>Doc-comments</p>
@@ -287,7 +278,7 @@ developing <a href="/book/vnext/rust/packages/create.html">custom packages</a>.<
 <li>use the <code>exported_module!</code> macro to turn it into a normal Rhai <a href="/book/vnext/rust/modules/index.html">module</a>,</li>
 <li>call <code>Engine::register_global_module</code> to register it</li>
 </ol>
-<pre><pre class="playground"><code class="language-rust no_run">fn main() {
+<pre><code class="language-rust">fn main() {
     let mut engine = Engine::new();
 
     // The macro call creates a Rhai module from the plugin module.
@@ -296,15 +287,12 @@ developing <a href="/book/vnext/rust/packages/create.html">custom packages</a>.<
     // A module can simply be registered into the global namespace.
     engine.register_global_module(module.into());
 }
-</code></pre></pre>
+</code></pre>
 <p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code>, <code>create_abc</code> and
 <code>increment</code>, the <code>value</code> <a href="/book/vnext/rust/getters-setters.html">property getter</a>), and the <code>TestStruct</code> <a href="/book/vnext/rust/custom.html">custom type</a>
 (with friendly name <code>ABC</code>) are automatically registered into the <a href="/book/vnext/engine/hello-world.html"><code>Engine</code></a> when
 <code>Engine::register_global_module</code> is called.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let x = greet(&quot;world&quot;);
+<pre><code class="language-rust">let x = greet(&quot;world&quot;);
 x == &quot;hello, world!&quot;;
 
 let x = greet(get_num().to_string());
@@ -322,8 +310,7 @@ abc.value == 42;
 abc.increment();
 
 abc.value == 43;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <div class="admonition warning small">
 <div class="admonition-title">
 <p>Only functions</p>
@@ -340,7 +327,7 @@ abc.value == 43;
 <li>call <code>Engine::register_static_module</code> to register it under a particular <a href="/book/vnext/language/fn-namespaces.html">module
 namespace</a></li>
 </ol>
-<pre><pre class="playground"><code class="language-rust no_run">fn main() {
+<pre><code class="language-rust">fn main() {
     let mut engine = Engine::new();
 
     // The macro call creates a Rhai module from the plugin module.
@@ -349,13 +336,10 @@ namespace</a></li>
     // A module can simply be registered as a static module namespace.
     engine.register_static_module(&quot;service&quot;, module.into());
 }
-</code></pre></pre>
+</code></pre>
 <p>The functions contained within the module definition (i.e. <code>greet</code>, <code>get_num</code> and <code>increment</code>), plus
 the constant <code>MY_NUMBER</code>, are automatically registered under the <a href="/book/vnext/language/fn-namespaces.html">module namespace</a> <code>service</code>:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let x = service::greet(&quot;world&quot;);
+<pre><code class="language-rust">let x = service::greet(&quot;world&quot;);
 x == &quot;hello, world!&quot;;
 
 service::MY_NUMBER == 42;
@@ -375,8 +359,7 @@ abc.value == 42;
 service::increment(abc);
 
 abc.value == 43;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Default global</p>
@@ -391,14 +374,10 @@ abc.value == 43;
 <a href="/book/vnext/language/for.html">iteration</a>, <a href="/book/vnext/rust/getters-setters.html">getters/setters</a> and <a href="/book/vnext/rust/indexers.html">indexers</a> for <a href="/book/vnext/rust/custom.html">custom types</a> can work as expected.</p>
 <p>Therefore, in the example above, the <code>increment</code> method (defined with <code>#[rhai_fn(global)]</code>)
 works fine when called in method-call style:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let x = 42;
+<pre><code class="language-rust">let x = 42;
 x.increment();
 x == 43;
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h3 id="load-dynamically"><a class="header" href="#load-dynamically">Load Dynamically</a></h3>
 <div class="admonition info side wide">
 <div class="admonition-title">
@@ -425,10 +404,7 @@ put <em>feature gates</em> or <em>compile-time gates</em> (i.e. <code>#[cfg(...)
 without having to duplicate the gates onto each individual function.</p>
 </div>
 </div>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[export_module]
+<pre><code class="language-rust">#[export_module]
 mod my_module {
     // Always available
     pub fn func0() {}
@@ -478,10 +454,9 @@ mod my_module_alternate {
 //   func4, func5, func6 - available under 'bar'
 //   func0, func1, func2, func3, func4, func5, func6 - available under 'foo' and 'bar'
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
-<div class="admonition tip side">
+<div class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
@@ -511,10 +486,7 @@ so long as they have different parameters.</p>
 <p>Registering the same function name with the same parameter types will cause a parse error.</p>
 </div>
 </div>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+<pre><code class="language-rust">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 #[export_module]
 mod my_module {
@@ -533,8 +505,7 @@ mod my_module {
         ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="getters-setters-and-indexers"><a class="header" href="#getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
 <div class="admonition tip side">
 <div class="admonition-title">
@@ -552,10 +523,7 @@ mod my_module {
 <tr><td style="text-align: center"><code>#[rhai_fn(index_get)]</code></td><td style="text-align: center">index getter</td></tr>
 <tr><td style="text-align: center"><code>#[rhai_fn(index_set)]</code></td><td style="text-align: center">index setter</td></tr>
 </tbody></table>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+<pre><code class="language-rust">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 #[export_module]
 mod my_module {
@@ -584,8 +552,7 @@ mod my_module {
         obj.list[index] = state;
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="multiple-registrations"><a class="header" href="#multiple-registrations">Multiple Registrations</a></h2>
 <p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times, separated by commas.</p>
 <div class="admonition tip small">
@@ -597,10 +564,7 @@ mod my_module {
 multiple alternative names to the same function.</p>
 </div>
 </div>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+<pre><code class="language-rust">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 #[export_module]
 mod my_module {
@@ -610,8 +574,7 @@ mod my_module {
         obj.prop[index]
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>The above function can be called in five ways:</p>
 <table><thead><tr><th>Parameter for <code>#[rhai_fn(...)]</code></th><th style="text-align: center">Type</th><th>Call style</th></tr></thead><tbody>
 <tr><td><code>name = &quot;get_prop_value&quot;</code></td><td style="text-align: center">method function</td><td><code>get_prop_value(x, 0)</code>, <code>x.get_prop_value(0)</code></td></tr>
@@ -621,15 +584,6 @@ mod my_module {
 <tr><td><code>index_get</code></td><td style="text-align: center"><a href="/book/vnext/rust/indexers.html">index getter</a></td><td><code>x[0]</code></td></tr>
 </tbody></table>
 <h2 id="pure-functions"><a class="header" href="#pure-functions">Pure Functions</a></h2>
-<div class="admonition bug side wide">
-<div class="admonition-title">
-<p>Error</p>
-</div>
-<div>
-<p>Non-pure functions, when passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter, will raise a
-runtime error.</p>
-</div>
-</div>
 <p>Apply the <code>#[rhai_fn(pure)]</code> attribute on a method function (i.e. one taking a <code>&amp;mut</code> first parameter)
 to mark it as  <em>pure</em> – i.e. it does not modify the <code>&amp;mut</code> parameter.</p>
 <p>This is often done to avoid expensive cloning for methods or <a href="/book/vnext/rust/getters-setters.html">property getters</a>
@@ -643,18 +597,23 @@ that return information about a <a href="/book/vnext/rust/custom.html">custom ty
 There is no checking.</p>
 </div>
 </div>
+<div class="admonition bug small">
+<div class="admonition-title">
+<p>Error: Constants Not OK for non-pure</p>
+</div>
+<div>
+<p>Non-pure functions raise a runtime error when passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
+</div>
+</div>
 <div class="admonition tip small">
 <div class="admonition-title">
-<p>Tip: Constants OK</p>
+<p>Tip: Constants OK for pure</p>
 </div>
 <div>
 <p>Pure functions can be passed a <a href="/book/vnext/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
 </div>
 </div>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+<pre><code class="language-rust">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 #[export_module]
 mod my_module {
@@ -685,13 +644,9 @@ mod my_module {
         // ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>When applied to a Rhai script:</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Constant
+<pre><code class="language-rust">// Constant
 const VECTOR = [1, 2, 3, 4, 5, 6, 7];
 
 let r = VECTOR.add1(2);     // ok!
@@ -701,16 +656,12 @@ let r = VECTOR.add2(2);     // runtime error: constant modified
 let r = VECTOR.first1;      // ok!
 
 let r = VECTOR.first2;      // runtime error: constant modified
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="fallible-functions"><a class="header" href="#fallible-functions">Fallible Functions</a></h2>
 <p>To register <a href="/book/vnext/rust/fallible.html">fallible functions</a> (i.e. functions that may return errors), apply the
 <code>#[rhai_fn(return_raw)]</code> attribute on functions that return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code>
 where <code>T</code> is any clonable type.</p>
-<pre><pre class="playground"><code class="language-rust no_run">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
+<pre><code class="language-rust">use rhai::plugin::*;        // a &quot;prelude&quot; import for macros
 
 #[export_module]
 mod my_module {
@@ -724,11 +675,10 @@ mod my_module {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <div class="admonition bug small">
 <div class="admonition-title">
-<p>Error</p>
+<p>Missing <code>#[rhai_fn(return_raw)]</code></p>
 </div>
 <div>
 <p>A compilation error — usually something that says <code>Result</code> does not implement
