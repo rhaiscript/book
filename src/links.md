@@ -104,6 +104,7 @@
 [shadowing]: {{rootUrl}}/language/shadow.md
 [variable shadowing]: {{rootUrl}}/language/shadow.md
 [variable definition filter]: {{rootUrl}}/engine/def-var.md
+[token remap filter]: {{rootUrl}}/engine/token-mapper.md
 
 [string]: {{rootUrl}}/language/strings-chars.md
 [strings]: {{rootUrl}}/language/strings-chars.md
