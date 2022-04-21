@@ -94,6 +94,7 @@ operate on object maps.
 | `contains`, [`in`] operator | property name                                                | does the object map contain a property of a particular name?                                                                                                          |
 | `keys`                      | _none_                                                       | returns an [array] of all the property names (in random order), not available under [`no_index`]                                                                      |
 | `values`                    | _none_                                                       | returns an [array] of all the property values (in random order), not available under [`no_index`]                                                                     |
+| `to_json`                   | _none_                                                       | returns a JSON representation of the object map ([`()`] is mapped to `null`, all other data types must be supported by JSON)                                          |
 
 
 Examples
