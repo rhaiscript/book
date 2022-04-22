@@ -68,27 +68,35 @@ which are also available to functions defined within the same script file.
 
 ### Base directory
 
+```admonish tip.side.wide "Tip: Default"
+
+If the base directory is not set, then relative paths are based off the directory of the loading script.
+
+This allows scripts to simply cross-load each other.
+```
+
 _Relative_ paths are resolved relative to a _root_ directory, which is usually the base directory.
 
 The base directory can be set via `FileModuleResolver::new_with_path` or `FileModuleResolver::set_base_path`.
 
-```admonish tip.small "Tip: Default base directory"
+### Custom [`Scope`]
 
-If the base directory is not set (e.g. using `FileModuleResolver::new`), then relative paths are
-based off the directory of the loading script.
+```admonish tip.side.wide "Tip"
 
-This allows scripts to simply load each other.
+This [`Scope`] can conveniently hold global [constants] etc.
 ```
+
+The `set_scope` method adds an optional [`Scope`] which will be used to [optimize][script optimization] [module] scripts.
 
 ### Caching
 
+```admonish tip.side.wide "Tip: Enable/disable caching"
+
+Use `enable_cache` to enable/disable the cache.
+```
+
 By default, [modules] are also _cached_ so a script file is only evaluated _once_, even when
 repeatedly imported.
-
-```admonish tip.small "Tip: Enable/disable caching"
-
-Use `FileModuleResolver::enable_cache` to enable/disable the script file cache.
-```
 
 ### Unix Shebangs
 
@@ -143,7 +151,7 @@ m::greet();                     // prints "hello! from module!"
 m::greet_main();                // prints "main here!"
 ```
 
-### Simulating virtual functions
+### Simulate virtual functions
 
 When calling a namespace-qualified function defined within a module, other functions defined within
 the same module script override any similar-named functions (with the same number of parameters)
