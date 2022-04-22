@@ -15,8 +15,8 @@ searches the [`Scope`] (if any) that is passed into the `Engine::eval_with_scope
 Setting [`Engine::set_strict_variables`][options] to `true` turns on _Strict Variables Mode_,
 which requires that:
 
-* all [variables] be defined within the same script before use,
-  or they must be [constants] within the provided [`Scope`] (if any),
+* all [variables]/[constants] be defined within the same script before use,
+  or they must be [variables]/[constants] within the provided [`Scope`] (if any),
 * [modules] must be [imported][`import`], also within the same script, before use.
 
 Within _Strict Variables_ mode, any attempt to access a [variable] or [module] before
