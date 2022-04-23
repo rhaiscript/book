@@ -113,20 +113,20 @@ ast += lowest;
 
 // Combine the second layer.
 let middle = engine.compile_file("country.rhai".into())?;
-ast += lowest;
+ast += middle;
 
 // Combine the third layer.
 let highest = engine.compile_file("office.rhai".into())?;
-ast += lowest;
+ast += highest;
 
 // Now, 'ast' contains the following functions:
 //
 // fn no_touch() {                // from 'corporate.rhai'
 //     throw "do not touch me!";
 // }
-// fn foo(x) { x + 42 }           // from 'regional.rhai'
+// fn foo(x) { x + 42 }           // from 'office.rhai'
 // fn bar(x, y) { x - y }         // from 'country.rhai'
-// fn baz() { print("hey!"); }    // from 'office.rhai'
+// fn baz() { print("hey!"); }    // from 'country.rhai'
 ```
 
 ```admonish failure.small "No super call"
