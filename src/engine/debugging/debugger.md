@@ -65,21 +65,21 @@ The `event` parameter of the second closure passed to `Engine::register_debugger
 
 | `DebuggerEvent` variant          | Description                                                                                     |
 | -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Start`                          | the debugger is triggered at the beginning of evaluation                                        |
 | `Step`                           | the debugger is triggered at the next step of evaluation                                        |
 | `BreakPoint(`_n_`)`              | the debugger is triggered by the _n_-th [break-point]                                           |
 | `FunctionExitWithValue(`_r_`)`   | the debugger is triggered by a function call returning with value _r_ which is `&Dynamic`       |
 | `FunctionExitWithError(`_err_`)` | the debugger is triggered by a function call exiting with error _err_ which is `&EvalAltResult` |
+| `End`                            | the debugger is triggered at the end of evaluation                                              |
 
 ### Return value
 
-```admonish tip.side.wide "Tip: Default command"
+```admonish tip.side.wide "Tip: Initialization"
 
-The default `DebuggerCommand` when a script just starts evaluation is always
-`DebuggerCommand::Next`, meaning that the [`Engine`] always stops at the _first_ [`AST`] node.
+When a script starts evaluation, the debugger always stops at the very _first_ [`AST`] node
+with the `event` parameter set to `DebuggerStatus::Start`.
 
 This allows initialization to be done (e.g. setting up [break-points]).
-
-To start script evaluation, return `DebuggerCommand::Continue`.
 ```
 
 The second closure passed to `Engine::register_debugger` will be called when stepping into or over
@@ -101,23 +101,3 @@ continued behavior of the debugger.
 | `StepOver`                | run to the next expression or statement, skipping over functions                                                                |                  |
 | `Next`                    | run to the next statement, skipping over functions                                                                              |      `next`      |
 | `FunctionExit`            | run to the end of the current function call; debugger is triggered _before_ the function call returns and the [`Scope`] cleared |     `finish`     |
-
-
-```admonish tip "Tip: Detect initialization"
-
-It is usually desirable to detect whether the callback function is at the beginning of
-a script evaluation run in order to perform special initialization tasks.
-
-Use the following tactics to obtain that information.
-
-1) If the task is to add a number of [break-points] at the beginning, simply check
-   `context.global_runtime_state().debugger.break_points()` to see if they are there (or whether
-   the count is zero).
-
-2) Store a `bool` value into the debugger's [_state_](state.md), update it to `true` after initialization,
-   and check its value later.
-
-3) Check `context.global_runtime_state().num_operations` which contains the
-   [number of operations][maximum number of operations] already performed by the [`Engine`].
-   At the beginning of script evaluation, this value should be zero (or a very small number).
-```
