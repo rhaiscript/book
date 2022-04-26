@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="import-a-module"><a class="header" href="#import-a-module">Import a Module</a></h1>
-<div class="admonition info side">
+<div id="admonition-see-also" class="admonition info side">
 <div class="admonition-title">
 <p>See also</p>
 </div>
@@ -174,7 +174,7 @@
 <p>Before a <a href="/book/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
 <a href="/book/rust/modules/resolvers.html">module resolver</a> registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
 <h2 id="import-statement"><a class="header" href="#import-statement"><code>import</code> Statement</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip</p>
 </div>
@@ -205,7 +205,7 @@ print(lock::status);            // module variables are constants
 
 lock::status = &quot;off&quot;;           // &lt;- runtime error: cannot modify a constant
 </code></pre>
-<div class="admonition info">
+<div id="admonition-imports-are-_scoped_" class="admonition info">
 <div class="admonition-title">
 <p>Imports are <em>scoped</em></p>
 </div>
@@ -240,7 +240,7 @@ for x in 0..1000 {
 </code></pre>
 </div>
 </div>
-<div class="admonition note">
+<div id="admonition-place-import-statements-at-the-top" class="admonition note">
 <div class="admonition-title">
 <p>Place <code>import</code> statements at the top</p>
 </div>
@@ -252,7 +252,7 @@ usually grouped at the top (beginning) of a script for manageability and visibil
 same <a href="/book/rust/modules/index.html">module</a> during every iteration of the loop!</p>
 </div>
 </div>
-<div class="admonition danger">
+<div id="admonition-recursive-imports" class="admonition danger">
 <div class="admonition-title">
 <p>Recursive imports</p>
 </div>

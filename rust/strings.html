@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="string-parameters-in-rust-functions"><a class="header" href="#string-parameters-in-rust-functions"><code>String</code> Parameters in Rust Functions</a></h1>
-<div class="admonition danger">
+<div id="admonition-warning-avoid-string-parameters" class="admonition danger">
 <div class="admonition-title">
 <p>Warning: Avoid <code>String</code> parameters</p>
 </div>
@@ -175,7 +175,7 @@ and the copy immediately thrown away right after the call.</p>
 </div>
 </div>
 <h2 id="str-maps-to-immutablestring"><a class="header" href="#str-maps-to-immutablestring"><code>&amp;str</code> Maps to <code>ImmutableString</code></a></h2>
-<div class="admonition warning side">
+<div id="admonition-common-mistake" class="admonition warning side">
 <div class="admonition-title">
 <p>Common mistake</p>
 </div>
@@ -206,7 +206,7 @@ let len = engine.eval::&lt;i64&gt;(&quot;len1(x)&quot;)?;   // 'x' cloned, very 
 let len = engine.eval::&lt;i64&gt;(&quot;len2(x)&quot;)?;   // 'x' is shared
 let len = engine.eval::&lt;i64&gt;(&quot;len3(x)&quot;)?;   // 'x' is shared
 </code></pre>
-<div class="admonition danger">
+<div id="admonition-mut-string-does-not-work--use-mut-immutablestring-instead" class="admonition danger">
 <div class="admonition-title">
 <p><code>&amp;mut String</code> does not work – use <code>&amp;mut ImmutableString</code> instead</p>
 </div>

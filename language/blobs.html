@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="blobs"><a class="header" href="#blobs">BLOB’s</a></h1>
-<div class="admonition tip side">
+<div id="admonition-safety" class="admonition tip side">
 <div class="admonition-title">
 <p>Safety</p>
 </div>
@@ -192,7 +192,7 @@ added or removed.</p>
 <blockquote>
 <p><em>blob</em> <code>[</code> <em>index position from −1 to −length</em> <code>]</code></p>
 </blockquote>
-<div class="admonition info small">
+<div id="admonition-byte-values" class="admonition info small">
 <div class="admonition-title">
 <p>Byte values</p>
 </div>
@@ -211,7 +211,7 @@ let x = blob(10);           // BLOB with ten zeros
 
 let x = blob(50, 42);       // BLOB with 50x 42's
 </code></pre>
-<div class="admonition tip">
+<div id="admonition-tip-initialize-with-byte-stream" class="admonition tip">
 <div class="admonition-title">
 <p>Tip: Initialize with byte stream</p>
 </div>
@@ -239,7 +239,7 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);
 </div>
 </div>
 <h2 id="writing-ascii-bytes"><a class="header" href="#writing-ascii-bytes">Writing ASCII Bytes</a></h2>
-<div class="admonition warning side">
+<div id="admonition-non-ascii" class="admonition warning side">
 <div class="admonition-title">
 <p>Non-ASCII</p>
 </div>
@@ -277,7 +277,7 @@ print(buf);                 // prints &quot;[4209666f6f202620 626172000000abcd]&
 
 device.send(buf);           // send command to device
 </code></pre>
-<div class="admonition question small">
+<div id="admonition-what-if-i-need-utf-8" class="admonition question small">
 <div class="admonition-title">
 <p>What if I need UTF-8?</p>
 </div>

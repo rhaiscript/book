@@ -172,7 +172,7 @@ that have been registered but no global state.</p>
 values of any type.</p>
 <p>Under <a href="/book/start/features.html"><code>sync</code></a>, however, only types that are <code>Send + Sync</code> are supported, and the entire <code>Scope</code>
 itself will also be <code>Send + Sync</code>. This is extremely useful in multi-threaded applications.</p>
-<div class="admonition info small">
+<div id="admonition-shadowing" class="admonition info small">
 <div class="admonition-title">
 <p>Shadowing</p>
 </div>
@@ -183,7 +183,7 @@ be accessed via <code>get_value&lt;T&gt;</code>, <code>get_mut&lt;T&gt;</code> a
 <p>Essentially, a <code>Scope</code> is always searched in <em>reverse order</em>.</p>
 </div>
 </div>
-<div class="admonition tip small">
+<div id="admonition-tip-the-lifetime-parameter" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: The lifetime parameter</p>
 </div>
@@ -214,7 +214,7 @@ as well as for possible future expansion when references can also be put into th
 <tr><td><code>iter</code>, <code>iter_raw</code>, <code>IntoIterator::into_iter</code></td><td>get an iterator to the <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the <code>Scope</code></td></tr>
 <tr><td><code>Extend::extend</code></td><td>add <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> to the <code>Scope</code></td></tr>
 </tbody></table>
-<div class="admonition info small">
+<div id="admonition-scope-public-api" class="admonition info small">
 <div class="admonition-title">
 <p><code>Scope</code> public API</p>
 </div>
@@ -276,7 +276,7 @@ assert_eq!(scope.get_value::&lt;i64&gt;(&quot;y&quot;).expect(&quot;variable y s
 <tr><td><code>Engine::compile_file_with_scope</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_std</code></a></td></tr>
 <tr><td><code>Engine::compile_expression_with_scope</code></td><td style="text-align: center"></td></tr>
 </tbody></table>
-<div class="admonition danger">
+<div id="admonition-dont-forget-to-rewind" class="admonition danger">
 <div class="admonition-title">
 <p>Don’t forget to <code>rewind</code></p>
 </div>

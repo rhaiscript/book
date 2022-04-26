@@ -165,7 +165,7 @@
                         <h1 id="serialization-and-deserialization-of-dynamic-with-serde"><a class="header" href="#serialization-and-deserialization-of-dynamic-with-serde">Serialization and Deserialization of <code>Dynamic</code> with <code>serde</code></a></h1>
 <p>Rhai’s <a href="/book/language/dynamic.html"><code>Dynamic</code></a> type supports serialization and deserialization by
 <a href="https://crates.io/crates/serde"><code>serde</code></a> via the <a href="/book/start/features.html"><code>serde</code></a> feature.</p>
-<div class="admonition tip small">
+<div id="admonition-tip" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip</p>
 </div>
@@ -268,7 +268,7 @@ r#&quot;
 // Convert the 'Dynamic' object map into 'MyStruct'
 let x: MyStruct = from_dynamic(&amp;result)?;
 </code></pre>
-<div class="admonition warning small">
+<div id="admonition-cannot-deserialize-shared-values" class="admonition warning small">
 <div class="admonition-title">
 <p>Cannot deserialize shared values</p>
 </div>
@@ -280,7 +280,7 @@ It will give a type error.</p>
 <p>Shared values are turned off via the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
 </div>
 </div>
-<div class="admonition tip">
+<div id="admonition-tip-lighter-alternative" class="admonition tip">
 <div class="admonition-title">
 <p>Tip: Lighter alternative</p>
 </div>
@@ -291,7 +291,7 @@ the <a href="/book/language/json.html"><code>Engine::parse_json</code></a> metho
 but it does not provide the same level of correctness, nor are there any configurable options.</p>
 </div>
 </div>
-<div class="admonition tip">
+<div id="admonition-tip-working-with-blobs" class="admonition tip">
 <div class="admonition-title">
 <p>Tip: Working with BLOB’s</p>
 </div>

@@ -189,7 +189,7 @@ print(z);                       // &lt;- error: variable 'z' not found
 
 &quot;print(42)&quot;.eval();             // &lt;- nope... method-call style doesn't work with 'eval'
 </code></pre>
-<div class="admonition danger small">
+<div id="admonition-eval-executes-inside-the-current-scope" class="admonition danger small">
 <div class="admonition-title">
 <p><code>eval</code> executes inside the current scope!</p>
 </div>
@@ -217,7 +217,7 @@ print(x);           // prints 42
 <p>Treat it as if the script segments are physically pasted in at the position of the <code>eval</code> call.</p>
 </div>
 </div>
-<div class="admonition warning small">
+<div id="admonition-cannot-define-new-functions" class="admonition warning small">
 <div class="admonition-title">
 <p>Cannot define new functions</p>
 </div>
@@ -226,7 +226,7 @@ print(x);           // prints 42
 the <em>global</em> level!</p>
 </div>
 </div>
-<div class="admonition failure small">
+<div id="admonition-eval-is-evil" class="admonition failure small">
 <div class="admonition-title">
 <p><code>eval</code> is evil</p>
 </div>
@@ -239,7 +239,7 @@ engine.disable_symbol(&quot;eval&quot;);
 </div>
 </div>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question">
+<div id="admonition-do-you-regret-implementing-eval-in-rhai" class="admonition question">
 <div class="admonition-title">
 <p>Do you regret implementing <code>eval</code> in Rhai?</p>
 </div>
@@ -249,7 +249,7 @@ engine.disable_symbol(&quot;eval&quot;);
 thus disabling a large number of optimizations.</p>
 </div>
 </div>
-<div class="admonition question">
+<div id="admonition-why-did-it-then" class="admonition question">
 <div class="admonition-title">
 <p>Why did it then???!!!</p>
 </div>

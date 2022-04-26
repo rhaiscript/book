@@ -166,7 +166,7 @@
 <p>For the ultimate adventurous, there is a built-in facility to <em>extend</em> the Rhai language with
 custom-defined <em>syntax</em>.</p>
 <p>But before going off to define the next weird statement type, heed this warning:</p>
-<div class="admonition danger small">
+<div id="admonition-dont-do-it" class="admonition danger small">
 <div class="admonition-title">
 <p>Don’t Do It™</p>
 </div>
@@ -177,7 +177,7 @@ language syntax just to do something.</p>
 <p>Try <a href="/book/engine/custom-op.html">custom operators</a> first.  A custom syntax should be considered a <em>last resort</em>.</p>
 </div>
 </div>
-<div class="admonition success small">
+<div id="admonition-where-this-might-be-useful" class="admonition success small">
 <div class="admonition-title">
 <p>Where this might be useful</p>
 </div>
@@ -509,7 +509,7 @@ and Rhai will fail with a parse error containing information about the expected 
 <p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
 <code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
-<div class="admonition tip small">
+<div id="admonition-tip-" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: <code>$$</code></p>
 </div>

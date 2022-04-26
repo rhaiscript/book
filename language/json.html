@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="parse-an-object-map-from-json"><a class="header" href="#parse-an-object-map-from-json">Parse an Object Map from JSON</a></h1>
-<div class="admonition info side wide">
+<div id="admonition-object-map-vs-json" class="admonition info side wide">
 <div class="admonition-title">
 <p>Object map vs. JSON</p>
 </div>
@@ -202,7 +202,7 @@ let result = engine.eval_with_scope::&lt;i64&gt;(r#&quot;map[&quot;^^^!!!&quot;]
 
 result == 3;          // the object map is successfully used in the script
 </code></pre>
-<div class="admonition note small">
+<div id="admonition-representation-of-numbers" class="admonition note small">
 <div class="admonition-title">
 <p>Representation of numbers</p>
 </div>
@@ -235,7 +235,7 @@ let map = engine.parse_json(&amp;new_json, false)?;
 map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
 </code></pre>
 <h2 id="use-serde-to-serializedeserialize-tofrom-json"><a class="header" href="#use-serde-to-serializedeserialize-tofrom-json">Use <code>serde</code> to Serialize/Deserialize to/from JSON</a></h2>
-<div class="admonition info side">
+<div id="admonition-see-also" class="admonition info side">
 <div class="admonition-title">
 <p>See also</p>
 </div>

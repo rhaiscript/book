@@ -168,7 +168,7 @@
 <blockquote>
 <p><em>object</em> <code>.</code> <em>function</em> <code>(</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
-<div class="admonition warning small">
+<div id="admonition-_method-call_-style-not-supported-under-no_object" class="admonition warning small">
 <div class="admonition-title">
 <p><em>Method-call</em> style not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
 </div>
@@ -184,7 +184,7 @@ engine.run(&quot;let x = [42]; x.clear();&quot;)?;
 <p><em>function</em> <code>(</code> <em>object</em><code>,</code> <em>parameter</em><code>,</code> … <code>,</code> <em>parameter</em><code>)</code></p>
 </blockquote>
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
-<div class="admonition note side">
+<div id="admonition-note" class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>
 </div>
@@ -237,7 +237,7 @@ update(array[0]);   // &lt;- 'array[0]' is an expression returning a calculated 
 
 array[0].update();  // &lt;- call in method-call style will update 'a'
 </code></pre>
-<div class="admonition danger small">
+<div id="admonition-no-support-for-references" class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>
@@ -287,7 +287,7 @@ fn add_method(obj: &amp;mut VeryComplexType, offset: i64) -&gt; i64 {
 }
 </code></pre>
 <h2 id="data-race-considerations"><a class="header" href="#data-race-considerations">Data Race Considerations</a></h2>
-<div class="admonition note side wide">
+<div id="admonition-data-races" class="admonition note side wide">
 <div class="admonition-title">
 <p>Data races</p>
 </div>

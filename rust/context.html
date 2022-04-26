@@ -180,7 +180,7 @@ and exposes the following.</p>
 <tr><td><code>call_fn()</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
 <tr><td><code>call_fn_raw()</code></td><td style="text-align: center"><code>Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
-<div class="admonition example">
+<div id="admonition-example--implement-safety-checks" class="admonition example">
 <div class="admonition-title">
 <p>Example – Implement Safety Checks</p>
 </div>
@@ -216,7 +216,7 @@ pub fn grow(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, Box&lt
 </code></pre>
 </div>
 </div>
-<div class="admonition example">
+<div id="admonition-example--call-a-function-within-a-function" class="admonition example">
 <div class="admonition-title">
 <p>Example – Call a Function Within a Function</p>
 </div>
@@ -239,7 +239,7 @@ engine.register_result_fn(&quot;super_call&quot;, super_call);
 </code></pre>
 </div>
 </div>
-<div class="admonition example">
+<div id="admonition-example--implement-a-callback" class="admonition example">
 <div class="admonition-title">
 <p>Example – Implement a Callback</p>
 </div>

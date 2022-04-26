@@ -172,7 +172,7 @@ print(X * 2);       // prints 84
 
 X = 123;            // &lt;- syntax error: constant modified
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-naming" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Naming</p>
 </div>
@@ -182,7 +182,7 @@ all-capital letters.</p>
 </div>
 </div>
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-singleton" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Singleton</p>
 </div>
@@ -228,7 +228,7 @@ engine.run_ast_with_scope(&amp;mut scope, &amp;ast)?;               // prints 42
 engine.run_with_scope(&amp;mut scope, script)?;
 </code></pre>
 <h2 id="caveat--constants-can-be-modified-via-rust"><a class="header" href="#caveat--constants-can-be-modified-via-rust">Caveat – Constants Can be Modified via Rust</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-plugin-functions" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Plugin functions</p>
 </div>
@@ -278,7 +278,7 @@ X.double();         // since 'X' is constant, a COPY is passed to 'this'
 
 X == 43;            // value of 'X' is unchanged by script
 </code></pre>
-<div class="admonition info small">
+<div id="admonition-implications-on-script-optimization" class="admonition info small">
 <div class="admonition-title">
 <p>Implications on script optimization</p>
 </div>

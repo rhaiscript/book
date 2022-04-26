@@ -254,7 +254,7 @@ mod my_module {
     }
 }
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-doc-comments" class="admonition tip small">
 <div class="admonition-title">
 <p>Doc-comments</p>
 </div>
@@ -311,7 +311,7 @@ abc.increment();
 
 abc.value == 43;
 </code></pre>
-<div class="admonition warning small">
+<div id="admonition-only-functions" class="admonition warning small">
 <div class="admonition-title">
 <p>Only functions</p>
 </div>
@@ -360,7 +360,7 @@ service::increment(abc);
 
 abc.value == 43;
 </code></pre>
-<div class="admonition tip side wide">
+<div id="admonition-tip-default-global" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Default global</p>
 </div>
@@ -379,7 +379,7 @@ x.increment();
 x == 43;
 </code></pre>
 <h3 id="load-dynamically"><a class="header" href="#load-dynamically">Load Dynamically</a></h3>
-<div class="admonition info side wide">
+<div id="admonition-see-also" class="admonition info side wide">
 <div class="admonition-title">
 <p>See also</p>
 </div>
@@ -394,7 +394,7 @@ x == 43;
 <code>combine_with_exported_module!</code> which automatically <em>flattens</em> the module namespace so that all
 functions in sub-modules are promoted to the top level <a href="/book/language/fn-namespaces.html">namespace</a>, all
 sub-modules are eliminated, and all variables are ignored.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-feature-gating" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Feature gating</p>
 </div>
@@ -456,7 +456,7 @@ mod my_module_alternate {
 combine_with_exported_module!(module, &quot;my_module_ID&quot;, my_module);
 </code></pre>
 <h2 id="functions-overloading-and-operators"><a class="header" href="#functions-overloading-and-operators">Functions Overloading and Operators</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-nativecallcontext-parameter" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: <code>NativeCallContext</code> parameter</p>
 </div>
@@ -470,7 +470,7 @@ attribute to individual functions.</p>
 the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, disregarding the actual name of the function.</p>
 <p>With <code>#[rhai_fn(name = &quot;...&quot;)]</code>, multiple functions may be registered under the same name in Rhai,
 so long as they have different parameters.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-operators" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Operators</p>
 </div>
@@ -478,7 +478,7 @@ so long as they have different parameters.</p>
 <p>Operators (which require function names that are not valid for Rust) can also be registered this way.</p>
 </div>
 </div>
-<div class="admonition bug small">
+<div id="admonition-duplicated-functions" class="admonition bug small">
 <div class="admonition-title">
 <p>Duplicated functions</p>
 </div>
@@ -507,7 +507,7 @@ mod my_module {
 }
 </code></pre>
 <h2 id="getters-setters-and-indexers"><a class="header" href="#getters-setters-and-indexers">Getters, Setters and Indexers</a></h2>
-<div class="admonition tip side">
+<div id="admonition-tip-global-namespace" class="admonition tip side">
 <div class="admonition-title">
 <p>Tip: Global namespace</p>
 </div>
@@ -555,7 +555,7 @@ mod my_module {
 </code></pre>
 <h2 id="multiple-registrations"><a class="header" href="#multiple-registrations">Multiple Registrations</a></h2>
 <p>Parameters to the <code>#[rhai_fn(...)]</code> attribute can be applied multiple times, separated by commas.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-overloaded-names" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Overloaded names</p>
 </div>
@@ -588,7 +588,7 @@ mod my_module {
 to mark it as  <em>pure</em> – i.e. it does not modify the <code>&amp;mut</code> parameter.</p>
 <p>This is often done to avoid expensive cloning for methods or <a href="/book/rust/getters-setters.html">property getters</a>
 that return information about a <a href="/book/rust/custom.html">custom type</a> and does not modify it.</p>
-<div class="admonition warning small">
+<div id="admonition-must-not-modify-mut-parameter" class="admonition warning small">
 <div class="admonition-title">
 <p>Must not modify <code>&amp;mut</code> parameter</p>
 </div>
@@ -597,7 +597,7 @@ that return information about a <a href="/book/rust/custom.html">custom type</a>
 There is no checking.</p>
 </div>
 </div>
-<div class="admonition bug small">
+<div id="admonition-error-constants-not-ok-for-non-pure" class="admonition bug small">
 <div class="admonition-title">
 <p>Error: Constants Not OK for non-pure</p>
 </div>
@@ -605,7 +605,7 @@ There is no checking.</p>
 <p>Non-pure functions raise a runtime error when passed a <a href="/book/language/constants.html">constant</a> value as the first <code>&amp;mut</code> parameter.</p>
 </div>
 </div>
-<div class="admonition tip small">
+<div id="admonition-tip-constants-ok-for-pure" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Constants OK for pure</p>
 </div>
@@ -676,7 +676,7 @@ mod my_module {
     }
 }
 </code></pre>
-<div class="admonition bug small">
+<div id="admonition-missing-rhai_fnreturn_raw" class="admonition bug small">
 <div class="admonition-title">
 <p>Missing <code>#[rhai_fn(return_raw)]</code></p>
 </div>
@@ -695,7 +695,7 @@ mod my_module {
 <tr><td><code>export_prefix = &quot;...&quot;</code></td><td>exports functions (including private, non-<code>pub</code> functions) with names starting with a specific prefix</td></tr>
 </tbody></table>
 <h2 id="inner-attributes"><a class="header" href="#inner-attributes">Inner Attributes</a></h2>
-<div class="admonition info side wide">
+<div id="admonition-rhai_fn-vs-rhai_mod" class="admonition info side wide">
 <div class="admonition-title">
 <p><code>rhai_fn</code> vs <code>rhai_mod</code></p>
 </div>

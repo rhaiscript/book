@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="export-variables-functions-and-sub-modules-from-a-script"><a class="header" href="#export-variables-functions-and-sub-modules-from-a-script">Export Variables, Functions and Sub-Modules From a Script</a></h1>
-<div class="admonition info side">
+<div id="admonition-see-also" class="admonition info side">
 <div class="admonition-title">
 <p>See also</p>
 </div>
@@ -203,7 +203,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
     export inner;       // &lt;- syntax error: cannot export a local variable
 }
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-multiple-exports" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Multiple exports</p>
 </div>
@@ -224,7 +224,7 @@ export z;
 </code></pre>
 </div>
 </div>
-<div class="admonition bug small">
+<div id="admonition-do-not-export-closures" class="admonition bug small">
 <div class="admonition-title">
 <p>Do not export closures</p>
 </div>
@@ -235,7 +235,7 @@ It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/
 </div>
 </div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
-<div class="admonition info side wide">
+<div id="admonition-private-functions" class="admonition info side wide">
 <div class="admonition-title">
 <p>Private functions</p>
 </div>
@@ -254,7 +254,7 @@ private fn foo() {}     // private function - hidden
 </code></pre>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
 <p>All loaded <a href="/book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-skip-exporting-a-module" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Skip exporting a module</p>
 </div>

@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="function-pointers"><a class="header" href="#function-pointers">Function Pointers</a></h1>
-<div class="admonition question side wide">
+<div id="admonition-trivia" class="admonition question side wide">
 <div class="admonition-title">
 <p>Trivia</p>
 </div>
@@ -217,7 +217,7 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 They do not hold the actual <a href="/book/language/functions.html">functions</a>.</p>
 <p>The actual <a href="/book/language/functions.html">function</a> must be defined in the appropriate <a href="/book/language/fn-namespaces.html">namespace</a>
 for the call to succeed.</p>
-<div class="admonition bug">
+<div id="admonition-cannot-export-function-pointer" class="admonition bug">
 <div class="admonition-title">
 <p>Cannot export function pointer</p>
 </div>
@@ -251,7 +251,7 @@ let x = my_mod::inc.call(41);       // runtime error:
 </div>
 </div>
 <h2 id="warning--global-namespace-only"><a class="header" href="#warning--global-namespace-only">Warning – Global Namespace Only</a></h2>
-<div class="admonition info side wide">
+<div id="admonition-see-also" class="admonition info side wide">
 <div class="admonition-title">
 <p>See also</p>
 </div>

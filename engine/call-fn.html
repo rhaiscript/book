@@ -225,7 +225,7 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ( 
 let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, () )?;
 //                                                          ^^ unit = tuple of zero
 </code></pre>
-<div class="admonition warning small">
+<div id="admonition-default-behavior" class="admonition warning small">
 <div class="admonition-title">
 <p>Default behavior</p>
 </div>
@@ -239,7 +239,7 @@ In other words, the <a href="/book/engine/scope.html"><code>Scope</code></a> is 
 </div>
 </div>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> Trait</a></h2>
-<div class="admonition note side">
+<div id="admonition-note" class="admonition note side">
 <div class="admonition-title">
 <p>Note</p>
 </div>
@@ -304,7 +304,7 @@ expected intuitive behavior.</p>
 <p>A parameter can be passed to keep new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.
 This allows the <a href="/book/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
 custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
-<div class="admonition warning small">
+<div id="admonition-warning-new-variables-persist-in-scope" class="admonition warning small">
 <div class="admonition-title">
 <p>Warning: new variables persist in <code>Scope</code></p>
 </div>
@@ -352,7 +352,7 @@ engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;
 // At this point, 'scope' contains these variables: 'foo', 'x', 'y'
 </code></pre>
 <h3 id="bind-the-this-pointer"><a class="header" href="#bind-the-this-pointer">Bind the <code>this</code> pointer</a></h3>
-<div class="admonition note side wide">
+<div id="admonition-note-1" class="admonition note side wide">
 <div class="admonition-title">
 <p>Note</p>
 </div>

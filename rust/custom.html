@@ -164,7 +164,7 @@
                     <main>
                         <h1 id="register-any-rust-type-and-its-methods"><a class="header" href="#register-any-rust-type-and-its-methods">Register any Rust Type and its Methods</a></h1>
 <h2 id="free-typing"><a class="header" href="#free-typing">Free Typing</a></h2>
-<div class="admonition question side wide">
+<div id="admonition-why-custom" class="admonition question side wide">
 <div class="admonition-title">
 <p>Why “Custom”?</p>
 </div>
@@ -183,7 +183,7 @@ possible, usually silently and seamlessly.</p>
 <p>External types that are not defined within the same crate (and thus cannot implement special Rhai
 traits or use special <code>#[derive]</code>) can also be used easily with Rhai.</p>
 <p>Support for custom types can be turned off via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
-<div class="admonition warning small">
+<div id="admonition-custom-types-are-slower" class="admonition warning small">
 <div class="admonition-title">
 <p>Custom types are slower</p>
 </div>
@@ -193,7 +193,7 @@ level of indirection, but for all other purposes there is no difference.</p>
 </div>
 </div>
 <h2 id="register-a-custom-type-and-its-methods"><a class="header" href="#register-a-custom-type-and-its-methods">Register a Custom Type and its Methods</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-working-with-enums" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Working with enums</p>
 </div>
@@ -246,7 +246,7 @@ println!(&quot;result: {}&quot;, result.field);   // prints 42
 <p><em>Methods</em> of custom types take a <code>&amp;mut</code> first parameter to that type, so that invoking methods can
 always update it.</p>
 <p>All other parameters in Rhai are passed by value (i.e. clones).</p>
-<div class="admonition danger small">
+<div id="admonition-no-support-for-references" class="admonition danger small">
 <div class="admonition-title">
 <p>No support for references</p>
 </div>

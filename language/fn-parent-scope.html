@@ -164,7 +164,7 @@
                     <main>
                         <h1 id="call-a-function-within-the-callers-scope"><a class="header" href="#call-a-function-within-the-callers-scope">Call a Function Within the Caller’s Scope</a></h1>
 <h2 id="peeking-out-of-the-pure-box"><a class="header" href="#peeking-out-of-the-pure-box">Peeking Out of The Pure Box</a></h2>
-<div class="admonition info side">
+<div id="admonition-only-scripts" class="admonition info side">
 <div class="admonition-title">
 <p>Only scripts</p>
 </div>
@@ -216,7 +216,7 @@ import &quot;hello&quot; as h;
 
 h::greet!();            // &lt;- syntax error: not allowed in namespace-qualified calls
 </code></pre>
-<div class="admonition danger small">
+<div id="admonition-the-callers-scope-can-be-mutated" class="admonition danger small">
 <div class="admonition-title">
 <p>The caller’s scope can be mutated</p>
 </div>
@@ -225,7 +225,7 @@ h::greet!();            // &lt;- syntax error: not allowed in namespace-qualifie
 <p>With this syntax, it is possible for a Rhai <a href="/book/language/functions.html">function</a> to mutate its calling environment.</p>
 </div>
 </div>
-<div class="admonition warning small">
+<div id="admonition-new-variables-are-not-retained" class="admonition warning small">
 <div class="admonition-title">
 <p>New variables are not retained</p>
 </div>
@@ -235,7 +235,7 @@ They remain local to the <a href="/book/language/functions.html">function</a>.</
 <p>Although the syntax resembles a Rust <em>macro</em> invocation, it is still a <a href="/book/language/functions.html">function</a> call.</p>
 </div>
 </div>
-<div class="admonition danger">
+<div id="admonition-caveat-emptor" class="admonition danger">
 <div class="admonition-title">
 <p>Caveat emptor</p>
 </div>

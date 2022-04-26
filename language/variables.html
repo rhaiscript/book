@@ -164,7 +164,7 @@
                     <main>
                         <h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
 <h2 id="valid-names"><a class="header" href="#valid-names">Valid Names</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-unicode-standard-annex-31-identifiers" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Unicode Standard Annex #31 identifiers</p>
 </div>
@@ -183,7 +183,7 @@
 <p>However, unlike Rust, a variable name must also contain at least one ASCII letter, and an ASCII
 letter must come <em>before</em> any digits. In other words, the first character that is not an underscore <code>_</code>
 must be an ASCII letter and not a digit.</p>
-<div class="admonition question side wide">
+<div id="admonition-why-this-restriction" class="admonition question side wide">
 <div class="admonition-title">
 <p>Why this restriction?</p>
 </div>
@@ -197,7 +197,7 @@ as <code>-1</code>.</p>
 <p>For example: <code>c3po</code> and <code>_r2d2_</code> are valid variable names, but <code>3abc</code> and <code>____49steps</code> are not.</p>
 <p>Variable names are case <em>sensitive</em>.</p>
 <p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a> (active or reserved).</p>
-<div class="admonition warning">
+<div id="admonition-avoid-names-longer-than-11-letters-on-32-bit" class="admonition warning">
 <div class="admonition-title">
 <p>Avoid names longer than 11 letters on 32-Bit</p>
 </div>
@@ -223,7 +223,7 @@ for loop_var in array {
 </div>
 <h2 id="declare-a-variable"><a class="header" href="#declare-a-variable">Declare a Variable</a></h2>
 <p>Variables are declared using the <code>let</code> keyword.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-no-initial-value" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: No initial value</p>
 </div>
@@ -232,7 +232,7 @@ for loop_var in array {
 If none is provided, it defaults to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 </div>
 </div>
-<div class="admonition warning small">
+<div id="admonition-variables-are-local" class="admonition warning small">
 <div class="admonition-title">
 <p>Variables are local</p>
 </div>
@@ -240,7 +240,7 @@ If none is provided, it defaults to <a href="/book/language/values-and-types.htm
 <p>A variable defined within a <a href="statements.html">statement block</a> is <em>local</em> to that block.</p>
 </div>
 </div>
-<div class="admonition tip small">
+<div id="admonition-tip-is_def_var" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: <code>is_def_var</code></p>
 </div>
@@ -301,7 +301,7 @@ engine.run_with_scope(&amp;mut scope,
     &quot;print(answer)&quot;                 // &lt;- prints 42
 )?;
 </code></pre>
-<div class="admonition bug small">
+<div id="admonition-no-scope" class="admonition bug small">
 <div class="admonition-title">
 <p>No <code>Scope</code></p>
 </div>
@@ -322,7 +322,7 @@ print(x);           // prints 42
 print(foo);         // &lt;- parse error under strict variables mode:
                     //    variable 'foo' is undefined
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip</p>
 </div>

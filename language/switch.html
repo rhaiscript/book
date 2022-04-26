@@ -177,7 +177,7 @@
 </code></pre>
 <h2 id="default-case"><a class="header" href="#default-case">Default Case</a></h2>
 <p>A <em>default</em> case (i.e. when no other cases match) can be specified with <code>_</code>.</p>
-<div class="admonition warning small">
+<div id="admonition-must-be-last" class="admonition warning small">
 <div class="admonition-title">
 <p>Must be last</p>
 </div>
@@ -209,7 +209,7 @@ switch map {
     _ =&gt; ...
 }
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-working-with-enums" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Working with enums</p>
 </div>
@@ -241,7 +241,7 @@ that must evaluate to <code>true</code> in order for the case to match.</p>
 <p>Because of their popularity, <a href="/book/appendix/literals.html">literal</a> integer <a href="/book/language/ranges.html">ranges</a> can also be used as <code>switch</code> cases.</p>
 <p>Numeric <a href="/book/language/ranges.html">ranges</a> are only searched when the <code>switch</code> value is itself an integer (i.e. they never
 match any other data types).</p>
-<div class="admonition warning small">
+<div id="admonition-must-come-after-integer-cases" class="admonition warning small">
 <div class="admonition-title">
 <p>Must come after integer cases</p>
 </div>
@@ -269,7 +269,7 @@ switch x {
     42 =&gt; ...,              // &lt;- syntax error: integer cases cannot follow range cases
 }
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-ranges-can-overlap" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Ranges can overlap</p>
 </div>

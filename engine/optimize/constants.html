@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="constants-propagation"><a class="header" href="#constants-propagation">Constants Propagation</a></h1>
-<div class="admonition tip side wide">
+<div id="admonition-usage" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Usage</p>
 </div>
@@ -197,7 +197,7 @@ if true { print(&quot;done!&quot;); }                 // &lt;- the line above is
 print(&quot;done!&quot;);                             // &lt;- the line above is further simplified to this
                                             //    because the condition is always true
 </code></pre>
-<div class="admonition tip">
+<div id="admonition-tip-custom-scope-constants" class="admonition tip">
 <div class="admonition-title">
 <p>Tip: Custom <code>Scope</code> constants</p>
 </div>
@@ -223,7 +223,7 @@ r#&quot;
 </code></pre>
 </div>
 </div>
-<div class="admonition tip">
+<div id="admonition-tip-customer-module-constants" class="admonition tip">
 <div class="admonition-title">
 <p>Tip: Customer module constants</p>
 </div>
@@ -252,7 +252,7 @@ r#&quot;
 </code></pre>
 </div>
 </div>
-<div class="admonition danger">
+<div id="admonition-caveat-constants-in-custom-scope-and-modules-are-also-propagated-into-functions" class="admonition danger">
 <div class="admonition-title">
 <p>Caveat: Constants in custom scope and modules are also propagated into functions</p>
 </div>
@@ -322,7 +322,7 @@ engine.run_with_scope(&amp;mut scope,
 </code></pre>
 </div>
 </div>
-<div class="admonition danger">
+<div id="admonition-caveat-beware-of-large-constants" class="admonition danger">
 <div class="admonition-title">
 <p>Caveat: Beware of large constants</p>
 </div>
@@ -352,7 +352,7 @@ let result = engine.run_with_scope(&amp;mut scope,
 the <a href="/book/language/constants.html">constants</a>.</p>
 </div>
 </div>
-<div class="admonition danger">
+<div id="admonition-caveat-constants-may-be-modified-by-rust-methods" class="admonition danger">
 <div class="admonition-title">
 <p>Caveat: Constants may be modified by Rust methods</p>
 </div>

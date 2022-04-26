@@ -164,7 +164,7 @@
                     <main>
                         <h1 id="numbers"><a class="header" href="#numbers">Numbers</a></h1>
 <h2 id="integers"><a class="header" href="#integers">Integers</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-bit-fields" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Bit-fields</p>
 </div>
@@ -175,7 +175,7 @@
 <p>Integer numbers follow C-style format with support for decimal, binary (<code>0b</code>), octal (<code>0o</code>) and hex (<code>0x</code>) notations.</p>
 <p>The default system integer type (also aliased to <code>INT</code>) is <code>i64</code>. It can be turned into <code>i32</code> via the <a href="/book/start/features.html"><code>only_i32</code></a> feature.</p>
 <h2 id="floating-point-numbers"><a class="header" href="#floating-point-numbers">Floating-Point Numbers</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-notations" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Notations</p>
 </div>
@@ -213,7 +213,7 @@ numeric types.</p>
 <p>For example, a <code>u8</code> is never implicitly converted to <code>i64</code> when used as a parameter in a function
 call or as a comparison operand.  <code>f32</code> is never implicitly converted to <code>f64</code>.</p>
 <p>This is exactly the same as Rust where all numeric types are distinct.  Rhai is written in Rust afterall.</p>
-<div class="admonition warning small">
+<div id="admonition-warning" class="admonition warning small">
 <div class="admonition-title">
 <p>Warning</p>
 </div>
@@ -254,7 +254,7 @@ engine.eval_with_scope::&lt;bool&gt;(&amp;mut scope, &quot;z == 42&quot;)?;
 engine.eval_with_scope::&lt;bool&gt;(&amp;mut scope, &quot;f == 42.0&quot;)?;
 </code></pre>
 <h2 id="floating-point-vs-decimal"><a class="header" href="#floating-point-vs-decimal">Floating-Point vs. Decimal</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-tip-no_float--decimal" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: <code>no_float</code> + <code>decimal</code></p>
 </div>

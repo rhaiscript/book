@@ -166,7 +166,7 @@
 <p>For scripting systems open to untrusted user-land scripts, it is always best to limit the amount of
 resources used by a script so that it does not consume more resources that it is allowed to.</p>
 <h2 id="most-important-resources"><a class="header" href="#most-important-resources">Most Important Resources</a></h2>
-<div class="admonition bug">
+<div id="admonition-memory" class="admonition bug">
 <div class="admonition-title">
 <p>Memory</p>
 </div>
@@ -174,7 +174,7 @@ resources used by a script so that it does not consume more resources that it is
 <p>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-cpu" class="admonition bug">
 <div class="admonition-title">
 <p>CPU</p>
 </div>
@@ -182,7 +182,7 @@ resources used by a script so that it does not consume more resources that it is
 <p>Run an infinite tight loop that consumes all CPU cycles.</p>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-time" class="admonition bug">
 <div class="admonition-title">
 <p>Time</p>
 </div>
@@ -190,7 +190,7 @@ resources used by a script so that it does not consume more resources that it is
 <p>Run indefinitely, thereby blocking the calling system which is waiting for a result.</p>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-stack" class="admonition bug">
 <div class="admonition-title">
 <p>Stack</p>
 </div>
@@ -212,7 +212,7 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </ul>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-overflows-or-underflows" class="admonition bug">
 <div class="admonition-title">
 <p>Overflows or Underflows</p>
 </div>
@@ -230,7 +230,7 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </ul>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-files" class="admonition bug">
 <div class="admonition-title">
 <p>Files</p>
 </div>
@@ -240,7 +240,7 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 <p>Even when <a href="/book/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-private-data" class="admonition bug">
 <div class="admonition-title">
 <p>Private data</p>
 </div>
@@ -249,7 +249,7 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 <p>Such security breach may put the entire system at risk.</p>
 </div>
 </div>
-<div class="admonition bug">
+<div id="admonition-the-internals-feature" class="admonition bug">
 <div class="admonition-title">
 <p>The <a href="/book/start/features.html"><code>internals</code></a> feature</p>
 </div>
@@ -277,7 +277,7 @@ be surprised how few scenarios this assumption holds.</p>
 </div>
 </div>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
-<div class="admonition tip side wide">
+<div id="admonition-ok-panic-anyway" class="admonition tip side wide">
 <div class="admonition-title">
 <p>OK, panic anyway</p>
 </div>

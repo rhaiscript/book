@@ -165,7 +165,7 @@
                         <h1 id="register-a-fallible-rust-function"><a class="header" href="#register-a-fallible-rust-function">Register a Fallible Rust Function</a></h1>
 <p>If a function is <em>fallible</em> (i.e. it returns a <code>Result&lt;_, _&gt;</code>), it can be registered with via
 <code>Engine::register_result_fn</code>.</p>
-<div class="admonition warning small">
+<div id="admonition-return-type" class="admonition warning small">
 <div class="admonition-title">
 <p>Return type</p>
 </div>
@@ -194,7 +194,7 @@ if let Err(error) = engine.eval::&lt;i64&gt;(&quot;divide(40, 0)&quot;) {
     println!(&quot;Error: {:?}&quot;, *error);         // prints ErrorRuntime(&quot;Division by zero detected!&quot;, (1, 1)&quot;)
 }
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-create-a-box" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Create a <code>Box&lt;EvalAltResult&gt;</code></p>
 </div>

@@ -166,7 +166,7 @@
 <p>Each <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can contain a <em>tag</em> that is <code>i32</code> and can contain any arbitrary data.</p>
 <p>On 32-bit targets, however, the tag is only <code>i16</code>.</p>
 <p>The tag defaults to zero.</p>
-<div class="admonition bug small">
+<div id="admonition-value-out-of-bounds" class="admonition bug small">
 <div class="admonition-title">
 <p>Value out of bounds</p>
 </div>
@@ -365,7 +365,7 @@ let b = r.tag[8..16];
 let c = r.tag[16..32];
 </code></pre>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question">
+<div id="admonition-tell-me-really-what-is-the-_point_" class="admonition question">
 <div class="admonition-title">
 <p>Tell me, really, what is the <em>point</em>?</p>
 </div>

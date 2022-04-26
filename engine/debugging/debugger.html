@@ -180,7 +180,7 @@ engine.register_debugger(
     }
 );
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-accessing-the-debugger" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Accessing the <code>Debugger</code></p>
 </div>
@@ -220,7 +220,7 @@ following signature.</p>
 <tr><td><code>FunctionExitWithError(</code><em>err</em><code>)</code></td><td>the debugger is triggered by a function call exiting with error <em>err</em> which is <code>&amp;EvalAltResult</code></td></tr>
 </tbody></table>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
-<div class="admonition tip side wide">
+<div id="admonition-tip-default-command" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Default command</p>
 </div>
@@ -246,7 +246,7 @@ continued behavior of the debugger.</p>
 <tr><td><code>Next</code></td><td>run to the next statement, skipping over functions</td><td style="text-align: center"><code>next</code></td></tr>
 <tr><td><code>FunctionExit</code></td><td>run to the end of the current function call; debugger is triggered <em>before</em> the function call returns and the <a href="/book/engine/scope.html"><code>Scope</code></a> cleared</td><td style="text-align: center"><code>finish</code></td></tr>
 </tbody></table>
-<div class="admonition tip">
+<div id="admonition-tip-detect-initialization" class="admonition tip">
 <div class="admonition-title">
 <p>Tip: Detect initialization</p>
 </div>

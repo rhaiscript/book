@@ -166,7 +166,7 @@
 <p>Rhai’s scripting engine is very lightweight.  It gets most of its abilities from functions.</p>
 <p>To call these functions, they need to be <em>registered</em> via <code>Engine::register_fn</code> or
 <code>Engine::register_result_fn</code> (see <a href="/book/rust/fallible.html">fallible functions</a>).</p>
-<div class="admonition tip small">
+<div id="admonition-tip-function-overloading" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Function overloading</p>
 </div>
@@ -223,7 +223,7 @@ println!(&quot;Answer: {}&quot;, result);         // prints 42
 
 engine.run(r#&quot;log(&quot;value&quot;, 42)&quot;#)?;     // prints &quot;value = 42&quot;
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-use-closures" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Use closures</p>
 </div>
@@ -233,7 +233,7 @@ engine.run(r#&quot;log(&quot;value&quot;, 42)&quot;#)?;     // prints &quot;valu
 </code></pre>
 </div>
 </div>
-<div class="admonition tip small">
+<div id="admonition-tip-create-a-dynamic" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Create a <code>Dynamic</code></p>
 </div>

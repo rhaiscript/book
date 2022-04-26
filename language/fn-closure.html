@@ -164,7 +164,7 @@
                     <main>
                         <h1 id="simulating-closures"><a class="header" href="#simulating-closures">Simulating Closures</a></h1>
 <h2 id="capture-external-variables-via-automatic-currying"><a class="header" href="#capture-external-variables-via-automatic-currying">Capture External Variables via Automatic Currying</a></h2>
-<div class="admonition tip side">
+<div id="admonition-tip-is_shared" class="admonition tip side">
 <div class="admonition-title">
 <p>Tip: <code>is_shared</code></p>
 </div>
@@ -184,7 +184,7 @@ as long as they are not shadowed by local <a href="/book/language/variables.html
 <p>Therefore, similar to closures in many languages, these captured shared values persist through
 reference counting, and may be read or modified even after the <a href="/book/language/variables.html">variables</a> that hold them go out of
 scope and no longer exist.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-disable-closures" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Disable closures</p>
 </div>
@@ -269,7 +269,7 @@ let f = |a| this += x + a;          // 'x' is captured in this closure
 x.call(f, 2);
 </code></pre>
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
-<div class="admonition question">
+<div id="admonition-how-is-it-actually-implemented" class="admonition question">
 <div class="admonition-title">
 <p>How is it actually implemented?</p>
 </div>
@@ -301,7 +301,7 @@ which Rhai simulates normal closures.</p>
 </ol>
 </div>
 </div>
-<div class="admonition question">
+<div id="admonition-why-automatic-currying" class="admonition question">
 <div class="admonition-title">
 <p>Why automatic currying?</p>
 </div>

@@ -167,7 +167,7 @@
 <p><code>Engine::register_global_module</code> registers a shared <a href="/book/rust/modules/index.html">module</a> into the
 <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>.</p>
 <p>This is by far the easiest way to expose a <a href="/book/rust/modules/index.html">module</a>’s functionalities to Rhai.</p>
-<div class="admonition tip small">
+<div id="admonition-tip-no-qualifiers" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: No qualifiers</p>
 </div>
@@ -176,7 +176,7 @@
 <em>namespace qualifiers</em>.</p>
 </div>
 </div>
-<div class="admonition warning small">
+<div id="admonition-warning" class="admonition warning small">
 <div class="admonition-title">
 <p>Warning</p>
 </div>
@@ -207,7 +207,7 @@ engine.register_global_module(module.into());
 engine.eval::&lt;i64&gt;(&quot;inc(MYSTIC_NUMBER)&quot;)? == 42;
 </code></pre>
 <h3 id="equivalent-to-engineregister_xxx"><a class="header" href="#equivalent-to-engineregister_xxx">Equivalent to <code>Engine::register_XXX</code></a></h3>
-<div class="admonition question side wide">
+<div id="admonition-trivia" class="admonition question side wide">
 <div class="admonition-title">
 <p>Trivia</p>
 </div>
@@ -253,7 +253,7 @@ engine.register_static_module(&quot;services::calc&quot;, module.into());
 engine.eval::&lt;i64&gt;(&quot;services::calc::inc(services::calc::MYSTIC_NUMBER)&quot;)? == 42;
 </code></pre>
 <h3 id="expose-functions-to-the-global-namespace"><a class="header" href="#expose-functions-to-the-global-namespace">Expose functions to the global namespace</a></h3>
-<div class="admonition tip side wide">
+<div id="admonition-tip-type-iterators" class="admonition tip side wide">
 <div class="admonition-title">
 <p>Tip: Type iterators</p>
 </div>

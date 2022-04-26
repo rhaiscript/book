@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="hot-reloading"><a class="header" href="#hot-reloading">Hot Reloading</a></h1>
-<div class="admonition info">
+<div id="admonition-usage-scenario" class="admonition info">
 <div class="admonition-title">
 <p>Usage scenario</p>
 </div>
@@ -182,7 +182,7 @@ host system.</p>
 </ul>
 </div>
 </div>
-<div class="admonition abstract">
+<div id="admonition-key-concepts" class="admonition abstract">
 <div class="admonition-title">
 <p>Key concepts</p>
 </div>
@@ -261,7 +261,7 @@ system.watch_for_script_change(|sys: &amp;mut System, fn_name: &amp;str| {
     *sys.script.borrow_mut() += patch_ast;
 });
 </code></pre>
-<div class="admonition tip small">
+<div id="admonition-tip-multi-threaded-considerations" class="admonition tip small">
 <div class="admonition-title">
 <p>Tip: Multi-threaded considerations</p>
 </div>
