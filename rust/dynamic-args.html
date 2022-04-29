@@ -167,7 +167,9 @@
 <p>A <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
 <div id="admonition-trivia" class="admonition question small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-trivia">
 <p>Trivia</p>
+</a>
 </div>
 <div>
 <p>The <code>push</code> method of an <a href="/book/language/arrays.html">array</a> is implemented as follows (minus code for <a href="/book/safety/index.html">safety</a> protection
@@ -222,7 +224,9 @@ engine.register_fn(&quot;foo&quot;, foo5)
 </code></pre>
 <div id="admonition-only-the-right-most-16-parameters-can-be-dynamic" class="admonition warning">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-only-the-right-most-16-parameters-can-be-dynamic">
 <p>Only the right-most 16 parameters can be <code>Dynamic</code></p>
+</a>
 </div>
 <div>
 <p>The number of parameter permutations go up exponentially, and therefore there is a realistic limit
@@ -243,7 +247,9 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
 <div id="admonition-how-is-this-implemented" class="admonition question">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-how-is-this-implemented">
 <p>How is this implemented?</p>
+</a>
 </div>
 <div>
 <h4 id="hash-lookup"><a class="header" href="#hash-lookup">Hash lookup</a></h4>
@@ -291,7 +297,9 @@ That’s where the 16 parameters limit comes from.</p>
 </div>
 <div id="admonition-what-it-calculates-65536-hashes-for-each-function-call" class="admonition question">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-what-it-calculates-65536-hashes-for-each-function-call">
 <p>What?! It calculates 65,536 hashes for each function call???!!!</p>
+</a>
 </div>
 <div>
 <p>Of course not. Don’t be silly.</p>
@@ -312,7 +320,9 @@ combination of argument types.</p>
 </div>
 <div id="admonition-but-then-beware-module-functions" class="admonition danger">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-but-then-beware-module-functions">
 <p>But then… beware module functions</p>
+</a>
 </div>
 <div>
 <p>The functions resolution <em>cache</em> resides only in the <a href="/book/language/fn-namespaces.html">global namespace</a>.

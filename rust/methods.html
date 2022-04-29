@@ -170,7 +170,9 @@
 </blockquote>
 <div id="admonition-_method-call_-style-not-supported-under-no_object" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-_method-call_-style-not-supported-under-no_object">
 <p><em>Method-call</em> style not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
+</a>
 </div>
 <div>
 <pre><code class="language-rust">// Below is a syntax error under 'no_object'.
@@ -186,7 +188,9 @@ engine.run(&quot;let x = [42]; x.clear();&quot;)?;
 <h3 id="equivalence"><a class="header" href="#equivalence">Equivalence</a></h3>
 <div id="admonition-note" class="admonition note side">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-note">
 <p>Note</p>
+</a>
 </div>
 <div>
 <p>This design is similar to Rust.</p>
@@ -239,7 +243,9 @@ array[0].update();  // &lt;- call in method-call style will update 'a'
 </code></pre>
 <div id="admonition-no-support-for-references" class="admonition danger small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-no-support-for-references">
 <p>No support for references</p>
+</a>
 </div>
 <div>
 <p>Rhai does NOT support normal references (i.e. <code>&amp;T</code>) as parameters.
@@ -289,7 +295,9 @@ fn add_method(obj: &amp;mut VeryComplexType, offset: i64) -&gt; i64 {
 <h2 id="data-race-considerations"><a class="header" href="#data-race-considerations">Data Race Considerations</a></h2>
 <div id="admonition-data-races" class="admonition note side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-data-races">
 <p>Data races</p>
+</a>
 </div>
 <div>
 <p>Data races are not possible in Rhai under the <a href="/book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>

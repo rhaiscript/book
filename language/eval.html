@@ -191,7 +191,9 @@ print(z);                       // &lt;- error: variable 'z' not found
 </code></pre>
 <div id="admonition-eval-executes-inside-the-current-scope" class="admonition danger small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-eval-executes-inside-the-current-scope">
 <p><code>eval</code> executes inside the current scope!</p>
+</a>
 </div>
 <div>
 <p>Script segments passed to <code>eval</code> execute inside the <em>current</em> <a href="/book/engine/scope.html"><code>Scope</code></a>, so they can access and modify
@@ -219,7 +221,9 @@ print(x);           // prints 42
 </div>
 <div id="admonition-cannot-define-new-functions" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-cannot-define-new-functions">
 <p>Cannot define new functions</p>
+</a>
 </div>
 <div>
 <p>New <a href="/book/language/functions.html">functions</a> cannot be defined within an <code>eval</code> call, since <a href="/book/language/functions.html">functions</a> can only be defined at
@@ -228,7 +232,9 @@ the <em>global</em> level!</p>
 </div>
 <div id="admonition-eval-is-evil" class="admonition failure small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-eval-is-evil">
 <p><code>eval</code> is evil</p>
+</a>
 </div>
 <div>
 <p>For those who subscribe to the (very sensible) motto of <a href="http://linterrors.com/js/eval-is-evil">“<code>eval</code> is evil”</a>,
@@ -241,7 +247,9 @@ engine.disable_symbol(&quot;eval&quot;);
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
 <div id="admonition-do-you-regret-implementing-eval-in-rhai" class="admonition question">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-do-you-regret-implementing-eval-in-rhai">
 <p>Do you regret implementing <code>eval</code> in Rhai?</p>
+</a>
 </div>
 <div>
 <p>Or course we do.</p>
@@ -251,7 +259,9 @@ thus disabling a large number of optimizations.</p>
 </div>
 <div id="admonition-why-did-it-then" class="admonition question">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-why-did-it-then">
 <p>Why did it then???!!!</p>
+</a>
 </div>
 <div>
 <p>Brendan Eich puts it well: “it is just too easy to implement.” <em>(source wanted)</em></p>

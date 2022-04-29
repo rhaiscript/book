@@ -165,7 +165,9 @@
                         <h1 id="blobs"><a class="header" href="#blobs">BLOB’s</a></h1>
 <div id="admonition-safety" class="admonition tip side">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-safety">
 <p>Safety</p>
+</a>
 </div>
 <div>
 <p>Always limit the <a href="/book/safety/max-array-size.html">maximum size of arrays</a>.</p>
@@ -194,7 +196,9 @@ added or removed.</p>
 </blockquote>
 <div id="admonition-byte-values" class="admonition info small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-byte-values">
 <p>Byte values</p>
+</a>
 </div>
 <div>
 <p>The value of a particular byte in a BLOB is mapped to an <code>INT</code> (which can be 64-bit or 32-bit
@@ -213,7 +217,9 @@ let x = blob(50, 42);       // BLOB with 50x 42's
 </code></pre>
 <div id="admonition-tip-initialize-with-byte-stream" class="admonition tip">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-initialize-with-byte-stream">
 <p>Tip: Initialize with byte stream</p>
+</a>
 </div>
 <div>
 <p>To quickly initialize a BLOB with a particular byte stream, the <code>write_be</code> method can be used to
@@ -241,7 +247,9 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);
 <h2 id="writing-ascii-bytes"><a class="header" href="#writing-ascii-bytes">Writing ASCII Bytes</a></h2>
 <div id="admonition-non-ascii" class="admonition warning side">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-non-ascii">
 <p>Non-ASCII</p>
+</a>
 </div>
 <div>
 <p>Non-ASCII characters (i.e. characters not within 1-127) are ignored.</p>
@@ -279,7 +287,9 @@ device.send(buf);           // send command to device
 </code></pre>
 <div id="admonition-what-if-i-need-utf-8" class="admonition question small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-what-if-i-need-utf-8">
 <p>What if I need UTF-8?</p>
+</a>
 </div>
 <div>
 <p>The <code>write_utf8</code> function writes a string in UTF-8 encoding.</p>

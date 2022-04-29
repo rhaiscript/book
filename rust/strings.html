@@ -165,7 +165,9 @@
                         <h1 id="string-parameters-in-rust-functions"><a class="header" href="#string-parameters-in-rust-functions"><code>String</code> Parameters in Rust Functions</a></h1>
 <div id="admonition-warning-avoid-string-parameters" class="admonition danger">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-warning-avoid-string-parameters">
 <p>Warning: Avoid <code>String</code> parameters</p>
+</a>
 </div>
 <div>
 <p>As much as possible, avoid using <code>String</code> parameters in functions.</p>
@@ -177,7 +179,9 @@ and the copy immediately thrown away right after the call.</p>
 <h2 id="str-maps-to-immutablestring"><a class="header" href="#str-maps-to-immutablestring"><code>&amp;str</code> Maps to <code>ImmutableString</code></a></h2>
 <div id="admonition-common-mistake" class="admonition warning side">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-common-mistake">
 <p>Common mistake</p>
+</a>
 </div>
 <div>
 <p>A common mistake made by novice Rhai users is to register functions with <code>String</code> parameters.</p>
@@ -208,7 +212,9 @@ let len = engine.eval::&lt;i64&gt;(&quot;len3(x)&quot;)?;   // 'x' is shared
 </code></pre>
 <div id="admonition-mut-string-does-not-work--use-mut-immutablestring-instead" class="admonition danger">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-mut-string-does-not-work--use-mut-immutablestring-instead">
 <p><code>&amp;mut String</code> does not work – use <code>&amp;mut ImmutableString</code> instead</p>
+</a>
 </div>
 <div>
 <p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,

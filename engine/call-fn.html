@@ -227,7 +227,9 @@ let result: i64 = engine.call_fn(&amp;mut scope, &amp;ast, &quot;hello&quot;, ()
 </code></pre>
 <div id="admonition-default-behavior" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-default-behavior">
 <p>Default behavior</p>
+</a>
 </div>
 <div>
 <p>When using <code>Engine::call_fn</code>, the <a href="/book/engine/compile.html"><code>AST</code></a> is always evaluated <em>before</em> the <a href="/book/language/functions.html">function</a> is called.</p>
@@ -241,7 +243,9 @@ In other words, the <a href="/book/engine/scope.html"><code>Scope</code></a> is 
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> Trait</a></h2>
 <div id="admonition-note" class="admonition note side">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-note">
 <p>Note</p>
+</a>
 </div>
 <div>
 <p>Rhai implements <a href="/book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
@@ -306,7 +310,9 @@ This allows the <a href="/book/language/functions.html">function</a> to easily p
 custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <div id="admonition-warning-new-variables-persist-in-scope" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-warning-new-variables-persist-in-scope">
 <p>Warning: new variables persist in <code>Scope</code></p>
+</a>
 </div>
 <div>
 <p>If the <a href="/book/engine/scope.html"><code>Scope</code></a> is not rewound, beware that all <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> defined at top level of the
@@ -354,7 +360,9 @@ engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;
 <h3 id="bind-the-this-pointer"><a class="header" href="#bind-the-this-pointer">Bind the <code>this</code> pointer</a></h3>
 <div id="admonition-note-1" class="admonition note side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-note-1">
 <p>Note</p>
+</a>
 </div>
 <div>
 <p><code>Engine::call_fn</code> cannot call functions in <em>method-call</em> style.</p>

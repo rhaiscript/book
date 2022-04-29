@@ -165,7 +165,9 @@
                         <h1 id="constants-propagation"><a class="header" href="#constants-propagation">Constants Propagation</a></h1>
 <div id="admonition-usage" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-usage">
 <p>Usage</p>
+</a>
 </div>
 <div>
 <p>Effective in template-based machine-generated scripts to turn on/off certain sections.</p>
@@ -199,7 +201,9 @@ print(&quot;done!&quot;);                             // &lt;- the line above is
 </code></pre>
 <div id="admonition-tip-custom-scope-constants" class="admonition tip">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-custom-scope-constants">
 <p>Tip: Custom <code>Scope</code> constants</p>
+</a>
 </div>
 <div>
 <p><a href="/book/language/constants.html">Constant</a> values can be provided in a custom <a href="/book/engine/scope.html"><code>Scope</code></a> object to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>
@@ -225,7 +229,9 @@ r#&quot;
 </div>
 <div id="admonition-tip-customer-module-constants" class="admonition tip">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-customer-module-constants">
 <p>Tip: Customer module constants</p>
+</a>
 </div>
 <div>
 <p><a href="/book/language/constants.html">Constants</a> defined in <a href="/book/rust/modules/index.html">modules</a> that are registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> via
@@ -254,7 +260,9 @@ r#&quot;
 </div>
 <div id="admonition-caveat-constants-in-custom-scope-and-modules-are-also-propagated-into-functions" class="admonition danger">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-caveat-constants-in-custom-scope-and-modules-are-also-propagated-into-functions">
 <p>Caveat: Constants in custom scope and modules are also propagated into functions</p>
+</a>
 </div>
 <div>
 <p><a href="/book/language/constants.html">Constants</a> defined at <em>global</em> level typically cannot be seen by script <a href="/book/language/functions.html">functions</a> because they are <em>pure</em>.</p>
@@ -324,7 +332,9 @@ engine.run_with_scope(&amp;mut scope,
 </div>
 <div id="admonition-caveat-beware-of-large-constants" class="admonition danger">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-caveat-beware-of-large-constants">
 <p>Caveat: Beware of large constants</p>
+</a>
 </div>
 <div>
 <p><a href="/book/language/constants.html">Constants</a> propagation replaces each usage of the <a href="/book/language/constants.html">constant</a> with a clone of its value.</p>
@@ -354,7 +364,9 @@ the <a href="/book/language/constants.html">constants</a>.</p>
 </div>
 <div id="admonition-caveat-constants-may-be-modified-by-rust-methods" class="admonition danger">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-caveat-constants-may-be-modified-by-rust-methods">
 <p>Caveat: Constants may be modified by Rust methods</p>
+</a>
 </div>
 <div>
 <p>If the <a href="/book/language/constants.html">constants</a> are modified later on (yes, it is possible, via Rust <em>methods</em>),

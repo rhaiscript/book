@@ -167,7 +167,9 @@
 <code>Engine::register_result_fn</code>.</p>
 <div id="admonition-return-type" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-return-type">
 <p>Return type</p>
+</a>
 </div>
 <div>
 <p>The function must return <code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code> where <code>T</code> is any clonable type.</p>
@@ -196,7 +198,9 @@ if let Err(error) = engine.eval::&lt;i64&gt;(&quot;divide(40, 0)&quot;) {
 </code></pre>
 <div id="admonition-tip-create-a-box" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-create-a-box">
 <p>Tip: Create a <code>Box&lt;EvalAltResult&gt;</code></p>
+</a>
 </div>
 <div>
 <p><code>Box&lt;EvalAltResult&gt;</code> implements <code>From&lt;&amp;str&gt;</code> and <code>From&lt;String&gt;</code> etc.

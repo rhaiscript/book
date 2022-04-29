@@ -290,7 +290,9 @@ r#&quot;
 </code></pre>
 <div id="admonition-tip-hold-multiple-references" class="admonition tip">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-hold-multiple-references">
 <p>Tip: Hold multiple references</p>
+</a>
 </div>
 <div>
 <p>In order to access a value argument that is expensive to clone <em>while</em> holding a mutable reference
@@ -321,7 +323,9 @@ let value_ref = &amp;*rest[0].read_lock::&lt;B&gt;().unwrap();
 <h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
 <div id="admonition-why-read_lock-and-write_lock" class="admonition question">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-why-read_lock-and-write_lock">
 <p>Why <code>read_lock</code> and <code>write_lock</code>?</p>
+</a>
 </div>
 <div>
 <p>The <a href="/book/language/dynamic.html"><code>Dynamic</code></a> API that casts it to a reference to a particular data type  is <code>read_lock</code>

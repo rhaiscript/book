@@ -168,7 +168,9 @@ resources used by a script so that it does not consume more resources that it is
 <h2 id="most-important-resources"><a class="header" href="#most-important-resources">Most Important Resources</a></h2>
 <div id="admonition-memory" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-memory">
 <p>Memory</p>
+</a>
 </div>
 <div>
 <p>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
@@ -176,7 +178,9 @@ resources used by a script so that it does not consume more resources that it is
 </div>
 <div id="admonition-cpu" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-cpu">
 <p>CPU</p>
+</a>
 </div>
 <div>
 <p>Run an infinite tight loop that consumes all CPU cycles.</p>
@@ -184,7 +188,9 @@ resources used by a script so that it does not consume more resources that it is
 </div>
 <div id="admonition-time" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-time">
 <p>Time</p>
+</a>
 </div>
 <div>
 <p>Run indefinitely, thereby blocking the calling system which is waiting for a result.</p>
@@ -192,7 +198,9 @@ resources used by a script so that it does not consume more resources that it is
 </div>
 <div id="admonition-stack" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-stack">
 <p>Stack</p>
+</a>
 </div>
 <div>
 <ul>
@@ -214,7 +222,9 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </div>
 <div id="admonition-overflows-or-underflows" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-overflows-or-underflows">
 <p>Overflows or Underflows</p>
+</a>
 </div>
 <div>
 <ul>
@@ -232,7 +242,9 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </div>
 <div id="admonition-files" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-files">
 <p>Files</p>
+</a>
 </div>
 <div>
 <p>Continuously <a href="/book/language/modules/import.html"><code>import</code></a> an external <a href="/book/rust/modules/index.html">module</a> within an infinite loop, thus putting heavy load on the file-system
@@ -242,7 +254,9 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </div>
 <div id="admonition-private-data" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-private-data">
 <p>Private data</p>
+</a>
 </div>
 <div>
 <p>Read from and/or write to private, secret, sensitive data.</p>
@@ -251,7 +265,9 @@ parsing the expression; or even deeply-nested statement blocks, if nested deep e
 </div>
 <div id="admonition-the-internals-feature" class="admonition bug">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-the-internals-feature">
 <p>The <a href="/book/start/features.html"><code>internals</code></a> feature</p>
+</a>
 </div>
 <div>
 <p>The <a href="/book/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
@@ -279,7 +295,9 @@ be surprised how few scenarios this assumption holds.</p>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
 <div id="admonition-ok-panic-anyway" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-ok-panic-anyway">
 <p>OK, panic anyway</p>
+</a>
 </div>
 <div>
 <p>All these safe-guards can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature, which disables all safety

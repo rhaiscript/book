@@ -166,7 +166,9 @@
 <p>A <code>Dynamic</code> value can be <em>any</em> type, as long as it implements <code>Clone</code>.</p>
 <div id="admonition-send--sync" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-send--sync">
 <p><code>Send + Sync</code></p>
+</a>
 </div>
 <div>
 <p>Under the <a href="/book/start/features.html"><code>sync</code></a> feature, all types must also be <code>Send + Sync</code>.</p>
@@ -198,7 +200,9 @@ switch type_of(mystery) {
 <h2 id="type-checking-and-casting"><a class="header" href="#type-checking-and-casting">Type Checking and Casting</a></h2>
 <div id="admonition-tip-dynamictry_cast" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-dynamictry_cast">
 <p>Tip: <code>Dynamic::try_cast</code></p>
+</a>
 </div>
 <div>
 <p>The <code>try_cast</code> method does not panic but returns <code>None</code> upon failure.</p>
@@ -246,7 +250,9 @@ match item.type_name() {                    // 'type_name' returns the name of t
 </code></pre>
 <div id="admonition-always-full-path-name" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-always-full-path-name">
 <p>Always full path name</p>
+</a>
 </div>
 <div>
 <p><code>type_name</code> always returns the <em>full</em> Rust path name of the type, even when the type

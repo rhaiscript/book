@@ -174,7 +174,9 @@ X = 123;            // &lt;- syntax error: constant modified
 </code></pre>
 <div id="admonition-tip-naming" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-naming">
 <p>Tip: Naming</p>
+</a>
 </div>
 <div>
 <p>Constants follow the same naming rules as <a href="/book/language/variables.html">variables</a>, but as a convention are often named with
@@ -184,7 +186,9 @@ all-capital letters.</p>
 <h2 id="manually-add-constant-into-custom-scope"><a class="header" href="#manually-add-constant-into-custom-scope">Manually Add Constant into Custom Scope</a></h2>
 <div id="admonition-tip-singleton" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-singleton">
 <p>Tip: Singleton</p>
+</a>
 </div>
 <div>
 <p>A constant value holding a <a href="/book/rust/custom.html">custom type</a> essentially acts
@@ -230,7 +234,9 @@ engine.run_with_scope(&amp;mut scope, script)?;
 <h2 id="caveat--constants-can-be-modified-via-rust"><a class="header" href="#caveat--constants-can-be-modified-via-rust">Caveat – Constants Can be Modified via Rust</a></h2>
 <div id="admonition-tip-plugin-functions" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-plugin-functions">
 <p>Tip: Plugin functions</p>
+</a>
 </div>
 <div>
 <p>In <a href="/book/plugins/function.html">plugin functions</a>, <code>&amp;mut</code> parameters disallow constant values by default.</p>
@@ -280,7 +286,9 @@ X == 43;            // value of 'X' is unchanged by script
 </code></pre>
 <div id="admonition-implications-on-script-optimization" class="admonition info small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-implications-on-script-optimization">
 <p>Implications on script optimization</p>
+</a>
 </div>
 <div>
 <p>Rhai <em>assumes</em> that constants are never changed, even via Rust functions.</p>

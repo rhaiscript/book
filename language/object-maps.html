@@ -165,7 +165,9 @@
                         <h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
 <div id="admonition-safety" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-safety">
 <p>Safety</p>
+</a>
 </div>
 <div>
 <p>Always limit the <a href="/book/safety/max-map-size.html">maximum size of object maps</a>.</p>
@@ -173,7 +175,9 @@
 </div>
 <div id="admonition-why-smartstring" class="admonition question side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-why-smartstring">
 <p>Why <code>SmartString</code>?</p>
+</a>
 </div>
 <div>
 <p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because most object map properties are short (at least shorter than 23 characters)
@@ -182,7 +186,9 @@ and ASCII-based, so they can usually be stored inline without incurring the cost
 </div>
 <div id="admonition-why-btreemap-and-not-hashmap" class="admonition question side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-why-btreemap-and-not-hashmap">
 <p>Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
+</a>
 </div>
 <div>
 <p>The vast majority of object maps contain just a few properties.</p>
@@ -217,7 +223,9 @@ or a <a href="/book/appendix/literals.html">string literal</a> without interpola
 <h3 id="non-existing-property"><a class="header" href="#non-existing-property">Non-existing property</a></h3>
 <div id="admonition-tip-force-error" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-force-error">
 <p>Tip: Force error</p>
+</a>
 </div>
 <div>
 <p>It is possible to force Rhai to return an <code>EvalAltResult:: ErrorPropertyNotFound</code> via

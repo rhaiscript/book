@@ -182,7 +182,9 @@ engine.register_debugger(
 </code></pre>
 <div id="admonition-tip-accessing-the-debugger" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-accessing-the-debugger">
 <p>Tip: Accessing the <code>Debugger</code></p>
+</a>
 </div>
 <div>
 <p>The type <code>debugger::Debugger</code> allows for manipulating <a href="/book/engine/debugging/break-points.html">break-points</a>, among others.</p>
@@ -214,21 +216,24 @@ following signature.</p>
 <p>The <code>event</code> parameter of the second closure passed to <code>Engine::register_debugger</code> contains a
 <code>debugger::DebuggerEvent</code> which is an <code>enum</code> with the following variants.</p>
 <table><thead><tr><th><code>DebuggerEvent</code> variant</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>Start</code></td><td>the debugger is triggered at the beginning of evaluation</td></tr>
 <tr><td><code>Step</code></td><td>the debugger is triggered at the next step of evaluation</td></tr>
 <tr><td><code>BreakPoint(</code><em>n</em><code>)</code></td><td>the debugger is triggered by the <em>n</em>-th <a href="/book/engine/debugging/break-points.html">break-point</a></td></tr>
 <tr><td><code>FunctionExitWithValue(</code><em>r</em><code>)</code></td><td>the debugger is triggered by a function call returning with value <em>r</em> which is <code>&amp;Dynamic</code></td></tr>
 <tr><td><code>FunctionExitWithError(</code><em>err</em><code>)</code></td><td>the debugger is triggered by a function call exiting with error <em>err</em> which is <code>&amp;EvalAltResult</code></td></tr>
+<tr><td><code>End</code></td><td>the debugger is triggered at the end of evaluation</td></tr>
 </tbody></table>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
-<div id="admonition-tip-default-command" class="admonition tip side wide">
+<div id="admonition-tip-initialization" class="admonition tip side wide">
 <div class="admonition-title">
-<p>Tip: Default command</p>
+<a class="admonition-anchor-link" href="#admonition-tip-initialization">
+<p>Tip: Initialization</p>
+</a>
 </div>
 <div>
-<p>The default <code>DebuggerCommand</code> when a script just starts evaluation is always
-<code>DebuggerCommand::Next</code>, meaning that the <a href="/book/engine/hello-world.html"><code>Engine</code></a> always stops at the <em>first</em> <a href="/book/engine/compile.html"><code>AST</code></a> node.</p>
+<p>When a script starts evaluation, the debugger always stops at the very <em>first</em> <a href="/book/engine/compile.html"><code>AST</code></a> node
+with the <code>event</code> parameter set to <code>DebuggerStatus::Start</code>.</p>
 <p>This allows initialization to be done (e.g. setting up <a href="/book/engine/debugging/break-points.html">break-points</a>).</p>
-<p>To start script evaluation, return <code>DebuggerCommand::Continue</code>.</p>
 </div>
 </div>
 <p>The second closure passed to <code>Engine::register_debugger</code> will be called when stepping into or over
@@ -246,32 +251,6 @@ continued behavior of the debugger.</p>
 <tr><td><code>Next</code></td><td>run to the next statement, skipping over functions</td><td style="text-align: center"><code>next</code></td></tr>
 <tr><td><code>FunctionExit</code></td><td>run to the end of the current function call; debugger is triggered <em>before</em> the function call returns and the <a href="/book/engine/scope.html"><code>Scope</code></a> cleared</td><td style="text-align: center"><code>finish</code></td></tr>
 </tbody></table>
-<div id="admonition-tip-detect-initialization" class="admonition tip">
-<div class="admonition-title">
-<p>Tip: Detect initialization</p>
-</div>
-<div>
-<p>It is usually desirable to detect whether the callback function is at the beginning of
-a script evaluation run in order to perform special initialization tasks.</p>
-<p>Use the following tactics to obtain that information.</p>
-<ol>
-<li>
-<p>If the task is to add a number of <a href="/book/engine/debugging/break-points.html">break-points</a> at the beginning, simply check
-<code>context.global_runtime_state().debugger.break_points()</code> to see if they are there (or whether
-the count is zero).</p>
-</li>
-<li>
-<p>Store a <code>bool</code> value into the debugger’s <a href="state.html"><em>state</em></a>, update it to <code>true</code> after initialization,
-and check its value later.</p>
-</li>
-<li>
-<p>Check <code>context.global_runtime_state().num_operations</code> which contains the
-<a href="/book/safety/max-operations.html">number of operations</a> already performed by the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.
-At the beginning of script evaluation, this value should be zero (or a very small number).</p>
-</li>
-</ol>
-</div>
-</div>
 
                     </main>
 

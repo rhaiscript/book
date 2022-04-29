@@ -165,7 +165,9 @@
                         <h1 id="export-variables-functions-and-sub-modules-from-a-script"><a class="header" href="#export-variables-functions-and-sub-modules-from-a-script">Export Variables, Functions and Sub-Modules From a Script</a></h1>
 <div id="admonition-see-also" class="admonition info side">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-see-also">
 <p>See also</p>
+</a>
 </div>
 <div>
 <p>See <a href="/book/rust/modules/ast.html"><em>Create a Module from AST</em></a> for more details.</p>
@@ -205,7 +207,9 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 </code></pre>
 <div id="admonition-tip-multiple-exports" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-multiple-exports">
 <p>Tip: Multiple exports</p>
+</a>
 </div>
 <div>
 <p><a href="/book/language/variables.html">Variables</a> can be exported under multiple names.
@@ -226,7 +230,9 @@ export z;
 </div>
 <div id="admonition-do-not-export-closures" class="admonition bug small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-do-not-export-closures">
 <p>Do not export closures</p>
+</a>
 </div>
 <div>
 <p>A <a href="/book/language/fn-ptr.html">function pointer</a>, <a href="/book/language/fn-anon.html">anonymous function</a> or <a href="/book/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
@@ -237,7 +243,9 @@ It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="/
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
 <div id="admonition-private-functions" class="admonition info side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-private-functions">
 <p>Private functions</p>
+</a>
 </div>
 <div>
 <p><a href="/book/language/modules/export.html"><code>private</code></a> <a href="/book/language/functions.html">functions</a> are commonly called within the <a href="/book/rust/modules/index.html">module</a> only.
@@ -256,7 +264,9 @@ private fn foo() {}     // private function - hidden
 <p>All loaded <a href="/book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
 <div id="admonition-tip-skip-exporting-a-module" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-skip-exporting-a-module">
 <p>Tip: Skip exporting a module</p>
+</a>
 </div>
 <div>
 <p>To prevent a <a href="/book/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the

@@ -166,7 +166,9 @@
 <h2 id="valid-names"><a class="header" href="#valid-names">Valid Names</a></h2>
 <div id="admonition-tip-unicode-standard-annex-31-identifiers" class="admonition tip side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-unicode-standard-annex-31-identifiers">
 <p>Tip: Unicode Standard Annex #31 identifiers</p>
+</a>
 </div>
 <div>
 <p>The <a href="/book/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
@@ -185,7 +187,9 @@ letter must come <em>before</em> any digits. In other words, the first character
 must be an ASCII letter and not a digit.</p>
 <div id="admonition-why-this-restriction" class="admonition question side wide">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-why-this-restriction">
 <p>Why this restriction?</p>
+</a>
 </div>
 <div>
 <p>To reduce confusion (and subtle bugs) because, for instance, <code>_1</code> can easily be misread (or mistyped)
@@ -199,7 +203,9 @@ as <code>-1</code>.</p>
 <p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a> (active or reserved).</p>
 <div id="admonition-avoid-names-longer-than-11-letters-on-32-bit" class="admonition warning">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-avoid-names-longer-than-11-letters-on-32-bit">
 <p>Avoid names longer than 11 letters on 32-Bit</p>
+</a>
 </div>
 <div>
 <p>Rhai uses <a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> which avoids allocations unless a string is over its internal limit
@@ -225,7 +231,9 @@ for loop_var in array {
 <p>Variables are declared using the <code>let</code> keyword.</p>
 <div id="admonition-tip-no-initial-value" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-no-initial-value">
 <p>Tip: No initial value</p>
+</a>
 </div>
 <div>
 <p>Variables do not have to be given an initial value.
@@ -234,7 +242,9 @@ If none is provided, it defaults to <a href="/book/language/values-and-types.htm
 </div>
 <div id="admonition-variables-are-local" class="admonition warning small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-variables-are-local">
 <p>Variables are local</p>
+</a>
 </div>
 <div>
 <p>A variable defined within a <a href="statements.html">statement block</a> is <em>local</em> to that block.</p>
@@ -242,7 +252,9 @@ If none is provided, it defaults to <a href="/book/language/values-and-types.htm
 </div>
 <div id="admonition-tip-is_def_var" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip-is_def_var">
 <p>Tip: <code>is_def_var</code></p>
+</a>
 </div>
 <div>
 <p>Use <code>is_def_var</code> to detect if a variable is defined.</p>
@@ -303,7 +315,9 @@ engine.run_with_scope(&amp;mut scope,
 </code></pre>
 <div id="admonition-no-scope" class="admonition bug small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-no-scope">
 <p>No <code>Scope</code></p>
+</a>
 </div>
 <div>
 <p>If no <a href="/book/engine/scope.html"><code>Scope</code></a> is used to evaluate the script (e.g. when using <code>Engine::run</code> instead of
@@ -324,7 +338,9 @@ print(foo);         // &lt;- parse error under strict variables mode:
 </code></pre>
 <div id="admonition-tip" class="admonition tip small">
 <div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip">
 <p>Tip</p>
+</a>
 </div>
 <div>
 <p>Turn on <a href="/book/engine/strict-var.html">strict variables</a> mode if no <a href="/book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
