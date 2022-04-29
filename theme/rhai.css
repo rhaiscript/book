@@ -50,21 +50,26 @@ html :is(.admonition) > :last-child {
   margin-bottom: 1.2rem;
 }
 
+a.admonition-anchor-link:link, a.admonition-anchor-link:visited {
+  color: var(--fg);
+}
+
+a.admonition-anchor-link:link:hover, a.admonition-anchor-link:visited:hover {
+  text-decoration: none;
+}
+
 :is(.admonition-title, summary) {
   position: relative;
   margin-block: 0;
   margin-inline: -1.6rem -1.2rem;
   padding-block: 0.8rem;
-  padding-inline: 4rem 1.2rem;
+  padding-inline: 4.4rem 1.2rem;
   font-weight: 700;
   background-color: rgba(68, 138, 255, 0.1);
-  border: 0 solid #448aff;
-  border-inline-start-width: 0.4rem;
-  border-start-start-radius: 0.2rem;
   display: flex;
 }
 
-:is(.admonition-title, summary) > p {
+:is(.admonition-title, summary) p {
   margin: 0;
 }
 
@@ -75,7 +80,7 @@ html :is(.admonition-title, summary):last-child {
 :is(.admonition-title, summary)::before {
   position: absolute;
   top: 0.625em;
-  inset-inline-start: 1.2rem;
+  inset-inline-start: 1.6rem;
   width: 2rem;
   height: 2rem;
   background-color: #448aff;
@@ -94,7 +99,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.note) > :is(.admonition-title, summary) {
   background-color: rgba(68, 138, 255, 0.1);
-  border-color: #448aff;
 }
 
 :is(.note) > :is(.admonition-title, summary)::before {
@@ -113,7 +117,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.abstract, .summary, .tldr) > :is(.admonition-title, summary) {
   background-color: rgba(0, 176, 255, 0.1);
-  border-color: #00b0ff;
 }
 
 :is(.abstract, .summary, .tldr) > :is(.admonition-title, summary)::before {
@@ -132,7 +135,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.info, .todo) > :is(.admonition-title, summary) {
   background-color: rgba(0, 184, 212, 0.1);
-  border-color: #00b8d4;
 }
 
 :is(.info, .todo) > :is(.admonition-title, summary)::before {
@@ -151,7 +153,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.tip, .hint, .important) > :is(.admonition-title, summary) {
   background-color: rgba(0, 191, 165, 0.1);
-  border-color: #00bfa5;
 }
 
 :is(.tip, .hint, .important) > :is(.admonition-title, summary)::before {
@@ -170,7 +171,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.success, .check, .done) > :is(.admonition-title, summary) {
   background-color: rgba(0, 200, 83, 0.1);
-  border-color: #00c853;
 }
 
 :is(.success, .check, .done) > :is(.admonition-title, summary)::before {
@@ -189,7 +189,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.question, .help, .faq) > :is(.admonition-title, summary) {
   background-color: rgba(100, 221, 23, 0.1);
-  border-color: #64dd17;
 }
 
 :is(.question, .help, .faq) > :is(.admonition-title, summary)::before {
@@ -208,7 +207,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.warning, .caution, .attention) > :is(.admonition-title, summary) {
   background-color: rgba(255, 145, 0, 0.1);
-  border-color: #ff9100;
 }
 
 :is(.warning, .caution, .attention) > :is(.admonition-title, summary)::before {
@@ -227,7 +225,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.failure, .fail, .missing) > :is(.admonition-title, summary) {
   background-color: rgba(255, 82, 82, 0.1);
-  border-color: #ff5252;
 }
 
 :is(.failure, .fail, .missing) > :is(.admonition-title, summary)::before {
@@ -246,7 +243,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.danger, .error) > :is(.admonition-title, summary) {
   background-color: rgba(255, 23, 68, 0.1);
-  border-color: #ff1744;
 }
 
 :is(.danger, .error) > :is(.admonition-title, summary)::before {
@@ -265,7 +261,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.bug) > :is(.admonition-title, summary) {
   background-color: rgba(245, 0, 87, 0.1);
-  border-color: #f50057;
 }
 
 :is(.bug) > :is(.admonition-title, summary)::before {
@@ -284,7 +279,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.example) > :is(.admonition-title, summary) {
   background-color: rgba(124, 77, 255, 0.1);
-  border-color: #7c4dff;
 }
 
 :is(.example) > :is(.admonition-title, summary)::before {
@@ -303,7 +297,6 @@ html :is(.admonition-title, summary):last-child {
 
 :is(.quote, .cite) > :is(.admonition-title, summary) {
   background-color: rgba(158, 158, 158, 0.1);
-  border-color: #9e9e9e;
 }
 
 :is(.quote, .cite) > :is(.admonition-title, summary)::before {
@@ -326,6 +319,10 @@ html :is(.admonition-title, summary):last-child {
 
 .rust :is(.admonition) {
   background-color: var(--sidebar-bg);
+  color: var(--sidebar-fg);
+}
+
+.rust .admonition-anchor-link:link, .rust .admonition-anchor-link:visited {
   color: var(--sidebar-fg);
 }
 
