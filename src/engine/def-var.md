@@ -40,15 +40,15 @@ Function Signature
 
 The function signature passed to `Engine::on_def_var` takes the following form.
 
-> `Fn(is_runtime: bool, info: VarDefInfo, context: &EvalContext) -> Result<bool, Box<EvalAltResult>>`
+> `Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -> Result<bool, Box<EvalAltResult>>`
 
 where:
 
-| Parameter    |              Type               | Description                                                                                     |
-| ------------ | :-----------------------------: | ----------------------------------------------------------------------------------------------- |
-| `is_runtime` |             `bool`              | `true` if the [variable] definition event happens during runtime, `false` if during compilation |
-| `info`       |          `VarDefInfo`           | information on the [variable] being defined                                                     |
-| `context`    | [`&EvalContext`][`EvalContext`] | the current _evaluation context_                                                                |
+| Parameter    |      Type       | Description                                                                                     |
+| ------------ | :-------------: | ----------------------------------------------------------------------------------------------- |
+| `is_runtime` |     `bool`      | `true` if the [variable] definition event happens during runtime, `false` if during compilation |
+| `info`       |  `VarDefInfo`   | information on the [variable] being defined                                                     |
+| `context`    | [`EvalContext`] | the current _evaluation context_                                                                |
 
 and `VarDefInfo` is a simple `struct` that contains the following fields:
 
