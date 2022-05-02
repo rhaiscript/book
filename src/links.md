@@ -83,7 +83,7 @@
 [type iterator]: {{rootUrl}}/language/iterator.md
 [type iterators]: {{rootUrl}}/language/iterator.md
 [`NativeCallContext`]: {{rootUrl}}/rust/context.md
-[`EvalContext`]: {{rootUrl}}/language/eval-context.md
+[`EvalContext`]: {{rootUrl}}/engine/eval-context.md
 [`GlobalRuntimeState`]: https://docs.rs/rhai/{{version}}/rhai/struct.GlobalRuntimeState.html
 
 [`instant::Instant`]: https://crates.io/crates/instant

@@ -41,7 +41,7 @@ engine.register_debugger(
     // Trigger the server during each debugger stop point
     |context, event, node, source, pos| {
         // Get the state
-        let mut state = debugger.state_mut();
+        let mut state = context.tag_mut();
 
         // Get the server
         let mut server = state.write_lock::<MyCommServer>().unwrap();
