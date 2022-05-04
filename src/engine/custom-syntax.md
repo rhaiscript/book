@@ -337,6 +337,7 @@ Really Advanced &ndash; Custom Parsers
 --------------------------------------
 
 Sometimes it is desirable to have multiple custom syntax starting with the same symbol.
+
 This is especially common for _command-style_ syntax where the second symbol calls a particular command:
 
 ```rust
@@ -370,6 +371,7 @@ How Custom Parsers Work
 ### Leading Symbol
 
 Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
+
 It can either be:
 
 * an identifier that isn't a normal [keyword] unless [disabled][disable keywords and operators], or
@@ -438,7 +440,7 @@ A custom parser always returns `Some` with the _next_ symbol expected (which can
 `$expr$`, `$block$` etc.) or `None` if parsing should terminate (_without_ reading the
 look-ahead symbol).
 
-~~~admonish tip.small "Tip: `$$`"
+~~~admonish tip.small "Tip: `$$` return symbol"
 
 A return symbol starting with `$$` is treated specially.
 
@@ -474,24 +476,25 @@ engine.register_custom_syntax_raw(
             "hello" => Ok(Some("world".into())),
             "update" | "check" | "add" | "remove" => Ok(Some("$ident$".into())),
             "cleanup" => Ok(Some("$$cleanup".into())),
-            cmd => Err(ParseError(Box::new(ParseErrorType::BadInput(
-                LexError::ImproperSymbol(format!("Improper command: {}", cmd))
-            )), Position::NONE)),
+            cmd => Err(LexError::ImproperSymbol(format!("Improper command: {}", cmd))
+                       .into_err(Position::NONE)),
         },
         // perform command arg ...
         3 => match (symbols[1].as_str(), symbols[2].as_str()) {
             ("action", _) => Ok(Some("$$action".into())),
             ("hello", "world") => Ok(Some("$$hello-world".into())),
-            ("update", arg) if arg == "system" => Ok(Some("$$update-system".into())),
-            ("update", arg) if arg == "client" => Ok(Some("$$update-client".into())),
+            ("update", arg) => match arg {
+                "system" => Ok(Some("$$update-system".into())),
+                "client" => Ok(Some("$$update-client".into())),
+                _ => Err(LexError::ImproperSymbol(format!("Cannot update {}", arg))
+                         .into_err(Position::NONE))
+            },
             ("check", arg) => Ok(Some("$$check".into())),
             ("add", arg) => Ok(Some("$$add".into())),
             ("remove", arg) => Ok(Some("$$remove".into())),
-            (cmd, arg) => Err(ParseError(Box::new(ParseErrorType::BadInput(
-                LexError::ImproperSymbol(
-                    format!("Invalid argument for command {}: {}", cmd, arg)
-                )
-            )), Position::NONE)),
+            (cmd, arg) => Err(LexError::ImproperSymbol(
+                format!("Invalid argument for command {}: {}", cmd, arg)
+            ).into_err(Position::NONE)),
         },
         _ => unreachable!(),
     },
