@@ -91,7 +91,7 @@ The above syntax is made up of a stream of symbols:
 |    8     |            |    `:`     | the colon symbol                                                                                         |
 |    9     |     4      | `$block$`  | a statement block, which must be enclosed with `{` ... `}`.                                              |
 
-This syntax matches the following sample code and generates three inputs (one for each non-keyword):
+This syntax matches the following sample code and generates five inputs (one for each non-keyword):
 
 ```rust
 // Assuming the 'exec' custom syntax implementation declares the variable 'hello':
