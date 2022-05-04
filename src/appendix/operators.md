@@ -51,6 +51,7 @@ Symbols and Patterns
 |         `` ` `` ... `` ` ``         | back-tick                          | multi-line literal [string]           |
 |             `'` ... `'`             | single quote                       | [character]                           |
 |                 `\`                 | 1) escape<br/>2) line continuation | escape character literal              |
+|                `()`                 | unit                               | null value                            |
 |             `(` ... `)`             | parentheses                        | expression grouping                   |
 |             `{` ... `}`             | braces                             | block statement                       |
 | <code>\|</code> ... <code>\|</code> | pipes                              | closure                               |
