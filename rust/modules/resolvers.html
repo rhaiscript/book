@@ -208,33 +208,44 @@ Loads a script file (based off the current directory or a specified one) with <c
 <p>All <a href="/book/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="/book/language/modules/import.html"><code>import</code></a> statements become sub-<a href="/book/rust/modules/index.html">modules</a>,
 which are also available to functions defined within the same script file.</p>
 <h3 id="base-directory"><a class="header" href="#base-directory">Base directory</a></h3>
-<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory.</p>
-<p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
-<div id="admonition-tip-default-base-directory" class="admonition tip small">
+<div id="admonition-tip-default" class="admonition tip side wide">
 <div class="admonition-title">
-<a class="admonition-anchor-link" href="#admonition-tip-default-base-directory">
-<p>Tip: Default base directory</p>
+<a class="admonition-anchor-link" href="#admonition-tip-default">
+<p>Tip: Default</p>
 </a>
 </div>
 <div>
-<p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then relative paths are
-based off the directory of the loading script.</p>
-<p>This allows scripts to simply load each other.</p>
+<p>If the base directory is not set, then relative paths are based off the directory of the loading script.</p>
+<p>This allows scripts to simply cross-load each other.</p>
 </div>
 </div>
+<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory.</p>
+<p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
+<h3 id="custom-scope"><a class="header" href="#custom-scope">Custom <a href="/book/engine/scope.html"><code>Scope</code></a></a></h3>
+<div id="admonition-tip" class="admonition tip side wide">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tip">
+<p>Tip</p>
+</a>
+</div>
+<div>
+<p>This <a href="/book/engine/scope.html"><code>Scope</code></a> can conveniently hold global <a href="/book/language/constants.html">constants</a> etc.</p>
+</div>
+</div>
+<p>The <code>set_scope</code> method adds an optional <a href="/book/engine/scope.html"><code>Scope</code></a> which will be used to <a href="/book/engine/optimize/index.html">optimize</a> <a href="/book/rust/modules/index.html">module</a> scripts.</p>
 <h3 id="caching"><a class="header" href="#caching">Caching</a></h3>
-<p>By default, <a href="/book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
-repeatedly imported.</p>
-<div id="admonition-tip-enabledisable-caching" class="admonition tip small">
+<div id="admonition-tip-enabledisable-caching" class="admonition tip side wide">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="#admonition-tip-enabledisable-caching">
 <p>Tip: Enable/disable caching</p>
 </a>
 </div>
 <div>
-<p>Use <code>FileModuleResolver::enable_cache</code> to enable/disable the script file cache.</p>
+<p>Use <code>enable_cache</code> to enable/disable the cache.</p>
 </div>
 </div>
+<p>By default, <a href="/book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
+repeatedly imported.</p>
 <h3 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h3>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
@@ -280,7 +291,7 @@ m::greet();                     // prints &quot;hello! from module!&quot;
 
 m::greet_main();                // prints &quot;main here!&quot;
 </code></pre>
-<h3 id="simulating-virtual-functions"><a class="header" href="#simulating-virtual-functions">Simulating virtual functions</a></h3>
+<h3 id="simulate-virtual-functions"><a class="header" href="#simulate-virtual-functions">Simulate virtual functions</a></h3>
 <p>When calling a namespace-qualified function defined within a module, other functions defined within
 the same module script override any similar-named functions (with the same number of parameters)
 defined in the <a href="/book/language/fn-namespaces.html">global namespace</a>.  This is to ensure that a module acts as a

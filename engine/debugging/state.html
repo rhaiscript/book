@@ -166,7 +166,9 @@
 <p>Sometimes it is useful to keep a persistent <em>state</em> within the <a href="/book/engine/debugging/debugger.html">debugger</a>.</p>
 <p>The <code>Engine::register_debugger</code> API accepts a function that returns the initial value of the
 <a href="/book/engine/debugging/debugger.html">debugger’s</a> state, which is a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can hold any value.</p>
-<p>The state can easily be accessed during a <a href="/book/engine/debugging/debugger.html">debugger</a> callback.</p>
+<p>This state value is the stored into the current evaluation’s persistent custom state which can be
+accessed via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>, <a href="/book/engine/eval-context.html"><code>EvalContext::tag</code></a>
+and <a href="/book/engine/eval-context.html"><code>EvalContext::tag_mut</code></a>.</p>
 <pre><code class="language-rust">engine.register_debugger(
     || {
         // Say, use an object map for the debugger state
@@ -177,17 +179,11 @@
         Dynamic::from_map(state)
     },
     |context, node, source, pos| {
-        // Get global runtime state
-        let global = context.global_runtime_state_mut();
-
-        // Get debugger
-        let debugger = &amp;mut global.debugger;
-
         // Print debugger state - which is an object map
-        println!(&quot;Current state = {}&quot;, debugger.state());
+        println!(&quot;Current state = {}&quot;, context.tag());
 
         // Get the state as an object map
-        let mut state = debugger.state_mut().write_lock::&lt;Map&gt;().unwrap();
+        let mut state = context.tag_mut().write_lock::&lt;Map&gt;().unwrap();
 
         // Read state
         let hello = state.get(&quot;hello&quot;).unwrap().as_int().unwrap();

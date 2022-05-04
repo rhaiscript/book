@@ -165,7 +165,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.6.1</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.7.0</strong> of Rhai.</p>
 <p>For the latest development version, see <a href="about//book/vnext/">here</a>.</p>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <div id="admonition-etymology-of-the-name-rhai" class="admonition question">
@@ -643,7 +643,7 @@ having to install anything.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.6.1&quot;    # assuming 1.6.1 is the latest version
+rhai = &quot;1.7.0&quot;    # assuming 1.7.0 is the latest version
 </code></pre>
 </div>
 </div>
@@ -743,7 +743,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.6.1&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;1.7.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>turns on these six features:</p>
 <table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
@@ -1166,7 +1166,7 @@ as well as for possible future expansion when references can also be put into th
 </div>
 <div>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.6.1/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.7.0/rhai/struct.Scope.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="example-4"><a class="header" href="#example-4">Example</a></h2>
@@ -2195,8 +2195,9 @@ and exposes the following.</p>
 <tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td><code>position()</code></td><td style="text-align: center"><code>Position</code></td><td>position of the function call</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
+<tr><td><code>tag()</code></td><td style="text-align: center"><code>&amp;Dynamic</code></td><td>reference to the custom state that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.6.1/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.7.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.7.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>; requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn()</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
@@ -3487,7 +3488,7 @@ change from time to time.</p>
 </div>
 <div>
 <p>For the complete <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.6.1/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.7.0/rhai/struct.Module.html">documentation</a> online.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
@@ -3804,33 +3805,44 @@ Loads a script file (based off the current directory or a specified one) with <c
 <p>All <a href="rust/modules//book/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="rust/modules//book/language/modules/import.html"><code>import</code></a> statements become sub-<a href="rust/modules//book/rust/modules/index.html">modules</a>,
 which are also available to functions defined within the same script file.</p>
 <h3 id="base-directory"><a class="header" href="#base-directory">Base directory</a></h3>
-<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory.</p>
-<p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
-<div id="admonition-tip-default-base-directory" class="admonition tip small">
+<div id="admonition-tip-default" class="admonition tip side wide">
 <div class="admonition-title">
-<a class="admonition-anchor-link" href="rust/modules/resolvers.html#admonition-tip-default-base-directory">
-<p>Tip: Default base directory</p>
+<a class="admonition-anchor-link" href="rust/modules/resolvers.html#admonition-tip-default">
+<p>Tip: Default</p>
 </a>
 </div>
 <div>
-<p>If the base directory is not set (e.g. using <code>FileModuleResolver::new</code>), then relative paths are
-based off the directory of the loading script.</p>
-<p>This allows scripts to simply load each other.</p>
+<p>If the base directory is not set, then relative paths are based off the directory of the loading script.</p>
+<p>This allows scripts to simply cross-load each other.</p>
 </div>
 </div>
+<p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory.</p>
+<p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or <code>FileModuleResolver::set_base_path</code>.</p>
+<h3 id="custom-scope"><a class="header" href="#custom-scope">Custom <a href="rust/modules//book/engine/scope.html"><code>Scope</code></a></a></h3>
+<div id="admonition-tip" class="admonition tip side wide">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="rust/modules/resolvers.html#admonition-tip">
+<p>Tip</p>
+</a>
+</div>
+<div>
+<p>This <a href="rust/modules//book/engine/scope.html"><code>Scope</code></a> can conveniently hold global <a href="rust/modules//book/language/constants.html">constants</a> etc.</p>
+</div>
+</div>
+<p>The <code>set_scope</code> method adds an optional <a href="rust/modules//book/engine/scope.html"><code>Scope</code></a> which will be used to <a href="rust/modules//book/engine/optimize/index.html">optimize</a> <a href="rust/modules//book/rust/modules/index.html">module</a> scripts.</p>
 <h3 id="caching"><a class="header" href="#caching">Caching</a></h3>
-<p>By default, <a href="rust/modules//book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
-repeatedly imported.</p>
-<div id="admonition-tip-enabledisable-caching" class="admonition tip small">
+<div id="admonition-tip-enabledisable-caching" class="admonition tip side wide">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="rust/modules/resolvers.html#admonition-tip-enabledisable-caching">
 <p>Tip: Enable/disable caching</p>
 </a>
 </div>
 <div>
-<p>Use <code>FileModuleResolver::enable_cache</code> to enable/disable the script file cache.</p>
+<p>Use <code>enable_cache</code> to enable/disable the cache.</p>
 </div>
 </div>
+<p>By default, <a href="rust/modules//book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
+repeatedly imported.</p>
 <h3 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h3>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be <a href="rust/modules//book/start/bin.html"><code>rhai-run</code></a>).</p>
@@ -3876,7 +3888,7 @@ m::greet();                     // prints &quot;hello! from module!&quot;
 
 m::greet_main();                // prints &quot;main here!&quot;
 </code></pre>
-<h3 id="simulating-virtual-functions"><a class="header" href="#simulating-virtual-functions">Simulating virtual functions</a></h3>
+<h3 id="simulate-virtual-functions"><a class="header" href="#simulate-virtual-functions">Simulate virtual functions</a></h3>
 <p>When calling a namespace-qualified function defined within a module, other functions defined within
 the same module script override any similar-named functions (with the same number of parameters)
 defined in the <a href="rust/modules//book/language/fn-namespaces.html">global namespace</a>.  This is to ensure that a module acts as a
@@ -5144,7 +5156,7 @@ def_package! {
 name = &quot;my-package&quot;     # 'my-package' crate
 
 [dependencies]
-rhai = &quot;1.6.1&quot;    # assuming 1.6.1 is the latest version
+rhai = &quot;1.7.0&quot;    # assuming 1.7.0 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><code class="language-rust">use rhai::def_package;
@@ -5197,7 +5209,7 @@ def_package! {
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.6.1&quot;
+rhai = &quot;1.7.0&quot;
 rhai-rand = &quot;0.1&quot;       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -5223,7 +5235,7 @@ engine.register_global_module(random.as_shared_module());
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version=&quot;1.6.1&quot;, features = [&quot;no_float&quot;] }
+rhai = { version=&quot;1.7.0&quot;, features = [&quot;no_float&quot;] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&quot;array&quot;] }
@@ -7573,6 +7585,7 @@ operate on object maps.</p>
 <tr><td><code>contains</code>, <a href="language//book/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
 <tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="language//book/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="language//book/start/features.html"><code>no_index</code></a></td></tr>
 <tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="language//book/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="language//book/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<a href="language//book/language/values-and-types.html"><code>()</code></a> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
 </tbody></table>
 <h2 id="examples-10"><a class="header" href="#examples-10">Examples</a></h2>
 <pre><code class="language-rust">let y = #{              // object map literal with 3 properties
@@ -7664,6 +7677,7 @@ map.values              // access property 'values', returns '()' if not found
 map.values()            // 'values' method - returns array of all property values
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="parse-an-object-map-from-json"><a class="header" href="#parse-an-object-map-from-json">Parse an Object Map from JSON</a></h1>
+<h2 id="do-it-without-serde"><a class="header" href="#do-it-without-serde">Do It Without <code>serde</code></a></h2>
 <div id="admonition-object-map-vs-json" class="admonition info side wide">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="language/json.html#admonition-object-map-vs-json">
@@ -7671,15 +7685,13 @@ map.values()            // 'values' method - returns array of all property value
 </a>
 </div>
 <div>
-<p>A valid JSON string does not start with a hash character <code>#</code> while a Rhai <a href="language//book/language/object-maps.html">object map</a> does.
-That’s the only major difference!</p>
+<p>A valid JSON object hash does not start with a hash character <code>#</code> while a Rhai <a href="language//book/language/object-maps.html">object map</a> does.
+That’s the only difference!</p>
 </div>
 </div>
 <p>The syntax for an <a href="language//book/language/object-maps.html">object map</a> is extremely similar to the JSON representation of a object hash,
 with the exception of <code>null</code> values which can technically be mapped to <a href="language//book/language/values-and-types.html"><code>()</code></a>.</p>
 <p>Use the <code>Engine::parse_json</code> method to parse a piece of JSON into an <a href="language//book/language/object-maps.html">object map</a>.</p>
-<p>The JSON text must represent a single object hash – i.e. must be wrapped within braces
-<code>{</code>…<code>}</code> – otherwise it returns a syntax error.</p>
 <pre><code class="language-rust">// JSON string - notice that JSON property names are always quoted
 //               notice also that comments are acceptable within the JSON string
 let json = r#&quot;{
@@ -7701,10 +7713,23 @@ map.len() == 6;       // 'map' contains all properties in the JSON string
 let mut scope = Scope::new();
 scope.push(&quot;map&quot;, map);
 
-let result = engine.eval_with_scope::&lt;i64&gt;(r#&quot;map[&quot;^^^!!!&quot;].len()&quot;#)?;
+let result = engine.eval_with_scope::&lt;i64&gt;(&amp;mut scope, r#&quot;map[&quot;^^^!!!&quot;].len()&quot;#)?;
 
 result == 3;          // the object map is successfully used in the script
 </code></pre>
+<div id="admonition-warning-must-be-object-hash" class="admonition warning small">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="language/json.html#admonition-warning-must-be-object-hash">
+<p>Warning: Must be object hash</p>
+</a>
+</div>
+<div>
+<p>The JSON text must represent a single object hash – i.e. must be wrapped within braces
+<code>{</code>…<code>}</code>.</p>
+<p>It cannot be a primitive type (e.g. number, string etc.).
+Otherwise it cannot be converted into an <a href="language//book/language/object-maps.html">object map</a> and a type error is returned.</p>
+</div>
+</div>
 <div id="admonition-representation-of-numbers" class="admonition note small">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="language/json.html#admonition-representation-of-numbers">
@@ -7720,26 +7745,31 @@ assumed to be an integer).</p>
 <p>This style can be used successfully with Rhai <a href="language//book/language/object-maps.html">object maps</a>.</p>
 </div>
 </div>
-<h2 id="parse-json-with-sub-objects"><a class="header" href="#parse-json-with-sub-objects">Parse JSON with Sub-Objects</a></h2>
-<p><code>Engine::parse_json</code> depends on the fact that the <a href="language//book/language/object-maps.html">object map</a> literal syntax in Rhai is <em>almost</em>
-the same as a JSON object.  However, it is <em>almost</em> because the syntax for a sub-object in JSON
-(i.e. “<code>{ ... }</code>”) is different from a Rhai <a href="language//book/language/object-maps.html">object map</a> literal (i.e. “<code>#{ ... }</code>”).</p>
-<p>When <code>Engine::parse_json</code> encounters JSON with sub-objects, it fails with a syntax error.</p>
-<p>If it is certain that no text string in the JSON will ever contain the character <code>{</code>,
-then it is possible to parse it by first replacing all occupance of <code>{</code> with <code>#{</code>.</p>
-<p>A JSON object hash starting with <code>#{</code> is handled transparently by <code>Engine::parse_json</code>.</p>
+<h3 id="sub-objects"><a class="header" href="#sub-objects">Sub-objects</a></h3>
+<p>Sub-objects are handled transparently by <code>Engine::parse_json</code>.</p>
+<p>It is <em>not</em> necessary to replace <code>{</code> with <code>#{</code> in order to fake a Rhai <a href="language//book/language/object-maps.html">object map</a> literal.</p>
 <pre><code class="language-rust">// JSON with sub-object 'b'.
 let json = r#&quot;{&quot;a&quot;:1, &quot;b&quot;:{&quot;x&quot;:true, &quot;y&quot;:false}}&quot;#;
 
-// Our JSON text does not contain the '{' character, so off we go!
-let new_json = json.replace(&quot;{&quot;, &quot;#{&quot;);
+// 'parse_json' handles this just fine.
+let map = engine.parse_json(json, false)?;
 
-// The leading '{' will also be replaced to '#{', but 'parse_json' handles this just fine.
-let map = engine.parse_json(&amp;new_json, false)?;
-
-map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
+// 'map' contains two properties: 'a' and 'b'
+map.len() == 2;
 </code></pre>
-<h2 id="use-serde-to-serializedeserialize-tofrom-json"><a class="header" href="#use-serde-to-serializedeserialize-tofrom-json">Use <code>serde</code> to Serialize/Deserialize to/from JSON</a></h2>
+<div id="admonition-tldr--how-is-it-done" class="admonition question small">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="language/json.html#admonition-tldr--how-is-it-done">
+<p>TL;DR – How is it done?</p>
+</a>
+</div>
+<div>
+<p>Internally, <code>Engine::parse_json</code> <em>cheats</em> by treating the JSON text as a Rhai script.</p>
+<p>That is why it even supports <a href="language//book/language/comments.html">comments</a> and arithmetic expressions in the JSON text.</p>
+<p>A <a href="language//book/engine/token-mapper.html">token remap filter</a> is used to convert <code>{</code> into <code>#{</code> and <code>null</code> to <a href="language//book/language/values-and-types.html"><code>()</code></a>.</p>
+</div>
+</div>
+<h2 id="use-serde"><a class="header" href="#use-serde">Use <code>serde</code></a></h2>
 <div id="admonition-see-also" class="admonition info side">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="language/json.html#admonition-see-also">
@@ -7751,8 +7781,8 @@ map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
 </div>
 </div>
 <p>Remember, <code>Engine::parse_json</code> is nothing more than a <em>cheap</em> alternative to true JSON parsing.</p>
-<p>If correctness is needed, or for more configuration possibilities, turn on the <a href="language//book/start/features.html"><code>serde</code></a>
-feature to pull in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate which enables
+<p>If strict correctness is needed, or for more configuration possibilities, turn on the
+<a href="language//book/start/features.html"><code>serde</code></a> feature to pull in <a href="https://crates.io/crates/serde"><code>serde</code></a> which enables
 serialization and deserialization to/from multiple formats, including JSON.</p>
 <p>Beware, though… the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate is quite heavy.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="special-support-for-oop-via-object-maps"><a class="header" href="#special-support-for-oop-via-object-maps">Special Support for OOP via Object Maps</a></h1>
@@ -8195,17 +8225,29 @@ let x = 123;        // &lt;- syntax error: variable 'x' already defined
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="strict-variables-mode-1"><a class="header" href="#strict-variables-mode-1">Strict Variables Mode</a></h1>
+<div id="admonition-scope-constants" class="admonition tip side">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="engine/strict-var.html#admonition-scope-constants">
+<p><code>Scope</code> constants</p>
+</a>
+</div>
+<div>
+<p><a href="engine//book/language/constants.html">Constants</a> in the external <a href="engine//book/engine/scope.html"><code>Scope</code></a>, when provided, count as definition.</p>
+</div>
+</div>
 <p>By default, Rhai looks up access to <a href="engine//book/language/variables.html">variables</a> from the enclosing block scope,
 working its way outwards until it reaches the top (global) level, then it
 searches the <a href="engine//book/engine/scope.html"><code>Scope</code></a> (if any) that is passed into the <code>Engine::eval_with_scope</code> call.</p>
 <p>Setting <a href="engine//book/engine/options.html"><code>Engine::set_strict_variables</code></a> to <code>true</code> turns on <em>Strict Variables Mode</em>,
 which requires that:</p>
 <ul>
-<li>all <a href="engine//book/language/variables.html">variables</a> be defined within the same script before use,</li>
+<li>all <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> be defined within the same script before use,
+or they must be <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> within the provided <a href="engine//book/engine/scope.html"><code>Scope</code></a> (if any),</li>
 <li><a href="engine//book/rust/modules/index.html">modules</a> must be <a href="engine//book/language/modules/import.html">imported</a>, also within the same script, before use.</li>
 </ul>
 <p>Within <em>Strict Variables</em> mode, any attempt to access a <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/rust/modules/index.html">module</a> before
 definition/<a href="engine//book/language/modules/import.html">import</a> results in a parse error.</p>
+<p>This way, variable access errors (usually typos) are caught during compile time instead of runtime.</p>
 <pre><code class="language-rust">let x = 42;
 
 let y = x * z;          // &lt;- parse error under strict variables mode:
@@ -8226,17 +8268,6 @@ print(foo::xyz);        // ok!
 let x = abc::def;       // &lt;- parse error under strict variables mode:
                         //    module 'abc' is undefined
 </code></pre>
-<div id="admonition-tip" class="admonition tip small">
-<div class="admonition-title">
-<a class="admonition-anchor-link" href="engine/strict-var.html#admonition-tip">
-<p>Tip</p>
-</a>
-</div>
-<div>
-<p>Turn on <em>Strict Variables</em> mode if no <a href="engine//book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
-This way, variable access errors are caught during compile time instead of runtime.</p>
-</div>
-</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variable-definition-filter"><a class="header" href="#variable-definition-filter">Variable Definition Filter</a></h1>
 <p>Although it is easy to disable variable <em><a href="engine//book/language/shadow.html">shadowing</a></em> via <a href="engine//book/engine/options.html"><code>Engine::set_allow_shadowing</code></a>,
 sometimes more fine-grained control is needed.</p>
@@ -8266,13 +8297,13 @@ engine.on_def_var(|is_runtime, info, context| {
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_def_var</code> takes the following form.</p>
 <blockquote>
-<p><code>Fn(is_runtime: bool, info: VarDefInfo, context: &amp;EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>is_runtime</code></td><td style="text-align: center"><code>bool</code></td><td><code>true</code> if the <a href="engine//book/language/variables.html">variable</a> definition event happens during runtime, <code>false</code> if during compilation</td></tr>
 <tr><td><code>info</code></td><td style="text-align: center"><code>VarDefInfo</code></td><td>information on the <a href="engine//book/language/variables.html">variable</a> being defined</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="engine//book/language/eval-context.html"><code>&amp;EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="engine//book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 </tbody></table>
 <p>and <code>VarDefInfo</code> is a simple <code>struct</code> that contains the following fields:</p>
 <table><thead><tr><th>Field</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
@@ -8281,7 +8312,7 @@ engine.on_def_var(|is_runtime, info, context| {
 <tr><td><code>nesting_level</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level; the global level is zero</td></tr>
 <tr><td><code>will_shadow</code></td><td style="text-align: center"><code>bool</code></td><td>will this <a href="engine//book/language/variables.html">variable</a> <em><a href="engine//book/language/shadow.html">shadow</a></em> an existing <a href="engine//book/language/variables.html">variable</a> of the same name?</td></tr>
 </tbody></table>
-<p>and <a href="engine//book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="engine//book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
@@ -8367,15 +8398,15 @@ using a variable resolver.</p>
 <h2 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_var</code> takes the following form.</p>
 <blockquote>
-<p><code>Fn(name: &amp;str, index: usize, context: &amp;EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>Fn(name: &amp;str, index: usize, context: EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="engine//book/language/variables.html">variable</a> name</td></tr>
 <tr><td><code>index</code></td><td style="text-align: center"><code>usize</code></td><td>an offset from the bottom of the current <a href="engine//book/engine/scope.html"><code>Scope</code></a> that the <a href="engine//book/language/variables.html">variable</a> is supposed to reside.<br/>Offsets start from 1, with 1 meaning the last <a href="engine//book/language/variables.html">variable</a> in the current <a href="engine//book/engine/scope.html"><code>Scope</code></a>.  Essentially the correct <a href="engine//book/language/variables.html">variable</a> is at position <code>scope.len() - index</code>.<br/>If <code>index</code> is zero, then there is no pre-calculated offset position and a search through the current <a href="engine//book/engine/scope.html"><code>Scope</code></a> must be performed.</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="engine//book/language/eval-context.html"><code>&amp;EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="engine//book/engine/eval-context.html"><code>EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
 </tbody></table>
-<p>and <a href="engine//book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="engine//book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="return-value-1"><a class="header" href="#return-value-1">Return value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
@@ -12436,7 +12467,7 @@ are imported recursively.</p>
 </a>
 </div>
 <div>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.6.1/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.7.0/rhai/struct.AST.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
@@ -12735,9 +12766,11 @@ the current evaluation state to be accessed and/or modified.</p>
 <tr><td><code>scope_mut()</code></td><td style="text-align: center"><code>&amp;mut &amp;mut Scope</code></td><td>mutable reference to the current <a href="engine//book/engine/scope.html"><code>Scope</code></a>; <a href="engine//book/language/variables.html">variables</a> can be added to/removed from it</td></tr>
 <tr><td><code>engine()</code></td><td style="text-align: center"><code>&amp;Engine</code></td><td>reference to the current <a href="engine//book/engine/hello-world.html"><code>Engine</code></a></td></tr>
 <tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
+<tr><td><code>tag()</code></td><td style="text-align: center"><code>&amp;Dynamic</code></td><td>reference to the custom state that is persistent during the current run</td></tr>
+<tr><td><code>tag_mut()</code></td><td style="text-align: center"><code>&amp;mut Dynamic</code></td><td>mutable reference to the custom state that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str, &amp;Module)&gt;</code></td><td>iterator of the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements, in reverse order (i.e. later <a href="engine//book/rust/modules/index.html">modules</a> come first); not available under <a href="engine//book/start/features.html"><code>no_module</code></a></td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.6.1/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
-<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.6.1/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="engine//book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="engine//book/engine/debugging/break-points.html">break-points</a></td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.7.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.7.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
+<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.7.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.7.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="engine//book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="engine//book/engine/debugging/break-points.html">break-points</a></td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = &amp;Module&gt;</code></td><td>iterator of the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="engine//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><code>&amp;[&amp;Module]</code></td><td>reference to the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a></td></tr>
 <tr><td><code>this_ptr()</code></td><td style="text-align: center"><code>Option&lt;&amp;Dynamic&gt;</code></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
@@ -12898,9 +12931,9 @@ a normal expression.</p>
 are parsed in the order defined within the custom syntax.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.7.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
 <p>The function <code>Engine::on_parse_token</code>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.7.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <h2 id="function-signature-4"><a class="header" href="#function-signature-4">Function Signature</a></h2>
 <div id="admonition-tip-raising-errors" class="admonition tip side">
 <div class="admonition-title">
@@ -12909,7 +12942,7 @@ are parsed in the order defined within the custom syntax.</p>
 </a>
 </div>
 <div>
-<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
+<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.7.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>
 </div>
 </div>
@@ -12919,9 +12952,9 @@ as the mapped token.</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
-<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.6.1/rhai/enum.Token.html">token</a></td></tr>
-<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.6.1/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.7.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.7.0/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.7.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
 <h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
 <pre><code class="language-rust">use rhai::{Engine, FLOAT, Token};
@@ -13177,10 +13210,10 @@ print(hello);   // variable declared by a custom syntax persists!
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="engine//book/language/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="engine//book/engine/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
 <tr><td><code>inputs</code></td><td style="text-align: center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
 </tbody></table>
-<p>and <a href="engine//book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="engine//book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h4 id="return-value-5"><a class="header" href="#return-value-5">Return value</a></h4>
 <p>Return value is the result of evaluating the custom syntax expression.</p>
 <h4 id="access-arguments"><a class="header" href="#access-arguments">Access arguments</a></h4>
@@ -13564,17 +13597,17 @@ with the following signature.</p>
 <p>The second callback is a function which will be called by the debugger during each step, with the
 following signature.</p>
 <blockquote>
-<p><code>Fn(context: &amp;mut EvalContext, event: debugger::DebuggerEvent, node: ASTNode, source: &amp;str, pos: Position) -&gt; Result&lt;debugger::DebuggerCommand, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>Fn(context: EvalContext, event: debugger::DebuggerEvent, node: ASTNode, source: &amp;str, pos: Position) -&gt; Result&lt;debugger::DebuggerCommand, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="engine/debugging//book/language/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="engine/debugging//book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 <tr><td><code>event</code></td><td style="text-align: center"><code>DebuggerEvent</code></td><td>an <code>enum</code> indicating the event that triggered the debugger</td></tr>
 <tr><td><code>node</code></td><td style="text-align: center"><a href="engine/debugging//book/engine/compile.html"><code>ASTNode</code></a></td><td>an <code>enum</code> with two variants: <code>Expr</code> or <code>Stmt</code>, corresponding to the current expression node or statement node in the <a href="engine/debugging//book/engine/compile.html"><code>AST</code></a></td></tr>
 <tr><td><code>source</code></td><td style="text-align: center"><code>&amp;str</code></td><td>the source of the current <a href="engine/debugging//book/engine/compile.html"><code>AST</code></a>, or empty if none</td></tr>
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>position of the current node, same as <code>node.position()</code></td></tr>
 </tbody></table>
-<p>and <a href="engine/debugging//book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="engine/debugging//book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="event"><a class="header" href="#event">Event</a></h3>
 <p>The <code>event</code> parameter of the second closure passed to <code>Engine::register_debugger</code> contains a
 <code>debugger::DebuggerEvent</code> which is an <code>enum</code> with the following variants.</p>
@@ -13618,7 +13651,9 @@ continued behavior of the debugger.</p>
 <p>Sometimes it is useful to keep a persistent <em>state</em> within the <a href="engine/debugging//book/engine/debugging/debugger.html">debugger</a>.</p>
 <p>The <code>Engine::register_debugger</code> API accepts a function that returns the initial value of the
 <a href="engine/debugging//book/engine/debugging/debugger.html">debugger’s</a> state, which is a <a href="engine/debugging//book/language/dynamic.html"><code>Dynamic</code></a> and can hold any value.</p>
-<p>The state can easily be accessed during a <a href="engine/debugging//book/engine/debugging/debugger.html">debugger</a> callback.</p>
+<p>This state value is the stored into the current evaluation’s persistent custom state which can be
+accessed via <a href="engine/debugging//book/rust/context.html"><code>NativeCallContext::tag</code></a>, <a href="engine/debugging//book/engine/eval-context.html"><code>EvalContext::tag</code></a>
+and <a href="engine/debugging//book/engine/eval-context.html"><code>EvalContext::tag_mut</code></a>.</p>
 <pre><code class="language-rust">engine.register_debugger(
     || {
         // Say, use an object map for the debugger state
@@ -13629,17 +13664,11 @@ continued behavior of the debugger.</p>
         Dynamic::from_map(state)
     },
     |context, node, source, pos| {
-        // Get global runtime state
-        let global = context.global_runtime_state_mut();
-
-        // Get debugger
-        let debugger = &amp;mut global.debugger;
-
         // Print debugger state - which is an object map
-        println!(&quot;Current state = {}&quot;, debugger.state());
+        println!(&quot;Current state = {}&quot;, context.tag());
 
         // Get the state as an object map
-        let mut state = debugger.state_mut().write_lock::&lt;Map&gt;().unwrap();
+        let mut state = context.tag_mut().write_lock::&lt;Map&gt;().unwrap();
 
         // Read state
         let hello = state.get(&quot;hello&quot;).unwrap().as_int().unwrap();
@@ -13752,7 +13781,7 @@ engine.register_debugger(
     // Trigger the server during each debugger stop point
     |context, event, node, source, pos| {
         // Get the state
-        let mut state = debugger.state_mut();
+        let mut state = context.tag_mut();
 
         // Get the server
         let mut server = state.write_lock::&lt;MyCommServer&gt;().unwrap();
@@ -14048,7 +14077,7 @@ engine.set_optimization_level(OptimizationLevel::None);
 let ast = engine.compile(&quot;...&quot;)?;
 </code></pre>
 <h2 id="step-2--extract-constants"><a class="header" href="#step-2--extract-constants">Step 2 – Extract Constants</a></h2>
-<p>Use <a href="https://docs.rs/rhai/1.6.1/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
+<p>Use <a href="https://docs.rs/rhai/1.7.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
 to extract top-level <a href="patterns//book/language/constants.html">constants</a> from the <a href="patterns//book/engine/compile.html"><code>AST</code></a>.</p>
 <pre><code class="language-rust">let mut scope = Scope::new();
 
@@ -16276,7 +16305,7 @@ let mut engine = create_scripting_engine(my_config);
 <h3 id="make-sure-that-rhai-has-the-appropriate-features"><a class="header" href="#make-sure-that-rhai-has-the-appropriate-features">Make sure that Rhai has the appropriate feature(s)</a></h3>
 <p>In the project’s <code>Cargo.toml</code>, specify the Rhai dependency with <code>bin-features</code>.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.6.1&quot;, features = [&quot;bin-features&quot;] }
+rhai = { version = &quot;1.7.0&quot;, features = [&quot;bin-features&quot;] }
 </code></pre>
 <h3 id="rebuild"><a class="header" href="#rebuild">Rebuild</a></h3>
 <p>Rebuild the project, which should automatically build all the customized tools.</p>
@@ -16336,7 +16365,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.6.1&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;1.7.0&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }

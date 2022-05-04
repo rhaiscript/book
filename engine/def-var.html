@@ -191,13 +191,13 @@ engine.on_def_var(|is_runtime, info, context| {
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_def_var</code> takes the following form.</p>
 <blockquote>
-<p><code>Fn(is_runtime: bool, info: VarDefInfo, context: &amp;EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>is_runtime</code></td><td style="text-align: center"><code>bool</code></td><td><code>true</code> if the <a href="/book/language/variables.html">variable</a> definition event happens during runtime, <code>false</code> if during compilation</td></tr>
 <tr><td><code>info</code></td><td style="text-align: center"><code>VarDefInfo</code></td><td>information on the <a href="/book/language/variables.html">variable</a> being defined</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/language/eval-context.html"><code>&amp;EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 </tbody></table>
 <p>and <code>VarDefInfo</code> is a simple <code>struct</code> that contains the following fields:</p>
 <table><thead><tr><th>Field</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
@@ -206,7 +206,7 @@ engine.on_def_var(|is_runtime, info, context| {
 <tr><td><code>nesting_level</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level; the global level is zero</td></tr>
 <tr><td><code>will_shadow</code></td><td style="text-align: center"><code>bool</code></td><td>will this <a href="/book/language/variables.html">variable</a> <em><a href="/book/language/shadow.html">shadow</a></em> an existing <a href="/book/language/variables.html">variable</a> of the same name?</td></tr>
 </tbody></table>
-<p>and <a href="/book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>

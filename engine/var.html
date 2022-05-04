@@ -228,15 +228,15 @@ using a variable resolver.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <code>Engine::on_var</code> takes the following form.</p>
 <blockquote>
-<p><code>Fn(name: &amp;str, index: usize, context: &amp;EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></p>
+<p><code>Fn(name: &amp;str, index: usize, context: EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/book/language/variables.html">variable</a> name</td></tr>
 <tr><td><code>index</code></td><td style="text-align: center"><code>usize</code></td><td>an offset from the bottom of the current <a href="/book/engine/scope.html"><code>Scope</code></a> that the <a href="/book/language/variables.html">variable</a> is supposed to reside.<br/>Offsets start from 1, with 1 meaning the last <a href="/book/language/variables.html">variable</a> in the current <a href="/book/engine/scope.html"><code>Scope</code></a>.  Essentially the correct <a href="/book/language/variables.html">variable</a> is at position <code>scope.len() - index</code>.<br/>If <code>index</code> is zero, then there is no pre-calculated offset position and a search through the current <a href="/book/engine/scope.html"><code>Scope</code></a> must be performed.</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/language/eval-context.html"><code>&amp;EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
 </tbody></table>
-<p>and <a href="/book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
 <table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>

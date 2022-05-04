@@ -267,10 +267,10 @@ print(hello);   // variable declared by a custom syntax persists!
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/language/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
 <tr><td><code>inputs</code></td><td style="text-align: center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
 </tbody></table>
-<p>and <a href="/book/language/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h4 id="return-value"><a class="header" href="#return-value">Return value</a></h4>
 <p>Return value is the result of evaluating the custom syntax expression.</p>
 <h4 id="access-arguments"><a class="header" href="#access-arguments">Access arguments</a></h4>

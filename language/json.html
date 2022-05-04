@@ -163,6 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="parse-an-object-map-from-json"><a class="header" href="#parse-an-object-map-from-json">Parse an Object Map from JSON</a></h1>
+<h2 id="do-it-without-serde"><a class="header" href="#do-it-without-serde">Do It Without <code>serde</code></a></h2>
 <div id="admonition-object-map-vs-json" class="admonition info side wide">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="#admonition-object-map-vs-json">
@@ -170,15 +171,13 @@
 </a>
 </div>
 <div>
-<p>A valid JSON string does not start with a hash character <code>#</code> while a Rhai <a href="/book/language/object-maps.html">object map</a> does.
-That’s the only major difference!</p>
+<p>A valid JSON object hash does not start with a hash character <code>#</code> while a Rhai <a href="/book/language/object-maps.html">object map</a> does.
+That’s the only difference!</p>
 </div>
 </div>
 <p>The syntax for an <a href="/book/language/object-maps.html">object map</a> is extremely similar to the JSON representation of a object hash,
 with the exception of <code>null</code> values which can technically be mapped to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <p>Use the <code>Engine::parse_json</code> method to parse a piece of JSON into an <a href="/book/language/object-maps.html">object map</a>.</p>
-<p>The JSON text must represent a single object hash – i.e. must be wrapped within braces
-<code>{</code>…<code>}</code> – otherwise it returns a syntax error.</p>
 <pre><code class="language-rust">// JSON string - notice that JSON property names are always quoted
 //               notice also that comments are acceptable within the JSON string
 let json = r#&quot;{
@@ -200,10 +199,23 @@ map.len() == 6;       // 'map' contains all properties in the JSON string
 let mut scope = Scope::new();
 scope.push(&quot;map&quot;, map);
 
-let result = engine.eval_with_scope::&lt;i64&gt;(r#&quot;map[&quot;^^^!!!&quot;].len()&quot;#)?;
+let result = engine.eval_with_scope::&lt;i64&gt;(&amp;mut scope, r#&quot;map[&quot;^^^!!!&quot;].len()&quot;#)?;
 
 result == 3;          // the object map is successfully used in the script
 </code></pre>
+<div id="admonition-warning-must-be-object-hash" class="admonition warning small">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-warning-must-be-object-hash">
+<p>Warning: Must be object hash</p>
+</a>
+</div>
+<div>
+<p>The JSON text must represent a single object hash – i.e. must be wrapped within braces
+<code>{</code>…<code>}</code>.</p>
+<p>It cannot be a primitive type (e.g. number, string etc.).
+Otherwise it cannot be converted into an <a href="/book/language/object-maps.html">object map</a> and a type error is returned.</p>
+</div>
+</div>
 <div id="admonition-representation-of-numbers" class="admonition note small">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="#admonition-representation-of-numbers">
@@ -219,26 +231,31 @@ assumed to be an integer).</p>
 <p>This style can be used successfully with Rhai <a href="/book/language/object-maps.html">object maps</a>.</p>
 </div>
 </div>
-<h2 id="parse-json-with-sub-objects"><a class="header" href="#parse-json-with-sub-objects">Parse JSON with Sub-Objects</a></h2>
-<p><code>Engine::parse_json</code> depends on the fact that the <a href="/book/language/object-maps.html">object map</a> literal syntax in Rhai is <em>almost</em>
-the same as a JSON object.  However, it is <em>almost</em> because the syntax for a sub-object in JSON
-(i.e. “<code>{ ... }</code>”) is different from a Rhai <a href="/book/language/object-maps.html">object map</a> literal (i.e. “<code>#{ ... }</code>”).</p>
-<p>When <code>Engine::parse_json</code> encounters JSON with sub-objects, it fails with a syntax error.</p>
-<p>If it is certain that no text string in the JSON will ever contain the character <code>{</code>,
-then it is possible to parse it by first replacing all occupance of <code>{</code> with <code>#{</code>.</p>
-<p>A JSON object hash starting with <code>#{</code> is handled transparently by <code>Engine::parse_json</code>.</p>
+<h3 id="sub-objects"><a class="header" href="#sub-objects">Sub-objects</a></h3>
+<p>Sub-objects are handled transparently by <code>Engine::parse_json</code>.</p>
+<p>It is <em>not</em> necessary to replace <code>{</code> with <code>#{</code> in order to fake a Rhai <a href="/book/language/object-maps.html">object map</a> literal.</p>
 <pre><code class="language-rust">// JSON with sub-object 'b'.
 let json = r#&quot;{&quot;a&quot;:1, &quot;b&quot;:{&quot;x&quot;:true, &quot;y&quot;:false}}&quot;#;
 
-// Our JSON text does not contain the '{' character, so off we go!
-let new_json = json.replace(&quot;{&quot;, &quot;#{&quot;);
+// 'parse_json' handles this just fine.
+let map = engine.parse_json(json, false)?;
 
-// The leading '{' will also be replaced to '#{', but 'parse_json' handles this just fine.
-let map = engine.parse_json(&amp;new_json, false)?;
-
-map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
+// 'map' contains two properties: 'a' and 'b'
+map.len() == 2;
 </code></pre>
-<h2 id="use-serde-to-serializedeserialize-tofrom-json"><a class="header" href="#use-serde-to-serializedeserialize-tofrom-json">Use <code>serde</code> to Serialize/Deserialize to/from JSON</a></h2>
+<div id="admonition-tldr--how-is-it-done" class="admonition question small">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-tldr--how-is-it-done">
+<p>TL;DR – How is it done?</p>
+</a>
+</div>
+<div>
+<p>Internally, <code>Engine::parse_json</code> <em>cheats</em> by treating the JSON text as a Rhai script.</p>
+<p>That is why it even supports <a href="/book/language/comments.html">comments</a> and arithmetic expressions in the JSON text.</p>
+<p>A <a href="/book/engine/token-mapper.html">token remap filter</a> is used to convert <code>{</code> into <code>#{</code> and <code>null</code> to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
+</div>
+</div>
+<h2 id="use-serde"><a class="header" href="#use-serde">Use <code>serde</code></a></h2>
 <div id="admonition-see-also" class="admonition info side">
 <div class="admonition-title">
 <a class="admonition-anchor-link" href="#admonition-see-also">
@@ -250,8 +267,8 @@ map.len() == 2;       // 'map' contains two properties: 'a' and 'b'
 </div>
 </div>
 <p>Remember, <code>Engine::parse_json</code> is nothing more than a <em>cheap</em> alternative to true JSON parsing.</p>
-<p>If correctness is needed, or for more configuration possibilities, turn on the <a href="/book/start/features.html"><code>serde</code></a>
-feature to pull in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate which enables
+<p>If strict correctness is needed, or for more configuration possibilities, turn on the
+<a href="/book/start/features.html"><code>serde</code></a> feature to pull in <a href="https://crates.io/crates/serde"><code>serde</code></a> which enables
 serialization and deserialization to/from multiple formats, including JSON.</p>
 <p>Beware, though… the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate is quite heavy.</p>
 

@@ -251,6 +251,7 @@ operate on object maps.</p>
 <tr><td><code>contains</code>, <a href="/book/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
 <tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
 <tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<a href="/book/language/values-and-types.html"><code>()</code></a> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
 </tbody></table>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><code class="language-rust">let y = #{              // object map literal with 3 properties
