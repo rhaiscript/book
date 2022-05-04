@@ -48,13 +48,13 @@ following signature.
 
 where:
 
-| Parameter |        Type        | Description                                                                                                                  |
-| --------- | :----------------: | ---------------------------------------------------------------------------------------------------------------------------- |
-| `context` |  [`EvalContext`]   | the current _evaluation context_                                                                                             |
-| `event`   |  `DebuggerEvent`   | an `enum` indicating the event that triggered the debugger                                                                   |
-| `node`    | [`ASTNode`][`AST`] | an `enum` with two variants: `Expr` or `Stmt`, corresponding to the current expression node or statement node in the [`AST`] |
-| `source`  |       `&str`       | the source of the current [`AST`], or empty if none                                                                          |
-| `pos`     |     `Position`     | position of the current node, same as `node.position()`                                                                      |
+| Parameter |      Type       | Description                                                                                                                  |
+| --------- | :-------------: | ---------------------------------------------------------------------------------------------------------------------------- |
+| `context` | [`EvalContext`] | the current _evaluation context_                                                                                             |
+| `event`   | `DebuggerEvent` | an `enum` indicating the event that triggered the debugger                                                                   |
+| `node`    |    `ASTNode`    | an `enum` with two variants: `Expr` or `Stmt`, corresponding to the current expression node or statement node in the [`AST`] |
+| `source`  |     `&str`      | the source of the current [`AST`], or empty if none                                                                          |
+| `pos`     |   `Position`    | position of the current node, same as `node.position()`                                                                      |
 
 and [`EvalContext`] is a type that encapsulates the current _evaluation context_.
 

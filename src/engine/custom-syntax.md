@@ -384,10 +384,10 @@ The custom syntax parser has the following signature.
 
 where:
 
-| Parameter    |            Type            | Description                                                                                                                                                         |
-| ------------ | :------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `symbols`    | `&[`[`ImmutableString`]`]` | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
-| `look_ahead` |           `&str`           | a string slice containing the next symbol that is about to be read                                                                                                  |
+| Parameter    |                   Type                    | Description                                                                                                                                                         |
+| ------------ | :---------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `symbols`    | [`&[ImmutableString]`][`ImmutableString`] | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
+| `look_ahead` |                  `&str`                   | a string slice containing the next symbol that is about to be read                                                                                                  |
 
 Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.
