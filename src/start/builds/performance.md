@@ -64,8 +64,15 @@ Therefore, functions taking `String` parameters should use [`ImmutableString`] o
 (maps to [`ImmutableString`]) for the best performance with Rhai.
 
 
-Disable Closures
-----------------
+Disable Closure Capturing
+-------------------------
+
+```admonish info.side.wide "Anonymous functions still work"
+
+[Anonymous functions] continue to work even under [`no_closure`].
+
+Only capturing of external shared [variables] is disabled.
+```
 
 Support for [closures] that capture _shared_ [variables] adds material overhead to script evaluation.
 
