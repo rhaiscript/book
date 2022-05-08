@@ -197,7 +197,18 @@ This is mainly to avoid excessive cloning when passing function arguments.</p>
 (a new copy of the string must be made in order to change it).</p>
 <p>Therefore, functions taking <code>String</code> parameters should use <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code>
 (maps to <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a>) for the best performance with Rhai.</p>
-<h2 id="disable-closures"><a class="header" href="#disable-closures">Disable Closures</a></h2>
+<h2 id="disable-closure-capturing"><a class="header" href="#disable-closure-capturing">Disable Closure Capturing</a></h2>
+<div id="admonition-anonymous-functions-still-work" class="admonition info side wide">
+<div class="admonition-title">
+<a class="admonition-anchor-link" href="#admonition-anonymous-functions-still-work">
+<p>Anonymous functions still work</p>
+</a>
+</div>
+<div>
+<p><a href="/book/language/fn-anon.html">Anonymous functions</a> continue to work even under <a href="/book/start/features.html"><code>no_closure</code></a>.</p>
+<p>Only capturing of external shared <a href="/book/language/variables.html">variables</a> is disabled.</p>
+</div>
+</div>
 <p>Support for <a href="/book/language/fn-closure.html">closures</a> that capture <em>shared</em> <a href="/book/language/variables.html">variables</a> adds material overhead to script evaluation.</p>
 <p>This is because every data access must be checked whether it is a shared value and, if so,
 take a read lock before reading it.</p>

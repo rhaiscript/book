@@ -247,7 +247,7 @@ Any valid identifier that is not an active <a href="/book/appendix/keywords.html
 <tr><td style="text-align: center">8</td><td style="text-align: center"></td><td style="text-align: center"><code>:</code></td><td>the colon symbol</td></tr>
 <tr><td style="text-align: center">9</td><td style="text-align: center">4</td><td style="text-align: center"><code>$block$</code></td><td>a statement block, which must be enclosed with <code>{</code> … <code>}</code>.</td></tr>
 </tbody></table>
-<p>This syntax matches the following sample code and generates three inputs (one for each non-keyword):</p>
+<p>This syntax matches the following sample code and generates five inputs (one for each non-keyword):</p>
 <pre><code class="language-rust">// Assuming the 'exec' custom syntax implementation declares the variable 'hello':
 let x = exec [hello &lt; 42] &lt;- foo(1, 2) : {
             hello += bar(hello);
@@ -431,8 +431,8 @@ engine.register_custom_syntax(&amp;[ &quot;var&quot;, &quot;$ident$&quot;, &quot
 })?;
 </code></pre>
 <h2 id="really-advanced--custom-parsers"><a class="header" href="#really-advanced--custom-parsers">Really Advanced – Custom Parsers</a></h2>
-<p>Sometimes it is desirable to have multiple custom syntax starting with the same symbol.
-This is especially common for <em>command-style</em> syntax where the second symbol calls a particular command:</p>
+<p>Sometimes it is desirable to have multiple custom syntax starting with the same symbol.</p>
+<p>This is especially common for <em>command-style</em> syntax where the second symbol calls a particular command:</p>
 <pre><code class="language-rust">// The following simulates a command-style syntax, all starting with 'perform'.
 perform hello world;        // A fixed sequence of symbols
 perform action 42;          // Perform a system action with a parameter
@@ -452,8 +452,8 @@ tags &lt; &quot;foo&quot;, &quot;bar&quot;, 123, ... , x+y, true &gt;
 together with the implementation function.</p>
 <h2 id="how-custom-parsers-work"><a class="header" href="#how-custom-parsers-work">How Custom Parsers Work</a></h2>
 <h3 id="leading-symbol"><a class="header" href="#leading-symbol">Leading Symbol</a></h3>
-<p>Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.
-It can either be:</p>
+<p>Under this API, the leading symbol for a custom parser is no longer restricted to be valid identifiers.</p>
+<p>It can either be:</p>
 <ul>
 <li>
 <p>an identifier that isn’t a normal <a href="/book/appendix/keywords.html">keyword</a> unless <a href="/book/engine/disable-keywords.html">disabled</a>, or</p>
@@ -469,7 +469,7 @@ It can either be:</p>
 </blockquote>
 <p>where:</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>symbols</code></td><td style="text-align: center"><code>&amp;[</code><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a><code>]</code></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
+<tr><td><code>symbols</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>&amp;[ImmutableString]</code></a></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
 <tr><td><code>look_ahead</code></td><td style="text-align: center"><code>&amp;str</code></td><td>a string slice containing the next symbol that is about to be read</td></tr>
 </tbody></table>
 <p>Most strings are <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a>’s so it is usually more efficient to just <code>clone</code> the appropriate one
@@ -513,10 +513,10 @@ and Rhai will fail with a parse error containing information about the expected 
 <p>A custom parser always returns <code>Some</code> with the <em>next</em> symbol expected (which can be <code>$ident$</code>,
 <code>$expr$</code>, <code>$block$</code> etc.) or <code>None</code> if parsing should terminate (<em>without</em> reading the
 look-ahead symbol).</p>
-<div id="admonition-tip-" class="admonition tip small">
+<div id="admonition-tip--return-symbol" class="admonition tip small">
 <div class="admonition-title">
-<a class="admonition-anchor-link" href="#admonition-tip-">
-<p>Tip: <code>$$</code></p>
+<a class="admonition-anchor-link" href="#admonition-tip--return-symbol">
+<p>Tip: <code>$$</code> return symbol</p>
 </a>
 </div>
 <div>
@@ -549,24 +549,25 @@ actually parsed.</p>
             &quot;hello&quot; =&gt; Ok(Some(&quot;world&quot;.into())),
             &quot;update&quot; | &quot;check&quot; | &quot;add&quot; | &quot;remove&quot; =&gt; Ok(Some(&quot;$ident$&quot;.into())),
             &quot;cleanup&quot; =&gt; Ok(Some(&quot;$$cleanup&quot;.into())),
-            cmd =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
-                LexError::ImproperSymbol(format!(&quot;Improper command: {}&quot;, cmd))
-            )), Position::NONE)),
+            cmd =&gt; Err(LexError::ImproperSymbol(format!(&quot;Improper command: {}&quot;, cmd))
+                       .into_err(Position::NONE)),
         },
         // perform command arg ...
         3 =&gt; match (symbols[1].as_str(), symbols[2].as_str()) {
             (&quot;action&quot;, _) =&gt; Ok(Some(&quot;$$action&quot;.into())),
             (&quot;hello&quot;, &quot;world&quot;) =&gt; Ok(Some(&quot;$$hello-world&quot;.into())),
-            (&quot;update&quot;, arg) if arg == &quot;system&quot; =&gt; Ok(Some(&quot;$$update-system&quot;.into())),
-            (&quot;update&quot;, arg) if arg == &quot;client&quot; =&gt; Ok(Some(&quot;$$update-client&quot;.into())),
+            (&quot;update&quot;, arg) =&gt; match arg {
+                &quot;system&quot; =&gt; Ok(Some(&quot;$$update-system&quot;.into())),
+                &quot;client&quot; =&gt; Ok(Some(&quot;$$update-client&quot;.into())),
+                _ =&gt; Err(LexError::ImproperSymbol(format!(&quot;Cannot update {}&quot;, arg))
+                         .into_err(Position::NONE))
+            },
             (&quot;check&quot;, arg) =&gt; Ok(Some(&quot;$$check&quot;.into())),
             (&quot;add&quot;, arg) =&gt; Ok(Some(&quot;$$add&quot;.into())),
             (&quot;remove&quot;, arg) =&gt; Ok(Some(&quot;$$remove&quot;.into())),
-            (cmd, arg) =&gt; Err(ParseError(Box::new(ParseErrorType::BadInput(
-                LexError::ImproperSymbol(
-                    format!(&quot;Invalid argument for command {}: {}&quot;, cmd, arg)
-                )
-            )), Position::NONE)),
+            (cmd, arg) =&gt; Err(LexError::ImproperSymbol(
+                format!(&quot;Invalid argument for command {}: {}&quot;, cmd, arg)
+            ).into_err(Position::NONE)),
         },
         _ =&gt; unreachable!(),
     },

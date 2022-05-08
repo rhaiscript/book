@@ -207,7 +207,7 @@ following signature.</p>
 <table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 <tr><td><code>event</code></td><td style="text-align: center"><code>DebuggerEvent</code></td><td>an <code>enum</code> indicating the event that triggered the debugger</td></tr>
-<tr><td><code>node</code></td><td style="text-align: center"><a href="/book/engine/compile.html"><code>ASTNode</code></a></td><td>an <code>enum</code> with two variants: <code>Expr</code> or <code>Stmt</code>, corresponding to the current expression node or statement node in the <a href="/book/engine/compile.html"><code>AST</code></a></td></tr>
+<tr><td><code>node</code></td><td style="text-align: center"><code>ASTNode</code></td><td>an <code>enum</code> with two variants: <code>Expr</code> or <code>Stmt</code>, corresponding to the current expression node or statement node in the <a href="/book/engine/compile.html"><code>AST</code></a></td></tr>
 <tr><td><code>source</code></td><td style="text-align: center"><code>&amp;str</code></td><td>the source of the current <a href="/book/engine/compile.html"><code>AST</code></a>, or empty if none</td></tr>
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>position of the current node, same as <code>node.position()</code></td></tr>
 </tbody></table>
