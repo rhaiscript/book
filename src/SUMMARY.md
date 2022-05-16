@@ -78,7 +78,7 @@ Rust Integration
 
 ----------------------
 
-Language Reference
+Scripting Language
 ==================
 
 - [Comments](language/comments.md)
@@ -226,6 +226,62 @@ Usage Patterns
 - [Dynamic Constants Provider](patterns/dynamic-const.md)
 - [Domain-Specific Tools](patterns/domain-tools.md)
 - [Multiple Instantiation](patterns/multiple.md)
+
+----------------------
+
+Language Reference
+==================
+
+- [Introduction](ref/index.md)
+- [Comments](ref/comments.md)
+- [Value Types](ref/values-and-types.md)
+  - [Dynamic Values](ref/dynamic.md)
+    - [type_of()](ref/type-of.md)
+    - [Value Tag](ref/dynamic-tag.md)
+  - [Numbers](ref/numbers.md)
+    - [Operators](ref/num-op.md)
+    - [Standard Functions](ref/num-fn.md)
+    - [Value Conversions](ref/convert.md)
+    - [Ranges](ref/ranges.md)
+    - [Bit-Fields](ref/bit-fields.md)
+  - [Strings and Characters](ref/strings-chars.md)
+    - [Standard Functions and Operators](ref/string-fn.md)
+  - [Arrays](ref/arrays.md)
+    - [BLOB's (Byte Arrays)](ref/blobs.md)
+  - [Object Maps](ref/object-maps.md)
+    - [Special Support for OOP](ref/object-maps-oop.md)
+  - [Timestamps](ref/timestamps.md)
+- [Keywords](ref/keywords.md)
+- [Statements](ref/statements.md)
+- [Variables](ref/variables.md)
+- [Constants](ref/constants.md)
+  - [Automatic Global Module](ref/global.md)
+- [Assignments](ref/assignment.md)
+- [Operators](ref/operators.md)
+- [Conditional Statements]()
+  - [If Statement](ref/if.md)
+  - [Switch Statement](ref/switch.md)
+- [Loops]()
+  - [While Loop](ref/while.md)
+  - [Do Loop](ref/do.md)
+  - [Infinite Loop](ref/loop.md)
+  - [For Loop](ref/for.md)
+- [Return Value](ref/return.md)
+- [Throw Exception on Error](ref/throw.md)
+  - [Catch Exceptions](ref/try-catch.md)
+- [Functions](ref/functions.md)
+  - [Method Calls](ref/fn-method.md)
+  - [Overloading](ref/overload.md)
+  - [Function Pointers](ref/fn-ptr.md)
+    - [Currying](ref/fn-curry.md)
+    - [Anonymous Functions](ref/fn-anon.md)
+    - [Closures](ref/fn-closure.md)
+  - [Metadata](ref/fn-metadata.md)
+- [Print and Debug](ref/print-debug.md)
+- [Modules](ref/modules/index.md)
+  - [Export Variables, Functions and Sub-Modules from Script](ref/modules/export.md)
+  - [Import Modules](ref/modules/import.md)
+- [Eval Function](ref/eval.md)
 
 ----------------------
 

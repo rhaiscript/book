@@ -100,8 +100,8 @@ Configuration Options
 | `extension`        | extension string         |     `.rhai`     | script files extension (default `.rhai`)                                                |
 | `google_analytics` | ID string                |     _none_      | [Google Analytics](https://analytics.google.com) ID                                     |
 | `[[links]]`        | table                    |     _none_      | external links                                                                          |
-| &bull; `name`      | string                   |     _none_      | &bull; title of external link                                                           |
-| &bull; `link`      | URL string               |     _none_      | &bull; URL of external link                                                             |
+| • `name`           | string                   |     _none_      | • title of external link                                                                |
+| • `link`           | URL string               |     _none_      | • URL of external link                                                                  |
 
 
 ~~~admonish abstract.small "MarkDown pages"
