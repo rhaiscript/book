@@ -31,14 +31,14 @@ Element Access Syntax
 
 Like [arrays], BLOB's are accessed with zero-based, non-negative integer indices:
 
-> _blob_ `[` _index position from 0 to (length&minus;1)_ `]`
+> _blob_ `[` _index position from 0 to (length−1)_ `]`
 
 ### From end
 
-A _negative_ position accesses an element in the BLOB counting from the _end_, with &minus;1 being the
+A _negative_ position accesses an element in the BLOB counting from the _end_, with −1 being the
 _last_ element.
 
-> _blob_ `[` _index position from &minus;1 to &minus;length_ `]`
+> _blob_ `[` _index position from −1 to −length_ `]`
 
 ```admonish info.small "Byte values"
 

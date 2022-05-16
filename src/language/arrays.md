@@ -37,14 +37,14 @@ Element Access Syntax
 
 Like C, arrays are accessed with zero-based, non-negative integer indices:
 
-> _array_ `[` _index position from 0 to (length&minus;1)_ `]`
+> _array_ `[` _index position from 0 to (length−1)_ `]`
 
 ### From end
 
-A _negative_ position accesses an element in the array counting from the _end_, with &minus;1 being the
+A _negative_ position accesses an element in the array counting from the _end_, with −1 being the
 _last_ element.
 
-> _array_ `[` _index position from &minus;1 to &minus;length_ `]`
+> _array_ `[` _index position from −1 to −length_ `]`
 
 
 Built-in Functions
@@ -84,8 +84,8 @@ The following methods (mostly defined in the [`BasicArrayPackage`][built-in pack
 | `splice`                    | <ol><li>[range] of items to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol>                                                                            | replaces a portion of the array with another (not necessarily of the same length as the replaced portion)                                                                                                                            |
 | `filter`                    | [function pointer] to predicate (usually a [closure]), or the function name as a [string]                                                                                                  | constructs a new array with all items that return `true` when called with the predicate function taking the following parameters:<ol><li>array item</li><li>_(optional)_ offset position</li></ol>                                   |
 | `contains`, [`in`] operator | element to find                                                                                                                                                                            | does the array contain an element? The `==` operator (if defined) is used to compare [custom types]                                                                                                                                  |
-| `index_of`                  | <ol><li>element to find (not a [function pointer])</li><li>_(optional)_ start position, counting from end if < 0, end if ≥ length</li></ol>                                                | returns the position of the first item in the array that equals the supplied element (using the `==` operator, if defined), or &minus;1 if not found</li></ol>                                                                       |
-| `index_of`                  | <ol><li>[function pointer] to predicate (usually a [closure]), or the function name as a [string]</li><li>_(optional)_ start position, counting from end if < 0, end if ≥ length</li></ol> | returns the position of the first item in the array that returns `true` when called with the predicate function, or &minus;1 if not found:<ol><li>array item</li><li>_(optional)_ offset position</li></ol>                          |
+| `index_of`                  | <ol><li>element to find (not a [function pointer])</li><li>_(optional)_ start position, counting from end if < 0, end if ≥ length</li></ol>                                                | returns the position of the first item in the array that equals the supplied element (using the `==` operator, if defined), or −1 if not found</li></ol>                                                                             |
+| `index_of`                  | <ol><li>[function pointer] to predicate (usually a [closure]), or the function name as a [string]</li><li>_(optional)_ start position, counting from end if < 0, end if ≥ length</li></ol> | returns the position of the first item in the array that returns `true` when called with the predicate function, or −1 if not found:<ol><li>array item</li><li>_(optional)_ offset position</li></ol>                                |
 | `dedup`                     | _(optional)_ [function pointer] to predicate (usually a [closure]), or the function name as a [string]; if omitted, the `==` operator is used, if defined                                  | removes all but the first of _consecutive_ items in the array that return `true` when called with the predicate function (non-consecutive duplicates are _not_ removed):<br/>1st & 2nd parameters: two items in the array            |
 | `map`                       | [function pointer] to conversion function (usually a [closure]), or the function name as a [string]                                                                                        | constructs a new array with all items mapped to the result of applying the conversion function taking the following parameters:<ol><li>array item</li><li>_(optional)_ offset position</li></ol>                                     |
 | `reduce`                    | <ol><li>[function pointer] to accumulator function (usually a [closure]), or the function name as a [string]</li><li>_(optional)_ the initial value</li></ol>                              | reduces the array into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value ([`()`] initially)</li><li>array item</li><li>_(optional)_ offset position</li></ol>                    |

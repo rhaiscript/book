@@ -56,17 +56,17 @@ Bits outside of the range are ignored.
 ### From Most-Significant Bit (MSB)
 
 A _negative_ index accesses a bit in the bit-field counting from the _end_, or from the
-_most-significant bit_, with &minus;1 being the _highest_ bit.
+_most-significant bit_, with −1 being the _highest_ bit.
 
-> _integer_ `[` _index from &minus;1 to &minus;64 or &minus;32_ `]`
+> _integer_ `[` _index from −1 to −64 or −32_ `]`
 >
-> _integer_ `[` _index from &minus;1 to &minus;64 or &minus;32_ `] =` `true` or `false` ;
+> _integer_ `[` _index from −1 to −64 or −32_ `] =` `true` or `false` ;
 
 [Ranges] always count from the least-significant bit (LSB) and has no support for negative positions.
 
 ```admonish warning.small "Number of bits"
 
-The maximum bit number that can be accessed is &minus;64 (or &minus;32 under [`only_i32`]).
+The maximum bit number that can be accessed is −64 (or −32 under [`only_i32`]).
 ```
 
 

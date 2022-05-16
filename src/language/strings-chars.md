@@ -192,14 +192,14 @@ This is similar to many modern languages but different from Rust.
 
 Individual characters within a string can be accessed with zero-based, non-negative integer indices:
 
-> _string_ `[` _index from 0 to (total number of characters &minus; 1)_ `]`
+> _string_ `[` _index from 0 to (total number of characters − 1)_ `]`
 
 ### From end
 
-A _negative_ index accesses a character in the string counting from the _end_, with &minus;1 being the
+A _negative_ index accesses a character in the string counting from the _end_, with −1 being the
 _last_ character.
 
-> _string_ `[` _index from &minus;1 to &minus;(total number of characters)_ `]`
+> _string_ `[` _index from −1 to −(total number of characters)_ `]`
 
 ```admonish warning.small "Character indexing can be SLOW"
 

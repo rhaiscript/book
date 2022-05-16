@@ -31,11 +31,11 @@ The following standard functions (defined in the [`ArithmeticPackage`][built-in 
 using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
 [`decimal`]) only.
 
-| Function                      | Description                                                          |
-| ----------------------------- | -------------------------------------------------------------------- |
-| `abs`                         | absolute value                                                       |
-| `sign`                        | returns (`INT`) &minus;1 if negative, &plus;1 if positive, 0 if zero |
-| `is_zero` method and property | returns `true` if the value is zero, otherwise `false`               |
+| Function                      | Description                                                    |
+| ----------------------------- | -------------------------------------------------------------- |
+| `abs`                         | absolute value                                                 |
+| `sign`                        | returns (`INT`) −1 if negative, &plus;1 if positive, 0 if zero |
+| `is_zero` method and property | returns `true` if the value is zero, otherwise `false`         |
 
 
 Floating-Point Functions
