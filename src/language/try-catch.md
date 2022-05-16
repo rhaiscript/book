@@ -10,6 +10,10 @@ When an [exception] is thrown via a [`throw`] statement, evaluation of the scrip
 It is possible, via the `try` ... `catch` statement, to _catch_ exceptions, optionally with an
 _error variable_.
 
+> `try` `{` ... `}` `catch` `{` ... `}`
+>
+> `try` `{` ... `}` `catch` `(` _error variable_ `)` `{` ... `}`
+
 ```js
 // Catch an exception and capturing its value
 try
@@ -50,7 +54,6 @@ catch
 
 Like the `try` ... `catch` syntax in most languages, it is possible to _re-throw_ an exception
 within the `catch` block simply by another [`throw`] statement without a value.
-
 
 ```js
 try

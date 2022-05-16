@@ -31,4 +31,4 @@ The return value is an [array] of [object maps] (so `get_fn_metadata_list` is al
 | `access`       |       [string]       |    no     | `"public"` if the function is public,<br/>`"private"` if it is [private][`private`] |
 | `name`         |       [string]       |    no     | [function] name                                                                     |
 | `params`       | [array] of [strings] |    no     | parameter names                                                                     |
-| `is_anonymous` |        `bool`        |    no     | is this [function] an anonymous function?                                           |
+| `is_anonymous` |        `bool`        |    no     | is this [function] an [anonymous function]?                                         |

@@ -96,7 +96,7 @@ No Access to External Scope
 Functions are not _closures_. They do not capture the calling environment and can only access their
 own parameters.
 
-They cannot access variables external to the function itself.
+They cannot access [variables] external to the function itself.
 
 ```rust
 let x = 42;

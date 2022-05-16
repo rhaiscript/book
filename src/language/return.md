@@ -15,4 +15,4 @@ return 123 + 456;   // returns 579
 A `return` statement at _global_ level stops the entire script evaluation,
 the return value is taken as the result of the script evaluation.
 
-A `return` statement inside a [function] exists with a return value to the caller.
+A `return` statement inside a [function call][function] exits with a return value to the caller.

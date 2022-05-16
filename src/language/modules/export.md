@@ -12,9 +12,9 @@ The easiest way to expose a collection of [functions] as a self-contained [modul
 
 The script text is evaluated.
 
-[Variables] are then selectively exposed via the [`export`] statement.
+[Variables] are then selectively exposed via the `export` statement.
 
-[Functions] defined by the script are automatically exported, unless marked as [private][`private`].
+[Functions] defined by the script are automatically exported, unless marked as `private`.
 
 Modules loaded within this [module] at the global level become _sub-modules_ and are also automatically exported.
 
@@ -85,13 +85,13 @@ Export Functions
 
 ```admonish info.side.wide "Private functions"
 
-[`private`] [functions] are commonly called within the [module] only.
+`private` [functions] are commonly called within the [module] only.
 They cannot be accessed otherwise.
 ```
 
-All [functions] are automatically exported, _unless_ it is explicitly opt-out with the [`private`] prefix.
+All [functions] are automatically exported, _unless_ it is explicitly opt-out with the `private` prefix.
 
-[Functions] declared [`private`] are hidden to the outside.
+[Functions] declared `private` are hidden to the outside.
 
 ```rust
 // This is a module script.

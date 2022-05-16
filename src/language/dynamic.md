@@ -10,6 +10,20 @@ A `Dynamic` value can be _any_ type, as long as it implements `Clone`.
 Under the [`sync`] feature, all types must also be `Send + Sync`.
 ~~~
 
+```rust
+let x = 42;         // value is an integer
+
+x = 123.456;        // value is now a floating-point number
+
+x = "hello";        // value is now a string
+
+x = x.len > 0;      // value is now a boolean
+
+x = [x];            // value is now an array
+
+x = #{x: x};        // value is now an object map
+```
+
 
 Use `type_of()` to Get Value Type
 ---------------------------------

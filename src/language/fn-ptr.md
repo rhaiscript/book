@@ -142,8 +142,8 @@ Dynamic Dispatch
 The purpose of function pointers is to enable rudimentary _dynamic dispatch_, meaning to determine,
 at runtime, which function to call among a group.
 
-Although it is possible to simulate dynamic dispatch via a number and a large `if-then-else-if` statement,
-using function pointers significantly simplifies the code.
+Although it is possible to simulate dynamic dispatch via a number and a large
+[`if-then-else-if`][`if`] statement, using function pointers significantly simplifies the code.
 
 ```rust
 let x = some_calculation();
@@ -215,8 +215,8 @@ x.call(func, 1);            // 'this' is bound to 'x', dispatched to 'func'
 x == 42;
 ```
 
-Beware that this only works for _method-call_ style.  Normal function-call style cannot bind
-the `this` pointer (for syntactic reasons).
+Beware that this only works for [_method-call_](fn-method.md) style.
+Normal function-call style cannot bind the `this` pointer (for syntactic reasons).
 
 Therefore, obviously, binding the `this` pointer is unsupported under [`no_object`].
 
