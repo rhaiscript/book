@@ -1,4 +1,7 @@
 {
 	"version": "1.7.0",
-	"repoHome": "https://github.com/rhaiscript/rhai/blob/main"
+	"repoHome": "https://github.com/rhaiscript/rhai/blob/main",
+	"rootUrlX": "",
+	"rootUrl": "/book",
+	"rootUrlXX": "/book/vnext"
 }
