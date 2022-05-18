@@ -23,7 +23,7 @@ Indexers are disabled when the [`no_index`] and [`no_object`] features are used 
 | `register_indexer_get`        | `Fn(&mut T, X) -> V`                                                                                          |      yes, but not advised      |
 | `register_indexer_set`        | `Fn(&mut T, X, V)`                                                                                            |              yes               |
 | `register_indexer_get_set`    | getter: `Fn(&mut T, X) -> V`<br/>setter: `Fn(&mut T, X, V)`                                                   | yes, but not advised in getter |
-| `register_indexer_get_result` | `Fn(&mut T, X) -> Result<Dynamic, Box<EvalAltResult>>`                                                        |      yes, but not advised      |
+| `register_indexer_get_result` | `Fn(&mut T, X) -> Result<V, Box<EvalAltResult>>`                                                              |      yes, but not advised      |
 | `register_indexer_set_result` | `Fn(&mut T, X, V) -> Result<(), Box<EvalAltResult>>`                                                          |              yes               |
 
 ```admonish danger.small "No support for references"
