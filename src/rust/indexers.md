@@ -18,13 +18,13 @@ They also take an additional parameter of any type that serves as the _index_ wi
 
 Indexers are disabled when the [`no_index`] and [`no_object`] features are used together.
 
-| `Engine` API                  | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`X: Clone` = index type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------- | :----------------------------: |
-| `register_indexer_get`        | `Fn(&mut T, X) -> V`                                                                                          |      yes, but not advised      |
-| `register_indexer_set`        | `Fn(&mut T, X, V)`                                                                                            |              yes               |
-| `register_indexer_get_set`    | getter: `Fn(&mut T, X) -> V`<br/>setter: `Fn(&mut T, X, V)`                                                   | yes, but not advised in getter |
-| `register_indexer_get_result` | `Fn(&mut T, X) -> Result<V, Box<EvalAltResult>>`                                                              |      yes, but not advised      |
-| `register_indexer_set_result` | `Fn(&mut T, X, V) -> Result<(), Box<EvalAltResult>>`                                                          |              yes               |
+| `Engine` API                                                    | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`X: Clone` = index type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | :----------------------------: |
+| `register_indexer_get`                                          | `Fn(&mut T, X) -> V`                                                                                          |      yes, but not advised      |
+| `register_indexer_set`                                          | `Fn(&mut T, X, V)`                                                                                            |              yes               |
+| `register_indexer_get_set`                                      | getter: `Fn(&mut T, X) -> V`<br/>setter: `Fn(&mut T, X, V)`                                                   | yes, but not advised in getter |
+| `register_indexer_get_result` _[(fallible)][fallible function]_ | `Fn(&mut T, X) -> Result<V, Box<EvalAltResult>>`                                                              |      yes, but not advised      |
+| `register_indexer_set_result` _[(fallible)][fallible function]_ | `Fn(&mut T, X, V) -> Result<(), Box<EvalAltResult>>`                                                          |              yes               |
 
 ```admonish danger.small "No support for references"
 
@@ -37,6 +37,12 @@ All references must be mutable (i.e. `&mut T`).
 By convention, index getters are not supposed to mutate the [custom type],
 although there is nothing that prevents this mutation.
 ```
+
+~~~admonish tip.small "Tip: `EvalAltResult::ErrorIndexNotFound`"
+
+For [fallible][fallible function] indexers, it is customary to return
+`EvalAltResult::ErrorIndexNotFound` when called with an invalid index value.
+~~~
 
 
 Cannot Override Arrays, BLOB's, Object Maps, Strings and Integers
