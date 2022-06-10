@@ -29,6 +29,7 @@ Operators
 |                                             `<=`                                             | less than or equals to                 |    yes     |       left        |
 |                                             `&&`                                             | boolean _AND_ (short-circuits)         |    yes     |       left        |
 |                                      <code>\|\|</code>                                       | boolean _OR_ (short-circuits)          |    yes     |       left        |
+|                                             `??`                                             | null-coalesce (short-circuits)         |    yes     |       left        |
 |                                             `!`                                              | boolean _NOT_                          |     no     |       right       |
 |                                         `[` ... `]`                                          | indexing                               |    yes     |       left        |
 |                                          `.`, `?.`                                           | 1) property access<br/>2) method call  |    yes     |       left        |

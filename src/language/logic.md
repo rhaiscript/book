@@ -173,3 +173,23 @@ a() | b();          // both a() and b() are evaluated
 
 a() & b();          // both a() and b() are evaluated
 ```
+
+
+Null-Coalescing Operator
+------------------------
+
+| Operator |  Description  | Arity  | Short-circuits? |
+| :------: | :-----------: | :----: | :-------------: |
+|   `??`   | Null-coalesce | binary |       yes       |
+
+The null-coalescing operator (`??`) returns the first operand if it is not [`()`], or the second
+operand if the first operand is [`()`].
+
+It _short-circuits_  &ndash; meaning that the second operand will not be evaluated if the first
+operand is not [`()`].
+
+```rust
+a ?? b              // returns 'a' if it is not (), otherwise 'b'
+
+a() ?? b();         // b() is only evaluated if a() is ()
+```

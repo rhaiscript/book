@@ -15,11 +15,11 @@ let x = +(a, b);        // <- the above is equivalent to this function call
 ```
 
 Similarly, comparison [operators] including `==`, `!=` etc. are all implemented as functions,
-with the stark exception of `&&` and `||`.
+with the stark exception of `&&`, `||` and `??`.
 
-~~~admonish warning.small "`&&` and `||` cannot be overloaded"
+~~~admonish warning.small "`&&`, `||` and `??` cannot be overloaded"
 
-Because they [_short-circuit_]({{rootUrl}}/language/logic.md#boolean-operators), `&&` and `||` are
+Because they [_short-circuit_]({{rootUrl}}/language/logic.md#boolean-operators), `&&`, `||` and `??` are
 handled specially and _not_ via a function.
 
 Overriding them has no effect at all.
