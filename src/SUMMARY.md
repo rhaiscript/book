@@ -139,6 +139,7 @@ Scripting Language
     - [Closures](language/fn-closure.md)
   - [Metadata](engine/metadata/index.md)
     - [Get Scripted Functions Metadata in Rhai](language/fn-metadata.md)
+    - [Get Scripted Functions Metadata from AST](rust/functions-metadata.md)
     - [Get Native Function Signatures](engine/metadata/gen_fn_sig.md)
     - [Export All Functions Metadata to JSON](engine/metadata/export_to_json.md)
 - [Print and Debug](language/print-debug.md)
