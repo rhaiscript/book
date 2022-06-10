@@ -30,6 +30,17 @@ The _dot notation_ allows only property names that follow the same naming rules 
 
 > _object_ `.` _property_
 
+### Elvis notation
+
+The [_Elvis notation_](https://en.wikipedia.org/wiki/Elvis_operator) is similar to the _dot
+notation_ except that it returns `()` if the object itself is `()`.
+
+> `// returns () if object is ()`  
+> _object_ `?.` _property_
+>
+> `// no action if object is ()`  
+> _object_ `?.` _property_ `=` _value_ `;`
+
 ### Index notation
 
 The _index notation_ allows setting/getting properties of arbitrary names (even the empty
@@ -42,6 +53,19 @@ The _index notation_ allows setting/getting properties of arbitrary names (even 
 Trying to read a non-existing property returns `()` instead of causing an error.
 
 This is similar to JavaScript where accessing a non-existing property returns `undefined`.
+
+Use the [_Elvis operator_](https://en.wikipedia.org/wiki/Elvis_operator) (`?.`) to short-circuit
+further processing if the object is `()`.
+
+```rust
+x.a.b.foo();        // <- error if 'x', 'x.a' or 'x.a.b' is ()
+
+x.a.b = 42;         // <- error if 'x' or 'x.a' is ()
+
+x?.a?.b?.foo();     // <- ok! returns () if 'x', 'x.a' or 'x.a.b' is ()
+
+x?.a?.b = 42;       // <- ok even if 'x' or 'x.a' is ()
+```
 
 
 Built-in Functions

@@ -19,7 +19,7 @@ let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));
 
 This limit may be changed via [`Engine::set_max_expr_depths`][options].
 
-There are two limits to set, one for the maximum depth at global level, and the other for function bodies.
+There are two limits to set, one for the maximum depth at global level, and the other for [function] bodies.
 
 A script exceeding the maximum nesting depths will terminate with a parse error.
 The malicious [`AST`] will not be able to get past parsing in the first place.
@@ -37,7 +37,7 @@ engine.set_max_expr_depths(50, 5);  // allow nesting up to 50 layers of expressi
 Multiple layers of expressions may be generated for a simple language construct, even though it may correspond
 to only one AST node.
 
-That is because the Rhai _parser_ internally runs a recursive chain of function calls and it is important that
+That is because the Rhai _parser_ internally runs a recursive chain of [function] calls and it is important that
 a malicious script does not panic the parser in the first place.
 ```
 
@@ -59,7 +59,7 @@ let a = 42;
 let result = (a+(a+(a+(a+(a+(a+(a+(a+(a+ ... (a+deep_calc(a,0)) ... )))))))));
 ```
 
-In the contrived example above, each recursive call to the function `deep_calc` adds the total
+In the contrived example above, each recursive call to the [function] `deep_calc` adds the total
 number of nested expression layers to Rhai's evaluation stack.  Sooner or later (most likely sooner
 than the limit for [maximum depth of function calls][maximum call stack depth] is reached), a stack
 overflow can be expected.

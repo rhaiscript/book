@@ -20,6 +20,15 @@ Properties can be accessed in a Rust-like syntax:
 >
 > _object_ `.` _property_ `=` _value_ `;`
 
+The [_Elvis operator_](https://en.wikipedia.org/wiki/Elvis_operator) can be used to short-circuit
+processing if the object itself is [`()`]:
+
+> `// returns () if object is ()`  
+> _object_ `?.` _property_
+>
+> `// no action if object is ()`  
+> _object_ `?.` _property_ `=` _value_ `;`
+
 Property getter and setter functions are called behind the scene.
 They each take a `&mut` reference to the first parameter.
 

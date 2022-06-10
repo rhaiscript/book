@@ -6,7 +6,7 @@ Compile to a Self-Contained `AST`
 ```admonish tip.side "Tip"
 
 It does not matter where the [`import`] statement occurs &mdash; e.g. deep within statement blocks
-or within function bodies.
+or within [function] bodies.
 ```
 
 When a script [imports][`import`] external [modules] that may not be available later on, it is

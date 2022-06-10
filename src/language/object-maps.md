@@ -8,19 +8,6 @@ Object Maps
 Always limit the [maximum size of object maps].
 ```
 
-~~~admonish question.side.wide "Why `SmartString`?"
-
-[`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
-and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
-~~~
-
-~~~admonish question.side.wide "Why `BTreeMap` and not `HashMap`?"
-
-The vast majority of object maps contain just a few properties.
-
-`BTreeMap` performs significantly better than `HashMap` when the number of entries is small.
-~~~
-
 Object maps are hash dictionaries. Properties are all [`Dynamic`] and can be freely added and retrieved.
 
 The Rust type of a Rhai object map is `rhai::Map`.
@@ -29,6 +16,19 @@ Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
 [`type_of()`] an object map returns `"map"`.
 
 Object maps are disabled via the [`no_object`] feature.
+
+~~~admonish question.small "Why `SmartString`?"
+
+[`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
+and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
+~~~
+
+~~~admonish question.small "Why `BTreeMap` and not `HashMap`?"
+
+The vast majority of object maps contain just a few properties.
+
+`BTreeMap` performs significantly better than `HashMap` when the number of entries is small.
+~~~
 
 
 Literal Syntax
@@ -54,6 +54,17 @@ The _dot notation_ allows only property names that follow the same naming rules 
 
 > _object_ `.` _property_
 
+### Elvis notation
+
+The [_Elvis notation_][elvis] is similar to the _dot notation_ except that it returns [`()`] if the object
+itself is [`()`].
+
+> `// returns () if object is ()`  
+> _object_ `?.` _property_
+>
+> `// no action if object is ()`  
+> _object_ `?.` _property_ `=` _value_ `;`
+
 ### Index notation
 
 The _index notation_ allows setting/getting properties of arbitrary names (even the empty [string]).
@@ -71,6 +82,18 @@ It is possible to force Rhai to return an `EvalAltResult:: ErrorPropertyNotFound
 Trying to read a non-existing property returns [`()`] instead of causing an error.
 
 This is similar to JavaScript where accessing a non-existing property returns `undefined`.
+
+Use the [_Elvis operator_][elvis] (`?.`) to short-circuit further processing if the object is [`()`].
+
+```rust
+x.a.b.foo();        // <- error if 'x', 'x.a' or 'x.a.b' is ()
+
+x.a.b = 42;         // <- error if 'x' or 'x.a' is ()
+
+x?.a?.b?.foo();     // <- ok! returns () if 'x', 'x.a' or 'x.a.b' is ()
+
+x?.a?.b = 42;       // <- ok even if 'x' or 'x.a' is ()
+```
 
 
 Built-in Functions

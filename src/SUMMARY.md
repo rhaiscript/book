@@ -266,6 +266,8 @@ Language Reference
 - [Constants](ref/constants.md)
   - [Automatic Global Module](ref/global.md)
 - [Assignments](ref/assignment.md)
+- [Properties](ref/getters-setters.md)
+- [Methods](ref/methods.md)
 - [Operators](ref/operators.md)
 - [Conditional Statements]()
   - [If Statement](ref/if.md)

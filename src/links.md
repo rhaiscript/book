@@ -79,6 +79,7 @@
 [custom type]: {{rootUrl}}/rust/custom.md
 [custom types]: {{rootUrl}}/rust/custom.md
 [getters/setters]: {{rootUrl}}/rust/getters-setters.md
+[elvis]: https://en.wikipedia.org/wiki/Elvis_operator
 [indexer]: {{rootUrl}}/rust/indexers.md
 [indexers]: {{rootUrl}}/rust/indexers.md
 [type iterator]: {{rootUrl}}/language/iterator.md

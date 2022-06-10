@@ -36,6 +36,11 @@ let z = x + w;          // <- parse error under strict variables mode:
 foo::bar::baz();        // <- parse error under strict variables mode:
                         //    module 'foo' is not yet defined
 
+fn test1() {
+    foo::bar::baz();    // <- parse error under strict variables mode:
+                        //    module 'foo' is defined
+}
+
 import "my_module" as foo;
 
 foo::bar::baz();        // ok!
@@ -44,6 +49,10 @@ print(foo::xyz);        // ok!
 
 let x = abc::def;       // <- parse error under strict variables mode:
                         //    module 'abc' is undefined
+
+fn test2() {
+    foo:bar::baz();     // ok!
+}
 ```
 
 
