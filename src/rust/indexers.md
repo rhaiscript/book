@@ -12,6 +12,14 @@ value at a particular index:
 >
 > _object_ `[` _index_ `]` `=` _value_ `;`
 
+The [_Elvis notation_][elvis] is similar except that it returns [`()`] if the object itself is [`()`].
+
+> `// returns () if object is ()`  
+> _object_ `?[` _index_ `]`
+>
+> `// no action if object is ()`  
+> _object_ `?[` _index_ `]` `=` _value_ `;`
+
 Like property [getters/setters], indexers take a `&mut` reference to the first parameter.
 
 They also take an additional parameter of any type that serves as the _index_ within brackets.
