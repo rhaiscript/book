@@ -62,7 +62,7 @@ impl Handler {
         states.insert("bool_state".into(), Dynamic::FALSE);
 
         // Add the main states-holding object map and call it 'state'
-        scope.push("state", Map::new());
+        scope.push("state", states);
 
         // Just a simple 'call_fn' can do here because we're rewinding the 'Scope'
         // In a real application you'd again be handling errors...
