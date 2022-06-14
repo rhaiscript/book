@@ -73,14 +73,18 @@ Package Functions
 
 The following functions are defined.
 
-|      Function       | Return type | Feature | Description                                                                  |
-| :-----------------: | :---------: | :-----: | ---------------------------------------------------------------------------- |
-|      `rand()`       |    `INT`    |         | generates a random number                                                    |
-| `rand(start..end)`  |    `INT`    |         | generates a random number within the exclusive range `start..end`            |
-| `rand(start..=end)` |    `INT`    |         | generates a random number within the inclusive range `start..=end`           |
-|   `rand_float()`    |   `FLOAT`   | `float` | generates a random floating-point number between `0.0` and `1.0` (exclusive) |
-|    `rand_bool()`    |   `bool`    |         | generates a random boolean                                                   |
-|   `rand_bool(p)`    |   `bool`    | `float` | generates a random boolean with the probability `p` of being `true`          |
+|          Function          |        Return type        | Feature | Description                                                                                |
+| :------------------------: | :-----------------------: | :-----: | ------------------------------------------------------------------------------------------ |
+|          `rand()`          |           `INT`           |         | generates a random integer number                                                          |
+|     `rand(start..end)`     |           `INT`           |         | generates a random integer number within the exclusive range `start..end`                  |
+|    `rand(start..=end)`     |           `INT`           |         | generates a random integer number within the inclusive range `start..=end`                 |
+|     `rand(start, end)`     |           `INT`           |         | generates a random integer number within the inclusive range `start..=end`                 |
+|       `rand_float()`       |          `FLOAT`          | `float` | generates a random floating-point number between `0.0` and `1.0` (exclusive)               |
+|  `rand_float(start, end)`  |          `FLOAT`          | `float` | generates a random floating-point number within the inclusive range `start..=end`          |
+|      `rand_decimal()`      | [`Decimal`][rust_decimal] |         | generates a random [decimal][rust_decimal] number                                          |
+| `rand_decimal(start, end)` | [`Decimal`][rust_decimal] |         | generates a random [decimal][rust_decimal] number within the inclusive range `start..=end` |
+|       `rand_bool()`        |          `bool`           |         | generates a random boolean                                                                 |
+|       `rand_bool(p)`       |          `bool`           | `float` | generates a random boolean with the probability `p` of being `true`                        |
 
 
 ### Arrays
