@@ -1,24 +1,26 @@
 The Rhai Scripting Language
 ==========================
 
-[What is Rhai](about/index.md)
+[The Rhai Book](about/index.md)
 
 ----------------------
 
 User’s Guide
 ============
 
-- [Features of Rhai](about/features.md)
+- [Introduction]()
+  - [Features of Rhai](about/features.md)
   - [Supported Targets and Builds](about/targets.md)
   - [What Rhai Isn't](about/non-design.md)
   - [Licensing](about/license.md)
   - [Related Resources](about/related.md)
-- [Getting Started](start/index.md)
+- [Getting Started]()
   - [Online Playground](start/playground.md)
   - [Install the Rhai Crate](start/install.md)
   - [Optional Features](start/features.md)
   - [Packaged Utilities](start/bin.md)
-- [Using the `Engine`](engine/index.md)
+- [The Scripting Engine]()
+  - [Using the `Engine`](engine/index.md)
   - [“Hello, Rhai”](engine/hello-world.md)
   - [Compile to AST](engine/compile.md)
   - [Raw Engine](engine/raw.md)
@@ -26,10 +28,10 @@ User’s Guide
   - [Scope &ndash; Maintaining State](engine/scope.md)
   - [Expressions Only](engine/expressions.md)
   - [Options](engine/options.md)
-- [Examples](start/examples/index.md)
+- [Examples]()
   - [Rust](start/examples/rust.md)
   - [Scripts](start/examples/scripts.md)
-- [Special Builds](start/builds/index.md)
+- [Special Builds]()
   - [Performance](start/builds/performance.md)
   - [Minimal](start/builds/minimal.md)
   - [no-std](start/builds/no-std.md)
@@ -48,11 +50,12 @@ Rust Integration
   - [Fallible Functions](rust/fallible.md)
   - [Dynamic Parameters](rust/dynamic-args.md)
   - [`NativeCallContext`](rust/context.md)
+  - [Override a Built-in Function](rust/override.md)
 - [Call a Rhai Function from Rust](engine/call-fn.md)
   - [Create a Rust Closure from a Rhai Function](engine/func.md)
-- [Override a Built-in Function](rust/override.md)
 - [Operator Overloading](rust/operators.md)
-- [Register any Rust Type and its Methods](rust/custom.md)
+- [Working with Any Rust Type]()
+  - [Register a Rust Type and Its Methods](rust/custom.md)
   - [Property Getters and Setters](rust/getters-setters.md)
   - [Indexers](rust/indexers.md)
   - [Call Method as Function](rust/methods.md)
@@ -155,14 +158,15 @@ Safety and Protection
 
 - [Introduction](safety/index.md)
 - [Sand-Boxing](safety/sandbox.md)
-- [Maximum Length of Strings](safety/max-string-size.md)
-- [Maximum Size of Arrays](safety/max-array-size.md)
-- [Maximum Size of Object Maps](safety/max-map-size.md)
-- [Maximum Number of Operations](safety/max-operations.md)
-- [Tracking Progress and Force-Termination](safety/progress.md)
-- [Maximum Number of Modules](safety/max-modules.md)
-- [Maximum Call Stack Depth](safety/max-call-stack.md)
-- [Maximum Expression Depth](safety/max-stmt-depth.md)
+- [Limits]()
+  - [Maximum Length of Strings](safety/max-string-size.md)
+  - [Maximum Size of Arrays](safety/max-array-size.md)
+  - [Maximum Size of Object Maps](safety/max-map-size.md)
+  - [Maximum Number of Operations](safety/max-operations.md)
+    - [Tracking Progress and Force-Termination](safety/progress.md)
+  - [Maximum Number of Modules](safety/max-modules.md)
+  - [Maximum Call Stack Depth](safety/max-call-stack.md)
+  - [Maximum Expression Depth](safety/max-stmt-depth.md)
 - [Turn Off Safety Checks](safety/checked.md)
 
 ----------------------
@@ -171,12 +175,12 @@ Script Optimization
 ===================
 
 - [Introduction](engine/optimize/index.md)
-  - [Optimization Levels](engine/optimize/optimize-levels.md)
+- [Optimization Passes]()
   - [Dead Code Elimination](engine/optimize/dead-code.md)
   - [Constants Propagation](engine/optimize/constants.md)
   - [Compound Assignment Rewrite](engine/optimize/rewrite.md)
   - [Eager Operator Evaluation](engine/optimize/op-eval.md)
-- [Re-Optimize an AST](engine/optimize/reoptimize.md)
+- [Re-Optimize an `AST`](engine/optimize/reoptimize.md)
 - [Subtle Semantic Changes](engine/optimize/semantics.md)
 - [Eager Function Evaluation](engine/optimize/eager.md)
   - [Side-Effect Considerations](engine/optimize/side-effects.md)

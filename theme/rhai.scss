@@ -14,8 +14,13 @@ blockquote em {
 	font-variant-caps: small-caps;
 }
 
-.chapter > .chapter-item {
-	font-size: 110%;
+.chapter {
+	li {
+		color: inherit;
+	}
+	> .chapter-item {
+		font-size: 110%;
+	}
 }
 
 td {

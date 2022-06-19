@@ -3,35 +3,29 @@ Functions Metadata
 
 {{#title Functions Metadata}}
 
-The _metadata_ of a [function](functions.md) means all relevant information related to a function's
-definition including:
+The _metadata_ of a [function](functions.md) means all relevant information related to a
+[function's](functions.md) definition including:
 
 1. Its callable name
 
 2. Its access mode (public or [private](modules/export.md))
 
-3. Its parameter names and types (if any)
+3. Its parameter names (if any)
 
-4. Its return value and type (if any)
+4. Its purpose, in the form of [doc-comments](comments.md)
 
-5. Its nature (i.e. native Rust or Rhai-scripted)
+5. Usage notes, warnings, examples etc., in the form of [doc-comments](comments.md)
 
-6. Its [namespace][function namespace] ([module](modules/index.md) or global)
+A [function's](functions.md) _signature_ encapsulates the first three pieces of information in a
+single concise line of definition:
 
-7. Its purpose, in the form of [doc-comments](comments.md)
-
-8. Usage notes, warnings, examples etc., in the form of [doc-comments](comments.md)
-
-A function's _signature_ encapsulates the first four pieces of information in a single concise line
-of definition:
-
-> `[private]` _name_ `(`_param 1_`:`_type 1_`,` _param 2_`:`_type 2_`,` ... `,` _param n_`:`_type n_`) ->` _return type_
+> `[private]` _name_ `(`_param 1_`,` _param 2_`,` ... `,` _param n_ `)`
 
 
 Get Functions Metadata
 ======================
 
-The built-in function `get_fn_metadata_list` returns an [array](arrays) of [object
+The built-in [function](functions.md) `get_fn_metadata_list` returns an [array](arrays) of [object
 maps](object-maps.md), each containing the metadata of one script-defined [function](functions.md)
 in scope.
 
