@@ -45,3 +45,25 @@ print(foo::xyz);        // ok!
 let x = abc::def;       // <- parse error under strict variables mode:
                         //    module 'abc' is undefined
 ```
+
+
+TL;DR
+-----
+
+```admonish question "Why isn't there a _Strict Functions_ mode?"
+
+Why can't function calls be checked for validity as well?
+
+Rust functions in Rhai can be [overloaded][function overloading]. This means that multiple versions of
+the same Rust function can exist under the same name, each accepting different numbers and/or types
+of arguments.
+
+While it is possible to check, at compile time, whether a [variable] has been previously declared,
+it is impossible to predict, at compile time, the _types_ of arguments to function calls, unless the
+function in question takes no parameters.
+
+Therefore, it is impossible to check, at compile time, whether a function call is valid given that
+the types of arguments are unknown until runtime. QED.
+
+Not to mention that it is also impossible to check for a function called via a [function pointer].
+```
