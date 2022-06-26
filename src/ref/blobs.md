@@ -129,7 +129,7 @@ device.send(buf);           // send command to device
 
 The `write_utf8` function writes a string in UTF-8 encoding.
 
-UTF-8 is, however, not very commonly used in embedded applications.
+UTF-8, however, is not very common for embedded applications.
 ```
 
 

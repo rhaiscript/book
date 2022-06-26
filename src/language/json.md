@@ -82,11 +82,15 @@ let map = engine.parse_json(json, false)?;
 map.len() == 2;
 ```
 
-```admonish question.small "TL;DR &ndash; How is it done?"
+
+### TL;DR
+
+```admonish question "How is it done?"
 
 Internally, `Engine::parse_json` _cheats_ by treating the JSON text as a Rhai script.
 
-That is why it even supports [comments] and arithmetic expressions in the JSON text.
+That is why it even supports [comments] and arithmetic expressions in the JSON text,
+although it is not a good idea to rely on non-standard JSON formats.
 
 A [token remap filter] is used to convert `{` into `#{` and `null` to [`()`].
 ```

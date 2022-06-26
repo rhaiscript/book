@@ -5,7 +5,7 @@ Dead Code Elimination
 
 ```admonish question.side.wide "Who writes dead code?"
 
-Nobody deliberately writes scripts with dead code.
+Nobody deliberately writes scripts with dead code (we hope).
 
 They are, however, extremely common in template-based machine-generated scripts.
 ```

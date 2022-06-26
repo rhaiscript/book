@@ -20,7 +20,6 @@ User’s Guide
   - [Optional Features](start/features.md)
   - [Packaged Utilities](start/bin.md)
 - [The Scripting Engine]()
-  - [Using the `Engine`](engine/index.md)
   - [“Hello, Rhai”](engine/hello-world.md)
   - [Compile to AST](engine/compile.md)
   - [Raw Engine](engine/raw.md)
