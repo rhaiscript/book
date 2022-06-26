@@ -20,6 +20,12 @@ blockquote em {
 	}
 	> .chapter-item {
 		font-size: 110%;
+
+		&:first-child {
+			font-weight: bold;
+			font-size: 200%;
+			font-variant-caps: small-caps;
+		}
 	}
 }
 

@@ -384,6 +384,12 @@ blockquote em {
   font-size: 110%;
 }
 
+.chapter > .chapter-item:first-child {
+  font-weight: bold;
+  font-size: 200%;
+  font-variant-caps: small-caps;
+}
+
 td > ol, td > ul {
   margin: 0;
   padding: 0;
