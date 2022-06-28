@@ -8,14 +8,16 @@ Global Constants
 
 * Script has a lot of duplicated [constants] used inside [functions].
 
+* For easier management, [constants] are declared at the top of the script.
+
 * As Rhai [functions] are pure, they cannot access [constants] declared at global level
   except through [`global`].
 
 * Sprinkling large number of [`global::CONSTANT`][`global`] throughout the script makes
   it slow and cumbersome.
 
-* Using [`global`] defeats [constants propagation]({{rootUrl}}/engine/optimize/constants.md)
-  in [script optimization].
+* Using [`global`] or a [variable resolver] defeats
+  [constants propagation]({{rootUrl}}/engine/optimize/constants.md) in [script optimization].
 ```
 
 ```admonish abstract "Key concepts"

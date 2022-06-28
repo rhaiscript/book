@@ -55,6 +55,13 @@ To change these [variables], better push them into a custom [`Scope`] instead of
 using a variable resolver.
 ```
 
+```admonish tip.small "Tip: Returning shared values"
+
+It is possible to return a _shared_ value from a variable resolver.
+
+This is one way to implement [Mutable Global State]({{rootUrl}}/patterns/global-mutable-state.md).
+```
+
 
 Function Signature
 ------------------

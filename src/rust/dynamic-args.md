@@ -72,7 +72,7 @@ engine.register_fn("foo", foo5)
 
 ~~~admonish warning "Only the right-most 16 parameters can be `Dynamic`"
 
-The number of parameter permutations go up exponentially, and therefore there is a realistic limit
+The number of parameter permutations goes up exponentially, and therefore there is a realistic limit
 of 16 parameters allowed to be [`Dynamic`], counting from the _right-most side_.
 
 For example, Rhai will not find the following function &ndash; Oh! and those 16 parameters to the right
@@ -161,10 +161,11 @@ Of course not. Don't be silly.
 
 #### Not every function has 16 parameters
 
-Studies have repeatedly shown that most functions accepts few parameters, with the mean between
+Studies have repeatedly shown that most functions accept few parameters, with the mean between
 2-3 parameters per function.  Functions with more than 5 parameters are rare in normal code bases.
 If at all, they are usually [closures] that _capture_ lots of external variables, bumping up the
-parameter count.
+parameter count; but [closures] are always script-defined and thus all parameters are already
+[`Dynamic`].
 
 In fact, you have a bigger problem if you write such a function that you need to call regularly.
 It would be far more efficient to group those parameters into [object maps].
