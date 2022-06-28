@@ -20,6 +20,9 @@ Global Constants
 
 ```admonish abstract "Key concepts"
 
+* The key to global [constants] is to use them to [optimize][script optimization] a script.
+  Otherwise, it would be just as simple to pass the constants into a custom [`Scope`] instead.
+
 * The script is first compiled into an [`AST`], and all [constants] are extracted.
 
 * The [constants] are then supplied to [re-optimize][script optimization] the [`AST`].
