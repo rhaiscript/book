@@ -213,7 +213,9 @@ Usage Patterns
 ==============
 
 - [Object-Oriented Programming (OOP)](patterns/oop.md)
-- [Global Constants](patterns/constants.md)
+- [Working With Constants]()
+  - [Dynamic Constants Provider](patterns/dynamic-const.md)
+  - [Global Constants](patterns/constants.md)
 - [Working With Rust Enums](patterns/enums.md)
 - [Simulate Macros to Simplify Scripts](patterns/macros.md)
 - [Loadable Configuration](patterns/config.md)
@@ -227,7 +229,6 @@ Usage Patterns
   - [Main Style](patterns/events-1.md)
   - [JS Style](patterns/events-2.md)
   - [Map Style](patterns/events-3.md)
-- [Dynamic Constants Provider](patterns/dynamic-const.md)
 - [Domain-Specific Tools](patterns/domain-tools.md)
 - [Multiple Instantiation](patterns/multiple.md)
 
