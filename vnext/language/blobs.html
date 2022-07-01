@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>BLOB&#x27;s (Byte Arrays) - Rhai - Embedded Scripting for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-12WKJTDTEE"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+        
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+        
+                gtag('config', 'G-12WKJTDTEE');
+            }
+        </script>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/rhai.min.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../about/index.html">The Rhai Book</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User’s Guide</li><li class="chapter-item expanded "><div>Introduction</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/features.html">Features of Rhai</a></li><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><div>Getting Started</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li></ol></li><li class="chapter-item expanded "><div>The Scripting Engine</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">“Hello, Rhai”</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/builtin.html">Built-in Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Options</a></li></ol></li><li class="chapter-item expanded "><div>Examples</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li><li class="chapter-item expanded "><div>Special Builds</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Rust Integration</li><li class="chapter-item expanded "><a href="../rust/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters</a></li><li class="chapter-item expanded "><a href="../rust/generic.html">Generic Functions</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Fallible Functions</a></li><li class="chapter-item expanded "><a href="../rust/dynamic-args.html">Dynamic Parameters</a></li><li class="chapter-item expanded "><a href="../rust/context.html">NativeCallContext</a></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><div>Working with Any Rust Type</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/custom.html">Register a Rust Type and Its Methods</a></li><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a></li><li class="chapter-item expanded "><a href="../rust/methods.html">Call Method as Function</a></li><li class="chapter-item expanded "><a href="../rust/collections.html">Collection Types</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create in Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/use.html">Use a Module</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/imp-resolver.html">Custom Module Resolvers</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/self-contained.html">Self-Contained AST</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plugins/module.html">Export a Rust Module</a></li><li class="chapter-item expanded "><a href="../plugins/function.html">Export a Rust Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Create Custom Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/crate.html">Create Packages as Crates</a></li><li class="chapter-item expanded "><a href="../lib/index.html">External Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lib/rhai-rand.html">Random Number Generation, Shuffling and Sampling</a></li><li class="spacer"></li></ol></li></ol></li><li class="chapter-item expanded "><li class="part-title">Scripting Language</li><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/dynamic-tag.html">Value Tag</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li></ol></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Standard Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="../language/ranges.html">Ranges</a></li><li class="chapter-item expanded "><a href="../language/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/immutable-string.html">ImmutableString</a></li><li class="chapter-item expanded "><a href="../language/string-fn.html">Standard Functions and Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/blobs.html" class="active">BLOB's (Byte Arrays)</a></li></ol></li><li class="chapter-item expanded "><a href="../language/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Timestamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/statement-expression.html">Statement Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/shadow.html">Variable Shadowing</a></li><li class="chapter-item expanded "><a href="../engine/strict-var.html">Strict Variables Mode</a></li><li class="chapter-item expanded "><a href="../engine/def-var.html">Variable Definition Filter</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li></ol></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/global.html">Automatic Global Module</a></li></ol></li><li class="chapter-item expanded "><a href="../language/assignment.html">Assignments</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Compound Assignments</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/in.html">In Operator</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/if-expression.html">If Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/switch-expression.html">Switch Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iterator.html">Make a Custom Type Iterable</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Value</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-metadata.html">Get Scripted Functions Metadata in Rhai</a></li><li class="chapter-item expanded "><a href="../rust/functions-metadata.html">Get Scripted Functions Metadata from AST</a></li><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Get Native Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export All Functions Metadata to JSON</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules from Script</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Safety and Protection</li><li class="chapter-item expanded "><a href="../safety/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><div>Limits</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/progress.html">Tracking Progress and Force-Termination</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Expression Depth</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/checked.html">Turn Off Safety Checks</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Script Optimization</li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Introduction</a></li><li class="chapter-item expanded "><div>Optimization Passes</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/dead-code.html">Dead Code Elimination</a></li><li class="chapter-item expanded "><a href="../engine/optimize/constants.html">Constants Propagation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/rewrite.html">Compound Assignment Rewrite</a></li><li class="chapter-item expanded "><a href="../engine/optimize/op-eval.html">Eager Operator Evaluation</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Advanced Topics</li><li class="chapter-item expanded "><a href="../engine/ast.html">Manage AST's</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API to Register Functions</a></li><li class="chapter-item expanded "><a href="../engine/eval-context.html">Evaluation Context</a></li><li class="chapter-item expanded "><a href="../language/fn-parent-scope.html">Call Function Within Caller's Scope</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use Rhai as a DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/token-mapper.html">Remap Tokens During Parsing</a></li><li class="chapter-item expanded "><a href="../engine/disable-keywords.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/disable-looping.html">Disable Looping</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/precedence.html">Operator Precedence</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html">Extend with Custom Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/index.html">Debugging Interface</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/debugger.html">Debugger</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/state.html">State</a></li><li class="chapter-item expanded "><a href="../engine/debugging/call-stack.html">Call Stack</a></li><li class="chapter-item expanded "><a href="../engine/debugging/break-points.html">Break-Points</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/server.html">Debugging Server</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><li class="part-title">Usage Patterns</li><li class="chapter-item expanded "><div>Programming Styles</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working with Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/macros.html">Simulate Macros to Simplify Scripts</a></li></ol></li><li class="chapter-item expanded "><div>Working with Constants</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li><li class="chapter-item expanded "><a href="../patterns/constants.html">Global Constants</a></li><li class="chapter-item expanded "><a href="../patterns/global-mutable-state.html">Mutable Global State</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layered Functions</a></li><li class="chapter-item expanded "><a href="../patterns/hot-reload.html">Hot Reloading</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/multi-threading.html">Multi-Threaded Synchronization</a></li><li class="chapter-item expanded "><div>Designing a Scriptable API</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer Over Rust Backend</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command Object</a></li><li class="chapter-item expanded "><a href="../patterns/blocking.html">Blocking/Async Function Calls</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/events-1.html">Main Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-2.html">JS Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-3.html">Map Style</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/domain-tools.html">Domain-Specific Tools</a></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Language Reference</li><li class="chapter-item expanded "><a href="../ref/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../ref/comments.html">Comments</a></li><li class="chapter-item expanded "><a href="../ref/values-and-types.html">Value Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../ref/dynamic-tag.html">Value Tag</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../ref/num-fn.html">Standard Functions</a></li><li class="chapter-item expanded "><a href="../ref/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="../ref/ranges.html">Ranges</a></li><li class="chapter-item expanded "><a href="../ref/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/string-fn.html">Standard Functions and Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/arrays.html">Arrays</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/blobs.html">BLOB's (Byte Arrays)</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/object-maps.html">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/object-maps-oop.html">Special Support for OOP</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/timestamps.html">Timestamps</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../ref/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="../ref/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="../ref/constants.html">Constants</a></li><li class="chapter-item expanded "><a href="../ref/assignment.html">Assignments</a></li><li class="chapter-item expanded "><a href="../ref/operators.html">Operators</a></li><li class="chapter-item expanded "><div>Operations on Data</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/indexing.html">Indexing</a></li><li class="chapter-item expanded "><a href="../ref/getters-setters.html">Properties</a></li><li class="chapter-item expanded "><a href="../ref/methods.html">Methods</a></li></ol></li><li class="chapter-item expanded "><div>Conditional Statements</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/if.html">If Statement</a></li><li class="chapter-item expanded "><a href="../ref/switch.html">Switch Statement</a></li></ol></li><li class="chapter-item expanded "><div>Loops</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../ref/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../ref/loop.html">Infinite Loop</a></li><li class="chapter-item expanded "><a href="../ref/for.html">For Loop</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/return.html">Return Value</a></li><li class="chapter-item expanded "><a href="../ref/throw.html">Throw Exception on Error</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/try-catch.html">Catch Exceptions</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="../ref/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../ref/fn-ptr.html">Function Pointers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../ref/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../ref/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/fn-metadata.html">Metadata</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../ref/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/modules/export.html">Export Variables, Functions and Sub-Modules from Script</a></li><li class="chapter-item expanded "><a href="../ref/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/eval.html">Eval Function</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/language/blobs.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="blobs"><a class="header" href="#blobs">BLOB’s</a></h1>
+<div id="admonition-safety" class="admonition tip side">
+<div class="admonition-title">
+<p>Safety</p>
+<p><a class="admonition-anchor-link" href="#admonition-safety"></a></p>
+</div>
+<div>
+<p>Always limit the <a href="/book/vnext/safety/max-array-size.html">maximum size of arrays</a>.</p>
+</div>
+</div>
+<p>BLOB’s (<strong>B</strong>inary <strong>L</strong>arge <strong>OB</strong>jects), used to hold packed arrays of bytes, have built-in support in Rhai.</p>
+<p>A BLOB has no literal representation, but is created via the <code>blob</code> function, or simply returned as
+the result of a function call (e.g. <code>generate_thumbnail_image</code> that generates a thumbnail version of
+a large image as a BLOB).</p>
+<p>All items stored in a BLOB are bytes (i.e. <code>u8</code>) and the BLOB can freely grow or shrink with bytes
+added or removed.</p>
+<p>The Rust type of a Rhai BLOB is <code>rhai::Blob</code> which is an alias to <code>Vec&lt;u8&gt;</code>.</p>
+<p><a href="/book/vnext/language/type-of.html"><code>type_of()</code></a> a BLOB returns <code>&quot;blob&quot;</code>.</p>
+<p>BLOB’s are disabled via the <a href="/book/vnext/start/features.html"><code>no_index</code></a> feature.</p>
+<h2 id="element-access-syntax"><a class="header" href="#element-access-syntax">Element Access Syntax</a></h2>
+<h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
+<p>Like <a href="/book/vnext/language/arrays.html">arrays</a>, BLOB’s are accessed with zero-based, non-negative integer indices:</p>
+<blockquote>
+<p><em>blob</em> <code>[</code> <em>index position from 0 to (length−1)</em> <code>]</code></p>
+</blockquote>
+<h3 id="from-end"><a class="header" href="#from-end">From end</a></h3>
+<p>A <em>negative</em> position accesses an element in the BLOB counting from the <em>end</em>, with −1 being the
+<em>last</em> element.</p>
+<blockquote>
+<p><em>blob</em> <code>[</code> <em>index position from −1 to −length</em> <code>]</code></p>
+</blockquote>
+<div id="admonition-byte-values" class="admonition info small">
+<div class="admonition-title">
+<p>Byte values</p>
+<p><a class="admonition-anchor-link" href="#admonition-byte-values"></a></p>
+</div>
+<div>
+<p>The value of a particular byte in a BLOB is mapped to an <code>INT</code> (which can be 64-bit or 32-bit
+depending on the <a href="/book/vnext/start/features.html"><code>only_i32</code></a> feature).</p>
+<p>Only the lowest 8 bits are significant, all other bits are ignored.</p>
+</div>
+</div>
+<h2 id="create-a-blob"><a class="header" href="#create-a-blob">Create a BLOB</a></h2>
+<p>The function <code>blob</code> allows creating an empty BLOB, optionally filling it to a required size with a
+particular value (default zero).</p>
+<pre><code class="language-rust">let x = blob();             // empty BLOB
+
+let x = blob(10);           // BLOB with ten zeros
+
+let x = blob(50, 42);       // BLOB with 50x 42's
+</code></pre>
+<div id="admonition-tip-initialize-with-byte-stream" class="admonition tip">
+<div class="admonition-title">
+<p>Tip: Initialize with byte stream</p>
+<p><a class="admonition-anchor-link" href="#admonition-tip-initialize-with-byte-stream"></a></p>
+</div>
+<div>
+<p>To quickly initialize a BLOB with a particular byte stream, the <code>write_be</code> method can be used to
+write eight bytes at a time (four under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>) in big-endian byte order.</p>
+<p>If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.</p>
+<pre><code class="language-rust">let buf = blob(12, 0);      // BLOB with 12x zeros
+
+// Write eight bytes at a time, in big-endian order
+buf.write_be(0, 8, 0xab_cd_ef_12_34_56_78_90);
+buf.write_be(8, 8, 0x0a_0b_0c_0d_00_00_00_00);
+                            //   ^^^^^^^^^^^ remember to pad unused bytes
+
+print(buf);                 // prints &quot;[abcdef1234567890 0a0b0c0d]&quot;
+
+buf[3] == 0x12;
+buf[10] == 0x0c;
+
+// Under 'only_i32', write four bytes at a time:
+buf.write_be(0, 4, 0xab_cd_ef_12);
+buf.write_be(4, 4, 0x34_56_78_90);
+buf.write_be(8, 4, 0x0a_0b_0c_0d);
+</code></pre>
+</div>
+</div>
+<h2 id="writing-ascii-bytes"><a class="header" href="#writing-ascii-bytes">Writing ASCII Bytes</a></h2>
+<div id="admonition-non-ascii" class="admonition warning side">
+<div class="admonition-title">
+<p>Non-ASCII</p>
+<p><a class="admonition-anchor-link" href="#admonition-non-ascii"></a></p>
+</div>
+<div>
+<p>Non-ASCII characters (i.e. characters not within 1-127) are ignored.</p>
+</div>
+</div>
+<p>For many embedded applications, it is necessary to encode an ASCII <a href="/book/vnext/language/strings-chars.html">string</a> as a byte stream.</p>
+<p>Use the <code>write_ascii</code> method to write ASCII <a href="/book/vnext/language/strings-chars.html">strings</a> into any specific <a href="/book/vnext/language/ranges.html">range</a> within a BLOB.</p>
+<p>The following is an example of a building a 16-byte command to send to an embedded device.</p>
+<pre><code class="language-rust">// Assume the following 16-byte command for an embedded device:
+// ┌─────────┬───────────────┬──────────────────────────────────┬───────┐
+// │    0    │       1       │              2-13                │ 14-15 │
+// ├─────────┼───────────────┼──────────────────────────────────┼───────┤
+// │ command │ string length │ ASCII string, max. 12 characters │  CRC  │
+// └─────────┴───────────────┴──────────────────────────────────┴───────┘
+
+let buf = blob(16, 0);      // initialize command buffer
+
+let text = &quot;foo &amp; bar&quot;;     // text string to send to device
+
+buf[0] = 0x42;              // command code
+buf[1] = s.len();           // length of string
+
+buf.write_ascii(2..14, text);   // write the string
+
+let crc = buf.calc_crc();   // calculate CRC
+
+buf.write_le(14, 2, crc);   // write CRC
+
+print(buf);                 // prints &quot;[4209666f6f202620 626172000000abcd]&quot;
+                            //          ^^ command code              ^^^^ CRC
+                            //            ^^ string length
+                            //              ^^^^^^^^^^^^^^^^^^^ foo &amp; bar
+
+device.send(buf);           // send command to device
+</code></pre>
+<div id="admonition-what-if-i-need-utf-8" class="admonition question small">
+<div class="admonition-title">
+<p>What if I need UTF-8?</p>
+<p><a class="admonition-anchor-link" href="#admonition-what-if-i-need-utf-8"></a></p>
+</div>
+<div>
+<p>The <code>write_utf8</code> function writes a string in UTF-8 encoding.</p>
+<p>UTF-8, however, is not very common for embedded applications.</p>
+</div>
+</div>
+<h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
+<p>The following functions (mostly defined in the <a href="/book/vnext/rust/packages/builtin.html"><code>BasicBlobPackage</code></a> but excluded if using a <a href="/book/vnext/engine/raw.html">raw <code>Engine</code></a>) operate on BLOB’s.</p>
+<table><thead><tr><th>Functions</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>blob</code> constructor function</td><td><ol><li><em>(optional)</em> initial length of the BLOB</li><li><em>(optional)</em> initial byte value</li></ol></td><td>creates a new BLOB, optionally of a particular length filled with an initial byte value (default = 0)</td></tr>
+<tr><td><code>to_array</code></td><td><em>none</em></td><td>converts the BLOB into an <a href="/book/vnext/language/arrays.html">array</a> of integers</td></tr>
+<tr><td><code>get</code></td><td>position, counting from end if &lt; 0</td><td>gets a copy of the byte at a certain position (0 if the position is not valid)</td></tr>
+<tr><td><code>set</code></td><td><ol><li>position, counting from end if &lt; 0</li><li>new byte value</li></ol></td><td>sets a certain position to a new value (no effect if the position is not valid)</td></tr>
+<tr><td><code>push</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li>byte to append</li></ol></td><td>appends a byte to the end</td></tr>
+<tr><td><code>append</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li>BLOB to append</li></ol></td><td>concatenates the second BLOB to the end of the first</td></tr>
+<tr><td><code>append</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li><a href="/book/vnext/language/strings-chars.html">string</a>/<a href="/book/vnext/language/strings-chars.html">character</a> to append</li></ol></td><td>concatenates a <a href="/book/vnext/language/strings-chars.html">string</a> or <a href="/book/vnext/language/strings-chars.html">character</a> (as UTF-8 encoded byte-stream) to the end of the BLOB</td></tr>
+<tr><td><code>+</code> operator</td><td><ol><li>first BLOB</li><li>second BLOB</li></ol></td><td>concatenates the first BLOB with the second</td></tr>
+<tr><td><code>==</code> operator</td><td><ol><li>first BLOB</li><li>second BLOB</li></ol></td><td>are two BLOB’s the same?</td></tr>
+<tr><td><code>!=</code> operator</td><td><ol><li>first BLOB</li><li>second BLOB</li></ol></td><td>are two BLOB’s different?</td></tr>
+<tr><td><code>insert</code></td><td><ol><li>position, counting from end if &lt; 0, end if ≥ length</li><li>byte to insert</li></ol></td><td>inserts a byte at a certain position</td></tr>
+<tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last byte and returns it (0 if empty)</td></tr>
+<tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first byte and returns it (0 if empty)</td></tr>
+<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of bytes to extract, none if ≤ 0</li></ol></td><td>extracts a portion of the BLOB into a new BLOB</td></tr>
+<tr><td><code>extract</code></td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the BLOB into a new BLOB</td></tr>
+<tr><td><code>remove</code></td><td>position, counting from end if &lt; 0</td><td>removes a byte at a particular position and returns it (0 if the position is not valid)</td></tr>
+<tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the BLOB byte by byte</td></tr>
+<tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of bytes in the BLOB</td></tr>
+<tr><td><code>pad</code></td><td><ol><li>target length</li><li>byte value to pad</li></ol></td><td>pads the BLOB with a byte value to at least a specified length</td></tr>
+<tr><td><code>clear</code></td><td><em>none</em></td><td>empties the BLOB</td></tr>
+<tr><td><code>truncate</code></td><td>target length</td><td>cuts off the BLOB at exactly a specified length (discarding all subsequent bytes)</td></tr>
+<tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the BLOB, leaving the tail at exactly a specified length</td></tr>
+<tr><td><code>contains</code>, <a href="/book/vnext/language/in.html"><code>in</code></a> operator</td><td>byte value to find</td><td>does the BLOB contain a particular byte value?</td></tr>
+<tr><td><code>split</code></td><td><ol><li>BLOB</li><li>position to split at, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>splits the BLOB into two BLOB’s, starting from a specified position</td></tr>
+<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to remove, none if ≤ 0</li></ol></td><td>removes a portion of the BLOB, returning the removed bytes as a new BLOB</td></tr>
+<tr><td><code>drain</code></td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the BLOB, returning the removed bytes as a new BLOB</td></tr>
+<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to retain, none if ≤ 0</li></ol></td><td>retains a portion of the BLOB, removes all other bytes and returning them as a new BLOB</td></tr>
+<tr><td><code>retain</code></td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the BLOB, removes all other bytes and returning them as a new BLOB</td></tr>
+<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to remove, none if ≤ 0</li><li>BLOB to insert</li></ol></td><td>replaces a portion of the BLOB with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>splice</code></td><td><ol><li><a href="/book/vnext/language/ranges.html">range</a> of bytes to remove, from beginning if ≤ 0, to end if ≥ length</li><li>BLOB to insert</td><td>replaces a portion of the BLOB with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>parse_le_int</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>), none if ≤ 0</li></ol></td><td>parses an integer at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_le_int</code></td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td><td>parses an integer at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_int</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>), none if ≤ 0</li></ol></td><td>parses an integer at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_int</code></td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a>)</td><td>parses an integer at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_le_float</code><br/>(not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li></ol></td><td>parses a floating-point number at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_le_float</code><br/>(not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td><td>parses a floating-point number at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_float</code><br/>(not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li></ol></td><td>parses a floating-point number at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_float</code><br/>(not available under <a href="/book/vnext/start/features.html"><code>no_float</code></a>)</td><td><a href="/book/vnext/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</td><td>parses a floating-point number at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_le</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_le</code></td><td><ol><li><a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_be</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, 8 if &gt; 8 (4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_be</code></td><td><ol><li><a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/vnext/start/features.html"><code>only_i32</code></a> or <a href="/book/vnext/start/features.html"><code>f32_float</code></a>)</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_utf8</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, none if ≤ 0, to end if ≥ length</li><li><a href="/book/vnext/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_utf8</code></td><td><ol><li><a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="/book/vnext/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_ascii</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of <a href="/book/vnext/language/strings-chars.html">characters</a> to write, none if ≤ 0, to end if ≥ length</li><li><a href="/book/vnext/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/book/vnext/language/strings-chars.html">characters</a> are skipped)</td></tr>
+<tr><td><code>write_ascii</code></td><td><ol><li><a href="/book/vnext/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="/book/vnext/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/vnext/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/book/vnext/language/strings-chars.html">characters</a> are skipped)</td></tr>
+</tbody></table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../language/arrays.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../language/object-maps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../language/arrays.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../language/object-maps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
