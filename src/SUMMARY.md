@@ -199,6 +199,7 @@ Advanced Topics
   - [Disable Keywords and/or Operators](engine/disable-keywords.md)
   - [Disable Looping](engine/disable-looping.md)
   - [Custom Operators](engine/custom-op.md)
+    - [Operator Precedence](engine/precedence.md)
   - [Extend with Custom Syntax](engine/custom-syntax.md)
 - [Debugging Interface](engine/debugging/index.md)
   - [Debugger](engine/debugging/debugger.md)

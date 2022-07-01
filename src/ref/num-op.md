@@ -116,7 +116,7 @@ type_of(x) == "decimal";
 Unary Before Binary
 -------------------
 
-In Rhai, unary operators take precedence over binary operators.  This is especially important to
+In Rhai, unary operators take [precedence] over binary operators.  This is especially important to
 remember when handling operators such as `**` which in some languages bind tighter than the unary
 `-` operator.
 

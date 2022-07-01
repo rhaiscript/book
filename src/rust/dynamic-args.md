@@ -25,7 +25,7 @@ fn push(array: &mut Array, item: Dynamic) {
 Precedence
 ----------
 
-Any parameter in a registered Rust function with a specific type has higher _precedence_ over
+Any parameter in a registered Rust function with a specific type has higher precedence over
 [`Dynamic`], so it is important to understand which _version_ of a function will be used.
 
 Parameter matching starts from the left to the right.

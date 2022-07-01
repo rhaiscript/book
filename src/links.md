@@ -40,6 +40,7 @@
 [raw `Engine`]: {{rootUrl}}/engine/raw.md
 [built-in operator]: {{rootUrl}}/engine/builtin.md
 [built-in operators]: {{rootUrl}}/engine/builtin.md
+[precedence]: {{rootUrl}}/engine/precedence.md
 [package]: {{rootUrl}}/rust/packages/index.md
 [packages]: {{rootUrl}}/rust/packages/index.md
 [built-in package]: {{rootUrl}}/rust/packages/builtin.md
