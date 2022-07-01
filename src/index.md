@@ -3,7 +3,7 @@ The Rhai Book
 
 {{#title The Rhai Book}}
 
-{{#include ../links.md}}
+{{#include links.md}}
 
 ![Rhai Logo]({{rootUrl}}/images/logo/rhai-banner-transparent-colour.svg)
 

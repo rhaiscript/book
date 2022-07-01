@@ -1,7 +1,7 @@
 The Rhai Scripting Language
 ==========================
 
-[The Rhai Book](about/index.md)
+[The Rhai Book](index.md)
 
 ----------------------
 
