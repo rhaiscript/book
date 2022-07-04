@@ -80,10 +80,26 @@ struct TestStruct {
     field: i64
 }
 
+impl TestStruct {
+    fn new() -> Self {
+        Self { field: 1 }
+    }
+}
+
 let mut engine = Engine::new();
 
 // Register custom type with friendly  name
-engine.register_type_with_name::<TestStruct>("TestStruct");
+engine.register_type_with_name::<TestStruct>("TestStruct")
+      .register_fn("new_ts", TestStruct::new);
+
+// Cast result back to custom type.
+let result = engine.eval::<TestStruct>(
+"
+    new_ts()        // calls 'TestStruct::new'
+")?;
+
+println!("result: {}", result.field);   // prints 1
+
 ```
 
 ```admonish tip.small "Tip: Working with enums"

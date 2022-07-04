@@ -77,7 +77,7 @@ Features of Rhai
 
 * Re-entrant scripting [`Engine`] can be made `Send + Sync` (via the [`sync`] feature).
 
-* Support for [`Decimal`][rust_decimal](https://crates.io/crates/rust_decimal) numbers.
+* Support for [`Decimal`][rust_decimal] numbers.
 
 * Serialization/deserialization support via [`serde`](https://crates.io/crates/serde).
 
