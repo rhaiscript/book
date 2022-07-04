@@ -7,10 +7,13 @@ The `switch` statement allows matching on [literal](../appendix/literals.md) val
 switch calc_secret_value(x) {
     1 => print("It's one!"),
     2 => {
+        // A statements block instead of a one-line statement
         print("It's two!");
         print("Again!");
     }
     3 => print("Go!"),
+    // A list of alternatives
+    4 | 5 | 6 => print("Some small number!"),
     // _ is the default when no case matches. It must be the last case.
     _ => print(`Oops! Something's wrong: ${x}`)
 }
@@ -73,16 +76,17 @@ Unlike Rust, however, case conditions do not allow the case values to duplicate.
 let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) => 100,
 
-    2 if x < foo => 200,
-    2 if bar() => 999,      // <- syntax error: still cannot have duplicated cases
+    2 | 3 | 4 if x < foo => 200,    // <- all alternatives share the same condition
+    
+    2 if bar() => 999,              // <- syntax error: still cannot have duplicated cases
 
-    3 => if CONDITION {     // <- put condition inside statement block for
-        123                 //    duplicated cases
+    5 => if CONDITION {             // <- put condition inside statement block for
+        123                         //    duplicated cases
     } else {
         0
     }
 
-    _ if CONDITION => 8888  // <- syntax error: default case cannot have condition
+    _ if CONDITION => 8888          // <- syntax error: default case cannot have condition
 };
 ```
 
