@@ -1,7 +1,35 @@
-Register any Rust Type and its Methods
-======================================
+Working with Any Rust Type
+===========================
 
 {{#include ../links.md}}
+
+```admonish tip.side.wide "Tip: Shared types"
+
+The only requirement of a type to work with Rhai is `Clone`.
+
+Therefore, it is extremely easy to use Rhai with data types such as
+`Rc<...>`, `Arc<...>`, `Rc<RefCell<...>>`, `Arc<Mutex<...>>` etc.
+```
+
+~~~admonish note.side.wide "Under `sync`"
+
+If the [`sync`] feature is used, a custom type must also be `Send + Sync`.
+~~~
+
+Rhai works seamlessly with any Rust type, as long as it implements `Clone` as this allows the
+[`Engine`] to pass by value.
+
+A type that is not one of the [standard types] is termed a "custom type".
+
+Custom types can have the following:
+
+* a custom (friendly) display name
+
+* [methods]
+
+* [property getters and setters](getters/setters)
+
+* [indexers]
 
 
 Free Typing
@@ -38,25 +66,11 @@ level of indirection, but for all other purposes there is no difference.
 ```
 
 
-Register a Custom Type and its Methods
---------------------------------------
+Register a Custom Type
+----------------------
 
-```admonish tip.side.wide "Tip: Working with enums"
-
-It is also possible to use Rust enums with Rhai.
-
-See the pattern [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
-```
-
-Any custom type must implement the `Clone` trait as this allows the [`Engine`] to pass by value.
-
-If the [`sync`] feature is used, it must also be `Send + Sync`.
-
-Notice that the custom type needs to be _registered_ using `Engine::register_type`
-or `Engine::register_type_with_name`.
-
-To use native methods on custom types in Rhai scripts, it is common to register an API for the type
-via the `Engine::register_XXX` API.
+The custom type needs to be _registered_ using `Engine::register_type` or
+`Engine::register_type_with_name`.
 
 ```rust
 use rhai::{Engine, EvalAltResult};
@@ -66,47 +80,17 @@ struct TestStruct {
     field: i64
 }
 
-impl TestStruct {
-    fn new() -> Self {
-        Self { field: 1 }
-    }
-
-    fn update(&mut self, x: i64) {      // methods take &mut as first parameter
-        self.field += x;
-    }
-}
-
 let mut engine = Engine::new();
 
-// Most Engine API's can be chained up.
-engine.register_type::<TestStruct>()    // register custom type
-      .register_fn("new_ts", TestStruct::new)
-      .register_fn("update", TestStruct::update);
-
-// Cast result back to custom type.
-let result = engine.eval::<TestStruct>(
-"
-    let x = new_ts();                   // calls 'TestStruct::new'
-    x.update(41);                       // calls 'TestStruct::update'
-    x                                   // 'x' holds a 'TestStruct'
-")?;
-
-println!("result: {}", result.field);   // prints 42
+// Register custom type with friendly  name
+engine.register_type_with_name::<TestStruct>("TestStruct");
 ```
 
+```admonish tip.small "Tip: Working with enums"
 
-First Parameter Must be `&mut`
-------------------------------
+It is also possible to use Rust enums with Rhai.
 
-_Methods_ of custom types take a `&mut` first parameter to that type, so that invoking methods can
-always update it.
-
-All other parameters in Rhai are passed by value (i.e. clones).
-
-```admonish danger.small "No support for references"
-
-Rhai does NOT support normal references (i.e. `&T`) as parameters.
-All references must be mutable (i.e. `&mut T`).
+See the pattern [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
 ```
 
 

@@ -43,7 +43,7 @@ version conflicts.
 Configuration Settings
 ----------------------
 
-Settings are stored in `src/context.json`:
+Settings are stored in `src/context.toml`:
 
 | Setting    | Description                                                                             |
 | ---------- | --------------------------------------------------------------------------------------- |

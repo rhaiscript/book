@@ -9,7 +9,7 @@ Features of Rhai
 * Simple language similar to JavaScript+Rust with dynamic typing.
 
 * Tight integration with native Rust [functions] and [types][custom types] including
-  [getters/setters], [methods][custom type] and [indexers].
+  [getters/setters], [methods] and [indexers].
 
 * Freely pass Rust values into a script as [variables]/[constants] via an external [`Scope`] &ndash;
   all clonable Rust types are supported seamlessly without the need to implement any special trait.

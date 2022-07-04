@@ -76,8 +76,10 @@
 [`to_hex`]: {{rootUrl}}/language/convert.md
 [`in`]: {{rootUrl}}/language/in.md
 
-[custom type]: {{rootUrl}}/rust/custom.md
-[custom types]: {{rootUrl}}/rust/custom.md
+[custom type]: {{rootUrl}}/rust/custom-type.md
+[custom types]: {{rootUrl}}/rust/custom-type.md
+[method]: {{rootUrl}}/rust/custom.md
+[methods]: {{rootUrl}}/rust/custom.md
 [getters/setters]: {{rootUrl}}/rust/getters-setters.md
 [elvis]: https://en.wikipedia.org/wiki/Elvis_operator
 [indexer]: {{rootUrl}}/rust/indexers.md
