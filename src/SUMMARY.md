@@ -27,7 +27,7 @@ User’s Guide
   - [Scope &ndash; Maintaining State](engine/scope.md)
   - [Expressions Only](engine/expressions.md)
   - [Options](engine/options.md)
-- [Examples](start/examples.index.md)
+- [Examples](start/examples/index.md)
   - [Rust](start/examples/rust.md)
   - [Scripts](start/examples/scripts.md)
 - [Special Builds](start/builds/index.md)
