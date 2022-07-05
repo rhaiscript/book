@@ -13,6 +13,7 @@
 [`no_function`]: {{rootUrl}}/start/features.md
 [`no_module`]: {{rootUrl}}/start/features.md
 [`no_closure`]: {{rootUrl}}/start/features.md
+[`no_custom_syntax`]: {{rootUrl}}/start/features.md
 [`no_std`]: {{rootUrl}}/start/features.md
 [`wasm-bindgen`]: {{rootUrl}}/start/features.md
 [`stdweb`]: {{rootUrl}}/start/features.md

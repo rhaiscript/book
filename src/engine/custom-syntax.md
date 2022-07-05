@@ -30,6 +30,11 @@ Try [custom operators] first.  A custom syntax should be considered a _last reso
 * Where you just want to confuse your user and make their lives miserable, because you can.
 ```
 
+```admonish tip.small "Disable custom syntax"
+
+Custom syntax can be disabled via the [`no_custom_syntax`] feature.
+```
+
 
 How to Do It
 ------------

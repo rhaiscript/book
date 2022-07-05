@@ -38,14 +38,15 @@ Features that Enable Special Functionalities
 Features that Disable Certain Language Features
 -----------------------------------------------
 
-| Feature       | Additive? | Description                                                                                                 |
-| ------------- | :-------: | ----------------------------------------------------------------------------------------------------------- |
-| `no_float`    |    no     | disables floating-point numbers and math                                                                    |
-| `no_index`    |    no     | disables [arrays] and indexing features                                                                     |
-| `no_object`   |    no     | disables support for [custom types] and [object maps]                                                       |
-| `no_function` |    no     | disables script-defined [functions]; implies `no_closure`                                                   |
-| `no_module`   |    no     | disables loading external [modules]                                                                         |
-| `no_closure`  |    no     | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_ |
+| Feature            | Additive? | Description                                                                                                 |
+| ------------------ | :-------: | ----------------------------------------------------------------------------------------------------------- |
+| `no_float`         |    no     | disables floating-point numbers and math                                                                    |
+| `no_index`         |    no     | disables [arrays] and indexing features                                                                     |
+| `no_object`        |    no     | disables support for [custom types] and [object maps]                                                       |
+| `no_function`      |    no     | disables script-defined [functions]; implies `no_closure`                                                   |
+| `no_module`        |    no     | disables loading external [modules]                                                                         |
+| `no_closure`       |    no     | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_ |
+| `no_custom_syntax` |    no     | disables [custom syntax] and [custom operators]                                                             |
 
 
 Features that Disable Certain Engine Features

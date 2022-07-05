@@ -14,6 +14,8 @@ customized operators performing specific logic.
 `Engine::register_custom_operator` registers a [keyword] as a custom operator, giving it a particular
 _[precedence]_ (which cannot be zero).
 
+Support for custom operators can be disabled via the [`no_custom_syntax`] feature.
+
 
 Example
 -------
