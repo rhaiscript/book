@@ -49,8 +49,8 @@ These symbol types can be used:
 * Standard [operators]
 * Reserved [symbols]({{rootUrl}}/appendix/operators.md#symbols).
 * Identifiers following the [variable] naming rules.
-* `$expr$` &ndash; any valid expression, statement or statement block.
-* `$block$` &ndash; any valid statement block (i.e. must be enclosed by `{` ... `}`).
+* `$expr$` &ndash; any valid expression, statement or statements block.
+* `$block$` &ndash; any valid statements block (i.e. must be enclosed by `{` ... `}`).
 * `$ident$` &ndash; any [variable] name.
 * `$symbol$` &ndash; any [symbol][operator], active or reserved.
 * `$bool$` &ndash; a boolean value.
@@ -87,14 +87,14 @@ The above syntax is made up of a stream of symbols:
 | :------: | :--------: | :--------: | -------------------------------------------------------------------------------------------------------- |
 |    1     |            |   `exec`   | custom keyword                                                                                           |
 |    2     |            |    `[`     | the left bracket symbol                                                                                  |
-|    2     |     0      | `$ident$`  | a variable name                                                                                          |
+|    2     |     0      | `$ident$`  | a [variable] name                                                                                        |
 |    3     |     1      | `$symbol$` | the operator                                                                                             |
 |    4     |     2      |  `$int$`   | an integer number                                                                                        |
 |    5     |            |    `]`     | the right bracket symbol                                                                                 |
 |    6     |            |    `<-`    | the left-arrow symbol (which is a [reserved symbol]({{rootUrl}}/appendix/operators.md#symbols) in Rhai). |
 |    7     |     3      |  `$expr$`  | an expression, which may be enclosed with `{` ... `}`, or not.                                           |
 |    8     |            |    `:`     | the colon symbol                                                                                         |
-|    9     |     4      | `$block$`  | a statement block, which must be enclosed with `{` ... `}`.                                              |
+|    9     |     4      | `$block$`  | a statements block, which must be enclosed with `{` ... `}`.                                             |
 
 This syntax matches the following sample code and generates five inputs (one for each non-keyword):
 
@@ -137,13 +137,13 @@ Return value is the result of evaluating the custom syntax expression.
 #### Access arguments
 
 The most important argument is `inputs` where the matched identifiers (`$ident$`), expressions/statements (`$expr$`)
-and statement blocks (`$block$`) are provided.
+and statements blocks (`$block$`) are provided.
 
 To access a particular argument, use the following patterns:
 
 | Argument type | Pattern (`n` = slot in `inputs`)                                                                             |             Result type             | Description           |
 | :-----------: | ------------------------------------------------------------------------------------------------------------ | :---------------------------------: | --------------------- |
-|   `$ident$`   | `inputs[n].get_string_value().unwrap()`                                                                      |               `&str`                | variable name         |
+|   `$ident$`   | `inputs[n].get_string_value().unwrap()`                                                                      |               `&str`                | [variable] name       |
 |  `$symbol$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`                                                  |         [`ImmutableString`]         | symbol literal        |
 |   `$expr$`    | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree    |
 |   `$block$`   | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree    |
@@ -185,9 +185,28 @@ let expression = &inputs[0];
 let result = context.eval_expression_tree(expression)?;
 ```
 
+#### Retain variables in block scope
+
+When an expression tree actually contains a statements block (i.e. `$block`), local
+[variables]/[constants] defined within that block are usually removed at the end of the block.
+
+Sometimes it is useful to retain these local [variables]/[constants] for further processing
+(e.g. collecting new [variables] into an [object map]).
+
+As such, evaluate the expression tree using the `EvalContext::eval_expression_tree_raw` method which
+contains a parameter to control whether the statements block should be rewound.
+
+```rust
+// Assume 'expression' contains a statements block with local variable definitions
+let expression = &inputs[0];
+let result = context.eval_expression_tree_raw(expression, false)?;
+
+// Variables defined within 'expression' persist in context.scope()
+```
+
 #### Declare variables
 
-New variables maybe declared (usually with a variable name that is passed in via `$ident$`).
+New [variables]/[constants] maybe declared (usually with a [variable] name that is passed in via `$ident$`).
 
 It can simply be pushed into the [`Scope`].
 
@@ -223,7 +242,7 @@ fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Resu
     let mut count = 0_i64;
 
     loop {
-        // Evaluate the statement block
+        // Evaluate the statements block
         context.eval_expression_tree(stmt)?;
 
         count += 1;
