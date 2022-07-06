@@ -186,15 +186,11 @@ New variables maybe declared (usually with a variable name that is passed in via
 
 It can simply be pushed into the [`Scope`].
 
-However, beware that all new variables must be declared _prior_ to evaluating any expression tree.
-In other words, any [`Scope`] calls that change the list of must come _before_ any
-`EvalContext::eval_expression_tree` calls.
-
 ```rust
 let var_name = inputs[0].get_string_value().unwrap();
 let expression = &inputs[1];
 
-context.scope_mut().push(var_name, 0_i64);      // do this BEFORE 'context.eval_expression_tree'!
+context.scope_mut().push(var_name, 0_i64);      // declare new variable
 
 let result = context.eval_expression_tree(expression)?;
 ```
