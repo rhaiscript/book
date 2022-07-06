@@ -36,7 +36,7 @@ When setting this limit, care must be also be taken to the evaluation depth of e
 within a function.
 
 It is entirely possible for a malicious script to embed a recursive call deep inside a nested
-expression or statement block (see [maximum statement depth]).
+expression or statements block (see [maximum statement depth]).
 
 ~~~rust
 fn bad_function(n) {

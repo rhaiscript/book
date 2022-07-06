@@ -5,7 +5,7 @@ Compile to a Self-Contained `AST`
 
 ```admonish tip.side "Tip"
 
-It does not matter where the [`import`] statement occurs &mdash; e.g. deep within statement blocks
+It does not matter where the [`import`] statement occurs &mdash; e.g. deep within statements blocks
 or within [function] bodies.
 ```
 

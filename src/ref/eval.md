@@ -25,7 +25,7 @@ result == 42;
 x == 10;                        // prints 10 - arguments are passed by value
 y == 32;                        // prints 32 - variables defined in 'eval' persist!
 
-eval("{ let z = y }");          // to keep a variable local, use a statement block
+eval("{ let z = y }");          // to keep a variable local, use a statements block
 
 print(z);                       // <- error: variable 'z' not found
 

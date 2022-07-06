@@ -42,7 +42,7 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
                         // another script can load this module and access 'x' as 'module::answer'
 
 {
-    let inner = 0;      // local variable - it disappears when the statement block ends,
+    let inner = 0;      // local variable - it disappears when the statements block ends,
                         //                  therefore it is not 'global' and cannot be exported
 
     export inner;       // <- syntax error: cannot export a local variable

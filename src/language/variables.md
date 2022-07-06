@@ -81,7 +81,7 @@ If none is provided, it defaults to [`()`].
 
 ```admonish warning.small "Variables are local"
 
-A variable defined within a [statement block](statements.md) is _local_ to that block.
+A variable defined within a [statements block](statements.md) is _local_ to that block.
 ```
 
 ~~~admonish tip.small "Tip: `is_def_var`"

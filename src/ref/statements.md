@@ -13,7 +13,7 @@ let a = 42;             // normal assignment statement
 let a = foo(42);        // normal function call statement
 foo < 42;               // normal expression as statement
 
-let a = { 40 + 2 };     // 'a' is set to the value of the statement block, which is the value of the last statement
+let a = { 40 + 2 };     // 'a' is set to the value of the statements block, which is the value of the last statement
 //              ^ the last statement does not require a terminating semicolon (but also works with it)
 //                ^ semicolon required here to terminate the 'let' statement
 //                  it is a syntax error without it, even though it ends with '}'
@@ -28,12 +28,12 @@ if foo { a = 42 }
 ```
 
 
-Statement Block
----------------
+Statements Block
+----------------
 
 ### Syntax
 
-Statement blocks in Rhai are formed by enclosing zero or more statements within braces `{`...`}`.
+Statements blocks in Rhai are formed by enclosing zero or more statements within braces `{`...`}`.
 
 > `{` _statement_`;` _statement_`;` ... _statement_ `}`
 >
@@ -41,7 +41,7 @@ Statement blocks in Rhai are formed by enclosing zero or more statements within 
 
 ### Closed scope
 
-A statement block forms a _closed_ scope.
+A statements block forms a _closed_ scope.
 
 Any [variable](variable.md) and/or [constant](constant.md) defined within the block are removed
 outside the block, so are [modules](modules/index.md) [imported](modules/import.md) within the block.
@@ -78,7 +78,7 @@ A statement can be used anywhere where an _expression_ is expected.
 
 These are called, for lack of a more creative name, "statement expressions."
 
-The _last_ statement of a statement block is _always_ the block's return value when used as a statement,
+The _last_ statement of a statements block is _always_ the block's return value when used as a statement,
 _regardless_ of whether it is terminated by a semicolon or not.
 
 If the last statement has no return value (e.g. variable definitions, assignments) then it is

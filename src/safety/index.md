@@ -33,7 +33,7 @@ Run indefinitely, thereby blocking the calling system which is waiting for a res
 * Create a large [array] or [object map] literal that exhausts the stack during parsing.
 
 * Create a degenerated deep expression with so many levels that the parser exhausts the call stack when
-  parsing the expression; or even deeply-nested statement blocks, if nested deep enough.
+  parsing the expression; or even deeply-nested statements blocks, if nested deep enough.
 
 * Load a [self-referencing module][`import`].
 ```
