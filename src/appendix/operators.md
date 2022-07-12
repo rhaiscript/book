@@ -31,7 +31,7 @@ Operators
 |                                      <code>\|\|</code>                                       | boolean _OR_ (short-circuits)          |    yes     |       left        |
 |                                             `??`                                             | null-coalesce (short-circuits)         |    yes     |       left        |
 |                                             `!`                                              | boolean _NOT_                          |     no     |       right       |
-|                                         `[` ... `]`                                          | indexing                               |    yes     |       left        |
+|                                  `[` ... `]`, `?[` ... `]`                                   | indexing                               |    yes     |       left        |
 |                                          `.`, `?.`                                           | 1) property access<br/>2) method call  |    yes     |       left        |
 |                                             `..`                                             | exclusive range                        |    yes     |       left        |
 |                                            `..=`                                             | inclusive range                        |    yes     |       left        |
@@ -69,7 +69,7 @@ Symbols and Patterns
 |                `--`                 | decrement                          | _reserved_                            |
 |                `...`                | rest                               | _reserved_                            |
 |                 `~`                 | tilde                              | _reserved_                            |
-|                `!.`                 | tilde                              | _reserved_                            |
+|                `!.`                 |                                    | _reserved_                            |
 |                 `?`                 | question                           | _reserved_                            |
 |                 `#`                 | hash                               | _reserved_                            |
 |                 `@`                 | at                                 | _reserved_                            |
