@@ -65,7 +65,6 @@ Symbols and Patterns
 |           `/**` ... `*/`            | doc-comment                        | block [doc-comment]                   |
 |            `(*` ... `*)`            | comment                            | _reserved_                            |
 |                `#!`                 | shebang                            | _reserved_                            |
-|             `<` ... `>`             | tag                                | _reserved_                            |
 |                `++`                 | increment                          | _reserved_                            |
 |                `--`                 | decrement                          | _reserved_                            |
 |                `...`                | rest                               | _reserved_                            |
