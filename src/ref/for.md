@@ -138,7 +138,7 @@ for x in range(0, 50, 3) {          // step by 3
 }
 
 // The 'range' function can also step backwards
-for x in range(50, 0, -3) {         // step down by -3
+for x in range(50..0, -3) {         // step down by -3
     if x < 10 { continue; }         // skip to the next iteration
 
     print(x);
