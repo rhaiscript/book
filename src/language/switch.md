@@ -39,6 +39,14 @@ switch wrong_default {
     2 => 3,
     3 => 4,     // <- ending with extra comma is OK
 }
+
+switch wrong_default {
+    1 => 2,
+    2 => 3,
+    3 => 4,
+    _ => 8,     // <- syntax error: default case not the last
+    _ => 9
+}
 ```
 
 
@@ -77,21 +85,24 @@ Case Conditions
 Similar to Rust, each case (except the default case at the end) can provide an optional condition
 that must evaluate to `true` in order for the case to match.
 
-Unlike Rust, however, case conditions do not allow the case values to duplicate.
+All cases are checked in order, so an earlier case that matches will override all later cases.
 
 ```js
 let result = switch calc_secret_value(x) {
     1 if some_external_condition(x, y, z) => 100,
 
-    2 | 3 | 4 if x < foo => 200,    // <- all alternatives share the same condition
+    1 | 2 | 3 if x < foo => 200,    // <- all alternatives share the same condition
     
-    2 if bar() => 999,              // <- syntax error: still cannot have duplicated cases
+    2 if bar() => 999,
 
-    5 => if CONDITION {             // <- put condition inside statement block for
-        123                         //    duplicated cases
-    } else {
-        0
-    }
+    2 => "two",                     // <- fallback value for 2
+
+    2 => "dead code",               // <- this case is a duplicate and will never match
+                                    //    because the previous case matches first
+
+    5 if CONDITION => 123,          // <- value for 5 matching condition
+
+    5 => "five",                    // <- fallback value for 5
 
     _ if CONDITION => 8888          // <- syntax error: default case cannot have condition
 };
@@ -124,7 +135,7 @@ switch x {
 
     -10..20 => ...,         // no match: not in range
 
-    0..50 => ...,           // <- MATCH!!! duplicated range cases are OK
+    0..50 => ...,           // <- MATCH!!!
 
     30..100 => ...,         // no match: even though it is within range,
                             // the previous case matches first
