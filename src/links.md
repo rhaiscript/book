@@ -221,3 +221,4 @@
 [literals]: {{rootUrl}}/appendix/literals.md
 
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md
+[`rhai-sci`]: {{rootUrl}}/lib/rhai-sci.md

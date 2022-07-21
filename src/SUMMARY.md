@@ -77,6 +77,7 @@ Rust Integration
   - [Create Packages as Crates](rust/packages/crate.md)
   - [External Packages](lib/index.md)
     - [Random Number Generation, Shuffling and Sampling](lib/rhai-rand.md)
+    - [Scientific Computing](lib/rhai-sci.md)
 
 ----------------------
 
