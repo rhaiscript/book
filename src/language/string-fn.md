@@ -46,8 +46,28 @@ e.g. `sub_string`, require walking through the entire UTF-8 encoded bytes stream
 individual Unicode characters and counting them, which can be slow for long [strings].
 
 
-Standard Operators
-------------------
+Building Strings
+----------------
+
+[Strings] can be built from segments via the `+` operator.
+
+| Operator           | Description                                                               |
+| ------------------ | ------------------------------------------------------------------------- |
+| [string] `+=` item | convert the item into a [string], then append it to the first [string]    |
+| [string] `+` item  | convert the item into a [string], then concatenate them as a new [string] |
+| item `+` [string]  | convert the item into a [string], then concatenate them as a new [string] |
+
+```rust
+let x = 42;
+
+// Build string with '+'
+let s = "The answer is: " + x + "!!!";
+
+// Prints: "The answer is: 42!!!"
+print(s);
+```
+
+### Standard Operators Between Strings and/or Characters
 
 The following standard operators inter-operate between [strings] and/or [characters][strings].
 
@@ -65,15 +85,18 @@ When one (or both) of the operands is a [character], it is first converted into 
 | `<`       | less than                                     |
 | `<=`      | less than or equals to                        |
 
-For convenience, when [BLOB's] are appended to a [string], it is treated as UTF-8 encoded data and
-automatically first converted into the appropriate [string] value.
+### Interop with BLOB's
+
+For convenience, when a [BLOB] is appended to a [string], or vice versa, it is treated as a UTF-8
+encoded byte stream and automatically first converted into the appropriate [string] value.
 
 That is because it is rarely useful to append a [BLOB] into a string, but extremely useful to be
 able to directly manipulate UTF-8 encoded text.
 
-| Operator                                         | Description                                                 |
-| ------------------------------------------------ | ----------------------------------------------------------- |
-| `+`, `+=`<br/>(not available under [`no_index`]) | append a [BLOB] (as a UTF-8 encoded [string]) to a [string] |
+| Operator  | Description                                                                 |
+| --------- | --------------------------------------------------------------------------- |
+| `+`, `+=` | append a [BLOB] (as a UTF-8 encoded byte stream) to the end of the [string] |
+| `+`       | concatenate a [BLOB] (as a UTF-8 encoded byte stream) with a [string]       |
 
 
 Examples

@@ -46,8 +46,28 @@ bytes stream to extract individual Unicode characters and counting them, which c
 [strings](strings-chars.md).
 
 
-Standard Operators
-------------------
+Building Strings
+----------------
+
+[Strings](strings-chars.md) can be built from segments via the `+` operator.
+
+| Operator                             | Description                                                                                                   |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| [string](strings-chars.md) `+=` item | convert the item into a [string](strings-chars.md), then append it to the first [string](strings-chars.md)    |
+| [string](strings-chars.md) `+` item  | convert the item into a [string](strings-chars.md), then concatenate them as a new [string](strings-chars.md) |
+| item `+` [string](strings-chars.md)  | convert the item into a [string](strings-chars.md), then concatenate them as a new [string](strings-chars.md) |
+
+```rust
+let x = 42;
+
+// Build string with '+'
+let s = "The answer is: " + x + "!!!";
+
+// Prints: "The answer is: 42!!!"
+print(s);
+```
+
+### Standard Operators Between Strings and/or Characters
 
 The following standard operators inter-operate between [strings](strings-chars.md) and/or
 [characters](strings-chars.md).
@@ -66,16 +86,19 @@ one-character [string](strings-chars.md) before running the operator.
 | `<`       | less than                                                                                          |
 | `<=`      | less than or equals to                                                                             |
 
-For convenience, when [BLOB's](blobs.md) are appended to a [string](strings-chars.md), it is treated
-as UTF-8 encoded data and automatically first converted into the appropriate
+### Interop with BLOB's
+
+For convenience, when a [BLOB](blobs.md) is appended to a [string](strings-chars.md), or vice
+versa, it is treated as a UTF-8 encoded byte stream and automatically first converted into the appropriate
 [string](strings-chars.md) value.
 
 That is because it is rarely useful to append a [BLOB](blobs.md) into a string, but extremely useful
 to be able to directly manipulate UTF-8 encoded text.
 
-| Operator  | Description                                                                                               |
-| --------- | --------------------------------------------------------------------------------------------------------- |
-| `+`, `+=` | append a [BLOB](blobs.md) (as a UTF-8 encoded [string](strings-chars.md)) to a [string](strings-chars.md) |
+| Operator  | Description                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| `+`, `+=` | append a [BLOB](blobs.md) (as a UTF-8 encoded byte stream) to the end of the [string](strings-chars.md) |
+| `+`       | concatenate a [BLOB](blobs.md) (as a UTF-8 encoded byte stream) with a [string](strings-chars.md)       |
 
 
 Examples
