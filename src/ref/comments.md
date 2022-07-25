@@ -4,7 +4,7 @@ Comments
 Comments are C-style, including `/*` ... `*/` pairs for block comments and `//` for comments to the
 end of the line.
 
-Comments can be nested.
+Block comments can be nested.
 
 ```rust
 let /* intruder comment */ name = "Bob";
@@ -77,3 +77,37 @@ This is consistent with popular comment block styles for C-like languages.
  ****************************************/
 ```
 ~~~
+
+
+Module Documentation
+====================
+
+Comment lines starting with `//!` make up the _module documentation_.
+
+They are used to document the containing [module](modules/index.md) &ndash;
+or for a Rhai script file, to document the file itself.
+
+```rust
+//! Documentation for this script file.
+//! This script is used to calculate something and display the result.
+
+fn calculate(x) {
+   ...
+}
+
+fn display(msg) {
+   //! Module documentation can be placed anywhere within the file.
+   ...
+}
+
+//! All module documentation lines will be collected into a single block.
+```
+
+For the example above, the module documentation block is:
+
+```rust
+//! Documentation for this script file.
+//! This script is used to calculate something and display the result.
+//! Module documentation can be placed anywhere within the file.
+//! All module documentation lines will be collected into a single block.
+```

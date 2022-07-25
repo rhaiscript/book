@@ -61,6 +61,7 @@ Symbols and Patterns
 |                `=>`                 | double arrow                       | `switch` expression case separator    |
 |                `//`                 | comment                            | line comment                          |
 |                `///`                | doc-comment                        | line [doc-comment]                    |
+|                `//!`                | module doc                         | [module documentation][comments]      |
 |            `/*` ... `*/`            | comment                            | block comment                         |
 |           `/**` ... `*/`            | doc-comment                        | block [doc-comment]                   |
 |            `(*` ... `*)`            | comment                            | _reserved_                            |
