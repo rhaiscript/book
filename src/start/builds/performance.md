@@ -7,14 +7,15 @@ Performance Build
 Some features are for performance.  In order to squeeze out the maximum performance from Rhai, the
 following features should be considered:
 
-| Feature         | Description                                            | Rationale                 |
-| --------------- | ------------------------------------------------------ | ------------------------- |
-| [`only_i32`]    | support only a single `i32` integer type               | reduce data size          |
-| [`no_float`]    | remove support for floating-point numbers              | reduce code size          |
-| [`f32_float`]   | set floating-point numbers (if not disabled) to 32-bit | reduce data size          |
-| [`no_closure`]  | remove support for variables sharing                   | no need for data locking  |
-| [`unchecked`]   | disable all safety [checks][checked]                   | remove non-essential code |
-| [`no_position`] | disable position tracking during parsing               | remove non-essential code |
+| Feature              | Description                                            | Rationale                 |
+| -------------------- | ------------------------------------------------------ | ------------------------- |
+| [`only_i32`]         | support only a single `i32` integer type               | reduce data size          |
+| [`no_float`]         | remove support for floating-point numbers              | reduce code size          |
+| [`f32_float`]        | set floating-point numbers (if not disabled) to 32-bit | reduce data size          |
+| [`no_closure`]       | remove support for variables sharing                   | no need for data locking  |
+| [`unchecked`]        | disable all safety [checks][checked]                   | remove non-essential code |
+| [`no_position`]      | disable position tracking during parsing               | remove non-essential code |
+| [`no_custom_syntax`] | disable custom syntax                                  | remove non-essential code |
 
 When the above feature flags are used, performance may increase by around 15-20%.
 

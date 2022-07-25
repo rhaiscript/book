@@ -43,24 +43,12 @@ Size
 
 Also look into [minimal builds] to reduce generated WASM size.
 
-As of this version, a typical, full-featured Rhai scripting engine compiles to a single WASM file
-less than 300KB gzipped.
+A typical, full-featured Rhai scripting engine compiles to a single WASM file that is only a few
+hundred KB.
 
-When excluding features that are marginal in WASM environment, the gzipped payload can be
-further shrunk to 160KB.
+When excluding features that are marginal in WASM environment, the gzipped payload can be shrunk further.
 
-The following standard [packages][built-in packages], when excluded, provide the corresponding size savings:
-
-|       Package       | WASM size saving |
-| :-----------------: | :--------------: |
-|    `CorePackage`    |      18 KB       |
-|  `BitFieldPackage`  |       1 KB       |
-|   `LogicPackage`    |      < 1 KB      |
-| `BasicMathPackage`  |       1 KB       |
-| `BasicArrayPackage` |      15 KB       |
-| `BasicBlobPackage`  |       7 KB       |
-|  `BasicMapPackage`  |       4 KB       |
-| `MoreStringPackage` |      34 KB       |
+Standard [packages][built-in packages] can also be excluded to yield additional size savings.
 
 
 Speed
@@ -82,6 +70,7 @@ are typically used for a WASM build:
 |          [`only_i32`]          | WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit                                                                                                                                                      |
 |         [`f32_float`]          | WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses                                                                                          |
 |         [`no_module`]          | a WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom [module resolver] can be provided that loads other Rhai scripts                           |
+|      [`no_custom_syntax`]      | if [custom syntax] is not used, this results in a small size saving                                                                                                                                                                   |
 
 The following features are typically _not_ used because they don't make sense in a WASM build:
 
