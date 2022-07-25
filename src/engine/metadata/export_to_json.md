@@ -39,18 +39,19 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
 
 ```json
 {
+    "doc": "//! Module documentation",
+
     "modules":
     {
-        /* namespace 'sub_module_1' */
-        "sub_module_1":
+        "sub_module_1": /* namespace 'sub_module_1' */
         {
             "modules":
             {
-                /* namespace 'sub_module_1::sub_sub_module_A' */
-                "sub_sub_module_A":
+                "sub_sub_module_A": /* namespace 'sub_module_1::sub_sub_module_A' */
                 {
-                    /* functions exported in 'sub_module_1::sub_sub_module_A' */
-                    "functions":
+                    "doc": "//! Module documentation can also occur in any sub-module",
+
+                    "functions": /* functions exported in 'sub_module_1::sub_sub_module_A' */
                     [
                         { ... function metadata ... },
                         { ... function metadata ... },
@@ -59,21 +60,20 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
                         ...
                     ]
                 },
-                /* namespace 'sub_module_1::sub_sub_module_B' */
-                "sub_sub_module_B":
+                "sub_sub_module_B": /* namespace 'sub_module_1::sub_sub_module_B' */
                 {
                     ...
                 }
             }
         },
-        "sub_module_2":
+        "sub_module_2": /* namespace 'sub_module_2' */
         {
             ...
         },
         ...
     },
-    /* functions registered globally or in the 'AST' */
-    "functions":
+
+    "functions": /* functions registered globally or in the 'AST' */
     [
         { ... function metadata ... },
         { ... function metadata ... },

@@ -46,3 +46,4 @@ The return value is an [array](arrays.md) of [object maps](object-maps.md) conta
 | `name`         |            [string](strings-chars.md)             |    no     | [function](functions.md) name                                                                         |
 | `params`       | [array](arrays.md) of [strings](strings-chars.md) |    no     | parameter names                                                                                       |
 | `is_anonymous` |                      `bool`                       |    no     | is this [function](functions.md) an [anonymous function](fn-anon.md)?                                 |
+| `comments`     | [array](arrays.md) of [strings](strings-chars.md) |    yes    | [doc-comments](comments.md), if any, one per line                                                     |

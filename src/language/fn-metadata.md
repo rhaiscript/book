@@ -32,3 +32,4 @@ The return value is an [array] of [object maps] (so `get_fn_metadata_list` is al
 | `name`         |       [string]       |    no     | [function] name                                                                     |
 | `params`       | [array] of [strings] |    no     | parameter names                                                                     |
 | `is_anonymous` |        `bool`        |    no     | is this [function] an [anonymous function]?                                         |
+| `comments`     | [array] of [strings] |    yes    | [doc-comments], if any, one per line                                                |
