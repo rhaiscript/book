@@ -26,6 +26,7 @@
 [WASM]: {{rootUrl}}/start/builds/wasm.md
 
 [playground]: https://rhai.rs/playground
+[lsp]: https://rhai.rs/lsp
 [`rhai-doc`]: https://github.com/rhaiscript/rhai-doc
 [MarkDown]: http://en.wikipedia.org/wiki/Markdown
 [`smartstring`]: https://crates.io/crates/smartstring

@@ -27,6 +27,8 @@ Related Resources
 
 * [Online Playground][playground] &ndash; Run Rhai scripts directly from an editor in the browser
 
+* [Language Server][lsp] &ndash; Language Server Protocol (LSP) server for Rhai
+
 * [`rhai-doc`] &ndash; Rhai script documentation tool
 ```
 

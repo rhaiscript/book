@@ -297,6 +297,7 @@ Appendix
 
 - [External Tools](tools/index.md)
   - [Online Playground](tools/playground.md)
+  - [Language Server](tools/lsp.md)
   - [`rhai-doc`](tools/rhai-doc.md)
 - [Keywords](appendix/keywords.md)
 - [Operators and Symbols](appendix/operators.md)

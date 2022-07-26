@@ -125,7 +125,7 @@ let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this
 ```
 
 To actually put a back-tick (`` ` ``) character inside a multi-line literal string, use two
-back-ticks together (i.e. ``` `` ```).
+back-ticks together (i.e. ` `` `).
 
 ```js
 let x = `I have a quote " as well as a back-tick `` here.`;
