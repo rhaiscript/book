@@ -44,25 +44,26 @@ In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 `Scope` API
 -----------
 
-| Method                                        | Description                                                                                                                          |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `new` _instance method_                       | create a new empty `Scope`                                                                                                           |
-| `len`                                         | number of [variables]/[constants] currently within the `Scope`                                                                       |
-| `rewind`                                      | _rewind_ (i.e. reset) the `Scope` to a particular number of [variables]/[constants]                                                  |
-| `clear`                                       | remove all [variables]/[constants] from the `Scope`, making it empty                                                                 |
-| `is_empty`                                    | is the `Scope` empty?                                                                                                                |
-| `is_constant`                                 | is the particular [variable]/[constant]  in the `Scope` a [constant]?                                                                |
-| `push`, `push_constant`                       | add a new [variable]/[constant] into the `Scope` with a specified value                                                              |
-| `push_dynamic`, `push_constant_dynamic`       | add a new [variable]/[constant] into the `Scope` with a [`Dynamic`] value                                                            |
-| `set_or_push<T>`                              | set the value of a [variable] within the `Scope` if it exists and is not [constant]; add a new [variable] into the `Scope` otherwise |
-| `contains`                                    | does the particular [variable] or [constant] exist in the `Scope`?                                                                   |
-| `get_value<T>`                                | get the value of a [variable]/[constant] within the `Scope`                                                                          |
-| `set_value<T>`                                | set the value of a [variable] within the `Scope`, panics if it is [constant]                                                         |
-| `get`                                         | get a reference to the value of a [variable]/[constant] within the `Scope`                                                           |
-| `get_mut`                                     | get a reference to the value of a [variable] within the `Scope`, `None` if it is [constant]                                          |
-| `set_alias`                                   | [exported][`export`] a [variable]/[constant] within the `Scope` under a particular name                                              |
-| `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                    |
-| `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                                                           |
+| Method                                        | Description                                                                                                                                         |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `new` _instance method_                       | create a new empty `Scope`                                                                                                                          |
+| `len`                                         | number of [variables]/[constants] currently within the `Scope`                                                                                      |
+| `rewind`                                      | _rewind_ (i.e. reset) the `Scope` to a particular number of [variables]/[constants]                                                                 |
+| `clear`                                       | remove all [variables]/[constants] from the `Scope`, making it empty                                                                                |
+| `is_empty`                                    | is the `Scope` empty?                                                                                                                               |
+| `is_constant`                                 | is the particular [variable]/[constant]  in the `Scope` a [constant]?                                                                               |
+| `push`, `push_constant`                       | add a new [variable]/[constant] into the `Scope` with a specified value                                                                             |
+| `push_dynamic`, `push_constant_dynamic`       | add a new [variable]/[constant] into the `Scope` with a [`Dynamic`] value                                                                           |
+| `set_or_push<T>`                              | set the value of the last [variable] within the `Scope` by name if it exists and is not [constant]; add a new [variable] into the `Scope` otherwise |
+| `contains`                                    | does the particular [variable] or [constant] exist in the `Scope`?                                                                                  |
+| `get_value<T>`                                | get the value of the last [variable]/[constant] within the `Scope` by name                                                                          |
+| `set_value<T>`                                | set the value of the last [variable] within the `Scope` bu ma,e, panics if it is [constant]                                                         |
+| `remove<T>`                                   | remove the last [variable]/[constant] from the `Scope` by name, returning its value                                                                 |
+| `get`                                         | get a reference to the value of the last [variable]/[constant] within the `Scope` by name                                                           |
+| `get_mut`                                     | get a reference to the value of the last [variable] within the `Scope` by name, `None` if it is [constant]                                          |
+| `set_alias`                                   | [exported][`export`] the last [variable]/[constant] within the `Scope` by name                                                                      |
+| `iter`, `iter_raw`, `IntoIterator::into_iter` | get an iterator to the [variables]/[constants] within the `Scope`                                                                                   |
+| `Extend::extend`                              | add [variables]/[constants] to the `Scope`                                                                                                          |
 
 ~~~admonish info.small "`Scope` public API"
 
