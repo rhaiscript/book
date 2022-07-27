@@ -81,6 +81,28 @@ let x = "hello, world!\n\
 let x = "hello, world!\nhello world again!\nthis is the last time!!!";
 ```
 
+~~~admonish warning.small "No ending quote before the line ends is a syntax error"
+
+If the ending double-quote is omitted, it is a syntax error.
+
+```rust
+let x = "hello
+# ";
+//            ^ syntax error: unterminated string literal
+```
+~~~
+
+```admonish question.small "Why not go multi-line?"
+
+Technically speaking, there is no difficulty in allowing strings to run for multiple lines
+_without_ the continuation back-slash.
+
+Rhai forces you to manually mark a continuation with a back-slash because the ending quote is easy to omit.
+Once it happens, the entire remainder of the script would have become one giant, multi-line string.
+
+This behavior is different from Rust, where string literals can run for multiple lines.
+```
+
 
 Multi-Line Literal Strings
 --------------------------
@@ -189,7 +211,7 @@ _last_ character.
 
 > _string_ `[` _index from −1 to −(total number of characters)_ `]`
 
-```admonish warning.small "Character indexing can be SLOW"
+```admonish warning.small "Character indexing can be SLOOOOOOOOW"
 
 Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.
 
