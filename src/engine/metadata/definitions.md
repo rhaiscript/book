@@ -10,6 +10,28 @@ into _definition files_ which are used by the [language server][lsp].
 
 Definitions are generated via the `Engine::definitions` and `Engine::definitions_with_scope` API.
 
+This API requires the [`metadata`] and [`internals`] feature.
+
+
+Configurable Options
+--------------------
+
+The `Definitions` type supports the following options in a fluent method-chaining style.
+
+| Option                                                              | Method                      | Default |
+| ------------------------------------------------------------------- | --------------------------- | :-----: |
+| Write headers in definition files?                                  | `with_headers`              | `false` |
+| Include [standard packages][built-in packages] in definition files? | `include_standard_packages` | `true`  |
+
+```rust
+engine
+    .definitions()
+    .with_headers(true)                     // write headers in all files
+    .include_standard_packages(false)       // skip standard packages
+    .write_to_dir("path/to/my/definitions")
+    .unwrap();
+```
+
 
 Example
 -------
@@ -63,6 +85,20 @@ engine
 engine
     .definitions_with_scope(&scope)
     .write_to_dir("path/to/my/definitions")
+    .unwrap();
+
+// Output a single definition file with everything merged.
+// Variables in the provided 'Scope' are included.
+engine
+    .definitions_with_scope(&scope)
+    .write_to_file("path/to/my/definitions/all_in_one.d.rhai")
+    .unwrap();
+
+// Output functions metadata to a JSON string.
+// Functions in standard packages are skipped and not included.
+let json = engine
+    .definitions()
+    .include_standard_packages(false)   // skip standard packages
     .unwrap();
 ```
 
@@ -123,4 +159,26 @@ module static;
         :
         :
 
+```
+
+
+All-in-One Definition File
+--------------------------
+
+`Definitions::write_to_file` generates a single definition file with everything merged in, like the following.
+
+```rust
+module static;
+
+op minus(int, int) -> int;
+
+        :
+        :
+
+module general_kenobi {
+    /// Returns a string where "hello there" is repeated 'n' times.
+    fn hello_there(n: int) -> String;
+}
+
+let hello_there;
 ```
