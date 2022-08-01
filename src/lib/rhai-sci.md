@@ -25,13 +25,21 @@ rhai-sci = "0.1"       # use rhai-sci crate
 ```
 
 
+Features
+--------
+
+|  Feature   | Description                                                  | Default? |
+| :--------: | ------------------------------------------------------------ | :------: |
+| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |    no    |
+
+
 Load Package into [`Engine`]
 ----------------------------
 
 ```rust
 use rhai::Engine;
 use rhai::packages::Package;    // needed for 'as_shared_module'
-use rhai_rand::SciPackage;
+use rhai_sci::SciPackage;
 
 let mut engine = Engine::new();
 
