@@ -174,10 +174,15 @@ scientific computing, inspired by languages like MATLAB, Octave, and R.</p>
 rhai = &quot;1.8.0&quot;
 rhai-sci = &quot;0.1&quot;       # use rhai-sci crate
 </code></pre>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th><th style="text-align: center">Default?</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/book/engine/metadata/index.html">functions metadata</a> (turns on <a href="/book/start/features.html"><code>metadata</code></a> in Rhai)</td><td style="text-align: center">no</td></tr>
+</tbody></table>
+</div>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>
 <pre><code class="language-rust">use rhai::Engine;
 use rhai::packages::Package;    // needed for 'as_shared_module'
-use rhai_rand::SciPackage;
+use rhai_sci::SciPackage;
 
 let mut engine = Engine::new();
 
