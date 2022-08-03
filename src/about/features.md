@@ -18,7 +18,7 @@ Features of Rhai
 
 * Very few additional dependencies &ndash; right now only [`smallvec`](https://crates.io/crates/smallvec),
   [`num-traits`](https://crates.io/crates/num-traits), [`ahash`](https://crates.io/crates/ahash),
-  [`bitflags`](https://crates.io/crates/bitflags) and [`SmartString`]; for [`no-std`] and [WASM] builds,
+  [`bitflags`](https://crates.io/crates/bitflags) and [`smartstring`]; for [`no-std`] and [WASM] builds,
   a number of additional dependencies are pulled in to provide for missing functionalities.
 
 * [Plugins] system powered by procedural macros simplifies custom API development.

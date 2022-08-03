@@ -10,8 +10,9 @@ User’s Guide
 
 - [Introduction](about/index.md)
   - [Features of Rhai](about/features.md)
-  - [Supported Targets and Builds](about/targets.md)
   - [What Rhai Isn't](about/non-design.md)
+  - [Supported Targets and Builds](about/targets.md)
+  - [Dependencies](about/dependencies.md)
   - [Licensing](about/license.md)
   - [Related Resources](about/related.md)
 - [Getting Started](start/index.md)
