@@ -24,7 +24,7 @@ fn mul(x, y) {                  // function with two parameters
     x * y
 }
 
-let func = Fn("mul");
+let func = mul;                 // <- de-sugars to 'Fn("mul")'
 
 func.call(21, 2) == 42;         // two arguments are required for 'mul'
 

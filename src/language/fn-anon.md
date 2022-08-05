@@ -17,9 +17,9 @@ fn square(x) { x * x }
 let x = [1, 2, 3, 4, 5];
 
 // Pass a function pointer to 'double'
-let y = x.map(Fn("double"));
+let y = x.map(double);
 
-// Pass a function pointer to 'square'
+// Pass a function pointer to 'square' using Fn(...) notation
 let z = y.map(Fn("square"));
 ```
 
@@ -37,9 +37,9 @@ fn obj_print() { print(this.data); }
 // Define object
 let obj = #{
     data: 42,
-    increment: Fn("obj_inc"),           // use function pointers to
-    decrement: Fn("obj_dec"),           // refer to method functions
-    print: Fn("obj_print")
+    increment: obj_inc,     // use function pointers to
+    decrement: obj_dec,     // refer to method functions
+    print: obj_print
 };
 ```
 
@@ -96,15 +96,15 @@ fn anon_fn_0005() { print(this.data); }
 
 let x = [1, 2, 3, 4, 5];
 
-let y = x.map(Fn("anon_fn_0001"));
+let y = x.map(anon_fn_0001);
 
-let z = y.map(Fn("anon_fn_0002"));
+let z = y.map(anon_fn_0002);
 
 let obj = #{
     data: 42,
-    increment: Fn("anon_fn_0003"),
-    decrement: Fn("anon_fn_0004"),
-    print: Fn("anon_fn_0005")
+    increment: anon_fn_0003,
+    decrement: anon_fn_0004,
+    print: anon_fn_0005
 };
 ```
 

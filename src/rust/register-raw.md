@@ -161,7 +161,7 @@ r#"
     fn foo(x) { this += x; }        // script-defined function 'foo'
 
     let x = 41;                     // object
-    x.bar(Fn("foo"), 1);            // pass 'foo' as function pointer
+    x.bar(foo, 1);                  // pass 'foo' as function pointer
     x
 "#)?;
 ```

@@ -45,7 +45,7 @@ fn anon_0001(x, y) { x + y }        // parameter 'x' is inserted
 
 make_shared(x);                     // convert variable 'x' into a shared value
 
-let f = Fn("anon_0001").curry(x);   // shared 'x' is curried
+let f = anon_0001.curry(x);         // shared 'x' is curried
 ```
 
 

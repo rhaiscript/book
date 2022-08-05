@@ -30,7 +30,7 @@ obj.data == 42;
 
 fn do_action(map, x) { map.data += x; }      // 'map' is a copy
 
-obj.action = Fn("do_action");
+obj.action = do_action;                      // <- de-sugars to 'Fn("do_action")'
 
 obj.action.call(obj, 2);                     // a copy of 'obj' is passed by value
 

@@ -3,7 +3,7 @@ Function Pointers
 
 {{#include ../links.md}}
 
-```admonish question.side.wide "Trivia"
+```admonish question.side "Trivia"
 
 A function pointer simply stores the _name_ of the [function] as a [string].
 ```
@@ -13,6 +13,31 @@ It is possible to store a _function pointer_ in a variable just like a normal va
 A function pointer is created via the `Fn` [function], which takes a [string] parameter.
 
 Call a function pointer via the `call` method.
+
+
+Short-Hand Notation
+-------------------
+
+```admonish warning.side "Not for native"
+
+Native Rust functions cannot use this short-hand notation.
+```
+
+Having to write `Fn("foo")` in order to create a function pointer to the [function] `foo` is a chore,
+so there is a short-hand available.
+
+A function pointer to any _script-defined_ [function] _within the same script_ can be obtained simply
+by referring to the [function's][function] name.
+
+```rust
+fn foo() { ... }        // function definition
+
+let f = foo;            // function pointer to 'foo'
+
+let f = Fn("foo");      // <- the above is equivalent to this
+
+let g = bar;            // error: variable 'bar' not found
+```
 
 
 Built-in Functions
@@ -35,6 +60,8 @@ Examples
 fn foo(x) { 41 + x }
 
 let func = Fn("foo");       // use the 'Fn' function to create a function pointer
+
+let func = foo;             // <- short-hand: equivalent to 'Fn("foo")'
 
 print(func);                // prints 'Fn(foo)'
 
@@ -90,7 +117,7 @@ fn increment(x) {
     x + 1
 }
 
-export let inc = Fn("increment");   // exports a function pointer
+export let inc = increment;         // exports a function pointer
 
 
 ┌───────────┐
@@ -167,18 +194,18 @@ if func == -1 {
 
 // Using pure function pointer
 let func = if x < 0 {
-    Fn("method1")
+    method1
 } else if x == 0 {
-    Fn("method2")
+    method2
 } else if x > 0 {
-    Fn("method3")
+    method3
 };
 
 // Dynamic dispatch
 func.call(42);
 
 // Using functions map
-let map = [ Fn("method1"), Fn("method2"), Fn("method3") ];
+let map = [ method1, method2, method3 ];
 
 let func = sign(x) + 1;
 
@@ -200,7 +227,7 @@ fn add(x) {                 // define function which uses 'this'
     this += x;
 }
 
-let func = Fn("add");       // function pointer to 'add'
+let func = add;             // function pointer to 'add'
 
 func.call(1);               // error: 'this' pointer is not bound
 

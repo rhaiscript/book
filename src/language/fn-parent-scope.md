@@ -48,7 +48,7 @@ x.method!();            // <- syntax error: not allowed in method-call style
 
 // Also works for function pointers
 
-let f = Fn("foo");
+let f = foo;            // <- de-sugars to 'Fn("foo")'
 
 call!(f, 42) == 84;     // must use function-call style
 
