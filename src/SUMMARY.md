@@ -58,6 +58,7 @@ Rust Integration
   - [Methods](rust/methods.md)
   - [Property Getters and Setters](rust/getters-setters.md)
   - [Indexers](rust/indexers.md)
+    - [Fallback to Properties](rust/indexer-prop-fallback.md)
   - [Call Method as Function](rust/methods-fn-call.md)
   - [Collection Types](rust/collections.md)
   - [Disable Custom Types](rust/disable-custom.md)
