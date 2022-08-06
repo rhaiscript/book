@@ -28,9 +28,10 @@ rhai-sci = "0.1"       # use rhai-sci crate
 Features
 --------
 
-|  Feature   | Description                                                  | Default? |
-| :--------: | ------------------------------------------------------------ | :------: |
-| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |    no    |
+|  Feature   | Description                                                                     | Default? |
+| :--------: | ------------------------------------------------------------------------------- | :------: |
+| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai)                    |    no    |
+|    `io`    | enables the `read_matrix` function but pulls in several additional dependencies |    no    |
 
 
 Load Package into [`Engine`]
