@@ -3,7 +3,7 @@ Constants Propagation
 
 {{#include ../../links.md}}
 
-```admonish tip.side.wide "Usage"
+```admonish tip.side
 
 Effective in template-based machine-generated scripts to turn on/off certain sections.
 ```

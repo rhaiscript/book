@@ -232,6 +232,8 @@ service::increment(abc);
 abc.value == 43;
 ```
 
+### Use `#[rhai_fn(global)]`
+
 ```admonish tip.side.wide "Tip: Default global"
 
 The default for all [getters/setters] and [indexers] defined in a [plugin module] is
@@ -253,7 +255,7 @@ x == 43;
 
 ### Load Dynamically
 
-```admonish info.side.wide "See also"
+```admonish info.side "See also"
 
 See the [module] section for more information.
 ```
@@ -333,9 +335,9 @@ combine_with_exported_module!(module, "my_module_ID", my_module);
 Functions Overloading and Operators
 -----------------------------------
 
-~~~admonish tip.side.wide "Tip: `NativeCallContext` parameter"
+~~~admonish tip.side "Tip: `NativeCallContext`"
 
-The _first_ parameter of a function can also be [`NativeCallContext`].
+The _first_ parameter of a function can also be of type [`NativeCallContext`].
 ~~~
 
 Operators and overloaded functions can be specified via applying the `#[rhai_fn(name = "...")]`
@@ -592,7 +594,7 @@ Inner Attributes
 
 ~~~admonish info.side.wide "`rhai_fn` vs `rhai_mod`"
 
-`#[rhai_fn]` is applied to functions, while `#[rhai_mod]` is applied to sub-modules.
+`#[rhai_fn]` is applied to functions, `#[rhai_mod]` to sub-modules.
 ~~~
 
 Inner attributes can be applied to the inner items of a module to tweak the export process.

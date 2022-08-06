@@ -153,7 +153,7 @@ fn add_method(obj: &mut VeryComplexType, offset: i64) -> i64 {
 Data Race Considerations
 ------------------------
 
-```admonish note.side.wide "Data races"
+```admonish note.side "Data races"
 
 Data races are not possible in Rhai under the [`no_closure`] feature because no sharing ever occurs.
 ```

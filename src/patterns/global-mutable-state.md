@@ -7,10 +7,10 @@ Mutable Global State
 Don't Do It™
 ------------
 
-```admonish question.side.wide "Consider JavaScript"
+```admonish question.side "Consider JavaScript"
 
 Generations of programmers struggled to get around mutable global state (a.k.a. the `window` object)
-in the initial design of JavaScript.
+in the design of JavaScript.
 ```
 
 In contrast to [global constants](constants.md), _mutable_ global states are **strongly

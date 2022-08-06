@@ -3,8 +3,12 @@ Printing for Custom Types
 
 {{#include ../links.md}}
 
+
+Provide These Functions
+-----------------------
+
 To use [custom types] for [`print`] and [`debug`], or convert a [custom type] into a [string],
-it is necessary that the following functions be registered (assuming the [custom type]
+it is necessary that the following functions, at minimum, be registered (assuming the [custom type]
 is `T: Display + Debug`).
 
 | Function    | Signature                            | Typical implementation | Usage                                                      |
@@ -12,6 +16,17 @@ is `T: Display + Debug`).
 | `to_string` | <code>\|x: &mut T\| -> String</code> | `x.to_string()`        | converts the [custom type] into a [string]                 |
 | `to_debug`  | <code>\|x: &mut T\| -> String</code> | `format!("{:?}", x)`   | converts the [custom type] into a [string] in debug format |
 
+~~~admonish tip.small "Tip: `#[rhai_fn(global)]`"
+
+If these functions are defined via a [plugin module], be sure to include the `#[rhai_fn(global)]` attribute
+in order to make them available globally.
+
+See [this section]({{rootUrl}}/plugins/module.md#use-rhai_fnglobal) for more details.
+~~~
+
+
+Also Consider These
+-------------------
 
 The following functions are implemented using `to_string()` or `to_debug()` by default, but can be
 overloaded with custom versions.

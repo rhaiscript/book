@@ -3,9 +3,9 @@ Track Progress and Force-Termination
 
 {{#include ../links.md}}
 
-```admonish info.side.wide "Operations count vs. progress percentage"
+```admonish info.side "Operations count vs. progress"
 
-_Operations count_ does not indicate the _amount_ of work already done &ndash; thus it is not real _progress_ tracking.
+_Operations count_ does not indicate the _proportion_ of work already done &ndash; thus it is not real _progress_ tracking.
 
 The real progress can be _estimated_ based on the expected number of operations in a typical run.
 ```

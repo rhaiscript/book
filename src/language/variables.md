@@ -42,7 +42,7 @@ Variable names are case _sensitive_.
 
 Variable names also cannot be the same as a [keyword] (active or reserved).
 
-```admonish warning "Avoid names longer than 11 letters on 32-Bit"
+```admonish warning.small "Avoid names longer than 11 letters on 32-Bit"
 
 Rhai uses [`SmartString`] which avoids allocations unless a string is over its internal limit
 (23 ASCII characters on 64-bit, but only 11 ASCII characters on 32-bit).

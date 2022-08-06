@@ -3,7 +3,7 @@ Indexer as Property Access Fallback
 
 {{#include ../links.md}}
 
-```admonish tip.side.wide "Tip: Property bag"
+```admonish tip.side "Tip: Property bag"
 
 Such an [indexer] allows easy creation of _property bags_ (similar to [object maps])
 which can dynamically add/remove properties.

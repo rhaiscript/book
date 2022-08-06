@@ -3,7 +3,7 @@ Dead Code Elimination
 
 {{#include ../../links.md}}
 
-```admonish question.side.wide "Who writes dead code?"
+```admonish question.side.wide "But who writes dead code?"
 
 Nobody deliberately writes scripts with dead code (we hope).
 

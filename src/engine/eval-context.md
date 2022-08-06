@@ -3,13 +3,10 @@
 
 {{#include ../links.md}}
 
-```admonish info.side.wide "Usage"
+Many functions in advanced API's contain a parameter of type `EvalContext` in order to allow the
+current evaluation state to be accessed and/or modified.
 
-Many functions in advanced API's contain an `EvalContext` parameter in order to allow
-the current evaluation state to be accessed and/or modified.
-```
-
-`EvalContext` is a type that encapsulates the current _evaluation context_ and exposes the following methods.
+`EvalContext` encapsulates the current _evaluation context_ and exposes the following methods.
 
 | Method                       |                      Return type                       | Description                                                                                                                                                             |
 | ---------------------------- | :----------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

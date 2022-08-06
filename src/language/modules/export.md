@@ -83,7 +83,7 @@ Exporting them causes a runtime error.
 Export Functions
 ----------------
 
-```admonish info.side.wide "Private functions"
+```admonish info.side "Private functions"
 
 `private` [functions] are commonly called within the [module] only.
 They cannot be accessed otherwise.

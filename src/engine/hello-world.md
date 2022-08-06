@@ -57,7 +57,7 @@ pub fn main() -> Result<(), Box<EvalAltResult>>
 Use Script Files
 ----------------
 
-```admonish info.side.wide "Script file extension"
+```admonish info.side "Script file extension"
 
 Rhai script files are customarily named with extension `.rhai`.
 ```

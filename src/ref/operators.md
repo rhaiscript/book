@@ -155,7 +155,7 @@ a() ?? b();         // b() is only evaluated if a() is ()
 In Operator
 ===========
 
-```admonish question.side.wide "Trivia"
+```admonish question.side "Trivia"
 
 The `in` operator is simply syntactic sugar for a call to the `contains` function.
 ```

@@ -67,7 +67,7 @@ Therefore, functions taking `String` parameters should use [`ImmutableString`] o
 Disable Closure Capturing
 -------------------------
 
-```admonish info.side.wide "Anonymous functions still work"
+```admonish info.side "Anonymous functions still work"
 
 [Anonymous functions] continue to work even under [`no_closure`].
 

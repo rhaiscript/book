@@ -212,7 +212,7 @@ engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
 
 ### Bind the `this` pointer
 
-```admonish note.side.wide
+```admonish note.side
 
 `Engine::call_fn` cannot call functions in _method-call_ style.
 ```

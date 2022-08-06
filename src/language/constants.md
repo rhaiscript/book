@@ -25,7 +25,7 @@ all-capital letters.
 Manually Add Constant into Custom Scope
 ---------------------------------------
 
-```admonish tip.side.wide "Tip: Singleton"
+```admonish tip.side "Tip: Singleton"
 
 A constant value holding a [custom type] essentially acts
 as a [_singleton_]({{rootUrl}}/patterns/singleton.md).

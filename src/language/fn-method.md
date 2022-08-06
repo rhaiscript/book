@@ -3,7 +3,7 @@
 
 {{#include ../links.md}}
 
-```admonish warning.side.wide "Functions are pure"
+```admonish warning.side "Functions are pure"
 
 The only way for a script-defined [function] to change an external value is via `this`.
 ```

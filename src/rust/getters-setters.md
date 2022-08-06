@@ -106,10 +106,10 @@ println!("Answer: {}", result);                 // prints 42
 Fallback to Indexer
 -------------------
 
-```admonish tip.side.wide "Tip: Property bag"
+```admonish note.side "See also"
 
-This feature makes it very easy for [custom types] to act as _property bags_
-(similar to an [object map]) which can add/remove properties at will.
+See [this section](indexer-prop-fallback.md) for details on an [indexer]
+acting as fallback to properties.
 ```
 
 If the getter/setter of a particular property is not defined, but an [indexer] is defined on the
@@ -122,6 +122,12 @@ In other words, [indexers] act as a _fallback_ to property getters/setters.
 a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried
+```
+
+```admonish tip.small "Tip: Implement a property bag"
+
+This feature makes it very easy for [custom types] to act as _property bags_
+(similar to an [object map]) which can add/remove properties at will.
 ```
 
 

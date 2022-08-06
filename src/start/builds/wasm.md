@@ -3,7 +3,7 @@ WebAssembly (WASM) Build
 
 {{#include ../../links.md}}
 
-```admonish question.side.wide "Why would you do that?"
+```admonish question.side "But why?"
 
 There is already a fast and powerful scripting language that integrates nicely with WASM &ndash; **JavaScript**.
 

@@ -68,7 +68,7 @@ which are also available to functions defined within the same script file.
 
 ### Base directory
 
-```admonish tip.side.wide "Tip: Default"
+```admonish tip.side "Tip: Default"
 
 If the base directory is not set, then relative paths are based off the directory of the loading script.
 
@@ -81,7 +81,7 @@ The base directory can be set via `FileModuleResolver::new_with_path` or `FileMo
 
 ### Custom [`Scope`]
 
-```admonish tip.side.wide "Tip"
+```admonish tip.side "Tip"
 
 This [`Scope`] can conveniently hold global [constants] etc.
 ```
@@ -90,7 +90,7 @@ The `set_scope` method adds an optional [`Scope`] which will be used to [optimiz
 
 ### Caching
 
-```admonish tip.side.wide "Tip: Enable/disable caching"
+```admonish tip.side "Tip: Enable/disable caching"
 
 Use `enable_cache` to enable/disable the cache.
 ```
@@ -213,11 +213,11 @@ m::greet();                         // prints "hello! from module!"
 `StaticModuleResolver`
 ----------------------
 
-```admonish tip.side.wide "Tip: Typical usage"
+~~~admonish tip.side "Tip: `no-std`"
 
-`StaticModuleResolver` is often used in [`no_std`] or embedded environments
+`StaticModuleResolver` is often used with [`no_std`] in embedded environments
 without a file system.
-```
+~~~
 
 Loads [modules] that are statically added.
 

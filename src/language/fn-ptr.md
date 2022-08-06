@@ -110,7 +110,7 @@ let x = my_mod::inc.call(41);       // runtime error:
 Warning &ndash; Global Namespace Only
 -------------------------------------
 
-```admonish info.side.wide "See also"
+```admonish info.side "See also"
 
 See _[Function Namespaces]_ for more details.
 ```

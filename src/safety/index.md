@@ -87,7 +87,7 @@ One example of such an environment is a Rhai scripting [`Engine`] compiled to [W
 _Don't Panic_ Guarantee &ndash; Any Panic is a Bug
 --------------------------------------------------
 
-```admonish tip.side.wide "OK, panic anyway"
+```admonish tip.side "OK, panic anyway"
 
 All these safe-guards can be turned off via the [`unchecked`] feature, which disables all safety
 checks (even fatal ones).

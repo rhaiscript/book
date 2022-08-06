@@ -1,7 +1,7 @@
 `this` &ndash; Simulating an Object Method
 ==========================================
 
-```admonish warning.side.wide "Functions are pure"
+```admonish warning.side "Functions are pure"
 
 The only way for a script-defined [function](functions.md) to change an external value is via `this`.
 ```

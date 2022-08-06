@@ -7,7 +7,7 @@ Numbers
 Integers
 --------
 
-```admonish tip.side.wide "Tip: Bit-fields"
+```admonish tip.side "Tip: Bit-fields"
 
 Integers can also be conveniently manipulated as [bit-fields].
 ```
@@ -20,7 +20,7 @@ The default system integer type (also aliased to `INT`) is `i64`. It can be turn
 Floating-Point Numbers
 ----------------------
 
-```admonish tip.side.wide "Tip: Notations"
+```admonish tip.side "Tip: Notations"
 
 Both decimal and scientific notations can be used to represent floating-point numbers.
 ```

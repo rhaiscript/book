@@ -3,7 +3,7 @@ Object Maps
 
 {{#include ../links.md}}
 
-```admonish tip.side.wide "Safety"
+```admonish tip.side "Safety"
 
 Always limit the [maximum size of object maps].
 ```

@@ -3,7 +3,7 @@ The `ImmutableString` Type
 
 {{#include ../links.md}}
 
-~~~admonish question.side.wide "Why `SmartString`?"
+~~~admonish question.side "Why `SmartString`?"
 
 [`SmartString`] is used because many strings in scripts are short (fewer than 24 ASCII characters).
 ~~~

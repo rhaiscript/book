@@ -57,7 +57,7 @@ switch type_of(mystery) {
 Type Checking and Casting
 -------------------------
 
-~~~admonish tip.side.wide "Tip: `Dynamic::try_cast`"
+~~~admonish tip.side "Tip: `try_cast`"
 
 The `try_cast` method does not panic but returns `None` upon failure.
 ~~~

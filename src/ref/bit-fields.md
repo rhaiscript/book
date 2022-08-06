@@ -1,7 +1,7 @@
 Integer as Bit-Fields
 =====================
 
-```admonish note.side.wide
+```admonish note.side
 
 Nothing here cannot be done via standard bit-manipulation (i.e. shifting and masking).
 

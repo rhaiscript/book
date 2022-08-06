@@ -49,7 +49,7 @@ engine.eval::<i64>("inc(MYSTIC_NUMBER)")? == 42;
 
 ### Equivalent to `Engine::register_XXX`
 
-```admonish question.side.wide "Trivia"
+```admonish question.side "Trivia"
 
 `Engine::register_fn` etc. are actually implemented by adding functions to an
 internal [module]!
@@ -102,7 +102,7 @@ engine.eval::<i64>("services::calc::inc(services::calc::MYSTIC_NUMBER)")? == 42;
 
 ### Expose functions to the global namespace
 
-```admonish tip.side.wide "Tip: Type iterators"
+```admonish tip.side "Tip: Type iterators"
 
 [Type iterators] are special &mdash; they are _always_ exposed to the
 [_global_ namespace][function namespace].

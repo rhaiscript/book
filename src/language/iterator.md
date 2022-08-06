@@ -3,7 +3,7 @@ Make a Custom Type Iterable
 
 {{#include ../links.md}}
 
-```admonish info.side.wide "Built-in type iterators"
+```admonish info.side "Built-in type iterators"
 
 Type iterators are already defined for built-in [standard types] such as [strings], [ranges],
 [bit-fields], [arrays] and [object maps].
