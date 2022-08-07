@@ -28,10 +28,12 @@ rhai-sci = "0.1"       # use rhai-sci crate
 Features
 --------
 
-|  Feature   | Description                                                                     | Default? |
-| :--------: | ------------------------------------------------------------------------------- | :------: |
-| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai)                    |    no    |
-|    `io`    | enables the `read_matrix` function but pulls in several additional dependencies |    no    |
+|  Feature   | Description                                                                                                                                                                                               | Default? |
+| :--------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: |
+| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai); necessary for running doc-tests                                                                                                             |    no    |
+|    `io`    | enables the `read_matrix` function but pulls in several additional dependencies                                                                                                                           |   yes    |
+| `nalgebra` | enables the functions `regress`, `inv`, `mtimes`, `horzcat`, `vertcat`, and `repmat` but pull in [`nalgebra`](https://crates.io/crates/nalgebra) and [`linregress`](https://crates.io/crates/linregress). |   yes    |
+|   `rand`   | enables the [`rand`](#rand) function for generating random values and random matrices, but brings in the `rand` library.                                                                                  |   yes    |
 
 
 Load Package into [`Engine`]
