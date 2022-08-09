@@ -235,12 +235,12 @@ impl TestStruct {
         self.field.clone()
     }
 
-    fn set_field(&amp;mut self, new_val: &amp;str) {
-        self.field = new_val.to_string();
+    fn set_field(&amp;mut self, new_val: String) {
+        self.field = new_val;
     }
 
     fn new() -&gt; Self {
-        Self { field: &quot;hello&quot; }
+        Self { field: &quot;hello, world!&quot;.to_string() }
     }
 }
 

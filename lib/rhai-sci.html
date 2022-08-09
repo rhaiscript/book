@@ -176,8 +176,10 @@ rhai-sci = &quot;0.1&quot;       # use rhai-sci crate
 </code></pre>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th><th style="text-align: center">Default?</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/book/engine/metadata/index.html">functions metadata</a> (turns on <a href="/book/start/features.html"><code>metadata</code></a> in Rhai)</td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>io</code></td><td>enables the <code>read_matrix</code> function but pulls in several additional dependencies</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/book/engine/metadata/index.html">functions metadata</a> (turns on <a href="/book/start/features.html"><code>metadata</code></a> in Rhai); necessary for running doc-tests</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>io</code></td><td>enables the <code>read_matrix</code> function but pulls in several additional dependencies</td><td style="text-align: center">yes</td></tr>
+<tr><td style="text-align: center"><code>nalgebra</code></td><td>enables the functions <code>regress</code>, <code>inv</code>, <code>mtimes</code>, <code>horzcat</code>, <code>vertcat</code>, and <code>repmat</code> but pull in <a href="https://crates.io/crates/nalgebra"><code>nalgebra</code></a> and <a href="https://crates.io/crates/linregress"><code>linregress</code></a>.</td><td style="text-align: center">yes</td></tr>
+<tr><td style="text-align: center"><code>rand</code></td><td>enables the <a href="#rand"><code>rand</code></a> function for generating random values and random matrices, but brings in the <code>rand</code> library.</td><td style="text-align: center">yes</td></tr>
 </tbody></table>
 </div>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>

@@ -1363,7 +1363,56 @@ features contained inside the <a href="engine//book/engine/compile.html"><code>A
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
 <p>Rhai comes with a number of examples showing how to integrate the scripting <a href="start/examples//book/engine/hello-world.html"><code>Engine</code></a> within a Rust
 application, as well as a number of sample scripts that showcase different Rhai language features.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="rust"><a class="header" href="#rust">Rust</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust-examples"><a class="header" href="#rust-examples">Rust Examples</a></h1>
+<h2 id="standard-examples"><a class="header" href="#standard-examples">Standard Examples</a></h2>
+<p>A number of examples can be found under <code>examples</code>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Example</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/arrays_and_structs.rs"><code>arrays_and_structs</code></a></td><td>shows how to register a <a href="start/examples//book/rust/custom-type.html">Rust type</a> and using it with <a href="start/examples//book/language/arrays.html">arrays</a></td></tr>
+<tr><td><a href="start/examples/callback.rs"><code>callback</code></a></td><td>shows how to store a Rhai <a href="start/examples//book/language/fn-closure.html">closure</a> and call it later within Rust</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/custom_types_and_methods.rs"><code>custom_types_and_methods</code></a></td><td>shows how to register a <a href="start/examples//book/rust/custom-type.html">Rust type</a> and <a href="start/examples//book/rust/custom.html">methods</a>/<a href="start/examples//book/rust/getters-setters.html">getters/setters</a> for it</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/hello.rs"><code>hello</code></a></td><td>simple example that evaluates an expression and prints the result</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/reuse_scope.rs"><code>reuse_scope</code></a></td><td>evaluates two pieces of code in separate runs, but using a common <a href="start/examples//book/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/serde.rs"><code>serde</code></a></td><td>example to serialize and deserialize Rust types with <a href="https://crates.io/crates/serde"><code>serde</code></a> (requires the <a href="start/examples//book/rust/serde.html"><code>serde</code></a> feature)</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/simple_fn.rs"><code>simple_fn</code></a></td><td>shows how to register a simple Rust function</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/strings.rs"><code>strings</code></a></td><td>shows different ways to register Rust functions taking <a href="start/examples//book/language/strings-chars.html">string</a> arguments</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/threading.rs"><code>threading</code></a></td><td>shows how to communicate with an <a href="start/examples//book/engine/hello-world.html"><code>Engine</code></a> running in a separate thread via an MPSC channel</td></tr>
+</tbody></table>
+</div>
+<h2 id="scriptable-event-handler-with-state-examples"><a class="header" href="#scriptable-event-handler-with-state-examples">Scriptable Event Handler With State Examples</a></h2>
+<p>Because of its popularity, the pattern <a href="start/examples//book/patterns/events.html"><em>Scriptable Event Handler With State</em></a>
+has sample implementations for different styles.</p>
+<div class="table-wrapper"><table><thead><tr><th>Example</th><th>Handler Script</th><th style="text-align: center">Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/event_handler_main"><code>event_handler_main</code></a></td><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/event_handler_main/script.rhai"><code>event_handler_main/script.rhai</code></a></td><td style="text-align: center"><a href="start/examples//book/patterns/events-1.html"><em>Main Style</em></a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/event_handler_js"><code>event_handler_js</code></a></td><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/event_handler_js/script.rhai"><code>event_handler_js/script.rhai</code></a></td><td style="text-align: center"><a href="start/examples//book/patterns/events-2.html"><em>JS Style</em></a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/event_handler_map"><code>event_handler_map</code></a></td><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/event_handler_map/script.rhai"><code>event_handler_map/script.rhai</code></a></td><td style="text-align: center"><a href="start/examples//book/patterns/events-3.html"><em>Map Style</em></a></td></tr>
+</tbody></table>
+</div>
+<h2 id="running-examples"><a class="header" href="#running-examples">Running Examples</a></h2>
+<p>Examples can be run with the following command:</p>
+<pre><code class="language-sh">cargo run --example {example_name}
+</code></pre>
+<h2 id="no-std-examples"><a class="header" href="#no-std-examples"><code>no-std</code> Examples</a></h2>
+<p>To illustrate <code>no-std</code> builds, a number of example applications are available under the <code>no_std</code> directory:</p>
+<div class="table-wrapper"><table><thead><tr><th>Example</th><th>Description</th><th style="text-align: center">Optimization</th><th style="text-align: center">Allocator</th><th style="text-align: center">Panics</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/no_std/no_std_test"><code>no_std_test</code></a></td><td>bare-bones test application that evaluates a Rhai expression and sets the result as the return value</td><td style="text-align: center">size</td><td style="text-align: center"><a href="https://crates.io/crates/wee_alloc"><code>wee_alloc</code></a></td><td style="text-align: center">abort</td></tr>
+</tbody></table>
+</div>
+<h3 id="building-the-no-std-examples"><a class="header" href="#building-the-no-std-examples">Building the <code>no-std</code> examples</a></h3>
+<div id="admonition-nightly-required" class="admonition warning">
+<div class="admonition-title">
+<p>Nightly required</p>
+<p><a class="admonition-anchor-link" href="start/examples/rust.html#admonition-nightly-required"></a></p>
+</div>
+<div>
+<p>Currently, the nightly compiler must be used to build for <code>no-std</code>.</p>
+</div>
+</div>
+<pre><code class="language-sh">cd no_std/no_std_test
+
+cargo +nightly build --release
+
+./target/release/no_std_test
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="example-scripts"><a class="header" href="#example-scripts">Example Scripts</a></h1>
 <h2 id="language-feature-scripts"><a class="header" href="#language-feature-scripts">Language Feature Scripts</a></h2>
 <p>There are also a number of examples scripts that showcase Rhai’s features, all in the <code>scripts</code> directory:</p>
@@ -2884,12 +2933,12 @@ impl TestStruct {
         self.field.clone()
     }
 
-    fn set_field(&amp;mut self, new_val: &amp;str) {
-        self.field = new_val.to_string();
+    fn set_field(&amp;mut self, new_val: String) {
+        self.field = new_val;
     }
 
     fn new() -&gt; Self {
-        Self { field: &quot;hello&quot; }
+        Self { field: &quot;hello, world!&quot;.to_string() }
     }
 }
 
@@ -5292,8 +5341,10 @@ rhai-sci = &quot;0.1&quot;       # use rhai-sci crate
 </code></pre>
 <h2 id="features-1"><a class="header" href="#features-1">Features</a></h2>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th><th style="text-align: center">Default?</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="lib//book/engine/metadata/index.html">functions metadata</a> (turns on <a href="lib//book/start/features.html"><code>metadata</code></a> in Rhai)</td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>io</code></td><td>enables the <code>read_matrix</code> function but pulls in several additional dependencies</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="lib//book/engine/metadata/index.html">functions metadata</a> (turns on <a href="lib//book/start/features.html"><code>metadata</code></a> in Rhai); necessary for running doc-tests</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>io</code></td><td>enables the <code>read_matrix</code> function but pulls in several additional dependencies</td><td style="text-align: center">yes</td></tr>
+<tr><td style="text-align: center"><code>nalgebra</code></td><td>enables the functions <code>regress</code>, <code>inv</code>, <code>mtimes</code>, <code>horzcat</code>, <code>vertcat</code>, and <code>repmat</code> but pull in <a href="https://crates.io/crates/nalgebra"><code>nalgebra</code></a> and <a href="https://crates.io/crates/linregress"><code>linregress</code></a>.</td><td style="text-align: center">yes</td></tr>
+<tr><td style="text-align: center"><code>rand</code></td><td>enables the <a href="lib/rhai-sci.html#rand"><code>rand</code></a> function for generating random values and random matrices, but brings in the <code>rand</code> library.</td><td style="text-align: center">yes</td></tr>
 </tbody></table>
 </div>
 <h2 id="load-package-into-engine-1"><a class="header" href="#load-package-into-engine-1">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
