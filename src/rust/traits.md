@@ -7,6 +7,7 @@ A number of traits, under the `rhai::` module namespace, provide additional func
 
 | Trait                    | Description                                                        | Methods                                                                                             |
 | ------------------------ | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `CustomType`             | trait to build a [custom type] for use with an [`Engine`]          | `build`                                                                                             |
 | `Func`                   | trait for creating Rust closures from script                       | `create_from_ast`, `create_from_script`                                                             |
 | `FuncArgs`               | trait for parsing function call arguments                          | `parse`                                                                                             |
 | `ModuleResolver`         | trait implemented by [module resolution][module resolver] services | `resolve`, `resolve_ast`                                                                            |

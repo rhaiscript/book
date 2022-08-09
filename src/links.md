@@ -37,6 +37,7 @@
 [traits]: {{rootUrl}}/rust/traits.md
 [`call_fn`]: {{rootUrl}}/engine/call-fn.md
 [`Func`]: {{rootUrl}}/engine/func.md
+[`CustomType`]: {{rootUrl}}/rust/build_type.md
 [`AST`]: {{rootUrl}}/engine/compile.md
 [`eval_expression`]: {{rootUrl}}/engine/expressions.md
 [raw `Engine`]: {{rootUrl}}/engine/raw.md
@@ -80,8 +81,8 @@
 
 [custom type]: {{rootUrl}}/rust/custom-type.md
 [custom types]: {{rootUrl}}/rust/custom-type.md
-[method]: {{rootUrl}}/rust/custom.md
-[methods]: {{rootUrl}}/rust/custom.md
+[method]: {{rootUrl}}/rust/methods.md
+[methods]: {{rootUrl}}/rust/methods.md
 [getters/setters]: {{rootUrl}}/rust/getters-setters.md
 [elvis]: https://en.wikipedia.org/wiki/Elvis_operator
 [indexer]: {{rootUrl}}/rust/indexers.md
