@@ -26,6 +26,7 @@ Features that Enable Special Functionalities
 
 | Feature             | Additive? | Description                                                                                                                                                                                                                                                        |
 | ------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `std`               |    no     | standard features                                                                                                                                                                                                                                                  |
 | `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                                                                                 |
 | `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type (pulls in the [`rust_decimal`][rust_decimal] crate)                                                                                                                                                              |
 | `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers (pulls in the [`unicode-xid`](https://crates.io/crates/unicode-xid) crate)                                                                                                |
@@ -75,9 +76,12 @@ Features for `no-std` Builds
 The following features are provided exclusively for [`no-std`] targets.
 Do not use them when not compiling for [`no-std`].
 
-| Feature  | Additive? | Description                                                                                            |
-| -------- | :-------: | ------------------------------------------------------------------------------------------------------ |
-| `no_std` |    no     | builds for [`no-std`]; notice that additional dependencies will be pulled in to replace `std` features |
+Specify `default-features = false` when compiling for [`no-std`], which will remove the default
+`std` feature.
+
+| Feature  | Additive? | Description                                                                                                    |
+| -------- | :-------: | -------------------------------------------------------------------------------------------------------------- |
+| `no_std` |    no     | builds for [`no-std`]; notice that additional dependencies will be pulled in to replace missing `std` features |
 
 
 Features for WebAssembly (WASM) Builds
