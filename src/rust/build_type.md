@@ -29,7 +29,7 @@ The `TypeBuilder` parameter provides a range of convenient methods to register [
 | `with_indexer_set`        | register an [indexer] set function                                          |
 | `with_indexer_set_result` | register a [fallible][fallible function] [indexer] set function             |
 | `with_indexer_get_set`    | register [indexer] get/set functions                                        |
-| `with_iterator`           | register a [type iterator]                                                  |
+| `is_iterable`             | register a [type iterator] if the [custom type] is iterable                 |
 
 ```admonish tip.small "Tip: Use plugin module if starting from scratch"
 
@@ -100,7 +100,7 @@ impl CustomType for Vec3 {
         builder
             .with_name("Vec3")
             .with_fn("vec3", Self::new)
-            .with_iterator()
+            .is_iterable()
             .with_get_set("x", Self::get_x, Self::set_x)
             .with_get_set("y", Self::get_y, Self::set_y)
             .with_get_set("z", Self::get_z, Self::set_z)
