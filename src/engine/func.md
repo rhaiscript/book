@@ -40,7 +40,7 @@ schedule_callback(func);        // pass it as a callback to another function
 // Although there is nothing you can't do by manually writing out the closure yourself...
 let engine = Engine::new();
 let ast = engine.compile(script)?;
-schedule_callback(Box::new(move |x: i64, y: String| -> Result<bool, Box<EvalAltResult>> {
-    engine.call_fn(&mut Scope::new(), &ast, "calc", (x, y))
+schedule_callback(Box::new(move |x: i64, y: String| {
+    engine.call_fn::<bool>(&mut Scope::new(), &ast, "calc", (x, y))
 }));
 ```

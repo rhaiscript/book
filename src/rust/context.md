@@ -71,11 +71,11 @@ use rhai::{Engine, NativeCallContext};
 let mut engine = Engine::new();
 
 // A function expecting a callback in form of a function pointer.
-fn super_call(context: NativeCallContext, value: i64) -> Result<i64, Box<EvalAltResult>>
+fn super_call(context: NativeCallContext, value: i64)
 {
     // Use 'call_fn' to call a function within the current evaluation!
-    context.call_fn("double", (value,))
-    //                        ^^^^^^^^ arguments passed in tuple
+    context.call_fn::<i64>("double", (value,))
+    //                               ^^^^^^^^ arguments passed in tuple
 }
 
 engine.register_result_fn("super_call", super_call);

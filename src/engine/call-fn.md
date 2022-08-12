@@ -57,15 +57,15 @@ scope.push_constant("MY_CONST", true);
 // Variables/constants pushed into the custom 'Scope'
 // (i.e. 'my_var', 'my_string', 'MY_CONST') are visible to the function.
 
-let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( "abc", 123_i64 ) )?;
-//          ^^^                                             ^^^^^^^^^^^^^^^^^^
-//          return type must be specified                   put arguments in a tuple
+let result = engine.call_fn::<i64>(&mut scope, &ast, "hello", ( "abc", 123_i64 ) )?;
+//                            ^^^                             ^^^^^^^^^^^^^^^^^^
+//              return type must be specified                 put arguments in a tuple
 
-let result: i64 = engine.call_fn(&mut scope, &ast, "hello", ( 123_i64, ) )?;
-//                                                          ^^^^^^^^^^^^ tuple of one
+let result = engine.call_fn::<i64>(&mut scope, &ast, "hello", ( 123_i64, ) )?;
+//                                                            ^^^^^^^^^^^^ tuple of one
 
-let result: i64 = engine.call_fn(&mut scope, &ast, "hello", () )?;
-//                                                          ^^ unit = tuple of zero
+let result = engine.call_fn::<i64>(&mut scope, &ast, "hello", () )?;
+//                                                            ^^ unit = tuple of zero
 ```
 
 ~~~admonish warning.small "Default behavior"
@@ -118,7 +118,7 @@ impl FuncArgs for Options {
 let options = Options { foo: true, bar: "world", baz: 42 };
 
 // The type 'Options' can now be used as arguments to 'call_fn'!
-let result: i64 = engine.call_fn(&mut scope, &ast, "hello", options)?;
+let result = engine.call_fn::<i64>(&mut scope, &ast, "hello", options)?;
 ```
 
 
