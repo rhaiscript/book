@@ -87,6 +87,11 @@ mod my_module {
     fn mystic_number() -> i64 {
         42
     }
+    // This global function defines a custom operator '@'.
+    #[rhai_fn(name = "@", global)]
+    pub fn square_add(x: i64, y: i64) -> i64 {
+        x * x + y * y
+    }
 
     // Sub-modules are ignored when the module is registered globally.
     pub mod my_sub_module {
@@ -149,6 +154,9 @@ fn main() {
 
     // A module can simply be registered into the global namespace.
     engine.register_global_module(module.into());
+
+    // Define a custom operator '@' with precedence of 160 (i.e. between +|- and *|/).
+    engine.register_custom_operator("@", 160).unwrap();
 }
 ```
 
@@ -166,6 +174,8 @@ x == "hello, 42!";
 
 let x = get_num();
 x == 42;
+
+x @ x == 3528;      // custom operator
 
 let abc = create_abc(x);
 
@@ -203,6 +213,9 @@ fn main() {
 
     // A module can simply be registered as a static module namespace.
     engine.register_static_module("service", module.into());
+
+    // Define a custom operator '@' with precedence of 160 (i.e. between +|- and *|/).
+    engine.register_custom_operator("@", 160).unwrap();
 }
 ```
 
@@ -220,6 +233,8 @@ x == "hello, 42!";
 
 let x = service::get_num();
 x == 42;
+
+x @ x == 3528;      // custom operator
 
 let abc = service::create_abc(x);
 

@@ -28,9 +28,8 @@ Share a Package Among Multiple `Engine`'s
 
 `Engine::register_global_module` and `Engine::register_static_module` both require _shared_ [modules].
 
-Once a package is created (e.g. via `Package::new`), it can create _shared_ [modules]
-(via `Package::as_shared_module`) and register into multiple instances of [`Engine`],
-even across threads (under the [`sync`] feature).
+Once a package is created (e.g. via `Package::new`), it can be registered into multiple instances of
+[`Engine`], even across threads (under the [`sync`] feature).
 
 ```admonish tip.small "Tip: Sharing package"
 
@@ -54,8 +53,7 @@ for _ in 0..100 {
     let mut engine = Engine::new_raw();
 
     // Register the package into the global namespace.
-    // 'Package::as_shared_module' converts the package into a shared module.
-    engine.register_global_module(package.as_shared_module());
+    package.register_into_engine(&mut engine);
 
     engines_collection.push(engine);
 }

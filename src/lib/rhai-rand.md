@@ -32,7 +32,7 @@ Load Package into [`Engine`]
 
 ```rust
 use rhai::Engine;
-use rhai::packages::Package;    // needed for 'as_shared_module'
+use rhai::packages::Package;    // needed for 'Package' trait
 use rhai_rand::RandomPackage;
 
 let mut engine = Engine::new();
@@ -40,8 +40,8 @@ let mut engine = Engine::new();
 // Create new 'RandomPackage' instance
 let random = RandomPackage::new();
 
-// Load the package
-engine.register_global_module(random.as_shared_module());
+// Load the package into the `Engine`
+random.register_into_engine(&mut engine);
 ```
 
 

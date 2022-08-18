@@ -44,8 +44,7 @@ Procedure
 * Always use `Engine::new_raw` to create a [raw `Engine`], instead of `Engine::new` which is _much_
   more expensive. A [raw `Engine`] is _extremely_ cheap to create.
 
-* Register the [custom package] with the [raw `Engine`] via `Engine::register_global_module`,
-  using `Package::as_shared_module` to obtain a shared [module].
+* Register the [custom package] with the [raw `Engine`] via `Package::register_into_engine`.
 
 
 Examples
@@ -56,12 +55,11 @@ use rhai::def_package;
 use rhai::packages::{Package, StandardPackage};
 
 // Define the custom package 'MyCustomPackage'.
+//
+// Aggregate other base packages simply by listing them after the colon.
 def_package! {
     /// My own personal super-duper custom package
-    pub MyCustomPackage(module) {
-      // Aggregate other packages simply by calling 'init' on each.
-      StandardPackage::init(module);
-
+    pub MyCustomPackage(module) : StandardPackage {
       // Register additional Rust functions using 'Module::set_native_fn'.
       let hash = module.set_native_fn("foo", |s: ImmutableString| {
           Ok(foo(s.into_owned()))
@@ -85,7 +83,7 @@ for x in 0..10_000 {
     let mut engine = Engine::new_raw();
 
     // Register custom package - cheap
-    engine.register_global_module(custom_pkg.as_shared_module());
+    custom_pkg.register_into_engine(&mut engine);
 
     // Evaluate script
     engine.run_ast(&ast)?;

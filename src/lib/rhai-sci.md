@@ -41,7 +41,7 @@ Load Package into [`Engine`]
 
 ```rust
 use rhai::Engine;
-use rhai::packages::Package;    // needed for 'as_shared_module'
+use rhai::packages::Package;    // needed for 'Package' trait
 use rhai_sci::SciPackage;
 
 let mut engine = Engine::new();
@@ -49,8 +49,8 @@ let mut engine = Engine::new();
 // Create new 'SciPackage' instance
 let sci = SciPackage::new();
 
-// Load the package
-engine.register_global_module(sci.as_shared_module());
+// Load the package into the [`Engine`]
+sci.register_into_engine(&mut engine);
 ```
 
 

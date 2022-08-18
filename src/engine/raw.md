@@ -58,8 +58,9 @@ engine.on_debug(|text, source, pos| {
 });
 
 // Register the Standard Package
-let package = StandardPackage::new().as_shared_module();
+let package = StandardPackage::new();
 
-engine.register_global_module(package);
+// Load the package into the [`Engine`]
+package.register_into_engine(&mut engine);
 ```
 ~~~

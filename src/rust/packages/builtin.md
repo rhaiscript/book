@@ -39,6 +39,6 @@ use rhai::packages::{Package, CorePackage};
 let mut engine = Engine::new_raw();
 let package = CorePackage::new();
 
-// Register the package into the 'Engine' by converting it into a shared module.
-engine.register_global_module(package.as_shared_module());
+// Register the package into the 'Engine'.
+package.register_into_engine(&mut engine);
 ```
