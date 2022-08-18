@@ -77,6 +77,8 @@ Symbols and Patterns
 |                 `$`                 | dollar                             | _reserved_                            |
 |                `->`                 | arrow                              | _reserved_                            |
 |                `<-`                 | left arrow                         | _reserved_                            |
+|                `<\|`                | left triangle                      | _reserved_                            |
+|                `\|>`                | right triangle                     | _reserved_                            |
 |                `===`                | strict equals to                   | _reserved_                            |
 |                `!==`                | strict not equals to               | _reserved_                            |
 |                `:=`                 | assignment                         | _reserved_                            |
