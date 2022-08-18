@@ -35,8 +35,8 @@ Elvis Operator
 --------------
 
 The [_Elvis_ operator](https://en.wikipedia.org/wiki/Elvis_operator) can be used to short-circuit
-the method call when the object itself is [`()`].
+the method call when the object itself is `()`.
 
 > _object_ `?.` _method_ `(` _parameters_ ... `)`
 
-In the above, the _method_ is never called if _object_ is [`()`].
+In the above, the _method_ is never called if _object_ is `()`.
