@@ -271,7 +271,7 @@ fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Resu
 
 // Register the custom syntax (sample): exec<x> -> { x += 1 } while x < 0
 engine.register_custom_syntax(
-    &[ "exec", "<", "$ident$", ">", "->", "$block$", "while", "$expr$" ], // the custom syntax
+    [ "exec", "<", "$ident$", ">", "->", "$block$", "while", "$expr$" ], // the custom syntax
     true,  // variables declared within this custom syntax
     implementation_func
 )?;
@@ -325,6 +325,35 @@ Make sure there are _lots_ of examples for users to follow.
 ### Step Six &ndash; Profit!
 
 
+Practical Example &ndash; Recreating C's Ternary Operator
+---------------------------------------------------------
+
+Rhai has [if expressions](../language/if-expression.md), but sometimes a C-style _ternary_ operator
+is more concise.
+
+```rust
+// A custom syntax must start with a unique symbol, so we use 'iff'.
+// Register the custom syntax: iff condition ? true-value : false-value
+engine.register_custom_syntax(
+    ["iff", "$expr$", "?", "$expr$", ":", "$expr$"],
+    false,
+    |context, inputs| match context.eval_expression_tree(&inputs[0])?.as_bool() {
+        Ok(true) => context.eval_expression_tree(&inputs[1]),
+        Ok(false) => context.eval_expression_tree(&inputs[2]),
+        Err(typ) => Err(Box::new(EvalAltResult::ErrorMismatchDataType(
+            "bool".to_string(), typ.to_string(), inputs[0].position(),
+        ))),
+    },
+)?;
+```
+
+```admonish tip.small "Tip: Custom syntax performance"
+
+The code in the example above is essentially what the [`if`] statement does internally, and since
+custom syntax is pre-parsed, there really is no performance penalty!
+```
+
+
 Practical Example &ndash; Recreating JavaScript's `var` Statement
 -----------------------------------------------------------------
 
@@ -334,7 +363,7 @@ There is currently no equivalent in Rhai.
 
 ```rust
 // Register the custom syntax: var x = ???
-engine.register_custom_syntax(&[ "var", "$ident$", "=", "$expr$" ], true, |context, inputs| {
+engine.register_custom_syntax([ "var", "$ident$", "=", "$expr$" ], true, |context, inputs| {
     let var_name = inputs[0].get_string_value().unwrap().to_string();
     let expr = &inputs[1];
 
