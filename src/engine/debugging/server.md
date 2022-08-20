@@ -27,7 +27,7 @@ let mut engine = Engine::new();
 engine.register_debugger(
     // Use the initialization callback to set up the communications channel
     // and listen to it
-    || {
+    |engine| {
         // Create server that will listen to requests
         let mut server = MyCommServer::new();
         server.listen("localhost:8080");

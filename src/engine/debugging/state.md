@@ -31,7 +31,7 @@ Example
 
 ```rust
 engine.register_debugger(
-    || {
+    |engine| {
         // Say, use an object map for the debugger state
         let mut state = Map::new();
         // Initialize properties

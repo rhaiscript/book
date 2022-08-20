@@ -13,7 +13,7 @@ let mut engine = Engine::new();
 
 engine.register_debugger(
     // Provide a callback to initialize the debugger state
-    || { ... },
+    |engine| { ... },
     // Provide a callback for each debugging step
     |context, event, node, source, pos| {
         ...
