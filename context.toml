@@ -1,0 +1,5 @@
+version = "1.9.0"
+repoHome = "https://github.com/rhaiscript/rhai/blob/main"
+#rootUrl = ""
+rootUrl = "/book"
+#rootUrl = "/book/vnext"

@@ -561,7 +561,7 @@ terms or conditions.</p>
 <p><a href="https://rhai.rs/playground">Online Playground</a> – Run Rhai scripts directly from an editor in the browser</p>
 </li>
 <li>
-<p><a href="https://rhai.rs/lsp">Language Server</a> – Language Server Protocol (LSP) server for Rhai</p>
+<p><a href="https://github.com/rhaiscript/lsp">Language Server</a> – Language Server Protocol (LSP) server for Rhai</p>
 </li>
 <li>
 <p><a href="https://github.com/rhaiscript/rhai-doc"><code>rhai-doc</code></a> – Rhai script documentation tool</p>
@@ -11216,9 +11216,9 @@ registered via <code>Engine::register_static_module</code></li>
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="generate-definition-files-for-language-server"><a class="header" href="#generate-definition-files-for-language-server">Generate Definition Files for Language Server</a></h1>
-<p>Rhai’s <a href="https://rhai.rs/lsp">language server</a> works with IDE’s to provide integrated support for the Rhai scripting language.</p>
+<p>Rhai’s <a href="https://github.com/rhaiscript/lsp">language server</a> works with IDE’s to provide integrated support for the Rhai scripting language.</p>
 <p>Functions and <a href="engine/metadata//book/rust/modules/index.html">modules</a> registered with an <a href="engine/metadata//book/engine/hello-world.html"><code>Engine</code></a> can output their <a href="engine/metadata//book/engine/metadata/index.html">metadata</a>
-into <em>definition files</em> which are used by the <a href="https://rhai.rs/lsp">language server</a>.</p>
+into <em>definition files</em> which are used by the <a href="https://github.com/rhaiscript/lsp">language server</a>.</p>
 <p>Definitions are generated via the <code>Engine::definitions</code> and <code>Engine::definitions_with_scope</code> API.</p>
 <p>This API requires the <a href="engine/metadata//book/start/features.html"><code>metadata</code></a> and <a href="engine/metadata//book/start/features.html"><code>internals</code></a> feature.</p>
 <h2 id="configurable-options"><a class="header" href="#configurable-options">Configurable Options</a></h2>
@@ -21195,7 +21195,7 @@ Rhai scripts directly within a browser editor window.</p>
 server to work with IDE tools.</p>
 <p>Author : <a href="https://github.com/tamasfe"><code>@tamasfe</code></a></p>
 <p>Repo : <a href="https://github.com/rhaiscript/lsp">on GitHub</a></p>
-<p>URL : <a href="https://rhai.rs/lsp">link to LSP Server</a></p>
+<p>URL : <a href="https://github.com/rhaiscript/lsp">link to LSP Server</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rhai-script-documentation-tool"><a class="header" href="#rhai-script-documentation-tool">Rhai Script Documentation Tool</a></h1>
 <p>The Rhai Script Documentation Tool, <code>rhai-doc</code>, takes a source directory and scans for
 Rhai script files (recursively), building a web-based documentation site for all <a href="tools//book/language/functions.html">functions</a> defined.</p>
