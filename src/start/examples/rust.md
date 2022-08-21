@@ -15,6 +15,7 @@ A number of examples can be found under `examples`.
 | [`callback`](callback.rs)                                                       | shows how to store a Rhai [closure] and call it later within Rust                                                               |
 | [`custom_types_and_methods`]({{repoHome}}/examples/custom_types_and_methods.rs) | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] for it                                         |
 | [`custom_types`]({{repoHome}}/examples/custom_types.rs)                         | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] using the [`CustomType`] trait.                |
+| [`definitions`]({{repoHome}}/examples/definitions)                              | shows how to generate definition files for use with the [Rhai Language Server][lsp] (requires the [`metadata`] feature)         |
 | [`hello`]({{repoHome}}/examples/hello.rs)                                       | simple example that evaluates an expression and prints the result                                                               |
 | [`reuse_scope`]({{repoHome}}/examples/reuse_scope.rs)                           | evaluates two pieces of code in separate runs, but using a common [`Scope`]                                                     |
 | [`serde`]({{repoHome}}/examples/serde.rs)                                       | example to serialize and deserialize Rust types with [`serde`](https://crates.io/crates/serde) (requires the [`serde`] feature) |
