@@ -82,4 +82,5 @@ Symbols and Patterns
 |                `===`                | strict equals to                   | _reserved_                            |
 |                `!==`                | strict not equals to               | _reserved_                            |
 |                `:=`                 | assignment                         | _reserved_                            |
+|                `:;`                 | typo to `::`                       | _reserved_                            |
 |            `::<` ... `>`            | turbofish                          | _reserved_                            |
