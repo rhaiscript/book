@@ -25,7 +25,7 @@ that they all share the same set of functions.
 >     /// Package description doc-comment
 >     pub name(variable) {
 >                         :
->         // package int code block
+>         // package init code block
 >                         :
 >     }
 >
