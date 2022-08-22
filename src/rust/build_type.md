@@ -14,22 +14,17 @@ This can be achieved simply by implementing the `CustomType` trait, which contai
 The `TypeBuilder` parameter provides a range of convenient methods to register [methods], property
 [getters/setters], [indexers] and [type iterators] of a [custom type]:
 
-| Method                    | Description                                                                 |
-| ------------------------- | --------------------------------------------------------------------------- |
-| `with_name`               | set a friendly name                                                         |
-| `with_fn`                 | register a [method]                                                         |
-| `with_result_fn`          | register a [fallible][fallible function] [method]                           |
-| `with_get`                | register a property [getter][getters/setters]                               |
-| `with_get_result`         | register a [fallible][fallible function] property [getter][getters/setters] |
-| `with_set`                | register a property [getter][getters/setters]                               |
-| `with_set_result`         | register a [fallible][fallible function] property [getter][getters/setters] |
-| `with_get_set`            | register property [getters/setters]                                         |
-| `with_indexer_get`        | register an [indexer] get function                                          |
-| `with_indexer_get_result` | register a [fallible][fallible function] [indexer] get function             |
-| `with_indexer_set`        | register an [indexer] set function                                          |
-| `with_indexer_set_result` | register a [fallible][fallible function] [indexer] set function             |
-| `with_indexer_get_set`    | register [indexer] get/set functions                                        |
-| `is_iterable`             | register a [type iterator] if the [custom type] is iterable                 |
+| Method                 | Description                                                 |
+| ---------------------- | ----------------------------------------------------------- |
+| `with_name`            | set a friendly name                                         |
+| `with_fn`              | register a [method]                                         |
+| `with_get`             | register a property [getter][getters/setters]               |
+| `with_set`             | register a property [getter][getters/setters]               |
+| `with_get_set`         | register property [getters/setters]                         |
+| `with_indexer_get`     | register an [indexer] get function                          |
+| `with_indexer_set`     | register an [indexer] set function                          |
+| `with_indexer_get_set` | register [indexer] get/set functions                        |
+| `is_iterable`          | register a [type iterator] if the [custom type] is iterable |
 
 ```admonish tip.small "Tip: Use plugin module if starting from scratch"
 
@@ -104,7 +99,7 @@ impl CustomType for Vec3 {
             .with_get_set("x", Self::get_x, Self::set_x)
             .with_get_set("y", Self::get_y, Self::set_y)
             .with_get_set("z", Self::get_z, Self::set_z)
-            .with_indexer_get_result(Self::get_component);
+            .with_indexer_get(Self::get_component);
     }
 }
 

@@ -273,7 +273,7 @@ fn super_call(context: NativeCallContext, callback: FnPtr, value: i64)
     //                                     ^^^^^^^^ arguments passed in tuple
 }
 
-engine.register_result_fn("super_call", super_call);
+engine.register_fn("super_call", super_call);
 ```
 
 

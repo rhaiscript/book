@@ -9,4 +9,4 @@ The [`no_object`] feature disables support for [custom types] including:
 
 * [object maps] and the [`Map`] type,
 
-* the `register_get`, `register_get_result`, `register_set`, `register_set_result` and `register_get_set` API's for [`Engine`]
+* the `register_get`, `register_set` and `register_get_set` API's for [`Engine`]

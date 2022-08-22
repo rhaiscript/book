@@ -36,13 +36,11 @@ Getters and setters are disabled under the [`no_object`] feature.
 
 <section></section>
 
-| `Engine` API          | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
-| --------------------- | -------------------------------------------------------------------------------- | :----------------------------: |
-| `register_get`        | `Fn(&mut T) -> V`                                                                |      yes, but not advised      |
-| `register_set`        | `Fn(&mut T, V)`                                                                  |              yes               |
-| `register_get_set`    | getter: `Fn(&mut T) -> V`</br>setter: `Fn(&mut T, V)`                            | yes, but not advised in getter |
-| `register_get_result` | `Fn(&mut T) -> Result<V, Box<EvalAltResult>>`                                    |      yes, but not advised      |
-| `register_set_result` | `Fn(&mut T, V) -> Result<(), Box<EvalAltResult>>`                                |              yes               |
+| `Engine` API       | Function signature(s)<br/>(`T: Clone` = custom type,<br/>`V: Clone` = data type) |        Can mutate `T`?         |
+| ------------------ | -------------------------------------------------------------------------------- | :----------------------------: |
+| `register_get`     | `Fn(&mut T) -> V`                                                                |      yes, but not advised      |
+| `register_set`     | `Fn(&mut T, V)`                                                                  |              yes               |
+| `register_get_set` | getter: `Fn(&mut T) -> V`</br>setter: `Fn(&mut T, V)`                            | yes, but not advised in getter |
 
 ```admonish danger.small "No support for references"
 

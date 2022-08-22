@@ -5,8 +5,7 @@ Register a Rust Function for Use in Rhai Scripts
 
 Rhai's scripting engine is very lightweight.  It gets most of its abilities from functions.
 
-To call these functions, they need to be _registered_ via `Engine::register_fn` or
-`Engine::register_result_fn` (see [fallible functions]).
+To call these functions, they need to be _registered_ via `Engine::register_fn`.
 
 ```admonish tip.small "Tip: Function overloading"
 

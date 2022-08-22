@@ -119,7 +119,7 @@ engine.register_fn("bunny_get_speed", move ||
 );
 
 let b = bunny.clone();
-engine.register_result_fn("bunny_set_speed", move |speed: i64|
+engine.register_fn("bunny_set_speed", move |speed: i64| -> Result<_, Box<EvalAltResult>>
     if speed <= 0 {
         return Err("Speed must be positive!".into());
     } else if speed > 100 {

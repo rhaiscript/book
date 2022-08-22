@@ -3,8 +3,8 @@ Register a Fallible Rust Function
 
 {{#include ../links.md}}
 
-If a function is _fallible_ (i.e. it returns a `Result<_, _>`), it can be registered with via
-`Engine::register_result_fn`.
+If a function is _fallible_ (i.e. it returns a `Result<_, _>`), it can be also registered with via
+`Engine::register_fn`.
 
 ```admonish warning.small "Return type"
 
@@ -26,8 +26,7 @@ fn safe_divide(x: i64, y: i64) -> Result<i64, Box<EvalAltResult>> {
 
 let mut engine = Engine::new();
 
-// Fallible functions that return Result values must use register_result_fn()
-engine.register_result_fn("divide", safe_divide);
+engine.register_fn("divide", safe_divide);
 
 if let Err(error) = engine.eval::<i64>("divide(40, 0)") {
     println!("Error: {:?}", *error);         // prints ErrorRuntime("Division by zero detected!", (1, 1)")

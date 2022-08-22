@@ -77,7 +77,7 @@ engine.register_type::<MyType>()
       // Property 'hello'
       .register_get("hello", |obj: &mut MyType| obj.len() as i64)
       // Index getter/setter
-      .register_indexer_get_result(|obj: &mut MyType, prop: &str|
+      .register_indexer_get(|obj: &mut MyType, prop: &str| -> Result<i64, Box<EvalAltResult>>
           obj.get(index).cloned().ok_or_else(|| "not found".into())
       ).register_indexer_set(|obj: &mut MyType, prop: &str, value: i64|
           obj.insert(prop.to_string(), value)
