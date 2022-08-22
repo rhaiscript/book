@@ -41,14 +41,19 @@ engine.register_type_with_name::<TestStruct>("TestStruct")
       .register_fn("new_ts", || TestStruct { fields: vec![1, 2, 3, 42] })
       .register_iterator::<TestStruct>();
 
+// 'TestStruct' is now iterable
 engine.run(
 "
-    // 'TestStruct' is iterable
-    let ts = new_ts();
-
-    // Use 'for' statement to loop through items in 'ts'
-    for value in ts {
+    for value in new_ts() {
         ...
     }
 ")?;
+```
+
+```admonish tip.small "Tip: Fallible type iterators"
+
+`Engine::register_iterator_result` allows registration of a _fallible_ type iterator &ndash;
+i.e. an iterator that returns `Result<T, Box<EvalAltResult>>`.
+
+On in very rare situations will this be necessary though.
 ```
