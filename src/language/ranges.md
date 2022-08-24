@@ -135,6 +135,7 @@ using a [raw `Engine`]) operate on ranges.
 | `start` method and property        |                 | beginning of the range                        |
 | `end` method and property          |                 | end of the range                              |
 | `contains`, [`in`] operator        | number to check | does this range contain the specified number? |
+| `is_empty` method and property     |                 | returns `true` if the range contains no items |
 | `is_inclusive` method and property |                 | is the range inclusive?                       |
 | `is_exclusive` method and property |                 | is the range exclusive?                       |
 
