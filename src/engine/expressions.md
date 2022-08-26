@@ -31,15 +31,15 @@ let result: i64 = engine.eval_expression_with_scope(&mut scope,
                   )?;
 ```
 
-```admonish bug "No statements allowed"
+~~~admonish bug "No statements allowed"
 
-When evaluating _expressions_, no full-blown statement (e.g. [`if`], [`while`], [`for`], `fn`)
-&ndash; not even [variable] assignment &ndash; is supported and will be considered syntax errors.
+When evaluating _expressions_, no full-blown statement (e.g. [`while`], [`for`], `fn`) &ndash;
+not even [variable] assignment &ndash; is supported and will be considered syntax errors.
 
-This is true even for [`if` expressions]({{rootUrl}}/language/if-expression.md), [`switch` expressions]({{rootUrl}}/language/switch-expression.md),
-[statement expressions]({{rootUrl}}/language/statement-expression.md) and [anonymous functions]/[closures].
+This is true also for [statement expressions]({{rootUrl}}/language/statement-expression.md)
+and [anonymous functions]/[closures].
 
-~~~rust
+```rust
 // The following are all syntax errors because the script
 // is not a strict expression.
 
@@ -48,9 +48,35 @@ engine.eval_expression::<()>("x = 42")?;
 let ast = engine.compile_expression("let x = 42")?;
 
 let result = engine.eval_expression_with_scope::<i64>(&mut scope,
-                    "if x { 42 } else { 123 }"
+                    "{ let y = calc(x); x + y }"
              )?;
 
 let fp: FnPtr = engine.eval_expression("|x| x + 1")?;
-~~~
 ```
+~~~
+
+
+~~~admonish tip "Tip: `if`-expressions and `switch`-expressions"
+
+[`if` expressions]({{rootUrl}}/language/if-expression.md) are allowed if both statement blocks
+contain only a single expression each.
+
+[`switch` expressions]({{rootUrl}}/language/switch-expression.md) are allowed if all match
+actions are expressions and not statements.
+
+```rust
+// The following are allowed.
+
+let result = engine.eval_expression_with_scope::<i64>(&mut scope,
+                    "if x { 42 } else { 123 }"
+             )?;
+
+let result = engine.eval_expression_with_scope::<i64>(&mut scope, "
+                    switch x {
+                        0 => x * 42,
+                        1..=9 => foo(123) + bar(1),
+                        10 => 0,
+                    }
+             ")?;
+```
+~~~
