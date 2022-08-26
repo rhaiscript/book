@@ -78,7 +78,7 @@ fn super_call(context: NativeCallContext, value: i64)
     //                               ^^^^^^^^ arguments passed in tuple
 }
 
-engine.register_result_fn("super_call", super_call);
+engine.register_fn("super_call", super_call);
 ```
 ~~~
 
@@ -98,3 +98,68 @@ pub fn greet(context: NativeCallContext, callback: FnPtr) -> Result<String, Box<
 }
 ```
 ~~~
+
+
+Advanced Usage &ndash; Recreate `NativeCallContext`
+---------------------------------------------------
+
+The `NativeCallContext` type encapsulates the entire _context_ of a script up to the
+particular point of the native Rust function call.
+
+The fields of `NativeCallContext` can be individually stored (e.g. `&str` fields can be stored as
+`String`'s) for later use, when a new `NativeCallContext` can be constructed based on these stored
+fields.
+
+A reconstructed `NativeCallContext` acts almost the same as the original instance, so it is possible
+to suspend the evaluation of a script, and to continue at a later time with a new
+`NativeCallContext`.
+
+Doing so requires the [`internals`] feature to access internal API's.
+
+### Step 1: Store all fields
+
+```rust
+// Store fields for later use
+let fn_name = context.fn_name().to_string();
+let source = context.source().map(|s| s.to_string());
+let global = context.global_runtime_state().unwrap().clone();
+let pos = context.position();
+let call_level = context.call_level();
+
+// Store the paths of the stack of call modules up to this point.
+let modules_list: Vec<String> = context.iter_namespaces()
+                                       .map(|m| m.id().unwrap_or(""))
+                                       .filter(|id| !id.is_empty())
+                                       .map(|id| id.to_string())
+                                       .collect();
+
+// ... store the fields somewhere ...
+```
+
+### Step 2: Recreate `NativeCallContext`
+
+```rust
+// ... do something else ...
+
+let mut libraries = Vec::<Shared<Module>>::new();
+
+for path in modules_list {
+    // Recreate the stack of call modules by resolving each path with
+    // the module resolver.
+    let module = engine.module_resolver().resolve(engine, None, &path, pos)?;
+
+    libraries.push(module);
+}
+
+let lib: Vec<&Module> = libraries.iter().map(|m| m.as_ref()).collect();
+
+let new_context = NativeCallContext::new_with_all_fields(
+                        &engine,
+                        &fn_name,
+                        src,
+                        &global,
+                        &lib,
+                        pos,
+                        call_level
+                  );
+```
