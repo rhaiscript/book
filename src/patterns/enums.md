@@ -46,38 +46,79 @@ enum MyEnum {
 #[export_module]
 mod MyEnumModule {
     // Constructors for 'MyEnum' variants
-    pub const Foo: &MyEnum = MyEnum::Foo;
+
+    /// `MyEnum::Foo` with no inner data.
+    pub const Foo: MyEnum = MyEnum::Foo;
+
+    /// `MyEnum::Bar(value)`
     pub fn Bar(value: i64) -> MyEnum { MyEnum::Bar(value) }
-    pub fn Baz(val1: String, val2: bool) -> MyEnum { MyEnum::Baz(val1, val2) }
-    // Access to fields
+
+    /// `MyEnum::Baz(name, flag)`
+    pub fn Baz(name: String, flag: bool) -> MyEnum { MyEnum::Baz(name, flag) }
+
+    /// Return the current variant of `MyEnum`.
     #[rhai_fn(global, get = "enum_type", pure)]
     pub fn get_type(my_enum: &mut MyEnum) -> String {
         match my_enum {
             MyEnum::Foo => "Foo".to_string(),
             MyEnum::Bar(_) => "Bar".to_string(),
-            MyEnum::Baz(_, _) => "Baz".to_string(),
+            MyEnum::Baz(_, _) => "Baz".to_string()
         }
     }
+
+    // Access to inner values by name
+
+    /// Return the value in `MyEnum::Bar`.
+    #[rhai_fn(global, get = "field_0", pure)]
+    pub fn value(my_enum: &mut MyEnum) -> Dynamic {
+        match my_enum {
+            MyEnum::Bar(x) => Dynamic::from(x),
+            _ => Dynamic::UNIT
+        }
+    }
+    /// Return the name in `MyEnum::Baz`.
+    #[rhai_fn(global, get = "field_0", pure)]
+    pub fn value(my_enum: &mut MyEnum) -> Dynamic {
+        match my_enum {
+            MyEnum::Baz(n, _) => Dynamic::from(n),
+            _ => Dynamic::UNIT
+        }
+    }
+    /// Return the flag in `MyEnum::Baz`.
+    #[rhai_fn(global, get = "field_0", pure)]
+    pub fn value(my_enum: &mut MyEnum) -> Dynamic {
+        match my_enum {
+            MyEnum::Baz(_, f) => Dynamic::from(f),
+            _ => Dynamic::UNIT
+        }
+    }
+
+    // Access to inner values by position
+
+    /// Return the value kept in the first position of `MyEnum`.
     #[rhai_fn(global, get = "field_0", pure)]
     pub fn get_field_0(my_enum: &mut MyEnum) -> Dynamic {
         match my_enum {
             MyEnum::Foo => Dynamic::UNIT,
             MyEnum::Bar(x) => Dynamic::from(x),
-            MyEnum::Baz(x, _) => Dynamic::from(x),
+            MyEnum::Baz(x, _) => Dynamic::from(x)
         }
     }
+    /// Return the value kept in the second position of `MyEnum`.
     #[rhai_fn(global, get = "field_1", pure)]
     pub fn get_field_1(my_enum: &mut MyEnum) -> Dynamic {
         match my_enum {
             MyEnum::Foo | MyEnum::Bar(_) => Dynamic::UNIT,
-            MyEnum::Baz(_, x) => Dynamic::from(x),
+            MyEnum::Baz(_, x) => Dynamic::from(x)
         }
     }
+
     // Printing
     #[rhai_fn(global, name = "to_string", name = "to_debug", pure)]
     pub fn to_string(my_enum: &mut MyEnum) -> String {
         format!("{:?}", my_enum)
     }
+
     // '==' and '!=' operators
     #[rhai_fn(global, name = "==", pure)]
     pub fn eq(my_enum: &mut MyEnum, my_enum2: MyEnum) -> bool {
@@ -119,6 +160,18 @@ z.enum_type == "Baz";
 
 // Extract enum fields
 
+x.value == ();
+
+y.value == 42;
+
+z.value == ();
+
+x.name == ();
+
+y.name == ();
+
+z.name == "hello";
+
 y.field_0 == 42;
 
 y.field_1 == ();
@@ -138,12 +191,12 @@ It is possible, however, to [`switch`] through enum variants based on their type
 switch my_enum.enum_type {
   "Foo" => ...,
   "Bar" => {
-    let value = foo.field_0;
+    let value = foo.value;
     ...
   }
   "Baz" => {
-    let val1 = foo.field_0;
-    let val2 = foo.field_1;
+    let name = foo.name;
+    let flag = foo.flag;
     ...
   }
 }
@@ -169,8 +222,8 @@ engine.register_get("enum_data", |my_enum: &mut MyEnum| {
         MyEnum::Bar(value) => vec![ "Bar".into() ] as Array,
 
         // Say, all fields act as discriminants
-        MyEnum::Baz(val1, val2) => vec![
-            "Baz".into(), val1.clone().into(), (*val2).into()
+        MyEnum::Baz(name, flag) => vec![
+            "Baz".into(), name.clone().into(), (*flag).into()
         ] as Array
     }
 });
