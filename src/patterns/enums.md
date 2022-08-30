@@ -181,6 +181,35 @@ z.field_0 == "hello";
 z.field_1 == true;
 ```
 
+~~~admonish tip.small "Tip: Use a macro"
+
+For enums containing only variants with no inner data, it is convenient to use a simple macro to create
+such a [plugin module].
+
+```rust
+// The 'create_enum_module!' macro
+macro_rules! create_enum_module {
+    ($module:ident : $typ:ty => $($variant:ident),+) => {
+        #[export_module]
+        pub mod $module {
+            $( pub const $variant: $typ = <$typ>::$variant; )*
+        }
+    };
+}
+
+// The enum
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
+pub enum MyEnum { Foo, Bar, Baz, Hello, World }
+
+// This creates a plugin module called 'my_enum_module'
+expand_enum! { my_enum_module: MyEnum => Foo, Bar, Baz, Hello, World }
+```
+~~~
+
+
+Use Enums With `switch`
+-----------------------
+
 Since enums are internally treated as [custom types], they are not _literals_ and cannot be used as
 a match case in [`switch`] statements.  This is quite a limitation because the equivalent `match`
 statement is commonly used in Rust to work with enums and bind variables to variant-internal data.
