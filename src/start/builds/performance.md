@@ -20,6 +20,24 @@ following features should be considered:
 When the above feature flags are used, performance may increase by around 15-20%.
 
 
+Unchecked Build
+---------------
+
+By default, Rhai provides a [_Don't Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic)
+guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.
+
+For maximum performance, however, these [safety] checks can be turned off via the [`unchecked`] feature.
+
+
+Fast Operators Mode
+-------------------
+
+Make sure that [_Fast Operators_ Mode][options], which is enabled by default, is on.  It ignores any
+user [overloading][operator overloading] of [built-in operators].
+
+For operator-heavy scripts, this may provide a substantial speed-up.
+
+
 Use Only One Integer Type
 -------------------------
 
@@ -85,15 +103,6 @@ performance overhead.
 
 Use [`no_closure`] to disable support for [closures] to optimize the hot path because it no longer
 needs to take locks for shared data.
-
-
-Unchecked Build
----------------
-
-By default, Rhai provides a [_Don't Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic)
-guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.
-
-For maximum performance, however, these [safety] checks can be turned off via the [`unchecked`] feature.
 
 
 Disable Position

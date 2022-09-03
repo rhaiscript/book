@@ -169,6 +169,7 @@
 [`global`]: {{rootUrl}}/language/global.md
 [variable resolver]: {{rootUrl}}/engine/var.md
 [strict variables]: {{rootUrl}}/engine/strict-var.md
+[fast operators]: {{rootUrl}}/start/builds/performance.md#fast-operators-mode
 [`private`]: {{rootUrl}}/language/modules/export.md
 
 [`eval`]: {{rootUrl}}/language/eval.md
