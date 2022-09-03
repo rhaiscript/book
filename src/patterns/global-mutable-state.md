@@ -28,7 +28,50 @@ discouraged** because:
    major surgery.
 
 
-```admonish danger "I don't care! Just tell me how to do it, now!"
+Alternative &ndash; Use `this`
+------------------------------
+
+In the majority of the such scenarios, there is only _one_ mutable global state of interest.
+
+Therefore, it is a _must_ better solution to bind that global state to the `this` pointer.
+
+```rust
+// Say this is a mutable global state...
+let state = #{ counter: 0 };
+
+// This function tries to access the global 'state'
+// which will fail.
+fn inc() {
+    state.counter += 1;
+}
+
+// The function should be written with 'this'
+fn inc() {
+    this.counter += 1;
+}
+
+state.inc();        // call 'inc' with 'state' bound to 'this'
+
+// Or this way... why hard-code the state in the first place?
+fn inc() {
+    this += 1;
+}
+
+state.counter.inc();
+```
+
+```admonish question.small "Why is this better?"
+
+There are good reasons why using `this` is a better solution:
+
+* the state is never _hidden_ &ndash; it is always clear to see what is being modified
+* it is just as fast &ndash; the `this` pointer works by reference
+* you can pass other states in, in the future, without changing the script code
+* there are no hard links within functions that will be difficult to unravel
+* only the [variable] bound to `this` is ever modified; everything else is immutable
+```
+
+```admonish danger.small "I don't care! I want it! Just tell me how to do it! Now!"
 
 This is not something that Rhai encourages.  _You Have Been Warned™_.
 
