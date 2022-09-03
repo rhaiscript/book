@@ -192,7 +192,10 @@ macro_rules! create_enum_module {
     ($module:ident : $typ:ty => $($variant:ident),+) => {
         #[export_module]
         pub mod $module {
-            $( pub const $variant: $typ = <$typ>::$variant; )*
+            $(
+                #[allow(non_upper_case_globals)]
+                pub const $variant: $typ = <$typ>::$variant;
+            )*
         }
     };
 }
