@@ -189,27 +189,3 @@ let this_ptr = &mut *first.write_lock::<A>().unwrap();
 let value_ref = &*rest[0].read_lock::<B>().unwrap();
 ```
 ~~~
-
-
-TL;DR
------
-
-~~~admonish question "Why `read_lock` and `write_lock`?"
-
-The [`Dynamic`] API that casts it to a reference to a particular data type  is `read_lock`
-(for an immutable reference) and `write_lock` (for a mutable reference).
-
-As the naming shows, something is _locked_ in order to allow this access, and that something
-is a _shared value_ created by [capturing][automatic currying] variables from [closures].
-
-Shared values are implemented as `Rc<RefCell<Dynamic>>` (`Arc<RwLock<Dynamic>>` under [`sync`]).
-
-If the value is _not_ a shared value, or if running under [`no_closure`] where there is
-no [capturing][automatic currying], this API de-sugars to a simple reference cast.
-
-In other words, there is no locking and reference counting overhead for the vast majority of
-non-shared values.
-
-If the value _is_ a shared value, then it is first _locked_ and the returned _lock guard_
-allows access to the underlying value in the specified type.
-~~~

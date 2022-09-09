@@ -35,20 +35,20 @@ switch type_of(x) {
 ```
 
 
-```admonish info "Custom types"
+```admonish info.small "Custom types"
 
 `type_of()` a [custom type] returns:
 
-* the registered name, if registered via `Engine::register_type_with_name`
+* the friendly name, if registered via `Engine::register_type_with_name`
 
-* the full Rust type name, if registered via `Engine::register_type`
+* the full Rust type path, if registered via `Engine::register_type`
 
 ~~~rust
 struct TestStruct1;
 struct TestStruct2;
 
 engine
-    // type_of(struct1) == "crate::path::to::module::TestStruct1"
+    // type_of(struct1) == "path::to::module::TestStruct1"
     .register_type::<TestStruct1>()
     // type_of(struct2) == "MyStruct"
     .register_type_with_name::<TestStruct2>("MyStruct");
