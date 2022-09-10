@@ -15,7 +15,3 @@ Versions
 --------
 
 This Book is for version **{{version}}** of Rhai.
-
-{% if rootUrl != "" and not rootUrl is ending_with("vnext") %}
-For the latest development version, see [here]({{rootUrl}}/vnext/).
-{% endif %}
