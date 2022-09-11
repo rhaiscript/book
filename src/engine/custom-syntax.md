@@ -410,8 +410,8 @@ tags < "foo", "bar", 123, ... , x+y, true >
 For even more flexibility in order to handle these advanced use cases, there is a
 _low level_ API for custom syntax that allows the registration of an entire mini-parser.
 
-Use `Engine::register_custom_syntax_raw` to register a custom syntax _parser_
-together with the implementation function.
+Use `Engine::register_custom_syntax_with_state_raw` to register a custom syntax _parser_ together
+with an implementation function, both of which accepts a custom user-defined _state_ value.
 
 
 How Custom Parsers Work
@@ -431,7 +431,7 @@ It can either be:
 
 The custom syntax parser has the following signature.
 
-> `Fn(symbols: &[ImmutableString], look_ahead: &str) -> Result<Option<ImmutableString>, ParseError>`
+> `Fn(symbols: &[ImmutableString], look_ahead: &str, state: &mut Dynamic) -> Result<Option<ImmutableString>, ParseError>`
 
 where:
 
@@ -439,6 +439,7 @@ where:
 | ------------ | :---------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `symbols`    | [`&[ImmutableString]`][`ImmutableString`] | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
 | `look_ahead` |                  `&str`                   | a string slice containing the next symbol that is about to be read                                                                                                  |
+| `state`      |        [`&mut Dynamic`][`Dynamic`]        | a user-defined _state_                                                                                                                                              |
 
 Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.
@@ -500,11 +501,26 @@ This is typically used to inform the implementation function which custom syntax
 actually parsed.
 ~~~
 
+#### Implementation function signature
+
+The signature of an implementation function for the `Engine::register_custom_syntax_with_state_raw`
+API is as follows.
+
+> `Fn(context: &mut EvalContext, inputs: &[Expression], state: &Dynamic) -> Result<Dynamic, Box<EvalAltResult>>`
+
+where:
+
+| Parameter |                Type                 | Description                                           |
+| --------- | :---------------------------------: | ----------------------------------------------------- |
+| `context` | [`&mut EvalContext`][`EvalContext`] | mutable reference to the current _evaluation context_ |
+| `inputs`  |           `&[Expression]`           | a list of input expression trees                      |
+| `state`   |       [`&Dynamic`][`Dynamic`]       | user-defined state                                    |
+
 
 ### Example
 
 ```rust
-engine.register_custom_syntax_raw(
+engine.register_custom_syntax_with_state_raw(
     // The leading symbol - which needs not be an identifier.
     "perform",
     // The custom parser implementation - always returns the next symbol expected
@@ -516,7 +532,7 @@ engine.register_custom_syntax_raw(
     //
     // The return type is 'Option<ImmutableString>' to allow common text strings
     // to be interned and shared easily, reducing allocations during parsing.
-    |symbols, look_ahead| match symbols.len() {
+    |symbols, look_ahead, state| match symbols.len() {
         // perform ...
         1 => Ok(Some("$ident$".into())),
         // perform command ...
