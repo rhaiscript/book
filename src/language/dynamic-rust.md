@@ -1,7 +1,30 @@
-Access `Dynamic` Data with Rust
-===============================
+Interop `Dynamic` Data with Rust
+================================
 
 {{#include ../links.md}}
+
+
+Create a `Dynamic` from Rust Type
+---------------------------------
+
+| Rust type<br/>`T: Clone`,<br/>`K: Into<String>`                    | Unavailable under | Use API                      |
+| ------------------------------------------------------------------ | :---------------: | ---------------------------- |
+| `INT` (`i64` or `i32`)                                             |                   | `value.into()`               |
+| `FLOAT` (`f64` or `f32`)                                           |   [`no_float`]    | `value.into()`               |
+| [`Decimal`][rust_decimal] (requires [`decimal`])                   |                   | `value.into()`               |
+| `bool`                                                             |                   | `value.into()`               |
+| [`()`]                                                             |                   | `value.into()`               |
+| [`String`][string], [`&str`][string], [`ImmutableString`]          |                   | `value.into()`               |
+| `char`                                                             |                   | `value.into()`               |
+| [`Array`][array]                                                   |   [`no_index`]    | `Dynamic::from_array(value)` |
+| [`Blob`][BLOB]                                                     |   [`no_index`]    | `Dynamic::from_blob(value)`  |
+| `Vec<T>`, `&[T]`, `Iterator<T>`                                    |   [`no_index`]    | `value.into()`               |
+| [`Map`][object map]                                                |   [`no_object`]   | `Dynamic::from_map(value)`   |
+| `HashMap<K, T>`, `HashSet<K>`,<br/>`BTreeMap<K, T>`, `BTreeSet<K>` |   [`no_object`]   | `value.into()`               |
+| [`INT..INT`][range], [`INT..=INT`][range]                          |                   | `value.into()`               |
+| `Rc<RwLock<T>>` or `Arc<Mutex<T>>`                                 |  [`no_closure`]   | `value.into()`               |
+| [`Instant`][timestamp]                                             |    [`no_std`]     | `value.into()`               |
+| All types (including above)                                        |                   | `Dynamic::from(value)`       |
 
 
 Type Checking and Casting

@@ -92,7 +92,7 @@ Scripting Language
 - [Values and Types](language/values-and-types.md)
   - [`Dynamic` Values](language/dynamic.md)
     - [type_of()](language/type-of.md)
-    - [Access Data with Rust](language/dynamic-rust.md)
+    - [Interop with Rust](language/dynamic-rust.md)
     - [Value Tag](language/dynamic-tag.md)
     - [Serialization/Deserialization with `serde`](rust/serde.md)
   - [Numbers](language/numbers.md)
