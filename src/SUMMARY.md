@@ -201,6 +201,7 @@ Advanced Topics
 - [Low-Level API to Register Functions](rust/register-raw.md)
 - [Evaluation Context](engine/eval-context.md)
 - [Call Function Within Caller's Scope](language/fn-parent-scope.md)
+- [Use Rhai in Dynamic Libraries](engine/dynamic-lib.md)
 - [Use Rhai as a DSL](engine/dsl.md)
   - [Remap Tokens During Parsing](engine/token-mapper.md)
   - [Disable Keywords and/or Operators](engine/disable-keywords.md)
