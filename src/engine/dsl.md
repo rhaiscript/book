@@ -79,7 +79,7 @@ let total = calculate sum(table->price) => row : row.weight > 50;
 let total = SELECT sum(price) AS row FROM table WHERE row.weight > 50;
 ```
 
-After registering this custom syntax with Rhai, it can be used anywhere inside a script as
+After registering this [custom syntax] with Rhai, it can be used anywhere inside a script as
 a normal expression.
 
 For its evaluation, the callback function will receive the following list of inputs:
@@ -91,4 +91,4 @@ For its evaluation, the callback function will receive the following list of inp
 * `inputs[4] = Expression(row.weight > 50)` &ndash; filter predicate
 
 Other identifiers, such as `"calculate"`, `"FROM"`, as well as symbols such as `->` and `:` etc.,
-are parsed in the order defined within the custom syntax.
+are parsed in the order defined within the [custom syntax].
