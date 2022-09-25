@@ -16,7 +16,6 @@ All built-in operators are binary, and are supported for both operands of the sa
 | `&&`, <code>\|\|</code>   |                               | <ul><li>`bool` (short-circuits)</li></ul>                                                                                                                                                                                 |
 | `==`, `!=`                |                               | <ul><li>`INT`</li><li>`FLOAT` (if not [`no_float`])</li><li>[`Decimal`][rust_decimal] (requires [`decimal`])</li><li>`bool`</li><li>`char`</li><li>[string]</li><li>[BLOB]</li><li>numeric [range]</li><li>`()`</li></ul> |
 | `>`, `>=`, `<`, `<=`      |                               | <ul><li>`INT`</li><li>`FLOAT` (if not [`no_float`])</li><li>[`Decimal`][rust_decimal] (requires [`decimal`])</li><li>`char`</li><li>[string]</li><li>`()`</li></ul>                                                       |
-| [`in`]                    |                               | <ul><li>[string]</li><li>`char`/[string]</li><li>[string]/[object map] (if not [`no_object`])</li><li>`INT`/[BLOB] (if not [`no_index`])</li><li>`INT`/numeric [range]</li></ul>                                          |
 
 ```admonish tip.small
 
