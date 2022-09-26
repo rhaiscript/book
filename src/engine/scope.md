@@ -29,7 +29,7 @@ Essentially, a `Scope` is always searched in _reverse order_.
 
 ```admonish tip.small "Tip: The lifetime parameter"
 
-The `Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
+`Scope` has a _lifetime_ parameter, in the vast majority of cases it can be omitted and
 automatically inferred to be `'static`.
 
 Currently, that lifetime parameter is not used.  It is there to maintain backwards compatibility
@@ -40,6 +40,18 @@ The lifetime parameter is not guaranteed to remain unused for future versions.
 In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 ```
 
+~~~admonish tip.small "Tip: The `const` generic parameter"
+
+`Scope` also has a _`const` generic_ parameter, which is a number that defaults to 8.
+It indicates the number of entries that the `Scope` can keep _inline_ without allocations.
+
+The larger this number, the larger the `Scope` type gets, but allocations will happen far
+less frequently.
+
+A smaller number makes `Scope` smaller, but allocation costs will be incurred when the
+number of entries exceed the _inline_ capacity.
+~~~
+
 
 `Scope` API
 -----------
@@ -47,6 +59,7 @@ In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 | Method                                        | Description                                                                                                                                         |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `new` _instance method_                       | create a new empty `Scope`                                                                                                                          |
+| `with_capacity` _instance method_             | create a new empty `Scope` with a specified initial capacity                                                                                        |
 | `len`                                         | number of [variables]/[constants] currently within the `Scope`                                                                                      |
 | `rewind`                                      | _rewind_ (i.e. reset) the `Scope` to a particular number of [variables]/[constants]                                                                 |
 | `clear`                                       | remove all [variables]/[constants] from the `Scope`, making it empty                                                                                |
@@ -70,6 +83,16 @@ In order to put a `Scope` into a `struct`, use `Scope<'static>`.
 For details on the `Scope` API, refer to the
 [documentation](https://docs.rs/rhai/{{version}}/rhai/struct.Scope.html) online.
 ~~~
+
+
+Serializing/Deserializing
+-------------------------
+
+With the [`serde`] feature, `Scope` is serializable and deserializable via
+[`serde`](https://crates.io/crates/serde).
+
+[Custom types] stored in the `Scope`, however, are serialized as full type-name strings.
+Data in [custom types] are not serialized.
 
 
 Example
@@ -120,7 +143,7 @@ assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 42);
 `Engine` API Using `Scope`
 --------------------------
 
-[`Engine`] API methods that accept a `Scope` parameter all end with `_with_scope`, making that
+[`Engine`] API methods that accept a `Scope` parameter all end in `_with_scope`, making that
 `Scope` (and everything inside it) available to the script:
 
 | `Engine` API                            | Not available under |
