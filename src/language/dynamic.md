@@ -52,3 +52,25 @@ switch type_of(mystery) {
     _ => print(`I don't know what this is: ${type_of(mystery)}`)
 }
 ```
+
+
+Parse from JSON
+---------------
+
+~~~admonish warning.side "Requires `metadata`"
+
+`parse_json` requires the [`metadata`] feature; the [`no_index`] and [`no_object`]
+features must _not_ be set.
+~~~
+
+Use `parse_json` to parse a JSON string into a [`Dynamic`] value.
+
+|           JSON type           |  Rhai type   |
+| :---------------------------: | :----------: |
+|  `number` (no decimal point)  |    `INT`     |
+| `number` (with decimal point) |   `FLOAT`    |
+|           `string`            |   [string]   |
+|           `boolean`           |    `bool`    |
+|            `Array`            |   [array]    |
+|           `Object`            | [object map] |
+|            `null`             |    [`()`]    |
