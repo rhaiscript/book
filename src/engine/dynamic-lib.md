@@ -9,6 +9,12 @@ Sometimes functions registered into a Rhai [`Engine`] come from _dynamic librari
 libraries_ in Linux or _DLL's_ in Windows), which are compiled separately from the main binary, not
 statically linked but loaded dynamically at runtime.
 
+~~~admonish example.small "`rhai-dylib`"
+
+The project [`rhai-dylib`] demonstrates an API for creating dynamically-loadable libraries
+for use with a Rhai [`Engine`].
+~~~
+
 
 Problem Symptom
 ---------------

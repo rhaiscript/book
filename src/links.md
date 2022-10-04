@@ -224,6 +224,7 @@
 [literal]: {{rootUrl}}/appendix/literals.md
 [literals]: {{rootUrl}}/appendix/literals.md
 
+[`rhai-dylib`]: {{rootUrl}}/lib/rhai-dylib.md
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md
 [`rhai-sci`]: {{rootUrl}}/lib/rhai-sci.md
 [`rhai-fs`]: {{rootUrl}}/lib/rhai-fs.md

@@ -83,6 +83,7 @@ Rust Integration
     - [Random Number Generation, Shuffling and Sampling](lib/rhai-rand.md)
     - [Scientific Computing](lib/rhai-sci.md)
     - [Filesystem Access](lib/rhai-fs.md)
+    - [Dynamic Loadable Libraries](lib/rhai-dylib.md)
 
 ----------------------
 
