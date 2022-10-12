@@ -50,7 +50,7 @@ This means that the same function signature _always_ generate the same hash valu
 That seed can be specified via the environment variable `RHAI_AHASH_SEED` and requires four
 64-bit numbers (i.e. `u64`) in Rust array literal format.
 
-```bash
+```sh
 RHAI_AHASH_SEED="[123, 456, 789, 42]" cargo build ...
 ```
 

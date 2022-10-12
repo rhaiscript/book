@@ -24,7 +24,39 @@ such as the script file API's and loading [modules] from external script files.
 ```admonish example "Sample"
 
 Check out the [_Online Playground_]({{rootUrl}}/tools/playground.md) project which is driven
-by a Rhai [`Engine`] compiled into [WASM].
+by a Rhai [`Engine`] compiled into WASM.
+```
+
+
+Target Environments
+-------------------
+
+### WASI: `wasm32-wasi`
+
+There is no particular setting to tweak when building for WASI.
+
+### Browser: `wasm32-unknown-unknown`
+
+The set of default features of Rhai is at odds with building for raw WASM, since it requires a
+system-provided source of random numbers (for hashing).
+
+Such a random number source is available if the WASM module is intended for a browser. In such
+circumstances, it is necessary to set the `js` feature on the
+[`getrandom`](https://crates.io/crates/getrandom) crate.
+
+```toml
+[dependencies]
+getrandom = { version = "0.2", features = [ "js" ] }
+```
+
+### Non-Browser: `wasm32-unknown-unknown`
+
+Non-browser environments may not have random numbers available, so it is necessary to opt out of
+`default-features` in order to force usage of fixed (non-random) hashing keys.
+
+```toml
+[dependencies]
+rhai = { version = "{{version}}", default-features = false, features = [ "std" ] }
 ```
 
 
@@ -43,8 +75,8 @@ Size
 
 Also look into [minimal builds] to reduce generated WASM size.
 
-A typical, full-featured Rhai scripting engine compiles to a single WASM file that is only a few
-hundred KB.
+A typical, full-featured Rhai scripting engine compiles to a single WASM32 file that is less than
+400KB (non-gzipped).
 
 When excluding features that are marginal in WASM environment, the gzipped payload can be shrunk further.
 
