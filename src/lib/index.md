@@ -9,3 +9,4 @@ Following are external [packages] that can be used with Rhai for additional func
 | :-----------: | ----------------------------------------------- |
 | [`rhai-rand`] | generate random numbers, shuffling and sampling |
 | [`rhai-sci`]  | functions for scientific computing              |
+|  [`rhai-fs`]  | functions to read/write files                   |

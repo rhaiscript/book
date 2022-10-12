@@ -81,6 +81,7 @@ Rust Integration
   - [External Packages](lib/index.md)
     - [Random Number Generation, Shuffling and Sampling](lib/rhai-rand.md)
     - [Scientific Computing](lib/rhai-sci.md)
+    - [Filesystem Access](lib/rhai-fs.md)
 
 ----------------------
 
