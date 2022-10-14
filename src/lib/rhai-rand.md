@@ -8,11 +8,16 @@
 * random number generation using the [`rand`](https://crates.io/crates/rand) crate
 * [array] shuffling and sampling
 
-On `crates.io`: [`rhai-rand`](https://crates.io/crates/rhai-rand)
+```admonish info.side "Documentation"
 
-On `GitHub`: [`rhaiscript/rhai-rand`](https://github.com/rhaiscript/rhai-rand)
+See [https://docs.rs/rhai-rand](https://docs.rs/rhai-rand#api) for the list of functions.
+```
 
-Package name: `RandomPackage`
+> On `crates.io`: [`rhai-rand`](https://crates.io/crates/rhai-rand)
+>
+> On `GitHub`: [`rhaiscript/rhai-rand`](https://github.com/rhaiscript/rhai-rand)
+>
+> Package name: `RandomPackage`
 
 
 Dependency
@@ -54,7 +59,7 @@ Features
 |  `array`   | enables methods for [arrays]                                 |   yes    |             [`no_index`]             |
 | `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |    no    |                                      |
 
-### Example &ndash; working with `no_float` in Rhai
+~~~admonish example "Example: Working with `no_float` in Rhai"
 
 `Cargo.toml`:
 
@@ -66,33 +71,4 @@ rhai = { version="{{version}}", features = ["no_float"] }
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version="0.1", default-features = false, features = ["array"] }
 ```
-
-
-Package Functions
------------------
-
-The following functions are defined.
-
-|          Function          |        Return type        | Feature | Description                                                                                |
-| :------------------------: | :-----------------------: | :-----: | ------------------------------------------------------------------------------------------ |
-|          `rand()`          |           `INT`           |         | generates a random integer number                                                          |
-|     `rand(start..end)`     |           `INT`           |         | generates a random integer number within the exclusive range `start..end`                  |
-|    `rand(start..=end)`     |           `INT`           |         | generates a random integer number within the inclusive range `start..=end`                 |
-|     `rand(start, end)`     |           `INT`           |         | generates a random integer number within the inclusive range `start..=end`                 |
-|       `rand_float()`       |          `FLOAT`          | `float` | generates a random floating-point number between `0.0` and `1.0` (exclusive)               |
-|  `rand_float(start, end)`  |          `FLOAT`          | `float` | generates a random floating-point number within the inclusive range `start..=end`          |
-|      `rand_decimal()`      | [`Decimal`][rust_decimal] |         | generates a random [decimal][rust_decimal] number                                          |
-| `rand_decimal(start, end)` | [`Decimal`][rust_decimal] |         | generates a random [decimal][rust_decimal] number within the inclusive range `start..=end` |
-|       `rand_bool()`        |          `bool`           |         | generates a random boolean                                                                 |
-|       `rand_bool(p)`       |          `bool`           | `float` | generates a random boolean with the probability `p` of being `true`                        |
-
-
-### Arrays
-
-The following methods are defined for [arrays] (requires the `array` feature).
-
-|  Method   |                       Parameter(s)                        | Return type | Description                                                                |
-| :-------: | :-------------------------------------------------------: | :---------: | -------------------------------------------------------------------------- |
-| `shuffle` |                          _none_                           |             | shuffles the items in the [array]                                          |
-| `sample`  |                          _none_                           | [`Dynamic`] | returns a random item from the [array]                                     |
-| `sample`  | number of items to sample (empty if ≤ 0, all if ≥ length) |  [`Array`]  | returns a non-repeating _shuffled_ random sample of items from the [array] |
+~~~

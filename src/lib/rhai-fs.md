@@ -1,9 +1,16 @@
-`rhai-fs`: Random Number Generation, Shuffling and Sampling
-=============================================================
+`rhai-fs`: Filesystem Access
+============================
 
 {{#include ../links.md}}
 
-`rhai-fs` is an independent Rhai [package] that provides functions to read from and write to files.
+
+`rhai-fs` is an independent Rhai [package] that enables reading from and writing to files in an
+external filesystem.
+
+```admonish info.side "Documentation"
+
+See <https://docs.rs/rhai-fs> for the list of functions.
+```
 
 > On `crates.io`: [`rhai-fs`](https://crates.io/crates/rhai-fs)
 >
@@ -63,7 +70,7 @@ print(`new file contents: ${blob_buf}`);
 file.seek(0);
 
 // Overwrite the original file with new data
-file.write(blob_buf);
+blob_buf.write_to_file(file);
 ```
 
 
