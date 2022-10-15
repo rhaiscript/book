@@ -7,24 +7,24 @@ Interop `Dynamic` Data with Rust
 Create a `Dynamic` from Rust Type
 ---------------------------------
 
-| Rust type<br/>`T: Clone`,<br/>`K: Into<String>`                    | Unavailable under | Use API                      |
-| ------------------------------------------------------------------ | :---------------: | ---------------------------- |
-| `INT` (`i64` or `i32`)                                             |                   | `value.into()`               |
-| `FLOAT` (`f64` or `f32`)                                           |   [`no_float`]    | `value.into()`               |
-| [`Decimal`][rust_decimal] (requires [`decimal`])                   |                   | `value.into()`               |
-| `bool`                                                             |                   | `value.into()`               |
-| [`()`]                                                             |                   | `value.into()`               |
-| [`String`][string], [`&str`][string], [`ImmutableString`]          |                   | `value.into()`               |
-| `char`                                                             |                   | `value.into()`               |
-| [`Array`][array]                                                   |   [`no_index`]    | `Dynamic::from_array(value)` |
-| [`Blob`][BLOB]                                                     |   [`no_index`]    | `Dynamic::from_blob(value)`  |
-| `Vec<T>`, `&[T]`, `Iterator<T>`                                    |   [`no_index`]    | `value.into()`               |
-| [`Map`][object map]                                                |   [`no_object`]   | `Dynamic::from_map(value)`   |
-| `HashMap<K, T>`, `HashSet<K>`,<br/>`BTreeMap<K, T>`, `BTreeSet<K>` |   [`no_object`]   | `value.into()`               |
-| [`INT..INT`][range], [`INT..=INT`][range]                          |                   | `value.into()`               |
-| `Rc<RwLock<T>>` or `Arc<Mutex<T>>`                                 |  [`no_closure`]   | `value.into()`               |
-| [`Instant`][timestamp]                                             |    [`no_std`]     | `value.into()`               |
-| All types (including above)                                        |                   | `Dynamic::from(value)`       |
+| Rust type<br/>`T: Clone`,<br/>`K: Into<String>`                    |     Unavailable under     | Use API                      |
+| ------------------------------------------------------------------ | :-----------------------: | ---------------------------- |
+| `INT` (`i64` or `i32`)                                             |                           | `value.into()`               |
+| `FLOAT` (`f64` or `f32`)                                           |       [`no_float`]        | `value.into()`               |
+| [`Decimal`][rust_decimal] (requires [`decimal`])                   |                           | `value.into()`               |
+| `bool`                                                             |                           | `value.into()`               |
+| [`()`]                                                             |                           | `value.into()`               |
+| [`String`][string], [`&str`][string], [`ImmutableString`]          |                           | `value.into()`               |
+| `char`                                                             |                           | `value.into()`               |
+| [`Array`][array]                                                   |       [`no_index`]        | `Dynamic::from_array(value)` |
+| [`Blob`][BLOB]                                                     |       [`no_index`]        | `Dynamic::from_blob(value)`  |
+| `Vec<T>`, `&[T]`, `Iterator<T>`                                    |       [`no_index`]        | `value.into()`               |
+| [`Map`][object map]                                                |       [`no_object`]       | `Dynamic::from_map(value)`   |
+| `HashMap<K, T>`, `HashSet<K>`,<br/>`BTreeMap<K, T>`, `BTreeSet<K>` |       [`no_object`]       | `value.into()`               |
+| [`INT..INT`][range], [`INT..=INT`][range]                          |                           | `value.into()`               |
+| `Rc<RwLock<T>>` or `Arc<Mutex<T>>`                                 |      [`no_closure`]       | `value.into()`               |
+| [`Instant`][timestamp]                                             | [`no_time`] or [`no_std`] | `value.into()`               |
+| All types (including above)                                        |                           | `Dynamic::from(value)`       |
 
 
 Type Checking and Casting
@@ -162,19 +162,19 @@ The following methods are available when working with [`Dynamic`]:
 
 ### Constructor instance methods
 
-| Method           | Not available under |                         Value type                          |         Data type         |
-| ---------------- | :-----------------: | :---------------------------------------------------------: | :-----------------------: |
-| `from_bool`      |                     |                           `bool`                            |          `bool`           |
-| `from_int`       |                     |                            `INT`                            |      integer number       |
-| `from_float`     |    [`no_float`]     |                           `FLOAT`                           |   floating-point number   |
-| `from_decimal`   |   non-[`decimal`]   |                  [`Decimal`][rust_decimal]                  | [`Decimal`][rust_decimal] |
-| `from_str`       |                     |                           `&str`                            |         [string]          |
-| `from_char`      |                     |                           `char`                            |        [character]        |
-| `from_array`     |    [`no_index`]     |                          `Vec<T>`                           |          [array]          |
-| `from_blob`      |    [`no_index`]     |                          `Vec<u8>`                          |          [BLOB]           |
-| `from_map`       |    [`no_object`]    |                            `Map`                            |       [object map]        |
-| `from_timestamp` |     [`no_std`]      | `std::time::Instant` ([`instant::Instant`] if [WASM] build) |        [timestamp]        |
-| `from<T>`        |                     |                             `T`                             |       [custom type]       |
+| Method           |    Not available under    |                         Value type                          |         Data type         |
+| ---------------- | :-----------------------: | :---------------------------------------------------------: | :-----------------------: |
+| `from_bool`      |                           |                           `bool`                            |          `bool`           |
+| `from_int`       |                           |                            `INT`                            |      integer number       |
+| `from_float`     |       [`no_float`]        |                           `FLOAT`                           |   floating-point number   |
+| `from_decimal`   |      non-[`decimal`]      |                  [`Decimal`][rust_decimal]                  | [`Decimal`][rust_decimal] |
+| `from_str`       |                           |                           `&str`                            |         [string]          |
+| `from_char`      |                           |                           `char`                            |        [character]        |
+| `from_array`     |       [`no_index`]        |                          `Vec<T>`                           |          [array]          |
+| `from_blob`      |       [`no_index`]        |                          `Vec<u8>`                          |          [BLOB]           |
+| `from_map`       |       [`no_object`]       |                            `Map`                            |       [object map]        |
+| `from_timestamp` | [`no_time`] or [`no_std`] | `std::time::Instant` ([`instant::Instant`] if [WASM] build) |        [timestamp]        |
+| `from<T>`        |                           |                             `T`                             |       [custom type]       |
 
 ### Detection methods
 
@@ -227,7 +227,7 @@ The following constructor traits are implemented for [`Dynamic`] where `T: Clone
 | `From<HashMap<K: Into<SmartString>, T>>`<br/>e.g. `From<HashMap<String, T>>`   |  [`no_object`] or [`no_std`]   |       [object map]        |
 | `From<HashSet<K: Into<SmartString>>>`<br/>e.g. `From<HashSet<String>>`         |  [`no_object`] or [`no_std`]   |       [object map]        |
 | `From<FnPtr>`                                                                  |                                |    [function pointer]     |
-| `From<Instant>`                                                                |           [`no_std`]           |        [timestamp]        |
+| `From<Instant>`                                                                |   [`no_time`] or [`no_std`]    |        [timestamp]        |
 | `From<Rc<RefCell<Dynamic>>>`                                                   |   [`sync`] or [`no_closure`]   |        [`Dynamic`]        |
 | `From<Arc<RwLock<Dynamic>>>` ([`sync`])                                        | non-[`sync`] or [`no_closure`] |        [`Dynamic`]        |
 | `FromIterator<X: IntoIterator<Item=T>>`                                        |          [`no_index`]          |          [array]          |

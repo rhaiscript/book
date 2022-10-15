@@ -6,7 +6,7 @@ Timestamps
 Timestamps are provided by the [`BasicTimePackage`][built-in packages] (excluded if using a [raw `Engine`])
 via the `timestamp` function.
 
-Timestamps are not available under [`no_std`].
+Timestamps are not available under [`no_time`] or [`no_std`].
 
 The Rust type of a timestamp is `std::time::Instant` ([`instant::Instant`] in [WASM] builds).
 
