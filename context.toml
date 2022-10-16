@@ -1,4 +1,4 @@
-version = "1.10.0"
+version = "1.10.1"
 repoHome = "https://github.com/rhaiscript/rhai/blob/main"
 #rootUrl = ""
 rootUrl = "/book"
