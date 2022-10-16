@@ -108,6 +108,34 @@ let result = switch calc_secret_value(x) {
 };
 ```
 
+~~~admonish tip "Tip: Use with `type_of()`"
+
+Case conditions, together with [`type_of()`], makes it extremely easy to work with
+values which may be of several different types (like properties in a JSON object).
+
+```js
+switch value.type_of() {
+    // if 'value' is a string...
+    "string" if value.len() < 5 => ...,
+    "string" => ...,
+
+    // if 'value' is an array...
+    "array" => ...,
+
+    // if 'value' is an object map...
+    "map" if value.prop == 42 => ...,
+    "map" => ...,
+
+    // if 'value' is a number...
+    "i64" if value > 0 => ...,
+    "i64" => ...,
+
+    // anything else: probably an error...
+    _ => ...
+}
+```
+~~~
+
 
 Range Cases
 -----------

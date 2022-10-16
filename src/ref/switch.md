@@ -101,6 +101,34 @@ let result = switch calc_secret_value(x) {
 };
 ```
 
+~~~admonish tip "Tip: Use with `type_of()`"
+
+Case conditions, together with [`type_of()`](type-of.md), makes it extremely easy to work with
+values which may be of several different types (like properties in a JSON object).
+
+```js
+switch value.type_of() {
+    // if 'value' is a string...
+    "string" if value.len() < 5 => ...,
+    "string" => ...,
+
+    // if 'value' is an array...
+    "array" => ...,
+
+    // if 'value' is an object map...
+    "map" if value.prop == 42 => ...,
+    "map" => ...,
+
+    // if 'value' is a number...
+    "i64" if value > 0 => ...,
+    "i64" => ...,
+
+    // anything else: probably an error...
+    _ => ...
+}
+```
+~~~
+
 
 Range Cases
 -----------
@@ -147,6 +175,40 @@ Numeric [range](ranges.md) cases are tried in the order that they appear in the 
 ```
 
 
+Switch Expression
+=================
+
+Like [`if`](if.md), `switch` also works as an _expression_.
+
+```admonish tip.small "Tip"
+
+This means that a `switch` expression can appear anywhere a regular expression can,
+e.g. as [function](functions.md) call arguments.
+```
+
+```js
+let x = switch foo { 1 => true, _ => false };
+
+func(switch foo {
+    "hello" => 42,
+    "world" => 123,
+    _ => 0
+});
+
+// The above is somewhat equivalent to:
+
+let x = if foo == 1 { true } else { false };
+
+if foo == "hello" {
+    func(42);
+} else if foo == "world" {
+    func(123);
+} else {
+    func(0);
+}
+```
+
+
 Difference From `if`-`else if` Chain
 ------------------------------------
 
@@ -180,37 +242,3 @@ number of cases to match.
 
 A long [`if`-`else if`](if.md) chain becomes increasingly slower with each additional case because
 essentially an O(n) _linear scan_ is performed.
-
-
-Switch Expression
-=================
-
-Like [`if`](if.md), `switch` also works as an _expression_.
-
-```admonish tip.small "Tip"
-
-This means that a `switch` expression can appear anywhere a regular expression can,
-e.g. as [function](functions.md) call arguments.
-```
-
-```js
-let x = switch foo { 1 => true, _ => false };
-
-func(switch foo {
-    "hello" => 42,
-    "world" => 123,
-    _ => 0
-});
-
-// The above is somewhat equivalent to:
-
-let x = if foo == 1 { true } else { false };
-
-if foo == "hello" {
-    func(42);
-} else if foo == "world" {
-    func(123);
-} else {
-    func(0);
-}
-```
