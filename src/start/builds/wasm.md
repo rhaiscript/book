@@ -28,46 +28,46 @@ by a Rhai [`Engine`] compiled into WASM.
 ```
 
 
+JavaScript Interop
+------------------
+
+Specify either of the [`wasm-bindgen`] or [`stdweb`] features when building for WASM that requires
+interop with JavaScript. This selects the appropriate JavaScript interop layer to use.
+
+It is still possible to compile for WASM without either [`wasm-bindgen`] or [`stdweb`],
+but then the interop code must then be explicitly provided.
+
+
 Target Environments
 -------------------
 
-### WASI: `wasm32-wasi`
+~~~admonish abstract "WASI: `wasm32-wasi`"
 
 There is no particular setting to tweak when building for WASI.
+~~~
 
-### Browser: `wasm32-unknown-unknown`
+~~~admonish abstract "JavaScript: `wasm32-unknown-unknown` + `wasm-bindgen`/`stdweb`"
 
-The set of default features of Rhai is at odds with building for raw WASM, since it requires a
+There is no particular setting to tweak when building for WASM with JavaScript interop (see above).
+~~~
+
+~~~admonish warning "Raw: `wasm32-unknown-unknown`"
+
+The set of default features of Rhai is at odds with building for raw WASM, since Rhai requires a
 system-provided source of random numbers (for hashing).
 
-Such a random number source is available if the WASM module is intended for a browser. In such
-circumstances, it is necessary to set the `js` feature on the
-[`getrandom`](https://crates.io/crates/getrandom) crate.
+Such random number source is available from JavaScript (e.g. if the WASM module is intended for a
+browser)
 
-```toml
-[dependencies]
-getrandom = { version = "0.2", features = [ "js" ] }
-```
-
-### Non-Browser: `wasm32-unknown-unknown`
-
-Non-browser environments may not have random numbers available, so it is necessary to opt out of
-`default-features` in order to force usage of fixed (non-random) hashing keys.
+Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
+opt out of `default-features` in order to force usage of [fixed (non-random) hashing
+keys]({{rootUrl}}/engine/dynamic-lib.md#force-stable-hashing).
 
 ```toml
 [dependencies]
 rhai = { version = "{{version}}", default-features = false, features = [ "std" ] }
 ```
-
-
-JavaScript Interop
-------------------
-
-Specify either of the [`wasm-bindgen`] or [`stdweb`] features when building for WASM.
-This selects the appropriate JavaScript interop layer to use.
-
-It is still possible to compile for WASM without either [`wasm-bindgen`] or [`stdweb`],
-but then the interop code must be explicitly provided.
+~~~
 
 
 Size
