@@ -17426,15 +17426,14 @@ from some external system.  This is extremely common when working with an ECS (E
 <div>
 <ul>
 <li>
-<p>Make a newtype that wraps an <code>INT</code> which is set to the CPU’s pointer size (i.e. <code>i64</code> on
-64-bit architectures and <code>i32</code> on 32-bit architectures).</p>
+<p>Make a newtype that wraps an integer which is set to the CPU’s pointer size (typically <code>usize</code>).</p>
 </li>
 <li>
-<p><a href="https://doc.rust-lang.org/std/mem/fn.transmute.html"><code>transmute</code></a> the reference provided by the system into <code>INT</code> and store it within the newtype.
+<p><a href="https://doc.rust-lang.org/std/mem/fn.transmute.html"><code>transmute</code></a> the reference provided by the system into an integer and store it within the newtype.
 This requires <code>unsafe</code> code.</p>
 </li>
 <li>
-<p>Use the newtype as a <em>handle</em> for all registered API functions, <a href="https://doc.rust-lang.org/std/mem/fn.transmute.html"><code>transmute</code></a> the <code>INT</code> back
+<p>Use the newtype as a <em>handle</em> for all registered API functions, <a href="https://doc.rust-lang.org/std/mem/fn.transmute.html"><code>transmute</code></a> the integer back
 to a reference before use. This also requires <code>unsafe</code> code.</p>
 </li>
 <li>
@@ -17445,9 +17444,10 @@ not does it ever live outside of the reference’s scope.</p>
 </div>
 </div>
 <h2 id="example-21"><a class="header" href="#example-21">Example</a></h2>
-<pre><code class="language-rust">/// Newtype wrapping a reference (pointer) cast into 'i64'
+<pre><code class="language-rust">/// Newtype wrapping a reference (pointer) cast into 'usize'
+/// together with a unique ID for protection.
 #[derive(Debug, Eq, PartialEq, Clone, Hash)]
-pub struct WorldHandle(i64);
+pub struct WorldHandle(usize, i64);
 
 /// Create handle from reference
 impl From&lt;&amp;mut World&gt; for WorldHandle {
@@ -17464,9 +17464,17 @@ impl AsMut&lt;World&gt; for WorldHandle {
 }
 
 impl WorldHandle {
-    /// Create handle from reference
+    /// Create handle from reference, using a random number as unique ID
     pub fn new(world: &amp;mut World) -&gt; Self {
-        Self(unsafe { std::mem::transmute(world) })
+        let handle =unsafe { std::mem::transmute(world) };
+        let unique_id = rand::random();
+
+        Self(handle, unique_id)
+    }
+
+    /// Get the unique ID of this instance
+    pub fn unique_id(&amp;self) -&gt; i64 {
+        self.1
     }
 }
 
@@ -17476,11 +17484,20 @@ pub mod handle_module {
     pub type Handle = WorldHandle;
 
     /// Draw a bunch of pretty shapes.
-    pub fn draw(world: &amp;mut Handle, shapes: Array) {
-        let world: &amp;mut World = world.as_mut();
+    #[rhai_fn(return_raw)]
+    pub fn draw(context: NativeCallContext, handle: &amp;mut Handle, shapes: Array) -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt; {
+        // Double check the pointer is still fresh!
+        if handle.unique_id() != context.tag() {
+            return &quot;Ouch! The handle is stale!&quot;.into();
+        }
+
+        // Get the reference to 'World'
+        let world: &amp;mut World = handle.as_mut();
 
         // ... work with reference
         world.draw_really_pretty_shapes(shapes);
+
+        Ok(())
     }
 }
 
@@ -17492,16 +17509,37 @@ super_ecs_system.query(...).for_each(|world: &amp;mut World| {
     // Create handle from reference to 'World'
     let handle: WorldHandle = world.into();
 
+    // Set the handle's ID into the engine's tag
+    engine.set_default_tag(handle.unique_id());
+
     // Add handle into scope
     let mut scope = Scope::new();
     scope.push(&quot;world&quot;, handle);
-
+    
     // Work with handle
     engine.run_with_scope(&amp;mut scope, &quot;world.draw([1, 2, 3])&quot;)
 
     // Make sure no instance of 'handle' leaks outside this scope!
 });
 </code></pre>
+<div id="admonition-important-ensure-no-leakage" class="admonition danger">
+<div class="admonition-title">
+<p>IMPORTANT! Ensure no leakage!</p>
+<p><a class="admonition-anchor-link" href="patterns/references.html#admonition-important-ensure-no-leakage"></a></p>
+</div>
+<div>
+<p>It is of utmost importance that no instance of the handle newtype ever <em>leaks</em> outside of the
+appropriate scope where the wrapped reference may no longer be valid.</p>
+<p>For example, do not allow the script to store a copy of the handle anywhere that can
+potentially be persistent (e.g. within an <a href="patterns//book/language/object-maps.html">object map</a>).</p>
+<p>One solution, as illustrated in the example, is to always tag each handle instance together with
+a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.10.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+before running scripts.</p>
+<p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a>
+(via <a href="patterns//book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
+an error should be returned instead.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="domain-specific-tools"><a class="header" href="#domain-specific-tools">Domain-Specific Tools</a></h1>
 <div id="admonition-usage-scenario" class="admonition info">
 <div class="admonition-title">
