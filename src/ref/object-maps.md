@@ -67,6 +67,38 @@ x?.a?.b?.foo();     // <- ok! returns () if 'x', 'x.a' or 'x.a.b' is ()
 x?.a?.b = 42;       // <- ok even if 'x' or 'x.a' is ()
 ```
 
+~~~admonish tip "Tip: Object maps are _FAST_"
+
+Normally, when [properties](getters-setters.md) are accessed, copies of the data values are made.
+This is normally slow.
+
+Object maps have special treatment &ndash; properties are accessed via _references_, meaning that
+no copies of data values are made.
+
+This makes object map access fast, especially when deep within a properties chain.
+
+```rust
+// 'obj' is a normal custom type
+let x = obj.a.b.c.d;
+
+// The above is equivalent to:
+let a_value = obj.a;        // temp copy of 'a'
+let b_value = a_value.b;    // temp copy of 'b'
+let c_value = b_value.c;    // temp copy of 'c'
+let d_value = c_value.d;    // temp copy of 'd'
+let x = d_value;
+
+// 'map' is an object map
+let x = map.a.b.c.d;        // direct access to 'd'
+                            // 'a', 'b' and 'c' are not copied
+
+map.a.b.c.d = 42;           // directly modifies 'd' in 'a', 'b' and 'c'
+                            // no copy of any property value is made
+
+map.a.b.c.d.calc();         // directly calls 'calc' on 'd'
+                            // no copy of any property value is made
+```
+~~~
 
 Built-in Functions
 ------------------
@@ -164,4 +196,42 @@ for val in y.values() { // get an array of all the property values via 'values'
 y.clear();              // empty the object map
 
 y.len() == 0;
+```
+
+
+Special Support for OOP
+------------------------
+
+Object maps can be used to simulate object-oriented programming (OOP) by storing data as properties
+and methods as properties holding [function pointers](fn-ptr.md).
+
+If an object map's property holds a [function pointer](fn-ptr.md), the property can simply be called
+like a normal method in method-call syntax.
+
+This is a _short-hand_ to avoid the more verbose syntax of using the `call` function keyword.
+
+When a property holding a [function pointer](fn-ptr.md) or a [closure](fn-closure.md) is called like
+a method, it is replaced as a method call on the object map itself.
+
+```rust
+let obj = #{
+                data: 40,
+                action: || this.data += x    // 'action' holds a closure
+           };
+
+obj.action(2);                               // calls the function pointer with 'this' bound to 'obj'
+
+obj.call(obj.action, 2);                     // <- the above de-sugars to this
+
+obj.data == 42;
+
+// To achieve the above with normal function pointer call will fail.
+
+fn do_action(map, x) { map.data += x; }      // 'map' is a copy
+
+obj.action = do_action;                      // <- de-sugars to 'Fn("do_action")'
+
+obj.action.call(obj, 2);                     // a copy of 'obj' is passed by value
+
+obj.data == 42;                              // 'obj.data' is not changed
 ```

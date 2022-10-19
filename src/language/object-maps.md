@@ -17,13 +17,13 @@ Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
 
 Object maps are disabled via the [`no_object`] feature.
 
-~~~admonish question.small "Why `SmartString`?"
+~~~admonish question.small "TL;DR: Why `SmartString`?"
 
 [`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.
 ~~~
 
-~~~admonish question.small "Why `BTreeMap` and not `HashMap`?"
+~~~admonish question.small "TL;DR: Why `BTreeMap` and not `HashMap`?"
 
 The vast majority of object maps contain just a few properties.
 
@@ -94,6 +94,39 @@ x?.a?.b?.foo();     // <- ok! returns () if 'x', 'x.a' or 'x.a.b' is ()
 
 x?.a?.b = 42;       // <- ok even if 'x' or 'x.a' is ()
 ```
+
+~~~admonish tip "Tip: Object maps are _FAST_"
+
+Normally, when [properties][getters/setters] are accessed, copies of the data values are made.
+This is normally slow.
+
+Object maps have special treatment &ndash; properties are accessed via _references_, meaning that
+no copies of data values are made.
+
+This makes object map access fast, especially when deep within a properties chain.
+
+```rust
+// 'obj' is a normal custom type
+let x = obj.a.b.c.d;
+
+// The above is equivalent to:
+let a_value = obj.a;        // temp copy of 'a'
+let b_value = a_value.b;    // temp copy of 'b'
+let c_value = b_value.c;    // temp copy of 'c'
+let d_value = c_value.d;    // temp copy of 'd'
+let x = d_value;
+
+// 'map' is an object map
+let x = map.a.b.c.d;        // direct access to 'd'
+                            // 'a', 'b' and 'c' are not copied
+
+map.a.b.c.d = 42;           // directly modifies 'd' in 'a', 'b' and 'c'
+                            // no copy of any property value is made
+
+map.a.b.c.d.calc();         // directly calls 'calc' on 'd'
+                            // no copy of any property value is made
+```
+~~~
 
 
 Built-in Functions
