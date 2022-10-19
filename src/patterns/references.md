@@ -89,7 +89,9 @@ pub mod handle_module {
     /// Draw a bunch of pretty shapes.
     #[rhai_fn(return_raw)]
     pub fn draw(context: NativeCallContext, handle: &mut Handle, shapes: Array) -> Result<(), Box<EvalAltResult>> {
-        // Double check the pointer is still fresh!
+        // Double check the pointer is still fresh
+        // by comparing the handle's unique ID with
+        // the version stored in the engine's tag!
         if handle.unique_id() != context.tag() {
             return "Ouch! The handle is stale!".into();
         }
@@ -115,6 +117,9 @@ super_ecs_system.query(...).for_each(|world: &mut World| {
     // Set the handle's ID into the engine's tag
     engine.set_default_tag(handle.unique_id());
 
+    // Alternatively, use 'Engine::call_fn_raw_raw' and set the handle's ID
+    // into the 'tag' field of the 'GlobalRuntimeState' object
+
     // Add handle into scope
     let mut scope = Scope::new();
     scope.push("world", handle);
@@ -135,6 +140,8 @@ appropriate scope where the wrapped reference may no longer be valid.
 For example, do not allow the script to store a copy of the handle anywhere that can
 potentially be persistent (e.g. within an [object map]).
 
+#### Safety check via unique ID
+
 One solution, as illustrated in the example, is to always tag each handle instance together with
 a unique random ID. That same ID can then be set into the [`Engine`] (via [`Engine::set_default_tag`])
 before running scripts.
@@ -142,4 +149,12 @@ before running scripts.
 Before executing any API function, first check whether the handle's ID matches that of the current [`Engine`]
 (via [`NativeCallContext::tag`][`NativeCallContext`]). If they differ, the handle is stale and should never be used;
 an error should be returned instead.
+
+#### Alternative to `Engine::set_default_tag`
+
+Alternatively, if the [`Engine`] cannot be made mutable, use `Engine::call_fn_raw_raw`
+(which requires the [`internals`] feature) to directly call a script [function] in a compiled [`AST`].
+
+This volatile API allows specifying a [`GlobalRuntimeState`] object which contains the `tag` field
+that can be set just for that evaluation run.
 ```
