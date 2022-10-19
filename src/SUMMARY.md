@@ -237,6 +237,7 @@ Usage Patterns
   - [Main Style](patterns/events-1.md)
   - [JS Style](patterns/events-2.md)
   - [Map Style](patterns/events-3.md)
+- [External References (Unsafe)](patterns/references.md)
 - [Domain-Specific Tools](patterns/domain-tools.md)
 - [Multiple Instantiation](patterns/multiple.md)
 
