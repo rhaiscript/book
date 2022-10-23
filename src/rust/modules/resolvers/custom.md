@@ -1,10 +1,10 @@
 Implement a Custom Module Resolver
 ==================================
 
-{{#include ../../links.md}}
+{{#include ../../../links.md}}
 
-For many applications in which Rhai is embedded, it is necessary to customize the way that modules
-are resolved.  For instance, modules may need to be loaded from script texts stored in a database,
+For many applications in which Rhai is embedded, it is necessary to customize the way that [modules]
+are resolved.  For instance, [modules] may need to be loaded from script texts stored in a database,
 not in the file system.
 
 A module resolver must implement the [`ModuleResolver`][traits] trait, which contains only one

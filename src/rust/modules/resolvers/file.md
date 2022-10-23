@@ -1,74 +1,32 @@
-Module Resolvers
-================
+`FileModuleResolver`
+====================
 
-{{#include ../../links.md}}
-
-~~~admonish info.side "`import`"
-
-See the section on [_Importing Modules_][`import`] for more details.
-~~~
-
-When encountering an [`import`] statement, Rhai attempts to _resolve_ the [module] based on the path string.
-
-_Module Resolvers_ are service types that implement the [`ModuleResolver`][traits] trait.
+{{#include ../../../links.md}}
 
 
-Set into `Engine`
------------------
+```admonish abstract.small "Default"
 
-An [`Engine`]'s module resolver is set via a call to `Engine::set_module_resolver`:
-
-```rust
-use rhai::module_resolvers::{DummyModuleResolver, StaticModuleResolver};
-
-// Create a module resolver
-let resolver = StaticModuleResolver::new();
-
-// Register functions into 'resolver'...
-
-// Use the module resolver
-engine.set_module_resolver(resolver);
-
-// Effectively disable 'import' statements by setting module resolver to
-// the 'DummyModuleResolver' which acts as... well... a dummy.
-engine.set_module_resolver(DummyModuleResolver::new());
+`FileModuleResolver` is the default for [`Engine::new`][`Engine`].
 ```
-
-
-Built-in Module Resolvers
--------------------------
-
-There are a number of standard resolvers built into Rhai, the default being the `FileModuleResolver`
-which simply loads a script file based on the path (with `.rhai` extension attached) and execute it
-to form a [module].
-
-Built-in [module] resolvers are grouped under the `rhai::module_resolvers`
-[module namespace][function namespace].
-
-
-`DummyResolversCollection` (default for `no-std`)
--------------------------------------------------
-
-This module resolver acts as a _dummy_ and fails all module resolution calls.
-
-
-`FileModuleResolver` (normal default)
--------------------------------------
 
 The _default_ [module] resolution service, not available for [`no_std`] or [WASM] builds.
 Loads a script file (based off the current directory or a specified one) with `.rhai` extension.
 
-### Function namespace
+
+Function Namespace
+-------------------
 
 All functions in the [_global_ namespace][function namespace], plus all those defined in the same
 [module], are _merged_ into a _unified_ [namespace][function namespace].
 
 All [modules] imported at _global_ level via [`import`] statements become sub-[modules],
-which are also available to functions defined within the same script file.
+which are also available to [functions] defined within the same script file.
 
-### Base directory
 
-```admonish tip.side "Tip: Default"
+Base Directory
+--------------
+
+```admonish tip.side.wide "Tip: Default"
 
 If the base directory is not set, then relative paths are based off the directory of the loading script.
 
@@ -77,20 +35,25 @@ This allows scripts to simply cross-load each other.
 
 _Relative_ paths are resolved relative to a _root_ directory, which is usually the base directory.
 
-The base directory can be set via `FileModuleResolver::new_with_path` or `FileModuleResolver::set_base_path`.
+The base directory can be set via `FileModuleResolver::new_with_path` or
+`FileModuleResolver::set_base_path`.
 
-### Custom [`Scope`]
 
-```admonish tip.side "Tip"
+Custom [`Scope`]
+----------------
+
+```admonish tip.side.wide "Tip"
 
 This [`Scope`] can conveniently hold global [constants] etc.
 ```
 
 The `set_scope` method adds an optional [`Scope`] which will be used to [optimize][script optimization] [module] scripts.
 
-### Caching
 
-```admonish tip.side "Tip: Enable/disable caching"
+Caching
+-------
+
+```admonish tip.side.wide "Tip: Enable/disable caching"
 
 Use `enable_cache` to enable/disable the cache.
 ```
@@ -98,7 +61,9 @@ Use `enable_cache` to enable/disable the cache.
 By default, [modules] are also _cached_ so a script file is only evaluated _once_, even when
 repeatedly imported.
 
-### Unix Shebangs
+
+Unix Shebangs
+-------------
 
 On Unix-like systems, the _shebang_ (`#!`) is used at the very beginning of a script file to mark a
 script with an interpreter (for Rhai this would be [`rhai-run`]({{rootUrl}}/start/bin.md)).
@@ -115,7 +80,10 @@ let answer = 42;
 print(`The answer is: ${answer}`);
 ```
 
-### Example
+
+Example
+-------
+
 
 ```rust
 ┌────────────────┐
@@ -151,16 +119,20 @@ m::greet();                     // prints "hello! from module!"
 m::greet_main();                // prints "main here!"
 ```
 
-### Simulate virtual functions
 
-When calling a namespace-qualified function defined within a module, other functions defined within
-the same module script override any similar-named functions (with the same number of parameters)
-defined in the [global namespace][function namespace].  This is to ensure that a module acts as a
-self-contained unit and functions defined in the calling script do not override module code.
+Simulate Virtual Functions
+--------------------------
 
-In some situations, however, it is actually beneficial to do it in reverse: have module code call
-functions defined in the calling script (i.e. in the [global namespace][function namespace]) if they
-exist, and only call those defined in the module script if none are found.
+When calling a namespace-qualified [function] defined within a [module], other [functions] defined
+within the same module override any similar-named [functions] (with the same number of parameters)
+defined in the [global namespace][function namespace].
+
+This is to ensure that a [module] acts as a self-contained unit and [functions] defined in the
+calling script do not override [module] code.
+
+In some situations, however, it is actually beneficial to do it in reverse: have [module] [functions] call
+[functions] defined in the calling script (i.e. in the [global namespace][function namespace]) if
+they exist, and only call those defined in the [module] if none are found.
 
 One such situation is the need to provide a _default implementation_ to a simulated _virtual_ function:
 
@@ -209,35 +181,3 @@ import "my_module" as m;
 m::greet();                         // prints "hello! from module!"
 ```
 
-
-`StaticModuleResolver`
-----------------------
-
-~~~admonish tip.side "Tip: `no-std`"
-
-`StaticModuleResolver` is often used with [`no_std`] in embedded environments
-without a file system.
-~~~
-
-Loads [modules] that are statically added.
-
-Functions are searched in the [_global_ namespace][function namespace] by default.
-
-```rust
-use rhai::{Module, module_resolvers::StaticModuleResolver};
-
-let module: Module = create_a_module();
-
-let mut resolver = StaticModuleResolver::new();
-resolver.insert("my_module", module);
-```
-
-
-`ModuleResolversCollection`
----------------------------
-
-A collection of module resolvers.
-
-[Modules] are resolved from each resolver in sequential order.
-
-This is useful when multiple types of [modules] are needed simultaneously.
