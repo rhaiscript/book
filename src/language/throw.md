@@ -29,7 +29,7 @@ let result = engine.eval::<i64>(
     }
 ").expect_err();
 
-println!("{}", result);     // prints "Runtime error: 42 (line 5, position 15)"
+println!("{result}");       // prints "Runtime error: 42 (line 5, position 15)"
 ```
 
 

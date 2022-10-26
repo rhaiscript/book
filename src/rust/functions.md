@@ -42,24 +42,24 @@ engine.register_fn("add", add_len)
           x + 1
       })
       .register_fn("log", |label: &str, x: i64| {
-          println!("{} = {}", label, x);
+          println!("{label} = {x}");
       });
 
 let result = engine.eval::<i64>(r#"add(40, "xx")"#)?;
 
-println!("Answer: {}", result);         // prints 42
+println!("Answer: {result}");           // prints 42
 
 let result = engine.eval::<i64>(r#"add(40, "x", 2)"#)?;
 
-println!("Answer: {}", result);         // prints 42
+println!("Answer: {result}");           // prints 42
 
 let result = engine.eval::<i64>("add()")?;
 
-println!("Answer: {}", result);         // prints 42
+println!("Answer: {result}");           // prints 42
 
 let result = engine.eval::<i64>("inc(41)")?;
 
-println!("Answer: {}", result);         // prints 42
+println!("Answer: {result}");           // prints 42
 
 engine.run(r#"log("value", 42)"#)?;     // prints "value = 42"
 ```

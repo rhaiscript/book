@@ -26,13 +26,13 @@ When embedding Rhai into an application, it is usually necessary to trap `print`
 
 ```rust
 // Any function or closure that takes an '&str' argument can be used to override 'print'.
-engine.on_print(|x| println!("hello: {}", x));
+engine.on_print(|x| println!("hello: {x}"));
 
 // Any function or closure that takes a '&str', an 'Option<&str>' and a 'Position' argument
 // can be used to override 'debug'.
 engine.on_debug(|x, src, pos| {
     let src = src.unwrap_or("unknown");
-    println!("DEBUG of {} at {:?}: {}", src, pos, x)
+    println!("DEBUG of {src} at {pos:?}: {s}")
 });
 
 // Example: quick-'n-dirty logging
@@ -48,7 +48,7 @@ engine.on_print(move |s| {
 let log = logbook.clone();
 engine.on_debug(move |s, src, pos| {
     let src = src.unwrap_or("unknown");
-    let entry = format!("DEBUG of {} at {:?}: {}", src, pos, s);
+    let entry = format!("DEBUG of {src} at {pos:?}: {s}");
     log.write().unwrap().push(entry);
 });
 
@@ -57,7 +57,7 @@ engine.run(script)?;
 
 // 'logbook' captures all the 'print' and 'debug' output
 for entry in logbook.read().unwrap().iter() {
-    println!("{}", entry);
+    println!("{entry}");
 }
 ```
 

@@ -71,7 +71,7 @@ fn main() {
     let mut value = 0_i64;
 
     while value < 10 {
-        println!("Value: {}", value);
+        println!("Value: {value}");
         // Send value to script
         tx_master.send(value).unwrap();
         // Receive value from script

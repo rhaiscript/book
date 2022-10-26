@@ -29,7 +29,7 @@ let mut engine = Engine::new();
 engine.register_fn("divide", safe_divide);
 
 if let Err(error) = engine.eval::<i64>("divide(40, 0)") {
-    println!("Error: {:?}", *error);         // prints ErrorRuntime("Division by zero detected!", (1, 1)")
+    println!("Error: {error:?}");               // prints ErrorRuntime("Division by zero detected!", (1, 1)")
 }
 ```
 

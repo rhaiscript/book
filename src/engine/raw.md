@@ -45,16 +45,13 @@ let mut engine = Engine::new_raw();
 engine.set_module_resolver(FileModuleResolver::new());
 
 // Default print/debug implementations
-engine.on_print(|text| println!("{}", text));
+engine.on_print(|text| println!("{text}"));
 
-engine.on_debug(|text, source, pos| {
-    if let Some(source) = source {
-        println!("{} @ {:?} | {}", source, pos, text);
-    } else if pos.is_none() {
-        println!("{}", text);
-    } else {
-        println!("{:?} | {}", pos, text);
-    }
+engine.on_debug(|text, source, pos| match (source, pos) {
+    (Some(source), crate::Position::NONE) => println!("{source} | {text}"),
+    (Some(source), pos) => println!("{source} @ {pos:?} | {text}"),
+    (None, crate::Position::NONE) => println!("{text}"),
+    (None, pos) => println!("{pos:?} | {text}"),
 });
 
 // Register the Standard Package

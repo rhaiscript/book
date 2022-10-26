@@ -42,7 +42,7 @@ engine.register_debugger(
     |context, node, source, pos| {
         // Print debugger state - which is an object map
         let state = context.global_runtime_state_mut().debugger.state();
-        println!("Current state = {}", state);
+        println!("Current state = {state}");
 
         // Get the state as an object map
         let mut state = context.global_runtime_state_mut()

@@ -15,7 +15,7 @@ let ast = engine.compile("40 + 2")?;
 for _ in 0..42 {
     let result: i64 = engine.eval_ast(&ast)?;
 
-    println!("Answer #{}: {}", i, result);      // prints 42
+    println!("Answer #{i}: {result}");      // prints 42
 }
 ```
 

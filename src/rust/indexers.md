@@ -121,7 +121,7 @@ r#"
     a["xyz"]                        // as the index type
 "#)?;
 
-println!("Answer: {}", result);     // prints 42
+println!("Answer: {result}");       // prints 42
 ```
 
 

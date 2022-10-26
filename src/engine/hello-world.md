@@ -47,7 +47,7 @@ pub fn main() -> Result<(), Box<EvalAltResult>>
     let result = engine.eval::<i64>("40 + 2")?;
     //                      ^^^^^^^ required: cast the result to a type
 
-    println!("Answer: {}", result);             // prints 42
+    println!("Answer: {result}");             // prints 42
 
     Ok(())
 }

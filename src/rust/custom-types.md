@@ -127,8 +127,8 @@ engine.register_type::<TestStruct1>()
 let ts1_type = engine.eval::<String>("let x = new_ts1(); x.type_of()")?;
 let ts2_type = engine.eval::<String>("let x = new_ts2(); x.type_of()")?;
 
-println!("{}", ts1_type);               // prints 'path::to::TestStruct'
-println!("{}", ts1_type);               // prints 'TestStruct'
+println!("{ts1_type}");                 // prints 'path::to::TestStruct'
+println!("{ts2_type}");                 // prints 'TestStruct'
 ```
 
 

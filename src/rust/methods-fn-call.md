@@ -51,7 +51,7 @@ let result = engine.eval::<i64>(
     x.foo()                         // 'foo' can also be called like a method on 'x'
 ")?;
 
-println!("result: {}", result);     // prints 1
+println!("result: {result}");       // prints 1
 ```
 
 

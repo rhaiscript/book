@@ -97,7 +97,7 @@ r#"
     a.xyz
 "#)?;
 
-println!("Answer: {}", result);                 // prints 42
+println!("Answer: {result}");                   // prints 42
 ```
 
 

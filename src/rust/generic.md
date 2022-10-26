@@ -25,7 +25,7 @@ use std::fmt::Display;
 use rhai::Engine;
 
 fn show_it<T: Display>(x: &mut T) {
-    println!("put up a good show: {}!", x)
+    println!("put up a good show: {x}!");
 }
 
 let mut engine = Engine::new();

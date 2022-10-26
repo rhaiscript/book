@@ -46,7 +46,7 @@ debugger.break_points_mut().push(
 
 // Display all break-points
 for bp in debugger.break_points().iter() {
-    println!("{}", bp);
+    println!("{bp}");
 }
 
 // Clear all break-points

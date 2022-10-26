@@ -106,7 +106,7 @@ engine.run_with_scope(&mut scope,
 // Notice that the new variable 'x', defined previously, is still here.
 let result = engine.eval_with_scope::<i64>(&mut scope, "x + y")?;
 
-println!("result: {}", result);                 // prints 1103
+println!("result: {result}");                   // prints 1103
 
 // Variable y is changed in the script - read it with 'get_value'
 assert_eq!(scope.get_value::<i64>("y").expect("variable y should exist"), 1);

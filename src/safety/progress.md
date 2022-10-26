@@ -30,7 +30,7 @@ let mut engine = Engine::new();
 
 engine.on_progress(|count| {    // parameter is number of operations already performed
     if count % 1000 == 0 {
-        println!("{}", count);  // print out a progress log every 1,000 operations
+        println!("{count}");    // print out a progress log every 1,000 operations
     }
     None                        // return 'None' to continue running the script
                                 // return 'Some(token)' to immediately terminate the script

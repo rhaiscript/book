@@ -27,6 +27,6 @@ let depth = debugger.call_stack().len();
 
 // Display all function calls
 for frame in debugger.call_stack().iter() {
-    println!("{}", frame);
+    println!("{frame}");
 }
 ```
