@@ -48,6 +48,7 @@ Rust Integration
   - [String Parameters](rust/strings.md)
   - [Generic Functions](rust/generic.md)
   - [Fallible Functions](rust/fallible.md)
+  - [`Dynamic` Return Value](rust/dynamic-return.md)
   - [`Dynamic` Parameters](rust/dynamic-args.md)
   - [`NativeCallContext`](rust/context.md)
   - [Override a Built-in Function](rust/override.md)

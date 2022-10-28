@@ -3,16 +3,26 @@ Register a Fallible Rust Function
 
 {{#include ../links.md}}
 
-If a function is _fallible_ (i.e. it returns a `Result<_, _>`), it can be also registered with via
+~~~admonish tip.side.wide "Tip: Consider `Dynamic`"
+
+A lot of times it is not necessary to register fallible functions.
+
+Simply have the function returns [`Dynamic`].
+Upon error, return [`()`] which is idiomatic in Rhai.
+
+See [here](dynamic-return.md) for more details.
+~~~
+
+If a function is _fallible_ (i.e. it returns a `Result<_, _>`), it can also be registered with via
 `Engine::register_fn`.
 
-```admonish warning.small "Return type"
-
 The function must return `Result<T, Box<EvalAltResult>>` where `T` is any clonable type.
-```
+
+In other words, the error type _must_ be `Box<EvalAltResult>`.  It is `Box`ed in order to reduce
+the size of the `Result` type since the error path is rarely hit.
 
 ```rust
-use rhai::{Engine, EvalAltResult, Position};
+use rhai::{Engine, EvalAltResult};
 
 // Function that may fail - the error type must be 'Box<EvalAltResult>'
 fn safe_divide(x: i64, y: i64) -> Result<i64, Box<EvalAltResult>> {
