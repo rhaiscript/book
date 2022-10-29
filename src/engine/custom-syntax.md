@@ -328,7 +328,7 @@ Make sure there are _lots_ of examples for users to follow.
 Practical Example &ndash; Recreating C's Ternary Operator
 ---------------------------------------------------------
 
-Rhai has [if expressions](../language/if-expression.md), but sometimes a C-style _ternary_ operator
+Rhai has [if expressions](../language/if.md#if-expression), but sometimes a C-style _ternary_ operator
 is more concise.
 
 ```rust

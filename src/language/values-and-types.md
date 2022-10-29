@@ -25,10 +25,14 @@ The following primitive types are supported natively.
 | **Nothing/void/nil/null/Unit** (or whatever it is called)                                                                        | `()`                                                                                                | `"()"`                    | `""` _(empty string)_           |
 
 
-```admonish warning.small "All types are distinct"
+```admonish warning.small "No automatic type conversion for integers"
 
-All types are treated strictly distinct by Rhai, meaning that `i32` and `i64` and `u32` are
-completely different. They cannot even be added together.
+The various integer types are treated strictly _distinct_ by Rhai, meaning that
+`i32` and `i64` and `u32` and `u8` are completely different.
+
+They cannot even be added together or compared with each other.
+
+Nor can a smaller integer type be up-casted to a larger integer type.
 
 This is very similar to Rust.
 ```
@@ -44,13 +48,15 @@ If only 32-bit integers are needed, enabling the [`only_i32`] feature will remov
 integer types other than `i32`, including `i64`.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.
 
-~~~admonish danger.small "Default integer is `i64`"
+~~~admonish danger.small "Warning: Default integer is `i64`"
 
 Rhai's default integer type is `i64`, which is _DIFFERENT_ from Rust's `i32`.
 
 It is very easy to unsuspectingly set an `i32` into Rhai, which _still works_ but will incur a significant
 runtime performance hit since the [`Engine`] will treat `i32` as an opaque [custom type] (unless using the
 [`only_i32`] feature).
+
+`i64` is the default even on 32-bit systems.  To use `i32` on 32-bit systems requires the [`only_i32`] feature.
 ~~~
 
 ```admonish tip.small "Tip: Floating-point numbers"
@@ -60,7 +66,7 @@ If no floating-point is needed or supported, use the [`no_float`] feature to rem
 Some applications require fixed-precision decimal numbers, which can be enabled via the [`decimal`] feature.
 ```
 
-```admonish info.small "Strings"
+```admonish info.small "Immutable strings"
 
 [Strings] in Rhai are _immutable_, meaning that they can be shared but not modified.
 

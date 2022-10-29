@@ -12,8 +12,9 @@ Compile-Time Language Features
 | Method                                                             | Description                                                                            |                 Default                 |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | :-------------------------------------: |
 | `set_optimization_level`<br/>(not available under [`no_optimize`]) | sets the amount of script _optimizations_ performed (see [script optimization])        | [`Simple`][`OptimizationLevel::Simple`] |
-| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions]({{rootUrl}}/language/if-expression.md)             |                  allow                  |
+| `set_allow_if_expression`                                          | allows/disallows [`if`-expressions]({{rootUrl}}/language/if.md#if-expression)          |                  allow                  |
 | `set_allow_switch_expression`                                      | allows/disallows [`switch` expressions]({{rootUrl}}/language/switch-expression.md)     |                  allow                  |
+| `set_allow_loop_expressions`                                       | allows/disallows loop expressions                                                      |                  allow                  |
 | `set_allow_statement_expression`                                   | allows/disallows [statement expressions]({{rootUrl}}/language/statement-expression.md) |                  allow                  |
 | `set_allow_anonymous_fn`<br/>(not available under [`no_function`]) | allows/disallows [anonymous functions]                                                 |                  allow                  |
 | `set_allow_looping`                                                | allows/disallows looping (i.e. [`while`], [`loop`], [`do`] and [`for`] statements)     |                  allow                  |

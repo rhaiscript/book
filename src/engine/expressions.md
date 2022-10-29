@@ -58,11 +58,13 @@ let fp: FnPtr = engine.eval_expression("|x| x + 1")?;
 
 ~~~admonish tip "Tip: `if`-expressions and `switch`-expressions"
 
-[`if` expressions]({{rootUrl}}/language/if-expression.md) are allowed if both statement blocks
+[`if` expressions]({{rootUrl}}/language/if.md#if-expression) are allowed if both statement blocks
 contain only a single expression each.
 
 [`switch` expressions]({{rootUrl}}/language/switch-expression.md) are allowed if all match
 actions are expressions and not statements.
+
+loop expressions are not allowed.
 
 ```rust
 // The following are allowed.
