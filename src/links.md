@@ -26,11 +26,13 @@
 [minimal builds]: {{rootUrl}}/start/builds/minimal.md
 [`no-std`]: {{rootUrl}}/start/builds/no-std.md
 [WASM]: {{rootUrl}}/start/builds/wasm.md
+[static hashing]: {{rootUrl}}/patterns/static-hash.md
 
 [playground]: https://rhai.rs/playground
 [lsp]: https://github.com/rhaiscript/lsp
 [`rhai-doc`]: https://github.com/rhaiscript/rhai-doc
 [MarkDown]: http://en.wikipedia.org/wiki/Markdown
+[`ahash`]: https://crates.io/crates/ahash
 [`smartstring`]: https://crates.io/crates/smartstring
 [`SmartString`]: https://crates.io/crates/smartstring
 
@@ -178,6 +180,7 @@
 
 [OOP]: {{rootUrl}}/patterns/oop.md
 [DSL]: {{rootUrl}}/engine/dsl.md
+[DOS]: https://en.wikipedia.org/wiki/Denial-of-service_attack
 
 [safety]: {{rootUrl}}/safety/index.md
 [checked]: {{rootUrl}}/safety/checked.md
@@ -225,6 +228,8 @@
 
 [literal]: {{rootUrl}}/appendix/literals.md
 [literals]: {{rootUrl}}/appendix/literals.md
+
+[`ahash`]: https://crates.io/crates/ahash
 
 [`rhai-dylib`]: {{rootUrl}}/lib/rhai-dylib.md
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md

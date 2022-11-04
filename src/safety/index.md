@@ -1,4 +1,4 @@
-Safety and Protection Against DoS Attacks
+Safety and Protection Against DOS Attacks
 =========================================
 
 {{#title Safety and Protection}}
@@ -7,6 +7,8 @@ Safety and Protection Against DoS Attacks
 
 For scripting systems open to untrusted user-land scripts, it is always best to limit the amount of
 resources used by a script so that it does not consume more resources that it is allowed to.
+
+These are common vectors for [Denial of Service (DOS)][DOS] attacks.
 
 
 Most Important Resources

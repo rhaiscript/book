@@ -60,8 +60,7 @@ Such random number source is available from JavaScript (e.g. if the WASM module 
 browser)
 
 Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
-opt out of `default-features` in order to force usage of [fixed (non-random) hashing
-keys]({{rootUrl}}/engine/dynamic-lib.md#force-stable-hashing).
+opt out of `default-features` in order to enable [static hashing] which uses fixed (non-random) keys.
 
 ```toml
 [dependencies]
