@@ -178,13 +178,25 @@ The following methods are available when working with [`Dynamic`]:
 
 ### Detection methods
 
-| Method         | Not available under | Return type | Description                                                            |
-| -------------- | :-----------------: | :---------: | ---------------------------------------------------------------------- |
-| `is<T>`        |                     |   `bool`    | is the value of type `T`?                                              |
-| `is_variant`   |                     |   `bool`    | is the value a trait object (i.e. not one of Rhai's [standard types])? |
-| `is_read_only` |                     |   `bool`    | is the value [constant]? A [constant] value should not be modified.    |
-| `is_shared`    |   [`no_closure`]    |   `bool`    | is the value _shared_ via a [closure]?                                 |
-| `is_locked`    |   [`no_closure`]    |   `bool`    | is the value _shared_ and locked (i.e. currently being read)?          |
+| Method         |    Not available under    | Return type | Description                                                            |
+| -------------- | :-----------------------: | :---------: | ---------------------------------------------------------------------- |
+| `is<T>`        |                           |   `bool`    | is the value of type `T`?                                              |
+| `is_variant`   |                           |   `bool`    | is the value a trait object (i.e. not one of Rhai's [standard types])? |
+| `is_read_only` |                           |   `bool`    | is the value [constant]? A [constant] value should not be modified.    |
+| `is_shared`    |      [`no_closure`]       |   `bool`    | is the value _shared_ via a [closure]?                                 |
+| `is_locked`    |      [`no_closure`]       |   `bool`    | is the value _shared_ and locked (i.e. currently being read)?          |
+| `is_unit`      |                           |   `bool`    | is the value [`()`]?                                                   |
+| `is_int`       |                           |   `bool`    | is the value an integer?                                               |
+| `is_float`     |       [`no_float`]        |   `bool`    | is the value a floating-point number?                                  |
+| `is_decimal`   |      non-[`decimal`]      |   `bool`    | is the value a [`Decimal`][rust_decimal]?                              |
+| `is_bool`      |                           |   `bool`    | is the value a `bool`?                                                 |
+| `is_char`      |                           |   `bool`    | is the value a [character]?                                            |
+| `is_string`    |                           |   `bool`    | is the value a [string]?                                               |
+| `is_array`     |       [`no_index`]        |   `bool`    | is the value an [array]?                                               |
+| `is_blob`      |       [`no_index`]        |   `bool`    | is the value a [BLOB]?                                                 |
+| `is_map`       |       [`no_object`]       |   `bool`    | is the value an [object map]?                                          |
+| `is_timestamp` | [`no_time`] or [`no_std`] |   `bool`    | is the value a [timestamp]?                                            |
+
 
 ### Casting methods
 
