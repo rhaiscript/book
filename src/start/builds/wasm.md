@@ -48,16 +48,25 @@ There is no particular setting to tweak when building for WASI.
 
 ~~~admonish abstract "JavaScript: `wasm32-unknown-unknown` + `wasm-bindgen`/`stdweb`"
 
-There is no particular setting to tweak when building for WASM with JavaScript interop (see above).
+Rhai requires a system-provided source of random numbers (for hashing).
+
+Such random number source is available from JavaScript (e.g. if the WASM module is intended
+for a browser).
+
+In such circumstances, it is necessary to enable the `js` feature on the
+[`getrandom`](https://crates.io/crates/getrandom) crate.
+
+```toml
+[dependencies]
+getrandom = { version = "0.2", features = [ "js" ] }
+```
+
+See also: <https://docs.rs/getrandom/latest/getrandom/#webassembly-support>
 ~~~
 
 ~~~admonish warning "Raw: `wasm32-unknown-unknown`"
 
-The set of default features of Rhai is at odds with building for raw WASM, since Rhai requires a
-system-provided source of random numbers (for hashing).
-
-Such random number source is available from JavaScript (e.g. if the WASM module is intended for a
-browser)
+Rhai requires a system-provided source of random numbers (for hashing).
 
 Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
 opt out of `default-features` in order to enable [static hashing] which uses fixed (non-random) keys.
