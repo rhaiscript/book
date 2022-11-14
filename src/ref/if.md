@@ -47,3 +47,39 @@ x == 22;
 let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 ```
+
+~~~admonish danger.small "Statement before expression"
+
+Beware that, like Rust, `if` is parsed primarily as a statement where it makes sense.
+This is to avoid surprises.
+
+```rust
+fn index_of(x) {
+    // 'if' is parsed primarily as a statement
+    if this.contains(x) {
+        return this.find_index(x)
+    }
+
+    -1
+}
+```
+
+The above will not be parsed as a single expression:
+
+```rust
+fn index_of(x) {
+    if this.contains(x) { return this.find_index(x) } - 1
+    //                          error due to '() - 1' ^
+}
+
+```
+
+To force parsing as an expression, parentheses are required:
+
+```rust
+fn calc_index(b, offset) {
+    (if b { 1 } else { 0 }) + offset
+//  ^---------------------^ parentheses
+}
+```
+~~~
