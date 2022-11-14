@@ -202,6 +202,38 @@ x == 22;
 let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 </code></pre>
+<div id="admonition-statement-before-expression" class="admonition danger small">
+<div class="admonition-title">
+<p>Statement before expression</p>
+<p><a class="admonition-anchor-link" href="#admonition-statement-before-expression"></a></p>
+</div>
+<div>
+<p>Beware that, like Rust, <code>if</code> is parsed primarily as a statement where it makes sense.
+This is to avoid surprises.</p>
+<pre><code class="language-rust">fn index_of(x) {
+    // 'if' is parsed primarily as a statement
+    if this.contains(x) {
+        return this.find_index(x)
+    }
+
+    -1
+}
+</code></pre>
+<p>The above will not be parsed as a single expression:</p>
+<pre><code class="language-rust">fn index_of(x) {
+    if this.contains(x) { return this.find_index(x) } - 1
+    //                          error due to '() - 1' ^
+}
+
+</code></pre>
+<p>To force parsing as an expression, parentheses are required:</p>
+<pre><code class="language-rust">fn calc_index(b, offset) {
+    (if b { 1 } else { 0 }) + offset
+//  ^---------------------^ parentheses
+}
+</code></pre>
+</div>
+</div>
 
                     </main>
 

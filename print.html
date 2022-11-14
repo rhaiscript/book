@@ -9971,6 +9971,38 @@ x == 22;
 let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 </code></pre>
+<div id="admonition-statement-before-expression" class="admonition danger small">
+<div class="admonition-title">
+<p>Statement before expression</p>
+<p><a class="admonition-anchor-link" href="language/if.html#admonition-statement-before-expression"></a></p>
+</div>
+<div>
+<p>Beware that, like Rust, <code>if</code> is parsed primarily as a statement where it makes sense.
+This is to avoid surprises.</p>
+<pre><code class="language-rust">fn index_of(x) {
+    // 'if' is parsed primarily as a statement
+    if this.contains(x) {
+        return this.find_index(x)
+    }
+
+    -1
+}
+</code></pre>
+<p>The above will not be parsed as a single expression:</p>
+<pre><code class="language-rust">fn index_of(x) {
+    if this.contains(x) { return this.find_index(x) } - 1
+    //                          error due to '() - 1' ^
+}
+
+</code></pre>
+<p>To force parsing as an expression, parentheses are required:</p>
+<pre><code class="language-rust">fn calc_index(b, offset) {
+    (if b { 1 } else { 0 }) + offset
+//  ^---------------------^ parentheses
+}
+</code></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="switch-statement"><a class="header" href="#switch-statement">Switch Statement</a></h1>
 <p>The <code>switch</code> statement allows matching on <a href="language//book/appendix/literals.html">literal</a> values, and it mostly follows Rust’s <code>match</code> syntax.</p>
 <pre><code class="language-js">switch calc_secret_value(x) {
@@ -20919,6 +20951,38 @@ x == 22;
 let x = if decision { 42 }; // no else branch defaults to '()'
 x == ();
 </code></pre>
+<div id="admonition-statement-before-expression" class="admonition danger small">
+<div class="admonition-title">
+<p>Statement before expression</p>
+<p><a class="admonition-anchor-link" href="ref/if.html#admonition-statement-before-expression"></a></p>
+</div>
+<div>
+<p>Beware that, like Rust, <code>if</code> is parsed primarily as a statement where it makes sense.
+This is to avoid surprises.</p>
+<pre><code class="language-rust">fn index_of(x) {
+    // 'if' is parsed primarily as a statement
+    if this.contains(x) {
+        return this.find_index(x)
+    }
+
+    -1
+}
+</code></pre>
+<p>The above will not be parsed as a single expression:</p>
+<pre><code class="language-rust">fn index_of(x) {
+    if this.contains(x) { return this.find_index(x) } - 1
+    //                          error due to '() - 1' ^
+}
+
+</code></pre>
+<p>To force parsing as an expression, parentheses are required:</p>
+<pre><code class="language-rust">fn calc_index(b, offset) {
+    (if b { 1 } else { 0 }) + offset
+//  ^---------------------^ parentheses
+}
+</code></pre>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="switch-statement-1"><a class="header" href="#switch-statement-1">Switch Statement</a></h1>
 <p>The <code>switch</code> statement allows matching on <a href="ref/../appendix/literals.html">literal</a> values.</p>
 <pre><code class="language-js">switch calc_secret_value(x) {
