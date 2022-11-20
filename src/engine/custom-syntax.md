@@ -325,10 +325,74 @@ Make sure there are _lots_ of examples for users to follow.
 ### Step Six &ndash; Profit!
 
 
+Practical Example &ndash; Matrix Literal
+----------------------------------------
+
+Say you'd want to use something like [`ndarray`](https://crates.io/crates/ndarray) to manipulate matrices.
+
+However, you'd like to write matrix literals in a more intuitive syntax than an [array]
+of [arrays].
+
+In other words, you'd like to turn:
+
+```rust
+// Array of arrays
+let matrix = [ [  a, b,     0 ],
+               [ -b, a,     0 ],
+               [  0, 0, c * d ] ];
+```
+
+into:
+
+```rust
+// Directly parse to an ndarray::Array (look ma, no commas!)
+let matrix = @|  a   b   0  |
+              | -b   a   0  |
+              |  0   0  c*d |;
+```
+
+This can easily be done via a custom syntax, which yields a syntax that is more pleasing.
+
+```rust
+engine.register_custom_syntax(
+    ["@", "|", "$expr$", "$expr$", "$expr$", "|", 
+          "|", "$expr$", "$expr$", "$expr$", "|",
+          "|", "$expr$", "$expr$", "$expr$", "|" 
+    ],
+    false,
+    |context, inputs| {
+        use ndarray::arr2;
+
+        let mut values = [[0.0; 3]; 3];
+
+        for y in 0..2 {
+            for x in 0..2 {
+                let offset = y * 3 + x;
+
+                match context.eval_expression_tree(&inputs[offset])?.as_float() {
+                    Ok(v) => values[y][x] = v,
+                    Err(typ) => return Err(Box::new(EvalAltResult::ErrorMismatchDataType(
+                                            "float".to_string(), typ.to_string(),
+                                            inputs[offset].position()
+                                )))
+                }
+            }
+        }
+
+        let matrix = arr2(&values);
+
+        Ok(Dynamic::from(matrix))
+    },
+)?;
+```
+
+For matrices of flexible dimensions, check out [custom syntax parsers](custom-syntax-parsers.md).
+
+
 Practical Example &ndash; Recreating C's Ternary Operator
 ---------------------------------------------------------
 
-Rhai has [if expressions](../language/if.md#if-expression), but sometimes a C-style _ternary_ operator
+Rhai has [if-expressions](../language/if.md#if-expression), but sometimes a C-style _ternary_ operator
 is more concise.
 
 ```rust
@@ -341,7 +405,7 @@ engine.register_custom_syntax(
         Ok(true) => context.eval_expression_tree(&inputs[1]),
         Ok(false) => context.eval_expression_tree(&inputs[2]),
         Err(typ) => Err(Box::new(EvalAltResult::ErrorMismatchDataType(
-            "bool".to_string(), typ.to_string(), inputs[0].position(),
+            "bool".to_string(), typ.to_string(), inputs[0].position()
         ))),
     },
 )?;
