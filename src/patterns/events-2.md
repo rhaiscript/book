@@ -66,11 +66,14 @@ impl Handler {
         // Convert the object map into 'Dynamic'
         let mut states: Dynamic = states.into();
 
-        // Use 'call_fn_raw' instead of 'call_fn' to bind the 'this' pointer
+        // Use 'call_fn_with_options' instead of 'call_fn' to bind the 'this' pointer
+        let options = CallFnOptions::new()
+                        .eval_ast(false)                // do not re-evaluate the AST
+                        .rewind_scope(true)             // rewind scope
+                        .bind_this_ptr(&mut states);    // bind the 'this' pointer
+
         // In a real application you'd again be handling errors...
-        engine.call_fn_raw(&mut scope, &ast, false, true, "init", Some(&mut states), []).unwrap();
-        //                                          ^^^^          ^^^^^^^^^^^^^^^^^
-        //                                      rewind scope      bind 'this' pointer
+        engine.call_fn_with_options(options, &mut scope, &ast, "init", ()).unwrap();
 
                     :
             // Code omitted
@@ -85,8 +88,8 @@ impl Handler {
 Bind `this` Pointer During Events Handling
 ------------------------------------------
 
-Events handling should also use `Engine::call_fn_raw` to bind the [object map] containing global
-states to the `this` pointer.
+Events handling should also use `Engine::call_fn_with_options` to bind the [object map] containing
+global states to the `this` pointer via `CallFnOptions::this_ptr`.
 
 ```rust
 pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
@@ -95,11 +98,14 @@ pub fn on_event(&mut self, event_name: &str, event_data: i64) -> Dynamic {
     let states = &mut self.states;
     let ast = &self.ast;
 
+    let options = CallFnOptions::new()
+                    .eval_ast(false)                // do not re-evaluate the AST
+                    .rewind_scope(true)             // rewind scope
+                    .bind_this_ptr(&mut states);    // bind the 'this' pointer
+
     match event_name {
         // In a real application you'd be handling errors...
-        "start" => engine.call_fn_raw(scope, ast, false, true, "start",
-                                      Some(states), [event_data.into()]).unwrap(),
-                                   // ^^^^^^^^^^^^ bind 'this' pointer
+        "start" => engine.call_fn_with_options(options, scope, ast, "start", (event_data,)).unwrap(),
             :
             :
     }

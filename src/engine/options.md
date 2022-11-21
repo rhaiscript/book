@@ -31,9 +31,11 @@ features contained inside the [`AST`] will still run as normal.
 Runtime Behavior
 ----------------
 
-| Method                                                                     | Description                                                                                                      |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `set_fail_on_invalid_map_property`<br/>(not available under [`no_object`]) | sets whether to raise errors (instead of returning [`()`]) when invalid properties are accessed on [object maps] |
+| Method                                                                     | Description                                                                                                                                      |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `set_fail_on_invalid_map_property`<br/>(not available under [`no_object`]) | sets whether to raise errors (instead of returning [`()`]) when invalid properties are accessed on [object maps]                                 |
+| `set_default_tag`                                                          | sets the default value of the _custom state_ (which can be obtained via [`NativeCallContext::tag`][`NativeCallContext`]) for each evaluation run |
+
 
 Safety Limits
 -------------

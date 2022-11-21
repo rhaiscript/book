@@ -12,11 +12,11 @@ See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
 ```
 
 
-Initialize Handler Instance with `Engine::call_fn_raw`
-------------------------------------------------------
+Initialize Handler Instance with `Engine::call_fn_with_options`
+---------------------------------------------------------------
 
-Use `Engine::call_fn_raw` instead of `Engine::call_fn` in order to retain new [variables] defined
-inside the custom [`Scope`] when running the `init` function.
+Use `Engine::call_fn_with_options` instead of `Engine::call_fn` in order to retain new [variables]
+defined inside the custom [`Scope`] when running the `init` function.
 
 ```rust
 impl Handler {
@@ -29,9 +29,12 @@ impl Handler {
                     :
 
         // Run the 'init' function to initialize the state, retaining variables.
+        let options = CallFnOptions::new()
+                        .eval_ast(false)        // do not re-evaluate the AST
+                        .rewind_scope(false);   // do not rewind scope
+
         // In a real application you'd again be handling errors...
-        engine.call_fn_raw(&mut scope, &ast, false, false, "init", None, []).unwrap();
-        //                                          ^^^^^ do not rewind scope
+        engine.call_fn_with_options(options, &mut scope, &ast, "init", ()).unwrap();
 
                     :
             // Code omitted
@@ -55,7 +58,7 @@ The API registered with the [`Engine`] can be also used throughout the script.
 
 ```js
 /// Initialize user-provided state (shadows system-provided state, if any).
-/// Because 'call_fn_raw' is used to call this, new variables introduced
+/// Because 'CallFnOptions::rewind_scope' is 'false', new variables introduced
 /// will remain inside the custom 'Scope'.
 fn init() {
     // Add 'bool_state' and 'obj_state' as new state variables
@@ -116,7 +119,8 @@ Disadvantages of This Style
 This style is simple to implement and intuitive to use, but it is not very flexible.
 
 New user state [variables] are introduced by evaluating a special initialization script [function]
-(e.g. `init`) that defines them, and `Engine::call_fn_raw` is used to keep them inside the custom [`Scope`].
+(e.g. `init`) that defines them, and `Engine::call_fn_with_scope` is used to keep them inside the
+custom [`Scope`] (together with setting `CallFnOptions::rewind_scope` to `false`).
 
 However, this has the disadvantage that no other [function] can introduce new state [variables],
 otherwise they'd simply _[shadow]_ existing [variables] in the custom [`Scope`].  Thus, [functions]

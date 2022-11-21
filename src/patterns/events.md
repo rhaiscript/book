@@ -24,7 +24,7 @@ Scriptable Event Handler with State
   * [`AST`] of the user script,
   * [`Scope`] containing system-provided default state.
 
-* User-provided state is initialized by a [function] called via [`Engine::call_fn_raw`][`call_fn`].
+* User-provided state is initialized by a [function] called via [`Engine::call_fn_with_options`][`call_fn`].
 
 * Upon an event, the appropriate event handler [function] in the script is called via
   [`Engine::call_fn`][`call_fn`].
@@ -107,9 +107,9 @@ Steps to initialize the event handler:
 1. Register an API with the [`Engine`],
 2. Create a custom [`Scope`] to serve as the stored state,
 3. Add default state [variables] into the custom [`Scope`],
-4. Optionally, call an initiation [function] to create new state [variables]; `Engine::call_fn_raw`
-   is used instead of `Engine::call_fn` so that [variables] created inside the [function] will not
-   be removed from the custom [`Scope`] upon exit,
+4. Optionally, call an initiation [function] to create new state [variables];
+   `Engine::call_fn_with_options` is used instead of `Engine::call_fn` so that [variables] created
+   inside the [function] will not be removed from the custom [`Scope`] upon exit,
 5. Get the handler script and [compile][`AST`] it,
 6. Store the compiled [`AST`] for future evaluations,
 7. Run the [`AST`] to initialize event handler state [variables].

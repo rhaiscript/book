@@ -120,11 +120,9 @@ super_ecs_system.query(...).for_each(|world: &mut World| {
     // Create handle from reference to 'World'
     let handle: WorldHandle = world.into();
 
-    // Set the handle's ID into the engine's tag
+    // Set the handle's ID into the engine's tag.
+    // Alternatively, use 'Engine::call_fn_with_options'.
     engine.set_default_tag(handle.unique_id());
-
-    // Alternatively, use 'Engine::call_fn_raw_raw' and set the handle's ID
-    // into the 'tag' field of the 'GlobalRuntimeState' object
 
     // Add handle into scope
     let mut scope = Scope::new();
@@ -158,9 +156,6 @@ an error should be returned instead.
 
 #### Alternative to `Engine::set_default_tag`
 
-Alternatively, if the [`Engine`] cannot be made mutable, use `Engine::call_fn_raw_raw`
-(which requires the [`internals`] feature) to directly call a script [function] in a compiled [`AST`].
-
-This volatile API allows specifying a [`GlobalRuntimeState`] object which contains the `tag` field
-that can be set just for that evaluation run.
+Alternatively, if the [`Engine`] cannot be made mutable, use `Engine::call_fn_with_options`
+to set the ID before directly calling a script [function] in a compiled [`AST`].
 ```

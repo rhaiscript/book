@@ -95,7 +95,7 @@ needed by the [function].
 All new [variables]/[constants] introduced are, by default, _not_ retained inside the [`Scope`].
 In other words, the [`Scope`] is _rewound_ before each call.
 
-If these default behaviors are not desirable, use `Engine::call_fn_raw`.
+If these default behaviors are not desirable, override them with `Engine::call_fn_with_options`.
 ~~~
 
 
@@ -104,7 +104,7 @@ If these default behaviors are not desirable, use `Engine::call_fn_raw`.
 
 ```admonish note.side
 
-Rhai implements [`FuncArgs`][traits] for tuples and `Vec<T>`.
+Rhai implements [`FuncArgs`][traits] for tuples, arrays and `Vec<T>`.
 ```
 
 `Engine::call_fn` takes a parameter of any type that implements the [`FuncArgs`][traits] trait,
@@ -149,29 +149,36 @@ to be split up to pass to functions.
 ```
 
 
-Low-Level API &ndash; `Engine::call_fn_raw`
--------------------------------------------
+`Engine::call_fn_with_options`
+------------------------------
 
-For more control, construct all arguments as [`Dynamic`] values and use `Engine::call_fn_raw`,
-passing it anything that implements `AsMut<[Dynamic]>` (such as a simple array or a `Vec<Dynamic>`):
+For more control, use `Engine::call_fn_with_options`, which takes a type `CallFnOptions`:
 
 ```rust
-let result = engine.call_fn_raw(
-                &mut scope,         // scope to use
-                &ast,               // AST containing the functions
-                false,              // false = do not evaluate the AST
-                false,              // false = do not rewind the scope (i.e. keep new variables)
-                "hello",            // function entry-point
-                None,               // 'this' pointer, if any
-                [ "abc".into(), 123_i64.into() ]    // arguments
+use rhai::{Engine, CallFnOptions};
+
+let options = CallFnOptions::new()
+                .eval_ast(false)            // do not evaluate the AST
+                .rewind_scope(false)        // do not rewind the scope (i.e. keep new variables)
+                .bind_this_ptr(&mut state); // 'this' pointer
+
+let result = engine.call_fn_with_options::<i64>(
+                options,                    // options
+                &mut scope,                 // scope to use
+                &ast,                       // AST containing the functions
+                "hello",                    // function entry-point
+                ( "abc", 123_i64 )          // arguments
              )?;
 ```
 
-`Engine::call_fn_raw` extends control to the following:
+`CallFnOptions` allows control of the following:
 
-* Whether to skip evaluation of the [`AST`] before calling the target [function]
-* Whether to rewind the custom [`Scope`] at the end of the [function] call
-* Whether to bind the `this` pointer to a specific value
+| Field          |                Type                 | Default |  Build method   | Description                                                                                               |
+| -------------- | :---------------------------------: | :-----: | :-------------: | --------------------------------------------------------------------------------------------------------- |
+| `eval_ast`     |               `bool`                | `true`  |   `eval_ast`    | skip evaluation of the [`AST`] before calling the target [function]                                       |
+| `rewind_scope` |               `bool`                | `true`  | `rewind_scope`  | rewind the custom [`Scope`] at the end of the [function] call so new local variables are removed          |
+| `this_ptr`     | [`Option<&mut Dynamic>`][`Dynamic`] | `None`  | `bind_this_ptr` | bind the `this` pointer to a specific value                                                               |
+| `tag`          |   [`Option<Dynamic>`][`Dynamic`]    | `None`  |   `with_tag`    | set the _custom state_ for this evaluation (accessed via [`NativeCallContext::tag`][`NativeCallContext`]) |
 
 ### Skip evaluation of the `AST`
 
@@ -230,9 +237,9 @@ let foo = 123;                      // 'foo' is retained
 │ Rust │
 └──────┘
 
-engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
-//                                   ^^^^ evaluate AST before call
-//                                         ^^^^^ do not rewind scope
+let options = CallFnOptions::new().rewind_scope(false);
+
+engine.call_fn_with_options(options, &mut scope, &ast, "initialize", ())?;
 
 // At this point, 'scope' contains these variables: 'foo', 'x', 'y'
 ```
@@ -244,7 +251,7 @@ engine.call_fn_raw(&mut scope, &ast, true, false, "initialize", None, [])?;
 `Engine::call_fn` cannot call functions in _method-call_ style.
 ```
 
-`Engine::call_fn_raw` can also bind a value to the `this` pointer of a script-defined [function].
+`Engine::call_fn_with_options` can also bind a value to the `this` pointer of a script-defined [function].
 
 It is possible, then, to call a [function] that uses `this`.
 
@@ -253,15 +260,12 @@ let ast = engine.compile("fn action(x) { this += x; }")?;
 
 let mut value: Dynamic = 1_i64.into();
 
-engine.call_fn_raw(
-            &mut scope,
-            &ast,
-            false,
-            false,
-            "action",
-            Some(&mut value),       // binding the 'this' pointer
-            [ 41_i64.into() ]
-       )?;
+let options = CallFnOptions::new()
+                .eval_ast(false)
+                .rewind_scope(false)
+                .bind_this_ptr(&mut value);
+
+engine.call_fn_with_options(options, &mut scope, &ast, "action", ( 41_i64, ))?;
 
 assert_eq!(value.as_int()?, 42);
 ```
