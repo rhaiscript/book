@@ -12,6 +12,7 @@ Rhai's [`Dynamic`] type supports serialization and deserialization by
 ```
 
 [`serde`]: https://crates.io/crates/serde
+[`serde_json`]: https://crates.io/crates/serde_json
 [`serde::Serialize`]: https://docs.serde.rs/serde/trait.Serialize.html
 [`serde::Deserialize`]: https://docs.serde.rs/serde/trait.Deserialize.html
 
@@ -20,7 +21,8 @@ Serialize/Deserialize a `Dynamic`
 ---------------------------------
 
 With the [`serde`][features] feature turned on, [`Dynamic`] implements [`serde::Serialize`] and
-[`serde::Deserialize`], so it can easily be serialized and deserialized with [`serde`].
+[`serde::Deserialize`], so it can easily be serialized and deserialized with [`serde`] (for example,
+to and from JSON via [`serde_json`]).
 
 ```rust
 let value: Dynamic = ...;
@@ -32,7 +34,24 @@ let json = serde_json::to_string(&value);
 let result: Dynamic = serde_json::from_str(&json);
 ```
 
+```admonish note.small "Custom types"
+
 [Custom types] are serialized as text strings of the value's type name.
+```
+
+```admonish warning.small "BLOB's"
+
+[BLOB's], or byte-arrays, are serialized and deserialized as simple [arrays] for some formats such as JSON.
+```
+
+```admonish tip.small "Tip: Lighter alternative for JSON"
+
+The [`serde_json`] crate is quite heavy.
+
+If only _simple_ JSON parsing (i.e. only deserialization) of a hash object into a Rhai [object map] is required,
+the [`Engine::parse_json`]({{rootUrl}}/language/json.md}}) method is available as a _cheap_ alternative,
+but it does not provide the same level of correctness, nor are there any configurable options.
+```
 
 
 `Dynamic` as Serialization Format
@@ -142,43 +161,4 @@ Use `Dynamic::flatten` to obtain a cloned copy before deserialization
 (if the value is not shared, it is simply returned and not cloned).
 
 Shared values are turned off via the [`no_closure`] feature.
-```
-
-```admonish tip "Tip: Lighter alternative"
-
-The [`serde`](https://crates.io/crates/serde) crate is quite heavy.
-
-If only _simple_ JSON parsing (i.e. only deserialization) of a hash object into a Rhai [object map] is required,
-the [`Engine::parse_json`]({{rootUrl}}/language/json.md}}) method is available as a _cheap_ alternative,
-but it does not provide the same level of correctness, nor are there any configurable options.
-```
-
-```admonish tip "Tip: Working with BLOB's"
-
-[BLOB's], or byte-arrays, are normally serialized and deserialized as simple [arrays].
-
-For higher efficiency, it is necessary to specify [BLOB] fields via the
-`serde_bytes` attribute from the [`serde_bytes`](https://crates.io/crates/serde_bytes) crate.
-
-~~~rust
-use serde::{Deserialize, Serialize};
-
-// Use 'serde_bytes' to serialize the data as Dynamic BLOB's
-#[derive(Deserialize, Serialize)]
-struct TypeWithBlobs<'a> {
-    #[serde(with = "serde_bytes")]
-    bytes: &'a [u8],
-
-    #[serde(with = "serde_bytes")]
-    byte_buf: Vec<u8>,
-}
-
-let blobs = from_dynamic::<TypeWithBlobs>(&blob)?;
-
-// Use 'serde_bytes::Bytes' to get a slice to a stream of bytes
-let bytes_ref: &[u8] = from_dynamic::<serde_bytes::Bytes>(&blob)?.as_ref();
-
-// Use 'serde_bytes::ByteBuf' to get a 'Vec<u8>'
-let bytes: Vec<u8> = from_dynamic::<serde_bytes::ByteBuf>(&blob)?.into_vec();
-~~~
 ```
