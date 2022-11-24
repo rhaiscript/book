@@ -6,6 +6,9 @@ Get Functions Metadata in Scripts
 The built-in function `get_fn_metadata_list` returns an [array] of [object maps], each containing
 the metadata of one script-defined [function] in scope.
 
+`get_fn_metadata_list` is defined in the [`LanguageCorePackage`][built-in packages], which is
+excluded when using a [raw `Engine`].
+
 `get_fn_metadata_list` has a few versions taking different parameters:
 
 | Signature                            | Description                                                                                                                             |

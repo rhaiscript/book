@@ -132,8 +132,8 @@ map.a.b.c.d.calc();         // directly calls 'calc' on 'd'
 Built-in Functions
 ------------------
 
-The following methods (defined in the [`BasicMapPackage`][built-in packages] but excluded if using a [raw `Engine`])
-operate on object maps.
+The following methods (defined in the [`BasicMapPackage`][built-in packages] but excluded when using
+a [raw `Engine`]) operate on object maps.
 
 | Function                    | Parameter(s)                                                 | Description                                                                                                                                                           |
 | --------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -43,8 +43,8 @@ let g = bar;            // error: variable 'bar' not found
 Built-in Functions
 ------------------
 
-The following standard methods (mostly defined in the [`BasicFnPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on function pointers.
+The following standard methods (mostly defined in the [`BasicFnPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on function pointers.
 
 | Function                           | Parameter(s) | Description                                                                                      |
 | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------ |

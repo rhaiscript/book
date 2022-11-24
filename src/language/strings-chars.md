@@ -29,7 +29,7 @@ String and character literals follow JavaScript-style syntax.
 ```admonish tip.small "Tip: Building strings"
 
 Strings can be built up from other strings and types via the `+` operator
-(provided by the [`MoreStringPackage`][built-in packages] but excluded if using a [raw `Engine`]).
+(provided by the [`MoreStringPackage`][built-in packages] but excluded when using a [raw `Engine`]).
 
 This is particularly useful when printing output.
 ```

@@ -7,16 +7,16 @@ Numeric Functions
 Integer Functions
 -----------------
 
-The following standard functions (defined in the [`ArithmeticPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on integers only.
+The following standard functions (defined in the [`ArithmeticPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on integers only.
 
 | Function                      | Description                                                      |
 | ----------------------------- | ---------------------------------------------------------------- |
 | `is_odd` method and property  | returns `true` if the value is an odd number, otherwise `false`  |
 | `is_even` method and property | returns `true` if the value is an even number, otherwise `false` |
 
-The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on integers only.
+The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on integers only.
 
 | Function     | Not available under | Description                                              |
 | ------------ | :-----------------: | -------------------------------------------------------- |
@@ -27,9 +27,9 @@ using a [raw `Engine`]) operate on integers only.
 Signed Numeric Functions
 ------------------------
 
-The following standard functions (defined in the [`ArithmeticPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [`Decimal`][rust_decimal] (requires
-[`decimal`]) only.
+The following standard functions (defined in the [`ArithmeticPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and
+[`Decimal`][rust_decimal] (requires [`decimal`]) only.
 
 | Function                      | Description                                                    |
 | ----------------------------- | -------------------------------------------------------------- |
@@ -41,9 +41,9 @@ using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and [
 Floating-Point Functions
 ------------------------
 
-The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decimal`][rust_decimal]
-(requires [`decimal`]) only.
+The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and
+[`Decimal`][rust_decimal] (requires [`decimal`]) only.
 
 | Category         | Supports `Decimal` | Functions                                                                                |
 | ---------------- | :----------------: | ---------------------------------------------------------------------------------------- |
@@ -64,8 +64,9 @@ using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and [`Decim
 Decimal Rounding Functions
 --------------------------
 
-The following rounding methods (defined in the [`BasicMathPackage`][built-in packages] but excluded if using a [raw `Engine`])
-operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] feature.
+The following rounding methods (defined in the [`BasicMathPackage`][built-in packages] but excluded
+when using a [raw `Engine`]) operate on [`Decimal`][rust_decimal] only, which requires the
+[`decimal`] feature.
 
 | Rounding type     | Behavior                                    | Methods                                                      |
 | ----------------- | ------------------------------------------- | ------------------------------------------------------------ |
@@ -81,8 +82,8 @@ operate on [`Decimal`][rust_decimal] only, which requires the [`decimal`] featur
 Parsing Functions
 -----------------
 
-The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but excluded if using a [raw `Engine`])
-parse numbers.
+The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) parse numbers.
 
 | Function          |        No available under        | Description                                                                                   |
 | ----------------- | :------------------------------: | --------------------------------------------------------------------------------------------- |
@@ -94,8 +95,9 @@ parse numbers.
 Formatting Functions
 --------------------
 
-The following standard functions (defined in the [`BasicStringPackage`][built-in packages] but excluded if using a [raw `Engine`])
-convert integer numbers into a [string] of hex, octal or binary representations.
+The following standard functions (defined in the [`BasicStringPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) convert integer numbers into a [string] of hex, octal or
+binary representations.
 
 | Function      | Description                          |
 | ------------- | ------------------------------------ |
@@ -103,8 +105,8 @@ convert integer numbers into a [string] of hex, octal or binary representations.
 | [`to_octal`]  | converts an integer number to octal  |
 | [`to_hex`]    | converts an integer number to hex    |
 
-These formatting functions are defined for all available integer numbers &ndash; i.e. `INT`, `u8`, `i8`,
-`u16`, `i16`, `u32`, `i32`, `u64`, `i64`, `u128` and `i128` unless disabled by feature flags.
+These formatting functions are defined for all available integer numbers &ndash; i.e. `INT`, `u8`,
+`i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, `u128` and `i128` unless disabled by feature flags.
 
 
 Floating-point Constants

@@ -18,7 +18,7 @@ Comparison Operators
 
 Comparison operators between most values of the same type are built in for all [standard types].
 
-Others are defined in the [`LogicPackage`][built-in packages] but excluded if using a [raw `Engine`].
+Others are defined in the [`LogicPackage`][built-in packages] but excluded when using a [raw `Engine`].
 
 
 ### Floating-point numbers interoperate with integers

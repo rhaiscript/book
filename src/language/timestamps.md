@@ -3,7 +3,7 @@ Timestamps
 
 {{#include ../links.md}}
 
-Timestamps are provided by the [`BasicTimePackage`][built-in packages] (excluded if using a [raw `Engine`])
+Timestamps are provided by the [`BasicTimePackage`][built-in packages] (excluded when using a [raw `Engine`])
 via the `timestamp` function.
 
 Timestamps are not available under [`no_time`] or [`no_std`].
@@ -16,7 +16,8 @@ The Rust type of a timestamp is `std::time::Instant` ([`instant::Instant`] in [W
 Built-in Functions
 ------------------
 
-The following methods (defined in the [`BasicTimePackage`][built-in packages] but excluded if using a [raw `Engine`]) operate on timestamps.
+The following methods (defined in the [`BasicTimePackage`][built-in packages] but excluded when
+using a [raw `Engine`]) operate on timestamps.
 
 | Function                      | Parameter(s)                                                | Description                                                           |
 | ----------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -27,7 +28,8 @@ The following methods (defined in the [`BasicTimePackage`][built-in packages] bu
 | `-=` operator                 | number of seconds to subtract                               | subtracts a specified number of seconds from the timestamp            |
 | `-` operator                  | <ol><li>later timestamp</li><li>earlier timestamp</li></ol> | returns the number of seconds between the two timestamps              |
 
-The following methods are defined in the [`LanguageCorePackage`][built-in packages] but excluded if using a [raw `Engine`].
+The following methods are defined in the [`LanguageCorePackage`][built-in packages] but excluded
+when using a [raw `Engine`].
 
 | Function | Not available under | Parameter(s)               | Description                                                 |
 | -------- | :-----------------: | -------------------------- | ----------------------------------------------------------- |

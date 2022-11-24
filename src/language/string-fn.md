@@ -4,8 +4,8 @@ Standard String Functions
 {{#include ../links.md}}
 
 
-The following standard methods (mostly defined in the [`MoreStringPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on [strings] (and possibly characters).
+The following standard methods (mostly defined in the [`MoreStringPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on [strings] (and possibly characters).
 
 | Function                                           | Parameter(s)                                                                                                                                    | Description                                                                                                                                                  |
 | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

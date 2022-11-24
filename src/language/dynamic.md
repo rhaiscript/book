@@ -59,8 +59,9 @@ Parse from JSON
 
 ~~~admonish warning.side "Requires `metadata`"
 
-`parse_json` requires the [`metadata`] feature; the [`no_index`] and [`no_object`]
-features must _not_ be set.
+`parse_json` is defined in the [`LanguageCorePackage`][built-in packages], which is excluded when using a [raw `Engine`].
+
+It also requires the [`metadata`] feature; the [`no_index`] and [`no_object`] features must _not_ be set.
 ~~~
 
 Use `parse_json` to parse a JSON string into a [`Dynamic`] value.

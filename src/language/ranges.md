@@ -127,8 +127,8 @@ engine.run(
 Built-in Functions
 ------------------
 
-The following methods (mostly defined in the [`BasicIteratorPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on ranges.
+The following methods (mostly defined in the [`BasicIteratorPackage`][built-in packages] but
+excluded when using a [raw `Engine`]) operate on ranges.
 
 | Function                           |  Parameter(s)   | Description                                   |
 | ---------------------------------- | :-------------: | --------------------------------------------- |

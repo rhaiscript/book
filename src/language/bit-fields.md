@@ -73,8 +73,8 @@ The maximum bit number that can be accessed is −64 (or −32 under [`only_i32`
 Bit-Field Functions
 -------------------
 
-The following standard functions (defined in the [`BitFieldPackage`][built-in packages] but excluded if
-using a [raw `Engine`]) operate on `INT` bit-fields.
+The following standard functions (defined in the [`BitFieldPackage`][built-in packages] but excluded
+when using a [raw `Engine`]) operate on `INT` bit-fields.
 
 These functions are available even under the [`no_index`] feature.
 
