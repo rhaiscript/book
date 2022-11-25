@@ -14,7 +14,8 @@ This state value is the stored into the [debugger]'s custom state.
 Access the Debugger State
 -------------------------
 
-Use `EvalContext::global_runtime_state_mut().debugger` to gain access to the current
+Use `EvalContext::global_runtime_state().debugger()` (immutable) or
+`EvalContext::global_runtime_state_mut().debugger_mut()` (mutable) to gain access to the current
 [`debugger::Debugger`] instance.
 
 The following [`debugger::Debugger`] methods allow access to the custom [debugger] state.
@@ -41,12 +42,12 @@ engine.register_debugger(
     },
     |context, node, source, pos| {
         // Print debugger state - which is an object map
-        let state = context.global_runtime_state_mut().debugger.state();
+        let state = context.global_runtime_state().debugger().state();
         println!("Current state = {state}");
 
         // Get the state as an object map
         let mut state = context.global_runtime_state_mut()
-                               .debugger.state_mut()
+                               .debugger_mut().state_mut()
                                .write_lock::<Map>().unwrap();
 
         // Read state

@@ -34,7 +34,7 @@ Example
 ```rust
 use rhai::debugger::*;
 
-let debugger = &mut context.global_runtime_state_mut().debugger;
+let debugger = &mut context.global_runtime_state_mut().debugger_mut();
 
 // Get number of break-points.
 let num_break_points = debugger.break_points().len();

@@ -27,7 +27,8 @@ engine.register_debugger(
 
 The type `debugger::Debugger` allows for manipulating [break-points], among others.
 
-The [`Engine`]'s debugger instance can be accessed via `context.global_runtime_state_mut().debugger`.
+The [`Engine`]'s debugger instance can be accessed via `context.global_runtime_state().debugger()` (immutable)
+or `context.global_runtime_state_mut().debugger_mut()` (mutable).
 ~~~
 
 

@@ -20,7 +20,7 @@ The `Debugger::call_stack` method returns a slice of all call stack frames.
 ```rust
 use rhai::debugger::*;
 
-let debugger = &mut context.global_runtime_state_mut().debugger;
+let debugger = &mut context.global_runtime_state().debugger();
 
 // Get depth of the call stack.
 let depth = debugger.call_stack().len();
