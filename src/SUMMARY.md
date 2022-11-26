@@ -11,6 +11,7 @@ User’s Guide
 - [Introduction](about/index.md)
   - [Features of Rhai](about/features.md)
   - [What Rhai Isn't](about/non-design.md)
+  - [Benchmarks](about/benchmarks.md)
   - [Supported Targets and Builds](about/targets.md)
   - [Dependencies](about/dependencies.md)
   - [Licensing](about/license.md)

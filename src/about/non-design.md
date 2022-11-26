@@ -56,48 +56,7 @@ order to support a wide range of user customizations, such as:
 * **No byte-codes/JIT** &ndash; Rhai uses a heavily-optimized AST-walking interpreter which is fast
   enough for most real-life scenarios.
 
-  The purpose of Rhai is not to be _blazing fast_, but to make it as easy and versatile as
-  possible to integrate with native Rust applications.  What you lose from running an AST walker,
-  you gain back from increased flexibility.
+```admonish info.small "How it compares?"
 
-```admonish question.small "TL;DR &ndash; Rhai is usually fast enough"
-
-Essential [AST][`AST`] data structures are packed small and kept together
-to maximize cache friendliness.
-
-[Functions] are dispatched based on pre-calculated hashes and accessing [variables] are mostly
-through pre-calculated offsets to the [variables] file (a [`Scope`]), so it is seldom necessary to
-look something up by name.
-  
-In addition, Rhai's design deliberately avoids maintaining a _scope chain_ so [function] scopes do
-not pay any speed penalty.  This particular design also allows [variables] data to be kept
-together in a contiguous block, avoiding allocations and fragmentation while being cache-friendly.
-In a typical script evaluation run, no data is shared and nothing is locked.
-```
-
-```admonish danger.small "Do not write the next 4D VR game entirely in Rhai"
-
-Rhai deliberately keeps the language small and lean by omitting advanced language features
-such as classes, inheritance, interfaces, generics, first-class functions/closures, pattern matching,
-monads (whatever), concurrency, async etc.
-
-Focus is on _flexibility_ and _ease of use_ instead of a powerful, expressive language.
-
-Avoid the temptation to write full-fledge application logic entirely in Rhai &ndash; that use case
-is best fulfilled by more complete scripting languages such as JavaScript or Lua.
-```
-
-```admonish tip.small "Use Rhai as a thin dynamic wrapper layer over Rust code"
-
-In actual practice, it is usually best to expose a Rust API into Rhai for scripts to call.
-
-All the core functionalities should be written in Rust, with Rhai being the dynamic _control_ layer.
-
-This is similar to some dynamic languages where most of the core functionalities reside in a C/C++
-standard library.
-
-Another similar scenario is a web front-end driving back-end services written in a systems language.
-In this case, JavaScript takes the role of Rhai while the back-end language, well... it can actually
-also be Rust. Except that Rhai integrates with Rust _much_ more tightly, removing the need for
-interfaces such as XHR calls and payload encoding such as JSON.
+See Rhai performance [benchmarks](benchmarks.md).
 ```

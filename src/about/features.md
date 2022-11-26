@@ -26,11 +26,12 @@ Features of Rhai
 
 ```admonish danger "Fast"
 
-* Fairly efficient evaluation (1 million iterations in 0.3 sec on a single-core, 2.3 GHz Linux VM).
+* Fairly efficient evaluation &ndash; 1 million iterations in 0.14 sec on a single-core, 2.6 GHz Linux VM
+  (see [benchmarks](benchmarks.md)).
 
 * Compile once to [AST][`AST`] for repeated evaluations.
 
-* Scripts are [optimized][script optimization] (useful for template-based machine-generated scripts).
+* Scripts are [optimized][script optimization] &ndash; useful for template-based machine-generated scripts.
 ```
 
 ```admonish tip "Dynamic"
@@ -54,7 +55,7 @@ Features of Rhai
 
 ```admonish warning "Safe"
 
-* Relatively little `unsafe` code (yes there are some for performance reasons).
+* Relatively little `unsafe` code &ndash; yes there are some for performance reasons.
 
 * Sand-boxed &ndash; the scripting [`Engine`], if declared immutable, cannot mutate the containing
   environment unless [explicitly permitted]({{rootUrl}}/patterns/control.md).
@@ -66,9 +67,9 @@ Features of Rhai
 
 * [_Don't Panic_][safety] guarantee &ndash; Any panic is a bug. It never panics the host system.
 
-* Protected against malicious attacks (such as [stack-overflow][maximum call stack depth],
+* Protected against malicious attacks &ndash; such as [stack-overflow][maximum call stack depth],
   [over-sized data][maximum length of strings], and [runaway scripts][maximum number of operations]
-  etc.) that may come from untrusted third-party user-land scripts.
+  etc. &ndash; that may come from untrusted third-party user-land scripts.
 
 * Track script evaluation [progress] and manually terminate a script run.
 ```
