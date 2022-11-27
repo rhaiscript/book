@@ -32,13 +32,15 @@ Example
 
 ```rust
 engine.register_debugger(
-    |engine| {
+    |engine, mut debugger| {
         // Say, use an object map for the debugger state
         let mut state = Map::new();
         // Initialize properties
         state.insert("hello".into(), 42_64.into());
         state.insert("foo".into(), false.into());
-        Dynamic::from_map(state)
+        
+        debugger.set_state(state);
+        debugger
     },
     |context, node, source, pos| {
         // Print debugger state - which is an object map

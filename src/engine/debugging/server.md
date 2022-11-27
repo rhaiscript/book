@@ -27,7 +27,7 @@ let mut engine = Engine::new();
 engine.register_debugger(
     // Use the initialization callback to set up the communications channel
     // and listen to it
-    |engine| {
+    |engine, mut debugger| {
         // Create server that will listen to requests
         let mut server = MyCommServer::new();
         server.listen("localhost:8080");
@@ -36,7 +36,8 @@ engine.register_debugger(
         let server = Rc::new(RefCell::new(server));
 
         // Store the channel in the debugger state
-        Dynamic::from(server)
+        debugger.set_state(Dynamic::from(server));
+        debugger
     },
     // Trigger the server during each debugger stop point
     |context, event, node, source, pos| {

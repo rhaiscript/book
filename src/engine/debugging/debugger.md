@@ -13,7 +13,10 @@ let mut engine = Engine::new();
 
 engine.register_debugger(
     // Provide a callback to initialize the debugger state
-    |engine| { ... },
+    |engine, mut debugger| {
+        debugger.set_state(...);
+        debugger
+    },
     // Provide a callback for each debugging step
     |context, event, node, source, pos| {
         ...
@@ -37,10 +40,9 @@ Callback Functions Signature
 
 There are two callback functions to register for the debugger.
 
-The first is simply a function to initialize the state of the debugger (a [`Dynamic`] value),
-with the following signature.
+The first is simply a function to initialize the state of the debugger with the following signature.
 
-> `Fn() -> Dynamic`
+> `Fn(&Engine, debugger::Debugger) -> debugger::Debugger`
 
 The second callback is a function which will be called by the debugger during each step, with the
 following signature.
