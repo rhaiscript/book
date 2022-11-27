@@ -470,17 +470,18 @@ integrate with native Rust applications.</p>
 <p>What you lose from running an <a href="about//book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
 <p>The following benchmarks were run on a 2.6GHz Linux VM comparing a
 <a href="about/../start/builds/performance.html">performance-optimized</a> build of Rhai and Python 3.</p>
-<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai</th><th style="text-align: center">Python3</th><th style="text-align: center">Difference</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.4s</td><td style="text-align: center">0.56s</td><td style="text-align: center">4.3x</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.14s</td><td style="text-align: center">0.07s</td><td style="text-align: center">2x</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">1s</td><td style="text-align: center">0.38s</td><td style="text-align: center">2.6x</td></tr>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai</th><th style="text-align: center">Python3</th><th style="text-align: center">Difference</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.4s</td><td style="text-align: center">0.56s</td><td style="text-align: center">4.3x</td><td>stresses recursive <a href="about//book/language/functions.html">function</a> calls</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.14s</td><td style="text-align: center">0.07s</td><td style="text-align: center">2x</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">1s</td><td style="text-align: center">0.38s</td><td style="text-align: center">2.6x</td><td>a closer-to-real-life calculation workload</td></tr>
 </tbody></table>
 </div>
-<p>In general, Rhai is roughly 2-4x slower than Python 3, which is a byte-codes interpreter.</p>
-<div id="admonition-tldr--rhai-design-optimizations" class="admonition question">
+<p>In general, Rhai is roughly 2.5x slower than Python 3, which is a byte-codes interpreter, for
+typical real-life workloads.</p>
+<div id="admonition-tldr--rhai-is-usually-fast-enough" class="admonition question">
 <div class="admonition-title">
-<p>TL;DR – Rhai design optimizations</p>
-<p><a class="admonition-anchor-link" href="about/benchmarks.html#admonition-tldr--rhai-design-optimizations"></a></p>
+<p>TL;DR – Rhai is usually fast enough</p>
+<p><a class="admonition-anchor-link" href="about/benchmarks.html#admonition-tldr--rhai-is-usually-fast-enough"></a></p>
 </div>
 <div>
 <h4 id="small-data-structures"><a class="header" href="#small-data-structures">Small data structures</a></h4>
