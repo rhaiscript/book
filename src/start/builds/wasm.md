@@ -3,7 +3,7 @@ WebAssembly (WASM) Build
 
 {{#include ../../links.md}}
 
-```admonish question.side "But why?"
+```admonish question.side.wide "But why?"
 
 There is already a fast and powerful scripting language that integrates nicely with WASM &ndash; **JavaScript**.
 
@@ -50,18 +50,11 @@ There is no particular setting to tweak when building for WASI.
 
 Rhai requires a system-provided source of random numbers (for hashing).
 
-Such random number source is available from JavaScript (e.g. if the WASM module is intended
-for a browser).
+Such random number source is available from JavaScript (implied by `wasm-bindgen` or `stdweb`).
 
-In such circumstances, it is necessary to enable the `js` feature on the
-[`getrandom`](https://crates.io/crates/getrandom) crate.
-
-```toml
-[dependencies]
-getrandom = { version = "0.2", features = [ "js" ] }
-```
-
-See also: <https://docs.rs/getrandom/latest/getrandom/#webassembly-support>
+The `js` feature on the [`getrandom`](https://crates.io/crates/getrandom) crate is
+enabled automatically to provide the random  number source.
+See also: <https://docs.rs/getrandom/latest/getrandom/#webassembly-support> for details.
 ~~~
 
 ~~~admonish warning "Raw: `wasm32-unknown-unknown`"
