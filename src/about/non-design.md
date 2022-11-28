@@ -53,10 +53,10 @@ order to support a wide range of user customizations, such as:
 * [filtering variables definition][variable definition filter].
 ```
 
-* **No byte-codes/JIT** &ndash; Rhai uses a heavily-optimized AST-walking interpreter which is fast
+* **No bytecodes/JIT** &ndash; Rhai uses a heavily-optimized AST-walking interpreter which is fast
   enough for most real-life scenarios.
 
 ```admonish info.small "How it compares?"
 
-See Rhai performance [benchmarks](benchmarks.md).
+See Rhai performance [benchmarks].
 ```

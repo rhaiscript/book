@@ -27,6 +27,7 @@
 [`no-std`]: {{rootUrl}}/start/builds/no-std.md
 [WASM]: {{rootUrl}}/start/builds/wasm.md
 [static hashing]: {{rootUrl}}/patterns/static-hash.md
+[benchmarks]: {{rootUrl}}/about/benchmarks.md
 
 [playground]: https://rhai.rs/playground
 [lsp]: https://github.com/rhaiscript/lsp
