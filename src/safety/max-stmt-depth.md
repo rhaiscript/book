@@ -3,14 +3,13 @@ Maximum Expression Nesting Depth
 
 {{#include ../links.md}}
 
-Rhai by default limits statement and expression nesting to a maximum depth of 64
-(which should be plenty) when they are at _global_ level, but only a depth of 32
-when they are within [function] bodies.
+Rhai by default limits statement and expression nesting to a maximum depth of 64 (which should be
+plenty) when they are at _global_ level, but only a depth of 32 when they are within [function] bodies.
 
 For debug builds, these limits are set further downwards to 32 and 16 respectively.
 
-That is because it is possible to overflow the [`Engine`]'s stack when it tries to
-recursively parse an extremely deeply-nested code stream.
+That is because it is possible to overflow the [`Engine`]'s stack when it tries to recursively parse
+an extremely deeply-nested code stream.
 
 ```rust
 // The following, if long enough, can easily cause stack overflow during parsing.
@@ -21,8 +20,8 @@ This limit may be changed via [`Engine::set_max_expr_depths`][options].
 
 There are two limits to set, one for the maximum depth at global level, and the other for [function] bodies.
 
-A script exceeding the maximum nesting depths will terminate with a parse error.
-The malicious [`AST`] will not be able to get past parsing in the first place.
+A script exceeding the maximum nesting depths will terminate with a parse error. The malicious
+[`AST`] will not be able to get past parsing in the first place.
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 

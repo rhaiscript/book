@@ -16,8 +16,8 @@ By default, all arithmetic calculations in Rhai are _checked_, meaning that the 
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.
 
-This checking can be turned off via the [`unchecked`] feature for higher performance
-(but higher risks as well).
+This checking can be turned off via the [`unchecked`] feature for higher performance (but higher
+risks as well).
 
 ```rust
 let x = 1_000_000_000_000;

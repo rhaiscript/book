@@ -5,7 +5,8 @@ Maximum Size of Arrays
 
 Rhai by default does not limit how large an [array] or a [BLOB] can be.
 
-This can be changed via the [`Engine::set_max_array_size`][options] method, with zero being unlimited (the default).
+This can be changed via the [`Engine::set_max_array_size`][options] method, with zero being
+unlimited (the default).
 
 A script attempting to create an [array] literal larger than the maximum will terminate with a parse error.
 

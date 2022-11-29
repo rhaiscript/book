@@ -7,9 +7,11 @@ Rhai by default does not limit how large (i.e. the number of properties) an [obj
 
 This can be changed via `Engine::set_max_map_size`, with zero being unlimited (the default).
 
-A script attempting to create an [object map] literal with more properties than the maximum will terminate with a parse error.
+A script attempting to create an [object map] literal with more properties than the maximum will
+terminate with a parse error.
 
-Any script operation that produces an [object map] with more properties than the maximum also terminates the script with an error result.
+Any script operation that produces an [object map] with more properties than the maximum also
+terminates the script with an error.
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 

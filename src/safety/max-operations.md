@@ -14,13 +14,14 @@ while 1 < 2 { ... }                 // loop with always-true condition
 
 Rhai by default does not limit how much time or CPU a script consumes.
 
-This can be changed via the [`Engine::set_max_operations`][options] method, with zero being unlimited (the default).
+This can be changed via the [`Engine::set_max_operations`][options] method, with zero being
+unlimited (the default).
 
-The _operations count_ is intended to be a very course-grained measurement of the amount of CPU that a script
-has consumed, allowing the system to impose a hard upper limit on computing resources.
+The _operations count_ is intended to be a very course-grained measurement of the amount of CPU that
+a script has consumed, allowing the system to impose a hard upper limit on computing resources.
 
-A script exceeding the maximum operations count terminates with an error result.
-This can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
+A script exceeding the maximum operations count terminates with an error result. This can be
+disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
 ```rust
 let mut engine = Engine::new();

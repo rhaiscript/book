@@ -5,11 +5,14 @@ Maximum Length of Strings
 
 Rhai by default does not limit how long a [string] can be.
 
-This can be changed via the [`Engine::set_max_string_size`][options] method, with zero being unlimited (the default).
+This can be changed via the [`Engine::set_max_string_size`][options] method, with zero being
+unlimited (the default).
 
-A script attempting to create a string literal longer than the maximum length will terminate with a parse error.
+A script attempting to create a [string] literal longer than the maximum length will terminate with
+a parse error.
 
-Any script operation that produces a string longer than the maximum also terminates the script with an error result.
+Any script operation that produces a [string] longer than the maximum also terminates the script
+with an error.
 
 This check can be disabled via the [`unchecked`] feature for higher performance (but higher risks as well).
 
