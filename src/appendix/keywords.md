@@ -18,6 +18,7 @@ Keywords List
 |        `loop`         | infinite [`loop`]                                                       |                                 |      no      |
 |         `for`         | [`for`] loop                                                            |                                 |      no      |
 |         `in`          | <ol><li>[containment][`in`] test</li><li>part of [`for`] loop</li></ol> |                                 |      no      |
+|         `!in`         | negated [containment][`in`] test                                        |                                 |      no      |
 |      `continue`       | continue a loop at the next iteration                                   |                                 |      no      |
 |        `break`        | break out of loop iteration                                             |                                 |      no      |
 |       `return`        | [return][`return`] value                                                |                                 |      no      |

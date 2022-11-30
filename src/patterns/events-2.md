@@ -138,7 +138,7 @@ Because an [object map] is used to hold state values, it is even possible to add
 fn init() {
     // Can detect system-provided default states!
     // Add 'bool_state' as new state variable if one does not exist
-    if !("bool_state" in this) {
+    if "bool_state" !in this {
         this.bool_state = false;
     }
     // Add 'obj_state' as new state variable (overwrites any existing)

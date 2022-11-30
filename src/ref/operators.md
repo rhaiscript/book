@@ -158,15 +158,24 @@ In Operator
 ```admonish question.side "Trivia"
 
 The `in` operator is simply syntactic sugar for a call to the `contains` function.
+
+Similarly, `!in` is a call to `!contains`.
 ```
 
 The `in` operator is used to check for _containment_ &ndash; i.e. whether a particular collection
 data type _contains_ a particular item.
 
+Similarly, `!in` is used to check for non-existence &ndash; i.e. it is `true` if a particular
+collection data type does _not_ contain a particular item.
+
 ```rust
 42 in array;
 
 array.contains(42);     // <- the above is equivalent to this
+
+123 !in array;
+
+!array.contains(123);   // <- the above is equivalent to this
 ```
 
 ### Built-in support for standard data types
@@ -194,6 +203,8 @@ let map = #{
 "foo" in map == true;               // check object map for property name
 
 'w' in "hello, world!" == true;     // check string for character
+
+'w' !in "hello, world!" == false;
 
 "wor" in "hello, world" == true;    // check string for sub-string
 

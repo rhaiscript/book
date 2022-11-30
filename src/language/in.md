@@ -6,15 +6,24 @@ In Operator
 ```admonish question.side.wide "Trivia"
 
 The `in` operator is simply syntactic sugar for a call to the `contains` function.
+
+Similarly, `!in` is a call to `!contains`.
 ```
 
 The `in` operator is used to check for _containment_ &ndash; i.e. whether a particular collection
 data type _contains_ a particular item.
 
+Similarly, `!in` is used to check for non-existence &ndash; i.e. it is `true` if a particular
+collection data type does _not_ contain a particular item.
+
 ```rust
 42 in array;
 
 array.contains(42);     // <- the above is equivalent to this
+
+123 !in array;
+
+!array.contains(123);   // <- the above is equivalent to this
 ```
 
 
@@ -46,6 +55,8 @@ let map = #{
 "foo" in map == true;               // check object map for property name
 
 'w' in "hello, world!" == true;     // check string for character
+
+'w' !in "hello, world!" == false;
 
 "wor" in "hello, world" == true;    // check string for sub-string
 
@@ -81,7 +92,7 @@ let array = [1, 2, 3, ts, 42, 999];
 Custom Implementation of `contains`
 -----------------------------------
 
-The `in` operator maps directly to a call to a function `contains` with the two operands switched.
+The `in` and `!in` operators map directly to a call to a function `contains` with the two operands switched.
 
 ```rust
 // This expression...
@@ -94,8 +105,10 @@ contains(container, item)
 container.contains(item)
 ```
 
-Support for the `in` operator can be easily extended to other types by registering a custom binary
-function named `contains` with the correct parameter types.
+Support for the `in` and `!in` operators can be easily extended to other types by registering a
+custom binary function named `contains` with the correct parameter types.
+
+Since `!in` maps to `!(... in ...)`, `contains` is enough to support both operators.
 
 ```rust
 let mut engine = Engine::new();
@@ -113,8 +126,10 @@ engine.run(
 r#"
     let ts = new_ts();
 
-    if 42 in ts {                   // this calls the 'contains' function
+    if 42 in ts {                   // this calls 'ts.contains(42)'
         print("I got 42!");
+    } else if 123 !in ts {          // this calls '!ts.contains(123)'
+        print("I ain't got 123!");
     }
 
     let err = "hello" in ts;        // <- runtime error: 'contains' not found
