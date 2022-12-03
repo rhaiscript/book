@@ -31,10 +31,10 @@ The following benchmarks were run on a 2.6GHz Linux VM comparing
 | Benchmark                                         | Rhai<br/>(Perf) | Rhai</br>(Full) | [Python 3]<br/>([bytecodes]) | [V8]<br/>([JIT]) | Description                                                                     |
 | ------------------------------------------------- | :-------------: | :-------------: | :--------------------------: | :--------------: | ------------------------------------------------------------------------------- |
 | [Fibonacci]({{repoHome}}/scripts/fibonacci.rhai)  |      2.4s       |      3.4s       |             0.6s             |      0.07s       | stresses recursive [function] calls                                             |
-| [1M loop]({{repoHome}}/scripts/speed_test.rhai)   |      0.14s      |      0.26s      |            0.08s             |      0.05s       | a simple counting loop (1 million iterations) that must run as fast as possible |
-| [Prime numbers]({{repoHome}}/scripts/primes.rhai) |       1s        |      1.5s       |             0.4s             |      0.09s       | a closer-to-real-life calculation workload                                      |
+| [1M loop]({{repoHome}}/scripts/speed_test.rhai)   |      0.14s      |      0.25s      |            0.08s             |      0.05s       | a simple counting loop (1 million iterations) that must run as fast as possible |
+| [Prime numbers]({{repoHome}}/scripts/primes.rhai) |      0.85s      |      1.25s      |             0.4s             |      0.09s       | a closer-to-real-life calculation workload                                      |
 
-In general, Rhai is roughly 2.5x slower than [Python 3], which is a [bytecodes] interpreter, for
+In general, Rhai is roughly 2x slower than [Python 3], which is a [bytecodes] interpreter, for
 typical real-life workloads.
 
 
