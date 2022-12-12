@@ -71,14 +71,6 @@ export z;
 ~~~
 ```
 
-```admonish bug.small "Do not export closures"
-
-A [function pointer], [anonymous function] or [closure], is not a _first-class function_.
-It is _syntactic sugar_ only, capturing the _name_ of a [function] to call.
-
-Exporting them causes a runtime error.
-```
-
 
 Export Functions
 ----------------
