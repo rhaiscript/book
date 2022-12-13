@@ -159,6 +159,7 @@ The following methods are available when working with [`Dynamic`]:
 | `flatten`       |                             |        [`Dynamic`]        | clone the value into a separate copy if it is _shared_ and there are multiple outstanding references, otherwise _shared_ values are turned unshared |
 | `read_lock<T>`  | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value for reading                                                                                                                          |
 | `write_lock<T>` | [`no_closure`] (pass thru') | `Option<` _guard to_ `T>` | lock the value exclusively for writing                                                                                                              |
+| `deep_scan`     |                             |                           | recursively scan for [`Dynamic`] values (e.g. items inside an [array] or [object map], or [curried arguments][currying] in a [function pointer])    |
 
 ### Constructor instance methods
 
