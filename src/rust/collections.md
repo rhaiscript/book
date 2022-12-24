@@ -64,3 +64,76 @@ engine
         col1
     });
 ```
+
+
+What About Indexers?
+--------------------
+
+Many users are tempted to register [indexers] for custom collections.  This essentially makes the
+original Rust type something similar to `Vec<MyType>`.
+
+Rhai's standard [`Array`] type is `Vec<Dynamic>` which already holds an ordered, iterable and
+indexable collection of dynamic items.  Since Rhai has built-in support, manipulating [arrays] is fast.
+
+In _most_ circumstances, it is better to use [`Array`] instead of a [custom type].
+
+~~~admonish tip.small "Tip: Convert to `Array` using `.into()`"
+
+[`Dynamic`] implements `FromIterator` for all iterable types and an [`Array`] is created in the process.
+
+So, converting a typed array (i.e. `Vec<MyType>`) into an [array] in Rhai is as simple as calling `.into()`.
+
+```rust
+// Say you have a custom typed array...
+let my_custom_array: Vec<MyType> = do_lots_of_calc(42);
+
+// Convert it into a 'Dynamic' that holds an array
+let value: Dynamic = my_custom_array.into();
+
+// Use is anywhere in Rhai...
+scope.push("my_custom_array", value);
+
+engine
+    // Raw function that returns a custom type
+    .register_fn("do_lots_of_calc_raw", do_lots_of_calc)
+    // Wrap function that return a custom typed array
+    .register_fn("do_lots_of_calc", |seed: i64| -> Dynamic {
+        let result = do_lots_of_calc(seed);     // Vec<MyType>
+        result.into()                           // Array in Dynamic
+    });
+```
+~~~
+
+
+TL;DR
+-----
+
+~~~admonish question "Why shouldn't we register `Vec<MyType>`?"
+
+### Reason #1: Performance
+
+A main reason why anybody would want to do this is to avoid the overheads of storing [`Dynamic`] items.
+
+This is why [BLOB's] is a built-in data type in Rhai, even though it is actually defined as `Vec<u8>`.
+The overhead of using [`Dynamic`] (16 bytes) versus `u8` (1 byte) is worth the trouble, although the
+performance gains may not be as pronounced as expected: benchmarks show a 15% speed improvement inside
+a tight loop compared with using an [array].
+
+`Vec<MyType>`, however, will be treated as an opaque [custom type] in Rhai, so performance is not optimized.
+What you gain from avoiding [`Dynamic`], you pay back in terms of slower access to the `Vec` as well as `MyType`
+(which is treated as yet another opaque [custom type]).
+
+### Reason #2: API
+
+Another reason why it shouldn't be done is due to the large number of functions and methods that must be registered
+for each type of this sort.  One only has to look at the vast API surface of [arrays]({{rootUrl}}/language/arrays.md#built-in-functions)
+to see the common methods that a user would expect to be available.
+
+Since `Vec<Type>` looks, feels and quacks just like a normal [array], and the usage syntax is almost equivalent (except
+for the fact that the data type is restricted), users would be frustrated if they find that certain functions available for
+[arrays] are not provided.
+
+This is similar to JavaScript's [_Typed Arrays_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays).
+They are quite awkward to work with, and basically each has a full API definition that must be pre-registered.
+~~~
+
