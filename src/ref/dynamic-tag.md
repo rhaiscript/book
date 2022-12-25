@@ -122,7 +122,7 @@ Again, after the script is verified, all tag assignment statements can simply be
 ```js
 
 fn some_complex_calculation(x) {
-    let result = 42;
+    let result = x;
 
     // Check first condition
     if some_complex_condition() {
@@ -147,9 +147,11 @@ fn some_complex_calculation(x) {
         result = 0;
         result.tag[3] = true;   // Set forth bit in bit-field
     }
+
+    result
 }
 
-let my_result = some_complex_calculation(key);
+let my_result = some_complex_calculation(42);
 
 // The tag of 'my_result' now contains a bit-field indicating
 // the result of each condition.
