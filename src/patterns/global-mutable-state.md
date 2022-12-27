@@ -33,7 +33,7 @@ Alternative &ndash; Use `this`
 
 In the majority of the such scenarios, there is only _one_ mutable global state of interest.
 
-Therefore, it is a _must_ better solution to bind that global state to the `this` pointer.
+Therefore, it is a _much_ better solution to bind that global state to the `this` pointer.
 
 ```rust
 // Say this is a mutable global state...

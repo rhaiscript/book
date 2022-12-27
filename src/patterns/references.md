@@ -39,7 +39,7 @@ There are usually alternatives.
   to a reference before use. This also requires `unsafe` code.
 
 * Make absolutely sure that the newtype is never stored anywhere permanent (e.g. in a [`Scope`])
-  not does it ever live outside of the reference's scope.
+  nor does it ever live outside of the reference's scope.
 ```
 
 
