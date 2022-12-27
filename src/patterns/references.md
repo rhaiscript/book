@@ -11,6 +11,7 @@ Passing External References to Rhai (Unsafe)
 ```admonish danger "Don't Do It™"
 
 As with anything `unsafe`, don't do this unless you have exhausted all possible alternatives.
+
 There are usually alternatives.
 ```
 
@@ -37,9 +38,14 @@ There are usually alternatives.
 
 * Use the newtype as a _handle_ for all registered API functions, [`transmute`] the integer back
   to a reference before use. This also requires `unsafe` code.
+```
 
-* Make absolutely sure that the newtype is never stored anywhere permanent (e.g. in a [`Scope`])
-  nor does it ever live outside of the reference's scope.
+```admonish bug "Here be dragons..."
+
+Make **absolutely sure** that the newtype is never stored anywhere permanent (e.g. in a [`Scope`])
+nor does it ever live outside of the reference's scope!
+
+Otherwise, a crash is the system being nice to you...
 ```
 
 
@@ -132,9 +138,9 @@ super_ecs_system.query(...).for_each(|world: &mut World| {
 ```
 
 
-```admonish danger "IMPORTANT! Ensure no leakage!"
+```admonish bug "Here be Many Dragons!"
 
-It is of utmost importance that no instance of the handle newtype ever _leaks_ outside of the
+It is of utmost importance that no instance of the handle newtype ever **_leaks_** outside of the
 appropriate scope where the wrapped reference may no longer be valid.
 
 For example, do not allow the script to store a copy of the handle anywhere that can
