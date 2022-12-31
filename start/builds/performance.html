@@ -169,13 +169,23 @@ following features should be considered:</p>
 <tr><td><a href="/book/start/features.html"><code>only_i32</code></a></td><td>support only a single <code>i32</code> integer type</td><td>reduce data size</td></tr>
 <tr><td><a href="/book/start/features.html"><code>no_float</code></a></td><td>remove support for floating-point numbers</td><td>reduce code size</td></tr>
 <tr><td><a href="/book/start/features.html"><code>f32_float</code></a></td><td>set floating-point numbers (if not disabled) to 32-bit</td><td>reduce data size</td></tr>
-<tr><td><a href="/book/start/features.html"><code>no_closure</code></a></td><td>remove support for variables sharing</td><td>no need for data locking</td></tr>
-<tr><td><a href="/book/start/features.html"><code>unchecked</code></a></td><td>disable all safety <a href="/book/safety/checked.html">checks</a></td><td>remove non-essential code</td></tr>
-<tr><td><a href="/book/start/features.html"><code>no_position</code></a></td><td>disable position tracking during parsing</td><td>remove non-essential code</td></tr>
-<tr><td><a href="/book/start/features.html"><code>no_custom_syntax</code></a></td><td>disable custom syntax</td><td>remove non-essential code</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_closure</code></a></td><td>remove support for <a href="/book/language/variables.html">variables</a> sharing</td><td>no need for data locking</td></tr>
+<tr><td><a href="/book/start/features.html"><code>unchecked</code></a></td><td>disable all safety <a href="/book/safety/checked.html">checks</a></td><td>remove checking code</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_module</code></a></td><td>disable loading external <a href="/book/rust/modules/index.html">modules</a></td><td>reduce code size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_position</code></a></td><td>disable position tracking during parsing</td><td>reduce data size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_custom_syntax</code></a></td><td>disable <a href="/book/engine/custom-syntax.html">custom syntax</a></td><td>reduce code size</td></tr>
 </tbody></table>
 </div>
 <p>When the above feature flags are used, performance may increase by around 15-20%.</p>
+<div id="admonition-see-also-benchmarks" class="admonition info small">
+<div class="admonition-title">
+<p>See also: Benchmarks</p>
+<p><a class="admonition-anchor-link" href="#admonition-see-also-benchmarks"></a></p>
+</div>
+<div>
+<p>See Rhai performance <a href="/book/about/benchmarks.html">benchmarks</a>.</p>
+</div>
+</div>
 <h2 id="unchecked-build"><a class="header" href="#unchecked-build">Unchecked Build</a></h2>
 <p>By default, Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a>
 guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.</p>

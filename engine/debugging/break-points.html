@@ -184,7 +184,7 @@ the following variants.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust">use rhai::debugger::*;
 
-let debugger = &amp;mut context.global_runtime_state_mut().debugger;
+let debugger = &amp;mut context.global_runtime_state_mut().debugger_mut();
 
 // Get number of break-points.
 let num_break_points = debugger.break_points().len();

@@ -173,7 +173,9 @@ resources used by a script so that it does not consume more resources that it is
 <p><a class="admonition-anchor-link" href="#admonition-memory"></a></p>
 </div>
 <div>
-<p>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
+<ul>
+<li>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</li>
+</ul>
 </div>
 </div>
 <div id="admonition-cpu" class="admonition bug">
@@ -182,7 +184,9 @@ resources used by a script so that it does not consume more resources that it is
 <p><a class="admonition-anchor-link" href="#admonition-cpu"></a></p>
 </div>
 <div>
-<p>Run an infinite tight loop that consumes all CPU cycles.</p>
+<ul>
+<li>Infinite tight loop that consumes all CPU cycles.</li>
+</ul>
 </div>
 </div>
 <div id="admonition-time" class="admonition bug">
@@ -191,7 +195,9 @@ resources used by a script so that it does not consume more resources that it is
 <p><a class="admonition-anchor-link" href="#admonition-time"></a></p>
 </div>
 <div>
-<p>Run indefinitely, thereby blocking the calling system which is waiting for a result.</p>
+<ul>
+<li>Run indefinitely, thereby blocking the calling system which is waiting for a result.</li>
+</ul>
 </div>
 </div>
 <div id="admonition-stack" class="admonition bug">
@@ -202,17 +208,17 @@ resources used by a script so that it does not consume more resources that it is
 <div>
 <ul>
 <li>
-<p>Infinite recursive call that exhausts the call stack.</p>
+<p>Deep recursive call that exhausts the call stack.</p>
 </li>
 <li>
-<p>Create a large <a href="/book/language/arrays.html">array</a> or <a href="/book/language/object-maps.html">object map</a> literal that exhausts the stack during parsing.</p>
+<p>Large <a href="/book/language/arrays.html">array</a> or <a href="/book/language/object-maps.html">object map</a> literal that exhausts the stack during parsing.</p>
 </li>
 <li>
-<p>Create a degenerated deep expression with so many levels that the parser exhausts the call stack when
+<p>Degenerated deep expression with so many levels that the parser exhausts the call stack when
 parsing the expression; or even deeply-nested statements blocks, if nested deep enough.</p>
 </li>
 <li>
-<p>Load a <a href="/book/language/modules/import.html">self-referencing module</a>.</p>
+<p><a href="/book/language/modules/import.html">Self-referencing module</a>.</p>
 </li>
 </ul>
 </div>
@@ -242,9 +248,13 @@ parsing the expression; or even deeply-nested statements blocks, if nested deep 
 <p><a class="admonition-anchor-link" href="#admonition-files"></a></p>
 </div>
 <div>
+<ul>
+<li>
 <p>Continuously <a href="/book/language/modules/import.html"><code>import</code></a> an external <a href="/book/rust/modules/index.html">module</a> within an infinite loop, thus putting heavy load on the file-system
 (or even the network if the file is not local).</p>
 <p>Even when <a href="/book/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
+</li>
+</ul>
 </div>
 </div>
 <div id="admonition-private-data" class="admonition bug">
@@ -253,8 +263,12 @@ parsing the expression; or even deeply-nested statements blocks, if nested deep 
 <p><a class="admonition-anchor-link" href="#admonition-private-data"></a></p>
 </div>
 <div>
+<ul>
+<li>
 <p>Read from and/or write to private, secret, sensitive data.</p>
 <p>Such security breach may put the entire system at risk.</p>
+</li>
+</ul>
 </div>
 </div>
 <div id="admonition-the-internals-feature" class="admonition bug">
@@ -280,13 +294,20 @@ break code.</p>
 </li>
 </ul>
 <p>Use <a href="/book/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
-be surprised how few scenarios this assumption holds.</p>
+be surprised under how few scenarios this assumption holds.</p>
 <p>One example of such an environment is a Rhai scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/book/start/builds/wasm.html">WASM</a> where the
 <a href="/book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
 </div>
 </div>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
-<div id="admonition-ok-panic-anyway" class="admonition tip side">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>
+<p>Rhai is designed to not bring down the host system, regardless of what a script may do to it. This
+is a central design goal – Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t
+Panic</em></a>
+guarantee.</p>
+<p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
+considered a bug in Rhai and should be reported as such.</p>
+<div id="admonition-ok-panic-anyway" class="admonition tip small">
 <div class="admonition-title">
 <p>OK, panic anyway</p>
 <p><a class="admonition-anchor-link" href="#admonition-ok-panic-anyway"></a></p>
@@ -298,11 +319,6 @@ checks (even fatal ones).</p>
 to bring down the host system.</p>
 </div>
 </div>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>
-<p>Rhai is designed to not bring down the host system, regardless of what a script may do to it.
-This is a central design goal – Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a> guarantee.</p>
-<p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
-considered a bug in Rhai and should be reported as such.</p>
 
                     </main>
 

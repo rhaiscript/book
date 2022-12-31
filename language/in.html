@@ -170,13 +170,20 @@
 </div>
 <div>
 <p>The <code>in</code> operator is simply syntactic sugar for a call to the <code>contains</code> function.</p>
+<p>Similarly, <code>!in</code> is a call to <code>!contains</code>.</p>
 </div>
 </div>
 <p>The <code>in</code> operator is used to check for <em>containment</em> – i.e. whether a particular collection
 data type <em>contains</em> a particular item.</p>
+<p>Similarly, <code>!in</code> is used to check for non-existence – i.e. it is <code>true</code> if a particular
+collection data type does <em>not</em> contain a particular item.</p>
 <pre><code class="language-rust">42 in array;
 
 array.contains(42);     // &lt;- the above is equivalent to this
+
+123 !in array;
+
+!array.contains(123);   // &lt;- the above is equivalent to this
 </code></pre>
 <h2 id="built-in-support-for-standard-data-types"><a class="header" href="#built-in-support-for-standard-data-types">Built-in Support for Standard Data Types</a></h2>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Data type</th><th style="text-align: center">Check for</th></tr></thead><tbody>
@@ -200,6 +207,8 @@ let map = #{
 &quot;foo&quot; in map == true;               // check object map for property name
 
 'w' in &quot;hello, world!&quot; == true;     // check string for character
+
+'w' !in &quot;hello, world!&quot; == false;
 
 &quot;wor&quot; in &quot;hello, world&quot; == true;    // check string for sub-string
 
@@ -228,7 +237,7 @@ let array = [1, 2, 3, ts, 42, 999];
                                     // because == operator is not defined
 </code></pre>
 <h2 id="custom-implementation-of-contains"><a class="header" href="#custom-implementation-of-contains">Custom Implementation of <code>contains</code></a></h2>
-<p>The <code>in</code> operator maps directly to a call to a function <code>contains</code> with the two operands switched.</p>
+<p>The <code>in</code> and <code>!in</code> operators map directly to a call to a function <code>contains</code> with the two operands switched.</p>
 <pre><code class="language-rust">// This expression...
 item in container
 
@@ -238,8 +247,9 @@ contains(container, item)
 // or...
 container.contains(item)
 </code></pre>
-<p>Support for the <code>in</code> operator can be easily extended to other types by registering a custom binary
-function named <code>contains</code> with the correct parameter types.</p>
+<p>Support for the <code>in</code> and <code>!in</code> operators can be easily extended to other types by registering a
+custom binary function named <code>contains</code> with the correct parameter types.</p>
+<p>Since <code>!in</code> maps to <code>!(... in ...)</code>, <code>contains</code> is enough to support both operators.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 engine.register_type::&lt;TestStruct&gt;()
@@ -255,8 +265,10 @@ engine.run(
 r#&quot;
     let ts = new_ts();
 
-    if 42 in ts {                   // this calls the 'contains' function
+    if 42 in ts {                   // this calls 'ts.contains(42)'
         print(&quot;I got 42!&quot;);
+    } else if 123 !in ts {          // this calls '!ts.contains(123)'
+        print(&quot;I ain't got 123!&quot;);
     }
 
     let err = &quot;hello&quot; in ts;        // &lt;- runtime error: 'contains' not found

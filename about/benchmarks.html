@@ -163,18 +163,30 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="benchmarking-rhai"><a class="header" href="#benchmarking-rhai">Benchmarking Rhai</a></h1>
+<div id="admonition-tip-nothing-beats-a-jit" class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Nothing beats a JIT</p>
+<p><a class="admonition-anchor-link" href="#admonition-tip-nothing-beats-a-jit"></a></p>
+</div>
+<div>
+<p>Needless to say <a href="https://v8.dev">V8</a> (JavaScript), which is a <a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> compiler with type specialization, blows any interpreter
+(AST or <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> based) out of the water, as also should <a href="https://luajit.org">LuaJIT</a>.</p>
+<p>So if you <em>absolutely must</em> have top performance…</p>
+</div>
+</div>
 <p>The purpose of Rhai is not to be <em>blazing fast</em>, but to make it as easy and versatile as possible to
 integrate with native Rust applications.</p>
 <p>What you lose from running an <a href="/book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
-<p>The following benchmarks were run on a 2.6GHz Linux VM comparing a
-<a href="../start/builds/performance.html">performance-optimized</a> build of Rhai and Python 3.</p>
-<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai</th><th style="text-align: center">Python3</th><th style="text-align: center">Difference</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.4s</td><td style="text-align: center">0.56s</td><td style="text-align: center">4.3x</td><td>stresses recursive <a href="/book/language/functions.html">function</a> calls</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.14s</td><td style="text-align: center">0.07s</td><td style="text-align: center">2x</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">1s</td><td style="text-align: center">0.38s</td><td style="text-align: center">2.6x</td><td>a closer-to-real-life calculation workload</td></tr>
+<p>The following benchmarks were run on a 2.6GHz Linux VM comparing
+<a href="../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a> and
+<a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.4s</td><td style="text-align: center">3.4s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="/book/language/functions.html">function</a> calls</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.14s</td><td style="text-align: center">0.25s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.25s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
 </tbody></table>
 </div>
-<p>In general, Rhai is roughly 2.5x slower than Python 3, which is a byte-codes interpreter, for
+<p>In general, Rhai is roughly 2x slower than <a href="https://www.python.org">Python 3</a>, which is a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for
 typical real-life workloads.</p>
 <div id="admonition-tldr--rhai-is-usually-fast-enough" class="admonition question">
 <div class="admonition-title">
@@ -186,16 +198,18 @@ typical real-life workloads.</p>
 <p>Essential <a href="/book/engine/compile.html">AST</a> and runtime data structures are packed small and kept together
 to maximize cache friendliness.</p>
 <h4 id="pre-calculations"><a class="header" href="#pre-calculations">Pre-calculations</a></h4>
-<p><a href="/book/language/functions.html">Functions</a> are dispatched based on pre-calculated hashes.</p>
-<p><a href="/book/language/variables.html">Variables</a> are mostly accessed through pre-calculated offsets to the <a href="/book/language/variables.html">variables</a> file (a <a href="/book/engine/scope.html"><code>Scope</code></a>).</p>
-<p>It is seldom necessary to look something up by name.</p>
+<p><a href="/book/language/functions.html">Functions</a> are dispatched based on pre-calculated hashes.
+<a href="/book/language/variables.html">Variables</a> are mostly accessed through pre-calculated offsets to the <a href="/book/language/variables.html">variables</a> file (a <a href="/book/engine/scope.html"><code>Scope</code></a>).
+It is seldom necessary to look something up by name.</p>
 <h4 id="caching"><a class="header" href="#caching">Caching</a></h4>
 <p><a href="/book/language/functions.html">Function</a> resolutions are cached so they do not incur lookup costs after a couple of calls.</p>
 <h4 id="no-scope-chain"><a class="header" href="#no-scope-chain">No scope-chain</a></h4>
 <p>Maintaining a <em>scope chain</em> is deliberately avoided by design so <a href="/book/language/functions.html">function</a> scopes do
-not pay any speed penalty.</p>
-<p>This allows <a href="/book/language/variables.html">variables</a> data to be kept together in a contiguous block, avoiding allocations
+not pay any speed penalty.
+This allows <a href="/book/language/variables.html">variables</a> data to be kept together in a contiguous block, avoiding allocations
 and fragmentation while being cache-friendly.</p>
+<h4 id="immutable-strings"><a class="header" href="#immutable-strings">Immutable strings</a></h4>
+<p>Rhai uses <a href="/book/rust/immutable-string.html">immutable strings</a> to bypass cloning issues.</p>
 <h4 id="no-sharing"><a class="header" href="#no-sharing">No sharing</a></h4>
 <p>In a typical script evaluation run, no data is shared and nothing is locked (other than
 <a href="/book/language/variables.html">variables</a> captured by <a href="/book/language/fn-closure.html">closures</a>).</p>
@@ -212,7 +226,7 @@ such as classes, inheritance, interfaces, generics, first-class functions/closur
 monads (whatever), concurrency, async etc.</p>
 <p>Focus is on <em>flexibility</em> and <em>ease of use</em> instead of a powerful, expressive language.</p>
 <p>Avoid the temptation to write full-fledge application logic entirely in Rhai – that use case
-is best fulfilled by more complete scripting languages such as JavaScript or Lua.</p>
+is best fulfilled by more complete scripting languages such as JavaScript or <a href="https://www.lua.org/">Lua</a>.</p>
 </div>
 </div>
 <div id="admonition-do-this-use-rhai-as-a-thin-dynamic-wrapper-layer-over-rust-code" class="admonition tip">
@@ -224,7 +238,7 @@ is best fulfilled by more complete scripting languages such as JavaScript or Lua
 <p>In actual practice, it is usually best to expose a Rust API into Rhai for scripts to call.</p>
 <p>All the core functionalities should be written in Rust, with Rhai being the dynamic <em>control</em> layer.</p>
 <p>This is similar to some dynamic languages where most of the core functionalities reside in a C/C++
-standard library.</p>
+standard library (e.g. <a href="https://www.python.org">Python 3</a>).</p>
 <p>Another similar scenario is a web front-end driving back-end services written in a systems language.
 In this case, JavaScript takes the role of Rhai while the back-end language, well… it can actually
 also be Rust. Except that Rhai integrates with Rust <em>much</em> more tightly, removing the need for

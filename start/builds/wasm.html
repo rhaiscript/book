@@ -163,7 +163,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="webassembly-wasm-build"><a class="header" href="#webassembly-wasm-build">WebAssembly (WASM) Build</a></h1>
-<div id="admonition-but-why" class="admonition question side">
+<div id="admonition-but-why" class="admonition question side wide">
 <div class="admonition-title">
 <p>But why?</p>
 <p><a class="admonition-anchor-link" href="#admonition-but-why"></a></p>
@@ -218,14 +218,10 @@ but then the interop code must then be explicitly provided.</p>
 </div>
 <div>
 <p>Rhai requires a system-provided source of random numbers (for hashing).</p>
-<p>Such random number source is available from JavaScript (e.g. if the WASM module is intended
-for a browser).</p>
-<p>In such circumstances, it is necessary to enable the <code>js</code> feature on the
-<a href="https://crates.io/crates/getrandom"><code>getrandom</code></a> crate.</p>
-<pre><code class="language-toml">[dependencies]
-getrandom = { version = &quot;0.2&quot;, features = [ &quot;js&quot; ] }
-</code></pre>
-<p>See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-support">https://docs.rs/getrandom/latest/getrandom/#webassembly-support</a></p>
+<p>Such random number source is available from JavaScript (implied by <code>wasm-bindgen</code> or <code>stdweb</code>).</p>
+<p>The <code>js</code> feature on the <a href="https://crates.io/crates/getrandom"><code>getrandom</code></a> crate is
+enabled automatically to provide the random  number source.
+See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-support">https://docs.rs/getrandom/latest/getrandom/#webassembly-support</a> for details.</p>
 </div>
 </div>
 <div id="admonition-raw-wasm32-unknown-unknown" class="admonition warning">
@@ -238,7 +234,7 @@ getrandom = { version = &quot;0.2&quot;, features = [ &quot;js&quot; ] }
 <p>Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
 opt out of <code>default-features</code> in order to enable <a href="/book/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.11.0&quot;, default-features = false, features = [ &quot;std&quot; ] }
+rhai = { version = &quot;1.12.0&quot;, default-features = false, features = [ &quot;std&quot; ] }
 </code></pre>
 </div>
 </div>

@@ -173,9 +173,9 @@
 <p>See the <a href="/book/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
 </div>
 </div>
-<h2 id="initialize-handler-instance-with-enginecall_fn_raw"><a class="header" href="#initialize-handler-instance-with-enginecall_fn_raw">Initialize Handler Instance with <code>Engine::call_fn_raw</code></a></h2>
-<p>Use <code>Engine::call_fn_raw</code> instead of <code>Engine::call_fn</code> in order to retain new <a href="/book/language/variables.html">variables</a> defined
-inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a> when running the <code>init</code> function.</p>
+<h2 id="initialize-handler-instance-with-enginecall_fn_with_options"><a class="header" href="#initialize-handler-instance-with-enginecall_fn_with_options">Initialize Handler Instance with <code>Engine::call_fn_with_options</code></a></h2>
+<p>Use <code>Engine::call_fn_with_options</code> instead of <code>Engine::call_fn</code> in order to retain new <a href="/book/language/variables.html">variables</a>
+defined inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a> when running the <code>init</code> function.</p>
 <pre><code class="language-rust">impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
@@ -186,9 +186,12 @@ inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a> when 
                     :
 
         // Run the 'init' function to initialize the state, retaining variables.
+        let options = CallFnOptions::new()
+                        .eval_ast(false)        // do not re-evaluate the AST
+                        .rewind_scope(false);   // do not rewind scope
+
         // In a real application you'd again be handling errors...
-        engine.call_fn_raw(&amp;mut scope, &amp;ast, false, false, &quot;init&quot;, None, []).unwrap();
-        //                                          ^^^^^ do not rewind scope
+        engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;init&quot;, ()).unwrap();
 
                     :
             // Code omitted
@@ -204,7 +207,7 @@ in the handler script to access and modify these state variables.</p>
 <p>The API registered with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be also used throughout the script.</p>
 <h3 id="sample-script"><a class="header" href="#sample-script">Sample script</a></h3>
 <pre><code class="language-js">/// Initialize user-provided state (shadows system-provided state, if any).
-/// Because 'call_fn_raw' is used to call this, new variables introduced
+/// Because 'CallFnOptions::rewind_scope' is 'false', new variables introduced
 /// will remain inside the custom 'Scope'.
 fn init() {
     // Add 'bool_state' and 'obj_state' as new state variables
@@ -260,7 +263,8 @@ fn update(data) {
 <h2 id="disadvantages-of-this-style"><a class="header" href="#disadvantages-of-this-style">Disadvantages of This Style</a></h2>
 <p>This style is simple to implement and intuitive to use, but it is not very flexible.</p>
 <p>New user state <a href="/book/language/variables.html">variables</a> are introduced by evaluating a special initialization script <a href="/book/language/functions.html">function</a>
-(e.g. <code>init</code>) that defines them, and <code>Engine::call_fn_raw</code> is used to keep them inside the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+(e.g. <code>init</code>) that defines them, and <code>Engine::call_fn_with_scope</code> is used to keep them inside the
+custom <a href="/book/engine/scope.html"><code>Scope</code></a> (together with setting <code>CallFnOptions::rewind_scope</code> to <code>false</code>).</p>
 <p>However, this has the disadvantage that no other <a href="/book/language/functions.html">function</a> can introduce new state <a href="/book/language/variables.html">variables</a>,
 otherwise they’d simply <em><a href="/book/language/shadow.html">shadow</a></em> existing <a href="/book/language/variables.html">variables</a> in the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.  Thus, <a href="/book/language/functions.html">functions</a>
 are called during events via <code>Engine::call_fn</code> which does not retain any <a href="/book/language/variables.html">variables</a>.</p>

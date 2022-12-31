@@ -168,7 +168,8 @@
 <a href="/book/engine/debugging/debugger.html">debugger’s</a> state, which is a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can hold any value.</p>
 <p>This state value is the stored into the <a href="/book/engine/debugging/debugger.html">debugger</a>’s custom state.</p>
 <h2 id="access-the-debugger-state"><a class="header" href="#access-the-debugger-state">Access the Debugger State</a></h2>
-<p>Use <code>EvalContext::global_runtime_state_mut().debugger</code> to gain access to the current
+<p>Use <code>EvalContext::global_runtime_state().debugger()</code> (immutable) or
+<code>EvalContext::global_runtime_state_mut().debugger_mut()</code> (mutable) to gain access to the current
 <a href="/book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> instance.</p>
 <p>The following <a href="/book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> methods allow access to the custom <a href="/book/engine/debugging/debugger.html">debugger</a> state.</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Parameter type</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
@@ -179,22 +180,24 @@
 </div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust">engine.register_debugger(
-    |engine| {
+    |engine, mut debugger| {
         // Say, use an object map for the debugger state
         let mut state = Map::new();
         // Initialize properties
         state.insert(&quot;hello&quot;.into(), 42_64.into());
         state.insert(&quot;foo&quot;.into(), false.into());
-        Dynamic::from_map(state)
+        
+        debugger.set_state(state);
+        debugger
     },
     |context, node, source, pos| {
         // Print debugger state - which is an object map
-        let state = context.global_runtime_state_mut().debugger.state();
+        let state = context.global_runtime_state().debugger().state();
         println!(&quot;Current state = {state}&quot;);
 
         // Get the state as an object map
         let mut state = context.global_runtime_state_mut()
-                               .debugger.state_mut()
+                               .debugger_mut().state_mut()
                                .write_lock::&lt;Map&gt;().unwrap();
 
         // Read state

@@ -165,7 +165,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.11.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.12.0</strong> of Rhai.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-rhai"><a class="header" href="#introduction-to-rhai">Introduction to Rhai</a></h1>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <div id="admonition-etymology-of-the-name-rhai" class="admonition question">
@@ -452,7 +452,7 @@ order to support a wide range of user customizations, such as:</p>
 </div>
 </div>
 <ul>
-<li><strong>No byte-codes/JIT</strong> – Rhai uses a heavily-optimized AST-walking interpreter which is fast
+<li><strong>No bytecodes/JIT</strong> – Rhai uses a heavily-optimized AST-walking interpreter which is fast
 enough for most real-life scenarios.</li>
 </ul>
 <div id="admonition-how-it-compares" class="admonition info small">
@@ -461,22 +461,34 @@ enough for most real-life scenarios.</li>
 <p><a class="admonition-anchor-link" href="about/non-design.html#admonition-how-it-compares"></a></p>
 </div>
 <div>
-<p>See Rhai performance <a href="about/benchmarks.html">benchmarks</a>.</p>
+<p>See Rhai performance <a href="about//book/about/benchmarks.html">benchmarks</a>.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="benchmarking-rhai"><a class="header" href="#benchmarking-rhai">Benchmarking Rhai</a></h1>
+<div id="admonition-tip-nothing-beats-a-jit" class="admonition tip side wide">
+<div class="admonition-title">
+<p>Tip: Nothing beats a JIT</p>
+<p><a class="admonition-anchor-link" href="about/benchmarks.html#admonition-tip-nothing-beats-a-jit"></a></p>
+</div>
+<div>
+<p>Needless to say <a href="https://v8.dev">V8</a> (JavaScript), which is a <a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> compiler with type specialization, blows any interpreter
+(AST or <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> based) out of the water, as also should <a href="https://luajit.org">LuaJIT</a>.</p>
+<p>So if you <em>absolutely must</em> have top performance…</p>
+</div>
+</div>
 <p>The purpose of Rhai is not to be <em>blazing fast</em>, but to make it as easy and versatile as possible to
 integrate with native Rust applications.</p>
 <p>What you lose from running an <a href="about//book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
-<p>The following benchmarks were run on a 2.6GHz Linux VM comparing a
-<a href="about/../start/builds/performance.html">performance-optimized</a> build of Rhai and Python 3.</p>
-<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai</th><th style="text-align: center">Python3</th><th style="text-align: center">Difference</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.4s</td><td style="text-align: center">0.56s</td><td style="text-align: center">4.3x</td><td>stresses recursive <a href="about//book/language/functions.html">function</a> calls</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.14s</td><td style="text-align: center">0.07s</td><td style="text-align: center">2x</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">1s</td><td style="text-align: center">0.38s</td><td style="text-align: center">2.6x</td><td>a closer-to-real-life calculation workload</td></tr>
+<p>The following benchmarks were run on a 2.6GHz Linux VM comparing
+<a href="about/../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a> and
+<a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.4s</td><td style="text-align: center">3.4s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="about//book/language/functions.html">function</a> calls</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.14s</td><td style="text-align: center">0.25s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.25s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
 </tbody></table>
 </div>
-<p>In general, Rhai is roughly 2.5x slower than Python 3, which is a byte-codes interpreter, for
+<p>In general, Rhai is roughly 2x slower than <a href="https://www.python.org">Python 3</a>, which is a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for
 typical real-life workloads.</p>
 <div id="admonition-tldr--rhai-is-usually-fast-enough" class="admonition question">
 <div class="admonition-title">
@@ -488,16 +500,18 @@ typical real-life workloads.</p>
 <p>Essential <a href="about//book/engine/compile.html">AST</a> and runtime data structures are packed small and kept together
 to maximize cache friendliness.</p>
 <h4 id="pre-calculations"><a class="header" href="#pre-calculations">Pre-calculations</a></h4>
-<p><a href="about//book/language/functions.html">Functions</a> are dispatched based on pre-calculated hashes.</p>
-<p><a href="about//book/language/variables.html">Variables</a> are mostly accessed through pre-calculated offsets to the <a href="about//book/language/variables.html">variables</a> file (a <a href="about//book/engine/scope.html"><code>Scope</code></a>).</p>
-<p>It is seldom necessary to look something up by name.</p>
+<p><a href="about//book/language/functions.html">Functions</a> are dispatched based on pre-calculated hashes.
+<a href="about//book/language/variables.html">Variables</a> are mostly accessed through pre-calculated offsets to the <a href="about//book/language/variables.html">variables</a> file (a <a href="about//book/engine/scope.html"><code>Scope</code></a>).
+It is seldom necessary to look something up by name.</p>
 <h4 id="caching"><a class="header" href="#caching">Caching</a></h4>
 <p><a href="about//book/language/functions.html">Function</a> resolutions are cached so they do not incur lookup costs after a couple of calls.</p>
 <h4 id="no-scope-chain"><a class="header" href="#no-scope-chain">No scope-chain</a></h4>
 <p>Maintaining a <em>scope chain</em> is deliberately avoided by design so <a href="about//book/language/functions.html">function</a> scopes do
-not pay any speed penalty.</p>
-<p>This allows <a href="about//book/language/variables.html">variables</a> data to be kept together in a contiguous block, avoiding allocations
+not pay any speed penalty.
+This allows <a href="about//book/language/variables.html">variables</a> data to be kept together in a contiguous block, avoiding allocations
 and fragmentation while being cache-friendly.</p>
+<h4 id="immutable-strings"><a class="header" href="#immutable-strings">Immutable strings</a></h4>
+<p>Rhai uses <a href="about//book/rust/immutable-string.html">immutable strings</a> to bypass cloning issues.</p>
 <h4 id="no-sharing"><a class="header" href="#no-sharing">No sharing</a></h4>
 <p>In a typical script evaluation run, no data is shared and nothing is locked (other than
 <a href="about//book/language/variables.html">variables</a> captured by <a href="about//book/language/fn-closure.html">closures</a>).</p>
@@ -514,7 +528,7 @@ such as classes, inheritance, interfaces, generics, first-class functions/closur
 monads (whatever), concurrency, async etc.</p>
 <p>Focus is on <em>flexibility</em> and <em>ease of use</em> instead of a powerful, expressive language.</p>
 <p>Avoid the temptation to write full-fledge application logic entirely in Rhai – that use case
-is best fulfilled by more complete scripting languages such as JavaScript or Lua.</p>
+is best fulfilled by more complete scripting languages such as JavaScript or <a href="https://www.lua.org/">Lua</a>.</p>
 </div>
 </div>
 <div id="admonition-do-this-use-rhai-as-a-thin-dynamic-wrapper-layer-over-rust-code" class="admonition tip">
@@ -526,7 +540,7 @@ is best fulfilled by more complete scripting languages such as JavaScript or Lua
 <p>In actual practice, it is usually best to expose a Rust API into Rhai for scripts to call.</p>
 <p>All the core functionalities should be written in Rust, with Rhai being the dynamic <em>control</em> layer.</p>
 <p>This is similar to some dynamic languages where most of the core functionalities reside in a C/C++
-standard library.</p>
+standard library (e.g. <a href="https://www.python.org">Python 3</a>).</p>
 <p>Another similar scenario is a web front-end driving back-end services written in a systems language.
 In this case, JavaScript takes the role of Rhai while the back-end language, well… it can actually
 also be Rust. Except that Rhai integrates with Rust <em>much</em> more tightly, removing the need for
@@ -727,7 +741,7 @@ having to install anything.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.11.0&quot;    # assuming 1.11.0 is the latest version
+rhai = &quot;1.12.0&quot;    # assuming 1.12.0 is the latest version
 </code></pre>
 </div>
 </div>
@@ -835,7 +849,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.11.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
+rhai = { version = &quot;1.12.0&quot;, features = [ &quot;sync&quot;, &quot;unchecked&quot;, &quot;only_i32&quot;, &quot;no_float&quot;, &quot;no_module&quot;, &quot;no_function&quot; ] }
 </code></pre>
 <p>turns on these six features:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
@@ -1363,7 +1377,7 @@ number of entries exceed the <em>inline</em> capacity.</p>
 </div>
 <div>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.11.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.12.0/rhai/struct.Scope.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="serializingdeserializing"><a class="header" href="#serializingdeserializing">Serializing/Deserializing</a></h2>
@@ -1580,6 +1594,7 @@ features contained inside the <a href="engine//book/engine/compile.html"><code>A
 <h2 id="runtime-behavior"><a class="header" href="#runtime-behavior">Runtime Behavior</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>set_fail_on_invalid_map_property</code><br/>(not available under <a href="engine//book/start/features.html"><code>no_object</code></a>)</td><td>sets whether to raise errors (instead of returning <a href="engine//book/language/values-and-types.html"><code>()</code></a>) when invalid properties are accessed on <a href="engine//book/language/object-maps.html">object maps</a></td></tr>
+<tr><td><code>set_default_tag</code></td><td>sets the default value of the <em>custom state</em> (which can be obtained via <a href="engine//book/rust/context.html"><code>NativeCallContext::tag</code></a>) for each evaluation run</td></tr>
 </tbody></table>
 </div>
 <h2 id="safety-limits"><a class="header" href="#safety-limits">Safety Limits</a></h2>
@@ -1699,13 +1714,23 @@ following features should be considered:</p>
 <tr><td><a href="start/builds//book/start/features.html"><code>only_i32</code></a></td><td>support only a single <code>i32</code> integer type</td><td>reduce data size</td></tr>
 <tr><td><a href="start/builds//book/start/features.html"><code>no_float</code></a></td><td>remove support for floating-point numbers</td><td>reduce code size</td></tr>
 <tr><td><a href="start/builds//book/start/features.html"><code>f32_float</code></a></td><td>set floating-point numbers (if not disabled) to 32-bit</td><td>reduce data size</td></tr>
-<tr><td><a href="start/builds//book/start/features.html"><code>no_closure</code></a></td><td>remove support for variables sharing</td><td>no need for data locking</td></tr>
-<tr><td><a href="start/builds//book/start/features.html"><code>unchecked</code></a></td><td>disable all safety <a href="start/builds//book/safety/checked.html">checks</a></td><td>remove non-essential code</td></tr>
-<tr><td><a href="start/builds//book/start/features.html"><code>no_position</code></a></td><td>disable position tracking during parsing</td><td>remove non-essential code</td></tr>
-<tr><td><a href="start/builds//book/start/features.html"><code>no_custom_syntax</code></a></td><td>disable custom syntax</td><td>remove non-essential code</td></tr>
+<tr><td><a href="start/builds//book/start/features.html"><code>no_closure</code></a></td><td>remove support for <a href="start/builds//book/language/variables.html">variables</a> sharing</td><td>no need for data locking</td></tr>
+<tr><td><a href="start/builds//book/start/features.html"><code>unchecked</code></a></td><td>disable all safety <a href="start/builds//book/safety/checked.html">checks</a></td><td>remove checking code</td></tr>
+<tr><td><a href="start/builds//book/start/features.html"><code>no_module</code></a></td><td>disable loading external <a href="start/builds//book/rust/modules/index.html">modules</a></td><td>reduce code size</td></tr>
+<tr><td><a href="start/builds//book/start/features.html"><code>no_position</code></a></td><td>disable position tracking during parsing</td><td>reduce data size</td></tr>
+<tr><td><a href="start/builds//book/start/features.html"><code>no_custom_syntax</code></a></td><td>disable <a href="start/builds//book/engine/custom-syntax.html">custom syntax</a></td><td>reduce code size</td></tr>
 </tbody></table>
 </div>
 <p>When the above feature flags are used, performance may increase by around 15-20%.</p>
+<div id="admonition-see-also-benchmarks" class="admonition info small">
+<div class="admonition-title">
+<p>See also: Benchmarks</p>
+<p><a class="admonition-anchor-link" href="start/builds/performance.html#admonition-see-also-benchmarks"></a></p>
+</div>
+<div>
+<p>See Rhai performance <a href="start/builds//book/about/benchmarks.html">benchmarks</a>.</p>
+</div>
+</div>
 <h2 id="unchecked-build"><a class="header" href="#unchecked-build">Unchecked Build</a></h2>
 <p>By default, Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a>
 guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.</p>
@@ -1924,7 +1949,7 @@ for different operating environments.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="webassembly-wasm-build"><a class="header" href="#webassembly-wasm-build">WebAssembly (WASM) Build</a></h1>
-<div id="admonition-but-why" class="admonition question side">
+<div id="admonition-but-why" class="admonition question side wide">
 <div class="admonition-title">
 <p>But why?</p>
 <p><a class="admonition-anchor-link" href="start/builds/wasm.html#admonition-but-why"></a></p>
@@ -1979,14 +2004,10 @@ but then the interop code must then be explicitly provided.</p>
 </div>
 <div>
 <p>Rhai requires a system-provided source of random numbers (for hashing).</p>
-<p>Such random number source is available from JavaScript (e.g. if the WASM module is intended
-for a browser).</p>
-<p>In such circumstances, it is necessary to enable the <code>js</code> feature on the
-<a href="https://crates.io/crates/getrandom"><code>getrandom</code></a> crate.</p>
-<pre><code class="language-toml">[dependencies]
-getrandom = { version = &quot;0.2&quot;, features = [ &quot;js&quot; ] }
-</code></pre>
-<p>See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-support">https://docs.rs/getrandom/latest/getrandom/#webassembly-support</a></p>
+<p>Such random number source is available from JavaScript (implied by <code>wasm-bindgen</code> or <code>stdweb</code>).</p>
+<p>The <code>js</code> feature on the <a href="https://crates.io/crates/getrandom"><code>getrandom</code></a> crate is
+enabled automatically to provide the random  number source.
+See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-support">https://docs.rs/getrandom/latest/getrandom/#webassembly-support</a> for details.</p>
 </div>
 </div>
 <div id="admonition-raw-wasm32-unknown-unknown" class="admonition warning">
@@ -1999,7 +2020,7 @@ getrandom = { version = &quot;0.2&quot;, features = [ &quot;js&quot; ] }
 <p>Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
 opt out of <code>default-features</code> in order to enable <a href="start/builds//book/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.11.0&quot;, default-features = false, features = [ &quot;std&quot; ] }
+rhai = { version = &quot;1.12.0&quot;, default-features = false, features = [ &quot;std&quot; ] }
 </code></pre>
 </div>
 </div>
@@ -2527,9 +2548,9 @@ and exposes the following.</p>
 <tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td><code>position()</code></td><td style="text-align: center"><code>Position</code></td><td>position of the function call</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
-<tr><td><code>tag()</code></td><td style="text-align: center"><a href="rust//book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the custom state that is persistent during the current run</td></tr>
+<tr><td><code>tag()</code></td><td style="text-align: center"><a href="rust//book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the <em>custom state</em> that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="rust//book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.12.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.12.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="rust//book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="rust//book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>; requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn(...)</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
@@ -2794,7 +2815,7 @@ if the comma is omitted.</p>
 needed by the <a href="engine//book/language/functions.html">function</a>.</p>
 <p>All new <a href="engine//book/language/variables.html">variables</a>/<a href="engine//book/language/constants.html">constants</a> introduced are, by default, <em>not</em> retained inside the <a href="engine//book/engine/scope.html"><code>Scope</code></a>.
 In other words, the <a href="engine//book/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> before each call.</p>
-<p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
+<p>If these default behaviors are not desirable, override them with <code>Engine::call_fn_with_options</code>.</p>
 </div>
 </div>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> Trait</a></h2>
@@ -2804,7 +2825,7 @@ In other words, the <a href="engine//book/engine/scope.html"><code>Scope</code><
 <p><a class="admonition-anchor-link" href="engine/call-fn.html#admonition-note"></a></p>
 </div>
 <div>
-<p>Rhai implements <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
+<p>Rhai implements <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> for tuples, arrays and <code>Vec&lt;T&gt;</code>.</p>
 </div>
 </div>
 <p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="engine//book/rust/traits.html"><code>FuncArgs</code></a> trait,
@@ -2847,25 +2868,31 @@ any <a href="engine//book/rust/custom-type.html">custom type</a>.</p>
 to be split up to pass to functions.</p>
 </div>
 </div>
-<h2 id="low-level-api--enginecall_fn_raw"><a class="header" href="#low-level-api--enginecall_fn_raw">Low-Level API – <code>Engine::call_fn_raw</code></a></h2>
-<p>For more control, construct all arguments as <a href="engine//book/language/dynamic.html"><code>Dynamic</code></a> values and use <code>Engine::call_fn_raw</code>,
-passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
-<pre><code class="language-rust">let result = engine.call_fn_raw(
-                &amp;mut scope,         // scope to use
-                &amp;ast,               // AST containing the functions
-                false,              // false = do not evaluate the AST
-                false,              // false = do not rewind the scope (i.e. keep new variables)
-                &quot;hello&quot;,            // function entry-point
-                None,               // 'this' pointer, if any
-                [ &quot;abc&quot;.into(), 123_i64.into() ]    // arguments
+<h2 id="enginecall_fn_with_options"><a class="header" href="#enginecall_fn_with_options"><code>Engine::call_fn_with_options</code></a></h2>
+<p>For more control, use <code>Engine::call_fn_with_options</code>, which takes a type <code>CallFnOptions</code>:</p>
+<pre><code class="language-rust">use rhai::{Engine, CallFnOptions};
+
+let options = CallFnOptions::new()
+                .eval_ast(false)            // do not evaluate the AST
+                .rewind_scope(false)        // do not rewind the scope (i.e. keep new variables)
+                .bind_this_ptr(&amp;mut state); // 'this' pointer
+
+let result = engine.call_fn_with_options::&lt;i64&gt;(
+                options,                    // options
+                &amp;mut scope,                 // scope to use
+                &amp;ast,                       // AST containing the functions
+                &quot;hello&quot;,                    // function entry-point
+                ( &quot;abc&quot;, 123_i64 )          // arguments
              )?;
 </code></pre>
-<p><code>Engine::call_fn_raw</code> extends control to the following:</p>
-<ul>
-<li>Whether to skip evaluation of the <a href="engine//book/engine/compile.html"><code>AST</code></a> before calling the target <a href="engine//book/language/functions.html">function</a></li>
-<li>Whether to rewind the custom <a href="engine//book/engine/scope.html"><code>Scope</code></a> at the end of the <a href="engine//book/language/functions.html">function</a> call</li>
-<li>Whether to bind the <code>this</code> pointer to a specific value</li>
-</ul>
+<p><code>CallFnOptions</code> allows control of the following:</p>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th style="text-align: center">Type</th><th style="text-align: center">Default</th><th style="text-align: center">Build method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>eval_ast</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>true</code></td><td style="text-align: center"><code>eval_ast</code></td><td>skip evaluation of the <a href="engine//book/engine/compile.html"><code>AST</code></a> before calling the target <a href="engine//book/language/functions.html">function</a></td></tr>
+<tr><td><code>rewind_scope</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>true</code></td><td style="text-align: center"><code>rewind_scope</code></td><td>rewind the custom <a href="engine//book/engine/scope.html"><code>Scope</code></a> at the end of the <a href="engine//book/language/functions.html">function</a> call so new local variables are removed</td></tr>
+<tr><td><code>this_ptr</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>Option&lt;&amp;mut Dynamic&gt;</code></a></td><td style="text-align: center"><code>None</code></td><td style="text-align: center"><code>bind_this_ptr</code></td><td>bind the <code>this</code> pointer to a specific value</td></tr>
+<tr><td><code>tag</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>Option&lt;Dynamic&gt;</code></a></td><td style="text-align: center"><code>None</code></td><td style="text-align: center"><code>with_tag</code></td><td>set the <em>custom state</em> for this evaluation (accessed via <a href="engine//book/rust/context.html"><code>NativeCallContext::tag</code></a>)</td></tr>
+</tbody></table>
+</div>
 <h3 id="skip-evaluation-of-the-ast"><a class="header" href="#skip-evaluation-of-the-ast">Skip evaluation of the <code>AST</code></a></h3>
 <p>By default, the <a href="engine//book/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="engine//book/language/functions.html">function</a>.
 A parameter can be passed to skip this evaluation.</p>
@@ -2919,9 +2946,9 @@ let foo = 123;                      // 'foo' is retained
 │ Rust │
 └──────┘
 
-engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;, None, [])?;
-//                                   ^^^^ evaluate AST before call
-//                                         ^^^^^ do not rewind scope
+let options = CallFnOptions::new().rewind_scope(false);
+
+engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;initialize&quot;, ())?;
 
 // At this point, 'scope' contains these variables: 'foo', 'x', 'y'
 </code></pre>
@@ -2935,21 +2962,18 @@ engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;
 <p><code>Engine::call_fn</code> cannot call functions in <em>method-call</em> style.</p>
 </div>
 </div>
-<p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="engine//book/language/functions.html">function</a>.</p>
+<p><code>Engine::call_fn_with_options</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="engine//book/language/functions.html">function</a>.</p>
 <p>It is possible, then, to call a <a href="engine//book/language/functions.html">function</a> that uses <code>this</code>.</p>
 <pre><code class="language-rust">let ast = engine.compile(&quot;fn action(x) { this += x; }&quot;)?;
 
 let mut value: Dynamic = 1_i64.into();
 
-engine.call_fn_raw(
-            &amp;mut scope,
-            &amp;ast,
-            false,
-            false,
-            &quot;action&quot;,
-            Some(&amp;mut value),       // binding the 'this' pointer
-            [ 41_i64.into() ]
-       )?;
+let options = CallFnOptions::new()
+                .eval_ast(false)
+                .rewind_scope(false)
+                .bind_this_ptr(&amp;mut value);
+
+engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;action&quot;, ( 41_i64, ))?;
 
 assert_eq!(value.as_int()?, 42);
 </code></pre>
@@ -4017,6 +4041,67 @@ engine
         col1
     });
 </code></pre>
+<h2 id="what-about-indexers"><a class="header" href="#what-about-indexers">What About Indexers?</a></h2>
+<p>Many users are tempted to register <a href="rust//book/rust/indexers.html">indexers</a> for custom collections.  This essentially makes the
+original Rust type something similar to <code>Vec&lt;MyType&gt;</code>.</p>
+<p>Rhai’s standard <a href="rust//book/language/arrays.html"><code>Array</code></a> type is <code>Vec&lt;Dynamic&gt;</code> which already holds an ordered, iterable and
+indexable collection of dynamic items.  Since Rhai has built-in support, manipulating <a href="rust//book/language/arrays.html">arrays</a> is fast.</p>
+<p>In <em>most</em> circumstances, it is better to use <a href="rust//book/language/arrays.html"><code>Array</code></a> instead of a <a href="rust//book/rust/custom-type.html">custom type</a>.</p>
+<div id="admonition-tip-convert-to-array-using-into" class="admonition tip small">
+<div class="admonition-title">
+<p>Tip: Convert to <code>Array</code> using <code>.into()</code></p>
+<p><a class="admonition-anchor-link" href="rust/collections.html#admonition-tip-convert-to-array-using-into"></a></p>
+</div>
+<div>
+<p><a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> implements <code>FromIterator</code> for all iterable types and an <a href="rust//book/language/arrays.html"><code>Array</code></a> is created in the process.</p>
+<p>So, converting a typed array (i.e. <code>Vec&lt;MyType&gt;</code>) into an <a href="rust//book/language/arrays.html">array</a> in Rhai is as simple as calling <code>.into()</code>.</p>
+<pre><code class="language-rust">// Say you have a custom typed array...
+let my_custom_array: Vec&lt;MyType&gt; = do_lots_of_calc(42);
+
+// Convert it into a 'Dynamic' that holds an array
+let value: Dynamic = my_custom_array.into();
+
+// Use is anywhere in Rhai...
+scope.push(&quot;my_custom_array&quot;, value);
+
+engine
+    // Raw function that returns a custom type
+    .register_fn(&quot;do_lots_of_calc_raw&quot;, do_lots_of_calc)
+    // Wrap function that return a custom typed array
+    .register_fn(&quot;do_lots_of_calc&quot;, |seed: i64| -&gt; Dynamic {
+        let result = do_lots_of_calc(seed);     // Vec&lt;MyType&gt;
+        result.into()                           // Array in Dynamic
+    });
+</code></pre>
+</div>
+</div>
+<h2 id="tldr-1"><a class="header" href="#tldr-1">TL;DR</a></h2>
+<div id="admonition-why-shouldnt-we-register-vec" class="admonition question">
+<div class="admonition-title">
+<p>Why shouldn’t we register <code>Vec&lt;MyType&gt;</code>?</p>
+<p><a class="admonition-anchor-link" href="rust/collections.html#admonition-why-shouldnt-we-register-vec"></a></p>
+</div>
+<div>
+<h3 id="reason-1-performance"><a class="header" href="#reason-1-performance">Reason #1: Performance</a></h3>
+<p>A main reason why anybody would want to do this is to avoid the overheads of storing <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> items.</p>
+<p>This is why <a href="rust//book/language/blobs.html">BLOB’s</a> is a built-in data type in Rhai, even though it is actually defined as <code>Vec&lt;u8&gt;</code>.
+The overhead of using <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> (16 bytes) versus <code>u8</code> (1 byte) is worth the trouble, although the
+performance gains may not be as pronounced as expected: benchmarks show a 15% speed improvement inside
+a tight loop compared with using an <a href="rust//book/language/arrays.html">array</a>.</p>
+<p><code>Vec&lt;MyType&gt;</code>, however, will be treated as an opaque <a href="rust//book/rust/custom-type.html">custom type</a> in Rhai, so performance is not optimized.
+What you gain from avoiding <a href="rust//book/language/dynamic.html"><code>Dynamic</code></a>, you pay back in terms of slower access to the <code>Vec</code> as well as <code>MyType</code>
+(which is treated as yet another opaque <a href="rust//book/rust/custom-type.html">custom type</a>).</p>
+<h3 id="reason-2-api"><a class="header" href="#reason-2-api">Reason #2: API</a></h3>
+<p>Another reason why it shouldn’t be done is due to the large number of functions and methods that must be registered
+for each type of this sort.  One only has to look at the vast API surface of <a href="rust//book/language/arrays.html#built-in-functions">arrays</a>
+to see the common methods that a user would expect to be available.</p>
+<p>Since <code>Vec&lt;Type&gt;</code> looks, feels and quacks just like a normal <a href="rust//book/language/arrays.html">array</a>, and the usage syntax is almost equivalent (except
+for the fact that the data type is restricted), users would be frustrated if they find that certain functions available for
+<a href="rust//book/language/arrays.html">arrays</a> are not provided.</p>
+<p>This is similar to JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays"><em>Typed Arrays</em></a>.
+They are quite awkward to work with, and basically each has a full API definition that must be pre-registered.</p>
+</div>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="disable-custom-types"><a class="header" href="#disable-custom-types">Disable Custom Types</a></h1>
 <p>The <a href="rust//book/start/features.html"><code>no_object</code></a> feature disables support for <a href="rust//book/rust/custom-type.html">custom types</a> including:</p>
 <ul>
@@ -4091,7 +4176,7 @@ change from time to time.</p>
 </div>
 <div>
 <p>For the complete <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.11.0/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.12.0/rhai/struct.Module.html">documentation</a> online.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
@@ -5893,7 +5978,7 @@ as an independent crate.</p>
 name = &quot;my-package&quot;     # 'my-package' crate
 
 [dependencies]
-rhai = &quot;1.11.0&quot;    # assuming 1.11.0 is the latest version
+rhai = &quot;1.12.0&quot;    # assuming 1.12.0 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><code class="language-rust">use rhai::def_package;
@@ -5959,7 +6044,7 @@ def_package! {
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.11.0&quot;
+rhai = &quot;1.12.0&quot;
 rhai-rand = &quot;0.1&quot;       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -5990,7 +6075,7 @@ random.register_into_engine(&amp;mut engine);
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version=&quot;1.11.0&quot;, features = [&quot;no_float&quot;] }
+rhai = { version=&quot;1.12.0&quot;, features = [&quot;no_float&quot;] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version=&quot;0.1&quot;, default-features = false, features = [&quot;array&quot;] }
@@ -6017,7 +6102,7 @@ scientific computing, inspired by languages like MATLAB, Octave, and R.</p>
 <h2 id="dependency-1"><a class="header" href="#dependency-1">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.11.0&quot;
+rhai = &quot;1.12.0&quot;
 rhai-sci = &quot;0.1&quot;       # use rhai-sci crate
 </code></pre>
 <h2 id="features-1"><a class="header" href="#features-1">Features</a></h2>
@@ -6061,7 +6146,7 @@ external filesystem.</p>
 <h2 id="dependency-2"><a class="header" href="#dependency-2">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = &quot;1.11.0&quot;
+rhai = &quot;1.12.0&quot;
 rhai-fs = &quot;0.1&quot;       # use rhai-fs crate
 </code></pre>
 <h2 id="load-package-into-engine-2"><a class="header" href="#load-package-into-engine-2">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -6583,6 +6668,7 @@ allows access to the underlying value in the specified type.</p>
 <tr><td><code>flatten</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="language//book/language/dynamic.html"><code>Dynamic</code></a></td><td>clone the value into a separate copy if it is <em>shared</em> and there are multiple outstanding references, otherwise <em>shared</em> values are turned unshared</td></tr>
 <tr><td><code>read_lock&lt;T&gt;</code></td><td style="text-align: center"><a href="language//book/start/features.html"><code>no_closure</code></a> (pass thru’)</td><td style="text-align: center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value for reading</td></tr>
 <tr><td><code>write_lock&lt;T&gt;</code></td><td style="text-align: center"><a href="language//book/start/features.html"><code>no_closure</code></a> (pass thru’)</td><td style="text-align: center"><code>Option&lt;</code> <em>guard to</em> <code>T&gt;</code></td><td>lock the value exclusively for writing</td></tr>
+<tr><td><code>deep_scan</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td>recursively scan for <a href="language//book/language/dynamic.html"><code>Dynamic</code></a> values (e.g. items inside an <a href="language//book/language/arrays.html">array</a> or <a href="language//book/language/object-maps.html">object map</a>, or <a href="language//book/language/fn-curry.html">curried arguments</a> in a <a href="language//book/language/fn-ptr.html">function pointer</a>)</td></tr>
 </tbody></table>
 </div>
 <h3 id="constructor-instance-methods"><a class="header" href="#constructor-instance-methods">Constructor instance methods</a></h3>
@@ -6760,7 +6846,7 @@ recording up to 32 (or 16 under 32-bit targets) logic conditions that contribute
 <p>Again, after the script is verified, all tag assignment statements can simply be removed.</p>
 <pre><code class="language-js">
 fn some_complex_calculation(x) {
-    let result = 42;
+    let result = x;
 
     // Check first condition
     if some_complex_condition() {
@@ -6785,9 +6871,11 @@ fn some_complex_calculation(x) {
         result = 0;
         result.tag[3] = true;   // Set forth bit in bit-field
     }
+
+    result
 }
 
-let my_result = some_complex_calculation(key);
+let my_result = some_complex_calculation(42);
 
 // The tag of 'my_result' now contains a bit-field indicating
 // the result of each condition.
@@ -6864,7 +6952,7 @@ let a = r.tag[0..8];
 let b = r.tag[8..16];
 let c = r.tag[16..32];
 </code></pre>
-<h2 id="tldr-1"><a class="header" href="#tldr-1">TL;DR</a></h2>
+<h2 id="tldr-2"><a class="header" href="#tldr-2">TL;DR</a></h2>
 <div id="admonition-tell-me-really-what-is-the-_point_" class="admonition question">
 <div class="admonition-title">
 <p>Tell me, really, what is the <em>point</em>?</p>
@@ -7168,8 +7256,8 @@ number = -5 - +5;
 <tr><td style="text-align: center"><code>/</code>, <code>/=</code></td><td>divide (integer division if acting on integer types)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>%</code>, <code>%=</code></td><td>modulo (remainder)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>**</code>, <code>**=</code></td><td>power/exponentiation</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">yes, also <code>FLOAT**INT</code></td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>&lt;&lt;</code>, <code>&lt;&lt;=</code></td><td>left bit-shift</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>&gt;&gt;</code>, <code>&gt;&gt;=</code></td><td>right bit-shift</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>&lt;&lt;</code>, <code>&lt;&lt;=</code></td><td>left bit-shift (if negative number of bits, shift right instead)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>&gt;&gt;</code>, <code>&gt;&gt;=</code></td><td>right bit-shift (if negative number of bits, shift left instead)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>&amp;</code>, <code>&amp;=</code></td><td>bit-wise <em>And</em></td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>|</code>, <code>|=</code></td><td>bit-wise <em>Or</em></td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>^</code>, <code>^=</code></td><td>bit-wise <em>Xor</em></td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
@@ -7523,7 +7611,7 @@ excluded when using a <a href="language//book/engine/raw.html">raw <code>Engine<
 <tr><td><code>is_exclusive</code> method and property</td><td style="text-align: center"></td><td>is the range exclusive?</td></tr>
 </tbody></table>
 </div>
-<h2 id="tldr-2"><a class="header" href="#tldr-2">TL;DR</a></h2>
+<h2 id="tldr-3"><a class="header" href="#tldr-3">TL;DR</a></h2>
 <div id="admonition-what-happened-to-the-_open-ended_-ranges" class="admonition question">
 <div class="admonition-title">
 <p>What happened to the <em>open-ended</em> ranges?</p>
@@ -8154,8 +8242,8 @@ when using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a
 <tr><td><code>insert</code></td><td><ol><li>position, counting from end if &lt; 0, end if ≥ length</li><li>element to insert</li></ol></td><td>inserts an element at a certain position</td></tr>
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last element and returns it (<a href="language//book/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first element and returns it (<a href="language//book/language/values-and-types.html"><code>()</code></a> if empty)</td></tr>
-<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of items to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a portion of the array into a new array</td></tr>
-<tr><td><code>extract</code></td><td><a href="language//book/language/ranges.html">range</a> of items to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of elements to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td><a href="language//book/language/ranges.html">range</a> of elements to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the array into a new array</td></tr>
 <tr><td><code>remove</code></td><td>position, counting from end if &lt; 0</td><td>removes an element at a particular position and returns it (<a href="language//book/language/values-and-types.html"><code>()</code></a> if the position is not valid)</td></tr>
 <tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the array</td></tr>
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of elements</td></tr>
@@ -8165,25 +8253,28 @@ when using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
 <tr><td><code>split</code></td><td><ol><li>array</li><li>position to split at, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>splits the array into two arrays, starting from a specified position</td></tr>
-<tr><td><code>drain</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></li></ol></td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to remove, none if ≤ 0</li></ol></td><td>removes a portion of the array, returning the removed items as a new array</td></tr>
-<tr><td><code>drain</code></td><td><a href="language//book/language/ranges.html">range</a> of items to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the array, returning the removed items as a new array</td></tr>
-<tr><td><code>retain</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></li></ol></td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to retain, none if ≤ 0</li></ol></td><td>retains a portion of the array, removes all other items and returning them as a new array</td></tr>
-<tr><td><code>retain</code></td><td><a href="language//book/language/ranges.html">range</a> of items to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the array, removes all other bytes and returning them as a new array</td></tr>
-<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to remove, none if ≤ 0</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>splice</code></td><td><ol><li><a href="language//book/language/ranges.html">range</a> of items to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>filter</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
+<tr><td><code>for_each</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> for processing elements</td><td>run through each element in the array in order, binding each to <code>this</code> and calling the processing function taking the following parameters: <ol><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>drain</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to remove, none if ≤ 0</li></ol></td><td>removes a portion of the array, returning the removed elements as a new array</td></tr>
+<tr><td><code>drain</code></td><td><a href="language//book/language/ranges.html">range</a> of elements to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the array, returning the removed elements as a new array</td></tr>
+<tr><td><code>retain</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to retain, none if ≤ 0</li></ol></td><td>retains a portion of the array, removes all other elements and returning them as a new array</td></tr>
+<tr><td><code>retain</code></td><td><a href="language//book/language/ranges.html">range</a> of elements to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the array, removes all other bytes and returning them as a new array</td></tr>
+<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to remove, none if ≤ 0</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>splice</code></td><td><ol><li><a href="language//book/language/ranges.html">range</a> of elements to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>filter</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all elements that return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>contains</code>, <a href="language//book/language/in.html"><code>in</code></a> operator</td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator (if defined) is used to compare <a href="language//book/rust/custom-type.html">custom types</a></td></tr>
-<tr><td><code>index_of</code></td><td><ol><li>element to find (not a <a href="language//book/language/fn-ptr.html">function pointer</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</li></ol></td></tr>
-<tr><td><code>index_of</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a>; if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> items in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two items in the array</td></tr>
-<tr><td><code>map</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></td><td>constructs a new array with all items mapped to the result of applying the conversion function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>reduce</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value (<a href="language//book/language/values-and-types.html"><code>()</code></a> initially)</li><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>reduce_rev</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value (<a href="language//book/language/values-and-types.html"><code>()</code></a> initially)</li><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>some</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>all</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>sort</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/language/fn-closure.html">closure</a>), or the function name as a <a href="language//book/language/strings-chars.html">string</a></td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first item</li><li>second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>index_of</code></td><td><ol><li>element to find (not a <a href="language//book/language/fn-ptr.html">function pointer</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first element in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</li></ol></td></tr>
+<tr><td><code>index_of</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first element in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>find</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the first element in the array that returns <code>true</code> when called with the predicate function, or <a href="language//book/language/values-and-types.html"><code>()</code></a> if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>find_map</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the first non-<a href="language//book/language/values-and-types.html"><code>()</code></a> value of the first element in the array when called with the predicate function, or <a href="language//book/language/values-and-types.html"><code>()</code></a> if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>); if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> elements in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two elements in the array</td></tr>
+<tr><td><code>map</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>constructs a new array with all elements mapped to the result of applying the conversion function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>reduce</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<a href="language//book/language/values-and-types.html"><code>()</code></a> initially)</li><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>reduce_rev</code></td><td><ol><li><a href="language//book/language/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<a href="language//book/language/values-and-types.html"><code>()</code></a> initially)</li><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>some</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any element returns <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>all</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all elements return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>sort</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/language/strings-chars.html">string</a>, <a href="language//book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
 </div><div id="admonition-tip-use-custom-types-with-arrays" class="admonition tip small">
@@ -8214,11 +8305,11 @@ y[1] == 2;
 y[2] == 3;
 y[3] == 4;
 
-(1 in y) == true;           // use 'in' to test if an item exists in the array
+(1 in y) == true;           // use 'in' to test if an element exists in the array
 
 (42 in y) == false;         // 'in' uses the 'contains' function, which uses the
                             // '==' operator (that users can override)
-                            // to check if the target item exists in the array
+                            // to check if the target element exists in the array
 
 y.contains(1) == true;      // the above de-sugars to this
 
@@ -8262,8 +8353,8 @@ y.pop() == 5;               // y == [4, 4]
 
 y.len == 2;
 
-for item in y {             // arrays can be iterated with a 'for' statement
-    print(item);
+for element in y {             // arrays can be iterated with a 'for' statement
+    print(element);
 }
 
 y.pad(6, &quot;hello&quot;);          // y == [4, 4, &quot;hello&quot;, &quot;hello&quot;, &quot;hello&quot;, &quot;hello&quot;]
@@ -8282,11 +8373,23 @@ y.len == 0;
 
 let a = [42, 123, 99];
 
+a.for_each(|| this *= 2);
+
+a == [84, 246, 198];
+
+a.for_each(|i| this /= 2);
+
+a == [42, 123, 99];
+
 a.map(|v| v + 1);           // returns [43, 124, 100]
+
+a.map(|| this + 1);         // returns [43, 124, 100]
 
 a.map(|v, i| v + i);        // returns [42, 124, 101]
 
 a.filter(|v| v &gt; 50);       // returns [123, 99]
+
+a.filter(|| this &gt; 50);     // returns [123, 99]
 
 a.filter(|v, i| i == 1);    // returns [123]
 
@@ -8298,15 +8401,18 @@ a.filter(|v| is_odd(v));    // &lt;- or this
 
 a.some(|v| v &gt; 50);         // returns true
 
+a.some(|| this &gt; 50);       // returns true
+
 a.some(|v, i| v &lt; i);       // returns false
-
-a.none(|v| v != 0);         // returns false
-
-a.none(|v, i| v == i);      // returns true
 
 a.all(|v| v &gt; 50);          // returns false
 
+a.all(|| this &gt; 50);        // returns false
+
 a.all(|v, i| v &gt; i);        // returns true
+
+// Reducing - initial value provided directly
+a.reduce(|sum| sum + this, 0) == 264;
 
 // Reducing - initial value provided directly
 a.reduce(|sum, v| sum + v, 0) == 264;
@@ -8321,15 +8427,18 @@ a.reduce(|sum, v, i|
     if i == 0 { v } else { sum + v }
 ) == 264;
 
-// Reducing - initial value provided directly
+// Reducing in reverse - initial value provided directly
+a.reduce_rev(|sum| sum + this, 0) == 264;
+
+// Reducing in reverse - initial value provided directly
 a.reduce_rev(|sum, v| sum + v, 0) == 264;
 
-// Reducing - initial value is '()'
+// Reducing in reverse - initial value is '()'
 a.reduce_rev(
     |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
 ) == 264;
 
-// Reducing - initial value has index position == 0
+// Reducing in reverse - initial value has index position == 0
 a.reduce_rev(|sum, v, i|
     if i == 2 { v } else { sum + v }
 ) == 264;
@@ -8843,7 +8952,7 @@ let map = engine.parse_json(json, false)?;
 // 'map' contains two properties: 'a' and 'b'
 map.len() == 2;
 </code></pre>
-<h3 id="tldr-3"><a class="header" href="#tldr-3">TL;DR</a></h3>
+<h3 id="tldr-4"><a class="header" href="#tldr-4">TL;DR</a></h3>
 <div id="admonition-how-is-it-done" class="admonition question">
 <div class="admonition-title">
 <p>How is it done?</p>
@@ -9355,7 +9464,7 @@ fn test2() {
     foo:bar::baz();     // ok!
 }
 </code></pre>
-<h2 id="tldr-4"><a class="header" href="#tldr-4">TL;DR</a></h2>
+<h2 id="tldr-5"><a class="header" href="#tldr-5">TL;DR</a></h2>
 <div id="admonition-why-isnt-there-a-_strict-functions_-mode" class="admonition question">
 <div class="admonition-title">
 <p>Why isn’t there a <em>Strict Functions</em> mode?</p>
@@ -9953,13 +10062,20 @@ a() ?? b();         // b() is only evaluated if a() is ()
 </div>
 <div>
 <p>The <code>in</code> operator is simply syntactic sugar for a call to the <code>contains</code> function.</p>
+<p>Similarly, <code>!in</code> is a call to <code>!contains</code>.</p>
 </div>
 </div>
 <p>The <code>in</code> operator is used to check for <em>containment</em> – i.e. whether a particular collection
 data type <em>contains</em> a particular item.</p>
+<p>Similarly, <code>!in</code> is used to check for non-existence – i.e. it is <code>true</code> if a particular
+collection data type does <em>not</em> contain a particular item.</p>
 <pre><code class="language-rust">42 in array;
 
 array.contains(42);     // &lt;- the above is equivalent to this
+
+123 !in array;
+
+!array.contains(123);   // &lt;- the above is equivalent to this
 </code></pre>
 <h2 id="built-in-support-for-standard-data-types"><a class="header" href="#built-in-support-for-standard-data-types">Built-in Support for Standard Data Types</a></h2>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Data type</th><th style="text-align: center">Check for</th></tr></thead><tbody>
@@ -9983,6 +10099,8 @@ let map = #{
 &quot;foo&quot; in map == true;               // check object map for property name
 
 'w' in &quot;hello, world!&quot; == true;     // check string for character
+
+'w' !in &quot;hello, world!&quot; == false;
 
 &quot;wor&quot; in &quot;hello, world&quot; == true;    // check string for sub-string
 
@@ -10011,7 +10129,7 @@ let array = [1, 2, 3, ts, 42, 999];
                                     // because == operator is not defined
 </code></pre>
 <h2 id="custom-implementation-of-contains"><a class="header" href="#custom-implementation-of-contains">Custom Implementation of <code>contains</code></a></h2>
-<p>The <code>in</code> operator maps directly to a call to a function <code>contains</code> with the two operands switched.</p>
+<p>The <code>in</code> and <code>!in</code> operators map directly to a call to a function <code>contains</code> with the two operands switched.</p>
 <pre><code class="language-rust">// This expression...
 item in container
 
@@ -10021,8 +10139,9 @@ contains(container, item)
 // or...
 container.contains(item)
 </code></pre>
-<p>Support for the <code>in</code> operator can be easily extended to other types by registering a custom binary
-function named <code>contains</code> with the correct parameter types.</p>
+<p>Support for the <code>in</code> and <code>!in</code> operators can be easily extended to other types by registering a
+custom binary function named <code>contains</code> with the correct parameter types.</p>
+<p>Since <code>!in</code> maps to <code>!(... in ...)</code>, <code>contains</code> is enough to support both operators.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 engine.register_type::&lt;TestStruct&gt;()
@@ -10038,8 +10157,10 @@ engine.run(
 r#&quot;
     let ts = new_ts();
 
-    if 42 in ts {                   // this calls the 'contains' function
+    if 42 in ts {                   // this calls 'ts.contains(42)'
         print(&quot;I got 42!&quot;);
+    } else if 123 !in ts {          // this calls '!ts.contains(123)'
+        print(&quot;I ain't got 123!&quot;);
     }
 
     let err = &quot;hello&quot; in ts;        // &lt;- runtime error: 'contains' not found
@@ -11796,7 +11917,7 @@ let f = |a| this += x + a;          // 'x' is captured in this closure
 // via a captured shared value.
 x.call(f, 2);
 </code></pre>
-<h2 id="tldr-5"><a class="header" href="#tldr-5">TL;DR</a></h2>
+<h2 id="tldr-6"><a class="header" href="#tldr-6">TL;DR</a></h2>
 <div id="admonition-how-is-it-actually-implemented" class="admonition question">
 <div class="admonition-title">
 <p>How is it actually implemented?</p>
@@ -12419,17 +12540,6 @@ export z;
 </code></pre>
 </div>
 </div>
-<div id="admonition-do-not-export-closures" class="admonition bug small">
-<div class="admonition-title">
-<p>Do not export closures</p>
-<p><a class="admonition-anchor-link" href="language/modules/export.html#admonition-do-not-export-closures"></a></p>
-</div>
-<div>
-<p>A <a href="language/modules//book/language/fn-ptr.html">function pointer</a>, <a href="language/modules//book/language/fn-anon.html">anonymous function</a> or <a href="language/modules//book/language/fn-closure.html">closure</a>, is not a <em>first-class function</em>.
-It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="language/modules//book/language/functions.html">function</a> to call.</p>
-<p>Exporting them causes a runtime error.</p>
-</div>
-</div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
 <div id="admonition-private-functions" class="admonition info side">
 <div class="admonition-title">
@@ -12677,7 +12787,7 @@ engine.disable_symbol(&quot;eval&quot;);
 </code></pre>
 </div>
 </div>
-<h2 id="tldr-6"><a class="header" href="#tldr-6">TL;DR</a></h2>
+<h2 id="tldr-7"><a class="header" href="#tldr-7">TL;DR</a></h2>
 <div id="admonition-do-you-regret-implementing-eval-in-rhai" class="admonition question">
 <div class="admonition-title">
 <p>Do you regret implementing <code>eval</code> in Rhai?</p>
@@ -12709,7 +12819,9 @@ resources used by a script so that it does not consume more resources that it is
 <p><a class="admonition-anchor-link" href="safety/index.html#admonition-memory"></a></p>
 </div>
 <div>
-<p>Continuously grow a <a href="safety//book/language/strings-chars.html">string</a>, an <a href="safety//book/language/arrays.html">array</a>, a <a href="safety//book/language/blobs.html">BLOB</a> or <a href="safety//book/language/object-maps.html">object map</a> until all memory is consumed.</p>
+<ul>
+<li>Continuously grow a <a href="safety//book/language/strings-chars.html">string</a>, an <a href="safety//book/language/arrays.html">array</a>, a <a href="safety//book/language/blobs.html">BLOB</a> or <a href="safety//book/language/object-maps.html">object map</a> until all memory is consumed.</li>
+</ul>
 </div>
 </div>
 <div id="admonition-cpu" class="admonition bug">
@@ -12718,7 +12830,9 @@ resources used by a script so that it does not consume more resources that it is
 <p><a class="admonition-anchor-link" href="safety/index.html#admonition-cpu"></a></p>
 </div>
 <div>
-<p>Run an infinite tight loop that consumes all CPU cycles.</p>
+<ul>
+<li>Infinite tight loop that consumes all CPU cycles.</li>
+</ul>
 </div>
 </div>
 <div id="admonition-time" class="admonition bug">
@@ -12727,7 +12841,9 @@ resources used by a script so that it does not consume more resources that it is
 <p><a class="admonition-anchor-link" href="safety/index.html#admonition-time"></a></p>
 </div>
 <div>
-<p>Run indefinitely, thereby blocking the calling system which is waiting for a result.</p>
+<ul>
+<li>Run indefinitely, thereby blocking the calling system which is waiting for a result.</li>
+</ul>
 </div>
 </div>
 <div id="admonition-stack" class="admonition bug">
@@ -12738,17 +12854,17 @@ resources used by a script so that it does not consume more resources that it is
 <div>
 <ul>
 <li>
-<p>Infinite recursive call that exhausts the call stack.</p>
+<p>Deep recursive call that exhausts the call stack.</p>
 </li>
 <li>
-<p>Create a large <a href="safety//book/language/arrays.html">array</a> or <a href="safety//book/language/object-maps.html">object map</a> literal that exhausts the stack during parsing.</p>
+<p>Large <a href="safety//book/language/arrays.html">array</a> or <a href="safety//book/language/object-maps.html">object map</a> literal that exhausts the stack during parsing.</p>
 </li>
 <li>
-<p>Create a degenerated deep expression with so many levels that the parser exhausts the call stack when
+<p>Degenerated deep expression with so many levels that the parser exhausts the call stack when
 parsing the expression; or even deeply-nested statements blocks, if nested deep enough.</p>
 </li>
 <li>
-<p>Load a <a href="safety//book/language/modules/import.html">self-referencing module</a>.</p>
+<p><a href="safety//book/language/modules/import.html">Self-referencing module</a>.</p>
 </li>
 </ul>
 </div>
@@ -12778,9 +12894,13 @@ parsing the expression; or even deeply-nested statements blocks, if nested deep 
 <p><a class="admonition-anchor-link" href="safety/index.html#admonition-files"></a></p>
 </div>
 <div>
+<ul>
+<li>
 <p>Continuously <a href="safety//book/language/modules/import.html"><code>import</code></a> an external <a href="safety//book/rust/modules/index.html">module</a> within an infinite loop, thus putting heavy load on the file-system
 (or even the network if the file is not local).</p>
 <p>Even when <a href="safety//book/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
+</li>
+</ul>
 </div>
 </div>
 <div id="admonition-private-data" class="admonition bug">
@@ -12789,8 +12909,12 @@ parsing the expression; or even deeply-nested statements blocks, if nested deep 
 <p><a class="admonition-anchor-link" href="safety/index.html#admonition-private-data"></a></p>
 </div>
 <div>
+<ul>
+<li>
 <p>Read from and/or write to private, secret, sensitive data.</p>
 <p>Such security breach may put the entire system at risk.</p>
+</li>
+</ul>
 </div>
 </div>
 <div id="admonition-the-internals-feature" class="admonition bug">
@@ -12816,13 +12940,20 @@ break code.</p>
 </li>
 </ul>
 <p>Use <a href="safety//book/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
-be surprised how few scenarios this assumption holds.</p>
+be surprised under how few scenarios this assumption holds.</p>
 <p>One example of such an environment is a Rhai scripting <a href="safety//book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="safety//book/start/builds/wasm.html">WASM</a> where the
 <a href="safety//book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
 </div>
 </div>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
-<div id="admonition-ok-panic-anyway" class="admonition tip side">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>
+<p>Rhai is designed to not bring down the host system, regardless of what a script may do to it. This
+is a central design goal – Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t
+Panic</em></a>
+guarantee.</p>
+<p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
+considered a bug in Rhai and should be reported as such.</p>
+<div id="admonition-ok-panic-anyway" class="admonition tip small">
 <div class="admonition-title">
 <p>OK, panic anyway</p>
 <p><a class="admonition-anchor-link" href="safety/index.html#admonition-ok-panic-anyway"></a></p>
@@ -12834,11 +12965,6 @@ checks (even fatal ones).</p>
 to bring down the host system.</p>
 </div>
 </div>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Don%27t_Panic.svg/320px-Don%27t_Panic.svg.png" alt="Don’t Panic" /></p>
-<p>Rhai is designed to not bring down the host system, regardless of what a script may do to it.
-This is a central design goal – Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a> guarantee.</p>
-<p>When using Rhai, any panic outside of API’s with explicitly documented panic conditions is
-considered a bug in Rhai and should be reported as such.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="sand-boxing--block-access-to-external-data"><a class="header" href="#sand-boxing--block-access-to-external-data">Sand-Boxing – Block Access to External Data</a></h1>
 <p>Rhai is <em>sand-boxed</em> so a script can never read from outside its own environment.</p>
 <p>Furthermore, an <a href="safety//book/engine/hello-world.html"><code>Engine</code></a> created non-<code>mut</code> cannot mutate any state, including itself
@@ -12878,9 +13004,12 @@ in a shared, interior-mutated object (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</cod
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="maximum-length-of-strings"><a class="header" href="#maximum-length-of-strings">Maximum Length of Strings</a></h1>
 <p>Rhai by default does not limit how long a <a href="safety//book/language/strings-chars.html">string</a> can be.</p>
-<p>This can be changed via the <a href="safety//book/engine/options.html"><code>Engine::set_max_string_size</code></a> method, with zero being unlimited (the default).</p>
-<p>A script attempting to create a string literal longer than the maximum length will terminate with a parse error.</p>
-<p>Any script operation that produces a string longer than the maximum also terminates the script with an error result.</p>
+<p>This can be changed via the <a href="safety//book/engine/options.html"><code>Engine::set_max_string_size</code></a> method, with zero being
+unlimited (the default).</p>
+<p>A script attempting to create a <a href="safety//book/language/strings-chars.html">string</a> literal longer than the maximum length will terminate with
+a parse error.</p>
+<p>Any script operation that produces a <a href="safety//book/language/strings-chars.html">string</a> longer than the maximum also terminates the script
+with an error.</p>
 <p>This check can be disabled via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
@@ -12902,7 +13031,8 @@ if both strings are <em>slightly</em> below the maximum length limit, the result
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="maximum-size-of-arrays"><a class="header" href="#maximum-size-of-arrays">Maximum Size of Arrays</a></h1>
 <p>Rhai by default does not limit how large an <a href="safety//book/language/arrays.html">array</a> or a <a href="safety//book/language/blobs.html">BLOB</a> can be.</p>
-<p>This can be changed via the <a href="safety//book/engine/options.html"><code>Engine::set_max_array_size</code></a> method, with zero being unlimited (the default).</p>
+<p>This can be changed via the <a href="safety//book/engine/options.html"><code>Engine::set_max_array_size</code></a> method, with zero being
+unlimited (the default).</p>
 <p>A script attempting to create an <a href="safety//book/language/arrays.html">array</a> literal larger than the maximum will terminate with a parse error.</p>
 <p>Any script operation that produces an <a href="safety//book/language/arrays.html">array</a> or a <a href="safety//book/language/blobs.html">BLOB</a> larger than the maximum also terminates
 the script with an error result.</p>
@@ -12955,8 +13085,10 @@ loop {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="maximum-size-of-object-maps"><a class="header" href="#maximum-size-of-object-maps">Maximum Size of Object Maps</a></h1>
 <p>Rhai by default does not limit how large (i.e. the number of properties) an <a href="safety//book/language/object-maps.html">object map</a> can be.</p>
 <p>This can be changed via <code>Engine::set_max_map_size</code>, with zero being unlimited (the default).</p>
-<p>A script attempting to create an <a href="safety//book/language/object-maps.html">object map</a> literal with more properties than the maximum will terminate with a parse error.</p>
-<p>Any script operation that produces an <a href="safety//book/language/object-maps.html">object map</a> with more properties than the maximum also terminates the script with an error result.</p>
+<p>A script attempting to create an <a href="safety//book/language/object-maps.html">object map</a> literal with more properties than the maximum will
+terminate with a parse error.</p>
+<p>Any script operation that produces an <a href="safety//book/language/object-maps.html">object map</a> with more properties than the maximum also
+terminates the script with an error.</p>
 <p>This check can be disabled via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
@@ -13010,11 +13142,12 @@ loop {
 while 1 &lt; 2 { ... }                 // loop with always-true condition
 </code></pre>
 <p>Rhai by default does not limit how much time or CPU a script consumes.</p>
-<p>This can be changed via the <a href="safety//book/engine/options.html"><code>Engine::set_max_operations</code></a> method, with zero being unlimited (the default).</p>
-<p>The <em>operations count</em> is intended to be a very course-grained measurement of the amount of CPU that a script
-has consumed, allowing the system to impose a hard upper limit on computing resources.</p>
-<p>A script exceeding the maximum operations count terminates with an error result.
-This can be disabled via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This can be changed via the <a href="safety//book/engine/options.html"><code>Engine::set_max_operations</code></a> method, with zero being
+unlimited (the default).</p>
+<p>The <em>operations count</em> is intended to be a very course-grained measurement of the amount of CPU that
+a script has consumed, allowing the system to impose a hard upper limit on computing resources.</p>
+<p>A script exceeding the maximum operations count terminates with an error result. This can be
+disabled via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 engine.set_max_operations(500);     // allow only up to 500 operations for this script
@@ -13168,19 +13301,18 @@ bad_function(0);
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="maximum-expression-nesting-depth"><a class="header" href="#maximum-expression-nesting-depth">Maximum Expression Nesting Depth</a></h1>
-<p>Rhai by default limits statement and expression nesting to a maximum depth of 64
-(which should be plenty) when they are at <em>global</em> level, but only a depth of 32
-when they are within <a href="safety//book/language/functions.html">function</a> bodies.</p>
+<p>Rhai by default limits statement and expression nesting to a maximum depth of 64 (which should be
+plenty) when they are at <em>global</em> level, but only a depth of 32 when they are within <a href="safety//book/language/functions.html">function</a> bodies.</p>
 <p>For debug builds, these limits are set further downwards to 32 and 16 respectively.</p>
-<p>That is because it is possible to overflow the <a href="safety//book/engine/hello-world.html"><code>Engine</code></a>’s stack when it tries to
-recursively parse an extremely deeply-nested code stream.</p>
+<p>That is because it is possible to overflow the <a href="safety//book/engine/hello-world.html"><code>Engine</code></a>’s stack when it tries to recursively parse
+an extremely deeply-nested code stream.</p>
 <pre><code class="language-rust">// The following, if long enough, can easily cause stack overflow during parsing.
 let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));
 </code></pre>
 <p>This limit may be changed via <a href="safety//book/engine/options.html"><code>Engine::set_max_expr_depths</code></a>.</p>
 <p>There are two limits to set, one for the maximum depth at global level, and the other for <a href="safety//book/language/functions.html">function</a> bodies.</p>
-<p>A script exceeding the maximum nesting depths will terminate with a parse error.
-The malicious <a href="safety//book/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
+<p>A script exceeding the maximum nesting depths will terminate with a parse error. The malicious
+<a href="safety//book/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
 <p>This check can be disabled via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
@@ -13243,8 +13375,8 @@ overflow can be expected.</p>
 <p>By default, all arithmetic calculations in Rhai are <em>checked</em>, meaning that the script terminates
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.</p>
-<p>This checking can be turned off via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance
-(but higher risks as well).</p>
+<p>This checking can be turned off via the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher
+risks as well).</p>
 <pre><code class="language-rust">let x = 1_000_000_000_000;
 
 x * x;      // Normal build - runtime error: multiplication overflow
@@ -13946,7 +14078,7 @@ are imported recursively.</p>
 <p><a class="admonition-anchor-link" href="engine/ast.html#admonition-ast-public-api"></a></p>
 </div>
 <div>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.11.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.12.0/rhai/struct.AST.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
@@ -14217,14 +14349,14 @@ current evaluation state to be accessed and/or modified.</p>
 <p><code>EvalContext</code> encapsulates the current <em>evaluation context</em> and exposes the following methods.</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>scope()</code></td><td style="text-align: center"><a href="engine//book/engine/scope.html"><code>&amp;Scope</code></a></td><td>reference to the current <a href="engine//book/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td><code>scope_mut()</code></td><td style="text-align: center"><a href="engine//book/engine/scope.html"><code>&amp;mut &amp;mut Scope</code></a></td><td>mutable reference to the current <a href="engine//book/engine/scope.html"><code>Scope</code></a>; <a href="engine//book/language/variables.html">variables</a> can be added to/removed from it</td></tr>
+<tr><td><code>scope_mut()</code></td><td style="text-align: center"><a href="engine//book/engine/scope.html"><code>&amp;mut Scope</code></a></td><td>mutable reference to the current <a href="engine//book/engine/scope.html"><code>Scope</code></a>; <a href="engine//book/language/variables.html">variables</a> can be added to/removed from it</td></tr>
 <tr><td><code>engine()</code></td><td style="text-align: center"><a href="engine//book/engine/hello-world.html"><code>&amp;Engine</code></a></td><td>reference to the current <a href="engine//book/engine/hello-world.html"><code>Engine</code></a></td></tr>
 <tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td><code>tag()</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the custom state that is persistent during the current run</td></tr>
 <tr><td><code>tag_mut()</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>mutable reference to the custom state that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="engine//book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements, in reverse order (i.e. later <a href="engine//book/rust/modules/index.html">modules</a> come first); not available under <a href="engine//book/start/features.html"><code>no_module</code></a></td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
-<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="engine//book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="engine//book/engine/debugging/break-points.html">break-points</a></td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.12.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.12.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
+<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.12.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.12.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="engine//book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="engine//book/engine/debugging/break-points.html">break-points</a></td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="engine//book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="engine//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="engine//book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a></td></tr>
 <tr><td><code>this_ptr()</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>Option&lt;&amp;Dynamic&gt;</code></a></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
@@ -14425,9 +14557,9 @@ a normal expression.</p>
 are parsed in the order defined within the <a href="engine//book/engine/custom-syntax.html">custom syntax</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.11.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.12.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
 <p>The function <code>Engine::on_parse_token</code>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.11.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.12.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <h2 id="function-signature-4"><a class="header" href="#function-signature-4">Function Signature</a></h2>
 <div id="admonition-tip-raising-errors" class="admonition tip side">
 <div class="admonition-title">
@@ -14435,7 +14567,7 @@ are parsed in the order defined within the <a href="engine//book/engine/custom-s
 <p><a class="admonition-anchor-link" href="engine/token-mapper.html#admonition-tip-raising-errors"></a></p>
 </div>
 <div>
-<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.11.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
+<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.12.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>
 </div>
 </div>
@@ -14445,9 +14577,9 @@ as the mapped token.</p>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.11.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
-<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.11.0/rhai/enum.Token.html">token</a></td></tr>
-<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.11.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.12.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.12.0/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.12.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
 </div>
 <h2 id="example-13"><a class="header" href="#example-13">Example</a></h2>
@@ -15220,7 +15352,10 @@ let mut engine = Engine::new();
 
 engine.register_debugger(
     // Provide a callback to initialize the debugger state
-    |engine| { ... },
+    |engine, mut debugger| {
+        debugger.set_state(...);
+        debugger
+    },
     // Provide a callback for each debugging step
     |context, event, node, source, pos| {
         ...
@@ -15236,15 +15371,15 @@ engine.register_debugger(
 </div>
 <div>
 <p>The type <code>debugger::Debugger</code> allows for manipulating <a href="engine/debugging//book/engine/debugging/break-points.html">break-points</a>, among others.</p>
-<p>The <a href="engine/debugging//book/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>context.global_runtime_state_mut().debugger</code>.</p>
+<p>The <a href="engine/debugging//book/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>context.global_runtime_state().debugger()</code> (immutable)
+or <code>context.global_runtime_state_mut().debugger_mut()</code> (mutable).</p>
 </div>
 </div>
 <h2 id="callback-functions-signature"><a class="header" href="#callback-functions-signature">Callback Functions Signature</a></h2>
 <p>There are two callback functions to register for the debugger.</p>
-<p>The first is simply a function to initialize the state of the debugger (a <a href="engine/debugging//book/language/dynamic.html"><code>Dynamic</code></a> value),
-with the following signature.</p>
+<p>The first is simply a function to initialize the state of the debugger with the following signature.</p>
 <blockquote>
-<p><code>Fn() -&gt; Dynamic</code></p>
+<p><code>Fn(&amp;Engine, debugger::Debugger) -&gt; debugger::Debugger</code></p>
 </blockquote>
 <p>The second callback is a function which will be called by the debugger during each step, with the
 following signature.</p>
@@ -15306,7 +15441,8 @@ continued behavior of the debugger.</p>
 <a href="engine/debugging//book/engine/debugging/debugger.html">debugger’s</a> state, which is a <a href="engine/debugging//book/language/dynamic.html"><code>Dynamic</code></a> and can hold any value.</p>
 <p>This state value is the stored into the <a href="engine/debugging//book/engine/debugging/debugger.html">debugger</a>’s custom state.</p>
 <h2 id="access-the-debugger-state"><a class="header" href="#access-the-debugger-state">Access the Debugger State</a></h2>
-<p>Use <code>EvalContext::global_runtime_state_mut().debugger</code> to gain access to the current
+<p>Use <code>EvalContext::global_runtime_state().debugger()</code> (immutable) or
+<code>EvalContext::global_runtime_state_mut().debugger_mut()</code> (mutable) to gain access to the current
 <a href="engine/debugging//book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> instance.</p>
 <p>The following <a href="engine/debugging//book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> methods allow access to the custom <a href="engine/debugging//book/engine/debugging/debugger.html">debugger</a> state.</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Parameter type</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
@@ -15317,22 +15453,24 @@ continued behavior of the debugger.</p>
 </div>
 <h2 id="example-16"><a class="header" href="#example-16">Example</a></h2>
 <pre><code class="language-rust">engine.register_debugger(
-    |engine| {
+    |engine, mut debugger| {
         // Say, use an object map for the debugger state
         let mut state = Map::new();
         // Initialize properties
         state.insert(&quot;hello&quot;.into(), 42_64.into());
         state.insert(&quot;foo&quot;.into(), false.into());
-        Dynamic::from_map(state)
+        
+        debugger.set_state(state);
+        debugger
     },
     |context, node, source, pos| {
         // Print debugger state - which is an object map
-        let state = context.global_runtime_state_mut().debugger.state();
+        let state = context.global_runtime_state().debugger().state();
         println!(&quot;Current state = {state}&quot;);
 
         // Get the state as an object map
         let mut state = context.global_runtime_state_mut()
-                               .debugger.state_mut()
+                               .debugger_mut().state_mut()
                                .write_lock::&lt;Map&gt;().unwrap();
 
         // Read state
@@ -15365,7 +15503,7 @@ or native Rust).</p>
 <p>The <code>Debugger::call_stack</code> method returns a slice of all call stack frames.</p>
 <pre><code class="language-rust">use rhai::debugger::*;
 
-let debugger = &amp;mut context.global_runtime_state_mut().debugger;
+let debugger = &amp;mut context.global_runtime_state().debugger();
 
 // Get depth of the call stack.
 let depth = debugger.call_stack().len();
@@ -15397,7 +15535,7 @@ the following variants.</p>
 <h2 id="example-17"><a class="header" href="#example-17">Example</a></h2>
 <pre><code class="language-rust">use rhai::debugger::*;
 
-let debugger = &amp;mut context.global_runtime_state_mut().debugger;
+let debugger = &amp;mut context.global_runtime_state_mut().debugger_mut();
 
 // Get number of break-points.
 let num_break_points = debugger.break_points().len();
@@ -15433,7 +15571,7 @@ let mut engine = Engine::new();
 engine.register_debugger(
     // Use the initialization callback to set up the communications channel
     // and listen to it
-    |engine| {
+    |engine, mut debugger| {
         // Create server that will listen to requests
         let mut server = MyCommServer::new();
         server.listen(&quot;localhost:8080&quot;);
@@ -15442,7 +15580,8 @@ engine.register_debugger(
         let server = Rc::new(RefCell::new(server));
 
         // Store the channel in the debugger state
-        Dynamic::from(server)
+        debugger.set_state(Dynamic::from(server));
+        debugger
     },
     // Trigger the server during each debugger stop point
     |context, event, node, source, pos| {
@@ -16220,7 +16359,7 @@ engine.set_optimization_level(OptimizationLevel::None);
 let ast = engine.compile(&quot;...&quot;)?;
 </code></pre>
 <h2 id="step-2--extract-constants"><a class="header" href="#step-2--extract-constants">Step 2 – Extract Constants</a></h2>
-<p>Use <a href="https://docs.rs/rhai/1.11.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
+<p>Use <a href="https://docs.rs/rhai/1.12.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
 to extract top-level <a href="patterns//book/language/constants.html">constants</a> from the <a href="patterns//book/engine/compile.html"><code>AST</code></a>.</p>
 <pre><code class="language-rust">let mut scope = Scope::new();
 
@@ -16310,7 +16449,7 @@ major surgery.</p>
 </ol>
 <h2 id="alternative--use-this"><a class="header" href="#alternative--use-this">Alternative – Use <code>this</code></a></h2>
 <p>In the majority of the such scenarios, there is only <em>one</em> mutable global state of interest.</p>
-<p>Therefore, it is a <em>must</em> better solution to bind that global state to the <code>this</code> pointer.</p>
+<p>Therefore, it is a <em>much</em> better solution to bind that global state to the <code>this</code> pointer.</p>
 <pre><code class="language-rust">// Say this is a mutable global state...
 let state = #{ counter: 0 };
 
@@ -17552,7 +17691,7 @@ of the function call, ending the block and continuing evaluation.</p>
 </ul>
 </li>
 <li>
-<p>User-provided state is initialized by a <a href="patterns//book/language/functions.html">function</a> called via <a href="patterns//book/engine/call-fn.html"><code>Engine::call_fn_raw</code></a>.</p>
+<p>User-provided state is initialized by a <a href="patterns//book/language/functions.html">function</a> called via <a href="patterns//book/engine/call-fn.html"><code>Engine::call_fn_with_options</code></a>.</p>
 </li>
 <li>
 <p>Upon an event, the appropriate event handler <a href="patterns//book/language/functions.html">function</a> in the script is called via
@@ -17626,9 +17765,9 @@ mod test_struct_api {
 <li>Register an API with the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a>,</li>
 <li>Create a custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a> to serve as the stored state,</li>
 <li>Add default state <a href="patterns//book/language/variables.html">variables</a> into the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a>,</li>
-<li>Optionally, call an initiation <a href="patterns//book/language/functions.html">function</a> to create new state <a href="patterns//book/language/variables.html">variables</a>; <code>Engine::call_fn_raw</code>
-is used instead of <code>Engine::call_fn</code> so that <a href="patterns//book/language/variables.html">variables</a> created inside the <a href="patterns//book/language/functions.html">function</a> will not
-be removed from the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a> upon exit,</li>
+<li>Optionally, call an initiation <a href="patterns//book/language/functions.html">function</a> to create new state <a href="patterns//book/language/variables.html">variables</a>;
+<code>Engine::call_fn_with_options</code> is used instead of <code>Engine::call_fn</code> so that <a href="patterns//book/language/variables.html">variables</a> created
+inside the <a href="patterns//book/language/functions.html">function</a> will not be removed from the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a> upon exit,</li>
 <li>Get the handler script and <a href="patterns//book/engine/compile.html">compile</a> it,</li>
 <li>Store the compiled <a href="patterns//book/engine/compile.html"><code>AST</code></a> for future evaluations,</li>
 <li>Run the <a href="patterns//book/engine/compile.html"><code>AST</code></a> to initialize event handler state <a href="patterns//book/language/variables.html">variables</a>.</li>
@@ -17731,9 +17870,9 @@ be removed from the custom <a href="patterns//book/engine/scope.html"><code>Scop
 <p>See the <a href="patterns//book/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
 </div>
 </div>
-<h2 id="initialize-handler-instance-with-enginecall_fn_raw"><a class="header" href="#initialize-handler-instance-with-enginecall_fn_raw">Initialize Handler Instance with <code>Engine::call_fn_raw</code></a></h2>
-<p>Use <code>Engine::call_fn_raw</code> instead of <code>Engine::call_fn</code> in order to retain new <a href="patterns//book/language/variables.html">variables</a> defined
-inside the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a> when running the <code>init</code> function.</p>
+<h2 id="initialize-handler-instance-with-enginecall_fn_with_options"><a class="header" href="#initialize-handler-instance-with-enginecall_fn_with_options">Initialize Handler Instance with <code>Engine::call_fn_with_options</code></a></h2>
+<p>Use <code>Engine::call_fn_with_options</code> instead of <code>Engine::call_fn</code> in order to retain new <a href="patterns//book/language/variables.html">variables</a>
+defined inside the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a> when running the <code>init</code> function.</p>
 <pre><code class="language-rust">impl Handler {
     // Create a new 'Handler'.
     pub fn new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
@@ -17744,9 +17883,12 @@ inside the custom <a href="patterns//book/engine/scope.html"><code>Scope</code><
                     :
 
         // Run the 'init' function to initialize the state, retaining variables.
+        let options = CallFnOptions::new()
+                        .eval_ast(false)        // do not re-evaluate the AST
+                        .rewind_scope(false);   // do not rewind scope
+
         // In a real application you'd again be handling errors...
-        engine.call_fn_raw(&amp;mut scope, &amp;ast, false, false, &quot;init&quot;, None, []).unwrap();
-        //                                          ^^^^^ do not rewind scope
+        engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;init&quot;, ()).unwrap();
 
                     :
             // Code omitted
@@ -17762,7 +17904,7 @@ in the handler script to access and modify these state variables.</p>
 <p>The API registered with the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> can be also used throughout the script.</p>
 <h3 id="sample-script"><a class="header" href="#sample-script">Sample script</a></h3>
 <pre><code class="language-js">/// Initialize user-provided state (shadows system-provided state, if any).
-/// Because 'call_fn_raw' is used to call this, new variables introduced
+/// Because 'CallFnOptions::rewind_scope' is 'false', new variables introduced
 /// will remain inside the custom 'Scope'.
 fn init() {
     // Add 'bool_state' and 'obj_state' as new state variables
@@ -17818,7 +17960,8 @@ fn update(data) {
 <h2 id="disadvantages-of-this-style"><a class="header" href="#disadvantages-of-this-style">Disadvantages of This Style</a></h2>
 <p>This style is simple to implement and intuitive to use, but it is not very flexible.</p>
 <p>New user state <a href="patterns//book/language/variables.html">variables</a> are introduced by evaluating a special initialization script <a href="patterns//book/language/functions.html">function</a>
-(e.g. <code>init</code>) that defines them, and <code>Engine::call_fn_raw</code> is used to keep them inside the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a>.</p>
+(e.g. <code>init</code>) that defines them, and <code>Engine::call_fn_with_scope</code> is used to keep them inside the
+custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a> (together with setting <code>CallFnOptions::rewind_scope</code> to <code>false</code>).</p>
 <p>However, this has the disadvantage that no other <a href="patterns//book/language/functions.html">function</a> can introduce new state <a href="patterns//book/language/variables.html">variables</a>,
 otherwise they’d simply <em><a href="patterns//book/language/shadow.html">shadow</a></em> existing <a href="patterns//book/language/variables.html">variables</a> in the custom <a href="patterns//book/engine/scope.html"><code>Scope</code></a>.  Thus, <a href="patterns//book/language/functions.html">functions</a>
 are called during events via <code>Engine::call_fn</code> which does not retain any <a href="patterns//book/language/variables.html">variables</a>.</p>
@@ -17892,11 +18035,14 @@ struct Handler {
         // Convert the object map into 'Dynamic'
         let mut states: Dynamic = states.into();
 
-        // Use 'call_fn_raw' instead of 'call_fn' to bind the 'this' pointer
+        // Use 'call_fn_with_options' instead of 'call_fn' to bind the 'this' pointer
+        let options = CallFnOptions::new()
+                        .eval_ast(false)                // do not re-evaluate the AST
+                        .rewind_scope(true)             // rewind scope
+                        .bind_this_ptr(&amp;mut states);    // bind the 'this' pointer
+
         // In a real application you'd again be handling errors...
-        engine.call_fn_raw(&amp;mut scope, &amp;ast, false, true, &quot;init&quot;, Some(&amp;mut states), []).unwrap();
-        //                                          ^^^^          ^^^^^^^^^^^^^^^^^
-        //                                      rewind scope      bind 'this' pointer
+        engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;init&quot;, ()).unwrap();
 
                     :
             // Code omitted
@@ -17907,19 +18053,22 @@ struct Handler {
 }
 </code></pre>
 <h2 id="bind-this-pointer-during-events-handling"><a class="header" href="#bind-this-pointer-during-events-handling">Bind <code>this</code> Pointer During Events Handling</a></h2>
-<p>Events handling should also use <code>Engine::call_fn_raw</code> to bind the <a href="patterns//book/language/object-maps.html">object map</a> containing global
-states to the <code>this</code> pointer.</p>
+<p>Events handling should also use <code>Engine::call_fn_with_options</code> to bind the <a href="patterns//book/language/object-maps.html">object map</a> containing
+global states to the <code>this</code> pointer via <code>CallFnOptions::this_ptr</code>.</p>
 <pre><code class="language-rust">pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Dynamic {
     let engine = &amp;self.engine;
     let scope = &amp;mut self.scope;
     let states = &amp;mut self.states;
     let ast = &amp;self.ast;
 
+    let options = CallFnOptions::new()
+                    .eval_ast(false)                // do not re-evaluate the AST
+                    .rewind_scope(true)             // rewind scope
+                    .bind_this_ptr(&amp;mut states);    // bind the 'this' pointer
+
     match event_name {
         // In a real application you'd be handling errors...
-        &quot;start&quot; =&gt; engine.call_fn_raw(scope, ast, false, true, &quot;start&quot;,
-                                      Some(states), [event_data.into()]).unwrap(),
-                                   // ^^^^^^^^^^^^ bind 'this' pointer
+        &quot;start&quot; =&gt; engine.call_fn_with_options(options, scope, ast, &quot;start&quot;, (event_data,)).unwrap(),
             :
             :
     }
@@ -17947,7 +18096,7 @@ necessary for <a href="patterns//book/language/functions.html">functions</a> to 
 fn init() {
     // Can detect system-provided default states!
     // Add 'bool_state' as new state variable if one does not exist
-    if !(&quot;bool_state&quot; in this) {
+    if &quot;bool_state&quot; !in this {
         this.bool_state = false;
     }
     // Add 'obj_state' as new state variable (overwrites any existing)
@@ -18084,7 +18233,7 @@ Therefore, the variable-accessing syntax is different from the main body of the 
 /// State is stored inside an object map bound to 'state'.
 fn init() {
     // Add 'bool_state' as new state variable if one does not exist
-    if !(&quot;bool_state&quot; in state) {
+    if &quot;bool_state&quot; !in state {
         state.bool_state = false;
     }
     // Add 'obj_state' as new state variable (overwrites any existing)
@@ -18117,7 +18266,7 @@ fn start(data) {
 
 /// 'end' event handler
 fn end(data) {
-    if !state.bool_state || !(&quot;start_mode&quot; in state) {
+    if !state.bool_state || &quot;start_mode&quot; !in state {
         throw &quot;Not yet started!&quot;;
     }
     if !state.obj_state.func1() &amp;&amp; !state.obj_state.func2() {
@@ -18142,8 +18291,8 @@ fn update(data) {
 <p><a class="admonition-anchor-link" href="patterns/references.html#admonition-dont-do-it"></a></p>
 </div>
 <div>
-<p>As with anything <code>unsafe</code>, don’t do this unless you have exhausted all possible alternatives.
-There are usually alternatives.</p>
+<p>As with anything <code>unsafe</code>, don’t do this unless you have exhausted all possible alternatives.</p>
+<p>There are usually alternatives.</p>
 </div>
 </div>
 <div id="admonition-usage-scenario" class="admonition info">
@@ -18190,11 +18339,18 @@ This requires <code>unsafe</code> code.</p>
 <p>Use the newtype as a <em>handle</em> for all registered API functions, <a href="https://doc.rust-lang.org/std/mem/fn.transmute.html"><code>transmute</code></a> the integer back
 to a reference before use. This also requires <code>unsafe</code> code.</p>
 </li>
-<li>
-<p>Make absolutely sure that the newtype is never stored anywhere permanent (e.g. in a <a href="patterns//book/engine/scope.html"><code>Scope</code></a>)
-not does it ever live outside of the reference’s scope.</p>
-</li>
 </ul>
+</div>
+</div>
+<div id="admonition-here-be-dragons" class="admonition bug">
+<div class="admonition-title">
+<p>Here be dragons…</p>
+<p><a class="admonition-anchor-link" href="patterns/references.html#admonition-here-be-dragons"></a></p>
+</div>
+<div>
+<p>Make <strong>absolutely sure</strong> that the newtype is never stored anywhere permanent (e.g. in a <a href="patterns//book/engine/scope.html"><code>Scope</code></a>)
+nor does it ever live outside of the reference’s scope!</p>
+<p>Otherwise, a crash is the system being nice to you…</p>
 </div>
 </div>
 <h2 id="example-21"><a class="header" href="#example-21">Example</a></h2>
@@ -18265,11 +18421,9 @@ super_ecs_system.query(...).for_each(|world: &amp;mut World| {
     // Create handle from reference to 'World'
     let handle: WorldHandle = world.into();
 
-    // Set the handle's ID into the engine's tag
+    // Set the handle's ID into the engine's tag.
+    // Alternatively, use 'Engine::call_fn_with_options'.
     engine.set_default_tag(handle.unique_id());
-
-    // Alternatively, use 'Engine::call_fn_raw_raw' and set the handle's ID
-    // into the 'tag' field of the 'GlobalRuntimeState' object
 
     // Add handle into scope
     let mut scope = Scope::new();
@@ -18281,28 +18435,26 @@ super_ecs_system.query(...).for_each(|world: &amp;mut World| {
     // Make sure no instance of 'handle' leaks outside this scope!
 });
 </code></pre>
-<div id="admonition-important-ensure-no-leakage" class="admonition danger">
+<div id="admonition-here-be-many-dragons" class="admonition bug">
 <div class="admonition-title">
-<p>IMPORTANT! Ensure no leakage!</p>
-<p><a class="admonition-anchor-link" href="patterns/references.html#admonition-important-ensure-no-leakage"></a></p>
+<p>Here be Many Dragons!</p>
+<p><a class="admonition-anchor-link" href="patterns/references.html#admonition-here-be-many-dragons"></a></p>
 </div>
 <div>
-<p>It is of utmost importance that no instance of the handle newtype ever <em>leaks</em> outside of the
+<p>It is of utmost importance that no instance of the handle newtype ever <strong><em>leaks</em></strong> outside of the
 appropriate scope where the wrapped reference may no longer be valid.</p>
 <p>For example, do not allow the script to store a copy of the handle anywhere that can
 potentially be persistent (e.g. within an <a href="patterns//book/language/object-maps.html">object map</a>).</p>
 <h4 id="safety-check-via-unique-id"><a class="header" href="#safety-check-via-unique-id">Safety check via unique ID</a></h4>
 <p>One solution, as illustrated in the example, is to always tag each handle instance together with
-a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.11.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.12.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
 before running scripts.</p>
 <p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a>
 (via <a href="patterns//book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
 an error should be returned instead.</p>
 <h4 id="alternative-to-engineset_default_tag"><a class="header" href="#alternative-to-engineset_default_tag">Alternative to <code>Engine::set_default_tag</code></a></h4>
-<p>Alternatively, if the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> cannot be made mutable, use <code>Engine::call_fn_raw_raw</code>
-(which requires the <a href="patterns//book/start/features.html"><code>internals</code></a> feature) to directly call a script <a href="patterns//book/language/functions.html">function</a> in a compiled <a href="patterns//book/engine/compile.html"><code>AST</code></a>.</p>
-<p>This volatile API allows specifying a <a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html"><code>GlobalRuntimeState</code></a> object which contains the <code>tag</code> field
-that can be set just for that evaluation run.</p>
+<p>Alternatively, if the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> cannot be made mutable, use <code>Engine::call_fn_with_options</code>
+to set the ID before directly calling a script <a href="patterns//book/language/functions.html">function</a> in a compiled <a href="patterns//book/engine/compile.html"><code>AST</code></a>.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="static-hashing"><a class="header" href="#static-hashing">Static Hashing</a></h1>
@@ -18381,7 +18533,7 @@ this environment variable has no effect.</p>
 <p>The seed specified in <code>RHAI_AHASH_SEED</code> is always used to initialize the hasher.</p>
 <p>If the environment variable is missing, or it contains all zeros (i.e. <code>[0, 0, 0, 0]</code>),
 then static hashing is disabled.</p>
-<h2 id="tldr-7"><a class="header" href="#tldr-7">TL;DR</a></h2>
+<h2 id="tldr-8"><a class="header" href="#tldr-8">TL;DR</a></h2>
 <div id="admonition-why-cant-we-tell-ahash-to-use-a-static-fixed-seed" class="admonition question">
 <div class="admonition-title">
 <p>Why can’t we tell <code>ahash</code> to use a static (fixed) seed?</p>
@@ -18523,7 +18675,7 @@ let mut engine = create_scripting_engine(my_config);
 <h3 id="make-sure-that-rhai-has-the-appropriate-features"><a class="header" href="#make-sure-that-rhai-has-the-appropriate-features">Make sure that Rhai has the appropriate feature(s)</a></h3>
 <p>In the project’s <code>Cargo.toml</code>, specify the Rhai dependency with <code>bin-features</code>.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.11.0&quot;, features = [&quot;bin-features&quot;] }
+rhai = { version = &quot;1.12.0&quot;, features = [&quot;bin-features&quot;] }
 </code></pre>
 <h3 id="rebuild"><a class="header" href="#rebuild">Rebuild</a></h3>
 <p>Rebuild the project, which should automatically build all the customized tools.</p>
@@ -18582,7 +18734,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = &quot;1.11.0&quot;, features = [ &quot;no_float&quot; ] }
+rhai = { version = &quot;1.12.0&quot;, features = [ &quot;no_float&quot; ] }
 rhai_github = { git = &quot;https://github.com/rhaiscript/rhai&quot;, features = [ &quot;unchecked&quot; ] }
 rhai_my_github = { git = &quot;https://github.com/my_github/rhai&quot;, branch = &quot;variation1&quot;, features = [ &quot;serde&quot;, &quot;no_closure&quot; ] }
 rhai_local = { path = &quot;../rhai_copy&quot; }
@@ -18921,7 +19073,7 @@ to the value.</p>
 <p>Again, after the script is verified, all tag assignment statements can simply be removed.</p>
 <pre><code class="language-js">
 fn some_complex_calculation(x) {
-    let result = 42;
+    let result = x;
 
     // Check first condition
     if some_complex_condition() {
@@ -18946,9 +19098,11 @@ fn some_complex_calculation(x) {
         result = 0;
         result.tag[3] = true;   // Set forth bit in bit-field
     }
+
+    result
 }
 
-let my_result = some_complex_calculation(key);
+let my_result = some_complex_calculation(42);
 
 // The tag of 'my_result' now contains a bit-field indicating
 // the result of each condition.
@@ -19084,8 +19238,8 @@ number = -5 - +5;
 <tr><td style="text-align: center"><code>/</code>, <code>/=</code></td><td>divide (integer division if acting on integer types)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">yes, also integer</td><td style="text-align: center">yes, also integer</td></tr>
 <tr><td style="text-align: center"><code>%</code>, <code>%=</code></td><td>modulo (remainder)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">yes, also integer</td><td style="text-align: center">yes, also integer</td></tr>
 <tr><td style="text-align: center"><code>**</code>, <code>**=</code></td><td>power/exponentiation</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">yes, also <code>FLOAT**INT</code></td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>&lt;&lt;</code>, <code>&lt;&lt;=</code></td><td>left bit-shift</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
-<tr><td style="text-align: center"><code>&gt;&gt;</code>, <code>&gt;&gt;=</code></td><td>right bit-shift</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>&lt;&lt;</code>, <code>&lt;&lt;=</code></td><td>left bit-shift (if negative number of bits, shift right instead)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>&gt;&gt;</code>, <code>&gt;&gt;=</code></td><td>right bit-shift (if negative number of bits, shift left instead)</td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>&amp;</code>, <code>&amp;=</code></td><td>bit-wise <em>And</em></td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>|</code>, <code>|=</code></td><td>bit-wise <em>Or</em></td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>^</code>, <code>^=</code></td><td>bit-wise <em>Xor</em></td><td style="text-align: center">numeric</td><td style="text-align: center">yes</td><td style="text-align: center">no</td><td style="text-align: center">no</td></tr>
@@ -19348,7 +19502,7 @@ x.to_hex() == &quot;1234abcd&quot;;
 <tr><td><code>is_exclusive</code> method and property</td><td style="text-align: center"></td><td>is the range exclusive?</td></tr>
 </tbody></table>
 </div>
-<h2 id="tldr-8"><a class="header" href="#tldr-8">TL;DR</a></h2>
+<h2 id="tldr-9"><a class="header" href="#tldr-9">TL;DR</a></h2>
 <div id="admonition-what-happened-to-the-_open-ended_-ranges" class="admonition question">
 <div class="admonition-title">
 <p>What happened to the <em>open-ended</em> ranges?</p>
@@ -19876,8 +20030,8 @@ added or removed.</p>
 <tr><td><code>insert</code></td><td><ol><li>position, counting from end if &lt; 0, end if ≥ length</li><li>element to insert</li></ol></td><td>inserts an element at a certain position</td></tr>
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last element and returns it (<code>()</code> if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first element and returns it (<code>()</code> if empty)</td></tr>
-<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of items to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a portion of the array into a new array</td></tr>
-<tr><td><code>extract</code></td><td><a href="ref/ranges.html">range</a> of items to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of elements to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td><a href="ref/ranges.html">range</a> of elements to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the array into a new array</td></tr>
 <tr><td><code>remove</code></td><td>position, counting from end if &lt; 0</td><td>removes an element at a particular position and returns it (<code>()</code> if the position is not valid)</td></tr>
 <tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the array</td></tr>
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of elements</td></tr>
@@ -19887,25 +20041,28 @@ added or removed.</p>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
 <tr><td><code>split</code></td><td><ol><li>array</li><li>position to split at, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>splits the array into two arrays, starting from a specified position</td></tr>
-<tr><td><code>drain</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></li></ol></td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to remove, none if ≤ 0</li></ol></td><td>removes a portion of the array, returning the removed items as a new array</td></tr>
-<tr><td><code>drain</code></td><td><a href="ref/ranges.html">range</a> of items to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the array, returning the removed items as a new array</td></tr>
-<tr><td><code>retain</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></li></ol></td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to retain, none if ≤ 0</li></ol></td><td>retains a portion of the array, removes all other items and returning them as a new array</td></tr>
-<tr><td><code>retain</code></td><td><a href="ref/ranges.html">range</a> of items to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the array, removes all other bytes and returning them as a new array</td></tr>
-<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to remove, none if ≤ 0</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>splice</code></td><td><ol><li><a href="ref/ranges.html">range</a> of items to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>filter</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
+<tr><td><code>for_each</code></td><td><a href="ref/fn-ptr.html">function pointer</a> for processing elements</td><td>run through each element in the array in order, binding each to <code>this</code> and calling the processing function taking the following parameters: <ol><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>drain</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to remove, none if ≤ 0</li></ol></td><td>removes a portion of the array, returning the removed elements as a new array</td></tr>
+<tr><td><code>drain</code></td><td><a href="ref/ranges.html">range</a> of elements to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the array, returning the removed elements as a new array</td></tr>
+<tr><td><code>retain</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to retain, none if ≤ 0</li></ol></td><td>retains a portion of the array, removes all other elements and returning them as a new array</td></tr>
+<tr><td><code>retain</code></td><td><a href="ref/ranges.html">range</a> of elements to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the array, removes all other bytes and returning them as a new array</td></tr>
+<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to remove, none if ≤ 0</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>splice</code></td><td><ol><li><a href="ref/ranges.html">range</a> of elements to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>filter</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>constructs a new array with all elements that return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>contains</code>, <code>in</code> operator</td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator is used for comparison</td></tr>
-<tr><td><code>index_of</code></td><td><ol><li>element to find (not a <a href="ref/fn-ptr.html">function pointer</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</li></ol></td></tr>
-<tr><td><code>index_of</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a [string]; if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> items in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two items in the array</td></tr>
-<tr><td><code>map</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></td><td>constructs a new array with all items mapped to the result of applying the conversion function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>reduce</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value (<code>()</code> initially)</li><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>reduce_rev</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value (<code>()</code> initially)</li><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>some</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>all</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>sort</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="ref/fn-closure.html">closure</a>), or the function name as a <a href="ref/strings-chars.html">string</a></td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first item</li><li>second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>index_of</code></td><td><ol><li>element to find (not a <a href="ref/fn-ptr.html">function pointer</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first element in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</li></ol></td></tr>
+<tr><td><code>index_of</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first element in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<ol><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>find</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the first element in the array that returns <code>true</code> when called with the predicate function, or <code>()</code> if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>find_map</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the first non-<code>()</code> value of the first element in the array when called with the predicate function, or <code>()</code> if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>); if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> elements in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two elements in the array</td></tr>
+<tr><td><code>map</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>constructs a new array with all elements mapped to the result of applying the conversion function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>reduce</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="ref/fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<code>()</code> initially)</li><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>reduce_rev</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="ref/fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<code>()</code> initially)</li><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>some</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any element returns <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>all</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all elements return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>sort</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="ref/strings-chars.html">string</a>, <a href="ref/strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
 </tbody></table>
 </div>
@@ -19925,11 +20082,11 @@ y[1] == 2;
 y[2] == 3;
 y[3] == 4;
 
-(1 in y) == true;           // use 'in' to test if an item exists in the array
+(1 in y) == true;           // use 'in' to test if an element exists in the array
 
 (42 in y) == false;         // 'in' uses the 'contains' function, which uses the
                             // '==' operator (that users can override)
-                            // to check if the target item exists in the array
+                            // to check if the target element exists in the array
 
 y.contains(1) == true;      // the above de-sugars to this
 
@@ -19973,8 +20130,8 @@ y.pop() == 5;               // y == [4, 4]
 
 y.len == 2;
 
-for item in y {             // arrays can be iterated with a 'for' statement
-    print(item);
+for element in y {             // arrays can be iterated with a 'for' statement
+    print(element);
 }
 
 y.pad(6, &quot;hello&quot;);          // y == [4, 4, &quot;hello&quot;, &quot;hello&quot;, &quot;hello&quot;, &quot;hello&quot;]
@@ -19995,9 +20152,13 @@ let a = [42, 123, 99];
 
 a.map(|v| v + 1);           // returns [43, 124, 100]
 
+a.map(|| this + 1);         // returns [43, 124, 100]
+
 a.map(|v, i| v + i);        // returns [42, 124, 101]
 
 a.filter(|v| v &gt; 50);       // returns [123, 99]
+
+a.filter(|| this &gt; 50);     // returns [123, 99]
 
 a.filter(|v, i| i == 1);    // returns [123]
 
@@ -20009,15 +20170,18 @@ a.filter(|v| is_odd(v));    // &lt;- or this
 
 a.some(|v| v &gt; 50);         // returns true
 
+a.some(|| this &gt; 50);       // returns true
+
 a.some(|v, i| v &lt; i);       // returns false
-
-a.none(|v| v != 0);         // returns false
-
-a.none(|v, i| v == i);      // returns true
 
 a.all(|v| v &gt; 50);          // returns false
 
+a.all(|| this &gt; 50);        // returns false
+
 a.all(|v, i| v &gt; i);        // returns true
+
+// Reducing - initial value provided directly
+a.reduce(|sum| sum + this, 0) == 264;
 
 // Reducing - initial value provided directly
 a.reduce(|sum, v| sum + v, 0) == 264;
@@ -20032,15 +20196,18 @@ a.reduce(|sum, v, i|
     if i == 0 { v } else { sum + v }
 ) == 264;
 
-// Reducing - initial value provided directly
+// Reducing in reverse - initial value provided directly
+a.reduce_rev(|sum| sum + this, 0) == 264;
+
+// Reducing in reverse - initial value provided directly
 a.reduce_rev(|sum, v| sum + v, 0) == 264;
 
-// Reducing - initial value is '()'
+// Reducing in reverse - initial value is '()'
 a.reduce_rev(
     |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
 ) == 264;
 
-// Reducing - initial value has index position == 0
+// Reducing in reverse - initial value has index position == 0
 a.reduce_rev(|sum, v, i|
     if i == 2 { v } else { sum + v }
 ) == 264;
@@ -20995,13 +21162,20 @@ a() ?? b();         // b() is only evaluated if a() is ()
 </div>
 <div>
 <p>The <code>in</code> operator is simply syntactic sugar for a call to the <code>contains</code> function.</p>
+<p>Similarly, <code>!in</code> is a call to <code>!contains</code>.</p>
 </div>
 </div>
 <p>The <code>in</code> operator is used to check for <em>containment</em> – i.e. whether a particular collection
 data type <em>contains</em> a particular item.</p>
+<p>Similarly, <code>!in</code> is used to check for non-existence – i.e. it is <code>true</code> if a particular
+collection data type does <em>not</em> contain a particular item.</p>
 <pre><code class="language-rust">42 in array;
 
 array.contains(42);     // &lt;- the above is equivalent to this
+
+123 !in array;
+
+!array.contains(123);   // &lt;- the above is equivalent to this
 </code></pre>
 <h3 id="built-in-support-for-standard-data-types-1"><a class="header" href="#built-in-support-for-standard-data-types-1">Built-in support for standard data types</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Data type</th><th style="text-align: center">Check for</th></tr></thead><tbody>
@@ -21025,6 +21199,8 @@ let map = #{
 &quot;foo&quot; in map == true;               // check object map for property name
 
 'w' in &quot;hello, world!&quot; == true;     // check string for character
+
+'w' !in &quot;hello, world!&quot; == false;
 
 &quot;wor&quot; in &quot;hello, world&quot; == true;    // check string for sub-string
 
@@ -22557,18 +22733,6 @@ export z;
 </code></pre>
 </div>
 </div>
-<div id="admonition-do-not-export-closures" class="admonition bug small">
-<div class="admonition-title">
-<p>Do not export closures</p>
-<p><a class="admonition-anchor-link" href="ref/modules/export.html#admonition-do-not-export-closures"></a></p>
-</div>
-<div>
-<p>A <a href="ref/modules/../fn-ptr.html">function pointer</a>, <a href="ref/modules/../fn-anon.html">anonymous function</a> or <a href="ref/modules/../fn-closure.html">closure</a>,
-is not a <em>first-class function</em>.</p>
-<p>It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="ref/modules/../functions.html">function</a> to call.</p>
-<p>Exporting them causes a runtime error.</p>
-</div>
-</div>
 <h2 id="export-functions-1"><a class="header" href="#export-functions-1">Export Functions</a></h2>
 <div id="admonition-private-functions" class="admonition info side wide">
 <div class="admonition-title">
@@ -22909,6 +23073,7 @@ under the scripts directory. The pages are assumed to be in <a href="http://en.w
 <tr><td style="text-align: center"><code>loop</code></td><td>infinite <a href="appendix//book/language/loop.html"><code>loop</code></a></td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>for</code></td><td><a href="appendix//book/language/for.html"><code>for</code></a> loop</td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>in</code></td><td><ol><li><a href="appendix//book/language/in.html">containment</a> test</li><li>part of <a href="appendix//book/language/for.html"><code>for</code></a> loop</li></ol></td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>
+<tr><td style="text-align: center"><code>!in</code></td><td>negated <a href="appendix//book/language/in.html">containment</a> test</td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>continue</code></td><td>continue a loop at the next iteration</td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>break</code></td><td>break out of loop iteration</td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>
 <tr><td style="text-align: center"><code>return</code></td><td><a href="appendix//book/language/return.html">return</a> value</td><td style="text-align: center"></td><td style="text-align: center">no</td></tr>

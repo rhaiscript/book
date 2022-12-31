@@ -169,11 +169,12 @@
 while 1 &lt; 2 { ... }                 // loop with always-true condition
 </code></pre>
 <p>Rhai by default does not limit how much time or CPU a script consumes.</p>
-<p>This can be changed via the <a href="/book/engine/options.html"><code>Engine::set_max_operations</code></a> method, with zero being unlimited (the default).</p>
-<p>The <em>operations count</em> is intended to be a very course-grained measurement of the amount of CPU that a script
-has consumed, allowing the system to impose a hard upper limit on computing resources.</p>
-<p>A script exceeding the maximum operations count terminates with an error result.
-This can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This can be changed via the <a href="/book/engine/options.html"><code>Engine::set_max_operations</code></a> method, with zero being
+unlimited (the default).</p>
+<p>The <em>operations count</em> is intended to be a very course-grained measurement of the amount of CPU that
+a script has consumed, allowing the system to impose a hard upper limit on computing resources.</p>
+<p>A script exceeding the maximum operations count terminates with an error result. This can be
+disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 engine.set_max_operations(500);     // allow only up to 500 operations for this script

@@ -169,8 +169,8 @@
 <p><a class="admonition-anchor-link" href="#admonition-dont-do-it"></a></p>
 </div>
 <div>
-<p>As with anything <code>unsafe</code>, don’t do this unless you have exhausted all possible alternatives.
-There are usually alternatives.</p>
+<p>As with anything <code>unsafe</code>, don’t do this unless you have exhausted all possible alternatives.</p>
+<p>There are usually alternatives.</p>
 </div>
 </div>
 <div id="admonition-usage-scenario" class="admonition info">
@@ -217,11 +217,18 @@ This requires <code>unsafe</code> code.</p>
 <p>Use the newtype as a <em>handle</em> for all registered API functions, <a href="https://doc.rust-lang.org/std/mem/fn.transmute.html"><code>transmute</code></a> the integer back
 to a reference before use. This also requires <code>unsafe</code> code.</p>
 </li>
-<li>
-<p>Make absolutely sure that the newtype is never stored anywhere permanent (e.g. in a <a href="/book/engine/scope.html"><code>Scope</code></a>)
-not does it ever live outside of the reference’s scope.</p>
-</li>
 </ul>
+</div>
+</div>
+<div id="admonition-here-be-dragons" class="admonition bug">
+<div class="admonition-title">
+<p>Here be dragons…</p>
+<p><a class="admonition-anchor-link" href="#admonition-here-be-dragons"></a></p>
+</div>
+<div>
+<p>Make <strong>absolutely sure</strong> that the newtype is never stored anywhere permanent (e.g. in a <a href="/book/engine/scope.html"><code>Scope</code></a>)
+nor does it ever live outside of the reference’s scope!</p>
+<p>Otherwise, a crash is the system being nice to you…</p>
 </div>
 </div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -292,11 +299,9 @@ super_ecs_system.query(...).for_each(|world: &amp;mut World| {
     // Create handle from reference to 'World'
     let handle: WorldHandle = world.into();
 
-    // Set the handle's ID into the engine's tag
+    // Set the handle's ID into the engine's tag.
+    // Alternatively, use 'Engine::call_fn_with_options'.
     engine.set_default_tag(handle.unique_id());
-
-    // Alternatively, use 'Engine::call_fn_raw_raw' and set the handle's ID
-    // into the 'tag' field of the 'GlobalRuntimeState' object
 
     // Add handle into scope
     let mut scope = Scope::new();
@@ -308,28 +313,26 @@ super_ecs_system.query(...).for_each(|world: &amp;mut World| {
     // Make sure no instance of 'handle' leaks outside this scope!
 });
 </code></pre>
-<div id="admonition-important-ensure-no-leakage" class="admonition danger">
+<div id="admonition-here-be-many-dragons" class="admonition bug">
 <div class="admonition-title">
-<p>IMPORTANT! Ensure no leakage!</p>
-<p><a class="admonition-anchor-link" href="#admonition-important-ensure-no-leakage"></a></p>
+<p>Here be Many Dragons!</p>
+<p><a class="admonition-anchor-link" href="#admonition-here-be-many-dragons"></a></p>
 </div>
 <div>
-<p>It is of utmost importance that no instance of the handle newtype ever <em>leaks</em> outside of the
+<p>It is of utmost importance that no instance of the handle newtype ever <strong><em>leaks</em></strong> outside of the
 appropriate scope where the wrapped reference may no longer be valid.</p>
 <p>For example, do not allow the script to store a copy of the handle anywhere that can
 potentially be persistent (e.g. within an <a href="/book/language/object-maps.html">object map</a>).</p>
 <h4 id="safety-check-via-unique-id"><a class="header" href="#safety-check-via-unique-id">Safety check via unique ID</a></h4>
 <p>One solution, as illustrated in the example, is to always tag each handle instance together with
-a unique random ID. That same ID can then be set into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.11.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+a unique random ID. That same ID can then be set into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.12.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
 before running scripts.</p>
 <p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="/book/engine/hello-world.html"><code>Engine</code></a>
 (via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
 an error should be returned instead.</p>
 <h4 id="alternative-to-engineset_default_tag"><a class="header" href="#alternative-to-engineset_default_tag">Alternative to <code>Engine::set_default_tag</code></a></h4>
-<p>Alternatively, if the <a href="/book/engine/hello-world.html"><code>Engine</code></a> cannot be made mutable, use <code>Engine::call_fn_raw_raw</code>
-(which requires the <a href="/book/start/features.html"><code>internals</code></a> feature) to directly call a script <a href="/book/language/functions.html">function</a> in a compiled <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
-<p>This volatile API allows specifying a <a href="https://docs.rs/rhai/1.11.0/rhai/struct.GlobalRuntimeState.html"><code>GlobalRuntimeState</code></a> object which contains the <code>tag</code> field
-that can be set just for that evaluation run.</p>
+<p>Alternatively, if the <a href="/book/engine/hello-world.html"><code>Engine</code></a> cannot be made mutable, use <code>Engine::call_fn_with_options</code>
+to set the ID before directly calling a script <a href="/book/language/functions.html">function</a> in a compiled <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 </div>
 </div>
 

@@ -288,13 +288,20 @@ a() ?? b();         // b() is only evaluated if a() is ()
 </div>
 <div>
 <p>The <code>in</code> operator is simply syntactic sugar for a call to the <code>contains</code> function.</p>
+<p>Similarly, <code>!in</code> is a call to <code>!contains</code>.</p>
 </div>
 </div>
 <p>The <code>in</code> operator is used to check for <em>containment</em> – i.e. whether a particular collection
 data type <em>contains</em> a particular item.</p>
+<p>Similarly, <code>!in</code> is used to check for non-existence – i.e. it is <code>true</code> if a particular
+collection data type does <em>not</em> contain a particular item.</p>
 <pre><code class="language-rust">42 in array;
 
 array.contains(42);     // &lt;- the above is equivalent to this
+
+123 !in array;
+
+!array.contains(123);   // &lt;- the above is equivalent to this
 </code></pre>
 <h3 id="built-in-support-for-standard-data-types"><a class="header" href="#built-in-support-for-standard-data-types">Built-in support for standard data types</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Data type</th><th style="text-align: center">Check for</th></tr></thead><tbody>
@@ -318,6 +325,8 @@ let map = #{
 &quot;foo&quot; in map == true;               // check object map for property name
 
 'w' in &quot;hello, world!&quot; == true;     // check string for character
+
+'w' !in &quot;hello, world!&quot; == false;
 
 &quot;wor&quot; in &quot;hello, world&quot; == true;    // check string for sub-string
 

@@ -220,18 +220,6 @@ export z;
 </code></pre>
 </div>
 </div>
-<div id="admonition-do-not-export-closures" class="admonition bug small">
-<div class="admonition-title">
-<p>Do not export closures</p>
-<p><a class="admonition-anchor-link" href="#admonition-do-not-export-closures"></a></p>
-</div>
-<div>
-<p>A <a href="../fn-ptr.html">function pointer</a>, <a href="../fn-anon.html">anonymous function</a> or <a href="../fn-closure.html">closure</a>,
-is not a <em>first-class function</em>.</p>
-<p>It is <em>syntactic sugar</em> only, capturing the <em>name</em> of a <a href="../functions.html">function</a> to call.</p>
-<p>Exporting them causes a runtime error.</p>
-</div>
-</div>
 <h2 id="export-functions"><a class="header" href="#export-functions">Export Functions</a></h2>
 <div id="admonition-private-functions" class="admonition info side wide">
 <div class="admonition-title">

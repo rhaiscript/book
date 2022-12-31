@@ -176,8 +176,8 @@
 <p>By default, all arithmetic calculations in Rhai are <em>checked</em>, meaning that the script terminates
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.</p>
-<p>This checking can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance
-(but higher risks as well).</p>
+<p>This checking can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher
+risks as well).</p>
 <pre><code class="language-rust">let x = 1_000_000_000_000;
 
 x * x;      // Normal build - runtime error: multiplication overflow

@@ -249,7 +249,7 @@ Therefore, the variable-accessing syntax is different from the main body of the 
 /// State is stored inside an object map bound to 'state'.
 fn init() {
     // Add 'bool_state' as new state variable if one does not exist
-    if !(&quot;bool_state&quot; in state) {
+    if &quot;bool_state&quot; !in state {
         state.bool_state = false;
     }
     // Add 'obj_state' as new state variable (overwrites any existing)
@@ -282,7 +282,7 @@ fn start(data) {
 
 /// 'end' event handler
 fn end(data) {
-    if !state.bool_state || !(&quot;start_mode&quot; in state) {
+    if !state.bool_state || &quot;start_mode&quot; !in state {
         throw &quot;Not yet started!&quot;;
     }
     if !state.obj_state.func1() &amp;&amp; !state.obj_state.func2() {

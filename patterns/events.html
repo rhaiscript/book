@@ -204,7 +204,7 @@
 </ul>
 </li>
 <li>
-<p>User-provided state is initialized by a <a href="/book/language/functions.html">function</a> called via <a href="/book/engine/call-fn.html"><code>Engine::call_fn_raw</code></a>.</p>
+<p>User-provided state is initialized by a <a href="/book/language/functions.html">function</a> called via <a href="/book/engine/call-fn.html"><code>Engine::call_fn_with_options</code></a>.</p>
 </li>
 <li>
 <p>Upon an event, the appropriate event handler <a href="/book/language/functions.html">function</a> in the script is called via
@@ -278,9 +278,9 @@ mod test_struct_api {
 <li>Register an API with the <a href="/book/engine/hello-world.html"><code>Engine</code></a>,</li>
 <li>Create a custom <a href="/book/engine/scope.html"><code>Scope</code></a> to serve as the stored state,</li>
 <li>Add default state <a href="/book/language/variables.html">variables</a> into the custom <a href="/book/engine/scope.html"><code>Scope</code></a>,</li>
-<li>Optionally, call an initiation <a href="/book/language/functions.html">function</a> to create new state <a href="/book/language/variables.html">variables</a>; <code>Engine::call_fn_raw</code>
-is used instead of <code>Engine::call_fn</code> so that <a href="/book/language/variables.html">variables</a> created inside the <a href="/book/language/functions.html">function</a> will not
-be removed from the custom <a href="/book/engine/scope.html"><code>Scope</code></a> upon exit,</li>
+<li>Optionally, call an initiation <a href="/book/language/functions.html">function</a> to create new state <a href="/book/language/variables.html">variables</a>;
+<code>Engine::call_fn_with_options</code> is used instead of <code>Engine::call_fn</code> so that <a href="/book/language/variables.html">variables</a> created
+inside the <a href="/book/language/functions.html">function</a> will not be removed from the custom <a href="/book/engine/scope.html"><code>Scope</code></a> upon exit,</li>
 <li>Get the handler script and <a href="/book/engine/compile.html">compile</a> it,</li>
 <li>Store the compiled <a href="/book/engine/compile.html"><code>AST</code></a> for future evaluations,</li>
 <li>Run the <a href="/book/engine/compile.html"><code>AST</code></a> to initialize event handler state <a href="/book/language/variables.html">variables</a>.</li>

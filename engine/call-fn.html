@@ -252,7 +252,7 @@ if the comma is omitted.</p>
 needed by the <a href="/book/language/functions.html">function</a>.</p>
 <p>All new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> introduced are, by default, <em>not</em> retained inside the <a href="/book/engine/scope.html"><code>Scope</code></a>.
 In other words, the <a href="/book/engine/scope.html"><code>Scope</code></a> is <em>rewound</em> before each call.</p>
-<p>If these default behaviors are not desirable, use <code>Engine::call_fn_raw</code>.</p>
+<p>If these default behaviors are not desirable, override them with <code>Engine::call_fn_with_options</code>.</p>
 </div>
 </div>
 <h2 id="funcargs-trait"><a class="header" href="#funcargs-trait"><code>FuncArgs</code> Trait</a></h2>
@@ -262,7 +262,7 @@ In other words, the <a href="/book/engine/scope.html"><code>Scope</code></a> is 
 <p><a class="admonition-anchor-link" href="#admonition-note"></a></p>
 </div>
 <div>
-<p>Rhai implements <a href="/book/rust/traits.html"><code>FuncArgs</code></a> for tuples and <code>Vec&lt;T&gt;</code>.</p>
+<p>Rhai implements <a href="/book/rust/traits.html"><code>FuncArgs</code></a> for tuples, arrays and <code>Vec&lt;T&gt;</code>.</p>
 </div>
 </div>
 <p><code>Engine::call_fn</code> takes a parameter of any type that implements the <a href="/book/rust/traits.html"><code>FuncArgs</code></a> trait,
@@ -305,25 +305,31 @@ any <a href="/book/rust/custom-type.html">custom type</a>.</p>
 to be split up to pass to functions.</p>
 </div>
 </div>
-<h2 id="low-level-api--enginecall_fn_raw"><a class="header" href="#low-level-api--enginecall_fn_raw">Low-Level API – <code>Engine::call_fn_raw</code></a></h2>
-<p>For more control, construct all arguments as <a href="/book/language/dynamic.html"><code>Dynamic</code></a> values and use <code>Engine::call_fn_raw</code>,
-passing it anything that implements <code>AsMut&lt;[Dynamic]&gt;</code> (such as a simple array or a <code>Vec&lt;Dynamic&gt;</code>):</p>
-<pre><code class="language-rust">let result = engine.call_fn_raw(
-                &amp;mut scope,         // scope to use
-                &amp;ast,               // AST containing the functions
-                false,              // false = do not evaluate the AST
-                false,              // false = do not rewind the scope (i.e. keep new variables)
-                &quot;hello&quot;,            // function entry-point
-                None,               // 'this' pointer, if any
-                [ &quot;abc&quot;.into(), 123_i64.into() ]    // arguments
+<h2 id="enginecall_fn_with_options"><a class="header" href="#enginecall_fn_with_options"><code>Engine::call_fn_with_options</code></a></h2>
+<p>For more control, use <code>Engine::call_fn_with_options</code>, which takes a type <code>CallFnOptions</code>:</p>
+<pre><code class="language-rust">use rhai::{Engine, CallFnOptions};
+
+let options = CallFnOptions::new()
+                .eval_ast(false)            // do not evaluate the AST
+                .rewind_scope(false)        // do not rewind the scope (i.e. keep new variables)
+                .bind_this_ptr(&amp;mut state); // 'this' pointer
+
+let result = engine.call_fn_with_options::&lt;i64&gt;(
+                options,                    // options
+                &amp;mut scope,                 // scope to use
+                &amp;ast,                       // AST containing the functions
+                &quot;hello&quot;,                    // function entry-point
+                ( &quot;abc&quot;, 123_i64 )          // arguments
              )?;
 </code></pre>
-<p><code>Engine::call_fn_raw</code> extends control to the following:</p>
-<ul>
-<li>Whether to skip evaluation of the <a href="/book/engine/compile.html"><code>AST</code></a> before calling the target <a href="/book/language/functions.html">function</a></li>
-<li>Whether to rewind the custom <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of the <a href="/book/language/functions.html">function</a> call</li>
-<li>Whether to bind the <code>this</code> pointer to a specific value</li>
-</ul>
+<p><code>CallFnOptions</code> allows control of the following:</p>
+<div class="table-wrapper"><table><thead><tr><th>Field</th><th style="text-align: center">Type</th><th style="text-align: center">Default</th><th style="text-align: center">Build method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>eval_ast</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>true</code></td><td style="text-align: center"><code>eval_ast</code></td><td>skip evaluation of the <a href="/book/engine/compile.html"><code>AST</code></a> before calling the target <a href="/book/language/functions.html">function</a></td></tr>
+<tr><td><code>rewind_scope</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>true</code></td><td style="text-align: center"><code>rewind_scope</code></td><td>rewind the custom <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of the <a href="/book/language/functions.html">function</a> call so new local variables are removed</td></tr>
+<tr><td><code>this_ptr</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;&amp;mut Dynamic&gt;</code></a></td><td style="text-align: center"><code>None</code></td><td style="text-align: center"><code>bind_this_ptr</code></td><td>bind the <code>this</code> pointer to a specific value</td></tr>
+<tr><td><code>tag</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;Dynamic&gt;</code></a></td><td style="text-align: center"><code>None</code></td><td style="text-align: center"><code>with_tag</code></td><td>set the <em>custom state</em> for this evaluation (accessed via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>)</td></tr>
+</tbody></table>
+</div>
 <h3 id="skip-evaluation-of-the-ast"><a class="header" href="#skip-evaluation-of-the-ast">Skip evaluation of the <code>AST</code></a></h3>
 <p>By default, the <a href="/book/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="/book/language/functions.html">function</a>.
 A parameter can be passed to skip this evaluation.</p>
@@ -377,9 +383,9 @@ let foo = 123;                      // 'foo' is retained
 │ Rust │
 └──────┘
 
-engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;, None, [])?;
-//                                   ^^^^ evaluate AST before call
-//                                         ^^^^^ do not rewind scope
+let options = CallFnOptions::new().rewind_scope(false);
+
+engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;initialize&quot;, ())?;
 
 // At this point, 'scope' contains these variables: 'foo', 'x', 'y'
 </code></pre>
@@ -393,21 +399,18 @@ engine.call_fn_raw(&amp;mut scope, &amp;ast, true, false, &quot;initialize&quot;
 <p><code>Engine::call_fn</code> cannot call functions in <em>method-call</em> style.</p>
 </div>
 </div>
-<p><code>Engine::call_fn_raw</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/book/language/functions.html">function</a>.</p>
+<p><code>Engine::call_fn_with_options</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/book/language/functions.html">function</a>.</p>
 <p>It is possible, then, to call a <a href="/book/language/functions.html">function</a> that uses <code>this</code>.</p>
 <pre><code class="language-rust">let ast = engine.compile(&quot;fn action(x) { this += x; }&quot;)?;
 
 let mut value: Dynamic = 1_i64.into();
 
-engine.call_fn_raw(
-            &amp;mut scope,
-            &amp;ast,
-            false,
-            false,
-            &quot;action&quot;,
-            Some(&amp;mut value),       // binding the 'this' pointer
-            [ 41_i64.into() ]
-       )?;
+let options = CallFnOptions::new()
+                .eval_ast(false)
+                .rewind_scope(false)
+                .bind_this_ptr(&amp;mut value);
+
+engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;action&quot;, ( 41_i64, ))?;
 
 assert_eq!(value.as_int()?, 42);
 </code></pre>

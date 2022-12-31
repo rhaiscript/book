@@ -198,8 +198,8 @@ added or removed.</p>
 <tr><td><code>insert</code></td><td><ol><li>position, counting from end if &lt; 0, end if ≥ length</li><li>element to insert</li></ol></td><td>inserts an element at a certain position</td></tr>
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last element and returns it (<code>()</code> if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first element and returns it (<code>()</code> if empty)</td></tr>
-<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of items to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a portion of the array into a new array</td></tr>
-<tr><td><code>extract</code></td><td><a href="ranges.html">range</a> of items to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of elements to extract, none if ≤ 0, to end if omitted</li></ol></td><td>extracts a portion of the array into a new array</td></tr>
+<tr><td><code>extract</code></td><td><a href="ranges.html">range</a> of elements to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the array into a new array</td></tr>
 <tr><td><code>remove</code></td><td>position, counting from end if &lt; 0</td><td>removes an element at a particular position and returns it (<code>()</code> if the position is not valid)</td></tr>
 <tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the array</td></tr>
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of elements</td></tr>
@@ -209,25 +209,28 @@ added or removed.</p>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the array at exactly a specified length (discarding all subsequent elements)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the array, leaving the tail at exactly a specified length</td></tr>
 <tr><td><code>split</code></td><td><ol><li>array</li><li>position to split at, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>splits the array into two arrays, starting from a specified position</td></tr>
-<tr><td><code>drain</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></li></ol></td><td>removes all items (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to remove, none if ≤ 0</li></ol></td><td>removes a portion of the array, returning the removed items as a new array</td></tr>
-<tr><td><code>drain</code></td><td><a href="ranges.html">range</a> of items to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the array, returning the removed items as a new array</td></tr>
-<tr><td><code>retain</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></li></ol></td><td>removes all items (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to retain, none if ≤ 0</li></ol></td><td>retains a portion of the array, removes all other items and returning them as a new array</td></tr>
-<tr><td><code>retain</code></td><td><a href="ranges.html">range</a> of items to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the array, removes all other bytes and returning them as a new array</td></tr>
-<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of items to remove, none if ≤ 0</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>splice</code></td><td><ol><li><a href="ranges.html">range</a> of items to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>filter</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></td><td>constructs a new array with all items that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
+<tr><td><code>for_each</code></td><td><a href="fn-ptr.html">function pointer</a> for processing elements</td><td>run through each element in the array in order, binding each to <code>this</code> and calling the processing function taking the following parameters: <ol><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>drain</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to remove, none if ≤ 0</li></ol></td><td>removes a portion of the array, returning the removed elements as a new array</td></tr>
+<tr><td><code>drain</code></td><td><a href="ranges.html">range</a> of elements to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the array, returning the removed elements as a new array</td></tr>
+<tr><td><code>retain</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to retain, none if ≤ 0</li></ol></td><td>retains a portion of the array, removes all other elements and returning them as a new array</td></tr>
+<tr><td><code>retain</code></td><td><a href="ranges.html">range</a> of elements to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the array, removes all other bytes and returning them as a new array</td></tr>
+<tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of elements to remove, none if ≤ 0</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>splice</code></td><td><ol><li><a href="ranges.html">range</a> of elements to remove, from beginning if ≤ 0, to end if ≥ length</li><li>array to insert</li></ol></td><td>replaces a portion of the array with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>filter</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</td><td>constructs a new array with all elements that return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>contains</code>, <code>in</code> operator</td><td>element to find</td><td>does the array contain an element? The <code>==</code> operator is used for comparison</td></tr>
-<tr><td><code>index_of</code></td><td><ol><li>element to find (not a <a href="fn-ptr.html">function pointer</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first item in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</li></ol></td></tr>
-<tr><td><code>index_of</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first item in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a [string]; if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> items in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two items in the array</td></tr>
-<tr><td><code>map</code></td><td><a href="fn-ptr.html">function pointer</a> to conversion function (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></td><td>constructs a new array with all items mapped to the result of applying the conversion function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>reduce</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value (<code>()</code> initially)</li><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>reduce_rev</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters:<ol><li>accumulated value (<code>()</code> initially)</li><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>some</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></td><td>returns <code>true</code> if any item returns <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>all</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></td><td>returns <code>true</code> if all items return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>array item</li><li><em>(optional)</em> offset position</li></ol></td></tr>
-<tr><td><code>sort</code></td><td><a href="fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="fn-closure.html">closure</a>), or the function name as a <a href="strings-chars.html">string</a></td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first item</li><li>second item<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>index_of</code></td><td><ol><li>element to find (not a <a href="fn-ptr.html">function pointer</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first element in the array that equals the supplied element (using the <code>==</code> operator, if defined), or −1 if not found</li></ol></td></tr>
+<tr><td><code>index_of</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the position of the first element in the array that returns <code>true</code> when called with the predicate function, or −1 if not found:<ol><li><code>this</code>: array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>find</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the first element in the array that returns <code>true</code> when called with the predicate function, or <code>()</code> if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>find_map</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</li><li><em>(optional)</em> start position, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>returns the first non-<code>()</code> value of the first element in the array when called with the predicate function, or <code>()</code> if not found:<ol><li>array element (if none, the array element is bound to <code>this</code>)</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>dedup</code></td><td><em>(optional)</em> <a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>); if omitted, the <code>==</code> operator is used, if defined</td><td>removes all but the first of <em>consecutive</em> elements in the array that return <code>true</code> when called with the predicate function (non-consecutive duplicates are <em>not</em> removed):<br/>1st &amp; 2nd parameters: two elements in the array</td></tr>
+<tr><td><code>map</code></td><td><a href="fn-ptr.html">function pointer</a> to conversion function (usually a <a href="fn-closure.html">closure</a>)</td><td>constructs a new array with all elements mapped to the result of applying the conversion function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>reduce</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<code>()</code> initially)</li><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>reduce_rev</code></td><td><ol><li><a href="fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<code>()</code> initially)</li><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>some</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any element returns <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>all</code></td><td><a href="fn-ptr.html">function pointer</a> to predicate (usually a <a href="fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all elements return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
+<tr><td><code>sort</code></td><td><a href="fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="strings-chars.html">string</a>, <a href="strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
 </tbody></table>
 </div>
@@ -247,11 +250,11 @@ y[1] == 2;
 y[2] == 3;
 y[3] == 4;
 
-(1 in y) == true;           // use 'in' to test if an item exists in the array
+(1 in y) == true;           // use 'in' to test if an element exists in the array
 
 (42 in y) == false;         // 'in' uses the 'contains' function, which uses the
                             // '==' operator (that users can override)
-                            // to check if the target item exists in the array
+                            // to check if the target element exists in the array
 
 y.contains(1) == true;      // the above de-sugars to this
 
@@ -295,8 +298,8 @@ y.pop() == 5;               // y == [4, 4]
 
 y.len == 2;
 
-for item in y {             // arrays can be iterated with a 'for' statement
-    print(item);
+for element in y {             // arrays can be iterated with a 'for' statement
+    print(element);
 }
 
 y.pad(6, &quot;hello&quot;);          // y == [4, 4, &quot;hello&quot;, &quot;hello&quot;, &quot;hello&quot;, &quot;hello&quot;]
@@ -317,9 +320,13 @@ let a = [42, 123, 99];
 
 a.map(|v| v + 1);           // returns [43, 124, 100]
 
+a.map(|| this + 1);         // returns [43, 124, 100]
+
 a.map(|v, i| v + i);        // returns [42, 124, 101]
 
 a.filter(|v| v &gt; 50);       // returns [123, 99]
+
+a.filter(|| this &gt; 50);     // returns [123, 99]
 
 a.filter(|v, i| i == 1);    // returns [123]
 
@@ -331,15 +338,18 @@ a.filter(|v| is_odd(v));    // &lt;- or this
 
 a.some(|v| v &gt; 50);         // returns true
 
+a.some(|| this &gt; 50);       // returns true
+
 a.some(|v, i| v &lt; i);       // returns false
-
-a.none(|v| v != 0);         // returns false
-
-a.none(|v, i| v == i);      // returns true
 
 a.all(|v| v &gt; 50);          // returns false
 
+a.all(|| this &gt; 50);        // returns false
+
 a.all(|v, i| v &gt; i);        // returns true
+
+// Reducing - initial value provided directly
+a.reduce(|sum| sum + this, 0) == 264;
 
 // Reducing - initial value provided directly
 a.reduce(|sum, v| sum + v, 0) == 264;
@@ -354,15 +364,18 @@ a.reduce(|sum, v, i|
     if i == 0 { v } else { sum + v }
 ) == 264;
 
-// Reducing - initial value provided directly
+// Reducing in reverse - initial value provided directly
+a.reduce_rev(|sum| sum + this, 0) == 264;
+
+// Reducing in reverse - initial value provided directly
 a.reduce_rev(|sum, v| sum + v, 0) == 264;
 
-// Reducing - initial value is '()'
+// Reducing in reverse - initial value is '()'
 a.reduce_rev(
     |sum, v| if sum.type_of() == &quot;()&quot; { v } else { sum + v }
 ) == 264;
 
-// Reducing - initial value has index position == 0
+// Reducing in reverse - initial value has index position == 0
 a.reduce_rev(|sum, v, i|
     if i == 2 { v } else { sum + v }
 ) == 264;

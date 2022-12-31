@@ -171,7 +171,10 @@ let mut engine = Engine::new();
 
 engine.register_debugger(
     // Provide a callback to initialize the debugger state
-    |engine| { ... },
+    |engine, mut debugger| {
+        debugger.set_state(...);
+        debugger
+    },
     // Provide a callback for each debugging step
     |context, event, node, source, pos| {
         ...
@@ -187,15 +190,15 @@ engine.register_debugger(
 </div>
 <div>
 <p>The type <code>debugger::Debugger</code> allows for manipulating <a href="/book/engine/debugging/break-points.html">break-points</a>, among others.</p>
-<p>The <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>context.global_runtime_state_mut().debugger</code>.</p>
+<p>The <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>context.global_runtime_state().debugger()</code> (immutable)
+or <code>context.global_runtime_state_mut().debugger_mut()</code> (mutable).</p>
 </div>
 </div>
 <h2 id="callback-functions-signature"><a class="header" href="#callback-functions-signature">Callback Functions Signature</a></h2>
 <p>There are two callback functions to register for the debugger.</p>
-<p>The first is simply a function to initialize the state of the debugger (a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value),
-with the following signature.</p>
+<p>The first is simply a function to initialize the state of the debugger with the following signature.</p>
 <blockquote>
-<p><code>Fn() -&gt; Dynamic</code></p>
+<p><code>Fn(&amp;Engine, debugger::Debugger) -&gt; debugger::Debugger</code></p>
 </blockquote>
 <p>The second callback is a function which will be called by the debugger during each step, with the
 following signature.</p>

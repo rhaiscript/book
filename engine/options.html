@@ -185,6 +185,7 @@ features contained inside the <a href="/book/engine/compile.html"><code>AST</cod
 <h2 id="runtime-behavior"><a class="header" href="#runtime-behavior">Runtime Behavior</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>set_fail_on_invalid_map_property</code><br/>(not available under <a href="/book/start/features.html"><code>no_object</code></a>)</td><td>sets whether to raise errors (instead of returning <a href="/book/language/values-and-types.html"><code>()</code></a>) when invalid properties are accessed on <a href="/book/language/object-maps.html">object maps</a></td></tr>
+<tr><td><code>set_default_tag</code></td><td>sets the default value of the <em>custom state</em> (which can be obtained via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>) for each evaluation run</td></tr>
 </tbody></table>
 </div>
 <h2 id="safety-limits"><a class="header" href="#safety-limits">Safety Limits</a></h2>

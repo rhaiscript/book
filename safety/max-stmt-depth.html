@@ -163,19 +163,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="maximum-expression-nesting-depth"><a class="header" href="#maximum-expression-nesting-depth">Maximum Expression Nesting Depth</a></h1>
-<p>Rhai by default limits statement and expression nesting to a maximum depth of 64
-(which should be plenty) when they are at <em>global</em> level, but only a depth of 32
-when they are within <a href="/book/language/functions.html">function</a> bodies.</p>
+<p>Rhai by default limits statement and expression nesting to a maximum depth of 64 (which should be
+plenty) when they are at <em>global</em> level, but only a depth of 32 when they are within <a href="/book/language/functions.html">function</a> bodies.</p>
 <p>For debug builds, these limits are set further downwards to 32 and 16 respectively.</p>
-<p>That is because it is possible to overflow the <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s stack when it tries to
-recursively parse an extremely deeply-nested code stream.</p>
+<p>That is because it is possible to overflow the <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s stack when it tries to recursively parse
+an extremely deeply-nested code stream.</p>
 <pre><code class="language-rust">// The following, if long enough, can easily cause stack overflow during parsing.
 let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));
 </code></pre>
 <p>This limit may be changed via <a href="/book/engine/options.html"><code>Engine::set_max_expr_depths</code></a>.</p>
 <p>There are two limits to set, one for the maximum depth at global level, and the other for <a href="/book/language/functions.html">function</a> bodies.</p>
-<p>A script exceeding the maximum nesting depths will terminate with a parse error.
-The malicious <a href="/book/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
+<p>A script exceeding the maximum nesting depths will terminate with a parse error. The malicious
+<a href="/book/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
 <p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 

@@ -214,11 +214,14 @@ struct Handler {
         // Convert the object map into 'Dynamic'
         let mut states: Dynamic = states.into();
 
-        // Use 'call_fn_raw' instead of 'call_fn' to bind the 'this' pointer
+        // Use 'call_fn_with_options' instead of 'call_fn' to bind the 'this' pointer
+        let options = CallFnOptions::new()
+                        .eval_ast(false)                // do not re-evaluate the AST
+                        .rewind_scope(true)             // rewind scope
+                        .bind_this_ptr(&amp;mut states);    // bind the 'this' pointer
+
         // In a real application you'd again be handling errors...
-        engine.call_fn_raw(&amp;mut scope, &amp;ast, false, true, &quot;init&quot;, Some(&amp;mut states), []).unwrap();
-        //                                          ^^^^          ^^^^^^^^^^^^^^^^^
-        //                                      rewind scope      bind 'this' pointer
+        engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;init&quot;, ()).unwrap();
 
                     :
             // Code omitted
@@ -229,19 +232,22 @@ struct Handler {
 }
 </code></pre>
 <h2 id="bind-this-pointer-during-events-handling"><a class="header" href="#bind-this-pointer-during-events-handling">Bind <code>this</code> Pointer During Events Handling</a></h2>
-<p>Events handling should also use <code>Engine::call_fn_raw</code> to bind the <a href="/book/language/object-maps.html">object map</a> containing global
-states to the <code>this</code> pointer.</p>
+<p>Events handling should also use <code>Engine::call_fn_with_options</code> to bind the <a href="/book/language/object-maps.html">object map</a> containing
+global states to the <code>this</code> pointer via <code>CallFnOptions::this_ptr</code>.</p>
 <pre><code class="language-rust">pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Dynamic {
     let engine = &amp;self.engine;
     let scope = &amp;mut self.scope;
     let states = &amp;mut self.states;
     let ast = &amp;self.ast;
 
+    let options = CallFnOptions::new()
+                    .eval_ast(false)                // do not re-evaluate the AST
+                    .rewind_scope(true)             // rewind scope
+                    .bind_this_ptr(&amp;mut states);    // bind the 'this' pointer
+
     match event_name {
         // In a real application you'd be handling errors...
-        &quot;start&quot; =&gt; engine.call_fn_raw(scope, ast, false, true, &quot;start&quot;,
-                                      Some(states), [event_data.into()]).unwrap(),
-                                   // ^^^^^^^^^^^^ bind 'this' pointer
+        &quot;start&quot; =&gt; engine.call_fn_with_options(options, scope, ast, &quot;start&quot;, (event_data,)).unwrap(),
             :
             :
     }
@@ -269,7 +275,7 @@ necessary for <a href="/book/language/functions.html">functions</a> to always ac
 fn init() {
     // Can detect system-provided default states!
     // Add 'bool_state' as new state variable if one does not exist
-    if !(&quot;bool_state&quot; in this) {
+    if &quot;bool_state&quot; !in this {
         this.bool_state = false;
     }
     // Add 'obj_state' as new state variable (overwrites any existing)
