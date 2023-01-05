@@ -87,7 +87,7 @@ Standard [packages][built-in packages] can also be excluded to yield additional 
 Speed
 -----
 
-In benchmark tests, a WASM build runs scripts roughly 1.7-2.2x slower than a native optimized release build.
+In benchmark tests, a WASM build runs scripts roughly 30% slower than a native optimized release build.
 
 
 Common Features

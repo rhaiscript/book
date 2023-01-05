@@ -183,17 +183,19 @@ let result = engine.call_fn_with_options::<i64>(
 ### Skip evaluation of the `AST`
 
 By default, the [`AST`] is evaluated before calling the target [function].
-A parameter can be passed to skip this evaluation.
+
+Setting `eval_ast` to `false` skips this evaluation.
 
 ### Keep new variables/constants
 
 By default, the [`Engine`] _rewinds_ the custom [`Scope`] after each call to the initial size,
 so any new [variable]/[constant] defined are cleared and will not spill into the custom [`Scope`].
 
-This keeps the [`Scope`] from being continuously polluted by new [variables] and is usually the
-expected intuitive behavior.
+This prevents the [`Scope`] from being continuously polluted by new [variables] and is usually the
+intuitively expected behavior.
 
-A parameter can be passed to keep new [variables]/[constants] within the custom [`Scope`].
+Setting `rewind_scope` to `false` retains new [variables]/[constants] within the custom [`Scope`].
+
 This allows the [function] to easily pass values back to the caller by leaving them inside the
 custom [`Scope`].
 
@@ -251,7 +253,7 @@ engine.call_fn_with_options(options, &mut scope, &ast, "initialize", ())?;
 `Engine::call_fn` cannot call functions in _method-call_ style.
 ```
 
-`Engine::call_fn_with_options` can also bind a value to the `this` pointer of a script-defined [function].
+`CallFnOptions` can also bind a value to the `this` pointer of a script-defined [function].
 
 It is possible, then, to call a [function] that uses `this`.
 
