@@ -245,7 +245,7 @@ rhai = { version = &quot;1.12.0&quot;, default-features = false, features = [ &q
 <p>When excluding features that are marginal in WASM environment, the gzipped payload can be shrunk further.</p>
 <p>Standard <a href="/book/rust/packages/builtin.html">packages</a> can also be excluded to yield additional size savings.</p>
 <h2 id="speed"><a class="header" href="#speed">Speed</a></h2>
-<p>In benchmark tests, a WASM build runs scripts roughly 1.7-2.2x slower than a native optimized release build.</p>
+<p>In benchmark tests, a WASM build runs scripts roughly 30% slower than a native optimized release build.</p>
 <h2 id="common-features"><a class="header" href="#common-features">Common Features</a></h2>
 <p>Some Rhai functionalities are not necessary in a WASM environment, so the following features
 are typically used for a WASM build:</p>

@@ -331,15 +331,15 @@ let result = engine.call_fn_with_options::&lt;i64&gt;(
 </tbody></table>
 </div>
 <h3 id="skip-evaluation-of-the-ast"><a class="header" href="#skip-evaluation-of-the-ast">Skip evaluation of the <code>AST</code></a></h3>
-<p>By default, the <a href="/book/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="/book/language/functions.html">function</a>.
-A parameter can be passed to skip this evaluation.</p>
+<p>By default, the <a href="/book/engine/compile.html"><code>AST</code></a> is evaluated before calling the target <a href="/book/language/functions.html">function</a>.</p>
+<p>Setting <code>eval_ast</code> to <code>false</code> skips this evaluation.</p>
 <h3 id="keep-new-variablesconstants"><a class="header" href="#keep-new-variablesconstants">Keep new variables/constants</a></h3>
 <p>By default, the <a href="/book/engine/hello-world.html"><code>Engine</code></a> <em>rewinds</em> the custom <a href="/book/engine/scope.html"><code>Scope</code></a> after each call to the initial size,
 so any new <a href="/book/language/variables.html">variable</a>/<a href="/book/language/constants.html">constant</a> defined are cleared and will not spill into the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
-<p>This keeps the <a href="/book/engine/scope.html"><code>Scope</code></a> from being continuously polluted by new <a href="/book/language/variables.html">variables</a> and is usually the
-expected intuitive behavior.</p>
-<p>A parameter can be passed to keep new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.
-This allows the <a href="/book/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
+<p>This prevents the <a href="/book/engine/scope.html"><code>Scope</code></a> from being continuously polluted by new <a href="/book/language/variables.html">variables</a> and is usually the
+intuitively expected behavior.</p>
+<p>Setting <code>rewind_scope</code> to <code>false</code> retains new <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
+<p>This allows the <a href="/book/language/functions.html">function</a> to easily pass values back to the caller by leaving them inside the
 custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <div id="admonition-warning-new-variables-persist-in-scope" class="admonition warning small">
 <div class="admonition-title">
@@ -399,7 +399,7 @@ engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, &quot;initialize&
 <p><code>Engine::call_fn</code> cannot call functions in <em>method-call</em> style.</p>
 </div>
 </div>
-<p><code>Engine::call_fn_with_options</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/book/language/functions.html">function</a>.</p>
+<p><code>CallFnOptions</code> can also bind a value to the <code>this</code> pointer of a script-defined <a href="/book/language/functions.html">function</a>.</p>
 <p>It is possible, then, to call a <a href="/book/language/functions.html">function</a> that uses <code>this</code>.</p>
 <pre><code class="language-rust">let ast = engine.compile(&quot;fn action(x) { this += x; }&quot;)?;
 
