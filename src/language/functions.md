@@ -5,6 +5,8 @@ Functions
 
 Rhai supports defining functions in script, with a syntax that is very similar to Rust without types.
 
+Valid function names are the same as valid [variable] names.
+
 ```rust
 fn add(x, y) {
     x + y

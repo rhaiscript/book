@@ -3,6 +3,8 @@ Functions
 
 Rhai supports defining functions in script.
 
+Valid function names are the same as valid [variable](variables.md) names.
+
 ```rust
 fn add(x, y) {
     x + y
