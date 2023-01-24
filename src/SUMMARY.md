@@ -74,7 +74,7 @@ Rust Integration
     - [Built-in Module Resolvers](rust/modules/resolvers/built-in.md)
       - [`DummyModuleResolver`](rust/modules/resolvers/dummy.md)
       - [`FileModuleResolver`](rust/modules/resolvers/file.md)
-      - [`StaticeModuleResolver`](rust/modules/resolvers/static.md)
+      - [`StaticModuleResolver`](rust/modules/resolvers/static.md)
       - [`ModuleResolversCollection`](rust/modules/resolvers/collection.md)
       - [`DylibModuleResolver` (external)](rust/modules/resolvers/dylib.md)
     - [Custom Module Resolvers](rust/modules/resolvers/custom.md)

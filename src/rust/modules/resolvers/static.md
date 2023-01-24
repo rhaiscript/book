@@ -1,5 +1,5 @@
-`StaticeModuleResolver`
-=======================
+`StaticModuleResolver`
+======================
 
 {{#include ../../../links.md}}
 
