@@ -441,7 +441,7 @@ mod my_module {
     }
     // This is an index setter for 'TestStruct'.
     #[rhai_fn(index_set)]
-    pub fn get_index(obj: &mut TestStruct, index: i64, state: bool) {
+    pub fn set_index(obj: &mut TestStruct, index: i64, state: bool) {
         obj.list[index] = state;
     }
 }
