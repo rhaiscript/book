@@ -83,8 +83,8 @@
 [`to_hex`]: {{rootUrl}}/language/convert.md
 [`in`]: {{rootUrl}}/language/in.md
 
-[custom type]: {{rootUrl}}/rust/custom-type.md
-[custom types]: {{rootUrl}}/rust/custom-type.md
+[custom type]: {{rootUrl}}/rust/custom-types.md
+[custom types]: {{rootUrl}}/rust/custom-types.md
 [method]: {{rootUrl}}/rust/methods.md
 [methods]: {{rootUrl}}/rust/methods.md
 [getters/setters]: {{rootUrl}}/rust/getters-setters.md
