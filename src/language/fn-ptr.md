@@ -117,7 +117,7 @@ fn increment(x) {
     x + 1
 }
 
-export let inc = increment;         // exports a function pointer
+export const inc = increment;       // exports a function pointer
 
 
 ┌───────────┐
@@ -129,7 +129,7 @@ import "my_module" as my_mod;
 print(my_mod::increment(41));       // ok!
 
 let x = my_mod::inc.call(41);       // runtime error:
-                                    //    function 'increment' not found
+                                    //   function 'increment' not found
 ```
 ~~~
 

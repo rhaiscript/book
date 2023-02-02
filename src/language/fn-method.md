@@ -40,3 +40,54 @@ The [_Elvis_ operator][elvis] can be used to short-circuit the method call when 
 > _object_ `?.` _method_ `(` _parameters_ ... `)`
 
 In the above, the _method_ is never called if _object_ is [`()`].
+
+
+Bind to `this` for Module Functions
+-----------------------------------
+
+The _method-call_ syntax is not possible for [functions] [imported][`import`] from [modules](modules/index.md).
+
+```js
+import "my_module" as foo;
+
+let x = 42;
+
+x.foo::change_value(1);     // <- syntax error
+```
+
+In order to call a [module](modules/index.md) [function] as a method, export that method as a
+[function pointer] and use the `call` syntax:
+
+```js
+┌────────────────┐
+│ my_module.rhai │
+└────────────────┘
+
+// The actual function that uses 'this'
+private fn change_value_impl(offset) {
+    this += offset;
+}
+
+// Export it as a function pointer
+export const change_value = change_value_impl;
+
+// The above is equivalent to:
+export const change_value = Fn("change_value_impl");
+
+// Or do it in one step via a closure
+export const change_value = |offset| this += offset;
+
+
+┌───────────┐
+│ main.rhai │
+└───────────┘
+
+import "my_module" as foo;
+
+let x = 42;
+
+// Use 'call' to bind 'x' to 'this'
+x.call(foo::change_value, 1);
+
+x == 43;
+```
