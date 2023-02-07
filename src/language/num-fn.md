@@ -118,3 +118,9 @@ The following functions return standard mathematical constants.
 | -------- | ------------------------- |
 | `PI`     | returns the value of &pi; |
 | `E`      | returns the value of _e_  |
+
+
+Numerical Functions for Scientific Computing
+--------------------------------------------
+
+Check out the [`rhai-sci`] crate for more numerical functions.
