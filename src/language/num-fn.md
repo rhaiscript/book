@@ -7,28 +7,23 @@ Numeric Functions
 Integer Functions
 -----------------
 
-The following standard functions (defined in the [`ArithmeticPackage`][built-in packages] but
-excluded when using a [raw `Engine`]) operate on integers only.
+The following standard functions are defined.
 
-| Function                      | Description                                                      |
-| ----------------------------- | ---------------------------------------------------------------- |
-| `is_odd` method and property  | returns `true` if the value is an odd number, otherwise `false`  |
-| `is_even` method and property | returns `true` if the value is an even number, otherwise `false` |
-
-The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but
-excluded when using a [raw `Engine`]) operate on integers only.
-
-| Function     | Not available under | Description                                              |
-| ------------ | :-----------------: | -------------------------------------------------------- |
-| `to_float`   |    [`no_float`]     | convert the value into `f64` (`f32` under [`f32_float`]) |
-| `to_decimal` |   non-[`decimal`]   | convert the value into [`Decimal`][rust_decimal]         |
+| Function                      | Not available under |                 Package                  | Description                                                      |
+| ----------------------------- | :-----------------: | :--------------------------------------: | ---------------------------------------------------------------- |
+| `is_odd` method and property  |                     | [`ArithmeticPackage`][built-in packages] | returns `true` if the value is an odd number, otherwise `false`  |
+| `is_even` method and property |                     | [`ArithmeticPackage`][built-in packages] | returns `true` if the value is an even number, otherwise `false` |
+| `min`                         |                     |   [`LogicPackage`][built-in packages]    | returns the smaller of two numbers, the first number if equal    |
+| `max`                         |                     |   [`LogicPackage`][built-in packages]    | returns the larger of two numbers, the first number if equal     |
+| `to_float`                    |    [`no_float`]     | [`BasicMathPackage`][built-in packages]  | convert the value into `f64` (`f32` under [`f32_float`])         |
+| `to_decimal`                  |   non-[`decimal`]   | [`BasicMathPackage`][built-in packages]  | convert the value into [`Decimal`][rust_decimal]                 |
 
 
 Signed Numeric Functions
 ------------------------
 
-The following standard functions (defined in the [`ArithmeticPackage`][built-in packages] but
-excluded when using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and
+The following standard functions are defined in the [`ArithmeticPackage`][built-in packages]
+(excluded when using a [raw `Engine`]) and operate on `i8`, `i16`, `i32`, `i64`, `f32`, `f64` and
 [`Decimal`][rust_decimal] (requires [`decimal`]) only.
 
 | Function                      | Description                                                    |
@@ -41,8 +36,8 @@ excluded when using a [raw `Engine`]) operate on `i8`, `i16`, `i32`, `i64`, `f32
 Floating-Point Functions
 ------------------------
 
-The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but
-excluded when using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`]) and
+The following standard functions are defined in the [`BasicMathPackage`][built-in packages]
+(excluded when using a [raw `Engine`]) and operate on `f64` (`f32` under [`f32_float`]) and
 [`Decimal`][rust_decimal] (requires [`decimal`]) only.
 
 | Category         | Supports `Decimal` | Functions                                                                                |
@@ -58,15 +53,16 @@ excluded when using a [raw `Engine`]) operate on `f64` (`f32` under [`f32_float`
 | Rounding         |        yes         | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
 | Conversion       |        yes         | [`to_int`], [`to_decimal`] (requires [`decimal`]), [`to_float`] (not under [`no_float`]) |
 | Conversion       |         no         | `to_degrees`, `to_radians`                                                               |
+| Comparison       |        yes         | `min`, `max` (also inter-operates with integers)                                         |
 | Testing          |         no         | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
 Decimal Rounding Functions
 --------------------------
 
-The following rounding methods (defined in the [`BasicMathPackage`][built-in packages] but excluded
-when using a [raw `Engine`]) operate on [`Decimal`][rust_decimal] only, which requires the
-[`decimal`] feature.
+The following rounding methods are defined in the [`BasicMathPackage`][built-in packages]
+(excluded when using a [raw `Engine`]) and operate on [`Decimal`][rust_decimal] only,
+which requires the [`decimal`] feature.
 
 | Rounding type     | Behavior                                    | Methods                                                      |
 | ----------------- | ------------------------------------------- | ------------------------------------------------------------ |
@@ -82,8 +78,8 @@ when using a [raw `Engine`]) operate on [`Decimal`][rust_decimal] only, which re
 Parsing Functions
 -----------------
 
-The following standard functions (defined in the [`BasicMathPackage`][built-in packages] but
-excluded when using a [raw `Engine`]) parse numbers.
+The following standard functions are defined in the [`BasicMathPackage`][built-in packages]
+(excluded when using a [raw `Engine`]) to parse numbers.
 
 | Function          |        No available under        | Description                                                                                   |
 | ----------------- | :------------------------------: | --------------------------------------------------------------------------------------------- |
@@ -95,9 +91,9 @@ excluded when using a [raw `Engine`]) parse numbers.
 Formatting Functions
 --------------------
 
-The following standard functions (defined in the [`BasicStringPackage`][built-in packages] but
-excluded when using a [raw `Engine`]) convert integer numbers into a [string] of hex, octal or
-binary representations.
+The following standard functions are defined in the [`BasicStringPackage`][built-in packages]
+(excluded when using a [raw `Engine`]) to convert integer numbers into a [string] of hex, octal
+or binary representations.
 
 | Function      | Description                          |
 | ------------- | ------------------------------------ |

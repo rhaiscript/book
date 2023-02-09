@@ -12,6 +12,8 @@ The following standard functions operate on integers only.
 | ----------------------------- | ---------------------------------------------------------------- |
 | `is_odd` method and property  | returns `true` if the value is an odd number, otherwise `false`  |
 | `is_even` method and property | returns `true` if the value is an even number, otherwise `false` |
+| `min`                         | returns the smaller of two numbers, the first number if equal    |
+| `max`                         | returns the larger of two numbers, the first number if equal     |
 | `to_float`                    | convert the value into `f64` (`f32` under 32-bit)                |
 | `to_decimal`                  | convert the value into decimal                                   |
 
@@ -19,7 +21,7 @@ The following standard functions operate on integers only.
 Signed Numeric Functions
 ------------------------
 
-The following standard functions operate on signed integers and decimal numbers only.
+The following standard functions operate on signed numbers (including floating-point and decimal) only.
 
 | Function                      | Description                                            |
 | ----------------------------- | ------------------------------------------------------ |
@@ -45,6 +47,7 @@ The following standard functions operate on floating-point and decimal numbers o
 | Rounding         |   yes    | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
 | Conversion       |   yes    | [`to_int`](convert.md), [`to_decimal`](convert.md), [`to_float`](convert.md)             |
 | Conversion       |    no    | `to_degrees`, `to_radians`                                                               |
+| Comparison       |   yes    | `min`, `max` (also inter-operates with integers)                                         |
 | Testing          |    no    | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
