@@ -354,6 +354,10 @@ let matrix = @|  a   b   0  |
 This can easily be done via a custom syntax, which yields a syntax that is more pleasing.
 
 ```rust
+// Disable the '|' symbol since it'll conflict with the bit-wise OR operator.
+// Do this BEFORE registering the custom syntax.
+engine.disable_symbol("|");
+
 engine.register_custom_syntax(
     ["@", "|", "$expr$", "$expr$", "$expr$", "|", 
           "|", "$expr$", "$expr$", "$expr$", "|",
@@ -365,8 +369,8 @@ engine.register_custom_syntax(
 
         let mut values = [[0.0; 3]; 3];
 
-        for y in 0..2 {
-            for x in 0..2 {
+        for y in 0..3 {
+            for x in 0..3 {
                 let offset = y * 3 + x;
 
                 match context.eval_expression_tree(&inputs[offset])?.as_float() {
