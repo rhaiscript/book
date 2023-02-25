@@ -116,7 +116,7 @@ mod MyEnumModule {
     // Printing
     #[rhai_fn(global, name = "to_string", name = "to_debug", pure)]
     pub fn to_string(my_enum: &mut MyEnum) -> String {
-        format!("{:?}", my_enum)
+        format!("{my_enum:?}")
     }
 
     // '==' and '!=' operators

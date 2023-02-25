@@ -84,7 +84,7 @@ for index in 0..10000 {
     let user_script = db.get_script(index);
 
     // Just merge the two scripts...
-    let combined_script = format!("{}\n{}\n", header_template, user_script);
+    let combined_script = format!("{header_template}\n{user_script}\n");
 
     // Run away!
     let result = engine.eval::<i64>(combined_script)?;

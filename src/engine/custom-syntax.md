@@ -249,7 +249,7 @@ fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Resu
 
         // Declare a new variable every three turns...
         if count % 3 == 0 {
-            context.scope_mut().push(format!("{}{}", var_name, count), count);
+            context.scope_mut().push(format!("{var_name}{count}"), count);
         }
 
         // Evaluate the condition expression
