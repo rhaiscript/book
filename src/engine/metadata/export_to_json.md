@@ -93,6 +93,7 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
     "namespace": "internal" | "global",
     "access": "public" | "private",
     "name": "fn_name",
+    "isAnonymous": false,
     "type": "native" | "script",
     "numParams": 42,  /* number of parameters */
     "params":  /* omitted if no parameters */
