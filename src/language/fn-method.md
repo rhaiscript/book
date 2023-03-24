@@ -10,7 +10,7 @@ The only way for a script-defined [function] to change an external value is via 
 
 Arguments passed to script-defined [functions] are always by _value_ because [functions] are _pure_.
 
-However, [functions] can also be called in _method-call_ style:
+However, [functions] can also be called in _method-call_ style (not available under [`no_object`]):
 
 > _object_ `.` _method_ `(` _parameters_ ... `)`
 
@@ -45,7 +45,7 @@ In the above, the _method_ is never called if _object_ is [`()`].
 Bind to `this` for Module Functions
 -----------------------------------
 
-The _method-call_ syntax is not possible for [functions] [imported][`import`] from [modules](modules/index.md).
+The _method-call_ syntax is not possible for [functions] [imported][`import`] from [modules].
 
 ```js
 import "my_module" as foo;
@@ -55,39 +55,31 @@ let x = 42;
 x.foo::change_value(1);     // <- syntax error
 ```
 
-In order to call a [module](modules/index.md) [function] as a method, export that method as a
-[function pointer] and use the `call` syntax:
+In order to call a [module] [function] as a method, it must be defined with a restriction on the
+type of object pointed to by `this`:
 
 ```js
 ┌────────────────┐
 │ my_module.rhai │
 └────────────────┘
 
-// The actual function that uses 'this'
-private fn change_value_impl(offset) {
+// This is a method call requiring 'this' to be an integer.
+// Methods are automatically marked global when importing this module.
+fn int.change_value_impl(offset) {
+    // 'this' is guaranteed to be an integer
     this += offset;
 }
-
-// Export it as a function pointer
-export const change_value = change_value_impl;
-
-// The above is equivalent to:
-export const change_value = Fn("change_value_impl");
-
-// Or do it in one step via a closure
-export const change_value = |offset| this += offset;
 
 
 ┌───────────┐
 │ main.rhai │
 └───────────┘
 
-import "my_module" as foo;
+import "my_module";
 
 let x = 42;
 
-// Use 'call' to bind 'x' to 'this'
-x.call(foo::change_value, 1);
+x.change_value(1);
 
 x == 43;
 ```
