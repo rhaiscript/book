@@ -69,8 +69,19 @@ level of indirection, but for all other purposes there is no difference.
 Register a Custom Type
 ----------------------
 
-The custom type needs to be _registered_ using `Engine::register_type` or
-`Engine::register_type_with_name`.
+```admonish tip.side.wide "Tip: Working with enums"
+
+It is also possible to use Rust enums with Rhai.
+
+See the pattern [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
+```
+
+The custom type needs to be _registered_ using:
+
+| `Engine` API                   | `type_of` output    |
+| ------------------------------ | ------------------- |
+| `register_type::<T>`           | full Rust path name |
+| `register_type_with_name::<T>` | friendly name       |
 
 ```rust
 use rhai::{Engine, EvalAltResult};
@@ -88,7 +99,7 @@ impl TestStruct {
 
 let mut engine = Engine::new();
 
-// Register custom type with friendly  name
+// Register custom type with friendly name
 engine.register_type_with_name::<TestStruct>("TestStruct")
       .register_fn("new_ts", TestStruct::new);
 
@@ -102,21 +113,21 @@ println!("result: {}", result.field);   // prints 1
 
 ```
 
-```admonish tip.small "Tip: Working with enums"
-
-It is also possible to use Rust enums with Rhai.
-
-See the pattern [Working with Enums]({{rootUrl}}/patterns/enums.md) for more details.
-```
-
-
 `type_of()` a Custom Type
 -------------------------
+
+```admonish question.side.wide "Giving types the same name?"
+
+It is OK to register several custom types under the _same_ friendly name
+and `type_of()` will faithfully return it.
+
+How this might possibly be useful is left to the imagination of the user.
+```
 
 [`type_of()`] works fine with custom types and returns the name of the type.
 
 If `Engine::register_type_with_name` is used to register the custom type with a special
-"pretty-print" name, [`type_of()`] will return that name instead.
+"pretty-print" friendly name, [`type_of()`] will return that name instead.
 
 ```rust
 engine.register_type::<TestStruct1>()
