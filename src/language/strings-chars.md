@@ -160,6 +160,19 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 String Interpolation
 --------------------
 
+~~~admonish question.side "What if I want `${` inside?"
+
+🤦 Well, you just _have_ to ask for the impossible, don't you?
+
+Currently there is no way to escape `${`.  Build the string in three pieces:
+
+```js
+`Interpolations start with "`
+    + "${"
+    + `" and end with }.`
+```
+~~~
+
 Multi-line literal strings support _string interpolation_ wrapped in `${` ... `}`.
 
 Interpolation is not supported for normal string or character literals.
