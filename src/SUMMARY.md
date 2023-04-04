@@ -113,6 +113,7 @@ Scripting Language
     - [Ranges](language/ranges.md)
     - [Bit-Fields](language/bit-fields.md)
   - [Strings and Characters](language/strings-chars.md)
+    - [String Interpolation](language/string-interp.md)
     - [`ImmutableString`](rust/immutable-string.md)
     - [Standard Functions and Operators](language/string-fn.md)
   - [Arrays](language/arrays.md)
