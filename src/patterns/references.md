@@ -18,7 +18,10 @@ There are usually alternatives.
 ```admonish info "Usage scenario"
 
 * A system where an embedded [`Engine`] is used to call scripts within a callback function/closure
-  from some external system.  This is extremely common when working with an ECS (Entity Component System).
+  from some external system.
+  
+  This is extremely common when working with an ECS (Entity Component System) or a GUI library where the script
+  must draw via the provided graphics context.
 
 * Said external system provides only _references_ (mutable or immutable) to work with their internal states.
 
