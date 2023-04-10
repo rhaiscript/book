@@ -70,8 +70,8 @@ mod MyEnumModule {
     #[rhai_fn(global, get = "value", pure)]
     pub fn get_value(my_enum: &mut MyEnum) -> Dynamic {
         match my_enum {
+            MyEnum::Foo => Dynamic::UNIT,
             MyEnum::Bar(x) => Dynamic::from(x),
-            MyEnum::Baz(n, _) => Dynamic::from(n),
             MyEnum::Baz(_, f) => Dynamic::from(f),
         }
     }
