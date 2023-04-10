@@ -66,30 +66,13 @@ mod MyEnumModule {
         }
     }
 
-    // Access to inner values by name
-
-    /// Return the value in `MyEnum::Bar`.
-    #[rhai_fn(global, get = "field_0", pure)]
-    pub fn value(my_enum: &mut MyEnum) -> Dynamic {
+    /// Return the inner value.
+    #[rhai_fn(global, get = "value", pure)]
+    pub fn get_value(my_enum: &mut MyEnum) -> Dynamic {
         match my_enum {
             MyEnum::Bar(x) => Dynamic::from(x),
-            _ => Dynamic::UNIT
-        }
-    }
-    /// Return the name in `MyEnum::Baz`.
-    #[rhai_fn(global, get = "field_0", pure)]
-    pub fn value(my_enum: &mut MyEnum) -> Dynamic {
-        match my_enum {
             MyEnum::Baz(n, _) => Dynamic::from(n),
-            _ => Dynamic::UNIT
-        }
-    }
-    /// Return the flag in `MyEnum::Baz`.
-    #[rhai_fn(global, get = "field_0", pure)]
-    pub fn value(my_enum: &mut MyEnum) -> Dynamic {
-        match my_enum {
             MyEnum::Baz(_, f) => Dynamic::from(f),
-            _ => Dynamic::UNIT
         }
     }
 
