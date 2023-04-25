@@ -35,7 +35,7 @@ engine.register_raw_fn(
         let y = *args[1].read_lock::<i64>().unwrap();       // get a reference to the second argument
                                                             // then copy it because it is a primary type
 
-        let y = std::mem::take(args[1]).cast::<i64>();      // alternatively, directly 'consume' it
+        let y = args[1].take().cast::<i64>();               // alternatively, directly 'consume' it
 
         let y = args[1].as_int().unwrap();                  // alternatively, use 'as_xxx()'
 
@@ -109,9 +109,9 @@ To extract an argument passed by value from the `args` parameter (`&mut [&mut Dy
 | `char`                    | `args[n].as_char().unwrap()`                        |                 `char`                  |   untouched    |
 | `()`                      | `args[n].as_unit().unwrap()`                        |                  `()`                   |   untouched    |
 | [String]                  | `&*args[n].read_lock::<ImmutableString>().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
-| [String] (consumed)       | `std::mem::take(args[n]).cast::<ImmutableString>()` |           [`ImmutableString`]           |     [`()`]     |
+| [String] (consumed)       | `args[n].take().cast::<ImmutableString>()`          |           [`ImmutableString`]           |     [`()`]     |
 | Others                    | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
-| Others (consumed)         | `std::mem::take(args[n]).cast::<T>()`               |                   `T`                   |     [`()`]     |
+| Others (consumed)         | `args[n].take().cast::<T>()`                        |                   `T`                   |     [`()`]     |
 
 
 Example &ndash; Pass a Callback to a Rust Function
@@ -143,8 +143,8 @@ engine.register_raw_fn(
     |context, args| {
         // 'args' is guaranteed to contain enough arguments of the correct types
 
-        let fp = std::mem::take(args[1]).cast::<FnPtr>();   // 2nd argument - function pointer
-        let value = std::mem::take(args[2]);                // 3rd argument - function argument
+        let fp = args[1].take().cast::<FnPtr>();            // 2nd argument - function pointer
+        let value = args[2].take();                         // 3rd argument - function argument
 
         // The 1st argument holds the 'this' pointer.
         // This should be done last as it gets a mutable reference to 'args'.
@@ -173,7 +173,7 @@ to the first argument, use one of the following tactics:
 
 1. If it is a [primary type][standard types] other than [string], use `as_xxx()` as above;
 
-2. Directly _consume_ that argument via `std::mem::take` as above;
+2. Directly _consume_ that argument via `arg[i].take()` as above.
 
 3. Use `split_first_mut` to partition the slice:
 
