@@ -30,9 +30,9 @@ The return value is an [array] of [object maps] (so `get_fn_metadata_list` is al
 
 | Field          |         Type         | Optional? | Description                                                                         |
 | -------------- | :------------------: | :-------: | ----------------------------------------------------------------------------------- |
-| `namespace`    |       [string]       |    yes    | the module _namespace_ if the [function] is defined within a [module]               |
+| `namespace`    |       [string]       |  **yes**  | the module _namespace_ if the [function] is defined within a [module]               |
 | `access`       |       [string]       |    no     | `"public"` if the function is public,<br/>`"private"` if it is [private][`private`] |
 | `name`         |       [string]       |    no     | [function] name                                                                     |
 | `params`       | [array] of [strings] |    no     | parameter names                                                                     |
 | `is_anonymous` |        `bool`        |    no     | is this [function] an [anonymous function]?                                         |
-| `comments`     | [array] of [strings] |    yes    | [doc-comments], if any, one per line                                                |
+| `comments`     | [array] of [strings] |  **yes**  | [doc-comments], if any, one per line                                                |

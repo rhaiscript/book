@@ -26,10 +26,10 @@ Features that Enable Special Functionalities
 
 | Feature             | Additive? | Description                                                                                                                                                                                                                                                        |
 | ------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `std`               |    no     | standard features                                                                                                                                                                                                                                                  |
-| `sync`              |    no     | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                                                                                 |
-| `decimal`           |    no     | enables the [`Decimal`][rust_decimal] number type (pulls in the [`rust_decimal`][rust_decimal] crate)                                                                                                                                                              |
-| `unicode-xid-ident` |    no     | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers (pulls in the [`unicode-xid`](https://crates.io/crates/unicode-xid) crate)                                                                                                |
+| `std`               |  **no**   | standard features                                                                                                                                                                                                                                                  |
+| `sync`              |  **no**   | restricts all values types to those that are `Send + Sync`; under this feature, all Rhai types, including [`Engine`], [`Scope`] and [`AST`], are all `Send + Sync`                                                                                                 |
+| `decimal`           |  **no**   | enables the [`Decimal`][rust_decimal] number type (pulls in the [`rust_decimal`][rust_decimal] crate)                                                                                                                                                              |
+| `unicode-xid-ident` |  **no**   | allows [Unicode Standard Annex #31](http://www.unicode.org/reports/tr31/) as identifiers (pulls in the [`unicode-xid`](https://crates.io/crates/unicode-xid) crate)                                                                                                |
 | `serde`             |    yes    | enables serialization/deserialization via `serde` (pulls in the [`serde`](https://crates.io/crates/serde) crate)                                                                                                                                                   |
 | `metadata`          |    yes    | enables exporting [functions metadata]; implies `serde` and additionally pulls in [`serde_json`](https://crates.io/crates/serde_json)                                                                                                                              |
 | `internals`         |    yes    | exposes internal data structures (e.g. [`AST`] nodes);<br/><br/>**Safety Warnings**<ul><li>allowing access to internal types may enable external attack vectors</li><li>internal types and functions are volatile and may change from version to version</li></ul> |
@@ -41,14 +41,14 @@ Features that Disable Certain Language Features
 
 | Feature            | Additive? | Description                                                                                                 |
 | ------------------ | :-------: | ----------------------------------------------------------------------------------------------------------- |
-| `no_float`         |    no     | disables floating-point numbers and math                                                                    |
-| `no_index`         |    no     | disables [arrays] and indexing features                                                                     |
-| `no_object`        |    no     | disables support for [custom types] and [object maps]                                                       |
-| `no_time`          |    no     | disables [timestamps]                                                                                       |
-| `no_function`      |    no     | disables script-defined [functions]; implies `no_closure`                                                   |
-| `no_module`        |    no     | disables loading external [modules]                                                                         |
-| `no_closure`       |    no     | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_ |
-| `no_custom_syntax` |    no     | disables [custom syntax] and [custom operators]                                                             |
+| `no_float`         |  **no**   | disables floating-point numbers and math                                                                    |
+| `no_index`         |  **no**   | disables [arrays] and indexing features                                                                     |
+| `no_object`        |  **no**   | disables support for [custom types] and [object maps]                                                       |
+| `no_time`          |  **no**   | disables [timestamps]                                                                                       |
+| `no_function`      |  **no**   | disables script-defined [functions]; implies `no_closure`                                                   |
+| `no_module`        |  **no**   | disables loading external [modules]                                                                         |
+| `no_closure`       |  **no**   | disables [capturing][automatic currying] external variables in [anonymous functions] to simulate _closures_ |
+| `no_custom_syntax` |  **no**   | disables [custom syntax] and [custom operators]                                                             |
 
 
 Features that Disable Certain Engine Features
@@ -56,9 +56,9 @@ Features that Disable Certain Engine Features
 
 | Feature       | Additive? | Description                                                                                                                                                                                                                                                                                                                                                   |
 | ------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `unchecked`   |    no     | disables [arithmetic checking][checked] (such as over-flows and division by zero), [call stack depth limit][maximum call stack depth], [operations count limit][maximum number of operations], [modules loading limit][maximum number of modules] and [data size limit][maximum length of strings].<br/>Beware that a bad script may panic the entire system! |
-| `no_optimize` |    no     | disables [script optimization]                                                                                                                                                                                                                                                                                                                                |
-| `no_position` |    no     | disables position tracking during parsing                                                                                                                                                                                                                                                                                                                     |
+| `unchecked`   |  **no**   | disables [arithmetic checking][checked] (such as over-flows and division by zero), [call stack depth limit][maximum call stack depth], [operations count limit][maximum number of operations], [modules loading limit][maximum number of modules] and [data size limit][maximum length of strings].<br/>Beware that a bad script may panic the entire system! |
+| `no_optimize` |  **no**   | disables [script optimization]                                                                                                                                                                                                                                                                                                                                |
+| `no_position` |  **no**   | disables position tracking during parsing                                                                                                                                                                                                                                                                                                                     |
 
 
 Features that Configure the Engine
@@ -66,9 +66,9 @@ Features that Configure the Engine
 
 | Feature     | Additive? | Description                                                                                         |
 | ----------- | :-------: | --------------------------------------------------------------------------------------------------- |
-| `f32_float` |    no     | sets the system floating-point type (`FLOAT`) to `f32` instead of `f64`; no effect under `no_float` |
-| `only_i32`  |    no     | sets the system integer type (`INT`) to `i32` and disable all other integer types                   |
-| `only_i64`  |    no     | sets the system integer type (`INT`) to `i64` and disable all other integer types                   |
+| `f32_float` |  **no**   | sets the system floating-point type (`FLOAT`) to `f32` instead of `f64`; no effect under `no_float` |
+| `only_i32`  |  **no**   | sets the system integer type (`INT`) to `i32` and disable all other integer types                   |
+| `only_i64`  |  **no**   | sets the system integer type (`INT`) to `i64` and disable all other integer types                   |
 
 
 Features for `no-std` Builds
@@ -82,7 +82,7 @@ Specify `default-features = false` when compiling for [`no-std`], which will rem
 
 | Feature  | Additive? | Description                                                                                                    |
 | -------- | :-------: | -------------------------------------------------------------------------------------------------------------- |
-| `no_std` |    no     | builds for [`no-std`]; notice that additional dependencies will be pulled in to replace missing `std` features |
+| `no_std` |  **no**   | builds for [`no-std`]; notice that additional dependencies will be pulled in to replace missing `std` features |
 
 
 Features for WebAssembly (WASM) Builds
@@ -93,8 +93,8 @@ Do not use them for non-[WASM] targets.
 
 | Feature        | Additive? | Description                                                                        |
 | -------------- | :-------: | ---------------------------------------------------------------------------------- |
-| `wasm-bindgen` |    no     | uses [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) to compile for [WASM] |
-| `stdweb`       |    no     | uses [`stdweb`](https://crates.io/crates/stdweb) to compile for [WASM]             |
+| `wasm-bindgen` |  **no**   | uses [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) to compile for [WASM] |
+| `stdweb`       |  **no**   | uses [`stdweb`](https://crates.io/crates/stdweb) to compile for [WASM]             |
 
 
 Features for Building Bin Tools

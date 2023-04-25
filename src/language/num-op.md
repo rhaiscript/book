@@ -34,20 +34,20 @@ Binary Operators
 |             `*`, `*=`             | multiply                                                         |   numeric   |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |             `/`, `/=`             | divide (integer division if acting on integer types)             |   numeric   |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |             `%`, `%=`             | modulo (remainder)                                               |   numeric   |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
-|            `**`, `**=`            | power/exponentiation                                             |   numeric   |  yes  | yes, also `FLOAT**INT` |            no             |
-|            `<<`, `<<=`            | left bit-shift (if negative number of bits, shift right instead) |   numeric   |  yes  |           no           |            no             |
-|            `>>`, `>>=`            | right bit-shift (if negative number of bits, shift left instead) |   numeric   |  yes  |           no           |            no             |
-|             `&`, `&=`             | bit-wise _And_                                                   |   numeric   |  yes  |           no           |            no             |
-| <code>\|</code>, <code>\|=</code> | bit-wise _Or_                                                    |   numeric   |  yes  |           no           |            no             |
-|             `^`, `^=`             | bit-wise _Xor_                                                   |   numeric   |  yes  |           no           |            no             |
+|            `**`, `**=`            | power/exponentiation                                             |   numeric   |  yes  | yes, also `FLOAT**INT` |          **no**           |
+|            `<<`, `<<=`            | left bit-shift (if negative number of bits, shift right instead) |   numeric   |  yes  |         **no**         |          **no**           |
+|            `>>`, `>>=`            | right bit-shift (if negative number of bits, shift left instead) |   numeric   |  yes  |         **no**         |          **no**           |
+|             `&`, `&=`             | bit-wise _And_                                                   |   numeric   |  yes  |         **no**         |          **no**           |
+| <code>\|</code>, <code>\|=</code> | bit-wise _Or_                                                    |   numeric   |  yes  |         **no**         |          **no**           |
+|             `^`, `^=`             | bit-wise _Xor_                                                   |   numeric   |  yes  |         **no**         |          **no**           |
 |               `==`                | equals to                                                        |   `bool`    |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |               `!=`                | not equals to                                                    |   `bool`    |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |                `>`                | greater than                                                     |   `bool`    |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |               `>=`                | greater than or equals to                                        |   `bool`    |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |                `<`                | less than                                                        |   `bool`    |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
 |               `<=`                | less than or equals to                                           |   `bool`    |  yes  |  yes, also with `INT`  |   yes, also with `INT`    |
-|               `..`                | exclusive range                                                  |   [range]   |  yes  |           no           |            no             |
-|               `..=`               | inclusive range                                                  |   [range]   |  yes  |           no           |            no             |
+|               `..`                | exclusive range                                                  |   [range]   |  yes  |         **no**         |          **no**           |
+|               `..=`               | inclusive range                                                  |   [range]   |  yes  |         **no**         |          **no**           |
 
 
 Examples

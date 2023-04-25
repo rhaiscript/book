@@ -43,18 +43,18 @@ The following standard functions are defined in the [`BasicMathPackage`][built-i
 | Category         | Supports `Decimal` | Functions                                                                                |
 | ---------------- | :----------------: | ---------------------------------------------------------------------------------------- |
 | Trigonometry     |        yes         | `sin`, `cos`, `tan`                                                                      |
-| Trigonometry     |         no         | `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`                                  |
-| Arc-trigonometry |         no         | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
+| Trigonometry     |       **no**       | `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`                                  |
+| Arc-trigonometry |       **no**       | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
 | Square root      |        yes         | `sqrt`                                                                                   |
 | Exponential      |        yes         | `exp` (base _e_)                                                                         |
 | Logarithmic      |        yes         | `ln` (base _e_)                                                                          |
 | Logarithmic      |        yes         | `log` (base 10)                                                                          |
-| Logarithmic      |         no         | `log(`_x_`,`_base_`)`                                                                    |
+| Logarithmic      |       **no**       | `log(`_x_`,`_base_`)`                                                                    |
 | Rounding         |        yes         | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
 | Conversion       |        yes         | [`to_int`], [`to_decimal`] (requires [`decimal`]), [`to_float`] (not under [`no_float`]) |
-| Conversion       |         no         | `to_degrees`, `to_radians`                                                               |
+| Conversion       |       **no**       | `to_degrees`, `to_radians`                                                               |
 | Comparison       |        yes         | `min`, `max` (also inter-operates with integers)                                         |
-| Testing          |         no         | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
+| Testing          |       **no**       | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
 Decimal Rounding Functions

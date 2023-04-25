@@ -57,7 +57,7 @@ Features
 | :--------: | ------------------------------------------------------------ | :------: | :----------------------------------: |
 |  `float`   | enables random floating-point number generation              |   yes    |             [`no_float`]             |
 |  `array`   | enables methods for [arrays]                                 |   yes    |             [`no_index`]             |
-| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |    no    |                                      |
+| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |  **no**  |                                      |
 
 ~~~admonish example "Example: Working with `no_float` in Rhai"
 

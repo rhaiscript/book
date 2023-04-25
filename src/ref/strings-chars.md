@@ -13,9 +13,9 @@ String and character literals follow JavaScript-style syntax.
 
 | Type                      |   Quotes    | Escapes? | Continuation? | Interpolation? |
 | ------------------------- | :---------: | :------: | :-----------: | :------------: |
-| Normal string             |   `"..."`   |   yes    |   with `\`    |       no       |
-| Multi-line literal string | `` `...` `` |    no    |      no       | with `${...}`  |
-| Character                 |   `'...'`   |   yes    |      no       |       no       |
+| Normal string             |   `"..."`   |   yes    |   with `\`    |     **no**     |
+| Multi-line literal string | `` `...` `` |  **no**  |    **no**     | with `${...}`  |
+| Character                 |   `'...'`   |   yes    |    **no**     |     **no**     |
 
 ```admonish tip.small "Tip: Building strings"
 
