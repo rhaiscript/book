@@ -175,7 +175,7 @@ let result = engine.call_fn_with_options::<i64>(
 
 | Field          |                Type                 | Default |  Build method   | Description                                                                                               |
 | -------------- | :---------------------------------: | :-----: | :-------------: | --------------------------------------------------------------------------------------------------------- |
-| `eval_ast`     |               `bool`                | `true`  |   `eval_ast`    | skip evaluation of the [`AST`] before calling the target [function]                                       |
+| `eval_ast`     |               `bool`                | `true`  |   `eval_ast`    | evaluate the [`AST`] before calling the target [function] (useful to run [`import` statements])           |
 | `rewind_scope` |               `bool`                | `true`  | `rewind_scope`  | rewind the custom [`Scope`] at the end of the [function] call so new local variables are removed          |
 | `this_ptr`     | [`Option<&mut Dynamic>`][`Dynamic`] | `None`  | `bind_this_ptr` | bind the `this` pointer to a specific value                                                               |
 | `tag`          |   [`Option<Dynamic>`][`Dynamic`]    | `None`  |   `with_tag`    | set the _custom state_ for this evaluation (accessed via [`NativeCallContext::tag`][`NativeCallContext`]) |
@@ -183,6 +183,8 @@ let result = engine.call_fn_with_options::<i64>(
 ### Skip evaluation of the `AST`
 
 By default, the [`AST`] is evaluated before calling the target [function].
+
+This is necessary to make sure that necessary [modules] imported via [`import`] statements are available.
 
 Setting `eval_ast` to `false` skips this evaluation.
 
