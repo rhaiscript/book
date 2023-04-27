@@ -4,6 +4,24 @@ Scriptable Event Handler with State
 {{#include ../links.md}}
 
 
+```admonish tip "IMPORTANT PATTERN"
+
+In many usage scenarios, a scripting engine is used to provide flexibility in event handling.
+
+That means to execute certain **actions** in response to certain **_events_** that occur at run-time,
+and scripts are used to provide flexibility for coding those actions.
+
+You'd be surprised how many applications fit under this pattern &ndash; they are all essentially
+event handling systems.
+```
+
+```admonish example "Examples"
+
+Because of the importance of this pattern, runnable examples are included.
+
+See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
+```
+
 ```admonish info "Usage scenario"
 
 * A system sends _events_ that must be handled.

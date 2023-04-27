@@ -6,7 +6,7 @@ Object-Oriented Programming (OOP)
 Rhai does not have _objects_ per se and is not object-oriented (in the traditional sense),
 but it is possible to _simulate_ object-oriented programming.
 
-```admonish question "To OOP or not to OOP, that is the question."
+```admonish question.small "To OOP or not to OOP, that is the question."
 
 Regardless of whether object-oriented programming (OOP) should be treated as a pattern or
 an _anti-pattern_ (the programming world is split 50-50 on this), there are always users who
