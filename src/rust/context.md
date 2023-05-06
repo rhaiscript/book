@@ -34,24 +34,28 @@ The native call context is useful for protecting a function from malicious scrip
 ```rust
 use rhai::{Array, NativeCallContext, EvalAltResult, Position};
 
-// This function builds an array of arbitrary size, but is protected
-// against attacks by first checking with the allowed limit set
-// into the 'Engine'.
-pub fn grow(context: NativeCallContext, size: i64) -> Result<Array, Box<EvalAltResult>>
+// This function builds an array of arbitrary size, but is protected against attacks
+// by first checking with the allowed limit set into the 'Engine'.
+pub fn new_array(context: NativeCallContext, size: i64) -> Result<Array, Box<EvalAltResult>>
 {
-    // Make sure the function does not generate a
-    // data structure larger than the allowed limit
-    // for the Engine!
-    if size as usize > context.engine().max_array_size() {
+    let array = Array::new();
+
+    if size <= 0 {
+        return array;
+    }
+
+    let size = size as usize;
+    let max_size = context.engine().max_array_size();
+
+    // Make sure the function does not generate a data structure larger than
+    // the allowed limit for the Engine!
+    if max_size > 0 && size > max_size {
         return Err(EvalAltResult::ErrorDataTooLarge(
             "Size to grow".to_string(),
-            context.engine().max_array_size(),
-            size as usize,
+            max_size, size,
             context.position(),
         ).into());
     }
-
-    let array = Array::new();
 
     for x in 0..size {
         array.push(x.into());
