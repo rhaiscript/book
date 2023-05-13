@@ -284,6 +284,7 @@ Language Reference
 - [Variables](ref/variables.md)
 - [Constants](ref/constants.md)
 - [Assignments](ref/assignment.md)
+  - [Compound Assignments](ref/assignment-op.md)
 - [Operators](ref/operators.md)
 - [Indexing](ref/indexing.md)
 - [Properties](ref/getters-setters.md)
