@@ -9,7 +9,7 @@ scientific computing, inspired by languages like MATLAB, Octave, and R.
 
 ```admonish info.side "Documentation"
 
-See [https://docs.rs/rhai-sci](https://docs.rs/rhai-sci#functions) for the list of functions.
+See [https://docs.rs/rhai-sci](https://docs.rs/rhai-sci#api) for the list of functions.
 ```
 
 > On `crates.io`: [`rhai-sci`](https://crates.io/crates/rhai-sci)
@@ -39,7 +39,7 @@ Features
 | `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai); necessary for running doc-tests                                                                                                              |  **no**  |
 |    `io`    | enables the `read_matrix` function but pulls in several additional dependencies                                                                                                                            |   yes    |
 | `nalgebra` | enables the functions `regress`, `inv`, `mtimes`, `horzcat`, `vertcat`, and `repmat` but pulls in [`nalgebra`](https://crates.io/crates/nalgebra) and [`linregress`](https://crates.io/crates/linregress). |   yes    |
-|   `rand`   | enables the [`rand`](#rand) function for generating random values and random matrices, but pulls in [`rand`](https://crates.io/crates/rand).                                                               |   yes    |
+|   `rand`   | enables the `rand` function for generating random values and random matrices, but pulls in [`rand`](https://crates.io/crates/rand).                                                                        |   yes    |
 
 
 Load Package into [`Engine`]

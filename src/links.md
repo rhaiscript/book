@@ -235,5 +235,6 @@
 [`rhai-dylib`]: {{rootUrl}}/lib/rhai-dylib.md
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md
 [`rhai-sci`]: {{rootUrl}}/lib/rhai-sci.md
+[`rhai-ml`]: {{rootUrl}}/lib/rhai-ml.md
 [`rhai-fs`]: {{rootUrl}}/lib/rhai-fs.md
 [`rhai-url`]: {{rootUrl}}/lib/rhai-url.md
