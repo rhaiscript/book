@@ -35,6 +35,27 @@ let mut engine = Engine::new();
 engine.register_fn("get_info", get_info);
 ```
 
+~~~admonish tip.small "Tip: Create a `Dynamic`"
+
+To create a [`Dynamic`] value, use `Dynamic::from`.
+
+[Standard types] in Rhai can also use `.into()`.
+
+```rust
+use rhai::Dynamic;
+
+let obj = TestStruct::new();
+
+let x = Dynamic::from(obj);
+
+// '.into()' works for standard types
+
+let x = 42_i64.into();
+
+let y = "hello!".into();
+```
+~~~
+
 
 Alternative to Fallible Functions
 ---------------------------------
