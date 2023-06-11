@@ -136,12 +136,12 @@ Range Cases
 Because of their popularity, [literal](../appendix/literals.md) integer [ranges](ranges.md) can also
 be used as `switch` cases.
 
-Numeric [ranges](ranges.md) are only searched when the `switch` value is itself an integer
-(i.e. they never match any other data types).
+Numeric [ranges](ranges.md) are only searched when the `switch` value is itself a number (including
+floating-point and decimal). They never match any other data types.
 
-```admonish warning.small "Must come after integer cases"
+```admonish warning.small "Must come after numeric cases"
 
-Range cases must come _after_ all integer cases.
+Range cases must come _after_ all numeric cases.
 ```
 
 ```js
@@ -150,7 +150,7 @@ let x = 42;
 switch x {
     'x' => ...,             // no match: wrong data type
 
-    1 => ...,               // <- specific integer cases are checked first
+    1 => ...,               // <- specific numeric cases are checked first
     2 => ...,               // <- but these do not match
 
     0..50 if x > 45 => ..., // no match: condition is 'false'
@@ -162,7 +162,7 @@ switch x {
     30..100 => ...,         // no match: even though it is within range,
                             // the previous case matches first
 
-    42 => ...,              // <- syntax error: integer cases cannot follow range cases
+    42 => ...,              // <- syntax error: numeric cases cannot follow range cases
 }
 ```
 

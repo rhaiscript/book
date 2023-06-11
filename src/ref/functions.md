@@ -1,7 +1,9 @@
 Functions
 =========
 
-Rhai supports defining functions in script.
+Rhai supports defining functions in script via the `fn` keyword.
+
+Valid function names are the same as valid [variable](variables.md) names.
 
 ```rust
 fn add(x, y) {
@@ -199,4 +201,10 @@ let x = 500;
 change(x);
 
 x == 500;           // 'x' is NOT changed!
+```
+
+```admonish warning.small "Rhai functions are pure"
+
+The only possibility for a Rhai script-defined function to modify an external variable is
+via the [`this`](fn-method.md) pointer.
 ```

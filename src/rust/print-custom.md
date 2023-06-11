@@ -14,7 +14,7 @@ is `T: Display + Debug`).
 | Function    | Signature                            | Typical implementation | Usage                                                      |
 | ----------- | ------------------------------------ | ---------------------- | ---------------------------------------------------------- |
 | `to_string` | <code>\|x: &mut T\| -> String</code> | `x.to_string()`        | converts the [custom type] into a [string]                 |
-| `to_debug`  | <code>\|x: &mut T\| -> String</code> | `format!("{:?}", x)`   | converts the [custom type] into a [string] in debug format |
+| `to_debug`  | <code>\|x: &mut T\| -> String</code> | `format!("{x:?}")`     | converts the [custom type] into a [string] in debug format |
 
 ~~~admonish tip.small "Tip: `#[rhai_fn(global)]`"
 

@@ -3,7 +3,9 @@ Functions
 
 {{#include ../links.md}}
 
-Rhai supports defining functions in script, with a syntax that is very similar to Rust without types.
+Rhai supports defining functions in script via the `fn` keyword, with a syntax that is very similar to Rust without types.
+
+Valid function names are the same as valid [variable] names.
 
 ```rust
 fn add(x, y) {
@@ -200,6 +202,7 @@ All arguments are passed by _value_, so all Rhai script-defined functions are _p
 
 Any update to an argument will **not** be reflected back to the caller.
 
+
 ```rust
 fn change(s) {      // 's' is passed by value
     s = 42;         // only a COPY of 's' is changed
@@ -210,4 +213,10 @@ let x = 500;
 change(x);
 
 x == 500;           // 'x' is NOT changed!
+```
+
+```admonish warning.small "Rhai functions are pure"
+
+The only possibility for a Rhai script-defined function to modify an external variable is
+via the [`this`](fn-method.md) pointer.
 ```

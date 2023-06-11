@@ -13,11 +13,12 @@ This also applies to all operators (which are implemented as functions).
 // When compiling the following with OptimizationLevel::Full...
 
 const DECISION = 1;
-                            // this condition is now eliminated because 'sign(DECISION) > 0'
-if DECISION.sign() > 0 {    // is a call to the 'sign' and '>' functions, and they return 'true'
-    print("hello!");        // this block is promoted to the parent level
+                            //    this condition is now eliminated because 'DECISION.sign() > 0'
+if DECISION.sign() > 0      // <- is a call to the 'sign' and '>' functions, and they return 'true'
+{
+    print("hello!");        // <- this block is promoted to the parent level
 } else {
-    print("boo!");          // this block is eliminated because it is never reached
+    print("boo!");          // <- this block is eliminated because it is never reached
 }
 
 print("hello!");            // <- the above is equivalent to this

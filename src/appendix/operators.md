@@ -30,7 +30,7 @@ Operators
 |                                             `&&`                                             | boolean _AND_ (short-circuits)         |    yes     |       left        |
 |                                      <code>\|\|</code>                                       | boolean _OR_ (short-circuits)          |    yes     |       left        |
 |                                             `??`                                             | null-coalesce (short-circuits)         |    yes     |       left        |
-|                                             `!`                                              | boolean _NOT_                          |     no     |       right       |
+|                                             `!`                                              | boolean _NOT_                          |   **no**   |       right       |
 |                                  `[` ... `]`, `?[` ... `]`                                   | indexing                               |    yes     |       left        |
 |                                          `.`, `?.`                                           | 1) property access<br/>2) method call  |    yes     |       left        |
 |                                             `..`                                             | exclusive range                        |    yes     |       left        |

@@ -249,7 +249,7 @@ fn implementation_func(context: &mut EvalContext, inputs: &[Expression]) -> Resu
 
         // Declare a new variable every three turns...
         if count % 3 == 0 {
-            context.scope_mut().push(format!("{}{}", var_name, count), count);
+            context.scope_mut().push(format!("{var_name}{count}"), count);
         }
 
         // Evaluate the condition expression
@@ -354,6 +354,10 @@ let matrix = @|  a   b   0  |
 This can easily be done via a custom syntax, which yields a syntax that is more pleasing.
 
 ```rust
+// Disable the '|' symbol since it'll conflict with the bit-wise OR operator.
+// Do this BEFORE registering the custom syntax.
+engine.disable_symbol("|");
+
 engine.register_custom_syntax(
     ["@", "|", "$expr$", "$expr$", "$expr$", "|", 
           "|", "$expr$", "$expr$", "$expr$", "|",
@@ -365,8 +369,8 @@ engine.register_custom_syntax(
 
         let mut values = [[0.0; 3]; 3];
 
-        for y in 0..2 {
-            for x in 0..2 {
+        for y in 0..3 {
+            for x in 0..3 {
                 let offset = y * 3 + x;
 
                 match context.eval_expression_tree(&inputs[offset])?.as_float() {
@@ -388,6 +392,43 @@ engine.register_custom_syntax(
 
 For matrices of flexible dimensions, check out [custom syntax parsers](custom-syntax-parsers.md).
 
+
+Practical Example &ndash; Defining Temporary Variables
+------------------------------------------------------
+
+It is possible to define temporary [variables]/[constants] which are available only to code blocks
+within the custom syntax.
+
+```rust
+engine.register_custom_syntax(
+    [ "with", "offset", "(", "$expr$", ",", "$expr$", ")", "$block$", ],
+    true,   // must be true in order to define new variables
+    |context, inputs| {
+        // Get the two offsets
+        let x = context.eval_expression_tree(&inputs[0])?.as_int().map_err(|typ| Box::new(
+            EvalAltResult::ErrorMismatchDataType("integer".to_string(), typ.to_string(), inputs[0].position())
+        ))?;
+        let y = context.eval_expression_tree(&inputs[1])?.as_int().map_err(|typ| Box::new(
+            EvalAltResult::ErrorMismatchDataType("integer".to_string(), typ.to_string(), inputs[1].position())
+        ))?;
+
+        // Add them as temporary constants into the scope, available only to the code block
+        let orig_len = context.scope().len();
+
+        context.scope_mut().push_constant("x", x);
+        context.scope_mut().push_constant("y", y);
+
+        // Run the code block
+        let result = context.eval_expression_tree(&inputs[2]);
+
+        // Remove the temporary constants from the scope so they don't leak outside
+        context.scope_mut().rewind(orig_len);
+
+        // Return the result
+        result
+    },
+)?;
+```
 
 Practical Example &ndash; Recreating C's Ternary Operator
 ---------------------------------------------------------

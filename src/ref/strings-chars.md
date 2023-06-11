@@ -13,9 +13,9 @@ String and character literals follow JavaScript-style syntax.
 
 | Type                      |   Quotes    | Escapes? | Continuation? | Interpolation? |
 | ------------------------- | :---------: | :------: | :-----------: | :------------: |
-| Normal string             |   `"..."`   |   yes    |   with `\`    |       no       |
-| Multi-line literal string | `` `...` `` |    no    |      no       | with `${...}`  |
-| Character                 |   `'...'`   |   yes    |      no       |       no       |
+| Normal string             |   `"..."`   |   yes    |   with `\`    |     **no**     |
+| Multi-line literal string | `` `...` `` |  **no**  |    **no**     | with `${...}`  |
+| Character                 |   `'...'`   |   yes    |    **no**     |     **no**     |
 
 ```admonish tip.small "Tip: Building strings"
 
@@ -147,6 +147,19 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 
 String Interpolation
 --------------------
+
+~~~admonish question.side "What if I want `${` inside?"
+
+🤦 Well, you just _have_ to ask for the impossible, don't you?
+
+Currently there is no way to escape `${`.  Build the string in three pieces:
+
+```js
+`Interpolations start with "`
+    + "${"
+    + `" and end with }.`
+```
+~~~
 
 Multi-line literal strings support _string interpolation_ wrapped in `${` ... `}`.
 

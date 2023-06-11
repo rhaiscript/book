@@ -154,9 +154,9 @@ All boolean operators are [built in][built-in operators] for the `bool` data typ
 |     Operator      | Description | Arity  | Short-circuits? |
 | :---------------: | :---------: | :----: | :-------------: |
 |  `!` _(prefix)_   |    _NOT_    | unary  |       no        |
-|       `&&`        |    _AND_    | binary |       yes       |
+|       `&&`        |    _AND_    | binary |     **yes**     |
 |        `&`        |    _AND_    | binary |       no        |
-| <code>\|\|</code> |    _OR_     | binary |       yes       |
+| <code>\|\|</code> |    _OR_     | binary |     **yes**     |
 |  <code>\|</code>  |    _OR_     | binary |       no        |
 
 Double boolean operators `&&` and `||` _short-circuit_ &ndash; meaning that the second operand will not be evaluated

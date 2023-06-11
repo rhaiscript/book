@@ -100,39 +100,6 @@ They do not hold the actual [functions].
 The actual [function] must be defined in the appropriate [namespace][function namespace]
 for the call to succeed.
 
-~~~admonish bug "Cannot export function pointer"
-
-[Exporting][`export`] a function pointer (or an [anonymous function] or [closure])
-from a [module] referring to a local [function] fails at runtime.
-
-That is because the target [function] is not supposed to be found in the caller's
-[namespace][function namespace].
-
-```js
-┌────────────────┐
-│ my_module.rhai │
-└────────────────┘
-
-fn increment(x) {
-    x + 1
-}
-
-export let inc = increment;         // exports a function pointer
-
-
-┌───────────┐
-│ main.rhai │
-└───────────┘
-
-import "my_module" as my_mod;
-
-print(my_mod::increment(41));       // ok!
-
-let x = my_mod::inc.call(41);       // runtime error:
-                                    //    function 'increment' not found
-```
-~~~
-
 
 Warning &ndash; Global Namespace Only
 -------------------------------------

@@ -255,11 +255,11 @@ The default for all [getters/setters] and [indexers] defined in a [plugin module
 `#[rhai_fn(global)]` unless specifically overridden by `#[rhai_fn(internal)]`.
 ```
 
-All functions (usually _methods_) defined in the module and marked with `#[rhai_fn(global)]`, all
+All functions (usually _[methods]_) defined in the module and marked with `#[rhai_fn(global)]`, all
 [type iterators] and all [custom types] are automatically exposed to the _global_ namespace, so
 [iteration][`for`], [getters/setters] and [indexers] for [custom types] can work as expected.
 
-Therefore, in the example above, the `increment` method (defined with `#[rhai_fn(global)]`)
+Therefore, in the example above, the `increment` [method] (defined with `#[rhai_fn(global)]`)
 works fine when called in method-call style:
 
 ```rust
@@ -441,7 +441,7 @@ mod my_module {
     }
     // This is an index setter for 'TestStruct'.
     #[rhai_fn(index_set)]
-    pub fn get_index(obj: &mut TestStruct, index: i64, state: bool) {
+    pub fn set_index(obj: &mut TestStruct, index: i64, state: bool) {
         obj.list[index] = state;
     }
 }
@@ -476,8 +476,8 @@ The above function can be called in five ways:
 
 | Parameter for `#[rhai_fn(...)]` |           Type            | Call style                                    |
 | ------------------------------- | :-----------------------: | --------------------------------------------- |
-| `name = "get_prop_value"`       |      method function      | `get_prop_value(x, 0)`, `x.get_prop_value(0)` |
-| `name = "prop"`                 |      method function      | `prop(x, 0)`, `x.prop(0)`                     |
+| `name = "get_prop_value"`       |         [method]          | `get_prop_value(x, 0)`, `x.get_prop_value(0)` |
+| `name = "prop"`                 |         [method]          | `prop(x, 0)`, `x.prop(0)`                     |
 | `name = "+"`                    |        [operator]         | `x + 42`                                      |
 | `set = "prop"`                  | [setter][getters/setters] | `x.prop = 42`                                 |
 | `index_get`                     |  [index getter][indexer]  | `x[0]`                                        |
@@ -486,10 +486,10 @@ The above function can be called in five ways:
 Pure Functions
 --------------
 
-Apply the `#[rhai_fn(pure)]` attribute on a method function (i.e. one taking a `&mut` first parameter)
+Apply the `#[rhai_fn(pure)]` attribute on a [method] function (i.e. one taking a `&mut` first parameter)
 to mark it as  _pure_ &ndash; i.e. it does not modify the `&mut` parameter.
 
-This is often done to avoid expensive cloning for methods or [property getters][getters/setters]
+This is often done to avoid expensive cloning for [methods] or [property getters][getters/setters]
 that return information about a [custom type] and does not modify it.
 
 ~~~admonish warning.small "Must not modify `&mut` parameter"

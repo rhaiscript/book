@@ -70,7 +70,7 @@ number of entries exceed the _inline_ capacity.
 | `set_or_push<T>`                              | set the value of the last [variable] within the `Scope` by name if it exists and is not [constant]; add a new [variable] into the `Scope` otherwise |
 | `contains`                                    | does the particular [variable] or [constant] exist in the `Scope`?                                                                                  |
 | `get_value<T>`                                | get the value of the last [variable]/[constant] within the `Scope` by name                                                                          |
-| `set_value<T>`                                | set the value of the last [variable] within the `Scope` bu ma,e, panics if it is [constant]                                                         |
+| `set_value<T>`                                | set the value of the last [variable] within the `Scope` by name, panics if it is [constant]                                                         |
 | `remove<T>`                                   | remove the last [variable]/[constant] from the `Scope` by name, returning its value                                                                 |
 | `get`                                         | get a reference to the value of the last [variable]/[constant] within the `Scope` by name                                                           |
 | `get_mut`                                     | get a reference to the value of the last [variable] within the `Scope` by name, `None` if it is [constant]                                          |

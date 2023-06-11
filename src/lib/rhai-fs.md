@@ -79,5 +79,5 @@ Features
 
 |  Feature   | Description                                                  | Default? | Should be used with Rhai feature |
 | :--------: | ------------------------------------------------------------ | :------: | :------------------------------: |
-| `no_array` | removes support for [arrays] and [BLOB's]                    |    no    |           [`no_index`]           |
-| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |    no    |                                  |
+| `no_array` | removes support for [arrays] and [BLOB's]                    |  **no**  |           [`no_index`]           |
+| `metadata` | enables [functions metadata] (turns on [`metadata`] in Rhai) |  **no**  |                                  |

@@ -31,3 +31,8 @@ switch type_of(x) {
     _ => throw `I cannot work with ${type_of(x)}!!!`
 }
 ```
+
+```admonish info.small "Standard types"
+
+See [here](values-and-types.md) for the `type_of` output of standard types.
+```

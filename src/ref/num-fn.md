@@ -12,6 +12,8 @@ The following standard functions operate on integers only.
 | ----------------------------- | ---------------------------------------------------------------- |
 | `is_odd` method and property  | returns `true` if the value is an odd number, otherwise `false`  |
 | `is_even` method and property | returns `true` if the value is an even number, otherwise `false` |
+| `min`                         | returns the smaller of two numbers, the first number if equal    |
+| `max`                         | returns the larger of two numbers, the first number if equal     |
 | `to_float`                    | convert the value into `f64` (`f32` under 32-bit)                |
 | `to_decimal`                  | convert the value into decimal                                   |
 
@@ -19,7 +21,7 @@ The following standard functions operate on integers only.
 Signed Numeric Functions
 ------------------------
 
-The following standard functions operate on signed integers and decimal numbers only.
+The following standard functions operate on signed numbers (including floating-point and decimal) only.
 
 | Function                      | Description                                            |
 | ----------------------------- | ------------------------------------------------------ |
@@ -36,16 +38,17 @@ The following standard functions operate on floating-point and decimal numbers o
 | Category         | Decimal? | Functions                                                                                |
 | ---------------- | :------: | ---------------------------------------------------------------------------------------- |
 | Trigonometry     |   yes    | `sin`, `cos`, `tan`                                                                      |
-| Trigonometry     |    no    | `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`                                  |
-| Arc-trigonometry |    no    | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
+| Trigonometry     |  **no**  | `sinh`, `cosh`, `tanh` in radians, `hypot(`_x_`,`_y_`)`                                  |
+| Arc-trigonometry |  **no**  | `asin`, `acos`, `atan(`_v_`)`, `atan(`_x_`,`_y_`)`, `asinh`, `acosh`, `atanh` in radians |
 | Square root      |   yes    | `sqrt`                                                                                   |
 | Exponential      |   yes    | `exp` (base _e_)                                                                         |
 | Logarithmic      |   yes    | `ln` (base _e_), `log` (base 10)                                                         |
-| Logarithmic      |    no    | `log(`_x_`,`_base_`)`                                                                    |
+| Logarithmic      |  **no**  | `log(`_x_`,`_base_`)`                                                                    |
 | Rounding         |   yes    | `floor`, `ceiling`, `round`, `int`, `fraction` methods and properties                    |
 | Conversion       |   yes    | [`to_int`](convert.md), [`to_decimal`](convert.md), [`to_float`](convert.md)             |
-| Conversion       |    no    | `to_degrees`, `to_radians`                                                               |
-| Testing          |    no    | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
+| Conversion       |  **no**  | `to_degrees`, `to_radians`                                                               |
+| Comparison       |   yes    | `min`, `max` (also inter-operates with integers)                                         |
+| Testing          |  **no**  | `is_nan`, `is_finite`, `is_infinite` methods and properties                              |
 
 
 Decimal Rounding Functions

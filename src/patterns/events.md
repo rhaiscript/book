@@ -4,6 +4,24 @@ Scriptable Event Handler with State
 {{#include ../links.md}}
 
 
+```admonish tip "IMPORTANT PATTERN"
+
+In many usage scenarios, a scripting engine is used to provide flexibility in event handling.
+
+That means to execute certain **actions** in response to certain **_events_** that occur at run-time,
+and scripts are used to provide flexibility for coding those actions.
+
+You'd be surprised how many applications fit under this pattern &ndash; they are all essentially
+event handling systems.
+```
+
+```admonish example "Examples"
+
+Because of the importance of this pattern, runnable examples are included.
+
+See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
+```
+
 ```admonish info "Usage scenario"
 
 * A system sends _events_ that must be handled.
@@ -206,9 +224,9 @@ Depending on needs and scripting style, there are three different ways to implem
 | Access state [variable]                           |                                              normal [variable]                                              |                          [property][object map] of `this`                           |                   [property][object map] of state variable                   |
 | Access global [constants]?                        |                                                     yes                                                     |                                         yes                                         |                                     yes                                      |
 | Add new state [variable]?                         |                                           `init` [function] only                                            |                                   all [functions]                                   |                               all [functions]                                |
-| Add new global [constants]?                       |                                                     yes                                                     |                                         no                                          |                                      no                                      |
-| [OOP]-style [functions] on states?                |                                                     no                                                      |                                         yes                                         |                                     yes                                      |
-| Detect system-provided initial states?            |                                                     no                                                      |                                         yes                                         |                                     yes                                      |
-| Local [variable] may _[shadow]_ state [variable]? |                                                     yes                                                     |                                         no                                          |                                      no                                      |
+| Add new global [constants]?                       |                                                     yes                                                     |                                       **no**                                        |                                    **no**                                    |
+| [OOP]-style [functions] on states?                |                                                   **no**                                                    |                                         yes                                         |                                     yes                                      |
+| Detect system-provided initial states?            |                                                   **no**                                                    |                                         yes                                         |                                     yes                                      |
+| Local [variable] may _[shadow]_ state [variable]? |                                                     yes                                                     |                                       **no**                                        |                                    **no**                                    |
 | Benefits                                          |                                                   simple                                                    |                                   fewer surprises                                   |                                  versatile                                   |
 | Disadvantages                                     | <ul><li>no new variables in [functions] (apart from `init`)</li><li>easy variable name collisions</li></ul> | <ul><li>`this.xxx` all over the place</li><li>more complex implementation</li></ul> | <ul><li>`state.xxx` all over the place</li><li>inconsistent syntax</li></ul> |

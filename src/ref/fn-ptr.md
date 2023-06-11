@@ -81,6 +81,18 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 ```
 
 
+Warning &ndash; Not First-Class Functions
+-----------------------------------------
+
+Beware that function pointers are _not_ first-class functions.
+
+They are _syntactic sugar_ only, capturing only the _name_ of a [function](functions.md) to call.
+They do not hold the actual [functions](functions.md).
+
+The actual [function](functions.md) must be defined in the appropriate namespace for the call to
+succeed.
+
+
 Warning &ndash; Global Namespace Only
 -------------------------------------
 
