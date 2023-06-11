@@ -195,3 +195,32 @@ const ChildClass = ParentClass + #{
 
 let obj3 = ChildClass;                      // a copy of 'ChildClass'
 ```
+
+```admonish warning.small "Warning: Exporting OOP objects"
+Objects containing anonymous functions cannot be exported into separated modules:
+Anonymous functions de-sugar into function pointers. However, those cannot
+point to a function from a module. Thus, it is mandatory to define all objects into
+the script that will be loaded by the engine.
+
+However, there are still (questionnable) ways to export objects.
+You could, for example, create a macro that appends the content of a module to the
+main script.
+
+~~~rust
+// my-module.rhai
+
+const my_object = #{
+    value: 5,
+    inc: || this.value += 1
+    dec: || this.value -= 1
+};
+~~~
+
+~~~rust
+#IMPORT "my-module" // `#IMPORT` is our new macro, it copies the content of "my-module.rhai" to this file.
+
+my_object.inc(); // `value` is incremented to 6.
+~~~
+
+Beware that since the contents of the module are copied into the main script, this could lead to unexpected behavior.
+```
