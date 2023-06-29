@@ -16,6 +16,8 @@ Most Important Resources
 
 ```admonish bug "Memory"
 * Continuously grow a [string], an [array], a [BLOB] or [object map] until all memory is consumed.
+
+* Continuously create new [variables] with large data until all memory is consumed.
 ```
 
 ```admonish bug "CPU"
