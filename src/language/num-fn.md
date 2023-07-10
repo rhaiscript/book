@@ -13,8 +13,8 @@ The following standard functions are defined.
 | ----------------------------- | :-----------------: | :--------------------------------------: | ---------------------------------------------------------------- |
 | `is_odd` method and property  |                     | [`ArithmeticPackage`][built-in packages] | returns `true` if the value is an odd number, otherwise `false`  |
 | `is_even` method and property |                     | [`ArithmeticPackage`][built-in packages] | returns `true` if the value is an even number, otherwise `false` |
-| `min`                         |                     |   [`LogicPackage`][built-in packages]    | returns the smaller of two numbers, the first number if equal    |
-| `max`                         |                     |   [`LogicPackage`][built-in packages]    | returns the larger of two numbers, the first number if equal     |
+| `min`                         |                     |   [`LogicPackage`][built-in packages]    | returns the smaller of two numbers                               |
+| `max`                         |                     |   [`LogicPackage`][built-in packages]    | returns the larger of two numbers                                |
 | `to_float`                    |    [`no_float`]     | [`BasicMathPackage`][built-in packages]  | convert the value into `f64` (`f32` under [`f32_float`])         |
 | `to_decimal`                  |   non-[`decimal`]   | [`BasicMathPackage`][built-in packages]  | convert the value into [`Decimal`][rust_decimal]                 |
 
