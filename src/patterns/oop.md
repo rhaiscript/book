@@ -40,12 +40,11 @@ then the call will be dispatched to the actual function with `this` binding to t
 Use Closures to Define Methods
 ------------------------------
 
-[Anonymous functions] or [closures] defined as values for [object map] properties take on a
-syntactic shape which resembles very closely that of class methods in an OOP language.
+[Closures] defined as values for [object map] properties take on a syntactic shape which resembles
+very closely that of class methods in an OOP language.
 
-Closures also _[capture][automatic currying]_ variables from the defining environment, which is a
-very common language feature.  Capturing is accomplished via a feature called _[automatic currying]_
-and can be turned off via the [`no_closure`] feature.
+[Closures] also _capture_ [variables] from the defining environment, which is a very common language
+feature.  It can be turned off via the [`no_closure`] feature.
 
 ```rust
 let factor = 1;

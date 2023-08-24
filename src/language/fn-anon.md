@@ -107,12 +107,3 @@ let obj = #{
     print: anon_fn_0005
 };
 ```
-
-```admonish danger.small "NOT real closures"
-
-Remember: though having the same syntax as Rust _closures_, anonymous functions are themselves
-**NOT** real closures.
-
-In particular, they capture their execution environment via [automatic currying]
-(disabled via [`no_closure`]).
-```

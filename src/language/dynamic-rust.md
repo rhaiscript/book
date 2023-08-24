@@ -131,12 +131,12 @@ println!("new answer = {}", value.answer);      // prints 0
 ~~~admonish question "TL;DR &ndash; Why `read_lock` and `write_lock`?"
 
 As the naming shows, something is _locked_ in order to allow accessing the data within a [`Dynamic`],
-and that something is a _shared value_ created by [capturing][automatic currying] variables from [closures].
+and that something is a _shared value_ created by capturing variables from [closures].
 
 Shared values are implemented as `Rc<RefCell<Dynamic>>` (`Arc<RwLock<Dynamic>>` under [`sync`]).
 
 If the value is _not_ a shared value, or if running under [`no_closure`] where there is
-no [capturing][automatic currying], this API de-sugars to a simple reference cast.
+no capturing, this API de-sugars to a simple reference cast.
 
 In other words, there is no locking and reference counting overhead for the vast majority of
 non-shared values.

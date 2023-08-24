@@ -81,8 +81,7 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 ```
 
 
-Warning &ndash; Not First-Class Functions
------------------------------------------
+```admonish warning "Not First-Class Functions"
 
 Beware that function pointers are _not_ first-class functions.
 
@@ -91,10 +90,9 @@ They do not hold the actual [functions](functions.md).
 
 The actual [function](functions.md) must be defined in the appropriate namespace for the call to
 succeed.
+```
 
-
-Warning &ndash; Global Namespace Only
--------------------------------------
+~~~admonish warning "Global Namespace Only"
 
 Because of their dynamic nature, function pointers cannot refer to functions in
 [`import`](modules/import.md)-ed [modules](modules/index.md).
@@ -117,6 +115,7 @@ let p = Fn("do_work_now");
 
 p.call();                   // works!
 ```
+~~~
 
 
 Dynamic Dispatch
@@ -200,3 +199,34 @@ x == 42;
 
 Beware that this only works for [_method-call_](fn-method.md) style.
 Normal function-call style cannot bind the `this` pointer (for syntactic reasons).
+
+
+Currying
+--------
+
+It is possible to _curry_ a function pointer by providing partial (or all) arguments.
+
+Currying is done via the `curry` keyword and produces a new function pointer which carries the
+curried arguments.
+
+When the curried function pointer is called, the curried arguments are inserted starting from the _left_.
+
+The actual call arguments should be reduced by the number of curried arguments.
+
+```rust
+fn mul(x, y) {                  // function with two parameters
+    x * y
+}
+
+let func = mul;                 // <- de-sugars to 'Fn("mul")'
+
+func.call(21, 2) == 42;         // two arguments are required for 'mul'
+
+let curried = func.curry(21);   // currying produces a new function pointer which
+                                // carries 21 as the first argument
+
+let curried = curry(func, 21);  // function-call style also works
+
+curried.call(2) == 42;          // <- de-sugars to 'func.call(21, 2)'
+                                //    only one argument is now required
+```

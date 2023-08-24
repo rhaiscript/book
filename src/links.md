@@ -157,7 +157,6 @@
 [function pointer]: {{rootUrl}}/language/fn-ptr.md
 [function pointers]: {{rootUrl}}/language/fn-ptr.md
 [currying]: {{rootUrl}}/language/fn-curry.md
-[automatic currying]: {{rootUrl}}/language/fn-closure.md
 [closure]: {{rootUrl}}/language/fn-closure.md
 [closures]: {{rootUrl}}/language/fn-closure.md
 [function namespace]: {{rootUrl}}/language/fn-namespaces.md

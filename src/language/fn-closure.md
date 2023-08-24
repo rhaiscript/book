@@ -1,25 +1,20 @@
-Simulating Closures
-===================
+Closures
+========
 
 {{#include ../links.md}}
-
-Capture External Variables via Automatic Currying
--------------------------------------------------
 
 ~~~admonish tip.side "Tip: `is_shared`"
 
 Use `Dynamic::is_shared` to check whether a particular [`Dynamic`] value is shared.
 ~~~
 
-Since [anonymous functions] de-sugar to standard function definitions, they retain all the behaviors
-of Rhai functions, including being _pure_, having no access to external [variables].
+Although [anonymous functions] de-sugar to standard function definitions, they differ from standard
+functions because they can _captures_ [variables] that are not defined within the current scope,
+but are instead defined in an external scope &ndash; i.e. where the [anonymous function] is created.
 
-The [anonymous function] syntax, however, automatically _captures_ [variables] that are not defined
-within the current scope, but are defined in the external scope &ndash; i.e. the scope where the
-[anonymous function] is created.
-
-[Variables] that are accessible during the time the [anonymous function] is created can be captured,
-as long as they are not shadowed by local [variables] defined within the function's scope.
+All [variables] that are accessible during the time the [anonymous function] is created are
+automatically captured when they are used, as long as they are not shadowed by local [variables]
+defined within the function's.
 
 The captured [variables] are automatically converted into **reference-counted shared values**
 (`Rc<RefCell<Dynamic>>`, or `Arc<RwLock<Dynamic>>` under [`sync`]).
@@ -30,7 +25,7 @@ scope and no longer exist.
 
 ```admonish tip.small "Tip: Disable closures"
 
-[Automatic currying] can be turned off via the [`no_closure`] feature.
+Capturing external [variables] can be turned off via the [`no_closure`] feature.
 ```
 
 
@@ -62,8 +57,7 @@ let f = anon_0001.curry(x);         // shared 'x' is curried
 ```
 
 
-Beware: Captured Variables are Truly Shared
--------------------------------------------
+~~~admonish bug "Beware: Captured Variables are Truly Shared"
 
 The example below is a typical tutorial sample for many languages to illustrate the traps
 that may accompany capturing external [variables] in closures.
@@ -86,10 +80,9 @@ for f in list {
     f.call();                       // all references to 'i' are the same variable!
 }
 ```
+~~~
 
-
-Therefore &ndash; Be Careful to Prevent Data Races
---------------------------------------------------
+~~~admonish danger "Be Careful to Prevent Data Races"
 
 Rust does not have data races, but that doesn't mean Rhai doesn't.
 
@@ -112,10 +105,9 @@ x.is_shared() == true;              // now 'x' is shared
 
 x.call(f, 2);                       // <- error: data race detected on 'x'
 ```
+~~~
 
-
-Data Races in `sync` Builds Can Become Deadlocks
-------------------------------------------------
+~~~admonish danger "Data Races in `sync` Builds Can Become Deadlocks"
 
 Under the [`sync`] feature, shared values are guarded with a `RwLock`, meaning that data race
 conditions no longer raise an error.
@@ -136,6 +128,7 @@ let f = |a| this += x + a;          // 'x' is captured in this closure
 // via a captured shared value.
 x.call(f, 2);
 ```
+~~~
 
 
 TL;DR
@@ -161,8 +154,7 @@ The actual implementation of closures de-sugars to:
 5. The shared value is then [curried][currying] into the [function pointer] itself,
    essentially carrying a reference to that shared value and inserting it into future calls of the [function].
 
-   This process is called [_Automatic Currying_][automatic currying], and is the mechanism through
-   which Rhai simulates normal closures.
+   This process is called _Automatic Currying_, and is the mechanism through which Rhai simulates closures.
 ```
 
 ```admonish question "Why automatic currying?"

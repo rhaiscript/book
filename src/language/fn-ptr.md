@@ -89,8 +89,7 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'
 ```
 
 
-Warning &ndash; Not First-Class Functions
------------------------------------------
+```admonish warning "Not First-Class Functions"
 
 Beware that function pointers are _not_ first-class functions.
 
@@ -99,15 +98,9 @@ They do not hold the actual [functions].
 
 The actual [function] must be defined in the appropriate [namespace][function namespace]
 for the call to succeed.
-
-
-Warning &ndash; Global Namespace Only
--------------------------------------
-
-```admonish info.side "See also"
-
-See _[Function Namespaces]_ for more details.
 ```
+
+~~~admonish warning "Global Namespace Only"
 
 Because of their dynamic nature, function pointers cannot refer to functions in [`import`]-ed [modules].
 
@@ -128,6 +121,7 @@ let p = Fn("do_work_now");
 
 p.call();                   // works!
 ```
+~~~
 
 
 Dynamic Dispatch

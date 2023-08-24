@@ -1,22 +1,124 @@
-Simulating Closures &ndash; Capture External Variables via Automatic Currying
-=============================================================================
+Closures
+========
+
+Many functions in the standard API expect [function pointer](fn-ptr.md) as parameters.
+
+For example:
+
+```rust
+// Function 'double' defined here - used only once
+fn double(x) { 2 * x }
+
+// Function 'square' defined here - again used only once
+fn square(x) { x * x }
+
+let x = [1, 2, 3, 4, 5];
+
+// Pass a function pointer to 'double'
+let y = x.map(double);
+
+// Pass a function pointer to 'square' using Fn(...) notation
+let z = y.map(Fn("square"));
+```
+
+Sometimes it gets tedious to define separate [functions](functions.md) only to dispatch them via
+single [function pointers](fn-ptr.md) &ndash; essentially, those [functions](functions.md) are only
+ever called in one place.
+
+This scenario is especially common when simulating object-oriented programming ([OOP]).
+
+```rust
+// Define functions one-by-one
+fn obj_inc(x, y) { this.data += x * y; }
+fn obj_dec(x) { this.data -= x; }
+fn obj_print() { print(this.data); }
+
+// Define object
+let obj = #{
+    data: 42,
+    increment: obj_inc,     // use function pointers to
+    decrement: obj_dec,     // refer to method functions
+    print: obj_print
+};
+```
+
+Syntax
+------
+
+Closures have a syntax similar to Rust's _closures_ (they are _not_ the same).
+
+> `|`_param 1_`,` _param 2_`,` ... `,` _param n_`|` _statement_  
+>
+> `|`_param 1_`,` _param 2_`,` ... `,` _param n_`| {` _statements_... `}`  
+
+No parameters:
+
+> `||` _statement_  
+>
+> `|| {` _statements_... `}`
+
+
+Rewrite Using Closures
+----------------------
+
+The above can be rewritten using closures.
+
+```rust
+let x = [1, 2, 3, 4, 5];
+
+let y = x.map(|x| 2 * x);
+
+let z = y.map(|x| x * x);
+
+let obj = #{
+    data: 42,
+    increment: |x, y| this.data += x * y,   // one statement
+    decrement: |x| this.data -= x,          // one statement
+    print_obj: || {
+        print(this.data);                   // full function body
+    }
+};
+```
+
+This de-sugars to:
+
+```rust
+// Automatically generated...
+fn anon_fn_0001(x) { 2 * x }
+fn anon_fn_0002(x) { x * x }
+fn anon_fn_0003(x, y) { this.data += x * y; }
+fn anon_fn_0004(x) { this.data -= x; }
+fn anon_fn_0005() { print(this.data); }
+
+let x = [1, 2, 3, 4, 5];
+
+let y = x.map(anon_fn_0001);
+
+let z = y.map(anon_fn_0002);
+
+let obj = #{
+    data: 42,
+    increment: anon_fn_0003,
+    decrement: anon_fn_0004,
+    print: anon_fn_0005
+};
+```
+
+Capture External Variables
+--------------------------
 
 ~~~admonish tip.side "Tip: `is_shared`"
 
 Use `is_shared` to check whether a particular dynamic value is shared.
 ~~~
 
-Since [anonymous functions](fn-anon.md) de-sugar to standard function definitions, they retain all
-the behaviors of Rhai functions, including being _pure_, having no access to external
-[variables](variables.md).
+Closures differ from standard functions because they can _captures_ [variables](variables.md) that
+are not defined within the current scope, but are instead defined in an external scope &ndash; i.e.
+where the it is created.
 
-The [anonymous function](fn-anon.md) syntax, however, automatically _captures_
-[variables](variables.md) that are not defined within the current scope, but are defined in the
-external scope &ndash; i.e. the scope where the [anonymous function](fn-anon.md) is created.
-
-[Variables](variables.md) that are accessible during the time the [anonymous function](fn-anon.md)
-is created can be captured, as long as they are not shadowed by local [variables](variables.md)
-defined within the function's scope.
+All [variables](variables.md) that are accessible during the time the closure is created are
+automatically captured when they are used, as long as they are not shadowed by local
+[variables](variables.md) defined within the function's.
 
 The captured [variables](variables.md) are automatically converted into **reference-counted shared values**.
 
@@ -49,7 +151,7 @@ let f = anon_0001.curry(x);         // shared 'x' is curried
 ```
 
 
-~~~admonish warning "Beware: Captured variables are truly shared"
+~~~admonish bug "Beware: Captured variables are truly shared"
 
 The example below is a typical tutorial sample for many languages to illustrate the traps
 that may accompany capturing external [variables](variables.md) in closures.

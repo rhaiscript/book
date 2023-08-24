@@ -89,8 +89,8 @@ Therefore, functions taking `String` parameters should use [`ImmutableString`] o
 (maps to [`ImmutableString`]) for the best performance with Rhai.
 
 
-Disable Closure Capturing
--------------------------
+Disable Capturing in Closures
+-----------------------------
 
 ```admonish info.side "Anonymous functions still work"
 

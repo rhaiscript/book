@@ -3,24 +3,24 @@ Value Types
 
 The following primitive value types are supported natively.
 
-| Category                                                                                                     | [`type_of()`](type-of.md) | `to_string()`                   |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------- | ------------------------------- |
-| **System integer**                                                                                           | `"i32"` or `"i64"`        | `"42"`, `"123"` etc.            |
-| **Other integer number**                                                                                     | `"i32"`, `"u64"` etc.     | `"42"`, `"123"` etc.            |
-| **Integer numeric [range](ranges.md)**                                                                       | `"range"`, `"range="`     | `"2..7"`, `"0..=15"` etc.       |
-| **Floating-point number**                                                                                    | `"f32"` or `"f64"`        | `"123.4567"` etc.               |
-| **Fixed precision decimal number**                                                                           | `"decimal"`               | `"42"`, `"123.4567"` etc.       |
-| **Boolean value**                                                                                            | `"bool"`                  | `"true"` or `"false"`           |
-| **Unicode character**                                                                                        | `"char"`                  | `"A"`, `"x"` etc.               |
-| **Immutable Unicode [string](strings-chars.md)**                                                             | `"string"`                | `"hello"` etc.                  |
-| **[`Array`](arrays.md)**                                                                                     | `"array"`                 | `"[ 1, 2, 3 ]"` etc.            |
-| **Byte array &ndash; [`BLOB`](blobs.md)**                                                                    | `"blob"`                  | `"[01020304abcd]"` etc.         |
-| **[Object map](object-maps.md)**                                                                             | `"map"`                   | `"#{ "a": 1, "b": true }"` etc. |
-| **[Timestamp](timestamps.md)**                                                                               | `"timestamp"`             | `"<timestamp>"`                 |
-| **[Function pointer](fn-ptr.md)**                                                                            | `"Fn"`                    | `"Fn(foo)"` etc.                |
-| **Dynamic value** (i.e. can be anything)                                                                     | _the actual type_         | _actual value_                  |
-| **Shared value** (a reference-counted, shared dynamic value, created via [automatic currying](fn-closure.md) | _the actual type_         | _actual value_                  |
-| **Nothing/void/nil/null/Unit** (or whatever it is called)                                                    | `"()"`                    | `""` _(empty string)_           |
+| Category                                                                                           | [`type_of()`](type-of.md) | `to_string()`                   |
+| -------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------- |
+| **System integer**                                                                                 | `"i32"` or `"i64"`        | `"42"`, `"123"` etc.            |
+| **Other integer number**                                                                           | `"i32"`, `"u64"` etc.     | `"42"`, `"123"` etc.            |
+| **Integer numeric [range](ranges.md)**                                                             | `"range"`, `"range="`     | `"2..7"`, `"0..=15"` etc.       |
+| **Floating-point number**                                                                          | `"f32"` or `"f64"`        | `"123.4567"` etc.               |
+| **Fixed precision decimal number**                                                                 | `"decimal"`               | `"42"`, `"123.4567"` etc.       |
+| **Boolean value**                                                                                  | `"bool"`                  | `"true"` or `"false"`           |
+| **Unicode character**                                                                              | `"char"`                  | `"A"`, `"x"` etc.               |
+| **Immutable Unicode [string](strings-chars.md)**                                                   | `"string"`                | `"hello"` etc.                  |
+| **[`Array`](arrays.md)**                                                                           | `"array"`                 | `"[ 1, 2, 3 ]"` etc.            |
+| **Byte array &ndash; [`BLOB`](blobs.md)**                                                          | `"blob"`                  | `"[01020304abcd]"` etc.         |
+| **[Object map](object-maps.md)**                                                                   | `"map"`                   | `"#{ "a": 1, "b": true }"` etc. |
+| **[Timestamp](timestamps.md)**                                                                     | `"timestamp"`             | `"<timestamp>"`                 |
+| **[Function pointer](fn-ptr.md)**                                                                  | `"Fn"`                    | `"Fn(foo)"` etc.                |
+| **Dynamic value** (i.e. can be anything)                                                           | _the actual type_         | _actual value_                  |
+| **Shared value** (a reference-counted, shared dynamic value, created via [closures](fn-closure.md) | _the actual type_         | _actual value_                  |
+| **Nothing/void/nil/null/Unit** (or whatever it is called)                                          | `"()"`                    | `""` _(empty string)_           |
 
 
 ```admonish warning.small "All types are distinct"

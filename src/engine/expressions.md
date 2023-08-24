@@ -37,7 +37,7 @@ When evaluating _expressions_, no full-blown statement (e.g. [`while`], [`for`],
 not even [variable] assignment &ndash; is supported and will be considered syntax errors.
 
 This is true also for [statement expressions]({{rootUrl}}/language/statement-expression.md)
-and [anonymous functions]/[closures].
+and [closures].
 
 ```rust
 // The following are all syntax errors because the script
