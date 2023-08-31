@@ -8,8 +8,8 @@ Export Functions Metadata to JSON
 --------------------------------------------------------------------------------
 
 As part of a _reflections_ API, `Engine::gen_fn_metadata_to_json` and the corresponding
-`Engine::gen_fn_metadata_with_ast_to_json` export the full list of [functions metadata]
-in JSON format.
+`Engine::gen_fn_metadata_with_ast_to_json` export the full list of [custom types] and
+[functions metadata] in JSON format.
 
 ~~~admonish warning.small "Requires `metadata`"
 
@@ -19,23 +19,24 @@ The [`metadata`] feature is required for this API, which also pulls in the
 
 ### Sources
 
-Functions from the following sources are included:
+Functions and [custom types] from the following sources are included:
 
 1. Script-defined functions in an [`AST`] (for `Engine::gen_fn_metadata_with_ast_to_json`)
 2. Native Rust functions registered into the global namespace via the `Engine::register_XXX` API
-3. _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) in static modules
+3. [Custom types] registered into the global namespace via the `Engine::register_type_with_name` API
+4. _Public_ (i.e. non-[`private`]) functions (native Rust or Rhai scripted) and [custom types] in static modules
    registered via `Engine::register_static_module`
-4. Native Rust functions in external [packages] registered via `Engine::register_global_module`
-5. Native Rust functions in [built-in packages] (optional)
+5. Native Rust functions and [custom types] in external [packages] registered via `Engine::register_global_module`
+6. Native Rust functions and [custom types] in [built-in packages] (optional)
 
 
 JSON Schema
 -----------
 
-The JSON schema used to hold functions metadata is very simple, containing a nested structure of
-`modules` and a list of `functions`.
+The JSON schema used to hold metadata is very simple, containing a nested structure of
+`modules`, a list of `customTypes` and a list of `functions`.
 
-### Modules Schema
+### Module Schema
 
 ```json
 {
@@ -51,12 +52,19 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
                 {
                     "doc": "//! Module documentation can also occur in any sub-module",
 
+                    "customTypes": /* custom types exported in 'sub_module_1::sub_sub_module_A' */
+                    [
+                        { ... custom type metadata ... },
+                        { ... custom type metadata ... },
+                        { ... custom type metadata ... }
+                        ...
+                    ],
                     "functions": /* functions exported in 'sub_module_1::sub_sub_module_A' */
                     [
                         { ... function metadata ... },
                         { ... function metadata ... },
                         { ... function metadata ... },
-                        { ... function metadata ... },
+                        { ... function metadata ... }
                         ...
                     ]
                 },
@@ -73,12 +81,34 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
         ...
     },
 
+    "customTypes": /* custom types registered globally */
+    [
+        { ... custom type metadata ... },
+        { ... custom type metadata ... },
+        { ... custom type metadata ... },
+        ...
+    ],
+
     "functions": /* functions registered globally or in the 'AST' */
     [
         { ... function metadata ... },
         { ... function metadata ... },
         { ... function metadata ... },
         { ... function metadata ... },
+        ...
+    ]
+}
+```
+
+### Custom Type Metadata Schema
+
+```json
+{
+    "typeName": "alloc::string::String",    /* name of Rust type */
+    "displayName": "MyType",
+    "docComments":  /* omitted if none */
+    [
+        "/// My super-string type.",
         ...
     ]
 }
