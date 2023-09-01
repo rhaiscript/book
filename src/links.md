@@ -219,6 +219,7 @@
 [`loop`]: {{rootUrl}}/language/loop.md
 [`for`]: {{rootUrl}}/language/for.md
 [`in`]: {{rootUrl}}/language/in.md
+[`exit`]: {{rootUrl}}/language/return.md#exit
 [`return`]: {{rootUrl}}/language/return.md
 [`throw`]: {{rootUrl}}/language/throw.md
 [`try`]: {{rootUrl}}/language/try-catch.md
