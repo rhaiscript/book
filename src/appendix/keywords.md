@@ -53,7 +53,6 @@ Reserved Keywords
 |  `static`   | variable declaration  |
 |  `shared`   | share value           |
 |   `goto`    | control flow          |
-|   `exit`    | control flow          |
 |   `match`   | matching              |
 |   `case`    | matching              |
 |  `public`   | function/field access |

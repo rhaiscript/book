@@ -11,7 +11,7 @@ The following are reserved keywords in Rhai.
 | [`let`][variable], [`const`][constant]                                     | `var`, `static`                                            | [variables]                         |                                |
 | `is_shared`                                                                |                                                            | _shared_ values                     |         [`no_closure`]         |
 |                                                                            | `is`                                                       | type checking                       |                                |
-| [`if`], [`else`][`if`]                                                     | `goto`, `exit`                                             | control flow                        |                                |
+| [`if`], [`else`][`if`]                                                     | `goto`                                                     | control flow                        |                                |
 | [`switch`]                                                                 | `match`, `case`                                            | switching and matching              |                                |
 | [`do`], [`while`], [`loop`], `until`, [`for`], [`in`], `continue`, `break` |                                                            | looping                             |                                |
 | [`fn`][function], [`private`], `is_def_fn`, `this`                         | `public`, `protected`, `new`                               | [functions]                         |        [`no_function`]         |
