@@ -169,7 +169,7 @@ Interpolation is not supported for normal string or character literals.
 statements block, including another interpolated string!
 The last result of the block is taken as the value for interpolation.
 
-Rhai uses [`to_string()`](convert.md) to convert any value into a string, then physically joins all
+Rhai uses [`to_string`](convert.md) to convert any value into a string, then physically joins all
 the sub-strings together.
 
 For convenience, if any interpolated value is a [BLOB](blobs.md), however, it is automatically treated as a

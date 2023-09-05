@@ -28,7 +28,7 @@ See [this section]({{rootUrl}}/plugins/module.md#use-rhai_fnglobal) for more det
 Also Consider These
 -------------------
 
-The following functions are implemented using `to_string()` or `to_debug()` by default, but can be
+The following functions are implemented using `to_string` or `to_debug` by default, but can be
 overloaded with custom versions.
 
 | Function      | Signature                                      | Default     | Usage                                                                  |

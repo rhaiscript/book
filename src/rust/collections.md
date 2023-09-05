@@ -112,7 +112,7 @@ TL;DR
 
 ### Reason #1: Performance
 
-A main reason why anybody would want to do this is to avoid the overheads of storing [`Dynamic`] items.
+A main reason why anybody would want to do this is to avoid the overhead of storing [`Dynamic`] items.
 
 This is why [BLOB's] is a built-in data type in Rhai, even though it is actually defined as `Vec<u8>`.
 The overhead of using [`Dynamic`] (16 bytes) versus `u8` (1 byte) is worth the trouble, although the

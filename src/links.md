@@ -66,8 +66,8 @@
 
 [`type_of`]: {{rootUrl}}/language/type-of.md
 [`type_of()`]: {{rootUrl}}/language/type-of.md
-[`to_string()`]: {{rootUrl}}/rust/print-custom.md
-[`to_debug()`]: {{rootUrl}}/rust/print-custom.md
+[`to_string`]: {{rootUrl}}/rust/print-custom.md
+[`to_debug`]: {{rootUrl}}/rust/print-custom.md
 [`()`]: {{rootUrl}}/language/values-and-types.md
 [standard types]: {{rootUrl}}/language/values-and-types.md
 [`Dynamic`]: {{rootUrl}}/language/dynamic.md

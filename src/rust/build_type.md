@@ -14,17 +14,19 @@ This can be achieved simply by implementing the `CustomType` trait, which contai
 The `TypeBuilder` parameter provides a range of convenient methods to register [methods], property
 [getters/setters], [indexers] and [type iterators] of a [custom type]:
 
-| Method                 | Description                                                 |
-| ---------------------- | ----------------------------------------------------------- |
-| `with_name`            | set a friendly name                                         |
-| `with_fn`              | register a [method]                                         |
-| `with_get`             | register a property [getter][getters/setters]               |
-| `with_set`             | register a property [getter][getters/setters]               |
-| `with_get_set`         | register property [getters/setters]                         |
-| `with_indexer_get`     | register an [indexer] get function                          |
-| `with_indexer_set`     | register an [indexer] set function                          |
-| `with_indexer_get_set` | register [indexer] get/set functions                        |
-| `is_iterable`          | register a [type iterator] if the [custom type] is iterable |
+| Method                 | Description                                                               |
+| ---------------------- | ------------------------------------------------------------------------- |
+| `with_name`            | set a friendly name                                                       |
+| `on_print`             | register the [`to_string`] function that pretty-prints the [custom type]  |
+| `on_debug`             | register the [`to_debug`] function that debug-prints the [custom type]    |
+| `with_fn`              | register a [method] (or any function really)                              |
+| `with_get`             | register a property [getter][getters/setters]                             |
+| `with_set`             | register a property [getter][getters/setters]                             |
+| `with_get_set`         | register property [getters/setters]                                       |
+| `with_indexer_get`     | register an [indexer] get function                                        |
+| `with_indexer_set`     | register an [indexer] set function                                        |
+| `with_indexer_get_set` | register [indexer] get/set functions                                      |
+| `is_iterable`          | automatically register a [type iterator] if the [custom type] is iterable |
 
 ```admonish tip.small "Tip: Use plugin module if starting from scratch"
 
@@ -69,14 +71,6 @@ impl Vec3 {
     fn set_z(&mut self, z: i64) {
         self.z = z
     }
-    fn get_component(&mut self, idx: i64) -> Result<i64, Box<EvalAltResult>> {
-        match idx {
-            0 => Ok(self.x),
-            1 => Ok(self.y),
-            2 => Ok(self.z),
-            _ => Err(EvalAltResult::ErrorIndexNotFound(idx.Into(), Position::NONE).into()),
-        }
-    }
 }
 
 // The custom type can even be iterated!
@@ -99,7 +93,26 @@ impl CustomType for Vec3 {
             .with_get_set("x", Self::get_x, Self::set_x)
             .with_get_set("y", Self::get_y, Self::set_y)
             .with_get_set("z", Self::get_z, Self::set_z)
-            .with_indexer_get(Self::get_component);
+            // Indexer get/set functions that do not panic on invalid indices
+            .with_indexer_get_set(
+                |vec: &mut Self, idx: i64) -> Result<i64, Box<EvalAltResult>> {
+                    match idx {
+                        0 => Ok(vec.x),
+                        1 => Ok(vec.y),
+                        2 => Ok(vec.z),
+                        _ => Err(EvalAltResult::ErrorIndexNotFound(idx.Into(), Position::NONE).into()),
+                    }
+                },
+                |vec: &mut Self, idx: i64, value: i64) -> Result<(), Box<EvalAltResult>> {
+                    match idx {
+                        0 => vec.x = value,
+                        1 => vec.y = value,
+                        2 => vec.z = value,
+                        _ => Err(EvalAltResult::ErrorIndexNotFound(idx.Into(), Position::NONE).into()),
+                    }
+                    Ok(())
+                }
+            );
     }
 }
 
@@ -108,3 +121,16 @@ let mut engine = Engine::new();
 // Register the custom type in one go!
 engine.build_type::<Vec3>();
 ```
+
+~~~admonish question "TL;DR: Why isn't there `is_indexable`?"
+
+Technically speaking, `TypeBuilder` can automatically register an [indexer] get function if the [custom type] implements `Index`.
+Similarly, it can automatically register an [indexer] set function for `IndexMut`.
+
+In practice, however, this is usually not desirable because most `Index`/`IndexMut` implementations panic on invalid indices.
+
+For Rhai, it is necessary to handle invalid indices properly by returning an error.
+
+Therefore, in the example above, the custom method `get_component` is used to define an [indexer] get function which
+properly handles invalid indices.
+~~~

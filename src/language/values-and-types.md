@@ -77,7 +77,7 @@ Any modification done to a Rhai string causes the [string] to be cloned and the 
 
 ```admonish tip.small "Tip: Convert to string"
 
-The [`to_string()`] function converts a standard type into a [string] for display purposes.
+The [`to_string`] function converts a standard type into a [string] for display purposes.
 
-The [`to_debug()`] function converts a standard type into a [string] in debug format.
+The [`to_debug`] function converts a standard type into a [string] in debug format.
 ```
