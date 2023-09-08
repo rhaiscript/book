@@ -88,24 +88,25 @@ The JSON schema used to hold functions metadata is very simple, containing a nes
 
 ```json
 {
-    "baseHash": 9876543210,  /* partial hash with only number of parameters */
-    "fullHash": 1234567890,  /* full hash with actual parameter types */
+    "baseHash": 9876543210,     /* partial hash with only number of parameters */
+    "fullHash": 1234567890,     /* full hash with actual parameter types */
     "namespace": "internal" | "global",
     "access": "public" | "private",
     "name": "fn_name",
     "isAnonymous": false,
     "type": "native" | "script",
-    "numParams": 42,  /* number of parameters */
-    "params":  /* omitted if no parameters */
+    "numParams": 42,            /* number of parameters */
+    "params":                   /* omitted if no parameters */
     [
         { "name": "param_1", "type": "type_1" },
         { "name": "param_2" },  /* no type name */
         { "type": "type_3" },   /* no parameter name */
         ...
     ],
-    "returnType": "ret_type",  /* omitted if () or unknown */
+    "thisType": "this_type",    /* omitted if none */
+    "returnType": "ret_type",   /* omitted if () or unknown */
     "signature": "[private] fn_name(param_1: type_1, param_2, _: type_3) -> ret_type",
-    "docComments":  /* omitted if none */
+    "docComments":              /* omitted if none */
     [
         "/// doc-comment line 1",
         "/// doc-comment line 2",

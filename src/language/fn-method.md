@@ -76,7 +76,7 @@ fn do_update(x) {
 ### The Solution
 
 With a special syntax, it is possible to restrict a [function] to be callable only when the object
-pointed to by [`this`](fn-method.md) is of a certain type:
+pointed to by `this` is of a certain type:
 
 > `fn`  _type name_ `.` _method_ `(` _parameters_ ... `)  {`  ...  `}`
 

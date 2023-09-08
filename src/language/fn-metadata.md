@@ -28,11 +28,12 @@ excluded when using a [raw `Engine`].
 The return value is an [array] of [object maps] (so `get_fn_metadata_list` is also not available under
 [`no_index`] or [`no_object`]), containing the following fields.
 
-| Field          |         Type         | Optional? | Description                                                                         |
-| -------------- | :------------------: | :-------: | ----------------------------------------------------------------------------------- |
-| `namespace`    |       [string]       |  **yes**  | the module _namespace_ if the [function] is defined within a [module]               |
-| `access`       |       [string]       |    no     | `"public"` if the function is public,<br/>`"private"` if it is [private][`private`] |
-| `name`         |       [string]       |    no     | [function] name                                                                     |
-| `params`       | [array] of [strings] |    no     | parameter names                                                                     |
-| `is_anonymous` |        `bool`        |    no     | is this [function] an [anonymous function]?                                         |
-| `comments`     | [array] of [strings] |  **yes**  | [doc-comments], if any, one per line                                                |
+| Field          |            Type            | Optional? | Description                                                                         |
+| -------------- | :------------------------: | :-------: | ----------------------------------------------------------------------------------- |
+| `namespace`    |          [string]          |  **yes**  | the module _namespace_ if the [function] is defined within a [module]               |
+| `access`       |          [string]          |    no     | `"public"` if the function is public,<br/>`"private"` if it is [private][`private`] |
+| `name`         |          [string]          |    no     | [function] name                                                                     |
+| `params`       |    [array] of [strings]    |    no     | parameter names                                                                     |
+| `this_type`    | [string](strings-chars.md) |  **yes**  | restrict the type of `this` if the [function] is a [method]                         |
+| `is_anonymous` |           `bool`           |    no     | is this [function] an [anonymous function]?                                         |
+| `comments`     |    [array] of [strings]    |  **yes**  | [doc-comments], if any, one per line                                                |

@@ -45,5 +45,6 @@ The return value is an [array](arrays.md) of [object maps](object-maps.md) conta
 | `access`       |            [string](strings-chars.md)             |    no     | `"public"` if the function is public,<br/>`"private"` if it is [private](modules/export.md)           |
 | `name`         |            [string](strings-chars.md)             |    no     | [function](functions.md) name                                                                         |
 | `params`       | [array](arrays.md) of [strings](strings-chars.md) |    no     | parameter names                                                                                       |
+| `this_type`    |            [string](strings-chars.md)             |  **yes**  | restrict the type of `this` if the [function](functions.md) is a [method](fn_methods.md)              |
 | `is_anonymous` |                      `bool`                       |    no     | is this [function](functions.md) an [anonymous function](fn-anon.md)?                                 |
 | `comments`     | [array](arrays.md) of [strings](strings-chars.md) |  **yes**  | [doc-comments](comments.md), if any, one per line                                                     |
