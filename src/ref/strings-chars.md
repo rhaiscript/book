@@ -26,6 +26,11 @@ Strings can be built up from other strings and types via the `+` or `+=` operato
 Standard Escape Sequences
 -------------------------
 
+~~~admonish tip.side "Tip: Character `to_int()`"
+
+Use the `to_int` method to convert a Unicode character into its 32-bit Unicode encoding.
+~~~
+
 There is built-in support for Unicode (`\u`_xxxx_ or `\U`_xxxxxxxx_) and hex (`\x`_xx_) escape
 sequences for normal strings and characters.
 
