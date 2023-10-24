@@ -17,11 +17,12 @@ A number of examples can be found under `examples`.
 | [`custom_types`]({{repoHome}}/examples/custom_types.rs)                         | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] using the [`CustomType`] trait.                |
 | [`definitions`]({{repoHome}}/examples/definitions)                              | shows how to generate definition files for use with the [Rhai Language Server][lsp] (requires the [`metadata`] feature)         |
 | [`hello`]({{repoHome}}/examples/hello.rs)                                       | simple example that evaluates an expression and prints the result                                                               |
+| [`pause_and_resume`]({{repoHome}}/pause_and_resume.rs)                          | shows how to pause/resume/stop an `Engine` running in a separate thread via an MPSC channel                                     |
 | [`reuse_scope`]({{repoHome}}/examples/reuse_scope.rs)                           | evaluates two pieces of code in separate runs, but using a common [`Scope`]                                                     |
 | [`serde`]({{repoHome}}/examples/serde.rs)                                       | example to serialize and deserialize Rust types with [`serde`](https://crates.io/crates/serde) (requires the [`serde`] feature) |
 | [`simple_fn`]({{repoHome}}/examples/simple_fn.rs)                               | shows how to register a simple Rust function                                                                                    |
 | [`strings`]({{repoHome}}/examples/strings.rs)                                   | shows different ways to register Rust functions taking [string] arguments                                                       |
-| [`threading`]({{repoHome}}/examples/threading.rs)                               | shows how to communicate with an [`Engine`] running in a separate thread via an MPSC channel                                    |
+| [`threading`]({{repoHome}}/examples/threading.rs)                               | shows how to communicate in duplex with an [`Engine`] running in a separate thread via a pair of MPSC channels                  |
 
 
 Scriptable Event Handler With State Examples
