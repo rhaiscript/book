@@ -17,9 +17,9 @@ Features of Rhai
 * Easily [call a script-defined function]({{rootUrl}}/engine/call-fn.md) from Rust.
 
 * Very few additional dependencies &ndash; right now only [`smallvec`](https://crates.io/crates/smallvec),
-  [`num-traits`](https://crates.io/crates/num-traits), [`ahash`](https://crates.io/crates/ahash),
-  [`bitflags`](https://crates.io/crates/bitflags) and [`smartstring`]; for [`no-std`] and [WASM] builds,
-  a number of additional dependencies are pulled in to provide for missing functionalities.
+  [`thin-vec`](https://crates.io/crates/thin-vec), [`num-traits`](https://crates.io/crates/num-traits),
+  [`ahash`](https://crates.io/crates/ahash), [`bitflags`](https://crates.io/crates/bitflags) and [`smartstring`];
+  for [`no-std`] and [WASM] builds, a number of additional dependencies are pulled in to provide for missing functionalities.
 
 * [Plugins] system powered by procedural macros simplifies custom API development.
 ```
