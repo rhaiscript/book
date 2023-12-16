@@ -39,6 +39,19 @@ let f = Fn("foo");      // <- the above is equivalent to this
 let g = bar;            // error: variable 'bar' not found
 ```
 
+The short-hand notation is particularly useful when passing [functions] as [closure] arguments.
+
+```rust
+fn is_even(n) { n % 2 == 0 }
+
+let array = [1, 2, 3, 4, 5];
+
+array.filter(is_even);
+
+array.filter(Fn("is_even"));    // <- the above is equivalent to this
+
+array.filter(|n| n % 2 == 0);   // <- ... or this
+```
 
 Built-in Functions
 ------------------
