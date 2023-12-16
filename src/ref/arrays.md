@@ -156,7 +156,7 @@ y.pop() == 5;               // y == [4, 4]
 
 y.len == 2;
 
-for element in y {             // arrays can be iterated with a 'for' statement
+for element in y {          // arrays can be iterated with a 'for' statement
     print(element);
 }
 
