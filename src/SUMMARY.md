@@ -254,6 +254,7 @@ Usage Patterns
 - [Blocking/Async Function Calls](patterns/blocking.md)
 - [External References (Unsafe)](patterns/references.md)
 - [Static Hashing](patterns/static-hash.md)
+- [Serialize an AST](patterns/serialize-ast.md)
 - [Domain-Specific Tools](patterns/domain-tools.md)
 - [Multiple Instantiation](patterns/multiple.md)
 
