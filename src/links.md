@@ -196,9 +196,9 @@
 [progress]: {{rootUrl}}/safety/progress.md
 
 [script optimization]: {{rootUrl}}/engine/optimize/index.md
-[`OptimizationLevel::Full`]: {{rootUrl}}/engine/optimize/optimize-levels.md
-[`OptimizationLevel::Simple`]: {{rootUrl}}/engine/optimize/optimize-levels.md
-[`OptimizationLevel::None`]: {{rootUrl}}/engine/optimize/optimize-levels.md
+[`OptimizationLevel::Full`]: {{rootUrl}}/engine/optimize/index.md
+[`OptimizationLevel::Simple`]: {{rootUrl}}/engine/optimize/index.md
+[`OptimizationLevel::None`]: {{rootUrl}}/engine/optimize/index.md
 
 [options]: {{rootUrl}}/engine/options.md
 

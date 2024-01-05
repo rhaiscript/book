@@ -28,8 +28,8 @@ and sub-modules.
 This code is exactly what would need to be written by hand to achieve the same goal, and is custom
 fit to each exported item.
 
-All `pub` functions become registered functions, constants become [module] [constants], [type
-aliases] become [custom types], and sub-modules become Rhai [sub-modules][module].
+All `pub` functions become registered functions, constants become [module] [constants], [type aliases]
+become [custom types], and sub-modules become Rhai [sub-modules][module].
 
 |   Module element   |          Example           | Rhai [module] equivalent |
 | :----------------: | :------------------------: | :----------------------: |
@@ -539,6 +539,12 @@ mod my_module {
     pub fn set_values(array: &mut rhai::Array, value: i64) {
         // ...
     }
+    // The following is a volatile function which returns different values
+    // for each call.
+    #[rhai_fn(volatile)]
+    pub fn get_current_time() -> String {
+        // ...
+    }
 }
 ```
 
@@ -556,6 +562,31 @@ let r = VECTOR.first1;      // ok!
 
 let r = VECTOR.first2;      // runtime error: constant modified
 ```
+
+
+Volatile Functions
+------------------
+
+A _volatile_ function is one that does not guarantee the same result for the same input(s).
+
+Most functions are non-volatile, meaning that they always generate the same result when called with
+the same arguments.
+
+Common examples of volatile functions are:
+
+* a function that returns the current date and/or time
+
+* a function that looks up the current value of a variable in the environment
+
+* a function that reads from a file (which depends on the content of the file at the time of read)
+
+* a function that reads from a database or a cache (which depends on the content at the time of read)
+
+When using [Full Optimization][`OptimizationLevel::Full`], functions with [constant] arguments are
+called _eagerly_ at compile time.  However, volatile functions are never called.
+
+Plugin functions are assumed to be **non-volatile** by default, unless marked with
+`#[rhai_fn(volatile)]`.
 
 
 Fallible Functions
@@ -616,15 +647,16 @@ Inner attributes can be applied to the inner items of a module to tweak the expo
 
 Parameters should be set on inner attributes to specify the desired behavior.
 
-| Attribute Parameter | Use with                       | Apply to                                           | Description                                                                   |
-| ------------------- | ------------------------------ | -------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `skip`              | `#[rhai_fn]`<br/>`#[rhai_mod]` | function or sub-module                             | do not export this function/[sub-module][module]                              |
-| `global`            | `#[rhai_fn]`                   | function                                           | expose this function to the global [namespace][function namespace]            |
-| `internal`          | `#[rhai_fn]`                   | function                                           | keep this function within the internal module [namespace][function namespace] |
-| `name = "..."`      | `#[rhai_fn]`<br/>`#[rhai_mod]` | function or sub-module                             | registers function/[sub-module][module] under the specified name              |
-| `get = "..."`       | `#[rhai_fn]`                   | `pub fn (&mut Type) -> ValueType`                  | registers a property [getter][getters/setters] for the named property         |
-| `set = "..."`       | `#[rhai_fn]`                   | `pub fn (&mut Type, ValueType)`                    | registers a property [setter][getters/setters] for the named property         |
-| `index_get`         | `#[rhai_fn]`                   | `pub fn (&mut Type, IndexType) -> ValueType`       | registers an [index getter][indexer]                                          |
-| `index_set`         | `#[rhai_fn]`                   | `pub fn (&mut Type, IndexType, ValueType)`         | registers an [index setter][indexer]                                          |
-| `return_raw`        | `#[rhai_fn]`                   | `pub fn (...) -> Result<Type, Box<EvalAltResult>>` | marks this as a [fallible function]                                           |
-| `pure`              | `#[rhai_fn]`                   | `pub fn (&mut Type, ...) -> ...`                   | marks this as a _pure_ function                                               |
+| Attribute Parameter | Use with                       | Apply to                                        | Description                                                                                                   |
+| ------------------- | ------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `skip`              | `#[rhai_fn]`<br/>`#[rhai_mod]` | any function or sub-module                      | do not export this function/sub-module                                                                        |
+| `global`            | `#[rhai_fn]`                   | any function                                    | expose this function to the global [namespace][function namespace]                                            |
+| `internal`          | `#[rhai_fn]`                   | any function                                    | keep this function within the internal module [namespace][function namespace]                                 |
+| `name = "..."`      | `#[rhai_fn]`<br/>`#[rhai_mod]` | any function or sub-module                      | registers function/sub-module under the specified name                                                        |
+| `get = "..."`       | `#[rhai_fn]`                   | `pub fn (&mut T) -> V`                          | registers a property [getter][getters/setters] for the named property                                         |
+| `set = "..."`       | `#[rhai_fn]`                   | `pub fn (&mut T, V)`                            | registers a property [setter][getters/setters] for the named property                                         |
+| `index_get`         | `#[rhai_fn]`                   | `pub fn (&mut T, X) -> V`                       | registers an [index getter][indexer]                                                                          |
+| `index_set`         | `#[rhai_fn]`                   | `pub fn (&mut T, X, V)`                         | registers an [index setter][indexer]                                                                          |
+| `return_raw`        | `#[rhai_fn]`                   | `pub fn (...) -> Result<V, Box<EvalAltResult>>` | marks this as a [fallible function]                                                                           |
+| `pure`              | `#[rhai_fn]`                   | `pub fn (&mut T, ...) -> ...`                   | marks this as a _pure_ function                                                                               |
+| `volatile`          | `#[rhai_fn]`                   | any function                                    | marks this as a _volatile_ function &ndash; i.e. it does not guarantee the same result for the same input(s). |
