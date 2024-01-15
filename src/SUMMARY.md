@@ -244,6 +244,7 @@ Usage Patterns
 - [Loadable Configuration](patterns/config.md)
 - [Multi-Layered Functions](patterns/multi-layer.md)
 - [Hot Reloading](patterns/hot-reload.md)
+- [Builder Pattern / Fluent API](patterns/builder.md)
 - [Dynamic Constants Provider](patterns/dynamic-const.md)
 - [Global Constants](patterns/constants.md)
 - [Mutable Global State](patterns/global-mutable-state.md)
