@@ -63,7 +63,7 @@ mod my_module {
 def_package! {
     /// My own personal super package in a new crate!
     pub MyPackage(module) {
-        combine_with_exported_module!(module, "my-functions", my_module));
+        combine_with_exported_module!(module, "my-functions", my_module);
     }
 }
 ```
