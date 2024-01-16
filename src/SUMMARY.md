@@ -183,6 +183,7 @@ Safety and Protection
 - [Maximum Number of Operations](safety/max-operations.md)
   - [Tracking Progress and Force-Termination](safety/progress.md)
 - [Maximum Number of Variables](safety/max-variables.md)
+- [Maximum Number of Functions](safety/max-functions.md)
 - [Maximum Number of Modules](safety/max-modules.md)
 - [Maximum Call Stack Depth](safety/max-call-stack.md)
 - [Maximum Expression Depth](safety/max-stmt-depth.md)

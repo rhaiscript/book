@@ -189,6 +189,8 @@
 [maximum statement depth]: {{rootUrl}}/safety/max-stmt-depth.md
 [maximum call stack depth]: {{rootUrl}}/safety/max-call-stack.md
 [maximum number of operations]: {{rootUrl}}/safety/max-operations.md
+[maximum number of variables]: {{rootUrl}}/safety/max-variables.md
+[maximum number of functions]: {{rootUrl}}/safety/max-functions.md
 [maximum number of modules]: {{rootUrl}}/safety/max-modules.md
 [maximum length of strings]: {{rootUrl}}/safety/max-string-size.md
 [maximum size of arrays]: {{rootUrl}}/safety/max-array-size.md

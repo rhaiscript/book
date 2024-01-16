@@ -18,6 +18,9 @@ Most Important Resources
 * Continuously grow a [string], an [array], a [BLOB] or [object map] until all memory is consumed.
 
 * Continuously create new [variables] with large data until all memory is consumed.
+
+* Continuously define new [functions] all memory is consumed (e.g. a simple [closure] `||`,
+  as short as two characters, is a [function] &ndash; an attractive target for DOS attacks).
 ```
 
 ```admonish bug "CPU"
