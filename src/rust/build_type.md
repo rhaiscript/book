@@ -131,6 +131,5 @@ In practice, however, this is usually not desirable because most `Index`/`IndexM
 
 For Rhai, it is necessary to handle invalid indices properly by returning an error.
 
-Therefore, in the example above, the custom method `get_component` is used to define an [indexer] get function which
-properly handles invalid indices.
+Therefore, in the example above, the `with_indexer_get_set` method properly handles invalid indices by returning errors.
 ~~~
