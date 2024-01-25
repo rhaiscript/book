@@ -3,7 +3,7 @@ Register a Generic Rust Function
 
 {{#include ../links.md}}
 
-```admonish info.side "No monomorphization"
+```admonish info.side.wide "No monomorphization"
 
 Due to its dynamic nature, Rhai cannot monomorphize generic functions automatically.
 

@@ -42,6 +42,12 @@ Rhai internally supports a number of standard data types (see [this list][standa
 Any type outside of the list is considered _custom_.
 ```
 
+```admonish warning.side.wide "Custom types are slower"
+
+Custom types run _slower_ than [built-in types][standard types] due to an additional
+level of indirection, but for all other purposes there is no difference.
+```
+
 Rhai works seamlessly with _any_ Rust type.
 
 A custom type is stored in Rhai as a Rust _trait object_ (specifically, a `dyn rhai::Variant`),
@@ -58,12 +64,6 @@ External types that are not defined within the same crate (and thus cannot imple
 traits or use special `#[derive]`) can also be used easily with Rhai.
 
 Support for custom types can be turned off via the [`no_object`] feature.
-
-```admonish warning.small "Custom types are slower"
-
-Custom types run _slower_ than [built-in types][standard types] due to an additional
-level of indirection, but for all other purposes there is no difference.
-```
 
 
 Register a Custom Type
