@@ -42,10 +42,10 @@ use rhai_fs::FilesystemPackage;
 let mut engine = Engine::new();
 
 // Create new 'FilesystemPackage' instance
-let random = FilesystemPackage::new();
+let fs = FilesystemPackage::new();
 
 // Load the package into the `Engine`
-random.register_into_engine(&mut engine);
+fs.register_into_engine(&mut engine);
 ```
 
 
