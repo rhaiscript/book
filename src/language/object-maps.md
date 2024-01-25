@@ -17,6 +17,39 @@ Currently it is an alias to `BTreeMap<SmartString, Dynamic>`.
 
 Object maps are disabled via the [`no_object`] feature.
 
+~~~admonish tip "Tip: Object maps are _FAST_"
+
+Normally, when [properties][getters/setters] are accessed, copies of the data values are made.
+This is normally slow.
+
+Object maps have special treatment &ndash; properties are accessed via _references_, meaning that
+no copies of data values are made.
+
+This makes object map access fast, especially when deep within a properties chain.
+
+```rust
+// 'obj' is a normal custom type
+let x = obj.a.b.c.d;
+
+// The above is equivalent to:
+let a_value = obj.a;        // temp copy of 'a'
+let b_value = a_value.b;    // temp copy of 'b'
+let c_value = b_value.c;    // temp copy of 'c'
+let d_value = c_value.d;    // temp copy of 'd'
+let x = d_value;
+
+// 'map' is an object map
+let x = map.a.b.c.d;        // direct access to 'd'
+                            // 'a', 'b' and 'c' are not copied
+
+map.a.b.c.d = 42;           // directly modifies 'd' in 'a', 'b' and 'c'
+                            // no copy of any property value is made
+
+map.a.b.c.d.calc();         // directly calls 'calc' on 'd'
+                            // no copy of any property value is made
+```
+~~~
+
 ~~~admonish question.small "TL;DR: Why `SmartString`?"
 
 [`SmartString`] is used because most object map properties are short (at least shorter than 23 characters)
@@ -71,7 +104,9 @@ The _index notation_ allows setting/getting properties of arbitrary names (even 
 
 > _object_ `[` _property_ `]`
 
-### Non-existing property
+
+Handle Non-Existent Properties
+------------------------------
 
 ```admonish tip.side.wide "Tip: Force error"
 
@@ -79,9 +114,33 @@ It is possible to force Rhai to return an `EvalAltResult:: ErrorPropertyNotFound
 [`Engine:: set_fail_on_invalid_map_property`][options].
 ```
 
-Trying to read a non-existing property returns [`()`] instead of causing an error.
+Trying to read a non-existent property returns [`()`] instead of causing an error.
 
-This is similar to JavaScript where accessing a non-existing property returns `undefined`.
+This is similar to JavaScript where accessing a non-existent property returns `undefined`.
+
+```rust
+let map = #{ foo: 42 };
+
+// Regular property access
+let x = map.foo;            // x == 42
+
+// Non-existent property
+let x = map.bar;            // x == ()
+```
+
+### Check for property existence
+
+Use the [`in`] operator to check whether a property exists in an object-map.
+
+```rust
+let map = #{ foo: 42 };
+
+"foo" in map == true;
+
+"bar" in map == false;
+```
+
+### Short-circuit non-existent property access
 
 Use the [_Elvis operator_][elvis] (`?.`) to short-circuit further processing if the object is [`()`].
 
@@ -95,38 +154,23 @@ x?.a?.b?.foo();     // <- ok! returns () if 'x', 'x.a' or 'x.a.b' is ()
 x?.a?.b = 42;       // <- ok even if 'x' or 'x.a' is ()
 ```
 
-~~~admonish tip "Tip: Object maps are _FAST_"
+### Default property value
 
-Normally, when [properties][getters/setters] are accessed, copies of the data values are made.
-This is normally slow.
-
-Object maps have special treatment &ndash; properties are accessed via _references_, meaning that
-no copies of data values are made.
-
-This makes object map access fast, especially when deep within a properties chain.
+Using the [null-coalescing operator](logic.md#null-coalescing-operator) to give non-existent
+properties default values.
 
 ```rust
-// 'obj' is a normal custom type
-let x = obj.a.b.c.d;
+let map = #{ foo: 42 };
 
-// The above is equivalent to:
-let a_value = obj.a;        // temp copy of 'a'
-let b_value = a_value.b;    // temp copy of 'b'
-let c_value = b_value.c;    // temp copy of 'c'
-let d_value = c_value.d;    // temp copy of 'd'
-let x = d_value;
+// Regular property access
+let x = map.foo;            // x == 42
 
-// 'map' is an object map
-let x = map.a.b.c.d;        // direct access to 'd'
-                            // 'a', 'b' and 'c' are not copied
+// Non-existent property
+let x = map.bar;            // x == ()
 
-map.a.b.c.d = 42;           // directly modifies 'd' in 'a', 'b' and 'c'
-                            // no copy of any property value is made
-
-map.a.b.c.d.calc();         // directly calls 'calc' on 'd'
-                            // no copy of any property value is made
+// Default value for property
+let x = map.bar ?? 42;      // x == 42
 ```
-~~~
 
 
 Built-in Functions
@@ -204,7 +248,7 @@ foo == 42;
 y.contains("a") == true;
 y.contains("xyz") == false;
 
-y.xyz == ();            // a non-existing property returns '()'
+y.xyz == ();            // a non-existent property returns '()'
 y["xyz"] == ();
 
 y.len == ();            // an object map has no property getter function

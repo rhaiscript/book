@@ -193,3 +193,21 @@ a ?? b              // returns 'a' if it is not (), otherwise 'b'
 
 a() ?? b();         // b() is only evaluated if a() is ()
 ```
+
+~~~admonish tip.small "Tip: Default value for object map property"
+
+Use the null-coalescing operator to implement default values for non-existent [object map] properties.
+
+```rust
+let map = #{ foo: 42 };
+
+// Regular property access
+let x = map.foo;            // x == 42
+
+// Non-existent property
+let x = map.bar;            // x == ()
+
+// Default value for property
+let x = map.bar ?? 42;      // x == 42
+```
+~~~
