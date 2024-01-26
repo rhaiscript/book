@@ -50,8 +50,8 @@ use rhai_ml::MLPackage;
 let mut engine = Engine::new();
 
 // Create new 'MLPackage' instance
-let sci = MLPackage::new();
+let ml = MLPackage::new();
 
 // Load the package into the [`Engine`]
-sci.register_into_engine(&mut engine);
+ml.register_into_engine(&mut engine);
 ```
