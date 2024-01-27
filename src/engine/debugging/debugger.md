@@ -42,12 +42,16 @@ There are two callback functions to register for the debugger.
 
 The first is simply a function to initialize the state of the debugger with the following signature.
 
-> `Fn(&Engine, debugger::Debugger) -> debugger::Debugger`
+> ```rust
+> Fn(&Engine, debugger::Debugger) -> debugger::Debugger
+> ```
 
 The second callback is a function which will be called by the debugger during each step, with the
 following signature.
 
-> `Fn(context: EvalContext, event: debugger::DebuggerEvent, node: ASTNode, source: &str, pos: Position) -> Result<debugger::DebuggerCommand, Box<EvalAltResult>>`
+> ```rust
+> Fn(context: EvalContext, event: debugger::DebuggerEvent, node: ASTNode, source: &str, pos: Position) -> Result<debugger::DebuggerCommand, Box<EvalAltResult>>
+> ```
 
 where:
 

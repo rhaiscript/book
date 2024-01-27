@@ -119,7 +119,9 @@ Any custom syntax must include an _implementation_ of it.
 
 The signature of an implementation function is as follows.
 
-> `Fn(context: &mut EvalContext, inputs: &[Expression]) -> Result<Dynamic, Box<EvalAltResult>>`
+> ```rust
+> Fn(context: &mut EvalContext, inputs: &[Expression]) -> Result<Dynamic, Box<EvalAltResult>>
+> ```
 
 where:
 

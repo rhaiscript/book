@@ -25,7 +25,9 @@ as the mapped token.
 
 The function signature passed to `Engine::on_parse_token` takes the following form.
 
-> `Fn(token: Token, pos: Position, state: &TokenizeState) -> Token`
+> ```rust
+> Fn(token: Token, pos: Position, state: &TokenizeState) -> Token
+> ```
 
 where:
 

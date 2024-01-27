@@ -58,7 +58,9 @@ Function Signature
 
 The function signature passed to `Engine::register_raw_fn` takes the following form.
 
-> `Fn(context: NativeCallContext, args: &mut [&mut Dynamic]) -> Result<T, Box<EvalAltResult>>`
+> ```rust
+> Fn(context: NativeCallContext, args: &mut [&mut Dynamic]) -> Result<T, Box<EvalAltResult>>
+> ```
 
 where:
 

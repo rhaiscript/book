@@ -67,7 +67,9 @@ for entry in logbook.read().unwrap().iter() {
 
 The function signature passed to `Engine::on_debug` takes the following form.
 
-> `Fn(text: &str, source: Option<&str>, pos: Position)`
+> ```rust
+> Fn(text: &str, source: Option<&str>, pos: Position)
+> ```
 
 where:
 

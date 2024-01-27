@@ -127,7 +127,9 @@ manner, with the parent node visited before its children.
 
 The signature of the callback function takes the following form.
 
-> `FnMut(&[ASTNode]) -> bool`
+> ```rust
+> FnMut(&[ASTNode]) -> bool
+> ```
 
 The single argument passed to the method contains a slice of `ASTNode` types representing the path
 from the current node to the root of the [`AST`].

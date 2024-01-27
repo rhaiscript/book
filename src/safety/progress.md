@@ -42,7 +42,9 @@ engine.on_progress(|count| {    // parameter is number of operations already per
 
 The signature of the closure to pass to `Engine::on_progress` is as follows.
 
-> `Fn(operations: u64) -> Option<Dynamic>`
+> ```rust
+> Fn(operations: u64) -> Option<Dynamic>
+> ```
 
 ### Return value
 

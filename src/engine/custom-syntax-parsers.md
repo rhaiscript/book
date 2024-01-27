@@ -49,7 +49,9 @@ It can either be:
 
 The [custom syntax] parser has the following signature.
 
-> `Fn(symbols: &[ImmutableString], look_ahead: &str, state: &mut Dynamic) -> Result<Option<ImmutableString>, ParseError>`
+> ```rust
+> Fn(symbols: &[ImmutableString], look_ahead: &str, state: &mut Dynamic) -> Result<Option<ImmutableString>, ParseError>
+> ```
 
 where:
 
@@ -161,7 +163,9 @@ custom _state_.
 The signature of an implementation function for `Engine::register_custom_syntax_with_state_raw` is
 as follows, which is slightly different from the function for `Engine::register_custom_syntax`.
 
-> `Fn(context: &mut EvalContext, inputs: &[Expression], state: &Dynamic) -> Result<Dynamic, Box<EvalAltResult>>`
+> ```rust
+> Fn(context: &mut EvalContext, inputs: &[Expression], state: &Dynamic) -> Result<Dynamic, Box<EvalAltResult>>
+> ```
 
 where:
 

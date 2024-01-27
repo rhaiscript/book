@@ -40,7 +40,9 @@ Function Signature
 
 The function signature passed to `Engine::on_def_var` takes the following form.
 
-> `Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -> Result<bool, Box<EvalAltResult>>`
+> ```rust
+> Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -> Result<bool, Box<EvalAltResult>>
+> ```
 
 where:
 
