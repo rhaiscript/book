@@ -33,6 +33,7 @@
 [lsp]: https://github.com/rhaiscript/lsp
 [`rhai-doc`]: https://github.com/rhaiscript/rhai-doc
 [MarkDown]: http://en.wikipedia.org/wiki/Markdown
+[MDX]: https://mdxjs.com/docs/what-is-mdx/
 [`ahash`]: https://crates.io/crates/ahash
 [`smartstring`]: https://crates.io/crates/smartstring
 [`SmartString`]: https://crates.io/crates/smartstring
@@ -238,3 +239,4 @@
 [`rhai-ml`]: {{rootUrl}}/lib/rhai-ml.md
 [`rhai-fs`]: {{rootUrl}}/lib/rhai-fs.md
 [`rhai-url`]: {{rootUrl}}/lib/rhai-url.md
+[`rhai-autodocs`]: {{rootUrl}}/lib/rhai-autodocs.md

@@ -94,7 +94,6 @@ Rust Integration
     - [AI and Machine Learning](lib/rhai-ml.md)
     - [Filesystem Access](lib/rhai-fs.md)
     - [Working with Urls](lib/rhai-url.md)
-    - [Dynamic Loadable Libraries](lib/rhai-dylib.md)
 
 ----------------------
 
@@ -324,6 +323,8 @@ Appendix
   - [Online Playground](tools/playground.md)
   - [Language Server](tools/lsp.md)
   - [`rhai-doc`](tools/rhai-doc.md)
+  - [Dynamic Loadable Libraries](lib/rhai-dylib.md)
+  - [Generate MarkDown/MDX API Documentation](lib/rhai-autodocs.md)
 - [Keywords](appendix/keywords.md)
 - [Operators and Symbols](appendix/operators.md)
 - [Literals](appendix/literals.md)
