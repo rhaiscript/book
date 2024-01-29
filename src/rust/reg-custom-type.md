@@ -1,8 +1,14 @@
-Register Custom Type
-====================
+Manually Register Custom Type
+=============================
 
 {{#include ../links.md}}
 
+
+```admonish warning.small "Warning"
+
+This assumes that the type is defined in an external crate and so the [`CustomType`] trait
+cannot be implemented for it due to Rust's [_orphan rule_](https://doc.rust-lang.org/book/ch10-02-traits.html).
+```
 
 ```admonish tip.side "Tip: Working with enums"
 

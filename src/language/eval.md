@@ -83,10 +83,7 @@ engine.disable_symbol("eval");
 ~~~
 
 
-TL;DR
------
-
-~~~admonish question "Do you regret implementing `eval` in Rhai?"
+~~~admonish question.small "Do you regret implementing `eval` in Rhai?"
 
 Or course we do.
 
@@ -94,7 +91,7 @@ Having the possibility of an `eval` call disrupts any predictability in the Rhai
 thus disabling a large number of optimizations.
 ~~~
 
-```admonish question "Why did it then???!!!"
+```admonish question.small "Why did it then???!!!"
 
 Brendan Eich puts it well: "it is just too easy to implement." _(source wanted)_
 ```

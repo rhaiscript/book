@@ -4,6 +4,14 @@ Auto-Generate API for Custom Type
 {{#include ../links.md}}
 
 
+```admonish warning.small "Warning"
+
+This assumes that you have complete control of the type and can do whatever you want with it
+(such as putting attributes on fields).
+
+In particular, the type must be defined within the current crate.
+```
+
 To register a type and its API for use with an [`Engine`], the simplest method is via the [`CustomType`] trait.
 
 A custom derive macro is provided to auto-implement [`CustomType`] on any `struct` type,
@@ -165,7 +173,7 @@ fn vec3_build_extra(builder: &mut TypeBuilder<Self>) {
 }
 ```
 
-The above is equivalent to the following manual implementations of the [`CustomType`] trait.
+~~~admonish question "TL;DR &ndash; The above is equivalent to this..."
 
 ```rust
 impl CustomType for ABC {
@@ -216,3 +224,4 @@ impl CustomType for Vec3 {
     }
 }
 ```
+~~~

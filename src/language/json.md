@@ -65,8 +65,6 @@ assumed to be an integer).
 This style can be used successfully with Rhai [object maps].
 ```
 
-### Sub-objects
-
 Sub-objects are handled transparently by `Engine::parse_json`.
 
 It is _not_ necessary to replace `{` with `#{` in order to fake a Rhai [object map] literal.
@@ -82,10 +80,7 @@ let map = engine.parse_json(json, false)?;
 map.len() == 2;
 ```
 
-
-### TL;DR
-
-```admonish question "How is it done?"
+```admonish question "TL;DR &ndash; How is it done?"
 
 Internally, `Engine::parse_json` _cheats_ by treating the JSON text as a Rhai script.
 

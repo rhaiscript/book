@@ -3,7 +3,16 @@ Register a Custom Type via the Type Builder
 
 {{#include ../links.md}}
 
-Sometimes it is convenient to package a [custom type]'s API (i.e. [methods],
+
+```admonish warning.small "Warning"
+
+This assumes that the type is defined within the current crate and you can implement traits for it.
+
+However, you may not _control_ the type (it may be auto-generated or maintained by another user),
+so you cannot put attributes on it.
+```
+
+It is usually convenient to package a [custom type]'s API (i.e. [methods],
 [properties][getters/setters], [indexers] and [type iterators]) together such that they can be more
 easily managed.
 
@@ -124,7 +133,7 @@ let mut engine = Engine::new();
 engine.build_type::<Vec3>();
 ```
 
-~~~admonish question "TL;DR: Why isn't there `is_indexable`?"
+~~~admonish question "TL;DR &ndash; Why isn't there `is_indexable`?"
 
 Technically speaking, `TypeBuilder` can automatically register an [indexer] get function if the [custom type] implements `Index`.
 Similarly, it can automatically register an [indexer] set function for `IndexMut`.

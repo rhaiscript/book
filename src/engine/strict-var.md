@@ -56,10 +56,7 @@ fn test2() {
 ```
 
 
-TL;DR
------
-
-```admonish question "Why isn't there a _Strict Functions_ mode?"
+```admonish question "TL;DR &ndash; Why isn't there a _Strict Functions_ mode?"
 
 Why can't function calls be checked for validity as well?
 
