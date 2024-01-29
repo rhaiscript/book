@@ -7,9 +7,11 @@ Sometimes it is convenient to package a [custom type]'s API (i.e. [methods],
 [properties][getters/setters], [indexers] and [type iterators]) together such that they can be more
 easily managed.
 
-This can be achieved simply by implementing the `CustomType` trait, which contains only a single method:
+This can be achieved by manually implementing the `CustomType` trait, which contains only a single method:
 
-> `fn build(builder: TypeBuilder<T>)`
+> ```rust
+> fn build(builder: TypeBuilder<T>)
+> ```
 
 The `TypeBuilder` parameter provides a range of convenient methods to register [methods], property
 [getters/setters], [indexers] and [type iterators] of a [custom type]:
@@ -41,7 +43,7 @@ Example
 
 ```rust
 // Custom type
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 struct Vec3 {
     x: i64,
     y: i64,

@@ -42,7 +42,7 @@
 [traits]: {{rootUrl}}/rust/traits.md
 [`call_fn`]: {{rootUrl}}/engine/call-fn.md
 [`Func`]: {{rootUrl}}/engine/func.md
-[`CustomType`]: {{rootUrl}}/rust/build_type.md
+[`CustomType`]: {{rootUrl}}/rust/build-type.md
 [`AST`]: {{rootUrl}}/engine/compile.md
 [`eval_expression`]: {{rootUrl}}/engine/expressions.md
 [raw `Engine`]: {{rootUrl}}/engine/raw.md
