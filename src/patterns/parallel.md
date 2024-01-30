@@ -53,28 +53,23 @@ Examples
 ```rust
 use rhai::def_package;
 use rhai::packages::{Package, StandardPackage};
+use rhai::FuncRegistration;
 
 // Define the custom package 'MyCustomPackage'.
-//
-// Aggregate other base packages simply by listing them after the colon.
 def_package! {
     /// My own personal super-duper custom package
+    // Aggregate other base packages simply by listing them after the colon.
     pub MyCustomPackage(module) : StandardPackage {
-      // Register additional Rust functions using 'Module::set_native_fn'.
-      let hash = module.set_native_fn("foo", |s: ImmutableString| {
-          Ok(foo(s.into_owned()))
-      });
-
-      // Remember to update the parameter names/types and return type metadata
-      // when using the 'metadata' feature.
-      // 'Module::set_native_fn' by default does not set function metadata.
-      module.update_fn_metadata(hash, &["s: ImmutableString", "i64"]);
-  }
+      // Register additional Rust functions.
+      FuncRegistration::new("foo")
+          .with_params(&["s: ImmutableString", "i64"])
+          .set_into_module(module, |s: ImmutableString| foo(s.into_owned()));
+    }
 }
 
 let ast = /* ... some AST ... */;
 
-let custom_pkg = MyCustomPackage::new();
+let my_custom_package = MyCustomPackage::new();
 
 // The following loop creates 10,000 Engine instances!
 
@@ -83,7 +78,7 @@ for x in 0..10_000 {
     let mut engine = Engine::new_raw();
 
     // Register custom package - cheap
-    custom_pkg.register_into_engine(&mut engine);
+    my_custom_package.register_into_engine(&mut engine);
 
     // Evaluate script
     engine.run_ast(&ast)?;

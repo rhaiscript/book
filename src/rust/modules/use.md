@@ -24,17 +24,14 @@ _namespace qualifiers_.
 ```
 
 ```rust
-use rhai::{Engine, Module};
+use rhai::{Engine, Module, FuncRegistration};
 
 let mut module = Module::new();             // new module
 
-// Use 'Module::set_native_fn' to add functions.
-let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
-
-// Remember to update the parameter names/types and return type metadata
-// when using the 'metadata' feature.
-// 'Module::set_native_fn' by default does not set function metadata.
-module.update_fn_metadata(hash, &["x: i64", "i64"]);
+// Add new function.
+FuncRegistration::new("inc")
+    .with_params_info(&["x: i64", "i64"])
+    .set_into_module(&mut module, |x: i64| x + 1);
 
 // Use 'Module::set_var' to add variables.
 module.set_var("MYSTIC_NUMBER", 41_i64);
@@ -76,17 +73,14 @@ Use Case 2 &ndash; Make It a Static Namespace
 [module namespace][function namespace].
 
 ```rust
-use rhai::{Engine, Module};
+use rhai::{Engine, Module, FuncRegistration};
 
 let mut module = Module::new();             // new module
 
-// Use 'Module::set_native_fn' to add functions.
-let hash = module.set_native_fn("inc", |x: i64| Ok(x + 1));
-
-// Remember to update the parameter names/types and return type metadata
-// when using the 'metadata' feature.
-// 'Module::set_native_fn' by default does not set function metadata.
-module.update_fn_metadata(hash, &["x: i64", "i64"]);
+// Add new function.
+FuncRegistration::new("inc")
+    .with_params_info(&["x: i64", "i64"])
+    .set_into_module(&mut module, |x: i64| x + 1);
 
 // Use 'Module::set_var' to add variables.
 module.set_var("MYSTIC_NUMBER", 41_i64);
@@ -114,20 +108,15 @@ by setting the `namespace` parameter to `FnNamespace::Global`.
 This way, [getters/setters] and [indexers] for [custom types] can work as expected.
 
 ```rust
-use rhai::{Engine, Module, FnNamespace};
+use rhai::{Engine, Module, FuncRegistration, FnNamespace};
 
 let mut module = Module::new();             // new module
 
-// Use 'Module::set_native_fn' to add functions.
-let hash = module.set_native_fn("inc", |x: &mut i64| Ok(x + 1));
-
-// Remember to update the parameter names/types and return type metadata
-// when using the 'metadata' feature.
-// 'Module::set_native_fn' by default does not set function metadata.
-module.update_fn_metadata(hash, &["x: &mut i64", "i64"]);
-
-// Expose method 'inc' to the global namespace (default is 'FnNamespace::Internal')
-module.update_fn_namespace(hash, FnNamespace::Global);
+// Add new function.
+FuncRegistration::new("inc")
+    .with_params_info(&["x: i64", "i64"])
+    .with_namespace(FnNamespace::Global)    // <- global namespace
+    .set_into_module(&mut module, |x: i64| x + 1);
 
 // Use 'Module::set_var' to add variables.
 module.set_var("MYSTIC_NUMBER", 41_i64);
@@ -156,14 +145,16 @@ The easiest way is to use, for example, the [`StaticModuleResolver`][module reso
 a custom module.
 
 ```rust
-use rhai::{Engine, Scope, Module};
+use rhai::{Engine, Scope, Module, FuncRegistration};
 use rhai::module_resolvers::StaticModuleResolver;
 
 let mut module = Module::new();             // new module
+
 module.set_var("answer", 41_i64);           // variable 'answer' under module
-module.set_native_fn("inc", |x: i64| {      // use 'Module::set_native_fn' to add functions
-    Ok(x + 1)
-});
+
+FuncRegistration::new("inc")
+    .with_params_info(&["x: i64"])
+    .set_into_module(&mut module, |x: i64| x + 1);
 
 // Create the module resolver
 let mut resolver = StaticModuleResolver::new();

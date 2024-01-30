@@ -74,31 +74,37 @@ Examples
 ```rust
 // Import necessary types and traits.
 use rhai::def_package;      // 'def_package!' macro
-use rhai::packages::{
-    ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage
-};
+use rhai::packages::{ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage};
+use rhai::{FuncRegistration, CustomType, TypeBuilder};
 
-// Aggregate other base packages (if any) simply by listing them after a colon.
+/// This is a custom type.
+#[derive(Clone, CustomType)]
+struct TestStruct {
+    foo: String,
+    bar: i64,
+    baz: bool
+}
+
 def_package! {
     /// My own personal super package
+    // Aggregate other base packages (if any) simply by listing them after a colon.
     pub MyPackage(module) : ArithmeticPackage, LogicPackage, BasicArrayPackage, BasicMapPackage
     {
-        // Register additional Rust functions using 'Module::set_native_fn'.
-        let hash = module.set_native_fn("foo", |s: &str| Ok(foo(s)));
-
-        // Remember to update the parameter names/types and return type
-        // metadata when using the 'metadata' feature because
-        // 'Module::set_native_fn' by default does not set function metadata.
-        module.update_fn_metadata(hash, &["s: &str", "i64"]);
+        // Register additional Rust function.
+        FuncRegistration::new("get_bar_value")
+            .with_params_info(&["s: &mut TestStruct", "i64"])
+            .set_into_module(module, |s: &mut TestStruct| s.bar);
 
         // Register a function for use as a custom operator.
-        let hash = module.set_native_fn("@", |x: i64, y: i64| Ok(x * x + y * y));
-
-        // Always make it available globally.
-        module.update_fn_namespace(hash, FnNamespace::Global);
+        FuncRegistration::new("@")
+            .with_namespace(FnNamespace::Global)    // <- make it available globally.
+            .set_into_module(module, |x: i64, y: i64| x * x + y * y);
     } |> |engine| {
         // This optional block performs tasks on an 'Engine' instance,
-        // e.g. register custom operators/syntax.
+        // e.g. register custom types and/or custom operators/syntax.
+
+        // Register custom type.
+        engine.build_type::<TestStruct>();
 
         // Define a custom operator '@' with precedence of 160
         // (i.e. between +|- and *|/).
@@ -132,8 +138,8 @@ def_package! {
 A second code block (in the syntax of a [closure]) following a right-triangle symbol (`|>`)
 is run whenever the [package] is being registered.
 
-It allows performing setup tasks directly on that [`Engine`], e.g. registering [custom operators]
-and/or [custom syntax].
+It allows performing setup tasks directly on that [`Engine`], e.g. registering [custom types],
+[custom operators] and/or [custom syntax].
 
 ```rust
 def_package! {
@@ -168,9 +174,7 @@ Variables in the [plugin module] are ignored.
 ```rust
 // Import necessary types and traits.
 use rhai::def_package;
-use rhai::packages::{
-    ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage
-};
+use rhai::packages::{ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage};
 use rhai::plugin::*;
 
 // Define plugin module.
@@ -219,6 +223,7 @@ mod my_plugin_module {
 
 def_package! {
     /// My own personal super package
+    // Aggregate other base packages (if any) simply by listing them after a colon.
     pub MyPackage(module) : ArithmeticPackage, LogicPackage, BasicArrayPackage, BasicMapPackage
     {
         // Merge all registered functions and constants from the plugin module
