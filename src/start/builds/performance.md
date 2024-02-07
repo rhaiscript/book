@@ -125,11 +125,15 @@ This may result in a slightly fast build due to elimination of code related to p
 Avoid Cloning
 -------------
 
+### Use `&mut` functions
+
 Rhai values are typically _cloned_ when passed around, especially into [function] calls.
 Large data structures may incur material cloning overhead.
 
 Some functions accept the first parameter as a mutable reference (i.e. `&mut`), for example
 _methods_ for [custom types], and may avoid potentially-costly cloning.
+
+### Compound assignment
 
 For example, the `+=` (append) compound assignment takes a mutable reference to the [variable] while
 the corresponding `+` (add) assignment usually doesn't.  The difference in performance can be huge:
@@ -145,6 +149,19 @@ let temp_value = x.clone() + 1;
 x = temp_value;
 
 x += 1;             // <- 'x' is NOT cloned
+```
+
+### Use `take`
+
+Another example: use the `take` function to extract a value out of a variable (replacing it with
+[`()`]) without cloning.
+
+```rust
+let x = create_some_very_big_and_expensive_type();
+
+let y = x;          // <- 'x' is cloned here
+
+let y = x.take();   // <- 'x' is NOT cloned
 ```
 
 ```admonish tip "Tip: Simple variable references are already optimized"
