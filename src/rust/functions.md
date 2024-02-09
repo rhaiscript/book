@@ -62,8 +62,59 @@ engine.run(r#"log("value", 42)"#)?;     // prints "value = 42"
 It is common for short functions to be registered via a _closure_.
 
 ```rust
-engine.register_fn("foo", |x: i64, y: bool| ...);
+┌──────┐
+│ Rust │
+└──────┘
+
+engine.register_fn("foo", |x: i64, y: i64| x * 2 + y * 3);
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+foo(42, 100);       // <- 42 * 2 + 100 * 3
 ```
+#### Interact with external environment
 
 An additional benefit to using closures is that they can capture external variables.
+
+For example, capturing a type wrapped in shared mutability (e.g. `Rc<RefCell<T>>`)
+allows a script to interact with the external environment through that shared type.
+
+See also: [Control Layer]({{rootUrl}}/patterns/control.md).
+
+```rust
+┌──────┐
+│ Rust │
+└──────┘
+
+/// A type that encapsulates some behavior.
+#[derive(Clone)]
+struct TestStruct { ... }
+
+impl TestSTruct {
+    /// Some action defined on that type.
+    pub fn do_foo(&self, x: i64, y: bool) {
+        // ... do something drastic with x and y
+    }
+}
+
+/// Wrapped in shared mutability: Rc<RefCell<TestStruct>>.
+let shared_obj = Rc::new(RefCell::new(TestStruct::new()));
+
+/// Clone the shared reference and move it into the closure.
+let embedded_obj = shared.clone();
+
+engine.register_fn("foo", move |x: i64, y: bool| {
+//                        ^^^^ 'embedded_obj' is captured into the closure
+
+    embedded_obj.borrow().do_foo(x, y);
+});
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+foo(42, true);      // <- equivalent to: shared_obj.borrow().do_foo(42, true);
+```
 ~~~

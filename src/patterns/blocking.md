@@ -4,15 +4,15 @@ Blocking/Async Function Calls
 {{#include ../links.md}}
 
 
+```admonish danger.small "Warning: Async and scripting don't mix well"
+
+Otherwise, you reinvent the [_Callback Hell_](https://en.wiktionary.org/wiki/callback_hell)
+which is JavaScript before all the async extensions.
+```
+
 ```admonish info "Usage scenarios"
 
 * A system's API contains async functions.
-```
-
-```admonish danger.small "Warning: Async and scripting don't mix well"
-
-Otherwise, you get the [_Callback Hell_](https://en.wiktionary.org/wiki/callback_hell)
-which is JavaScript before all the async extensions.
 ```
 
 ```admonish abstract "Key concepts"
@@ -27,14 +27,13 @@ which is JavaScript before all the async extensions.
 * Results are marshaled back to the [`Engine`] thread via another MPSC channel.
 ```
 
-```admonish info.small "See also"
+Implementation
+--------------
+
+```admonish info.side "See also"
 
 See the _[Multi-Threaded Synchronization](multi-threading.md)_ pattern.
 ```
-
-
-Implementation
---------------
 
 1. Spawn a thread to run the scripting [`Engine`].  Usually the [`sync`] feature is
    _NOT_ used for this pattern.
@@ -59,5 +58,5 @@ Implementation
 8. When the async function call complete on the `worker` thread, the result is sent back to
    the [`Engine`] thread via the `reply` channel.
 
-9.  After the result is obtained from the `reply` channel, the [`Engine`] returns it as the return value
+9. After the result is obtained from the `reply` channel, the [`Engine`] returns it as the return value
    of the function call, ending the block and continuing evaluation.

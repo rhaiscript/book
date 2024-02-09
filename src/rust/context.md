@@ -27,6 +27,9 @@ and exposes the following.
 | `call_native_fn_raw(...)` |      `Result<`[`Dynamic`]`, Box<EvalAltResult>>`       | call a registered native Rust function with the supplied arguments; this is an advanced method                                                                                                                                             |
 
 
+Example Implementations
+-----------------------
+
 ~~~admonish example "Example &ndash; Implement Safety Checks"
 
 The native call context is useful for protecting a function from malicious scripts.

@@ -18,7 +18,7 @@ let x = 123.to_float();
 print(x);       // what happens?
 ```
 
-```admonish tip "Tip: Monkey patching Rhai"
+```admonish tip.small "Tip: Monkey patching Rhai"
 
 Most of Rhai's built-in functionality resides in registered functions.
 
@@ -33,7 +33,7 @@ In other words, do it only when _all else fails_.  Do not monkey patch Rhai simp
 because you _can_.
 ```
 
-```admonish info "Search order for functions"
+```admonish info.small "Search order for functions"
 
 Rhai searches for the correct implementation of a function in the following order:
 

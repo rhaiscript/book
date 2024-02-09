@@ -57,8 +57,7 @@ let y = "hello!".into();
 ~~~
 
 
-Alternative to Fallible Functions
----------------------------------
+~~~admonish tip.small "Tip: Alternative to fallible functions"
 
 Instead of registering a [fallible function], it is usually more idiomatic to leverage the _dynamic_
 nature of Rhai and simply return [`()`] upon error.
@@ -92,3 +91,4 @@ engine.run(r#"
     }
 "#)?;
 ```
+~~~
