@@ -186,6 +186,8 @@
 [safety]: {{rootUrl}}/safety/index.md
 [checked]: {{rootUrl}}/safety/checked.md
 [sand-boxed]: {{rootUrl}}/safety/sandbox.md
+[memory]: {{rootUrl}}/safety/memory.md
+[stack]: {{rootUrl}}/safety/stack.md
 [maximum statement depth]: {{rootUrl}}/safety/max-stmt-depth.md
 [maximum call stack depth]: {{rootUrl}}/safety/max-call-stack.md
 [maximum number of operations]: {{rootUrl}}/safety/max-operations.md

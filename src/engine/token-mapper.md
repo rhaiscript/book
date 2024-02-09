@@ -14,6 +14,16 @@ The function `Engine::on_parse_token`, available only under [`internals`], allow
 _mapper function_ that converts (remaps) a [`Token`] into another.
 
 
+```admonish tip.small "Hot Tips: Use as safety checks"
+
+Since it is called for _every_ token parsed from the script, this token mapper function
+can also be used to implement _safety checks_ against, say, stack-overflow or out-of-memory
+situations during parsing.
+
+See [here][memory] for more details.
+```
+
+
 Function Signature
 ------------------
 

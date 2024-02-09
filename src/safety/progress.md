@@ -1,5 +1,9 @@
+Limiting Run Time
+=================
+
+
 Track Progress and Force-Termination
-====================================
+------------------------------------
 
 {{#include ../links.md}}
 
@@ -22,8 +26,10 @@ The closure passed to `Engine::on_progress` will be called once for every operat
 Progress tracking is disabled with the [`unchecked`] feature.
 
 
-Example
--------
+Examples
+--------
+
+### Periodic Logging
 
 ```rust
 let mut engine = Engine::new();
@@ -37,8 +43,30 @@ engine.on_progress(|count| {    // parameter is number of operations already per
 });
 ```
 
+### Limit running time
 
-### Function signature
+```rust
+let mut engine = Engine::new();
+
+let start = get_time();         // get the current system time
+
+engine.on_progress(move |_| {
+    let now = get_time();
+
+    if now.duration_since(start).as_secs() > 60 {
+        // Return a dummy token just to force-terminate the script
+        // after running for more than 60 seconds!
+        Some(Dynamic::UNIT)
+    } else {
+        // Continue
+        None
+    }
+});
+```
+
+
+Function Signature of Callback
+------------------------------
 
 The signature of the closure to pass to `Engine::on_progress` is as follows.
 
