@@ -118,6 +118,7 @@ Scripting Language
     - [String Interpolation](language/string-interp.md)
     - [`ImmutableString`](rust/immutable-string.md)
     - [Standard Functions and Operators](language/string-fn.md)
+    - [Strings Interner](rust/strings-interner.md)
   - [Arrays](language/arrays.md)
     - [BLOB's (Byte Arrays)](language/blobs.md)
   - [Object Maps](language/object-maps.md)

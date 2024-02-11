@@ -61,3 +61,7 @@ only a very [restricted set][built-in operators] of basic arithmetic and logical
 Selectively include other necessary functionalities by picking specific [packages] to minimize the footprint.
 
 Packages are shared (even across threads via the [`sync`] feature), so they only have to be created once.
+
+In addition, a [`Engine::new_raw`][raw `Engine`] disables the _[strings interner]_, which might
+actually increase memory usage if many strings are created in scripts. Therefore, selectively turn
+on the [strings interner] via [`Engine::set_max_strings_interned`][options].

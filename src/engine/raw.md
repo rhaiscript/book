@@ -29,9 +29,19 @@ the same [`Engine`] with the same set of functions.
 | [Built-in operators]  |         yes          |        yes        |
 | [Package] loaded      |  `StandardPackage`   |      _none_       |
 | [Module resolver]     | `FileModuleResolver` |      _none_       |
+| [Strings interner]    |         yes          |       _no_        |
 | [`on_print`][`print`] |         yes          |      _none_       |
 | [`on_debug`][`debug`] |         yes          |      _none_       |
 
+
+```admonish warning.small "Warning: No strings interner"
+
+A _raw_ [`Engine`] disables the _[strings interner]_ by default.
+
+This may lead to a significant increase in memory usage if many strings are created in scripts.
+
+Turn the _[strings interner]_ back on via [`Engine::set_max_strings_interned`][options].
+```
 
 ~~~admonish example "`Engine::new` is equivalent to..."
 ```rust
@@ -43,6 +53,9 @@ let mut engine = Engine::new_raw();
 
 // Use the file-based module resolver
 engine.set_module_resolver(FileModuleResolver::new());
+
+// Enable the strings interner
+engine.set_max_strings_interned(1024);
 
 // Default print/debug implementations
 engine.on_print(|text| println!("{text}"));

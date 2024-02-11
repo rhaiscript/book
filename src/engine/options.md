@@ -40,14 +40,15 @@ Runtime Behavior
 Safety Limits
 -------------
 
-| Method                |      Not available under       | Description                                                                                                                             |
-| --------------------- | :----------------------------: | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `set_max_expr_depths` |         [`unchecked`]          | sets the maximum nesting levels of an expression/statement (see [maximum statement depth])                                              |
-| `set_max_call_levels` | [`unchecked`], [`no_function`] | sets the maximum number of function call levels (default 50) to avoid infinite recursion (see [maximum call stack depth])               |
-| `set_max_operations`  |         [`unchecked`]          | sets the maximum number of _operations_ that a script is allowed to consume (see [maximum number of operations])                        |
-| `set_max_variables`   |         [`unchecked`]          | sets the maximum number of [variables] that a script is allowed to define within a single [`Scope`] (see [maximum number of variables]) |
-| `set_max_functions`   | [`unchecked`], [`no_function`] | sets the maximum number of [functions] that a script is allowed to define (see [maximum number of functions])                           |
-| `set_max_modules`     | [`unchecked`], [`no_modules`]  | sets the maximum number of [modules] that a script is allowed to load (see [maximum number of modules])                                 |
-| `set_max_string_size` |         [`unchecked`]          | sets the maximum length (in UTF-8 bytes) for [strings] (see [maximum length of strings])                                                |
-| `set_max_array_size`  |  [`unchecked`], [`no_index`]   | sets the maximum size for [arrays] (see [maximum size of arrays])                                                                       |
-| `set_max_map_size`    |  [`unchecked`], [`no_object`]  | sets the maximum number of properties for [object maps] (see [maximum size of object maps])                                             |
+| Method                     |      Not available under       | Description                                                                                                                             |
+| -------------------------- | :----------------------------: | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `set_max_expr_depths`      |         [`unchecked`]          | sets the maximum nesting levels of an expression/statement (see [maximum statement depth])                                              |
+| `set_max_call_levels`      | [`unchecked`], [`no_function`] | sets the maximum number of function call levels (default 50) to avoid infinite recursion (see [maximum call stack depth])               |
+| `set_max_operations`       |         [`unchecked`]          | sets the maximum number of _operations_ that a script is allowed to consume (see [maximum number of operations])                        |
+| `set_max_variables`        |         [`unchecked`]          | sets the maximum number of [variables] that a script is allowed to define within a single [`Scope`] (see [maximum number of variables]) |
+| `set_max_functions`        | [`unchecked`], [`no_function`] | sets the maximum number of [functions] that a script is allowed to define (see [maximum number of functions])                           |
+| `set_max_modules`          | [`unchecked`], [`no_modules`]  | sets the maximum number of [modules] that a script is allowed to load (see [maximum number of modules])                                 |
+| `set_max_string_size`      |         [`unchecked`]          | sets the maximum length (in UTF-8 bytes) for [strings] (see [maximum length of strings])                                                |
+| `set_max_array_size`       |  [`unchecked`], [`no_index`]   | sets the maximum size for [arrays] (see [maximum size of arrays])                                                                       |
+| `set_max_map_size`         |  [`unchecked`], [`no_object`]  | sets the maximum number of properties for [object maps] (see [maximum size of object maps])                                             |
+| `set_max_strings_interned` |                                | sets the maximum number of [strings] to be interned (if zero, the [strings interner] is disabled)                                       |

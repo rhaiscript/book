@@ -64,6 +64,7 @@
 [functions metadata]: {{rootUrl}}/engine/metadata/index.md
 [`Scope`]: {{rootUrl}}/engine/scope.md
 [`serde`]: {{rootUrl}}/rust/serde.md
+[strings interner]: {{rootUrl}}/rust/strings-interner.md
 
 [`type_of`]: {{rootUrl}}/language/type-of.md
 [`type_of()`]: {{rootUrl}}/language/type-of.md
