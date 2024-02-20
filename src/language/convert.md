@@ -7,11 +7,11 @@ Value Conversions
 Convert Between Integer and Floating-Point
 ------------------------------------------
 
-| Function     | Not available under |             From type              |          To type          |
-| ------------ | :-----------------: | :--------------------------------: | :-----------------------: |
-| `to_int`     |                     | `FLOAT`, [`Decimal`][rust_decimal] |           `INT`           |
-| `to_float`   |    [`no_float`]     | `INT`,  [`Decimal`][rust_decimal]  |          `FLOAT`          |
-| `to_decimal` |   non-[`decimal`]   |           `INT`, `FLOAT`           | [`Decimal`][rust_decimal] |
+| Function     | Not available under |                 From type                 |          To type          |
+| ------------ | :-----------------: | :---------------------------------------: | :-----------------------: |
+| `to_int`     |                     | `INT`, `FLOAT`, [`Decimal`][rust_decimal] |           `INT`           |
+| `to_float`   |    [`no_float`]     | `INT`, `FLOAT`, [`Decimal`][rust_decimal] |          `FLOAT`          |
+| `to_decimal` |   non-[`decimal`]   | `INT`, `FLOAT`, [`Decimal`][rust_decimal] | [`Decimal`][rust_decimal] |
 
 That's it; for other conversions, register custom conversion functions.
 
