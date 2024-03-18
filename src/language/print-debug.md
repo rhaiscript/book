@@ -3,6 +3,10 @@
 
 {{#include ../links.md}}
 
+[`Engine::on_print`]: https://docs.rs/rhai/{{version}}/rhai/struct.Engine.html#method.on_print
+[`Engine::on_debug`]: https://docs.rs/rhai/{{version}}/rhai/struct.Engine.html#method.on_debug
+
+
 The `print` and `debug` functions default to printing to `stdout`, with `debug` using standard debug formatting.
 
 ```js
@@ -22,7 +26,7 @@ Override `print` and `debug` with Callback Functions
 ----------------------------------------------------
 
 When embedding Rhai into an application, it is usually necessary to trap `print` and `debug` output
-(for logging into a tracking log, for example) with the `Engine::on_print` and `Engine::on_debug` methods.
+(for logging into a tracking log, for example) with the [`Engine::on_print`] and [`Engine::on_debug`] methods.
 
 ```rust
 // Any function or closure that takes an '&str' argument can be used to override 'print'.
@@ -65,7 +69,7 @@ for entry in logbook.read().unwrap().iter() {
 `on_debug` Callback Signature
 -----------------------------
 
-The function signature passed to `Engine::on_debug` takes the following form.
+The function signature passed to [`Engine::on_debug]` takes the following form.
 
 > ```rust
 > Fn(text: &str, source: Option<&str>, pos: Position)

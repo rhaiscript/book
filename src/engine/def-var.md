@@ -3,6 +3,9 @@ Variable Definition Filter
 
 {{#include ../links.md}}
 
+[`Engine::on_def_var`]: https://docs.rs/rhai/{{version}}/rhai/struct.Engine.html#method.on_def_var
+
+
 Although it is easy to disable variable _[shadowing]_ via [`Engine::set_allow_shadowing`][options],
 sometimes more fine-grained control is needed.
 
@@ -11,8 +14,8 @@ a particular variable name needs to be protected and not others.  Or only under 
 circumstances.
 
 Under this scenario, it is possible to provide a _filter_ closure to the [`Engine`] via
-`Engine::on_def_var` that traps variable definitions (i.e. [`let`][variable] or [`const`][constant]
-statements) in a Rhai script.
+[`Engine::on_def_var`] that traps variable definitions (i.e. [`let`][variable] or
+[`const`][constant] statements) in a Rhai script.
 
 The filter is called when a [variable] or [constant] is defined both during runtime and compilation.
 
@@ -38,7 +41,7 @@ engine.on_def_var(|is_runtime, info, context| {
 Function Signature
 ------------------
 
-The function signature passed to `Engine::on_def_var` takes the following form.
+The function signature passed to [`Engine::on_def_var`] takes the following form.
 
 > ```rust
 > Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -> Result<bool, Box<EvalAltResult>>

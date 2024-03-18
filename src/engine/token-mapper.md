@@ -3,6 +3,7 @@ Remap Tokens During Parsing
 
 {{#include ../links.md}}
 
+[`Engine::on_parse_token`]: https://docs.rs/rhai/{{version}}/rhai/struct.Engine.html#method.on_parse_token
 [`Token`]: https://docs.rs/rhai/{{version}}/rhai/enum.Token.html
 
 
@@ -10,7 +11,7 @@ The Rhai [`Engine`] first parses a script into a stream of _tokens_.
 
 Tokens have the type [`Token`] which is only exported under [`internals`].
 
-The function `Engine::on_parse_token`, available only under [`internals`], allows registration of a
+The function [`Engine::on_parse_token`], available only under [`internals`], allows registration of a
 _mapper function_ that converts (remaps) a [`Token`] into another.
 
 
@@ -33,7 +34,7 @@ Raise a parse error by returning [`Token::LexError`](https://docs.rs/rhai/{{vers
 as the mapped token.
 ```
 
-The function signature passed to `Engine::on_parse_token` takes the following form.
+The function signature passed to [`Engine::on_parse_token`] takes the following form.
 
 > ```rust
 > Fn(token: Token, pos: Position, state: &TokenizeState) -> Token

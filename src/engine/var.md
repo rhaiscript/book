@@ -3,6 +3,9 @@ Variable Resolver
 
 {{#include ../links.md}}
 
+[`Engine::on_var`]: https://docs.rs/rhai/{{version}}/rhai/struct.Engine.html#method.on_var
+
+
 By default, Rhai looks up access to [variables] from the enclosing block scope, working its way
 outwards until it reaches the top (global) level, then it searches the [`Scope`] that is passed into
 the `Engine::eval` call.
@@ -10,7 +13,7 @@ the `Engine::eval` call.
 There is a built-in facility for advanced users to _hook_ into the [variable] resolution service and
 to override its default behavior.
 
-To do so, provide a closure to the [`Engine`] via `Engine::on_var`.
+To do so, provide a closure to the [`Engine`] via [`Engine::on_var`].
 
 ```rust
 let mut engine = Engine::new();
@@ -66,7 +69,7 @@ This is one way to implement [Mutable Global State]({{rootUrl}}/patterns/global-
 Function Signature
 ------------------
 
-The function signature passed to `Engine::on_var` takes the following form.
+The function signature passed to [`Engine::on_var`] takes the following form.
 
 > ```rust
 > Fn(name: &str, index: usize, context: EvalContext) -> Result<Option<Dynamic>, Box<EvalAltResult>>

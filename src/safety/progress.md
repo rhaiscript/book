@@ -1,6 +1,8 @@
 Limiting Run Time
 =================
 
+[`Engine::on_progress`]: https://docs.rs/rhai/{{version}}/rhai/struct.Engine.html#method.on_progress
+
 
 Track Progress and Force-Termination
 ------------------------------------
@@ -19,9 +21,9 @@ It is impossible to know when, or even whether, a script run will end
 
 When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-[`Engine`] via `Engine::on_progress`.
+[`Engine`] via [`Engine::on_progress`].
 
-The closure passed to `Engine::on_progress` will be called once for every operation.
+The closure passed to [`Engine::on_progress`] will be called once for every operation.
 
 Progress tracking is disabled with the [`unchecked`] feature.
 
@@ -68,7 +70,7 @@ engine.on_progress(move |_| {
 Function Signature of Callback
 ------------------------------
 
-The signature of the closure to pass to `Engine::on_progress` is as follows.
+The signature of the closure to pass to [`Engine::on_progress`] is as follows.
 
 > ```rust
 > Fn(operations: u64) -> Option<Dynamic>
