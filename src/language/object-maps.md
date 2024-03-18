@@ -108,12 +108,6 @@ The _index notation_ allows setting/getting properties of arbitrary names (even 
 Handle Non-Existent Properties
 ------------------------------
 
-```admonish tip.side.wide "Tip: Force error"
-
-It is possible to force Rhai to return an `EvalAltResult:: ErrorPropertyNotFound` via
-[`Engine:: set_fail_on_invalid_map_property`][options].
-```
-
 Trying to read a non-existent property returns [`()`] instead of causing an error.
 
 This is similar to JavaScript where accessing a non-existent property returns `undefined`.
@@ -126,6 +120,18 @@ let x = map.foo;            // x == 42
 
 // Non-existent property
 let x = map.bar;            // x == ()
+```
+
+```admonish tip.small "Tip: Force error"
+
+It is possible to force Rhai to return an `EvalAltResult:: ErrorPropertyNotFound` via
+[`Engine:: set_fail_on_invalid_map_property`][options].
+```
+
+```admonish tip.small "Advanced tip: Override standard behavior"
+
+For fine-tuned control on what happens when a non-existent property is accessed,
+see [_Non-Existent Property Handling for Object Maps_](object-maps-missing-prop.md).
 ```
 
 ### Check for property existence

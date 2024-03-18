@@ -47,6 +47,17 @@ _last_ element.
 > _array_ `[` _index position from −1 to −length_ `]`
 
 
+Out-of-Bounds Index
+-------------------
+
+Trying to read from an index that is out of bounds causes an error.
+
+```admonish tip.small "Advanced tip: Override standard behavior"
+
+For fine-tuned control on what happens when an out-of-bounds index is accessed,
+see [_Out-of-Bounds Index for Arrays_](arrays-oob.md).
+```
+
 Built-in Functions
 ------------------
 
