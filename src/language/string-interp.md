@@ -46,10 +46,23 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 String Interpolation
 ====================
 
-```admonish warning.side "Only literal strings"
+```admonish warning.side.wide "Only literal strings"
 
 Interpolation is not supported for normal [string] or [character] literals.
 ```
+
+~~~admonish question.side.wide "What if I want `${` inside?"
+
+🤦 Well, you just _have_ to ask for the impossible, don't you?
+
+Currently there is no way to escape `${`.  Build the [string] in three pieces:
+
+```js
+`Interpolations start with "`
+      + "${"
+      + `" and end with }.`
+```
+~~~
 
 Multi-line literal [strings] support _string interpolation_ wrapped in `${` ... `}`.
 
@@ -91,15 +104,3 @@ print(`Data: ${blob}`);                 // prints "Data: !!!"
 
 print(`Data: ${blob.to_string()}`);     // prints "Data: [212121]"
 ```
-
-~~~admonish question.small "What if I want `${` inside?"
-
-🤦 Well, you just _have_ to ask for the impossible, don't you?
-
-Currently there is no way to escape `${`.  Build the [string] in three pieces:
-
-```js
-`Interpolations start with "` + "${" + `" and end with }.`
-```
-~~~
-

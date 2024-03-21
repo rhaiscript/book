@@ -103,7 +103,7 @@ Technically speaking, there is no difficulty in allowing strings to run for mult
 _without_ the continuation back-slash.
 
 Rhai forces you to manually mark a continuation with a back-slash because the ending quote is easy to omit.
-Once it happens, the entire remainder of the script would have become one giant, multi-line string.
+Once it happens, the entire remainder of the script would become one giant, multi-line string.
 
 This behavior is different from Rust, where string literals can run for multiple lines.
 ```
@@ -153,7 +153,7 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 String Interpolation
 --------------------
 
-~~~admonish question.side "What if I want `${` inside?"
+~~~admonish question.side.wide "What if I want `${` inside?"
 
 🤦 Well, you just _have_ to ask for the impossible, don't you?
 
@@ -242,6 +242,21 @@ bytes) can also be slow.
 ```
 
 
+Sub-Strings
+-----------
+
+Sub-strings, or _slices_ in some programming languages, are parts of strings.
+
+In Rhai, a sub-string can be specified by indexing with a [range](ranges.md) of characters:
+
+> _string_ `[` _first character (starting from zero)_ `..` _last character (exclusive)_ `]`
+>
+> _string_ `[` _first character (starting from zero)_ `..=` _last character (inclusive)_ `]`
+
+Sub-string [ranges](ranges.md) always start from zero counting towards the end of the string.
+Negative [ranges](ranges.md) are not supported.
+
+
 Examples
 --------
 
@@ -261,7 +276,10 @@ record == "Bob C. Davis: age 42";
 // Unlike Rust, Rhai strings can be indexed to get a character
 // (disabled with 'no_index')
 let c = record[4];
-c == 'C';
+c == 'C';                               // single character
+
+let slice = record[4..8];               // sub-string slice
+slice == " C. D";
 
 ts.s = record;                          // custom type properties can take strings
 
@@ -276,6 +294,13 @@ c == 'f';
 
 let c = ("foo" + "bar")[5];             // ... and expressions returning strings
 c == 'r';
+
+let text = "hello, world!";
+text[0] = 'H';                          // modify a single character
+text == "Hello, world!";
+
+text[7..=11] = "Earth";                 // modify a sub-string slice
+text == "Hello, Earth!";
 
 // Escape sequences in strings
 record += " \u2764\n";                  // escape sequence of '❤' in Unicode
