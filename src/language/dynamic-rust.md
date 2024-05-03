@@ -30,9 +30,11 @@ Create a `Dynamic` from Rust Type
 Type Checking and Casting
 -------------------------
 
-~~~admonish tip.side "Tip: `try_cast`"
+~~~admonish tip.side "Tip: `try_cast` and `try_cast_result`"
 
 The `try_cast` method does not panic but returns `None` upon failure.
+
+The `try_cast_result` method also does not panic but returns the original value upon failure.
 ~~~
 
 A [`Dynamic`] value's actual type can be checked via `Dynamic::is`.
@@ -203,10 +205,11 @@ The following methods are available when working with [`Dynamic`]:
 
 The following methods cast a [`Dynamic`] into a specific type:
 
-| Method                  | Not available under |     Return type (error is the actual data type)      |
+| Method                  | Not available under | Return type (error is name of actual type if `&str`) |
 | ----------------------- | :-----------------: | :--------------------------------------------------: |
 | `cast<T>`               |                     |               `T` (panics on failure)                |
 | `try_cast<T>`           |                     |                     `Option<T>`                      |
+| `try_cast_result<T>`    |                     |                 `Result<T, Dynamic>`                 |
 | `clone_cast<T>`         |                     |        cloned copy of `T` (panics on failure)        |
 | `as_unit`               |                     |                  `Result<(), &str>`                  |
 | `as_int`                |                     |                 `Result<INT, &str>`                  |
