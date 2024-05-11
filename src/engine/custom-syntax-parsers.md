@@ -77,6 +77,7 @@ The custom parser can inspect this symbols stream to determine the next symbol t
 |  `$symbol$`   | symbol literal    |
 |   `$expr$`    | `$expr$`          |
 |   `$block$`   | `$block$`         |
+|   `$func$`    | `$func$`          |
 |   `$bool$`    | `true` or `false` |
 |    `$int$`    | value of number   |
 |   `$float$`   | value of number   |

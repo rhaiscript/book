@@ -51,6 +51,7 @@ These symbol types can be used:
 * Identifiers following the [variable] naming rules.
 * `$expr$` &ndash; any valid expression, statement or statements block.
 * `$block$` &ndash; any valid statements block (i.e. must be enclosed by `{` ... `}`).
+* `$func$` &ndash; any valid [closure], or any valid statements block as the body of a [closure] with no parameters (if not [`no_function`]).
 * `$ident$` &ndash; any [variable] name.
 * `$symbol$` &ndash; any [symbol][operator], active or reserved.
 * `$bool$` &ndash; a boolean value.
@@ -143,16 +144,17 @@ and statements blocks (`$block$`) are provided.
 
 To access a particular argument, use the following patterns:
 
-| Argument type | Pattern (`n` = slot in `inputs`)                                                                             |             Result type             | Description           |
-| :-----------: | ------------------------------------------------------------------------------------------------------------ | :---------------------------------: | --------------------- |
-|   `$ident$`   | `inputs[n].get_string_value().unwrap()`                                                                      |               `&str`                | [variable] name       |
-|  `$symbol$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`                                                  |         [`ImmutableString`]         | symbol literal        |
-|   `$expr$`    | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree    |
-|   `$block$`   | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree    |
-|   `$bool$`    | `inputs[n].get_literal_value::<bool>().unwrap()`                                                             |               `bool`                | boolean value         |
-|    `$int$`    | `inputs[n].get_literal_value::<INT>().unwrap()`                                                              |                `INT`                | integer number        |
-|   `$float$`   | `inputs[n].get_literal_value::<FLOAT>().unwrap()`                                                            |               `FLOAT`               | floating-point number |
-|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`<br/><br/>`inputs[n].get_string_value().unwrap()` | [`ImmutableString`]<br/><br/>`&str` | [string] text         |
+| Argument type | Pattern (`n` = slot in `inputs`)                                                                             |             Result type             | Description                                         |
+| :-----------: | ------------------------------------------------------------------------------------------------------------ | :---------------------------------: | --------------------------------------------------- |
+|   `$ident$`   | `inputs[n].get_string_value().unwrap()`                                                                      |               `&str`                | [variable] name                                     |
+|  `$symbol$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`                                                  |         [`ImmutableString`]         | symbol literal                                      |
+|   `$expr$`    | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree                                  |
+|   `$block$`   | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree                                  |
+|   `$func$`    | `&inputs[n]`                                                                                                 |            `&Expression`            | an expression tree (output is a [function pointer]) |
+|   `$bool$`    | `inputs[n].get_literal_value::<bool>().unwrap()`                                                             |               `bool`                | boolean value                                       |
+|    `$int$`    | `inputs[n].get_literal_value::<INT>().unwrap()`                                                              |                `INT`                | integer number                                      |
+|   `$float$`   | `inputs[n].get_literal_value::<FLOAT>().unwrap()`                                                            |               `FLOAT`               | floating-point number                               |
+|  `$string$`   | `inputs[n].get_literal_value::<ImmutableString>().unwrap()`<br/><br/>`inputs[n].get_string_value().unwrap()` | [`ImmutableString`]<br/><br/>`&str` | [string] text                                       |
 
 #### Get literal constants
 
