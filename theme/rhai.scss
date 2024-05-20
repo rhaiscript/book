@@ -18,7 +18,8 @@ blockquote em {
 	li {
 		color: inherit;
 	}
-	> .chapter-item {
+
+	>.chapter-item {
 		font-size: 110%;
 
 		&:first-child {
@@ -30,7 +31,9 @@ blockquote em {
 }
 
 td {
-	> ol, > ul {
+
+	>ol,
+	>ul {
 		margin: 0;
 		padding: 0;
 		padding-left: inherit;
@@ -38,7 +41,12 @@ td {
 }
 
 main {
-	> section, > pre, h1, h2, h3 {
+
+	>section,
+	>pre,
+	h1,
+	h2,
+	h3 {
 		clear: both;
 	}
 }
