@@ -170,6 +170,28 @@ let x = map.bar ?? 42;      // x == 42
 ```
 ~~~
 
+Short-circuit loops and early returns
+-------------------------------------
+
+The following statements are allowed to follow the null-coalescing operator:
+
+* `break`
+* `continue`
+* [`return`](return.md)
+* [`throw`](throw.md)
+
+This means that you can use the null-coalescing operator to short-circuit loops and/or
+early-return from functions when the value tested is `()`.
+
+```rust
+let total = 0;
+
+for value in list {
+    // Whenever 'calculate' returns '()', the loop stops
+    total += calculate(value) ?? break;
+}
+```
+
 
 In Operator
 ===========
