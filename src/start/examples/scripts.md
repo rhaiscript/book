@@ -16,7 +16,7 @@ There are also a number of examples scripts that showcase Rhai's features, all i
 | [`doc-comments.rhai`]({{repoHome}}/scripts/doc-comments.rhai)     | [doc-comments] example                                                                        |
 | [`for1.rhai`]({{repoHome}}/scripts/for1.rhai)                     | [`for`] loops                                                                                 |
 | [`for2.rhai`]({{repoHome}}/scripts/for2.rhai)                     | [`for`] loops with [array] iterations                                                         |
-| [`for3.rhai`]({{repoHome}}/scripts/for2.rhai)                     | [`for`] loops with [closures]                                                                 |
+| [`for3.rhai`]({{repoHome}}/scripts/for3.rhai)                     | [`for`] loops with [closures]                                                                 |
 | [`function_decl1.rhai`]({{repoHome}}/scripts/function_decl1.rhai) | a [function] without parameters                                                               |
 | [`function_decl2.rhai`]({{repoHome}}/scripts/function_decl2.rhai) | a [function] with two parameters                                                              |
 | [`function_decl3.rhai`]({{repoHome}}/scripts/function_decl3.rhai) | a [function] with many parameters                                                             |
