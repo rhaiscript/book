@@ -67,6 +67,12 @@ It is common for short functions to be registered via a _closure_.
 └──────┘
 
 engine.register_fn("foo", |x: i64, y: i64| x * 2 + y * 3);
+//                            ^^^     ^^^
+// Usually parameter types need to be specified
+
+engine.register_fn("bar", |x: i64| -> Result<_, Box<EvalAltResult>> { x * 2 });
+//                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// For fallible closures, the return ERROR type may need to be specified
 
 ┌─────────────┐
 │ Rhai script │
@@ -116,5 +122,30 @@ engine.register_fn("foo", move |x: i64, y: bool| {
 └─────────────┘
 
 foo(42, true);      // <- equivalent to: shared_obj.borrow().do_foo(42, true);
+```
+~~~
+
+~~~admonish warning "Warning: Don't touch those generic parameters"
+
+Rhai uses an intricate system of traits (in particular `RhaiNativeFunc`) with many generic parameters to ensure
+an intuitive and smooth developer experience that _just works_.
+
+Because of this, it is not recommended to touch those generic parameters directly.  These generic parameters may change
+liberally in future versions of Rhai. In most situations they are automatically inferred by the compiler.
+
+In the cases where the compiler fail to infer types when registering a _closure_, (usually with the _error_ type
+of a [fallible function]), manually declare the parameter and/or return types.
+
+```rust
+// The following fails to compile because the compiler does not know
+// the return _error_ type of the closure.
+// It knows the return type, which is 'Result<i64, E>', but 'E' is not known.
+engine.register_fn("foo", |x: i64| Ok(x));
+
+// Don't do this...
+engine.register_fn::<_, 1, false, i64, Box<EvalAltResult>>("foo", |x: i64| Ok(x));
+
+// Do this...
+engine.register_fn("foo", |x: i64| -> Result<i64, Box<EvalAltResult>> { Ok(x) });
 ```
 ~~~
