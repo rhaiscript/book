@@ -12,7 +12,7 @@ A number of examples can be found under `examples`.
 | Example                                                                         | Description                                                                                                                     |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | [`arrays_and_structs`]({{repoHome}}/examples/arrays_and_structs.rs)             | shows how to register a [Rust type][custom type] and using it with [arrays]                                                     |
-| [`callback`](callback.rs)                                                       | shows how to store a Rhai [closure] and call it later within Rust                                                               |
+| [`callback`]({{repoHome}}/examples/callback.rs)                                 | shows how to store a Rhai [closure] and call it later within Rust                                                               |
 | [`custom_types_and_methods`]({{repoHome}}/examples/custom_types_and_methods.rs) | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] for it                                         |
 | [`custom_types`]({{repoHome}}/examples/custom_types.rs)                         | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] using the [`CustomType`] trait.                |
 | [`definitions`]({{repoHome}}/examples/definitions)                              | shows how to generate definition files for use with the [Rhai Language Server][lsp] (requires the [`metadata`] feature)         |
