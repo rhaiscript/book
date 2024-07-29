@@ -102,18 +102,18 @@ Extract Other Pass-By-Value Arguments
 
 To extract an argument passed by value from the `args` parameter (`&mut [&mut Dynamic]`), use the following statements.
 
-| Argument type             | Access statement (`n` = argument position)          |                 Result                  | Original value |
-| ------------------------- | --------------------------------------------------- | :-------------------------------------: | :------------: |
-| `INT`                     | `args[n].as_int().unwrap()`                         |                  `INT`                  |   untouched    |
-| `FLOAT`                   | `args[n].as_float().unwrap()`                       |                 `FLOAT`                 |   untouched    |
-| [`Decimal`][rust_decimal] | `args[n].as_decimal().unwrap()`                     |        [`Decimal`][rust_decimal]        |   untouched    |
-| `bool`                    | `args[n].as_bool().unwrap()`                        |                 `bool`                  |   untouched    |
-| `char`                    | `args[n].as_char().unwrap()`                        |                 `char`                  |   untouched    |
-| `()`                      | `args[n].as_unit().unwrap()`                        |                  `()`                   |   untouched    |
-| [String]                  | `&*args[n].read_lock::<ImmutableString>().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
-| [String] (consumed)       | `args[n].take().cast::<ImmutableString>()`          |           [`ImmutableString`]           |     [`()`]     |
-| Others                    | `&*args[n].read_lock::<T>().unwrap()`               |                  `&T`                   |   untouched    |
-| Others (consumed)         | `args[n].take().cast::<T>()`                        |                   `T`                   |     [`()`]     |
+| Argument type             | Access statement (`n` = argument position)     |                 Result                  | Original value |
+| ------------------------- | ---------------------------------------------- | :-------------------------------------: | :------------: |
+| `INT`                     | `args[n].as_int().unwrap()`                    |                  `INT`                  |   untouched    |
+| `FLOAT`                   | `args[n].as_float().unwrap()`                  |                 `FLOAT`                 |   untouched    |
+| [`Decimal`][rust_decimal] | `args[n].as_decimal().unwrap()`                |        [`Decimal`][rust_decimal]        |   untouched    |
+| `bool`                    | `args[n].as_bool().unwrap()`                   |                 `bool`                  |   untouched    |
+| `char`                    | `args[n].as_char().unwrap()`                   |                 `char`                  |   untouched    |
+| `()`                      | `args[n].as_unit().unwrap()`                   |                  `()`                   |   untouched    |
+| [String]                  | `&*args[n].as_immutable_string_ref().unwrap()` | [`&ImmutableString`][`ImmutableString`] |   untouched    |
+| [String] (consumed)       | `args[n].take().cast::<ImmutableString>()`     |           [`ImmutableString`]           |     [`()`]     |
+| Others                    | `&*args[n].read_lock::<T>().unwrap()`          |                  `&T`                   |   untouched    |
+| Others (consumed)         | `args[n].take().cast::<T>()`                   |                   `T`                   |     [`()`]     |
 
 
 Example &ndash; Pass a Callback to a Rust Function
