@@ -20,11 +20,12 @@ String and Character Literals
 
 String and character literals follow JavaScript-style syntax.
 
-| Type                      |   Quotes    | Escapes? | Continuation? | Interpolation? |
-| ------------------------- | :---------: | :------: | :-----------: | :------------: |
-| Normal string             |   `"..."`   |   yes    |   with `\`    |     **no**     |
-| Multi-line literal string | `` `...` `` |  **no**  |    **no**     | with `${...}`  |
-| Character                 |   `'...'`   |   yes    |    **no**     |     **no**     |
+| Type                      |     Quotes      | Escapes? | Continuation? | Interpolation? |
+| ------------------------- | :-------------: | :------: | :-----------: | :------------: |
+| Normal string             |     `"..."`     |   yes    |   with `\`    |     **no**     |
+| Raw string                | `#..#"..."#..#` |  **no**  |    **no**     |     **no**     |
+| Multi-line literal string |   `` `...` ``   |  **no**  |    **no**     | with `${...}`  |
+| Character                 |     `'...'`     |   yes    |    **no**     |     **no**     |
 
 ```admonish tip.small "Tip: Building strings"
 
@@ -118,6 +119,30 @@ Rhai forces you to manually mark a continuation with a back-slash because the en
 Once it happens, the entire remainder of the script would become one giant, multi-line string.
 
 This behavior is different from Rust, where string literals can run for multiple lines.
+```
+
+
+Raw Strings
+-----------
+
+A _raw string_ is any text enclosed by a pair of double-quotes (`"`), wrapped by hash (`#`) characters.
+
+The number of hash (`#`) on each side must be the same.
+
+Any text inside the double-quotes, as long as it is not a double-quote (`"`) followed by the same
+number of hash (`#`) characters is simply copied verbatim, _including and control codes and/or
+line-breaks_.
+
+Raw strings are very useful for embedded regular expressions, file paths, and program code etc.
+
+```rust
+let x = #"Hello, I am a raw string! which means that I can contain
+             line-breaks, \ slashes (not escapes), "quotes" and even # characters!"#
+
+// Use more than one '#' if you happen to have '"###...' inside the string...
+
+let x = ###"In Rhai, you can write ##"hello"## as a raw string."###;
+//                                         ^^^ this is not the end of the raw string
 ```
 
 
