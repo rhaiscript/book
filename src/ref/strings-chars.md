@@ -118,7 +118,7 @@ A _raw string_ is any text enclosed by a pair of double-quotes (`"`), wrapped by
 The number of hash (`#`) on each side must be the same.
 
 Any text inside the double-quotes, as long as it is not a double-quote (`"`) followed by the same
-number of hash (`#`) characters is simply copied verbatim, _including and control codes and/or
+number of hash (`#`) characters, is simply copied verbatim, _including control codes and/or
 line-breaks_.
 
 Raw strings are very useful for embedded regular expressions, file paths, and program code etc.
