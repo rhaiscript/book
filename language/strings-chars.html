@@ -210,6 +210,7 @@
 <p>String and character literals follow JavaScript-style syntax.</p>
 <div class="table-wrapper"><table><thead><tr><th>Type</th><th style="text-align: center">Quotes</th><th style="text-align: center">Escapes?</th><th style="text-align: center">Continuation?</th><th style="text-align: center">Interpolation?</th></tr></thead><tbody>
 <tr><td>Normal string</td><td style="text-align: center"><code>"..."</code></td><td style="text-align: center">yes</td><td style="text-align: center">with <code>\</code></td><td style="text-align: center"><strong>no</strong></td></tr>
+<tr><td>Raw string</td><td style="text-align: center"><code>#..#"..."#..#</code></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
 <tr><td>Multi-line literal string</td><td style="text-align: center"><code>`...`</code></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">with <code>${...}</code></td></tr>
 <tr><td>Character</td><td style="text-align: center"><code>'...'</code></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
 </tbody></table>
@@ -298,6 +299,20 @@ Once it happens, the entire remainder of the script would become one giant, mult
 <p>This behavior is different from Rust, where string literals can run for multiple lines.</p>
 </div>
 </div>
+<h2 id="raw-strings"><a class="header" href="#raw-strings">Raw Strings</a></h2>
+<p>A <em>raw string</em> is any text enclosed by a pair of double-quotes (<code>"</code>), wrapped by hash (<code>#</code>) characters.</p>
+<p>The number of hash (<code>#</code>) on each side must be the same.</p>
+<p>Any text inside the double-quotes, as long as it is not a double-quote (<code>"</code>) followed by the same
+number of hash (<code>#</code>) characters is simply copied verbatim, <em>including and control codes and/or
+line-breaks</em>.</p>
+<p>Raw strings are very useful for embedded regular expressions, file paths, and program code etc.</p>
+<pre><code class="language-rust">let x = #"Hello, I am a raw string! which means that I can contain
+             line-breaks, \ slashes (not escapes), "quotes" and even # characters!"#
+
+// Use more than one '#' if you happen to have '"###...' inside the string...
+
+let x = ###"In Rhai, you can write ##"hello"## as a raw string."###;
+//                                         ^^^ this is not the end of the raw string</code></pre>
 <h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
 <p>Strings can be <em>indexed</em> into to get access to any individual character.
 This is similar to many modern languages but different from Rust.</p>

@@ -209,8 +209,8 @@
 (a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
 <p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-<a href="/book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.19.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
-<p>The closure passed to <a href="https://docs.rs/rhai/1.19.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
+<p>The closure passed to <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
 <p>Progress tracking is disabled with the <a href="/book/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="periodic-logging"><a class="header" href="#periodic-logging">Periodic Logging</a></h3>
@@ -241,7 +241,7 @@ engine.on_progress(move |_| {
     }
 });</code></pre>
 <h2 id="function-signature-of-callback"><a class="header" href="#function-signature-of-callback">Function Signature of Callback</a></h2>
-<p>The signature of the closure to pass to <a href="https://docs.rs/rhai/1.19.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> is as follows.</p>
+<p>The signature of the closure to pass to <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> is as follows.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(operations: u64) -&gt; Option&lt;Dynamic&gt;</code></pre>
 </blockquote>

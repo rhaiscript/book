@@ -254,9 +254,9 @@ engine.set_max_strings_interned(1024);
 engine.on_print(|text| println!("{text}"));
 
 engine.on_debug(|text, source, pos| match (source, pos) {
-    (Some(source), crate::Position::NONE) =&gt; println!("{source} | {text}"),
+    (Some(source), Position::NONE) =&gt; println!("{source} | {text}"),
     (Some(source), pos) =&gt; println!("{source} @ {pos:?} | {text}"),
-    (None, crate::Position::NONE) =&gt; println!("{text}"),
+    (None, Position::NONE) =&gt; println!("{text}"),
     (None, pos) =&gt; println!("{pos:?} | {text}"),
 });
 
