@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="../theme/rhai.min.css">
 
     </head>
-    <body class="sidebar-visible no-js">
+    <body>
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -74,19 +74,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -96,45 +93,27 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">The Rhai Book</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">User’s Guide</li><li class="chapter-item expanded "><a href="../about/index.html">Introduction</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../about/features.html">Features of Rhai</a></li><li class="chapter-item expanded "><a href="../about/non-design.html">What Rhai Isn't</a></li><li class="chapter-item expanded "><a href="../about/benchmarks.html">Benchmarks</a></li><li class="chapter-item expanded "><a href="../about/targets.html">Supported Targets and Builds</a></li><li class="chapter-item expanded "><a href="../about/dependencies.html">Dependencies</a></li><li class="chapter-item expanded "><a href="../about/license.html">Licensing</a></li><li class="chapter-item expanded "><a href="../about/related.html">Related Resources</a></li></ol></li><li class="chapter-item expanded "><a href="../start/index.html">Getting Started</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../start/install.html">Install the Rhai Crate</a></li><li class="chapter-item expanded "><a href="../start/features.html">Optional Features</a></li><li class="chapter-item expanded "><a href="../start/bin.html">Packaged Utilities</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/index.html">The Scripting Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/hello-world.html">“Hello, Rhai”</a></li><li class="chapter-item expanded "><a href="../engine/compile.html">Compile to AST</a></li><li class="chapter-item expanded "><a href="../engine/raw.html">Raw Engine</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/builtin.html">Built-in Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/scope.html">Scope – Maintaining State</a></li><li class="chapter-item expanded "><a href="../engine/expressions.html">Expressions Only</a></li><li class="chapter-item expanded "><a href="../engine/options.html">Options</a></li></ol></li><li class="chapter-item expanded "><a href="../start/examples/index.html">Examples</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/examples/rust.html">Rust</a></li><li class="chapter-item expanded "><a href="../start/examples/scripts.html">Scripts</a></li></ol></li><li class="chapter-item expanded "><a href="../start/builds/index.html">Special Builds</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../start/builds/performance.html">Performance</a></li><li class="chapter-item expanded "><a href="../start/builds/minimal.html">Minimal</a></li><li class="chapter-item expanded "><a href="../start/builds/no-std.html">no-std</a></li><li class="chapter-item expanded "><a href="../start/builds/wasm.html">WebAssembly (WASM)</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Rust Integration</li><li class="chapter-item expanded "><a href="../rust/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../rust/traits.html">Traits</a></li><li class="chapter-item expanded "><a href="../rust/functions.html">Register a Rust Function</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/overloading.html">Function Overloading</a></li><li class="chapter-item expanded "><a href="../rust/generic.html">Generic Functions</a></li><li class="chapter-item expanded "><a href="../rust/strings.html">String Parameters</a></li><li class="chapter-item expanded "><a href="../rust/dynamic-args.html">Dynamic Parameters</a></li><li class="chapter-item expanded "><a href="../rust/dynamic-return.html">Dynamic Return Value</a></li><li class="chapter-item expanded "><a href="../rust/fallible.html">Fallible Functions</a></li><li class="chapter-item expanded "><a href="../rust/context.html">NativeCallContext</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/context-restore.html">Restore NativeCallContext</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/override.html">Override a Built-in Function</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/call-fn.html">Call a Rhai Function from Rust</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/func.html">Create a Rust Closure from a Rhai Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/operators.html">Operator Overloading</a></li><li class="chapter-item expanded "><a href="../rust/custom-types.html">Working with Any Rust Type</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/derive-custom-type.html">Auto-Generate API</a></li><li class="chapter-item expanded "><a href="../rust/build-type.html">Custom Type Builder</a></li><li class="chapter-item expanded "><a href="../rust/reg-custom-type.html">Manually Register Custom Type</a></li><li class="chapter-item expanded "><a href="../rust/methods.html">Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/methods-fn-call.html">Call Method as Function</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/getters-setters.html">Property Getters and Setters</a></li><li class="chapter-item expanded "><a href="../rust/indexers.html">Indexers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/indexer-prop-fallback.html">Fallback to Properties</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/collections.html">Collection Types</a></li><li class="chapter-item expanded "><a href="../rust/disable-custom.html">Disable Custom Types</a></li><li class="chapter-item expanded "><a href="../rust/print-custom.html">Printing Custom Types</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/create.html">Create in Rust</a></li><li class="chapter-item expanded "><a href="../rust/modules/ast.html">Create from AST</a></li><li class="chapter-item expanded "><a href="../rust/modules/use.html">Use a Module</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers/index.html">Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/resolvers/built-in.html">Built-in Module Resolvers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/modules/resolvers/dummy.html">DummyModuleResolver</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers/file.html">FileModuleResolver</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers/static.html">StaticModuleResolver</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers/collection.html">ModuleResolversCollection</a></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers/dylib.html">DylibModuleResolver (external)</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/resolvers/custom.html">Custom Module Resolvers</a></li></ol></li><li class="chapter-item expanded "><a href="../rust/modules/self-contained.html">Self-Contained AST</a></li></ol></li><li class="chapter-item expanded "><a href="../plugins/index.html">Plugin Modules</a></li><li class="chapter-item expanded "><a href="../rust/packages/index.html">Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rust/packages/builtin.html">Built-in Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/create.html">Create Custom Packages</a></li><li class="chapter-item expanded "><a href="../rust/packages/crate.html">Create Packages as Crates</a></li><li class="chapter-item expanded "><a href="../lib/index.html">External Packages</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lib/rhai-rand.html">Random Number Generation, Shuffling and Sampling</a></li><li class="chapter-item expanded "><a href="../lib/rhai-sci.html">Scientific Computing</a></li><li class="chapter-item expanded "><a href="../lib/rhai-ml.html">AI and Machine Learning</a></li><li class="chapter-item expanded "><a href="../lib/rhai-fs.html">Filesystem Access</a></li><li class="chapter-item expanded "><a href="../lib/rhai-url.html">Working with Urls</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Scripting Language</li><li class="chapter-item expanded "><a href="../language/comments.html">Comments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/doc-comments.html">Doc-Comments</a></li></ol></li><li class="chapter-item expanded "><a href="../language/values-and-types.html">Values and Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../language/dynamic-rust.html">Interop with Rust</a></li><li class="chapter-item expanded "><a href="../language/dynamic-tag.html">Value Tag</a></li><li class="chapter-item expanded "><a href="../rust/serde.html">Serialization/Deserialization with serde</a></li></ol></li><li class="chapter-item expanded "><a href="../language/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../language/num-fn.html">Standard Functions</a></li><li class="chapter-item expanded "><a href="../language/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="../language/ranges.html">Ranges</a></li><li class="chapter-item expanded "><a href="../language/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="../language/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/string-interp.html">String Interpolation</a></li><li class="chapter-item expanded "><a href="../rust/immutable-string.html">ImmutableString</a></li><li class="chapter-item expanded "><a href="../language/string-fn.html">Standard Functions and Operators</a></li><li class="chapter-item expanded "><a href="../rust/strings-interner.html">Strings Interner</a></li></ol></li><li class="chapter-item expanded "><a href="../language/arrays.html">Arrays</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/blobs.html">BLOB's (Byte Arrays)</a></li><li class="chapter-item expanded "><a href="../language/arrays-oob.html">Out-of-Bounds Index</a></li></ol></li><li class="chapter-item expanded "><a href="../language/object-maps.html" class="active">Object Maps</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/json.html">Parse from JSON</a></li><li class="chapter-item expanded "><a href="../language/object-maps-oop.html">Special Support for OOP</a></li><li class="chapter-item expanded "><a href="../language/object-maps-missing-prop.html">Non-Existent Property</a></li></ol></li><li class="chapter-item expanded "><a href="../language/timestamps.html">Timestamps</a></li></ol></li><li class="chapter-item expanded "><a href="../language/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../language/statements.html">Statements</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/statement-expression.html">Statement Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/variables.html">Variables</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/shadow.html">Variable Shadowing</a></li><li class="chapter-item expanded "><a href="../engine/strict-var.html">Strict Variables Mode</a></li><li class="chapter-item expanded "><a href="../engine/def-var.html">Variable Definition Filter</a></li><li class="chapter-item expanded "><a href="../engine/var.html">Variable Resolver</a></li></ol></li><li class="chapter-item expanded "><a href="../language/constants.html">Constants</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/global.html">Automatic Global Module</a></li></ol></li><li class="chapter-item expanded "><a href="../language/assignment.html">Assignments</a></li><li class="chapter-item expanded "><a href="../language/assignment-op.html">Compound Assignments</a></li><li class="chapter-item expanded "><a href="../language/logic.html">Logic Operators</a></li><li class="chapter-item expanded "><a href="../language/in.html">In Operator</a></li><li class="chapter-item expanded "><a href="../language/if.html">If Statement</a></li><li class="chapter-item expanded "><a href="../language/switch.html">Switch Statement</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/switch-expression.html">Switch Expression</a></li></ol></li><li class="chapter-item expanded "><a href="../language/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../language/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../language/loop.html">Loop Statement</a></li><li class="chapter-item expanded "><a href="../language/for.html">For Loop</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/iter.html">Standard Iterable Types</a></li><li class="chapter-item expanded "><a href="../language/iterator.html">Make a Custom Type Iterable</a></li></ol></li><li class="chapter-item expanded "><a href="../language/return.html">Return Value</a></li><li class="chapter-item expanded "><a href="../language/throw.html">Throw Exception on Error</a></li><li class="chapter-item expanded "><a href="../language/try-catch.html">Catch Exceptions</a></li><li class="chapter-item expanded "><a href="../language/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="../language/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../language/fn-namespaces.html">Namespaces</a></li><li class="chapter-item expanded "><a href="../language/fn-ptr.html">Function Pointers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-curry.html">Currying</a></li><li class="chapter-item expanded "><a href="../language/fn-anon.html">Anonymous Functions</a></li><li class="chapter-item expanded "><a href="../language/fn-closure.html">Closures</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/metadata/index.html">Metadata</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/fn-metadata.html">Get Scripted Functions Metadata in Rhai</a></li><li class="chapter-item expanded "><a href="../rust/functions-metadata.html">Get Scripted Functions Metadata from AST</a></li><li class="chapter-item expanded "><a href="../engine/metadata/gen_fn_sig.html">Get Native Function Signatures</a></li><li class="chapter-item expanded "><a href="../engine/metadata/export_to_json.html">Export All Functions Metadata to JSON</a></li><li class="chapter-item expanded "><a href="../engine/metadata/definitions.html">Generate Definition Files for Language Server</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../language/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../language/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language/modules/export.html">Export Variables, Functions and Sub-Modules from Script</a></li><li class="chapter-item expanded "><a href="../language/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../language/eval.html">Eval Function</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Safety and Protection</li><li class="chapter-item expanded "><a href="../safety/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../safety/sandbox.html">Sand-Boxing</a></li><li class="chapter-item expanded "><a href="../safety/progress.html">Limiting Run Time</a></li><li class="chapter-item expanded "><a href="../safety/memory.html">Limiting Memory Usage</a></li><li class="chapter-item expanded "><a href="../safety/stack.html">Limiting Stack Usage</a></li><li class="chapter-item expanded "><a href="../safety/limits.html">Built-in Safety Limits</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../safety/max-string-size.html">Maximum Length of Strings</a></li><li class="chapter-item expanded "><a href="../safety/max-array-size.html">Maximum Size of Arrays</a></li><li class="chapter-item expanded "><a href="../safety/max-map-size.html">Maximum Size of Object Maps</a></li><li class="chapter-item expanded "><a href="../safety/max-operations.html">Maximum Number of Operations</a></li><li class="chapter-item expanded "><a href="../safety/max-variables.html">Maximum Number of Variables</a></li><li class="chapter-item expanded "><a href="../safety/max-functions.html">Maximum Number of Functions</a></li><li class="chapter-item expanded "><a href="../safety/max-modules.html">Maximum Number of Modules</a></li><li class="chapter-item expanded "><a href="../safety/max-call-stack.html">Maximum Call Stack Depth</a></li><li class="chapter-item expanded "><a href="../safety/max-stmt-depth.html">Maximum Expression Depth</a></li></ol></li><li class="chapter-item expanded "><a href="../safety/checked.html">Turn Off Safety Checks</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Script Optimization</li><li class="chapter-item expanded "><a href="../engine/optimize/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../engine/optimize/passes.html">Optimization Passes</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/dead-code.html">Dead Code Elimination</a></li><li class="chapter-item expanded "><a href="../engine/optimize/constants.html">Constants Propagation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/rewrite.html">Compound Assignment Rewrite</a></li><li class="chapter-item expanded "><a href="../engine/optimize/op-eval.html">Eager Operator Evaluation</a></li><li class="chapter-item expanded "><a href="../engine/optimize/eager.html">Eager Function Evaluation</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/optimize/side-effects.html">Side-Effect Considerations</a></li><li class="chapter-item expanded "><a href="../engine/optimize/volatility.html">Volatility Considerations</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../engine/optimize/semantics.html">Subtle Semantic Changes</a></li><li class="chapter-item expanded "><a href="../engine/optimize/reoptimize.html">Re-Optimize an AST</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Advanced Topics</li><li class="chapter-item expanded "><a href="../engine/ast.html">Manage AST's</a></li><li class="chapter-item expanded "><a href="../rust/register-raw.html">Low-Level API to Register Functions</a></li><li class="chapter-item expanded "><a href="../engine/eval-context.html">Evaluation Context</a></li><li class="chapter-item expanded "><a href="../language/fn-parent-scope.html">Call Function Within Caller's Scope</a></li><li class="chapter-item expanded "><a href="../engine/dynamic-lib.html">Use Rhai in Dynamic Libraries</a></li><li class="chapter-item expanded "><a href="../engine/dsl.html">Use Rhai as a DSL</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/token-mapper.html">Remap Tokens During Parsing</a></li><li class="chapter-item expanded "><a href="../engine/disable-keywords.html">Disable Keywords and/or Operators</a></li><li class="chapter-item expanded "><a href="../engine/disable-looping.html">Disable Looping</a></li><li class="chapter-item expanded "><a href="../engine/custom-op.html">Custom Operators</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/precedence.html">Operator Precedence</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/custom-syntax.html">Extend with Custom Syntax</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/custom-syntax-parsers.html">Custom Syntax Parsers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/index.html">Debugging Interface</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/debugger.html">Debugger</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../engine/debugging/state.html">State</a></li><li class="chapter-item expanded "><a href="../engine/debugging/call-stack.html">Call Stack</a></li><li class="chapter-item expanded "><a href="../engine/debugging/break-points.html">Break-Points</a></li></ol></li><li class="chapter-item expanded "><a href="../engine/debugging/server.html">Debugging Server</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Usage Patterns</li><li class="chapter-item expanded "><a href="../patterns/oop.html">Object-Oriented Programming (OOP)</a></li><li class="chapter-item expanded "><a href="../patterns/events.html">Scriptable Event Handler with State</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/events-1.html">Main Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-2.html">JS Style</a></li><li class="chapter-item expanded "><a href="../patterns/events-3.html">Map Style</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/control.html">Control Layer Over Rust Backend</a></li><li class="chapter-item expanded "><a href="../patterns/singleton.html">Singleton Command Object</a></li><li class="chapter-item expanded "><a href="../patterns/config.html">Loadable Configuration</a></li><li class="chapter-item expanded "><a href="../patterns/multi-layer.html">Multi-Layered Functions</a></li><li class="chapter-item expanded "><a href="../patterns/hot-reload.html">Hot Reloading</a></li><li class="chapter-item expanded "><a href="../patterns/builder.html">Builder Pattern / Fluent API</a></li><li class="chapter-item expanded "><a href="../patterns/dynamic-const.html">Dynamic Constants Provider</a></li><li class="chapter-item expanded "><a href="../patterns/constants.html">Global Constants</a></li><li class="chapter-item expanded "><a href="../patterns/global-mutable-state.html">Mutable Global State</a></li><li class="chapter-item expanded "><a href="../patterns/enums.html">Working with Rust Enums</a></li><li class="chapter-item expanded "><a href="../patterns/macros.html">Simulate Macros to Simplify Scripts</a></li><li class="chapter-item expanded "><a href="../patterns/parallel.html">One Engine Instance Per Call</a></li><li class="chapter-item expanded "><a href="../patterns/multi-threading.html">Multi-Threaded Synchronization</a></li><li class="chapter-item expanded "><a href="../patterns/blocking.html">Blocking/Async Function Calls</a></li><li class="chapter-item expanded "><a href="../patterns/references.html">External References (Unsafe)</a></li><li class="chapter-item expanded "><a href="../patterns/static-hash.html">Static Hashing</a></li><li class="chapter-item expanded "><a href="../patterns/serialize-ast.html">Serialize an AST</a></li><li class="chapter-item expanded "><a href="../patterns/domain-tools.html">Domain-Specific Tools</a></li><li class="chapter-item expanded "><a href="../patterns/multiple.html">Multiple Instantiation</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Language Reference</li><li class="chapter-item expanded "><a href="../ref/index.html">Introduction</a></li><li class="chapter-item expanded "><a href="../ref/comments.html">Comments</a></li><li class="chapter-item expanded "><a href="../ref/values-and-types.html">Value Types</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/dynamic.html">Dynamic Values</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/type-of.html">type_of()</a></li><li class="chapter-item expanded "><a href="../ref/dynamic-tag.html">Value Tag</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/numbers.html">Numbers</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/num-op.html">Operators</a></li><li class="chapter-item expanded "><a href="../ref/num-fn.html">Standard Functions</a></li><li class="chapter-item expanded "><a href="../ref/convert.html">Value Conversions</a></li><li class="chapter-item expanded "><a href="../ref/ranges.html">Ranges</a></li><li class="chapter-item expanded "><a href="../ref/bit-fields.html">Bit-Fields</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/strings-chars.html">Strings and Characters</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/string-fn.html">Standard Functions and Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/arrays.html">Arrays</a></li><li class="chapter-item expanded "><a href="../ref/blobs.html">BLOB's (Byte Arrays)</a></li><li class="chapter-item expanded "><a href="../ref/object-maps.html">Object Maps</a></li><li class="chapter-item expanded "><a href="../ref/timestamps.html">Timestamps</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../ref/statements.html">Statements</a></li><li class="chapter-item expanded "><a href="../ref/variables.html">Variables</a></li><li class="chapter-item expanded "><a href="../ref/constants.html">Constants</a></li><li class="chapter-item expanded "><a href="../ref/assignment.html">Assignments</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/assignment-op.html">Compound Assignments</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/operators.html">Operators</a></li><li class="chapter-item expanded "><a href="../ref/indexing.html">Indexing</a></li><li class="chapter-item expanded "><a href="../ref/getters-setters.html">Properties</a></li><li class="chapter-item expanded "><a href="../ref/methods.html">Methods</a></li><li class="chapter-item expanded "><a href="../ref/if.html">If Statement</a></li><li class="chapter-item expanded "><a href="../ref/switch.html">Switch Statement</a></li><li class="chapter-item expanded "><a href="../ref/while.html">While Loop</a></li><li class="chapter-item expanded "><a href="../ref/do.html">Do Loop</a></li><li class="chapter-item expanded "><a href="../ref/loop.html">Infinite Loop</a></li><li class="chapter-item expanded "><a href="../ref/for.html">For Loop</a></li><li class="chapter-item expanded "><a href="../ref/return.html">Return Value</a></li><li class="chapter-item expanded "><a href="../ref/throw.html">Throw Exception on Error</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/try-catch.html">Catch Exceptions</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/functions.html">Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/fn-method.html">Method Calls</a></li><li class="chapter-item expanded "><a href="../ref/overload.html">Overloading</a></li><li class="chapter-item expanded "><a href="../ref/fn-ptr.html">Function Pointers</a></li><li class="chapter-item expanded "><a href="../ref/fn-closure.html">Closures</a></li><li class="chapter-item expanded "><a href="../ref/fn-metadata.html">Metadata</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/print-debug.html">Print and Debug</a></li><li class="chapter-item expanded "><a href="../ref/modules/index.html">Modules</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ref/modules/export.html">Export Variables, Functions and Sub-Modules from Script</a></li><li class="chapter-item expanded "><a href="../ref/modules/import.html">Import Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../ref/eval.html">Eval Function</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Appendix</li><li class="chapter-item expanded "><a href="../tools/index.html">External Tools</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/playground.html">Online Playground</a></li><li class="chapter-item expanded "><a href="../tools/lsp.html">Language Server</a></li><li class="chapter-item expanded "><a href="../tools/rhai-doc.html">rhai-doc</a></li><li class="chapter-item expanded "><a href="../lib/rhai-dylib.html">Dynamic Loadable Libraries</a></li><li class="chapter-item expanded "><a href="../lib/rhai-autodocs.html">Generate MarkDown/MDX API Documentation</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/keywords.html">Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/operators.html">Operators and Symbols</a></li><li class="chapter-item expanded "><a href="../appendix/literals.html">Literals</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <div class="sidebar-scrollbox"></div>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
+        <script async src="../toc.js"></script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -194,27 +173,31 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="object-maps"><a class="header" href="#object-maps">Object Maps</a></h1>
-<div id="admonition-safety" class="admonition admonish-tip side">
+<div id="admonition-safety" class="admonition admonish-tip side" role="note" aria-labelledby="admonition-safety-title">
 <div class="admonition-title">
+<div id="admonition-safety-title">
 <p>Safety</p>
-<p><a class="admonition-anchor-link" href="#admonition-safety"></a></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-safety"></a>
 </div>
 <div>
-<p>Always limit the <a href="/book/safety/max-map-size.html">maximum size of object maps</a>.</p>
+<p>Always limit the <a href="/safety/max-map-size.html">maximum size of object maps</a>.</p>
 </div>
 </div>
-<p>Object maps are hash dictionaries. Properties are all <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
+<p>Object maps are hash dictionaries. Properties are all <a href="/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
 <p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
 Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
-<p><a href="/book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>"map"</code>.</p>
-<p>Object maps are disabled via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
-<div id="admonition-tip-object-maps-are-_fast_" class="admonition admonish-tip">
+<p><a href="/language/type-of.html"><code>type_of()</code></a> an object map returns <code>"map"</code>.</p>
+<p>Object maps are disabled via the <a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<div id="admonition-tip-object-maps-are-_fast_" class="admonition admonish-tip" role="note" aria-labelledby="admonition-tip-object-maps-are-_fast_-title">
 <div class="admonition-title">
+<div id="admonition-tip-object-maps-are-_fast_-title">
 <p>Tip: Object maps are <em>FAST</em></p>
-<p><a class="admonition-anchor-link" href="#admonition-tip-object-maps-are-_fast_"></a></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-object-maps-are-_fast_"></a>
 </div>
 <div>
-<p>Normally, when <a href="/book/rust/getters-setters.html">properties</a> are accessed, copies of the data values are made.
+<p>Normally, when <a href="/rust/getters-setters.html">properties</a> are accessed, copies of the data values are made.
 This is normally slow.</p>
 <p>Object maps have special treatment – properties are accessed via <em>references</em>, meaning that
 no copies of data values are made.</p>
@@ -240,20 +223,24 @@ map.a.b.c.d.calc();         // directly calls 'calc' on 'd'
                             // no copy of any property value is made</code></pre>
 </div>
 </div>
-<div id="admonition-tldr-why-smartstring" class="admonition admonish-question small">
+<div id="admonition-tldr-why-smartstring" class="admonition admonish-question small" role="note" aria-labelledby="admonition-tldr-why-smartstring-title">
 <div class="admonition-title">
+<div id="admonition-tldr-why-smartstring-title">
 <p>TL;DR: Why <code>SmartString</code>?</p>
-<p><a class="admonition-anchor-link" href="#admonition-tldr-why-smartstring"></a></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tldr-why-smartstring"></a>
 </div>
 <div>
 <p><a href="https://crates.io/crates/smartstring"><code>SmartString</code></a> is used because most object map properties are short (at least shorter than 23 characters)
 and ASCII-based, so they can usually be stored inline without incurring the cost of an allocation.</p>
 </div>
 </div>
-<div id="admonition-tldr-why-btreemap-and-not-hashmap" class="admonition admonish-question small">
+<div id="admonition-tldr-why-btreemap-and-not-hashmap" class="admonition admonish-question small" role="note" aria-labelledby="admonition-tldr-why-btreemap-and-not-hashmap-title">
 <div class="admonition-title">
+<div id="admonition-tldr-why-btreemap-and-not-hashmap-title">
 <p>TL;DR: Why <code>BTreeMap</code> and not <code>HashMap</code>?</p>
-<p><a class="admonition-anchor-link" href="#admonition-tldr-why-btreemap-and-not-hashmap"></a></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tldr-why-btreemap-and-not-hashmap"></a>
 </div>
 <div>
 <p>The vast majority of object maps contain just a few properties.</p>
@@ -267,17 +254,17 @@ commas <code>,</code>:</p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em><code>,</code> … <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>}</code></p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em><code>,</code> … <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>}</code>     <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>The property <em>name</em> can be a simple identifier following the same naming rules as <a href="/book/language/variables.html">variables</a>,
-or a <a href="/book/appendix/literals.html">string literal</a> without interpolation.</p>
+<p>The property <em>name</em> can be a simple identifier following the same naming rules as <a href="/language/variables.html">variables</a>,
+or a <a href="/appendix/literals.html">string literal</a> without interpolation.</p>
 <h2 id="property-access-syntax"><a class="header" href="#property-access-syntax">Property Access Syntax</a></h2>
 <h3 id="dot-notation"><a class="header" href="#dot-notation">Dot notation</a></h3>
-<p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/book/language/variables.html">variables</a>.</p>
+<p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/language/variables.html">variables</a>.</p>
 <blockquote>
 <p><em>object</em> <code>.</code> <em>property</em></p>
 </blockquote>
 <h3 id="elvis-notation"><a class="header" href="#elvis-notation">Elvis notation</a></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis notation</em></a> is similar to the <em>dot notation</em> except that it returns <a href="/book/language/values-and-types.html"><code>()</code></a> if the object
-itself is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis notation</em></a> is similar to the <em>dot notation</em> except that it returns <a href="/language/values-and-types.html"><code>()</code></a> if the object
+itself is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
 <blockquote>
 <p><code>// returns () if object is ()</code><br />
 <em>object</em> <code>?.</code> <em>property</em></p>
@@ -285,12 +272,12 @@ itself is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p
 <em>object</em> <code>?.</code> <em>property</em> <code>=</code> <em>value</em> <code>;</code></p>
 </blockquote>
 <h3 id="index-notation"><a class="header" href="#index-notation">Index notation</a></h3>
-<p>The <em>index notation</em> allows setting/getting properties of arbitrary names (even the empty <a href="/book/language/strings-chars.html">string</a>).</p>
+<p>The <em>index notation</em> allows setting/getting properties of arbitrary names (even the empty <a href="/language/strings-chars.html">string</a>).</p>
 <blockquote>
 <p><em>object</em> <code>[</code> <em>property</em> <code>]</code></p>
 </blockquote>
 <h2 id="handle-non-existent-properties"><a class="header" href="#handle-non-existent-properties">Handle Non-Existent Properties</a></h2>
-<p>Trying to read a non-existent property returns <a href="/book/language/values-and-types.html"><code>()</code></a> instead of causing an error.</p>
+<p>Trying to read a non-existent property returns <a href="/language/values-and-types.html"><code>()</code></a> instead of causing an error.</p>
 <p>This is similar to JavaScript where accessing a non-existent property returns <code>undefined</code>.</p>
 <pre><code class="language-rust">let map = #{ foo: 42 };
 
@@ -299,20 +286,24 @@ let x = map.foo;            // x == 42
 
 // Non-existent property
 let x = map.bar;            // x == ()</code></pre>
-<div id="admonition-tip-force-error" class="admonition admonish-tip small">
+<div id="admonition-tip-force-error" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-force-error-title">
 <div class="admonition-title">
+<div id="admonition-tip-force-error-title">
 <p>Tip: Force error</p>
-<p><a class="admonition-anchor-link" href="#admonition-tip-force-error"></a></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-force-error"></a>
 </div>
 <div>
 <p>It is possible to force Rhai to return an <code>EvalAltResult:: ErrorPropertyNotFound</code> via
-<a href="/book/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>.</p>
+<a href="/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>.</p>
 </div>
 </div>
-<div id="admonition-advanced-tip-override-standard-behavior" class="admonition admonish-tip small">
+<div id="admonition-advanced-tip-override-standard-behavior" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-advanced-tip-override-standard-behavior-title">
 <div class="admonition-title">
+<div id="admonition-advanced-tip-override-standard-behavior-title">
 <p>Advanced tip: Override standard behavior</p>
-<p><a class="admonition-anchor-link" href="#admonition-advanced-tip-override-standard-behavior"></a></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-advanced-tip-override-standard-behavior"></a>
 </div>
 <div>
 <p>For fine-tuned control on what happens when a non-existent property is accessed,
@@ -320,14 +311,14 @@ see <a href="object-maps-missing-prop.html"><em>Non-Existent Property Handling f
 </div>
 </div>
 <h3 id="check-for-property-existence"><a class="header" href="#check-for-property-existence">Check for property existence</a></h3>
-<p>Use the <a href="/book/language/in.html"><code>in</code></a> operator to check whether a property exists in an object-map.</p>
+<p>Use the <a href="/language/in.html"><code>in</code></a> operator to check whether a property exists in an object-map.</p>
 <pre><code class="language-rust">let map = #{ foo: 42 };
 
 "foo" in map == true;
 
 "bar" in map == false;</code></pre>
 <h3 id="short-circuit-non-existent-property-access"><a class="header" href="#short-circuit-non-existent-property-access">Short-circuit non-existent property access</a></h3>
-<p>Use the <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis operator</em></a> (<code>?.</code>) to short-circuit further processing if the object is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
+<p>Use the <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis operator</em></a> (<code>?.</code>) to short-circuit further processing if the object is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><code class="language-rust">x.a.b.foo();        // &lt;- error if 'x', 'x.a' or 'x.a.b' is ()
 
 x.a.b = 42;         // &lt;- error if 'x' or 'x.a' is ()
@@ -349,27 +340,27 @@ let x = map.bar;            // x == ()
 // Default value for property
 let x = map.bar ?? 42;      // x == 42</code></pre>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
-<p>The following methods (defined in the <a href="/book/rust/packages/builtin.html"><code>BasicMapPackage</code></a> but excluded when using
-a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on object maps.</p>
+<p>The following methods (defined in the <a href="/rust/packages/builtin.html"><code>BasicMapPackage</code></a> but excluded when using
+a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on object maps.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>get</code></td><td>property name</td><td>gets a copy of the value of a certain property (<a href="/book/language/values-and-types.html"><code>()</code></a> if the property does not exist); behavior is not affected by <a href="/book/engine/options.html"><code>Engine::fail_on_invalid_map_property</code></a></td></tr>
+<tr><td><code>get</code></td><td>property name</td><td>gets a copy of the value of a certain property (<a href="/language/values-and-types.html"><code>()</code></a> if the property does not exist); behavior is not affected by <a href="/engine/options.html"><code>Engine::fail_on_invalid_map_property</code></a></td></tr>
 <tr><td><code>set</code></td><td><ol><li>property name</li><li>new element</li></ol></td><td>sets a certain property to a new value (property is added if not already exists)</td></tr>
 <tr><td><code>len</code></td><td><em>none</em></td><td>returns the number of properties</td></tr>
 <tr><td><code>is_empty</code></td><td><em>none</em></td><td>returns <code>true</code> if the object map is empty</td></tr>
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the object map</td></tr>
-<tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/book/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
+<tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
 <tr><td><code>+=</code> operator, <code>mixin</code></td><td>second object map</td><td>mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values)</td></tr>
 <tr><td><code>+</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>merges the first object map with the second</td></tr>
 <tr><td><code>==</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>are the two object maps the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>!=</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>are the two object maps different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>fill_with</code></td><td>second object map</td><td>adds in all properties of the second object map that do not exist in the object map</td></tr>
-<tr><td><code>contains</code>, <a href="/book/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
-<tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
-<tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
-<tr><td><code>drain</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
-<tr><td><code>retain</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
-<tr><td><code>filter</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>constructs a object map with all elements that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
-<tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<a href="/book/language/values-and-types.html"><code>()</code></a> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
+<tr><td><code>contains</code>, <a href="/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
+<tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>drain</code></td><td><a href="/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
+<tr><td><code>retain</code></td><td><a href="/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
+<tr><td><code>filter</code></td><td><a href="/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/language/fn-closure.html">closure</a>)</td><td>constructs a object map with all elements that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
+<tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<a href="/language/values-and-types.html"><code>()</code></a> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
 </tbody></table>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -443,9 +434,9 @@ y.clear();              // empty the object map
 y.len() == 0;</code></pre>
 <h2 id="no-support-for-property-getters"><a class="header" href="#no-support-for-property-getters">No Support for Property Getters</a></h2>
 <p>In order not to affect the speed of accessing properties in an object map, new
-<a href="/book/rust/getters-setters.html">property getters</a> cannot be registered because they conflict with the syntax of
+<a href="/rust/getters-setters.html">property getters</a> cannot be registered because they conflict with the syntax of
 property access.</p>
-<p>A <a href="/book/rust/getters-setters.html">property getter</a> function registered via <code>Engine::register_get</code>, for example,
+<p>A <a href="/rust/getters-setters.html">property getter</a> function registered via <code>Engine::register_get</code>, for example,
 for a <code>Map</code> will never be found – instead, the property will be looked up in the object map.</p>
 <p>Properties should be registered as <em>methods</em> instead:</p>
 <pre><code class="language-rust">map.len                 // access property 'len', returns '()' if not found
@@ -489,6 +480,22 @@ map.values()            // 'values' method - returns array of all property value
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
