@@ -19,7 +19,7 @@ event handling systems.
 
 Because of the importance of this pattern, runnable examples are included.
 
-See the [_Examples_]({{rootUrl}}/start/examples/rust.md) section for details.
+See the [_Examples_](../start/examples/rust.md) section for details.
 ```
 
 ```admonish info "Usage scenario"
