@@ -42,7 +42,7 @@ let db = provider.clone();
 
 // Register a variable resolver.
 // Move the shared provider into the closure.
-engine.on_var(move |name, _, _, _| Ok(db.get(name).map(Dynamic::from)));
+engine.on_var(move |name, _, _| Ok(db.get(name).map(Dynamic::from)));
 ```
 
 
