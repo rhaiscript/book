@@ -233,7 +233,7 @@ let engine = Engine::new();</code></pre>
 <div>
 <p><code>rhai::config::hashing::set_ahash_seed</code> can only ever be called <em>once</em>,
 and must be called <em>BEFORE</em> performing any operation on Rhai (e.g. creating
-an <a href="/engine/hello-world.html"><code>Engine</code></a>).</p>
+an <a href="/book/engine/hello-world.html"><code>Engine</code></a>).</p>
 <p>Calling it a second time simply returns an error.</p>
 </div>
 </div>
@@ -312,22 +312,6 @@ say otherwise.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

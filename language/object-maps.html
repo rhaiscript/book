@@ -181,14 +181,14 @@
 <a class="admonition-anchor-link" href="#admonition-safety"></a>
 </div>
 <div>
-<p>Always limit the <a href="/safety/max-map-size.html">maximum size of object maps</a>.</p>
+<p>Always limit the <a href="/book/safety/max-map-size.html">maximum size of object maps</a>.</p>
 </div>
 </div>
-<p>Object maps are hash dictionaries. Properties are all <a href="/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
+<p>Object maps are hash dictionaries. Properties are all <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can be freely added and retrieved.</p>
 <p>The Rust type of a Rhai object map is <code>rhai::Map</code>.
 Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</p>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> an object map returns <code>"map"</code>.</p>
-<p>Object maps are disabled via the <a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> an object map returns <code>"map"</code>.</p>
+<p>Object maps are disabled via the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <div id="admonition-tip-object-maps-are-_fast_" class="admonition admonish-tip" role="note" aria-labelledby="admonition-tip-object-maps-are-_fast_-title">
 <div class="admonition-title">
 <div id="admonition-tip-object-maps-are-_fast_-title">
@@ -197,7 +197,7 @@ Currently it is an alias to <code>BTreeMap&lt;SmartString, Dynamic&gt;</code>.</
 <a class="admonition-anchor-link" href="#admonition-tip-object-maps-are-_fast_"></a>
 </div>
 <div>
-<p>Normally, when <a href="/rust/getters-setters.html">properties</a> are accessed, copies of the data values are made.
+<p>Normally, when <a href="/book/rust/getters-setters.html">properties</a> are accessed, copies of the data values are made.
 This is normally slow.</p>
 <p>Object maps have special treatment – properties are accessed via <em>references</em>, meaning that
 no copies of data values are made.</p>
@@ -254,17 +254,17 @@ commas <code>,</code>:</p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em><code>,</code> … <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>}</code></p>
 <p><code>#{</code> <em>property</em> <code>:</code> <em>value</em><code>,</code> … <code>,</code> <em>property</em> <code>:</code> <em>value</em> <code>,</code> <code>}</code>     <code>// trailing comma is OK</code></p>
 </blockquote>
-<p>The property <em>name</em> can be a simple identifier following the same naming rules as <a href="/language/variables.html">variables</a>,
-or a <a href="/appendix/literals.html">string literal</a> without interpolation.</p>
+<p>The property <em>name</em> can be a simple identifier following the same naming rules as <a href="/book/language/variables.html">variables</a>,
+or a <a href="/book/appendix/literals.html">string literal</a> without interpolation.</p>
 <h2 id="property-access-syntax"><a class="header" href="#property-access-syntax">Property Access Syntax</a></h2>
 <h3 id="dot-notation"><a class="header" href="#dot-notation">Dot notation</a></h3>
-<p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/language/variables.html">variables</a>.</p>
+<p>The <em>dot notation</em> allows only property names that follow the same naming rules as <a href="/book/language/variables.html">variables</a>.</p>
 <blockquote>
 <p><em>object</em> <code>.</code> <em>property</em></p>
 </blockquote>
 <h3 id="elvis-notation"><a class="header" href="#elvis-notation">Elvis notation</a></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis notation</em></a> is similar to the <em>dot notation</em> except that it returns <a href="/language/values-and-types.html"><code>()</code></a> if the object
-itself is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis notation</em></a> is similar to the <em>dot notation</em> except that it returns <a href="/book/language/values-and-types.html"><code>()</code></a> if the object
+itself is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <blockquote>
 <p><code>// returns () if object is ()</code><br />
 <em>object</em> <code>?.</code> <em>property</em></p>
@@ -272,12 +272,12 @@ itself is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
 <em>object</em> <code>?.</code> <em>property</em> <code>=</code> <em>value</em> <code>;</code></p>
 </blockquote>
 <h3 id="index-notation"><a class="header" href="#index-notation">Index notation</a></h3>
-<p>The <em>index notation</em> allows setting/getting properties of arbitrary names (even the empty <a href="/language/strings-chars.html">string</a>).</p>
+<p>The <em>index notation</em> allows setting/getting properties of arbitrary names (even the empty <a href="/book/language/strings-chars.html">string</a>).</p>
 <blockquote>
 <p><em>object</em> <code>[</code> <em>property</em> <code>]</code></p>
 </blockquote>
 <h2 id="handle-non-existent-properties"><a class="header" href="#handle-non-existent-properties">Handle Non-Existent Properties</a></h2>
-<p>Trying to read a non-existent property returns <a href="/language/values-and-types.html"><code>()</code></a> instead of causing an error.</p>
+<p>Trying to read a non-existent property returns <a href="/book/language/values-and-types.html"><code>()</code></a> instead of causing an error.</p>
 <p>This is similar to JavaScript where accessing a non-existent property returns <code>undefined</code>.</p>
 <pre><code class="language-rust">let map = #{ foo: 42 };
 
@@ -295,7 +295,7 @@ let x = map.bar;            // x == ()</code></pre>
 </div>
 <div>
 <p>It is possible to force Rhai to return an <code>EvalAltResult:: ErrorPropertyNotFound</code> via
-<a href="/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>.</p>
+<a href="/book/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>.</p>
 </div>
 </div>
 <div id="admonition-advanced-tip-override-standard-behavior" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-advanced-tip-override-standard-behavior-title">
@@ -311,14 +311,14 @@ see <a href="object-maps-missing-prop.html"><em>Non-Existent Property Handling f
 </div>
 </div>
 <h3 id="check-for-property-existence"><a class="header" href="#check-for-property-existence">Check for property existence</a></h3>
-<p>Use the <a href="/language/in.html"><code>in</code></a> operator to check whether a property exists in an object-map.</p>
+<p>Use the <a href="/book/language/in.html"><code>in</code></a> operator to check whether a property exists in an object-map.</p>
 <pre><code class="language-rust">let map = #{ foo: 42 };
 
 "foo" in map == true;
 
 "bar" in map == false;</code></pre>
 <h3 id="short-circuit-non-existent-property-access"><a class="header" href="#short-circuit-non-existent-property-access">Short-circuit non-existent property access</a></h3>
-<p>Use the <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis operator</em></a> (<code>?.</code>) to short-circuit further processing if the object is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>Use the <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis operator</em></a> (<code>?.</code>) to short-circuit further processing if the object is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><code class="language-rust">x.a.b.foo();        // &lt;- error if 'x', 'x.a' or 'x.a.b' is ()
 
 x.a.b = 42;         // &lt;- error if 'x' or 'x.a' is ()
@@ -340,27 +340,27 @@ let x = map.bar;            // x == ()
 // Default value for property
 let x = map.bar ?? 42;      // x == 42</code></pre>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
-<p>The following methods (defined in the <a href="/rust/packages/builtin.html"><code>BasicMapPackage</code></a> but excluded when using
-a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on object maps.</p>
+<p>The following methods (defined in the <a href="/book/rust/packages/builtin.html"><code>BasicMapPackage</code></a> but excluded when using
+a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on object maps.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>get</code></td><td>property name</td><td>gets a copy of the value of a certain property (<a href="/language/values-and-types.html"><code>()</code></a> if the property does not exist); behavior is not affected by <a href="/engine/options.html"><code>Engine::fail_on_invalid_map_property</code></a></td></tr>
+<tr><td><code>get</code></td><td>property name</td><td>gets a copy of the value of a certain property (<a href="/book/language/values-and-types.html"><code>()</code></a> if the property does not exist); behavior is not affected by <a href="/book/engine/options.html"><code>Engine::fail_on_invalid_map_property</code></a></td></tr>
 <tr><td><code>set</code></td><td><ol><li>property name</li><li>new element</li></ol></td><td>sets a certain property to a new value (property is added if not already exists)</td></tr>
 <tr><td><code>len</code></td><td><em>none</em></td><td>returns the number of properties</td></tr>
 <tr><td><code>is_empty</code></td><td><em>none</em></td><td>returns <code>true</code> if the object map is empty</td></tr>
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the object map</td></tr>
-<tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
+<tr><td><code>remove</code></td><td>property name</td><td>removes a certain property and returns it (<a href="/book/language/values-and-types.html"><code>()</code></a> if the property does not exist)</td></tr>
 <tr><td><code>+=</code> operator, <code>mixin</code></td><td>second object map</td><td>mixes in all the properties of the second object map to the first (values of properties with the same names replace the existing values)</td></tr>
 <tr><td><code>+</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>merges the first object map with the second</td></tr>
 <tr><td><code>==</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>are the two object maps the same (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>!=</code> operator</td><td><ol><li>first object map</li><li>second object map</li></ol></td><td>are the two object maps different (elements compared with the <code>==</code> operator, if defined)?</td></tr>
 <tr><td><code>fill_with</code></td><td>second object map</td><td>adds in all properties of the second object map that do not exist in the object map</td></tr>
-<tr><td><code>contains</code>, <a href="/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
-<tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/start/features.html"><code>no_index</code></a></td></tr>
-<tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/start/features.html"><code>no_index</code></a></td></tr>
-<tr><td><code>drain</code></td><td><a href="/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
-<tr><td><code>retain</code></td><td><a href="/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
-<tr><td><code>filter</code></td><td><a href="/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/language/fn-closure.html">closure</a>)</td><td>constructs a object map with all elements that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
-<tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<a href="/language/values-and-types.html"><code>()</code></a> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
+<tr><td><code>contains</code>, <a href="/book/language/in.html"><code>in</code></a> operator</td><td>property name</td><td>does the object map contain a property of a particular name?</td></tr>
+<tr><td><code>keys</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property names (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>values</code></td><td><em>none</em></td><td>returns an <a href="/book/language/arrays.html">array</a> of all the property values (in random order), not available under <a href="/book/start/features.html"><code>no_index</code></a></td></tr>
+<tr><td><code>drain</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
+<tr><td><code>retain</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>removes all elements (returning them) that do not return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
+<tr><td><code>filter</code></td><td><a href="/book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="/book/language/fn-closure.html">closure</a>)</td><td>constructs a object map with all elements that return <code>true</code> when called with the predicate function taking the following parameters:<ol><li>key</li><li><em>(optional)</em> object map element (if omitted, the object map element is bound to <code>this</code>)</li></ol></td></tr>
+<tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<a href="/book/language/values-and-types.html"><code>()</code></a> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
 </tbody></table>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -434,9 +434,9 @@ y.clear();              // empty the object map
 y.len() == 0;</code></pre>
 <h2 id="no-support-for-property-getters"><a class="header" href="#no-support-for-property-getters">No Support for Property Getters</a></h2>
 <p>In order not to affect the speed of accessing properties in an object map, new
-<a href="/rust/getters-setters.html">property getters</a> cannot be registered because they conflict with the syntax of
+<a href="/book/rust/getters-setters.html">property getters</a> cannot be registered because they conflict with the syntax of
 property access.</p>
-<p>A <a href="/rust/getters-setters.html">property getter</a> function registered via <code>Engine::register_get</code>, for example,
+<p>A <a href="/book/rust/getters-setters.html">property getter</a> function registered via <code>Engine::register_get</code>, for example,
 for a <code>Map</code> will never be found – instead, the property will be looked up in the object map.</p>
 <p>Properties should be registered as <em>methods</em> instead:</p>
 <pre><code class="language-rust">map.len                 // access property 'len', returns '()' if not found
@@ -480,22 +480,6 @@ map.values()            // 'values' method - returns array of all property value
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

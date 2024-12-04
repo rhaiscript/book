@@ -210,18 +210,18 @@
 <div>
 <ul>
 <li>
-<p>Expose a Command type with an API.  The <a href="/start/features.html"><code>no_object</code></a> feature must not be on.</p>
+<p>Expose a Command type with an API.  The <a href="/book/start/features.html"><code>no_object</code></a> feature must not be on.</p>
 </li>
 <li>
-<p>Leverage <a href="/rust/overloading.html">function overloading</a> to simplify the API design.</p>
+<p>Leverage <a href="/book/rust/overloading.html">function overloading</a> to simplify the API design.</p>
 </li>
 <li>
-<p>Since Rhai is <em><a href="/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate anything outside of its internal environment.
+<p>Since Rhai is <em><a href="/book/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate anything outside of its internal environment.
 To perform external actions via an API, the command object type must be wrapped in a <code>RefCell</code>
-(or <code>RwLock</code>/<code>Mutex</code> for <a href="/start/features.html"><code>sync</code></a>) and shared to the <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+(or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 <li>
-<p>Load each command object into a custom <a href="/engine/scope.html"><code>Scope</code></a> as constant variables.</p>
+<p>Load each command object into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> as constant variables.</p>
 </li>
 <li>
 <p>Control each command object in script via the constants.</p>
@@ -236,7 +236,7 @@ system in a shared, interior-mutated object.</p>
 a name singleton object in the scripting space.</p>
 <p>Use this when the API is complex but has a clear object structure.</p>
 <p>For a relatively simple API that is action-based and not object-based, use the
-<a href="/patterns/control.html">Control Layer</a> pattern instead.</p>
+<a href="/book/patterns/control.html">Control Layer</a> pattern instead.</p>
 <h3 id="functional-api"><a class="header" href="#functional-api">Functional API</a></h3>
 <p>Assume the following command object type:</p>
 <pre><code class="language-rust">struct EnergizerBunny { ... }
@@ -252,14 +252,14 @@ impl EnergizerBunny {
 }</code></pre>
 <h3 id="wrap-command-object-type-as-shared"><a class="header" href="#wrap-command-object-type-as-shared">Wrap command object type as shared</a></h3>
 <pre><code class="language-rust">pub type SharedBunny = Rc&lt;RefCell&lt;EnergizerBunny&gt;&gt;;</code></pre>
-<p>or in multi-threaded environments with the <a href="/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
+<p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
 <pre><code class="language-rust">pub type SharedBunny = Arc&lt;RwLock&lt;EnergizerBunny&gt;&gt;;
 
 pub type SharedBunny = Arc&lt;Mutex&lt;EnergizerBunny&gt;&gt;;</code></pre>
 <h3 id="develop-a-plugin-with-methods-and-getterssetters"><a class="header" href="#develop-a-plugin-with-methods-and-getterssetters">Develop a plugin with methods and getters/setters</a></h3>
-<p>The easiest way to develop a complete set of API for a <a href="/rust/custom-types.html">custom type</a> is via a <a href="/plugins/module.html">plugin module</a>.</p>
-<p>Notice that putting <code>pure</code> in <code>#[rhai_fn(...)]</code> allows a <a href="/rust/getters-setters.html">getter/setter</a> to operate
-on a <a href="/language/constants.html">constant</a> without raising an error.  Therefore, it is needed on <em>all</em> functions.</p>
+<p>The easiest way to develop a complete set of API for a <a href="/book/rust/custom-types.html">custom type</a> is via a <a href="/book/plugins/module.html">plugin module</a>.</p>
+<p>Notice that putting <code>pure</code> in <code>#[rhai_fn(...)]</code> allows a <a href="/book/rust/getters-setters.html">getter/setter</a> to operate
+on a <a href="/book/language/constants.html">constant</a> without raising an error.  Therefore, it is needed on <em>all</em> functions.</p>
 <pre><code class="language-rust">use rhai::plugin::*;
 
 // Remember to put 'pure' on all functions, or they'll choke on constants!
@@ -338,7 +338,7 @@ engine.register_global_module(exported_module!(bunny_api).into());</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-friendly-name-for-custom-type"></a>
 </div>
 <div>
-<p>It is customary to register a <em>friendly display name</em> for any <a href="/rust/custom-types.html">custom type</a>
+<p>It is customary to register a <em>friendly display name</em> for any <a href="/book/rust/custom-types.html">custom type</a>
 involved in the plugin.</p>
 <p>This can easily be done via a <em>type alias</em> in the plugin module.</p>
 </div>
@@ -369,8 +369,8 @@ engine.run_with_scope(&amp;mut scope, script)?;</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-prevent-shadowing"></a>
 </div>
 <div>
-<p>It is usually desirable to prevent <a href="/language/shadow.html">shadowing</a> of the singleton command object.</p>
-<p>This can be easily achieved via a <a href="/engine/def-var.html">variable definition filter</a>.</p>
+<p>It is usually desirable to prevent <a href="/book/language/shadow.html">shadowing</a> of the singleton command object.</p>
+<p>This can be easily achieved via a <a href="/book/engine/def-var.html">variable definition filter</a>.</p>
 <pre><code class="language-rust">// Now the script can no longer define a variable named 'BUNNY'
 engine.on_def_var(|_, info, _| Ok(info.name != "BUNNY"));</code></pre>
 </div>
@@ -415,22 +415,6 @@ let BUNNY = 42;     // &lt;- syntax error if variable definition filter is set</
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

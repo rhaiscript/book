@@ -181,12 +181,12 @@
 <a class="admonition-anchor-link" href="#admonition-useful-for-no-std"></a>
 </div>
 <div>
-<p><code>StaticModuleResolver</code> is often used with <a href="/start/features.html"><code>no_std</code></a> in embedded environments
+<p><code>StaticModuleResolver</code> is often used with <a href="/book/start/features.html"><code>no_std</code></a> in embedded environments
 without a file system.</p>
 </div>
 </div>
-<p>Loads <a href="/rust/modules/index.html">modules</a> that are statically added.</p>
-<p>Functions are searched in the <a href="/language/fn-namespaces.html"><em>global</em> namespace</a> by default.</p>
+<p>Loads <a href="/book/rust/modules/index.html">modules</a> that are statically added.</p>
+<p>Functions are searched in the <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a> by default.</p>
 <pre><code class="language-rust">use rhai::{Module, module_resolvers::StaticModuleResolver};
 
 let module: Module = create_a_module();
@@ -225,22 +225,6 @@ engine.set_module_resolver(resolver);</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

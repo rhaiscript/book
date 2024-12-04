@@ -186,24 +186,24 @@
 <p>Simple language similar to JavaScript+Rust with dynamic typing.</p>
 </li>
 <li>
-<p>Tight integration with native Rust <a href="/language/functions.html">functions</a> and <a href="/rust/custom-types.html">types</a> including
-<a href="/rust/getters-setters.html">getters/setters</a>, <a href="/rust/methods.html">methods</a> and <a href="/rust/indexers.html">indexers</a>.</p>
+<p>Tight integration with native Rust <a href="/book/language/functions.html">functions</a> and <a href="/book/rust/custom-types.html">types</a> including
+<a href="/book/rust/getters-setters.html">getters/setters</a>, <a href="/book/rust/methods.html">methods</a> and <a href="/book/rust/indexers.html">indexers</a>.</p>
 </li>
 <li>
-<p>Freely pass Rust values into a script as <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> via an external <a href="/engine/scope.html"><code>Scope</code></a> –
+<p>Freely pass Rust values into a script as <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> via an external <a href="/book/engine/scope.html"><code>Scope</code></a> –
 all clonable Rust types are supported seamlessly without the need to implement any special trait.</p>
 </li>
 <li>
-<p>Easily <a href="/engine/call-fn.html">call a script-defined function</a> from Rust.</p>
+<p>Easily <a href="/book/engine/call-fn.html">call a script-defined function</a> from Rust.</p>
 </li>
 <li>
 <p>Very few additional dependencies – right now only <a href="https://crates.io/crates/smallvec"><code>smallvec</code></a>,
 <a href="https://crates.io/crates/thin-vec"><code>thin-vec</code></a>, <a href="https://crates.io/crates/num-traits"><code>num-traits</code></a>,
 <a href="https://crates.io/crates/ahash"><code>ahash</code></a>, <a href="https://crates.io/crates/bitflags"><code>bitflags</code></a> and <a href="https://crates.io/crates/smartstring"><code>smartstring</code></a>;
-for <a href="/start/builds/no-std.html"><code>no-std</code></a> and <a href="/start/builds/wasm.html">WASM</a> builds, a number of additional dependencies are pulled in to provide for missing functionalities.</p>
+for <a href="/book/start/builds/no-std.html"><code>no-std</code></a> and <a href="/book/start/builds/wasm.html">WASM</a> builds, a number of additional dependencies are pulled in to provide for missing functionalities.</p>
 </li>
 <li>
-<p><a href="/plugins/index.html">Plugins</a> system powered by procedural macros simplifies custom API development.</p>
+<p><a href="/book/plugins/index.html">Plugins</a> system powered by procedural macros simplifies custom API development.</p>
 </li>
 </ul>
 </div>
@@ -222,10 +222,10 @@ for <a href="/start/builds/no-std.html"><code>no-std</code></a> and <a href="/st
 (see <a href="benchmarks.html">benchmarks</a>).</p>
 </li>
 <li>
-<p>Compile once to <a href="/engine/compile.html">AST</a> for repeated evaluations.</p>
+<p>Compile once to <a href="/book/engine/compile.html">AST</a> for repeated evaluations.</p>
 </li>
 <li>
-<p>Scripts are <a href="/engine/optimize/index.html">optimized</a> – useful for template-based machine-generated scripts.</p>
+<p>Scripts are <a href="/book/engine/optimize/index.html">optimized</a> – useful for template-based machine-generated scripts.</p>
 </li>
 </ul>
 </div>
@@ -240,27 +240,27 @@ for <a href="/start/builds/no-std.html"><code>no-std</code></a> and <a href="/st
 <div>
 <ul>
 <li>
-<p><a href="/language/overload.html">Function overloading</a>.</p>
+<p><a href="/book/language/overload.html">Function overloading</a>.</p>
 </li>
 <li>
-<p><a href="/rust/operators.html">Operator overloading</a>.</p>
+<p><a href="/book/rust/operators.html">Operator overloading</a>.</p>
 </li>
 <li>
-<p>Organize code base with dynamically-loadable <a href="/rust/modules/index.html">modules</a>, optionally overriding the
-<a href="/rust/modules/resolvers/index.html">resolution</a> process.</p>
+<p>Organize code base with dynamically-loadable <a href="/book/rust/modules/index.html">modules</a>, optionally overriding the
+<a href="/book/rust/modules/resolvers/index.html">resolution</a> process.</p>
 </li>
 <li>
-<p>Dynamic dispatch via <a href="/language/fn-ptr.html">function pointers</a> with additional support for <a href="/language/fn-curry.html">currying</a>.</p>
+<p>Dynamic dispatch via <a href="/book/language/fn-ptr.html">function pointers</a> with additional support for <a href="/book/language/fn-curry.html">currying</a>.</p>
 </li>
 <li>
-<p><a href="/language/fn-closure.html">Closures</a> that can capture shared variables.</p>
+<p><a href="/book/language/fn-closure.html">Closures</a> that can capture shared variables.</p>
 </li>
 <li>
-<p>Some support for <a href="/patterns/oop.html">object-oriented programming (OOP)</a>.</p>
+<p>Some support for <a href="/book/patterns/oop.html">object-oriented programming (OOP)</a>.</p>
 </li>
 <li>
-<p>Hook into variables access via a <a href="/engine/var.html">variable resolver</a>, or control definition of variables via a
-<a href="/engine/def-var.html">variable definition filter</a>.</p>
+<p>Hook into variables access via a <a href="/book/engine/var.html">variable resolver</a>, or control definition of variables via a
+<a href="/book/engine/def-var.html">variable definition filter</a>.</p>
 </li>
 </ul>
 </div>
@@ -278,8 +278,8 @@ for <a href="/start/builds/no-std.html"><code>no-std</code></a> and <a href="/st
 <p>Relatively little <code>unsafe</code> code – yes there are some for performance reasons.</p>
 </li>
 <li>
-<p>Sand-boxed – the scripting <a href="/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing
-environment unless <a href="/patterns/control.html">explicitly permitted</a>.</p>
+<p>Sand-boxed – the scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a>, if declared immutable, cannot mutate the containing
+environment unless <a href="/book/patterns/control.html">explicitly permitted</a>.</p>
 </li>
 <li>
 <p>Passes Miri.</p>
@@ -297,15 +297,15 @@ environment unless <a href="/patterns/control.html">explicitly permitted</a>.</p
 <div>
 <ul>
 <li>
-<p><a href="/safety/index.html"><em>Don’t Panic</em></a> guarantee – Any panic is a bug. It never panics the host system.</p>
+<p><a href="/book/safety/index.html"><em>Don’t Panic</em></a> guarantee – Any panic is a bug. It never panics the host system.</p>
 </li>
 <li>
-<p>Protected against malicious attacks – such as <a href="/safety/max-call-stack.html">stack-overflow</a>,
-<a href="/safety/max-string-size.html">over-sized data</a>, and <a href="/safety/max-operations.html">runaway scripts</a>
+<p>Protected against malicious attacks – such as <a href="/book/safety/max-call-stack.html">stack-overflow</a>,
+<a href="/book/safety/max-string-size.html">over-sized data</a>, and <a href="/book/safety/max-operations.html">runaway scripts</a>
 etc. – that may come from untrusted third-party user-land scripts.</p>
 </li>
 <li>
-<p>Track script evaluation <a href="/safety/progress.html">progress</a> and manually terminate a script run.</p>
+<p>Track script evaluation <a href="/book/safety/progress.html">progress</a> and manually terminate a script run.</p>
 </li>
 </ul>
 </div>
@@ -320,7 +320,7 @@ etc. – that may come from untrusted third-party user-land scripts.</p>
 <div>
 <ul>
 <li>
-<p>Re-entrant scripting <a href="/engine/hello-world.html"><code>Engine</code></a> can be made <code>Send + Sync</code> (via the <a href="/start/features.html"><code>sync</code></a> feature).</p>
+<p>Re-entrant scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> can be made <code>Send + Sync</code> (via the <a href="/book/start/features.html"><code>sync</code></a> feature).</p>
 </li>
 <li>
 <p>Support for <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> numbers.</p>
@@ -329,19 +329,19 @@ etc. – that may come from untrusted third-party user-land scripts.</p>
 <p>Serialization/deserialization support via <a href="https://crates.io/crates/serde"><code>serde</code></a>.</p>
 </li>
 <li>
-<p>Support for <a href="/start/builds/minimal.html">minimal builds</a> by excluding unneeded language <a href="/start/features.html">features</a>.</p>
+<p>Support for <a href="/book/start/builds/minimal.html">minimal builds</a> by excluding unneeded language <a href="/book/start/features.html">features</a>.</p>
 </li>
 <li>
-<p>Supports <a href="targets.html">most build targets</a> including <code>no-std</code> and <a href="/start/builds/wasm.html">WASM</a>.</p>
+<p>Supports <a href="targets.html">most build targets</a> including <code>no-std</code> and <a href="/book/start/builds/wasm.html">WASM</a>.</p>
 </li>
 <li>
-<p>Surgically <a href="/engine/disable-keywords.html">disable keywords and operators</a> to restrict the language.</p>
+<p>Surgically <a href="/book/engine/disable-keywords.html">disable keywords and operators</a> to restrict the language.</p>
 </li>
 <li>
-<p>Use as a <a href="/engine/dsl.html">DSL</a> by defining <a href="/engine/custom-op.html">custom operators</a> and/or extending the language with <a href="/engine/custom-syntax.html">custom syntax</a>.</p>
+<p>Use as a <a href="/book/engine/dsl.html">DSL</a> by defining <a href="/book/engine/custom-op.html">custom operators</a> and/or extending the language with <a href="/book/engine/custom-syntax.html">custom syntax</a>.</p>
 </li>
 <li>
-<p>A <a href="/engine/debugging/debugger.html">debugging</a> interface provides powerful debugging support.</p>
+<p>A <a href="/book/engine/debugging/debugger.html">debugging</a> interface provides powerful debugging support.</p>
 </li>
 </ul>
 </div>
@@ -376,22 +376,6 @@ etc. – that may come from untrusted third-party user-land scripts.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

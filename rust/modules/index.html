@@ -173,21 +173,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
-<p>Rhai allows organizing functionalities (<a href="/language/functions.html">functions</a>, both Rust-based and scripted, and
-<a href="/language/variables.html">variables</a>) into independent <em>modules</em>.</p>
-<p>A module has the type <code>rhai::Module</code> and holds a collection of <a href="/language/functions.html">functions</a>, <a href="/language/variables.html">variables</a>, <a href="/language/iterator.html">type
+<p>Rhai allows organizing functionalities (<a href="/book/language/functions.html">functions</a>, both Rust-based and scripted, and
+<a href="/book/language/variables.html">variables</a>) into independent <em>modules</em>.</p>
+<p>A module has the type <code>rhai::Module</code> and holds a collection of <a href="/book/language/functions.html">functions</a>, <a href="/book/language/variables.html">variables</a>, <a href="/book/language/iterator.html">type
 iterators</a> and sub-modules.</p>
 <p>It may contain entirely Rust functions, or it may encapsulate a Rhai script together with
-all the <a href="/language/functions.html">functions</a> and <a href="/language/variables.html">variables</a> defined by that script.</p>
-<p>Other scripts then load this module and use the <a href="/language/functions.html">functions</a> and <a href="/language/variables.html">variables</a> <a href="/language/modules/export.html">exported</a>.</p>
-<p>Alternatively, modules can be registered directly into an <a href="/engine/hello-world.html"><code>Engine</code></a> and made available to scripts,
-either globally or under individual static module <a href="/language/fn-namespaces.html"><em>namespaces</em></a>.</p>
-<p>Modules can be disabled via the <a href="/start/features.html"><code>no_module</code></a> feature.</p>
+all the <a href="/book/language/functions.html">functions</a> and <a href="/book/language/variables.html">variables</a> defined by that script.</p>
+<p>Other scripts then load this module and use the <a href="/book/language/functions.html">functions</a> and <a href="/book/language/variables.html">variables</a> <a href="/book/language/modules/export.html">exported</a>.</p>
+<p>Alternatively, modules can be registered directly into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> and made available to scripts,
+either globally or under individual static module <a href="/book/language/fn-namespaces.html"><em>namespaces</em></a>.</p>
+<p>Modules can be disabled via the <a href="/book/start/features.html"><code>no_module</code></a> feature.</p>
 <h2 id="usage-patterns"><a class="header" href="#usage-patterns">Usage Patterns</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Usage</th><th style="text-align: center">API</th><th style="text-align: center">Lookup</th><th style="text-align: center">Sub-modules?</th><th style="text-align: center">Variables?</th></tr></thead><tbody>
 <tr><td>Global module</td><td style="text-align: center"><code>Engine:: register_global_module</code></td><td style="text-align: center">simple name</td><td style="text-align: center">ignored</td><td style="text-align: center">yes</td></tr>
 <tr><td>Static module</td><td style="text-align: center"><code>Engine:: register_static_module</code></td><td style="text-align: center">namespace-qualified name</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td>Dynamic module</td><td style="text-align: center"><a href="/language/modules/import.html"><code>import</code></a> statement</td><td style="text-align: center">namespace-qualified name</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td>Dynamic module</td><td style="text-align: center"><a href="/book/language/modules/import.html"><code>import</code></a> statement</td><td style="text-align: center">namespace-qualified name</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -219,22 +219,6 @@ either globally or under individual static module <a href="/language/fn-namespac
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

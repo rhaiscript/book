@@ -176,18 +176,18 @@
 <h2 id="integer-functions"><a class="header" href="#integer-functions">Integer Functions</a></h2>
 <p>The following standard functions are defined.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th style="text-align: center">Not available under</th><th style="text-align: center">Package</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>is_odd</code> method and property</td><td style="text-align: center"></td><td style="text-align: center"><a href="/rust/packages/builtin.html"><code>ArithmeticPackage</code></a></td><td>returns <code>true</code> if the value is an odd number, otherwise <code>false</code></td></tr>
-<tr><td><code>is_even</code> method and property</td><td style="text-align: center"></td><td style="text-align: center"><a href="/rust/packages/builtin.html"><code>ArithmeticPackage</code></a></td><td>returns <code>true</code> if the value is an even number, otherwise <code>false</code></td></tr>
-<tr><td><code>min</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/rust/packages/builtin.html"><code>LogicPackage</code></a></td><td>returns the smaller of two numbers</td></tr>
-<tr><td><code>max</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/rust/packages/builtin.html"><code>LogicPackage</code></a></td><td>returns the larger of two numbers</td></tr>
-<tr><td><code>to_float</code></td><td style="text-align: center"><a href="/start/features.html"><code>no_float</code></a></td><td style="text-align: center"><a href="/rust/packages/builtin.html"><code>BasicMathPackage</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="/start/features.html"><code>f32_float</code></a>)</td></tr>
-<tr><td><code>to_decimal</code></td><td style="text-align: center">non-<a href="/start/features.html"><code>decimal</code></a></td><td style="text-align: center"><a href="/rust/packages/builtin.html"><code>BasicMathPackage</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><code>is_odd</code> method and property</td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/rust/packages/builtin.html"><code>ArithmeticPackage</code></a></td><td>returns <code>true</code> if the value is an odd number, otherwise <code>false</code></td></tr>
+<tr><td><code>is_even</code> method and property</td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/rust/packages/builtin.html"><code>ArithmeticPackage</code></a></td><td>returns <code>true</code> if the value is an even number, otherwise <code>false</code></td></tr>
+<tr><td><code>min</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/rust/packages/builtin.html"><code>LogicPackage</code></a></td><td>returns the smaller of two numbers</td></tr>
+<tr><td><code>max</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/rust/packages/builtin.html"><code>LogicPackage</code></a></td><td>returns the larger of two numbers</td></tr>
+<tr><td><code>to_float</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_float</code></a></td><td style="text-align: center"><a href="/book/rust/packages/builtin.html"><code>BasicMathPackage</code></a></td><td>convert the value into <code>f64</code> (<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>)</td></tr>
+<tr><td><code>to_decimal</code></td><td style="text-align: center">non-<a href="/book/start/features.html"><code>decimal</code></a></td><td style="text-align: center"><a href="/book/rust/packages/builtin.html"><code>BasicMathPackage</code></a></td><td>convert the value into <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
 </div>
 <h2 id="signed-numeric-functions"><a class="header" href="#signed-numeric-functions">Signed Numeric Functions</a></h2>
-<p>The following standard functions are defined in the <a href="/rust/packages/builtin.html"><code>ArithmeticPackage</code></a>
-(excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) and operate on <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>f32</code>, <code>f64</code> and
-<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/start/features.html"><code>decimal</code></a>) only.</p>
+<p>The following standard functions are defined in the <a href="/book/rust/packages/builtin.html"><code>ArithmeticPackage</code></a>
+(excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) and operate on <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>f32</code>, <code>f64</code> and
+<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>) only.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>abs</code></td><td>absolute value</td></tr>
 <tr><td><code>sign</code></td><td>returns (<code>INT</code>) −1 if negative, +1 if positive, 0 if zero</td></tr>
@@ -195,9 +195,9 @@
 </tbody></table>
 </div>
 <h2 id="floating-point-functions"><a class="header" href="#floating-point-functions">Floating-Point Functions</a></h2>
-<p>The following standard functions are defined in the <a href="/rust/packages/builtin.html"><code>BasicMathPackage</code></a>
-(excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) and operate on <code>f64</code> (<code>f32</code> under <a href="/start/features.html"><code>f32_float</code></a>) and
-<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/start/features.html"><code>decimal</code></a>) only.</p>
+<p>The following standard functions are defined in the <a href="/book/rust/packages/builtin.html"><code>BasicMathPackage</code></a>
+(excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) and operate on <code>f64</code> (<code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>) and
+<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>) only.</p>
 <div class="table-wrapper"><table><thead><tr><th>Category</th><th style="text-align: center">Supports <code>Decimal</code></th><th>Functions</th></tr></thead><tbody>
 <tr><td>Trigonometry</td><td style="text-align: center">yes</td><td><code>sin</code>, <code>cos</code>, <code>tan</code></td></tr>
 <tr><td>Trigonometry</td><td style="text-align: center"><strong>no</strong></td><td><code>sinh</code>, <code>cosh</code>, <code>tanh</code> in radians, <code>hypot(</code><em>x</em><code>,</code><em>y</em><code>)</code></td></tr>
@@ -208,16 +208,16 @@
 <tr><td>Logarithmic</td><td style="text-align: center">yes</td><td><code>log</code> (base 10)</td></tr>
 <tr><td>Logarithmic</td><td style="text-align: center"><strong>no</strong></td><td><code>log(</code><em>x</em><code>,</code><em>base</em><code>)</code></td></tr>
 <tr><td>Rounding</td><td style="text-align: center">yes</td><td><code>floor</code>, <code>ceiling</code>, <code>round</code>, <code>int</code>, <code>fraction</code> methods and properties</td></tr>
-<tr><td>Conversion</td><td style="text-align: center">yes</td><td><a href="/language/convert.html"><code>to_int</code></a>, <a href="/language/convert.html"><code>to_decimal</code></a> (requires <a href="/start/features.html"><code>decimal</code></a>), <a href="/language/convert.html"><code>to_float</code></a> (not under <a href="/start/features.html"><code>no_float</code></a>)</td></tr>
+<tr><td>Conversion</td><td style="text-align: center">yes</td><td><a href="/book/language/convert.html"><code>to_int</code></a>, <a href="/book/language/convert.html"><code>to_decimal</code></a> (requires <a href="/book/start/features.html"><code>decimal</code></a>), <a href="/book/language/convert.html"><code>to_float</code></a> (not under <a href="/book/start/features.html"><code>no_float</code></a>)</td></tr>
 <tr><td>Conversion</td><td style="text-align: center"><strong>no</strong></td><td><code>to_degrees</code>, <code>to_radians</code></td></tr>
 <tr><td>Comparison</td><td style="text-align: center">yes</td><td><code>min</code>, <code>max</code> (also inter-operates with integers)</td></tr>
 <tr><td>Testing</td><td style="text-align: center"><strong>no</strong></td><td><code>is_nan</code>, <code>is_finite</code>, <code>is_infinite</code> methods and properties</td></tr>
 </tbody></table>
 </div>
 <h2 id="decimal-rounding-functions"><a class="header" href="#decimal-rounding-functions">Decimal Rounding Functions</a></h2>
-<p>The following rounding methods are defined in the <a href="/rust/packages/builtin.html"><code>BasicMathPackage</code></a>
-(excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) and operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only,
-which requires the <a href="/start/features.html"><code>decimal</code></a> feature.</p>
+<p>The following rounding methods are defined in the <a href="/book/rust/packages/builtin.html"><code>BasicMathPackage</code></a>
+(excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) and operate on <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> only,
+which requires the <a href="/book/start/features.html"><code>decimal</code></a> feature.</p>
 <div class="table-wrapper"><table><thead><tr><th>Rounding type</th><th>Behavior</th><th>Methods</th></tr></thead><tbody>
 <tr><td>None</td><td></td><td><code>floor</code>, <code>ceiling</code>, <code>int</code>, <code>fraction</code> methods and properties</td></tr>
 <tr><td>Banker’s rounding</td><td>round to integer</td><td><code>round</code> method and property</td></tr>
@@ -229,22 +229,22 @@ which requires the <a href="/start/features.html"><code>decimal</code></a> featu
 </tbody></table>
 </div>
 <h2 id="parsing-functions"><a class="header" href="#parsing-functions">Parsing Functions</a></h2>
-<p>The following standard functions are defined in the <a href="/rust/packages/builtin.html"><code>BasicMathPackage</code></a>
-(excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) to parse numbers.</p>
+<p>The following standard functions are defined in the <a href="/book/rust/packages/builtin.html"><code>BasicMathPackage</code></a>
+(excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) to parse numbers.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th style="text-align: center">No available under</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="/language/convert.html"><code>parse_int</code></a></td><td style="text-align: center"></td><td>converts a <a href="/language/strings-chars.html">string</a> to <code>INT</code> with an optional radix</td></tr>
-<tr><td><a href="/language/convert.html"><code>parse_float</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>no_float</code></a> and non-<a href="/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/language/strings-chars.html">string</a> to <code>FLOAT</code> (<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> under <a href="/start/features.html"><code>no_float</code></a> and <a href="/start/features.html"><code>decimal</code></a>)</td></tr>
-<tr><td><a href="/language/convert.html"><code>parse_decimal</code></a></td><td style="text-align: center">non-<a href="/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/language/strings-chars.html">string</a> to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
+<tr><td><a href="/book/language/convert.html"><code>parse_int</code></a></td><td style="text-align: center"></td><td>converts a <a href="/book/language/strings-chars.html">string</a> to <code>INT</code> with an optional radix</td></tr>
+<tr><td><a href="/book/language/convert.html"><code>parse_float</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>no_float</code></a> and non-<a href="/book/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/book/language/strings-chars.html">string</a> to <code>FLOAT</code> (<a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> under <a href="/book/start/features.html"><code>no_float</code></a> and <a href="/book/start/features.html"><code>decimal</code></a>)</td></tr>
+<tr><td><a href="/book/language/convert.html"><code>parse_decimal</code></a></td><td style="text-align: center">non-<a href="/book/start/features.html"><code>decimal</code></a></td><td>converts a <a href="/book/language/strings-chars.html">string</a> to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a></td></tr>
 </tbody></table>
 </div>
 <h2 id="formatting-functions"><a class="header" href="#formatting-functions">Formatting Functions</a></h2>
-<p>The following standard functions are defined in the <a href="/rust/packages/builtin.html"><code>BasicStringPackage</code></a>
-(excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) to convert integer numbers into a <a href="/language/strings-chars.html">string</a> of hex, octal
+<p>The following standard functions are defined in the <a href="/book/rust/packages/builtin.html"><code>BasicStringPackage</code></a>
+(excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) to convert integer numbers into a <a href="/book/language/strings-chars.html">string</a> of hex, octal
 or binary representations.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="/language/convert.html"><code>to_binary</code></a></td><td>converts an integer number to binary</td></tr>
-<tr><td><a href="/language/convert.html"><code>to_octal</code></a></td><td>converts an integer number to octal</td></tr>
-<tr><td><a href="/language/convert.html"><code>to_hex</code></a></td><td>converts an integer number to hex</td></tr>
+<tr><td><a href="/book/language/convert.html"><code>to_binary</code></a></td><td>converts an integer number to binary</td></tr>
+<tr><td><a href="/book/language/convert.html"><code>to_octal</code></a></td><td>converts an integer number to octal</td></tr>
+<tr><td><a href="/book/language/convert.html"><code>to_hex</code></a></td><td>converts an integer number to hex</td></tr>
 </tbody></table>
 </div>
 <p>These formatting functions are defined for all available integer numbers – i.e. <code>INT</code>, <code>u8</code>,
@@ -257,7 +257,7 @@ or binary representations.</p>
 </tbody></table>
 </div>
 <h2 id="numerical-functions-for-scientific-computing"><a class="header" href="#numerical-functions-for-scientific-computing">Numerical Functions for Scientific Computing</a></h2>
-<p>Check out the <a href="/lib/rhai-sci.html"><code>rhai-sci</code></a> crate for more numerical functions.</p>
+<p>Check out the <a href="/book/lib/rhai-sci.html"><code>rhai-sci</code></a> crate for more numerical functions.</p>
 
                     </main>
 
@@ -288,22 +288,6 @@ or binary representations.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="assignments"><a class="header" href="#assignments">Assignments</a></h1>
-<p>Value assignments to <a href="/language/variables.html">variables</a> use the <code>=</code> symbol.</p>
+<p>Value assignments to <a href="/book/language/variables.html">variables</a> use the <code>=</code> symbol.</p>
 <pre><code class="language-rust">let foo = 42;
 
 bar = 123 * 456 - 789;
@@ -182,7 +182,7 @@ x[1][2].prop = do_calculation();</code></pre>
 <h2 id="valid-assignment-targets"><a class="header" href="#valid-assignment-targets">Valid Assignment Targets</a></h2>
 <p>The left-hand-side (LHS) of an assignment statement must be a valid
 <em><a href="https://en.wikipedia.org/wiki/Value_(computer_science)">l-value</a></em>, which must be rooted in a
-<a href="/language/variables.html">variable</a>, potentially extended via indexing or properties.</p>
+<a href="/book/language/variables.html">variable</a>, potentially extended via indexing or properties.</p>
 <div id="admonition-assigning-to-invalid-l-value" class="admonition admonish-bug" role="note" aria-labelledby="admonition-assigning-to-invalid-l-value-title">
 <div class="admonition-title">
 <div id="admonition-assigning-to-invalid-l-value-title">
@@ -207,15 +207,15 @@ x.foo() = 42;           // syntax error: method call is not an l-value
 </div>
 <h2 id="values-are-cloned"><a class="header" href="#values-are-cloned">Values are Cloned</a></h2>
 <p>Values assigned are always <em>cloned</em>.
-So care must be taken when assigning large data types (such as <a href="/language/arrays.html">arrays</a>).</p>
+So care must be taken when assigning large data types (such as <a href="/book/language/arrays.html">arrays</a>).</p>
 <pre><code class="language-rust">x = y;                  // value of 'y' is cloned
 
 x == y;                 // both 'x' and 'y' hold different copies
                         // of the same value</code></pre>
 <h2 id="moving-data"><a class="header" href="#moving-data">Moving Data</a></h2>
 <p>When assigning large data types, sometimes it is desirable to <em>move</em> the data instead of cloning it.</p>
-<p>Use the <code>take</code> function (defined in the <a href="/rust/packages/builtin.html"><code>LangCorePackage</code></a> but excluded
-when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) to <em>move</em> data.</p>
+<p>Use the <code>take</code> function (defined in the <a href="/book/rust/packages/builtin.html"><code>LangCorePackage</code></a> but excluded
+when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) to <em>move</em> data.</p>
 <h3 id="the-original-variable-is-left-with-"><a class="header" href="#the-original-variable-is-left-with-">The original variable is left with <code>()</code></a></h3>
 <pre><code class="language-rust">x = take(y);            // value of 'y' is moved to 'x'
 
@@ -223,7 +223,7 @@ y == ();                // 'y' now holds '()'
 
 x != y;                 // 'x' holds the original value of 'y'</code></pre>
 <h3 id="return-large-data-types-from-functions"><a class="header" href="#return-large-data-types-from-functions">Return large data types from functions</a></h3>
-<p><code>take</code> is convenient when returning large data types from a <a href="/language/functions.html">function</a>.</p>
+<p><code>take</code> is convenient when returning large data types from a <a href="/book/language/functions.html">function</a>.</p>
 <pre><code class="language-rust">fn get_large_value_naive() {
     let large_result = do_complex_calculation();
 
@@ -244,7 +244,7 @@ fn get_large_value_smart() {
     large_result.take()
 }</code></pre>
 <h3 id="assigning-large-data-types-to-object-map-properties"><a class="header" href="#assigning-large-data-types-to-object-map-properties">Assigning large data types to object map properties</a></h3>
-<p><code>take</code> is useful when assigning large data types to <a href="/language/object-maps.html">object map</a> properties.</p>
+<p><code>take</code> is useful when assigning large data types to <a href="/book/language/object-maps.html">object map</a> properties.</p>
 <pre><code class="language-rust">let x = [];
 
 // Build a large array
@@ -293,22 +293,6 @@ for n in 0..1000000 { my_object.my_property += n; }</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

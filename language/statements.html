@@ -176,7 +176,7 @@
 <p>Statements are terminated by semicolons <code>;</code> and they are mandatory,
 except for the <em>last</em> statement in a <em>block</em> (enclosed by <code>{</code> … <code>}</code> pairs) where it can be omitted.</p>
 <p>Semicolons can also be omitted for statement types that always end in a block – for example
-the <a href="/language/if.html"><code>if</code></a>, <a href="/language/while.html"><code>while</code></a>, <a href="/language/for.html"><code>for</code></a>,  <a href="/language/loop.html"><code>loop</code></a> and <a href="/language/switch.html"><code>switch</code></a> statements.</p>
+the <a href="/book/language/if.html"><code>if</code></a>, <a href="/book/language/while.html"><code>while</code></a>, <a href="/book/language/for.html"><code>for</code></a>,  <a href="/book/language/loop.html"><code>loop</code></a> and <a href="/book/language/switch.html"><code>switch</code></a> statements.</p>
 <pre><code class="language-rust">let a = 42;             // normal assignment statement
 let a = foo(42);        // normal function call statement
 foo &lt; 42;               // normal expression as statement
@@ -202,8 +202,8 @@ if foo { a = 42 }
 </blockquote>
 <h3 id="closed-scope"><a class="header" href="#closed-scope">Closed scope</a></h3>
 <p>A statements block forms a <em>closed</em> scope.</p>
-<p>Any <a href="/language/variables.html">variable</a> and/or <a href="/language/constants.html">constant</a> defined within the block are removed outside the block, so are
-<a href="/rust/modules/index.html">modules</a> <a href="/language/modules/import.html">imported</a> within the block.</p>
+<p>Any <a href="/book/language/variables.html">variable</a> and/or <a href="/book/language/constants.html">constant</a> defined within the block are removed outside the block, so are
+<a href="/book/rust/modules/index.html">modules</a> <a href="/book/language/modules/import.html">imported</a> within the block.</p>
 <pre><code class="language-rust">let x = 42;
 let y = 18;
 
@@ -255,22 +255,6 @@ h::greet();             // &lt;- error: module 'h' not found</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

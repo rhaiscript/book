@@ -181,7 +181,7 @@
 <div id="admonition-_method-call_-style-not-supported-under-no_object" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-_method-call_-style-not-supported-under-no_object-title">
 <div class="admonition-title">
 <div id="admonition-_method-call_-style-not-supported-under-no_object-title">
-<p><em>Method-call</em> style not supported under <a href="/start/features.html"><code>no_object</code></a></p>
+<p><em>Method-call</em> style not supported under <a href="/book/start/features.html"><code>no_object</code></a></p>
 </div>
 <a class="admonition-anchor-link" href="#admonition-_method-call_-style-not-supported-under-no_object"></a>
 </div>
@@ -207,7 +207,7 @@ engine.run("let x = [42]; x.clear();")?;
 <p>This design is similar to Rust.</p>
 </div>
 </div>
-<p>Internally, methods on a <a href="/rust/custom-types.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
+<p>Internally, methods on a <a href="/book/rust/custom-types.html">custom type</a> is <em>the same</em> as a function taking a <code>&amp;mut</code> first argument of
 the object’s type.</p>
 <p>Therefore, methods and functions can be called interchangeably.</p>
 <pre><code class="language-rust">impl TestStruct {
@@ -227,15 +227,15 @@ let result = engine.eval::&lt;i64&gt;(
 
 println!("result: {result}");       // prints 1</code></pre>
 <h2 id="first-mut-parameter"><a class="header" href="#first-mut-parameter">First <code>&amp;mut</code> Parameter</a></h2>
-<p>The opposite direction also works — methods in a Rust <a href="/rust/custom-types.html">custom type</a> registered with the
-<a href="/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods are
-registered as regular <a href="/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
+<p>The opposite direction also works — methods in a Rust <a href="/book/rust/custom-types.html">custom type</a> registered with the
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> can be called just like a regular function.  In fact, like Rust, object methods are
+registered as regular <a href="/book/language/functions.html">functions</a> in Rhai that take a first <code>&amp;mut</code> parameter.</p>
 <p>Unlike functions defined in script (for which all arguments are passed by <em>value</em>),
 native Rust functions may mutate the first <code>&amp;mut</code> argument.</p>
 <p>Sometimes, however, there are more subtle differences. Methods called in normal function-call style
 may end up not muting the object afterall — see the example below.</p>
-<p>Custom types, <a href="/rust/getters-setters.html">properties</a>, <a href="/rust/indexers.html">indexers</a> and methods are disabled under the
-<a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Custom types, <a href="/book/rust/getters-setters.html">properties</a>, <a href="/book/rust/indexers.html">indexers</a> and methods are disabled under the
+<a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <pre><code class="language-rust">let a = new_ts();   // constructor function
 a.field = 500;      // property setter
 a.update();         // method call, 'a' can be modified
@@ -263,7 +263,7 @@ All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 </div>
 <h2 id="number-of-parameters-in-methods"><a class="header" href="#number-of-parameters-in-methods">Number of Parameters in Methods</a></h2>
-<p>Native Rust methods registered with an <a href="/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
+<p>Native Rust methods registered with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> take <em>one additional parameter</em> more than
 an equivalent method coded in script, where the object is accessed via the <code>this</code> pointer instead.</p>
 <p>The following table illustrates the differences:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Function type</th><th style="text-align: center">No. of parameters</th><th style="text-align: center">Object reference</th><th style="text-align: center">Function signature</th></tr></thead><tbody>
@@ -311,7 +311,7 @@ fn add_method(obj: &amp;mut VeryComplexType, offset: i64) -&gt; i64 {
 <a class="admonition-anchor-link" href="#admonition-data-races"></a>
 </div>
 <div>
-<p>Data races are not possible in Rhai under the <a href="/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
+<p>Data races are not possible in Rhai under the <a href="/book/start/features.html"><code>no_closure</code></a> feature because no sharing ever occurs.</p>
 </div>
 </div>
 <p>Because methods always take a mutable reference as the first argument, even it the value is never changed,
@@ -319,7 +319,7 @@ care must be taken when using <em>shared</em> values with methods.</p>
 <p>Usually data races are not possible in Rhai because, for each function call, there is ever only one
 value that is mutable – the first argument of a method.  All other arguments are cloned.</p>
 <p>It is possible, however, to create a data race with a <em>shared</em> value, when the same value is
-<em>captured</em> in a <a href="/language/fn-closure.html">closure</a> and then used again as the <em>object</em> of calling that <a href="/language/fn-closure.html">closure</a>!</p>
+<em>captured</em> in a <a href="/book/language/fn-closure.html">closure</a> and then used again as the <em>object</em> of calling that <a href="/book/language/fn-closure.html">closure</a>!</p>
 <pre><code class="language-rust">let x = 20;
 
 x.is_shared() == false;             // 'x' is not shared, so no data race is possible
@@ -359,22 +359,6 @@ x.call(f, 2);                       // &lt;- error: data race detected on 'x'</c
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

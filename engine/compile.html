@@ -193,7 +193,7 @@ for _ in 0..42 {
 </div>
 <div>
 <p>Compiling script files is also supported via <code>Engine::compile_file</code>
-(not available for <a href="/start/features.html"><code>no_std</code></a> or <a href="/start/builds/wasm.html">WASM</a> builds).</p>
+(not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds).</p>
 <pre><code class="language-rust">let ast = engine.compile_file("hello_world.rhai".into())?;</code></pre>
 </div>
 </div>
@@ -211,7 +211,7 @@ should see the section on <a href="ast.html"><em>Manage AST’s</em></a> for mor
 </div>
 <h2 id="practical-use--header-template-scripts"><a class="header" href="#practical-use--header-template-scripts">Practical Use – Header Template Scripts</a></h2>
 <p>Sometimes it is desirable to include a standardized <em>header template</em> in a script that contains
-pre-defined <a href="/language/functions.html">functions</a>, <a href="/language/constants.html">constants</a> and <a href="/language/modules/import.html">imported</a> <a href="/rust/modules/index.html">modules</a>.</p>
+pre-defined <a href="/book/language/functions.html">functions</a>, <a href="/book/language/constants.html">constants</a> and <a href="/book/language/modules/import.html">imported</a> <a href="/book/rust/modules/index.html">modules</a>.</p>
 <pre><code class="language-rust">// START OF THE HEADER TEMPLATE
 // The following should run before every script...
 
@@ -286,12 +286,12 @@ for index in 0..10000 {
     println!("{result}");</code></pre>
 <h3 id="option-3--the-not-so-hard-way"><a class="header" href="#option-3--the-not-so-hard-way">Option 3 – The not-so-hard way</a></h3>
 <p>Option 1 does repeated work, option 2 requires manipulating <code>AST</code>’s…</p>
-<p>This option makes the scripted <a href="/language/functions.html">functions</a> (not <a href="/language/modules/import.html">imported</a> <a href="/rust/modules/index.html">modules</a> nor <a href="/language/constants.html">constants</a>
-however) available globally by first making it a <a href="/rust/modules/index.html">module</a> (via <a href="modules/ast.html"><code>Module::eval_ast_as_new</code></a>)
-and then loading it into the <a href="/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::register_global_module</code>.</p>
+<p>This option makes the scripted <a href="/book/language/functions.html">functions</a> (not <a href="/book/language/modules/import.html">imported</a> <a href="/book/rust/modules/index.html">modules</a> nor <a href="/book/language/constants.html">constants</a>
+however) available globally by first making it a <a href="/book/rust/modules/index.html">module</a> (via <a href="modules/ast.html"><code>Module::eval_ast_as_new</code></a>)
+and then loading it into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>Engine::register_global_module</code>.</p>
 <blockquote>
 <p><strong>Pros:</strong> No need to recompile the header template!</p>
-<p><strong>Cons:</strong> No <a href="/language/modules/import.html">imported</a> <a href="/rust/modules/index.html">modules</a> nor <a href="/language/constants.html">constants</a>; if the header template is changed, a new <a href="/engine/hello-world.html"><code>Engine</code></a> must be created.</p>
+<p><strong>Cons:</strong> No <a href="/book/language/modules/import.html">imported</a> <a href="/book/rust/modules/index.html">modules</a> nor <a href="/book/language/constants.html">constants</a>; if the header template is changed, a new <a href="/book/engine/hello-world.html"><code>Engine</code></a> must be created.</p>
 </blockquote>
 <pre><code class="language-rust">let header_template = "..... // scripts... .....";
 
@@ -339,22 +339,6 @@ for index in 0..10000 {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

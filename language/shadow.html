@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="variable-shadowing"><a class="header" href="#variable-shadowing">Variable Shadowing</a></h1>
-<p>In Rhai, new <a href="/language/variables.html">variables</a> automatically <em>shadow</em> existing ones of the same name.  There is no error.</p>
+<p>In Rhai, new <a href="/book/language/variables.html">variables</a> automatically <em>shadow</em> existing ones of the same name.  There is no error.</p>
 <p>This behavior is consistent with Rust.</p>
 <pre><code class="language-rust">let x = 42;
 let y = 123;
@@ -211,7 +211,7 @@ print(y);           // prints 123 - 'y' is not shadowed</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-shadowing"></a>
 </div>
 <div>
-<p>Set <a href="/engine/options.html"><code>Engine::set_allow_shadowing</code></a> to <code>false</code> to turn <a href="/language/variables.html">variables</a> shadowing off.</p>
+<p>Set <a href="/book/engine/options.html"><code>Engine::set_allow_shadowing</code></a> to <code>false</code> to turn <a href="/book/language/variables.html">variables</a> shadowing off.</p>
 <pre><code class="language-rust">let x = 42;
 
 let x = 123;        // &lt;- syntax error: variable 'x' already defined
@@ -248,22 +248,6 @@ let x = 123;        // &lt;- syntax error: variable 'x' already defined
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

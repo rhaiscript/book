@@ -182,8 +182,8 @@
 </div>
 <div>
 <p>A lot of times it is not necessary to register fallible functions.</p>
-<p>Simply have the function returns <a href="/language/dynamic.html"><code>Dynamic</code></a>.
-Upon error, return <a href="/language/values-and-types.html"><code>()</code></a> which is idiomatic in Rhai.</p>
+<p>Simply have the function returns <a href="/book/language/dynamic.html"><code>Dynamic</code></a>.
+Upon error, return <a href="/book/language/values-and-types.html"><code>()</code></a> which is idiomatic in Rhai.</p>
 <p>See <a href="dynamic-return.html">here</a> for more details.</p>
 </div>
 </div>
@@ -255,22 +255,6 @@ which should be hit rarely.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

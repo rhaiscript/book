@@ -190,7 +190,7 @@ return value defaults to <code>()</code>.</p>
 <p>The <em>last</em> statement of a statements block is <em>always</em> the block’s return value when used as a statement,
 <em>regardless</em> of whether it is terminated by a semicolon or not.</p>
 <p>If the last statement has no return value (e.g. variable definitions, assignments) then it is
-assumed to be <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+assumed to be <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><code class="language-rust">let x = {
     let foo = calc_something();
     let bar = foo + baz;
@@ -224,7 +224,7 @@ let x = foo_result + calc_result + baz;
 do_work(x, y, { let z = foo(x, y); print(z); z });
            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
            //       statement expression</code></pre>
-<p>Statement expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_statement_expression</code></a>.</p>
+<p>Statement expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_statement_expression</code></a>.</p>
 
                     </main>
 
@@ -255,22 +255,6 @@ do_work(x, y, { let z = foo(x, y); print(z); z });
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

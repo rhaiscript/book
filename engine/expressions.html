@@ -181,7 +181,7 @@
 <a class="admonition-anchor-link" href="#admonition-tip-dynamic"></a>
 </div>
 <div>
-<p>Use <a href="/language/dynamic.html"><code>Dynamic</code></a> if you’re uncertain of the return type.</p>
+<p>Use <a href="/book/language/dynamic.html"><code>Dynamic</code></a> if you’re uncertain of the return type.</p>
 </div>
 </div>
 <p>Very often, a use case does not require a full-blown scripting <em>language</em>, but only needs to
@@ -210,10 +210,10 @@ let result: i64 = engine.eval_expression_with_scope(&amp;mut scope,
 <a class="admonition-anchor-link" href="#admonition-no-statements-allowed"></a>
 </div>
 <div>
-<p>When evaluating <em>expressions</em>, no full-blown statement (e.g. <a href="/language/while.html"><code>while</code></a>, <a href="/language/for.html"><code>for</code></a>, <code>fn</code>) –
-not even <a href="/language/variables.html">variable</a> assignment – is supported and will be considered syntax errors.</p>
-<p>This is true also for <a href="/language/statement-expression.html">statement expressions</a>
-and <a href="/language/fn-closure.html">closures</a>.</p>
+<p>When evaluating <em>expressions</em>, no full-blown statement (e.g. <a href="/book/language/while.html"><code>while</code></a>, <a href="/book/language/for.html"><code>for</code></a>, <code>fn</code>) –
+not even <a href="/book/language/variables.html">variable</a> assignment – is supported and will be considered syntax errors.</p>
+<p>This is true also for <a href="/book/language/statement-expression.html">statement expressions</a>
+and <a href="/book/language/fn-closure.html">closures</a>.</p>
 <pre><code class="language-rust">// The following are all syntax errors because the script
 // is not a strict expression.
 
@@ -236,9 +236,9 @@ let fp: FnPtr = engine.eval_expression("|x| x + 1")?;</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-if-expressions-and-switch-expressions"></a>
 </div>
 <div>
-<p><a href="/language/if.html#if-expression"><code>if</code> expressions</a> are allowed if both statement blocks
+<p><a href="/book/language/if.html#if-expression"><code>if</code> expressions</a> are allowed if both statement blocks
 contain only a single expression each.</p>
-<p><a href="/language/switch-expression.html"><code>switch</code> expressions</a> are allowed if all match
+<p><a href="/book/language/switch-expression.html"><code>switch</code> expressions</a> are allowed if all match
 actions are expressions and not statements.</p>
 <p>loop expressions are not allowed.</p>
 <pre><code class="language-rust">// The following are allowed.
@@ -286,22 +286,6 @@ let result = engine.eval_expression_with_scope::&lt;i64&gt;(&amp;mut scope, "
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

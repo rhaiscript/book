@@ -183,20 +183,20 @@
 <div>
 <ul>
 <li>
-<p>A system is divided into separate <em>layers</em>, each providing logic in terms of scripted <a href="/language/functions.html">functions</a>.</p>
+<p>A system is divided into separate <em>layers</em>, each providing logic in terms of scripted <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>A lower layer provides <em>default implementations</em> of certain <a href="/language/functions.html">functions</a>.</p>
+<p>A lower layer provides <em>default implementations</em> of certain <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>Higher layers each provide progressively more specific implementations of the same <a href="/language/functions.html">functions</a>.</p>
+<p>Higher layers each provide progressively more specific implementations of the same <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>A more specific <a href="/language/functions.html">function</a>, if defined in a higher layer, always overrides the implementation
+<p>A more specific <a href="/book/language/functions.html">function</a>, if defined in a higher layer, always overrides the implementation
 in a lower layer.</p>
 </li>
 <li>
-<p>This is akin to object-oriented programming but with <a href="/language/functions.html">functions</a>.</p>
+<p>This is akin to object-oriented programming but with <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
 <p>This type of system is extremely convenient for dynamic business rules configuration, setting
@@ -239,11 +239,11 @@ organization, but also cater for country- or region-specific rules, practices an
 <p>Each layer is a separate script.</p>
 </li>
 <li>
-<p>The lowest layer script is compiled into a base <a href="/engine/compile.html"><code>AST</code></a>.</p>
+<p>The lowest layer script is compiled into a base <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 </li>
 <li>
-<p>Higher layer scripts are also compiled into <a href="/engine/compile.html"><code>AST</code></a> and <em>combined</em> into the base using
-<a href="/engine/ast.html"><code>AST::combine</code></a> (or the <code>+=</code> operator), overriding any existing <a href="/language/functions.html">functions</a>.</p>
+<p>Higher layer scripts are also compiled into <a href="/book/engine/compile.html"><code>AST</code></a> and <em>combined</em> into the base using
+<a href="/book/engine/ast.html"><code>AST::combine</code></a> (or the <code>+=</code> operator), overriding any existing <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 </ul>
 </div>
@@ -360,22 +360,6 @@ higher-layer function to call an equivalent lower-layer function).</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

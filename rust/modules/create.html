@@ -174,10 +174,10 @@
                     <main>
                         <h1 id="create-a-module-in-rust"><a class="header" href="#create-a-module-in-rust">Create a Module in Rust</a></h1>
 <h2 id="the-easy-way--plugin"><a class="header" href="#the-easy-way--plugin">The Easy Way – Plugin</a></h2>
-<p>By far the simplest way to create a <a href="/rust/modules/index.html">module</a> is via a <a href="/plugins/module.html">plugin module</a>
-which converts a normal Rust module into a Rhai <a href="/rust/modules/index.html">module</a> via procedural macros.</p>
+<p>By far the simplest way to create a <a href="/book/rust/modules/index.html">module</a> is via a <a href="/book/plugins/module.html">plugin module</a>
+which converts a normal Rust module into a Rhai <a href="/book/rust/modules/index.html">module</a> via procedural macros.</p>
 <h2 id="the-hard-way--module-api"><a class="header" href="#the-hard-way--module-api">The Hard Way – <code>Module</code> API</a></h2>
-<p>Manually creating a <a href="/rust/modules/index.html">module</a> is possible via the <a href="/rust/modules/index.html"><code>Module</code></a> public API, which is volatile and may
+<p>Manually creating a <a href="/book/rust/modules/index.html">module</a> is possible via the <a href="/book/rust/modules/index.html"><code>Module</code></a> public API, which is volatile and may
 change from time to time.</p>
 <div id="admonition-module-public-api" class="admonition admonish-info small" role="note" aria-labelledby="admonition-module-public-api-title">
 <div class="admonition-title">
@@ -187,7 +187,7 @@ change from time to time.</p>
 <a class="admonition-anchor-link" href="#admonition-module-public-api"></a>
 </div>
 <div>
-<p>For the complete <a href="/rust/modules/index.html"><code>Module</code></a> public API, refer to the
+<p>For the complete <a href="/book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
 <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Module.html">documentation</a> online.</p>
 </div>
 </div>
@@ -221,22 +221,6 @@ change from time to time.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

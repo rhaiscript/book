@@ -182,7 +182,7 @@
 <a class="admonition-anchor-link" href="#admonition-send--sync"></a>
 </div>
 <div>
-<p>Under the <a href="/start/features.html"><code>sync</code></a> feature, all types must also be <code>Send + Sync</code>.</p>
+<p>Under the <a href="/book/start/features.html"><code>sync</code></a> feature, all types must also be <code>Send + Sync</code>.</p>
 </div>
 </div>
 <pre><code class="language-rust">let x = 42;         // value is an integer
@@ -197,7 +197,7 @@ x = [x];            // value is now an array
 
 x = #{x: x};        // value is now an object map</code></pre>
 <h2 id="use-type_of-to-get-value-type"><a class="header" href="#use-type_of-to-get-value-type">Use <code>type_of()</code> to Get Value Type</a></h2>
-<p>Because <a href="/language/type-of.html"><code>type_of()</code></a> a <code>Dynamic</code> value returns the type of the actual value,
+<p>Because <a href="/book/language/type-of.html"><code>type_of()</code></a> a <code>Dynamic</code> value returns the type of the actual value,
 it is usually used to perform type-specific actions based on the actual value’s type.</p>
 <pre><code class="language-js">let mystery = get_some_dynamic_value();
 
@@ -228,19 +228,19 @@ switch type_of(mystery) {
 <a class="admonition-anchor-link" href="#admonition-requires-metadata"></a>
 </div>
 <div>
-<p><code>parse_json</code> is defined in the <a href="/rust/packages/builtin.html"><code>LanguageCorePackage</code></a>, which is excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>.</p>
-<p>It also requires the <a href="/start/features.html"><code>metadata</code></a> feature; the <a href="/start/features.html"><code>no_index</code></a> and <a href="/start/features.html"><code>no_object</code></a> features must <em>not</em> be set.</p>
+<p><code>parse_json</code> is defined in the <a href="/book/rust/packages/builtin.html"><code>LanguageCorePackage</code></a>, which is excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
+<p>It also requires the <a href="/book/start/features.html"><code>metadata</code></a> feature; the <a href="/book/start/features.html"><code>no_index</code></a> and <a href="/book/start/features.html"><code>no_object</code></a> features must <em>not</em> be set.</p>
 </div>
 </div>
-<p>Use <code>parse_json</code> to parse a JSON string into a <a href="/language/dynamic.html"><code>Dynamic</code></a> value.</p>
+<p>Use <code>parse_json</code> to parse a JSON string into a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">JSON type</th><th style="text-align: center">Rhai type</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>number</code> (no decimal point)</td><td style="text-align: center"><code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>number</code> (with decimal point)</td><td style="text-align: center"><code>FLOAT</code></td></tr>
-<tr><td style="text-align: center"><code>string</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td></tr>
+<tr><td style="text-align: center"><code>string</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td></tr>
 <tr><td style="text-align: center"><code>boolean</code></td><td style="text-align: center"><code>bool</code></td></tr>
-<tr><td style="text-align: center"><code>Array</code></td><td style="text-align: center"><a href="/language/arrays.html">array</a></td></tr>
-<tr><td style="text-align: center"><code>Object</code></td><td style="text-align: center"><a href="/language/object-maps.html">object map</a></td></tr>
-<tr><td style="text-align: center"><code>null</code></td><td style="text-align: center"><a href="/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td style="text-align: center"><code>Array</code></td><td style="text-align: center"><a href="/book/language/arrays.html">array</a></td></tr>
+<tr><td style="text-align: center"><code>Object</code></td><td style="text-align: center"><a href="/book/language/object-maps.html">object map</a></td></tr>
+<tr><td style="text-align: center"><code>null</code></td><td style="text-align: center"><a href="/book/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -272,22 +272,6 @@ switch type_of(mystery) {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

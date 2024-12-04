@@ -181,14 +181,14 @@
 <a class="admonition-anchor-link" href="#admonition-see-also"></a>
 </div>
 <div>
-<p>For more details, see the section <a href="/tools/playground.html">here</a>.</p>
+<p>For more details, see the section <a href="/book/tools/playground.html">here</a>.</p>
 </div>
 </div>
 <p>Rhai provides an <a href="https://rhai.rs/playground">online playground</a> to try out its language and engine features without
 having to install anything.</p>
 <p>The playground provides a syntax-highlighting script editor with example snippets.</p>
 <p>Scripts can be evaluated directly from the editor.</p>
-<p><a href="https://rhai.rs/playground"><img src="/images/playground.png" alt="Online Playground" /></a></p>
+<p><a href="https://rhai.rs/playground"><img src="/book/images/playground.png" alt="Online Playground" /></a></p>
 
                     </main>
 
@@ -219,22 +219,6 @@ having to install anything.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

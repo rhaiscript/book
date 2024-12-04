@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="rhai-sci-functions-for-scientific-computing"><a class="header" href="#rhai-sci-functions-for-scientific-computing"><code>rhai-sci</code>: Functions for Scientific Computing</a></h1>
-<p><code>rhai-sci</code> is an independent Rhai <a href="/rust/packages/index.html">package</a> that provides functions useful for
+<p><code>rhai-sci</code> is an independent Rhai <a href="/book/rust/packages/index.html">package</a> that provides functions useful for
 scientific computing, inspired by languages like MATLAB, Octave, and R.</p>
 <div id="admonition-documentation" class="admonition admonish-info side" role="note" aria-labelledby="admonition-documentation-title">
 <div class="admonition-title">
@@ -199,13 +199,13 @@ rhai-sci = "0.1"       # use rhai-sci crate
 </code></pre>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th><th style="text-align: center">Default?</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/engine/metadata/index.html">functions metadata</a> (turns on <a href="/start/features.html"><code>metadata</code></a> in Rhai); necessary for running doc-tests</td><td style="text-align: center"><strong>no</strong></td></tr>
+<tr><td style="text-align: center"><code>metadata</code></td><td>enables <a href="/book/engine/metadata/index.html">functions metadata</a> (turns on <a href="/book/start/features.html"><code>metadata</code></a> in Rhai); necessary for running doc-tests</td><td style="text-align: center"><strong>no</strong></td></tr>
 <tr><td style="text-align: center"><code>io</code></td><td>enables the <code>read_matrix</code> function but pulls in several additional dependencies</td><td style="text-align: center">yes</td></tr>
 <tr><td style="text-align: center"><code>nalgebra</code></td><td>enables the functions <code>regress</code>, <code>inv</code>, <code>mtimes</code>, <code>horzcat</code>, <code>vertcat</code>, and <code>repmat</code> but pulls in <a href="https://crates.io/crates/nalgebra"><code>nalgebra</code></a> and <a href="https://crates.io/crates/linregress"><code>linregress</code></a>.</td><td style="text-align: center">yes</td></tr>
 <tr><td style="text-align: center"><code>rand</code></td><td>enables the <code>rand</code> function for generating random values and random matrices, but pulls in <a href="https://crates.io/crates/rand"><code>rand</code></a>.</td><td style="text-align: center">yes</td></tr>
 </tbody></table>
 </div>
-<h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/engine/hello-world.html"><code>Engine</code></a></a></h2>
+<h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>
 <pre><code class="language-rust">use rhai::Engine;
 use rhai::packages::Package;    // needed for 'Package' trait
 use rhai_sci::SciPackage;
@@ -247,22 +247,6 @@ sci.register_into_engine(&amp;mut engine);</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

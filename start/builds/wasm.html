@@ -197,7 +197,7 @@ among other places.</p>
 </div>
 <div>
 <p>When building for WASM, certain features will not be available,
-such as the script file API’s and loading <a href="/rust/modules/index.html">modules</a> from external script files.</p>
+such as the script file API’s and loading <a href="/book/rust/modules/index.html">modules</a> from external script files.</p>
 </div>
 </div>
 <div id="admonition-sample" class="admonition admonish-example" role="note" aria-labelledby="admonition-sample-title">
@@ -208,14 +208,14 @@ such as the script file API’s and loading <a href="/rust/modules/index.html">m
 <a class="admonition-anchor-link" href="#admonition-sample"></a>
 </div>
 <div>
-<p>Check out the <a href="/tools/playground.html"><em>Online Playground</em></a> project which is driven
-by a Rhai <a href="/engine/hello-world.html"><code>Engine</code></a> compiled into WASM.</p>
+<p>Check out the <a href="/book/tools/playground.html"><em>Online Playground</em></a> project which is driven
+by a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled into WASM.</p>
 </div>
 </div>
 <h2 id="javascript-interop"><a class="header" href="#javascript-interop">JavaScript Interop</a></h2>
-<p>Specify either of the <a href="/start/features.html"><code>wasm-bindgen</code></a> or <a href="/start/features.html"><code>stdweb</code></a> features when building for WASM that requires
+<p>Specify either of the <a href="/book/start/features.html"><code>wasm-bindgen</code></a> or <a href="/book/start/features.html"><code>stdweb</code></a> features when building for WASM that requires
 interop with JavaScript. This selects the appropriate JavaScript interop layer to use.</p>
-<p>It is still possible to compile for WASM without either <a href="/start/features.html"><code>wasm-bindgen</code></a> or <a href="/start/features.html"><code>stdweb</code></a>,
+<p>It is still possible to compile for WASM without either <a href="/book/start/features.html"><code>wasm-bindgen</code></a> or <a href="/book/start/features.html"><code>stdweb</code></a>,
 but then the interop code must then be explicitly provided.</p>
 <h2 id="target-environments"><a class="header" href="#target-environments">Target Environments</a></h2>
 <div id="admonition-wasi-wasm32-wasi" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-wasi-wasm32-wasi-title">
@@ -254,39 +254,39 @@ See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-suppo
 <div>
 <p>Rhai requires a system-provided source of random numbers (for hashing).</p>
 <p>Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
-opt out of <code>default-features</code> in order to enable <a href="/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
+opt out of <code>default-features</code> in order to enable <a href="/book/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
 <pre><code class="language-toml">[dependencies]
 rhai = { version = "1.20.0", default-features = false, features = [ "std" ] }
 </code></pre>
 </div>
 </div>
 <h2 id="size"><a class="header" href="#size">Size</a></h2>
-<p>Also look into <a href="/start/builds/minimal.html">minimal builds</a> to reduce generated WASM size.</p>
+<p>Also look into <a href="/book/start/builds/minimal.html">minimal builds</a> to reduce generated WASM size.</p>
 <p>A typical, full-featured Rhai scripting engine compiles to a single WASM32 file that is less than
 400KB (non-gzipped).</p>
 <p>When excluding features that are marginal in WASM environment, the gzipped payload can be shrunk further.</p>
-<p>Standard <a href="/rust/packages/builtin.html">packages</a> can also be excluded to yield additional size savings.</p>
+<p>Standard <a href="/book/rust/packages/builtin.html">packages</a> can also be excluded to yield additional size savings.</p>
 <h2 id="speed"><a class="header" href="#speed">Speed</a></h2>
 <p>In benchmark tests, a WASM build runs scripts roughly 30% slower than a native optimized release build.</p>
 <h2 id="common-features"><a class="header" href="#common-features">Common Features</a></h2>
 <p>Some Rhai functionalities are not necessary in a WASM environment, so the following features
 are typically used for a WASM build:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>wasm-bindgen</code></a> or <a href="/start/features.html"><code>stdweb</code></a></td><td>use <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> or <a href="https://crates.io/crates/stdweb"><code>stdweb</code></a> as the JavaScript interop layer, omit if using custom interop code</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>unchecked</code></a></td><td>when a WASM module panics, it doesn’t crash the entire web app; however this also disables <a href="/safety/max-operations.html">maximum number of operations</a> and <a href="/safety/progress.html">progress</a> tracking so a script can still run indefinitely – the web app must terminate it itself</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>only_i32</code></a></td><td>WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>f32_float</code></a></td><td>WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>no_module</code></a></td><td>a WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom <a href="/rust/modules/resolvers/index.html">module resolver</a> can be provided that loads other Rhai scripts</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>no_custom_syntax</code></a></td><td>if <a href="/engine/custom-syntax.html">custom syntax</a> is not used, this results in a small size saving</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>wasm-bindgen</code></a> or <a href="/book/start/features.html"><code>stdweb</code></a></td><td>use <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> or <a href="https://crates.io/crates/stdweb"><code>stdweb</code></a> as the JavaScript interop layer, omit if using custom interop code</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>unchecked</code></a></td><td>when a WASM module panics, it doesn’t crash the entire web app; however this also disables <a href="/book/safety/max-operations.html">maximum number of operations</a> and <a href="/book/safety/progress.html">progress</a> tracking so a script can still run indefinitely – the web app must terminate it itself</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>only_i32</code></a></td><td>WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>f32_float</code></a></td><td>WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>no_module</code></a></td><td>a WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom <a href="/book/rust/modules/resolvers/index.html">module resolver</a> can be provided that loads other Rhai scripts</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>no_custom_syntax</code></a></td><td>if <a href="/book/engine/custom-syntax.html">custom syntax</a> is not used, this results in a small size saving</td></tr>
 </tbody></table>
 </div>
 <p>The following features are typically <em>not</em> used because they don’t make sense in a WASM build:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Why unnecessary</th></tr></thead><tbody>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>sync</code></a></td><td>WASM is single-threaded</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>no_std</code></a></td><td><code>std</code> lib works fine with WASM</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>metadata</code></a></td><td>WASM usually doesn’t need access to Rhai functions metadata</td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>internals</code></a></td><td>WASM usually doesn’t need to access Rhai internal data structures, unless you are walking the <a href="/engine/compile.html"><code>AST</code></a></td></tr>
-<tr><td style="text-align: center"><a href="/start/features.html"><code>debugging</code></a></td><td>unless debugging is needed</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>sync</code></a></td><td>WASM is single-threaded</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>no_std</code></a></td><td><code>std</code> lib works fine with WASM</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>metadata</code></a></td><td>WASM usually doesn’t need access to Rhai functions metadata</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td>WASM usually doesn’t need to access Rhai internal data structures, unless you are walking the <a href="/book/engine/compile.html"><code>AST</code></a></td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>debugging</code></a></td><td>unless debugging is needed</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -318,22 +318,6 @@ are typically used for a WASM build:</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

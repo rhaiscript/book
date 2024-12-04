@@ -174,12 +174,12 @@
                     <main>
                         <h1 id="disable-looping"><a class="header" href="#disable-looping">Disable Looping</a></h1>
 <p>For certain scripts, especially those in embedded usage for straight calculations, or where Rhai
-script <a href="/engine/compile.html"><code>AST</code></a>’s are eventually transcribed into some other instruction set, looping may be
+script <a href="/book/engine/compile.html"><code>AST</code></a>’s are eventually transcribed into some other instruction set, looping may be
 undesirable as it may not be supported by the application itself.</p>
-<p>Rhai looping constructs include the <a href="/language/while.html"><code>while</code></a>, <a href="/language/loop.html"><code>loop</code></a>, <a href="/language/do.html"><code>do</code></a> and <a href="/language/for.html"><code>for</code></a> statements.</p>
+<p>Rhai looping constructs include the <a href="/book/language/while.html"><code>while</code></a>, <a href="/book/language/loop.html"><code>loop</code></a>, <a href="/book/language/do.html"><code>do</code></a> and <a href="/book/language/for.html"><code>for</code></a> statements.</p>
 <p>Although it is possible to disable these keywords via
-<a href="/engine/disable-keywords.html"><code>Engine::disable_symbol</code></a>, it is simpler to disable all looping
-via <a href="/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+<a href="/book/engine/disable-keywords.html"><code>Engine::disable_symbol</code></a>, it is simpler to disable all looping
+via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 <pre><code class="language-rust">use rhai::Engine;
 
 let mut engine = Engine::new();
@@ -226,22 +226,6 @@ engine.compile("for n in 0..10 { print(n); }")?;</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

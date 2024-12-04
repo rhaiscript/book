@@ -203,7 +203,7 @@ logically the <code>C</code> was changed to an <code>R</code> to make it “Rhai
 </div>
 <div>
 <div style="float:right;text-align:center;width:20%">
-    <img src="/images/logo/rhai_logo_old.png" title="Prototype Rhai logo">
+    <img src="/book/images/logo/rhai_logo_old.png" title="Prototype Rhai logo">
     <div style="font-size:60%">Original prototype</div>
 </div>
 <p>One of Rhai’s maintainers, <a href="https://github.com/schungx"><code>@schungx</code></a>, was thinking about a logo
@@ -253,22 +253,6 @@ first prototype version of the logo.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

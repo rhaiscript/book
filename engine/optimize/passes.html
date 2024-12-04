@@ -173,16 +173,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="optimization-passes"><a class="header" href="#optimization-passes">Optimization Passes</a></h1>
-<p><a href="/engine/optimize/index.html">Script optimization</a> is performed via multiple <em>passes</em>.
+<p><a href="/book/engine/optimize/index.html">Script optimization</a> is performed via multiple <em>passes</em>.
 Each pass does a specific optimization.</p>
-<p>The optimization is completed when no passes can simplify the <a href="/engine/compile.html"><code>AST</code></a> any further.</p>
+<p>The optimization is completed when no passes can simplify the <a href="/book/engine/compile.html"><code>AST</code></a> any further.</p>
 <h2 id="built-in-optimization-passes"><a class="header" href="#built-in-optimization-passes">Built-in Optimization Passes</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Pass</th><th>Description</th></tr></thead><tbody>
 <tr><td><a href="dead-code.html">Dead code elimination</a></td><td>Eliminates code that cannot be reached</td></tr>
-<tr><td><a href="constants.html">Constants propagation</a></td><td>Replaces <a href="/language/constants.html">constants</a> with values</td></tr>
+<tr><td><a href="constants.html">Constants propagation</a></td><td>Replaces <a href="/book/language/constants.html">constants</a> with values</td></tr>
 <tr><td><a href="rewrite.html">Compound assignments rewrite</a></td><td>Rewrites assignments into compound assignments</td></tr>
-<tr><td><a href="op-eval.html">Eager operator evaluation</a></td><td>Eagerly calls operators with <a href="/language/constants.html">constant</a> arguments</td></tr>
-<tr><td><a href="eager.html">Eager function evaluation</a></td><td>Eagerly calls functions with <a href="/language/constants.html">constant</a> arguments</td></tr>
+<tr><td><a href="op-eval.html">Eager operator evaluation</a></td><td>Eagerly calls operators with <a href="/book/language/constants.html">constant</a> arguments</td></tr>
+<tr><td><a href="eager.html">Eager function evaluation</a></td><td>Eagerly calls functions with <a href="/book/language/constants.html">constant</a> arguments</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -214,22 +214,6 @@ Each pass does a specific optimization.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

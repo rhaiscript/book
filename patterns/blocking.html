@@ -211,14 +211,14 @@ which is JavaScript before all the async extensions.</p>
 <p>This pattern is based upon the <em><a href="multi-threading.html">Multi-Threaded Synchronization</a></em> pattern.</p>
 </li>
 <li>
-<p>An independent thread is used to run the scripting <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>An independent thread is used to run the scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 <li>
 <p>An MPSC channel (or any other appropriate synchronization primitive) is used to send function call
 arguments, packaged as a message, to another Rust thread that will perform the actual async calls.</p>
 </li>
 <li>
-<p>Results are marshaled back to the <a href="/engine/hello-world.html"><code>Engine</code></a> thread via another MPSC channel.</p>
+<p>Results are marshaled back to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> thread via another MPSC channel.</p>
 </li>
 </ul>
 </div>
@@ -237,7 +237,7 @@ arguments, packaged as a message, to another Rust thread that will perform the a
 </div>
 <ol>
 <li>
-<p>Spawn a thread to run the scripting <a href="/engine/hello-world.html"><code>Engine</code></a>.  Usually the <a href="/start/features.html"><code>sync</code></a> feature is
+<p>Spawn a thread to run the scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a>.  Usually the <a href="/book/start/features.html"><code>sync</code></a> feature is
 <em>NOT</em> used for this pattern.</p>
 </li>
 <li>
@@ -249,7 +249,7 @@ This thread may actually be the main thread of the program.</p>
 communications between the two threads.</p>
 </li>
 <li>
-<p>Register async API function to the <a href="/engine/hello-world.html"><code>Engine</code></a> with a closure that captures the MPSC end-points.</p>
+<p>Register async API function to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> with a closure that captures the MPSC end-points.</p>
 </li>
 <li>
 <p>If there are more than one async function, the receive end-point on the <code>reply</code> channel can simply be cloned.
@@ -261,14 +261,14 @@ The send end-point on the <code>command</code> channel can be wrapped in an <cod
 by the <code>worker</code> thread and the appropriate async function called.</p>
 </li>
 <li>
-<p>The <a href="/engine/hello-world.html"><code>Engine</code></a> blocks on the function call, waiting for a reply message on the <code>reply</code> channel.</p>
+<p>The <a href="/book/engine/hello-world.html"><code>Engine</code></a> blocks on the function call, waiting for a reply message on the <code>reply</code> channel.</p>
 </li>
 <li>
 <p>When the async function call complete on the <code>worker</code> thread, the result is sent back to
-the <a href="/engine/hello-world.html"><code>Engine</code></a> thread via the <code>reply</code> channel.</p>
+the <a href="/book/engine/hello-world.html"><code>Engine</code></a> thread via the <code>reply</code> channel.</p>
 </li>
 <li>
-<p>After the result is obtained from the <code>reply</code> channel, the <a href="/engine/hello-world.html"><code>Engine</code></a> returns it as the return value
+<p>After the result is obtained from the <code>reply</code> channel, the <a href="/book/engine/hello-world.html"><code>Engine</code></a> returns it as the return value
 of the function call, ending the block and continuing evaluation.</p>
 </li>
 </ol>
@@ -302,22 +302,6 @@ of the function call, ending the block and continuing evaluation.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

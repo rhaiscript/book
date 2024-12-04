@@ -181,7 +181,7 @@
 <a class="admonition-anchor-link" href="#admonition-safety"></a>
 </div>
 <div>
-<p>Always limit the <a href="/safety/max-array-size.html">maximum size of arrays</a>.</p>
+<p>Always limit the <a href="/book/safety/max-array-size.html">maximum size of arrays</a>.</p>
 </div>
 </div>
 <p>BLOB’s (<strong>B</strong>inary <strong>L</strong>arge <strong>OB</strong>jects), used to hold packed arrays of bytes, have built-in support in Rhai.</p>
@@ -191,11 +191,11 @@ a large image as a BLOB).</p>
 <p>All items stored in a BLOB are bytes (i.e. <code>u8</code>) and the BLOB can freely grow or shrink with bytes
 added or removed.</p>
 <p>The Rust type of a Rhai BLOB is <code>rhai::Blob</code> which is an alias to <code>Vec&lt;u8&gt;</code>.</p>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> a BLOB returns <code>"blob"</code>.</p>
-<p>BLOB’s are disabled via the <a href="/start/features.html"><code>no_index</code></a> feature.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> a BLOB returns <code>"blob"</code>.</p>
+<p>BLOB’s are disabled via the <a href="/book/start/features.html"><code>no_index</code></a> feature.</p>
 <h2 id="element-access-syntax"><a class="header" href="#element-access-syntax">Element Access Syntax</a></h2>
 <h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
-<p>Like <a href="/language/arrays.html">arrays</a>, BLOB’s are accessed with zero-based, non-negative integer indices:</p>
+<p>Like <a href="/book/language/arrays.html">arrays</a>, BLOB’s are accessed with zero-based, non-negative integer indices:</p>
 <blockquote>
 <p><em>blob</em> <code>[</code> <em>index position from 0 to (length−1)</em> <code>]</code></p>
 </blockquote>
@@ -214,7 +214,7 @@ added or removed.</p>
 </div>
 <div>
 <p>The value of a particular byte in a BLOB is mapped to an <code>INT</code> (which can be 64-bit or 32-bit
-depending on the <a href="/start/features.html"><code>only_i32</code></a> feature).</p>
+depending on the <a href="/book/start/features.html"><code>only_i32</code></a> feature).</p>
 <p>Only the lowest 8 bits are significant, all other bits are ignored.</p>
 </div>
 </div>
@@ -235,7 +235,7 @@ let x = blob(50, 42);       // BLOB with 50x 42's</code></pre>
 </div>
 <div>
 <p>To quickly initialize a BLOB with a particular byte stream, the <code>write_be</code> method can be used to
-write eight bytes at a time (four under <a href="/start/features.html"><code>only_i32</code></a>) in big-endian byte order.</p>
+write eight bytes at a time (four under <a href="/book/start/features.html"><code>only_i32</code></a>) in big-endian byte order.</p>
 <p>If fewer than eight bytes are needed, remember to right-pad the number as big-endian byte order is used.</p>
 <pre><code class="language-rust">let buf = blob(12, 0);      // BLOB with 12x zeros
 
@@ -267,8 +267,8 @@ buf.write_be(8, 4, 0x0a_0b_0c_0d);</code></pre>
 <p>Non-ASCII characters (i.e. characters not within 1-127) are ignored.</p>
 </div>
 </div>
-<p>For many embedded applications, it is necessary to encode an ASCII <a href="/language/strings-chars.html">string</a> as a byte stream.</p>
-<p>Use the <code>write_ascii</code> method to write ASCII <a href="/language/strings-chars.html">strings</a> into any specific <a href="/language/ranges.html">range</a> within a BLOB.</p>
+<p>For many embedded applications, it is necessary to encode an ASCII <a href="/book/language/strings-chars.html">string</a> as a byte stream.</p>
+<p>Use the <code>write_ascii</code> method to write ASCII <a href="/book/language/strings-chars.html">strings</a> into any specific <a href="/book/language/ranges.html">range</a> within a BLOB.</p>
 <p>The following is an example of a building a 16-byte command to send to an embedded device.</p>
 <pre><code class="language-rust">// Assume the following 16-byte command for an embedded device:
 // ┌─────────┬───────────────┬──────────────────────────────────┬───────┐
@@ -309,19 +309,19 @@ device.send(buf);           // send command to device</code></pre>
 </div>
 </div>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
-<p>The following functions (mostly defined in the <a href="/rust/packages/builtin.html"><code>BasicBlobPackage</code></a> but excluded
-when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on BLOB’s.</p>
+<p>The following functions (mostly defined in the <a href="/book/rust/packages/builtin.html"><code>BasicBlobPackage</code></a> but excluded
+when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on BLOB’s.</p>
 <div class="table-wrapper"><table><thead><tr><th>Functions</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>blob</code> constructor function</td><td><ol><li><em>(optional)</em> initial length of the BLOB</li><li><em>(optional)</em> initial byte value</li></ol></td><td>creates a new BLOB, optionally of a particular length filled with an initial byte value (default = 0)</td></tr>
-<tr><td><code>to_array</code></td><td><em>none</em></td><td>converts the BLOB into an <a href="/language/arrays.html">array</a> of integers</td></tr>
-<tr><td><code>as_string</code></td><td><em>none</em></td><td>converts the BLOB into a <a href="/language/strings-chars.html">string</a> (the byte stream is interpreted as UTF-8)</td></tr>
+<tr><td><code>to_array</code></td><td><em>none</em></td><td>converts the BLOB into an <a href="/book/language/arrays.html">array</a> of integers</td></tr>
+<tr><td><code>as_string</code></td><td><em>none</em></td><td>converts the BLOB into a <a href="/book/language/strings-chars.html">string</a> (the byte stream is interpreted as UTF-8)</td></tr>
 <tr><td><code>get</code></td><td>position, counting from end if &lt; 0</td><td>gets a copy of the byte at a certain position (0 if the position is not valid)</td></tr>
 <tr><td><code>set</code></td><td><ol><li>position, counting from end if &lt; 0</li><li>new byte value</li></ol></td><td>sets a certain position to a new value (no effect if the position is not valid)</td></tr>
 <tr><td><code>push</code>, <code>append</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li>byte to append</li></ol></td><td>appends a byte to the end</td></tr>
 <tr><td><code>append</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li>BLOB to append</li></ol></td><td>concatenates the second BLOB to the end of the first</td></tr>
-<tr><td><code>append</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li><a href="/language/strings-chars.html">string</a>/<a href="/language/strings-chars.html">character</a> to append</li></ol></td><td>concatenates a <a href="/language/strings-chars.html">string</a> or <a href="/language/strings-chars.html">character</a> (as UTF-8 encoded byte-stream) to the end of the BLOB</td></tr>
-<tr><td><code>+</code> operator</td><td><ol><li>first BLOB</li><li><a href="/language/strings-chars.html">string</a> to append</li></ol></td><td>creates a new <a href="/language/strings-chars.html">string</a> by concatenating the BLOB (as UTF-8 encoded byte-stream) with the the <a href="/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>+</code> operator</td><td><ol><li><a href="/language/strings-chars.html">string</a></li><li>BLOB to append</li></ol></td><td>creates a new <a href="/language/strings-chars.html">string</a> by concatenating the BLOB (as UTF-8 encoded byte-stream) to the end of the <a href="/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>append</code>, <code>+=</code> operator</td><td><ol><li>BLOB</li><li><a href="/book/language/strings-chars.html">string</a>/<a href="/book/language/strings-chars.html">character</a> to append</li></ol></td><td>concatenates a <a href="/book/language/strings-chars.html">string</a> or <a href="/book/language/strings-chars.html">character</a> (as UTF-8 encoded byte-stream) to the end of the BLOB</td></tr>
+<tr><td><code>+</code> operator</td><td><ol><li>first BLOB</li><li><a href="/book/language/strings-chars.html">string</a> to append</li></ol></td><td>creates a new <a href="/book/language/strings-chars.html">string</a> by concatenating the BLOB (as UTF-8 encoded byte-stream) with the the <a href="/book/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>+</code> operator</td><td><ol><li><a href="/book/language/strings-chars.html">string</a></li><li>BLOB to append</li></ol></td><td>creates a new <a href="/book/language/strings-chars.html">string</a> by concatenating the BLOB (as UTF-8 encoded byte-stream) to the end of the <a href="/book/language/strings-chars.html">string</a></td></tr>
 <tr><td><code>+</code> operator</td><td><ol><li>first BLOB</li><li>second BLOB</li></ol></td><td>concatenates the first BLOB with the second</td></tr>
 <tr><td><code>==</code> operator</td><td><ol><li>first BLOB</li><li>second BLOB</li></ol></td><td>are two BLOB’s the same?</td></tr>
 <tr><td><code>!=</code> operator</td><td><ol><li>first BLOB</li><li>second BLOB</li></ol></td><td>are two BLOB’s different?</td></tr>
@@ -329,7 +329,7 @@ when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on 
 <tr><td><code>pop</code></td><td><em>none</em></td><td>removes the last byte and returns it (0 if empty)</td></tr>
 <tr><td><code>shift</code></td><td><em>none</em></td><td>removes the first byte and returns it (0 if empty)</td></tr>
 <tr><td><code>extract</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li><em>(optional)</em> number of bytes to extract, none if ≤ 0</li></ol></td><td>extracts a portion of the BLOB into a new BLOB</td></tr>
-<tr><td><code>extract</code></td><td><a href="/language/ranges.html">range</a> of bytes to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the BLOB into a new BLOB</td></tr>
+<tr><td><code>extract</code></td><td><a href="/book/language/ranges.html">range</a> of bytes to extract, from beginning if ≤ 0, to end if ≥ length</td><td>extracts a portion of the BLOB into a new BLOB</td></tr>
 <tr><td><code>remove</code></td><td>position, counting from end if &lt; 0</td><td>removes a byte at a particular position and returns it (0 if the position is not valid)</td></tr>
 <tr><td><code>reverse</code></td><td><em>none</em></td><td>reverses the BLOB byte by byte</td></tr>
 <tr><td><code>len</code> method and property</td><td><em>none</em></td><td>returns the number of bytes in the BLOB</td></tr>
@@ -338,30 +338,30 @@ when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on 
 <tr><td><code>clear</code></td><td><em>none</em></td><td>empties the BLOB</td></tr>
 <tr><td><code>truncate</code></td><td>target length</td><td>cuts off the BLOB at exactly a specified length (discarding all subsequent bytes)</td></tr>
 <tr><td><code>chop</code></td><td>target length</td><td>cuts off the head of the BLOB, leaving the tail at exactly a specified length</td></tr>
-<tr><td><code>contains</code>, <a href="/language/in.html"><code>in</code></a> operator</td><td>byte value to find</td><td>does the BLOB contain a particular byte value?</td></tr>
+<tr><td><code>contains</code>, <a href="/book/language/in.html"><code>in</code></a> operator</td><td>byte value to find</td><td>does the BLOB contain a particular byte value?</td></tr>
 <tr><td><code>split</code></td><td><ol><li>BLOB</li><li>position to split at, counting from end if &lt; 0, end if ≥ length</li></ol></td><td>splits the BLOB into two BLOB’s, starting from a specified position</td></tr>
 <tr><td><code>drain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to remove, none if ≤ 0</li></ol></td><td>removes a portion of the BLOB, returning the removed bytes as a new BLOB</td></tr>
-<tr><td><code>drain</code></td><td><a href="/language/ranges.html">range</a> of bytes to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the BLOB, returning the removed bytes as a new BLOB</td></tr>
+<tr><td><code>drain</code></td><td><a href="/book/language/ranges.html">range</a> of bytes to remove, from beginning if ≤ 0, to end if ≥ length</td><td>removes a portion of the BLOB, returning the removed bytes as a new BLOB</td></tr>
 <tr><td><code>retain</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to retain, none if ≤ 0</li></ol></td><td>retains a portion of the BLOB, removes all other bytes and returning them as a new BLOB</td></tr>
-<tr><td><code>retain</code></td><td><a href="/language/ranges.html">range</a> of bytes to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the BLOB, removes all other bytes and returning them as a new BLOB</td></tr>
+<tr><td><code>retain</code></td><td><a href="/book/language/ranges.html">range</a> of bytes to retain, from beginning if ≤ 0, to end if ≥ length</td><td>retains a portion of the BLOB, removes all other bytes and returning them as a new BLOB</td></tr>
 <tr><td><code>splice</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to remove, none if ≤ 0</li><li>BLOB to insert</li></ol></td><td>replaces a portion of the BLOB with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>splice</code></td><td><ol><li><a href="/language/ranges.html">range</a> of bytes to remove, from beginning if ≤ 0, to end if ≥ length</li><li>BLOB to insert</td><td>replaces a portion of the BLOB with another (not necessarily of the same length as the replaced portion)</td></tr>
-<tr><td><code>parse_le_int</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/start/features.html"><code>only_i32</code></a>), none if ≤ 0</li></ol></td><td>parses an integer at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_le_int</code></td><td><a href="/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/start/features.html"><code>only_i32</code></a>)</td><td>parses an integer at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_be_int</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/start/features.html"><code>only_i32</code></a>), none if ≤ 0</li></ol></td><td>parses an integer at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_be_int</code></td><td><a href="/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/start/features.html"><code>only_i32</code></a>)</td><td>parses an integer at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_le_float</code><br/>(not available under <a href="/start/features.html"><code>no_float</code></a>)</td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li></ol></td><td>parses a floating-point number at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_le_float</code><br/>(not available under <a href="/start/features.html"><code>no_float</code></a>)</td><td><a href="/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/start/features.html"><code>f32_float</code></a>)</td><td>parses a floating-point number at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_be_float</code><br/>(not available under <a href="/start/features.html"><code>no_float</code></a>)</td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li></ol></td><td>parses a floating-point number at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>parse_be_float</code><br/>(not available under <a href="/start/features.html"><code>no_float</code></a>)</td><td><a href="/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/start/features.html"><code>f32_float</code></a>)</td><td>parses a floating-point number at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write_le</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, 8 if &gt; 8 (4 under <a href="/start/features.html"><code>only_i32</code></a> or <a href="/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write_le</code></td><td><ol><li><a href="/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/start/features.html"><code>only_i32</code></a> or <a href="/start/features.html"><code>f32_float</code></a>)</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write_be</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, 8 if &gt; 8 (4 under <a href="/start/features.html"><code>only_i32</code></a> or <a href="/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write_be</code></td><td><ol><li><a href="/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/start/features.html"><code>only_i32</code></a> or <a href="/start/features.html"><code>f32_float</code></a>)</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
-<tr><td><code>write_utf8</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, none if ≤ 0, to end if ≥ length</li><li><a href="/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
-<tr><td><code>write_utf8</code></td><td><ol><li><a href="/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
-<tr><td><code>write_ascii</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of <a href="/language/strings-chars.html">characters</a> to write, none if ≤ 0, to end if ≥ length</li><li><a href="/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/language/strings-chars.html">characters</a> are skipped)</td></tr>
-<tr><td><code>write_ascii</code></td><td><ol><li><a href="/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/language/strings-chars.html">characters</a> are skipped)</td></tr>
+<tr><td><code>splice</code></td><td><ol><li><a href="/book/language/ranges.html">range</a> of bytes to remove, from beginning if ≤ 0, to end if ≥ length</li><li>BLOB to insert</td><td>replaces a portion of the BLOB with another (not necessarily of the same length as the replaced portion)</td></tr>
+<tr><td><code>parse_le_int</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/start/features.html"><code>only_i32</code></a>), none if ≤ 0</li></ol></td><td>parses an integer at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_le_int</code></td><td><a href="/book/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/start/features.html"><code>only_i32</code></a>)</td><td>parses an integer at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_int</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/start/features.html"><code>only_i32</code></a>), none if ≤ 0</li></ol></td><td>parses an integer at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_int</code></td><td><a href="/book/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/start/features.html"><code>only_i32</code></a>)</td><td>parses an integer at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_le_float</code><br/>(not available under <a href="/book/start/features.html"><code>no_float</code></a>)</td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li></ol></td><td>parses a floating-point number at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_le_float</code><br/>(not available under <a href="/book/start/features.html"><code>no_float</code></a>)</td><td><a href="/book/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/start/features.html"><code>f32_float</code></a>)</td><td>parses a floating-point number at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_float</code><br/>(not available under <a href="/book/start/features.html"><code>no_float</code></a>)</td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to parse, 8 if &gt; 8 (4 under <a href="/book/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li></ol></td><td>parses a floating-point number at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>parse_be_float</code><br/>(not available under <a href="/book/start/features.html"><code>no_float</code></a>)</td><td><a href="/book/language/ranges.html">range</a> of bytes to parse, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/start/features.html"><code>f32_float</code></a>)</td><td>parses a floating-point number at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_le</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, 8 if &gt; 8 (4 under <a href="/book/start/features.html"><code>only_i32</code></a> or <a href="/book/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_le</code></td><td><ol><li><a href="/book/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/start/features.html"><code>only_i32</code></a> or <a href="/book/start/features.html"><code>f32_float</code></a>)</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in little-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_be</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, 8 if &gt; 8 (4 under <a href="/book/start/features.html"><code>only_i32</code></a> or <a href="/book/start/features.html"><code>f32_float</code></a>), none if ≤ 0</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_be</code></td><td><ol><li><a href="/book/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length (up to 8 bytes, 4 under <a href="/book/start/features.html"><code>only_i32</code></a> or <a href="/book/start/features.html"><code>f32_float</code></a>)</li><li>integer or floating-point value</li></ol></td><td>writes a value at the particular offset in big-endian byte order (if not enough bytes, zeros are padded; extra bytes are ignored)</td></tr>
+<tr><td><code>write_utf8</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of bytes to write, none if ≤ 0, to end if ≥ length</li><li><a href="/book/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_utf8</code></td><td><ol><li><a href="/book/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="/book/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/language/strings-chars.html">string</a> to the particular offset in UTF-8 encoding</td></tr>
+<tr><td><code>write_ascii</code></td><td><ol><li>start position, counting from end if &lt; 0, end if ≥ length</li><li>number of <a href="/book/language/strings-chars.html">characters</a> to write, none if ≤ 0, to end if ≥ length</li><li><a href="/book/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/book/language/strings-chars.html">characters</a> are skipped)</td></tr>
+<tr><td><code>write_ascii</code></td><td><ol><li><a href="/book/language/ranges.html">range</a> of bytes to write, from beginning if ≤ 0, to end if ≥ length, to end if ≥ length</li><li><a href="/book/language/strings-chars.html">string</a> to write</li></ol></td><td>writes a <a href="/book/language/strings-chars.html">string</a> to the particular offset in 7-bit ASCII encoding (non-ASCII <a href="/book/language/strings-chars.html">characters</a> are skipped)</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -393,22 +393,6 @@ when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on 
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

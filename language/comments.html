@@ -190,7 +190,7 @@ end of the line.</p>
 */</code></pre>
 <h2 id="module-documentation"><a class="header" href="#module-documentation">Module Documentation</a></h2>
 <p>Comment lines starting with <code>//!</code> make up the <em>module documentation</em>.</p>
-<p>They are used to document the containing <a href="/rust/modules/index.html">module</a> – or for a Rhai script file,
+<p>They are used to document the containing <a href="/book/rust/modules/index.html">module</a> – or for a Rhai script file,
 to document the file itself.</p>
 <div id="admonition-requires-metadata" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-requires-metadata-title">
 <div class="admonition-title">
@@ -200,8 +200,8 @@ to document the file itself.</p>
 <a class="admonition-anchor-link" href="#admonition-requires-metadata"></a>
 </div>
 <div>
-<p>Module documentation is only supported under the <a href="/start/features.html"><code>metadata</code></a> feature.</p>
-<p>If <a href="/start/features.html"><code>metadata</code></a> is not active, they are treated as normal <a href="/language/comments.html">comments</a>.</p>
+<p>Module documentation is only supported under the <a href="/book/start/features.html"><code>metadata</code></a> feature.</p>
+<p>If <a href="/book/start/features.html"><code>metadata</code></a> is not active, they are treated as normal <a href="/book/language/comments.html">comments</a>.</p>
 </div>
 </div>
 <pre><code class="language-rust">//! Documentation for this script file.
@@ -252,22 +252,6 @@ fn display(msg) {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

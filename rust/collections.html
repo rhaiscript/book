@@ -181,11 +181,11 @@
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>Collections can also hold <a href="/language/dynamic.html"><code>Dynamic</code></a> values (e.g. like an <a href="/language/arrays.html">array</a>).</p>
+<p>Collections can also hold <a href="/book/language/dynamic.html"><code>Dynamic</code></a> values (e.g. like an <a href="/book/language/arrays.html">array</a>).</p>
 </div>
 </div>
 <p>A <em>collection</em> type holds a… well… <em>collection</em> of items.  It can be homogeneous (all items are
-the same type) or heterogeneous (items are of different types, use <a href="/language/dynamic.html"><code>Dynamic</code></a> to hold).</p>
+the same type) or heterogeneous (items are of different types, use <a href="/book/language/dynamic.html"><code>Dynamic</code></a> to hold).</p>
 <p>Because their only purpose for existence is to hold a number of items, collection types commonly
 register the following methods.</p>
 <section></section>
@@ -208,7 +208,7 @@ register the following methods.</p>
 <p>Collections are typically iterable.</p>
 <p>It is customary to use <code>Engine::register_iterator</code> to allow iterating the collection if
 it implements <code>IntoIterator</code>.</p>
-<p>Alternative, register a specific <a href="/language/iterator.html">type iterator</a> for the <a href="/rust/custom-types.html">custom type</a>.</p>
+<p>Alternative, register a specific <a href="/book/language/iterator.html">type iterator</a> for the <a href="/book/rust/custom-types.html">custom type</a>.</p>
 </div>
 </div>
 <div id="admonition-tip-use-a-plugin-module" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-use-a-plugin-module-title">
@@ -219,7 +219,7 @@ it implements <code>IntoIterator</code>.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-use-a-plugin-module"></a>
 </div>
 <div>
-<p>A <a href="/plugins/module.html">plugin module</a> makes defining an entire API for a <a href="/rust/custom-types.html">custom type</a> a snap.</p>
+<p>A <a href="/book/plugins/module.html">plugin module</a> makes defining an entire API for a <a href="/book/rust/custom-types.html">custom type</a> a snap.</p>
 </div>
 </div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -242,11 +242,11 @@ engine
         col1
     });</code></pre>
 <h2 id="what-about-indexers"><a class="header" href="#what-about-indexers">What About Indexers?</a></h2>
-<p>Many users are tempted to register <a href="/rust/indexers.html">indexers</a> for custom collections.  This essentially makes the
+<p>Many users are tempted to register <a href="/book/rust/indexers.html">indexers</a> for custom collections.  This essentially makes the
 original Rust type something similar to <code>Vec&lt;MyType&gt;</code>.</p>
-<p>Rhai’s standard <a href="/language/arrays.html"><code>Array</code></a> type is <code>Vec&lt;Dynamic&gt;</code> which already holds an ordered, iterable and
-indexable collection of dynamic items.  Since Rhai has built-in support, manipulating <a href="/language/arrays.html">arrays</a> is fast.</p>
-<p>In <em>most</em> circumstances, it is better to use <a href="/language/arrays.html"><code>Array</code></a> instead of a <a href="/rust/custom-types.html">custom type</a>.</p>
+<p>Rhai’s standard <a href="/book/language/arrays.html"><code>Array</code></a> type is <code>Vec&lt;Dynamic&gt;</code> which already holds an ordered, iterable and
+indexable collection of dynamic items.  Since Rhai has built-in support, manipulating <a href="/book/language/arrays.html">arrays</a> is fast.</p>
+<p>In <em>most</em> circumstances, it is better to use <a href="/book/language/arrays.html"><code>Array</code></a> instead of a <a href="/book/rust/custom-types.html">custom type</a>.</p>
 <div id="admonition-tip-convert-to-array-using-into" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-convert-to-array-using-into-title">
 <div class="admonition-title">
 <div id="admonition-tip-convert-to-array-using-into-title">
@@ -255,8 +255,8 @@ indexable collection of dynamic items.  Since Rhai has built-in support, manipul
 <a class="admonition-anchor-link" href="#admonition-tip-convert-to-array-using-into"></a>
 </div>
 <div>
-<p><a href="/language/dynamic.html"><code>Dynamic</code></a> implements <code>FromIterator</code> for all iterable types and an <a href="/language/arrays.html"><code>Array</code></a> is created in the process.</p>
-<p>So, converting a typed array (i.e. <code>Vec&lt;MyType&gt;</code>) into an <a href="/language/arrays.html">array</a> in Rhai is as simple as calling <code>.into()</code>.</p>
+<p><a href="/book/language/dynamic.html"><code>Dynamic</code></a> implements <code>FromIterator</code> for all iterable types and an <a href="/book/language/arrays.html"><code>Array</code></a> is created in the process.</p>
+<p>So, converting a typed array (i.e. <code>Vec&lt;MyType&gt;</code>) into an <a href="/book/language/arrays.html">array</a> in Rhai is as simple as calling <code>.into()</code>.</p>
 <pre><code class="language-rust">// Say you have a custom typed array...
 let my_custom_array: Vec&lt;MyType&gt; = do_lots_of_calc(42);
 
@@ -286,21 +286,21 @@ engine
 </div>
 <div>
 <h3 id="reason-1-performance"><a class="header" href="#reason-1-performance">Reason #1: Performance</a></h3>
-<p>A main reason why anybody would want to do this is to avoid the overhead of storing <a href="/language/dynamic.html"><code>Dynamic</code></a> items.</p>
-<p>This is why <a href="/language/blobs.html">BLOB’s</a> is a built-in data type in Rhai, even though it is actually defined as <code>Vec&lt;u8&gt;</code>.
-The overhead of using <a href="/language/dynamic.html"><code>Dynamic</code></a> (16 bytes) versus <code>u8</code> (1 byte) is worth the trouble, although the
+<p>A main reason why anybody would want to do this is to avoid the overhead of storing <a href="/book/language/dynamic.html"><code>Dynamic</code></a> items.</p>
+<p>This is why <a href="/book/language/blobs.html">BLOB’s</a> is a built-in data type in Rhai, even though it is actually defined as <code>Vec&lt;u8&gt;</code>.
+The overhead of using <a href="/book/language/dynamic.html"><code>Dynamic</code></a> (16 bytes) versus <code>u8</code> (1 byte) is worth the trouble, although the
 performance gains may not be as pronounced as expected: benchmarks show a 15% speed improvement inside
-a tight loop compared with using an <a href="/language/arrays.html">array</a>.</p>
-<p><code>Vec&lt;MyType&gt;</code>, however, will be treated as an opaque <a href="/rust/custom-types.html">custom type</a> in Rhai, so performance is not optimized.
-What you gain from avoiding <a href="/language/dynamic.html"><code>Dynamic</code></a>, you pay back in terms of slower access to the <code>Vec</code> as well as <code>MyType</code>
-(which is treated as yet another opaque <a href="/rust/custom-types.html">custom type</a>).</p>
+a tight loop compared with using an <a href="/book/language/arrays.html">array</a>.</p>
+<p><code>Vec&lt;MyType&gt;</code>, however, will be treated as an opaque <a href="/book/rust/custom-types.html">custom type</a> in Rhai, so performance is not optimized.
+What you gain from avoiding <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, you pay back in terms of slower access to the <code>Vec</code> as well as <code>MyType</code>
+(which is treated as yet another opaque <a href="/book/rust/custom-types.html">custom type</a>).</p>
 <h3 id="reason-2-api"><a class="header" href="#reason-2-api">Reason #2: API</a></h3>
 <p>Another reason why it shouldn’t be done is due to the large number of functions and methods that must be registered
-for each type of this sort.  One only has to look at the vast API surface of <a href="/language/arrays.html#built-in-functions">arrays</a>
+for each type of this sort.  One only has to look at the vast API surface of <a href="/book/language/arrays.html#built-in-functions">arrays</a>
 to see the common methods that a user would expect to be available.</p>
-<p>Since <code>Vec&lt;Type&gt;</code> looks, feels and quacks just like a normal <a href="/language/arrays.html">array</a>, and the usage syntax is almost equivalent (except
+<p>Since <code>Vec&lt;Type&gt;</code> looks, feels and quacks just like a normal <a href="/book/language/arrays.html">array</a>, and the usage syntax is almost equivalent (except
 for the fact that the data type is restricted), users would be frustrated if they find that certain functions available for
-<a href="/language/arrays.html">arrays</a> are not provided.</p>
+<a href="/book/language/arrays.html">arrays</a> are not provided.</p>
 <p>This is similar to JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays"><em>Typed Arrays</em></a>.
 They are quite awkward to work with, and basically each has a full API definition that must be pre-registered.</p>
 </div>
@@ -335,22 +335,6 @@ They are quite awkward to work with, and basically each has a full API definitio
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

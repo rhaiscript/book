@@ -173,8 +173,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dynamic-return-value"><a class="header" href="#dynamic-return-value"><code>Dynamic</code> Return Value</a></h1>
-<p>Rhai supports registering functions that return <a href="/language/dynamic.html"><code>Dynamic</code></a>.</p>
-<p>A <a href="/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
+<p>Rhai supports registering functions that return <a href="/book/language/dynamic.html"><code>Dynamic</code></a>.</p>
+<p>A <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
 <pre><code class="language-rust">use rhai::{Engine, Dynamic};
 
 // The 'Dynamic' return type allows this function to
@@ -208,8 +208,8 @@ engine.register_fn("get_info", get_info);</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-create-a-dynamic"></a>
 </div>
 <div>
-<p>To create a <a href="/language/dynamic.html"><code>Dynamic</code></a> value, use <code>Dynamic::from</code>.</p>
-<p><a href="/language/values-and-types.html">Standard types</a> in Rhai can also use <code>.into()</code>.</p>
+<p>To create a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value, use <code>Dynamic::from</code>.</p>
+<p><a href="/book/language/values-and-types.html">Standard types</a> in Rhai can also use <code>.into()</code>.</p>
 <pre><code class="language-rust">use rhai::Dynamic;
 
 let obj = TestStruct::new();
@@ -231,8 +231,8 @@ let y = "hello!".into();</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-alternative-to-fallible-functions"></a>
 </div>
 <div>
-<p>Instead of registering a <a href="/rust/fallible.html">fallible function</a>, it is usually more idiomatic to leverage the <em>dynamic</em>
-nature of Rhai and simply return <a href="/language/values-and-types.html"><code>()</code></a> upon error.</p>
+<p>Instead of registering a <a href="/book/rust/fallible.html">fallible function</a>, it is usually more idiomatic to leverage the <em>dynamic</em>
+nature of Rhai and simply return <a href="/book/language/values-and-types.html"><code>()</code></a> upon error.</p>
 <pre><code class="language-rust">use rhai::{Engine, Dynamic};
 
 // Function that may fail - return () upon failure
@@ -292,22 +292,6 @@ engine.run(r#"
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

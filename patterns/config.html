@@ -210,19 +210,19 @@ configuration file.</p>
 <div>
 <ul>
 <li>
-<p>Leverage the loadable <a href="/rust/modules/index.html">modules</a> of Rhai.  The <a href="/start/features.html"><code>no_module</code></a> feature must not be on.</p>
+<p>Leverage the loadable <a href="/book/rust/modules/index.html">modules</a> of Rhai.  The <a href="/book/start/features.html"><code>no_module</code></a> feature must not be on.</p>
 </li>
 <li>
 <p>Expose the configuration API.  Use separate scripts to configure that API.
 Dynamically load scripts via the <code>import</code> statement.</p>
 </li>
 <li>
-<p>Leverage <a href="/rust/overloading.html">function overloading</a> to simplify the API design.</p>
+<p>Leverage <a href="/book/rust/overloading.html">function overloading</a> to simplify the API design.</p>
 </li>
 <li>
 <p>Since Rhai is <em>sand-boxed</em>, it cannot mutate the environment.  To modify the external
 configuration object via an API, it must be wrapped in a <code>RefCell</code> (or <code>RwLock</code>/<code>Mutex</code> for
-<a href="/start/features.html"><code>sync</code></a>) and shared to the <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<a href="/book/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 </ul>
 </div>
@@ -240,14 +240,14 @@ struct Config {
 <pre><code class="language-rust">type SharedConfig = Rc&lt;RefCell&lt;Config&gt;&gt;;
 
 let config = SharedConfig::default();</code></pre>
-<p>or in multi-threaded environments with the <a href="/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
+<p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
 <pre><code class="language-rust">type SharedConfig = Arc&lt;RwLock&lt;Config&gt;&gt;;
 
 type SharedConfig = Arc&lt;Mutex&lt;Config&gt;&gt;;</code></pre>
 <h3 id="register-config-api"><a class="header" href="#register-config-api">Register config API</a></h3>
 <p>The trick to building a Config API is to clone the shared configuration object and move it into each
 function registration via a closure.</p>
-<p>Therefore, it is not possible to use a <a href="/plugins/module.html">plugin module</a> to achieve this, and each function must be
+<p>Therefore, it is not possible to use a <a href="/book/plugins/module.html">plugin module</a> to achieve this, and each function must be
 registered one after another.</p>
 <pre><code class="language-rust">// Notice 'move' is used to move the shared configuration object into the closure.
 let cfg = config.clone();
@@ -305,8 +305,8 @@ let id = config_get_id();
 
 id == "hello";</code></pre>
 <h2 id="consider-a-custom-syntax"><a class="header" href="#consider-a-custom-syntax">Consider a Custom Syntax</a></h2>
-<p>This is probably one of the few scenarios where a <a href="/engine/custom-syntax.html">custom syntax</a> can be recommended.</p>
-<p>A properly-designed <a href="/engine/custom-syntax.html">custom syntax</a> can make the configuration file clean, simple to write,
+<p>This is probably one of the few scenarios where a <a href="/book/engine/custom-syntax.html">custom syntax</a> can be recommended.</p>
+<p>A properly-designed <a href="/book/engine/custom-syntax.html">custom syntax</a> can make the configuration file clean, simple to write,
 easy to understand and quick to modify.</p>
 <p>For example, the above configuration example may be expressed by this custom syntax:</p>
 <pre><code class="language-rust">┌────────────────┐
@@ -325,7 +325,7 @@ map "bar" =&gt; true;
 if config contains "hey" || config is_set "hey" {
     map "baz" =&gt; false;
 }</code></pre>
-<p>Notice that <code>contains</code> and <code>is_set</code> may also be implemented as a <a href="/engine/custom-op.html">custom operator</a>.</p>
+<p>Notice that <code>contains</code> and <code>is_set</code> may also be implemented as a <a href="/book/engine/custom-op.html">custom operator</a>.</p>
 
                     </main>
 
@@ -356,22 +356,6 @@ if config contains "hey" || config is_set "hey" {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

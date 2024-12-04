@@ -176,14 +176,14 @@
 <p>Some features are for performance.  In order to squeeze out the maximum performance from Rhai, the
 following features should be considered:</p>
 <div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Description</th><th>Rationale</th></tr></thead><tbody>
-<tr><td><a href="/start/features.html"><code>only_i32</code></a></td><td>support only a single <code>i32</code> integer type</td><td>reduce data size</td></tr>
-<tr><td><a href="/start/features.html"><code>no_float</code></a></td><td>remove support for floating-point numbers</td><td>reduce code size</td></tr>
-<tr><td><a href="/start/features.html"><code>f32_float</code></a></td><td>set floating-point numbers (if not disabled) to 32-bit</td><td>reduce data size</td></tr>
-<tr><td><a href="/start/features.html"><code>no_closure</code></a></td><td>remove support for <a href="/language/variables.html">variables</a> sharing</td><td>no need for data locking</td></tr>
-<tr><td><a href="/start/features.html"><code>unchecked</code></a></td><td>disable all safety <a href="/safety/checked.html">checks</a></td><td>remove checking code</td></tr>
-<tr><td><a href="/start/features.html"><code>no_module</code></a></td><td>disable loading external <a href="/rust/modules/index.html">modules</a></td><td>reduce code size</td></tr>
-<tr><td><a href="/start/features.html"><code>no_position</code></a></td><td>disable position tracking during parsing</td><td>reduce data size</td></tr>
-<tr><td><a href="/start/features.html"><code>no_custom_syntax</code></a></td><td>disable <a href="/engine/custom-syntax.html">custom syntax</a></td><td>reduce code size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>only_i32</code></a></td><td>support only a single <code>i32</code> integer type</td><td>reduce data size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_float</code></a></td><td>remove support for floating-point numbers</td><td>reduce code size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>f32_float</code></a></td><td>set floating-point numbers (if not disabled) to 32-bit</td><td>reduce data size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_closure</code></a></td><td>remove support for <a href="/book/language/variables.html">variables</a> sharing</td><td>no need for data locking</td></tr>
+<tr><td><a href="/book/start/features.html"><code>unchecked</code></a></td><td>disable all safety <a href="/book/safety/checked.html">checks</a></td><td>remove checking code</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_module</code></a></td><td>disable loading external <a href="/book/rust/modules/index.html">modules</a></td><td>reduce code size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_position</code></a></td><td>disable position tracking during parsing</td><td>reduce data size</td></tr>
+<tr><td><a href="/book/start/features.html"><code>no_custom_syntax</code></a></td><td>disable <a href="/book/engine/custom-syntax.html">custom syntax</a></td><td>reduce code size</td></tr>
 </tbody></table>
 </div>
 <p>When the above feature flags are used, performance may increase by around 15-20%.</p>
@@ -195,40 +195,40 @@ following features should be considered:</p>
 <a class="admonition-anchor-link" href="#admonition-see-also-benchmarks"></a>
 </div>
 <div>
-<p>See Rhai performance <a href="/about/benchmarks.html">benchmarks</a>.</p>
+<p>See Rhai performance <a href="/book/about/benchmarks.html">benchmarks</a>.</p>
 </div>
 </div>
 <h2 id="unchecked-build"><a class="header" href="#unchecked-build">Unchecked Build</a></h2>
 <p>By default, Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a>
 guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.</p>
-<p>For maximum performance, however, these <a href="/safety/index.html">safety</a> checks can be turned off via the <a href="/start/features.html"><code>unchecked</code></a> feature.</p>
+<p>For maximum performance, however, these <a href="/book/safety/index.html">safety</a> checks can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="fast-operators-mode"><a class="header" href="#fast-operators-mode">Fast Operators Mode</a></h2>
-<p>Make sure that <a href="/engine/options.html"><em>Fast Operators</em> Mode</a>, which is enabled by default, is on.  It ignores any
-user <a href="/rust/operators.html">overloading</a> of <a href="/engine/builtin.html">built-in operators</a>.</p>
+<p>Make sure that <a href="/book/engine/options.html"><em>Fast Operators</em> Mode</a>, which is enabled by default, is on.  It ignores any
+user <a href="/book/rust/operators.html">overloading</a> of <a href="/book/engine/builtin.html">built-in operators</a>.</p>
 <p>For operator-heavy scripts, this may provide a substantial speed-up.</p>
 <h2 id="use-only-one-integer-type"><a class="header" href="#use-only-one-integer-type">Use Only One Integer Type</a></h2>
 <p>If only a single integer type is needed in scripts – most of the time this is the case –
 it is best to avoid registering lots of functions related to other integer types that will never be used.
-As a result, <a href="/engine/hello-world.html"><code>Engine</code></a> creation will be faster because fewer functions need to be loaded.</p>
-<p>The <a href="/start/features.html"><code>only_i32</code></a> and <a href="/start/features.html"><code>only_i64</code></a> features disable all integer types except <code>i32</code> or <code>i64</code> respectively.</p>
+As a result, <a href="/book/engine/hello-world.html"><code>Engine</code></a> creation will be faster because fewer functions need to be loaded.</p>
+<p>The <a href="/book/start/features.html"><code>only_i32</code></a> and <a href="/book/start/features.html"><code>only_i64</code></a> features disable all integer types except <code>i32</code> or <code>i64</code> respectively.</p>
 <h2 id="use-only-32-bit-numbers"><a class="header" href="#use-only-32-bit-numbers">Use Only 32-Bit Numbers</a></h2>
-<p>If only 32-bit integers are needed – again, most of the time this is the case – turn on <a href="/start/features.html"><code>only_i32</code></a>.
+<p>If only 32-bit integers are needed – again, most of the time this is the case – turn on <a href="/book/start/features.html"><code>only_i32</code></a>.
 Under this feature, only <code>i32</code> is supported as a built-in integer type and no others.</p>
 <p>On 64-bit targets this may not gain much, but on certain 32-bit targets this improves performance
 due to 64-bit arithmetic requiring more CPU cycles to complete.</p>
 <h2 id="minimize-size-of-dynamic"><a class="header" href="#minimize-size-of-dynamic">Minimize Size of <code>Dynamic</code></a></h2>
-<p>Turning on <a href="/start/features.html"><code>f32_float</code></a> (or <a href="/start/features.html"><code>no_float</code></a>) and <a href="/start/features.html"><code>only_i32</code></a> on 32-bit targets makes the critical
-<a href="/language/dynamic.html"><code>Dynamic</code></a> data type only 8 bytes long for 32-bit targets.</p>
-<p>Normally <a href="/language/dynamic.html"><code>Dynamic</code></a> needs to be up 12-16 bytes long in order to hold an <code>i64</code> or <code>f64</code>.</p>
-<p>A smaller <a href="/language/dynamic.html"><code>Dynamic</code></a> helps performance due to better cache efficiency.</p>
+<p>Turning on <a href="/book/start/features.html"><code>f32_float</code></a> (or <a href="/book/start/features.html"><code>no_float</code></a>) and <a href="/book/start/features.html"><code>only_i32</code></a> on 32-bit targets makes the critical
+<a href="/book/language/dynamic.html"><code>Dynamic</code></a> data type only 8 bytes long for 32-bit targets.</p>
+<p>Normally <a href="/book/language/dynamic.html"><code>Dynamic</code></a> needs to be up 12-16 bytes long in order to hold an <code>i64</code> or <code>f64</code>.</p>
+<p>A smaller <a href="/book/language/dynamic.html"><code>Dynamic</code></a> helps performance due to better cache efficiency.</p>
 <h2 id="use-immutablestring"><a class="header" href="#use-immutablestring">Use <code>ImmutableString</code></a></h2>
-<p>Internally, Rhai uses <em>immutable</em> <a href="/language/strings-chars.html">strings</a> instead of the Rust <code>String</code> type.
+<p>Internally, Rhai uses <em>immutable</em> <a href="/book/language/strings-chars.html">strings</a> instead of the Rust <code>String</code> type.
 This is mainly to avoid excessive cloning when passing function arguments.</p>
-<p>Rhai’s internal string type is <a href="/rust/immutable-string.html"><code>ImmutableString</code></a> (basically <code>Rc&lt;SmartString&gt;</code> or
-<code>Arc&lt;SmartString&gt;</code> depending on the <a href="/start/features.html"><code>sync</code></a> feature). It is cheap to clone, but expensive to modify
+<p>Rhai’s internal string type is <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> (basically <code>Rc&lt;SmartString&gt;</code> or
+<code>Arc&lt;SmartString&gt;</code> depending on the <a href="/book/start/features.html"><code>sync</code></a> feature). It is cheap to clone, but expensive to modify
 (a new copy of the string must be made in order to change it).</p>
-<p>Therefore, functions taking <code>String</code> parameters should use <a href="/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code>
-(maps to <a href="/rust/immutable-string.html"><code>ImmutableString</code></a>) for the best performance with Rhai.</p>
+<p>Therefore, functions taking <code>String</code> parameters should use <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code>
+(maps to <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a>) for the best performance with Rhai.</p>
 <h2 id="disable-capturing-in-closures"><a class="header" href="#disable-capturing-in-closures">Disable Capturing in Closures</a></h2>
 <div id="admonition-anonymous-functions-still-work" class="admonition admonish-info side" role="note" aria-labelledby="admonition-anonymous-functions-still-work-title">
 <div class="admonition-title">
@@ -238,30 +238,30 @@ This is mainly to avoid excessive cloning when passing function arguments.</p>
 <a class="admonition-anchor-link" href="#admonition-anonymous-functions-still-work"></a>
 </div>
 <div>
-<p><a href="/language/fn-anon.html">Anonymous functions</a> continue to work even under <a href="/start/features.html"><code>no_closure</code></a>.</p>
-<p>Only capturing of external shared <a href="/language/variables.html">variables</a> is disabled.</p>
+<p><a href="/book/language/fn-anon.html">Anonymous functions</a> continue to work even under <a href="/book/start/features.html"><code>no_closure</code></a>.</p>
+<p>Only capturing of external shared <a href="/book/language/variables.html">variables</a> is disabled.</p>
 </div>
 </div>
-<p>Support for <a href="/language/fn-closure.html">closures</a> that capture <em>shared</em> <a href="/language/variables.html">variables</a> adds material overhead to script evaluation.</p>
+<p>Support for <a href="/book/language/fn-closure.html">closures</a> that capture <em>shared</em> <a href="/book/language/variables.html">variables</a> adds material overhead to script evaluation.</p>
 <p>This is because every data access must be checked whether it is a shared value and, if so,
 take a read lock before reading it.</p>
-<p>As the vast majority of <a href="/language/variables.html">variables</a> are <em>not</em> shared, needless to say this is a non-trivial
+<p>As the vast majority of <a href="/book/language/variables.html">variables</a> are <em>not</em> shared, needless to say this is a non-trivial
 performance overhead.</p>
-<p>Use <a href="/start/features.html"><code>no_closure</code></a> to disable support for <a href="/language/fn-closure.html">closures</a> to optimize the hot path because it no longer
+<p>Use <a href="/book/start/features.html"><code>no_closure</code></a> to disable support for <a href="/book/language/fn-closure.html">closures</a> to optimize the hot path because it no longer
 needs to take locks for shared data.</p>
 <h2 id="disable-position"><a class="header" href="#disable-position">Disable Position</a></h2>
-<p>For embedded scripts that are not expected to cause errors, the <a href="/start/features.html"><code>no_position</code></a> feature can be used
+<p>For embedded scripts that are not expected to cause errors, the <a href="/book/start/features.html"><code>no_position</code></a> feature can be used
 to disable position tracking during parsing.</p>
 <p>No line number/character position information is kept for error reporting purposes.</p>
 <p>This may result in a slightly fast build due to elimination of code related to position tracking.</p>
 <h2 id="avoid-cloning"><a class="header" href="#avoid-cloning">Avoid Cloning</a></h2>
 <h3 id="use-mut-functions"><a class="header" href="#use-mut-functions">Use <code>&amp;mut</code> functions</a></h3>
-<p>Rhai values are typically <em>cloned</em> when passed around, especially into <a href="/language/functions.html">function</a> calls.
+<p>Rhai values are typically <em>cloned</em> when passed around, especially into <a href="/book/language/functions.html">function</a> calls.
 Large data structures may incur material cloning overhead.</p>
 <p>Some functions accept the first parameter as a mutable reference (i.e. <code>&amp;mut</code>), for example
-<em>methods</em> for <a href="/rust/custom-types.html">custom types</a>, and may avoid potentially-costly cloning.</p>
+<em>methods</em> for <a href="/book/rust/custom-types.html">custom types</a>, and may avoid potentially-costly cloning.</p>
 <h3 id="compound-assignment"><a class="header" href="#compound-assignment">Compound assignment</a></h3>
-<p>For example, the <code>+=</code> (append) compound assignment takes a mutable reference to the <a href="/language/variables.html">variable</a> while
+<p>For example, the <code>+=</code> (append) compound assignment takes a mutable reference to the <a href="/book/language/variables.html">variable</a> while
 the corresponding <code>+</code> (add) assignment usually doesn’t.  The difference in performance can be huge:</p>
 <pre><code class="language-rust">let x = create_some_very_big_and_expensive_type();
 
@@ -275,7 +275,7 @@ x = temp_value;
 x += 1;             // &lt;- 'x' is NOT cloned</code></pre>
 <h3 id="use-take"><a class="header" href="#use-take">Use <code>take</code></a></h3>
 <p>Another example: use the <code>take</code> function to extract a value out of a variable (replacing it with
-<a href="/language/values-and-types.html"><code>()</code></a>) without cloning.</p>
+<a href="/book/language/values-and-types.html"><code>()</code></a>) without cloning.</p>
 <pre><code class="language-rust">let x = create_some_very_big_and_expensive_type();
 
 let y = x;          // &lt;- 'x' is cloned here
@@ -289,8 +289,8 @@ let y = x.take();   // &lt;- 'x' is NOT cloned</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-simple-variable-references-are-already-optimized"></a>
 </div>
 <div>
-<p>Rhai’s script <a href="/engine/optimize/index.html">optimizer</a> is usually smart enough to <em>rewrite</em> function calls
-into <a href="/rust/methods.html"><em>method-call</em></a> style or <a href="/language/assignment-op.html"><em>compound assignment</em></a>
+<p>Rhai’s script <a href="/book/engine/optimize/index.html">optimizer</a> is usually smart enough to <em>rewrite</em> function calls
+into <a href="/book/rust/methods.html"><em>method-call</em></a> style or <a href="/book/language/assignment-op.html"><em>compound assignment</em></a>
 style to take advantage of this.</p>
 <p>However, there are limits to its intelligence, and only <strong>simple variable references</strong> are optimized.</p>
 <pre><code class="language-rust">x = x + 1;          // &lt;- this statement...
@@ -309,11 +309,11 @@ some_func(x[y], 1); // &lt;- but this is not, so 'x[y]` is cloned</code></pre>
 </div>
 </div>
 <h2 id="short-variable-names-for-32-bit-systems"><a class="header" href="#short-variable-names-for-32-bit-systems">Short Variable Names for 32-Bit Systems</a></h2>
-<p>On 32-bit systems, <a href="/language/variables.html">variable</a> and <a href="/language/constants.html">constant</a> names longer than 11 ASCII characters incur additional
+<p>On 32-bit systems, <a href="/book/language/variables.html">variable</a> and <a href="/book/language/constants.html">constant</a> names longer than 11 ASCII characters incur additional
 allocation overhead.</p>
 <p>This is particularly true for local variables inside a hot loop, where they are created and destroyed
 in rapid succession.</p>
-<p>Therefore, avoid long <a href="/language/variables.html">variable</a> and <a href="/language/constants.html">constant</a> names that are over this limit.</p>
+<p>Therefore, avoid long <a href="/book/language/variables.html">variable</a> and <a href="/book/language/constants.html">constant</a> names that are over this limit.</p>
 <p>On 64-bit systems, this limit is raised to 23 ASCII characters, which is almost always adequate.</p>
 
                     </main>
@@ -345,22 +345,6 @@ in rapid succession.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

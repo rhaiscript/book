@@ -207,8 +207,8 @@ number = -5 - +5;
 <tr><td style="text-align: center"><code>&gt;=</code></td><td>greater than or equals to</td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>&lt;</code></td><td>less than</td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
 <tr><td style="text-align: center"><code>&lt;=</code></td><td>less than or equals to</td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">yes</td><td style="text-align: center">yes, also with <code>INT</code></td><td style="text-align: center">yes, also with <code>INT</code></td></tr>
-<tr><td style="text-align: center"><code>..</code></td><td>exclusive range</td><td style="text-align: center"><a href="/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
-<tr><td style="text-align: center"><code>..=</code></td><td>inclusive range</td><td style="text-align: center"><a href="/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
+<tr><td style="text-align: center"><code>..</code></td><td>exclusive range</td><td style="text-align: center"><a href="/book/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
+<tr><td style="text-align: center"><code>..=</code></td><td>inclusive range</td><td style="text-align: center"><a href="/book/language/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
 </tbody></table>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -224,7 +224,7 @@ let right_shifted = 42 &gt;&gt; 3;    // right shift
 
 let bit_op = 42 | 99;           // bit masking</code></pre>
 <h2 id="floating-point-interoperates-with-integers"><a class="header" href="#floating-point-interoperates-with-integers">Floating-Point Interoperates with Integers</a></h2>
-<p>When one of the operands to a binary arithmetic <a href="/appendix/operators.html#operators">operator</a> is floating-point, it works with <code>INT</code> for
+<p>When one of the operands to a binary arithmetic <a href="/book/appendix/operators.html#operators">operator</a> is floating-point, it works with <code>INT</code> for
 the other operand and the result is floating-point.</p>
 <pre><code class="language-rust">let x = 41.0 + 1;               // 'FLOAT' + 'INT'
 
@@ -238,7 +238,7 @@ type_of(x) == "f64";
 
 (10 &lt; x) == true;               // 'INT' &lt; 'FLOAT'</code></pre>
 <h2 id="decimal-interoperates-with-integers"><a class="header" href="#decimal-interoperates-with-integers">Decimal Interoperates with Integers</a></h2>
-<p>When one of the operands to a binary arithmetic <a href="/appendix/operators.html#operators">operator</a> is <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>,
+<p>When one of the operands to a binary arithmetic <a href="/book/appendix/operators.html#operators">operator</a> is <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>,
 it works with <code>INT</code> for the other operand and the result is <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>.</p>
 <pre><code class="language-rust">let d = parse_decimal("2");
 
@@ -254,7 +254,7 @@ type_of(x) == "decimal";
 
 (10 &lt; x) == true;               // 'INT' &lt; 'Decimal'</code></pre>
 <h2 id="unary-before-binary"><a class="header" href="#unary-before-binary">Unary Before Binary</a></h2>
-<p>In Rhai, unary operators take <a href="/engine/precedence.html">precedence</a> over binary operators.  This is especially important to
+<p>In Rhai, unary operators take <a href="/book/engine/precedence.html">precedence</a> over binary operators.  This is especially important to
 remember when handling operators such as <code>**</code> which in some languages bind tighter than the unary
 <code>-</code> operator.</p>
 <pre><code class="language-rust">-2 + 2 == 0;
@@ -299,22 +299,6 @@ remember when handling operators such as <code>**</code> which in some languages
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

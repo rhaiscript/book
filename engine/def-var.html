@@ -173,15 +173,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="variable-definition-filter"><a class="header" href="#variable-definition-filter">Variable Definition Filter</a></h1>
-<p>Although it is easy to disable variable <em><a href="/language/shadow.html">shadowing</a></em> via <a href="/engine/options.html"><code>Engine::set_allow_shadowing</code></a>,
+<p>Although it is easy to disable variable <em><a href="/book/language/shadow.html">shadowing</a></em> via <a href="/book/engine/options.html"><code>Engine::set_allow_shadowing</code></a>,
 sometimes more fine-grained control is needed.</p>
-<p>For example, it may be the case that not <em>all</em> variables <a href="/language/shadow.html">shadowing</a> must be disallowed, but that only
+<p>For example, it may be the case that not <em>all</em> variables <a href="/book/language/shadow.html">shadowing</a> must be disallowed, but that only
 a particular variable name needs to be protected and not others.  Or only under very special
 circumstances.</p>
-<p>Under this scenario, it is possible to provide a <em>filter</em> closure to the <a href="/engine/hello-world.html"><code>Engine</code></a> via
-<a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="/language/variables.html"><code>let</code></a> or
-<a href="/language/constants.html"><code>const</code></a> statements) in a Rhai script.</p>
-<p>The filter is called when a <a href="/language/variables.html">variable</a> or <a href="/language/constants.html">constant</a> is defined both during runtime and compilation.</p>
+<p>Under this scenario, it is possible to provide a <em>filter</em> closure to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via
+<a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="/book/language/variables.html"><code>let</code></a> or
+<a href="/book/language/constants.html"><code>const</code></a> statements) in a Rhai script.</p>
+<p>The filter is called when a <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> is defined both during runtime and compilation.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 // Register a variable definition filter.
@@ -204,26 +204,26 @@ engine.on_def_var(|is_runtime, info, context| {
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>is_runtime</code></td><td style="text-align: center"><code>bool</code></td><td><code>true</code> if the <a href="/language/variables.html">variable</a> definition event happens during runtime, <code>false</code> if during compilation</td></tr>
-<tr><td><code>info</code></td><td style="text-align: center"><code>VarDefInfo</code></td><td>information on the <a href="/language/variables.html">variable</a> being defined</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>is_runtime</code></td><td style="text-align: center"><code>bool</code></td><td><code>true</code> if the <a href="/book/language/variables.html">variable</a> definition event happens during runtime, <code>false</code> if during compilation</td></tr>
+<tr><td><code>info</code></td><td style="text-align: center"><code>VarDefInfo</code></td><td>information on the <a href="/book/language/variables.html">variable</a> being defined</td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 </tbody></table>
 </div>
 <p>and <code>VarDefInfo</code> is a simple <code>struct</code> that contains the following fields:</p>
 <div class="table-wrapper"><table><thead><tr><th>Field</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/language/variables.html">variable</a> name</td></tr>
-<tr><td><code>is_const</code></td><td style="text-align: center"><code>bool</code></td><td><code>true</code> if the definition is a <a href="/language/constants.html"><code>const</code></a>; <code>false</code> if it is a <a href="/language/variables.html"><code>let</code></a></td></tr>
+<tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/book/language/variables.html">variable</a> name</td></tr>
+<tr><td><code>is_const</code></td><td style="text-align: center"><code>bool</code></td><td><code>true</code> if the definition is a <a href="/book/language/constants.html"><code>const</code></a>; <code>false</code> if it is a <a href="/book/language/variables.html"><code>let</code></a></td></tr>
 <tr><td><code>nesting_level</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level; the global level is zero</td></tr>
-<tr><td><code>will_shadow</code></td><td style="text-align: center"><code>bool</code></td><td>will this <a href="/language/variables.html">variable</a> <em><a href="/language/shadow.html">shadow</a></em> an existing <a href="/language/variables.html">variable</a> of the same name?</td></tr>
+<tr><td><code>will_shadow</code></td><td style="text-align: center"><code>bool</code></td><td>will this <a href="/book/language/variables.html">variable</a> <em><a href="/book/language/shadow.html">shadow</a></em> an existing <a href="/book/language/variables.html">variable</a> of the same name?</td></tr>
 </tbody></table>
 </div>
-<p>and <a href="/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>Ok(true)</code></td><td>normal <a href="/language/variables.html">variable</a> definition should continue</td></tr>
-<tr><td><code>Ok(false)</code></td><td><a href="/language/throw.html">throws</a> a runtime or compilation error</td></tr>
-<tr><td><code>Err(Box&lt;EvalAltResult&gt;)</code></td><td>error that is reflected back to the <a href="/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td><code>Ok(true)</code></td><td>normal <a href="/book/language/variables.html">variable</a> definition should continue</td></tr>
+<tr><td><code>Ok(false)</code></td><td><a href="/book/language/throw.html">throws</a> a runtime or compilation error</td></tr>
+<tr><td><code>Err(Box&lt;EvalAltResult&gt;)</code></td><td>error that is reflected back to the <a href="/book/engine/hello-world.html"><code>Engine</code></a></td></tr>
 </tbody></table>
 </div><div id="admonition-error-during-compilation" class="admonition admonish-bug small" role="note" aria-labelledby="admonition-error-during-compilation-title">
 <div class="admonition-title">
@@ -268,22 +268,6 @@ through as the compilation error.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -233,7 +233,7 @@ for entry in logbook.read().unwrap().iter() {
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>position (line number and character offset) of the <code>debug</code> call</td></tr>
 </tbody></table>
 </div>
-<p>The <em>source</em> of a script evaluation is any text string provided to an <a href="/engine/compile.html"><code>AST</code></a> via <code>AST::set_source</code>.</p>
+<p>The <em>source</em> of a script evaluation is any text string provided to an <a href="/book/engine/compile.html"><code>AST</code></a> via <code>AST::set_source</code>.</p>
 <div id="admonition-tip" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-title">
 <div class="admonition-title">
 <div id="admonition-tip-title">
@@ -242,7 +242,7 @@ for entry in logbook.read().unwrap().iter() {
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>If a <a href="/rust/modules/index.html">module</a> is loaded via an <a href="/language/modules/import.html"><code>import</code></a> statement, then the <em>source</em> of functions defined within
+<p>If a <a href="/book/rust/modules/index.html">module</a> is loaded via an <a href="/book/language/modules/import.html"><code>import</code></a> statement, then the <em>source</em> of functions defined within
 the module will be the module’s <em>path</em>.</p>
 </div>
 </div>
@@ -276,22 +276,6 @@ the module will be the module’s <em>path</em>.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

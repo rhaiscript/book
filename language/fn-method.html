@@ -181,15 +181,15 @@
 <a class="admonition-anchor-link" href="#admonition-functions-are-pure"></a>
 </div>
 <div>
-<p>The only way for a script-defined <a href="/language/functions.html">function</a> to change an external value is via <code>this</code>.</p>
+<p>The only way for a script-defined <a href="/book/language/functions.html">function</a> to change an external value is via <code>this</code>.</p>
 </div>
 </div>
-<p>Arguments passed to script-defined <a href="/language/functions.html">functions</a> are always by <em>value</em> because <a href="/language/functions.html">functions</a> are <em>pure</em>.</p>
-<p>However, <a href="/language/functions.html">functions</a> can also be called in <em>method-call</em> style (not available under <a href="/start/features.html"><code>no_object</code></a>):</p>
+<p>Arguments passed to script-defined <a href="/book/language/functions.html">functions</a> are always by <em>value</em> because <a href="/book/language/functions.html">functions</a> are <em>pure</em>.</p>
+<p>However, <a href="/book/language/functions.html">functions</a> can also be called in <em>method-call</em> style (not available under <a href="/book/start/features.html"><code>no_object</code></a>):</p>
 <blockquote>
 <p><em>object</em> <code>.</code> <em>method</em> <code>(</code> <em>parameters</em> … <code>)</code></p>
 </blockquote>
-<p>When a <a href="/language/functions.html">function</a> is called this way, the keyword <code>this</code> binds to the object in the method call and
+<p>When a <a href="/book/language/functions.html">function</a> is called this way, the keyword <code>this</code> binds to the object in the method call and
 can be changed.</p>
 <pre><code class="language-rust">fn change() {       // note that the method does not need a parameter
     this = 42;      // 'this' binds to the object in method-call
@@ -203,11 +203,11 @@ x == 42;            // 'x' is changed!
 
 change();           // &lt;- error: 'this' is unbound</code></pre>
 <h2 id="elvis-operator"><a class="header" href="#elvis-operator">Elvis Operator</a></h2>
-<p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis</em> operator</a> can be used to short-circuit the method call when the object itself is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis</em> operator</a> can be used to short-circuit the method call when the object itself is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <blockquote>
 <p><em>object</em> <code>?.</code> <em>method</em> <code>(</code> <em>parameters</em> … <code>)</code></p>
 </blockquote>
-<p>In the above, the <em>method</em> is never called if <em>object</em> is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>In the above, the <em>method</em> is never called if <em>object</em> is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <h2 id="restrict-the-type-of-this-in-function-definitions"><a class="header" href="#restrict-the-type-of-this-in-function-definitions">Restrict the Type of <code>this</code> in Function Definitions</a></h2>
 <div id="admonition-tip-automatically-global" class="admonition admonish-tip side wide" role="note" aria-labelledby="admonition-tip-automatically-global-title">
 <div class="admonition-title">
@@ -217,14 +217,14 @@ change();           // &lt;- error: 'this' is unbound</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-automatically-global"></a>
 </div>
 <div>
-<p>Methods defined this way are automatically exposed to the <a href="/language/fn-namespaces.html">global namespace</a>.</p>
+<p>Methods defined this way are automatically exposed to the <a href="/book/language/fn-namespaces.html">global namespace</a>.</p>
 </div>
 </div>
-<p>In many cases it may be desirable to implement <em>methods</em> for different <a href="/rust/custom-types.html">custom types</a> using
-script-defined <a href="/language/functions.html">functions</a>.</p>
+<p>In many cases it may be desirable to implement <em>methods</em> for different <a href="/book/rust/custom-types.html">custom types</a> using
+script-defined <a href="/book/language/functions.html">functions</a>.</p>
 <h3 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h3>
 <p>Doing so is brittle and requires a lot of type checking code because there can only be one
-<a href="/language/functions.html">function</a> definition for the same name and arity:</p>
+<a href="/book/language/functions.html">function</a> definition for the same name and arity:</p>
 <pre><code class="language-js">// Really painful way to define a method called 'do_update' on various data types
 fn do_update(x) {
     switch type_of(this) {
@@ -239,7 +239,7 @@ fn do_update(x) {
 }
 </code></pre>
 <h3 id="the-solution"><a class="header" href="#the-solution">The Solution</a></h3>
-<p>With a special syntax, it is possible to restrict a <a href="/language/functions.html">function</a> to be callable only when the object
+<p>With a special syntax, it is possible to restrict a <a href="/book/language/functions.html">function</a> to be callable only when the object
 pointed to by <code>this</code> is of a certain type:</p>
 <blockquote>
 <p><code>fn</code>  <em>type name</em> <code>.</code> <em>method</em> <code>(</code> <em>parameters</em> … <code>)  {</code>  …  <code>}</code></p>
@@ -248,7 +248,7 @@ pointed to by <code>this</code> is of a certain type:</p>
 <blockquote>
 <p><code>fn</code>  <code>"</code><em>type name string</em><code>"</code> <code>.</code> <em>method</em> <code>(</code> <em>parameters</em> … <code>)  {</code>  …  <code>}</code></p>
 </blockquote>
-<p>Needless to say, this <em>typed method</em> definition style is not available under <a href="/start/features.html"><code>no_object</code></a>.</p>
+<p>Needless to say, this <em>typed method</em> definition style is not available under <a href="/book/start/features.html"><code>no_object</code></a>.</p>
 <div id="admonition-type-name-must-be-the-same-as-type_of" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-type-name-must-be-the-same-as-type_of-title">
 <div class="admonition-title">
 <div id="admonition-type-name-must-be-the-same-as-type_of-title">
@@ -257,7 +257,7 @@ pointed to by <code>this</code> is of a certain type:</p>
 <a class="admonition-anchor-link" href="#admonition-type-name-must-be-the-same-as-type_of"></a>
 </div>
 <div>
-<p>The <em>type name</em> specified in front of the <a href="/language/functions.html">function</a> name must match the output of <a href="/language/type-of.html"><code>type_of</code></a>
+<p>The <em>type name</em> specified in front of the <a href="/book/language/functions.html">function</a> name must match the output of <a href="/book/language/type-of.html"><code>type_of</code></a>
 for the required type.</p>
 </div>
 </div>
@@ -322,7 +322,7 @@ is_def_fn("int", "do_update", 2) == true;
 </code></pre>
 <h2 id="bind-to-this-for-module-functions"><a class="header" href="#bind-to-this-for-module-functions">Bind to <code>this</code> for Module Functions</a></h2>
 <h3 id="the-problem-1"><a class="header" href="#the-problem-1">The Problem</a></h3>
-<p>The <em>method-call</em> syntax is not possible for <a href="/language/functions.html">functions</a> <a href="/language/modules/import.html">imported</a> from <a href="/rust/modules/index.html">modules</a>.</p>
+<p>The <em>method-call</em> syntax is not possible for <a href="/book/language/functions.html">functions</a> <a href="/book/language/modules/import.html">imported</a> from <a href="/book/rust/modules/index.html">modules</a>.</p>
 <pre><code class="language-js">import "my_module" as foo;
 
 let x = 42;
@@ -330,7 +330,7 @@ let x = 42;
 x.foo::change_value(1);     // &lt;- syntax error
 </code></pre>
 <h3 id="the-solution-1"><a class="header" href="#the-solution-1">The Solution</a></h3>
-<p>In order to call a <a href="/rust/modules/index.html">module</a> <a href="/language/functions.html">function</a> as a method, it must be defined with a restriction on the
+<p>In order to call a <a href="/book/rust/modules/index.html">module</a> <a href="/book/language/functions.html">function</a> as a method, it must be defined with a restriction on the
 type of object pointed to by <code>this</code>:</p>
 <pre><code class="language-js">┌────────────────┐
 │ my_module.rhai │
@@ -386,22 +386,6 @@ x == 43;
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

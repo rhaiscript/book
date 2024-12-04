@@ -186,27 +186,27 @@
 so you cannot put attributes on it.</p>
 </div>
 </div>
-<p>It is usually convenient to package a <a href="/rust/custom-types.html">custom type</a>’s API (i.e. <a href="/rust/methods.html">methods</a>,
-<a href="/rust/getters-setters.html">properties</a>, <a href="/rust/indexers.html">indexers</a> and <a href="/language/iterator.html">type iterators</a>) together such that they can be more
+<p>It is usually convenient to package a <a href="/book/rust/custom-types.html">custom type</a>’s API (i.e. <a href="/book/rust/methods.html">methods</a>,
+<a href="/book/rust/getters-setters.html">properties</a>, <a href="/book/rust/indexers.html">indexers</a> and <a href="/book/language/iterator.html">type iterators</a>) together such that they can be more
 easily managed.</p>
 <p>This can be achieved by manually implementing the <code>CustomType</code> trait, which contains only a single method:</p>
 <blockquote>
 <pre><code class="language-rust">fn build(builder: TypeBuilder&lt;T&gt;)</code></pre>
 </blockquote>
-<p>The <code>TypeBuilder</code> parameter provides a range of convenient methods to register <a href="/rust/methods.html">methods</a>, property
-<a href="/rust/getters-setters.html">getters/setters</a>, <a href="/rust/indexers.html">indexers</a> and <a href="/language/iterator.html">type iterators</a> of a <a href="/rust/custom-types.html">custom type</a>:</p>
+<p>The <code>TypeBuilder</code> parameter provides a range of convenient methods to register <a href="/book/rust/methods.html">methods</a>, property
+<a href="/book/rust/getters-setters.html">getters/setters</a>, <a href="/book/rust/indexers.html">indexers</a> and <a href="/book/language/iterator.html">type iterators</a> of a <a href="/book/rust/custom-types.html">custom type</a>:</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>with_name</code></td><td>set a friendly name</td></tr>
-<tr><td><code>on_print</code></td><td>register the <a href="/rust/print-custom.html"><code>to_string</code></a> function that pretty-prints the <a href="/rust/custom-types.html">custom type</a></td></tr>
-<tr><td><code>on_debug</code></td><td>register the <a href="/rust/print-custom.html"><code>to_debug</code></a> function that debug-prints the <a href="/rust/custom-types.html">custom type</a></td></tr>
-<tr><td><code>with_fn</code></td><td>register a <a href="/rust/methods.html">method</a> (or any function really)</td></tr>
-<tr><td><code>with_get</code></td><td>register a property <a href="/rust/getters-setters.html">getter</a></td></tr>
-<tr><td><code>with_set</code></td><td>register a property <a href="/rust/getters-setters.html">getter</a></td></tr>
-<tr><td><code>with_get_set</code></td><td>register property <a href="/rust/getters-setters.html">getters/setters</a></td></tr>
-<tr><td><code>with_indexer_get</code></td><td>register an <a href="/rust/indexers.html">indexer</a> get function</td></tr>
-<tr><td><code>with_indexer_set</code></td><td>register an <a href="/rust/indexers.html">indexer</a> set function</td></tr>
-<tr><td><code>with_indexer_get_set</code></td><td>register <a href="/rust/indexers.html">indexer</a> get/set functions</td></tr>
-<tr><td><code>is_iterable</code></td><td>automatically register a <a href="/language/iterator.html">type iterator</a> if the <a href="/rust/custom-types.html">custom type</a> is iterable</td></tr>
+<tr><td><code>on_print</code></td><td>register the <a href="/book/rust/print-custom.html"><code>to_string</code></a> function that pretty-prints the <a href="/book/rust/custom-types.html">custom type</a></td></tr>
+<tr><td><code>on_debug</code></td><td>register the <a href="/book/rust/print-custom.html"><code>to_debug</code></a> function that debug-prints the <a href="/book/rust/custom-types.html">custom type</a></td></tr>
+<tr><td><code>with_fn</code></td><td>register a <a href="/book/rust/methods.html">method</a> (or any function really)</td></tr>
+<tr><td><code>with_get</code></td><td>register a property <a href="/book/rust/getters-setters.html">getter</a></td></tr>
+<tr><td><code>with_set</code></td><td>register a property <a href="/book/rust/getters-setters.html">getter</a></td></tr>
+<tr><td><code>with_get_set</code></td><td>register property <a href="/book/rust/getters-setters.html">getters/setters</a></td></tr>
+<tr><td><code>with_indexer_get</code></td><td>register an <a href="/book/rust/indexers.html">indexer</a> get function</td></tr>
+<tr><td><code>with_indexer_set</code></td><td>register an <a href="/book/rust/indexers.html">indexer</a> set function</td></tr>
+<tr><td><code>with_indexer_get_set</code></td><td>register <a href="/book/rust/indexers.html">indexer</a> get/set functions</td></tr>
+<tr><td><code>is_iterable</code></td><td>automatically register a <a href="/book/language/iterator.html">type iterator</a> if the <a href="/book/rust/custom-types.html">custom type</a> is iterable</td></tr>
 </tbody></table>
 </div><div id="admonition-tip-use-plugin-module-if-starting-from-scratch" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-use-plugin-module-if-starting-from-scratch-title">
 <div class="admonition-title">
@@ -217,7 +217,7 @@ easily managed.</p>
 </div>
 <div>
 <p>The <code>CustomType</code> trait is typically used on external types that are already defined.</p>
-<p>To define a <a href="/rust/custom-types.html">custom type</a> and implement its API from scratch, it is more convenient to use a <a href="/plugins/module.html">plugin module</a>.</p>
+<p>To define a <a href="/book/rust/custom-types.html">custom type</a> and implement its API from scratch, it is more convenient to use a <a href="/book/plugins/module.html">plugin module</a>.</p>
 </div>
 </div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -309,8 +309,8 @@ engine.build_type::&lt;Vec3&gt;();</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tldr--why-isnt-there-is_indexable"></a>
 </div>
 <div>
-<p>Technically speaking, <code>TypeBuilder</code> can automatically register an <a href="/rust/indexers.html">indexer</a> get function if the <a href="/rust/custom-types.html">custom type</a> implements <code>Index</code>.
-Similarly, it can automatically register an <a href="/rust/indexers.html">indexer</a> set function for <code>IndexMut</code>.</p>
+<p>Technically speaking, <code>TypeBuilder</code> can automatically register an <a href="/book/rust/indexers.html">indexer</a> get function if the <a href="/book/rust/custom-types.html">custom type</a> implements <code>Index</code>.
+Similarly, it can automatically register an <a href="/book/rust/indexers.html">indexer</a> set function for <code>IndexMut</code>.</p>
 <p>In practice, however, this is usually not desirable because most <code>Index</code>/<code>IndexMut</code> implementations panic on invalid indices.</p>
 <p>For Rhai, it is necessary to handle invalid indices properly by returning an error.</p>
 <p>Therefore, in the example above, the <code>with_indexer_get_set</code> method properly handles invalid indices by returning errors.</p>
@@ -346,22 +346,6 @@ Similarly, it can automatically register an <a href="/rust/indexers.html">indexe
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

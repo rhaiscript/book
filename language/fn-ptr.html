@@ -181,11 +181,11 @@
 <a class="admonition-anchor-link" href="#admonition-trivia"></a>
 </div>
 <div>
-<p>A function pointer simply stores the <em>name</em> of the <a href="/language/functions.html">function</a> as a <a href="/language/strings-chars.html">string</a>.</p>
+<p>A function pointer simply stores the <em>name</em> of the <a href="/book/language/functions.html">function</a> as a <a href="/book/language/strings-chars.html">string</a>.</p>
 </div>
 </div>
 <p>It is possible to store a <em>function pointer</em> in a variable just like a normal value.</p>
-<p>A function pointer is created via the <code>Fn</code> <a href="/language/functions.html">function</a>, which takes a <a href="/language/strings-chars.html">string</a> parameter.</p>
+<p>A function pointer is created via the <code>Fn</code> <a href="/book/language/functions.html">function</a>, which takes a <a href="/book/language/strings-chars.html">string</a> parameter.</p>
 <p>Call a function pointer via the <code>call</code> method.</p>
 <h2 id="short-hand-notation"><a class="header" href="#short-hand-notation">Short-Hand Notation</a></h2>
 <div id="admonition-not-for-native" class="admonition admonish-warning side" role="note" aria-labelledby="admonition-not-for-native-title">
@@ -199,10 +199,10 @@
 <p>Native Rust functions cannot use this short-hand notation.</p>
 </div>
 </div>
-<p>Having to write <code>Fn("foo")</code> in order to create a function pointer to the <a href="/language/functions.html">function</a> <code>foo</code> is a chore,
+<p>Having to write <code>Fn("foo")</code> in order to create a function pointer to the <a href="/book/language/functions.html">function</a> <code>foo</code> is a chore,
 so there is a short-hand available.</p>
-<p>A function pointer to any <em>script-defined</em> <a href="/language/functions.html">function</a> <em>within the same script</em> can be obtained simply
-by referring to the <a href="/language/functions.html">function’s</a> name.</p>
+<p>A function pointer to any <em>script-defined</em> <a href="/book/language/functions.html">function</a> <em>within the same script</em> can be obtained simply
+by referring to the <a href="/book/language/functions.html">function’s</a> name.</p>
 <pre><code class="language-rust">fn foo() { ... }        // function definition
 
 let f = foo;            // function pointer to 'foo'
@@ -210,7 +210,7 @@ let f = foo;            // function pointer to 'foo'
 let f = Fn("foo");      // &lt;- the above is equivalent to this
 
 let g = bar;            // error: variable 'bar' not found</code></pre>
-<p>The short-hand notation is particularly useful when passing <a href="/language/functions.html">functions</a> as <a href="/language/fn-closure.html">closure</a> arguments.</p>
+<p>The short-hand notation is particularly useful when passing <a href="/book/language/functions.html">functions</a> as <a href="/book/language/fn-closure.html">closure</a> arguments.</p>
 <pre><code class="language-rust">fn is_even(n) { n % 2 == 0 }
 
 let array = [1, 2, 3, 4, 5];
@@ -221,12 +221,12 @@ array.filter(Fn("is_even"));    // &lt;- the above is equivalent to this
 
 array.filter(|n| n % 2 == 0);   // &lt;- ... or this</code></pre>
 <h2 id="built-in-functions"><a class="header" href="#built-in-functions">Built-in Functions</a></h2>
-<p>The following standard methods (mostly defined in the <a href="/rust/packages/builtin.html"><code>BasicFnPackage</code></a> but
-excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>) operate on function pointers.</p>
+<p>The following standard methods (mostly defined in the <a href="/book/rust/packages/builtin.html"><code>BasicFnPackage</code></a> but
+excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>) operate on function pointers.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>name</code> method and property</td><td><em>none</em></td><td>returns the name of the <a href="/language/functions.html">function</a> encapsulated by the function pointer</td></tr>
-<tr><td><code>is_anonymous</code> method and property</td><td><em>none</em></td><td>does the function pointer refer to an <a href="/language/fn-anon.html">anonymous function</a>? Not available under <a href="/start/features.html"><code>no_function</code></a>.</td></tr>
-<tr><td><code>call</code></td><td><em>arguments</em></td><td>calls the <a href="/language/functions.html">function</a> matching the function pointer’s name with the <em>arguments</em></td></tr>
+<tr><td><code>name</code> method and property</td><td><em>none</em></td><td>returns the name of the <a href="/book/language/functions.html">function</a> encapsulated by the function pointer</td></tr>
+<tr><td><code>is_anonymous</code> method and property</td><td><em>none</em></td><td>does the function pointer refer to an <a href="/book/language/fn-anon.html">anonymous function</a>? Not available under <a href="/book/start/features.html"><code>no_function</code></a>.</td></tr>
+<tr><td><code>call</code></td><td><em>arguments</em></td><td>calls the <a href="/book/language/functions.html">function</a> matching the function pointer’s name with the <em>arguments</em></td></tr>
 </tbody></table>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -268,9 +268,9 @@ hello.call(0);              // error: function not found - 'hello_world (i64)'</
 </div>
 <div>
 <p>Beware that function pointers are <em>not</em> first-class functions.</p>
-<p>They are <em>syntactic sugar</em> only, capturing only the <em>name</em> of a <a href="/language/functions.html">function</a> to call.
-They do not hold the actual <a href="/language/functions.html">functions</a>.</p>
-<p>The actual <a href="/language/functions.html">function</a> must be defined in the appropriate <a href="/language/fn-namespaces.html">namespace</a>
+<p>They are <em>syntactic sugar</em> only, capturing only the <em>name</em> of a <a href="/book/language/functions.html">function</a> to call.
+They do not hold the actual <a href="/book/language/functions.html">functions</a>.</p>
+<p>The actual <a href="/book/language/functions.html">function</a> must be defined in the appropriate <a href="/book/language/fn-namespaces.html">namespace</a>
 for the call to succeed.</p>
 </div>
 </div>
@@ -282,8 +282,8 @@ for the call to succeed.</p>
 <a class="admonition-anchor-link" href="#admonition-global-namespace-only"></a>
 </div>
 <div>
-<p>Because of their dynamic nature, function pointers cannot refer to functions in <a href="/language/modules/import.html"><code>import</code></a>-ed <a href="/rust/modules/index.html">modules</a>.</p>
-<p>They can only refer to <a href="/language/functions.html">functions</a> within the global <a href="/language/fn-namespaces.html">namespace</a>.</p>
+<p>Because of their dynamic nature, function pointers cannot refer to functions in <a href="/book/language/modules/import.html"><code>import</code></a>-ed <a href="/book/rust/modules/index.html">modules</a>.</p>
+<p>They can only refer to <a href="/book/language/functions.html">functions</a> within the global <a href="/book/language/fn-namespaces.html">namespace</a>.</p>
 <pre><code class="language-js">import "foo" as f;          // assume there is 'f::do_work()'
 
 f::do_work();               // works!
@@ -304,7 +304,7 @@ p.call();                   // works!
 <p>The purpose of function pointers is to enable rudimentary <em>dynamic dispatch</em>, meaning to determine,
 at runtime, which function to call among a group.</p>
 <p>Although it is possible to simulate dynamic dispatch via a number and a large
-<a href="/language/if.html"><code>if-then-else-if</code></a> statement, using function pointers significantly simplifies the code.</p>
+<a href="/book/language/if.html"><code>if-then-else-if</code></a> statement, using function pointers significantly simplifies the code.</p>
 <pre><code class="language-rust">let x = some_calculation();
 
 // These are the functions to call depending on the value of 'x'
@@ -366,12 +366,12 @@ x.call(func, 1);            // 'this' is bound to 'x', dispatched to 'func'
 x == 42;</code></pre>
 <p>Beware that this only works for <a href="fn-method.html"><em>method-call</em></a> style.
 Normal function-call style cannot bind the <code>this</code> pointer (for syntactic reasons).</p>
-<p>Therefore, obviously, binding the <code>this</code> pointer is unsupported under <a href="/start/features.html"><code>no_object</code></a>.</p>
+<p>Therefore, obviously, binding the <code>this</code> pointer is unsupported under <a href="/book/start/features.html"><code>no_object</code></a>.</p>
 <h2 id="call-a-function-pointer-within-a-rust-function-as-a-callback"><a class="header" href="#call-a-function-pointer-within-a-rust-function-as-a-callback">Call a Function Pointer within a Rust Function (as a Callback)</a></h2>
-<p>It is completely normal to register a Rust function with an <a href="/engine/hello-world.html"><code>Engine</code></a> that takes parameters
+<p>It is completely normal to register a Rust function with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> that takes parameters
 whose types are function pointers.  The Rust type in question is <code>rhai::FnPtr</code>.</p>
 <p>A function pointer in Rhai is essentially syntactic sugar wrapping the <em>name</em> of a function
-to call in script.  Therefore, the script’s <em>execution context</em> (i.e. <a href="/rust/context.html"><code>NativeCallContext</code></a>)
+to call in script.  Therefore, the script’s <em>execution context</em> (i.e. <a href="/book/rust/context.html"><code>NativeCallContext</code></a>)
 is needed in order to call a function pointer.</p>
 <pre><code class="language-rust">use rhai::{Engine, FnPtr, NativeCallContext};
 
@@ -389,8 +389,8 @@ fn super_call(context: NativeCallContext, callback: FnPtr, value: i64)
 
 engine.register_fn("super_call", super_call);</code></pre>
 <h2 id="call-a-function-pointer-directly"><a class="header" href="#call-a-function-pointer-directly">Call a Function Pointer Directly</a></h2>
-<p>The <code>FnPtr::call</code> method allows the function pointer to be called directly on any <a href="/engine/hello-world.html"><code>Engine</code></a> and
-<a href="/engine/compile.html"><code>AST</code></a>, making it possible to reuse the <code>FnPtr</code> data type in may different calls and scripting
+<p>The <code>FnPtr::call</code> method allows the function pointer to be called directly on any <a href="/book/engine/hello-world.html"><code>Engine</code></a> and
+<a href="/book/engine/compile.html"><code>AST</code></a>, making it possible to reuse the <code>FnPtr</code> data type in may different calls and scripting
 environments.</p>
 <pre><code class="language-rust">use rhai::{Engine, FnPtr};
 
@@ -445,22 +445,6 @@ result == "hello42";</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

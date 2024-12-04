@@ -181,15 +181,15 @@
 <a class="admonition-anchor-link" href="#admonition-tip-property-bag"></a>
 </div>
 <div>
-<p>Such an <a href="/rust/indexers.html">indexer</a> allows easy creation of <em>property bags</em> (similar to <a href="/language/object-maps.html">object maps</a>)
+<p>Such an <a href="/book/rust/indexers.html">indexer</a> allows easy creation of <em>property bags</em> (similar to <a href="/book/language/object-maps.html">object maps</a>)
 which can dynamically add/remove properties.</p>
 </div>
 </div>
-<p>An <a href="/rust/indexers.html">indexer</a> taking a <a href="/language/strings-chars.html">string</a> index is a special case – it acts as a <em>fallback</em> to property
-<a href="/rust/getters-setters.html">getters/setters</a>.</p>
-<p>During a property access, if the appropriate property <a href="/rust/getters-setters.html">getter/setter</a> is not
-defined, an <a href="/rust/indexers.html">indexer</a> is called and passed the string name of the property.</p>
-<p>This is also extremely useful as a short-hand for <a href="/rust/indexers.html">indexers</a>, when the <a href="/language/strings-chars.html">string</a> keys conform to
+<p>An <a href="/book/rust/indexers.html">indexer</a> taking a <a href="/book/language/strings-chars.html">string</a> index is a special case – it acts as a <em>fallback</em> to property
+<a href="/book/rust/getters-setters.html">getters/setters</a>.</p>
+<p>During a property access, if the appropriate property <a href="/book/rust/getters-setters.html">getter/setter</a> is not
+defined, an <a href="/book/rust/indexers.html">indexer</a> is called and passed the string name of the property.</p>
+<p>This is also extremely useful as a short-hand for <a href="/book/rust/indexers.html">indexers</a>, when the <a href="/book/language/strings-chars.html">string</a> keys conform to
 property name syntax.</p>
 <pre><code class="language-rust">// Assume 'obj' has an indexer defined with string parameters...
 
@@ -212,10 +212,10 @@ let x = obj.hello_world;</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-swizzling"></a>
 </div>
 <div>
-<p>Since an <a href="/rust/indexers.html">indexer</a> can serve as a <em>fallback</em> to <a href="/rust/getters-setters.html">property access</a>,
+<p>Since an <a href="/book/rust/indexers.html">indexer</a> can serve as a <em>fallback</em> to <a href="/book/rust/getters-setters.html">property access</a>,
 it is possible to implement <a href="https://en.wikipedia.org/wiki/Swizzling_(computer_graphics)">swizzling</a>
-of properties for use with vector-like <a href="/rust/custom-types.html">custom types</a>.</p>
-<p>Such an <a href="/rust/indexers.html">indexer</a> defined on a <a href="/rust/custom-types.html">custom type</a> (for instance, <code>Float4</code>) can inspect the property name,
+of properties for use with vector-like <a href="/book/rust/custom-types.html">custom types</a>.</p>
+<p>Such an <a href="/book/rust/indexers.html">indexer</a> defined on a <a href="/book/rust/custom-types.html">custom type</a> (for instance, <code>Float4</code>) can inspect the property name,
 construct a proper return value based on the swizzle pattern, and return it.</p>
 <pre><code class="language-rust">// Assume 'v' is a 'Float4'
 let r = v.w;        // -&gt; v.w
@@ -226,8 +226,8 @@ let r = v.yyzzxx;   // error: property 'yyzzxx' not found</code></pre>
 </div>
 </div>
 <h2 id="caveat--reverse-is-not-true"><a class="header" href="#caveat--reverse-is-not-true">Caveat – Reverse is NOT True</a></h2>
-<p>The reverse, however, is not true – when an <a href="/rust/indexers.html">indexer</a> fails or doesn’t exist, the corresponding
-property <a href="/rust/getters-setters.html">getter/setter</a>, if any, is not called.</p>
+<p>The reverse, however, is not true – when an <a href="/book/rust/indexers.html">indexer</a> fails or doesn’t exist, the corresponding
+property <a href="/book/rust/getters-setters.html">getter/setter</a>, if any, is not called.</p>
 <pre><code class="language-rust">type MyType = HashMap&lt;String, i64&gt;;
 
 let mut engine = Engine::new();
@@ -295,22 +295,6 @@ engine.run(r#"let ts = new_ts(); print(ts["hello"]);"#);
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

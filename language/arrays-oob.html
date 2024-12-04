@@ -181,13 +181,13 @@
 <a class="admonition-anchor-link" href="#admonition-requires-internals"></a>
 </div>
 <div>
-<p>This is an advanced feature that requires the <a href="/start/features.html"><code>internals</code></a> feature to be enabled.</p>
+<p>This is an advanced feature that requires the <a href="/book/start/features.html"><code>internals</code></a> feature to be enabled.</p>
 </div>
 </div>
-<p>Normally, when an index is out-of-bounds for an <a href="/language/arrays.html">array</a>, an error is raised.</p>
+<p>Normally, when an index is out-of-bounds for an <a href="/book/language/arrays.html">array</a>, an error is raised.</p>
 <p>It is possible to completely control this behavior via a special callback function
-registered into an <a href="/engine/hello-world.html"><code>Engine</code></a> via <code>on_invalid_array_index</code>.</p>
-<p>Using this callback, for instance, it is simple to instruct Rhai to extend the <a href="/language/arrays.html">array</a> to
+registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>on_invalid_array_index</code>.</p>
+<p>Using this callback, for instance, it is simple to instruct Rhai to extend the <a href="/book/language/arrays.html">array</a> to
 accommodate this new element, or to return a default value instead of raising an error.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
@@ -196,16 +196,16 @@ accommodate this new element, or to return a default value instead of raising an
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>array</code></td><td style="text-align: center"><a href="/language/arrays.html"><code>&amp;mut Array</code></a></td><td>the <a href="/language/arrays.html">array</a> being accessed</td></tr>
+<tr><td><code>array</code></td><td style="text-align: center"><a href="/book/language/arrays.html"><code>&amp;mut Array</code></a></td><td>the <a href="/book/language/arrays.html">array</a> being accessed</td></tr>
 <tr><td><code>index</code></td><td style="text-align: center"><code>i64</code></td><td>index value</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 </tbody></table>
 </div>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code>.</p>
-<p><a href="https://docs.rs/rhai/latest/rhai/enum.Target.html"><code>Target</code></a> is an advanced type, available only under the <a href="/start/features.html"><code>internals</code></a> feature, that represents a
-<em>reference</em> to a <a href="/language/dynamic.html"><code>Dynamic</code></a> value.</p>
-<p>It can be used to point to a particular value within the <a href="/language/arrays.html">array</a> or a new temporary value.</p>
+<p><a href="https://docs.rs/rhai/latest/rhai/enum.Target.html"><code>Target</code></a> is an advanced type, available only under the <a href="/book/start/features.html"><code>internals</code></a> feature, that represents a
+<em>reference</em> to a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value.</p>
+<p>It can be used to point to a particular value within the <a href="/book/language/arrays.html">array</a> or a new temporary value.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust">engine.on_invalid_array_index(|arr, index, _| {
     match index {
@@ -258,22 +258,6 @@ accommodate this new element, or to return a default value instead of raising an
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

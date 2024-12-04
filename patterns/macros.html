@@ -183,19 +183,19 @@
 <div>
 <ul>
 <li>
-<p>Scripts need to access existing data in <a href="/language/variables.html">variables</a>.</p>
+<p>Scripts need to access existing data in <a href="/book/language/variables.html">variables</a>.</p>
 </li>
 <li>
 <p>The particular fields to access correspond to long/complex expressions (e.g. long
-<a href="/rust/indexers.html">indexing</a> and/or <a href="/rust/getters-setters.html">property</a> chains <code>foo[x][y].bar[z].baz</code>).</p>
+<a href="/book/rust/indexers.html">indexing</a> and/or <a href="/book/rust/getters-setters.html">property</a> chains <code>foo[x][y].bar[z].baz</code>).</p>
 </li>
 <li>
 <p>Usage is prevalent inside the scripts, requiring extensive duplications of code that
 are prone to typos and errors.</p>
 </li>
 <li>
-<p>There are a few such <a href="/language/variables.html">variables</a> to modify at the same time – otherwise, it would
-be simpler to bind the <code>this</code> pointer to the <a href="/language/variables.html">variable</a>.</p>
+<p>There are a few such <a href="/book/language/variables.html">variables</a> to modify at the same time – otherwise, it would
+be simpler to bind the <code>this</code> pointer to the <a href="/book/language/variables.html">variable</a>.</p>
 </li>
 </ul>
 </div>
@@ -210,7 +210,7 @@ be simpler to bind the <code>this</code> pointer to the <a href="/language/varia
 <div>
 <ul>
 <li>
-<p>Pick a <em>macro</em> syntax that is unlikely to conflict with content in literal <a href="/language/strings-chars.html">strings</a>.</p>
+<p>Pick a <em>macro</em> syntax that is unlikely to conflict with content in literal <a href="/book/language/strings-chars.html">strings</a>.</p>
 </li>
 <li>
 <p>Before script evaluation/compilation, globally replace macros with their corresponding expansions.</p>
@@ -232,7 +232,7 @@ They are not <em>REAL</em> macros.</p>
 </div>
 </div>
 <p>Pick a syntax that is intuitive for the domain but <strong>unlikely to occur naturally inside
-<a href="/language/strings-chars.html">string</a> literals</strong>.</p>
+<a href="/book/language/strings-chars.html">string</a> literals</strong>.</p>
 <div class="table-wrapper"><table><thead><tr><th>Sample Syntax</th><th>Sample usage</th></tr></thead><tbody>
 <tr><td><code>#FOO</code></td><td><code>#FOO = 42;</code></td></tr>
 <tr><td><code>$Bar</code></td><td><code>$Bar.work();</code></td></tr>
@@ -248,7 +248,7 @@ They are not <em>REAL</em> macros.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-avoid-normal-words"></a>
 </div>
 <div>
-<p>Avoid normal syntax that may show up inside a <a href="/language/strings-chars.html">string</a> literal.</p>
+<p>Avoid normal syntax that may show up inside a <a href="/book/language/strings-chars.html">string</a> literal.</p>
 <p>For example, if using <code>Target</code> as a macro:</p>
 <pre><code class="language-rust">// This script...
 Target.do_damage(10);
@@ -347,22 +347,6 @@ in the original, unexpanded scripts.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

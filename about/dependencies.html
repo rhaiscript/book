@@ -179,9 +179,9 @@
 <tr><td><a href="https://crates.io/crates/smallvec"><code>smallvec</code></a></td><td><code>Vec</code> variant that stores a number of items inline</td><td>most functions have very few parameters, and avoiding allocations result in significant performance improvement</td></tr>
 <tr><td><a href="https://crates.io/crates/num-traits"><code>num-traits</code></a></td><td>numeric traits</td><td>for use with macros defining arithmetic functions and operators</td></tr>
 <tr><td><a href="https://crates.io/crates/ahash"><code>ahash</code></a></td><td>fast hashing for data</td><td>not cryptographically secure, thus faster than standard Rust hashing; Rhai does a <em>lot</em> of hashing so this matters</td></tr>
-<tr><td><a href="https://crates.io/crates/once_cell"><code>once_cell</code></a></td><td>global static data</td><td>fixed hashing keys for <a href="/patterns/static-hash.html">static hashing</a></td></tr>
-<tr><td><a href="https://crates.io/crates/bitflags"><code>bitflags</code></a></td><td>bit fields</td><td>store flags in <a href="/engine/compile.html"><code>AST</code></a> nodes to minimize memory usage</td></tr>
-<tr><td><a href="https://crates.io/crates/smartstring"><code>smartstring</code></a></td><td><code>String</code> variant that stores short <a href="/language/strings-chars.html">strings</a> inline</td><td>most <a href="/language/strings-chars.html">strings</a> in scripts (e.g. keywords, properties, symbols, variables, function names etc.) are short, and avoiding allocations result in significant performance improvement</td></tr>
+<tr><td><a href="https://crates.io/crates/once_cell"><code>once_cell</code></a></td><td>global static data</td><td>fixed hashing keys for <a href="/book/patterns/static-hash.html">static hashing</a></td></tr>
+<tr><td><a href="https://crates.io/crates/bitflags"><code>bitflags</code></a></td><td>bit fields</td><td>store flags in <a href="/book/engine/compile.html"><code>AST</code></a> nodes to minimize memory usage</td></tr>
+<tr><td><a href="https://crates.io/crates/smartstring"><code>smartstring</code></a></td><td><code>String</code> variant that stores short <a href="/book/language/strings-chars.html">strings</a> inline</td><td>most <a href="/book/language/strings-chars.html">strings</a> in scripts (e.g. keywords, properties, symbols, variables, function names etc.) are short, and avoiding allocations result in significant performance improvement</td></tr>
 </tbody></table>
 </div>
 <h2 id="no-std-dependencies"><a class="header" href="#no-std-dependencies"><code>no-std</code> Dependencies</a></h2>
@@ -194,18 +194,18 @@
 </div>
 <h2 id="feature-dependencies"><a class="header" href="#feature-dependencies">Feature Dependencies</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Crate</th><th style="text-align: center">Pulled in by feature</th></tr></thead><tbody>
-<tr><td><a href="https://crates.io/crates/rust_decimal"><code>rust_decimal</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>decimal</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/unicode-xid"><code>unicode-xid</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>unicode-xid-ident</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/serde"><code>serde</code></a></td><td style="text-align: center"><a href="/rust/serde.html"><code>serde</code></a>, <a href="/start/features.html"><code>metadata</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>metadata</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/rust_decimal"><code>rust_decimal</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>decimal</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/unicode-xid"><code>unicode-xid</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>unicode-xid-ident</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/serde"><code>serde</code></a></td><td style="text-align: center"><a href="/book/rust/serde.html"><code>serde</code></a>, <a href="/book/start/features.html"><code>metadata</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>metadata</code></a></td></tr>
 <tr><td><a href="https://crates.io/crates/rustyline"><code>rustyline</code></a></td><td style="text-align: center"><code>bin-features</code></td></tr>
 </tbody></table>
 </div>
 <h2 id="wasm-dependencies"><a class="header" href="#wasm-dependencies">WASM Dependencies</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Crate</th><th style="text-align: center">Pulled in by feature</th></tr></thead><tbody>
-<tr><td><a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>wasm-bindgen</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/stdweb"><code>stdweb</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>stdweb</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/instant"><code>instant</code></a></td><td style="text-align: center"><a href="/start/features.html"><code>wasm-bindgen</code></a>, <a href="/start/features.html"><code>stdweb</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>wasm-bindgen</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/stdweb"><code>stdweb</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>stdweb</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/instant"><code>instant</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>wasm-bindgen</code></a>, <a href="/book/start/features.html"><code>stdweb</code></a></td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -237,22 +237,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

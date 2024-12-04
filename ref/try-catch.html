@@ -284,7 +284,7 @@ the particular error, including its type, line and character position (if any), 
 <tr><td>Syntax error during parsing</td><td>invalid script</td></tr>
 <tr><td>[Custom syntax] mismatch error</td><td>incompatible [<code>Engine</code>] instance</td></tr>
 <tr><td>Script evaluation metrics exceeding [limits][safety]</td><td>[safety] protection</td></tr>
-<tr><td>Script evaluation manually <a href="/safety/progress.html">terminated</a></td><td>[safety] protection</td></tr>
+<tr><td>Script evaluation manually <a href="/book/safety/progress.html">terminated</a></td><td>[safety] protection</td></tr>
 </tbody></table>
 </div></div>
 </div>
@@ -318,22 +318,6 @@ the particular error, including its type, line and character position (if any), 
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

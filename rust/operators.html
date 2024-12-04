@@ -175,11 +175,11 @@
                         <h1 id="operator-overloading"><a class="header" href="#operator-overloading">Operator Overloading</a></h1>
 <p>In Rhai, a lot of functionalities are actually implemented as functions, including basic operations
 such as arithmetic calculations.</p>
-<p>For example, in the expression “<code>a + b</code>”, the <code>+</code> <a href="/appendix/operators.html#operators">operator</a> actually calls a function named “<code>+</code>”!</p>
+<p>For example, in the expression “<code>a + b</code>”, the <code>+</code> <a href="/book/appendix/operators.html#operators">operator</a> actually calls a function named “<code>+</code>”!</p>
 <pre><code class="language-rust">let x = a + b;
 
 let x = +(a, b);        // &lt;- the above is equivalent to this function call</code></pre>
-<p>Similarly, comparison <a href="/appendix/operators.html#operators">operators</a> including <code>==</code>, <code>!=</code> etc. are all implemented as functions,
+<p>Similarly, comparison <a href="/book/appendix/operators.html#operators">operators</a> including <code>==</code>, <code>!=</code> etc. are all implemented as functions,
 with the stark exception of <code>&amp;&amp;</code>, <code>||</code> and <code>??</code>.</p>
 <div id="admonition---and--cannot-be-overloaded" class="admonition admonish-warning small" role="note" aria-labelledby="admonition---and--cannot-be-overloaded-title">
 <div class="admonition-title">
@@ -189,16 +189,16 @@ with the stark exception of <code>&amp;&amp;</code>, <code>||</code> and <code>?
 <a class="admonition-anchor-link" href="#admonition---and--cannot-be-overloaded"></a>
 </div>
 <div>
-<p>Because they <a href="/language/logic.html#boolean-operators"><em>short-circuit</em></a>, <code>&amp;&amp;</code>, <code>||</code> and <code>??</code> are
+<p>Because they <a href="/book/language/logic.html#boolean-operators"><em>short-circuit</em></a>, <code>&amp;&amp;</code>, <code>||</code> and <code>??</code> are
 handled specially and <em>not</em> via a function.</p>
 <p>Overriding them has no effect at all.</p>
 </div>
 </div>
 <h2 id="overload-operator-via-rust-function"><a class="header" href="#overload-operator-via-rust-function">Overload Operator via Rust Function</a></h2>
-<p><a href="/appendix/operators.html#operators">Operator</a> functions cannot be defined in script because <a href="/appendix/operators.html#operators">operators</a> are usually not valid function names.</p>
-<p>However, <a href="/appendix/operators.html#operators">operator</a> functions <em>can</em> be registered via <code>Engine::register_fn</code>.</p>
-<p>When a custom <a href="/appendix/operators.html#operators">operator</a> function is registered with the same name as an <a href="/appendix/operators.html#operators">operator</a>,
-it <em>overrides</em> the built-in version.  However, make sure the <a href="/start/builds/performance.html#fast-operators-mode"><em>Fast Operators Mode</em></a>
+<p><a href="/book/appendix/operators.html#operators">Operator</a> functions cannot be defined in script because <a href="/book/appendix/operators.html#operators">operators</a> are usually not valid function names.</p>
+<p>However, <a href="/book/appendix/operators.html#operators">operator</a> functions <em>can</em> be registered via <code>Engine::register_fn</code>.</p>
+<p>When a custom <a href="/book/appendix/operators.html#operators">operator</a> function is registered with the same name as an <a href="/book/appendix/operators.html#operators">operator</a>,
+it <em>overrides</em> the built-in version.  However, make sure the <a href="/book/start/builds/performance.html#fast-operators-mode"><em>Fast Operators Mode</em></a>
 is disabled; otherwise this will not work.</p>
 <div id="admonition-must-turn-off-_fast-operators-mode_" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-must-turn-off-_fast-operators-mode_-title">
 <div class="admonition-title">
@@ -208,10 +208,10 @@ is disabled; otherwise this will not work.</p>
 <a class="admonition-anchor-link" href="#admonition-must-turn-off-_fast-operators-mode_"></a>
 </div>
 <div>
-<p>The <a href="/start/builds/performance.html#fast-operators-mode"><em>Fast Operators Mode</em></a>, which is enabled by default, causes the <a href="/engine/hello-world.html"><code>Engine</code></a>
-to <em>ignore</em> all custom-registered operator functions for <a href="/engine/builtin.html">built-in operators</a>.  This is for
+<p>The <a href="/book/start/builds/performance.html#fast-operators-mode"><em>Fast Operators Mode</em></a>, which is enabled by default, causes the <a href="/book/engine/hello-world.html"><code>Engine</code></a>
+to <em>ignore</em> all custom-registered operator functions for <a href="/book/engine/builtin.html">built-in operators</a>.  This is for
 performance considerations.</p>
-<p>Disable <a href="/start/builds/performance.html#fast-operators-mode"><em>Fast Operators Mode</em></a> via <a href="/engine/options.html"><code>Engine::set_fast_operators</code></a>
+<p>Disable <a href="/book/start/builds/performance.html#fast-operators-mode"><em>Fast Operators Mode</em></a> via <a href="/book/engine/options.html"><code>Engine::set_fast_operators</code></a>
 in order for the overloaded operators to be used.</p>
 </div>
 </div>
@@ -250,13 +250,13 @@ result == 43;                                       //    ... but not now</code>
 <a class="admonition-anchor-link" href="#admonition-considerations"></a>
 </div>
 <div>
-<p>Use <a href="/appendix/operators.html#operators">operator</a> overloading for <a href="/rust/custom-types.html">custom types</a> only.</p>
-<p>Be <strong>very careful</strong> when overriding built-in <a href="/appendix/operators.html#operators">operators</a> because users expect standard <a href="/appendix/operators.html#operators">operators</a> to
+<p>Use <a href="/book/appendix/operators.html#operators">operator</a> overloading for <a href="/book/rust/custom-types.html">custom types</a> only.</p>
+<p>Be <strong>very careful</strong> when overriding built-in <a href="/book/appendix/operators.html#operators">operators</a> because users expect standard <a href="/book/appendix/operators.html#operators">operators</a> to
 behave in a consistent and predictable manner, and will be annoyed if an expression involving <code>+</code>
 turns into a subtraction, for example.  You may think it is amusing, but users who need to get
 things done won’t.</p>
-<p><a href="/appendix/operators.html#operators">Operator</a> overloading also impacts <a href="/engine/optimize/index.html">script optimization</a> when using <a href="/engine/optimize/index.html"><code>OptimizationLevel::Full</code></a>.
-See the section on <a href="/engine/optimize/index.html">script optimization</a> for more details.</p>
+<p><a href="/book/appendix/operators.html#operators">Operator</a> overloading also impacts <a href="/book/engine/optimize/index.html">script optimization</a> when using <a href="/book/engine/optimize/index.html"><code>OptimizationLevel::Full</code></a>.
+See the section on <a href="/book/engine/optimize/index.html">script optimization</a> for more details.</p>
 </div>
 </div>
 
@@ -289,22 +289,6 @@ See the section on <a href="/engine/optimize/index.html">script optimization</a>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -175,7 +175,7 @@
                         <h1 id="disable-certain-keywords-andor-operators"><a class="header" href="#disable-certain-keywords-andor-operators">Disable Certain Keywords and/or Operators</a></h1>
 <p>For certain embedded usage, it is sometimes necessary to restrict the language to a strict subset of
 Rhai to prevent usage of certain language features.</p>
-<p>Rhai supports surgically disabling a <a href="/appendix/keywords.html">keyword</a> or <a href="/appendix/operators.html#operators">operator</a> via <code>Engine::disable_symbol</code>.</p>
+<p>Rhai supports surgically disabling a <a href="/book/appendix/keywords.html">keyword</a> or <a href="/book/appendix/operators.html#operators">operator</a> via <code>Engine::disable_symbol</code>.</p>
 <pre><code class="language-rust">use rhai::Engine;
 
 let mut engine = Engine::new();
@@ -222,22 +222,6 @@ engine.compile("let x = 40 + 2; x += 1;")?;
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

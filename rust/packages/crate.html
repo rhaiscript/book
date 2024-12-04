@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="create-a-custom-package-as-an-independent-crate"><a class="header" href="#create-a-custom-package-as-an-independent-crate">Create a Custom Package as an Independent Crate</a></h1>
-<p>Creating a custom <a href="/rust/packages/index.html">package</a> as an independent crate allows it to be shared by multiple projects.</p>
+<p>Creating a custom <a href="/book/rust/packages/index.html">package</a> as an independent crate allows it to be shared by multiple projects.</p>
 <div id="admonition-key-concepts" class="admonition admonish-abstract small" role="note" aria-labelledby="admonition-key-concepts-title">
 <div class="admonition-title">
 <div id="admonition-key-concepts-title">
@@ -187,7 +187,7 @@
 <p>Create a Rust crate that specifies <a href="https://crates.io/crates/rhai"><code>rhai</code></a> as dependency.</p>
 </li>
 <li>
-<p>The main <code>lib.rs</code> module can contain the <a href="/rust/packages/index.html">package</a> being constructed.</p>
+<p>The main <code>lib.rs</code> module can contain the <a href="/book/rust/packages/index.html">package</a> being constructed.</p>
 </li>
 </ul>
 </div>
@@ -200,7 +200,7 @@
 <a class="admonition-anchor-link" href="#admonition-example"></a>
 </div>
 <div>
-<p>The projects <a href="/lib/rhai-rand.html"><code>rhai-rand</code></a> and <a href="/lib/rhai-sci.html"><code>rhai-sci</code></a> show simple examples of creating a custom <a href="/rust/packages/index.html">package</a>
+<p>The projects <a href="/book/lib/rhai-rand.html"><code>rhai-rand</code></a> and <a href="/book/lib/rhai-sci.html"><code>rhai-sci</code></a> show simple examples of creating a custom <a href="/book/rust/packages/index.html">package</a>
 as an independent crate.</p>
 </div>
 </div>
@@ -275,22 +275,6 @@ def_package! {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

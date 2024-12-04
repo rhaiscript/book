@@ -190,9 +190,9 @@
 (a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
 <p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-<a href="/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
+<a href="/book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
 <p>The closure passed to <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
-<p>Progress tracking is disabled with the <a href="/start/features.html"><code>unchecked</code></a> feature.</p>
+<p>Progress tracking is disabled with the <a href="/book/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <h3 id="periodic-logging"><a class="header" href="#periodic-logging">Periodic Logging</a></h3>
 <pre><code class="language-rust">let mut engine = Engine::new();
@@ -228,7 +228,7 @@ engine.on_progress(move |_| {
 </blockquote>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Value</th><th>Effect</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>Some(token)</code></td><td>terminate immediately, with <code>token</code> (a <a href="/language/dynamic.html"><code>Dynamic</code></a> value) as <em>termination token</em></td></tr>
+<tr><td style="text-align: center"><code>Some(token)</code></td><td>terminate immediately, with <code>token</code> (a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value) as <em>termination token</em></td></tr>
 <tr><td style="text-align: center"><code>None</code></td><td>continue script evaluation</td></tr>
 </tbody></table>
 </div>
@@ -244,11 +244,11 @@ engine.on_progress(move |_| {
 <p>The termination token is commonly used to provide information on the <em>reason</em> behind the termination decision.</p>
 </div>
 </div>
-<p>The <a href="/language/dynamic.html"><code>Dynamic</code></a> value returned is a <em>termination token</em>.</p>
+<p>The <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value returned is a <em>termination token</em>.</p>
 <p>A script that is manually terminated returns with the error <code>EvalAltResult::ErrorTerminated(token, position)</code>
 wrapping this value.</p>
 <p>If the termination token is not needed, simply return <code>Some(Dynamic::UNIT)</code> to terminate the script
-run with <a href="/language/values-and-types.html"><code>()</code></a> as the token.</p>
+run with <a href="/book/language/values-and-types.html"><code>()</code></a> as the token.</p>
 
                     </main>
 
@@ -279,22 +279,6 @@ run with <a href="/language/values-and-types.html"><code>()</code></a> as the to
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

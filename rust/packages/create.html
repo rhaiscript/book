@@ -181,13 +181,13 @@
 <a class="admonition-anchor-link" href="#admonition-see-also"></a>
 </div>
 <div>
-<p>See also the <a href="/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
+<p>See also the <a href="/book/patterns/parallel.html"><em>One Engine Instance Per Call</em></a> pattern.</p>
 </div>
 </div>
-<p>The macro <code>def_package!</code> can be used to create a custom <a href="/rust/packages/index.html">package</a>.</p>
-<p>A custom <a href="/rust/packages/index.html">package</a> can aggregate many other <a href="/rust/packages/index.html">packages</a> into a single self-contained unit.
+<p>The macro <code>def_package!</code> can be used to create a custom <a href="/book/rust/packages/index.html">package</a>.</p>
+<p>A custom <a href="/book/rust/packages/index.html">package</a> can aggregate many other <a href="/book/rust/packages/index.html">packages</a> into a single self-contained unit.
 More functions can be added on top of others.</p>
-<p>Custom <a href="/rust/packages/index.html">packages</a> are extremely useful when multiple <a href="/engine/raw.html">raw <code>Engine</code></a> instances must be created such
+<p>Custom <a href="/book/rust/packages/index.html">packages</a> are extremely useful when multiple <a href="/book/engine/raw.html">raw <code>Engine</code></a> instances must be created such
 that they all share the same set of functions.</p>
 <h2 id="def_package"><a class="header" href="#def_package"><code>def_package!</code></a></h2>
 <blockquote>
@@ -225,14 +225,14 @@ that they all share the same set of functions.</p>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Element</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center">description</td><td>doc-comment for the <a href="/rust/packages/index.html">package</a></td></tr>
-<tr><td style="text-align: center"><code>pub</code> etc.</td><td>visibility of the <a href="/rust/packages/index.html">package</a></td></tr>
-<tr><td style="text-align: center">name</td><td>name of the <a href="/rust/packages/index.html">package</a>, usually ending in …<code>Package</code></td></tr>
-<tr><td style="text-align: center">variable</td><td>a variable name holding a reference to the <a href="/rust/modules/index.html">module</a> forming the <a href="/rust/packages/index.html">package</a>, usually <code>module</code> or <code>lib</code></td></tr>
-<tr><td style="text-align: center">base_package</td><td>an external <a href="/rust/packages/index.html">package</a> type that is merged into this <a href="/rust/packages/index.html">package</a> as a dependency</td></tr>
-<tr><td style="text-align: center">package init code block</td><td>a code block that initializes the <a href="/rust/packages/index.html">package</a></td></tr>
-<tr><td style="text-align: center">engine</td><td>a variable name holding a mutable reference to an <a href="/engine/hello-world.html"><code>Engine</code></a></td></tr>
-<tr><td style="text-align: center">engine setup code block</td><td>a code block that performs setup tasks on an <a href="/engine/hello-world.html"><code>Engine</code></a> during registration</td></tr>
+<tr><td style="text-align: center">description</td><td>doc-comment for the <a href="/book/rust/packages/index.html">package</a></td></tr>
+<tr><td style="text-align: center"><code>pub</code> etc.</td><td>visibility of the <a href="/book/rust/packages/index.html">package</a></td></tr>
+<tr><td style="text-align: center">name</td><td>name of the <a href="/book/rust/packages/index.html">package</a>, usually ending in …<code>Package</code></td></tr>
+<tr><td style="text-align: center">variable</td><td>a variable name holding a reference to the <a href="/book/rust/modules/index.html">module</a> forming the <a href="/book/rust/packages/index.html">package</a>, usually <code>module</code> or <code>lib</code></td></tr>
+<tr><td style="text-align: center">base_package</td><td>an external <a href="/book/rust/packages/index.html">package</a> type that is merged into this <a href="/book/rust/packages/index.html">package</a> as a dependency</td></tr>
+<tr><td style="text-align: center">package init code block</td><td>a code block that initializes the <a href="/book/rust/packages/index.html">package</a></td></tr>
+<tr><td style="text-align: center">engine</td><td>a variable name holding a mutable reference to an <a href="/book/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td style="text-align: center">engine setup code block</td><td>a code block that performs setup tasks on an <a href="/book/engine/hello-world.html"><code>Engine</code></a> during registration</td></tr>
 </tbody></table>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -306,10 +306,10 @@ def_package! {
 <a class="admonition-anchor-link" href="#admonition-advanced-engine-setup-with-"></a>
 </div>
 <div>
-<p>A second code block (in the syntax of a <a href="/language/fn-closure.html">closure</a>) following a right-triangle symbol (<code>|&gt;</code>)
-is run whenever the <a href="/rust/packages/index.html">package</a> is being registered.</p>
-<p>It allows performing setup tasks directly on that <a href="/engine/hello-world.html"><code>Engine</code></a>, e.g. registering <a href="/rust/custom-types.html">custom types</a>,
-<a href="/engine/custom-op.html">custom operators</a> and/or <a href="/engine/custom-syntax.html">custom syntax</a>.</p>
+<p>A second code block (in the syntax of a <a href="/book/language/fn-closure.html">closure</a>) following a right-triangle symbol (<code>|&gt;</code>)
+is run whenever the <a href="/book/rust/packages/index.html">package</a> is being registered.</p>
+<p>It allows performing setup tasks directly on that <a href="/book/engine/hello-world.html"><code>Engine</code></a>, e.g. registering <a href="/book/rust/custom-types.html">custom types</a>,
+<a href="/book/engine/custom-op.html">custom operators</a> and/or <a href="/book/engine/custom-syntax.html">custom syntax</a>.</p>
 <pre><code class="language-rust">def_package! {
     pub MyPackage(module) {
             :
@@ -329,15 +329,15 @@ is run whenever the <a href="/rust/packages/index.html">package</a> is being reg
 <a class="admonition-anchor-link" href="#admonition-trivia"></a>
 </div>
 <div>
-<p>This is exactly how Rhai’s built-in <a href="/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are actually implemented.</p>
+<p>This is exactly how Rhai’s built-in <a href="/book/rust/packages/index.html">packages</a>, such as <code>BasicMathPackage</code>, are actually implemented.</p>
 </div>
 </div>
-<p>By far the easiest way to create a custom <a href="/rust/packages/index.html">package</a> is to call <code>plugin::combine_with_exported_module!</code>
-from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/plugins/module.html">plugin module</a>.</p>
-<p>Due to specific requirements of a <a href="/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
-<em>flattens</em> all sub-modules (i.e. all functions and <a href="/language/iterator.html">type iterators</a> defined within sub-modules
-are pulled up to the top level instead) and so there will not be any sub-modules added to the <a href="/rust/packages/index.html">package</a>.</p>
-<p>Variables in the <a href="/plugins/module.html">plugin module</a> are ignored.</p>
+<p>By far the easiest way to create a custom <a href="/book/rust/packages/index.html">package</a> is to call <code>plugin::combine_with_exported_module!</code>
+from within <code>def_package!</code> which simply merges in all the functions defined within a <a href="/book/plugins/module.html">plugin module</a>.</p>
+<p>Due to specific requirements of a <a href="/book/rust/packages/index.html">package</a>, <code>plugin::combine_with_exported_module!</code>
+<em>flattens</em> all sub-modules (i.e. all functions and <a href="/book/language/iterator.html">type iterators</a> defined within sub-modules
+are pulled up to the top level instead) and so there will not be any sub-modules added to the <a href="/book/rust/packages/index.html">package</a>.</p>
+<p>Variables in the <a href="/book/plugins/module.html">plugin module</a> are ignored.</p>
 <pre><code class="language-rust">// Import necessary types and traits.
 use rhai::def_package;
 use rhai::packages::{ArithmeticPackage, BasicArrayPackage, BasicMapPackage, LogicPackage};
@@ -449,22 +449,6 @@ def_package! {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

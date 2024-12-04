@@ -182,7 +182,7 @@
 <a class="admonition-anchor-link" href="#admonition-tip-unicode-standard-annex-31-identifiers"></a>
 </div>
 <div>
-<p>The <a href="/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
+<p>The <a href="/book/start/features.html"><code>unicode-xid-ident</code></a> feature expands the allowed characters for variable names to the set defined by
 <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>.</p>
 </div>
 </div>
@@ -213,7 +213,7 @@ as <code>-1</code>.</p>
 <p>Therefore, some names acceptable to Rust, like <code>_</code>, <code>_42foo</code>, <code>_1</code> etc., are not valid in Rhai.</p>
 <p>For example: <code>c3po</code> and <code>_r2d2_</code> are valid variable names, but <code>3abc</code> and <code>____49steps</code> are not.</p>
 <p>Variable names are case <em>sensitive</em>.</p>
-<p>Variable names also cannot be the same as a <a href="/appendix/keywords.html">keyword</a> (active or reserved).</p>
+<p>Variable names also cannot be the same as a <a href="/book/appendix/keywords.html">keyword</a> (active or reserved).</p>
 <div id="admonition-avoid-names-longer-than-11-letters-on-32-bit" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-avoid-names-longer-than-11-letters-on-32-bit-title">
 <div class="admonition-title">
 <div id="admonition-avoid-names-longer-than-11-letters-on-32-bit-title">
@@ -252,7 +252,7 @@ for loop_var in array {
 </div>
 <div>
 <p>Variables do not have to be given an initial value.
-If none is provided, it defaults to <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+If none is provided, it defaults to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 </div>
 </div>
 <div id="admonition-variables-are-local" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-variables-are-local-title">
@@ -312,7 +312,7 @@ is_def_var("y") == false;</code></pre>
 <h2 id="use-before-definition"><a class="header" href="#use-before-definition">Use Before Definition</a></h2>
 <p>By default, variables do not need to be defined before they are used.</p>
 <p>If a variable accessed by a script is not defined previously within the same script, it is assumed
-to be provided via an external custom <a href="/engine/scope.html"><code>Scope</code></a> passed to the <a href="/engine/hello-world.html"><code>Engine</code></a> via the
+to be provided via an external custom <a href="/book/engine/scope.html"><code>Scope</code></a> passed to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via the
 <code>Engine::XXX_with_scope</code> API.</p>
 <pre><code class="language-rust">let engine = Engine::new();
 
@@ -336,14 +336,14 @@ engine.run_with_scope(&amp;mut scope,
 <a class="admonition-anchor-link" href="#admonition-no-scope"></a>
 </div>
 <div>
-<p>If no <a href="/engine/scope.html"><code>Scope</code></a> is used to evaluate the script (e.g. when using <code>Engine::run</code> instead of
+<p>If no <a href="/book/engine/scope.html"><code>Scope</code></a> is used to evaluate the script (e.g. when using <code>Engine::run</code> instead of
 <code>Engine::run_with_scope</code>), an undefined variable causes a runtime error when accessed.</p>
 </div>
 </div>
 <h2 id="strict-variables-mode"><a class="header" href="#strict-variables-mode">Strict Variables Mode</a></h2>
-<p>With <a href="/engine/options.html"><code>Engine::set_strict_variables</code></a>, it is possible to turn on
-<a href="/engine/strict-var.html"><em>Strict Variables</em></a> mode.</p>
-<p>When <a href="/engine/strict-var.html">strict variables</a> mode is active, accessing a variable not previously defined within
+<p>With <a href="/book/engine/options.html"><code>Engine::set_strict_variables</code></a>, it is possible to turn on
+<a href="/book/engine/strict-var.html"><em>Strict Variables</em></a> mode.</p>
+<p>When <a href="/book/engine/strict-var.html">strict variables</a> mode is active, accessing a variable not previously defined within
 the same script directly causes a parse error when compiling the script.</p>
 <pre><code class="language-rust">let x = 42;
 
@@ -359,7 +359,7 @@ print(foo);         // &lt;- parse error under strict variables mode:
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>Turn on <a href="/engine/strict-var.html">strict variables</a> mode if no <a href="/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
+<p>Turn on <a href="/book/engine/strict-var.html">strict variables</a> mode if no <a href="/book/engine/scope.html"><code>Scope</code></a> is to be provided for script evaluation runs.
 This way, variable access errors are caught during compile time instead of runtime.</p>
 </div>
 </div>
@@ -393,22 +393,6 @@ This way, variable access errors are caught during compile time instead of runti
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

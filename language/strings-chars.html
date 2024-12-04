@@ -181,12 +181,12 @@
 <a class="admonition-anchor-link" href="#admonition-safety"></a>
 </div>
 <div>
-<p>Always limit the <a href="/safety/max-string-size.html">maximum length of strings</a>.</p>
+<p>Always limit the <a href="/book/safety/max-string-size.html">maximum length of strings</a>.</p>
 </div>
 </div>
 <p>String in Rhai contain any text sequence of valid Unicode characters.</p>
 <p>Internally strings are stored in UTF-8 encoding.</p>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> a string returns <code>"string"</code>.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> a string returns <code>"string"</code>.</p>
 <h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
 <p>String and character literals follow JavaScript-style syntax.</p>
 <div class="table-wrapper"><table><thead><tr><th>Type</th><th style="text-align: center">Quotes</th><th style="text-align: center">Escapes?</th><th style="text-align: center">Continuation?</th><th style="text-align: center">Interpolation?</th></tr></thead><tbody>
@@ -204,7 +204,7 @@
 </div>
 <div>
 <p>Strings can be built up from other strings and types via the <code>+</code> operator
-(provided by the <a href="/rust/packages/builtin.html"><code>MoreStringPackage</code></a> but excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>).</p>
+(provided by the <a href="/book/rust/packages/builtin.html"><code>MoreStringPackage</code></a> but excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>).</p>
 <p>This is particularly useful when printing output.</p>
 </div>
 </div>
@@ -334,13 +334,13 @@ bytes) can also be slow.</p>
 </div>
 <h2 id="sub-strings"><a class="header" href="#sub-strings">Sub-Strings</a></h2>
 <p>Sub-strings, or <em>slices</em> in some programming languages, are parts of strings.</p>
-<p>In Rhai, a sub-string can be specified by indexing with a <a href="/language/ranges.html">range</a> of characters:</p>
+<p>In Rhai, a sub-string can be specified by indexing with a <a href="/book/language/ranges.html">range</a> of characters:</p>
 <blockquote>
 <p><em>string</em> <code>[</code> <em>first character (starting from zero)</em> <code>..</code> <em>last character (exclusive)</em> <code>]</code></p>
 <p><em>string</em> <code>[</code> <em>first character (starting from zero)</em> <code>..=</code> <em>last character (inclusive)</em> <code>]</code></p>
 </blockquote>
-<p>Sub-string <a href="/language/ranges.html">ranges</a> always start from zero counting towards the end of the string.
-Negative <a href="/language/ranges.html">ranges</a> are not supported.</p>
+<p>Sub-string <a href="/book/language/ranges.html">ranges</a> always start from zero counting towards the end of the string.
+Negative <a href="/book/language/ranges.html">ranges</a> are not supported.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <pre><code class="language-js">let name = "Bob";
 let middle_initial = 'C';
@@ -432,22 +432,6 @@ for ch in record {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

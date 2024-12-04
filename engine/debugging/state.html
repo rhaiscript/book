@@ -173,19 +173,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="debugger-state"><a class="header" href="#debugger-state">Debugger State</a></h1>
-<p>Sometimes it is useful to keep a persistent <em>state</em> within the <a href="/engine/debugging/debugger.html">debugger</a>.</p>
+<p>Sometimes it is useful to keep a persistent <em>state</em> within the <a href="/book/engine/debugging/debugger.html">debugger</a>.</p>
 <p>The <code>Engine::register_debugger</code> API accepts a function that returns the initial value of the
-<a href="/engine/debugging/debugger.html">debugger’s</a> state, which is a <a href="/language/dynamic.html"><code>Dynamic</code></a> and can hold any value.</p>
-<p>This state value is the stored into the <a href="/engine/debugging/debugger.html">debugger</a>’s custom state.</p>
+<a href="/book/engine/debugging/debugger.html">debugger’s</a> state, which is a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> and can hold any value.</p>
+<p>This state value is the stored into the <a href="/book/engine/debugging/debugger.html">debugger</a>’s custom state.</p>
 <h2 id="access-the-debugger-state"><a class="header" href="#access-the-debugger-state">Access the Debugger State</a></h2>
 <p>Use <code>EvalContext::global_runtime_state().debugger()</code> (immutable) or
 <code>EvalContext::global_runtime_state_mut().debugger_mut()</code> (mutable) to gain access to the current
-<a href="/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> instance.</p>
-<p>The following <a href="/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> methods allow access to the custom <a href="/engine/debugging/debugger.html">debugger</a> state.</p>
+<a href="/book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> instance.</p>
+<p>The following <a href="/book/engine/debugging/debugger.html"><code>debugger::Debugger</code></a> methods allow access to the custom <a href="/book/engine/debugging/debugger.html">debugger</a> state.</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Parameter type</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>state</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"><a href="/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>returns the custom state</td></tr>
-<tr><td><code>state_mut</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"><a href="/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>returns a mutable reference to the custom state</td></tr>
-<tr><td><code>set_state</code></td><td style="text-align: center"><a href="/language/dynamic.html"><code>impl Into&lt;Dynamic&gt;</code></a></td><td style="text-align: center"><em>none</em></td><td>sets the value of the custom state</td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>returns the custom state</td></tr>
+<tr><td><code>state_mut</code></td><td style="text-align: center"><em>none</em></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>returns a mutable reference to the custom state</td></tr>
+<tr><td><code>set_state</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>impl Into&lt;Dynamic&gt;</code></a></td><td style="text-align: center"><em>none</em></td><td>sets the value of the custom state</td></tr>
 </tbody></table>
 </div>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
@@ -252,22 +252,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

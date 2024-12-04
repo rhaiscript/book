@@ -244,7 +244,7 @@ state.counter.inc();</code></pre>
 <li>it is just as fast – the <code>this</code> pointer works by reference</li>
 <li>you can pass other states in, in the future, without changing the script code</li>
 <li>there are no hard links within functions that will be difficult to unravel</li>
-<li>only the <a href="/language/variables.html">variable</a> bound to <code>this</code> is ever modified; everything else is immutable</li>
+<li>only the <a href="/book/language/variables.html">variable</a> bound to <code>this</code> is ever modified; everything else is immutable</li>
 </ul>
 </div>
 </div>
@@ -272,7 +272,7 @@ engine.register_fn("get_global_value", move || *v.borrow());
 
 let v = value.clone();
 engine.register_fn("set_global_value", move |value: i64| *v.borrow_mut() = value);</code></pre>
-<p>These functions can be used in script <a href="/language/functions.html">functions</a> to access the shared global state.</p>
+<p>These functions can be used in script <a href="/book/language/functions.html">functions</a> to access the shared global state.</p>
 <pre><code class="language-rust">fn foo() {
     let current = get_global_value();       // Get global state value
     current += 1;
@@ -281,7 +281,7 @@ engine.register_fn("set_global_value", move |value: i64| *v.borrow_mut() = value
 <p>This option is preferred because it is possible to modify the get/set functions later on to
 add/change functionalities without introducing breaking script changes.</p>
 <h2 id="option-2--variable-resolver"><a class="header" href="#option-2--variable-resolver">Option 2 – Variable Resolver</a></h2>
-<p>Declare a <a href="/engine/var.html">variable resolver</a> that returns a <em>shared</em> value which is the global state.</p>
+<p>Declare a <a href="/book/engine/var.html">variable resolver</a> that returns a <em>shared</em> value which is the global state.</p>
 <pre><code class="language-rust">// Use a shared value as the global state
 let value: Dynamic = 1.into();
 let mut value = value.into_shared();        // convert into shared value
@@ -348,22 +348,6 @@ considered an <em>Anti-Pattern</em>.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

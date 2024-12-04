@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="switch-expression"><a class="header" href="#switch-expression">Switch Expression</a></h1>
-<p>Like <a href="/language/if.html"><code>if</code></a>, <a href="/language/switch.html"><code>switch</code></a> also works as an <em>expression</em>.</p>
+<p>Like <a href="/book/language/if.html"><code>if</code></a>, <a href="/book/language/switch.html"><code>switch</code></a> also works as an <em>expression</em>.</p>
 <div id="admonition-tip" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-title">
 <div class="admonition-title">
 <div id="admonition-tip-title">
@@ -182,8 +182,8 @@
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>This means that a <a href="/language/switch.html"><code>switch</code></a> expression can appear anywhere a regular expression can,
-e.g. as <a href="/language/functions.html">function</a> call arguments.</p>
+<p>This means that a <a href="/book/language/switch.html"><code>switch</code></a> expression can appear anywhere a regular expression can,
+e.g. as <a href="/book/language/functions.html">function</a> call arguments.</p>
 </div>
 </div>
 <div id="admonition-tip-disable-switch-expressions" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-disable-switch-expressions-title">
@@ -194,7 +194,7 @@ e.g. as <a href="/language/functions.html">function</a> call arguments.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-switch-expressions"></a>
 </div>
 <div>
-<p><a href="/language/switch.html"><code>switch</code></a> expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_switch_expression</code></a>.</p>
+<p><a href="/book/language/switch.html"><code>switch</code></a> expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_switch_expression</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-js">let x = switch foo { 1 =&gt; true, _ =&gt; false };
@@ -247,22 +247,6 @@ if foo == "hello" {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

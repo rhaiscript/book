@@ -177,9 +177,9 @@
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Tool</th><th>Description</th></tr></thead><tbody>
 <tr><td style="text-align: center"><a href="playground.html">Online Playground</a></td><td>edit and run Rhai scripts in a browser</td></tr>
 <tr><td style="text-align: center"><a href="lsp.html">LSP Server</a></td><td>Rhai Language Server</td></tr>
-<tr><td style="text-align: center"><a href="rhai-doc.html"><code>rhai-doc</code></a></td><td>generate documentation for Rhai <a href="/language/functions.html">functions</a></td></tr>
-<tr><td style="text-align: center"><a href="/lib/rhai-dylib.html"><code>rhai-dylib</code></a></td><td>create dynamically loadable Rhai libraries</td></tr>
-<tr><td style="text-align: center"><a href="/lib/rhai-autodocs.html"><code>rhai-autodocs</code></a></td><td>generate <a href="http://en.wikipedia.org/wiki/Markdown">MarkDown</a>/<a href="https://mdxjs.com/docs/what-is-mdx/">MDX</a> API documentation from an <a href="/engine/hello-world.html"><code>Engine</code></a> instance</td></tr>
+<tr><td style="text-align: center"><a href="rhai-doc.html"><code>rhai-doc</code></a></td><td>generate documentation for Rhai <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td style="text-align: center"><a href="/book/lib/rhai-dylib.html"><code>rhai-dylib</code></a></td><td>create dynamically loadable Rhai libraries</td></tr>
+<tr><td style="text-align: center"><a href="/book/lib/rhai-autodocs.html"><code>rhai-autodocs</code></a></td><td>generate <a href="http://en.wikipedia.org/wiki/Markdown">MarkDown</a>/<a href="https://mdxjs.com/docs/what-is-mdx/">MDX</a> API documentation from an <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -211,22 +211,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

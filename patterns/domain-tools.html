@@ -183,17 +183,17 @@
 <div>
 <ul>
 <li>
-<p>A system has a <em>domain-specific</em> API, requiring <a href="/rust/custom-types.html">custom types</a> and/or
-Rust <a href="/rust/functions.html">functions</a> to be registered and exposed to scripting.</p>
+<p>A system has a <em>domain-specific</em> API, requiring <a href="/book/rust/custom-types.html">custom types</a> and/or
+Rust <a href="/book/rust/functions.html">functions</a> to be registered and exposed to scripting.</p>
 </li>
 <li>
-<p>The system’s behavior is controlled by Rhai script <a href="/language/functions.html">functions</a>, such as in the
+<p>The system’s behavior is controlled by Rhai script <a href="/book/language/functions.html">functions</a>, such as in the
 <a href="events.html"><em>Scriptable Event Handler with State</em></a>, <a href="control.html"><em>Control Layer</em></a> or
 <a href="singleton.html"><em>Singleton Command Object</em></a> patterns.</p>
 </li>
 <li>
 <p>It is desirable to be able to <em>interactively</em> test the system with different scripts,
-and/or <a href="/engine/debugging/debugger.html">debug</a> them.</p>
+and/or <a href="/book/engine/debugging/debugger.html">debug</a> them.</p>
 </li>
 </ul>
 </div>
@@ -208,18 +208,18 @@ and/or <a href="/engine/debugging/debugger.html">debug</a> them.</p>
 <div>
 <ul>
 <li>
-<p>Leverage the pre-packaged <a href="/start/bin.html">bin tools</a> – it is easy because each of them is
+<p>Leverage the pre-packaged <a href="/book/start/bin.html">bin tools</a> – it is easy because each of them is
 one single source file.</p>
 </li>
 <li>
-<p>Modify the <a href="/engine/hello-world.html"><code>Engine</code></a> creation code to include domain-specific registrations.</p>
+<p>Modify the <a href="/book/engine/hello-world.html"><code>Engine</code></a> creation code to include domain-specific registrations.</p>
 </li>
 </ul>
 </div>
 </div>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <h3 id="copy-necessary-tool-source-files"><a class="header" href="#copy-necessary-tool-source-files">Copy necessary tool source files</a></h3>
-<p>Each <a href="/start/bin.html">bin tool</a> is a single source file.</p>
+<p>Each <a href="/book/start/bin.html">bin tool</a> is a single source file.</p>
 <p>Download the necessary one(s) into the project’s <code>bin</code> or <code>example</code> subdirectory.</p>
 <div class="table-wrapper"><table><thead><tr><th>Select this source file</th><th>To make</th></tr></thead><tbody>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/rhai-run.rs"><code>rhai-run.rs</code></a></td><td>a simple script runner for the system</td></tr>
@@ -233,7 +233,7 @@ rhai-repl.rs -&gt; /path/to/my_project/examples/repl.rs
 rhai-dbg.rs -&gt; /path/to/my_project/examples/db.rs
 </code></pre>
 <h3 id="leverage-engine-configuration-code-in-the-project"><a class="header" href="#leverage-engine-configuration-code-in-the-project">Leverage <code>Engine</code> configuration code in the project</a></h3>
-<p>Assume the project already contains configuration code for a customized <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>Assume the project already contains configuration code for a customized <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 <pre><code class="language-rust">use rhai::Engine;
 use rhai::plugin::*;
 
@@ -283,7 +283,7 @@ fn create_scripting_engine(config: MySystemConfig) -&gt; Engine {
     engine
 }</code></pre>
 <h3 id="modify-engine-creation"><a class="header" href="#modify-engine-creation">Modify <code>Engine</code> creation</a></h3>
-<p>Each <a href="/start/bin.html">bin tool</a> contains a line that creates the main script <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>Each <a href="/book/start/bin.html">bin tool</a> contains a line that creates the main script <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 <p>Modify it to call the project’s creation function.</p>
 <pre><code class="language-rust">// Initialize scripting engine
 let mut engine = Engine::new();
@@ -299,7 +299,7 @@ rhai = { version = "1.20.0", features = ["bin-features"] }
 <p>Rebuild the project, which should automatically build all the customized tools.</p>
 <h3 id="run-tools"><a class="header" href="#run-tools">Run tools</a></h3>
 <p>Each customized tool now has access to the entire domain-specific API.
-Functions and <a href="/rust/custom-types.html">custom types</a> can be used in REPL, <a href="/engine/debugging/debugger.html">debugging</a> etc.</p>
+Functions and <a href="/book/rust/custom-types.html">custom types</a> can be used in REPL, <a href="/book/engine/debugging/debugger.html">debugging</a> etc.</p>
 
                     </main>
 
@@ -330,22 +330,6 @@ Functions and <a href="/rust/custom-types.html">custom types</a> can be used in 
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

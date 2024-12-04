@@ -222,7 +222,7 @@ pub fn main() -&gt; Result&lt;(), Box&lt;EvalAltResult&gt;&gt;
 </div>
 </div>
 <p>Or evaluate a script file directly with <code>Engine::run_file</code> or <code>Engine::eval_file</code>.</p>
-<p>Loading and running script files is not available for <a href="/start/features.html"><code>no_std</code></a> or <a href="/start/builds/wasm.html">WASM</a> builds.</p>
+<p>Loading and running script files is not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds.</p>
 <pre><code class="language-rust">let result = engine.eval_file::&lt;i64&gt;("hello_world.rhai".into())?;
 //                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
 //                                   a 'PathBuf' is needed
@@ -238,7 +238,7 @@ engine.run_file("hello_world.rhai".into())?;</code></pre>
 </div>
 <div>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be <a href="/start/bin.html"><code>rhai-run</code></a>).</p>
+script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped by <code>Engine::compile_file</code> and
 <code>Engine::eval_file</code>. Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
 <p>This behavior is also present for non-Unix (e.g. Windows) environments so scripts are portable.</p>
@@ -260,7 +260,7 @@ print(`The answer is: ${answer}`);
 <a class="admonition-anchor-link" href="#admonition-tip-dynamic"></a>
 </div>
 <div>
-<p>Use <a href="/language/dynamic.html"><code>Dynamic</code></a> if you’re uncertain of the return type.</p>
+<p>Use <a href="/book/language/dynamic.html"><code>Dynamic</code></a> if you’re uncertain of the return type.</p>
 </div>
 </div>
 <p>The type parameter for <code>Engine::eval</code> is used to specify the type of the return value, which <em>must</em>
@@ -312,22 +312,6 @@ let result: String = engine.eval("40 + 2")?;    // returns an error because the 
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

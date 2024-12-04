@@ -174,7 +174,7 @@
                     <main>
                         <h1 id="do-loop"><a class="header" href="#do-loop">Do Loop</a></h1>
 <p><code>do</code> loops have two opposite variants: <code>do</code> … <code>while</code> and <code>do</code> … <code>until</code>.</p>
-<p>Like the <a href="/language/while.html"><code>while</code></a> loop, <code>continue</code> can be used to skip to the next iteration, by-passing all
+<p>Like the <a href="/book/language/while.html"><code>while</code></a> loop, <code>continue</code> can be used to skip to the next iteration, by-passing all
 following statements; <code>break</code> can be used to break out of the loop unconditionally.</p>
 <div id="admonition-tip-disable-do-loops" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-disable-do-loops-title">
 <div class="admonition-title">
@@ -184,7 +184,7 @@ following statements; <code>break</code> can be used to break out of the loop un
 <a class="admonition-anchor-link" href="#admonition-tip-disable-do-loops"></a>
 </div>
 <div>
-<p><code>do</code> loops can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+<p><code>do</code> loops can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-rust">let x = 10;
@@ -206,7 +206,7 @@ do {
 <h2 id="do-expression"><a class="header" href="#do-expression">Do Expression</a></h2>
 <p>Like Rust, <code>do</code> statements can also be used as <em>expressions</em>.</p>
 <p>The <code>break</code> statement takes an optional expression that provides the return value.</p>
-<p>The default return value of a <code>do</code> expression is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The default return value of a <code>do</code> expression is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <div id="admonition-tip-disable-all-loop-expressions" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-disable-all-loop-expressions-title">
 <div class="admonition-title">
 <div id="admonition-tip-disable-all-loop-expressions-title">
@@ -215,7 +215,7 @@ do {
 <a class="admonition-anchor-link" href="#admonition-tip-disable-all-loop-expressions"></a>
 </div>
 <div>
-<p>Loop expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_loop_expressions</code></a>.</p>
+<p>Loop expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_loop_expressions</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-js">let x = 0;
@@ -268,22 +268,6 @@ if result == () {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -213,7 +213,7 @@ operators in other C-like languages.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-if-expressions"></a>
 </div>
 <div>
-<p><code>if</code> expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_if_expression</code></a>.</p>
+<p><code>if</code> expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_if_expression</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-rust">// The following is equivalent to C: int x = 1 + (decision ? 42 : 123) / 2;
@@ -283,22 +283,6 @@ This is to avoid surprises.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

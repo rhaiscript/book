@@ -181,18 +181,18 @@
 <a class="admonition-anchor-link" href="#admonition-requires-metadata"></a>
 </div>
 <div>
-<p>Exporting metadata requires the <a href="/start/features.html"><code>metadata</code></a> feature.</p>
+<p>Exporting metadata requires the <a href="/book/start/features.html"><code>metadata</code></a> feature.</p>
 </div>
 </div>
 <h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
-<p>The <em>metadata</em> of a <a href="/language/functions.html">function</a> means all relevant information related to a function’s
+<p>The <em>metadata</em> of a <a href="/book/language/functions.html">function</a> means all relevant information related to a function’s
 definition including:</p>
 <ol>
 <li>
 <p>Its callable name</p>
 </li>
 <li>
-<p>Its access mode (public or <a href="/language/modules/export.html">private</a>)</p>
+<p>Its access mode (public or <a href="/book/language/modules/export.html">private</a>)</p>
 </li>
 <li>
 <p>Its parameter names and types (if any)</p>
@@ -204,13 +204,13 @@ definition including:</p>
 <p>Its nature (i.e. native Rust or Rhai-scripted)</p>
 </li>
 <li>
-<p>Its <a href="/language/fn-namespaces.html">namespace</a> (<a href="/rust/modules/index.html">module</a> or global)</p>
+<p>Its <a href="/book/language/fn-namespaces.html">namespace</a> (<a href="/book/rust/modules/index.html">module</a> or global)</p>
 </li>
 <li>
-<p>Its purpose, in the form of <a href="/language/doc-comments.html">doc-comments</a></p>
+<p>Its purpose, in the form of <a href="/book/language/doc-comments.html">doc-comments</a></p>
 </li>
 <li>
-<p>Usage notes, warnings, examples etc., in the form of <a href="/language/doc-comments.html">doc-comments</a></p>
+<p>Usage notes, warnings, examples etc., in the form of <a href="/book/language/doc-comments.html">doc-comments</a></p>
 </li>
 </ol>
 <p>A function’s <em>signature</em> encapsulates the first four pieces of information in a single concise line
@@ -219,7 +219,7 @@ of definition:</p>
 <p><code>[private]</code> <em>name</em> <code>(</code><em>param 1</em><code>:</code><em>type 1</em><code>,</code> <em>param 2</em><code>:</code><em>type 2</em><code>,</code> … <code>,</code> <em>param n</em><code>:</code><em>type n</em><code>) -&gt;</code> <em>return type</em></p>
 </blockquote>
 <h2 id="custom-types"><a class="header" href="#custom-types">Custom Types</a></h2>
-<p>The <em>metadata</em> of a <a href="/rust/custom-types.html">custom type</a> include:</p>
+<p>The <em>metadata</em> of a <a href="/book/rust/custom-types.html">custom type</a> include:</p>
 <ol>
 <li>
 <p>Its full Rust type name</p>
@@ -228,7 +228,7 @@ of definition:</p>
 <p>Its pretty-print <em>display name</em> (which can be the same as its Rust type name)</p>
 </li>
 <li>
-<p>Its purpose, in the form of <a href="/language/doc-comments.html">doc-comments</a></p>
+<p>Its purpose, in the form of <a href="/book/language/doc-comments.html">doc-comments</a></p>
 </li>
 </ol>
 
@@ -261,22 +261,6 @@ of definition:</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -173,8 +173,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dynamic-parameters-in-rust-functions"><a class="header" href="#dynamic-parameters-in-rust-functions"><code>Dynamic</code> Parameters in Rust Functions</a></h1>
-<p>It is possible for Rust functions to contain parameters of type <a href="/language/dynamic.html"><code>Dynamic</code></a>.</p>
-<p>A <a href="/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
+<p>It is possible for Rust functions to contain parameters of type <a href="/book/language/dynamic.html"><code>Dynamic</code></a>.</p>
+<p>A <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value can hold any clonable type.</p>
 <div id="admonition-trivia" class="admonition admonish-question small" role="note" aria-labelledby="admonition-trivia-title">
 <div class="admonition-title">
 <div id="admonition-trivia-title">
@@ -183,8 +183,8 @@
 <a class="admonition-anchor-link" href="#admonition-trivia"></a>
 </div>
 <div>
-<p>The <code>push</code> method of an <a href="/language/arrays.html">array</a> is implemented as follows (minus code for <a href="/safety/index.html">safety</a> protection
-against <a href="/safety/max-array-size.html">over-sized arrays</a>), allowing the function to be called with
+<p>The <code>push</code> method of an <a href="/book/language/arrays.html">array</a> is implemented as follows (minus code for <a href="/book/safety/index.html">safety</a> protection
+against <a href="/book/safety/max-array-size.html">over-sized arrays</a>), allowing the function to be called with
 all item types.</p>
 <pre><code class="language-rust">// 'item: Dynamic' matches all data types
 fn push(array: &amp;mut Array, item: Dynamic) {
@@ -194,10 +194,10 @@ fn push(array: &amp;mut Array, item: Dynamic) {
 </div>
 <h2 id="precedence"><a class="header" href="#precedence">Precedence</a></h2>
 <p>Any parameter in a registered Rust function with a specific type has higher precedence over
-<a href="/language/dynamic.html"><code>Dynamic</code></a>, so it is important to understand which <em>version</em> of a function will be used.</p>
+<a href="/book/language/dynamic.html"><code>Dynamic</code></a>, so it is important to understand which <em>version</em> of a function will be used.</p>
 <p>Parameter matching starts from the left to the right.
 Candidate functions will be matched in order of parameter types.</p>
-<p>Therefore, always leave <a href="/language/dynamic.html"><code>Dynamic</code></a> parameters (up to 16, see below) as far to the right as possible.</p>
+<p>Therefore, always leave <a href="/book/language/dynamic.html"><code>Dynamic</code></a> parameters (up to 16, see below) as far to the right as possible.</p>
 <pre><code class="language-rust">use rhai::{Engine, Dynamic};
 
 // Different versions of the same function 'foo'
@@ -240,7 +240,7 @@ engine.register_fn("foo", foo5)
 </div>
 <div>
 <p>The number of parameter permutations goes up exponentially, and therefore there is a realistic limit
-of 16 parameters allowed to be <a href="/language/dynamic.html"><code>Dynamic</code></a>, counting from the <em>right-most side</em>.</p>
+of 16 parameters allowed to be <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, counting from the <em>right-most side</em>.</p>
 <p>For example, Rhai will not find the following function – Oh! and those 16 parameters to the right
 certainly have nothing to do with it!</p>
 <pre><code class="language-rust">// The 'd' parameter counts 17th from the right!
@@ -263,11 +263,11 @@ fn weird(a: i64, d: Dynamic, x1: i64, x2: i64, x3: i64, x4: i64,
 </div>
 <div>
 <h4 id="hash-lookup"><a class="header" href="#hash-lookup">Hash lookup</a></h4>
-<p>Since functions in Rhai can be <a href="/rust/overloading.html">overloaded</a>, Rhai uses a single <em>hash</em> number
+<p>Since functions in Rhai can be <a href="/book/rust/overloading.html">overloaded</a>, Rhai uses a single <em>hash</em> number
 to quickly lookup the actual function, based on argument types.</p>
 <p>For each function call, a hash is calculated from:</p>
 <ol>
-<li>the function’s <a href="/language/fn-namespaces.html">namespace</a>, if any,</li>
+<li>the function’s <a href="/book/language/fn-namespaces.html">namespace</a>, if any,</li>
 <li>the function’s name,</li>
 <li>number of arguments (its <em>arity</em>),</li>
 <li>unique ID of the type of each argument, if any.</li>
@@ -278,25 +278,25 @@ to quickly lookup the actual function, based on argument types.</p>
 map to a single version).  That is because each type has a different ID, and thus they calculate to
 different hash numbers.</p>
 <p>This is the reason why <a href="generic.html">generic functions</a> must be expanded into concrete types.</p>
-<p>The type ID of <a href="/language/dynamic.html"><code>Dynamic</code></a> is different from any other type, but it must match all types seamlessly.
+<p>The type ID of <a href="/book/language/dynamic.html"><code>Dynamic</code></a> is different from any other type, but it must match all types seamlessly.
 Needless to say, this creates a slight problem.</p>
 <h4 id="trying-combinations"><a class="header" href="#trying-combinations">Trying combinations</a></h4>
-<p>If the combined hash calculated from the actual argument type ID’s is not found, then the <a href="/engine/hello-world.html"><code>Engine</code></a>
-calculates hashes for different <em>combinations</em> of argument types and <a href="/language/dynamic.html"><code>Dynamic</code></a>, systematically
-replacing different arguments with <a href="/language/dynamic.html"><code>Dynamic</code></a> <em>starting from the right-most parameter</em>.</p>
+<p>If the combined hash calculated from the actual argument type ID’s is not found, then the <a href="/book/engine/hello-world.html"><code>Engine</code></a>
+calculates hashes for different <em>combinations</em> of argument types and <a href="/book/language/dynamic.html"><code>Dynamic</code></a>, systematically
+replacing different arguments with <a href="/book/language/dynamic.html"><code>Dynamic</code></a> <em>starting from the right-most parameter</em>.</p>
 <p>Thus, assuming a three-argument function call:</p>
 <pre><code class="language-rust">foo(42, "hello", true);</code></pre>
 <p>The following hashes will be calculated, in order.
 They will be <em>all different</em>.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Order</th><th>Hash calculation method</th></tr></thead><tbody>
 <tr><td style="text-align: center">1</td><td><code>foo</code> + 3 + <code>i64</code> + <code>string</code> + <code>bool</code></td></tr>
-<tr><td style="text-align: center">2</td><td><code>foo</code> + 3 + <code>i64</code> + <code>string</code> + <a href="/language/dynamic.html"><code>Dynamic</code></a></td></tr>
-<tr><td style="text-align: center">3</td><td><code>foo</code> + 3 + <code>i64</code> + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <code>bool</code></td></tr>
-<tr><td style="text-align: center">4</td><td><code>foo</code> + 3 + <code>i64</code> + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <a href="/language/dynamic.html"><code>Dynamic</code></a></td></tr>
-<tr><td style="text-align: center">5</td><td><code>foo</code> + 3 + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <code>string</code> + <code>bool</code></td></tr>
-<tr><td style="text-align: center">6</td><td><code>foo</code> + 3 + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <code>string</code> + <a href="/language/dynamic.html"><code>Dynamic</code></a></td></tr>
-<tr><td style="text-align: center">7</td><td><code>foo</code> + 3 + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <code>bool</code></td></tr>
-<tr><td style="text-align: center">8</td><td><code>foo</code> + 3 + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <a href="/language/dynamic.html"><code>Dynamic</code></a> + <a href="/language/dynamic.html"><code>Dynamic</code></a></td></tr>
+<tr><td style="text-align: center">2</td><td><code>foo</code> + 3 + <code>i64</code> + <code>string</code> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a></td></tr>
+<tr><td style="text-align: center">3</td><td><code>foo</code> + 3 + <code>i64</code> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <code>bool</code></td></tr>
+<tr><td style="text-align: center">4</td><td><code>foo</code> + 3 + <code>i64</code> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a></td></tr>
+<tr><td style="text-align: center">5</td><td><code>foo</code> + 3 + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <code>string</code> + <code>bool</code></td></tr>
+<tr><td style="text-align: center">6</td><td><code>foo</code> + 3 + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <code>string</code> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a></td></tr>
+<tr><td style="text-align: center">7</td><td><code>foo</code> + 3 + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <code>bool</code></td></tr>
+<tr><td style="text-align: center">8</td><td><code>foo</code> + 3 + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a> + <a href="/book/language/dynamic.html"><code>Dynamic</code></a></td></tr>
 </tbody></table>
 </div>
 <p>Therefore, the version with all the correct parameter types will always be found first if it exists.</p>
@@ -317,11 +317,11 @@ That’s where the 16 parameters limit comes from.</p>
 <h4 id="not-every-function-has-16-parameters"><a class="header" href="#not-every-function-has-16-parameters">Not every function has 16 parameters</a></h4>
 <p>Studies have repeatedly shown that most functions accept few parameters, with the mean between
 2-3 parameters per function.  Functions with more than 5 parameters are rare in normal code bases.
-If at all, they are usually <a href="/language/fn-closure.html">closures</a> that <em>capture</em> lots of external variables, bumping up the
-parameter count; but <a href="/language/fn-closure.html">closures</a> are always script-defined and thus all parameters are already
-<a href="/language/dynamic.html"><code>Dynamic</code></a>.</p>
+If at all, they are usually <a href="/book/language/fn-closure.html">closures</a> that <em>capture</em> lots of external variables, bumping up the
+parameter count; but <a href="/book/language/fn-closure.html">closures</a> are always script-defined and thus all parameters are already
+<a href="/book/language/dynamic.html"><code>Dynamic</code></a>.</p>
 <p>In fact, you have a bigger problem if you write such a function that you need to call regularly.
-It would be far more efficient to group those parameters into <a href="/language/object-maps.html">object maps</a>.</p>
+It would be far more efficient to group those parameters into <a href="/book/language/object-maps.html">object maps</a>.</p>
 <h4 id="caching-to-the-rescue"><a class="header" href="#caching-to-the-rescue">Caching to the rescue</a></h4>
 <p>Function hashes are <em>cached</em>, so this process only happens <em>once</em>, and only up to the number of
 rounds for the correct function to be found.</p>
@@ -338,10 +338,10 @@ combination of argument types.</p>
 <a class="admonition-anchor-link" href="#admonition-but-then-beware-module-functions"></a>
 </div>
 <div>
-<p>The functions resolution <em>cache</em> resides only in the <a href="/language/fn-namespaces.html">global namespace</a>.
+<p>The functions resolution <em>cache</em> resides only in the <a href="/book/language/fn-namespaces.html">global namespace</a>.
 This is a limitation.</p>
-<p>Therefore, calls to functions in an <a href="/language/modules/import.html"><code>import</code></a>ed <a href="/rust/modules/index.html">module</a> (i.e. <em>qualified</em> with
-a <a href="/language/fn-namespaces.html">namespace</a> path) do not have the benefit of a cache.</p>
+<p>Therefore, calls to functions in an <a href="/book/language/modules/import.html"><code>import</code></a>ed <a href="/book/rust/modules/index.html">module</a> (i.e. <em>qualified</em> with
+a <a href="/book/language/fn-namespaces.html">namespace</a> path) do not have the benefit of a cache.</p>
 <p>Thus, up to 2<sup><em>n</em></sup> hashes are calculated during <em>every</em> function call.
 This is unlikely to cause a performance issue since most functions accept only a few parameters.</p>
 </div>
@@ -376,22 +376,6 @@ This is unlikely to cause a performance issue since most functions accept only a
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

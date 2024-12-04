@@ -181,7 +181,7 @@
 <tr><td>Logic and bit masks</td><td style="text-align: center"><code>||</code>,  <code>|</code>, <code>^</code></td><td style="text-align: center">left</td><td style="text-align: center">30</td></tr>
 <tr><td>Logic and bit masks</td><td style="text-align: center"><code>&amp;&amp;</code>, <code>&amp;</code></td><td style="text-align: center">left</td><td style="text-align: center">60</td></tr>
 <tr><td>Comparisons</td><td style="text-align: center"><code>==</code>, <code>!=</code></td><td style="text-align: center">left</td><td style="text-align: center">90</td></tr>
-<tr><td>Containment</td><td style="text-align: center"><a href="/language/in.html"><code>in</code></a></td><td style="text-align: center">left</td><td style="text-align: center">110</td></tr>
+<tr><td>Containment</td><td style="text-align: center"><a href="/book/language/in.html"><code>in</code></a></td><td style="text-align: center">left</td><td style="text-align: center">110</td></tr>
 <tr><td>Comparisons</td><td style="text-align: center"><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></td><td style="text-align: center">left</td><td style="text-align: center">130</td></tr>
 <tr><td>Null-coalesce</td><td style="text-align: center"><code>??</code></td><td style="text-align: center">left</td><td style="text-align: center">135</td></tr>
 <tr><td>Ranges</td><td style="text-align: center"><code>..</code>, <code>..=</code></td><td style="text-align: center">left</td><td style="text-align: center">140</td></tr>
@@ -222,22 +222,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

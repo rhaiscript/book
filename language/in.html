@@ -198,10 +198,10 @@ array.contains(42);     // &lt;- the above is equivalent to this
 !array.contains(123);   // &lt;- the above is equivalent to this</code></pre>
 <h2 id="built-in-support-for-standard-data-types"><a class="header" href="#built-in-support-for-standard-data-types">Built-in Support for Standard Data Types</a></h2>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Data type</th><th style="text-align: center">Check for</th></tr></thead><tbody>
-<tr><td style="text-align: center">Numeric <a href="/language/ranges.html">range</a></td><td style="text-align: center">integer number</td></tr>
-<tr><td style="text-align: center"><a href="/language/arrays.html">Array</a></td><td style="text-align: center">contained item</td></tr>
-<tr><td style="text-align: center"><a href="/language/object-maps.html">Object map</a></td><td style="text-align: center">property name</td></tr>
-<tr><td style="text-align: center"><a href="/language/strings-chars.html">String</a></td><td style="text-align: center"><a href="/language/strings-chars.html">sub-string</a> or <a href="/language/strings-chars.html">character</a></td></tr>
+<tr><td style="text-align: center">Numeric <a href="/book/language/ranges.html">range</a></td><td style="text-align: center">integer number</td></tr>
+<tr><td style="text-align: center"><a href="/book/language/arrays.html">Array</a></td><td style="text-align: center">contained item</td></tr>
+<tr><td style="text-align: center"><a href="/book/language/object-maps.html">Object map</a></td><td style="text-align: center">property name</td></tr>
+<tr><td style="text-align: center"><a href="/book/language/strings-chars.html">String</a></td><td style="text-align: center"><a href="/book/language/strings-chars.html">sub-string</a> or <a href="/book/language/strings-chars.html">character</a></td></tr>
 </tbody></table>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -225,7 +225,7 @@ let map = #{
 
 42 in -100..100 == true;            // check range for number</code></pre>
 <h2 id="array-items-comparison"><a class="header" href="#array-items-comparison">Array Items Comparison</a></h2>
-<p>The default implementation of the <code>in</code> operator for <a href="/language/arrays.html">arrays</a> uses the <code>==</code> operator (if defined)
+<p>The default implementation of the <code>in</code> operator for <a href="/book/language/arrays.html">arrays</a> uses the <code>==</code> operator (if defined)
 to compare items.</p>
 <div id="admonition--defaults-to-false" class="admonition admonish-warning small" role="note" aria-labelledby="admonition--defaults-to-false-title">
 <div class="admonition-title">
@@ -235,7 +235,7 @@ to compare items.</p>
 <a class="admonition-anchor-link" href="#admonition--defaults-to-false"></a>
 </div>
 <div>
-<p>For a <a href="/rust/custom-types.html">custom type</a>, <code>==</code> defaults to <code>false</code> when comparing it with a value of of the same type.</p>
+<p>For a <a href="/book/rust/custom-types.html">custom type</a>, <code>==</code> defaults to <code>false</code> when comparing it with a value of of the same type.</p>
 <p>See the section on <a href="logic.html"><em>Logic Operators</em></a> for more details.</p>
 </div>
 </div>
@@ -314,22 +314,6 @@ r#"
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

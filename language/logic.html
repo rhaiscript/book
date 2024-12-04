@@ -183,8 +183,8 @@
 <tr><td style="text-align: center"><code>&lt;=</code></td><td><code>x</code> is less than or equals to <code>y</code></td><td style="text-align: center">error if not defined</td><td style="text-align: center"><code>false</code> if not defined</td></tr>
 </tbody></table>
 </div>
-<p>Comparison operators between most values of the same type are built in for all <a href="/language/values-and-types.html">standard types</a>.</p>
-<p>Others are defined in the <a href="/rust/packages/builtin.html"><code>LogicPackage</code></a> but excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>.</p>
+<p>Comparison operators between most values of the same type are built in for all <a href="/book/language/values-and-types.html">standard types</a>.</p>
+<p>Others are defined in the <a href="/book/rust/packages/builtin.html"><code>LogicPackage</code></a> but excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
 <h3 id="floating-point-numbers-interoperate-with-integers"><a class="header" href="#floating-point-numbers-interoperate-with-integers">Floating-point numbers interoperate with integers</a></h3>
 <p>Comparing a floating-point number (<code>FLOAT</code>) with an integer is also supported.</p>
 <pre><code class="language-rust">42 == 42.0;         // true
@@ -210,8 +210,8 @@ d &gt; 42;             // false
 
 d &lt; 42;             // false</code></pre>
 <h3 id="strings-interoperate-with-characters"><a class="header" href="#strings-interoperate-with-characters">Strings interoperate with characters</a></h3>
-<p>Comparing a <a href="/language/strings-chars.html">string</a> with a <a href="/language/strings-chars.html">character</a> is also supported, with the character first turned into a
-<a href="/language/strings-chars.html">string</a> before performing the comparison.</p>
+<p>Comparing a <a href="/book/language/strings-chars.html">string</a> with a <a href="/book/language/strings-chars.html">character</a> is also supported, with the character first turned into a
+<a href="/book/language/strings-chars.html">string</a> before performing the comparison.</p>
 <pre><code class="language-rust">'x' == "x";         // true
 
 "" &lt; 'a';           // true
@@ -254,7 +254,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <a class="admonition-anchor-link" href="#admonition-tip-always-the-full-set"></a>
 </div>
 <div>
-<p>It is strongly recommended that, when defining operators for <a href="/rust/custom-types.html">custom types</a>, always define the
+<p>It is strongly recommended that, when defining operators for <a href="/book/rust/custom-types.html">custom types</a>, always define the
 <strong>full set</strong> of six operators together, or at least the <code>==</code> and <code>!=</code> pair.</p>
 </div>
 </div>
@@ -273,7 +273,7 @@ x == 42;            // error: ==(u16, i64) not defined, no default for numeric t
 <p><code>&lt;=</code> does not imply <code>&lt;</code></p>
 </li>
 </ul>
-<p>Therefore, if a <a href="/rust/custom-types.html">custom type</a> misses an <a href="/appendix/operators.html#operators">operator</a> definition, it simply raises an error
+<p>Therefore, if a <a href="/book/rust/custom-types.html">custom type</a> misses an <a href="/book/appendix/operators.html#operators">operator</a> definition, it simply raises an error
 or returns the default.</p>
 <p>This behavior can be counter-intuitive.</p>
 <pre><code class="language-rust">let ts = new_ts();  // custom type with '&lt;=' and '==' defined
@@ -294,7 +294,7 @@ ts != ts;           // error: '!=' not defined, even though '==' is</code></pre>
 <a class="admonition-anchor-link" href="#admonition-note"></a>
 </div>
 <div>
-<p>All boolean operators are <a href="/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
+<p>All boolean operators are <a href="/book/engine/builtin.html">built in</a> for the <code>bool</code> data type.</p>
 </div>
 </div>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Operator</th><th style="text-align: center">Description</th><th style="text-align: center">Arity</th><th style="text-align: center">Short-circuits?</th></tr></thead><tbody>
@@ -320,10 +320,10 @@ a() &amp; b();          // both a() and b() are evaluated</code></pre>
 <tr><td style="text-align: center"><code>??</code></td><td style="text-align: center">Null-coalesce</td><td style="text-align: center">binary</td><td style="text-align: center">yes</td></tr>
 </tbody></table>
 </div>
-<p>The null-coalescing operator (<code>??</code>) returns the first operand if it is not <a href="/language/values-and-types.html"><code>()</code></a>, or the second
-operand if the first operand is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The null-coalescing operator (<code>??</code>) returns the first operand if it is not <a href="/book/language/values-and-types.html"><code>()</code></a>, or the second
+operand if the first operand is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <p>It <em>short-circuits</em>  – meaning that the second operand will not be evaluated if the first
-operand is not <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+operand is not <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><code class="language-rust">a ?? b              // returns 'a' if it is not (), otherwise 'b'
 
 a() ?? b();         // b() is only evaluated if a() is ()</code></pre>
@@ -335,7 +335,7 @@ a() ?? b();         // b() is only evaluated if a() is ()</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-default-value-for-object-map-property"></a>
 </div>
 <div>
-<p>Use the null-coalescing operator to implement default values for non-existent <a href="/language/object-maps.html">object map</a> properties.</p>
+<p>Use the null-coalescing operator to implement default values for non-existent <a href="/book/language/object-maps.html">object map</a> properties.</p>
 <pre><code class="language-rust">let map = #{ foo: 42 };
 
 // Regular property access
@@ -353,11 +353,11 @@ let x = map.bar ?? 42;      // x == 42</code></pre>
 <ul>
 <li><code>break</code></li>
 <li><code>continue</code></li>
-<li><a href="/language/return.html"><code>return</code></a></li>
-<li><a href="/language/throw.html"><code>throw</code></a></li>
+<li><a href="/book/language/return.html"><code>return</code></a></li>
+<li><a href="/book/language/throw.html"><code>throw</code></a></li>
 </ul>
 <p>This means that you can use the null-coalescing operator to short-circuit loops and/or
-early-return from functions when the value tested is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+early-return from functions when the value tested is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <pre><code class="language-rust">let total = 0;
 
 for value in list {
@@ -394,22 +394,6 @@ for value in list {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

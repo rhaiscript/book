@@ -182,13 +182,13 @@
 <a class="admonition-anchor-link" href="#admonition-object-map-vs-json"></a>
 </div>
 <div>
-<p>A valid JSON object hash does not start with a hash character <code>#</code> while a Rhai <a href="/language/object-maps.html">object map</a> does.
+<p>A valid JSON object hash does not start with a hash character <code>#</code> while a Rhai <a href="/book/language/object-maps.html">object map</a> does.
 That’s the only difference!</p>
 </div>
 </div>
-<p>The syntax for an <a href="/language/object-maps.html">object map</a> is extremely similar to the JSON representation of a object hash,
-with the exception of <code>null</code> values which can technically be mapped to <a href="/language/values-and-types.html"><code>()</code></a>.</p>
-<p>Use the <code>Engine::parse_json</code> method to parse a piece of JSON into an <a href="/language/object-maps.html">object map</a>.</p>
+<p>The syntax for an <a href="/book/language/object-maps.html">object map</a> is extremely similar to the JSON representation of a object hash,
+with the exception of <code>null</code> values which can technically be mapped to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
+<p>Use the <code>Engine::parse_json</code> method to parse a piece of JSON into an <a href="/book/language/object-maps.html">object map</a>.</p>
 <pre><code class="language-rust">// JSON string - notice that JSON property names are always quoted
 //               notice also that comments are acceptable within the JSON string
 let json = r#"{
@@ -224,7 +224,7 @@ result == 3;          // the object map is successfully used in the script</code
 <p>The JSON text must represent a single object hash – i.e. must be wrapped within braces
 <code>{</code>…<code>}</code>.</p>
 <p>It cannot be a primitive type (e.g. number, string etc.).
-Otherwise it cannot be converted into an <a href="/language/object-maps.html">object map</a> and a type error is returned.</p>
+Otherwise it cannot be converted into an <a href="/book/language/object-maps.html">object map</a> and a type error is returned.</p>
 </div>
 </div>
 <div id="admonition-representation-of-numbers" class="admonition admonish-note small" role="note" aria-labelledby="admonition-representation-of-numbers-title">
@@ -236,15 +236,15 @@ Otherwise it cannot be converted into an <a href="/language/object-maps.html">ob
 </div>
 <div>
 <p>JSON numbers are all floating-point while Rhai supports integers (<code>INT</code>) and floating-point (<code>FLOAT</code>)
-(except under <a href="/start/features.html"><code>no_float</code></a>).</p>
+(except under <a href="/book/start/features.html"><code>no_float</code></a>).</p>
 <p>Most common generators of JSON data distinguish between integer and floating-point values by always
 serializing a floating-point number with a decimal point (i.e. <code>123.0</code> instead of <code>123</code> which is
 assumed to be an integer).</p>
-<p>This style can be used successfully with Rhai <a href="/language/object-maps.html">object maps</a>.</p>
+<p>This style can be used successfully with Rhai <a href="/book/language/object-maps.html">object maps</a>.</p>
 </div>
 </div>
 <p>Sub-objects are handled transparently by <code>Engine::parse_json</code>.</p>
-<p>It is <em>not</em> necessary to replace <code>{</code> with <code>#{</code> in order to fake a Rhai <a href="/language/object-maps.html">object map</a> literal.</p>
+<p>It is <em>not</em> necessary to replace <code>{</code> with <code>#{</code> in order to fake a Rhai <a href="/book/language/object-maps.html">object map</a> literal.</p>
 <pre><code class="language-rust">// JSON with sub-object 'b'.
 let json = r#"{"a":1, "b":{"x":true, "y":false}}"#;
 
@@ -262,9 +262,9 @@ map.len() == 2;</code></pre>
 </div>
 <div>
 <p>Internally, <code>Engine::parse_json</code> <em>cheats</em> by treating the JSON text as a Rhai script.</p>
-<p>That is why it even supports <a href="/language/comments.html">comments</a> and arithmetic expressions in the JSON text,
+<p>That is why it even supports <a href="/book/language/comments.html">comments</a> and arithmetic expressions in the JSON text,
 although it is not a good idea to rely on non-standard JSON formats.</p>
-<p>A <a href="/engine/token-mapper.html">token remap filter</a> is used to convert <code>{</code> into <code>#{</code> and <code>null</code> to <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>A <a href="/book/engine/token-mapper.html">token remap filter</a> is used to convert <code>{</code> into <code>#{</code> and <code>null</code> to <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 </div>
 </div>
 <h2 id="use-serde"><a class="header" href="#use-serde">Use <code>serde</code></a></h2>
@@ -276,12 +276,12 @@ although it is not a good idea to rely on non-standard JSON formats.</p>
 <a class="admonition-anchor-link" href="#admonition-see-also"></a>
 </div>
 <div>
-<p>See <em><a href="/rust/serde.html">Serialization/ Deserialization of <code>Dynamic</code> with <code>serde</code></a></em> for more details.</p>
+<p>See <em><a href="/book/rust/serde.html">Serialization/ Deserialization of <code>Dynamic</code> with <code>serde</code></a></em> for more details.</p>
 </div>
 </div>
 <p>Remember, <code>Engine::parse_json</code> is nothing more than a <em>cheap</em> alternative to true JSON parsing.</p>
 <p>If strict correctness is needed, or for more configuration possibilities, turn on the
-<a href="/start/features.html"><code>serde</code></a> feature to pull in <a href="https://crates.io/crates/serde"><code>serde</code></a> which enables
+<a href="/book/start/features.html"><code>serde</code></a> feature to pull in <a href="https://crates.io/crates/serde"><code>serde</code></a> which enables
 serialization and deserialization to/from multiple formats, including JSON.</p>
 <p>Beware, though… the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate is quite heavy.</p>
 
@@ -314,22 +314,6 @@ serialization and deserialization to/from multiple formats, including JSON.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

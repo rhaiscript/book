@@ -183,22 +183,22 @@
 <div>
 <ul>
 <li>
-<p>Script has a lot of duplicated <a href="/language/constants.html">constants</a> used inside <a href="/language/functions.html">functions</a>.</p>
+<p>Script has a lot of duplicated <a href="/book/language/constants.html">constants</a> used inside <a href="/book/language/functions.html">functions</a>.</p>
 </li>
 <li>
-<p>For easier management, <a href="/language/constants.html">constants</a> are declared at the top of the script.</p>
+<p>For easier management, <a href="/book/language/constants.html">constants</a> are declared at the top of the script.</p>
 </li>
 <li>
-<p>As Rhai <a href="/language/functions.html">functions</a> are pure, they cannot access <a href="/language/constants.html">constants</a> declared at global level
-except through <a href="/language/global.html"><code>global</code></a>.</p>
+<p>As Rhai <a href="/book/language/functions.html">functions</a> are pure, they cannot access <a href="/book/language/constants.html">constants</a> declared at global level
+except through <a href="/book/language/global.html"><code>global</code></a>.</p>
 </li>
 <li>
-<p>Sprinkling large number of <a href="/language/global.html"><code>global::CONSTANT</code></a> throughout the script makes
+<p>Sprinkling large number of <a href="/book/language/global.html"><code>global::CONSTANT</code></a> throughout the script makes
 it slow and cumbersome.</p>
 </li>
 <li>
-<p>Using <a href="/language/global.html"><code>global</code></a> or a <a href="/engine/var.html">variable resolver</a> defeats
-<a href="/engine/optimize/constants.html">constants propagation</a> in <a href="/engine/optimize/index.html">script optimization</a>.</p>
+<p>Using <a href="/book/language/global.html"><code>global</code></a> or a <a href="/book/engine/var.html">variable resolver</a> defeats
+<a href="/book/engine/optimize/constants.html">constants propagation</a> in <a href="/book/engine/optimize/index.html">script optimization</a>.</p>
 </li>
 </ul>
 </div>
@@ -213,17 +213,17 @@ it slow and cumbersome.</p>
 <div>
 <ul>
 <li>
-<p>The key to global <a href="/language/constants.html">constants</a> is to use them to <a href="/engine/optimize/index.html">optimize</a> a script.
-Otherwise, it would be just as simple to pass the constants into a custom <a href="/engine/scope.html"><code>Scope</code></a> instead.</p>
+<p>The key to global <a href="/book/language/constants.html">constants</a> is to use them to <a href="/book/engine/optimize/index.html">optimize</a> a script.
+Otherwise, it would be just as simple to pass the constants into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> instead.</p>
 </li>
 <li>
-<p>The script is first compiled into an <a href="/engine/compile.html"><code>AST</code></a>, and all <a href="/language/constants.html">constants</a> are extracted.</p>
+<p>The script is first compiled into an <a href="/book/engine/compile.html"><code>AST</code></a>, and all <a href="/book/language/constants.html">constants</a> are extracted.</p>
 </li>
 <li>
-<p>The <a href="/language/constants.html">constants</a> are then supplied to <a href="/engine/optimize/index.html">re-optimize</a> the <a href="/engine/compile.html"><code>AST</code></a>.</p>
+<p>The <a href="/book/language/constants.html">constants</a> are then supplied to <a href="/book/engine/optimize/index.html">re-optimize</a> the <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 </li>
 <li>
-<p>This pattern also works under <a href="/engine/strict-var.html"><em>Strict Variables Mode</em></a>.</p>
+<p>This pattern also works under <a href="/book/engine/strict-var.html"><em>Strict Variables Mode</em></a>.</p>
 </li>
 </ul>
 </div>
@@ -250,10 +250,10 @@ let x = calc_foo(magic);
 
 print(x);</code></pre>
 <h2 id="step-1--compile-script-into-ast"><a class="header" href="#step-1--compile-script-into-ast">Step 1 – Compile Script into <code>AST</code></a></h2>
-<p>Compile the script into <a href="/engine/compile.html"><code>AST</code></a> form.</p>
-<p>Normally, it is useful to disable <a href="/engine/optimize/index.html">optimizations</a> at this stage since
-the <a href="/engine/compile.html"><code>AST</code></a> will be re-optimized later.</p>
-<p><a href="/engine/strict-var.html"><em>Strict Variables Mode</em></a> must be OFF for this to work.</p>
+<p>Compile the script into <a href="/book/engine/compile.html"><code>AST</code></a> form.</p>
+<p>Normally, it is useful to disable <a href="/book/engine/optimize/index.html">optimizations</a> at this stage since
+the <a href="/book/engine/compile.html"><code>AST</code></a> will be re-optimized later.</p>
+<p><a href="/book/engine/strict-var.html"><em>Strict Variables Mode</em></a> must be OFF for this to work.</p>
 <pre><code class="language-rust">// Turn Strict Variables Mode OFF (if necessary)
 engine.set_strict_variables(false);
 
@@ -263,7 +263,7 @@ engine.set_optimization_level(OptimizationLevel::None);
 let ast = engine.compile("...")?;</code></pre>
 <h2 id="step-2--extract-constants"><a class="header" href="#step-2--extract-constants">Step 2 – Extract Constants</a></h2>
 <p>Use <a href="https://docs.rs/rhai/1.20.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
-to extract top-level <a href="/language/constants.html">constants</a> from the <a href="/engine/compile.html"><code>AST</code></a>.</p>
+to extract top-level <a href="/book/language/constants.html">constants</a> from the <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 <pre><code class="language-rust">let mut scope = Scope::new();
 
 // Extract all top-level constants without running the script
@@ -273,14 +273,14 @@ ast.iter_literal_variables(true, false).for_each(|(name, _, value)|
 
 // 'scope' now contains: FOO, BAR, MAGIC_NUMBER</code></pre>
 <h2 id="step-3a--propagate-constants"><a class="header" href="#step-3a--propagate-constants">Step 3a – Propagate Constants</a></h2>
-<p><a href="/engine/optimize/index.html">Re-optimize</a> the <a href="/engine/compile.html"><code>AST</code></a> using the new constants.</p>
+<p><a href="/book/engine/optimize/index.html">Re-optimize</a> the <a href="/book/engine/compile.html"><code>AST</code></a> using the new constants.</p>
 <pre><code class="language-rust">// Turn optimization back ON
 engine.set_optimization_level(OptimizationLevel::Simple);
 
 let ast = engine.optimize_ast(&amp;scope, ast, engine.optimization_level());</code></pre>
 <h2 id="step-3b--recompile-script-alternative"><a class="header" href="#step-3b--recompile-script-alternative">Step 3b – Recompile Script (Alternative)</a></h2>
-<p>If <a href="/engine/strict-var.html"><em>Strict Variables Mode</em></a> is used, however, it is necessary to re-compile the
-script in order to detect undefined <a href="/language/variables.html">variable</a> usages.</p>
+<p>If <a href="/book/engine/strict-var.html"><em>Strict Variables Mode</em></a> is used, however, it is necessary to re-compile the
+script in order to detect undefined <a href="/book/language/variables.html">variable</a> usages.</p>
 <pre><code class="language-rust">// Turn Strict Variables Mode back ON
 engine.set_strict_variables(true);
 
@@ -290,7 +290,7 @@ engine.set_optimization_level(OptimizationLevel::Simple);
 // Re-compile the script using constants in 'scope'
 let ast = engine.compile_with_scope(&amp;scope, "...")?;</code></pre>
 <h2 id="step-4--run-the-script"><a class="header" href="#step-4--run-the-script">Step 4 – Run the Script</a></h2>
-<p>At this step, the <a href="/engine/compile.html"><code>AST</code></a> is now optimized with constants propagated into all access sites.</p>
+<p>At this step, the <a href="/book/engine/compile.html"><code>AST</code></a> is now optimized with constants propagated into all access sites.</p>
 <p>The script essentially becomes:</p>
 <pre><code class="language-rust">// These are constants
 
@@ -344,22 +344,6 @@ engine.run_ast(&amp;ast)?;</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

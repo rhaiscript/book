@@ -173,35 +173,35 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="get-functions-metadata-in-scripts"><a class="header" href="#get-functions-metadata-in-scripts">Get Functions Metadata in Scripts</a></h1>
-<p>The built-in function <code>get_fn_metadata_list</code> returns an <a href="/language/arrays.html">array</a> of <a href="/language/object-maps.html">object maps</a>, each containing
-the metadata of one script-defined <a href="/language/functions.html">function</a> in scope.</p>
-<p><code>get_fn_metadata_list</code> is defined in the <a href="/rust/packages/builtin.html"><code>LanguageCorePackage</code></a>, which is
-excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>.</p>
+<p>The built-in function <code>get_fn_metadata_list</code> returns an <a href="/book/language/arrays.html">array</a> of <a href="/book/language/object-maps.html">object maps</a>, each containing
+the metadata of one script-defined <a href="/book/language/functions.html">function</a> in scope.</p>
+<p><code>get_fn_metadata_list</code> is defined in the <a href="/book/rust/packages/builtin.html"><code>LanguageCorePackage</code></a>, which is
+excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
 <p><code>get_fn_metadata_list</code> has a few versions taking different parameters:</p>
 <div class="table-wrapper"><table><thead><tr><th>Signature</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>get_fn_metadata_list()</code></td><td>returns an <a href="/language/arrays.html">array</a> for <em>all</em> script-defined <a href="/language/functions.html">functions</a></td></tr>
-<tr><td><code>get_fn_metadata_list(name)</code></td><td>returns an <a href="/language/arrays.html">array</a> containing all script-defined <a href="/language/functions.html">functions</a> matching a specified name</td></tr>
-<tr><td><code>get_fn_metadata_list(name, params)</code></td><td>returns an <a href="/language/arrays.html">array</a> containing all script-defined <a href="/language/functions.html">functions</a> matching a specified name and accepting the specified number of parameters</td></tr>
+<tr><td><code>get_fn_metadata_list()</code></td><td>returns an <a href="/book/language/arrays.html">array</a> for <em>all</em> script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td><code>get_fn_metadata_list(name)</code></td><td>returns an <a href="/book/language/arrays.html">array</a> containing all script-defined <a href="/book/language/functions.html">functions</a> matching a specified name</td></tr>
+<tr><td><code>get_fn_metadata_list(name, params)</code></td><td>returns an <a href="/book/language/arrays.html">array</a> containing all script-defined <a href="/book/language/functions.html">functions</a> matching a specified name and accepting the specified number of parameters</td></tr>
 </tbody></table>
 </div>
-<p><a href="/language/functions.html">Functions</a> from the following sources are returned, in order:</p>
+<p><a href="/book/language/functions.html">Functions</a> from the following sources are returned, in order:</p>
 <ol>
-<li>Encapsulated script environment (e.g. when loading a <a href="/rust/modules/index.html">module</a> from a script file),</li>
+<li>Encapsulated script environment (e.g. when loading a <a href="/book/rust/modules/index.html">module</a> from a script file),</li>
 <li>Current script,</li>
-<li><a href="/rust/modules/index.html">Modules</a> registered via <code>Engine::register_global_module</code> (latest registrations first)</li>
-<li><a href="/rust/modules/index.html">Modules</a> imported via the <a href="/language/modules/import.html"><code>import</code></a> statement (latest imports first),</li>
-<li><a href="/rust/modules/index.html">Modules</a> added via <code>Engine::register_static_module</code> (latest registrations first)</li>
+<li><a href="/book/rust/modules/index.html">Modules</a> registered via <code>Engine::register_global_module</code> (latest registrations first)</li>
+<li><a href="/book/rust/modules/index.html">Modules</a> imported via the <a href="/book/language/modules/import.html"><code>import</code></a> statement (latest imports first),</li>
+<li><a href="/book/rust/modules/index.html">Modules</a> added via <code>Engine::register_static_module</code> (latest registrations first)</li>
 </ol>
-<p>The return value is an <a href="/language/arrays.html">array</a> of <a href="/language/object-maps.html">object maps</a> (so <code>get_fn_metadata_list</code> is also not available under
-<a href="/start/features.html"><code>no_index</code></a> or <a href="/start/features.html"><code>no_object</code></a>), containing the following fields.</p>
+<p>The return value is an <a href="/book/language/arrays.html">array</a> of <a href="/book/language/object-maps.html">object maps</a> (so <code>get_fn_metadata_list</code> is also not available under
+<a href="/book/start/features.html"><code>no_index</code></a> or <a href="/book/start/features.html"><code>no_object</code></a>), containing the following fields.</p>
 <div class="table-wrapper"><table><thead><tr><th>Field</th><th style="text-align: center">Type</th><th style="text-align: center">Optional?</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>namespace</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center"><strong>yes</strong></td><td>the module <em>namespace</em> if the <a href="/language/functions.html">function</a> is defined within a <a href="/rust/modules/index.html">module</a></td></tr>
-<tr><td><code>access</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center">no</td><td><code>"public"</code> if the function is public,<br/><code>"private"</code> if it is <a href="/language/modules/export.html">private</a></td></tr>
-<tr><td><code>name</code></td><td style="text-align: center"><a href="/language/strings-chars.html">string</a></td><td style="text-align: center">no</td><td><a href="/language/functions.html">function</a> name</td></tr>
-<tr><td><code>params</code></td><td style="text-align: center"><a href="/language/arrays.html">array</a> of <a href="/language/strings-chars.html">strings</a></td><td style="text-align: center">no</td><td>parameter names</td></tr>
-<tr><td><code>this_type</code></td><td style="text-align: center"><a href="strings-chars.html">string</a></td><td style="text-align: center"><strong>yes</strong></td><td>restrict the type of <code>this</code> if the <a href="/language/functions.html">function</a> is a <a href="/rust/methods.html">method</a></td></tr>
-<tr><td><code>is_anonymous</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">no</td><td>is this <a href="/language/functions.html">function</a> an <a href="/language/fn-anon.html">anonymous function</a>?</td></tr>
-<tr><td><code>comments</code></td><td style="text-align: center"><a href="/language/arrays.html">array</a> of <a href="/language/strings-chars.html">strings</a></td><td style="text-align: center"><strong>yes</strong></td><td><a href="/language/doc-comments.html">doc-comments</a>, if any, one per line</td></tr>
+<tr><td><code>namespace</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center"><strong>yes</strong></td><td>the module <em>namespace</em> if the <a href="/book/language/functions.html">function</a> is defined within a <a href="/book/rust/modules/index.html">module</a></td></tr>
+<tr><td><code>access</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center">no</td><td><code>"public"</code> if the function is public,<br/><code>"private"</code> if it is <a href="/book/language/modules/export.html">private</a></td></tr>
+<tr><td><code>name</code></td><td style="text-align: center"><a href="/book/language/strings-chars.html">string</a></td><td style="text-align: center">no</td><td><a href="/book/language/functions.html">function</a> name</td></tr>
+<tr><td><code>params</code></td><td style="text-align: center"><a href="/book/language/arrays.html">array</a> of <a href="/book/language/strings-chars.html">strings</a></td><td style="text-align: center">no</td><td>parameter names</td></tr>
+<tr><td><code>this_type</code></td><td style="text-align: center"><a href="strings-chars.html">string</a></td><td style="text-align: center"><strong>yes</strong></td><td>restrict the type of <code>this</code> if the <a href="/book/language/functions.html">function</a> is a <a href="/book/rust/methods.html">method</a></td></tr>
+<tr><td><code>is_anonymous</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">no</td><td>is this <a href="/book/language/functions.html">function</a> an <a href="/book/language/fn-anon.html">anonymous function</a>?</td></tr>
+<tr><td><code>comments</code></td><td style="text-align: center"><a href="/book/language/arrays.html">array</a> of <a href="/book/language/strings-chars.html">strings</a></td><td style="text-align: center"><strong>yes</strong></td><td><a href="/book/language/doc-comments.html">doc-comments</a>, if any, one per line</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -233,22 +233,6 @@ excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>.</p
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

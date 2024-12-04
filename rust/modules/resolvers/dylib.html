@@ -181,7 +181,7 @@
 <a class="admonition-anchor-link" href="#admonition-requires-external-crate-rhai-dylib"></a>
 </div>
 <div>
-<p><code>DylibModuleResolver</code> resides in the <a href="/lib/rhai-dylib.html"><code>rhai-dylib</code></a> crate which must be specified
+<p><code>DylibModuleResolver</code> resides in the <a href="/book/lib/rhai-dylib.html"><code>rhai-dylib</code></a> crate which must be specified
 as a dependency:</p>
 <pre><code class="language-toml">[dependencies]
 rhai-dylib = { version = "0.1" }
@@ -196,11 +196,11 @@ rhai-dylib = { version = "0.1" }
 <a class="admonition-anchor-link" href="#admonition-linux-or-windows-only"></a>
 </div>
 <div>
-<p><a href="/lib/rhai-dylib.html"><code>rhai-dylib</code></a> currently supports only Linux and Windows.</p>
+<p><a href="/book/lib/rhai-dylib.html"><code>rhai-dylib</code></a> currently supports only Linux and Windows.</p>
 </div>
 </div>
 <p>Parallel to how the <a href="file.html"><code>FileModuleResolver</code></a> works, <code>DylibModuleResolver</code> loads external
-native Rust <a href="/rust/modules/index.html">modules</a> from compiled <em>dynamic shared libraries</em> (e.g. <code>.so</code> in Linux and <code>.dll</code> in
+native Rust <a href="/book/rust/modules/index.html">modules</a> from compiled <em>dynamic shared libraries</em> (e.g. <code>.so</code> in Linux and <code>.dll</code> in
 Windows).</p>
 <p>Therefore, <a href="file.html"><code>FileModuleResolver</code></a> loads Rhai script files while <code>DylibModuleResolver</code>
 loads native Rust shared libraries.  It is very common to have the two work together.</p>
@@ -264,22 +264,6 @@ m::greet();</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

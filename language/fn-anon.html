@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="anonymous-functions"><a class="header" href="#anonymous-functions">Anonymous Functions</a></h1>
-<p>Many functions in the standard API expect <a href="/language/fn-ptr.html">function pointer</a> as parameters.</p>
+<p>Many functions in the standard API expect <a href="/book/language/fn-ptr.html">function pointer</a> as parameters.</p>
 <p>For example:</p>
 <pre><code class="language-rust">// Function 'double' defined here - used only once
 fn double(x) { 2 * x }
@@ -188,9 +188,9 @@ let y = x.map(double);
 
 // Pass a function pointer to 'square' using Fn(...) notation
 let z = y.map(Fn("square"));</code></pre>
-<p>Sometimes it gets tedious to define separate <a href="/language/functions.html">functions</a> only to dispatch them via single <a href="/language/fn-ptr.html">function pointers</a> –
-essentially, those <a href="/language/functions.html">functions</a> are only ever called in one place.</p>
-<p>This scenario is especially common when simulating object-oriented programming (<a href="/patterns/oop.html">OOP</a>).</p>
+<p>Sometimes it gets tedious to define separate <a href="/book/language/functions.html">functions</a> only to dispatch them via single <a href="/book/language/fn-ptr.html">function pointers</a> –
+essentially, those <a href="/book/language/functions.html">functions</a> are only ever called in one place.</p>
+<p>This scenario is especially common when simulating object-oriented programming (<a href="/book/patterns/oop.html">OOP</a>).</p>
 <pre><code class="language-rust">// Define functions one-by-one
 fn obj_inc(x, y) { this.data += x * y; }
 fn obj_dec(x) { this.data -= x; }
@@ -204,7 +204,7 @@ let obj = #{
     print: obj_print
 };</code></pre>
 <h2 id="syntax"><a class="header" href="#syntax">Syntax</a></h2>
-<p>Anonymous <a href="/language/functions.html">functions</a> have a syntax similar to Rust’s <em>closures</em> (they are <em>not</em> the same).</p>
+<p>Anonymous <a href="/book/language/functions.html">functions</a> have a syntax similar to Rust’s <em>closures</em> (they are <em>not</em> the same).</p>
 <blockquote>
 <p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>|</code> <em>statement</em></p>
 <p><code>|</code><em>param 1</em><code>,</code> <em>param 2</em><code>,</code> … <code>,</code> <em>param n</em><code>| {</code> <em>statements</em>… <code>}</code></p>
@@ -214,9 +214,9 @@ let obj = #{
 <p><code>||</code> <em>statement</em></p>
 <p><code>|| {</code> <em>statements</em>… <code>}</code></p>
 </blockquote>
-<p>Anonymous functions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_anonymous_function</code></a>.</p>
+<p>Anonymous functions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_anonymous_function</code></a>.</p>
 <h2 id="rewrite-using-anonymous-functions"><a class="header" href="#rewrite-using-anonymous-functions">Rewrite Using Anonymous Functions</a></h2>
-<p>The above can be rewritten using <em>anonymous <a href="/language/functions.html">functions</a></em>.</p>
+<p>The above can be rewritten using <em>anonymous <a href="/book/language/functions.html">functions</a></em>.</p>
 <pre><code class="language-rust">let x = [1, 2, 3, 4, 5];
 
 let y = x.map(|x| 2 * x);
@@ -281,22 +281,6 @@ let obj = #{
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

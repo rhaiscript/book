@@ -186,9 +186,9 @@
 <p>In particular, the type must be defined within the current crate.</p>
 </div>
 </div>
-<p>To register a type and its API for use with an <a href="/engine/hello-world.html"><code>Engine</code></a>, the simplest method is via the <a href="/rust/build-type.html"><code>CustomType</code></a> trait.</p>
-<p>A custom derive macro is provided to auto-implement <a href="/rust/build-type.html"><code>CustomType</code></a> on any <code>struct</code> type,
-which exposes all the type’s fields to an <a href="/engine/hello-world.html"><code>Engine</code></a> all at once.</p>
+<p>To register a type and its API for use with an <a href="/book/engine/hello-world.html"><code>Engine</code></a>, the simplest method is via the <a href="/book/rust/build-type.html"><code>CustomType</code></a> trait.</p>
+<p>A custom derive macro is provided to auto-implement <a href="/book/rust/build-type.html"><code>CustomType</code></a> on any <code>struct</code> type,
+which exposes all the type’s fields to an <a href="/book/engine/hello-world.html"><code>Engine</code></a> all at once.</p>
 <p>It is as simple as adding <code>#[derive(CustomType)]</code> to the type definition.</p>
 <pre><code class="language-rust">use rhai::{CustomType, TypeBuilder};    // &lt;- necessary imports
 
@@ -411,22 +411,6 @@ impl CustomType for Vec3 {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

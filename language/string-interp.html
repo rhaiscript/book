@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="multi-line-literal-strings"><a class="header" href="#multi-line-literal-strings">Multi-Line Literal Strings</a></h1>
-<p>A <a href="/language/strings-chars.html">string</a> wrapped by a pair of back-tick (<code>`</code>) characters is interpreted <em>literally</em>.</p>
+<p>A <a href="/book/language/strings-chars.html">string</a> wrapped by a pair of back-tick (<code>`</code>) characters is interpreted <em>literally</em>.</p>
 <p>This means that every single character that lies between the two back-ticks is taken verbatim.</p>
 <p>This include new-lines, whitespaces, escape characters etc.</p>
 <pre><code class="language-js">let x = `hello, world! "\t\x42"
@@ -194,7 +194,7 @@ block starts from the <em>next</em> line; the starting new-line character is str
 // The above is the same as:
 let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!!\n";
 </code></pre>
-<p>To actually put a back-tick (<code>`</code>) character inside a multi-line literal <a href="/language/strings-chars.html">string</a>, use two
+<p>To actually put a back-tick (<code>`</code>) character inside a multi-line literal <a href="/book/language/strings-chars.html">string</a>, use two
 back-ticks together (i.e. <code>``</code>).</p>
 <pre><code class="language-js">let x = `I have a quote " as well as a back-tick `` here.`;
 
@@ -210,7 +210,7 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 <a class="admonition-anchor-link" href="#admonition-only-literal-strings"></a>
 </div>
 <div>
-<p>Interpolation is not supported for normal <a href="/language/strings-chars.html">string</a> or <a href="/language/strings-chars.html">character</a> literals.</p>
+<p>Interpolation is not supported for normal <a href="/book/language/strings-chars.html">string</a> or <a href="/book/language/strings-chars.html">character</a> literals.</p>
 </div>
 </div>
 <div id="admonition-what-if-i-want--inside" class="admonition admonish-question side wide" role="note" aria-labelledby="admonition-what-if-i-want--inside-title">
@@ -222,21 +222,21 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 </div>
 <div>
 <p>🤦 Well, you just <em>have</em> to ask for the impossible, don’t you?</p>
-<p>Currently there is no way to escape <code>${</code>.  Build the <a href="/language/strings-chars.html">string</a> in three pieces:</p>
+<p>Currently there is no way to escape <code>${</code>.  Build the <a href="/book/language/strings-chars.html">string</a> in three pieces:</p>
 <pre><code class="language-js">`Interpolations start with "`
       + "${"
       + `" and end with }.`
 </code></pre>
 </div>
 </div>
-<p>Multi-line literal <a href="/language/strings-chars.html">strings</a> support <em>string interpolation</em> wrapped in <code>${</code> … <code>}</code>.</p>
+<p>Multi-line literal <a href="/book/language/strings-chars.html">strings</a> support <em>string interpolation</em> wrapped in <code>${</code> … <code>}</code>.</p>
 <p><code>${</code> … <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
-statements block, including another interpolated <a href="/language/strings-chars.html">string</a>!
+statements block, including another interpolated <a href="/book/language/strings-chars.html">string</a>!
 The last result of the block is taken as the value for interpolation.</p>
-<p>Rhai uses <a href="/rust/print-custom.html"><code>to_string</code></a> to convert any value into a <a href="/language/strings-chars.html">string</a>, then physically joins all the
+<p>Rhai uses <a href="/book/rust/print-custom.html"><code>to_string</code></a> to convert any value into a <a href="/book/language/strings-chars.html">string</a>, then physically joins all the
 sub-strings together.</p>
-<p>For convenience, if any interpolated value is a <a href="/language/blobs.html">BLOB</a>, however, it is automatically treated as a
-UTF-8 encoded string.  That is because it is rarely useful to interpolate a <a href="/language/blobs.html">BLOB</a> into a <a href="/language/strings-chars.html">string</a>,
+<p>For convenience, if any interpolated value is a <a href="/book/language/blobs.html">BLOB</a>, however, it is automatically treated as a
+UTF-8 encoded string.  That is because it is rarely useful to interpolate a <a href="/book/language/blobs.html">BLOB</a> into a <a href="/book/language/strings-chars.html">string</a>,
 but extremely useful to be able to directly manipulate UTF-8 encoded text.</p>
 <pre><code class="language-js">let x = 42;
 let y = 123;
@@ -294,22 +294,6 @@ print(`Data: ${blob.to_string()}`);     // prints "Data: [212121]"
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

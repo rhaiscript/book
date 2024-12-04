@@ -181,18 +181,18 @@
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>It does not matter where the <a href="/language/modules/import.html"><code>import</code></a> statement occurs — e.g. deep within statements blocks
-or within <a href="/language/functions.html">function</a> bodies.</p>
+<p>It does not matter where the <a href="/book/language/modules/import.html"><code>import</code></a> statement occurs — e.g. deep within statements blocks
+or within <a href="/book/language/functions.html">function</a> bodies.</p>
 </div>
 </div>
-<p>When a script <a href="/language/modules/import.html">imports</a> external <a href="/rust/modules/index.html">modules</a> that may not be available later on, it is
-possible to eagerly <a href="/rust/modules/resolvers/index.html"><em>pre-resolve</em></a> these imports and embed them directly into a
-self-contained <a href="/engine/compile.html"><code>AST</code></a>.</p>
+<p>When a script <a href="/book/language/modules/import.html">imports</a> external <a href="/book/rust/modules/index.html">modules</a> that may not be available later on, it is
+possible to eagerly <a href="/book/rust/modules/resolvers/index.html"><em>pre-resolve</em></a> these imports and embed them directly into a
+self-contained <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 <p>For instance, a system may periodically connect to a central source (e.g. a database) to load
-scripts and compile them to <a href="/engine/compile.html"><code>AST</code></a> form. Afterwards, in order to conserve bandwidth (or due to
+scripts and compile them to <a href="/book/engine/compile.html"><code>AST</code></a> form. Afterwards, in order to conserve bandwidth (or due to
 other physical limitations), it is disconnected from the central source for self-contained
 operation.</p>
-<p>Compile a script into a <em>self-contained</em> <a href="/engine/compile.html"><code>AST</code></a> via <code>Engine::compile_into_self_contained</code>.</p>
+<p>Compile a script into a <em>self-contained</em> <a href="/book/engine/compile.html"><code>AST</code></a> via <code>Engine::compile_into_self_contained</code>.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 // Compile script into self-contained AST using the current
@@ -205,11 +205,11 @@ engine.set_module_resolver(DummyModuleResolver::new());
 
 // The AST still evaluates fine, even with 'import' statements!
 engine.run(&amp;ast)?;</code></pre>
-<p>When such an <a href="/engine/compile.html"><code>AST</code></a> is evaluated, <a href="/language/modules/import.html"><code>import</code></a> statements within are provided the <em>pre-resolved</em>
-<a href="/rust/modules/index.html">modules</a> without going through the normal <a href="/rust/modules/resolvers/index.html">module resolution</a> process.</p>
+<p>When such an <a href="/book/engine/compile.html"><code>AST</code></a> is evaluated, <a href="/book/language/modules/import.html"><code>import</code></a> statements within are provided the <em>pre-resolved</em>
+<a href="/book/rust/modules/index.html">modules</a> without going through the normal <a href="/book/rust/modules/resolvers/index.html">module resolution</a> process.</p>
 <h2 id="only-static-paths"><a class="header" href="#only-static-paths">Only Static Paths</a></h2>
-<p><code>Engine::compile_into_self_contained</code> only pre-resolves <a href="/language/modules/import.html"><code>import</code></a> statements in the script
-that are <em>static</em>, i.e. with a path that is a <a href="/language/strings-chars.html">string</a> literal.</p>
+<p><code>Engine::compile_into_self_contained</code> only pre-resolves <a href="/book/language/modules/import.html"><code>import</code></a> statements in the script
+that are <em>static</em>, i.e. with a path that is a <a href="/book/language/strings-chars.html">string</a> literal.</p>
 <pre><code class="language-rust">// The following import is pre-resolved.
 import "hello" as h;
 
@@ -261,22 +261,6 @@ import module_name as h;</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

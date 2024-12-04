@@ -195,7 +195,7 @@
 <div>
 <ul>
 <li>
-<p>A system where an embedded <a href="/engine/hello-world.html"><code>Engine</code></a> is used to call scripts within a callback function/closure
+<p>A system where an embedded <a href="/book/engine/hello-world.html"><code>Engine</code></a> is used to call scripts within a callback function/closure
 from some external system.</p>
 <p>This is extremely common when working with an ECS (Entity Component System) or a GUI library where the script
 must draw via the provided graphics context.</p>
@@ -210,7 +210,7 @@ must draw via the provided graphics context.</p>
 <p>Said external system’s API require such states to function.</p>
 </li>
 <li>
-<p>It is impossible to pass references into Rhai because the <a href="/engine/hello-world.html"><code>Engine</code></a> does not track lifetimes.</p>
+<p>It is impossible to pass references into Rhai because the <a href="/book/engine/hello-world.html"><code>Engine</code></a> does not track lifetimes.</p>
 </li>
 </ul>
 </div>
@@ -246,7 +246,7 @@ to a reference before use. This also requires <code>unsafe</code> code.</p>
 <a class="admonition-anchor-link" href="#admonition-here-be-dragons"></a>
 </div>
 <div>
-<p>Make <strong>absolutely sure</strong> that the newtype is never stored anywhere permanent (e.g. in a <a href="/engine/scope.html"><code>Scope</code></a>)
+<p>Make <strong>absolutely sure</strong> that the newtype is never stored anywhere permanent (e.g. in a <a href="/book/engine/scope.html"><code>Scope</code></a>)
 nor does it ever live outside of the reference’s scope!</p>
 <p>Otherwise, a crash is the system being nice to you…</p>
 </div>
@@ -343,17 +343,17 @@ super_ecs_system.query(...).for_each(|world: &amp;mut World| {
 <p>It is of utmost importance that no instance of the handle newtype ever <strong><em>leaks</em></strong> outside of the
 appropriate scope where the wrapped reference may no longer be valid.</p>
 <p>For example, do not allow the script to store a copy of the handle anywhere that can
-potentially be persistent (e.g. within an <a href="/language/object-maps.html">object map</a>).</p>
+potentially be persistent (e.g. within an <a href="/book/language/object-maps.html">object map</a>).</p>
 <h4 id="safety-check-via-unique-id"><a class="header" href="#safety-check-via-unique-id">Safety check via unique ID</a></h4>
 <p>One solution, as illustrated in the example, is to always tag each handle instance together with
-a unique random ID. That same ID can then be set into the <a href="/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+a unique random ID. That same ID can then be set into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
 before running scripts.</p>
-<p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="/engine/hello-world.html"><code>Engine</code></a>
-(via <a href="/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
+<p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="/book/engine/hello-world.html"><code>Engine</code></a>
+(via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
 an error should be returned instead.</p>
 <h4 id="alternative-to-engineset_default_tag"><a class="header" href="#alternative-to-engineset_default_tag">Alternative to <code>Engine::set_default_tag</code></a></h4>
-<p>Alternatively, if the <a href="/engine/hello-world.html"><code>Engine</code></a> cannot be made mutable, use <code>Engine::call_fn_with_options</code>
-to set the ID before directly calling a script <a href="/language/functions.html">function</a> in a compiled <a href="/engine/compile.html"><code>AST</code></a>.</p>
+<p>Alternatively, if the <a href="/book/engine/hello-world.html"><code>Engine</code></a> cannot be made mutable, use <code>Engine::call_fn_with_options</code>
+to set the ID before directly calling a script <a href="/book/language/functions.html">function</a> in a compiled <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 </div>
 </div>
 
@@ -386,22 +386,6 @@ to set the ID before directly calling a script <a href="/language/functions.html
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

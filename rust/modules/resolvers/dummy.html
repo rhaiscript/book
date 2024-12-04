@@ -181,10 +181,10 @@
 <a class="admonition-anchor-link" href="#admonition-default"></a>
 </div>
 <div>
-<p><code>DummyModuleResolver</code> is the default for <a href="/start/features.html"><code>no_std</code></a> or <a href="/engine/raw.html"><code>Engine::new_raw</code></a>.</p>
+<p><code>DummyModuleResolver</code> is the default for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/engine/raw.html"><code>Engine::new_raw</code></a>.</p>
 </div>
 </div>
-<p>This <a href="/rust/modules/resolvers/index.html">module resolver</a> acts as a <em>dummy</em> and fails all module resolution calls.</p>
+<p>This <a href="/book/rust/modules/resolvers/index.html">module resolver</a> acts as a <em>dummy</em> and fails all module resolution calls.</p>
 
                     </main>
 
@@ -215,22 +215,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

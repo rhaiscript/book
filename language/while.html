@@ -184,7 +184,7 @@
 <a class="admonition-anchor-link" href="#admonition-tip-disable-while-loops"></a>
 </div>
 <div>
-<p><code>while</code> loops can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+<p><code>while</code> loops can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-rust">let x = 10;
@@ -198,7 +198,7 @@ while x &gt; 0 {
 <h2 id="while-expression"><a class="header" href="#while-expression">While Expression</a></h2>
 <p>Like Rust, <code>while</code> statements can also be used as <em>expressions</em>.</p>
 <p>The <code>break</code> statement takes an optional expression that provides the return value.</p>
-<p>The default return value of a <code>while</code> expression is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The default return value of a <code>while</code> expression is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <div id="admonition-tip-disable-all-loop-expressions" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-disable-all-loop-expressions-title">
 <div class="admonition-title">
 <div id="admonition-tip-disable-all-loop-expressions-title">
@@ -207,7 +207,7 @@ while x &gt; 0 {
 <a class="admonition-anchor-link" href="#admonition-tip-disable-all-loop-expressions"></a>
 </div>
 <div>
-<p>Loop expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_loop_expressions</code></a>.</p>
+<p>Loop expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_loop_expressions</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-js">let x = 0;
@@ -260,22 +260,6 @@ if result == () {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

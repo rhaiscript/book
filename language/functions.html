@@ -174,7 +174,7 @@
                     <main>
                         <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
 <p>Rhai supports defining functions in script via the <code>fn</code> keyword, with a syntax that is very similar to Rust without types.</p>
-<p>Valid function names are the same as valid <a href="/language/variables.html">variable</a> names.</p>
+<p>Valid function names are the same as valid <a href="/book/language/variables.html">variable</a> names.</p>
 <pre><code class="language-rust">fn add(x, y) {
     x + y
 }
@@ -194,7 +194,7 @@ sub(2, 3,) == -1;   // trailing comma in arguments list is OK</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-functions"></a>
 </div>
 <div>
-<p>Defining functions can be disabled via the <a href="/start/features.html"><code>no_function</code></a> feature.</p>
+<p>Defining functions can be disabled via the <a href="/book/start/features.html"><code>no_function</code></a> feature.</p>
 </div>
 </div>
 <div id="admonition-tip-is_def_fn" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-is_def_fn-title">
@@ -205,7 +205,7 @@ sub(2, 3,) == -1;   // trailing comma in arguments list is OK</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-is_def_fn"></a>
 </div>
 <div>
-<p>Use <code>is_def_fn</code> (not available under <a href="/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
+<p>Use <code>is_def_fn</code> (not available under <a href="/book/start/features.html"><code>no_function</code></a>) to detect if a Rhai function is defined
 (and therefore callable) based on its name and the number of parameters (<em>arity</em>).</p>
 <pre><code class="language-rust">fn foo(x) { x + 1 }
 
@@ -253,14 +253,14 @@ fn do_addition(x) {
 <h2 id="no-access-to-external-scope"><a class="header" href="#no-access-to-external-scope">No Access to External Scope</a></h2>
 <p>Functions are not <em>closures</em>. They do not capture the calling environment and can only access their
 own parameters.</p>
-<p>They cannot access <a href="/language/variables.html">variables</a> external to the function itself.</p>
+<p>They cannot access <a href="/book/language/variables.html">variables</a> external to the function itself.</p>
 <pre><code class="language-rust">let x = 42;
 
 fn foo() {
     x               // &lt;- error: variable 'x' not found
 }</code></pre>
 <h2 id="but-can-call-other-functions-and-access-modules"><a class="header" href="#but-can-call-other-functions-and-access-modules">But Can Call Other Functions and Access Modules</a></h2>
-<p>All functions in the same <a href="/engine/compile.html"><code>AST</code></a> can call each other.</p>
+<p>All functions in the same <a href="/book/engine/compile.html"><code>AST</code></a> can call each other.</p>
 <pre><code class="language-rust">fn foo(x) {         // function defined in the global namespace
     x + 1
 }
@@ -268,7 +268,7 @@ fn foo() {
 fn bar(x) {
     foo(x)          // ok! function 'foo' can be called
 }</code></pre>
-<p>In addition, <a href="/rust/modules/index.html">modules</a> <a href="/language/modules/import.html">imported</a> at global level can be accessed.</p>
+<p>In addition, <a href="/book/rust/modules/index.html">modules</a> <a href="/book/language/modules/import.html">imported</a> at global level can be accessed.</p>
 <pre><code class="language-js">import "hello" as hey;
 import "world" as woo;
 
@@ -285,9 +285,9 @@ fn foo(x) {
 }
 </code></pre>
 <h2 id="automatic-global-module"><a class="header" href="#automatic-global-module">Automatic Global Module</a></h2>
-<p>When a <a href="/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/rust/modules/index.html">module</a> called <a href="/language/global.html"><code>global</code></a>.</p>
-<p>Functions can access those <a href="/language/constants.html">constants</a> via the special <a href="/language/global.html"><code>global</code></a> <a href="/rust/modules/index.html">module</a>.</p>
-<p>Naturally, the automatic <a href="/language/global.html"><code>global</code></a> <a href="/rust/modules/index.html">module</a> is not available under <a href="/start/features.html"><code>no_function</code></a> nor <a href="/start/features.html"><code>no_module</code></a>.</p>
+<p>When a <a href="/book/language/constants.html">constant</a> is declared at global scope, it is added to a special <a href="/book/rust/modules/index.html">module</a> called <a href="/book/language/global.html"><code>global</code></a>.</p>
+<p>Functions can access those <a href="/book/language/constants.html">constants</a> via the special <a href="/book/language/global.html"><code>global</code></a> <a href="/book/rust/modules/index.html">module</a>.</p>
+<p>Naturally, the automatic <a href="/book/language/global.html"><code>global</code></a> <a href="/book/rust/modules/index.html">module</a> is not available under <a href="/book/start/features.html"><code>no_function</code></a> nor <a href="/book/start/features.html"><code>no_module</code></a>.</p>
 <pre><code class="language-rust">const CONSTANT = 42;        // this constant is automatically added to 'global'
 
 let hello = 1;              // variables are not added to 'global'
@@ -314,7 +314,7 @@ fn foo(x) {         // &lt;- define 'foo' after use
     x + 1
 }</code></pre>
 <h2 id="arguments-are-passed-by-value"><a class="header" href="#arguments-are-passed-by-value">Arguments are Passed by Value</a></h2>
-<p>Functions defined in script always take <a href="/language/dynamic.html"><code>Dynamic</code></a> parameters (i.e. they can be of any types).
+<p>Functions defined in script always take <a href="/book/language/dynamic.html"><code>Dynamic</code></a> parameters (i.e. they can be of any types).
 Therefore, functions with the same name and same <em>number</em> of parameters are equivalent.</p>
 <p>All arguments are passed by <em>value</em>, so all Rhai script-defined functions are <em>pure</em>
 (i.e. they never modify their arguments).</p>
@@ -370,22 +370,6 @@ via the <a href="fn-method.html"><code>this</code></a> pointer.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

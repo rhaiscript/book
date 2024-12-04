@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="multiple-instantiation"><a class="header" href="#multiple-instantiation">Multiple Instantiation</a></h1>
-<p>Rhai’s <a href="/start/features.html">features</a> are not strictly additive.  This is easily deduced from the <a href="/start/features.html"><code>no_std</code></a> feature
+<p>Rhai’s <a href="/book/start/features.html">features</a> are not strictly additive.  This is easily deduced from the <a href="/book/start/features.html"><code>no_std</code></a> feature
 which prepares the crate for <code>no-std</code> builds.  Obviously, turning on this feature has a material
 impact on how Rhai behaves.</p>
 <p>Many crates resolve this by going the opposite direction: build for <code>no-std</code> in default, but add a
@@ -209,7 +209,7 @@ as a feature.</p>
 </div>
 <h2 id="multiple-instantiations-of-rhai-within-the-same-project"><a class="header" href="#multiple-instantiations-of-rhai-within-the-same-project">Multiple Instantiations of Rhai Within The Same Project</a></h2>
 <p>The trick is to differentiate between multiple identical copies of Rhai, each having
-a different <a href="/start/features.html">features</a> set, by their <em>sources</em>:</p>
+a different <a href="/book/start/features.html">features</a> set, by their <em>sources</em>:</p>
 <ul>
 <li>
 <p>Different versions from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a> – The official crate.</p>
@@ -232,9 +232,9 @@ rhai_my_github = { git = "https://github.com/my_github/rhai", branch = "variatio
 rhai_local = { path = "../rhai_copy" }
 </code></pre>
 <p>The example above creates four different modules: <code>rhai</code>, <code>rhai_github</code>, <code>rhai_my_github</code> and
-<code>rhai_local</code>, each referring to a different Rhai copy with the appropriate <a href="/start/features.html">features</a> set.</p>
+<code>rhai_local</code>, each referring to a different Rhai copy with the appropriate <a href="/book/start/features.html">features</a> set.</p>
 <p>Only one crate of any particular version can be used from each source, because Cargo merges all
-candidate cases within the same source, adding all <a href="/start/features.html">features</a> together.</p>
+candidate cases within the same source, adding all <a href="/book/start/features.html">features</a> together.</p>
 <p>If more than four different instantiations of Rhai is necessary (why?), create more local
 repositories or GitHub forks or branches.</p>
 <div id="admonition-no-way-to-avoid-dependency-conflicts" class="admonition admonish-danger small" role="note" aria-labelledby="admonition-no-way-to-avoid-dependency-conflicts-title">
@@ -245,11 +245,11 @@ repositories or GitHub forks or branches.</p>
 <a class="admonition-anchor-link" href="#admonition-no-way-to-avoid-dependency-conflicts"></a>
 </div>
 <div>
-<p>Unfortunately, pulling in Rhai from different sources do not resolve the problem of <a href="/start/features.html">features</a>
+<p>Unfortunately, pulling in Rhai from different sources do not resolve the problem of <a href="/book/start/features.html">features</a>
 conflict between dependencies.  Even overriding <code>crates.io</code> via the <code>[patch]</code> manifest section
 doesn’t work – all dependencies will eventually find the only one copy.</p>
 <p>What is necessary – multiple copies of Rhai, one for each dependent crate that requires it,
-together with their <em>unique</em> <a href="/start/features.html">features</a> set intact.  In other words, turning off Cargo’s crate
+together with their <em>unique</em> <a href="/book/start/features.html">features</a> set intact.  In other words, turning off Cargo’s crate
 merging feature <em>just for Rhai</em>.</p>
 <p>Unfortunately, as of this writing, there is no known method to achieve it.</p>
 <p>Therefore, moral of the story: avoid pulling in multiple crates that depend on Rhai.</p>
@@ -285,22 +285,6 @@ merging feature <em>just for Rhai</em>.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

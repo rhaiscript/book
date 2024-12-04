@@ -175,18 +175,18 @@
                         <h1 id="script-optimization"><a class="header" href="#script-optimization">Script Optimization</a></h1>
 <p>Rhai includes an <em>optimizer</em> that tries to optimize a script after parsing.
 This can reduce resource utilization and increase execution speed.</p>
-<p>Script optimization can be turned off via the <a href="/start/features.html"><code>no_optimize</code></a> feature.</p>
+<p>Script optimization can be turned off via the <a href="/book/start/features.html"><code>no_optimize</code></a> feature.</p>
 <h1 id="optimization-levels"><a class="header" href="#optimization-levels">Optimization Levels</a></h1>
 <p>There are three levels of optimization: <code>None</code>, <code>Simple</code> and <code>Full</code>.
 The default is <code>Simple</code>.</p>
-<p>An <a href="/engine/hello-world.html"><code>Engine</code></a>’s optimization level is set via <a href="/engine/options.html"><code>Engine::set_optimization_level</code></a>.</p>
+<p>An <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s optimization level is set via <a href="/book/engine/options.html"><code>Engine::set_optimization_level</code></a>.</p>
 <pre><code class="language-rust">// Turn on aggressive optimizations
 engine.set_optimization_level(rhai::OptimizationLevel::Full);</code></pre>
 <h2 id="none"><a class="header" href="#none"><code>None</code></a></h2>
 <p><code>None</code> is obvious – no optimization on the AST is performed.</p>
 <h2 id="simple-default"><a class="header" href="#simple-default"><code>Simple</code> (Default)</a></h2>
 <p><code>Simple</code> performs only relatively <em>safe</em> optimizations without causing side-effects (i.e. it only
-relies on static analysis and <a href="/engine/builtin.html">built-in operators</a> for <a href="/language/constants.html">constant</a> <a href="/language/values-and-types.html">standard types</a>, and will not
+relies on static analysis and <a href="/book/engine/builtin.html">built-in operators</a> for <a href="/book/language/constants.html">constant</a> <a href="/book/language/values-and-types.html">standard types</a>, and will not
 perform any external function calls).</p>
 <div id="admonition-warning" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-warning-title">
 <div class="admonition-title">
@@ -196,9 +196,9 @@ perform any external function calls).</p>
 <a class="admonition-anchor-link" href="#admonition-warning"></a>
 </div>
 <div>
-<p>After <em>constants propagation</em> is performed, if the <a href="/language/constants.html">constants</a> are then modified (yes, it is possible, via Rust functions),
+<p>After <em>constants propagation</em> is performed, if the <a href="/book/language/constants.html">constants</a> are then modified (yes, it is possible, via Rust functions),
 the modified values will <em>not</em> show up in the optimized script.</p>
-<p>Only the initialization values of <a href="/language/constants.html">constants</a> are ever retained.</p>
+<p>Only the initialization values of <a href="/book/language/constants.html">constants</a> are ever retained.</p>
 </div>
 </div>
 <div id="admonition-warning-1" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-warning-1-title">
@@ -209,12 +209,12 @@ the modified values will <em>not</em> show up in the optimized script.</p>
 <a class="admonition-anchor-link" href="#admonition-warning-1"></a>
 </div>
 <div>
-<p>Overriding a <a href="/engine/builtin.html">built-in operator</a> in the <a href="/engine/hello-world.html"><code>Engine</code></a> afterwards has no effect after the
+<p>Overriding a <a href="/book/engine/builtin.html">built-in operator</a> in the <a href="/book/engine/hello-world.html"><code>Engine</code></a> afterwards has no effect after the
 optimizer replaces an expression with its calculated value.</p>
 </div>
 </div>
 <h2 id="full"><a class="header" href="#full"><code>Full</code></a></h2>
-<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="/language/constants.html">constant</a> arguments to
+<p><code>Full</code> is <em>much</em> more aggressive, <em>including</em> calling external functions on <a href="/book/language/constants.html">constant</a> arguments to
 determine their results.</p>
 <p>One benefit to this is that many more optimization opportunities arise, especially with regards to
 comparison operators.</p>
@@ -248,22 +248,6 @@ comparison operators.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

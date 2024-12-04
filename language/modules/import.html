@@ -181,11 +181,11 @@
 <a class="admonition-anchor-link" href="#admonition-see-also"></a>
 </div>
 <div>
-<p>See <a href="/rust/modules/resolvers/index.html"><em>Module Resolvers</em></a> for more details.</p>
+<p>See <a href="/book/rust/modules/resolvers/index.html"><em>Module Resolvers</em></a> for more details.</p>
 </div>
 </div>
-<p>Before a <a href="/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
-<a href="/rust/modules/resolvers/index.html">module resolver</a> registered into the <a href="/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
+<p>Before a <a href="/book/rust/modules/index.html">module</a> can be used (via an <code>import</code> statement) in a script, there must be a
+<a href="/book/rust/modules/resolvers/index.html">module resolver</a> registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, the default being the <code>FileModuleResolver</code>.</p>
 <h2 id="import-statement"><a class="header" href="#import-statement"><code>import</code> Statement</a></h2>
 <div id="admonition-tip" class="admonition admonish-tip side wide" role="note" aria-labelledby="admonition-tip-title">
 <div class="admonition-title">
@@ -195,11 +195,11 @@
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>A <a href="/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.</p>
+<p>A <a href="/book/rust/modules/index.html">module</a> that is only <code>import</code>-ed but not given any name is simply run.</p>
 <p>This is a very simple way to run another script file from within a script.</p>
 </div>
 </div>
-<p>A <a href="/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.</p>
+<p>A <a href="/book/rust/modules/index.html">module</a> can be <em>imported</em> via the <code>import</code> statement, and be given a name.</p>
 <p>Its members can be accessed via <code>::</code> similar to C++.</p>
 <pre><code class="language-js">import "crypto_banner";         // run the script file 'crypto_banner.rhai' without creating an imported module
 
@@ -229,7 +229,7 @@ lock::status = "off";           // &lt;- runtime error: cannot modify a constant
 <a class="admonition-anchor-link" href="#admonition-imports-are-_scoped_"></a>
 </div>
 <div>
-<p><a href="/rust/modules/index.html">Modules</a> imported via <code>import</code> statements are only accessible inside the relevant block scope.</p>
+<p><a href="/book/rust/modules/index.html">Modules</a> imported via <code>import</code> statements are only accessible inside the relevant block scope.</p>
 <pre><code class="language-js">import "hacker" as h;           // import module - visible globally
 
 if secured {                    // &lt;- new block scope
@@ -271,7 +271,7 @@ for x in 0..1000 {
 usually grouped at the top (beginning) of a script for manageability and visibility.</p>
 <p>It is not advised to deviate from this common practice unless there is a <em>Very Good Reason™</em>.</p>
 <p>Especially, do not place an <code>import</code> statement within a loop; doing so will repeatedly re-load the
-same <a href="/rust/modules/index.html">module</a> during every iteration of the loop!</p>
+same <a href="/book/rust/modules/index.html">module</a> during every iteration of the loop!</p>
 </div>
 </div>
 <div id="admonition-recursive-imports" class="admonition admonish-danger" role="note" aria-labelledby="admonition-recursive-imports-title">
@@ -282,8 +282,8 @@ same <a href="/rust/modules/index.html">module</a> during every iteration of the
 <a class="admonition-anchor-link" href="#admonition-recursive-imports"></a>
 </div>
 <div>
-<p>Beware of <em>import cycles</em> – i.e. recursively loading the same <a href="/rust/modules/index.html">module</a>. This is a sure-fire way to
-cause a stack overflow in the <a href="/engine/hello-world.html"><code>Engine</code></a>, unless stopped by setting a limit for <a href="/safety/max-modules.html">maximum number of modules</a>.</p>
+<p>Beware of <em>import cycles</em> – i.e. recursively loading the same <a href="/book/rust/modules/index.html">module</a>. This is a sure-fire way to
+cause a stack overflow in the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, unless stopped by setting a limit for <a href="/book/safety/max-modules.html">maximum number of modules</a>.</p>
 <p>For instance, importing itself always causes an infinite recursion:</p>
 <pre><code class="language-js">┌────────────┐
 │ hello.rhai │
@@ -293,7 +293,7 @@ import "hello" as foo;          // import itself - infinite recursion!
 
 foo::do_something();
 </code></pre>
-<p><a href="/rust/modules/index.html">Modules</a> cross-referencing also cause infinite recursion:</p>
+<p><a href="/book/rust/modules/index.html">Modules</a> cross-referencing also cause infinite recursion:</p>
 <pre><code class="language-js">┌────────────┐
 │ hello.rhai │
 └────────────┘
@@ -341,22 +341,6 @@ bar::do_something_else();
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

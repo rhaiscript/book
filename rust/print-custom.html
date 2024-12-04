@@ -174,12 +174,12 @@
                     <main>
                         <h1 id="printing-for-custom-types"><a class="header" href="#printing-for-custom-types">Printing for Custom Types</a></h1>
 <h2 id="provide-these-functions"><a class="header" href="#provide-these-functions">Provide These Functions</a></h2>
-<p>To use <a href="/rust/custom-types.html">custom types</a> for <a href="/language/print-debug.html"><code>print</code></a> and <a href="/language/print-debug.html"><code>debug</code></a>, or convert a <a href="/rust/custom-types.html">custom type</a> into a <a href="/language/strings-chars.html">string</a>,
-it is necessary that the following functions, at minimum, be registered (assuming the <a href="/rust/custom-types.html">custom type</a>
+<p>To use <a href="/book/rust/custom-types.html">custom types</a> for <a href="/book/language/print-debug.html"><code>print</code></a> and <a href="/book/language/print-debug.html"><code>debug</code></a>, or convert a <a href="/book/rust/custom-types.html">custom type</a> into a <a href="/book/language/strings-chars.html">string</a>,
+it is necessary that the following functions, at minimum, be registered (assuming the <a href="/book/rust/custom-types.html">custom type</a>
 is <code>T: Display + Debug</code>).</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Signature</th><th>Typical implementation</th><th>Usage</th></tr></thead><tbody>
-<tr><td><code>to_string</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>x.to_string()</code></td><td>converts the <a href="/rust/custom-types.html">custom type</a> into a <a href="/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>to_debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>format!("{x:?}")</code></td><td>converts the <a href="/rust/custom-types.html">custom type</a> into a <a href="/language/strings-chars.html">string</a> in debug format</td></tr>
+<tr><td><code>to_string</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>x.to_string()</code></td><td>converts the <a href="/book/rust/custom-types.html">custom type</a> into a <a href="/book/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>to_debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>format!("{x:?}")</code></td><td>converts the <a href="/book/rust/custom-types.html">custom type</a> into a <a href="/book/language/strings-chars.html">string</a> in debug format</td></tr>
 </tbody></table>
 </div><div id="admonition-tip-rhai_fnglobal" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-rhai_fnglobal-title">
 <div class="admonition-title">
@@ -189,20 +189,20 @@ is <code>T: Display + Debug</code>).</p>
 <a class="admonition-anchor-link" href="#admonition-tip-rhai_fnglobal"></a>
 </div>
 <div>
-<p>If these functions are defined via a <a href="/plugins/module.html">plugin module</a>, be sure to include the <code>#[rhai_fn(global)]</code> attribute
+<p>If these functions are defined via a <a href="/book/plugins/module.html">plugin module</a>, be sure to include the <code>#[rhai_fn(global)]</code> attribute
 in order to make them available globally.</p>
-<p>See <a href="/plugins/module.html#use-rhai_fnglobal">this section</a> for more details.</p>
+<p>See <a href="/book/plugins/module.html#use-rhai_fnglobal">this section</a> for more details.</p>
 </div>
 </div>
 <h2 id="also-consider-these"><a class="header" href="#also-consider-these">Also Consider These</a></h2>
 <p>The following functions are implemented using <code>to_string</code> or <code>to_debug</code> by default, but can be
 overloaded with custom versions.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Signature</th><th>Default</th><th>Usage</th></tr></thead><tbody>
-<tr><td><code>print</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_string</code></td><td>converts the <a href="/rust/custom-types.html">custom type</a> into a <a href="/language/strings-chars.html">string</a> for the <a href="/language/print-debug.html"><code>print</code></a> statement</td></tr>
-<tr><td><code>debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_debug</code></td><td>converts the <a href="/rust/custom-types.html">custom type</a> into a <a href="/language/strings-chars.html">string</a> for the <a href="/language/print-debug.html"><code>debug</code></a> statement</td></tr>
-<tr><td><code>+</code> operator</td><td><code>|s: &amp;str, x: T| -&gt; String</code></td><td><code>to_string</code></td><td>concatenates the <a href="/rust/custom-types.html">custom type</a> with another <a href="/language/strings-chars.html">string</a></td></tr>
-<tr><td><code>+</code> operator</td><td><code>|x: &amp;mut T, s: &amp;str| -&gt; String</code></td><td><code>to_string</code></td><td>concatenates another <a href="/language/strings-chars.html">string</a> with the <a href="/rust/custom-types.html">custom type</a></td></tr>
-<tr><td><code>+=</code> operator</td><td><code>|s: &amp;mut ImmutableString, x: T|</code></td><td><code>to_string</code></td><td>appends the <a href="/rust/custom-types.html">custom type</a> to an existing <a href="/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>print</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_string</code></td><td>converts the <a href="/book/rust/custom-types.html">custom type</a> into a <a href="/book/language/strings-chars.html">string</a> for the <a href="/book/language/print-debug.html"><code>print</code></a> statement</td></tr>
+<tr><td><code>debug</code></td><td><code>|x: &amp;mut T| -&gt; String</code></td><td><code>to_debug</code></td><td>converts the <a href="/book/rust/custom-types.html">custom type</a> into a <a href="/book/language/strings-chars.html">string</a> for the <a href="/book/language/print-debug.html"><code>debug</code></a> statement</td></tr>
+<tr><td><code>+</code> operator</td><td><code>|s: &amp;str, x: T| -&gt; String</code></td><td><code>to_string</code></td><td>concatenates the <a href="/book/rust/custom-types.html">custom type</a> with another <a href="/book/language/strings-chars.html">string</a></td></tr>
+<tr><td><code>+</code> operator</td><td><code>|x: &amp;mut T, s: &amp;str| -&gt; String</code></td><td><code>to_string</code></td><td>concatenates another <a href="/book/language/strings-chars.html">string</a> with the <a href="/book/rust/custom-types.html">custom type</a></td></tr>
+<tr><td><code>+=</code> operator</td><td><code>|s: &amp;mut ImmutableString, x: T|</code></td><td><code>to_string</code></td><td>appends the <a href="/book/rust/custom-types.html">custom type</a> to an existing <a href="/book/language/strings-chars.html">string</a></td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -234,22 +234,6 @@ overloaded with custom versions.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

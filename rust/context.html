@@ -174,24 +174,24 @@
                     <main>
                         <h1 id="nativecallcontext"><a class="header" href="#nativecallcontext"><code>NativeCallContext</code></a></h1>
 <p>If the <em>first</em> parameter of a function is of type <code>rhai::NativeCallContext</code>, then it is treated
-specially by the <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+specially by the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 <p><code>NativeCallContext</code> is a type that encapsulates the current <em>call context</em> of a Rust function call
 and exposes the following.</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>engine()</code></td><td style="text-align: center"><a href="/engine/hello-world.html"><code>&amp;Engine</code></a></td><td>the current <a href="/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/language/fn-ptr.html">function pointer</a>.</td></tr>
+<tr><td><code>engine()</code></td><td style="text-align: center"><a href="/book/engine/hello-world.html"><code>&amp;Engine</code></a></td><td>the current <a href="/book/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/book/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/book/language/fn-ptr.html">function pointer</a>.</td></tr>
 <tr><td><code>fn_name()</code></td><td style="text-align: center"><code>&amp;str</code></td><td>name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)</td></tr>
 <tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
 <tr><td><code>position()</code></td><td style="text-align: center"><code>Position</code></td><td>position of the function call</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
-<tr><td><code>tag()</code></td><td style="text-align: center"><a href="/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the <em>custom state</em> that is persistent during the current run</td></tr>
-<tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later <a href="/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.20.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.20.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="/start/features.html"><code>internals</code></a> feature</td></tr>
-<tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="/language/fn-namespaces.html">namespaces</a> (as <a href="/rust/modules/index.html">modules</a>) containing all script-defined <a href="/language/functions.html">functions</a>, in reverse order (i.e. later <a href="/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="/language/fn-namespaces.html">namespaces</a> (as <a href="/rust/modules/index.html">modules</a>) containing all script-defined <a href="/language/functions.html">functions</a>; requires the <a href="/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>tag()</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the <em>custom state</em> that is persistent during the current run</td></tr>
+<tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later <a href="/book/rust/modules/index.html">modules</a> come first)</td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.20.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.20.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="/book/rust/modules/index.html">modules</a> come first)</td></tr>
+<tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="/book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>; requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn(...)</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
 <tr><td><code>call_native_fn(...)</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a registered native Rust function with the supplied arguments, casting the result into the required type</td></tr>
-<tr><td><code>call_fn_raw(...)</code></td><td style="text-align: center"><code>Result&lt;</code><a href="/language/dynamic.html"><code>Dynamic</code></a><code>, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
-<tr><td><code>call_native_fn_raw(...)</code></td><td style="text-align: center"><code>Result&lt;</code><a href="/language/dynamic.html"><code>Dynamic</code></a><code>, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a registered native Rust function with the supplied arguments; this is an advanced method</td></tr>
+<tr><td><code>call_fn_raw(...)</code></td><td style="text-align: center"><code>Result&lt;</code><a href="/book/language/dynamic.html"><code>Dynamic</code></a><code>, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments; this is an advanced method</td></tr>
+<tr><td><code>call_native_fn_raw(...)</code></td><td style="text-align: center"><code>Result&lt;</code><a href="/book/language/dynamic.html"><code>Dynamic</code></a><code>, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a registered native Rust function with the supplied arguments; this is an advanced method</td></tr>
 </tbody></table>
 </div>
 <h2 id="example-implementations"><a class="header" href="#example-implementations">Example Implementations</a></h2>
@@ -245,7 +245,7 @@ pub fn new_array(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, B
 <a class="admonition-anchor-link" href="#admonition-example--call-a-function-within-a-function"></a>
 </div>
 <div>
-<p>The <em>native call context</em> can be used to call a <a href="/language/functions.html">function</a> within the current evaluation
+<p>The <em>native call context</em> can be used to call a <a href="/book/language/functions.html">function</a> within the current evaluation
 via <code>call_fn</code> (or more commonly <code>call_native_fn</code>).</p>
 <pre><code class="language-rust">use rhai::{Engine, NativeCallContext};
 
@@ -271,7 +271,7 @@ engine.register_fn("super_call", |context: NativeCallContext, value: i64| {
 <a class="admonition-anchor-link" href="#admonition-example--implement-a-callback"></a>
 </div>
 <div>
-<p>The <em>native call context</em> can be used to call a <a href="/language/fn-ptr.html">function pointer</a> or <a href="/language/fn-closure.html">closure</a> that has been passed
+<p>The <em>native call context</em> can be used to call a <a href="/book/language/fn-ptr.html">function pointer</a> or <a href="/book/language/fn-closure.html">closure</a> that has been passed
 as a parameter to the function (via <code>FnPtr::call_within_context</code>), thereby implementing a <em>callback</em>.</p>
 <pre><code class="language-rust">use rhai::{Dynamic, FnPtr, NativeCallContext, EvalAltResult};
 
@@ -313,22 +313,6 @@ pub fn greet(context: NativeCallContext, callback: FnPtr) -&gt; Result&lt;String
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="register-with-the-debugger"><a class="header" href="#register-with-the-debugger">Register with the Debugger</a></h1>
-<p>Hooking up a debugging interface is as simple as providing closures to the <a href="/engine/hello-world.html"><code>Engine</code></a>’s built-in
+<p>Hooking up a debugging interface is as simple as providing closures to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s built-in
 debugger via <code>Engine::register_debugger</code>.</p>
 <pre><code class="language-rust">use rhai::debugger::{ASTNode, DebuggerCommand};
 
@@ -200,8 +200,8 @@ engine.register_debugger(
 <a class="admonition-anchor-link" href="#admonition-tip-accessing-the-debugger"></a>
 </div>
 <div>
-<p>The type <code>debugger::Debugger</code> allows for manipulating <a href="/engine/debugging/break-points.html">break-points</a>, among others.</p>
-<p>The <a href="/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>context.global_runtime_state().debugger()</code> (immutable)
+<p>The type <code>debugger::Debugger</code> allows for manipulating <a href="/book/engine/debugging/break-points.html">break-points</a>, among others.</p>
+<p>The <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s debugger instance can be accessed via <code>context.global_runtime_state().debugger()</code> (immutable)
 or <code>context.global_runtime_state_mut().debugger_mut()</code> (mutable).</p>
 </div>
 </div>
@@ -218,21 +218,21 @@ following signature.</p>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 <tr><td><code>event</code></td><td style="text-align: center"><code>DebuggerEvent</code></td><td>an <code>enum</code> indicating the event that triggered the debugger</td></tr>
-<tr><td><code>node</code></td><td style="text-align: center"><code>ASTNode</code></td><td>an <code>enum</code> with two variants: <code>Expr</code> or <code>Stmt</code>, corresponding to the current expression node or statement node in the <a href="/engine/compile.html"><code>AST</code></a></td></tr>
-<tr><td><code>source</code></td><td style="text-align: center"><code>&amp;str</code></td><td>the source of the current <a href="/engine/compile.html"><code>AST</code></a>, or empty if none</td></tr>
+<tr><td><code>node</code></td><td style="text-align: center"><code>ASTNode</code></td><td>an <code>enum</code> with two variants: <code>Expr</code> or <code>Stmt</code>, corresponding to the current expression node or statement node in the <a href="/book/engine/compile.html"><code>AST</code></a></td></tr>
+<tr><td><code>source</code></td><td style="text-align: center"><code>&amp;str</code></td><td>the source of the current <a href="/book/engine/compile.html"><code>AST</code></a>, or empty if none</td></tr>
 <tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>position of the current node, same as <code>node.position()</code></td></tr>
 </tbody></table>
 </div>
-<p>and <a href="/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h3 id="event"><a class="header" href="#event">Event</a></h3>
 <p>The <code>event</code> parameter of the second closure passed to <code>Engine::register_debugger</code> contains a
 <code>debugger::DebuggerEvent</code> which is an <code>enum</code> with the following variants.</p>
 <div class="table-wrapper"><table><thead><tr><th><code>DebuggerEvent</code> variant</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>Start</code></td><td>the debugger is triggered at the beginning of evaluation</td></tr>
 <tr><td><code>Step</code></td><td>the debugger is triggered at the next step of evaluation</td></tr>
-<tr><td><code>BreakPoint(</code><em>n</em><code>)</code></td><td>the debugger is triggered by the <em>n</em>-th <a href="/engine/debugging/break-points.html">break-point</a></td></tr>
+<tr><td><code>BreakPoint(</code><em>n</em><code>)</code></td><td>the debugger is triggered by the <em>n</em>-th <a href="/book/engine/debugging/break-points.html">break-point</a></td></tr>
 <tr><td><code>FunctionExitWithValue(</code><em>r</em><code>)</code></td><td>the debugger is triggered by a function call returning with value <em>r</em> which is <code>&amp;Dynamic</code></td></tr>
 <tr><td><code>FunctionExitWithError(</code><em>err</em><code>)</code></td><td>the debugger is triggered by a function call exiting with error <em>err</em> which is <code>&amp;EvalAltResult</code></td></tr>
 <tr><td><code>End</code></td><td>the debugger is triggered at the end of evaluation</td></tr>
@@ -247,13 +247,13 @@ following signature.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-initialization"></a>
 </div>
 <div>
-<p>When a script starts evaluation, the debugger always stops at the very <em>first</em> <a href="/engine/compile.html"><code>AST</code></a> node
+<p>When a script starts evaluation, the debugger always stops at the very <em>first</em> <a href="/book/engine/compile.html"><code>AST</code></a> node
 with the <code>event</code> parameter set to <code>DebuggerStatus::Start</code>.</p>
-<p>This allows initialization to be done (e.g. setting up <a href="/engine/debugging/break-points.html">break-points</a>).</p>
+<p>This allows initialization to be done (e.g. setting up <a href="/book/engine/debugging/break-points.html">break-points</a>).</p>
 </div>
 </div>
 <p>The second closure passed to <code>Engine::register_debugger</code> will be called when stepping into or over
-expressions and statements, or when <a href="/engine/debugging/break-points.html">break-points</a> are hit.</p>
+expressions and statements, or when <a href="/book/engine/debugging/break-points.html">break-points</a> are hit.</p>
 <p>The return type of the closure is <code>Result&lt;debugger::DebuggerCommand, Box&lt;EvalAltResult&gt;&gt;</code>.</p>
 <p>If an error is returned, the script evaluation at that particular instance returns with that
 particular error. It is thus possible to <em>abort</em> the script evaluation by returning an error that is
@@ -265,7 +265,7 @@ continued behavior of the debugger.</p>
 <tr><td><code>StepInto</code></td><td>run to the next expression or statement, diving into functions</td><td style="text-align: center"><code>step</code></td></tr>
 <tr><td><code>StepOver</code></td><td>run to the next expression or statement, skipping over functions</td><td style="text-align: center"></td></tr>
 <tr><td><code>Next</code></td><td>run to the next statement, skipping over functions</td><td style="text-align: center"><code>next</code></td></tr>
-<tr><td><code>FunctionExit</code></td><td>run to the end of the current function call; debugger is triggered <em>before</em> the function call returns and the <a href="/engine/scope.html"><code>Scope</code></a> cleared</td><td style="text-align: center"><code>finish</code></td></tr>
+<tr><td><code>FunctionExit</code></td><td>run to the end of the current function call; debugger is triggered <em>before</em> the function call returns and the <a href="/book/engine/scope.html"><code>Scope</code></a> cleared</td><td style="text-align: center"><code>finish</code></td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -297,22 +297,6 @@ continued behavior of the debugger.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

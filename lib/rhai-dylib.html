@@ -186,10 +186,10 @@
 </div>
 <p><code>rhai-dylib</code> is an independent crate that demonstrates an API to register Rhai functionalities via
 <em>dynamic shared libraries</em> (i.e. <code>.so</code> in Linux or <code>.dll</code> in Windows).</p>
-<p>In other words, functions and <a href="/rust/modules/index.html">modules</a> can be defined in external libraries that are loaded
+<p>In other words, functions and <a href="/book/rust/modules/index.html">modules</a> can be defined in external libraries that are loaded
 dynamically at <em>runtime</em>, allowing for great flexibility at the cost of depending on the unstable
 Rust ABI.</p>
-<p>A <a href="/rust/modules/resolvers/index.html">module resolver</a> is also included.</p>
+<p>A <a href="/book/rust/modules/resolvers/index.html">module resolver</a> is also included.</p>
 <blockquote>
 <p>On <code>crates.io</code>: <a href="https://crates.io/crates/rhai-dylib"><code>rhai-dylib</code></a></p>
 <p>On <code>GitHub</code>: <a href="https://github.com/rhaiscript/rhai-dylib"><code>rhaiscript/rhai-dylib</code></a></p>
@@ -225,22 +225,6 @@ Rust ABI.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

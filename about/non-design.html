@@ -184,7 +184,7 @@
 </li>
 <li>
 <p><strong>No structures/records/tuples</strong> – define your types in Rust instead; Rhai can seamlessly
-work with <a href="/rust/custom-types.html"><em>any Rust type</em></a> that implements <code>Clone</code>.</p>
+work with <a href="/book/rust/custom-types.html"><em>any Rust type</em></a> that implements <code>Clone</code>.</p>
 </li>
 </ul>
 <div id="admonition-object-maps" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-object-maps-title">
@@ -195,9 +195,9 @@ work with <a href="/rust/custom-types.html"><em>any Rust type</em></a> that impl
 <a class="admonition-anchor-link" href="#admonition-object-maps"></a>
 </div>
 <div>
-<p>There is a built-in <a href="/language/object-maps.html">object map</a> type which is adequate for most uses.</p>
-<p>It is also possible to simulate <a href="/patterns/oop.html">object-oriented programming (OOP)</a> by storing <a href="/language/fn-ptr.html">function pointers</a>
-or <a href="/language/fn-closure.html">closures</a> in <a href="/language/object-maps.html">object map</a> properties, turning them into <em><a href="/rust/methods.html">methods</a></em>.</p>
+<p>There is a built-in <a href="/book/language/object-maps.html">object map</a> type which is adequate for most uses.</p>
+<p>It is also possible to simulate <a href="/book/patterns/oop.html">object-oriented programming (OOP)</a> by storing <a href="/book/language/fn-ptr.html">function pointers</a>
+or <a href="/book/language/fn-closure.html">closures</a> in <a href="/book/language/object-maps.html">object map</a> properties, turning them into <em><a href="/book/rust/methods.html">methods</a></em>.</p>
 </div>
 </div>
 <ul>
@@ -211,7 +211,7 @@ or <a href="/language/fn-closure.html">closures</a> in <a href="/language/object
 <a class="admonition-anchor-link" href="#admonition-function-pointers"></a>
 </div>
 <div>
-<p>There is support for simple <a href="/language/fn-ptr.html">function pointers</a> to allow runtime dispatch by function name.</p>
+<p>There is support for simple <a href="/book/language/fn-ptr.html">function pointers</a> to allow runtime dispatch by function name.</p>
 </div>
 </div>
 <ul>
@@ -220,7 +220,7 @@ or <a href="/language/fn-closure.html">closures</a> in <a href="/language/object
 </li>
 <li>
 <p><strong>No first-class closures</strong> – do your closure magic in Rust instead:
-<a href="/engine/call-fn.html">turn a Rhai scripted function into a Rust closure</a>.</p>
+<a href="/book/engine/call-fn.html">turn a Rhai scripted function into a Rust closure</a>.</p>
 </li>
 </ul>
 <div id="admonition-simulated-closures" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-simulated-closures-title">
@@ -231,8 +231,8 @@ or <a href="/language/fn-closure.html">closures</a> in <a href="/language/object
 <a class="admonition-anchor-link" href="#admonition-simulated-closures"></a>
 </div>
 <div>
-<p>There is support for simulated <a href="/language/fn-closure.html">closures</a> via <a href="/language/fn-curry.html">currying</a> a <a href="/language/fn-ptr.html">function pointer</a> with
-<a href="/language/fn-closure.html">captured</a> shared <a href="/language/variables.html">variables</a>.</p>
+<p>There is support for simulated <a href="/book/language/fn-closure.html">closures</a> via <a href="/book/language/fn-curry.html">currying</a> a <a href="/book/language/fn-ptr.html">function pointer</a> with
+<a href="/book/language/fn-closure.html">captured</a> shared <a href="/book/language/variables.html">variables</a>.</p>
 </div>
 </div>
 <ul>
@@ -250,11 +250,11 @@ recursive-descent parser for statements, and a hand-coded Pratt parser for expre
 <p>This lack of formalism allows the <em>tokenizer</em> and <em>parser</em> themselves to be exposed as services in
 order to support a wide range of user customizations, such as:</p>
 <ul>
-<li><a href="/engine/disable-keywords.html">disabling keywords and operators</a>,</li>
-<li>dynamically <a href="/engine/token-mapper.html">changing tokens</a> during parsing,</li>
-<li>adding <a href="/engine/custom-op.html">custom operators</a>,</li>
-<li>defining <a href="/engine/custom-syntax.html">custom syntax</a>,</li>
-<li><a href="/engine/def-var.html">filtering variables definition</a>.</li>
+<li><a href="/book/engine/disable-keywords.html">disabling keywords and operators</a>,</li>
+<li>dynamically <a href="/book/engine/token-mapper.html">changing tokens</a> during parsing,</li>
+<li>adding <a href="/book/engine/custom-op.html">custom operators</a>,</li>
+<li>defining <a href="/book/engine/custom-syntax.html">custom syntax</a>,</li>
+<li><a href="/book/engine/def-var.html">filtering variables definition</a>.</li>
 </ul>
 </div>
 </div>
@@ -270,7 +270,7 @@ enough for most real-life scenarios.</li>
 <a class="admonition-anchor-link" href="#admonition-how-it-compares"></a>
 </div>
 <div>
-<p>See Rhai performance <a href="/about/benchmarks.html">benchmarks</a>.</p>
+<p>See Rhai performance <a href="/book/about/benchmarks.html">benchmarks</a>.</p>
 </div>
 </div>
 
@@ -303,22 +303,6 @@ enough for most real-life scenarios.</li>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

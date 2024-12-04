@@ -252,7 +252,7 @@ foo(42, 100);       // &lt;- 42 * 2 + 100 * 3</code></pre>
 <p>An additional benefit to using closures is that they can capture external variables.</p>
 <p>For example, capturing a type wrapped in shared mutability (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</code>)
 allows a script to interact with the external environment through that shared type.</p>
-<p>See also: <a href="/patterns/control.html">Control Layer</a>.</p>
+<p>See also: <a href="/book/patterns/control.html">Control Layer</a>.</p>
 <pre><code class="language-rust">┌──────┐
 │ Rust │
 └──────┘
@@ -300,7 +300,7 @@ an intuitive and smooth developer experience that <em>just works</em>.</p>
 <p>Because of this, it is not recommended to touch those generic parameters directly.  These generic parameters may change
 liberally in future versions of Rhai. In most situations they are automatically inferred by the compiler.</p>
 <p>In the cases where the compiler fail to infer types when registering a <em>closure</em>, (usually with the <em>error</em> type
-of a <a href="/rust/fallible.html">fallible function</a>), manually declare the parameter and/or return types.</p>
+of a <a href="/book/rust/fallible.html">fallible function</a>), manually declare the parameter and/or return types.</p>
 <pre><code class="language-rust">// The following fails to compile because the compiler does not know
 // the return _error_ type of the closure.
 // It knows the return type, which is 'Result&lt;i64, E&gt;', but 'E' is not known.
@@ -343,22 +343,6 @@ engine.register_fn("foo", |x: i64| -&gt; Result&lt;i64, Box&lt;EvalAltResult&gt;
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

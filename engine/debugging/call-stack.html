@@ -181,12 +181,12 @@
 <a class="admonition-anchor-link" href="#admonition-call-stack-frames"></a>
 </div>
 <div>
-<p>Each “frame” in the call stack corresponds to one layer of <a href="/language/functions.html">function</a> call (script-defined
+<p>Each “frame” in the call stack corresponds to one layer of <a href="/book/language/functions.html">function</a> call (script-defined
 or native Rust).</p>
 <p>A call stack frame has the type <code>debugger::CallStackFrame</code>.</p>
 </div>
 </div>
-<p>The <a href="/engine/debugging/debugger.html">debugger</a> keeps a <em>call stack</em> of <a href="/language/functions.html">function</a> calls with argument values.</p>
+<p>The <a href="/book/engine/debugging/debugger.html">debugger</a> keeps a <em>call stack</em> of <a href="/book/language/functions.html">function</a> calls with argument values.</p>
 <p>This call stack can be examined to determine the control flow at any particular point.</p>
 <p>The <code>Debugger::call_stack</code> method returns a slice of all call stack frames.</p>
 <pre><code class="language-rust">use rhai::debugger::*;
@@ -230,22 +230,6 @@ for frame in debugger.call_stack().iter() {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

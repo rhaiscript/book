@@ -181,19 +181,19 @@
 <a class="admonition-anchor-link" href="#admonition-tip-is_shared"></a>
 </div>
 <div>
-<p>Use <code>Dynamic::is_shared</code> to check whether a particular <a href="/language/dynamic.html"><code>Dynamic</code></a> value is shared.</p>
+<p>Use <code>Dynamic::is_shared</code> to check whether a particular <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value is shared.</p>
 </div>
 </div>
-<p>Although <a href="/language/fn-anon.html">anonymous functions</a> de-sugar to standard function definitions, they differ from standard
-functions because they can <em>captures</em> <a href="/language/variables.html">variables</a> that are not defined within the current scope,
-but are instead defined in an external scope – i.e. where the <a href="/language/fn-anon.html">anonymous function</a> is created.</p>
-<p>All <a href="/language/variables.html">variables</a> that are accessible during the time the <a href="/language/fn-anon.html">anonymous function</a> is created are
-automatically captured when they are used, as long as they are not shadowed by local <a href="/language/variables.html">variables</a>
+<p>Although <a href="/book/language/fn-anon.html">anonymous functions</a> de-sugar to standard function definitions, they differ from standard
+functions because they can <em>captures</em> <a href="/book/language/variables.html">variables</a> that are not defined within the current scope,
+but are instead defined in an external scope – i.e. where the <a href="/book/language/fn-anon.html">anonymous function</a> is created.</p>
+<p>All <a href="/book/language/variables.html">variables</a> that are accessible during the time the <a href="/book/language/fn-anon.html">anonymous function</a> is created are
+automatically captured when they are used, as long as they are not shadowed by local <a href="/book/language/variables.html">variables</a>
 defined within the function’s.</p>
-<p>The captured <a href="/language/variables.html">variables</a> are automatically converted into <strong>reference-counted shared values</strong>
-(<code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code>, or <code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> under <a href="/start/features.html"><code>sync</code></a>).</p>
+<p>The captured <a href="/book/language/variables.html">variables</a> are automatically converted into <strong>reference-counted shared values</strong>
+(<code>Rc&lt;RefCell&lt;Dynamic&gt;&gt;</code>, or <code>Arc&lt;RwLock&lt;Dynamic&gt;&gt;</code> under <a href="/book/start/features.html"><code>sync</code></a>).</p>
 <p>Therefore, similar to closures in many languages, these captured shared values persist through
-reference counting, and may be read or modified even after the <a href="/language/variables.html">variables</a> that hold them go out of
+reference counting, and may be read or modified even after the <a href="/book/language/variables.html">variables</a> that hold them go out of
 scope and no longer exist.</p>
 <div id="admonition-tip-disable-closures" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-disable-closures-title">
 <div class="admonition-title">
@@ -203,7 +203,7 @@ scope and no longer exist.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-closures"></a>
 </div>
 <div>
-<p>Capturing external <a href="/language/variables.html">variables</a> can be turned off via the <a href="/start/features.html"><code>no_closure</code></a> feature.</p>
+<p>Capturing external <a href="/book/language/variables.html">variables</a> can be turned off via the <a href="/book/start/features.html"><code>no_closure</code></a> feature.</p>
 </div>
 </div>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -237,9 +237,9 @@ let f = anon_0001.curry(x);         // shared 'x' is curried</code></pre>
 </div>
 <div>
 <p>The example below is a typical tutorial sample for many languages to illustrate the traps
-that may accompany capturing external <a href="/language/variables.html">variables</a> in closures.</p>
+that may accompany capturing external <a href="/book/language/variables.html">variables</a> in closures.</p>
 <p>It prints <code>9</code>, <code>9</code>, <code>9</code>, … <code>9</code>, <code>9</code>, not <code>0</code>, <code>1</code>, <code>2</code>, … <code>8</code>, <code>9</code>, because there is
-ever only <em>one</em> captured <a href="/language/variables.html">variable</a>, and all ten closures capture the <em>same</em> <a href="/language/variables.html">variable</a>.</p>
+ever only <em>one</em> captured <a href="/book/language/variables.html">variable</a>, and all ten closures capture the <em>same</em> <a href="/book/language/variables.html">variable</a>.</p>
 <pre><code class="language-rust">let list = [];
 
 for i in 0..10 {
@@ -264,8 +264,8 @@ for f in list {
 </div>
 <div>
 <p>Rust does not have data races, but that doesn’t mean Rhai doesn’t.</p>
-<p>Avoid performing a method call on a captured shared <a href="/language/variables.html">variable</a> (which essentially takes a
-mutable reference to the shared object) while using that same <a href="/language/variables.html">variable</a> as a parameter
+<p>Avoid performing a method call on a captured shared <a href="/book/language/variables.html">variable</a> (which essentially takes a
+mutable reference to the shared object) while using that same <a href="/book/language/variables.html">variable</a> as a parameter
 in the method call – this is a sure-fire way to generate a data race error.</p>
 <p>If a shared value is used as the <code>this</code> pointer in a method call to a closure function,
 then the same shared value <em>must not</em> be captured inside that function, or a data race
@@ -289,10 +289,10 @@ x.call(f, 2);                       // &lt;- error: data race detected on 'x'</c
 <a class="admonition-anchor-link" href="#admonition-data-races-in-sync-builds-can-become-deadlocks"></a>
 </div>
 <div>
-<p>Under the <a href="/start/features.html"><code>sync</code></a> feature, shared values are guarded with a <code>RwLock</code>, meaning that data race
+<p>Under the <a href="/book/start/features.html"><code>sync</code></a> feature, shared values are guarded with a <code>RwLock</code>, meaning that data race
 conditions no longer raise an error.</p>
 <p>Instead, they wait endlessly for the <code>RwLock</code> to be freed, and thus can become deadlocks.</p>
-<p>On the other hand, since the same thread (i.e. the <a href="/engine/hello-world.html"><code>Engine</code></a> thread) that is holding the lock
+<p>On the other hand, since the same thread (i.e. the <a href="/book/engine/hello-world.html"><code>Engine</code></a> thread) that is holding the lock
 is attempting to read it again, this may also <a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html#panics-1">panic</a>
 depending on the O/S.</p>
 <pre><code class="language-rust">let x = 20;
@@ -317,24 +317,24 @@ x.call(f, 2);</code></pre>
 <p>The actual implementation of closures de-sugars to:</p>
 <ol>
 <li>
-<p>Keeping track of what <a href="/language/variables.html">variables</a> are accessed inside the <a href="/language/fn-anon.html">anonymous function</a>,</p>
+<p>Keeping track of what <a href="/book/language/variables.html">variables</a> are accessed inside the <a href="/book/language/fn-anon.html">anonymous function</a>,</p>
 </li>
 <li>
-<p>If a <a href="/language/variables.html">variable</a> is not defined within the <a href="/language/fn-anon.html">anonymous function’s</a> scope,
-it is looked up <em>outside</em> the <a href="/language/functions.html">function</a> and in the current execution scope –
-where the <a href="/language/fn-anon.html">anonymous function</a> is created.</p>
+<p>If a <a href="/book/language/variables.html">variable</a> is not defined within the <a href="/book/language/fn-anon.html">anonymous function’s</a> scope,
+it is looked up <em>outside</em> the <a href="/book/language/functions.html">function</a> and in the current execution scope –
+where the <a href="/book/language/fn-anon.html">anonymous function</a> is created.</p>
 </li>
 <li>
-<p>The <a href="/language/variables.html">variable</a> is added to the parameters list of the <a href="/language/fn-anon.html">anonymous function</a>, at the front.</p>
+<p>The <a href="/book/language/variables.html">variable</a> is added to the parameters list of the <a href="/book/language/fn-anon.html">anonymous function</a>, at the front.</p>
 </li>
 <li>
-<p>The <a href="/language/variables.html">variable</a> is then converted into a <strong>reference-counted shared value</strong>.</p>
-<p>An <a href="/language/fn-anon.html">anonymous function</a> which captures an external <a href="/language/variables.html">variable</a> is the only way to create a
+<p>The <a href="/book/language/variables.html">variable</a> is then converted into a <strong>reference-counted shared value</strong>.</p>
+<p>An <a href="/book/language/fn-anon.html">anonymous function</a> which captures an external <a href="/book/language/variables.html">variable</a> is the only way to create a
 reference-counted shared value in Rhai.</p>
 </li>
 <li>
-<p>The shared value is then <a href="/language/fn-curry.html">curried</a> into the <a href="/language/fn-ptr.html">function pointer</a> itself,
-essentially carrying a reference to that shared value and inserting it into future calls of the <a href="/language/functions.html">function</a>.</p>
+<p>The shared value is then <a href="/book/language/fn-curry.html">curried</a> into the <a href="/book/language/fn-ptr.html">function pointer</a> itself,
+essentially carrying a reference to that shared value and inserting it into future calls of the <a href="/book/language/functions.html">function</a>.</p>
 <p>This process is called <em>Automatic Currying</em>, and is the mechanism through which Rhai simulates closures.</p>
 </li>
 </ol>
@@ -406,22 +406,6 @@ the function. Rhai just brings this directly up to the front.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

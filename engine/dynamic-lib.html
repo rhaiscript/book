@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="use-rhai-in-dynamic-libraries"><a class="header" href="#use-rhai-in-dynamic-libraries">Use Rhai in Dynamic Libraries</a></h1>
-<p>Sometimes functions registered into a Rhai <a href="/engine/hello-world.html"><code>Engine</code></a> come from <em>dynamic libraries</em> (a.k.a. <em>shared
+<p>Sometimes functions registered into a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> come from <em>dynamic libraries</em> (a.k.a. <em>shared
 libraries</em> in Linux or <em>DLL’s</em> in Windows), which are compiled separately from the main binary, not
 statically linked but loaded dynamically at runtime.</p>
 <div id="admonition-rhai-dylib" class="admonition admonish-example small" role="note" aria-labelledby="admonition-rhai-dylib-title">
@@ -184,15 +184,15 @@ statically linked but loaded dynamically at runtime.</p>
 <a class="admonition-anchor-link" href="#admonition-rhai-dylib"></a>
 </div>
 <div>
-<p>The project <a href="/lib/rhai-dylib.html"><code>rhai-dylib</code></a> demonstrates an API for creating dynamically-loadable libraries
-for use with a Rhai <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>The project <a href="/book/lib/rhai-dylib.html"><code>rhai-dylib</code></a> demonstrates an API for creating dynamically-loadable libraries
+for use with a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </div>
 </div>
 <h2 id="problem-symptom"><a class="header" href="#problem-symptom">Problem Symptom</a></h2>
 <p>The symptom is usually <em>Function Not Found</em> errors even though the relevant functions (within the
-dynamic library) have already been registered into the <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
-<p>This usually happens when a mutable reference to the <a href="/engine/hello-world.html"><code>Engine</code></a> is passed into an entry-point
-function exposed by the dynamic library and the <a href="/engine/hello-world.html"><code>Engine</code></a>’s function registration API is called
+dynamic library) have already been registered into the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
+<p>This usually happens when a mutable reference to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> is passed into an entry-point
+function exposed by the dynamic library and the <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s function registration API is called
 inside the dynamic library.</p>
 <h2 id="problem-cause"><a class="header" href="#problem-cause">Problem Cause</a></h2>
 <p>To counter <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">DOS</a> attacks, the <em>hasher</em> used by Rhai, <a href="https://crates.io/crates/ahash"><code>ahash</code></a>, automatically generates a different
@@ -203,7 +203,7 @@ during each compile, and during each run.</p>
 are not linked together at compile time, two independent copies of the hasher reside in them,
 resulting in different hashes for even the same function signature.</p>
 <h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
-<p>Use <a href="/patterns/static-hash.html">static hashing</a> for force predictable hashes.</p>
+<p>Use <a href="/book/patterns/static-hash.html">static hashing</a> for force predictable hashes.</p>
 <div id="admonition-warning-safety-considerations" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-warning-safety-considerations-title">
 <div class="admonition-title">
 <div id="admonition-warning-safety-considerations-title">
@@ -213,7 +213,7 @@ resulting in different hashes for even the same function signature.</p>
 </div>
 <div>
 <p>Static hashing allows dynamic libraries with Rhai code to be loaded and used with
-an <a href="/engine/hello-world.html"><code>Engine</code></a> in the main binary.</p>
+an <a href="/book/engine/hello-world.html"><code>Engine</code></a> in the main binary.</p>
 <p>However, a fixed seed enlarges the attack surface of Rhai to malicious intent
 (e.g. <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">DOS</a> attacks).</p>
 <p>This safety trade-off should be carefully considered.</p>
@@ -249,22 +249,6 @@ an <a href="/engine/hello-world.html"><code>Engine</code></a> in the main binary
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

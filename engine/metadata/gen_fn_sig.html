@@ -175,19 +175,19 @@
                         <h1 id="get-native-function-signatures"><a class="header" href="#get-native-function-signatures">Get Native Function Signatures</a></h1>
 <h2 id="enginegen_fn_signatures"><a class="header" href="#enginegen_fn_signatures"><code>Engine::gen_fn_signatures</code></a></h2>
 <p>As part of a <em>reflections</em> API, <code>Engine::gen_fn_signatures</code> returns a list of function <em>signatures</em>
-(as <code>Vec&lt;String&gt;</code>), each corresponding to a particular native function available to that <a href="/engine/hello-world.html"><code>Engine</code></a> instance.</p>
+(as <code>Vec&lt;String&gt;</code>), each corresponding to a particular native function available to that <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance.</p>
 <blockquote>
 <p><em>name</em> <code>(</code><em>param 1</em><code>:</code><em>type 1</em><code>,</code> <em>param 2</em><code>:</code><em>type 2</em><code>,</code> … <code>,</code> <em>param n</em><code>:</code><em>type n</em><code>) -&gt;</code> <em>return type</em></p>
 </blockquote>
-<p>The <a href="/start/features.html"><code>metadata</code></a> feature must be used to turn on this API.</p>
+<p>The <a href="/book/start/features.html"><code>metadata</code></a> feature must be used to turn on this API.</p>
 <h3 id="sources"><a class="header" href="#sources">Sources</a></h3>
 <p>Functions from the following sources are included, in order:</p>
 <ol>
 <li>Native Rust functions registered into the global namespace via the <code>Engine::register_XXX</code> API</li>
-<li><em>Public</em> (i.e. non-<a href="/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) in global sub-modules
+<li><em>Public</em> (i.e. non-<a href="/book/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) in global sub-modules
 registered via <code>Engine::register_static_module</code>.</li>
-<li>Native Rust functions in external <a href="/rust/packages/index.html">packages</a> registered via <code>Engine::register_global_module</code></li>
-<li>Native Rust functions in <a href="/rust/packages/builtin.html">built-in packages</a> (optional)</li>
+<li>Native Rust functions in external <a href="/book/rust/packages/index.html">packages</a> registered via <code>Engine::register_global_module</code></li>
+<li>Native Rust functions in <a href="/book/rust/packages/builtin.html">built-in packages</a> (optional)</li>
 </ol>
 <h2 id="functions-metadata"><a class="header" href="#functions-metadata">Functions Metadata</a></h2>
 <p>Beware, however, that not all function signatures contain parameters and return value information.</p>
@@ -199,19 +199,19 @@ parameter because Rust simply does not make such metadata available natively.</p
 <blockquote>
 <p><code>foo(_: i64, _: char, _: &amp;str) -&gt; String</code></p>
 </blockquote>
-<p>An <a href="/appendix/operators.html#operators">operator</a> function. Notice that function names do not need to be valid identifiers.</p>
+<p>An <a href="/book/appendix/operators.html#operators">operator</a> function. Notice that function names do not need to be valid identifiers.</p>
 <blockquote>
 <p><code>+=(_: &amp;mut i64, _: i64)</code></p>
 </blockquote>
-<p>A <a href="/rust/getters-setters.html">property setter</a>.
+<p>A <a href="/book/rust/getters-setters.html">property setter</a>.
 Notice that function names do not need to be valid identifiers.
 In this case, the first parameter should be <code>&amp;mut T</code> of the custom type and the return value is <code>()</code>:</p>
 <blockquote>
 <p><code>set$prop(_: &amp;mut TestStruct, _: i64)</code></p>
 </blockquote>
 <h3 id="script-defined-functions"><a class="header" href="#script-defined-functions">Script-Defined Functions</a></h3>
-<p>Script-defined <a href="/language/functions.html">function</a> signatures contain parameter names.
-Since <em>all</em> parameters, as well as the return value, are <a href="/language/dynamic.html"><code>Dynamic</code></a> the types are simply not shown.</p>
+<p>Script-defined <a href="/book/language/functions.html">function</a> signatures contain parameter names.
+Since <em>all</em> parameters, as well as the return value, are <a href="/book/language/dynamic.html"><code>Dynamic</code></a> the types are simply not shown.</p>
 <blockquote>
 <p><code>foo(x, y, z)</code></p>
 </blockquote>
@@ -225,20 +225,20 @@ fn foo(x, y, z) {
 <p><code>foo(x: Dynamic, y: Dynamic, z: Dynamic) -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
 <h3 id="plugin-functions"><a class="header" href="#plugin-functions">Plugin Functions</a></h3>
-<p>Functions defined in <a href="/plugins/module.html">plugin modules</a> are the best.
-They contain all metadata describing the functions, including <a href="/language/doc-comments.html">doc-comments</a>.</p>
+<p>Functions defined in <a href="/book/plugins/module.html">plugin modules</a> are the best.
+They contain all metadata describing the functions, including <a href="/book/language/doc-comments.html">doc-comments</a>.</p>
 <p>For example, a plugin function <code>combine</code>:</p>
 <blockquote>
 <p><code>/// This is a doc-comment, included in this function's metadata.</code><br />
 <code>combine(list: &amp;mut MyStruct&lt;i64&gt;, num: usize, name: &amp;str) -&gt; bool</code></p>
 </blockquote>
 <p>Notice that function names do not need to be valid identifiers.</p>
-<p>For example, an <a href="/appendix/operators.html#operators">operator</a> defined as a <a href="/rust/fallible.html">fallible function</a> in a <a href="/plugins/module.html">plugin module</a> via
+<p>For example, an <a href="/book/appendix/operators.html#operators">operator</a> defined as a <a href="/book/rust/fallible.html">fallible function</a> in a <a href="/book/plugins/module.html">plugin module</a> via
 <code>#[rhai_fn(name="+=", return_raw)]</code> returns <code>Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code>:</p>
 <blockquote>
 <p><code>+=(list: &amp;mut MyStruct&lt;i64&gt;, value: &amp;str) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></p>
 </blockquote>
-<p>For example, a <a href="/rust/getters-setters.html">property getter</a> defined in a <a href="/plugins/module.html">plugin module</a>:</p>
+<p>For example, a <a href="/book/rust/getters-setters.html">property getter</a> defined in a <a href="/book/plugins/module.html">plugin module</a>:</p>
 <blockquote>
 <p><code>get$prop(obj: &amp;mut MyStruct&lt;i64&gt;) -&gt; String</code></p>
 </blockquote>
@@ -272,22 +272,6 @@ They contain all metadata describing the functions, including <a href="/language
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -181,19 +181,19 @@
 <a class="admonition-anchor-link" href="#admonition-cannot-override-object-maps"></a>
 </div>
 <div>
-<p>Property getters and setters are intended for <a href="/rust/custom-types.html">custom types</a>.</p>
-<p>Any getter or setter function registered for <a href="/language/object-maps.html">object maps</a> is simply <em>ignored</em>.</p>
-<p>Get/set syntax on <a href="/language/object-maps.html">object maps</a> is interpreted as access to properties.</p>
+<p>Property getters and setters are intended for <a href="/book/rust/custom-types.html">custom types</a>.</p>
+<p>Any getter or setter function registered for <a href="/book/language/object-maps.html">object maps</a> is simply <em>ignored</em>.</p>
+<p>Get/set syntax on <a href="/book/language/object-maps.html">object maps</a> is interpreted as access to properties.</p>
 </div>
 </div>
-<p>A <a href="/rust/custom-types.html">custom type</a> can also expose properties by registering <code>get</code> and/or <code>set</code> functions.</p>
+<p>A <a href="/book/rust/custom-types.html">custom type</a> can also expose properties by registering <code>get</code> and/or <code>set</code> functions.</p>
 <p>Properties can be accessed in a Rust-like syntax:</p>
 <blockquote>
 <p><em>object</em> <code>.</code> <em>property</em></p>
 <p><em>object</em> <code>.</code> <em>property</em> <code>=</code> <em>value</em> <code>;</code></p>
 </blockquote>
 <p>The <a href="https://en.wikipedia.org/wiki/Elvis_operator"><em>Elvis operator</em></a> can be used to short-circuit
-processing if the object itself is <a href="/language/values-and-types.html"><code>()</code></a>:</p>
+processing if the object itself is <a href="/book/language/values-and-types.html"><code>()</code></a>:</p>
 <blockquote>
 <p><code>// returns () if object is ()</code><br />
 <em>object</em> <code>?.</code> <em>property</em></p>
@@ -202,7 +202,7 @@ processing if the object itself is <a href="/language/values-and-types.html"><co
 </blockquote>
 <p>Property getter and setter functions are called behind the scene.
 They each take a <code>&amp;mut</code> reference to the first parameter.</p>
-<p>Getters and setters are disabled under the <a href="/start/features.html"><code>no_object</code></a> feature.</p>
+<p>Getters and setters are disabled under the <a href="/book/start/features.html"><code>no_object</code></a> feature.</p>
 <section></section>
 <div class="table-wrapper"><table><thead><tr><th><code>Engine</code> API</th><th>Function signature(s)<br/>(<code>T: Clone</code> = custom type,<br/><code>V: Clone</code> = data type)</th><th style="text-align: center">Can mutate <code>T</code>?</th></tr></thead><tbody>
 <tr><td><code>register_get</code></td><td><code>Fn(&amp;mut T) -&gt; V</code></td><td style="text-align: center">yes, but not advised</td></tr>
@@ -230,7 +230,7 @@ All references must be mutable (i.e. <code>&amp;mut T</code>).</p>
 </div>
 <div>
 <p>By convention, property getters are assumed to be <em>pure</em>, meaning that they are not supposed to
-mutate the <a href="/rust/custom-types.html">custom type</a>, although there is nothing that prevents this mutation in Rust.</p>
+mutate the <a href="/book/rust/custom-types.html">custom type</a>, although there is nothing that prevents this mutation in Rust.</p>
 <p>Even though a property getter function also takes <code>&amp;mut</code> as the first parameter, Rhai assumes that
 no data is changed when the function is called.</p>
 </div>
@@ -281,14 +281,14 @@ println!("Answer: {result}");                   // prints 42</code></pre>
 <a class="admonition-anchor-link" href="#admonition-see-also"></a>
 </div>
 <div>
-<p>See <a href="indexer-prop-fallback.html">this section</a> for details on an <a href="/rust/indexers.html">indexer</a>
+<p>See <a href="indexer-prop-fallback.html">this section</a> for details on an <a href="/book/rust/indexers.html">indexer</a>
 acting as fallback to properties.</p>
 </div>
 </div>
-<p>If the getter/setter of a particular property is not defined, but an <a href="/rust/indexers.html">indexer</a> is defined on the
-<a href="/rust/custom-types.html">custom type</a> with <a href="/language/strings-chars.html">string</a> index, then the corresponding <a href="/rust/indexers.html">indexer</a> will be called with the name of
+<p>If the getter/setter of a particular property is not defined, but an <a href="/book/rust/indexers.html">indexer</a> is defined on the
+<a href="/book/rust/custom-types.html">custom type</a> with <a href="/book/language/strings-chars.html">string</a> index, then the corresponding <a href="/book/rust/indexers.html">indexer</a> will be called with the name of
 the property as the index value.</p>
-<p>In other words, <a href="/rust/indexers.html">indexers</a> act as a <em>fallback</em> to property getters/setters.</p>
+<p>In other words, <a href="/book/rust/indexers.html">indexers</a> act as a <em>fallback</em> to property getters/setters.</p>
 <pre><code class="language-rust">a.foo           // if property getter for 'foo' doesn't exist...
 
 a["foo"]        // an indexer (if any) is tried</code></pre>
@@ -300,12 +300,12 @@ a["foo"]        // an indexer (if any) is tried</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-implement-a-property-bag"></a>
 </div>
 <div>
-<p>This feature makes it very easy for <a href="/rust/custom-types.html">custom types</a> to act as <em>property bags</em>
-(similar to an <a href="/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
+<p>This feature makes it very easy for <a href="/book/rust/custom-types.html">custom types</a> to act as <em>property bags</em>
+(similar to an <a href="/book/language/object-maps.html">object map</a>) which can add/remove properties at will.</p>
 </div>
 </div>
 <h2 id="chaining-updates"><a class="header" href="#chaining-updates">Chaining Updates</a></h2>
-<p>It is possible to <em>chain</em> property accesses and/or indexing (via <a href="/rust/indexers.html">indexers</a>) together to modify a
+<p>It is possible to <em>chain</em> property accesses and/or indexing (via <a href="/book/rust/indexers.html">indexers</a>) together to modify a
 particular property value at the end of the chain.</p>
 <p>Rhai detects such modifications and updates the changed values all the way back up the chain.</p>
 <p>In the end, the syntax works as expected by intuition, automatically and without special attention.</p>
@@ -364,22 +364,6 @@ print(root.prop1.sub["hello"].list[0].value);</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

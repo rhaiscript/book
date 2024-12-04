@@ -182,15 +182,15 @@
 </div>
 <div>
 <p>A runnable example of this implementation is included.</p>
-<p>See the <a href="/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
+<p>See the <a href="/book/start/examples/rust.html"><em>Examples</em></a> section for details.</p>
 </div>
 </div>
 <h2 id="keep-state-in-object-map"><a class="header" href="#keep-state-in-object-map">Keep State in Object Map</a></h2>
-<p>This style allows defining new user state <a href="/language/variables.html">variables</a> everywhere by packaging them all inside an
-<a href="/language/object-maps.html">object map</a>, which is then exposed via the <code>this</code> pointer.</p>
+<p>This style allows defining new user state <a href="/book/language/variables.html">variables</a> everywhere by packaging them all inside an
+<a href="/book/language/object-maps.html">object map</a>, which is then exposed via the <code>this</code> pointer.</p>
 <p>Because this scripting style resembles JavaScript, it is so named.</p>
-<p>State variables can be freely created by <em>all</em> <a href="/language/functions.html">functions</a> (not just the <code>init</code> <a href="/language/functions.html">function</a>).</p>
-<p>The event handler type needs to hold this <a href="/language/object-maps.html">object map</a> instead of a custom <a href="/engine/scope.html"><code>Scope</code></a>.</p>
+<p>State variables can be freely created by <em>all</em> <a href="/book/language/functions.html">functions</a> (not just the <code>init</code> <a href="/book/language/functions.html">function</a>).</p>
+<p>The event handler type needs to hold this <a href="/book/language/object-maps.html">object map</a> instead of a custom <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <pre><code class="language-rust">use rhai::{Engine, Scope, Dynamic, AST};
 
 // Event handler
@@ -205,7 +205,7 @@ struct Handler {
     pub ast: AST
 }</code></pre>
 <h2 id="bind-object-map-to-this-pointer"><a class="header" href="#bind-object-map-to-this-pointer">Bind Object Map to <code>this</code> Pointer</a></h2>
-<p>Initialization can simply be done via binding the <a href="/language/object-maps.html">object map</a> containing global states to the
+<p>Initialization can simply be done via binding the <a href="/book/language/object-maps.html">object map</a> containing global states to the
 <code>this</code> pointer.</p>
 <pre><code class="language-rust">impl Handler {
     // Create a new 'Handler'.
@@ -242,7 +242,7 @@ struct Handler {
     }
 }</code></pre>
 <h2 id="bind-this-pointer-during-events-handling"><a class="header" href="#bind-this-pointer-during-events-handling">Bind <code>this</code> Pointer During Events Handling</a></h2>
-<p>Events handling should also use <code>Engine::call_fn_with_options</code> to bind the <a href="/language/object-maps.html">object map</a> containing
+<p>Events handling should also use <code>Engine::call_fn_with_options</code> to bind the <a href="/book/language/object-maps.html">object map</a> containing
 global states to the <code>this</code> pointer via <code>CallFnOptions::this_ptr</code>.</p>
 <pre><code class="language-rust">pub fn on_event(&amp;mut self, event_name: &amp;str, event_data: i64) -&gt; Dynamic {
     let engine = &amp;self.engine;
@@ -271,15 +271,15 @@ global states to the <code>this</code> pointer via <code>CallFnOptions::this_ptr
 <a class="admonition-anchor-link" href="#admonition-no-shadowing"></a>
 </div>
 <div>
-<p>Notice that <code>this</code> can never be <a href="/language/shadow.html">shadowed</a> because it is not a valid <a href="/language/variables.html">variable</a> name.</p>
+<p>Notice that <code>this</code> can never be <a href="/book/language/shadow.html">shadowed</a> because it is not a valid <a href="/book/language/variables.html">variable</a> name.</p>
 </div>
 </div>
-<p>Because the stored state is kept in an <a href="/language/object-maps.html">object map</a>, which in turn is bound to <code>this</code>, it is
-necessary for <a href="/language/functions.html">functions</a> to always access or modify these state <a href="/language/variables.html">variables</a> via the <code>this</code> pointer.</p>
-<p>As it is impossible to declare a local <a href="/language/variables.html">variable</a> named <code>this</code>, there is no risk of accidentally
-<em><a href="/language/shadow.html">shadowing</a></em> a state <a href="/language/variables.html">variable</a>.</p>
-<p>Because an <a href="/language/object-maps.html">object map</a> is used to hold state values, it is even possible to add user-defined
-<a href="/language/functions.html">functions</a>, leveraging the <a href="/patterns/oop.html">OOP</a> support for <a href="/language/object-maps.html">object maps</a>.</p>
+<p>Because the stored state is kept in an <a href="/book/language/object-maps.html">object map</a>, which in turn is bound to <code>this</code>, it is
+necessary for <a href="/book/language/functions.html">functions</a> to always access or modify these state <a href="/book/language/variables.html">variables</a> via the <code>this</code> pointer.</p>
+<p>As it is impossible to declare a local <a href="/book/language/variables.html">variable</a> named <code>this</code>, there is no risk of accidentally
+<em><a href="/book/language/shadow.html">shadowing</a></em> a state <a href="/book/language/variables.html">variable</a>.</p>
+<p>Because an <a href="/book/language/object-maps.html">object map</a> is used to hold state values, it is even possible to add user-defined
+<a href="/book/language/functions.html">functions</a>, leveraging the <a href="/book/patterns/oop.html">OOP</a> support for <a href="/book/language/object-maps.html">object maps</a>.</p>
 <h3 id="sample-script"><a class="header" href="#sample-script">Sample script</a></h3>
 <pre><code class="language-js">/// Initialize user-provided state.
 /// State is stored inside an object map bound to 'this'.
@@ -366,22 +366,6 @@ fn update(data) {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

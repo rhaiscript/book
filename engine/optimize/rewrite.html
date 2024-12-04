@@ -185,7 +185,7 @@
 </div>
 </div>
 <p>Usually, a <em>compound assignment</em> (e.g. <code>+=</code> for append) takes a mutable first parameter
-(i.e. <code>&amp;mut</code>) while the corresponding simple <a href="/appendix/operators.html#operators">operator</a> (i.e. <code>+</code>) does not.</p>
+(i.e. <code>&amp;mut</code>) while the corresponding simple <a href="/book/appendix/operators.html#operators">operator</a> (i.e. <code>+</code>) does not.</p>
 <p>The script optimizer rewrites normal assignments into <em>compound assignments</em> wherever possible in
 order to avoid unnecessary cloning.</p>
 <pre><code class="language-rust">let big = create_some_very_big_type();
@@ -249,22 +249,6 @@ x[y] += 1;          // &lt;- ... than this</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

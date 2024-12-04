@@ -213,7 +213,7 @@ grows <em>upwards</em> in order to maximize memory usage efficiency.</p>
 </div>
 </div>
 <h2 id="during-evaluation"><a class="header" href="#during-evaluation">During Evaluation</a></h2>
-<p>To prevent <em>stack-overflow</em> failures, provide a closure to <a href="/safety/progress.html"><code>Engine::on_progress</code></a> to
+<p>To prevent <em>stack-overflow</em> failures, provide a closure to <a href="/book/safety/progress.html"><code>Engine::on_progress</code></a> to
 track stack usage and force-terminate a malicious script before it can bring down the host system.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
@@ -243,7 +243,7 @@ engine.on_progress(move |_| {
 <h2 id="during-parsing"><a class="header" href="#during-parsing">During Parsing</a></h2>
 <p>A malicious script can be carefully crafted such that it consumes all stack memory during the
 parsing stage.</p>
-<p>Protect against this by via a closure to <a href="/engine/token-mapper.html"><code>Engine::on_parse_token</code></a>.</p>
+<p>Protect against this by via a closure to <a href="/book/engine/token-mapper.html"><code>Engine::on_parse_token</code></a>.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 const MAX_STACK: usize = 100 * 1024;    // 10KB
@@ -301,22 +301,6 @@ engine.on_parse_token(|token, _, _| {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -188,7 +188,7 @@
 <p>Rust generic functions can be used in Rhai, but separate instances for each concrete type must be
 registered separately.</p>
 <p>This essentially <em>overloads</em> the function with different parameter types as Rhai does not natively
-support generics but Rhai does support <em><a href="/rust/overloading.html">function overloading</a></em>.</p>
+support generics but Rhai does support <em><a href="/book/rust/overloading.html">function overloading</a></em>.</p>
 <p>The example below shows how to register multiple functions (or, in this case, multiple overloaded
 versions of the same function) under the same name.</p>
 <pre><code class="language-rust">use std::fmt::Display;
@@ -234,22 +234,6 @@ engine.register_fn("print", show_it::&lt;i64&gt;)
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

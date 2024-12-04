@@ -187,14 +187,14 @@ resources used by a script so that it does not consume more resources that it is
 <div>
 <ul>
 <li>
-<p>Continuously grow a <a href="/language/strings-chars.html">string</a>, an <a href="/language/arrays.html">array</a>, a <a href="/language/blobs.html">BLOB</a> or <a href="/language/object-maps.html">object map</a> until all memory is consumed.</p>
+<p>Continuously grow a <a href="/book/language/strings-chars.html">string</a>, an <a href="/book/language/arrays.html">array</a>, a <a href="/book/language/blobs.html">BLOB</a> or <a href="/book/language/object-maps.html">object map</a> until all memory is consumed.</p>
 </li>
 <li>
-<p>Continuously create new <a href="/language/variables.html">variables</a> with large data until all memory is consumed.</p>
+<p>Continuously create new <a href="/book/language/variables.html">variables</a> with large data until all memory is consumed.</p>
 </li>
 <li>
-<p>Continuously define new <a href="/language/functions.html">functions</a> all memory is consumed (e.g. a simple <a href="/language/fn-closure.html">closure</a> <code>||</code>,
-as short as two characters, is a <a href="/language/functions.html">function</a> – an attractive target for DOS attacks).</p>
+<p>Continuously define new <a href="/book/language/functions.html">functions</a> all memory is consumed (e.g. a simple <a href="/book/language/fn-closure.html">closure</a> <code>||</code>,
+as short as two characters, is a <a href="/book/language/functions.html">function</a> – an attractive target for DOS attacks).</p>
 </li>
 </ul>
 </div>
@@ -238,14 +238,14 @@ as short as two characters, is a <a href="/language/functions.html">function</a>
 <p>Deep recursive call that exhausts the call stack.</p>
 </li>
 <li>
-<p>Large <a href="/language/arrays.html">array</a> or <a href="/language/object-maps.html">object map</a> literal that exhausts the stack during parsing.</p>
+<p>Large <a href="/book/language/arrays.html">array</a> or <a href="/book/language/object-maps.html">object map</a> literal that exhausts the stack during parsing.</p>
 </li>
 <li>
 <p>Degenerated deep expression with so many levels that the parser exhausts the call stack when
 parsing the expression; or even deeply-nested statements blocks, if nested deep enough.</p>
 </li>
 <li>
-<p><a href="/language/modules/import.html">Self-referencing module</a>.</p>
+<p><a href="/book/language/modules/import.html">Self-referencing module</a>.</p>
 </li>
 </ul>
 </div>
@@ -281,9 +281,9 @@ parsing the expression; or even deeply-nested statements blocks, if nested deep 
 <div>
 <ul>
 <li>
-<p>Continuously <a href="/language/modules/import.html"><code>import</code></a> an external <a href="/rust/modules/index.html">module</a> within an infinite loop, thus putting heavy load on the file-system
+<p>Continuously <a href="/book/language/modules/import.html"><code>import</code></a> an external <a href="/book/rust/modules/index.html">module</a> within an infinite loop, thus putting heavy load on the file-system
 (or even the network if the file is not local).</p>
-<p>Even when <a href="/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
+<p>Even when <a href="/book/rust/modules/index.html">modules</a> are not created from files, they still typically consume a lot of resources to load.</p>
 </li>
 </ul>
 </div>
@@ -307,13 +307,13 @@ parsing the expression; or even deeply-nested statements blocks, if nested deep 
 <div id="admonition-the-internals-feature" class="admonition admonish-bug" role="note" aria-labelledby="admonition-the-internals-feature-title">
 <div class="admonition-title">
 <div id="admonition-the-internals-feature-title">
-<p>The <a href="/start/features.html"><code>internals</code></a> feature</p>
+<p>The <a href="/book/start/features.html"><code>internals</code></a> feature</p>
 </div>
 <a class="admonition-anchor-link" href="#admonition-the-internals-feature"></a>
 </div>
 <div>
-<p>The <a href="/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
-example, the <a href="/engine/compile.html"><code>AST</code></a> and related types).</p>
+<p>The <a href="/book/start/features.html"><code>internals</code></a> feature allows third-party access to Rust internal data types and functions (for
+example, the <a href="/book/engine/compile.html"><code>AST</code></a> and related types).</p>
 <p>This is usually a <em>Very Bad Idea™</em> because:</p>
 <ul>
 <li>
@@ -328,10 +328,10 @@ environment, violating the <em>Don’t Panic</em> guarantee.</p>
 break code.</p>
 </li>
 </ul>
-<p>Use <a href="/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
+<p>Use <a href="/book/start/features.html"><code>internals</code></a> only if the operating environment has absolutely no safety concerns – you’d
 be surprised under how few scenarios this assumption holds.</p>
-<p>One example of such an environment is a Rhai scripting <a href="/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/start/builds/wasm.html">WASM</a> where the
-<a href="/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
+<p>One example of such an environment is a Rhai scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> compiled to <a href="/book/start/builds/wasm.html">WASM</a> where the
+<a href="/book/engine/compile.html"><code>AST</code></a> is further translated to include environment-specific modifications.</p>
 </div>
 </div>
 <h2 id="dont-panic-guarantee--any-panic-is-a-bug"><a class="header" href="#dont-panic-guarantee--any-panic-is-a-bug"><em>Don’t Panic</em> Guarantee – Any Panic is a Bug</a></h2>
@@ -350,7 +350,7 @@ considered a bug in Rhai and should be reported as such.</p>
 <a class="admonition-anchor-link" href="#admonition-ok-panic-anyway"></a>
 </div>
 <div>
-<p>All these safe-guards can be turned off via the <a href="/start/features.html"><code>unchecked</code></a> feature, which disables all safety
+<p>All these safe-guards can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature, which disables all safety
 checks (even fatal ones).</p>
 <p>This increases script evaluation performance somewhat, but very easy for a malicious script
 to bring down the host system.</p>
@@ -386,22 +386,6 @@ to bring down the host system.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

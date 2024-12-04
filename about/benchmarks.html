@@ -188,12 +188,12 @@
 </div>
 <p>The purpose of Rhai is not to be <em>blazing fast</em>, but to make it as easy and versatile as possible to
 integrate with native Rust applications.</p>
-<p>What you lose from running an <a href="/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
+<p>What you lose from running an <a href="/book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
 <p>The following benchmarks were run on a 2.6GHz Linux VM comparing
 <a href="../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a> and
 <a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
 <div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.25s</td><td style="text-align: center">3.2s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="/language/functions.html">function</a> calls</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.25s</td><td style="text-align: center">3.2s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="/book/language/functions.html">function</a> calls</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.13s</td><td style="text-align: center">0.2s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.2s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
 </tbody></table>
@@ -209,24 +209,24 @@ typical real-life workloads.</p>
 </div>
 <div>
 <h4 id="small-data-structures"><a class="header" href="#small-data-structures">Small data structures</a></h4>
-<p>Essential <a href="/engine/compile.html">AST</a> and runtime data structures are packed small and kept together
+<p>Essential <a href="/book/engine/compile.html">AST</a> and runtime data structures are packed small and kept together
 to maximize cache friendliness.</p>
 <h4 id="pre-calculations"><a class="header" href="#pre-calculations">Pre-calculations</a></h4>
-<p><a href="/language/functions.html">Functions</a> are dispatched based on pre-calculated hashes.
-<a href="/language/variables.html">Variables</a> are mostly accessed through pre-calculated offsets to the <a href="/language/variables.html">variables</a> file (a <a href="/engine/scope.html"><code>Scope</code></a>).
+<p><a href="/book/language/functions.html">Functions</a> are dispatched based on pre-calculated hashes.
+<a href="/book/language/variables.html">Variables</a> are mostly accessed through pre-calculated offsets to the <a href="/book/language/variables.html">variables</a> file (a <a href="/book/engine/scope.html"><code>Scope</code></a>).
 It is seldom necessary to look something up by name.</p>
 <h4 id="caching"><a class="header" href="#caching">Caching</a></h4>
-<p><a href="/language/functions.html">Function</a> resolutions are cached so they do not incur lookup costs after a couple of calls.</p>
+<p><a href="/book/language/functions.html">Function</a> resolutions are cached so they do not incur lookup costs after a couple of calls.</p>
 <h4 id="no-scope-chain"><a class="header" href="#no-scope-chain">No scope-chain</a></h4>
-<p>Maintaining a <em>scope chain</em> is deliberately avoided by design so <a href="/language/functions.html">function</a> scopes do
+<p>Maintaining a <em>scope chain</em> is deliberately avoided by design so <a href="/book/language/functions.html">function</a> scopes do
 not pay any speed penalty.
-This allows <a href="/language/variables.html">variables</a> data to be kept together in a contiguous block, avoiding allocations
+This allows <a href="/book/language/variables.html">variables</a> data to be kept together in a contiguous block, avoiding allocations
 and fragmentation while being cache-friendly.</p>
 <h4 id="immutable-strings"><a class="header" href="#immutable-strings">Immutable strings</a></h4>
-<p>Rhai uses <a href="/rust/immutable-string.html">immutable strings</a> to bypass cloning issues.</p>
+<p>Rhai uses <a href="/book/rust/immutable-string.html">immutable strings</a> to bypass cloning issues.</p>
 <h4 id="no-sharing"><a class="header" href="#no-sharing">No sharing</a></h4>
 <p>In a typical script evaluation run, no data is shared and nothing is locked (other than
-<a href="/language/variables.html">variables</a> captured by <a href="/language/fn-closure.html">closures</a>).</p>
+<a href="/book/language/variables.html">variables</a> captured by <a href="/book/language/fn-closure.html">closures</a>).</p>
 </div>
 </div>
 <div id="admonition-do-not-write-the-next-4d-vr-game-entirely-in-rhai" class="admonition admonish-danger" role="note" aria-labelledby="admonition-do-not-write-the-next-4d-vr-game-entirely-in-rhai-title">
@@ -293,22 +293,6 @@ interfaces such as XHR calls and payload encoding such as JSON.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

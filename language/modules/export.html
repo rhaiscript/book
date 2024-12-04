@@ -181,19 +181,19 @@
 <a class="admonition-anchor-link" href="#admonition-see-also"></a>
 </div>
 <div>
-<p>See <a href="/rust/modules/ast.html"><em>Create a Module from AST</em></a> for more details.</p>
+<p>See <a href="/book/rust/modules/ast.html"><em>Create a Module from AST</em></a> for more details.</p>
 </div>
 </div>
-<p>The easiest way to expose a collection of <a href="/language/functions.html">functions</a> as a self-contained <a href="/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
+<p>The easiest way to expose a collection of <a href="/book/language/functions.html">functions</a> as a self-contained <a href="/book/rust/modules/index.html">module</a> is to do it via a Rhai script itself.</p>
 <p>The script text is evaluated.</p>
-<p><a href="/language/variables.html">Variables</a> are then selectively exposed via the <code>export</code> statement.</p>
-<p><a href="/language/functions.html">Functions</a> defined by the script are automatically exported, unless marked as <code>private</code>.</p>
-<p>Modules loaded within this <a href="/rust/modules/index.html">module</a> at the global level become <em>sub-modules</em> and are also automatically exported.</p>
+<p><a href="/book/language/variables.html">Variables</a> are then selectively exposed via the <code>export</code> statement.</p>
+<p><a href="/book/language/functions.html">Functions</a> defined by the script are automatically exported, unless marked as <code>private</code>.</p>
+<p>Modules loaded within this <a href="/book/rust/modules/index.html">module</a> at the global level become <em>sub-modules</em> and are also automatically exported.</p>
 <h2 id="export-global-variables"><a class="header" href="#export-global-variables">Export Global Variables</a></h2>
-<p>The <code>export</code> statement, which can only be at global level, exposes a selected <a href="/language/variables.html">variable</a> as member of a <a href="/rust/modules/index.html">module</a>.</p>
-<p><a href="/language/variables.html">Variables</a> not exported are <em>private</em> and hidden. They are merely used to initialize the <a href="/rust/modules/index.html">module</a>,
+<p>The <code>export</code> statement, which can only be at global level, exposes a selected <a href="/book/language/variables.html">variable</a> as member of a <a href="/book/rust/modules/index.html">module</a>.</p>
+<p><a href="/book/language/variables.html">Variables</a> not exported are <em>private</em> and hidden. They are merely used to initialize the <a href="/book/rust/modules/index.html">module</a>,
 but cannot be accessed from outside.</p>
-<p>Everything exported from a <a href="/rust/modules/index.html">module</a> is <strong><a href="/language/constants.html">constant</a></strong> (i.e. read-only).</p>
+<p>Everything exported from a <a href="/book/rust/modules/index.html">module</a> is <strong><a href="/book/language/constants.html">constant</a></strong> (i.e. read-only).</p>
 <pre><code class="language-js">// This is a module script.
 
 let hidden = 123;       // variable not exported - default hidden
@@ -224,8 +224,8 @@ export x as answer;     // the variable 'x' is exported under the alias 'answer'
 <a class="admonition-anchor-link" href="#admonition-tip-multiple-exports"></a>
 </div>
 <div>
-<p><a href="/language/variables.html">Variables</a> can be exported under multiple names.
-For example, the following exports three <a href="/language/variables.html">variables</a>:</p>
+<p><a href="/book/language/variables.html">Variables</a> can be exported under multiple names.
+For example, the following exports three <a href="/book/language/variables.html">variables</a>:</p>
 <ul>
 <li><code>x</code> as <code>x</code> and <code>hello</code></li>
 <li><code>y</code> as <code>foo</code> and <code>bar</code></li>
@@ -249,19 +249,19 @@ export z;
 <a class="admonition-anchor-link" href="#admonition-private-functions"></a>
 </div>
 <div>
-<p><code>private</code> <a href="/language/functions.html">functions</a> are commonly called within the <a href="/rust/modules/index.html">module</a> only.
+<p><code>private</code> <a href="/book/language/functions.html">functions</a> are commonly called within the <a href="/book/rust/modules/index.html">module</a> only.
 They cannot be accessed otherwise.</p>
 </div>
 </div>
-<p>All <a href="/language/functions.html">functions</a> are automatically exported, <em>unless</em> it is explicitly opt-out with the <code>private</code> prefix.</p>
-<p><a href="/language/functions.html">Functions</a> declared <code>private</code> are hidden to the outside.</p>
+<p>All <a href="/book/language/functions.html">functions</a> are automatically exported, <em>unless</em> it is explicitly opt-out with the <code>private</code> prefix.</p>
+<p><a href="/book/language/functions.html">Functions</a> declared <code>private</code> are hidden to the outside.</p>
 <pre><code class="language-rust">// This is a module script.
 
 fn inc(x) { x + 1 }     // script-defined function - default public
 
 private fn foo() {}     // private function - hidden</code></pre>
 <h2 id="sub-modules"><a class="header" href="#sub-modules">Sub-Modules</a></h2>
-<p>All loaded <a href="/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
+<p>All loaded <a href="/book/rust/modules/index.html">modules</a> are automatically exported as sub-modules.</p>
 <div id="admonition-tip-skip-exporting-a-module" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-skip-exporting-a-module-title">
 <div class="admonition-title">
 <div id="admonition-tip-skip-exporting-a-module-title">
@@ -270,7 +270,7 @@ private fn foo() {}     // private function - hidden</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-skip-exporting-a-module"></a>
 </div>
 <div>
-<p>To prevent a <a href="/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the
+<p>To prevent a <a href="/book/rust/modules/index.html">module</a> from being exported, load it inside a block statement so that it goes away at the
 end of the block.</p>
 <pre><code class="language-js">// This is a module script.
 
@@ -312,22 +312,6 @@ import "hello" as foo;      // &lt;- exported
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

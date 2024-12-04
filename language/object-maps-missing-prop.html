@@ -181,16 +181,16 @@
 <a class="admonition-anchor-link" href="#admonition-requires-internals"></a>
 </div>
 <div>
-<p>This is an advanced feature that requires the <a href="/start/features.html"><code>internals</code></a> feature to be enabled.</p>
+<p>This is an advanced feature that requires the <a href="/book/start/features.html"><code>internals</code></a> feature to be enabled.</p>
 </div>
 </div>
-<p>Normally, when a property is accessed from an <a href="/language/object-maps.html">object map</a> that does not exist, <a href="/language/values-and-types.html"><code>()</code></a> is returned.
-Via <a href="/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>, it is possible to make this an error
+<p>Normally, when a property is accessed from an <a href="/book/language/object-maps.html">object map</a> that does not exist, <a href="/book/language/values-and-types.html"><code>()</code></a> is returned.
+Via <a href="/book/engine/options.html"><code>Engine:: set_fail_on_invalid_map_property</code></a>, it is possible to make this an error
 instead.</p>
 <p>Other than that, it is possible to completely control this behavior via a special callback function
-registered into an <a href="/engine/hello-world.html"><code>Engine</code></a> via <code>on_map_missing_property</code>.</p>
+registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <code>on_map_missing_property</code>.</p>
 <p>Using this callback, for instance, it is simple to instruct Rhai to create a new property in the
-<a href="/language/object-maps.html">object map</a> on the fly, possibly with a default value, when a non-existent property is accessed.</p>
+<a href="/book/language/object-maps.html">object map</a> on the fly, possibly with a default value, when a non-existent property is accessed.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
 <p>The function signature passed to <a href="https://docs.rs/rhai/1.20.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
 <blockquote>
@@ -198,16 +198,16 @@ registered into an <a href="/engine/hello-world.html"><code>Engine</code></a> vi
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>map</code></td><td style="text-align: center"><a href="/language/object-maps.html"><code>&amp;mut Map</code></a></td><td>the <a href="/language/object-maps.html">object map</a> being accessed</td></tr>
+<tr><td><code>map</code></td><td style="text-align: center"><a href="/book/language/object-maps.html"><code>&amp;mut Map</code></a></td><td>the <a href="/book/language/object-maps.html">object map</a> being accessed</td></tr>
 <tr><td><code>prop</code></td><td style="text-align: center"><code>&amp;str</code></td><td>name of the property being accessed</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>the current <em>evaluation context</em></td></tr>
 </tbody></table>
 </div>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
 <p>The return value is <code>Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code>.</p>
-<p><a href="https://docs.rs/rhai/latest/rhai/enum.Target.html"><code>Target</code></a> is an advanced type, available only under the <a href="/start/features.html"><code>internals</code></a> feature, that represents a
-<em>reference</em> to a <a href="/language/dynamic.html"><code>Dynamic</code></a> value.</p>
-<p>It can be used to point to a particular value within the <a href="/language/object-maps.html">object map</a>.</p>
+<p><a href="https://docs.rs/rhai/latest/rhai/enum.Target.html"><code>Target</code></a> is an advanced type, available only under the <a href="/book/start/features.html"><code>internals</code></a> feature, that represents a
+<em>reference</em> to a <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value.</p>
+<p>It can be used to point to a particular value within the <a href="/book/language/object-maps.html">object map</a>.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust">engine.on_map_missing_property(|map, prop, context| {
     match prop {
@@ -260,22 +260,6 @@ registered into an <a href="/engine/hello-world.html"><code>Engine</code></a> vi
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

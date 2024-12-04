@@ -175,21 +175,21 @@
                         <h1 id="values-and-types"><a class="header" href="#values-and-types">Values and Types</a></h1>
 <p>The following primitive types are supported natively.</p>
 <div class="table-wrapper"><table><thead><tr><th>Category</th><th>Equivalent Rust types</th><th><a href="type-of.html"><code>type_of()</code></a></th><th><code>to_string()</code></th></tr></thead><tbody>
-<tr><td><strong>System integer</strong></td><td><code>rhai::INT</code> (default <code>i64</code>, <code>i32</code> under <a href="/start/features.html"><code>only_i32</code></a>)</td><td><code>"i32"</code> or <code>"i64"</code></td><td><code>"42"</code>, <code>"123"</code> etc.</td></tr>
+<tr><td><strong>System integer</strong></td><td><code>rhai::INT</code> (default <code>i64</code>, <code>i32</code> under <a href="/book/start/features.html"><code>only_i32</code></a>)</td><td><code>"i32"</code> or <code>"i64"</code></td><td><code>"42"</code>, <code>"123"</code> etc.</td></tr>
 <tr><td><strong>Other integer number</strong></td><td><code>u8</code>, <code>i8</code>, <code>u16</code>, <code>i16</code>, <code>u32</code>, <code>i32</code>, <code>u64</code>, <code>i64</code></td><td><code>"i32"</code>, <code>"u64"</code> etc.</td><td><code>"42"</code>, <code>"123"</code> etc.</td></tr>
-<tr><td><strong>Integer numeric <a href="/language/ranges.html">range</a></strong></td><td><code>std::ops::Range&lt;rhai::INT&gt;</code>, <code>std::ops::RangeInclusive&lt;rhai::INT&gt;</code></td><td><code>"range"</code>, <code>"range="</code></td><td><code>"2..7"</code>, <code>"0..=15"</code> etc.</td></tr>
-<tr><td><strong>Floating-point number</strong> (disabled with <a href="/start/features.html"><code>no_float</code></a>)</td><td><code>rhai::FLOAT</code> (default <code>f64</code>, <code>f32</code> under <a href="/start/features.html"><code>f32_float</code></a>)</td><td><code>"f32"</code> or <code>"f64"</code></td><td><code>"123.4567"</code> etc.</td></tr>
-<tr><td><strong>Fixed precision decimal number</strong> (requires <a href="/start/features.html"><code>decimal</code></a>)</td><td><a href="https://crates.io/crates/rust_decimal"><code>rust_decimal::Decimal</code></a></td><td><code>"decimal"</code></td><td><code>"42"</code>, <code>"123.4567"</code> etc.</td></tr>
+<tr><td><strong>Integer numeric <a href="/book/language/ranges.html">range</a></strong></td><td><code>std::ops::Range&lt;rhai::INT&gt;</code>, <code>std::ops::RangeInclusive&lt;rhai::INT&gt;</code></td><td><code>"range"</code>, <code>"range="</code></td><td><code>"2..7"</code>, <code>"0..=15"</code> etc.</td></tr>
+<tr><td><strong>Floating-point number</strong> (disabled with <a href="/book/start/features.html"><code>no_float</code></a>)</td><td><code>rhai::FLOAT</code> (default <code>f64</code>, <code>f32</code> under <a href="/book/start/features.html"><code>f32_float</code></a>)</td><td><code>"f32"</code> or <code>"f64"</code></td><td><code>"123.4567"</code> etc.</td></tr>
+<tr><td><strong>Fixed precision decimal number</strong> (requires <a href="/book/start/features.html"><code>decimal</code></a>)</td><td><a href="https://crates.io/crates/rust_decimal"><code>rust_decimal::Decimal</code></a></td><td><code>"decimal"</code></td><td><code>"42"</code>, <code>"123.4567"</code> etc.</td></tr>
 <tr><td><strong>Boolean value</strong></td><td><code>bool</code></td><td><code>"bool"</code></td><td><code>"true"</code> or <code>"false"</code></td></tr>
 <tr><td><strong>Unicode character</strong></td><td><code>char</code></td><td><code>"char"</code></td><td><code>"A"</code>, <code>"x"</code> etc.</td></tr>
-<tr><td><strong>Immutable Unicode <a href="/language/strings-chars.html">string</a></strong></td><td><a href="/rust/immutable-string.html"><code>rhai::ImmutableString</code></a> (<code>Rc&lt;SmartString&gt;</code>, <code>Arc&lt;SmartString&gt;</code> under <a href="/start/features.html"><code>sync</code></a>)</td><td><code>"string"</code></td><td><code>"hello"</code> etc.</td></tr>
-<tr><td><strong><a href="/language/arrays.html"><code>Array</code></a></strong> (disabled with <a href="/start/features.html"><code>no_index</code></a>)</td><td><a href="/language/arrays.html"><code>rhai::Array</code></a> (<code>Vec&lt;Dynamic&gt;</code>)</td><td><code>"array"</code></td><td><code>"[ 1, 2, 3 ]"</code> etc.</td></tr>
-<tr><td><strong>Byte array – <a href="/language/blobs.html"><code>BLOB</code></a></strong> (disabled with <a href="/start/features.html"><code>no_index</code></a>)</td><td><a href="/language/blobs.html"><code>rhai::Blob</code></a> (<code>Vec&lt;u8&gt;</code>)</td><td><code>"blob"</code></td><td><code>"[01020304abcd]"</code> etc.</td></tr>
-<tr><td><strong><a href="/language/object-maps.html">Object map</a></strong> (disabled with <a href="/start/features.html"><code>no_object</code></a>)</td><td><a href="/language/object-maps.html"><code>rhai::Map</code></a> (<code>BTreeMap&lt;SmartString, Dynamic&gt;</code>)</td><td><code>"map"</code></td><td><code>"#{ "a": 1, "b": true }"</code> etc.</td></tr>
-<tr><td><strong><a href="/language/timestamps.html">Timestamp</a></strong> (disabled with <a href="/start/features.html"><code>no_time</code></a> or <a href="/start/features.html"><code>no_std</code></a>)</td><td><code>std::time::Instant</code> (<a href="https://crates.io/crates/instant"><code>instant::Instant</code></a> if <a href="/start/builds/wasm.html">WASM</a> build)</td><td><code>"timestamp"</code></td><td><code>"&lt;timestamp&gt;"</code></td></tr>
-<tr><td><strong><a href="/language/fn-ptr.html">Function pointer</a></strong></td><td><a href="/language/fn-ptr.html"><code>rhai::FnPtr</code></a></td><td><code>"Fn"</code></td><td><code>"Fn(foo)"</code> etc.</td></tr>
-<tr><td><strong>Dynamic value</strong> (i.e. can be anything)</td><td><a href="/language/dynamic.html"><code>rhai::Dynamic</code></a></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
-<tr><td><strong>Shared value</strong> (a reference-counted, shared <a href="/language/dynamic.html"><code>Dynamic</code></a> value, created via <a href="/language/fn-closure.html">closures</a>, disabled with <a href="/start/features.html"><code>no_closure</code></a>)</td><td></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
+<tr><td><strong>Immutable Unicode <a href="/book/language/strings-chars.html">string</a></strong></td><td><a href="/book/rust/immutable-string.html"><code>rhai::ImmutableString</code></a> (<code>Rc&lt;SmartString&gt;</code>, <code>Arc&lt;SmartString&gt;</code> under <a href="/book/start/features.html"><code>sync</code></a>)</td><td><code>"string"</code></td><td><code>"hello"</code> etc.</td></tr>
+<tr><td><strong><a href="/book/language/arrays.html"><code>Array</code></a></strong> (disabled with <a href="/book/start/features.html"><code>no_index</code></a>)</td><td><a href="/book/language/arrays.html"><code>rhai::Array</code></a> (<code>Vec&lt;Dynamic&gt;</code>)</td><td><code>"array"</code></td><td><code>"[ 1, 2, 3 ]"</code> etc.</td></tr>
+<tr><td><strong>Byte array – <a href="/book/language/blobs.html"><code>BLOB</code></a></strong> (disabled with <a href="/book/start/features.html"><code>no_index</code></a>)</td><td><a href="/book/language/blobs.html"><code>rhai::Blob</code></a> (<code>Vec&lt;u8&gt;</code>)</td><td><code>"blob"</code></td><td><code>"[01020304abcd]"</code> etc.</td></tr>
+<tr><td><strong><a href="/book/language/object-maps.html">Object map</a></strong> (disabled with <a href="/book/start/features.html"><code>no_object</code></a>)</td><td><a href="/book/language/object-maps.html"><code>rhai::Map</code></a> (<code>BTreeMap&lt;SmartString, Dynamic&gt;</code>)</td><td><code>"map"</code></td><td><code>"#{ "a": 1, "b": true }"</code> etc.</td></tr>
+<tr><td><strong><a href="/book/language/timestamps.html">Timestamp</a></strong> (disabled with <a href="/book/start/features.html"><code>no_time</code></a> or <a href="/book/start/features.html"><code>no_std</code></a>)</td><td><code>std::time::Instant</code> (<a href="https://crates.io/crates/instant"><code>instant::Instant</code></a> if <a href="/book/start/builds/wasm.html">WASM</a> build)</td><td><code>"timestamp"</code></td><td><code>"&lt;timestamp&gt;"</code></td></tr>
+<tr><td><strong><a href="/book/language/fn-ptr.html">Function pointer</a></strong></td><td><a href="/book/language/fn-ptr.html"><code>rhai::FnPtr</code></a></td><td><code>"Fn"</code></td><td><code>"Fn(foo)"</code> etc.</td></tr>
+<tr><td><strong>Dynamic value</strong> (i.e. can be anything)</td><td><a href="/book/language/dynamic.html"><code>rhai::Dynamic</code></a></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
+<tr><td><strong>Shared value</strong> (a reference-counted, shared <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value, created via <a href="/book/language/fn-closure.html">closures</a>, disabled with <a href="/book/start/features.html"><code>no_closure</code></a>)</td><td></td><td><em>the actual type</em></td><td><em>actual value</em></td></tr>
 <tr><td><strong>Nothing/void/nil/null/Unit</strong> (or whatever it is called)</td><td><code>()</code></td><td><code>"()"</code></td><td><code>""</code> <em>(empty string)</em></td></tr>
 </tbody></table>
 </div><div id="admonition-no-automatic-type-conversion-for-integers" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-no-automatic-type-conversion-for-integers-title">
@@ -209,8 +209,8 @@
 </div>
 <h2 id="default-types"><a class="header" href="#default-types">Default Types</a></h2>
 <p>The default integer type is <code>i64</code>. If other integer types are not needed, it is possible to exclude
-them and make a smaller build with the <a href="/start/features.html"><code>only_i64</code></a> feature.</p>
-<p>If only 32-bit integers are needed, enabling the <a href="/start/features.html"><code>only_i32</code></a> feature will remove support for all
+them and make a smaller build with the <a href="/book/start/features.html"><code>only_i64</code></a> feature.</p>
+<p>If only 32-bit integers are needed, enabling the <a href="/book/start/features.html"><code>only_i32</code></a> feature will remove support for all
 integer types other than <code>i32</code>, including <code>i64</code>.
 This is useful on some 32-bit targets where using 64-bit integers incur a performance penalty.</p>
 <div id="admonition-warning-default-integer-is-i64" class="admonition admonish-danger small" role="note" aria-labelledby="admonition-warning-default-integer-is-i64-title">
@@ -223,9 +223,9 @@ This is useful on some 32-bit targets where using 64-bit integers incur a perfor
 <div>
 <p>Rhai’s default integer type is <code>i64</code>, which is <em>DIFFERENT</em> from Rust’s <code>i32</code>.</p>
 <p>It is very easy to unsuspectingly set an <code>i32</code> into Rhai, which <em>still works</em> but will incur a significant
-runtime performance hit since the <a href="/engine/hello-world.html"><code>Engine</code></a> will treat <code>i32</code> as an opaque <a href="/rust/custom-types.html">custom type</a> (unless using the
-<a href="/start/features.html"><code>only_i32</code></a> feature).</p>
-<p><code>i64</code> is the default even on 32-bit systems.  To use <code>i32</code> on 32-bit systems requires the <a href="/start/features.html"><code>only_i32</code></a> feature.</p>
+runtime performance hit since the <a href="/book/engine/hello-world.html"><code>Engine</code></a> will treat <code>i32</code> as an opaque <a href="/book/rust/custom-types.html">custom type</a> (unless using the
+<a href="/book/start/features.html"><code>only_i32</code></a> feature).</p>
+<p><code>i64</code> is the default even on 32-bit systems.  To use <code>i32</code> on 32-bit systems requires the <a href="/book/start/features.html"><code>only_i32</code></a> feature.</p>
 </div>
 </div>
 <div id="admonition-tip-floating-point-numbers" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-floating-point-numbers-title">
@@ -236,8 +236,8 @@ runtime performance hit since the <a href="/engine/hello-world.html"><code>Engin
 <a class="admonition-anchor-link" href="#admonition-tip-floating-point-numbers"></a>
 </div>
 <div>
-<p>If no floating-point is needed or supported, use the <a href="/start/features.html"><code>no_float</code></a> feature to remove it.</p>
-<p>Some applications require fixed-precision decimal numbers, which can be enabled via the <a href="/start/features.html"><code>decimal</code></a> feature.</p>
+<p>If no floating-point is needed or supported, use the <a href="/book/start/features.html"><code>no_float</code></a> feature to remove it.</p>
+<p>Some applications require fixed-precision decimal numbers, which can be enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature.</p>
 </div>
 </div>
 <div id="admonition-immutable-strings" class="admonition admonish-info small" role="note" aria-labelledby="admonition-immutable-strings-title">
@@ -248,9 +248,9 @@ runtime performance hit since the <a href="/engine/hello-world.html"><code>Engin
 <a class="admonition-anchor-link" href="#admonition-immutable-strings"></a>
 </div>
 <div>
-<p><a href="/language/strings-chars.html">Strings</a> in Rhai are <em>immutable</em>, meaning that they can be shared but not modified.</p>
-<p>Internally, the <a href="/rust/immutable-string.html"><code>ImmutableString</code></a> type is a wrapper over <code>Rc&lt;String&gt;</code> or <code>Arc&lt;String&gt;</code> (depending on <a href="/start/features.html"><code>sync</code></a>).</p>
-<p>Any modification done to a Rhai string causes the <a href="/language/strings-chars.html">string</a> to be cloned and the modifications made to the copy.</p>
+<p><a href="/book/language/strings-chars.html">Strings</a> in Rhai are <em>immutable</em>, meaning that they can be shared but not modified.</p>
+<p>Internally, the <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> type is a wrapper over <code>Rc&lt;String&gt;</code> or <code>Arc&lt;String&gt;</code> (depending on <a href="/book/start/features.html"><code>sync</code></a>).</p>
+<p>Any modification done to a Rhai string causes the <a href="/book/language/strings-chars.html">string</a> to be cloned and the modifications made to the copy.</p>
 </div>
 </div>
 <div id="admonition-tip-convert-to-string" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-convert-to-string-title">
@@ -261,8 +261,8 @@ runtime performance hit since the <a href="/engine/hello-world.html"><code>Engin
 <a class="admonition-anchor-link" href="#admonition-tip-convert-to-string"></a>
 </div>
 <div>
-<p>The <a href="/rust/print-custom.html"><code>to_string</code></a> function converts a standard type into a <a href="/language/strings-chars.html">string</a> for display purposes.</p>
-<p>The <a href="/rust/print-custom.html"><code>to_debug</code></a> function converts a standard type into a <a href="/language/strings-chars.html">string</a> in debug format.</p>
+<p>The <a href="/book/rust/print-custom.html"><code>to_string</code></a> function converts a standard type into a <a href="/book/language/strings-chars.html">string</a> for display purposes.</p>
+<p>The <a href="/book/rust/print-custom.html"><code>to_debug</code></a> function converts a standard type into a <a href="/book/language/strings-chars.html">string</a> in debug format.</p>
 </div>
 </div>
 
@@ -295,22 +295,6 @@ runtime performance hit since the <a href="/engine/hello-world.html"><code>Engin
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

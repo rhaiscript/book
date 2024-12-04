@@ -181,7 +181,7 @@
 <a class="admonition-anchor-link" href="#admonition-warning"></a>
 </div>
 <div>
-<p>This assumes that the type is defined in an external crate and so the <a href="/rust/build-type.html"><code>CustomType</code></a> trait
+<p>This assumes that the type is defined in an external crate and so the <a href="/book/rust/build-type.html"><code>CustomType</code></a> trait
 cannot be implemented for it due to Rust’s <a href="https://doc.rust-lang.org/book/ch10-02-traits.html"><em>orphan rule</em></a>.</p>
 </div>
 </div>
@@ -194,10 +194,10 @@ cannot be implemented for it due to Rust’s <a href="https://doc.rust-lang.org/
 </div>
 <div>
 <p>It is also possible to use Rust enums with Rhai.</p>
-<p>See the pattern <a href="/patterns/enums.html">Working with Enums</a> for more details.</p>
+<p>See the pattern <a href="/book/patterns/enums.html">Working with Enums</a> for more details.</p>
 </div>
 </div>
-<p>The custom type needs to be <em>registered</em> into an <a href="/engine/hello-world.html"><code>Engine</code></a> via:</p>
+<p>The custom type needs to be <em>registered</em> into an <a href="/book/engine/hello-world.html"><code>Engine</code></a> via:</p>
 <div class="table-wrapper"><table><thead><tr><th><code>Engine</code> API</th><th><code>type_of</code> output</th></tr></thead><tbody>
 <tr><td><code>register_type::&lt;T&gt;</code></td><td>full Rust path name</td></tr>
 <tr><td><code>register_type_with_name::&lt;T&gt;</code></td><td>friendly name</td></tr>
@@ -244,9 +244,9 @@ and <code>type_of()</code> will faithfully return it.</p>
 <p>How this might possibly be useful is left to the imagination of the user.</p>
 </div>
 </div>
-<p><a href="/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
+<p><a href="/book/language/type-of.html"><code>type_of()</code></a> works fine with custom types and returns the name of the type.</p>
 <p>If <code>Engine::register_type_with_name</code> is used to register the custom type with a special
-“pretty-print” friendly name, <a href="/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
+“pretty-print” friendly name, <a href="/book/language/type-of.html"><code>type_of()</code></a> will return that name instead.</p>
 <pre><code class="language-rust">engine.register_type::&lt;TestStruct1&gt;()
       .register_fn("new_ts1", TestStruct1::new)
       .register_type_with_name::&lt;TestStruct2&gt;("TestStruct")
@@ -260,7 +260,7 @@ println!("{ts2_type}");                 // prints 'TestStruct'</code></pre>
 <h2 id="-operator"><a class="header" href="#-operator"><code>==</code> Operator</a></h2>
 <p>Many standard functions (e.g. filtering, searching and sorting) expect a custom type to be
 <em>comparable</em>, meaning that the <code>==</code> operator must be registered for the custom type.</p>
-<p>For example, in order to use the <a href="/language/in.html"><code>in</code></a> operator with a custom type for an <a href="/language/arrays.html">array</a>,
+<p>For example, in order to use the <a href="/book/language/in.html"><code>in</code></a> operator with a custom type for an <a href="/book/language/arrays.html">array</a>,
 the <code>==</code> operator is used to check whether two values are the same.</p>
 <pre><code class="language-rust">// Assume 'TestStruct' implements `PartialEq`
 engine.register_fn("==",
@@ -300,22 +300,6 @@ item in array;              // 'in' operator uses '=='</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

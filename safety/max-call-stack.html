@@ -193,9 +193,9 @@ fn recurse_forever() {
 </div>
 <p>Because of its intended embedded usage, Rhai, by default, limits function calls to a maximum depth
 of 64 levels (8 levels in debug build) in order to fit into most platforms’ default stack sizes.</p>
-<p>This limit may be changed via the <a href="/engine/options.html"><code>Engine::set_max_call_levels</code></a> method.</p>
+<p>This limit may be changed via the <a href="/book/engine/options.html"><code>Engine::set_max_call_levels</code></a> method.</p>
 <p>A script exceeding the maximum call stack depth will terminate with an error result.</p>
-<p>This check can be disabled via the <a href="/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 engine.set_max_call_levels(10);     // allow only up to 10 levels of function calls
@@ -212,7 +212,7 @@ engine.set_max_call_levels(0);      // allow no function calls at all (max depth
 <p>When setting this limit, care must be also be taken to the evaluation depth of each <em>statement</em>
 within a function.</p>
 <p>It is entirely possible for a malicious script to embed a recursive call deep inside a nested
-expression or statements block (see <a href="/safety/max-stmt-depth.html">maximum statement depth</a>).</p>
+expression or statements block (see <a href="/book/safety/max-stmt-depth.html">maximum statement depth</a>).</p>
 <pre><code class="language-rust">fn bad_function(n) {
     // Bail out long before reaching the limit
     if n &gt; 10 {
@@ -251,7 +251,7 @@ bad_function(0);</code></pre>
 size of 2MB for spawned threads.</p>
 <p>This default can further be changed such that a spawned thread has as large a stack as needed.</p>
 <p>See <a href="https://doc.rust-lang.org/std/thread/#stack-size">the on-line Rust docs</a> for more details.</p>
-<p>Therefore, in order to relax the stack size limit for scripts, run the <a href="/engine/hello-world.html"><code>Engine</code></a> in a separate
+<p>Therefore, in order to relax the stack size limit for scripts, run the <a href="/book/engine/hello-world.html"><code>Engine</code></a> in a separate
 spawned thread with a larger stack.</p>
 </div>
 </div>
@@ -285,22 +285,6 @@ spawned thread with a larger stack.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

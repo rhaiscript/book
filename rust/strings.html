@@ -200,10 +200,10 @@ and the copy immediately thrown away right after the call.</p>
 </div>
 </div>
 <p>Rust functions accepting parameters of <code>String</code> should use <code>&amp;str</code> instead because it maps directly
-to <a href="/rust/immutable-string.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/language/strings-chars.html">strings</a> internally.</p>
-<p>The parameter type <code>String</code> involves always converting an <a href="/rust/immutable-string.html"><code>ImmutableString</code></a> into a <code>String</code>
+to <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> which is the type that Rhai uses to represent <a href="/book/language/strings-chars.html">strings</a> internally.</p>
+<p>The parameter type <code>String</code> involves always converting an <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> into a <code>String</code>
 which mandates cloning it.</p>
-<p>Using <a href="/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code> is much more efficient.</p>
+<p>Using <a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a> or <code>&amp;str</code> is much more efficient.</p>
 <pre><code class="language-rust">fn get_len1(s: String) -&gt; i64 {             // BAD!!! Very inefficient!!!
     s.len() as i64
 }
@@ -231,7 +231,7 @@ let len = engine.eval::&lt;i64&gt;("len3(x)")?;   // 'x' is shared</code></pre>
 <div>
 <p>A function with the first parameter being <code>&amp;mut String</code> does not match a string argument passed to it,
 which has type <code>ImmutableString</code>.</p>
-<p>In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/rust/custom-types.html">custom type</a>.</p>
+<p>In fact, <code>&amp;mut String</code> is treated as an opaque <a href="/book/rust/custom-types.html">custom type</a>.</p>
 <pre><code class="language-rust">fn bad(s: &amp;mut String) { ... }              // '&amp;mut String' will not match string values
 
 fn good(s: &amp;mut ImmutableString) { ... }
@@ -274,22 +274,6 @@ engine.eval(r#"good("hello")"#)?;           // &lt;- this one works</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

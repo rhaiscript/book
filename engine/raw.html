@@ -173,8 +173,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="raw-engine"><a class="header" href="#raw-engine">Raw <code>Engine</code></a></h1>
-<p><code>Engine::new</code> creates a scripting <a href="/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
-via <a href="/language/print-debug.html"><code>print</code></a> or <a href="/language/print-debug.html"><code>debug</code></a>).</p>
+<p><code>Engine::new</code> creates a scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a> with common functionalities (e.g. printing to <code>stdout</code>
+via <a href="/book/language/print-debug.html"><code>print</code></a> or <a href="/book/language/print-debug.html"><code>debug</code></a>).</p>
 <p>In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
 application code storage space.</p>
 <div id="admonition-built-in-operators" class="admonition admonish-info side wide" role="note" aria-labelledby="admonition-built-in-operators-title">
@@ -185,22 +185,22 @@ application code storage space.</p>
 <a class="admonition-anchor-link" href="#admonition-built-in-operators"></a>
 </div>
 <div>
-<p>Even with a raw <a href="/engine/hello-world.html"><code>Engine</code></a>, some operators are built-in and always available.</p>
-<p>See <a href="/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
+<p>Even with a raw <a href="/book/engine/hello-world.html"><code>Engine</code></a>, some operators are built-in and always available.</p>
+<p>See <a href="/book/engine/builtin.html"><em>Built-in Operators</em></a> for a full list.</p>
 </div>
 </div>
-<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <a href="/engine/hello-world.html"><code>Engine</code></a>, in which only a minimal set of
-<a href="/engine/builtin.html">built-in</a> basic arithmetic and logical operators are supported.</p>
-<p>To add more functionalities to a <em>raw</em> <a href="/engine/hello-world.html"><code>Engine</code></a>, load <a href="/rust/packages/index.html">packages</a> into it.</p>
-<p>Since <a href="/rust/packages/index.html">packages</a> can be <em>shared</em>, this is an extremely efficient way to create multiple instances of
-the same <a href="/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
+<p>Use <code>Engine::new_raw</code> to create a <em>raw</em> <a href="/book/engine/hello-world.html"><code>Engine</code></a>, in which only a minimal set of
+<a href="/book/engine/builtin.html">built-in</a> basic arithmetic and logical operators are supported.</p>
+<p>To add more functionalities to a <em>raw</em> <a href="/book/engine/hello-world.html"><code>Engine</code></a>, load <a href="/book/rust/packages/index.html">packages</a> into it.</p>
+<p>Since <a href="/book/rust/packages/index.html">packages</a> can be <em>shared</em>, this is an extremely efficient way to create multiple instances of
+the same <a href="/book/engine/hello-world.html"><code>Engine</code></a> with the same set of functions.</p>
 <div class="table-wrapper"><table><thead><tr><th></th><th style="text-align: center"><code>Engine::new</code></th><th style="text-align: center"><code>Engine::new_raw</code></th></tr></thead><tbody>
-<tr><td><a href="/engine/builtin.html">Built-in operators</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><a href="/rust/packages/index.html">Package</a> loaded</td><td style="text-align: center"><code>StandardPackage</code></td><td style="text-align: center"><em>none</em></td></tr>
-<tr><td><a href="/rust/modules/resolvers/index.html">Module resolver</a></td><td style="text-align: center"><code>FileModuleResolver</code></td><td style="text-align: center"><em>none</em></td></tr>
-<tr><td><a href="/rust/strings-interner.html">Strings interner</a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>no</em></td></tr>
-<tr><td><a href="/language/print-debug.html"><code>on_print</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
-<tr><td><a href="/language/print-debug.html"><code>on_debug</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/engine/builtin.html">Built-in operators</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><a href="/book/rust/packages/index.html">Package</a> loaded</td><td style="text-align: center"><code>StandardPackage</code></td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/rust/modules/resolvers/index.html">Module resolver</a></td><td style="text-align: center"><code>FileModuleResolver</code></td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/rust/strings-interner.html">Strings interner</a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>no</em></td></tr>
+<tr><td><a href="/book/language/print-debug.html"><code>on_print</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
+<tr><td><a href="/book/language/print-debug.html"><code>on_debug</code></a></td><td style="text-align: center">yes</td><td style="text-align: center"><em>none</em></td></tr>
 </tbody></table>
 </div><div id="admonition-warning-no-strings-interner" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-warning-no-strings-interner-title">
 <div class="admonition-title">
@@ -210,9 +210,9 @@ the same <a href="/engine/hello-world.html"><code>Engine</code></a> with the sam
 <a class="admonition-anchor-link" href="#admonition-warning-no-strings-interner"></a>
 </div>
 <div>
-<p>A <em>raw</em> <a href="/engine/hello-world.html"><code>Engine</code></a> disables the <em><a href="/rust/strings-interner.html">strings interner</a></em> by default.</p>
+<p>A <em>raw</em> <a href="/book/engine/hello-world.html"><code>Engine</code></a> disables the <em><a href="/book/rust/strings-interner.html">strings interner</a></em> by default.</p>
 <p>This may lead to a significant increase in memory usage if many strings are created in scripts.</p>
-<p>Turn the <em><a href="/rust/strings-interner.html">strings interner</a></em> back on via <a href="/engine/options.html"><code>Engine::set_max_strings_interned</code></a>.</p>
+<p>Turn the <em><a href="/book/rust/strings-interner.html">strings interner</a></em> back on via <a href="/book/engine/options.html"><code>Engine::set_max_strings_interned</code></a>.</p>
 </div>
 </div>
 <div id="admonition-enginenew-is-equivalent-to" class="admonition admonish-example" role="note" aria-labelledby="admonition-enginenew-is-equivalent-to-title">
@@ -282,22 +282,6 @@ package.register_into_engine(&amp;mut engine);</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

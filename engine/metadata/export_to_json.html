@@ -175,8 +175,8 @@
                         <h1 id="export-functions-metadata-to-json"><a class="header" href="#export-functions-metadata-to-json">Export Functions Metadata to JSON</a></h1>
 <h2 id="enginegen_fn_metadata_to_jsonenginegen_fn_metadata_with_ast_to_json"><a class="header" href="#enginegen_fn_metadata_to_jsonenginegen_fn_metadata_with_ast_to_json"><code>Engine::gen_fn_metadata_to_json</code><br/><code>Engine::gen_fn_metadata_with_ast_to_json</code></a></h2>
 <p>As part of a <em>reflections</em> API, <code>Engine::gen_fn_metadata_to_json</code> and the corresponding
-<code>Engine::gen_fn_metadata_with_ast_to_json</code> export the full list of <a href="/rust/custom-types.html">custom types</a> and
-<a href="/engine/metadata/index.html">functions metadata</a> in JSON format.</p>
+<code>Engine::gen_fn_metadata_with_ast_to_json</code> export the full list of <a href="/book/rust/custom-types.html">custom types</a> and
+<a href="/book/engine/metadata/index.html">functions metadata</a> in JSON format.</p>
 <div id="admonition-requires-metadata" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-requires-metadata-title">
 <div class="admonition-title">
 <div id="admonition-requires-metadata-title">
@@ -185,20 +185,20 @@
 <a class="admonition-anchor-link" href="#admonition-requires-metadata"></a>
 </div>
 <div>
-<p>The <a href="/start/features.html"><code>metadata</code></a> feature is required for this API, which also pulls in the
+<p>The <a href="/book/start/features.html"><code>metadata</code></a> feature is required for this API, which also pulls in the
 <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a> crate.</p>
 </div>
 </div>
 <h3 id="sources"><a class="header" href="#sources">Sources</a></h3>
-<p>Functions and <a href="/rust/custom-types.html">custom types</a> from the following sources are included:</p>
+<p>Functions and <a href="/book/rust/custom-types.html">custom types</a> from the following sources are included:</p>
 <ol>
-<li>Script-defined functions in an <a href="/engine/compile.html"><code>AST</code></a> (for <code>Engine::gen_fn_metadata_with_ast_to_json</code>)</li>
+<li>Script-defined functions in an <a href="/book/engine/compile.html"><code>AST</code></a> (for <code>Engine::gen_fn_metadata_with_ast_to_json</code>)</li>
 <li>Native Rust functions registered into the global namespace via the <code>Engine::register_XXX</code> API</li>
-<li><a href="/rust/custom-types.html">Custom types</a> registered into the global namespace via the <code>Engine::register_type_with_name</code> API</li>
-<li><em>Public</em> (i.e. non-<a href="/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) and <a href="/rust/custom-types.html">custom types</a> in static modules
+<li><a href="/book/rust/custom-types.html">Custom types</a> registered into the global namespace via the <code>Engine::register_type_with_name</code> API</li>
+<li><em>Public</em> (i.e. non-<a href="/book/language/modules/export.html"><code>private</code></a>) functions (native Rust or Rhai scripted) and <a href="/book/rust/custom-types.html">custom types</a> in static modules
 registered via <code>Engine::register_static_module</code></li>
-<li>Native Rust functions and <a href="/rust/custom-types.html">custom types</a> in external <a href="/rust/packages/index.html">packages</a> registered via <code>Engine::register_global_module</code></li>
-<li>Native Rust functions and <a href="/rust/custom-types.html">custom types</a> in <a href="/rust/packages/builtin.html">built-in packages</a> (optional)</li>
+<li>Native Rust functions and <a href="/book/rust/custom-types.html">custom types</a> in external <a href="/book/rust/packages/index.html">packages</a> registered via <code>Engine::register_global_module</code></li>
+<li>Native Rust functions and <a href="/book/rust/custom-types.html">custom types</a> in <a href="/book/rust/packages/builtin.html">built-in packages</a> (optional)</li>
 </ol>
 <h2 id="json-schema"><a class="header" href="#json-schema">JSON Schema</a></h2>
 <p>The JSON schema used to hold metadata is very simple, containing a nested structure of
@@ -334,22 +334,6 @@ registered via <code>Engine::register_static_module</code></li>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

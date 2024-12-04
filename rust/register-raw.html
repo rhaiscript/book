@@ -173,10 +173,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="use-the-low-level-api-to-register-a-rust-function"><a class="header" href="#use-the-low-level-api-to-register-a-rust-function">Use the Low-Level API to Register a Rust Function</a></h1>
-<p>When a native Rust function is registered with an <a href="/engine/hello-world.html"><code>Engine</code></a> using the <code>register_XXX</code> API, Rhai
-transparently converts all function arguments from <a href="/language/dynamic.html"><code>Dynamic</code></a> into the correct types before calling
+<p>When a native Rust function is registered with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> using the <code>register_XXX</code> API, Rhai
+transparently converts all function arguments from <a href="/book/language/dynamic.html"><code>Dynamic</code></a> into the correct types before calling
 the function.</p>
-<p>For more power and flexibility, there is a <em>low-level</em> API to work directly with <a href="/language/dynamic.html"><code>Dynamic</code></a> values
+<p>For more power and flexibility, there is a <em>low-level</em> API to work directly with <a href="/book/language/dynamic.html"><code>Dynamic</code></a> values
 without the conversions.</p>
 <h2 id="raw-function-registration"><a class="header" href="#raw-function-registration">Raw Function Registration</a></h2>
 <p>The <code>Engine::register_raw_fn</code> method is marked <em>volatile</em>, meaning that it may be changed without warning.</p>
@@ -220,8 +220,8 @@ engine.register_fn("increment_by", |x: &amp;mut i64, y: i64| *x += y);</code></p
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>T</code></td><td style="text-align: center"><code>impl Clone</code></td><td>return type of the function</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/rust/context.html"><code>NativeCallContext</code></a></td><td>the current <em>native call context</em>, useful for recursively calling functions on the same <a href="/engine/hello-world.html"><code>Engine</code></a></td></tr>
-<tr><td><code>args</code></td><td style="text-align: center"><code>&amp;mut [&amp;mut Dynamic]</code></td><td>a slice containing <code>&amp;mut</code> references to <a href="/language/dynamic.html"><code>Dynamic</code></a> values.<br/>The slice is guaranteed to contain enough arguments <em>of the correct types</em>.</td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/rust/context.html"><code>NativeCallContext</code></a></td><td>the current <em>native call context</em>, useful for recursively calling functions on the same <a href="/book/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td><code>args</code></td><td style="text-align: center"><code>&amp;mut [&amp;mut Dynamic]</code></td><td>a slice containing <code>&amp;mut</code> references to <a href="/book/language/dynamic.html"><code>Dynamic</code></a> values.<br/>The slice is guaranteed to contain enough arguments <em>of the correct types</em>.</td></tr>
 </tbody></table>
 </div>
 <h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
@@ -247,17 +247,17 @@ references to <code>args</code>, otherwise the Rust borrow checker will complain
 <tr><td><code>bool</code></td><td><code>args[n].as_bool().unwrap()</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center">untouched</td></tr>
 <tr><td><code>char</code></td><td><code>args[n].as_char().unwrap()</code></td><td style="text-align: center"><code>char</code></td><td style="text-align: center">untouched</td></tr>
 <tr><td><code>()</code></td><td><code>args[n].as_unit().unwrap()</code></td><td style="text-align: center"><code>()</code></td><td style="text-align: center">untouched</td></tr>
-<tr><td><a href="/language/strings-chars.html">String</a></td><td><code>&amp;*args[n].as_immutable_string_ref().unwrap()</code></td><td style="text-align: center"><a href="/rust/immutable-string.html"><code>&amp;ImmutableString</code></a></td><td style="text-align: center">untouched</td></tr>
-<tr><td><a href="/language/strings-chars.html">String</a> (consumed)</td><td><code>args[n].take().cast::&lt;ImmutableString&gt;()</code></td><td style="text-align: center"><a href="/rust/immutable-string.html"><code>ImmutableString</code></a></td><td style="text-align: center"><a href="/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td><a href="/book/language/strings-chars.html">String</a></td><td><code>&amp;*args[n].as_immutable_string_ref().unwrap()</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>&amp;ImmutableString</code></a></td><td style="text-align: center">untouched</td></tr>
+<tr><td><a href="/book/language/strings-chars.html">String</a> (consumed)</td><td><code>args[n].take().cast::&lt;ImmutableString&gt;()</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a></td><td style="text-align: center"><a href="/book/language/values-and-types.html"><code>()</code></a></td></tr>
 <tr><td>Others</td><td><code>&amp;*args[n].read_lock::&lt;T&gt;().unwrap()</code></td><td style="text-align: center"><code>&amp;T</code></td><td style="text-align: center">untouched</td></tr>
-<tr><td>Others (consumed)</td><td><code>args[n].take().cast::&lt;T&gt;()</code></td><td style="text-align: center"><code>T</code></td><td style="text-align: center"><a href="/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td>Others (consumed)</td><td><code>args[n].take().cast::&lt;T&gt;()</code></td><td style="text-align: center"><code>T</code></td><td style="text-align: center"><a href="/book/language/values-and-types.html"><code>()</code></a></td></tr>
 </tbody></table>
 </div>
 <h2 id="example--pass-a-callback-to-a-rust-function"><a class="header" href="#example--pass-a-callback-to-a-rust-function">Example – Pass a Callback to a Rust Function</a></h2>
-<p>The low-level API is useful when there is a need to interact with the scripting <a href="/engine/hello-world.html"><code>Engine</code></a>
+<p>The low-level API is useful when there is a need to interact with the scripting <a href="/book/engine/hello-world.html"><code>Engine</code></a>
 within a function.</p>
-<p>The following example registers a function that takes a <a href="/language/fn-ptr.html">function pointer</a> as an argument,
-then calls it within the same <a href="/engine/hello-world.html"><code>Engine</code></a>.  This way, a <em>callback</em> function can be provided
+<p>The following example registers a function that takes a <a href="/book/language/fn-ptr.html">function pointer</a> as an argument,
+then calls it within the same <a href="/book/engine/hello-world.html"><code>Engine</code></a>.  This way, a <em>callback</em> function can be provided
 to a native Rust function.</p>
 <p>The example also showcases the use of <code>FnPtr::call_raw</code>, a low-level API which allows binding the
 <code>this</code> pointer to the function pointer call.</p>
@@ -309,7 +309,7 @@ r#"
 to the first argument, use one of the following tactics:</p>
 <ol>
 <li>
-<p>If it is a <a href="/language/values-and-types.html">primary type</a> other than <a href="/language/strings-chars.html">string</a>, use <code>as_xxx()</code> as above;</p>
+<p>If it is a <a href="/book/language/values-and-types.html">primary type</a> other than <a href="/book/language/strings-chars.html">string</a>, use <code>as_xxx()</code> as above;</p>
 </li>
 <li>
 <p>Directly <em>consume</em> that argument via <code>arg[i].take()</code> as above.</p>
@@ -359,22 +359,6 @@ let value_ref = &amp;*rest[0].read_lock::&lt;B&gt;().unwrap();</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

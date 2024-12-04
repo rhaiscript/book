@@ -181,21 +181,21 @@
 <a class="admonition-anchor-link" href="#admonition-scope-constants"></a>
 </div>
 <div>
-<p><a href="/language/constants.html">Constants</a> in the external <a href="/engine/scope.html"><code>Scope</code></a>, when provided, count as definition.</p>
+<p><a href="/book/language/constants.html">Constants</a> in the external <a href="/book/engine/scope.html"><code>Scope</code></a>, when provided, count as definition.</p>
 </div>
 </div>
-<p>By default, Rhai looks up access to <a href="/language/variables.html">variables</a> from the enclosing block scope,
+<p>By default, Rhai looks up access to <a href="/book/language/variables.html">variables</a> from the enclosing block scope,
 working its way outwards until it reaches the top (global) level, then it
-searches the <a href="/engine/scope.html"><code>Scope</code></a> (if any) that is passed into the <code>Engine::eval_with_scope</code> call.</p>
-<p>Setting <a href="/engine/options.html"><code>Engine::set_strict_variables</code></a> to <code>true</code> turns on <em>Strict Variables Mode</em>,
+searches the <a href="/book/engine/scope.html"><code>Scope</code></a> (if any) that is passed into the <code>Engine::eval_with_scope</code> call.</p>
+<p>Setting <a href="/book/engine/options.html"><code>Engine::set_strict_variables</code></a> to <code>true</code> turns on <em>Strict Variables Mode</em>,
 which requires that:</p>
 <ul>
-<li>all <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> be defined within the same script before use,
-or they must be <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> within the provided <a href="/engine/scope.html"><code>Scope</code></a> (if any),</li>
-<li><a href="/rust/modules/index.html">modules</a> must be <a href="/language/modules/import.html">imported</a>, also within the same script, before use.</li>
+<li>all <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> be defined within the same script before use,
+or they must be <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> within the provided <a href="/book/engine/scope.html"><code>Scope</code></a> (if any),</li>
+<li><a href="/book/rust/modules/index.html">modules</a> must be <a href="/book/language/modules/import.html">imported</a>, also within the same script, before use.</li>
 </ul>
-<p>Within <em>Strict Variables</em> mode, any attempt to access a <a href="/language/variables.html">variable</a> or <a href="/rust/modules/index.html">module</a> before
-definition/<a href="/language/modules/import.html">import</a> results in a parse error.</p>
+<p>Within <em>Strict Variables</em> mode, any attempt to access a <a href="/book/language/variables.html">variable</a> or <a href="/book/rust/modules/index.html">module</a> before
+definition/<a href="/book/language/modules/import.html">import</a> results in a parse error.</p>
 <p>This way, variable access errors (usually typos) are caught during compile time instead of runtime.</p>
 <pre><code class="language-rust">let x = 42;
 
@@ -234,15 +234,15 @@ fn test2() {
 </div>
 <div>
 <p>Why can’t function calls be checked for validity as well?</p>
-<p>Rust functions in Rhai can be <a href="/rust/overloading.html">overloaded</a>. This means that multiple versions of
+<p>Rust functions in Rhai can be <a href="/book/rust/overloading.html">overloaded</a>. This means that multiple versions of
 the same Rust function can exist under the same name, each accepting different numbers and/or types
 of arguments.</p>
-<p>While it is possible to check, at compile time, whether a <a href="/language/variables.html">variable</a> has been previously declared,
+<p>While it is possible to check, at compile time, whether a <a href="/book/language/variables.html">variable</a> has been previously declared,
 it is impossible to predict, at compile time, the <em>types</em> of arguments to function calls, unless the
 function in question takes no parameters.</p>
 <p>Therefore, it is impossible to check, at compile time, whether a function call is valid given that
 the types of arguments are unknown until runtime. QED.</p>
-<p>Not to mention that it is also impossible to check for a function called via a <a href="/language/fn-ptr.html">function pointer</a>.</p>
+<p>Not to mention that it is also impossible to check for a function called via a <a href="/book/language/fn-ptr.html">function pointer</a>.</p>
 </div>
 </div>
 
@@ -275,22 +275,6 @@ the types of arguments are unknown until runtime. QED.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

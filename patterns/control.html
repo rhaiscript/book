@@ -207,12 +207,12 @@
 <p>Expose a Control API.</p>
 </li>
 <li>
-<p>Leverage <a href="/rust/overloading.html">function overloading</a> to simplify the API design.</p>
+<p>Leverage <a href="/book/rust/overloading.html">function overloading</a> to simplify the API design.</p>
 </li>
 <li>
-<p>Since Rhai is <em><a href="/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate anything outside of its internal environment.
+<p>Since Rhai is <em><a href="/book/safety/sandbox.html">sand-boxed</a></em>, it cannot mutate anything outside of its internal environment.
 To perform external actions via an API, the actual system must be wrapped in a <code>RefCell</code>
-(or <code>RwLock</code>/<code>Mutex</code> for <a href="/start/features.html"><code>sync</code></a>) and shared to the <a href="/engine/hello-world.html"><code>Engine</code></a>.</p>
+(or <code>RwLock</code>/<code>Mutex</code> for <a href="/book/start/features.html"><code>sync</code></a>) and shared to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>.</p>
 </li>
 </ul>
 </div>
@@ -240,7 +240,7 @@ system in a shared, interior-mutated object.</p>
 but only through exposing an abstract API primarily made up of functions.</p>
 <p>Use this when the API is relatively simple and clean, and the number of functions is small enough.</p>
 <p>For a complex API involving lots of functions, or an API that has a clear object structure, use the
-<a href="/patterns/singleton.html">Singleton Command Object</a> pattern instead.</p>
+<a href="/book/patterns/singleton.html">Singleton Command Object</a> pattern instead.</p>
 <h3 id="functional-api"><a class="header" href="#functional-api">Functional API</a></h3>
 <p>Assume that a system provides the following functional API:</p>
 <pre><code class="language-rust">struct EnergizerBunny;
@@ -255,14 +255,14 @@ impl EnergizerBunny {
 }</code></pre>
 <h3 id="wrap-api-in-shared-object"><a class="header" href="#wrap-api-in-shared-object">Wrap API in shared object</a></h3>
 <pre><code class="language-rust">pub type SharedBunny = Rc&lt;RefCell&lt;EnergizerBunny&gt;&gt;;</code></pre>
-<p>or in multi-threaded environments with the <a href="/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
+<p>or in multi-threaded environments with the <a href="/book/start/features.html"><code>sync</code></a> feature, use one of the following:</p>
 <pre><code class="language-rust">pub type SharedBunny = Arc&lt;RwLock&lt;EnergizerBunny&gt;&gt;;
 
 pub type SharedBunny = Arc&lt;Mutex&lt;EnergizerBunny&gt;&gt;;</code></pre>
 <h3 id="register-control-api"><a class="header" href="#register-control-api">Register control API</a></h3>
 <p>The trick to building a Control API is to clone the shared API object and
 move it into each function registration via a closure.</p>
-<p>Therefore, it is not possible to use a <a href="/plugins/module.html">plugin module</a> to achieve this, and each function must be
+<p>Therefore, it is not possible to use a <a href="/book/plugins/module.html">plugin module</a> to achieve this, and each function must be
 registered one after another.</p>
 <pre><code class="language-rust">// Notice 'move' is used to move the shared API object into the closure.
 let b = bunny.clone();
@@ -340,22 +340,6 @@ if bunny_get_speed() &gt; 50 { bunny_set_speed(50); }</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

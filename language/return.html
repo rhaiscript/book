@@ -175,13 +175,13 @@
                         <h1 id="return-value"><a class="header" href="#return-value">Return Value</a></h1>
 <h2 id="return"><a class="header" href="#return"><code>return</code></a></h2>
 <p>The <code>return</code> statement is used to immediately stop evaluation and exist the current context
-(typically a <a href="/language/functions.html">function</a> call) yielding a <em>return value</em>.</p>
+(typically a <a href="/book/language/functions.html">function</a> call) yielding a <em>return value</em>.</p>
 <pre><code class="language-rust">return;             // equivalent to return ();
 
 return 123 + 456;   // returns 579</code></pre>
 <p>A <code>return</code> statement at <em>global</em> level stops the entire script evaluation,
 the return value is taken as the result of the script evaluation.</p>
-<p>A <code>return</code> statement inside a <a href="/language/functions.html">function call</a> exits with a return value to the caller.</p>
+<p>A <code>return</code> statement inside a <a href="/book/language/functions.html">function call</a> exits with a return value to the caller.</p>
 <h2 id="exit"><a class="header" href="#exit"><code>exit</code></a></h2>
 <p>Similar to the <code>return</code> statement, the <code>exit</code> <em>function</em> is used to immediately stop evaluation,
 but it does so regardless of where it is called from, even deep inside nested function calls.</p>
@@ -198,9 +198,9 @@ fn baz() {
 let x = baz();      // exits with result 42
 
 print(x);           // &lt;- this is never run</code></pre>
-<p>The <code>exit</code> function is defined in the <a href="/rust/packages/builtin.html"><code>LanguageCorePackage</code></a> but excluded when using a <a href="/engine/raw.html">raw <code>Engine</code></a>.</p>
+<p>The <code>exit</code> function is defined in the <a href="/book/rust/packages/builtin.html"><code>LanguageCorePackage</code></a> but excluded when using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
 <div class="table-wrapper"><table><thead><tr><th>Function</th><th>Parameter(s)</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>exit</code></td><td>result value <em>(optional)</em></td><td>immediately terminate script evaluation (default result value is <a href="/language/values-and-types.html"><code>()</code></a>)</td></tr>
+<tr><td><code>exit</code></td><td>result value <em>(optional)</em></td><td>immediately terminate script evaluation (default result value is <a href="/book/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -232,22 +232,6 @@ print(x);           // &lt;- this is never run</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

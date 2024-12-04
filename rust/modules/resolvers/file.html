@@ -181,16 +181,16 @@
 <a class="admonition-anchor-link" href="#admonition-default"></a>
 </div>
 <div>
-<p><code>FileModuleResolver</code> is the default for <a href="/engine/hello-world.html"><code>Engine::new</code></a>.</p>
+<p><code>FileModuleResolver</code> is the default for <a href="/book/engine/hello-world.html"><code>Engine::new</code></a>.</p>
 </div>
 </div>
-<p>The <em>default</em> <a href="/rust/modules/index.html">module</a> resolution service, not available for <a href="/start/features.html"><code>no_std</code></a> or <a href="/start/builds/wasm.html">WASM</a> builds.
+<p>The <em>default</em> <a href="/book/rust/modules/index.html">module</a> resolution service, not available for <a href="/book/start/features.html"><code>no_std</code></a> or <a href="/book/start/builds/wasm.html">WASM</a> builds.
 Loads a script file (based off the current directory or a specified one) with <code>.rhai</code> extension.</p>
 <h2 id="function-namespace"><a class="header" href="#function-namespace">Function Namespace</a></h2>
-<p>All functions in the <a href="/language/fn-namespaces.html"><em>global</em> namespace</a>, plus all those defined in the same
-<a href="/rust/modules/index.html">module</a>, are <em>merged</em> into a <em>unified</em> <a href="/language/fn-namespaces.html">namespace</a>.</p>
-<p>All <a href="/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="/language/modules/import.html"><code>import</code></a> statements become sub-<a href="/rust/modules/index.html">modules</a>,
-which are also available to <a href="/language/functions.html">functions</a> defined within the same script file.</p>
+<p>All functions in the <a href="/book/language/fn-namespaces.html"><em>global</em> namespace</a>, plus all those defined in the same
+<a href="/book/rust/modules/index.html">module</a>, are <em>merged</em> into a <em>unified</em> <a href="/book/language/fn-namespaces.html">namespace</a>.</p>
+<p>All <a href="/book/rust/modules/index.html">modules</a> imported at <em>global</em> level via <a href="/book/language/modules/import.html"><code>import</code></a> statements become sub-<a href="/book/rust/modules/index.html">modules</a>,
+which are also available to <a href="/book/language/functions.html">functions</a> defined within the same script file.</p>
 <h2 id="base-directory"><a class="header" href="#base-directory">Base Directory</a></h2>
 <div id="admonition-tip-default" class="admonition admonish-tip side wide" role="note" aria-labelledby="admonition-tip-default-title">
 <div class="admonition-title">
@@ -207,7 +207,7 @@ which are also available to <a href="/language/functions.html">functions</a> def
 <p><em>Relative</em> paths are resolved relative to a <em>root</em> directory, which is usually the base directory.</p>
 <p>The base directory can be set via <code>FileModuleResolver::new_with_path</code> or
 <code>FileModuleResolver::set_base_path</code>.</p>
-<h2 id="custom-scope"><a class="header" href="#custom-scope">Custom <a href="/engine/scope.html"><code>Scope</code></a></a></h2>
+<h2 id="custom-scope"><a class="header" href="#custom-scope">Custom <a href="/book/engine/scope.html"><code>Scope</code></a></a></h2>
 <div id="admonition-tip" class="admonition admonish-tip side wide" role="note" aria-labelledby="admonition-tip-title">
 <div class="admonition-title">
 <div id="admonition-tip-title">
@@ -216,10 +216,10 @@ which are also available to <a href="/language/functions.html">functions</a> def
 <a class="admonition-anchor-link" href="#admonition-tip"></a>
 </div>
 <div>
-<p>This <a href="/engine/scope.html"><code>Scope</code></a> can conveniently hold global <a href="/language/constants.html">constants</a> etc.</p>
+<p>This <a href="/book/engine/scope.html"><code>Scope</code></a> can conveniently hold global <a href="/book/language/constants.html">constants</a> etc.</p>
 </div>
 </div>
-<p>The <code>set_scope</code> method adds an optional <a href="/engine/scope.html"><code>Scope</code></a> which will be used to <a href="/engine/optimize/index.html">optimize</a> <a href="/rust/modules/index.html">module</a> scripts.</p>
+<p>The <code>set_scope</code> method adds an optional <a href="/book/engine/scope.html"><code>Scope</code></a> which will be used to <a href="/book/engine/optimize/index.html">optimize</a> <a href="/book/rust/modules/index.html">module</a> scripts.</p>
 <h2 id="caching"><a class="header" href="#caching">Caching</a></h2>
 <div id="admonition-tip-enabledisable-caching" class="admonition admonish-tip side wide" role="note" aria-labelledby="admonition-tip-enabledisable-caching-title">
 <div class="admonition-title">
@@ -232,11 +232,11 @@ which are also available to <a href="/language/functions.html">functions</a> def
 <p>Use <code>enable_cache</code> to enable/disable the cache.</p>
 </div>
 </div>
-<p>By default, <a href="/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
+<p>By default, <a href="/book/rust/modules/index.html">modules</a> are also <em>cached</em> so a script file is only evaluated <em>once</em>, even when
 repeatedly imported.</p>
 <h2 id="unix-shebangs"><a class="header" href="#unix-shebangs">Unix Shebangs</a></h2>
 <p>On Unix-like systems, the <em>shebang</em> (<code>#!</code>) is used at the very beginning of a script file to mark a
-script with an interpreter (for Rhai this would be <a href="/start/bin.html"><code>rhai-run</code></a>).</p>
+script with an interpreter (for Rhai this would be <a href="/book/start/bin.html"><code>rhai-run</code></a>).</p>
 <p>If a script file starts with <code>#!</code>, the entire first line is skipped.
 Because of this, Rhai scripts with shebangs at the beginning need no special processing.</p>
 <pre><code class="language-js">#!/home/to/me/bin/rhai-run
@@ -279,14 +279,14 @@ m::greet();                     // prints "hello! from module!"
 
 m::greet_main();                // prints "main here!"</code></pre>
 <h2 id="simulate-virtual-functions"><a class="header" href="#simulate-virtual-functions">Simulate Virtual Functions</a></h2>
-<p>When calling a namespace-qualified <a href="/language/functions.html">function</a> defined within a <a href="/rust/modules/index.html">module</a>, other <a href="/language/functions.html">functions</a> defined
-within the same module override any similar-named <a href="/language/functions.html">functions</a> (with the same number of parameters)
-defined in the <a href="/language/fn-namespaces.html">global namespace</a>.</p>
-<p>This is to ensure that a <a href="/rust/modules/index.html">module</a> acts as a self-contained unit and <a href="/language/functions.html">functions</a> defined in the
-calling script do not override <a href="/rust/modules/index.html">module</a> code.</p>
-<p>In some situations, however, it is actually beneficial to do it in reverse: have <a href="/rust/modules/index.html">module</a> <a href="/language/functions.html">functions</a> call
-<a href="/language/functions.html">functions</a> defined in the calling script (i.e. in the <a href="/language/fn-namespaces.html">global namespace</a>) if
-they exist, and only call those defined in the <a href="/rust/modules/index.html">module</a> if none are found.</p>
+<p>When calling a namespace-qualified <a href="/book/language/functions.html">function</a> defined within a <a href="/book/rust/modules/index.html">module</a>, other <a href="/book/language/functions.html">functions</a> defined
+within the same module override any similar-named <a href="/book/language/functions.html">functions</a> (with the same number of parameters)
+defined in the <a href="/book/language/fn-namespaces.html">global namespace</a>.</p>
+<p>This is to ensure that a <a href="/book/rust/modules/index.html">module</a> acts as a self-contained unit and <a href="/book/language/functions.html">functions</a> defined in the
+calling script do not override <a href="/book/rust/modules/index.html">module</a> code.</p>
+<p>In some situations, however, it is actually beneficial to do it in reverse: have <a href="/book/rust/modules/index.html">module</a> <a href="/book/language/functions.html">functions</a> call
+<a href="/book/language/functions.html">functions</a> defined in the calling script (i.e. in the <a href="/book/language/fn-namespaces.html">global namespace</a>) if
+they exist, and only call those defined in the <a href="/book/rust/modules/index.html">module</a> if none are found.</p>
 <p>One such situation is the need to provide a <em>default implementation</em> to a simulated <em>virtual</em> function:</p>
 <pre><code class="language-rust">┌────────────────┐
 │ my_module.rhai │
@@ -360,22 +360,6 @@ m::greet();                         // prints "hello! from module!"</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

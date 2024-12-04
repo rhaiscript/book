@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="for-loop"><a class="header" href="#for-loop">For Loop</a></h1>
-<p>Iterating through a numeric <a href="/language/ranges.html">range</a> or an <a href="/language/arrays.html">array</a>, or any type with a registered <a href="/language/iterator.html">type iterator</a>,
+<p>Iterating through a numeric <a href="/book/language/ranges.html">range</a> or an <a href="/book/language/arrays.html">array</a>, or any type with a registered <a href="/book/language/iterator.html">type iterator</a>,
 is provided by the <code>for</code> … <code>in</code> loop.</p>
 <p>There are two alternative syntaxes, one including a counter variable:</p>
 <blockquote>
@@ -188,7 +188,7 @@ is provided by the <code>for</code> … <code>in</code> loop.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-for-loops"></a>
 </div>
 <div>
-<p><code>for</code> loops can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
+<p><code>for</code> loops can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_looping</code></a>.</p>
 </div>
 </div>
 <h2 id="break-or-continue"><a class="header" href="#break-or-continue">Break or Continue</a></h2>
@@ -197,7 +197,7 @@ is provided by the <code>for</code> … <code>in</code> loop.</p>
 <h2 id="for-expression"><a class="header" href="#for-expression">For Expression</a></h2>
 <p>Unlike Rust, <code>for</code> statements can also be used as <em>expressions</em>.</p>
 <p>The <code>break</code> statement takes an optional expression that provides the return value.</p>
-<p>The default return value of a <code>for</code> expression is <a href="/language/values-and-types.html"><code>()</code></a>.</p>
+<p>The default return value of a <code>for</code> expression is <a href="/book/language/values-and-types.html"><code>()</code></a>.</p>
 <div id="admonition-tip-disable-all-loop-expressions" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-disable-all-loop-expressions-title">
 <div class="admonition-title">
 <div id="admonition-tip-disable-all-loop-expressions-title">
@@ -206,7 +206,7 @@ is provided by the <code>for</code> … <code>in</code> loop.</p>
 <a class="admonition-anchor-link" href="#admonition-tip-disable-all-loop-expressions"></a>
 </div>
 <div>
-<p>Loop expressions can be disabled via <a href="/engine/options.html"><code>Engine::set_allow_loop_expressions</code></a>.</p>
+<p>Loop expressions can be disabled via <a href="/book/engine/options.html"><code>Engine::set_allow_loop_expressions</code></a>.</p>
 </div>
 </div>
 <pre><code class="language-js">let a = [42, 123, 999, 0, true, "hello", "world!", 987.6543];
@@ -275,22 +275,6 @@ for (item, count) in a {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

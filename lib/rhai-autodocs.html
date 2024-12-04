@@ -174,7 +174,7 @@
                     <main>
                         <h1 id="rhai-autodocs-generate-api-documentation"><a class="header" href="#rhai-autodocs-generate-api-documentation"><code>rhai-autodocs</code>: Generate API Documentation</a></h1>
 <p><code>rhai-autodocs</code> helps generate API documentation, in <a href="http://en.wikipedia.org/wiki/Markdown">MarkDown</a> or <a href="https://mdxjs.com/docs/what-is-mdx/">MDX</a> format, for functions
-registered inside an <a href="/engine/hello-world.html"><code>Engine</code></a> instance.</p>
+registered inside an <a href="/book/engine/hello-world.html"><code>Engine</code></a> instance.</p>
 <p>It is typically imported as a build dependency into the build script.</p>
 <p>The <a href="http://en.wikipedia.org/wiki/Markdown">MarkDown</a>/<a href="https://mdxjs.com/docs/what-is-mdx/">MDX</a> files can then be used to create a static documentation site using generators
 such as <a href="https://crates.io/crates/mdbook"><code>mdbook</code></a> or <a href="https://docusaurus.io">Docusaurus</a>.</p>
@@ -236,22 +236,6 @@ rhai-autodocs = "0.4"           # use rhai-autodocs crate
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -182,7 +182,7 @@
 </div>
 <div>
 <p>Rust enum variants are not considered separate types.</p>
-<p>Although Rhai integrates fine with Rust enums (treated transparently as <a href="/rust/custom-types.html">custom types</a>),
+<p>Although Rhai integrates fine with Rust enums (treated transparently as <a href="/book/rust/custom-types.html">custom types</a>),
 it is impossible (short of registering a complete API) to distinguish between individual
 variants and to extract internal data from them.</p>
 </div>
@@ -190,13 +190,13 @@ variants and to extract internal data from them.</p>
 <p>Enums in Rust can hold data and are typically used with <em>pattern matching</em>.</p>
 <p>Unlike Rust, Rhai does not have built-in pattern matching capabilities, so working with enum
 variants that contain embedded data is not an easy proposition.</p>
-<p>Since Rhai is dynamic and <a href="/language/variables.html">variables</a> can hold any type of data, they are essentially enums
+<p>Since Rhai is dynamic and <a href="/book/language/variables.html">variables</a> can hold any type of data, they are essentially enums
 by nature.</p>
-<p>Multiple distinct types can be stored in a single <a href="/language/dynamic.html"><code>Dynamic</code></a> without merging them into an enum
+<p>Multiple distinct types can be stored in a single <a href="/book/language/dynamic.html"><code>Dynamic</code></a> without merging them into an enum
 as variants.</p>
 <p>This section outlines a number of possible solutions to work with Rust enums.</p>
 <h2 id="simulate-an-enum-api"><a class="header" href="#simulate-an-enum-api">Simulate an Enum API</a></h2>
-<p>A <a href="/plugins/module.html">plugin module</a> is extremely handy in creating an entire API for a custom enum type.</p>
+<p>A <a href="/book/plugins/module.html">plugin module</a> is extremely handy in creating an entire API for a custom enum type.</p>
 <pre><code class="language-rust">use rhai::plugin::*;
 use rhai::{Dynamic, Engine, EvalAltResult};
 
@@ -332,7 +332,7 @@ z.field_1 == true;</code></pre>
 </div>
 <div>
 <p>For enums containing only variants with no inner data, it is convenient to use a simple macro to create
-such a <a href="/plugins/module.html">plugin module</a>.</p>
+such a <a href="/book/plugins/module.html">plugin module</a>.</p>
 <pre><code class="language-rust">// The 'create_enum_module!' macro
 macro_rules! create_enum_module {
     ($module:ident : $typ:ty =&gt; $($variant:ident),+) =&gt; {
@@ -355,10 +355,10 @@ expand_enum! { my_enum_module: MyEnum =&gt; Foo, Bar, Baz, Hello, World }</code>
 </div>
 </div>
 <h2 id="use-enums-with-switch"><a class="header" href="#use-enums-with-switch">Use Enums With <code>switch</code></a></h2>
-<p>Since enums are internally treated as <a href="/rust/custom-types.html">custom types</a>, they are not <em>literals</em> and cannot be used as
-a match case in <a href="/language/switch.html"><code>switch</code></a> statements.  This is quite a limitation because the equivalent <code>match</code>
+<p>Since enums are internally treated as <a href="/book/rust/custom-types.html">custom types</a>, they are not <em>literals</em> and cannot be used as
+a match case in <a href="/book/language/switch.html"><code>switch</code></a> statements.  This is quite a limitation because the equivalent <code>match</code>
 statement is commonly used in Rust to work with enums and bind variables to variant-internal data.</p>
-<p>It is possible, however, to <a href="/language/switch.html"><code>switch</code></a> through enum variants based on their types:</p>
+<p>It is possible, however, to <a href="/book/language/switch.html"><code>switch</code></a> through enum variants based on their types:</p>
 <pre><code class="language-c   no_run">switch my_enum.enum_type {
   "Foo" =&gt; ...,
   "Bar" =&gt; {
@@ -373,9 +373,9 @@ statement is commonly used in Rust to work with enums and bind variables to vari
 }
 </code></pre>
 <h2 id="use-switch-through-arrays"><a class="header" href="#use-switch-through-arrays">Use <code>switch</code> Through Arrays</a></h2>
-<p>Another way to work with Rust enums in a <a href="/language/switch.html"><code>switch</code></a> statement is through exposing the internal data
+<p>Another way to work with Rust enums in a <a href="/book/language/switch.html"><code>switch</code></a> statement is through exposing the internal data
 (or at least those that act as effective <em>discriminants</em>) of each enum variant as a variable-length
-<a href="/language/arrays.html">array</a>, usually with the name of the variant as the first item for convenience:</p>
+<a href="/book/language/arrays.html">array</a>, usually with the name of the variant as the first item for convenience:</p>
 <pre><code class="language-rust">use rhai::Array;
 
 engine.register_get("enum_data", |my_enum: &amp;mut MyEnum| {
@@ -392,7 +392,7 @@ engine.register_get("enum_data", |my_enum: &amp;mut MyEnum| {
         ] as Array
     }
 });</code></pre>
-<p>Then it is a simple matter to match an enum via a <a href="/language/switch.html"><code>switch</code></a> expression.</p>
+<p>Then it is a simple matter to match an enum via a <a href="/book/language/switch.html"><code>switch</code></a> expression.</p>
 <pre><code class="language-c   no_run">// Assume 'value' = 'MyEnum::Baz("hello", true)'
 // 'enum_data' creates a variable-length array with 'MyEnum' data
 let x = switch value.enum_data {
@@ -416,10 +416,10 @@ let x = switch [value.type, value.field_0, value.field_1] {
     _ =&gt; 9
 }
 </code></pre>
-<p>Usually, a helper method returns an <a href="/language/arrays.html">array</a> of values that can uniquely determine the <a href="/language/switch.html"><code>switch</code></a> case
+<p>Usually, a helper method returns an <a href="/book/language/arrays.html">array</a> of values that can uniquely determine the <a href="/book/language/switch.html"><code>switch</code></a> case
 based on actual usage requirements – which means that it probably skips fields that contain
 data instead of discriminants.</p>
-<p>Then <a href="/language/switch.html"><code>switch</code></a> is used to very quickly match through a large number of <a href="/language/arrays.html">array</a> shapes and jump to the
+<p>Then <a href="/book/language/switch.html"><code>switch</code></a> is used to very quickly match through a large number of <a href="/book/language/arrays.html">array</a> shapes and jump to the
 appropriate case implementation.</p>
 <p>Data fields can then be extracted from the enum independently.</p>
 
@@ -452,22 +452,6 @@ appropriate case implementation.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

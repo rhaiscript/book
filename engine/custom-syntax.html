@@ -187,7 +187,7 @@ custom-defined <em>syntax</em>.</p>
 <p>Stick with standard language syntax as much as possible.</p>
 <p>Having to learn Rhai is bad enough, no sane user would ever want to learn <em>yet</em> another obscure
 language syntax just to do something.</p>
-<p>Try <a href="/engine/custom-op.html">custom operators</a> first.  A custom syntax should be considered a <em>last resort</em>.</p>
+<p>Try <a href="/book/engine/custom-op.html">custom operators</a> first.  A custom syntax should be considered a <em>last resort</em>.</p>
 </div>
 </div>
 <div id="admonition-where-this-might-be-useful" class="admonition admonish-success small" role="note" aria-labelledby="admonition-where-this-might-be-useful-title">
@@ -223,7 +223,7 @@ understanding of the code’s intent.</p>
 <a class="admonition-anchor-link" href="#admonition-disable-custom-syntax"></a>
 </div>
 <div>
-<p>Custom syntax can be disabled via the <a href="/start/features.html"><code>no_custom_syntax</code></a> feature.</p>
+<p>Custom syntax can be disabled via the <a href="/book/start/features.html"><code>no_custom_syntax</code></a> feature.</p>
 </div>
 </div>
 <h2 id="how-to-do-it"><a class="header" href="#how-to-do-it">How to Do It</a></h2>
@@ -231,26 +231,26 @@ understanding of the code’s intent.</p>
 <p>A custom syntax is simply a list of symbols.</p>
 <p>These symbol types can be used:</p>
 <ul>
-<li>Standard <a href="/appendix/keywords.html">keywords</a></li>
-<li>Standard <a href="/appendix/operators.html#operators">operators</a></li>
-<li>Reserved <a href="/appendix/operators.html#symbols">symbols</a>.</li>
-<li>Identifiers following the <a href="/language/variables.html">variable</a> naming rules.</li>
+<li>Standard <a href="/book/appendix/keywords.html">keywords</a></li>
+<li>Standard <a href="/book/appendix/operators.html#operators">operators</a></li>
+<li>Reserved <a href="/book/appendix/operators.html#symbols">symbols</a>.</li>
+<li>Identifiers following the <a href="/book/language/variables.html">variable</a> naming rules.</li>
 <li><code>$expr$</code> – any valid expression, statement or statements block.</li>
 <li><code>$block$</code> – any valid statements block (i.e. must be enclosed by <code>{</code> … <code>}</code>).</li>
-<li><code>$func$</code> – any valid <a href="/language/fn-closure.html">closure</a>, or any valid statements block as the body of a <a href="/language/fn-closure.html">closure</a> with no parameters (if not <a href="/start/features.html"><code>no_function</code></a>).</li>
-<li><code>$ident$</code> – any <a href="/language/variables.html">variable</a> name.</li>
-<li><code>$symbol$</code> – any <a href="/appendix/operators.html#operators">symbol</a>, active or reserved.</li>
+<li><code>$func$</code> – any valid <a href="/book/language/fn-closure.html">closure</a>, or any valid statements block as the body of a <a href="/book/language/fn-closure.html">closure</a> with no parameters (if not <a href="/book/start/features.html"><code>no_function</code></a>).</li>
+<li><code>$ident$</code> – any <a href="/book/language/variables.html">variable</a> name.</li>
+<li><code>$symbol$</code> – any <a href="/book/appendix/operators.html#operators">symbol</a>, active or reserved.</li>
 <li><code>$bool$</code> – a boolean value.</li>
 <li><code>$int$</code> – an integer number.</li>
-<li><code>$float$</code> – a floating-point number (if not <a href="/start/features.html"><code>no_float</code></a>).</li>
-<li><code>$string$</code> – a <a href="/language/strings-chars.html">string</a> literal.</li>
+<li><code>$float$</code> – a floating-point number (if not <a href="/book/start/features.html"><code>no_float</code></a>).</li>
+<li><code>$string$</code> – a <a href="/book/language/strings-chars.html">string</a> literal.</li>
 </ul>
 <h4 id="the-first-symbol-must-be-an-identifier"><a class="header" href="#the-first-symbol-must-be-an-identifier">The first symbol must be an identifier</a></h4>
 <p>There is no specific limit on the combination and sequencing of each symbol type,
-except the <em>first</em> symbol which must be a custom <a href="/appendix/keywords.html">keyword</a> that follows the naming rules
-of <a href="/language/variables.html">variables</a>.</p>
-<p>The first symbol also cannot be a normal <a href="/appendix/keywords.html">keyword</a> unless it is <a href="/engine/disable-keywords.html">disabled</a>.
-Any valid identifier that is not an active <a href="/appendix/keywords.html">keyword</a> works fine, even if it is a reserved <a href="/appendix/keywords.html">keyword</a>.</p>
+except the <em>first</em> symbol which must be a custom <a href="/book/appendix/keywords.html">keyword</a> that follows the naming rules
+of <a href="/book/language/variables.html">variables</a>.</p>
+<p>The first symbol also cannot be a normal <a href="/book/appendix/keywords.html">keyword</a> unless it is <a href="/book/engine/disable-keywords.html">disabled</a>.
+Any valid identifier that is not an active <a href="/book/appendix/keywords.html">keyword</a> works fine, even if it is a reserved <a href="/book/appendix/keywords.html">keyword</a>.</p>
 <h4 id="the-first-symbol-must-be-unique"><a class="header" href="#the-first-symbol-must-be-unique">The first symbol must be unique</a></h4>
 <p>Rhai uses the <em>first</em> symbol as a clue to parse custom syntax.</p>
 <p>Therefore, at any one time, there can only be <em>one</em> custom syntax starting with each unique symbol.</p>
@@ -261,11 +261,11 @@ Any valid identifier that is not an active <a href="/appendix/keywords.html">key
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Position</th><th style="text-align: center">Input slot</th><th style="text-align: center">Symbol</th><th>Description</th></tr></thead><tbody>
 <tr><td style="text-align: center">1</td><td style="text-align: center"></td><td style="text-align: center"><code>exec</code></td><td>custom keyword</td></tr>
 <tr><td style="text-align: center">2</td><td style="text-align: center"></td><td style="text-align: center"><code>[</code></td><td>the left bracket symbol</td></tr>
-<tr><td style="text-align: center">2</td><td style="text-align: center">0</td><td style="text-align: center"><code>$ident$</code></td><td>a <a href="/language/variables.html">variable</a> name</td></tr>
+<tr><td style="text-align: center">2</td><td style="text-align: center">0</td><td style="text-align: center"><code>$ident$</code></td><td>a <a href="/book/language/variables.html">variable</a> name</td></tr>
 <tr><td style="text-align: center">3</td><td style="text-align: center">1</td><td style="text-align: center"><code>$symbol$</code></td><td>the operator</td></tr>
 <tr><td style="text-align: center">4</td><td style="text-align: center">2</td><td style="text-align: center"><code>$int$</code></td><td>an integer number</td></tr>
 <tr><td style="text-align: center">5</td><td style="text-align: center"></td><td style="text-align: center"><code>]</code></td><td>the right bracket symbol</td></tr>
-<tr><td style="text-align: center">6</td><td style="text-align: center"></td><td style="text-align: center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
+<tr><td style="text-align: center">6</td><td style="text-align: center"></td><td style="text-align: center"><code>&lt;-</code></td><td>the left-arrow symbol (which is a <a href="/book/appendix/operators.html#symbols">reserved symbol</a> in Rhai).</td></tr>
 <tr><td style="text-align: center">7</td><td style="text-align: center">3</td><td style="text-align: center"><code>$expr$</code></td><td>an expression, which may be enclosed with <code>{</code> … <code>}</code>, or not.</td></tr>
 <tr><td style="text-align: center">8</td><td style="text-align: center"></td><td style="text-align: center"><code>:</code></td><td>the colon symbol</td></tr>
 <tr><td style="text-align: center">9</td><td style="text-align: center">4</td><td style="text-align: center"><code>$block$</code></td><td>a statements block, which must be enclosed with <code>{</code> … <code>}</code>.</td></tr>
@@ -290,11 +290,11 @@ print(hello);   // variable declared by a custom syntax persists!</code></pre>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/engine/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>&amp;mut EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
 <tr><td><code>inputs</code></td><td style="text-align: center"><code>&amp;[Expression]</code></td><td>a list of input expression trees</td></tr>
 </tbody></table>
 </div>
-<p>and <a href="/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
+<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
 <h4 id="return-value"><a class="header" href="#return-value">Return value</a></h4>
 <p>Return value is the result of evaluating the custom syntax expression.</p>
 <h4 id="access-arguments"><a class="header" href="#access-arguments">Access arguments</a></h4>
@@ -302,20 +302,20 @@ print(hello);   // variable declared by a custom syntax persists!</code></pre>
 and statements blocks (<code>$block$</code>) are provided.</p>
 <p>To access a particular argument, use the following patterns:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Argument type</th><th>Pattern (<code>n</code> = slot in <code>inputs</code>)</th><th style="text-align: center">Result type</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center"><code>$ident$</code></td><td><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/language/variables.html">variable</a> name</td></tr>
-<tr><td style="text-align: center"><code>$symbol$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td style="text-align: center"><a href="/rust/immutable-string.html"><code>ImmutableString</code></a></td><td>symbol literal</td></tr>
+<tr><td style="text-align: center"><code>$ident$</code></td><td><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/book/language/variables.html">variable</a> name</td></tr>
+<tr><td style="text-align: center"><code>$symbol$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a></td><td>symbol literal</td></tr>
 <tr><td style="text-align: center"><code>$expr$</code></td><td><code>&amp;inputs[n]</code></td><td style="text-align: center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
 <tr><td style="text-align: center"><code>$block$</code></td><td><code>&amp;inputs[n]</code></td><td style="text-align: center"><code>&amp;Expression</code></td><td>an expression tree</td></tr>
-<tr><td style="text-align: center"><code>$func$</code></td><td><code>&amp;inputs[n]</code></td><td style="text-align: center"><code>&amp;Expression</code></td><td>an expression tree (output is a <a href="/language/fn-ptr.html">function pointer</a>)</td></tr>
+<tr><td style="text-align: center"><code>$func$</code></td><td><code>&amp;inputs[n]</code></td><td style="text-align: center"><code>&amp;Expression</code></td><td>an expression tree (output is a <a href="/book/language/fn-ptr.html">function pointer</a>)</td></tr>
 <tr><td style="text-align: center"><code>$bool$</code></td><td><code>inputs[n].get_literal_value::&lt;bool&gt;().unwrap()</code></td><td style="text-align: center"><code>bool</code></td><td>boolean value</td></tr>
 <tr><td style="text-align: center"><code>$int$</code></td><td><code>inputs[n].get_literal_value::&lt;INT&gt;().unwrap()</code></td><td style="text-align: center"><code>INT</code></td><td>integer number</td></tr>
 <tr><td style="text-align: center"><code>$float$</code></td><td><code>inputs[n].get_literal_value::&lt;FLOAT&gt;().unwrap()</code></td><td style="text-align: center"><code>FLOAT</code></td><td>floating-point number</td></tr>
-<tr><td style="text-align: center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code><br/><br/><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><a href="/rust/immutable-string.html"><code>ImmutableString</code></a><br/><br/><code>&amp;str</code></td><td><a href="/language/strings-chars.html">string</a> text</td></tr>
+<tr><td style="text-align: center"><code>$string$</code></td><td><code>inputs[n].get_literal_value::&lt;ImmutableString&gt;().unwrap()</code><br/><br/><code>inputs[n].get_string_value().unwrap()</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>ImmutableString</code></a><br/><br/><code>&amp;str</code></td><td><a href="/book/language/strings-chars.html">string</a> text</td></tr>
 </tbody></table>
 </div>
 <h4 id="get-literal-constants"><a class="header" href="#get-literal-constants">Get literal constants</a></h4>
 <p>Several argument types represent literal constants that can be obtained directly via
-<code>Expression::get_literal_value&lt;T&gt;</code> or <code>Expression::get_string_value</code> (for <a href="/language/strings-chars.html">strings</a>).</p>
+<code>Expression::get_literal_value&lt;T&gt;</code> or <code>Expression::get_string_value</code> (for <a href="/book/language/strings-chars.html">strings</a>).</p>
 <pre><code class="language-rust">let expression = &amp;inputs[0];
 
 // Use 'get_literal_value' with a turbo-fish type to extract the value
@@ -338,9 +338,9 @@ within the current evaluation context.</p>
 let result = context.eval_expression_tree(expression)?;</code></pre>
 <h4 id="retain-variables-in-block-scope"><a class="header" href="#retain-variables-in-block-scope">Retain variables in block scope</a></h4>
 <p>When an expression tree actually contains a statements block (i.e. <code>$block</code>), local
-<a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> defined within that block are usually removed at the end of the block.</p>
-<p>Sometimes it is useful to retain these local <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> for further processing
-(e.g. collecting new <a href="/language/variables.html">variables</a> into an <a href="/language/object-maps.html">object map</a>).</p>
+<a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> defined within that block are usually removed at the end of the block.</p>
+<p>Sometimes it is useful to retain these local <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> for further processing
+(e.g. collecting new <a href="/book/language/variables.html">variables</a> into an <a href="/book/language/object-maps.html">object map</a>).</p>
 <p>As such, evaluate the expression tree using the <code>EvalContext::eval_expression_tree_raw</code> method which
 contains a parameter to control whether the statements block should be rewound.</p>
 <pre><code class="language-rust">// Assume 'expression' contains a statements block with local variable definitions
@@ -349,8 +349,8 @@ let result = context.eval_expression_tree_raw(expression, false)?;
 
 // Variables defined within 'expression' persist in context.scope()</code></pre>
 <h4 id="declare-variables"><a class="header" href="#declare-variables">Declare variables</a></h4>
-<p>New <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> maybe declared (usually with a <a href="/language/variables.html">variable</a> name that is passed in via <code>$ident$</code>).</p>
-<p>It can simply be pushed into the <a href="/engine/scope.html"><code>Scope</code></a>.</p>
+<p>New <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> maybe declared (usually with a <a href="/book/language/variables.html">variable</a> name that is passed in via <code>$ident$</code>).</p>
+<p>It can simply be pushed into the <a href="/book/engine/scope.html"><code>Scope</code></a>.</p>
 <pre><code class="language-rust">let var_name = inputs[0].get_string_value().unwrap();
 let expression = &amp;inputs[1];
 
@@ -426,12 +426,12 @@ exec&lt;x&gt; -&gt; { x += 1 } while x &lt; 0;
 <h3 id="step-four--disable-unneeded-statement-types"><a class="header" href="#step-four--disable-unneeded-statement-types">Step Four – Disable Unneeded Statement Types</a></h3>
 <p>When a DSL needs a custom syntax, most likely than not it is extremely specialized.
 Therefore, many statement types actually may not make sense under the same usage scenario.</p>
-<p>So, while at it, better <a href="/engine/disable-keywords.html">disable</a> those built-in keywords
-and <a href="/appendix/operators.html#operators">operators</a> that should not be used by the user.  The would leave only the bare minimum
+<p>So, while at it, better <a href="/book/engine/disable-keywords.html">disable</a> those built-in keywords
+and <a href="/book/appendix/operators.html#operators">operators</a> that should not be used by the user.  The would leave only the bare minimum
 language surface exposed, together with the custom syntax that is tailor-designed for
 the scenario.</p>
-<p>A <a href="/appendix/keywords.html">keyword</a> or <a href="/appendix/operators.html#operators">operator</a> that is disabled can still be used in a custom syntax.</p>
-<p>In an extreme case, it is possible to disable <em>every</em> <a href="/appendix/keywords.html">keyword</a> in the language, leaving only
+<p>A <a href="/book/appendix/keywords.html">keyword</a> or <a href="/book/appendix/operators.html#operators">operator</a> that is disabled can still be used in a custom syntax.</p>
+<p>In an extreme case, it is possible to disable <em>every</em> <a href="/book/appendix/keywords.html">keyword</a> in the language, leaving only
 custom syntax (plus possibly expressions).  But again, Don’t Do It™ – unless you are certain
 of what you’re doing.</p>
 <h3 id="step-five--document"><a class="header" href="#step-five--document">Step Five – Document</a></h3>
@@ -440,8 +440,8 @@ of what you’re doing.</p>
 <h3 id="step-six--profit"><a class="header" href="#step-six--profit">Step Six – Profit!</a></h3>
 <h2 id="practical-example--matrix-literal"><a class="header" href="#practical-example--matrix-literal">Practical Example – Matrix Literal</a></h2>
 <p>Say you’d want to use something like <a href="https://crates.io/crates/ndarray"><code>ndarray</code></a> to manipulate matrices.</p>
-<p>However, you’d like to write matrix literals in a more intuitive syntax than an <a href="/language/arrays.html">array</a>
-of <a href="/language/arrays.html">arrays</a>.</p>
+<p>However, you’d like to write matrix literals in a more intuitive syntax than an <a href="/book/language/arrays.html">array</a>
+of <a href="/book/language/arrays.html">arrays</a>.</p>
 <p>In other words, you’d like to turn:</p>
 <pre><code class="language-rust">// Array of arrays
 let matrix = [ [  a, b,     0 ],
@@ -489,7 +489,7 @@ engine.register_custom_syntax(
 )?;</code></pre>
 <p>For matrices of flexible dimensions, check out <a href="custom-syntax-parsers.html">custom syntax parsers</a>.</p>
 <h2 id="practical-example--defining-temporary-variables"><a class="header" href="#practical-example--defining-temporary-variables">Practical Example – Defining Temporary Variables</a></h2>
-<p>It is possible to define temporary <a href="/language/variables.html">variables</a>/<a href="/language/constants.html">constants</a> which are available only to code blocks
+<p>It is possible to define temporary <a href="/book/language/variables.html">variables</a>/<a href="/book/language/constants.html">constants</a> which are available only to code blocks
 within the custom syntax.</p>
 <pre><code class="language-rust">engine.register_custom_syntax(
     [ "with", "offset", "(", "$expr$", ",", "$expr$", ")", "$block$", ],
@@ -543,7 +543,7 @@ engine.register_custom_syntax(
 <a class="admonition-anchor-link" href="#admonition-tip-custom-syntax-performance"></a>
 </div>
 <div>
-<p>The code in the example above is essentially what the <a href="/language/if.html"><code>if</code></a> statement does internally, and since
+<p>The code in the example above is essentially what the <a href="/book/language/if.html"><code>if</code></a> statement does internally, and since
 custom syntax is pre-parsed, there really is no performance penalty!</p>
 </div>
 </div>
@@ -598,22 +598,6 @@ engine.register_custom_syntax([ "var", "$ident$", "=", "$expr$" ], true, |contex
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

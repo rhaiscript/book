@@ -173,13 +173,13 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="implement-a-custom-module-resolver"><a class="header" href="#implement-a-custom-module-resolver">Implement a Custom Module Resolver</a></h1>
-<p>For many applications in which Rhai is embedded, it is necessary to customize the way that <a href="/rust/modules/index.html">modules</a>
-are resolved.  For instance, <a href="/rust/modules/index.html">modules</a> may need to be loaded from script texts stored in a database,
+<p>For many applications in which Rhai is embedded, it is necessary to customize the way that <a href="/book/rust/modules/index.html">modules</a>
+are resolved.  For instance, <a href="/book/rust/modules/index.html">modules</a> may need to be loaded from script texts stored in a database,
 not in the file system.</p>
-<p>A module resolver must implement the <a href="/rust/traits.html"><code>ModuleResolver</code></a> trait, which contains only one
+<p>A module resolver must implement the <a href="/book/rust/traits.html"><code>ModuleResolver</code></a> trait, which contains only one
 required function: <code>resolve</code>.</p>
 <p>When Rhai prepares to load a module, <code>ModuleResolver::resolve</code> is called with the name
-of the <em>module path</em> (i.e. the path specified in the <a href="/language/modules/import.html"><code>import</code></a> statement).</p>
+of the <em>module path</em> (i.e. the path specified in the <a href="/book/language/modules/import.html"><code>import</code></a> statement).</p>
 <div id="admonition-success" class="admonition admonish-success" role="note" aria-labelledby="admonition-success-title">
 <div class="admonition-title">
 <div id="admonition-success-title">
@@ -188,8 +188,8 @@ of the <em>module path</em> (i.e. the path specified in the <a href="/language/m
 <a class="admonition-anchor-link" href="#admonition-success"></a>
 </div>
 <div>
-<p>Upon success, it should return a shared <a href="/rust/modules/index.html">module</a> wrapped by <code>Rc</code> (or <code>Arc</code> under <a href="/start/features.html"><code>sync</code></a>).</p>
-<p>The module resolver should call <code>Module::build_index</code> on the target <a href="/rust/modules/index.html">module</a> before returning it.</p>
+<p>Upon success, it should return a shared <a href="/book/rust/modules/index.html">module</a> wrapped by <code>Rc</code> (or <code>Arc</code> under <a href="/book/start/features.html"><code>sync</code></a>).</p>
+<p>The module resolver should call <code>Module::build_index</code> on the target <a href="/book/rust/modules/index.html">module</a> before returning it.</p>
 <ul>
 <li>This method flattens the entire module tree and <em>indexes</em> it for fast function name resolution.</li>
 <li>If the module is already indexed, calling this method has no effect.</li>
@@ -260,12 +260,12 @@ r#"
     foo:bar();
 "#)?;</code></pre>
 <h2 id="advanced--moduleresolverresolve_ast"><a class="header" href="#advanced--moduleresolverresolve_ast">Advanced – <code>ModuleResolver::resolve_ast</code></a></h2>
-<p>There is another function in the <a href="/rust/traits.html"><code>ModuleResolver</code></a> trait, <code>resolve_ast</code>, which is a
+<p>There is another function in the <a href="/book/rust/traits.html"><code>ModuleResolver</code></a> trait, <code>resolve_ast</code>, which is a
 low-level API intended for advanced usage scenarios.</p>
 <p><code>ModuleResolver::resolve_ast</code> has a default implementation that simply returns <code>None</code>,
-which indicates that this API is not supported by the <a href="/rust/modules/resolvers/index.html">module resolver</a>.</p>
-<p>Any <a href="/rust/modules/resolvers/index.html">module resolver</a> that serves <a href="/rust/modules/index.html">modules</a> based on Rhai scripts should implement
-<code>ModuleResolver::resolve_ast</code>. When called, the compiled <a href="/engine/compile.html"><code>AST</code></a> of the script should be returned.</p>
+which indicates that this API is not supported by the <a href="/book/rust/modules/resolvers/index.html">module resolver</a>.</p>
+<p>Any <a href="/book/rust/modules/resolvers/index.html">module resolver</a> that serves <a href="/book/rust/modules/index.html">modules</a> based on Rhai scripts should implement
+<code>ModuleResolver::resolve_ast</code>. When called, the compiled <a href="/book/engine/compile.html"><code>AST</code></a> of the script should be returned.</p>
 <p><code>ModuleResolver::resolve_ast</code> should not return an error if <code>ModuleResolver::resolve</code> will not.
 On the other hand, the same error should be returned if <code>ModuleResolver::resolve</code> will return one.</p>
 
@@ -298,22 +298,6 @@ On the other hand, the same error should be returned if <code>ModuleResolver::re
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

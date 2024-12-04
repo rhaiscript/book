@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="eager-function-evaluation-when-using-full-optimization-level"><a class="header" href="#eager-function-evaluation-when-using-full-optimization-level">Eager Function Evaluation When Using Full Optimization Level</a></h1>
-<p>When the optimization level is <a href="/engine/optimize/index.html"><code>OptimizationLevel::Full</code></a>, the <a href="/engine/hello-world.html"><code>Engine</code></a> assumes all functions to
+<p>When the optimization level is <a href="/book/engine/optimize/index.html"><code>OptimizationLevel::Full</code></a>, the <a href="/book/engine/hello-world.html"><code>Engine</code></a> assumes all functions to
 be <em>pure</em> and will <em>eagerly</em> evaluated all function calls with constant arguments, using the result
 to replace the call.</p>
 <p>This also applies to all operators (which are implemented as functions).</p>
@@ -211,10 +211,10 @@ if launch_nukes &amp;&amp; president_okeyed {
 <p>In the script above (well… as if nuclear silos will one day be controlled by Rhai scripts),
 the functions <code>update_defcon</code>, <code>start_world_war</code> and <code>launch_all_nukes</code> will be evaluated
 during <em>compilation</em> because they have constant arguments.</p>
-<p>The <a href="/language/variables.html">variables</a> <code>launch_nukes</code> and <code>president_okeyed</code> are never checked, because the script
+<p>The <a href="/book/language/variables.html">variables</a> <code>launch_nukes</code> and <code>president_okeyed</code> are never checked, because the script
 actually has not yet been run!  The functions are called during compilation.
 This is, <em>obviously</em>, not what you want.</p>
-<p><strong>Moral of the story: compile with an <a href="/engine/hello-world.html"><code>Engine</code></a> that does not have any functions registered.
+<p><strong>Moral of the story: compile with an <a href="/book/engine/hello-world.html"><code>Engine</code></a> that does not have any functions registered.
 Register functions <em>AFTER</em> compilation.</strong></p>
 </div>
 </div>
@@ -233,7 +233,7 @@ Register functions <em>AFTER</em> compilation.</strong></p>
 In Rust, this would have been handled via a <code>const</code> function.</p>
 </li>
 <li>
-<p>Evaluating a value to a <a href="/rust/custom-types.html">custom type</a> that has no representation in script.</p>
+<p>Evaluating a value to a <a href="/book/rust/custom-types.html">custom type</a> that has no representation in script.</p>
 </li>
 </ul>
 <pre><code class="language-rust">// A complex function that returns a unique ID based on the arguments
@@ -275,22 +275,6 @@ let complex_obj = make_complex_obj(42);</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

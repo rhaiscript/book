@@ -175,12 +175,12 @@
                         <h1 id="traits"><a class="header" href="#traits">Traits</a></h1>
 <p>A number of traits, under the <code>rhai::</code> module namespace, provide additional functionalities.</p>
 <div class="table-wrapper"><table><thead><tr><th>Trait</th><th>Description</th><th>Methods</th></tr></thead><tbody>
-<tr><td><code>CustomType</code></td><td>trait to build a <a href="/rust/custom-types.html">custom type</a> for use with an <a href="/engine/hello-world.html"><code>Engine</code></a></td><td><code>build</code></td></tr>
+<tr><td><code>CustomType</code></td><td>trait to build a <a href="/book/rust/custom-types.html">custom type</a> for use with an <a href="/book/engine/hello-world.html"><code>Engine</code></a></td><td><code>build</code></td></tr>
 <tr><td><code>Func</code></td><td>trait for creating Rust closures from script</td><td><code>create_from_ast</code>, <code>create_from_script</code></td></tr>
 <tr><td><code>FuncArgs</code></td><td>trait for parsing function call arguments</td><td><code>parse</code></td></tr>
-<tr><td><code>ModuleResolver</code></td><td>trait implemented by <a href="/rust/modules/resolvers/index.html">module resolution</a> services</td><td><code>resolve</code>, <code>resolve_ast</code>, <code>resolve_raw</code></td></tr>
-<tr><td><code>packages::Package</code></td><td>trait implemented by <a href="/rust/packages/index.html">packages</a></td><td><code>init</code>, <code>init_engine</code>, <code>register_into_engine</code>, <code>register_into_engine_as</code>, <code>as_shared_module</code></td></tr>
-<tr><td><code>plugin::PluginFunction</code></td><td>trait implemented by <a href="/plugins/index.html">plugin</a> functions</td><td><code>call</code>, <code>is_method_call</code>, <code>has_context</code>, <code>is_pure</code></td></tr>
+<tr><td><code>ModuleResolver</code></td><td>trait implemented by <a href="/book/rust/modules/resolvers/index.html">module resolution</a> services</td><td><code>resolve</code>, <code>resolve_ast</code>, <code>resolve_raw</code></td></tr>
+<tr><td><code>packages::Package</code></td><td>trait implemented by <a href="/book/rust/packages/index.html">packages</a></td><td><code>init</code>, <code>init_engine</code>, <code>register_into_engine</code>, <code>register_into_engine_as</code>, <code>as_shared_module</code></td></tr>
+<tr><td><code>plugin::PluginFunction</code></td><td>trait implemented by <a href="/book/plugins/index.html">plugin</a> functions</td><td><code>call</code>, <code>is_method_call</code>, <code>has_context</code>, <code>is_pure</code></td></tr>
 </tbody></table>
 </div>
                     </main>
@@ -212,22 +212,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

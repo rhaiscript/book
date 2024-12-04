@@ -188,7 +188,7 @@
 <p>By default, all arithmetic calculations in Rhai are <em>checked</em>, meaning that the script terminates
 with a runtime error whenever it detects a numeric over-flow/under-flow condition or an invalid
 floating-point operation.</p>
-<p>This checking can be turned off via the <a href="/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher
+<p>This checking can be turned off via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher
 risks as well).</p>
 <pre><code class="language-rust">let x = 1_000_000_000_000;
 
@@ -202,8 +202,8 @@ x / 0;      // Normal build - runtime error: division by zero
 x / 0;      // 'unchecked' build - panic!</code></pre>
 <h2 id="other-safety-checks"><a class="header" href="#other-safety-checks">Other Safety Checks</a></h2>
 <p>In addition to overflows, there are many other safety checks performed by Rhai at runtime.
-<a href="/start/features.html"><code>unchecked</code></a> turns them <strong>all</strong> off as well, such as…</p>
-<h3 id="infinite-loops"><a class="header" href="#infinite-loops"><a href="/safety/max-operations.html">Infinite loops</a></a></h3>
+<a href="/book/start/features.html"><code>unchecked</code></a> turns them <strong>all</strong> off as well, such as…</p>
+<h3 id="infinite-loops"><a class="header" href="#infinite-loops"><a href="/book/safety/max-operations.html">Infinite loops</a></a></h3>
 <pre><code class="language-rust">// Normal build - runtime error: exceeds maximum number of operations
 loop {
     foo();
@@ -213,7 +213,7 @@ loop {
 loop {
     foo();
 }</code></pre>
-<h3 id="infinite-recursion"><a class="header" href="#infinite-recursion"><a href="/safety/max-call-stack.html">Infinite recursion</a></a></h3>
+<h3 id="infinite-recursion"><a class="header" href="#infinite-recursion"><a href="/book/safety/max-call-stack.html">Infinite recursion</a></a></h3>
 <pre><code class="language-rust">fn foo() {
     foo();
 }
@@ -221,7 +221,7 @@ loop {
 foo();      // Normal build - runtime error: exceeds maximum stack depth
 
 foo();      // 'unchecked' build - panic due to stack overflow!</code></pre>
-<h3 id="gigantic-data-structures"><a class="header" href="#gigantic-data-structures"><a href="/safety/max-array-size.html">Gigantic data structures</a></a></h3>
+<h3 id="gigantic-data-structures"><a class="header" href="#gigantic-data-structures"><a href="/book/safety/max-array-size.html">Gigantic data structures</a></a></h3>
 <pre><code class="language-rust">let x = [];
 
 // Normal build - runtime error: array exceeds maximum size
@@ -275,22 +275,6 @@ for x in range(0, 10, -1) { ... }</code></pre>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

@@ -174,17 +174,17 @@
                     <main>
                         <h1 id="maximum-expression-nesting-depth"><a class="header" href="#maximum-expression-nesting-depth">Maximum Expression Nesting Depth</a></h1>
 <p>Rhai by default limits statement and expression nesting to a maximum depth of 64 (which should be
-plenty) when they are at <em>global</em> level, but only a depth of 32 when they are within <a href="/language/functions.html">function</a> bodies.</p>
+plenty) when they are at <em>global</em> level, but only a depth of 32 when they are within <a href="/book/language/functions.html">function</a> bodies.</p>
 <p>For debug builds, these limits are set further downwards to 32 and 16 respectively.</p>
-<p>That is because it is possible to overflow the <a href="/engine/hello-world.html"><code>Engine</code></a>’s stack when it tries to recursively parse
+<p>That is because it is possible to overflow the <a href="/book/engine/hello-world.html"><code>Engine</code></a>’s stack when it tries to recursively parse
 an extremely deeply-nested code stream.</p>
 <pre><code class="language-rust">// The following, if long enough, can easily cause stack overflow during parsing.
 let a = (1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(...)+1)))))))))));</code></pre>
-<p>This limit may be changed via <a href="/engine/options.html"><code>Engine::set_max_expr_depths</code></a>.</p>
-<p>There are two limits to set, one for the maximum depth at global level, and the other for <a href="/language/functions.html">function</a> bodies.</p>
+<p>This limit may be changed via <a href="/book/engine/options.html"><code>Engine::set_max_expr_depths</code></a>.</p>
+<p>There are two limits to set, one for the maximum depth at global level, and the other for <a href="/book/language/functions.html">function</a> bodies.</p>
 <p>A script exceeding the maximum nesting depths will terminate with a parse error. The malicious
-<a href="/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
-<p>This check can be disabled via the <a href="/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
+<a href="/book/engine/compile.html"><code>AST</code></a> will not be able to get past parsing in the first place.</p>
+<p>This check can be disabled via the <a href="/book/start/features.html"><code>unchecked</code></a> feature for higher performance (but higher risks as well).</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 engine.set_max_expr_depths(50, 5);  // allow nesting up to 50 layers of expressions/statements
@@ -199,7 +199,7 @@ engine.set_max_expr_depths(50, 5);  // allow nesting up to 50 layers of expressi
 <div>
 <p>Multiple layers of expressions may be generated for a simple language construct, even though it may correspond
 to only one AST node.</p>
-<p>That is because the Rhai <em>parser</em> internally runs a recursive chain of <a href="/language/functions.html">function</a> calls and it is important that
+<p>That is because the Rhai <em>parser</em> internally runs a recursive chain of <a href="/book/language/functions.html">function</a> calls and it is important that
 a malicious script does not panic the parser in the first place.</p>
 </div>
 </div>
@@ -211,8 +211,8 @@ a malicious script does not panic the parser in the first place.</p>
 <a class="admonition-anchor-link" href="#admonition-beware-of-recursion"></a>
 </div>
 <div>
-<p><em><a href="/language/functions.html">Functions</a></em> are placed under stricter limits because of the multiplicative effect of <em>recursion</em>.</p>
-<p>A <a href="/language/functions.html">function</a> can effectively call itself while deep inside an expression chain within the <a href="/language/functions.html">function</a>
+<p><em><a href="/book/language/functions.html">Functions</a></em> are placed under stricter limits because of the multiplicative effect of <em>recursion</em>.</p>
+<p>A <a href="/book/language/functions.html">function</a> can effectively call itself while deep inside an expression chain within the <a href="/book/language/functions.html">function</a>
 body, thereby overflowing the stack even when the level of recursion is within limit.</p>
 <pre><code class="language-rust">fn deep_calc(a, n) {
     (a+(a+(a+(a+(a+(a+(a+(a+(a+ ... (a+deep_calc(a,n+1)) ... )))))))))
@@ -222,14 +222,14 @@ body, thereby overflowing the stack even when the level of recursion is within l
 let a = 42;
 
 let result = (a+(a+(a+(a+(a+(a+(a+(a+(a+ ... (a+deep_calc(a,0)) ... )))))))));</code></pre>
-<p>In the contrived example above, each recursive call to the <a href="/language/functions.html">function</a> <code>deep_calc</code> adds the total
+<p>In the contrived example above, each recursive call to the <a href="/book/language/functions.html">function</a> <code>deep_calc</code> adds the total
 number of nested expression layers to Rhai’s evaluation stack.  Sooner or later (most likely sooner
-than the limit for <a href="/safety/max-call-stack.html">maximum depth of function calls</a> is reached), a stack
+than the limit for <a href="/book/safety/max-call-stack.html">maximum depth of function calls</a> is reached), a stack
 overflow can be expected.</p>
 <p>In general, make sure that <code>C x ( 5 + F ) + S</code> layered calls do not cause a stack overflow, where:</p>
 <ul>
 <li><code>C</code> = maximum call stack depth,</li>
-<li><code>F</code> = maximum statement depth for <a href="/language/functions.html">functions</a>,</li>
+<li><code>F</code> = maximum statement depth for <a href="/book/language/functions.html">functions</a>,</li>
 <li><code>S</code> = maximum statement depth at global level.</li>
 </ul>
 </div>
@@ -264,22 +264,6 @@ overflow can be expected.</p>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

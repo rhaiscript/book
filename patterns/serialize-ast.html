@@ -173,7 +173,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="serialize-an-ast"><a class="header" href="#serialize-an-ast">Serialize an AST</a></h1>
-<p>In many situations, it is tempting to <em>serialize</em> an <a href="/engine/compile.html"><code>AST</code></a>, so that it can be loaded and recreated
+<p>In many situations, it is tempting to <em>serialize</em> an <a href="/book/engine/compile.html"><code>AST</code></a>, so that it can be loaded and recreated
 later on.</p>
 <p>In Rhai, there is usually little reason to do so.</p>
 <div id="admonition-dont-do-this" class="admonition admonish-failure small" role="note" aria-labelledby="admonition-dont-do-this-title">
@@ -184,7 +184,7 @@ later on.</p>
 <a class="admonition-anchor-link" href="#admonition-dont-do-this"></a>
 </div>
 <div>
-<p>Serialize the <a href="/engine/compile.html"><code>AST</code></a> into some format for storage.</p>
+<p>Serialize the <a href="/book/engine/compile.html"><code>AST</code></a> into some format for storage.</p>
 </div>
 </div>
 <div id="admonition-do-this" class="admonition admonish-success small" role="note" aria-labelledby="admonition-do-this-title">
@@ -199,17 +199,17 @@ later on.</p>
 </div>
 </div>
 <p>Storing the original script text, preferably compressed (via <code>gzip</code> etc.) usually yields much smaller data size.</p>
-<p>Plus, is it possibly faster to recompile the original script than to recreate the <a href="/engine/compile.html"><code>AST</code></a> via
+<p>Plus, is it possibly faster to recompile the original script than to recreate the <a href="/book/engine/compile.html"><code>AST</code></a> via
 deserialization.</p>
 <p>That is because the deserialization processing is essentially a form of parsing, in this case
-parsing the serialized data into an <a href="/engine/compile.html"><code>AST</code></a> – an equivalent process to what Rhai does, which
-is parsing the script text into the same <a href="/engine/compile.html"><code>AST</code></a>.</p>
+parsing the serialized data into an <a href="/book/engine/compile.html"><code>AST</code></a> – an equivalent process to what Rhai does, which
+is parsing the script text into the same <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
 <h2 id="illustration"><a class="header" href="#illustration">Illustration</a></h2>
 <p>The following script occupies only 42 bytes, possibly less if compressed.
 That is only slightly more than 5 words on a 64-bit CPU!</p>
 <pre><code class="language-rust">fn sum(x, y) { x + y }
 print(sum(42, 1));</code></pre>
-<p>The <a href="/engine/compile.html"><code>AST</code></a> would be <em>much</em> more complicated and looks something like this:</p>
+<p>The <a href="/book/engine/compile.html"><code>AST</code></a> would be <em>much</em> more complicated and looks something like this:</p>
 <pre><code class="language-json">FnDef {
     Name: "sum",
     ThisType: None,
@@ -280,22 +280,6 @@ Block [
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

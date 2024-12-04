@@ -182,11 +182,11 @@
 <a class="admonition-anchor-link" href="#admonition-tip-bit-fields"></a>
 </div>
 <div>
-<p>Integers can also be conveniently manipulated as <a href="/language/bit-fields.html">bit-fields</a>.</p>
+<p>Integers can also be conveniently manipulated as <a href="/book/language/bit-fields.html">bit-fields</a>.</p>
 </div>
 </div>
 <p>Integer numbers follow C-style format with support for decimal, binary (<code>0b</code>), octal (<code>0o</code>) and hex (<code>0x</code>) notations.</p>
-<p>The default system integer type (also aliased to <code>INT</code>) is <code>i64</code>. It can be turned into <code>i32</code> via the <a href="/start/features.html"><code>only_i32</code></a> feature.</p>
+<p>The default system integer type (also aliased to <code>INT</code>) is <code>i64</code>. It can be turned into <code>i32</code> via the <a href="/book/start/features.html"><code>only_i32</code></a> feature.</p>
 <h2 id="floating-point-numbers"><a class="header" href="#floating-point-numbers">Floating-Point Numbers</a></h2>
 <div id="admonition-tip-notations" class="admonition admonish-tip side" role="note" aria-labelledby="admonition-tip-notations-title">
 <div class="admonition-title">
@@ -199,17 +199,17 @@
 <p>Both decimal and scientific notations can be used to represent floating-point numbers.</p>
 </div>
 </div>
-<p>Floating-point numbers are also supported if not disabled with <a href="/start/features.html"><code>no_float</code></a>.</p>
+<p>Floating-point numbers are also supported if not disabled with <a href="/book/start/features.html"><code>no_float</code></a>.</p>
 <p>The default system floating-point type is <code>f64</code> (also aliased to <code>FLOAT</code>).
-It can be turned into <code>f32</code> via the <a href="/start/features.html"><code>f32_float</code></a> feature.</p>
+It can be turned into <code>f32</code> via the <a href="/book/start/features.html"><code>f32_float</code></a> feature.</p>
 <h2 id="decimal-numbers"><a class="header" href="#decimal-numbers"><code>Decimal</code> Numbers</a></h2>
-<p>When rounding errors cannot be accepted, such as in financial calculations, the <a href="/start/features.html"><code>decimal</code></a> feature
+<p>When rounding errors cannot be accepted, such as in financial calculations, the <a href="/book/start/features.html"><code>decimal</code></a> feature
 turns on support for the <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> type, which is a fixed-precision floating-point
 number with no rounding errors.</p>
 <h2 id="number-literals"><a class="header" href="#number-literals">Number Literals</a></h2>
 <p><code>_</code> separators can be added freely and are ignored within a number – except at the very beginning or right after
 a decimal point (<code>.</code>).</p>
-<div class="table-wrapper"><table><thead><tr><th>Sample</th><th>Format</th><th style="text-align: center">Value type</th><th style="text-align: center"><a href="/start/features.html"><code>no_float</code></a></th><th style="text-align: center"><a href="/start/features.html"><code>no_float</code></a> + <a href="/start/features.html"><code>decimal</code></a></th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Sample</th><th>Format</th><th style="text-align: center">Value type</th><th style="text-align: center"><a href="/book/start/features.html"><code>no_float</code></a></th><th style="text-align: center"><a href="/book/start/features.html"><code>no_float</code></a> + <a href="/book/start/features.html"><code>decimal</code></a></th></tr></thead><tbody>
 <tr><td><code>_123</code></td><td><em>improper separator</em></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
 <tr><td><code>123_345</code>, <code>-42</code></td><td>decimal</td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><code>INT</code></td></tr>
 <tr><td><code>0o07_76</code></td><td>octal</td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><code>INT</code></td><td style="text-align: center"><code>INT</code></td></tr>
@@ -238,9 +238,9 @@ call or as a comparison operand.  <code>f32</code> is never implicitly converted
 <a class="admonition-anchor-link" href="#admonition-warning"></a>
 </div>
 <div>
-<p>Integer variables pushed inside a custom <a href="/engine/scope.html"><code>Scope</code></a> must be the correct type.</p>
+<p>Integer variables pushed inside a custom <a href="/book/engine/scope.html"><code>Scope</code></a> must be the correct type.</p>
 <p>It is extremely easy to mess up numeric types since the Rust default integer type is <code>i32</code> while for
-Rhai it is <code>i64</code> (unless under <a href="/start/features.html"><code>only_i32</code></a>).</p>
+Rhai it is <code>i64</code> (unless under <a href="/book/start/features.html"><code>only_i32</code></a>).</p>
 </div>
 </div>
 <pre><code class="language-rust">use rhai::{Engine, Scope, INT};
@@ -281,20 +281,20 @@ engine.eval_with_scope::&lt;bool&gt;(&amp;mut scope, "f == 42.0")?;</code></pre>
 <a class="admonition-anchor-link" href="#admonition-tip-no_float--decimal"></a>
 </div>
 <div>
-<p>When both <a href="/start/features.html"><code>no_float</code></a> and <a href="/start/features.html"><code>decimal</code></a> features are turned on, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> <em>replaces</em>
+<p>When both <a href="/book/start/features.html"><code>no_float</code></a> and <a href="/book/start/features.html"><code>decimal</code></a> features are turned on, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> <em>replaces</em>
 the standard floating-point type.</p>
 <p>Floating-point number literals in scripts parse to <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> values.</p>
 </div>
 </div>
-<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (enabled via the <a href="/start/features.html"><code>decimal</code></a> feature) represents a fixed-precision
+<p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> (enabled via the <a href="/book/start/features.html"><code>decimal</code></a> feature) represents a fixed-precision
 floating-point number which is popular with financial calculations and other usage scenarios where
 round-off errors are not acceptable.</p>
 <p><a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> takes up more space (16 bytes) than a standard <code>FLOAT</code> (4-8 bytes) and is
 much slower in calculations due to the lack of CPU hardware support. Use it only when necessary.</p>
 <p>For most situations, the standard floating-point number type <code>FLOAT</code> (<code>f64</code> or <code>f32</code> with
-<a href="/start/features.html"><code>f32_float</code></a>) is enough and is faster than <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>.</p>
-<p>It is possible to use both <code>FLOAT</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> together with just the <a href="/start/features.html"><code>decimal</code></a> feature
-– use <a href="/language/convert.html"><code>parse_decimal</code></a> or <a href="/language/convert.html"><code>to_decimal</code></a> to create a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> value.</p>
+<a href="/book/start/features.html"><code>f32_float</code></a>) is enough and is faster than <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>.</p>
+<p>It is possible to use both <code>FLOAT</code> and <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> together with just the <a href="/book/start/features.html"><code>decimal</code></a> feature
+– use <a href="/book/language/convert.html"><code>parse_decimal</code></a> or <a href="/book/language/convert.html"><code>to_decimal</code></a> to create a <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> value.</p>
 
                     </main>
 
@@ -325,22 +325,6 @@ much slower in calculations due to the lack of CPU hardware support. Use it only
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
