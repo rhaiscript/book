@@ -283,3 +283,28 @@ let result = f(42)?;
 
 result == "hello42";
 ```
+
+
+Bind to a native Rust Function
+------------------------------
+
+It is also possible to create a function pointer that binds to a native Rust function or a Rust closure.
+
+The signature of the native Rust function takes the following form.
+
+> ```rust
+> Fn(context: NativeCallContext, args: &mut [&mut Dynamic])  
+>    -> Result<Dynamic, Box<EvalAltResult>> + 'static
+> ```
+
+where:
+
+| Parameter |         Type          | Description                                     |
+| --------- | :-------------------: | ----------------------------------------------- |
+| `context` | [`NativeCallContext`] | mutable reference to the current _call context_ |
+| `args`    | `&mut [&mut Dynamic]` | mutable reference to list of arguments          |
+
+When such a function pointer is used in script, the native Rust function will be called
+with the arguments provided.
+
+The Rust function should check whether the appropriate number of arguments have been passed.
