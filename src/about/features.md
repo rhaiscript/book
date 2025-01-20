@@ -27,7 +27,8 @@ Features of Rhai
 ```admonish danger "Fast"
 
 * Fairly efficient evaluation &ndash; 1 million iterations in 0.14 sec on a single-core, 2.6 GHz Linux VM
-  (see [benchmarks](benchmarks.md)).
+  running [this script](https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai)
+  (also see [benchmarks](benchmarks.md)).
 
 * Compile once to [AST][`AST`] for repeated evaluations.
 
