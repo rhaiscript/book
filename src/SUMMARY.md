@@ -253,6 +253,7 @@ Usage Patterns
 - [Multi-Layered Functions](patterns/multi-layer.md)
 - [Hot Reloading](patterns/hot-reload.md)
 - [Builder Pattern / Fluent API](patterns/builder.md)
+- [Objects with Defined Behaviors](patterns/objects.md)
 - [Dynamic Constants Provider](patterns/dynamic-const.md)
 - [Global Constants](patterns/constants.md)
 - [Mutable Global State](patterns/global-mutable-state.md)
