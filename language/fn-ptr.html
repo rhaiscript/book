@@ -415,6 +415,22 @@ let f = move |x: i64| -&gt; Result&lt;String, _&gt; {
 let result = f(42)?;
 
 result == "hello42";</code></pre>
+<h2 id="bind-to-a-native-rust-function"><a class="header" href="#bind-to-a-native-rust-function">Bind to a native Rust Function</a></h2>
+<p>It is also possible to create a function pointer that binds to a native Rust function or a Rust closure.</p>
+<p>The signature of the native Rust function takes the following form.</p>
+<blockquote>
+<pre><code class="language-rust">Fn(context: NativeCallContext, args: &amp;mut [&amp;mut Dynamic])  
+   -&gt; Result&lt;Dynamic, Box&lt;EvalAltResult&gt;&gt; + 'static</code></pre>
+</blockquote>
+<p>where:</p>
+<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/rust/context.html"><code>NativeCallContext</code></a></td><td>mutable reference to the current <em>call context</em></td></tr>
+<tr><td><code>args</code></td><td style="text-align: center"><code>&amp;mut [&amp;mut Dynamic]</code></td><td>mutable reference to list of arguments</td></tr>
+</tbody></table>
+</div>
+<p>When such a function pointer is used in script, the native Rust function will be called
+with the arguments provided.</p>
+<p>The Rust function should check whether the appropriate number of arguments have been passed.</p>
 
                     </main>
 
