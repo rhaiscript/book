@@ -3,7 +3,7 @@ Generate Definition Files for Language Server
 
 {{#include ../../links.md}}
 
-Rhai's [language server][lsp] works with IDE's to provide integrated support for the Rhai scripting language.
+Rhai's [language server][lsp] works with IDEs to provide integrated support for the Rhai scripting language.
 
 Functions and [modules] registered with an [`Engine`] can output their [metadata][functions metadata]
 into _definition files_ which are used by the [language server][lsp].
