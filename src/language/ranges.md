@@ -42,9 +42,9 @@ Ranges are commonly used in the following scenarios.
 | [`switch`] expressions     | `switch n { 0..100 => ... }`            |
 | [Bit-fields] access        | `let x = n[2..6];`                      |
 | Bits iteration             | `for bit in n.bits(2..=9) { ... }`      |
-| [Array] range-based API's  | `array.extract(2..8)`                   |
-| [BLOB] range-based API's   | `blob.parse_le_int(4..8)`               |
-| [String] range-based API's | `string.sub_string(4..=12)`             |
+| [Array] range-based APIs   | `array.extract(2..8)`                   |
+| [BLOB] range-based APIs    | `blob.parse_le_int(4..8)`               |
+| [String] range-based APIs  | `string.sub_string(4..=12)`             |
 | [Characters] iteration     | `for ch in string.bits(4..=12) { ... }` |
 | [Custom types]             | `my_obj.action(3..=15, "foo");`         |
 

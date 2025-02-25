@@ -52,8 +52,8 @@ The `rhai_type` attribute, with options, can be added to the fields of the type 
 | `readonly` |    field    |      _none_       | only auto-generate getter, no setter; cannot be used with `set`.                                                         |
 |   `get`    |    field    |   function path   | use this getter function (with `&self`) instead of the auto-generated getter; if `get_mut` is also set, this is ignored. |
 | `get_mut`  |    field    |   function path   | use this getter function (with `&mut self`) instead of the auto-generated getter.                                        |
-|   `set`    |    field    |   function path   | use this setter function instead of the auto-generated setter; cannot be used with `readonly`.                           |
-|  `extra`   |    type     |   function path   | call this function after building the type to add additional API's                                                       |
+| `set`      |    field    |   function path   | use this setter function instead of the auto-generated setter; cannot be used with `readonly`.                           |
+| `extra`    |    type     |   function path   | call this function after building the type to add additional APIs                                                        |
 
 ### Function signatures
 
@@ -103,7 +103,7 @@ pub struct ABC(
 
 #[derive(Default, Clone)]
 #[derive(CustomType)]                   // <- auto-implement 'CustomType'
-#[rhai_type(name = "MyFoo", extra = Self::build_extra)] // <- call this type 'MyFoo' and use 'build_extra' to add additional API's
+#[rhai_type(name = "MyFoo", extra = Self::build_extra)] // <- call this type 'MyFoo' and use 'build_extra' to add additional APIs
 pub struct Foo {
     #[rhai_type(skip)]                  // <- field not included
     dummy: i64,
@@ -139,7 +139,7 @@ impl Foo {
         };
     }
 
-    /// Additional API's
+    /// Additional APIs
     fn build_extra(builder: &mut TypeBuilder<Self>) {
         // Register constructor function
         builder.with_fn("new_foo", || Self::default());
