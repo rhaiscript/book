@@ -138,7 +138,7 @@ impl Handler {
     pub fn new(path: impl Into<PathBuf>) -> Self {
         let mut engine = Engine::new();
 
-        // Register custom types and API's
+        // Register custom types and APIs
         engine.register_type_with_name::<TestStruct>("TestStruct")
               .register_global_module(exported_module!(test_struct_api).into());
 

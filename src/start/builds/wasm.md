@@ -18,7 +18,7 @@ among other places.
 ```admonish warning "Unavailable features"
 
 When building for WASM, certain features will not be available,
-such as the script file API's and loading [modules] from external script files.
+such as the script file APIs and loading [modules] from external script files.
 ```
 
 ```admonish example "Sample"

@@ -36,9 +36,9 @@ Ranges are commonly used in the following scenarios.
 | [`switch`](switch.md) expressions            | `switch n { 0..100 => ... }`            |
 | [Bit-fields](bit-fields.md) access           | `let x = n[2..6];`                      |
 | Bits iteration                               | `for bit in n.bits(2..=9) { ... }`      |
-| [Array](arrays.md) range-based API's         | `array.extract(2..8)`                   |
-| [BLOB](blobs.md) range-based API's           | `blob.parse_le_int(4..8)`               |
-| [String](strings-chars.md) range-based API's | `string.sub_string(4..=12)`             |
+| [Array](arrays.md) range-based APIs          | `array.extract(2..8)`                   |
+| [BLOB](blobs.md) range-based APIs            | `blob.parse_le_int(4..8)`               |
+| [String](strings-chars.md) range-based APIs  | `string.sub_string(4..=12)`             |
 | [Characters](strings-chars.md) iteration     | `for ch in string.bits(4..=12) { ... }` |
 
 

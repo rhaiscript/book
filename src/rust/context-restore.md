@@ -14,7 +14,7 @@ A reconstructed [`NativeCallContext`] acts almost the same as the original insta
 to suspend the evaluation of a script, and to continue at a later time with a new
 [`NativeCallContext`].
 
-Doing so requires the [`internals`] feature to access internal API's.
+Doing so requires the [`internals`] feature to access internal APIs.
 
 ### Step 1: Store `NativeCallContext` data
 

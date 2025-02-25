@@ -102,7 +102,7 @@ is a central design goal &ndash; Rhai provides a [_Don't
 Panic_](https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don't_Panic)
 guarantee.
 
-When using Rhai, any panic outside of API's with explicitly documented panic conditions is
+When using Rhai, any panic outside of APIs with explicitly documented panic conditions is
 considered a bug in Rhai and should be reported as such.
 
 ```admonish tip.small "OK, panic anyway"

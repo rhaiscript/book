@@ -3,7 +3,7 @@
 
 {{#include ../links.md}}
 
-Many functions in advanced API's contain a parameter of type `EvalContext` in order to allow the
+Many functions in advanced APIs contain a parameter of type `EvalContext` in order to allow the
 current evaluation state to be accessed and/or modified.
 
 `EvalContext` encapsulates the current _evaluation context_ and exposes the following methods.
