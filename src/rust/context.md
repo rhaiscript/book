@@ -13,8 +13,9 @@ and exposes the following.
 | ------------------------- | :----------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `engine()`                |                 [`&Engine`][`Engine`]                  | the current [`Engine`], with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using [`Engine::call_fn`][`call_fn`], or calling a [function pointer]. |
 | `fn_name()`               |                         `&str`                         | name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)                                                                                                                        |
-| `source()`                |                     `Option<&str>`                     | reference to the current source, if any                                                                                                                                                                                                    |
-| `position()`              |                       `Position`                       | position of the function call                                                                                                                                                                                                              |
+| `fn_source()`             |                     `Option<&str>`                     | source of the current function, if any                                                                                                                                                                                                     |
+| `call_source()`           |                     `Option<&str>`                     | source of the caller, if any                                                                                                                                                                                                               |
+| `call_position()`         |                       `Position`                       | position of the function call                                                                                                                                                                                                              |
 | `call_level()`            |                        `usize`                         | the current nesting level of function calls                                                                                                                                                                                                |
 | `tag()`                   |                [`&Dynamic`][`Dynamic`]                 | reference to the _custom state_ that is persistent during the current run                                                                                                                                                                  |
 | `iter_imports()`          | `impl Iterator<Item = (&str,`[`&Module`][`Module`]`)>` | iterator of the current stack of [modules] imported via `import` statements, in reverse order (i.e. later [modules] come first)                                                                                                            |
@@ -56,7 +57,7 @@ pub fn new_array(context: NativeCallContext, size: i64) -> Result<Array, Box<Eva
         return Err(EvalAltResult::ErrorDataTooLarge(
             "Size to grow".to_string(),
             max_size, size,
-            context.position(),
+            context.call_position(),
         ).into());
     }
 
