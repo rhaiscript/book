@@ -28,27 +28,27 @@ number = -5 - +5;
 Binary Operators
 ----------------
 
-|             Operator              | Description                                                      |    Result type     | Integer |     Floating-point     |      Decimal      |
-| :-------------------------------: | ---------------------------------------------------------------- | :----------------: | :-----: | :--------------------: | :---------------: |
-|             `+`, `+=`             | plus                                                             |      numeric       |   yes   |   yes, also integer    | yes, also integer |
-|             `-`, `-=`             | minus                                                            |      numeric       |   yes   |   yes, also integer    | yes, also integer |
-|             `*`, `*=`             | multiply                                                         |      numeric       |   yes   |   yes, also integer    | yes, also integer |
-|             `/`, `/=`             | divide (integer division if acting on integer types)             |      numeric       |   yes   |   yes, also integer    | yes, also integer |
-|             `%`, `%=`             | modulo (remainder)                                               |      numeric       |   yes   |   yes, also integer    | yes, also integer |
-|            `**`, `**=`            | power/exponentiation                                             |      numeric       |   yes   | yes, also `FLOAT**INT` |      **no**       |
-|            `<<`, `<<=`            | left bit-shift (if negative number of bits, shift right instead) |      numeric       |   yes   |         **no**         |      **no**       |
-|            `>>`, `>>=`            | right bit-shift (if negative number of bits, shift left instead) |      numeric       |   yes   |         **no**         |      **no**       |
-|             `&`, `&=`             | bit-wise _And_                                                   |      numeric       |   yes   |         **no**         |      **no**       |
-| <code>\|</code>, <code>\|=</code> | bit-wise _Or_                                                    |      numeric       |   yes   |         **no**         |      **no**       |
-|             `^`, `^=`             | bit-wise _Xor_                                                   |      numeric       |   yes   |         **no**         |      **no**       |
-|               `==`                | equals to                                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|               `!=`                | not equals to                                                    |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|                `>`                | greater than                                                     |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|               `>=`                | greater than or equals to                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|                `<`                | less than                                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|               `<=`                | less than or equals to                                           |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
-|               `..`                | exclusive range                                                  | [range](ranges.md) |   yes   |         **no**         |      **no**       |
-|               `..=`               | inclusive range                                                  | [range](ranges.md) |   yes   |         **no**         |      **no**       |
+|  Operator   | Description                                                      |    Result type     | Integer |     Floating-point     |      Decimal      |
+| :---------: | ---------------------------------------------------------------- | :----------------: | :-----: | :--------------------: | :---------------: |
+|  `+`, `+=`  | plus                                                             |      numeric       |   yes   |   yes, also integer    | yes, also integer |
+|  `-`, `-=`  | minus                                                            |      numeric       |   yes   |   yes, also integer    | yes, also integer |
+|  `*`, `*=`  | multiply                                                         |      numeric       |   yes   |   yes, also integer    | yes, also integer |
+|  `/`, `/=`  | divide (integer division if acting on integer types)             |      numeric       |   yes   |   yes, also integer    | yes, also integer |
+|  `%`, `%=`  | modulo (remainder)                                               |      numeric       |   yes   |   yes, also integer    | yes, also integer |
+| `**`, `**=` | power/exponentiation                                             |      numeric       |   yes   | yes, also `FLOAT**INT` |      **no**       |
+| `<<`, `<<=` | left bit-shift (if negative number of bits, shift right instead) |      numeric       |   yes   |         **no**         |      **no**       |
+| `>>`, `>>=` | right bit-shift (if negative number of bits, shift left instead) |      numeric       |   yes   |         **no**         |      **no**       |
+|  `&`, `&=`  | bit-wise _And_                                                   |      numeric       |   yes   |         **no**         |      **no**       |
+| `\|`, `\|=` | bit-wise _Or_                                                    |      numeric       |   yes   |         **no**         |      **no**       |
+|  `^`, `^=`  | bit-wise _Xor_                                                   |      numeric       |   yes   |         **no**         |      **no**       |
+|    `==`     | equals to                                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
+|    `!=`     | not equals to                                                    |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
+|     `>`     | greater than                                                     |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
+|    `>=`     | greater than or equals to                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
+|     `<`     | less than                                                        |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
+|    `<=`     | less than or equals to                                           |       `bool`       |   yes   |   yes, also integer    | yes, also integer |
+|    `..`     | exclusive range                                                  | [range](ranges.md) |   yes   |         **no**         |      **no**       |
+|    `..=`    | inclusive range                                                  | [range](ranges.md) |   yes   |         **no**         |      **no**       |
 
 
 Examples

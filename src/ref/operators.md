@@ -108,13 +108,13 @@ Boolean Operators
 All boolean operators are [built in](../engine/builtin.md) for the `bool` data type.
 ```
 
-|     Operator      | Description | Arity  | Short-circuits? |
-| :---------------: | :---------: | :----: | :-------------: |
-|  `!` _(prefix)_   |    _NOT_    | unary  |       no        |
-|       `&&`        |    _AND_    | binary |     **yes**     |
-|        `&`        |    _AND_    | binary |       no        |
-| <code>\|\|</code> |    _OR_     | binary |     **yes**     |
-|  <code>\|</code>  |    _OR_     | binary |       no        |
+|    Operator    | Description | Arity  | Short-circuits? |
+| :------------: | :---------: | :----: | :-------------: |
+| `!` _(prefix)_ |    _NOT_    | unary  |       no        |
+|      `&&`      |    _AND_    | binary |     **yes**     |
+|      `&`       |    _AND_    | binary |       no        |
+|     `\|\|`     |    _OR_     | binary |     **yes**     |
+|      `\|`      |    _OR_     | binary |       no        |
 
 Double boolean operators `&&` and `||` _short-circuit_ &ndash; meaning that the second operand will not be evaluated
 if the first one already proves the condition wrong.
