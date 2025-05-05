@@ -48,7 +48,7 @@ For a relatively simple API that is action-based and not object-based, use the
 [Control Layer]({{rootUrl}}/patterns/control.md) pattern instead.
 
 
-### Functional API
+### Control API
 
 Assume the following command object type:
 

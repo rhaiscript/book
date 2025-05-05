@@ -52,9 +52,9 @@ For a complex API involving lots of functions, or an API that has a clear object
 [Singleton Command Object]({{rootUrl}}/patterns/singleton.md) pattern instead.
 
 
-### Functional API
+### Control API
 
-Assume that a system provides the following functional API:
+Assume that a system provides the following API:
 
 ```rust
 struct EnergizerBunny;
