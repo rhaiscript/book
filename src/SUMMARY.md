@@ -110,6 +110,7 @@ Scripting Language
     - [Serialization/Deserialization with `serde`](rust/serde.md)
   - [Numbers](language/numbers.md)
     - [Operators](language/num-op.md)
+      - [Floating-point Comparison](language/float-comp.md)
     - [Standard Functions](language/num-fn.md)
     - [Value Conversions](language/convert.md)
     - [Ranges](language/ranges.md)
