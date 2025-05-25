@@ -98,7 +98,7 @@ See also: [Control Layer]({{rootUrl}}/patterns/control.md).
 #[derive(Clone)]
 struct TestStruct { ... }
 
-impl TestSTruct {
+impl TestStruct {
     /// Some action defined on that type.
     pub fn do_foo(&self, x: i64, y: bool) {
         // ... do something drastic with x and y
