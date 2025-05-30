@@ -46,7 +46,7 @@ With `max_diff = max(|x|, |y|) × epsilon`, Rhai compares floating-point numbers
 | operator |   operands    | algorithm                   |
 | :------: | :-----------: | --------------------------- |
 | `x == y` |   has zero    | `\|x - y\|` < _epsilon_     |
-| `x == y` | both non-zero | `\|x - y\|` <               |
+| `x == y` | both non-zero | `\|x - y\|` < _epsilon_     |
 | `x != y` |   has zero    | `\|x - y\|` ≥ _epsilon_     |
 | `x != y` | both non-zero | `\|x - y\|` ≥ `max_diff`    |
 | `x > y`  |   has zero    | `x - y` ≥ _epsilon_         |
@@ -66,6 +66,11 @@ For most scripts that casually compare floating-point numbers, the default behav
 cover all bases:
 
 ```rust
+let x = 0.3;            // 0.3
+let y = 0.1 + 0.2;      // 0.3?
+
+x == y == true;         // 0.1 + 0.2 = 0.3. Just Works!
+
 let x = 1e-16;          // 0.0000000000000001
 x > 0 == false;         // comparing with zero Just Works when value is very small
 x == 0 == true;
