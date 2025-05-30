@@ -216,7 +216,7 @@ engine.build_type::&lt;Vec3&gt;()
 <tr><td style="text-align: center"><code>get</code></td><td style="text-align: center">field</td><td style="text-align: center">function path</td><td>use this getter function (with <code>&amp;self</code>) instead of the auto-generated getter; if <code>get_mut</code> is also set, this is ignored.</td></tr>
 <tr><td style="text-align: center"><code>get_mut</code></td><td style="text-align: center">field</td><td style="text-align: center">function path</td><td>use this getter function (with <code>&amp;mut self</code>) instead of the auto-generated getter.</td></tr>
 <tr><td style="text-align: center"><code>set</code></td><td style="text-align: center">field</td><td style="text-align: center">function path</td><td>use this setter function instead of the auto-generated setter; cannot be used with <code>readonly</code>.</td></tr>
-<tr><td style="text-align: center"><code>extra</code></td><td style="text-align: center">type</td><td style="text-align: center">function path</td><td>call this function after building the type to add additional API’s</td></tr>
+<tr><td style="text-align: center"><code>extra</code></td><td style="text-align: center">type</td><td style="text-align: center">function path</td><td>call this function after building the type to add additional APIs</td></tr>
 </tbody></table>
 </div>
 <h3 id="function-signatures"><a class="header" href="#function-signatures">Function signatures</a></h3>
@@ -256,7 +256,7 @@ pub struct ABC(
 
 #[derive(Default, Clone)]
 #[derive(CustomType)]                   // &lt;- auto-implement 'CustomType'
-#[rhai_type(name = "MyFoo", extra = Self::build_extra)] // &lt;- call this type 'MyFoo' and use 'build_extra' to add additional API's
+#[rhai_type(name = "MyFoo", extra = Self::build_extra)] // &lt;- call this type 'MyFoo' and use 'build_extra' to add additional APIs
 pub struct Foo {
     #[rhai_type(skip)]                  // &lt;- field not included
     dummy: i64,
@@ -292,7 +292,7 @@ impl Foo {
         };
     }
 
-    /// Additional API's
+    /// Additional APIs
     fn build_extra(builder: &amp;mut TypeBuilder&lt;Self&gt;) {
         // Register constructor function
         builder.with_fn("new_foo", || Self::default());

@@ -177,6 +177,7 @@
 <h2 id="main-dependencies"><a class="header" href="#main-dependencies">Main Dependencies</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Crate</th><th>Description</th><th>Why use it?</th></tr></thead><tbody>
 <tr><td><a href="https://crates.io/crates/smallvec"><code>smallvec</code></a></td><td><code>Vec</code> variant that stores a number of items inline</td><td>most functions have very few parameters, and avoiding allocations result in significant performance improvement</td></tr>
+<tr><td><a href="https://crates.io/crates/thin-vec"><code>thin-vec</code></a></td><td><code>Vec</code> variant that takes up only the size of a single pointer</td><td>make key <code>enum</code> types with variants that contain <code>Vec</code>’s smaller</td></tr>
 <tr><td><a href="https://crates.io/crates/num-traits"><code>num-traits</code></a></td><td>numeric traits</td><td>for use with macros defining arithmetic functions and operators</td></tr>
 <tr><td><a href="https://crates.io/crates/ahash"><code>ahash</code></a></td><td>fast hashing for data</td><td>not cryptographically secure, thus faster than standard Rust hashing; Rhai does a <em>lot</em> of hashing so this matters</td></tr>
 <tr><td><a href="https://crates.io/crates/once_cell"><code>once_cell</code></a></td><td>global static data</td><td>fixed hashing keys for <a href="/book/patterns/static-hash.html">static hashing</a></td></tr>

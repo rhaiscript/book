@@ -178,7 +178,7 @@ outwards until it reaches the top (global) level, then it searches the <a href="
 the <code>Engine::eval</code> call.</p>
 <p>There is a built-in facility for advanced users to <em>hook</em> into the <a href="/book/language/variables.html">variable</a> resolution service and
 to override its default behavior.</p>
-<p>To do so, provide a closure to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.21.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
+<p>To do so, provide a closure to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.22.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 // Register a variable resolver.
@@ -249,7 +249,7 @@ using a variable resolver.</p>
 </div>
 </div>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.21.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.22.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(name: &amp;str, index: usize, context: EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>

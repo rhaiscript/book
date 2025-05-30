@@ -180,12 +180,13 @@ and exposes the following.</p>
 <div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>engine()</code></td><td style="text-align: center"><a href="/book/engine/hello-world.html"><code>&amp;Engine</code></a></td><td>the current <a href="/book/engine/hello-world.html"><code>Engine</code></a>, with all configurations and settings.<br/>This is sometimes useful for calling a script-defined function within the same evaluation context using <a href="/book/engine/call-fn.html"><code>Engine::call_fn</code></a>, or calling a <a href="/book/language/fn-ptr.html">function pointer</a>.</td></tr>
 <tr><td><code>fn_name()</code></td><td style="text-align: center"><code>&amp;str</code></td><td>name of the function called (useful when the same Rust function is mapped to multiple Rhai-callable function names)</td></tr>
-<tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
-<tr><td><code>position()</code></td><td style="text-align: center"><code>Position</code></td><td>position of the function call</td></tr>
+<tr><td><code>fn_source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>source of the current function, if any</td></tr>
+<tr><td><code>call_source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>source of the caller, if any</td></tr>
+<tr><td><code>call_position()</code></td><td style="text-align: center"><code>Position</code></td><td>position of the function call</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
 <tr><td><code>tag()</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the <em>custom state</em> that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later <a href="/book/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.21.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.21.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.22.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.22.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="/book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="/book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="/book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>; requires the <a href="/book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn(...)</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
@@ -225,7 +226,7 @@ pub fn new_array(context: NativeCallContext, size: i64) -&gt; Result&lt;Array, B
         return Err(EvalAltResult::ErrorDataTooLarge(
             "Size to grow".to_string(),
             max_size, size,
-            context.position(),
+            context.call_position(),
         ).into());
     }
 

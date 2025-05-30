@@ -329,7 +329,7 @@ inside the <a href="/book/language/functions.html">function</a> will not be remo
     pub fn new(path: impl Into&lt;PathBuf&gt;) -&gt; Self {
         let mut engine = Engine::new();
 
-        // Register custom types and API's
+        // Register custom types and APIs
         engine.register_type_with_name::&lt;TestStruct&gt;("TestStruct")
               .register_global_module(exported_module!(test_struct_api).into());
 

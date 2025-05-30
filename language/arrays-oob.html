@@ -190,7 +190,7 @@ registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></
 <p>Using this callback, for instance, it is simple to instruct Rhai to extend the <a href="/book/language/arrays.html">array</a> to
 accommodate this new element, or to return a default value instead of raising an error.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.21.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.22.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(array: &amp;mut Array, index: i64, context: EvalContext) -&gt; Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>

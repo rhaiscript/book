@@ -193,7 +193,7 @@ impl TestStruct {
 
 let mut engine = Engine::new();
 
-// Most Engine API's can be chained up.
+// Most Engine APIs can be chained up.
 engine.register_type_with_name::&lt;TestStruct&gt;("TestStruct")
       .register_fn("new_ts", TestStruct::new)
       .register_fn("update", TestStruct::update);

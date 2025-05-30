@@ -180,7 +180,7 @@ use, when a new <a href="/book/rust/context.html"><code>NativeCallContext</code>
 <p>A reconstructed <a href="/book/rust/context.html"><code>NativeCallContext</code></a> acts almost the same as the original instance, so it is possible
 to suspend the evaluation of a script, and to continue at a later time with a new
 <a href="/book/rust/context.html"><code>NativeCallContext</code></a>.</p>
-<p>Doing so requires the <a href="/book/start/features.html"><code>internals</code></a> feature to access internal API’s.</p>
+<p>Doing so requires the <a href="/book/start/features.html"><code>internals</code></a> feature to access internal APIs.</p>
 <h3 id="step-1-store-nativecallcontext-data"><a class="header" href="#step-1-store-nativecallcontext-data">Step 1: Store <code>NativeCallContext</code> data</a></h3>
 <pre><code class="language-rust">// Store context for later use
 let context_data = context.store_data();
