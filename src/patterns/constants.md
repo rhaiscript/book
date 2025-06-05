@@ -92,9 +92,9 @@ to extract top-level [constants] from the [`AST`].
 let mut scope = Scope::new();
 
 // Extract all top-level constants without running the script
-ast.iter_literal_variables(true, false).for_each(|(name, _, value)|
+ast.iter_literal_variables(true, false).for_each(|(name, _, value)| {
     scope.push_constant(name, value);
-);
+});
 
 // 'scope' now contains: FOO, BAR, MAGIC_NUMBER
 ```
