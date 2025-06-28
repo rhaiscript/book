@@ -82,3 +82,38 @@ let result = engine.eval_expression_with_scope::<i64>(&mut scope, "
              ")?;
 ```
 ~~~
+
+
+Evaluate a Binary Operation
+---------------------------
+
+Sometimes it is desirable to evaluate a binary operation directly, without the need to create a script.
+This is especially useful when comparing two [`Dynamic`] values.
+
+Use `Engine::eval_binary_op` to evaluate a binary operation directly.
+
+```rust
+let x = 123;         // Integer value
+let y = 123.0;       // Floating-point value
+
+// Run the '==' operator to compare the two values.
+// Rhai returns 'true' because they are the same, though of different types.
+let result = engine.eval_binary_op("==", x, y)?;
+//                                 ^^^^
+//                                 Operator to evaluate
+
+// Rhai has built-in array comparison as well as for all supported types.
+let x = [1, 2, true, "hello"];
+let y = [1, 2, true, "hello"];
+
+let result = engine.eval_binary_op("==", x, y)?;
+```
+
+~~~admonish tip.small "Tip: Rhai built-in comparisons"
+
+Rhai automatically handles comparisons between different [`Dynamic`] value types that
+are expected by causal script users, e.g. floating-point vs integer,
+`"A"` (a [string]) vs `'A'` (a [character]) etc.
+
+See [here]({{rootUrl}}/language/logic.md) for more details.
+~~~
