@@ -52,8 +52,8 @@ The `rhai_type` attribute, with options, can be added to the fields of the type 
 | `readonly` |    field    |      _none_       | only auto-generate getter, no setter; cannot be used with `set`.                                                         |
 |   `get`    |    field    |   function path   | use this getter function (with `&self`) instead of the auto-generated getter; if `get_mut` is also set, this is ignored. |
 | `get_mut`  |    field    |   function path   | use this getter function (with `&mut self`) instead of the auto-generated getter.                                        |
-| `set`      |    field    |   function path   | use this setter function instead of the auto-generated setter; cannot be used with `readonly`.                           |
-| `extra`    |    type     |   function path   | call this function after building the type to add additional APIs                                                        |
+|   `set`    |    field    |   function path   | use this setter function instead of the auto-generated setter; cannot be used with `readonly`.                           |
+|  `extra`   |    type     |   function path   | call this function after building the type to add additional APIs                                                        |
 
 ### Function signatures
 
@@ -84,7 +84,8 @@ The signature of the function for `extra` is:
 ### Example
 
 ```rust
-use rhai::{CustomType, TypeBuilder};    // <- necessary imports
+// Necessary imports
+use rhai::{CustomType, TypeBuilder, EvalAltResult, Dynamic, Position};
 
 #[derive(Debug, Clone)]
 #[derive(CustomType)]                   // <- auto-implement 'CustomType'
@@ -118,7 +119,9 @@ pub struct Foo {
     qux: char,                          // <- auto setter for 'qux'
 
     #[rhai_type(set = Self::set_hello)] // <- call custom setter for 'hello'
-    hello: String                       // <- auto getter for 'hello'
+    hello: String,                      // <- auto getter for 'hello'
+
+    maybe: Option<String>               // <- automatically handle 'Option' type
 }
 
 impl Foo {
@@ -208,6 +211,24 @@ impl CustomType for Foo {
         builder.with_get_set("hello",
             |obj: &mut Self| obj.hello.clone(),
             Self::set_hello
+        );
+        builder.with_get_set("maybe",
+            |obj: &mut Self| obj.maybe.clone().map_or(Dynamic::UNIT, Dynamic::from),
+            |obj: &mut Self, val: Dynamic| {
+                if val.is_unit() {
+                    obj.maybe = None;
+                    Ok(())
+                } else if let Some(x) = val.read_lock::<String>() {
+                    obj.maybe = Some(x.clone());
+                    Ok(())
+                } else {
+                    Err(Box::new(EngineError::TypeMismatch(
+                        "String".to_string(),
+                        val.type_name().to_string(),
+                        Position::NONE
+                    )))
+                }
+            }
         );
         Self::build_extra(&mut builder);
     }
