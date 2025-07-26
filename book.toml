@@ -1,6 +1,6 @@
 [book]
 title = "Rhai - Embedded Scripting for Rust"
-authors = ["Jonathan Turner", "Stephen Chung"]
+authors = ["Sophia Turner", "Stephen Chung"]
 description = "Tutorial and reference on the Rhai scripting engine and language."
 language = "en"
 

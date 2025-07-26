@@ -21,7 +21,7 @@ a popular kind of [spicy milk tea consumed in India](https://en.wikipedia.org/wi
 Later, when the novel implementation technique behind ChaiScript was ported from C++ to Rust,
 logically the `C` was changed to an `R` to make it "RhaiScript", or just "Rhai".
 
-&ndash; Rhai author [Johnathan Turner](https://github.com/jntrnr)
+&ndash; Rhai author [Sophia Turner](https://github.com/sophiajt)
 ```
 
 ```admonish question "Origin of the Rhai logo"
