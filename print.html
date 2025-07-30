@@ -38,27 +38,42 @@
         <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="theme/rhai.min.css">
 
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
     </head>
     <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
     <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -72,7 +87,8 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             const html = document.documentElement;
@@ -85,22 +101,25 @@
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <!-- populated by js -->
-            <div class="sidebar-scrollbox"></div>
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
                 <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
             </noscript>
@@ -108,8 +127,6 @@
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
-
-        <script async src="toc.js"></script>
 
         <div id="page-wrapper" class="page-wrapper">
 
@@ -124,13 +141,14 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -150,7 +168,12 @@
 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -195,7 +218,7 @@ which is the word for “tea” in many world languages and, in particular,
 a popular kind of <a href="https://en.wikipedia.org/wiki/Masala_chai">spicy milk tea consumed in India</a>.</p>
 <p>Later, when the novel implementation technique behind ChaiScript was ported from C++ to Rust,
 logically the <code>C</code> was changed to an <code>R</code> to make it “RhaiScript”, or just “Rhai”.</p>
-<p>– Rhai author <a href="https://github.com/jntrnr">Johnathan Turner</a></p>
+<p>– Rhai author <a href="https://github.com/sophiajt">Sophia Turner</a></p>
 </div>
 </div>
 <div id="admonition-origin-of-the-rhai-logo" class="admonition admonish-question" role="note" aria-labelledby="admonition-origin-of-the-rhai-logo-title">
@@ -7784,8 +7807,8 @@ let engine = Engine::new();
 
 let result: Dynamic = engine.eval(
 r#"
-<span class="boring">    {
-</span>        a: 42,
+    #{
+        a: 42,
         b: [ "hello", "world" ],
         c: true,
         d: #{ x: 123.456, y: 999.0 }
@@ -8072,7 +8095,7 @@ console.log(y);         // 0.30000000000000004
 <p>With <code>max_diff = max(|x|, |y|) × epsilon</code>, Rhai compares floating-point numbers based on the following:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">operator</th><th style="text-align: center">operands</th><th>algorithm</th></tr></thead><tbody>
 <tr><td style="text-align: center"><code>x == y</code></td><td style="text-align: center">has zero</td><td><code>|x - y|</code> &lt; <em>epsilon</em></td></tr>
-<tr><td style="text-align: center"><code>x == y</code></td><td style="text-align: center">both non-zero</td><td><code>|x - y|</code> &lt;</td></tr>
+<tr><td style="text-align: center"><code>x == y</code></td><td style="text-align: center">both non-zero</td><td><code>|x - y|</code> &lt; <em>epsilon</em></td></tr>
 <tr><td style="text-align: center"><code>x != y</code></td><td style="text-align: center">has zero</td><td><code>|x - y|</code> ≥ <em>epsilon</em></td></tr>
 <tr><td style="text-align: center"><code>x != y</code></td><td style="text-align: center">both non-zero</td><td><code>|x - y|</code> ≥ <code>max_diff</code></td></tr>
 <tr><td style="text-align: center"><code>x &gt; y</code></td><td style="text-align: center">has zero</td><td><code>x - y</code> ≥ <em>epsilon</em></td></tr>
@@ -8088,7 +8111,12 @@ console.log(y);         // 0.30000000000000004
 <h2 id="casual-scripting-usage"><a class="header" href="#casual-scripting-usage">Casual Scripting Usage</a></h2>
 <p>For most scripts that casually compare floating-point numbers, the default behavior is sufficient to
 cover all bases:</p>
-<pre><code class="language-rust">let x = 1e-16;          // 0.0000000000000001
+<pre><code class="language-rust">let x = 0.3;            // 0.3
+let y = 0.1 + 0.2;      // 0.3?
+
+x == y == true;         // 0.1 + 0.2 = 0.3. Just Works!
+
+let x = 1e-16;          // 0.0000000000000001
 x &gt; 0 == false;         // comparing with zero Just Works when value is very small
 x == 0 == true;
 
@@ -9819,8 +9847,8 @@ let foo = #{ a:1, b:2, c:3 }.a;
 foo == 1;
 
 fn abc() {
-<span class="boring">    { a:1, b:2, c:3 }  // a function returning an object map
-</span>}
+    #{ a:1, b:2, c:3 }  // a function returning an object map
+}
 
 let foo = abc().b;
 foo == 2;
@@ -19677,9 +19705,9 @@ to extract top-level <a href="patterns//book/language/constants.html">constants<
 <pre><code class="language-rust">let mut scope = Scope::new();
 
 // Extract all top-level constants without running the script
-ast.iter_literal_variables(true, false).for_each(|(name, _, value)|
+ast.iter_literal_variables(true, false).for_each(|(name, _, value)| {
     scope.push_constant(name, value);
-);
+});
 
 // 'scope' now contains: FOO, BAR, MAGIC_NUMBER</code></pre>
 <h2 id="step-3a--propagate-constants"><a class="header" href="#step-3a--propagate-constants">Step 3a – Propagate Constants</a></h2>
@@ -23073,8 +23101,8 @@ let foo = #{ a:1, b:2, c:3 }.a;
 foo == 1;
 
 fn abc() {
-<span class="boring">    { a:1, b:2, c:3 }  // a function returning an object map
-</span>}
+    #{ a:1, b:2, c:3 }  // a function returning an object map
+}
 
 let foo = abc().b;
 foo == 2;
@@ -26147,6 +26175,7 @@ rhai-autodocs = "0.4"           # use rhai-autodocs crate
             window.setTimeout(window.print, 100);
         });
         </script>
+
 
     </div>
     </body>
