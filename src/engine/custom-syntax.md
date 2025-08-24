@@ -51,9 +51,11 @@ These symbol types can be used:
 * Identifiers following the [variable] naming rules.
 * `$expr$` &ndash; any valid expression, statement or statements block.
 * `$block$` &ndash; any valid statements block (i.e. must be enclosed by `{` ... `}`).
+* `$inner$` &ndash; any valid statements block _after_ the starting `{` but must be terminated by `}`.
 * `$func$` &ndash; any valid [closure], or any valid statements block as the body of a [closure] with no parameters (if not [`no_function`]).
 * `$ident$` &ndash; any [variable] name.
 * `$symbol$` &ndash; any [symbol][operator], active or reserved.
+* `$token$` &ndash; any valid token.
 * `$bool$` &ndash; a boolean value.
 * `$int$` &ndash; an integer number.
 * `$float$` &ndash; a floating-point number (if not [`no_float`]).

@@ -231,6 +231,7 @@ Advanced Topics
     - [Operator Precedence](engine/precedence.md)
   - [Extend with Custom Syntax](engine/custom-syntax.md)
     - [Custom Syntax Parsers](engine/custom-syntax-parsers.md)
+    - [Parsing Arbitrary Text](engine/custom-syntax-arbitrary-text.md)
 - [Debugging Interface](engine/debugging/index.md)
   - [Debugger](engine/debugging/debugger.md)
     - [State](engine/debugging/state.md)

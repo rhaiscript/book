@@ -55,11 +55,11 @@ The [custom syntax] parser has the following signature.
 
 where:
 
-| Parameter    |                   Type                    | Description                                                                                                                                                         |
-| ------------ | :---------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `symbols`    | [`&[ImmutableString]`][`ImmutableString`] | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$`; `$ident$` and other literal markers are replaced by the actual text |
-| `look_ahead` |                  `&str`                   | a string slice containing the next symbol that is about to be read                                                                                                  |
-| `state`      |        [`&mut Dynamic`][`Dynamic`]        | mutable reference to a user-defined _state_                                                                                                                         |
+| Parameter    |                   Type                    | Description                                                                                                                                                              |
+| ------------ | :---------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `symbols`    | [`&[ImmutableString]`][`ImmutableString`] | a slice of symbols that have been parsed so far, possibly containing `$expr$` and/or `$block$` etc.; `$ident$` and other literal markers are replaced by the actual text |
+| `look_ahead` |                  `&str`                   | a string slice containing the next symbol that is about to be read                                                                                                       |
+| `state`      |        [`&mut Dynamic`][`Dynamic`]        | mutable reference to a user-defined _state_                                                                                                                              |
 
 Most strings are [`ImmutableString`]'s so it is usually more efficient to just `clone` the appropriate one
 (if any matches, or keep an internal cache for commonly-used symbols) as the return value.
@@ -77,6 +77,8 @@ The custom parser can inspect this symbols stream to determine the next symbol t
 |  `$symbol$`   | symbol literal    |
 |   `$expr$`    | `$expr$`          |
 |   `$block$`   | `$block$`         |
+|   `$inner$`   | `$inner$`         |
+|   `$token$`   | token text        |
 |   `$func$`    | `$func$`          |
 |   `$bool$`    | `true` or `false` |
 |    `$int$`    | value of number   |
