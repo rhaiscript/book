@@ -117,3 +117,22 @@ are expected by causal script users, e.g. floating-point vs integer,
 
 See [here]({{rootUrl}}/language/logic.md) for more details.
 ~~~
+
+
+Evaluate an Arbitrary Function Call
+-----------------------------------
+
+Sometimes it is desirable to evaluate a function call directly, without the need to create a script.
+
+Use `Engine::eval_fn_call` to evaluate an arbitrary function call. It does not matter whether the
+function is a Rhai-scripted [function], a registered Rust function, a built-in function, or a
+function in one of the loaded [modules].
+
+
+```rust
+let result = engine.eval_fn_call("foo", None, (123, true))?;
+//                                            ^^^^^^^^^^^
+//                                            Arguments
+//                                      ^^^^
+//                                      'this' pointer, if any
+```
