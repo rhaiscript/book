@@ -173,12 +173,13 @@ let result = engine.call_fn_with_options::<i64>(
 
 `CallFnOptions` allows control of the following:
 
-| Field          |                Type                 | Default |  Build method   | Description                                                                                               |
-| -------------- | :---------------------------------: | :-----: | :-------------: | --------------------------------------------------------------------------------------------------------- |
-| `eval_ast`     |               `bool`                | `true`  |   `eval_ast`    | evaluate the [`AST`] before calling the target [function] (useful to run [`import`] statements)           |
-| `rewind_scope` |               `bool`                | `true`  | `rewind_scope`  | rewind the custom [`Scope`] at the end of the [function] call so new local variables are removed          |
-| `this_ptr`     | [`Option<&mut Dynamic>`][`Dynamic`] | `None`  | `bind_this_ptr` | bind the `this` pointer to a specific value                                                               |
-| `tag`          |   [`Option<Dynamic>`][`Dynamic`]    | `None`  |   `with_tag`    | set the _custom state_ for this evaluation (accessed via [`NativeCallContext::tag`][`NativeCallContext`]) |
+| Field               |                Type                 | Default |    Build method     | Description                                                                                               |
+| ------------------- | :---------------------------------: | :-----: | :-----------------: | --------------------------------------------------------------------------------------------------------- |
+| `eval_ast`          |               `bool`                | `true`  |     `eval_ast`      | evaluate the [`AST`] before calling the target [function] (useful to run [`import`] statements)           |
+| `rewind_scope`      |               `bool`                | `true`  |   `rewind_scope`    | rewind the custom [`Scope`] at the end of the [function] call so new local variables are removed          |
+| `this_ptr`          | [`Option<&mut Dynamic>`][`Dynamic`] | `None`  |   `bind_this_ptr`   | bind the `this` pointer to a specific value                                                               |
+| `in_all_namespaces` |               `bool`                | `false` | `in_all_namespaces` | call function in all namespaces, not only scripted function within the [`AST`]                            |
+| `tag`               |   [`Option<Dynamic>`][`Dynamic`]    | `None`  |     `with_tag`      | set the _custom state_ for this evaluation (accessed via [`NativeCallContext::tag`][`NativeCallContext`]) |
 
 ### Skip evaluation of the `AST`
 
@@ -272,4 +273,22 @@ let options = CallFnOptions::new()
 engine.call_fn_with_options(options, &mut scope, &ast, "action", ( 41_i64, ))?;
 
 assert_eq!(value.as_int()?, 42);
+```
+
+### Just call any function
+
+Sometimes it is useful to just make a function call without worrying whether the function is a
+Rhai-scripted [function] in the [`AST`].
+
+Setting `in_all_namespaces` to `true` allows this.
+
+```rust
+
+let options = CallFnOptions::new().in_all_namespaces(true);
+
+engine.call_fn_with_options(options, &mut scope, &ast, "calc", (1, 2, 3))?;
+
+// The function 'calc' will be called with three arguments (1,2, 3) regardless of
+// whether it is a scripted Rhai function, a native Rust function or a module function
+// loaded into the 'Engine'.
 ```
