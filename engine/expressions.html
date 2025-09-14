@@ -279,6 +279,48 @@ let result = engine.eval_expression_with_scope::&lt;i64&gt;(&amp;mut scope, "
              ")?;</code></pre>
 </div>
 </div>
+<h2 id="evaluate-a-binary-operation"><a class="header" href="#evaluate-a-binary-operation">Evaluate a Binary Operation</a></h2>
+<p>Sometimes it is desirable to evaluate a binary operation directly, without the need to create a script.
+This is especially useful when comparing two <a href="/book/language/dynamic.html"><code>Dynamic</code></a> values.</p>
+<p>Use <code>Engine::eval_binary_op</code> to evaluate a binary operation directly.</p>
+<pre><code class="language-rust">let x = 123;         // Integer value
+let y = 123.0;       // Floating-point value
+
+// Run the '==' operator to compare the two values.
+// Rhai returns 'true' because they are the same, though of different types.
+let result = engine.eval_binary_op("==", x, y)?;
+//                                 ^^^^
+//                                 Operator to evaluate
+
+// Rhai has built-in array comparison as well as for all supported types.
+let x = [1, 2, true, "hello"];
+let y = [1, 2, true, "hello"];
+
+let result = engine.eval_binary_op("==", x, y)?;</code></pre>
+<div id="admonition-tip-rhai-built-in-comparisons" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-rhai-built-in-comparisons-title">
+<div class="admonition-title">
+<div id="admonition-tip-rhai-built-in-comparisons-title">
+<p>Tip: Rhai built-in comparisons</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-rhai-built-in-comparisons"></a>
+</div>
+<div>
+<p>Rhai automatically handles comparisons between different <a href="/book/language/dynamic.html"><code>Dynamic</code></a> value types that
+are expected by causal script users, e.g. floating-point vs integer,
+<code>"A"</code> (a <a href="/book/language/strings-chars.html">string</a>) vs <code>'A'</code> (a <a href="/book/language/strings-chars.html">character</a>) etc.</p>
+<p>See <a href="/book/language/logic.html">here</a> for more details.</p>
+</div>
+</div>
+<h2 id="evaluate-an-arbitrary-function-call"><a class="header" href="#evaluate-an-arbitrary-function-call">Evaluate an Arbitrary Function Call</a></h2>
+<p>Sometimes it is desirable to evaluate a function call directly, without the need to create a script.</p>
+<p>Use <code>Engine::eval_fn_call</code> to evaluate an arbitrary function call. It does not matter whether the
+function is a Rhai-scripted <a href="/book/language/functions.html">function</a>, a registered Rust function, a built-in function, or a
+function in one of the loaded <a href="/book/rust/modules/index.html">modules</a>.</p>
+<pre><code class="language-rust">let result = engine.eval_fn_call("foo", None, (123, true))?;
+//                                            ^^^^^^^^^^^
+//                                            Arguments
+//                                      ^^^^
+//                                      'this' pointer, if any</code></pre>
 
                     </main>
 

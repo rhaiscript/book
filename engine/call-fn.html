@@ -364,6 +364,7 @@ let result = engine.call_fn_with_options::&lt;i64&gt;(
 <tr><td><code>eval_ast</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>true</code></td><td style="text-align: center"><code>eval_ast</code></td><td>evaluate the <a href="/book/engine/compile.html"><code>AST</code></a> before calling the target <a href="/book/language/functions.html">function</a> (useful to run <a href="/book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
 <tr><td><code>rewind_scope</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>true</code></td><td style="text-align: center"><code>rewind_scope</code></td><td>rewind the custom <a href="/book/engine/scope.html"><code>Scope</code></a> at the end of the <a href="/book/language/functions.html">function</a> call so new local variables are removed</td></tr>
 <tr><td><code>this_ptr</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;&amp;mut Dynamic&gt;</code></a></td><td style="text-align: center"><code>None</code></td><td style="text-align: center"><code>bind_this_ptr</code></td><td>bind the <code>this</code> pointer to a specific value</td></tr>
+<tr><td><code>in_all_namespaces</code></td><td style="text-align: center"><code>bool</code></td><td style="text-align: center"><code>false</code></td><td style="text-align: center"><code>in_all_namespaces</code></td><td>call function in all namespaces, not only scripted function within the <a href="/book/engine/compile.html"><code>AST</code></a></td></tr>
 <tr><td><code>tag</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;Dynamic&gt;</code></a></td><td style="text-align: center"><code>None</code></td><td style="text-align: center"><code>with_tag</code></td><td>set the <em>custom state</em> for this evaluation (accessed via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>)</td></tr>
 </tbody></table>
 </div>
@@ -454,6 +455,18 @@ let options = CallFnOptions::new()
 engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, "action", ( 41_i64, ))?;
 
 assert_eq!(value.as_int()?, 42);</code></pre>
+<h3 id="just-call-any-function"><a class="header" href="#just-call-any-function">Just call any function</a></h3>
+<p>Sometimes it is useful to just make a function call without worrying whether the function is a
+Rhai-scripted <a href="/book/language/functions.html">function</a> in the <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
+<p>Setting <code>in_all_namespaces</code> to <code>true</code> allows this.</p>
+<pre><code class="language-rust">
+let options = CallFnOptions::new().in_all_namespaces(true);
+
+engine.call_fn_with_options(options, &amp;mut scope, &amp;ast, "calc", (1, 2, 3))?;
+
+// The function 'calc' will be called with three arguments (1,2, 3) regardless of
+// whether it is a scripted Rhai function, a native Rust function or a module function
+// loaded into the 'Engine'.</code></pre>
 
                     </main>
 

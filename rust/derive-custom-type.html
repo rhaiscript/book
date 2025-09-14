@@ -260,7 +260,8 @@ engine.build_type::&lt;Vec3&gt;()
 <pre><code class="language-rust">Fn(&amp;mut TypeBuilder&lt;T&gt;)</code></pre>
 </blockquote>
 <h3 id="example"><a class="header" href="#example">Example</a></h3>
-<pre><code class="language-rust">use rhai::{CustomType, TypeBuilder};    // &lt;- necessary imports
+<pre><code class="language-rust">// Necessary imports
+use rhai::{CustomType, TypeBuilder, EvalAltResult, Dynamic, Position};
 
 #[derive(Debug, Clone)]
 #[derive(CustomType)]                   // &lt;- auto-implement 'CustomType'
@@ -294,7 +295,9 @@ pub struct Foo {
     qux: char,                          // &lt;- auto setter for 'qux'
 
     #[rhai_type(set = Self::set_hello)] // &lt;- call custom setter for 'hello'
-    hello: String                       // &lt;- auto getter for 'hello'
+    hello: String,                      // &lt;- auto getter for 'hello'
+
+    maybe: Option&lt;String&gt;               // &lt;- automatically handle 'Option' type
 }
 
 impl Foo {
@@ -387,6 +390,24 @@ impl CustomType for Foo {
         builder.with_get_set("hello",
             |obj: &amp;mut Self| obj.hello.clone(),
             Self::set_hello
+        );
+        builder.with_get_set("maybe",
+            |obj: &amp;mut Self| obj.maybe.clone().map_or(Dynamic::UNIT, Dynamic::from),
+            |obj: &amp;mut Self, val: Dynamic| {
+                if val.is_unit() {
+                    obj.maybe = None;
+                    Ok(())
+                } else if let Some(x) = val.read_lock::&lt;String&gt;() {
+                    obj.maybe = Some(x.clone());
+                    Ok(())
+                } else {
+                    Err(Box::new(EngineError::TypeMismatch(
+                        "String".to_string(),
+                        val.type_name().to_string(),
+                        Position::NONE
+                    )))
+                }
+            }
         );
         Self::build_extra(&amp;mut builder);
     }

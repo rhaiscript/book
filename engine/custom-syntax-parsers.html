@@ -232,7 +232,7 @@ with an implementation function, both of which accept a custom user-defined <em>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>symbols</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>&amp;[ImmutableString]</code></a></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code>; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
+<tr><td><code>symbols</code></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>&amp;[ImmutableString]</code></a></td><td>a slice of symbols that have been parsed so far, possibly containing <code>$expr$</code> and/or <code>$block$</code> etc.; <code>$ident$</code> and other literal markers are replaced by the actual text</td></tr>
 <tr><td><code>look_ahead</code></td><td style="text-align: center"><code>&amp;str</code></td><td>a string slice containing the next symbol that is about to be read</td></tr>
 <tr><td><code>state</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>mutable reference to a user-defined <em>state</em></td></tr>
 </tbody></table>
@@ -248,6 +248,8 @@ with an implementation function, both of which accept a custom user-defined <em>
 <tr><td style="text-align: center"><code>$symbol$</code></td><td>symbol literal</td></tr>
 <tr><td style="text-align: center"><code>$expr$</code></td><td><code>$expr$</code></td></tr>
 <tr><td style="text-align: center"><code>$block$</code></td><td><code>$block$</code></td></tr>
+<tr><td style="text-align: center"><code>$inner$</code></td><td><code>$inner$</code></td></tr>
+<tr><td style="text-align: center"><code>$token$</code></td><td>token text</td></tr>
 <tr><td style="text-align: center"><code>$func$</code></td><td><code>$func$</code></td></tr>
 <tr><td style="text-align: center"><code>$bool$</code></td><td><code>true</code> or <code>false</code></td></tr>
 <tr><td style="text-align: center"><code>$int$</code></td><td>value of number</td></tr>
@@ -401,7 +403,7 @@ as follows, which is slightly different from the function for <code>Engine::regi
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../engine/debugging/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../engine/custom-syntax-arbitrary-text.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -415,7 +417,7 @@ as follows, which is slightly different from the function for <code>Engine::regi
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../engine/debugging/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../engine/custom-syntax-arbitrary-text.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

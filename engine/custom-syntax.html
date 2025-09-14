@@ -260,9 +260,11 @@ understanding of the code’s intent.</p>
 <li>Identifiers following the <a href="/book/language/variables.html">variable</a> naming rules.</li>
 <li><code>$expr$</code> – any valid expression, statement or statements block.</li>
 <li><code>$block$</code> – any valid statements block (i.e. must be enclosed by <code>{</code> … <code>}</code>).</li>
+<li><code>$inner$</code> – any valid statements block <em>after</em> the starting <code>{</code> but must be terminated by <code>}</code>.</li>
 <li><code>$func$</code> – any valid <a href="/book/language/fn-closure.html">closure</a>, or any valid statements block as the body of a <a href="/book/language/fn-closure.html">closure</a> with no parameters (if not <a href="/book/start/features.html"><code>no_function</code></a>).</li>
 <li><code>$ident$</code> – any <a href="/book/language/variables.html">variable</a> name.</li>
 <li><code>$symbol$</code> – any <a href="/book/appendix/operators.html#operators">symbol</a>, active or reserved.</li>
+<li><code>$token$</code> – any valid token.</li>
 <li><code>$bool$</code> – a boolean value.</li>
 <li><code>$int$</code> – an integer number.</li>
 <li><code>$float$</code> – a floating-point number (if not <a href="/book/start/features.html"><code>no_float</code></a>).</li>

@@ -220,7 +220,7 @@
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.22.0"
+rhai = "1.23.0"
 rhai-rand = "0.1"       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -252,7 +252,7 @@ random.register_into_engine(&amp;mut engine);</code></pre>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version="1.22.0", features = ["no_float"] }
+rhai = { version="1.23.0", features = ["no_float"] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version="0.1", default-features = false, features = ["array"] }
