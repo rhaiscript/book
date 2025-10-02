@@ -19,16 +19,13 @@ level = 4
 [output.html.playground]
 runnable = false
 
-[outputX.linkcheck]
-optional = true
-follow-web-links = false
-traverse-parent-directories = false
-warning-policy = "ignore"
-
-[preprocessor.tera]
-command = "mdbook-tera"
-
 [preprocessor.admonish]
 command = "mdbook-admonish"
 on_failure = "bail"
 assets_version = "3.0.2"    # do not edit: managed by `mdbook-admonish install`
+
+[preprocessor.variables.variables]
+version = "1.23.0"
+repoHome = "https://github.com/rhaiscript/rhai/blob/main"
+rootUrl = ""
+#rootUrl = "/book"

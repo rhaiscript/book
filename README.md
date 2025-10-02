@@ -14,10 +14,10 @@ How to Build from Source
 cargo install mdbook
 ```
 
-* Install [`mdbook-tera`](https://crates.io/crates/mdbook-tera) (for templating)
+* Install [`mdbook-variables`](https://crates.io/crates/mdbook-variables) (for variables expansion)
 
 ```sh
-cargo install mdbook-tera
+cargo install mdbook-variables
 ```
 
 * Install [`mdbook-admonish`](https://crates.io/crates/mdbook-admonish) (for styling)
@@ -34,7 +34,7 @@ mdbook build
 
 ### Warning: Recompile when `mdbook` is updated
 
-`mdbook-tera` and `mdbook-admonish` depend on particular versions of `mdbook`.
+`mdbook-variables` and `mdbook-admonish` depend on particular versions of `mdbook`.
 
 When `mdbook` is updated, it is best to reinstall both plugins to make sure that there are no
 version conflicts.
@@ -43,7 +43,7 @@ version conflicts.
 Configuration Settings
 ----------------------
 
-Settings are stored in `src/context.toml`:
+Settings are stored in `src/book.toml` under the `[preprocessor.variables.variables]` section:
 
 | Setting    | Description                                                                             |
 | ---------- | --------------------------------------------------------------------------------------- |
