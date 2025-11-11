@@ -25,7 +25,7 @@ on_failure = "bail"
 assets_version = "3.0.2"    # do not edit: managed by `mdbook-admonish install`
 
 [preprocessor.variables.variables]
-version = "1.23.0"
+version = "1.24.0"
 repoHome = "https://github.com/rhaiscript/rhai/blob/main"
 rootUrl = ""
 #rootUrl = "/book"
