@@ -17,7 +17,6 @@
 [`no_time`]: {{rootUrl}}/start/features.md
 [`no_std`]: {{rootUrl}}/start/features.md
 [`wasm-bindgen`]: {{rootUrl}}/start/features.md
-[`stdweb`]: {{rootUrl}}/start/features.md
 [`metadata`]: {{rootUrl}}/start/features.md
 [`internals`]: {{rootUrl}}/start/features.md
 [`debugging`]: {{rootUrl}}/start/features.md

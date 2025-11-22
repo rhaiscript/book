@@ -31,11 +31,11 @@ by a Rhai [`Engine`] compiled into WASM.
 JavaScript Interop
 ------------------
 
-Specify either of the [`wasm-bindgen`] or [`stdweb`] features when building for WASM that requires
-interop with JavaScript. This selects the appropriate JavaScript interop layer to use.
+Specify [`wasm-bindgen`] when building for WASM that requires interop with JavaScript.
+This selects [`wasm-bindgen`] as the JavaScript interop layer to use.
 
-It is still possible to compile for WASM without either [`wasm-bindgen`] or [`stdweb`],
-but then the interop code must then be explicitly provided.
+It is still possible to compile for WASM without [`wasm-bindgen`], but then the interop code must
+then be explicitly provided.
 
 
 Target Environments
@@ -46,11 +46,11 @@ Target Environments
 There is no particular setting to tweak when building for WASI.
 ~~~
 
-~~~admonish abstract "JavaScript: `wasm32-unknown-unknown` + `wasm-bindgen`/`stdweb`"
+~~~admonish abstract "JavaScript: `wasm32-unknown-unknown` + `wasm-bindgen`"
 
 Rhai requires a system-provided source of random numbers (for hashing).
 
-Such random number source is available from JavaScript (implied by `wasm-bindgen` or `stdweb`).
+Such random number source is available from JavaScript (implied by `wasm-bindgen`).
 
 The `js` feature on the [`getrandom`](https://crates.io/crates/getrandom) crate is
 enabled automatically to provide the random  number source.
@@ -96,14 +96,14 @@ Common Features
 Some Rhai functionalities are not necessary in a WASM environment, so the following features
 are typically used for a WASM build:
 
-|            Feature             | Description                                                                                                                                                                                                                           |
-| :----------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`wasm-bindgen`] or [`stdweb`] | use [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) or [`stdweb`](https://crates.io/crates/stdweb) as the JavaScript interop layer, omit if using custom interop code                                                         |
-|         [`unchecked`]          | when a WASM module panics, it doesn't crash the entire web app; however this also disables [maximum number of operations] and [progress] tracking so a script can still run indefinitely &ndash; the web app must terminate it itself |
-|          [`only_i32`]          | WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit                                                                                                                                                      |
-|         [`f32_float`]          | WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses                                                                                          |
-|         [`no_module`]          | a WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom [module resolver] can be provided that loads other Rhai scripts                           |
-|      [`no_custom_syntax`]      | if [custom syntax] is not used, this results in a small size saving                                                                                                                                                                   |
+|       Feature        | Description                                                                                                                                                                                                                           |
+| :------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   [`wasm-bindgen`]   | use [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) as the JavaScript interop layer, omit if using custom interop code                                                                                                        |
+|    [`unchecked`]     | when a WASM module panics, it doesn't crash the entire web app; however this also disables [maximum number of operations] and [progress] tracking so a script can still run indefinitely &ndash; the web app must terminate it itself |
+|     [`only_i32`]     | WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit                                                                                                                                                      |
+|    [`f32_float`]     | WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses                                                                                          |
+|    [`no_module`]     | a WASM module cannot load modules from the file system, so usually this is not needed, but the savings are minimal; alternatively, a custom [module resolver] can be provided that loads other Rhai scripts                           |
+| [`no_custom_syntax`] | if [custom syntax] is not used, this results in a small size saving                                                                                                                                                                   |
 
 The following features are typically _not_ used because they don't make sense in a WASM build:
 

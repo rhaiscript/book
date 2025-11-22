@@ -46,8 +46,7 @@ Feature Dependencies
 WASM Dependencies
 -----------------
 
-| Crate                                                   |     Pulled in by feature     |
-| ------------------------------------------------------- | :--------------------------: |
-| [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) |       [`wasm-bindgen`]       |
-| [`stdweb`](https://crates.io/crates/stdweb)             |          [`stdweb`]          |
-| [`instant`](https://crates.io/crates/instant)           | [`wasm-bindgen`], [`stdweb`] |
+| Crate                                                   | Pulled in by feature |
+| ------------------------------------------------------- | :------------------: |
+| [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) |   [`wasm-bindgen`]   |
+| [`instant`](https://crates.io/crates/instant)           |   [`wasm-bindgen`]   |

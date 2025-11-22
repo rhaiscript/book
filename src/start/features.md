@@ -94,7 +94,6 @@ Do not use them for non-[WASM] targets.
 | Feature        | Additive? | Description                                                                        |
 | -------------- | :-------: | ---------------------------------------------------------------------------------- |
 | `wasm-bindgen` |  **no**   | uses [`wasm-bindgen`](https://crates.io/crates/wasm-bindgen) to compile for [WASM] |
-| `stdweb`       |  **no**   | uses [`stdweb`](https://crates.io/crates/stdweb) to compile for [WASM]             |
 
 
 Features for Building Bin Tools
