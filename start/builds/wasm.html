@@ -236,10 +236,10 @@ by a Rhai <a href="/book/engine/hello-world.html"><code>Engine</code></a> compil
 </div>
 </div>
 <h2 id="javascript-interop"><a class="header" href="#javascript-interop">JavaScript Interop</a></h2>
-<p>Specify either of the <a href="/book/start/features.html"><code>wasm-bindgen</code></a> or <a href="/book/start/features.html"><code>stdweb</code></a> features when building for WASM that requires
-interop with JavaScript. This selects the appropriate JavaScript interop layer to use.</p>
-<p>It is still possible to compile for WASM without either <a href="/book/start/features.html"><code>wasm-bindgen</code></a> or <a href="/book/start/features.html"><code>stdweb</code></a>,
-but then the interop code must then be explicitly provided.</p>
+<p>Specify <a href="/book/start/features.html"><code>wasm-bindgen</code></a> when building for WASM that requires interop with JavaScript.
+This selects <a href="/book/start/features.html"><code>wasm-bindgen</code></a> as the JavaScript interop layer to use.</p>
+<p>It is still possible to compile for WASM without <a href="/book/start/features.html"><code>wasm-bindgen</code></a>, but then the interop code must
+then be explicitly provided.</p>
 <h2 id="target-environments"><a class="header" href="#target-environments">Target Environments</a></h2>
 <div id="admonition-wasi-wasm32-wasi" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-wasi-wasm32-wasi-title">
 <div class="admonition-title">
@@ -252,16 +252,16 @@ but then the interop code must then be explicitly provided.</p>
 <p>There is no particular setting to tweak when building for WASI.</p>
 </div>
 </div>
-<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb-title">
+<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgen" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-javascript-wasm32-unknown-unknown--wasm-bindgen-title">
 <div class="admonition-title">
-<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb-title">
-<p>JavaScript: <code>wasm32-unknown-unknown</code> + <code>wasm-bindgen</code>/<code>stdweb</code></p>
+<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgen-title">
+<p>JavaScript: <code>wasm32-unknown-unknown</code> + <code>wasm-bindgen</code></p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb"></a>
+<a class="admonition-anchor-link" href="#admonition-javascript-wasm32-unknown-unknown--wasm-bindgen"></a>
 </div>
 <div>
 <p>Rhai requires a system-provided source of random numbers (for hashing).</p>
-<p>Such random number source is available from JavaScript (implied by <code>wasm-bindgen</code> or <code>stdweb</code>).</p>
+<p>Such random number source is available from JavaScript (implied by <code>wasm-bindgen</code>).</p>
 <p>The <code>js</code> feature on the <a href="https://crates.io/crates/getrandom"><code>getrandom</code></a> crate is
 enabled automatically to provide the random  number source.
 See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-support">https://docs.rs/getrandom/latest/getrandom/#webassembly-support</a> for details.</p>
@@ -279,7 +279,7 @@ See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-suppo
 <p>Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
 opt out of <code>default-features</code> in order to enable <a href="/book/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.23.0", default-features = false, features = [ "std" ] }
+rhai = { version = "1.24.0", default-features = false, features = [ "std" ] }
 </code></pre>
 </div>
 </div>
@@ -295,7 +295,7 @@ rhai = { version = "1.23.0", default-features = false, features = [ "std" ] }
 <p>Some Rhai functionalities are not necessary in a WASM environment, so the following features
 are typically used for a WASM build:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center"><a href="/book/start/features.html"><code>wasm-bindgen</code></a> or <a href="/book/start/features.html"><code>stdweb</code></a></td><td>use <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> or <a href="https://crates.io/crates/stdweb"><code>stdweb</code></a> as the JavaScript interop layer, omit if using custom interop code</td></tr>
+<tr><td style="text-align: center"><a href="/book/start/features.html"><code>wasm-bindgen</code></a></td><td>use <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> as the JavaScript interop layer, omit if using custom interop code</td></tr>
 <tr><td style="text-align: center"><a href="/book/start/features.html"><code>unchecked</code></a></td><td>when a WASM module panics, it doesn’t crash the entire web app; however this also disables <a href="/book/safety/max-operations.html">maximum number of operations</a> and <a href="/book/safety/progress.html">progress</a> tracking so a script can still run indefinitely – the web app must terminate it itself</td></tr>
 <tr><td style="text-align: center"><a href="/book/start/features.html"><code>only_i32</code></a></td><td>WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit</td></tr>
 <tr><td style="text-align: center"><a href="/book/start/features.html"><code>f32_float</code></a></td><td>WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses</td></tr>

@@ -198,7 +198,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.23.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.24.0</strong> of Rhai.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-rhai"><a class="header" href="#introduction-to-rhai">Introduction to Rhai</a></h1>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <div id="admonition-etymology-of-the-name-rhai" class="admonition admonish-question" role="note" aria-labelledby="admonition-etymology-of-the-name-rhai-title">
@@ -662,8 +662,7 @@ interfaces such as XHR calls and payload encoding such as JSON.</p>
 <h2 id="wasm-dependencies"><a class="header" href="#wasm-dependencies">WASM Dependencies</a></h2>
 <div class="table-wrapper"><table><thead><tr><th>Crate</th><th style="text-align: center">Pulled in by feature</th></tr></thead><tbody>
 <tr><td><a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a></td><td style="text-align: center"><a href="about//book/start/features.html"><code>wasm-bindgen</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/stdweb"><code>stdweb</code></a></td><td style="text-align: center"><a href="about//book/start/features.html"><code>stdweb</code></a></td></tr>
-<tr><td><a href="https://crates.io/crates/instant"><code>instant</code></a></td><td style="text-align: center"><a href="about//book/start/features.html"><code>wasm-bindgen</code></a>, <a href="about//book/start/features.html"><code>stdweb</code></a></td></tr>
+<tr><td><a href="https://crates.io/crates/instant"><code>instant</code></a></td><td style="text-align: center"><a href="about//book/start/features.html"><code>wasm-bindgen</code></a></td></tr>
 </tbody></table>
 </div><div style="break-before: page; page-break-before: always;"></div><h1 id="licensing"><a class="header" href="#licensing">Licensing</a></h1>
 <p>Rhai is licensed under either of the following, at your choice:</p>
@@ -836,7 +835,7 @@ having to install anything.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.23.0"    # assuming 1.23.0 is the latest version
+rhai = "1.24.0"    # assuming 1.24.0 is the latest version
 </code></pre>
 </div>
 </div>
@@ -941,7 +940,6 @@ Do not use them when not compiling for <a href="start//book/start/builds/no-std.
 Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> targets.</p>
 <div class="table-wrapper"><table><thead><tr><th>Feature</th><th style="text-align: center">Additive?</th><th>Description</th></tr></thead><tbody>
 <tr><td><code>wasm-bindgen</code></td><td style="text-align: center"><strong>no</strong></td><td>uses <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> to compile for <a href="start//book/start/builds/wasm.html">WASM</a></td></tr>
-<tr><td><code>stdweb</code></td><td style="text-align: center"><strong>no</strong></td><td>uses <a href="https://crates.io/crates/stdweb"><code>stdweb</code></a> to compile for <a href="start//book/start/builds/wasm.html">WASM</a></td></tr>
 </tbody></table>
 </div>
 <h2 id="features-for-building-bin-tools"><a class="header" href="#features-for-building-bin-tools">Features for Building Bin Tools</a></h2>
@@ -950,7 +948,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.23.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
+rhai = { version = "1.24.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
 </code></pre>
 <p>turns on these six features:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
@@ -1517,7 +1515,7 @@ number of entries exceed the <em>inline</em> capacity.</p>
 </div>
 <div>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.23.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.24.0/rhai/struct.Scope.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="serializingdeserializing"><a class="header" href="#serializingdeserializing">Serializing/Deserializing</a></h2>
@@ -2199,10 +2197,10 @@ by a Rhai <a href="start/builds//book/engine/hello-world.html"><code>Engine</cod
 </div>
 </div>
 <h2 id="javascript-interop"><a class="header" href="#javascript-interop">JavaScript Interop</a></h2>
-<p>Specify either of the <a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a> or <a href="start/builds//book/start/features.html"><code>stdweb</code></a> features when building for WASM that requires
-interop with JavaScript. This selects the appropriate JavaScript interop layer to use.</p>
-<p>It is still possible to compile for WASM without either <a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a> or <a href="start/builds//book/start/features.html"><code>stdweb</code></a>,
-but then the interop code must then be explicitly provided.</p>
+<p>Specify <a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a> when building for WASM that requires interop with JavaScript.
+This selects <a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a> as the JavaScript interop layer to use.</p>
+<p>It is still possible to compile for WASM without <a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a>, but then the interop code must
+then be explicitly provided.</p>
 <h2 id="target-environments"><a class="header" href="#target-environments">Target Environments</a></h2>
 <div id="admonition-wasi-wasm32-wasi" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-wasi-wasm32-wasi-title">
 <div class="admonition-title">
@@ -2215,16 +2213,16 @@ but then the interop code must then be explicitly provided.</p>
 <p>There is no particular setting to tweak when building for WASI.</p>
 </div>
 </div>
-<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb-title">
+<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgen" class="admonition admonish-abstract" role="note" aria-labelledby="admonition-javascript-wasm32-unknown-unknown--wasm-bindgen-title">
 <div class="admonition-title">
-<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb-title">
-<p>JavaScript: <code>wasm32-unknown-unknown</code> + <code>wasm-bindgen</code>/<code>stdweb</code></p>
+<div id="admonition-javascript-wasm32-unknown-unknown--wasm-bindgen-title">
+<p>JavaScript: <code>wasm32-unknown-unknown</code> + <code>wasm-bindgen</code></p>
 </div>
-<a class="admonition-anchor-link" href="start/builds/wasm.html#admonition-javascript-wasm32-unknown-unknown--wasm-bindgenstdweb"></a>
+<a class="admonition-anchor-link" href="start/builds/wasm.html#admonition-javascript-wasm32-unknown-unknown--wasm-bindgen"></a>
 </div>
 <div>
 <p>Rhai requires a system-provided source of random numbers (for hashing).</p>
-<p>Such random number source is available from JavaScript (implied by <code>wasm-bindgen</code> or <code>stdweb</code>).</p>
+<p>Such random number source is available from JavaScript (implied by <code>wasm-bindgen</code>).</p>
 <p>The <code>js</code> feature on the <a href="https://crates.io/crates/getrandom"><code>getrandom</code></a> crate is
 enabled automatically to provide the random  number source.
 See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-support">https://docs.rs/getrandom/latest/getrandom/#webassembly-support</a> for details.</p>
@@ -2242,7 +2240,7 @@ See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-suppo
 <p>Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
 opt out of <code>default-features</code> in order to enable <a href="start/builds//book/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.23.0", default-features = false, features = [ "std" ] }
+rhai = { version = "1.24.0", default-features = false, features = [ "std" ] }
 </code></pre>
 </div>
 </div>
@@ -2258,7 +2256,7 @@ rhai = { version = "1.23.0", default-features = false, features = [ "std" ] }
 <p>Some Rhai functionalities are not necessary in a WASM environment, so the following features
 are typically used for a WASM build:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
-<tr><td style="text-align: center"><a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a> or <a href="start/builds//book/start/features.html"><code>stdweb</code></a></td><td>use <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> or <a href="https://crates.io/crates/stdweb"><code>stdweb</code></a> as the JavaScript interop layer, omit if using custom interop code</td></tr>
+<tr><td style="text-align: center"><a href="start/builds//book/start/features.html"><code>wasm-bindgen</code></a></td><td>use <a href="https://crates.io/crates/wasm-bindgen"><code>wasm-bindgen</code></a> as the JavaScript interop layer, omit if using custom interop code</td></tr>
 <tr><td style="text-align: center"><a href="start/builds//book/start/features.html"><code>unchecked</code></a></td><td>when a WASM module panics, it doesn’t crash the entire web app; however this also disables <a href="start/builds//book/safety/max-operations.html">maximum number of operations</a> and <a href="start/builds//book/safety/progress.html">progress</a> tracking so a script can still run indefinitely – the web app must terminate it itself</td></tr>
 <tr><td style="text-align: center"><a href="start/builds//book/start/features.html"><code>only_i32</code></a></td><td>WASM supports 32-bit and 64-bit integers, but most scripts will only need 32-bit</td></tr>
 <tr><td style="text-align: center"><a href="start/builds//book/start/features.html"><code>f32_float</code></a></td><td>WASM supports 32-bit single-precision and 64-bit double-precision floating-point numbers, but single-precision is usually fine for most uses</td></tr>
@@ -2894,7 +2892,7 @@ and exposes the following.</p>
 <tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of function calls</td></tr>
 <tr><td><code>tag()</code></td><td style="text-align: center"><a href="rust//book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the <em>custom state</em> that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="rust//book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.23.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.23.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements); requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="rust//book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="rust//book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a>; requires the <a href="rust//book/start/features.html"><code>internals</code></a> feature</td></tr>
 <tr><td><code>call_fn(...)</code></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
@@ -4914,7 +4912,7 @@ change from time to time.</p>
 </div>
 <div>
 <p>For the complete <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.23.0/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.24.0/rhai/struct.Module.html">documentation</a> online.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
@@ -6640,7 +6638,7 @@ as an independent crate.</p>
 name = "my-package"     # 'my-package' crate
 
 [dependencies]
-rhai = "1.23.0"    # assuming 1.23.0 is the latest version
+rhai = "1.24.0"    # assuming 1.24.0 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><code class="language-rust">use rhai::def_package;
@@ -6709,7 +6707,7 @@ def_package! {
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.23.0"
+rhai = "1.24.0"
 rhai-rand = "0.1"       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -6741,7 +6739,7 @@ random.register_into_engine(&amp;mut engine);</code></pre>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version="1.23.0", features = ["no_float"] }
+rhai = { version="1.24.0", features = ["no_float"] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version="0.1", default-features = false, features = ["array"] }
@@ -6770,7 +6768,7 @@ scientific computing, inspired by languages like MATLAB, Octave, and R.</p>
 <h2 id="dependency-1"><a class="header" href="#dependency-1">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.23.0"
+rhai = "1.24.0"
 rhai-sci = "0.1"       # use rhai-sci crate
 </code></pre>
 <h2 id="features-1"><a class="header" href="#features-1">Features</a></h2>
@@ -6815,7 +6813,7 @@ artificial intelligence and machine learning.</p>
 <h2 id="dependency-2"><a class="header" href="#dependency-2">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.23.0"
+rhai = "1.24.0"
 rhai-ml = "0.1"       # use rhai-ml crate
 </code></pre>
 <h2 id="features-2"><a class="header" href="#features-2">Features</a></h2>
@@ -6857,7 +6855,7 @@ external filesystem.</p>
 <h2 id="dependency-3"><a class="header" href="#dependency-3">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.23.0"
+rhai = "1.24.0"
 rhai-fs = "0.1"       # use rhai-fs crate
 </code></pre>
 <h2 id="load-package-into-engine-3"><a class="header" href="#load-package-into-engine-3">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -6919,7 +6917,7 @@ blob_buf.write_to_file(file);
 <h2 id="dependency-4"><a class="header" href="#dependency-4">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.23.0"
+rhai = "1.24.0"
 rhai-url = "0.0.1"       # use rhai-url crate
 </code></pre>
 <h2 id="load-package-into-engine-4"><a class="header" href="#load-package-into-engine-4">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -9262,8 +9260,12 @@ when using a <a href="language//book/engine/raw.html">raw <code>Engine</code></a
 <tr><td><code>zip</code></td><td><ol><li>array to zip</li><li><a href="language//book/language/fn-ptr.html">function pointer</a> to conversion function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</li></ol></td><td>constructs a new array with all element pairs from two arrays mapped to the result of applying the conversion function taking the following parameters:<ol><li>first array element</li><li>second array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>some</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any element returns <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>all</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to predicate (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all elements return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
-<tr><td><code>sort</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>sort_by</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/language/strings-chars.html">string</a>, <a href="language//book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/language/values-and-types.html"><code>()</code></a>)</td></tr>
+<tr><td><code>sort_desc</code></td><td><em>none</em></td><td>sorts, in descending order, a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/language/strings-chars.html">string</a>, <a href="language//book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/language/values-and-types.html"><code>()</code></a>)</td></tr>
+<tr><td><code>order_by</code></td><td><a href="language//book/language/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="language//book/language/fn-closure.html">closure</a>)</td><td>returns a copy of the array that is sorted with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>order</code></td><td><em>none</em></td><td>returns a sorted copy of a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/language/strings-chars.html">string</a>, <a href="language//book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/language/values-and-types.html"><code>()</code></a>)</td></tr>
+<tr><td><code>order_desc</code></td><td><em>none</em></td><td>returns a sorted (in descending order) copy of a <em>homogeneous</em> array containing only elements of the same comparable built-in type (<code>INT</code>, <code>FLOAT</code>, <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a>, <a href="language//book/language/strings-chars.html">string</a>, <a href="language//book/language/strings-chars.html">character</a>, <code>bool</code>, <a href="language//book/language/values-and-types.html"><code>()</code></a>)</td></tr>
 </tbody></table>
 </div><div id="admonition-tip-use-custom-types-with-arrays" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-use-custom-types-with-arrays-title">
 <div class="admonition-title">
@@ -9659,7 +9661,7 @@ registered into an <a href="language//book/engine/hello-world.html"><code>Engine
 <p>Using this callback, for instance, it is simple to instruct Rhai to extend the <a href="language//book/language/arrays.html">array</a> to
 accommodate this new element, or to return a default value instead of raising an error.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(array: &amp;mut Array, index: i64, context: EvalContext) -&gt; Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -10146,7 +10148,7 @@ registered into an <a href="language//book/engine/hello-world.html"><code>Engine
 <p>Using this callback, for instance, it is simple to instruct Rhai to create a new property in the
 <a href="language//book/language/object-maps.html">object map</a> on the fly, possibly with a default value, when a non-existent property is accessed.</p>
 <h2 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(map: &amp;mut Map, prop: &amp;str, context: EvalContext) -&gt; Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -10671,7 +10673,7 @@ sometimes more fine-grained control is needed.</p>
 a particular variable name needs to be protected and not others.  Or only under very special
 circumstances.</p>
 <p>Under this scenario, it is possible to provide a <em>filter</em> closure to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> via
-<a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="engine//book/language/variables.html"><code>let</code></a> or
+<a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="engine//book/language/variables.html"><code>let</code></a> or
 <a href="engine//book/language/constants.html"><code>const</code></a> statements) in a Rhai script.</p>
 <p>The filter is called when a <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/language/constants.html">constant</a> is defined both during runtime and compilation.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
@@ -10690,7 +10692,7 @@ engine.on_def_var(|is_runtime, info, context| {
     }
 });</code></pre>
 <h2 id="function-signature-2"><a class="header" href="#function-signature-2">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -10736,7 +10738,7 @@ outwards until it reaches the top (global) level, then it searches the <a href="
 the <code>Engine::eval</code> call.</p>
 <p>There is a built-in facility for advanced users to <em>hook</em> into the <a href="engine//book/language/variables.html">variable</a> resolution service and
 to override its default behavior.</p>
-<p>To do so, provide a closure to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
+<p>To do so, provide a closure to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 // Register a variable resolver.
@@ -10807,7 +10809,7 @@ using a variable resolver.</p>
 </div>
 </div>
 <h2 id="function-signature-3"><a class="header" href="#function-signature-3">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(name: &amp;str, index: usize, context: EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -13935,7 +13937,7 @@ debug("world!");        // prints "world!" to stdout using debug formatting
 </code></pre>
 <h2 id="override-print-and-debug-with-callback-functions"><a class="header" href="#override-print-and-debug-with-callback-functions">Override <code>print</code> and <code>debug</code> with Callback Functions</a></h2>
 <p>When embedding Rhai into an application, it is usually necessary to trap <code>print</code> and <code>debug</code> output
-(for logging into a tracking log, for example) with the <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_print"><code>Engine::on_print</code></a> and <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_debug"><code>Engine::on_debug</code></a> methods.</p>
+(for logging into a tracking log, for example) with the <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_print"><code>Engine::on_print</code></a> and <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_debug"><code>Engine::on_debug</code></a> methods.</p>
 <pre><code class="language-rust">// Any function or closure that takes an '&amp;str' argument can be used to override 'print'.
 engine.on_print(|x| println!("hello: {x}"));
 
@@ -14597,8 +14599,8 @@ in a shared, interior-mutated object (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</cod
 (a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
 <p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-<a href="safety//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
-<p>The closure passed to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
+<a href="safety//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
+<p>The closure passed to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
 <p>Progress tracking is disabled with the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="examples-16"><a class="header" href="#examples-16">Examples</a></h2>
 <h3 id="periodic-logging"><a class="header" href="#periodic-logging">Periodic Logging</a></h3>
@@ -14629,7 +14631,7 @@ engine.on_progress(move |_| {
     }
 });</code></pre>
 <h2 id="function-signature-of-callback"><a class="header" href="#function-signature-of-callback">Function Signature of Callback</a></h2>
-<p>The signature of the closure to pass to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> is as follows.</p>
+<p>The signature of the closure to pass to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> is as follows.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(operations: u64) -&gt; Option&lt;Dynamic&gt;</code></pre>
 </blockquote>
@@ -16013,7 +16015,7 @@ are imported recursively.</p>
 <a class="admonition-anchor-link" href="engine/ast.html#admonition-ast-public-api"></a>
 </div>
 <div>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.23.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.24.0/rhai/struct.AST.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
@@ -16287,8 +16289,8 @@ current evaluation state to be accessed and/or modified.</p>
 <tr><td><code>tag()</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the custom state that is persistent during the current run</td></tr>
 <tr><td><code>tag_mut()</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>mutable reference to the custom state that is persistent during the current run</td></tr>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="engine//book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements, in reverse order (i.e. later <a href="engine//book/rust/modules/index.html">modules</a> come first); not available under <a href="engine//book/start/features.html"><code>no_module</code></a></td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.23.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.23.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
-<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.23.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.23.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="engine//book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="engine//book/engine/debugging/break-points.html">break-points</a></td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="engine//book/rust/modules/index.html">modules</a> imported via <a href="engine//book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
+<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="engine//book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="engine//book/engine/debugging/break-points.html">break-points</a></td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="engine//book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="engine//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="engine//book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="engine//book/language/fn-namespaces.html">namespaces</a> (as <a href="engine//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="engine//book/language/functions.html">functions</a></td></tr>
 <tr><td><code>this_ptr()</code></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>Option&lt;&amp;Dynamic&gt;</code></a></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
@@ -16498,9 +16500,9 @@ a normal expression.</p>
 are parsed in the order defined within the <a href="engine//book/engine/custom-syntax.html">custom syntax</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.23.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
-<p>The function <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.23.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.24.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
+<p>The function <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.24.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <div id="admonition-hot-tips-use-as-safety-checks" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-hot-tips-use-as-safety-checks-title">
 <div class="admonition-title">
 <div id="admonition-hot-tips-use-as-safety-checks-title">
@@ -16524,19 +16526,19 @@ situations during parsing.</p>
 <a class="admonition-anchor-link" href="engine/token-mapper.html#admonition-tip-raising-errors"></a>
 </div>
 <div>
-<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.23.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
+<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.24.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>
 </div>
 </div>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(token: Token, pos: Position, state: &amp;TokenizeState) -&gt; Token</code></pre>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.23.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
-<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.23.0/rhai/enum.Token.html">token</a></td></tr>
-<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.23.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.24.0/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
 </div>
 <h2 id="example-16"><a class="header" href="#example-16">Example</a></h2>
@@ -19906,7 +19908,7 @@ engine.set_optimization_level(OptimizationLevel::None);
 
 let ast = engine.compile("...")?;</code></pre>
 <h2 id="step-2--extract-constants"><a class="header" href="#step-2--extract-constants">Step 2 – Extract Constants</a></h2>
-<p>Use <a href="https://docs.rs/rhai/1.23.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
+<p>Use <a href="https://docs.rs/rhai/1.24.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
 to extract top-level <a href="patterns//book/language/constants.html">constants</a> from the <a href="patterns//book/engine/compile.html"><code>AST</code></a>.</p>
 <pre><code class="language-rust">let mut scope = Scope::new();
 
@@ -21004,7 +21006,7 @@ appropriate scope where the wrapped reference may no longer be valid.</p>
 potentially be persistent (e.g. within an <a href="patterns//book/language/object-maps.html">object map</a>).</p>
 <h4 id="safety-check-via-unique-id"><a class="header" href="#safety-check-via-unique-id">Safety check via unique ID</a></h4>
 <p>One solution, as illustrated in the example, is to always tag each handle instance together with
-a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.23.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.24.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
 before running scripts.</p>
 <p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a>
 (via <a href="patterns//book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
@@ -21323,7 +21325,7 @@ let mut engine = create_scripting_engine(my_config);</code></pre>
 <h3 id="make-sure-that-rhai-has-the-appropriate-features"><a class="header" href="#make-sure-that-rhai-has-the-appropriate-features">Make sure that Rhai has the appropriate feature(s)</a></h3>
 <p>In the project’s <code>Cargo.toml</code>, specify the Rhai dependency with <code>bin-features</code>.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.23.0", features = ["bin-features"] }
+rhai = { version = "1.24.0", features = ["bin-features"] }
 </code></pre>
 <h3 id="rebuild"><a class="header" href="#rebuild">Rebuild</a></h3>
 <p>Rebuild the project, which should automatically build all the customized tools.</p>
@@ -21384,7 +21386,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.23.0", features = [ "no_float" ] }
+rhai = { version = "1.24.0", features = [ "no_float" ] }
 rhai_github = { git = "https://github.com/rhaiscript/rhai", features = [ "unchecked" ] }
 rhai_my_github = { git = "https://github.com/my_github/rhai", branch = "variation1", features = [ "serde", "no_closure" ] }
 rhai_local = { path = "../rhai_copy" }
@@ -22795,8 +22797,12 @@ added or removed.</p>
 <tr><td><code>reduce_rev</code></td><td><ol><li><a href="ref/fn-ptr.html">function pointer</a> to accumulator function (usually a <a href="ref/fn-closure.html">closure</a>)</li><li><em>(optional)</em> the initial value</li></ol></td><td>reduces the array (in reverse order) into a single value via the accumulator function taking the following parameters (if the second parameter is omitted, the array element is bound to <code>this</code>):<ol><li>accumulated value (<code>()</code> initially)</li><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>some</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if any element returns <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
 <tr><td><code>all</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to predicate (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>returns <code>true</code> if all elements return <code>true</code> when called with the predicate function taking the following parameters (if none, the array element is bound to <code>this</code>):<ol><li>array element</li><li><em>(optional)</em> index position</li></ol></td></tr>
-<tr><td><code>sort</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>sort_by</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>sorts the array with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
 <tr><td><code>sort</code></td><td><em>none</em></td><td>sorts a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="ref/strings-chars.html">string</a>, <a href="ref/strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
+<tr><td><code>sort_desc</code></td><td><em>none</em></td><td>sorts, in descending order, a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="ref/strings-chars.html">string</a>, <a href="ref/strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
+<tr><td><code>order_by</code></td><td><a href="ref/fn-ptr.html">function pointer</a> to a comparison function (usually a <a href="ref/fn-closure.html">closure</a>)</td><td>returns a copy of the array sorted with a comparison function taking the following parameters:<ol><li>first element</li><li>second element<br/>return value: <code>INT</code> &lt; 0 if first &lt; second, &gt; 0 if first &gt; second, 0 if first == second</li></ol></td></tr>
+<tr><td><code>order</code></td><td><em>none</em></td><td>returns a sorted copy of a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="ref/strings-chars.html">string</a>, <a href="ref/strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
+<tr><td><code>order_desc</code></td><td><em>none</em></td><td>returns a sorted (in descending order) copy of a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="ref/strings-chars.html">string</a>, <a href="ref/strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
 </tbody></table>
 </div>
 <h2 id="examples-23"><a class="header" href="#examples-23">Examples</a></h2>
@@ -26157,7 +26163,7 @@ such as <a href="https://crates.io/crates/mdbook"><code>mdbook</code></a> or <a 
 <h2 id="usage-2"><a class="header" href="#usage-2">Usage</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dev-dependencies]
-rhai = "1.23.0"
+rhai = "1.24.0"
 rhai-autodocs = "0.4"           # use rhai-autodocs crate
 </code></pre>
 <p><code>build.rs</code>:</p>
