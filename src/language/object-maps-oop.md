@@ -22,7 +22,7 @@ as a method call on the [object map] itself.
 ```rust
 let obj = #{
                 data: 40,
-                action: || this.data += x    // 'action' holds a closure
+                action: |x| this.data += x    // 'action' holds a closure
            };
 
 obj.action(2);                               // calls the function pointer with 'this' bound to 'obj'
