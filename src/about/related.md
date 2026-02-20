@@ -25,7 +25,7 @@ Related Resources
 
 * [Online Playground][playground] &ndash; Run Rhai scripts directly from an editor in the browser
 
-* [Language Server][lsp] &ndash; Language Server Protocol (LSP) server for Rhai
+* [Language Server][lsp] &ndash; Experimental Language Server Protocol (LSP) server for Rhai
 
 * [`rhai-doc`] &ndash; Rhai script documentation tool
 ```
@@ -33,13 +33,18 @@ Related Resources
 ~~~admonish note "Syntax highlighting"
 
 * [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=rhaiscript.vscode-rhai)
-  &ndash; Support `.rhai` script files syntax highlighting for Visual Studio Code
+  &ndash; Support `.rhai` script files syntax highlighting for Visual Studio Code.
+
+* [JetBrains Plugin](https://plugins.jetbrains.com/plugin/30068-rhai-language-support)
+  &ndash; Support `.rhai` script files syntax highlighting and more for JetBrains IDE's.
 
 * [Sublime Text 3 Plugin](https://packagecontrol.io/packages/Rhai) &ndash; Support `.rhai` script
-  files syntax highlighting for Sublime Text 3
+  files syntax highlighting for Sublime Text 3.
 
-* For other syntax highlighting purposes, e.g. `vim`, `highlight.js`, both Rust or JavaScript can be
-  used successfully.
+* [Vim Plugin](https://github.com/rhaiscript/vim-rhai)
+  &ndash; Support `.rhai` script files syntax highlighting for Vim.
+
+* For other syntax highlighting purposes, e.g. `highlight.js`, both Rust or JavaScript can be used successfully.
   
   Use `rust` when there is no [string interpolation][string]. This way, [closures] and [functions]
   (via the `fn` keyword) are styled properly. Elements not highlighted include:
