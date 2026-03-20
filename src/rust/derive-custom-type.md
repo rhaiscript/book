@@ -47,13 +47,14 @@ The `rhai_type` attribute, with options, can be added to the fields of the type 
 
 |   Option   | Applies to  |       Value       | Description                                                                                                              |
 | :--------: | :---------: | :---------------: | ------------------------------------------------------------------------------------------------------------------------ |
+|   `root`   |    type     | string expression | use this alternate name instead of `rhai` when importing the Rhai crate under a different name in `Cargo.toml`.          |
+|  `extra`   |    type     |   function path   | call this function after building the type to add additional APIs.                                                       |
 |   `name`   | type, field | string expression | use this name instead of the type/field name.                                                                            |
 |   `skip`   |    field    |      _none_       | skip this field; cannot be used with any other attribute.                                                                |
 | `readonly` |    field    |      _none_       | only auto-generate getter, no setter; cannot be used with `set`.                                                         |
 |   `get`    |    field    |   function path   | use this getter function (with `&self`) instead of the auto-generated getter; if `get_mut` is also set, this is ignored. |
 | `get_mut`  |    field    |   function path   | use this getter function (with `&mut self`) instead of the auto-generated getter.                                        |
 |   `set`    |    field    |   function path   | use this setter function instead of the auto-generated setter; cannot be used with `readonly`.                           |
-|  `extra`   |    type     |   function path   | call this function after building the type to add additional APIs                                                        |
 
 ### Function signatures
 
