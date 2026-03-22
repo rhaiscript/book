@@ -73,7 +73,7 @@ the _global_ level!
 
 ~~~admonish failure.small "`eval` is evil"
 
-For those who subscribe to the (very sensible) motto of ["`eval` is evil"](http://linterrors.com/js/eval-is-evil),
+For those who subscribe to the (very sensible) motto of ["`eval` is evil"](https://www.oreilly.com/library/view/javascript-the-good/9780596517748/apcs21.html),
 disable `eval` via [`Engine::disable_symbol`][disable keywords and operators].
 
 ```rust
