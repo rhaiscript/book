@@ -169,6 +169,7 @@ Scripting Language
     - [Get Native Function Signatures](engine/metadata/gen_fn_sig.md)
     - [Export All Functions Metadata to JSON](engine/metadata/export_to_json.md)
     - [Generate Definition Files for Language Server](engine/metadata/definitions.md)
+  - [Missing Function Handling](language/fn-missing.md)
 - [Print and Debug](language/print-debug.md)
 - [Modules](language/modules/index.md)
   - [Export Variables, Functions and Sub-Modules from Script](language/modules/export.md)
