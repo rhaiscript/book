@@ -20,7 +20,7 @@ which exposes all the type's fields to an [`Engine`] all at once.
 It is as simple as adding `#[derive(CustomType)]` to the type definition.
 
 ```rust
-use rhai::{CustomType, TypeBuilder};    // <- necessary imports
+use rhai::CustomType;
 
 #[derive(Clone, CustomType)]            // <- auto-implement 'CustomType'
 pub struct Vec3 {                       //    for normal structs
@@ -47,7 +47,7 @@ The `rhai_type` attribute, with options, can be added to the fields of the type 
 
 |   Option   | Applies to  |       Value       | Description                                                                                                              |
 | :--------: | :---------: | :---------------: | ------------------------------------------------------------------------------------------------------------------------ |
-|   `root`   |    type     | string expression | use this alternate name instead of `rhai` when importing the Rhai crate under a different name in `Cargo.toml`.          |
+|   `root`   |    type     |    module path    | use this alternate name instead of `rhai` when importing the Rhai crate under a different name in `Cargo.toml`.          |
 |  `extra`   |    type     |   function path   | call this function after building the type to add additional APIs.                                                       |
 |   `name`   | type, field | string expression | use this name instead of the type/field name.                                                                            |
 |   `skip`   |    field    |      _none_       | skip this field; cannot be used with any other attribute.                                                                |
@@ -85,8 +85,7 @@ The signature of the function for `extra` is:
 ### Example
 
 ```rust
-// Necessary imports
-use rhai::{CustomType, TypeBuilder, EvalAltResult, Dynamic, Position};
+use rhai::{CustomType, TypeBuilder};
 
 #[derive(Debug, Clone)]
 #[derive(CustomType)]                   // <- auto-implement 'CustomType'
@@ -181,7 +180,7 @@ fn vec3_build_extra(builder: &mut TypeBuilder<Self>) {
 
 ```rust
 impl CustomType for ABC {
-    fn build(mut builder: TypeBuilder<Self>)
+    fn build(mut builder: rhai::TypeBuilder<Self>)
     {
         builder.with_name("ABC");
         builder.with_get("field1", |obj: &mut Self| obj.1.clone());
@@ -197,7 +196,7 @@ impl CustomType for ABC {
 }
 
 impl CustomType for Foo {
-    fn build(mut builder: TypeBuilder<Self>)
+    fn build(mut builder: rhai::TypeBuilder<Self>)
     {
         builder.with_name("MyFoo");
         builder.with_get("bar", |obj: &mut Self| obj.bar.clone());
@@ -214,8 +213,8 @@ impl CustomType for Foo {
             Self::set_hello
         );
         builder.with_get_set("maybe",
-            |obj: &mut Self| obj.maybe.clone().map_or(Dynamic::UNIT, Dynamic::from),
-            |obj: &mut Self, val: Dynamic| {
+            |obj: &mut Self| obj.maybe.clone().map_or(rhai::Dynamic::UNIT, rhai::Dynamic::from),
+            |obj: &mut Self, val: rhai::Dynamic| {
                 if val.is_unit() {
                     obj.maybe = None;
                     Ok(())
@@ -226,7 +225,7 @@ impl CustomType for Foo {
                     Err(Box::new(EngineError::TypeMismatch(
                         "String".to_string(),
                         val.type_name().to_string(),
-                        Position::NONE
+                        rhai::Position::NONE
                     )))
                 }
             }
@@ -236,7 +235,7 @@ impl CustomType for Foo {
 }
 
 impl CustomType for Vec3 {
-    fn build(mut builder: TypeBuilder<Self>)
+    fn build(mut builder: rhai::TypeBuilder<Self>)
     {
         builder.with_name("Vec3");
         builder.with_get_set("x", |obj: &mut Self| Self::x(&*obj), Self::set_x);
