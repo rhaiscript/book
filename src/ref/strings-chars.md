@@ -178,19 +178,6 @@ let x = "I have a quote \" as well as a back-tick ` here.";
 String Interpolation
 --------------------
 
-~~~admonish question.side.wide "What if I want `${` inside?"
-
-🤦 Well, you just _have_ to ask for the impossible, don't you?
-
-Currently there is no way to escape `${`.  Build the string in three pieces:
-
-```js
-`Interpolations start with "`
-    + "${"
-    + `" and end with }.`
-```
-~~~
-
 Multi-line literal strings support _string interpolation_ wrapped in `${` ... `}`.
 
 Interpolation is not supported for normal string or character literals.
@@ -206,6 +193,8 @@ For convenience, if any interpolated value is a [BLOB](blobs.md), however, it is
 UTF-8 encoded string.  That is because it is rarely useful to interpolate a [BLOB](blobs.md) into a string,
 but extremely useful to be able to directly manipulate UTF-8 encoded text.
 
+To put `${` literally without interpolation, use `\${` instead.
+
 ```js
 let x = 42;
 let y = 123;
@@ -220,9 +209,10 @@ let s = `
 Undeniable logic:
 1) Hello, ${let w = `${x} world`; if x > 1 { w += "s" } w}!
 2) If ${y} > ${x} then it is ${y > x}!
+3) \${x - y} is not interpolated because it is escaped!
 `;
 
-s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 > 42 then it is true!\n";
+s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 > 42 then it is true!\n3) ${x - y} is not interpolated because it is escaped!\n";
 
 let blob = blob(3, 0x21);
 
