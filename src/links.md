@@ -240,6 +240,7 @@
 [`ahash`]: https://crates.io/crates/ahash
 
 [`rhai-dylib`]: {{rootUrl}}/lib/rhai-dylib.md
+[`rhai-bigint`]: {{rootUrl}}/lib/rhai-bigint.md
 [`rhai-rand`]: {{rootUrl}}/lib/rhai-rand.md
 [`rhai-sci`]: {{rootUrl}}/lib/rhai-sci.md
 [`rhai-ml`]: {{rootUrl}}/lib/rhai-ml.md

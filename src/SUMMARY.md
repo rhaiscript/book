@@ -90,6 +90,7 @@ Rust Integration
   - [Create Packages as Crates](rust/packages/crate.md)
   - [External Packages](lib/index.md)
     - [Random Number Generation, Shuffling and Sampling](lib/rhai-rand.md)
+    - [Arbitrary-Precision BigInt Arithmetic](lib/rhai-bigint.md)
     - [Scientific Computing](lib/rhai-sci.md)
     - [AI and Machine Learning](lib/rhai-ml.md)
     - [Filesystem Access](lib/rhai-fs.md)
