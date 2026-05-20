@@ -150,7 +150,7 @@ impl Foo {
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, CustomType)]
-#[rhai_fn(extra = vec3_build_extra)]
+#[rhai_type(extra = vec3_build_extra)]
 pub struct Vec3 {
     #[rhai_type(get = Self::x, set = Self::set_x)]
     x: i64,
