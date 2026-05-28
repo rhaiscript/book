@@ -78,7 +78,7 @@ impl AsMut<World> for WorldHandle {
 impl WorldHandle {
     /// Create handle from reference, using a random number as unique ID
     pub fn new(world: &mut World) -> Self {
-        let handle =unsafe { std::mem::transmute(world) };
+        let handle = unsafe { std::mem::transmute(world) };
         let unique_id = rand::random();
 
         Self(handle, unique_id)
@@ -101,7 +101,7 @@ pub mod handle_module {
         // Double check the pointer is still fresh
         // by comparing the handle's unique ID with
         // the version stored in the engine's tag!
-        if handle.unique_id() != context.tag() {
+        if handle.unique_id() != context.tag().unwrap().as_int().unwrap() {
             return "Ouch! The handle is stale!".into();
         }
 
