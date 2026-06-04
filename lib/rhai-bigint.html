@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>String Interpolation - Rhai - Embedded Scripting for Rust</title>
+        <title>Arbitrary-Precision BigInt Arithmetic - Rhai - Embedded Scripting for Rust</title>
 
 
         <!-- Custom HTML head -->
@@ -161,7 +161,7 @@
                         <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/rhaiscript/book/edit/master/src/language/string-interp.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/lib/rhai-bigint.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -195,94 +195,57 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="multi-line-literal-strings"><a class="header" href="#multi-line-literal-strings">Multi-Line Literal Strings</a></h1>
-<p>A <a href="/book/language/strings-chars.html">string</a> wrapped by a pair of back-tick (<code>`</code>) characters is interpreted <em>literally</em>.</p>
-<p>This means that every single character that lies between the two back-ticks is taken verbatim.</p>
-<p>This include new-lines, whitespaces, escape characters etc.</p>
-<pre><code class="language-js">let x = `hello, world! "\t\x42"
-  hello world again! 'x'
-     this is the last time!!! `;
-
-// The above is the same as:
-let x = "hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!! ";
-</code></pre>
-<p>If a back-tick (<code>`</code>) appears at the <em>end</em> of a line, then it is understood that the entire text
-block starts from the <em>next</em> line; the starting new-line character is stripped.</p>
-<pre><code class="language-js">let x = `
-        hello, world! "\t\x42"
-  hello world again! 'x'
-     this is the last time!!!
-`;
-
-// The above is the same as:
-let x = "        hello, world! \"\\t\\x42\"\n  hello world again! 'x'\n     this is the last time!!!\n";
-</code></pre>
-<p>To actually put a back-tick (<code>`</code>) character inside a multi-line literal <a href="/book/language/strings-chars.html">string</a>, use two
-back-ticks together (i.e. <code>``</code>).</p>
-<pre><code class="language-js">let x = `I have a quote " as well as a back-tick `` here.`;
-
-// The above is the same as:
-let x = "I have a quote \" as well as a back-tick ` here.";
-</code></pre>
-<h1 id="string-interpolation"><a class="header" href="#string-interpolation">String Interpolation</a></h1>
-<div id="admonition-only-literal-strings" class="admonition admonish-warning side wide" role="note" aria-labelledby="admonition-only-literal-strings-title">
+                        <h1 id="rhai-bigint-arbitrary-precision-bigint-arithmetic"><a class="header" href="#rhai-bigint-arbitrary-precision-bigint-arithmetic"><code>rhai-bigint</code>: Arbitrary-Precision BigInt Arithmetic</a></h1>
+<p><code>rhai-bigint</code> is an independent Rhai <a href="/book/rust/packages/index.html">package</a> that provides seamless, arbitrary-precision BigInt
+arithmetic via the <a href="https://crates.io/crates/num-bigint"><code>num-bigint</code></a> crate.</p>
+<div id="admonition-documentation" class="admonition admonish-info side" role="note" aria-labelledby="admonition-documentation-title">
 <div class="admonition-title">
-<div id="admonition-only-literal-strings-title">
-<p>Only literal strings</p>
+<div id="admonition-documentation-title">
+<p>Documentation</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-only-literal-strings"></a>
+<a class="admonition-anchor-link" href="#admonition-documentation"></a>
 </div>
 <div>
-<p>Interpolation is not supported for normal <a href="/book/language/strings-chars.html">string</a> or <a href="/book/language/strings-chars.html">character</a> literals.</p>
+<p>See <a href="https://docs.rs/rhai-bigint#api">https://docs.rs/rhai-bigint</a> for the list of functions.</p>
 </div>
 </div>
-<p>Multi-line literal <a href="/book/language/strings-chars.html">strings</a> support <em>string interpolation</em> wrapped in <code>${</code> … <code>}</code>.</p>
-<p><code>${</code> … <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
-statements block, including another interpolated <a href="/book/language/strings-chars.html">string</a>!
-The last result of the block is taken as the value for interpolation.</p>
-<p>Rhai uses <a href="/book/rust/print-custom.html"><code>to_string</code></a> to convert any value into a <a href="/book/language/strings-chars.html">string</a>, then physically joins all the
-sub-strings together.</p>
-<p>For convenience, if any interpolated value is a <a href="/book/language/blobs.html">BLOB</a>, however, it is automatically treated as a
-UTF-8 encoded string.  That is because it is rarely useful to interpolate a <a href="/book/language/blobs.html">BLOB</a> into a <a href="/book/language/strings-chars.html">string</a>,
-but extremely useful to be able to directly manipulate UTF-8 encoded text.</p>
-<p>To put <code>${</code> literally without interpolation, use <code>\${</code> instead.</p>
-<pre><code class="language-js">let x = 42;
-let y = 123;
-
-let s = `x = ${x} and y = ${y}.`;                   // &lt;- interpolated string
-
-let s = ("x = " + {x} + " and y = " + {y} + ".");   // &lt;- de-sugars to this
-
-s == "x = 42 and y = 123.";
-
-let s = `
-Undeniable logic:
-1) Hello, ${let w = `${x} world`; if x &gt; 1 { w += "s" } w}!
-2) If ${y} &gt; ${x} then it is ${y &gt; x}!
-3) \${x - y} is not interpolated because it is escaped!
-`;
-
-s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n3) ${x - y} is not interpolated because it is escaped!\n";
-
-let blob = blob(3, 0x21);
-
-print(blob);                            // prints [212121]
-
-print(`Data: ${blob}`);                 // prints "Data: !!!"
-                                        // BLOB is treated as UTF-8 encoded string
-
-print(`Data: ${blob.to_string()}`);     // prints "Data: [212121]"
+<blockquote>
+<p>On <code>crates.io</code>: <a href="https://crates.io/crates/rhai-bigint"><code>rhai-bigint</code></a></p>
+<p>On <code>GitHub</code>: <a href="https://github.com/rhaiscript/rhai-bigint"><code>rhaiscript/rhai-bigint</code></a></p>
+<p>Package name: <code>BigIntPackage</code></p>
+</blockquote>
+<h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
+<p><code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[dependencies]
+rhai = "1.24.0"
+rhai-bigint = "0.1"             # use rhai-bigint crate
 </code></pre>
+<h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>
+<pre><code class="language-rust">use rhai::Engine;
+use rhai::packages::Package;    // needed for 'Package' trait
+use rhai_bigint::BigIntPackage;
 
+let mut engine = Engine::new();
+
+// Create new 'BigIntPackage' instance
+let bigint = BigIntPackage::new();
+
+// Load the package into the `Engine`
+bigint.register_into_engine(&amp;mut engine);</code></pre>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th><th style="text-align: center">Default?</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>sync</code></td><td>enables <a href="/book/start/features.html"><code>rhai/sync</code></a> support</td><td style="text-align: center"><strong>no</strong></td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../language/strings-chars.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../lib/rhai-rand.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../rust/immutable-string.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../lib/rhai-sci.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -292,11 +255,11 @@ print(`Data: ${blob.to_string()}`);     // prints "Data: [212121]"
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../language/strings-chars.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../lib/rhai-rand.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../rust/immutable-string.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../lib/rhai-sci.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

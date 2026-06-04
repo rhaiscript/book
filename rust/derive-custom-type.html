@@ -213,7 +213,7 @@
 <p>A custom derive macro is provided to auto-implement <a href="/book/rust/build-type.html"><code>CustomType</code></a> on any <code>struct</code> type,
 which exposes all the type’s fields to an <a href="/book/engine/hello-world.html"><code>Engine</code></a> all at once.</p>
 <p>It is as simple as adding <code>#[derive(CustomType)]</code> to the type definition.</p>
-<pre><code class="language-rust">use rhai::{CustomType, TypeBuilder};    // &lt;- necessary imports
+<pre><code class="language-rust">use rhai::CustomType;
 
 #[derive(Clone, CustomType)]            // &lt;- auto-implement 'CustomType'
 pub struct Vec3 {                       //    for normal structs
@@ -233,13 +233,14 @@ engine.build_type::&lt;Vec3&gt;()
 <h2 id="custom-attribute-options"><a class="header" href="#custom-attribute-options">Custom Attribute Options</a></h2>
 <p>The <code>rhai_type</code> attribute, with options, can be added to the fields of the type to customize the auto-generated API.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Option</th><th style="text-align: center">Applies to</th><th style="text-align: center">Value</th><th>Description</th></tr></thead><tbody>
+<tr><td style="text-align: center"><code>root</code></td><td style="text-align: center">type</td><td style="text-align: center">module path</td><td>use this alternate name instead of <code>rhai</code> when importing the Rhai crate under a different name in <code>Cargo.toml</code>.</td></tr>
+<tr><td style="text-align: center"><code>extra</code></td><td style="text-align: center">type</td><td style="text-align: center">function path</td><td>call this function after building the type to add additional APIs.</td></tr>
 <tr><td style="text-align: center"><code>name</code></td><td style="text-align: center">type, field</td><td style="text-align: center">string expression</td><td>use this name instead of the type/field name.</td></tr>
 <tr><td style="text-align: center"><code>skip</code></td><td style="text-align: center">field</td><td style="text-align: center"><em>none</em></td><td>skip this field; cannot be used with any other attribute.</td></tr>
 <tr><td style="text-align: center"><code>readonly</code></td><td style="text-align: center">field</td><td style="text-align: center"><em>none</em></td><td>only auto-generate getter, no setter; cannot be used with <code>set</code>.</td></tr>
 <tr><td style="text-align: center"><code>get</code></td><td style="text-align: center">field</td><td style="text-align: center">function path</td><td>use this getter function (with <code>&amp;self</code>) instead of the auto-generated getter; if <code>get_mut</code> is also set, this is ignored.</td></tr>
 <tr><td style="text-align: center"><code>get_mut</code></td><td style="text-align: center">field</td><td style="text-align: center">function path</td><td>use this getter function (with <code>&amp;mut self</code>) instead of the auto-generated getter.</td></tr>
 <tr><td style="text-align: center"><code>set</code></td><td style="text-align: center">field</td><td style="text-align: center">function path</td><td>use this setter function instead of the auto-generated setter; cannot be used with <code>readonly</code>.</td></tr>
-<tr><td style="text-align: center"><code>extra</code></td><td style="text-align: center">type</td><td style="text-align: center">function path</td><td>call this function after building the type to add additional APIs</td></tr>
 </tbody></table>
 </div>
 <h3 id="function-signatures"><a class="header" href="#function-signatures">Function signatures</a></h3>
@@ -260,8 +261,7 @@ engine.build_type::&lt;Vec3&gt;()
 <pre><code class="language-rust">Fn(&amp;mut TypeBuilder&lt;T&gt;)</code></pre>
 </blockquote>
 <h3 id="example"><a class="header" href="#example">Example</a></h3>
-<pre><code class="language-rust">// Necessary imports
-use rhai::{CustomType, TypeBuilder, EvalAltResult, Dynamic, Position};
+<pre><code class="language-rust">use rhai::{CustomType, TypeBuilder};
 
 #[derive(Debug, Clone)]
 #[derive(CustomType)]                   // &lt;- auto-implement 'CustomType'
@@ -326,7 +326,7 @@ impl Foo {
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, CustomType)]
-#[rhai_fn(extra = vec3_build_extra)]
+#[rhai_type(extra = vec3_build_extra)]
 pub struct Vec3 {
     #[rhai_type(get = Self::x, set = Self::set_x)]
     x: i64,
@@ -359,7 +359,7 @@ fn vec3_build_extra(builder: &amp;mut TypeBuilder&lt;Self&gt;) {
 </div>
 <div>
 <pre><code class="language-rust">impl CustomType for ABC {
-    fn build(mut builder: TypeBuilder&lt;Self&gt;)
+    fn build(mut builder: rhai::TypeBuilder&lt;Self&gt;)
     {
         builder.with_name("ABC");
         builder.with_get("field1", |obj: &amp;mut Self| obj.1.clone());
@@ -375,7 +375,7 @@ fn vec3_build_extra(builder: &amp;mut TypeBuilder&lt;Self&gt;) {
 }
 
 impl CustomType for Foo {
-    fn build(mut builder: TypeBuilder&lt;Self&gt;)
+    fn build(mut builder: rhai::TypeBuilder&lt;Self&gt;)
     {
         builder.with_name("MyFoo");
         builder.with_get("bar", |obj: &amp;mut Self| obj.bar.clone());
@@ -392,8 +392,8 @@ impl CustomType for Foo {
             Self::set_hello
         );
         builder.with_get_set("maybe",
-            |obj: &amp;mut Self| obj.maybe.clone().map_or(Dynamic::UNIT, Dynamic::from),
-            |obj: &amp;mut Self, val: Dynamic| {
+            |obj: &amp;mut Self| obj.maybe.clone().map_or(rhai::Dynamic::UNIT, rhai::Dynamic::from),
+            |obj: &amp;mut Self, val: rhai::Dynamic| {
                 if val.is_unit() {
                     obj.maybe = None;
                     Ok(())
@@ -404,7 +404,7 @@ impl CustomType for Foo {
                     Err(Box::new(EngineError::TypeMismatch(
                         "String".to_string(),
                         val.type_name().to_string(),
-                        Position::NONE
+                        rhai::Position::NONE
                     )))
                 }
             }
@@ -414,7 +414,7 @@ impl CustomType for Foo {
 }
 
 impl CustomType for Vec3 {
-    fn build(mut builder: TypeBuilder&lt;Self&gt;)
+    fn build(mut builder: rhai::TypeBuilder&lt;Self&gt;)
     {
         builder.with_name("Vec3");
         builder.with_get_set("x", |obj: &amp;mut Self| Self::x(&amp;*obj), Self::set_x);

@@ -341,22 +341,6 @@ back-ticks together (i.e. <code>``</code>).</p>
 let x = "I have a quote \" as well as a back-tick ` here.";
 </code></pre>
 <h2 id="string-interpolation"><a class="header" href="#string-interpolation">String Interpolation</a></h2>
-<div id="admonition-what-if-i-want--inside" class="admonition admonish-question side wide" role="note" aria-labelledby="admonition-what-if-i-want--inside-title">
-<div class="admonition-title">
-<div id="admonition-what-if-i-want--inside-title">
-<p>What if I want <code>${</code> inside?</p>
-</div>
-<a class="admonition-anchor-link" href="#admonition-what-if-i-want--inside"></a>
-</div>
-<div>
-<p>🤦 Well, you just <em>have</em> to ask for the impossible, don’t you?</p>
-<p>Currently there is no way to escape <code>${</code>.  Build the string in three pieces:</p>
-<pre><code class="language-js">`Interpolations start with "`
-    + "${"
-    + `" and end with }.`
-</code></pre>
-</div>
-</div>
 <p>Multi-line literal strings support <em>string interpolation</em> wrapped in <code>${</code> … <code>}</code>.</p>
 <p>Interpolation is not supported for normal string or character literals.</p>
 <p><code>${</code> … <code>}</code> acts as a statements <em>block</em> and can contain anything that is allowed within a
@@ -367,6 +351,7 @@ the sub-strings together.</p>
 <p>For convenience, if any interpolated value is a <a href="blobs.html">BLOB</a>, however, it is automatically treated as a
 UTF-8 encoded string.  That is because it is rarely useful to interpolate a <a href="blobs.html">BLOB</a> into a string,
 but extremely useful to be able to directly manipulate UTF-8 encoded text.</p>
+<p>To put <code>${</code> literally without interpolation, use <code>\${</code> instead.</p>
 <pre><code class="language-js">let x = 42;
 let y = 123;
 
@@ -380,9 +365,10 @@ let s = `
 Undeniable logic:
 1) Hello, ${let w = `${x} world`; if x &gt; 1 { w += "s" } w}!
 2) If ${y} &gt; ${x} then it is ${y &gt; x}!
+3) \${x - y} is not interpolated because it is escaped!
 `;
 
-s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n";
+s == "Undeniable logic:\n1) Hello, 42 worlds!\n2) If 123 &gt; 42 then it is true!\n3) ${x - y} is not interpolated because it is escaped!\n";
 
 let blob = blob(3, 0x21);
 

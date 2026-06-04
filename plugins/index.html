@@ -806,8 +806,9 @@ mod my_module {
 <p>Parameters can be applied to the <code>#[export_module]</code> attribute to override its default behavior.</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody>
 <tr><td><em>none</em></td><td>exports only public (i.e. <code>pub</code>) functions</td></tr>
-<tr><td><code>export_all</code></td><td>exports all functions (including private, non-<code>pub</code> functions); use <code>#[rhai_fn(skip)]</code> on individual functions to avoid export</td></tr>
-<tr><td><code>export_prefix = "..."</code></td><td>exports functions (including private, non-<code>pub</code> functions) with names starting with a specific prefix</td></tr>
+<tr><td><code>export_all</code></td><td>exports all functions (including private, non-<code>pub</code> functions);<br />use <code>#[rhai_fn(skip)]</code> on individual functions to avoid export</td></tr>
+<tr><td><code>export_prefix = "..."</code></td><td>exports only functions (including private, non-<code>pub</code> functions) with names starting with a specific prefix</td></tr>
+<tr><td><code>root = "..."</code></td><td>specifies an alternative name for the Rhai crate (default is <code>rhai</code>) if it is renamed in <code>Cargo.toml</code></td></tr>
 </tbody></table>
 </div>
 <h2 id="inner-attributes"><a class="header" href="#inner-attributes">Inner Attributes</a></h2>

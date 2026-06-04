@@ -199,23 +199,70 @@
 <p>Many functions in advanced APIs contain a parameter of type <code>EvalContext</code> in order to allow the
 current evaluation state to be accessed and/or modified.</p>
 <p><code>EvalContext</code> encapsulates the current <em>evaluation context</em> and exposes the following methods.</p>
-<div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>scope()</code></td><td style="text-align: center"><a href="/book/engine/scope.html"><code>&amp;Scope</code></a></td><td>reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td><code>scope_mut()</code></td><td style="text-align: center"><a href="/book/engine/scope.html"><code>&amp;mut Scope</code></a></td><td>mutable reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a>; <a href="/book/language/variables.html">variables</a> can be added to/removed from it</td></tr>
-<tr><td><code>engine()</code></td><td style="text-align: center"><a href="/book/engine/hello-world.html"><code>&amp;Engine</code></a></td><td>reference to the current <a href="/book/engine/hello-world.html"><code>Engine</code></a></td></tr>
-<tr><td><code>source()</code></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
-<tr><td><code>tag()</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the custom state that is persistent during the current run</td></tr>
-<tr><td><code>tag_mut()</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>mutable reference to the custom state that is persistent during the current run</td></tr>
-<tr><td><code>iter_imports()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <a href="/book/language/modules/import.html"><code>import</code></a> statements, in reverse order (i.e. later <a href="/book/rust/modules/index.html">modules</a> come first); not available under <a href="/book/start/features.html"><code>no_module</code></a></td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a> (including the stack of <a href="/book/rust/modules/index.html">modules</a> imported via <a href="/book/language/modules/import.html"><code>import</code></a> statements)</td></tr>
-<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a>; use this to access the <a href="/book/engine/debugging/debugger.html"><code>debugger</code></a> field in order to set/clear <a href="/book/engine/debugging/break-points.html">break-points</a></td></tr>
-<tr><td><code>iter_namespaces()</code></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a>, in reverse order (i.e. later <a href="/book/rust/modules/index.html">modules</a> come first)</td></tr>
-<tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="/book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a></td></tr>
-<tr><td><code>this_ptr()</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;&amp;Dynamic&gt;</code></a></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
-<tr><td><code>this_ptr_mut()</code></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Option&lt;&amp;mut Dynamic&gt;</code></a></td><td>mutable reference to the current bound <code>this</code> pointer, if any</td></tr>
-<tr><td><code>call_level()</code></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of <a href="/book/language/functions.html">function</a> calls</td></tr>
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Requires feature</th><th style="text-align: center">Return type</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>engine()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/engine/hello-world.html"><code>&amp;Engine</code></a></td><td>reference to the current <a href="/book/engine/hello-world.html"><code>Engine</code></a></td></tr>
+<tr><td><code>scope()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/engine/scope.html"><code>&amp;Scope</code></a></td><td>reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
+<tr><td><code>scope_mut()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/engine/scope.html"><code>&amp;mut Scope</code></a></td><td>mutable reference to the current <a href="/book/engine/scope.html"><code>Scope</code></a>; <a href="/book/language/variables.html">variables</a> can be added to/removed from it</td></tr>
+<tr><td><code>source()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>Option&lt;&amp;str&gt;</code></td><td>reference to the current source, if any</td></tr>
+<tr><td><code>source_mut()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/rust/immutable-string.html"><code>&amp;mut Option&lt;ImmutableString&gt;</code></a></td><td>mutable reference to the current source, if any</td></tr>
+<tr><td><code>tag()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;Dynamic</code></a></td><td>reference to the <em>custom state</em> that is persistent during the current run</td></tr>
+<tr><td><code>tag_mut()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Dynamic</code></a></td><td>mutable reference to the <em>custom state</em> that is persistent during the current run</td></tr>
+<tr><td><code>iter_imports()</code></td><td style="text-align: center">not <a href="/book/start/features.html"><code>no_module</code></a></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="/book/rust/modules/index.html">modules</a> imported via <a href="/book/language/modules/import.html"><code>import</code></a> statements, in reverse order (i.e. later imported <a href="/book/rust/modules/index.html">modules</a> come first)</td></tr>
+<tr><td><code>iter_namespaces()</code></td><td style="text-align: center">not <a href="/book/start/features.html"><code>no_function</code></a></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="/book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="/book/language/fn-namespaces.html">namespaces</a> (as <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>,<br/>not <a href="/book/start/features.html"><code>no_function</code></a></td><td style="text-align: center"><a href="/book/rust/modules/index.html"><code>&amp;[Shared&lt;Module&gt;]</code></a></td><td>reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as shared <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td><code>namespaces_mut()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>,<br/>not <a href="/book/start/features.html"><code>no_function</code></a></td><td style="text-align: center"><a href="/book/rust/modules/index.html"><code>&amp;mut [Module]</code></a></td><td>mutable reference to the <a href="/book/language/fn-namespaces.html">namespaces</a> (as shared <a href="/book/rust/modules/index.html">modules</a>) containing all script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td><code>this_ptr()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;&amp;Dynamic&gt;</code></a></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
+<tr><td><code>this_ptr_mut()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Option&lt;&amp;mut Dynamic&gt;</code></a></td><td>mutable reference to the current bound <code>this</code> pointer, if any</td></tr>
+<tr><td><code>call_level()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of <a href="/book/language/functions.html">function</a> calls</td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.24.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>debugger()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>, <a href="/book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="/book/engine/debugging/debugger.html"><code>Option&lt;&amp;debugger::Debugger&gt;</code></a></td><td>reference to the <a href="/book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
+<tr><td><code>debugger_mut()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>, <a href="/book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="/book/engine/debugging/debugger.html"><code>Option&lt;&amp;mut debugger::Debugger&gt;</code></a></td><td>mutable reference to the <a href="/book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
+<tr><td><code>new_frame()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>EvalContextFrameGuard</code></td><td>create a new frame that automatically restores field values upon <code>Drop</code></td></tr>
 </tbody></table>
 </div>
+<h2 id="new-frame"><a class="header" href="#new-frame">New Frame</a></h2>
+<p>The <code>EvalContext::new_frame()</code> method creates a new frame (via a <em>frame guard</em>) that automatically
+restores field values when it is dropped. This is useful for temporarily modifying the <code>EvalContext</code>
+and ensuring that it is properly restored afterwards, even if it exits due to an error.</p>
+<p>The frame guard type returned by <code>EvalContext::new_frame()</code> is <code>EvalContextFrameGuard</code>,
+supporting the following API:</p>
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th style="text-align: center">Requires feature</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>with_new_caching_layer()</code></td><td style="text-align: center"></td><td>push a new caching layer so that function resolutions do not persist</td></tr>
+<tr><td><code>rewind_scope(true/false)</code></td><td style="text-align: center"></td><td>rewind (or not) the <a href="/book/engine/scope.html">scope</a> at the end of the frame</td></tr>
+<tr><td><code>with_source(new_source)</code></td><td style="text-align: center"></td><td>modify the current source</td></tr>
+<tr><td><code>clear_source()</code></td><td style="text-align: center"></td><td>clear the current source</td></tr>
+<tr><td><code>with_tag(new_state)</code></td><td style="text-align: center"></td><td>modify the <em>custom state</em></td></tr>
+<tr><td><code>clear_tag()</code></td><td style="text-align: center"></td><td>clear the <em>custom state</em> to <a href="/book/language/values-and-types.html"><code>()</code></a></td></tr>
+<tr><td><code>with_import(module)</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>,<br/>not <a href="/book/start/features.html"><code>no_module</code></a></td><td>push a new imported <a href="/book/rust/modules/index.html">module</a></td></tr>
+<tr><td><code>with_namespace(module)</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>,<br/>not <a href="/book/start/features.html"><code>no_function</code></a></td><td>push a new <a href="/book/rust/modules/index.html">module</a> containing script-defined <a href="/book/language/functions.html">functions</a></td></tr>
+<tr><td><code>up_call_level()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td>increment the current nesting level of <a href="/book/language/functions.html">function</a> calls</td></tr>
+</tbody></table>
+</div>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<p>The following pushes a new, empty, caching layer to make sure that new function resolutions
+do not persist. This is useful if the resolution will be volatile.</p>
+<pre><code class="language-rust">// The resolution to function 'foo' will not be cached outside the frame.
+// The next call to 'foo' will be resolved again instead of using the cached resolution,
+// even if 'foo' is redefined.
+let result: i64 = context.new_frame()
+                         .with_new_caching_layer()
+                         .call_fn("foo", (0_i64, true))?;</code></pre>
+<p>The following modifies the <code>EvalContext</code> before using, restoring its state afterwards.</p>
+<pre><code class="language-rust">{
+     // Modify the context before using...
+     let context = context.new_frame()
+                          .rewind_scope(true)           // rewinds the scope...
+                          .with_source("new source")    // new source...
+                          .with_module(new_module)      // add new module...
+                          .up_call_level();             // increment call level...
+    //
+    // Call a function with the modified context...
+    let result: i64 = context.call_fn("foo", (0_i64, true))?;
+    //
+    // ... at end of block, context automatically restored to previous state.
+}</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
