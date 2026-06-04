@@ -101,8 +101,8 @@ pub mod handle_module {
         // Double check the pointer is still fresh
         // by comparing the handle's unique ID with
         // the version stored in the engine's tag!
-        if handle.unique_id() != context.tag().unwrap().as_int().unwrap() {
-            return "Ouch! The handle is stale!".into();
+        if context.tag().map_or(true, |tag| tag.as_int() != Ok(handle.unique_id())) {
+            return Err("Ouch! The handle is stale!".into());
         }
 
         // Get the reference to 'World'
