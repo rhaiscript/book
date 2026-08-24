@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Strings and Characters - Rhai - Embedded Scripting for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-12WKJTDTEE"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+        
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+        
+                gtag('config', 'G-12WKJTDTEE');
+            }
+        </script>
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/rhai.min.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/language/strings-chars.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="strings-and-characters"><a class="header" href="#strings-and-characters">Strings and Characters</a></h1>
+<div id="admonition-safety" class="admonition admonish-tip side" role="note" aria-labelledby="admonition-safety-title">
+<div class="admonition-title">
+<div id="admonition-safety-title">
+<p>Safety</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-safety"></a>
+</div>
+<div>
+<p>Always limit the <a href="/book/dev/safety/max-string-size.html">maximum length of strings</a>.</p>
+</div>
+</div>
+<p>String in Rhai contain any text sequence of valid Unicode characters.</p>
+<p>Internally strings are stored in UTF-8 encoding.</p>
+<p><a href="/book/dev/language/type-of.html"><code>type_of()</code></a> a string returns <code>"string"</code>.</p>
+<h2 id="string-and-character-literals"><a class="header" href="#string-and-character-literals">String and Character Literals</a></h2>
+<p>String and character literals follow JavaScript-style syntax.</p>
+<div class="table-wrapper"><table><thead><tr><th>Type</th><th style="text-align: center">Quotes</th><th style="text-align: center">Escapes?</th><th style="text-align: center">Continuation?</th><th style="text-align: center">Interpolation?</th></tr></thead><tbody>
+<tr><td>Normal string</td><td style="text-align: center"><code>"..."</code></td><td style="text-align: center">yes</td><td style="text-align: center">with <code>\</code></td><td style="text-align: center"><strong>no</strong></td></tr>
+<tr><td>Raw string</td><td style="text-align: center"><code>#..#"..."#..#</code></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
+<tr><td>Multi-line literal string</td><td style="text-align: center"><code>`...`</code></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">with <code>${...}</code></td></tr>
+<tr><td>Character</td><td style="text-align: center"><code>'...'</code></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
+</tbody></table>
+</div><div id="admonition-tip-building-strings" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-building-strings-title">
+<div class="admonition-title">
+<div id="admonition-tip-building-strings-title">
+<p>Tip: Building strings</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-building-strings"></a>
+</div>
+<div>
+<p>Strings can be built up from other strings and types via the <code>+</code> operator
+(provided by the <a href="/book/dev/rust/packages/builtin.html"><code>MoreStringPackage</code></a> but excluded when using a <a href="/book/dev/engine/raw.html">raw <code>Engine</code></a>).</p>
+<p>This is particularly useful when printing output.</p>
+</div>
+</div>
+<h2 id="standard-escape-sequences"><a class="header" href="#standard-escape-sequences">Standard Escape Sequences</a></h2>
+<div id="admonition-tip-character-to_int" class="admonition admonish-tip side" role="note" aria-labelledby="admonition-tip-character-to_int-title">
+<div class="admonition-title">
+<div id="admonition-tip-character-to_int-title">
+<p>Tip: Character <code>to_int()</code></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-character-to_int"></a>
+</div>
+<div>
+<p>Use the <code>to_int</code> method to convert a Unicode character into its 32-bit Unicode encoding.</p>
+</div>
+</div>
+<p>There is built-in support for Unicode (<code>\u</code><em>xxxx</em> or <code>\U</code><em>xxxxxxxx</em>) and hex (<code>\x</code><em>xx</em>) escape
+sequences for normal strings and characters.</p>
+<p>Hex sequences map to ASCII characters, while <code>\u</code> maps to 16-bit common Unicode code points and <code>\U</code>
+maps the full, 32-bit extended Unicode code points.</p>
+<p>Escape sequences are not supported for multi-line literal strings wrapped by back-ticks (<code>`</code>).</p>
+<div class="table-wrapper"><table><thead><tr><th>Escape sequence</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>\\</code></td><td>back-slash (<code>\</code>)</td></tr>
+<tr><td><code>\t</code></td><td>tab</td></tr>
+<tr><td><code>\r</code></td><td>carriage-return (<code>CR</code>)</td></tr>
+<tr><td><code>\n</code></td><td>line-feed (<code>LF</code>)</td></tr>
+<tr><td><code>\"</code> or <code>""</code></td><td>double-quote (<code>"</code>)</td></tr>
+<tr><td><code>\'</code></td><td>single-quote (<code>'</code>)</td></tr>
+<tr><td><code>\x</code><em>xx</em></td><td>ASCII character in 2-digit hex</td></tr>
+<tr><td><code>\u</code><em>xxxx</em></td><td>Unicode character in 4-digit hex</td></tr>
+<tr><td><code>\U</code><em>xxxxxxxx</em></td><td>Unicode character in 8-digit hex</td></tr>
+</tbody></table>
+</div>
+<h2 id="line-continuation"><a class="header" href="#line-continuation">Line Continuation</a></h2>
+<p>For a normal string wrapped by double-quotes (<code>"</code>), a back-slash (<code>\</code>) character at the end of a
+line indicates that the string continues onto the next line <em>without any line-break</em>.</p>
+<p>Whitespace up to the indentation of the opening double-quote is ignored in order to enable lining up
+blocks of text.</p>
+<p>Spaces are <em>not</em> added, so to separate one line with the next with a space, put a space before the
+ending back-slash (<code>\</code>) character.</p>
+<pre><code class="language-rust">let x = "hello, world!\
+         hello world again! \
+         this is the ""last"" time!!!";
+// ^^^^^^ these whitespaces are ignored
+
+// The above is the same as:
+let x = "hello, world!hello world again! this is the \"last\" time!!!";</code></pre>
+<p>A string with continuation does not open up a new line.  To do so, a new-line character must be
+manually inserted at the appropriate position.</p>
+<pre><code class="language-rust">let x = "hello, world!\n\
+         hello world again!\n\
+         this is the last time!!!";
+
+// The above is the same as:
+let x = "hello, world!\nhello world again!\nthis is the last time!!!";</code></pre>
+<div id="admonition-no-ending-quote-before-the-line-ends-is-a-syntax-error" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-no-ending-quote-before-the-line-ends-is-a-syntax-error-title">
+<div class="admonition-title">
+<div id="admonition-no-ending-quote-before-the-line-ends-is-a-syntax-error-title">
+<p>No ending quote before the line ends is a syntax error</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-no-ending-quote-before-the-line-ends-is-a-syntax-error"></a>
+</div>
+<div>
+<p>If the ending double-quote is omitted, it is a syntax error.</p>
+<pre><code class="language-rust">let x = "hello
+<span class="boring">";
+</span>//            ^ syntax error: unterminated string literal</code></pre>
+</div>
+</div>
+<div id="admonition-why-not-go-multi-line" class="admonition admonish-question small" role="note" aria-labelledby="admonition-why-not-go-multi-line-title">
+<div class="admonition-title">
+<div id="admonition-why-not-go-multi-line-title">
+<p>Why not go multi-line?</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-why-not-go-multi-line"></a>
+</div>
+<div>
+<p>Technically speaking, there is no difficulty in allowing strings to run for multiple lines
+<em>without</em> the continuation back-slash.</p>
+<p>Rhai forces you to manually mark a continuation with a back-slash because the ending quote is easy to omit.
+Once it happens, the entire remainder of the script would become one giant, multi-line string.</p>
+<p>This behavior is different from Rust, where string literals can run for multiple lines.</p>
+</div>
+</div>
+<h2 id="raw-strings"><a class="header" href="#raw-strings">Raw Strings</a></h2>
+<p>A <em>raw string</em> is any text enclosed by a pair of double-quotes (<code>"</code>), wrapped by hash (<code>#</code>) characters.</p>
+<p>The number of hash (<code>#</code>) on each side must be the same.</p>
+<p>Any text inside the double-quotes, as long as it is not a double-quote (<code>"</code>) followed by the same
+number of hash (<code>#</code>) characters, is simply copied verbatim, <em>including control codes and/or
+line-breaks</em>.</p>
+<p>Raw strings are very useful for embedded regular expressions, file paths, and program code etc.</p>
+<pre><code class="language-rust">let x = #"Hello, I am a raw string! which means that I can contain
+             line-breaks, \ slashes (not escapes), "quotes" and even # characters!"#
+
+// Use more than one '#' if you happen to have '"###...' inside the string...
+
+let x = ###"In Rhai, you can write ##"hello"## as a raw string."###;
+//                                         ^^^ this is not the end of the raw string</code></pre>
+<h2 id="indexing"><a class="header" href="#indexing">Indexing</a></h2>
+<p>Strings can be <em>indexed</em> into to get access to any individual character.
+This is similar to many modern languages but different from Rust.</p>
+<h3 id="from-beginning"><a class="header" href="#from-beginning">From beginning</a></h3>
+<p>Individual characters within a string can be accessed with zero-based, non-negative integer indices:</p>
+<blockquote>
+<p><em>string</em> <code>[</code> <em>index from 0 to (total number of characters − 1)</em> <code>]</code></p>
+</blockquote>
+<h3 id="from-end"><a class="header" href="#from-end">From end</a></h3>
+<p>A <em>negative</em> index accesses a character in the string counting from the <em>end</em>, with −1 being the
+<em>last</em> character.</p>
+<blockquote>
+<p><em>string</em> <code>[</code> <em>index from −1 to −(total number of characters)</em> <code>]</code></p>
+</blockquote>
+<div id="admonition-character-indexing-can-be-sloooooooow" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-character-indexing-can-be-sloooooooow-title">
+<div class="admonition-title">
+<div id="admonition-character-indexing-can-be-sloooooooow-title">
+<p>Character indexing can be SLOOOOOOOOW</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-character-indexing-can-be-sloooooooow"></a>
+</div>
+<div>
+<p>Internally, a Rhai string is still stored compactly as a Rust UTF-8 string in order to save memory.</p>
+<p>Therefore, getting the character at a particular index involves walking through the entire UTF-8
+encoded bytes stream to extract individual Unicode characters, counting them on the way.</p>
+<p>Because of this, indexing can be a <em>slow</em> procedure, especially for long strings.
+Along the same lines, getting the <em>length</em> of a string (which returns the number of characters, not
+bytes) can also be slow.</p>
+</div>
+</div>
+<h2 id="sub-strings"><a class="header" href="#sub-strings">Sub-Strings</a></h2>
+<p>Sub-strings, or <em>slices</em> in some programming languages, are parts of strings.</p>
+<p>In Rhai, a sub-string can be specified by indexing with a <a href="/book/dev/language/ranges.html">range</a> of characters:</p>
+<blockquote>
+<p><em>string</em> <code>[</code> <em>first character (starting from zero)</em> <code>..</code> <em>last character (exclusive)</em> <code>]</code></p>
+<p><em>string</em> <code>[</code> <em>first character (starting from zero)</em> <code>..=</code> <em>last character (inclusive)</em> <code>]</code></p>
+</blockquote>
+<p>Sub-string <a href="/book/dev/language/ranges.html">ranges</a> always start from zero counting towards the end of the string.
+Negative <a href="/book/dev/language/ranges.html">ranges</a> are not supported.</p>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<pre><code class="language-js">let name = "Bob";
+let middle_initial = 'C';
+let last = "Davis";
+
+let full_name = `${name} ${middle_initial}. ${last}`;
+full_name == "Bob C. Davis";
+
+// String building with different types
+let age = 42;
+let record = `${full_name}: age ${age}`;
+record == "Bob C. Davis: age 42";
+
+// Unlike Rust, Rhai strings can be indexed to get a character
+// (disabled with 'no_index')
+let c = record[4];
+c == 'C';                               // single character
+
+let slice = record[4..8];               // sub-string slice
+slice == " C. D";
+
+ts.s = record;                          // custom type properties can take strings
+
+let c = ts.s[4];
+c == 'C';
+
+let c = ts.s[-4];                       // negative index counts from the end
+c == 'e';
+
+let c = "foo"[0];                       // indexing also works on string literals...
+c == 'f';
+
+let c = ("foo" + "bar")[5];             // ... and expressions returning strings
+c == 'r';
+
+let text = "hello, world!";
+text[0] = 'H';                          // modify a single character
+text == "Hello, world!";
+
+text[7..=11] = "Earth";                 // modify a sub-string slice
+text == "Hello, Earth!";
+
+// Escape sequences in strings
+record += " \u2764\n";                  // escape sequence of '❤' in Unicode
+record == "Bob C. Davis: age 42 ❤\n";  // '\n' = new-line
+
+// Unlike Rust, Rhai strings can be directly modified character-by-character
+// (disabled with 'no_index')
+record[4] = '\x58'; // 0x58 = 'X'
+record == "Bob X. Davis: age 42 ❤\n";
+
+// Use 'in' to test if a substring (or character) exists in a string
+"Davis" in record == true;
+'X' in record == true;
+'C' in record == false;
+
+// Strings can be iterated with a 'for' statement, yielding characters
+for ch in record {
+    print(ch);
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../language/bit-fields.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../language/string-interp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../language/bit-fields.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../language/string-interp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

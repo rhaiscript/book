@@ -1,0 +1,402 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Capabilities Matching - Rhai - Embedded Scripting for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-12WKJTDTEE"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+        
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+        
+                gtag('config', 'G-12WKJTDTEE');
+            }
+        </script>
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/rhai.min.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/grain/capabilities.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="capabilities"><a class="header" href="#capabilities">Capabilities</a></h1>
+<h2 id="why-is-this-important"><a class="header" href="#why-is-this-important">Why is This Important?</a></h2>
+<p>Normally, there is no way for Rhai’s <a href="/book/dev/engine/compile.html"><code>AST</code></a> to go out of sync with the <a href="/book/dev/engine/hello-world.html"><code>Engine</code></a> build that
+compiled it.</p>
+<p>The Rhai compiler and its runtime are tightly-coupled together, and an <a href="/book/dev/engine/compile.html"><code>AST</code></a> can only ever be
+built from the script source.  There is no mechanism to store an <a href="/book/dev/engine/compile.html"><code>AST</code></a> externally or transmit it
+elsewhere.</p>
+<p>Not so for the Rhai Grain VM.</p>
+<p>A Rhai script’s <a href="/book/dev/engine/compile.html"><code>AST</code></a> can be further transpiled into <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> which can be stored externally
+(i.e. into a file) and then shipped to another machine, and run on a completely different <a href="/book/dev/engine/hello-world.html"><code>Engine</code></a>
+build, which may not even have a parser or the same <a href="/book/dev/start/features.html">features</a> enabled.</p>
+<h2 id="fingerprint-abi"><a class="header" href="#fingerprint-abi">Fingerprint (ABI)</a></h2>
+<p>Thereforel, Rhai Grain <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> carry a small <em>fingerprint</em>, or ABI, that makes sure it can be
+properly decoded and/or run on the host.</p>
+<h3 id="fingerprint-abi-structure"><a class="header" href="#fingerprint-abi-structure">Fingerprint (ABI) structure</a></h3>
+<div id="admonition-note" class="admonition admonish-note side" role="note" aria-labelledby="admonition-note-title">
+<div class="admonition-title">
+<div id="admonition-note-title">
+<p>Note</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-note"></a>
+</div>
+<div>
+<p>The fingerprint is not just metadata.</p>
+<p>It is the compatibility guard-rails that prevents a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> stream from running
+on a build that does not have the features to handle it.</p>
+</div>
+</div>
+<p>The fingerprint records:</p>
+<ul>
+<li>
+<p>whether the <a href="/book/dev/language/values-and-types.html">system integer number</a> is 32-bit or 64-bit,</p>
+</li>
+<li>
+<p>whether the system <a href="/book/dev/language/values-and-types.html">floating-point number</a> is 32-bit or 64-bit,</p>
+</li>
+<li>
+<p>the <em>capabilities</em> required to run.</p>
+</li>
+</ul>
+<h3 id="capabilities-set"><a class="header" href="#capabilities-set">Capabilities set</a></h3>
+<p>The capability set covers Rhai language features that a script may use, such as:</p>
+<ul>
+<li>
+<p>floating-point or <a href="/book/dev/start/features.html"><code>decimal</code></a> numbers,</p>
+</li>
+<li>
+<p><a href="/book/dev/language/arrays.html">arrays</a>, <a href="/book/dev/language/blobs.html">BLOB’s</a>, or <a href="/book/dev/language/object-maps.html">object maps</a>,</p>
+</li>
+<li>
+<p>indexing (i.e. usage of <code>[ .. ]</code> syntax),</p>
+</li>
+<li>
+<p>accessing <a href="/book/dev/rust/getters-setters.html">properties</a>,</p>
+</li>
+<li>
+<p>calling functions in <a href="/book/dev/rust/methods.html">method-call</a> style,</p>
+</li>
+<li>
+<p>the <code>this</code> pointer,</p>
+</li>
+<li>
+<p>defining scripted <a href="/book/dev/language/functions.html">functions</a>,</p>
+</li>
+<li>
+<p><a href="/book/dev/language/fn-ptr.html">function pointers</a> and <a href="/book/dev/language/fn-curry.html">currying</a>,</p>
+</li>
+<li>
+<p>capturing variables from <a href="/book/dev/language/fn-closure.html">closures</a>,</p>
+</li>
+<li>
+<p><a href="/book/dev/language/modules/import.html"><code>import</code></a> and <a href="/book/dev/language/modules/export.html"><code>export</code></a> to work with <a href="/book/dev/rust/modules/index.html">modules</a>,</p>
+</li>
+<li>
+<p><a href="/book/dev/engine/custom-syntax.html">custom syntax</a></p>
+</li>
+</ul>
+<h2 id="what-is-checked"><a class="header" href="#what-is-checked">What is Checked?</a></h2>
+<p>When <code>Program::read</code> loads <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>, it checks the ABI before it decodes the rest,
+comparing the capabilities it requires against the capabilities supported by the host.</p>
+<p>If any required capability is missing from the host, it simply fails to load.</p>
+<p><code>Program::read</code> will never load <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> beyond the current host’s ability to handle.</p>
+<p>This catches two classes of incompatibility:</p>
+<ol>
+<li>
+<p>a different integer or floating-point width, such as using <code>i64</code> on a host built with
+<a href="/book/dev/start/features.html"><code>only_i32</code></a> or using <code>f32</code> on a host built without <a href="/book/dev/start/features.html"><code>f32_float</code></a>, and</p>
+</li>
+<li>
+<p>any required capability that the host does not support.</p>
+</li>
+</ol>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<ul>
+<li>
+<p>If the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> was transpiled on a Rhai instance with a 64-bit integer build, but is being loaded
+on a 32-bit build of Rhai (via <a href="/book/dev/start/features.html"><code>only_i32</code></a>), it will refuse to load.</p>
+</li>
+<li>
+<p>If the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> was transpiled on a full Rhai instance, for example, but it does not use any
+<a href="/book/dev/language/arrays.html">arrays</a> or <a href="/book/dev/language/object-maps.html">object maps</a>.  Then the same <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> can be successfully loaded and run on a
+computer with a <a href="/book/dev/start/features.html"><code>no_index</code></a> and <a href="/book/dev/start/features.html"><code>no_object</code></a> build of Rhai, because those features are not used.</p>
+</li>
+<li>
+<p>If the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> uses a particular language feature of Rhai (e.g. defines a <a href="/book/dev/language/functions.html">function</a>) but the
+host build does not support that feature (e.g. <a href="/book/dev/start/features.html"><code>no_function</code></a>), again it will refuse to load.</p>
+</li>
+<li>
+<p>The key point is that Rhai Grain treats a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> stream as a deployment unit: if it requires a
+capability the host build does not support, it is not runnable.</p>
+</li>
+</ul>
+<h2 id="verification"><a class="header" href="#verification">Verification</a></h2>
+<p>The ABI check above is only the first gate.</p>
+<p>After the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> is decoded, a verifier inspects every instruction checks the capabilities that
+instruction requires to run.</p>
+<p>This is a second, more precise check. Even if the fingerprint is declared to be compatible with the
+host, the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> stream itself is inspected to make sure it does not contain instructions
+that require additional capabilities.</p>
+<p>In other words, Rhai Grain enforces that:</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> capabilities are within the host’s supported capabilities, and</p>
+</li>
+<li>
+<p>every instruction’s requirements fall under the declared capabilities.</p>
+</li>
+</ul>
+<p>Only when both hold can will the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> safely load.</p>
+<h2 id="caveats-and-gotchas"><a class="header" href="#caveats-and-gotchas">Caveats and Gotcha’s</a></h2>
+<p>Rhai Grain’s capability system is for compatibility, not a general-purpose sandbox.</p>
+<p>It is designed to make sure that a stream of <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> can run on the current host build.</p>
+<p>It does not make the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> fully portable to every possible build of Rhai.</p>
+<ul>
+<li>
+<p>A build with more <a href="/book/dev/start/features.html">features</a> is usually fine; a build with fewer features is not.
+The host must support every capability the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> require.</p>
+</li>
+<li>
+<p>This check happens before loading and execution. A mismatch fails at load time,
+not as a later runtime fault.</p>
+</li>
+<li>
+<p>The compatibility test is intentionally strict. <code>Program::read</code> will fail even if
+the host’s integer or floating-point widths are longer than the ones declared
+by the <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>.</p>
+</li>
+<li>
+<p>This is not a substitute for runtime <a href="/book/dev/safety/index.html">safety</a> limits. Even fully compatible
+<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> still requires usual Rhai runtime checks.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../grain/store-load.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../grain/callbacks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../grain/store-load.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../grain/callbacks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

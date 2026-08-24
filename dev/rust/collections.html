@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Collection Types - Rhai - Embedded Scripting for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-12WKJTDTEE"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+        
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+        
+                gtag('config', 'G-12WKJTDTEE');
+            }
+        </script>
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/rhai.min.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/rust/collections.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="custom-collection-types"><a class="header" href="#custom-collection-types">Custom Collection Types</a></h1>
+<div id="admonition-tip" class="admonition admonish-tip side" role="note" aria-labelledby="admonition-tip-title">
+<div class="admonition-title">
+<div id="admonition-tip-title">
+<p>Tip</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip"></a>
+</div>
+<div>
+<p>Collections can also hold <a href="/book/dev/language/dynamic.html"><code>Dynamic</code></a> values (e.g. like an <a href="/book/dev/language/arrays.html">array</a>).</p>
+</div>
+</div>
+<p>A <em>collection</em> type holds a… well… <em>collection</em> of items.  It can be homogeneous (all items are
+the same type) or heterogeneous (items are of different types, use <a href="/book/dev/language/dynamic.html"><code>Dynamic</code></a> to hold).</p>
+<p>Because their only purpose for existence is to hold a number of items, collection types commonly
+register the following methods.</p>
+<section></section>
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>len</code> method and property</td><td>gets the total number of items in the collection</td></tr>
+<tr><td><code>clear</code></td><td>clears the collection</td></tr>
+<tr><td><code>contains</code></td><td>checks if a particular item exists in the collection</td></tr>
+<tr><td><code>add</code>, <code>+=</code> operator</td><td>adds a particular item to the collection</td></tr>
+<tr><td><code>remove</code>, <code>-=</code> operator</td><td>removes a particular item from the collection</td></tr>
+<tr><td><code>merge</code> or <code>+</code> operator</td><td>merges two collections, yielding a new collection with all items</td></tr>
+</tbody></table>
+</div><div id="admonition-tip-define-type-iterator" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-define-type-iterator-title">
+<div class="admonition-title">
+<div id="admonition-tip-define-type-iterator-title">
+<p>Tip: Define type iterator</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-define-type-iterator"></a>
+</div>
+<div>
+<p>Collections are typically iterable.</p>
+<p>It is customary to use <code>Engine::register_iterator</code> to allow iterating the collection if
+it implements <code>IntoIterator</code>.</p>
+<p>Alternative, register a specific <a href="/book/dev/language/iterator.html">type iterator</a> for the <a href="/book/dev/rust/custom-types.html">custom type</a>.</p>
+</div>
+</div>
+<div id="admonition-tip-use-a-plugin-module" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-use-a-plugin-module-title">
+<div class="admonition-title">
+<div id="admonition-tip-use-a-plugin-module-title">
+<p>Tip: Use a plugin module</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-use-a-plugin-module"></a>
+</div>
+<div>
+<p>A <a href="/book/dev/plugins/module.html">plugin module</a> makes defining an entire API for a <a href="/book/dev/rust/custom-types.html">custom type</a> a snap.</p>
+</div>
+</div>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<pre><code class="language-rust">type MyBag = HashSet&lt;MyItem&gt;;
+
+engine
+    .register_type_with_name::&lt;MyBag&gt;("MyBag")
+    .register_iterator::&lt;MyBag&gt;()
+    .register_fn("new_bag", || MyBag::new())
+    .register_fn("len", |col: &amp;mut MyBag| col.len() as i64)
+    .register_get("len", |col: &amp;mut MyBag| col.len() as i64)
+    .register_fn("clear", |col: &amp;mut MyBag| col.clear())
+    .register_fn("contains", |col: &amp;mut MyBag, item: i64| col.contains(&amp;item))
+    .register_fn("add", |col: &amp;mut MyBag, item: MyItem| col.insert(item))
+    .register_fn("+=", |col: &amp;mut MyBag, item: MyItem| col.insert(item))
+    .register_fn("remove", |col: &amp;mut MyBag, item: MyItem| col.remove(&amp;item))
+    .register_fn("-=", |col: &amp;mut MyBag, item: MyItem| col.remove(&amp;item))
+    .register_fn("+", |mut col1: MyBag, col2: MyBag| {
+        col1.extend(col2.into_iter());
+        col1
+    });</code></pre>
+<h2 id="what-about-indexers"><a class="header" href="#what-about-indexers">What About Indexers?</a></h2>
+<p>Many users are tempted to register <a href="/book/dev/rust/indexers.html">indexers</a> for custom collections.  This essentially makes the
+original Rust type something similar to <code>Vec&lt;MyType&gt;</code>.</p>
+<p>Rhai’s standard <a href="/book/dev/language/arrays.html"><code>Array</code></a> type is <code>Vec&lt;Dynamic&gt;</code> which already holds an ordered, iterable and
+indexable collection of dynamic items.  Since Rhai has built-in support, manipulating <a href="/book/dev/language/arrays.html">arrays</a> is fast.</p>
+<p>In <em>most</em> circumstances, it is better to use <a href="/book/dev/language/arrays.html"><code>Array</code></a> instead of a <a href="/book/dev/rust/custom-types.html">custom type</a>.</p>
+<div id="admonition-tip-convert-to-array-using-into" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-convert-to-array-using-into-title">
+<div class="admonition-title">
+<div id="admonition-tip-convert-to-array-using-into-title">
+<p>Tip: Convert to <code>Array</code> using <code>.into()</code></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-convert-to-array-using-into"></a>
+</div>
+<div>
+<p><a href="/book/dev/language/dynamic.html"><code>Dynamic</code></a> implements <code>FromIterator</code> for all iterable types and an <a href="/book/dev/language/arrays.html"><code>Array</code></a> is created in the process.</p>
+<p>So, converting a typed array (i.e. <code>Vec&lt;MyType&gt;</code>) into an <a href="/book/dev/language/arrays.html">array</a> in Rhai is as simple as calling <code>.into()</code>.</p>
+<pre><code class="language-rust">// Say you have a custom typed array...
+let my_custom_array: Vec&lt;MyType&gt; = do_lots_of_calc(42);
+
+// Convert it into a 'Dynamic' that holds an array
+let value: Dynamic = my_custom_array.into();
+
+// Use is anywhere in Rhai...
+scope.push("my_custom_array", value);
+
+engine
+    // Raw function that returns a custom type
+    .register_fn("do_lots_of_calc_raw", do_lots_of_calc)
+    // Wrap function that return a custom typed array
+    .register_fn("do_lots_of_calc", |seed: i64| -&gt; Dynamic {
+        let result = do_lots_of_calc(seed);     // Vec&lt;MyType&gt;
+        result.into()                           // Array in Dynamic
+    });</code></pre>
+</div>
+</div>
+<h2 id="tldr"><a class="header" href="#tldr">TL;DR</a></h2>
+<div id="admonition-why-shouldnt-we-register-vec" class="admonition admonish-question" role="note" aria-labelledby="admonition-why-shouldnt-we-register-vec-title">
+<div class="admonition-title">
+<div id="admonition-why-shouldnt-we-register-vec-title">
+<p>Why shouldn’t we register <code>Vec&lt;MyType&gt;</code>?</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-why-shouldnt-we-register-vec"></a>
+</div>
+<div>
+<h3 id="reason-1-performance"><a class="header" href="#reason-1-performance">Reason #1: Performance</a></h3>
+<p>A main reason why anybody would want to do this is to avoid the overhead of storing <a href="/book/dev/language/dynamic.html"><code>Dynamic</code></a> items.</p>
+<p>This is why <a href="/book/dev/language/blobs.html">BLOB’s</a> is a built-in data type in Rhai, even though it is actually defined as <code>Vec&lt;u8&gt;</code>.
+The overhead of using <a href="/book/dev/language/dynamic.html"><code>Dynamic</code></a> (16 bytes) versus <code>u8</code> (1 byte) is worth the trouble, although the
+performance gains may not be as pronounced as expected: benchmarks show a 15% speed improvement inside
+a tight loop compared with using an <a href="/book/dev/language/arrays.html">array</a>.</p>
+<p><code>Vec&lt;MyType&gt;</code>, however, will be treated as an opaque <a href="/book/dev/rust/custom-types.html">custom type</a> in Rhai, so performance is not optimized.
+What you gain from avoiding <a href="/book/dev/language/dynamic.html"><code>Dynamic</code></a>, you pay back in terms of slower access to the <code>Vec</code> as well as <code>MyType</code>
+(which is treated as yet another opaque <a href="/book/dev/rust/custom-types.html">custom type</a>).</p>
+<h3 id="reason-2-api"><a class="header" href="#reason-2-api">Reason #2: API</a></h3>
+<p>Another reason why it shouldn’t be done is due to the large number of functions and methods that must be registered
+for each type of this sort.  One only has to look at the vast API surface of <a href="/book/dev/language/arrays.html#built-in-functions">arrays</a>
+to see the common methods that a user would expect to be available.</p>
+<p>Since <code>Vec&lt;Type&gt;</code> looks, feels and quacks just like a normal <a href="/book/dev/language/arrays.html">array</a>, and the usage syntax is almost equivalent (except
+for the fact that the data type is restricted), users would be frustrated if they find that certain functions available for
+<a href="/book/dev/language/arrays.html">arrays</a> are not provided.</p>
+<p>This is similar to JavaScript’s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays"><em>Typed Arrays</em></a>.
+They are quite awkward to work with, and basically each has a full API definition that must be pre-registered.</p>
+</div>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../rust/indexer-prop-fallback.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../rust/disable-custom.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../rust/indexer-prop-fallback.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../rust/disable-custom.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

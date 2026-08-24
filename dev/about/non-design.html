@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>What Rhai Isn&#x27;t - Rhai - Embedded Scripting for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-12WKJTDTEE"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+        
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+        
+                gtag('config', 'G-12WKJTDTEE');
+            }
+        </script>
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/rhai.min.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/about/non-design.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="what-rhai-isnt"><a class="header" href="#what-rhai-isnt">What Rhai Isn’t</a></h1>
+<p>Rhai’s purpose is to provide a dynamic layer over Rust code, in the same spirit of <em>zero cost abstractions</em>.</p>
+<p>It doesn’t attempt to be a new language. For example:</p>
+<ul>
+<li>
+<p><strong>No classes</strong>.  Well, Rust doesn’t either. On the other hand…</p>
+</li>
+<li>
+<p><strong>No traits</strong>…  so it is also not Rust. Do your Rusty stuff in Rust.</p>
+</li>
+<li>
+<p><strong>No structures/records/tuples</strong> – define your types in Rust instead; Rhai can seamlessly
+work with <a href="/book/dev/rust/custom-types.html"><em>any Rust type</em></a> that implements <code>Clone</code>.</p>
+</li>
+</ul>
+<div id="admonition-object-maps" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-object-maps-title">
+<div class="admonition-title">
+<div id="admonition-object-maps-title">
+<p>Object maps</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-object-maps"></a>
+</div>
+<div>
+<p>There is a built-in <a href="/book/dev/language/object-maps.html">object map</a> type which is adequate for most uses.</p>
+<p>It is also possible to simulate <a href="/book/dev/patterns/oop.html">object-oriented programming (OOP)</a> by storing <a href="/book/dev/language/fn-ptr.html">function pointers</a>
+or <a href="/book/dev/language/fn-closure.html">closures</a> in <a href="/book/dev/language/object-maps.html">object map</a> properties, turning them into <em><a href="/book/dev/rust/methods.html">methods</a></em>.</p>
+</div>
+</div>
+<ul>
+<li><strong>No first-class functions</strong> – Code your functions in Rust instead, and register them with Rhai.</li>
+</ul>
+<div id="admonition-function-pointers" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-function-pointers-title">
+<div class="admonition-title">
+<div id="admonition-function-pointers-title">
+<p>Function pointers</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-function-pointers"></a>
+</div>
+<div>
+<p>There is support for simple <a href="/book/dev/language/fn-ptr.html">function pointers</a> to allow runtime dispatch by function name.</p>
+</div>
+</div>
+<ul>
+<li>
+<p><strong>No garbage collection</strong> – this should be expected, so…</p>
+</li>
+<li>
+<p><strong>No first-class closures</strong> – do your closure magic in Rust instead:
+<a href="/book/dev/engine/call-fn.html">turn a Rhai scripted function into a Rust closure</a>.</p>
+</li>
+</ul>
+<div id="admonition-simulated-closures" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-simulated-closures-title">
+<div class="admonition-title">
+<div id="admonition-simulated-closures-title">
+<p>Simulated closures</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-simulated-closures"></a>
+</div>
+<div>
+<p>There is support for simulated <a href="/book/dev/language/fn-closure.html">closures</a> via <a href="/book/dev/language/fn-curry.html">currying</a> a <a href="/book/dev/language/fn-ptr.html">function pointer</a> with
+<a href="/book/dev/language/fn-closure.html">captured</a> shared <a href="/book/dev/language/variables.html">variables</a>.</p>
+</div>
+</div>
+<ul>
+<li><strong>No formal language grammar</strong> – Rhai uses a hand-coded lexer, a hand-coded top-down
+recursive-descent parser for statements, and a hand-coded Pratt parser for expressions.</li>
+</ul>
+<div id="admonition-highly-customizable" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-highly-customizable-title">
+<div class="admonition-title">
+<div id="admonition-highly-customizable-title">
+<p>Highly customizable</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-highly-customizable"></a>
+</div>
+<div>
+<p>This lack of formalism allows the <em>tokenizer</em> and <em>parser</em> themselves to be exposed as services in
+order to support a wide range of user customizations, such as:</p>
+<ul>
+<li><a href="/book/dev/engine/disable-keywords.html">disabling keywords and operators</a>,</li>
+<li>dynamically <a href="/book/dev/engine/token-mapper.html">changing tokens</a> during parsing,</li>
+<li>adding <a href="/book/dev/engine/custom-op.html">custom operators</a>,</li>
+<li>defining <a href="/book/dev/engine/custom-syntax.html">custom syntax</a>,</li>
+<li><a href="/book/dev/engine/def-var.html">filtering variables definition</a>.</li>
+</ul>
+</div>
+</div>
+<ul>
+<li><strong>No JIT</strong> – Rhai primarily uses a heavily-optimized AST-walking interpreter which is fast
+enough for most real-life scenarios. There is an <em>experimental</em> bytecodes compiler and VM
+(called <strong><a href="/book/dev/grain/index.html">Rhai Grain</a></strong>) that is a work-in-progress.</li>
+</ul>
+<div id="admonition-how-it-compares" class="admonition admonish-info small" role="note" aria-labelledby="admonition-how-it-compares-title">
+<div class="admonition-title">
+<div id="admonition-how-it-compares-title">
+<p>How it compares?</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-how-it-compares"></a>
+</div>
+<div>
+<p>See Rhai performance <a href="/book/dev/about/benchmarks.html">benchmarks</a>.</p>
+</div>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../about/features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../about/benchmarks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../about/features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../about/benchmarks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Register a Rust Function - Rhai - Embedded Scripting for Rust</title>
+
+
+        <!-- Custom HTML head -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-12WKJTDTEE"></script>
+        <script>
+            var localAddrs = ["localhost", "127.0.0.1", ""];
+        
+            // Make sure we don't activate Google Analytics if the developer is inspecting the book locally...
+            if (localAddrs.indexOf(document.location.hostname) === -1) {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+        
+                gtag('config', 'G-12WKJTDTEE');
+            }
+        </script>
+        <meta name="description" content="Tutorial and reference on the Rhai scripting engine and language.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/rhai.min.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rhai - Embedded Scripting for Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/rust/functions.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="register-a-rust-function-for-use-in-rhai-scripts"><a class="header" href="#register-a-rust-function-for-use-in-rhai-scripts">Register a Rust Function for Use in Rhai Scripts</a></h1>
+<p>Rhai’s scripting engine is very lightweight.  It gets most of its abilities from functions.</p>
+<p>To call these functions, they need to be <em>registered</em> via <code>Engine::register_fn</code>.</p>
+<pre><code class="language-rust">use rhai::{Dynamic, Engine, ImmutableString};
+
+// Normal function that returns a standard type
+// Remember to use 'ImmutableString' and not 'String'
+fn add_len(x: i64, s: ImmutableString) -&gt; i64 {
+    x + s.len()
+}
+// Alternatively, '&amp;str' maps directly to 'ImmutableString'
+fn add_len_count(x: i64, s: &amp;str, c: i64) -&gt; i64 {
+    x + s.len() * c
+}
+// Function that returns a 'Dynamic' value
+fn get_any_value() -&gt; Dynamic {
+    42_i64.into()                       // standard types can use '.into()'
+}
+
+let mut engine = Engine::new();
+
+// Notice that all three functions are overloaded into the same name with
+// different number of parameters and/or parameter types.
+engine.register_fn("add", add_len)
+      .register_fn("add", add_len_count)
+      .register_fn("add", get_any_value)
+      .register_fn("inc", |x: i64| {    // closure is also OK!
+          x + 1
+      })
+      .register_fn("log", |label: &amp;str, x: i64| {
+          println!("{label} = {x}");
+      });
+
+let result = engine.eval::&lt;i64&gt;(r#"add(40, "xx")"#)?;
+
+println!("Answer: {result}");           // prints 42
+
+let result = engine.eval::&lt;i64&gt;(r#"add(40, "x", 2)"#)?;
+
+println!("Answer: {result}");           // prints 42
+
+let result = engine.eval::&lt;i64&gt;("add()")?;
+
+println!("Answer: {result}");           // prints 42
+
+let result = engine.eval::&lt;i64&gt;("inc(41)")?;
+
+println!("Answer: {result}");           // prints 42
+
+engine.run(r#"log("value", 42)"#)?;     // prints "value = 42"</code></pre>
+<div id="admonition-tip-use-closures" class="admonition admonish-tip" role="note" aria-labelledby="admonition-tip-use-closures-title">
+<div class="admonition-title">
+<div id="admonition-tip-use-closures-title">
+<p>Tip: Use closures</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-tip-use-closures"></a>
+</div>
+<div>
+<p>It is common for short functions to be registered via a <em>closure</em>.</p>
+<pre><code class="language-rust">┌──────┐
+│ Rust │
+└──────┘
+
+engine.register_fn("foo", |x: i64, y: i64| x * 2 + y * 3);
+//                            ^^^     ^^^
+// Usually parameter types need to be specified
+
+engine.register_fn("bar", |x: i64| -&gt; Result&lt;_, Box&lt;EvalAltResult&gt;&gt; { x * 2 });
+//                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// For fallible closures, the return ERROR type may need to be specified
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+foo(42, 100);       // &lt;- 42 * 2 + 100 * 3</code></pre>
+<h4 id="interact-with-external-environment"><a class="header" href="#interact-with-external-environment">Interact with external environment</a></h4>
+<p>An additional benefit to using closures is that they can capture external variables.</p>
+<p>For example, capturing a type wrapped in shared mutability (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</code>)
+allows a script to interact with the external environment through that shared type.</p>
+<p>See also: <a href="/book/dev/patterns/control.html">Control Layer</a>.</p>
+<pre><code class="language-rust">┌──────┐
+│ Rust │
+└──────┘
+
+/// A type that encapsulates some behavior.
+#[derive(Clone)]
+struct TestStruct { ... }
+
+impl TestStruct {
+    /// Some action defined on that type.
+    pub fn do_foo(&amp;self, x: i64, y: bool) {
+        // ... do something drastic with x and y
+    }
+}
+
+/// Wrapped in shared mutability: Rc&lt;RefCell&lt;TestStruct&gt;&gt;.
+let shared_obj = Rc::new(RefCell::new(TestStruct::new()));
+
+/// Clone the shared reference and move it into the closure.
+let embedded_obj = shared.clone();
+
+engine.register_fn("foo", move |x: i64, y: bool| {
+//                        ^^^^ 'embedded_obj' is captured into the closure
+
+    embedded_obj.borrow().do_foo(x, y);
+});
+
+┌─────────────┐
+│ Rhai script │
+└─────────────┘
+
+foo(42, true);      // &lt;- equivalent to: shared_obj.borrow().do_foo(42, true);</code></pre>
+</div>
+</div>
+<div id="admonition-warning-dont-touch-those-generic-parameters" class="admonition admonish-warning" role="note" aria-labelledby="admonition-warning-dont-touch-those-generic-parameters-title">
+<div class="admonition-title">
+<div id="admonition-warning-dont-touch-those-generic-parameters-title">
+<p>Warning: Don’t touch those generic parameters</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-warning-dont-touch-those-generic-parameters"></a>
+</div>
+<div>
+<p>Rhai uses an intricate system of traits (in particular <code>RhaiNativeFunc</code>) with many generic parameters to ensure
+an intuitive and smooth developer experience that <em>just works</em>.</p>
+<p>Because of this, it is not recommended to touch those generic parameters directly.  These generic parameters may change
+liberally in future versions of Rhai. In most situations they are automatically inferred by the compiler.</p>
+<p>In the cases where the compiler fail to infer types when registering a <em>closure</em>, (usually with the <em>error</em> type
+of a <a href="/book/dev/rust/fallible.html">fallible function</a>), manually declare the parameter and/or return types.</p>
+<pre><code class="language-rust">// The following fails to compile because the compiler does not know
+// the return _error_ type of the closure.
+// It knows the return type, which is 'Result&lt;i64, E&gt;', but 'E' is not known.
+engine.register_fn("foo", |x: i64| Ok(x));
+
+// Don't do this...
+engine.register_fn::&lt;_, 1, false, i64, Box&lt;EvalAltResult&gt;&gt;("foo", |x: i64| Ok(x));
+
+// Do this...
+engine.register_fn("foo", |x: i64| -&gt; Result&lt;i64, Box&lt;EvalAltResult&gt;&gt; { Ok(x) });</code></pre>
+</div>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../rust/traits.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../rust/overloading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../rust/traits.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../rust/overloading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
