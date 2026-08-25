@@ -198,7 +198,7 @@
 <p>Rhai is an embedded scripting language and evaluation engine for Rust that gives a safe and easy way
 to add scripting to any application.</p>
 <h2 id="versions"><a class="header" href="#versions">Versions</a></h2>
-<p>This Book is for version <strong>1.25.0</strong> of Rhai.</p>
+<p>This Book is for version <strong>1.26.0</strong> of Rhai.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-rhai"><a class="header" href="#introduction-to-rhai">Introduction to Rhai</a></h1>
 <h2 id="trivia"><a class="header" href="#trivia">Trivia</a></h2>
 <div id="admonition-etymology-of-the-name-rhai" class="admonition admonish-question" role="note" aria-labelledby="admonition-etymology-of-the-name-rhai-title">
@@ -298,10 +298,14 @@ for <a href="about//book/start/builds/no-std.html"><code>no-std</code></a> and <
 <li>
 <p>Fairly efficient evaluation – 1 million iterations in 0.14 sec on a single-core, 2.6 GHz Linux VM
 running <a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">this script</a>
-(also see <a href="about/benchmarks.html">benchmarks</a>).</p>
+with the standard AST-walking interpreter (also see <a href="about/benchmarks.html">benchmarks</a>).</p>
 </li>
 <li>
 <p>Compile once to <a href="about//book/engine/compile.html">AST</a> for repeated evaluations.</p>
+</li>
+<li>
+<p><em>Experimental</em> <strong><a href="about//book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM for even faster evaluation
+(roughly 1.8-2.2x) – work-in-progress.</p>
 </li>
 <li>
 <p>Scripts are <a href="about//book/engine/optimize/index.html">optimized</a> – useful for template-based machine-generated scripts.</p>
@@ -512,8 +516,9 @@ order to support a wide range of user customizations, such as:</p>
 </div>
 </div>
 <ul>
-<li><strong>No bytecodes/JIT</strong> – Rhai uses a heavily-optimized AST-walking interpreter which is fast
-enough for most real-life scenarios.</li>
+<li><strong>No JIT</strong> – Rhai primarily uses a heavily-optimized AST-walking interpreter which is fast
+enough for most real-life scenarios. There is an <em>experimental</em> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>
+transpiler and VM (called <strong><a href="about//book/grain/index.html">Rhai Grain</a></strong>) that is a work-in-progress.</li>
 </ul>
 <div id="admonition-how-it-compares" class="admonition admonish-info small" role="note" aria-labelledby="admonition-how-it-compares-title">
 <div class="admonition-title">
@@ -540,26 +545,28 @@ enough for most real-life scenarios.</li>
 <p>So if you <em>absolutely must</em> have top performance…</p>
 </div>
 </div>
-<p>The purpose of Rhai is not to be <em>blazing fast</em>, but to make it as easy and versatile as possible to
-integrate with native Rust applications.</p>
-<p>What you lose from running an <a href="about//book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
+<p>The main design goal of Rhai is to make it as easy and versatile as possible to integrate with
+native Rust applications.</p>
+<p>So, what you lose from running an <a href="about//book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
 <p>The following benchmarks were run on a 2.6GHz Linux VM comparing
-<a href="about/../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a> and
-<a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
-<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.25s</td><td style="text-align: center">3.2s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="about//book/language/functions.html">function</a> calls</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.13s</td><td style="text-align: center">0.2s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.2s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
+<a href="about/../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a>
+and <a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="about//book/grain/index.html">Rhai Grain</a> <br/>(Perf, <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.25s</td><td style="text-align: center">3.2s</td><td style="text-align: center">1.2s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="about//book/language/functions.html">function</a> calls</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.13s</td><td style="text-align: center">0.2s</td><td style="text-align: center">0.05s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.2s</td><td style="text-align: center">1.1s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
 </tbody></table>
 </div>
-<p>In general, Rhai is roughly 2x slower than <a href="https://www.python.org">Python 3</a>, which is a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for
-typical real-life workloads.</p>
-<div id="admonition-tldr--rhai-is-usually-fast-enough" class="admonition admonish-question" role="note" aria-labelledby="admonition-tldr--rhai-is-usually-fast-enough-title">
+<p>In general, Rhai’s standard AST-walking interpreter is roughly 2-3x slower than <a href="https://www.python.org">Python 3</a>, which is
+a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for typical real-life workloads.</p>
+<p>The <em>experimental</em> <strong><a href="about//book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> VM (work-in-progress and only
+available under the <a href="about//book/start/features.html"><code>grain</code></a> feature) is roughly 2x faster, making it roughly at par with <a href="https://www.python.org">Python 3</a>.</p>
+<div id="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough" class="admonition admonish-question" role="note" aria-labelledby="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough-title">
 <div class="admonition-title">
-<div id="admonition-tldr--rhai-is-usually-fast-enough-title">
-<p>TL;DR – Rhai is usually fast enough</p>
+<div id="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough-title">
+<p>TL;DR – You may not need bytecodes – Rhai is usually fast enough</p>
 </div>
-<a class="admonition-anchor-link" href="about/benchmarks.html#admonition-tldr--rhai-is-usually-fast-enough"></a>
+<a class="admonition-anchor-link" href="about/benchmarks.html#admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough"></a>
 </div>
 <div>
 <h4 id="small-data-structures"><a class="header" href="#small-data-structures">Small data structures</a></h4>
@@ -581,6 +588,40 @@ and fragmentation while being cache-friendly.</p>
 <h4 id="no-sharing"><a class="header" href="#no-sharing">No sharing</a></h4>
 <p>In a typical script evaluation run, no data is shared and nothing is locked (other than
 <a href="about//book/language/variables.html">variables</a> captured by <a href="about//book/language/fn-closure.html">closures</a>).</p>
+</div>
+</div>
+<div id="admonition-proscons-of-rhai-grain" class="admonition admonish-info" role="note" aria-labelledby="admonition-proscons-of-rhai-grain-title">
+<div class="admonition-title">
+<div id="admonition-proscons-of-rhai-grain-title">
+<p>Pros/Cons of Rhai Grain</p>
+</div>
+<a class="admonition-anchor-link" href="about/benchmarks.html#admonition-proscons-of-rhai-grain"></a>
+</div>
+<div>
+<h4 id="pros"><a class="header" href="#pros">Pros</a></h4>
+<ul>
+<li>
+<p>Faster.</p>
+</li>
+<li>
+<p>Smaller memory footprint and fewer allocations.</p>
+</li>
+<li>
+<p>Compiled <a href="about//book/grain/compiler-vm.html">bytecodes</a> do not need the original script sources to run, enabling more secured usage scenarios.</p>
+</li>
+</ul>
+<h4 id="cons"><a class="header" href="#cons">Cons</a></h4>
+<ul>
+<li>
+<p>Still experimental.</p>
+</li>
+<li>
+<p>There is an additional compilation step.</p>
+</li>
+<li>
+<p>Not yet 100% feature parity with the interpreter.</p>
+</li>
+</ul>
 </div>
 </div>
 <div id="admonition-do-not-write-the-next-4d-vr-game-entirely-in-rhai" class="admonition admonish-danger" role="note" aria-labelledby="admonition-do-not-write-the-next-4d-vr-game-entirely-in-rhai-title">
@@ -839,7 +880,7 @@ having to install anything.</p>
 <p>The easiest way is to install the Rhai crate from <a href="https://crates.io/crates/rhai/"><code>crates.io</code></a>,
 starting by looking up the latest version and adding this line under <code>dependencies</code> in the project’s <code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"    # assuming 1.25.0 is the latest version
+rhai = "1.26.0"    # assuming 1.26.0 is the latest version
 </code></pre>
 </div>
 </div>
@@ -900,8 +941,10 @@ what scripts can (or cannot) do.</p>
 <tr><td><code>unicode-xid-ident</code></td><td style="text-align: center"><strong>no</strong></td><td>allows <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a> as identifiers (pulls in the <a href="https://crates.io/crates/unicode-xid"><code>unicode-xid</code></a> crate)</td></tr>
 <tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate)</td></tr>
 <tr><td><code>metadata</code></td><td style="text-align: center">yes</td><td>enables exporting <a href="start//book/engine/metadata/index.html">functions metadata</a>; implies <code>serde</code> and additionally pulls in <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td></tr>
+<tr><td><code>grain</code></td><td style="text-align: center">yes</td><td>enables the <em>experimental</em> <strong><a href="start//book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM (work-in-progress)</td></tr>
 <tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="start//book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><ul><li>allowing access to internal types may enable external attack vectors</li><li>internal types and functions are volatile and may change from version to version</li></ul></td></tr>
 <tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the <a href="start//book/engine/debugging/debugger.html">debugging</a> interface; implies <code>internals</code></td></tr>
+<tr><td><code>grain</code></td><td style="text-align: center">yes</td><td>enables the experimental <a href="start//book/grain/index.html">Rhai Grain VM</a> bytecode compiler and VM</td></tr>
 </tbody></table>
 </div>
 <h2 id="features-that-disable-certain-language-features"><a class="header" href="#features-that-disable-certain-language-features">Features that Disable Certain Language Features</a></h2>
@@ -952,7 +995,7 @@ Do not use them for non-<a href="start//book/start/builds/wasm.html">WASM</a> ta
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.25.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
+rhai = { version = "1.26.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
 </code></pre>
 <p>turns on these six features:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>
@@ -1519,7 +1562,7 @@ number of entries exceed the <em>inline</em> capacity.</p>
 </div>
 <div>
 <p>For details on the <code>Scope</code> API, refer to the
-<a href="https://docs.rs/rhai/1.25.0/rhai/struct.Scope.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.26.0/rhai/struct.Scope.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="serializingdeserializing"><a class="header" href="#serializingdeserializing">Serializing/Deserializing</a></h2>
@@ -1807,6 +1850,8 @@ application, as well as a number of sample scripts that showcase different Rhai 
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/custom_types_and_methods.rs"><code>custom_types_and_methods</code></a></td><td>shows how to register a <a href="start/examples//book/rust/custom-types.html">Rust type</a> and <a href="start/examples//book/rust/methods.html">methods</a>/<a href="start/examples//book/rust/getters-setters.html">getters/setters</a> for it</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/custom_types.rs"><code>custom_types</code></a></td><td>shows how to register a <a href="start/examples//book/rust/custom-types.html">Rust type</a> and <a href="start/examples//book/rust/methods.html">methods</a>/<a href="start/examples//book/rust/getters-setters.html">getters/setters</a> using the <a href="start/examples//book/rust/build-type.html"><code>CustomType</code></a> trait.</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/definitions"><code>definitions</code></a></td><td>shows how to generate definition files for use with the <a href="https://github.com/rhaiscript/lsp">Rhai Language Server</a> (requires the <a href="start/examples//book/start/features.html"><code>metadata</code></a> feature)</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/grain_bench.rs"><code>grain_bench</code></a></td><td>comparison benchmarks for <a href="start/examples//book/grain/index.html">Rhai Grain VM</a></td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/grain_dump.rs"><code>grain_dump</code></a></td><td>compile a Rhai script to <a href="start/examples//book/grain/index.html">Rhai Grain</a> <a href="start/examples//book/grain/compiler-vm.html">bytecodes</a> and print the disassembly</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/hello.rs"><code>hello</code></a></td><td>simple example that evaluates an expression and prints the result</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/pause_and_resume.rs"><code>pause_and_resume</code></a></td><td>shows how to pause/resume/stop an <code>Engine</code> running in a separate thread via an MPSC channel</td></tr>
 <tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/examples/reuse_scope.rs"><code>reuse_scope</code></a></td><td>evaluates two pieces of code in separate runs, but using a common <a href="start/examples//book/engine/scope.html"><code>Scope</code></a></td></tr>
@@ -1899,6 +1944,7 @@ cargo +nightly build --release
 <div style="break-before: page; page-break-before: always;"></div><h1 id="special-builds"><a class="header" href="#special-builds">Special Builds</a></h1>
 <p>It is possible to mix-and-match various <a href="start/builds//book/start/features.html">features</a> of the Rhai crate to make specialized builds with
 specific characteristics and behaviors.</p>
+<p>These include smaller builds, WebAssembly targets, and the experimental <a href="start/builds//book/grain/index.html">Rhai Grain VM</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="performance-build"><a class="header" href="#performance-build">Performance Build</a></h1>
 <p>Some features are for performance.  In order to squeeze out the maximum performance from Rhai, the
 following features should be considered:</p>
@@ -1925,6 +1971,11 @@ following features should be considered:</p>
 <p>See Rhai performance <a href="start/builds//book/about/benchmarks.html">benchmarks</a>.</p>
 </div>
 </div>
+<h2 id="rhai-grain-bytecodes-vm"><a class="header" href="#rhai-grain-bytecodes-vm">Rhai Grain Bytecodes VM</a></h2>
+<p>There is an <em>experimental</em> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM (called <strong><a href="start/builds//book/grain/index.html">Rhai Grain</a></strong>)
+that is a work-in-progress and available under the <a href="start/builds//book/start/features.html"><code>grain</code></a> feature.</p>
+<p>By transpiling to <a href="start/builds//book/grain/compiler-vm.html">bytecodes</a> and running in a VM, it is roughly 1.8-2x faster than the standard
+AST-walking interpreter.</p>
 <h2 id="unchecked-build"><a class="header" href="#unchecked-build">Unchecked Build</a></h2>
 <p>By default, Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a>
 guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.</p>
@@ -2244,7 +2295,7 @@ See also: <a href="https://docs.rs/getrandom/latest/getrandom/#webassembly-suppo
 <p>Non-JavaScript/non-browser environments may not have random numbers available, so it is necessary to
 opt out of <code>default-features</code> in order to enable <a href="start/builds//book/patterns/static-hash.html">static hashing</a> which uses fixed (non-random) keys.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.25.0", default-features = false, features = [ "std" ] }
+rhai = { version = "1.26.0", default-features = false, features = [ "std" ] }
 </code></pre>
 </div>
 </div>
@@ -2898,7 +2949,7 @@ and exposes the following.</p>
 <tr><td><code>iter_imports()</code></td><td style="text-align: center">not <a href="rust//book/start/features.html"><code>no_module</code></a></td><td style="text-align: center"><code>impl Iterator&lt;Item = (&amp;str,</code><a href="rust//book/rust/modules/index.html"><code>&amp;Module</code></a><code>)&gt;</code></td><td>iterator of the current stack of <a href="rust//book/rust/modules/index.html">modules</a> imported via <code>import</code> statements, in reverse order (i.e. later imported <a href="rust//book/rust/modules/index.html">modules</a> come first)</td></tr>
 <tr><td><code>iter_namespaces()</code></td><td style="text-align: center">not <a href="rust//book/start/features.html"><code>no_function</code></a></td><td style="text-align: center"><code>impl Iterator&lt;Item =</code><a href="rust//book/rust/modules/index.html"><code>&amp;Module</code></a><code>&gt;</code></td><td>iterator of the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a></td></tr>
 <tr><td><code>namespaces()</code></td><td style="text-align: center"><a href="rust//book/start/features.html"><code>internals</code></a>,<br/>not <a href="rust//book/start/features.html"><code>no_function</code></a></td><td style="text-align: center"><a href="rust//book/rust/modules/index.html"><code>&amp;[&amp;Module]</code></a></td><td>reference to the <a href="rust//book/language/fn-namespaces.html">namespaces</a> (as <a href="rust//book/rust/modules/index.html">modules</a>) containing all script-defined <a href="rust//book/language/functions.html">functions</a></td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="rust//book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.25.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.25.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="rust//book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
 <tr><td><code>debugger()</code></td><td style="text-align: center"><a href="rust//book/start/features.html"><code>internals</code></a>, <a href="rust//book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="rust//book/engine/debugging/debugger.html"><code>Option&lt;&amp;debugger::Debugger&gt;</code></a></td><td>reference to the <a href="rust//book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
 <tr><td><code>call_fn(...)</code></td><td style="text-align: center"></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a function with the supplied arguments, casting the result into the required type</td></tr>
 <tr><td><code>call_native_fn(...)</code></td><td style="text-align: center"></td><td style="text-align: center"><code>Result&lt;T, Box&lt;EvalAltResult&gt;&gt;</code></td><td>call a registered native Rust function with the supplied arguments, casting the result into the required type</td></tr>
@@ -4917,7 +4968,7 @@ change from time to time.</p>
 </div>
 <div>
 <p>For the complete <a href="rust/modules//book/rust/modules/index.html"><code>Module</code></a> public API, refer to the
-<a href="https://docs.rs/rhai/1.25.0/rhai/struct.Module.html">documentation</a> online.</p>
+<a href="https://docs.rs/rhai/1.26.0/rhai/struct.Module.html">documentation</a> online.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-module-from-an-ast"><a class="header" href="#create-a-module-from-an-ast">Create a Module from an AST</a></h1>
@@ -6644,7 +6695,7 @@ as an independent crate.</p>
 name = "my-package"     # 'my-package' crate
 
 [dependencies]
-rhai = "1.25.0"    # assuming 1.25.0 is the latest version
+rhai = "1.26.0"    # assuming 1.26.0 is the latest version
 </code></pre>
 <p><code>lib.rs</code>:</p>
 <pre><code class="language-rust">use rhai::def_package;
@@ -6714,7 +6765,7 @@ def_package! {
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-rand = "0.1"       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -6746,7 +6797,7 @@ random.register_into_engine(&amp;mut engine);</code></pre>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version="1.25.0", features = ["no_float"] }
+rhai = { version="1.26.0", features = ["no_float"] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version="0.1", default-features = false, features = ["array"] }
@@ -6775,7 +6826,7 @@ arithmetic via the <a href="https://crates.io/crates/num-bigint"><code>num-bigin
 <h2 id="dependency-1"><a class="header" href="#dependency-1">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-bigint = "0.1"             # use rhai-bigint crate
 </code></pre>
 <h2 id="load-package-into-engine-1"><a class="header" href="#load-package-into-engine-1">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -6816,7 +6867,7 @@ scientific computing, inspired by languages like MATLAB, Octave, and R.</p>
 <h2 id="dependency-2"><a class="header" href="#dependency-2">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-sci = "0.1"       # use rhai-sci crate
 </code></pre>
 <h2 id="features-2"><a class="header" href="#features-2">Features</a></h2>
@@ -6861,7 +6912,7 @@ artificial intelligence and machine learning.</p>
 <h2 id="dependency-3"><a class="header" href="#dependency-3">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-ml = "0.1"       # use rhai-ml crate
 </code></pre>
 <h2 id="features-3"><a class="header" href="#features-3">Features</a></h2>
@@ -6903,7 +6954,7 @@ external filesystem.</p>
 <h2 id="dependency-4"><a class="header" href="#dependency-4">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-fs = "0.1"       # use rhai-fs crate
 </code></pre>
 <h2 id="load-package-into-engine-4"><a class="header" href="#load-package-into-engine-4">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -6965,7 +7016,7 @@ blob_buf.write_to_file(file);
 <h2 id="dependency-5"><a class="header" href="#dependency-5">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-url = "0.0.1"       # use rhai-url crate
 </code></pre>
 <h2 id="load-package-into-engine-5"><a class="header" href="#load-package-into-engine-5">Load Package into <a href="lib//book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -9695,7 +9746,7 @@ registered into an <a href="language//book/engine/hello-world.html"><code>Engine
 <p>Using this callback, for instance, it is simple to instruct Rhai to extend the <a href="language//book/language/arrays.html">array</a> to
 accommodate this new element, or to return a default value instead of raising an error.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_invalid_array_index"><code>Engine::on_invalid_array_index</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(array: &amp;mut Array, index: i64, context: EvalContext) -&gt; Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -10182,7 +10233,7 @@ registered into an <a href="language//book/engine/hello-world.html"><code>Engine
 <p>Using this callback, for instance, it is simple to instruct Rhai to create a new property in the
 <a href="language//book/language/object-maps.html">object map</a> on the fly, possibly with a default value, when a non-existent property is accessed.</p>
 <h2 id="function-signature-1"><a class="header" href="#function-signature-1">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(map: &amp;mut Map, prop: &amp;str, context: EvalContext) -&gt; Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -10707,7 +10758,7 @@ sometimes more fine-grained control is needed.</p>
 a particular variable name needs to be protected and not others.  Or only under very special
 circumstances.</p>
 <p>Under this scenario, it is possible to provide a <em>filter</em> closure to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> via
-<a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="engine//book/language/variables.html"><code>let</code></a> or
+<a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="engine//book/language/variables.html"><code>let</code></a> or
 <a href="engine//book/language/constants.html"><code>const</code></a> statements) in a Rhai script.</p>
 <p>The filter is called when a <a href="engine//book/language/variables.html">variable</a> or <a href="engine//book/language/constants.html">constant</a> is defined both during runtime and compilation.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
@@ -10726,7 +10777,7 @@ engine.on_def_var(|is_runtime, info, context| {
     }
 });</code></pre>
 <h2 id="function-signature-2"><a class="header" href="#function-signature-2">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -10772,7 +10823,7 @@ outwards until it reaches the top (global) level, then it searches the <a href="
 the <code>Engine::eval</code> call.</p>
 <p>There is a built-in facility for advanced users to <em>hook</em> into the <a href="engine//book/language/variables.html">variable</a> resolution service and
 to override its default behavior.</p>
-<p>To do so, provide a closure to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
+<p>To do so, provide a closure to the <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
 
 // Register a variable resolver.
@@ -10843,7 +10894,7 @@ using a variable resolver.</p>
 </div>
 </div>
 <h2 id="function-signature-3"><a class="header" href="#function-signature-3">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(name: &amp;str, index: usize, context: EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>
@@ -13977,7 +14028,7 @@ registered into an <a href="language//book/engine/hello-world.html"><code>Engine
 fallback <a href="language//book/language/functions.html">function</a> on the fly, or even modify the error returned, when a non-existent <a href="language//book/language/functions.html">function</a> or
 <a href="language//book/rust/methods.html">method</a> is called.</p>
 <h2 id="function-signature-4"><a class="header" href="#function-signature-4">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_missing_function"><code>Engine::on_missing_function</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_missing_function"><code>Engine::on_missing_function</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(name: &amp;str, args: &amp;mut [&amp;mut Dynamic], is_method_call: bool, context: EvalContext)  
       -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></pre>
@@ -14014,7 +14065,7 @@ debug("world!");        // prints "world!" to stdout using debug formatting
 </code></pre>
 <h2 id="override-print-and-debug-with-callback-functions"><a class="header" href="#override-print-and-debug-with-callback-functions">Override <code>print</code> and <code>debug</code> with Callback Functions</a></h2>
 <p>When embedding Rhai into an application, it is usually necessary to trap <code>print</code> and <code>debug</code> output
-(for logging into a tracking log, for example) with the <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_print"><code>Engine::on_print</code></a> and <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_debug"><code>Engine::on_debug</code></a> methods.</p>
+(for logging into a tracking log, for example) with the <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_print"><code>Engine::on_print</code></a> and <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_debug"><code>Engine::on_debug</code></a> methods.</p>
 <pre><code class="language-rust">// Any function or closure that takes an '&amp;str' argument can be used to override 'print'.
 engine.on_print(|x| println!("hello: {x}"));
 
@@ -14676,8 +14727,8 @@ in a shared, interior-mutated object (e.g. <code>Rc&lt;RefCell&lt;T&gt;&gt;</cod
 (a.k.a. the <a href="http://en.wikipedia.org/wiki/Halting_problem">Halting Problem</a>).</p>
 <p>When dealing with third-party untrusted scripts that may be malicious, in order to track evaluation
 progress and force-terminate a script prematurely (for any reason), provide a closure to the
-<a href="safety//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
-<p>The closure passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
+<a href="safety//book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a>.</p>
+<p>The closure passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> will be called once for every operation.</p>
 <p>Progress tracking is disabled with the <a href="safety//book/start/features.html"><code>unchecked</code></a> feature.</p>
 <h2 id="examples-16"><a class="header" href="#examples-16">Examples</a></h2>
 <h3 id="periodic-logging"><a class="header" href="#periodic-logging">Periodic Logging</a></h3>
@@ -14708,7 +14759,7 @@ engine.on_progress(move |_| {
     }
 });</code></pre>
 <h2 id="function-signature-of-callback"><a class="header" href="#function-signature-of-callback">Function Signature of Callback</a></h2>
-<p>The signature of the closure to pass to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> is as follows.</p>
+<p>The signature of the closure to pass to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_progress"><code>Engine::on_progress</code></a> is as follows.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(operations: u64) -&gt; Option&lt;Dynamic&gt;</code></pre>
 </blockquote>
@@ -16093,7 +16144,7 @@ are imported recursively.</p>
 <a class="admonition-anchor-link" href="engine/ast.html#admonition-ast-public-api"></a>
 </div>
 <div>
-<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.25.0/rhai/struct.AST.html">documentation</a> online.</p>
+<p>For the complete <a href="engine//book/engine/compile.html"><code>AST</code></a> API, refer to the <a href="https://docs.rs/rhai/1.26.0/rhai/struct.AST.html">documentation</a> online.</p>
 </div>
 </div>
 <h2 id="extract-only-functions"><a class="header" href="#extract-only-functions">Extract Only Functions</a></h2>
@@ -16374,8 +16425,8 @@ current evaluation state to be accessed and/or modified.</p>
 <tr><td><code>this_ptr()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>Option&lt;&amp;Dynamic&gt;</code></a></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
 <tr><td><code>this_ptr_mut()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="engine//book/language/dynamic.html"><code>&amp;mut Option&lt;&amp;mut Dynamic&gt;</code></a></td><td>mutable reference to the current bound <code>this</code> pointer, if any</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of <a href="engine//book/language/functions.html">function</a> calls</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.25.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.25.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
-<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.25.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.25.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
 <tr><td><code>debugger()</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>internals</code></a>, <a href="engine//book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="engine//book/engine/debugging/debugger.html"><code>Option&lt;&amp;debugger::Debugger&gt;</code></a></td><td>reference to the <a href="engine//book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
 <tr><td><code>debugger_mut()</code></td><td style="text-align: center"><a href="engine//book/start/features.html"><code>internals</code></a>, <a href="engine//book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="engine//book/engine/debugging/debugger.html"><code>Option&lt;&amp;mut debugger::Debugger&gt;</code></a></td><td>mutable reference to the <a href="engine//book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
 <tr><td><code>new_frame()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>EvalContextFrameGuard</code></td><td>create a new frame that automatically restores field values upon <code>Drop</code></td></tr>
@@ -16625,9 +16676,9 @@ a normal expression.</p>
 are parsed in the order defined within the <a href="engine//book/engine/custom-syntax.html">custom syntax</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="remap-tokens-during-parsing"><a class="header" href="#remap-tokens-during-parsing">Remap Tokens During Parsing</a></h1>
 <p>The Rhai <a href="engine//book/engine/hello-world.html"><code>Engine</code></a> first parses a script into a stream of <em>tokens</em>.</p>
-<p>Tokens have the type <a href="https://docs.rs/rhai/1.25.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
-<p>The function <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
-<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.25.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
+<p>Tokens have the type <a href="https://docs.rs/rhai/1.26.0/rhai/enum.Token.html"><code>Token</code></a> which is only exported under <a href="engine//book/start/features.html"><code>internals</code></a>.</p>
+<p>The function <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a>, available only under <a href="engine//book/start/features.html"><code>internals</code></a>, allows registration of a
+<em>mapper function</em> that converts (remaps) a <a href="https://docs.rs/rhai/1.26.0/rhai/enum.Token.html"><code>Token</code></a> into another.</p>
 <div id="admonition-hot-tips-use-as-safety-checks" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-hot-tips-use-as-safety-checks-title">
 <div class="admonition-title">
 <div id="admonition-hot-tips-use-as-safety-checks-title">
@@ -16651,19 +16702,19 @@ situations during parsing.</p>
 <a class="admonition-anchor-link" href="engine/token-mapper.html#admonition-tip-raising-errors"></a>
 </div>
 <div>
-<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.25.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
+<p>Raise a parse error by returning <a href="https://docs.rs/rhai/1.26.0/rhai/enum.Token.html#variant.LexError"><code>Token::LexError</code></a>
 as the mapped token.</p>
 </div>
 </div>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_parse_token"><code>Engine::on_parse_token</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(token: Token, pos: Position, state: &amp;TokenizeState) -&gt; Token</code></pre>
 </blockquote>
 <p>where:</p>
 <div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.25.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
-<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.25.0/rhai/enum.Token.html">token</a></td></tr>
-<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.25.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
+<tr><td><code>token</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/enum.Token.html"><code>Token</code></a></td><td>the next symbol parsed</td></tr>
+<tr><td><code>pos</code></td><td style="text-align: center"><code>Position</code></td><td>location of the <a href="https://docs.rs/rhai/1.26.0/rhai/enum.Token.html">token</a></td></tr>
+<tr><td><code>state</code></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/struct.TokenizeState.html"><code>&amp;TokenizeState</code></a></td><td>current state of the tokenizer</td></tr>
 </tbody></table>
 </div>
 <h2 id="example-17"><a class="header" href="#example-17">Example</a></h2>
@@ -20033,7 +20084,7 @@ engine.set_optimization_level(OptimizationLevel::None);
 
 let ast = engine.compile("...")?;</code></pre>
 <h2 id="step-2--extract-constants"><a class="header" href="#step-2--extract-constants">Step 2 – Extract Constants</a></h2>
-<p>Use <a href="https://docs.rs/rhai/1.25.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
+<p>Use <a href="https://docs.rs/rhai/1.26.0/rhai/struct.AST.html#method.iter_literal_variables"><code>AST::iter_literal_variables</code></a>
 to extract top-level <a href="patterns//book/language/constants.html">constants</a> from the <a href="patterns//book/engine/compile.html"><code>AST</code></a>.</p>
 <pre><code class="language-rust">let mut scope = Scope::new();
 
@@ -21131,7 +21182,7 @@ appropriate scope where the wrapped reference may no longer be valid.</p>
 potentially be persistent (e.g. within an <a href="patterns//book/language/object-maps.html">object map</a>).</p>
 <h4 id="safety-check-via-unique-id"><a class="header" href="#safety-check-via-unique-id">Safety check via unique ID</a></h4>
 <p>One solution, as illustrated in the example, is to always tag each handle instance together with
-a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+a unique random ID. That same ID can then be set into the <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
 before running scripts.</p>
 <p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="patterns//book/engine/hello-world.html"><code>Engine</code></a>
 (via <a href="patterns//book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;
@@ -21450,7 +21501,7 @@ let mut engine = create_scripting_engine(my_config);</code></pre>
 <h3 id="make-sure-that-rhai-has-the-appropriate-features"><a class="header" href="#make-sure-that-rhai-has-the-appropriate-features">Make sure that Rhai has the appropriate feature(s)</a></h3>
 <p>In the project’s <code>Cargo.toml</code>, specify the Rhai dependency with <code>bin-features</code>.</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.25.0", features = ["bin-features"] }
+rhai = { version = "1.26.0", features = ["bin-features"] }
 </code></pre>
 <h3 id="rebuild"><a class="header" href="#rebuild">Rebuild</a></h3>
 <p>Rebuild the project, which should automatically build all the customized tools.</p>
@@ -21511,7 +21562,7 @@ a different <a href="patterns//book/start/features.html">features</a> set, by th
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.25.0", features = [ "no_float" ] }
+rhai = { version = "1.26.0", features = [ "no_float" ] }
 rhai_github = { git = "https://github.com/rhaiscript/rhai", features = [ "unchecked" ] }
 rhai_my_github = { git = "https://github.com/my_github/rhai", branch = "variation1", features = [ "serde", "no_closure" ] }
 rhai_local = { path = "../rhai_copy" }
@@ -21538,6 +21589,547 @@ together with their <em>unique</em> <a href="patterns//book/start/features.html"
 merging feature <em>just for Rhai</em>.</p>
 <p>Unfortunately, as of this writing, there is no known method to achieve it.</p>
 <p>Therefore, moral of the story: avoid pulling in multiple crates that depend on Rhai.</p>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rhai-grain"><a class="header" href="#rhai-grain">Rhai Grain</a></h1>
+<p>Rhai Grain is an <em>experimental</em> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM for Rhai scripts.</p>
+<p>It is only available under the <a href="grain//book/start/features.html"><code>grain</code></a> feature.</p>
+<p>See <a href="https://docs.rs/rhai/latest/rhai/grain/index.html">documentation on Rhai Grain</a>.</p>
+<h2 id="when-to-use-rhai-grain"><a class="header" href="#when-to-use-rhai-grain">When to Use Rhai Grain</a></h2>
+<div id="admonition-warning-experimental" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-warning-experimental-title">
+<div class="admonition-title">
+<div id="admonition-warning-experimental-title">
+<p>Warning: Experimental</p>
+</div>
+<a class="admonition-anchor-link" href="grain/index.html#admonition-warning-experimental"></a>
+</div>
+<div>
+<p>Rhai Grain is still experimental and is not yet fully production-ready.</p>
+</div>
+</div>
+<p>Use Rhai Grain when you want to:</p>
+<ul>
+<li>
+<p>ship a script without shipping source code,</p>
+</li>
+<li>
+<p>reduce per-script memory and CPU costs on constrained devices,</p>
+</li>
+<li>
+<p>run faster than the standard Rhai interpreter,</p>
+</li>
+<li>
+<p>avoid keeping an <a href="grain//book/engine/compile.html"><code>AST</code></a> resident,</p>
+</li>
+<li>
+<p>run the same script on a second Rhai instance without reparsing it.</p>
+</li>
+</ul>
+<p>Use the normal <a href="grain//book/engine/compile.html"><code>AST</code></a> for the most straight-forward developer experience, including
+<a href="grain//book/engine/debugging/debugger.html">debugging</a>, when the script source is available, or when the script
+is short-lived and compiled just once in-process.</p>
+<p>Rhai Grain is most valuable when a script is treated as an artifact: transpiled into
+<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> once, serialized once, validated once and then executed many times
+directly on a target machine.</p>
+<h2 id="caveats"><a class="header" href="#caveats">Caveats</a></h2>
+<ul>
+<li>
+<p><code>Program::write</code> only succeeds when <code>Program::residual_count</code> is zero.</p>
+</li>
+<li>
+<p>Anything that fails to transpile is kept as an <a href="grain//book/engine/compile.html"><code>AST</code></a> fragment and interpreted by Rhai.</p>
+</li>
+<li>
+<p><code>Program::write_stripped</code> is for shipping <a href="grain//book/grain/compiler-vm.html">bytecodes</a> plus a host-side <a href="grain//book/grain/diagnostics.html"><code>Sidecar</code></a>
+for diagnostics.</p>
+</li>
+</ul>
+<h2 id="unsupported-features"><a class="header" href="#unsupported-features">Unsupported Features</a></h2>
+<p>Rhai Grain does not support every feature of the language.</p>
+<p>When the transpiler failes, it preserves that part as a residual <a href="grain//book/engine/compile.html"><code>AST</code></a> fragment and hands it back to
+Rhai for processing.</p>
+<p>They include:</p>
+<ul>
+<li>
+<p><a href="grain//book/language/eval.html"><code>eval</code></a>,</p>
+</li>
+<li>
+<p>loading <a href="grain//book/rust/modules/index.html">modules</a> via <a href="grain//book/language/modules/import.html"><code>import</code></a>,</p>
+</li>
+<li>
+<p>the <a href="grain//book/language/object-maps-missing-prop.html"><code>Engine::on_map_missing_property</code></a> advanced callback,</p>
+</li>
+<li>
+<p><a href="grain//book/engine/custom-syntax.html">custom syntax</a></p>
+</li>
+</ul>
+<p>If <code>Program::residual_count()</code> is non-zero, the program still runs, but part of it will fall back to
+Rhai’s normal <a href="grain//book/engine/compile.html"><code>AST</code></a> evaluation path.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rhai-grain-transpiler--vm"><a class="header" href="#rhai-grain-transpiler--vm">Rhai Grain Transpiler &amp; VM</a></h1>
+<p>Rhai’s default execution path is an <a href="grain//book/engine/compile.html"><code>AST</code></a>-walking interpreter.
+It is flexible and easy to use, but also keeps a full <a href="grain//book/engine/compile.html"><code>AST</code></a> tree in memory.</p>
+<p>Interpretation is also slower than a script transpiled into <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> and
+executed in a <a href="https://en.wikipedia.org/wiki/Virtual_Machine">virtual machine</a> (VM).</p>
+<p>Rhai Grain replaces the <a href="grain//book/engine/compile.html"><code>AST</code></a> with a flat stream of instructions, resulting in a compact
+representation that can be produced (transpiled) on one machine and loaded onto another,
+completely different, machine without carrying the original script source text.</p>
+<div id="admonition-runtime-behavior" class="admonition admonish-note small" role="note" aria-labelledby="admonition-runtime-behavior-title">
+<div class="admonition-title">
+<div id="admonition-runtime-behavior-title">
+<p>Runtime Behavior</p>
+</div>
+<a class="admonition-anchor-link" href="grain/compiler-vm.html#admonition-runtime-behavior"></a>
+</div>
+<div>
+<p>Rhai Grain still uses Rhai’s normal runtime services, including registered functions and <a href="grain//book/rust/modules/index.html">modules</a>.</p>
+<p>The VM attempts to reproduce the Rhai <a href="grain//book/engine/hello-world.html"><code>Engine</code></a>’s behavior as faithfully as possible
+so script runs are predictable.</p>
+</div>
+</div>
+<h2 id="examples-20"><a class="header" href="#examples-20">Examples</a></h2>
+<p>Compile a script into <a href="grain//book/engine/compile.html"><code>AST</code></a>, then further transpile it into <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> using
+<code>rhai::grain::Compiler</code>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> can be executed using <code>rhai::grain::Vm</code>.</p>
+<h3 id="transpile-a-script-into-bytecodes-and-execute-it"><a class="header" href="#transpile-a-script-into-bytecodes-and-execute-it">Transpile a script into bytecodes and execute it</a></h3>
+<pre><code class="language-rust">use rhai::grain::{Compiler, Vm};
+
+// Create new Engine.
+let engine = Engine::new();
+
+// Compile script to AST.
+let ast = engine.compile(script)?;
+
+// Create Rhai Grain transpiler.
+let grain = Compiler::new();
+
+// Transpile AST to bytecodes.
+let bytecodes = grain.compile(&amp;ast);
+
+// The bytecodes can be written to a file or sent over the network etc.,
+// then loaded later, even by a completely different Rhai program
+// in a completely different computer!
+
+// Execute bytecodes using Rhai Grain VM.
+let mut vm = Vm::new(&amp;engine);
+
+// The result is exactly the same as evaluated via`engine.eval_ast`.
+let result = vm.eval(&amp;bytecodes)?;</code></pre>
+<p>The <a href="grain//book/engine/scope.html"><code>Scope</code></a> is the same for Rhai. A script declares variables into the <a href="grain//book/engine/scope.html"><code>Scope</code></a>
+in exactly the manner as it would when evaluated through <code>Engine::eval_with_scope</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="store-bytecodes-and-reload-it-later"><a class="header" href="#store-bytecodes-and-reload-it-later">Store Bytecodes and Reload It Later</a></h1>
+<div id="admonition-benefits" class="admonition admonish-note side" role="note" aria-labelledby="admonition-benefits-title">
+<div class="admonition-title">
+<div id="admonition-benefits-title">
+<p>Benefits</p>
+</div>
+<a class="admonition-anchor-link" href="grain/store-load.html#admonition-benefits"></a>
+</div>
+<div>
+<p>The size of the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> stream is usually smaller than the original script source,
+and <em>much</em> smaller than memory required to hold the entire <a href="grain//book/engine/compile.html"><code>AST</code></a>.</p>
+</div>
+</div>
+<p>This is the primary use case for Rhai Grain: transpile an <a href="grain//book/engine/compile.html"><code>AST</code></a> to <a href="grain//book/grain/compiler-vm.html">bytecodes</a>
+on a host, then run it on a resource-constrained separate target that does not have
+access to the Rhai parser or the source file.</p>
+<p>Once a script has been transpiled into <a href="grain//book/grain/compiler-vm.html">bytecodes</a> all the way through, it can be saved
+into whatever storage (e.g. a file) as a dense byte stream.</p>
+<p>The <a href="grain//book/grain/compiler-vm.html">bytecodes</a>, when loaded, can be consumed by another <code>Vm</code> and can run with a fresh
+<a href="grain//book/engine/hello-world.html"><code>Engine</code></a> instance.</p>
+<h2 id="example-28"><a class="header" href="#example-28">Example</a></h2>
+<h3 id="transpile-to-bytecodes"><a class="header" href="#transpile-to-bytecodes">Transpile to bytecodes</a></h3>
+<pre><code class="language-rust">use rhai::grain::{Compiler, Program, Vm};
+
+let engine = Engine::new();
+let ast = engine.compile(script)?;
+
+let grain = Compiler::new();
+let bytecodes = grain.compile(&amp;ast);
+
+// Make sure that there are no unsupported features in the script.
+assert_eq!(bytecodes.residual_count(), 0);</code></pre>
+<div id="admonition-residual-ast-fragments" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-residual-ast-fragments-title">
+<div class="admonition-title">
+<div id="admonition-residual-ast-fragments-title">
+<p>Residual AST fragments</p>
+</div>
+<a class="admonition-anchor-link" href="grain/store-load.html#admonition-residual-ast-fragments"></a>
+</div>
+<div>
+<p>The important check here is <code>bytecodes.residual_count()</code>.</p>
+<p>If Rhai Grain cannot transpile the script completely (i.e. if the script depends on certain
+unsupported functionality such as <a href="grain//book/language/eval.html"><code>eval</code></a>), the program will still contain <em>residual</em>
+<a href="grain//book/engine/compile.html"><code>AST</code></a> fragments and <code>write</code> will refuse to serialize it.</p>
+<p>In practice, this is a good sanity check: if the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> can be written out, it no longer
+depends on the script source at all (nor the <a href="grain//book/engine/compile.html"><code>AST</code></a>).</p>
+</div>
+</div>
+<h3 id="write-out-to-disk"><a class="header" href="#write-out-to-disk">Write out to disk</a></h3>
+<pre><code class="language-rust">// Serialize the bytecodes into a dense byte stream.
+let buf = bytecodes.write()?;
+
+// Save it to a file.
+std::fs::write("my_program.rgrn", buffer)?;</code></pre>
+<h3 id="reload-from-disk-and-run"><a class="header" href="#reload-from-disk-and-run">Reload from disk and run</a></h3>
+<pre><code class="language-rust">// Load the bytecodes from disk.
+let buf = std::fs::read("my_program.rgrn")?;
+
+// Deserialize the bytecodes.
+let loaded = Program::read(&amp;buf)?;
+
+let mut vm = Vm::new(&amp;engine);
+let result = vm.eval(&amp;loaded)?;</code></pre>
+<div id="admonition-still-needs-an-engine" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-still-needs-an-engine-title">
+<div class="admonition-title">
+<div id="admonition-still-needs-an-engine-title">
+<p>Still needs an <code>Engine</code></p>
+</div>
+<a class="admonition-anchor-link" href="grain/store-load.html#admonition-still-needs-an-engine"></a>
+</div>
+<div>
+<p>The <a href="grain//book/grain/compiler-vm.html">bytecodes</a> is not a standalone executable.</p>
+<p>It still must be evaluated by a <code>Vm</code>, which still uses an actual Rhai <a href="grain//book/engine/hello-world.html"><code>Engine</code></a>
+to call registered native functions and perform other runtime operations.</p>
+<p>This is why Rhai Grain is particularly useful for deployment scenarios where
+the target device should <em>not</em> have access to the script source, but still must know
+what functions and behavior are legal to call.</p>
+<p>The <a href="grain//book/grain/compiler-vm.html">bytecodes</a> is a compact representation of the <a href="grain//book/engine/compile.html"><code>AST</code></a>; the runtime is still Rhai.</p>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="capabilities"><a class="header" href="#capabilities">Capabilities</a></h1>
+<h2 id="why-is-this-important"><a class="header" href="#why-is-this-important">Why is This Important?</a></h2>
+<p>Normally, there is no way for Rhai’s <a href="grain//book/engine/compile.html"><code>AST</code></a> to go out of sync with the <a href="grain//book/engine/hello-world.html"><code>Engine</code></a> build that
+compiled it.</p>
+<p>The Rhai compiler and its runtime are tightly-coupled together, and an <a href="grain//book/engine/compile.html"><code>AST</code></a> can only ever be
+built from the script source.  There is no mechanism to store an <a href="grain//book/engine/compile.html"><code>AST</code></a> externally or transmit it
+elsewhere.</p>
+<p>Not so for the Rhai Grain VM.</p>
+<p>A Rhai script’s <a href="grain//book/engine/compile.html"><code>AST</code></a> can be further transpiled into <a href="grain//book/grain/compiler-vm.html">bytecodes</a> which can be stored externally
+(i.e. into a file) and then shipped to another machine, and run on a completely different <a href="grain//book/engine/hello-world.html"><code>Engine</code></a>
+build, which may not even have a parser or the same <a href="grain//book/start/features.html">features</a> enabled.</p>
+<h2 id="fingerprint-abi"><a class="header" href="#fingerprint-abi">Fingerprint (ABI)</a></h2>
+<p>Thereforel, Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a> carry a small <em>fingerprint</em>, or ABI, that makes sure it can be
+properly decoded and/or run on the host.</p>
+<h3 id="fingerprint-abi-structure"><a class="header" href="#fingerprint-abi-structure">Fingerprint (ABI) structure</a></h3>
+<div id="admonition-note" class="admonition admonish-note side" role="note" aria-labelledby="admonition-note-title">
+<div class="admonition-title">
+<div id="admonition-note-title">
+<p>Note</p>
+</div>
+<a class="admonition-anchor-link" href="grain/capabilities.html#admonition-note"></a>
+</div>
+<div>
+<p>The fingerprint is not just metadata.</p>
+<p>It is the compatibility guard-rails that prevents a <a href="grain//book/grain/compiler-vm.html">bytecodes</a> stream from running
+on a build that does not have the features to handle it.</p>
+</div>
+</div>
+<p>The fingerprint records:</p>
+<ul>
+<li>
+<p>whether the <a href="grain//book/language/values-and-types.html">system integer number</a> is 32-bit or 64-bit,</p>
+</li>
+<li>
+<p>whether the system <a href="grain//book/language/values-and-types.html">floating-point number</a> is 32-bit or 64-bit,</p>
+</li>
+<li>
+<p>the <em>capabilities</em> required to run.</p>
+</li>
+</ul>
+<h3 id="capabilities-set"><a class="header" href="#capabilities-set">Capabilities set</a></h3>
+<p>The capability set covers Rhai language features that a script may use, such as:</p>
+<ul>
+<li>
+<p>floating-point or <a href="grain//book/start/features.html"><code>decimal</code></a> numbers,</p>
+</li>
+<li>
+<p><a href="grain//book/language/arrays.html">arrays</a>, <a href="grain//book/language/blobs.html">BLOB’s</a>, or <a href="grain//book/language/object-maps.html">object maps</a>,</p>
+</li>
+<li>
+<p>indexing (i.e. usage of <code>[ .. ]</code> syntax),</p>
+</li>
+<li>
+<p>accessing <a href="grain//book/rust/getters-setters.html">properties</a>,</p>
+</li>
+<li>
+<p>calling functions in <a href="grain//book/rust/methods.html">method-call</a> style,</p>
+</li>
+<li>
+<p>the <code>this</code> pointer,</p>
+</li>
+<li>
+<p>defining scripted <a href="grain//book/language/functions.html">functions</a>,</p>
+</li>
+<li>
+<p><a href="grain//book/language/fn-ptr.html">function pointers</a> and <a href="grain//book/language/fn-curry.html">currying</a>,</p>
+</li>
+<li>
+<p>capturing variables from <a href="grain//book/language/fn-closure.html">closures</a>,</p>
+</li>
+<li>
+<p><a href="grain//book/language/modules/import.html"><code>import</code></a> and <a href="grain//book/language/modules/export.html"><code>export</code></a> to work with <a href="grain//book/rust/modules/index.html">modules</a>,</p>
+</li>
+<li>
+<p><a href="grain//book/engine/custom-syntax.html">custom syntax</a></p>
+</li>
+</ul>
+<h2 id="what-is-checked"><a class="header" href="#what-is-checked">What is Checked?</a></h2>
+<p>When <code>Program::read</code> loads <a href="grain//book/grain/compiler-vm.html">bytecodes</a>, it checks the ABI before it decodes the rest,
+comparing the capabilities it requires against the capabilities supported by the host.</p>
+<p>If any required capability is missing from the host, it simply fails to load.</p>
+<p><code>Program::read</code> will never load <a href="grain//book/grain/compiler-vm.html">bytecodes</a> beyond the current host’s ability to handle.</p>
+<p>This catches two classes of incompatibility:</p>
+<ol>
+<li>
+<p>a different integer or floating-point width, such as using <code>i64</code> on a host built with
+<a href="grain//book/start/features.html"><code>only_i32</code></a> or using <code>f32</code> on a host built without <a href="grain//book/start/features.html"><code>f32_float</code></a>, and</p>
+</li>
+<li>
+<p>any required capability that the host does not support.</p>
+</li>
+</ol>
+<h3 id="example-29"><a class="header" href="#example-29">Example</a></h3>
+<ul>
+<li>
+<p>If the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> was transpiled on a Rhai instance with a 64-bit integer build, but is being loaded
+on a 32-bit build of Rhai (via <a href="grain//book/start/features.html"><code>only_i32</code></a>), it will refuse to load.</p>
+</li>
+<li>
+<p>If the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> was transpiled on a full Rhai instance, for example, but it does not use any
+<a href="grain//book/language/arrays.html">arrays</a> or <a href="grain//book/language/object-maps.html">object maps</a>.  Then the same <a href="grain//book/grain/compiler-vm.html">bytecodes</a> can be successfully loaded and run on a
+computer with a <a href="grain//book/start/features.html"><code>no_index</code></a> and <a href="grain//book/start/features.html"><code>no_object</code></a> build of Rhai, because those features are not used.</p>
+</li>
+<li>
+<p>If the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> uses a particular language feature of Rhai (e.g. defines a <a href="grain//book/language/functions.html">function</a>) but the
+host build does not support that feature (e.g. <a href="grain//book/start/features.html"><code>no_function</code></a>), again it will refuse to load.</p>
+</li>
+<li>
+<p>The key point is that Rhai Grain treats a <a href="grain//book/grain/compiler-vm.html">bytecodes</a> stream as a deployment unit: if it requires a
+capability the host build does not support, it is not runnable.</p>
+</li>
+</ul>
+<h2 id="verification"><a class="header" href="#verification">Verification</a></h2>
+<p>The ABI check above is only the first gate.</p>
+<p>After the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> is decoded, a verifier inspects every instruction checks the capabilities that
+instruction requires to run.</p>
+<p>This is a second, more precise check. Even if the fingerprint is declared to be compatible with the
+host, the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> stream itself is inspected to make sure it does not contain instructions
+that require additional capabilities.</p>
+<p>In other words, Rhai Grain enforces that:</p>
+<ul>
+<li>
+<p><a href="grain//book/grain/compiler-vm.html">bytecodes</a> capabilities are within the host’s supported capabilities, and</p>
+</li>
+<li>
+<p>every instruction’s requirements fall under the declared capabilities.</p>
+</li>
+</ul>
+<p>Only when both hold can will the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> safely load.</p>
+<h2 id="caveats-and-gotchas"><a class="header" href="#caveats-and-gotchas">Caveats and Gotcha’s</a></h2>
+<p>Rhai Grain’s capability system is for compatibility, not a general-purpose sandbox.</p>
+<p>It is designed to make sure that a stream of <a href="grain//book/grain/compiler-vm.html">bytecodes</a> can run on the current host build.</p>
+<p>It does not make the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> fully portable to every possible build of Rhai.</p>
+<ul>
+<li>
+<p>A build with more <a href="grain//book/start/features.html">features</a> is usually fine; a build with fewer features is not.
+The host must support every capability the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> require.</p>
+</li>
+<li>
+<p>This check happens before loading and execution. A mismatch fails at load time,
+not as a later runtime fault.</p>
+</li>
+<li>
+<p>The compatibility test is intentionally strict. <code>Program::read</code> will fail even if
+the host’s integer or floating-point widths are longer than the ones declared
+by the <a href="grain//book/grain/compiler-vm.html">bytecodes</a>.</p>
+</li>
+<li>
+<p>This is not a substitute for runtime <a href="grain//book/safety/index.html">safety</a> limits. Even fully compatible
+<a href="grain//book/grain/compiler-vm.html">bytecodes</a> still requires usual Rhai runtime checks.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="run-bytecodes-with-callback"><a class="header" href="#run-bytecodes-with-callback">Run Bytecodes with Callback</a></h1>
+<p>The standard <code>Vm::eval</code> and <code>Vm::eval_with_scope</code> path is enough for ordinary scripts.</p>
+<p>A Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a> program becomes a special case when it creates or receives a
+<a href="grain//book/language/fn-ptr.html">function pointer</a> that a native Rust function later calls.</p>
+<h2 id="vmeval_with_callbacks"><a class="header" href="#vmeval_with_callbacks"><code>Vm::eval_with_callbacks</code></a></h2>
+<p>This is the purpose of <code>Vm::eval_with_callbacks</code>: it registers a native <em>wrapper</em> for each
+transpiled function for the duration of the run, so a script that creates a <a href="grain//book/language/fn-closure.html">closure</a> and then
+hands it to a host callback can still be resolved by Rhai.</p>
+<p>This is necessary when the script does something like:</p>
+<pre><code class="language-rhai">let values = [1, 2, 3];     // an array
+
+values.map(|x| x * 2);      // native function 'map' taking closure as callback
+</code></pre>
+<p>The <a href="grain//book/engine/hello-world.html"><code>Engine</code></a> must be able to resolve that <a href="grain//book/language/fn-ptr.html">function pointer</a> within the native Rust call.</p>
+<div id="admonition-callbacks-are-necessary-for-closures" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-callbacks-are-necessary-for-closures-title">
+<div class="admonition-title">
+<div id="admonition-callbacks-are-necessary-for-closures-title">
+<p>Callbacks are necessary for closures</p>
+</div>
+<a class="admonition-anchor-link" href="grain/callbacks.html#admonition-callbacks-are-necessary-for-closures"></a>
+</div>
+<div>
+<p>Without callback wrappers, Rhai Grain would know the clos7ure <a href="grain//book/language/functions.html">function</a> exists in the <a href="grain//book/grain/compiler-vm.html">bytecodes</a>,
+but the <a href="grain//book/engine/hello-world.html"><code>Engine</code></a> that runs the native function (<code>map</code>) would not.</p>
+</div>
+</div>
+<h2 id="run-with-callback-wrappers"><a class="header" href="#run-with-callback-wrappers">Run with Callback Wrappers</a></h2>
+<pre><code class="language-rust">use rhai::grain::{Compiler, Vm};
+
+let engine = Engine::new();
+let ast = engine.compile(script)?;
+
+// Transpile into shared bytecodes.
+let grain = Compiler::new();
+let bytecodes = grain.compile(&amp;ast).into_shared();
+
+// Use 'eval_with_callbacks'.
+let mut vm = Vm::new(&amp;engine);
+let value = vm.eval_with_callbacks(&amp;mut scope, &amp;bytecodes)?;</code></pre>
+<div id="admonition-tip-use-callbacks-only-when-necessary" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-use-callbacks-only-when-necessary-title">
+<div class="admonition-title">
+<div id="admonition-tip-use-callbacks-only-when-necessary-title">
+<p>Tip: Use callbacks only when necessary</p>
+</div>
+<a class="admonition-anchor-link" href="grain/callbacks.html#admonition-tip-use-callbacks-only-when-necessary"></a>
+</div>
+<div>
+<p>The callback-enabled path is not needed for <em>every</em> script.</p>
+<p>If the script has no <a href="grain//book/language/fn-ptr.html">function pointer</a> or <a href="grain//book/language/fn-closure.html">closure</a> usage,
+plain <code>Vm::eval</code> is simpler and faster.</p>
+<p>It becomes necessary only when Rhai must cross from native Rust
+back into Rhai Grain through a <a href="grain//book/language/fn-ptr.html">function pointer</a> or a <a href="grain//book/language/fn-closure.html">closure</a>.</p>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="diagnostics"><a class="header" href="#diagnostics">Diagnostics</a></h1>
+<p>When errors occur, Rhai Grain provides the exact same level of diagnostics as <a href="grain//book/engine/hello-world.html"><code>Engine</code></a> does
+– i.e., full source positions, stack traces, and error messages.</p>
+<p>Diagnostics information, however, is a heavy payload, sometimes even larger than the instructions
+and data.  Rhai Grain allows stripping the diagnostics information from <a href="grain//book/grain/compiler-vm.html">bytecodes</a> and keeping it
+in a separate <a href="grain//book/grain/diagnostics.html"><code>Sidecar</code></a> that resides on the host together with the script source.</p>
+<h2 id="stripping-bytecodes"><a class="header" href="#stripping-bytecodes">Stripping Bytecodes</a></h2>
+<p>For an even more compact shipping format, Rhai Grain also supports a stripped form of
+the serialized <a href="grain//book/grain/compiler-vm.html">bytecodes</a> that removes diagnostics information.</p>
+<pre><code class="language-rust">use rhai::grain::{Compiler, Program};
+
+let engine = Engine::new();
+let ast = engine.compile(script)?;
+
+let grain = Compiler::new();
+let bytecodes = grain.compile(&amp;ast);
+
+// Make sure that there are no unsupported features in the script.
+assert_eq!(bytecodes.residual_count(), 0);
+
+// Serialize the bytecodes into a dense byte stream with no diagnostics.
+let stripped = bytecodes.write_stripped()?;</code></pre>
+<h2 id="keep-diagnostics-on-the-host"><a class="header" href="#keep-diagnostics-on-the-host">Keep Diagnostics on the Host</a></h2>
+<p>The Rhai Grain <code>Sidecar</code> keeps source positions and debug information separately
+so the target device can carry only the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> payload.</p>
+<pre><code class="language-rust">use rhai::grain::{Compiler, Program, Vm};
+
+let bytecodes = Program::read(&amp;stripped.artifact).unwrap();
+
+let mut vm = Vm::new(&amp;engine);
+let error = vm.eval_with_scope(&amp;mut Scope::new(), &amp;bytecodes).unwrap_err();
+
+let sites = stripped.sidecar.resolve(&amp;vm.fault_trace());
+
+assert!(error.position().is_none());
+assert_eq!(sites[0].unwrap().line, 1);</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="primary-api"><a class="header" href="#primary-api">Primary API</a></h1>
+<p>The relevant types live under <code>rhai::grain</code> namespace.</p>
+<pre><code class="language-rust">use rhai::grain::{Compiler, Program, Vm};</code></pre>
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>Compiler::new</code> | <code>Compiler::compile</code></td><td>transpile an <a href="grain//book/engine/compile.html"><code>AST</code></a> into Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a>.</td></tr>
+<tr><td><code>Program::write</code> | <code>Program::read</code></td><td>serialize and reload a chunk of Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a>.</td></tr>
+<tr><td><code>Program::write_stripped</code></td><td>remove diagnostics from the Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a>.</td></tr>
+<tr><td><code>Program::residual_count</code> | <code>Program::first_unsupported</code></td><td>report features not yet supported.</td></tr>
+<tr><td><code>Vm::eval</code> | <code>Vm::eval_with_scope</code></td><td>run a script transpiled into Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a>.</td></tr>
+<tr><td><code>Vm::eval_with_callback</code></td><td>run a script transpiled into Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a> with <em>wrappers</em> for script-defined <a href="grain//book/language/functions.html">functions</a>.</td></tr>
+<tr><td><code>Vm::fault_trace</code></td><td>retrieve the trace after an error.</td></tr>
+<tr><td><code>Sidecar::resolve</code></td><td>map fault traces back to source locations.</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="caveats-and-gotchas-1"><a class="header" href="#caveats-and-gotchas-1">Caveats and Gotcha’s</a></h1>
+<p>Rhai Grain is powerful, but a few caveats remain.</p>
+<div id="admonition-residual-ast-fragments" class="admonition admonish-warning" role="note" aria-labelledby="admonition-residual-ast-fragments-title">
+<div class="admonition-title">
+<div id="admonition-residual-ast-fragments-title">
+<p>Residual AST Fragments</p>
+</div>
+<a class="admonition-anchor-link" href="grain/caveats.html#admonition-residual-ast-fragments"></a>
+</div>
+<div>
+<p>The transpiler does not promise that every construct can be proessed.</p>
+<p>If there are still residual unsupported <a href="grain//book/engine/compile.html"><code>AST</code></a> fragments, the resulting bytecodes
+is not fully serializable.</p>
+<p>That is not an error; it merely means the script still contains pieces that
+Rhai Grain must fall back to the original <a href="grain//book/engine/compile.html"><code>AST</code></a> interpreter.</p>
+<p>Once <code>residual_count()</code> reaches zero, the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> is completely stand-alone
+and free of any dependency on the original source or <a href="grain//book/engine/compile.html"><code>AST</code></a>.</p>
+</div>
+</div>
+<div id="admonition-engine-compatibility" class="admonition admonish-warning" role="note" aria-labelledby="admonition-engine-compatibility-title">
+<div class="admonition-title">
+<div id="admonition-engine-compatibility-title">
+<p><code>Engine</code> Compatibility</p>
+</div>
+<a class="admonition-anchor-link" href="grain/caveats.html#admonition-engine-compatibility"></a>
+</div>
+<div>
+<p>The Rhai Grain <a href="grain//book/grain/compiler-vm.html">bytecodes</a> is not a portable binary format across arbitrary Rhai versions
+or <a href="grain//book/start/features.html">feature</a> sets. It is intended to be produced and consumed by compatible builds of Rhai.</p>
+<p>The target <a href="grain//book/engine/hello-world.html"><code>Engine</code></a> must register all necessary functions, <a href="grain//book/rust/modules/index.html">modules</a> or custom behavior
+that are called by the loaded script.</p>
+<p>In other words, the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> contains the script’s logic, not a full copy of the host runtime.</p>
+<p>A <code>Vm</code> can run a script with a fresh <a href="grain//book/engine/hello-world.html"><code>Engine</code></a>, but it must still know how to call
+the functions the script expects.</p>
+</div>
+</div>
+<div id="admonition-stripped-diagnostics" class="admonition admonish-warning" role="note" aria-labelledby="admonition-stripped-diagnostics-title">
+<div class="admonition-title">
+<div id="admonition-stripped-diagnostics-title">
+<p>Stripped Diagnostics</p>
+</div>
+<a class="admonition-anchor-link" href="grain/caveats.html#admonition-stripped-diagnostics"></a>
+</div>
+<div>
+<p>If a stripped <a href="grain//book/grain/compiler-vm.html">bytecodes</a> run fails at runtime, it can only tell which instructions
+were active when it failed.</p>
+<p>For full source locations, the <a href="grain//book/grain/diagnostics.html"><code>Sidecar</code></a> produced by <code>write_stripped()</code> must be preserved
+and resolve the fault frames against it on the host with the script source.</p>
+<p>Without the <a href="grain//book/grain/diagnostics.html"><code>Sidecar</code></a>, the error can have no line or source mapping information.</p>
+</div>
+</div>
+<div id="admonition-debugging-markers-are-not-shipped-by-default" class="admonition admonish-note" role="note" aria-labelledby="admonition-debugging-markers-are-not-shipped-by-default-title">
+<div class="admonition-title">
+<div id="admonition-debugging-markers-are-not-shipped-by-default-title">
+<p>Debugging Markers are Not Shipped by Default</p>
+</div>
+<a class="admonition-anchor-link" href="grain/caveats.html#admonition-debugging-markers-are-not-shipped-by-default"></a>
+</div>
+<div>
+<p>A <a href="grain//book/engine/debugging/debugger.html">debugging</a> build can pause on statements and emit trace information.</p>
+<p>That extra metadata is intentionally omitted from production <a href="grain//book/grain/compiler-vm.html">bytecodes</a>.</p>
+<p>This keeps the <a href="grain//book/grain/compiler-vm.html">bytecodes</a> smaller and avoids shipping a debugger into a deployment target.</p>
+<p>The <a href="grain//book/grain/compiler-vm.html">bytecodes</a> still runs without those markers, but it cannot be stopped step-by-step
+or at break-points in the same way as a full Rhai <a href="grain//book/engine/hello-world.html"><code>Engine</code></a>.</p>
+</div>
+</div>
+<div id="admonition-not-a-replacement-for-engine-on-the-target" class="admonition admonish-danger" role="note" aria-labelledby="admonition-not-a-replacement-for-engine-on-the-target-title">
+<div class="admonition-title">
+<div id="admonition-not-a-replacement-for-engine-on-the-target-title">
+<p>Not a Replacement for <code>Engine</code> on the Target</p>
+</div>
+<a class="admonition-anchor-link" href="grain/caveats.html#admonition-not-a-replacement-for-engine-on-the-target"></a>
+</div>
+<div>
+<p>Rhai Grain does not remove the need for an <a href="grain//book/engine/hello-world.html"><code>Engine</code></a> on the target.</p>
+<p>It removes the need for a parser and an <a href="grain//book/engine/compile.html"><code>AST</code></a>, but the target still needs a
+<code>Vm</code> and the runtime metadata that Rhai uses to call functions and manage values.</p>
+<p>Rhai Grain is best thought of as a compact, deployable script representation,
+not as an alternative runtime environment with zero host requirements.</p>
 </div>
 </div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rhai-language-reference"><a class="header" href="#rhai-language-reference">Rhai Language Reference</a></h1>
@@ -21780,7 +22372,7 @@ switch type_of(x) {
 <p>It is an error to set a tag to a value beyond the bounds of <code>i32</code> (<code>i16</code> on 32-bit targets).</p>
 </div>
 </div>
-<h2 id="examples-20"><a class="header" href="#examples-20">Examples</a></h2>
+<h2 id="examples-21"><a class="header" href="#examples-21">Examples</a></h2>
 <pre><code class="language-rust">let x = 42;
 
 x.tag == 0;             // tag defaults to zero
@@ -22043,7 +22635,7 @@ number = -5 - +5;
 <tr><td style="text-align: center"><code>..=</code></td><td>inclusive range</td><td style="text-align: center"><a href="ref/ranges.html">range</a></td><td style="text-align: center">yes</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center"><strong>no</strong></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-21"><a class="header" href="#examples-21">Examples</a></h2>
+<h2 id="examples-22"><a class="header" href="#examples-22">Examples</a></h2>
 <pre><code class="language-rust">let x = (1 + 2) * (6 - 4) / 2;  // arithmetic, with parentheses
 
 let reminder = 42 % 10;         // modulo
@@ -22402,7 +22994,7 @@ system integer type (usually −64).</p>
 <tr><td><code>bits</code></td><td><a href="ref/ranges.html">range</a> of bits</td><td>allows iteration over the bits of a bit-field</td></tr>
 </tbody></table>
 </div>
-<h2 id="example-28"><a class="header" href="#example-28">Example</a></h2>
+<h2 id="example-30"><a class="header" href="#example-30">Example</a></h2>
 <pre><code class="language-js   no_run">// Assume the following bits fields in a single 16-bit word:
 // ┌─────────┬────────────┬──────┬─────────┐
 // │  15-12  │    11-4    │  3   │   2-0   │
@@ -22655,7 +23247,7 @@ bytes) can also be slow.</p>
 </blockquote>
 <p>Sub-string <a href="ref/ranges.html">ranges</a> always start from zero counting towards the end of the string.
 Negative <a href="ref/ranges.html">ranges</a> are not supported.</p>
-<h2 id="examples-22"><a class="header" href="#examples-22">Examples</a></h2>
+<h2 id="examples-23"><a class="header" href="#examples-23">Examples</a></h2>
 <pre><code class="language-js">let name = "Bob";
 let middle_initial = 'C';
 let last = "Davis";
@@ -22801,7 +23393,7 @@ to be able to directly manipulate UTF-8 encoded text.</p>
 <tr><td><code>+</code></td><td>concatenate a <a href="ref/blobs.html">BLOB</a> (as a UTF-8 encoded byte stream) with a <a href="ref/strings-chars.html">string</a></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-23"><a class="header" href="#examples-23">Examples</a></h2>
+<h2 id="examples-24"><a class="header" href="#examples-24">Examples</a></h2>
 <pre><code class="language-rust">let full_name == " Bob C. Davis ";
 full_name.len == 14;
 
@@ -22916,7 +23508,7 @@ added or removed.</p>
 <tr><td><code>order_desc</code></td><td><em>none</em></td><td>returns a sorted (in descending order) copy of a <em>homogeneous</em> array containing only elements of the same comparable built-in type (integers, floating-point, decimal, <a href="ref/strings-chars.html">string</a>, <a href="ref/strings-chars.html">character</a>, <code>bool</code>, <code>()</code>)</td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-24"><a class="header" href="#examples-24">Examples</a></h2>
+<h2 id="examples-25"><a class="header" href="#examples-25">Examples</a></h2>
 <pre><code class="language-rust">let y = [2, 3];             // y == [2, 3]
 
 let y = [2, 3,];            // y == [2, 3]
@@ -23389,7 +23981,7 @@ let x = map.bar ?? 42;      // x == 42</code></pre>
 <tr><td><code>to_json</code></td><td><em>none</em></td><td>returns a JSON representation of the object map (<code>()</code> is mapped to <code>null</code>, all other data types must be supported by JSON)</td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-25"><a class="header" href="#examples-25">Examples</a></h2>
+<h2 id="examples-26"><a class="header" href="#examples-26">Examples</a></h2>
 <pre><code class="language-rust">let y = #{              // object map literal with 3 properties
     a: 1,
     bar: "hello",
@@ -23505,7 +24097,7 @@ obj.data == 42;                              // 'obj.data' is not changed</code>
 <tr><td><code>sleep</code></td><td>number of seconds to sleep</td><td>blocks the current thread for a specified number of seconds</td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-26"><a class="header" href="#examples-26">Examples</a></h2>
+<h2 id="examples-27"><a class="header" href="#examples-27">Examples</a></h2>
 <pre><code class="language-rust">let now = timestamp();
 
 // Do some lengthy operation...
@@ -24160,7 +24752,7 @@ array.contains(42);     // &lt;- the above is equivalent to this
 <tr><td style="text-align: center"><a href="ref/strings-chars.html">String</a></td><td style="text-align: center"><a href="ref/strings-chars.html">sub-string</a> or <a href="ref/strings-chars.html">character</a></td></tr>
 </tbody></table>
 </div>
-<h3 id="examples-27"><a class="header" href="#examples-27">Examples</a></h3>
+<h3 id="examples-28"><a class="header" href="#examples-28">Examples</a></h3>
 <pre><code class="language-rust">let array = [1, "abc", 42, ()];
 
 42 in array == true;                // check array for item
@@ -25279,7 +25871,7 @@ when the object pointed to by <code>this</code> is of a certain type:</p>
 <p>Using these make scripts more portable.</p>
 </div>
 </div>
-<h3 id="examples-28"><a class="header" href="#examples-28">Examples</a></h3>
+<h3 id="examples-29"><a class="header" href="#examples-29">Examples</a></h3>
 <pre><code class="language-js">/// This 'do_update' can only be called on objects of type 'MyType' in method style
 fn MyType.do_update(x, y) {
     this.update(x * y);
@@ -25436,7 +26028,7 @@ array.filter(|n| n % 2 == 0);   // &lt;- ... or this</code></pre>
 <tr><td><code>call</code></td><td><em>arguments</em></td><td>calls the <a href="ref/functions.html">function</a> matching the function pointer’s name with the <em>arguments</em></td></tr>
 </tbody></table>
 </div>
-<h2 id="examples-29"><a class="header" href="#examples-29">Examples</a></h2>
+<h2 id="examples-30"><a class="header" href="#examples-30">Examples</a></h2>
 <pre><code class="language-rust">fn foo(x) { 41 + x }
 
 let func = Fn("foo");       // use the 'Fn' function to create a function pointer
@@ -26189,7 +26781,7 @@ Rhai script files (recursively), building a web-based documentation site for all
 <code>rhai-doc</code> and must be placed in the source directory.</p>
 <p>A skeleton <code>rhai.toml</code> can be generated inside the source directory via the <code>new</code> command.</p>
 <p>An alternate configuration file can be specified via the <code>--config</code> option.</p>
-<h3 id="example-29"><a class="header" href="#example-29">Example</a></h3>
+<h3 id="example-31"><a class="header" href="#example-31">Example</a></h3>
 <pre><code class="language-toml">name = "My Rhai Project"                # project name
 color = [246, 119, 2]                   # theme color
 root = "/docs/"                         # root URL for generated site
@@ -26274,7 +26866,7 @@ such as <a href="https://crates.io/crates/mdbook"><code>mdbook</code></a> or <a 
 <h2 id="usage-2"><a class="header" href="#usage-2">Usage</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dev-dependencies]
-rhai = "1.25.0"
+rhai = "1.26.0"
 rhai-autodocs = "0.4"           # use rhai-autodocs crate
 </code></pre>
 <p><code>build.rs</code>:</p>

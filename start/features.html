@@ -222,8 +222,10 @@ what scripts can (or cannot) do.</p>
 <tr><td><code>unicode-xid-ident</code></td><td style="text-align: center"><strong>no</strong></td><td>allows <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a> as identifiers (pulls in the <a href="https://crates.io/crates/unicode-xid"><code>unicode-xid</code></a> crate)</td></tr>
 <tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate)</td></tr>
 <tr><td><code>metadata</code></td><td style="text-align: center">yes</td><td>enables exporting <a href="/book/engine/metadata/index.html">functions metadata</a>; implies <code>serde</code> and additionally pulls in <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td></tr>
+<tr><td><code>grain</code></td><td style="text-align: center">yes</td><td>enables the <em>experimental</em> <strong><a href="/book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM (work-in-progress)</td></tr>
 <tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="/book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><ul><li>allowing access to internal types may enable external attack vectors</li><li>internal types and functions are volatile and may change from version to version</li></ul></td></tr>
 <tr><td><code>debugging</code></td><td style="text-align: center">yes</td><td>enables the <a href="/book/engine/debugging/debugger.html">debugging</a> interface; implies <code>internals</code></td></tr>
+<tr><td><code>grain</code></td><td style="text-align: center">yes</td><td>enables the experimental <a href="/book/grain/index.html">Rhai Grain VM</a> bytecode compiler and VM</td></tr>
 </tbody></table>
 </div>
 <h2 id="features-that-disable-certain-language-features"><a class="header" href="#features-that-disable-certain-language-features">Features that Disable Certain Language Features</a></h2>
@@ -274,7 +276,7 @@ Do not use them for non-<a href="/book/start/builds/wasm.html">WASM</a> targets.
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>The <code>Cargo.toml</code> configuration below:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.25.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
+rhai = { version = "1.26.0", features = [ "sync", "unchecked", "only_i32", "no_float", "no_module", "no_function" ] }
 </code></pre>
 <p>turns on these six features:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: center">Feature</th><th>Description</th></tr></thead><tbody>

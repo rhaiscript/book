@@ -209,26 +209,28 @@
 <p>So if you <em>absolutely must</em> have top performance…</p>
 </div>
 </div>
-<p>The purpose of Rhai is not to be <em>blazing fast</em>, but to make it as easy and versatile as possible to
-integrate with native Rust applications.</p>
-<p>What you lose from running an <a href="/book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
+<p>The main design goal of Rhai is to make it as easy and versatile as possible to integrate with
+native Rust applications.</p>
+<p>So, what you lose from running an <a href="/book/engine/compile.html">AST</a> walker, you gain back from increased flexibility.</p>
 <p>The following benchmarks were run on a 2.6GHz Linux VM comparing
-<a href="../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a> and
-<a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
-<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.25s</td><td style="text-align: center">3.2s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="/book/language/functions.html">function</a> calls</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.13s</td><td style="text-align: center">0.2s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
-<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.2s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
+<a href="../start/builds/performance.html">performance-optimized</a> and full builds of Rhai with <a href="https://www.python.org">Python 3</a>
+and <a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).</p>
+<div class="table-wrapper"><table><thead><tr><th>Benchmark</th><th style="text-align: center">Rhai<br/>(Perf)</th><th style="text-align: center">Rhai</br>(Full)</th><th style="text-align: center"><a href="/book/grain/index.html">Rhai Grain</a> <br/>(Perf, <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://www.python.org">Python 3</a><br/>(<a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a>)</th><th style="text-align: center"><a href="https://v8.dev">V8</a><br/>(<a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a>)</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/fibonacci.rhai">Fibonacci</a></td><td style="text-align: center">2.25s</td><td style="text-align: center">3.2s</td><td style="text-align: center">1.2s</td><td style="text-align: center">0.6s</td><td style="text-align: center">0.07s</td><td>stresses recursive <a href="/book/language/functions.html">function</a> calls</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">1M loop</a></td><td style="text-align: center">0.13s</td><td style="text-align: center">0.2s</td><td style="text-align: center">0.05s</td><td style="text-align: center">0.08s</td><td style="text-align: center">0.05s</td><td>a simple counting loop (1 million iterations) that must run as fast as possible</td></tr>
+<tr><td><a href="https://github.com/rhaiscript/rhai/blob/main/scripts/primes.rhai">Prime numbers</a></td><td style="text-align: center">0.85s</td><td style="text-align: center">1.2s</td><td style="text-align: center">1.1s</td><td style="text-align: center">0.4s</td><td style="text-align: center">0.09s</td><td>a closer-to-real-life calculation workload</td></tr>
 </tbody></table>
 </div>
-<p>In general, Rhai is roughly 2x slower than <a href="https://www.python.org">Python 3</a>, which is a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for
-typical real-life workloads.</p>
-<div id="admonition-tldr--rhai-is-usually-fast-enough" class="admonition admonish-question" role="note" aria-labelledby="admonition-tldr--rhai-is-usually-fast-enough-title">
+<p>In general, Rhai’s standard AST-walking interpreter is roughly 2-3x slower than <a href="https://www.python.org">Python 3</a>, which is
+a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for typical real-life workloads.</p>
+<p>The <em>experimental</em> <strong><a href="/book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> VM (work-in-progress and only
+available under the <a href="/book/start/features.html"><code>grain</code></a> feature) is roughly 2x faster, making it roughly at par with <a href="https://www.python.org">Python 3</a>.</p>
+<div id="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough" class="admonition admonish-question" role="note" aria-labelledby="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough-title">
 <div class="admonition-title">
-<div id="admonition-tldr--rhai-is-usually-fast-enough-title">
-<p>TL;DR – Rhai is usually fast enough</p>
+<div id="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough-title">
+<p>TL;DR – You may not need bytecodes – Rhai is usually fast enough</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-tldr--rhai-is-usually-fast-enough"></a>
+<a class="admonition-anchor-link" href="#admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough"></a>
 </div>
 <div>
 <h4 id="small-data-structures"><a class="header" href="#small-data-structures">Small data structures</a></h4>
@@ -250,6 +252,40 @@ and fragmentation while being cache-friendly.</p>
 <h4 id="no-sharing"><a class="header" href="#no-sharing">No sharing</a></h4>
 <p>In a typical script evaluation run, no data is shared and nothing is locked (other than
 <a href="/book/language/variables.html">variables</a> captured by <a href="/book/language/fn-closure.html">closures</a>).</p>
+</div>
+</div>
+<div id="admonition-proscons-of-rhai-grain" class="admonition admonish-info" role="note" aria-labelledby="admonition-proscons-of-rhai-grain-title">
+<div class="admonition-title">
+<div id="admonition-proscons-of-rhai-grain-title">
+<p>Pros/Cons of Rhai Grain</p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-proscons-of-rhai-grain"></a>
+</div>
+<div>
+<h4 id="pros"><a class="header" href="#pros">Pros</a></h4>
+<ul>
+<li>
+<p>Faster.</p>
+</li>
+<li>
+<p>Smaller memory footprint and fewer allocations.</p>
+</li>
+<li>
+<p>Compiled <a href="/book/grain/compiler-vm.html">bytecodes</a> do not need the original script sources to run, enabling more secured usage scenarios.</p>
+</li>
+</ul>
+<h4 id="cons"><a class="header" href="#cons">Cons</a></h4>
+<ul>
+<li>
+<p>Still experimental.</p>
+</li>
+<li>
+<p>There is an additional compilation step.</p>
+</li>
+<li>
+<p>Not yet 100% feature parity with the interpreter.</p>
+</li>
+</ul>
 </div>
 </div>
 <div id="admonition-do-not-write-the-next-4d-vr-game-entirely-in-rhai" class="admonition admonish-danger" role="note" aria-labelledby="admonition-do-not-write-the-next-4d-vr-game-entirely-in-rhai-title">

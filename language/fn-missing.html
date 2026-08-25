@@ -215,7 +215,7 @@ registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></
 fallback <a href="/book/language/functions.html">function</a> on the fly, or even modify the error returned, when a non-existent <a href="/book/language/functions.html">function</a> or
 <a href="/book/rust/methods.html">method</a> is called.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.25.0/rhai/struct.Engine.html#method.on_missing_function"><code>Engine::on_missing_function</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_missing_function"><code>Engine::on_missing_function</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(name: &amp;str, args: &amp;mut [&amp;mut Dynamic], is_method_call: bool, context: EvalContext)  
       -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></pre>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Variable Resolver - Rhai - Embedded Scripting for Rust</title>
+        <title>Capabilities Matching - Rhai - Embedded Scripting for Rust</title>
 
 
         <!-- Custom HTML head -->
@@ -161,7 +161,7 @@
                         <a href="https://github.com/rhaiscript/rhai" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/rhaiscript/book/edit/master/src/engine/var.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/rhaiscript/book/edit/master/src/grain/capabilities.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -195,112 +195,168 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="variable-resolver"><a class="header" href="#variable-resolver">Variable Resolver</a></h1>
-<p>By default, Rhai looks up access to <a href="/book/language/variables.html">variables</a> from the enclosing block scope, working its way
-outwards until it reaches the top (global) level, then it searches the <a href="/book/engine/scope.html"><code>Scope</code></a> that is passed into
-the <code>Engine::eval</code> call.</p>
-<p>There is a built-in facility for advanced users to <em>hook</em> into the <a href="/book/language/variables.html">variable</a> resolution service and
-to override its default behavior.</p>
-<p>To do so, provide a closure to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a>.</p>
-<pre><code class="language-rust">let mut engine = Engine::new();
-
-// Register a variable resolver.
-engine.on_var(|name, index, context| {
-    match name {
-        "MYSTIC_NUMBER" =&gt; Ok(Some(42_i64.into())),
-        // Override a variable - make it not found even if it exists!
-        "DO_NOT_USE" =&gt; Err(EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE).into()),
-        // Silently maps 'chameleon' into 'innocent'.
-        "chameleon" =&gt; context.scope().get_value("innocent").map(Some).ok_or_else(|| 
-            EvalAltResult::ErrorVariableNotFound(name.to_string(), Position::NONE).into()
-        ),
-        // Return Ok(None) to continue with the normal variable resolution process.
-        _ =&gt; Ok(None)
-    }
-});</code></pre>
-<div id="admonition-benefits-of-using-a-variable-resolver" class="admonition admonish-info small" role="note" aria-labelledby="admonition-benefits-of-using-a-variable-resolver-title">
+                        <h1 id="capabilities"><a class="header" href="#capabilities">Capabilities</a></h1>
+<h2 id="why-is-this-important"><a class="header" href="#why-is-this-important">Why is This Important?</a></h2>
+<p>Normally, there is no way for Rhai’s <a href="/book/engine/compile.html"><code>AST</code></a> to go out of sync with the <a href="/book/engine/hello-world.html"><code>Engine</code></a> build that
+compiled it.</p>
+<p>The Rhai compiler and its runtime are tightly-coupled together, and an <a href="/book/engine/compile.html"><code>AST</code></a> can only ever be
+built from the script source.  There is no mechanism to store an <a href="/book/engine/compile.html"><code>AST</code></a> externally or transmit it
+elsewhere.</p>
+<p>Not so for the Rhai Grain VM.</p>
+<p>A Rhai script’s <a href="/book/engine/compile.html"><code>AST</code></a> can be further transpiled into <a href="/book/grain/compiler-vm.html">bytecodes</a> which can be stored externally
+(i.e. into a file) and then shipped to another machine, and run on a completely different <a href="/book/engine/hello-world.html"><code>Engine</code></a>
+build, which may not even have a parser or the same <a href="/book/start/features.html">features</a> enabled.</p>
+<h2 id="fingerprint-abi"><a class="header" href="#fingerprint-abi">Fingerprint (ABI)</a></h2>
+<p>Thereforel, Rhai Grain <a href="/book/grain/compiler-vm.html">bytecodes</a> carry a small <em>fingerprint</em>, or ABI, that makes sure it can be
+properly decoded and/or run on the host.</p>
+<h3 id="fingerprint-abi-structure"><a class="header" href="#fingerprint-abi-structure">Fingerprint (ABI) structure</a></h3>
+<div id="admonition-note" class="admonition admonish-note side" role="note" aria-labelledby="admonition-note-title">
 <div class="admonition-title">
-<div id="admonition-benefits-of-using-a-variable-resolver-title">
-<p>Benefits of using a variable resolver</p>
+<div id="admonition-note-title">
+<p>Note</p>
 </div>
-<a class="admonition-anchor-link" href="#admonition-benefits-of-using-a-variable-resolver"></a>
+<a class="admonition-anchor-link" href="#admonition-note"></a>
 </div>
 <div>
+<p>The fingerprint is not just metadata.</p>
+<p>It is the compatibility guard-rails that prevents a <a href="/book/grain/compiler-vm.html">bytecodes</a> stream from running
+on a build that does not have the features to handle it.</p>
+</div>
+</div>
+<p>The fingerprint records:</p>
+<ul>
+<li>
+<p>whether the <a href="/book/language/values-and-types.html">system integer number</a> is 32-bit or 64-bit,</p>
+</li>
+<li>
+<p>whether the system <a href="/book/language/values-and-types.html">floating-point number</a> is 32-bit or 64-bit,</p>
+</li>
+<li>
+<p>the <em>capabilities</em> required to run.</p>
+</li>
+</ul>
+<h3 id="capabilities-set"><a class="header" href="#capabilities-set">Capabilities set</a></h3>
+<p>The capability set covers Rhai language features that a script may use, such as:</p>
+<ul>
+<li>
+<p>floating-point or <a href="/book/start/features.html"><code>decimal</code></a> numbers,</p>
+</li>
+<li>
+<p><a href="/book/language/arrays.html">arrays</a>, <a href="/book/language/blobs.html">BLOB’s</a>, or <a href="/book/language/object-maps.html">object maps</a>,</p>
+</li>
+<li>
+<p>indexing (i.e. usage of <code>[ .. ]</code> syntax),</p>
+</li>
+<li>
+<p>accessing <a href="/book/rust/getters-setters.html">properties</a>,</p>
+</li>
+<li>
+<p>calling functions in <a href="/book/rust/methods.html">method-call</a> style,</p>
+</li>
+<li>
+<p>the <code>this</code> pointer,</p>
+</li>
+<li>
+<p>defining scripted <a href="/book/language/functions.html">functions</a>,</p>
+</li>
+<li>
+<p><a href="/book/language/fn-ptr.html">function pointers</a> and <a href="/book/language/fn-curry.html">currying</a>,</p>
+</li>
+<li>
+<p>capturing variables from <a href="/book/language/fn-closure.html">closures</a>,</p>
+</li>
+<li>
+<p><a href="/book/language/modules/import.html"><code>import</code></a> and <a href="/book/language/modules/export.html"><code>export</code></a> to work with <a href="/book/rust/modules/index.html">modules</a>,</p>
+</li>
+<li>
+<p><a href="/book/engine/custom-syntax.html">custom syntax</a></p>
+</li>
+</ul>
+<h2 id="what-is-checked"><a class="header" href="#what-is-checked">What is Checked?</a></h2>
+<p>When <code>Program::read</code> loads <a href="/book/grain/compiler-vm.html">bytecodes</a>, it checks the ABI before it decodes the rest,
+comparing the capabilities it requires against the capabilities supported by the host.</p>
+<p>If any required capability is missing from the host, it simply fails to load.</p>
+<p><code>Program::read</code> will never load <a href="/book/grain/compiler-vm.html">bytecodes</a> beyond the current host’s ability to handle.</p>
+<p>This catches two classes of incompatibility:</p>
 <ol>
 <li>
-<p>Avoid having to maintain a custom <a href="/book/engine/scope.html"><code>Scope</code></a> with all <a href="/book/language/variables.html">variables</a> regardless of need
-(because a script may not use them all).</p>
+<p>a different integer or floating-point width, such as using <code>i64</code> on a host built with
+<a href="/book/start/features.html"><code>only_i32</code></a> or using <code>f32</code> on a host built without <a href="/book/start/features.html"><code>f32_float</code></a>, and</p>
 </li>
 <li>
-<p><em>Short-circuit</em> <a href="/book/language/variables.html">variable</a> access, essentially overriding standard behavior.</p>
-</li>
-<li>
-<p><em>Lazy-load</em> <a href="/book/language/variables.html">variables</a> when they are accessed, not up-front.
-This benefits when the number of <a href="/book/language/variables.html">variables</a> is very large, when they are timing-dependent,
-or when they are expensive to load.</p>
-</li>
-<li>
-<p>Rename system <a href="/book/language/variables.html">variables</a> on a script-by-script basis without having to construct different <a href="/book/engine/scope.html"><code>Scope</code></a>’s.</p>
+<p>any required capability that the host does not support.</p>
 </li>
 </ol>
-</div>
-</div>
-<div id="admonition-returned-values-are-constants" class="admonition admonish-warning small" role="note" aria-labelledby="admonition-returned-values-are-constants-title">
-<div class="admonition-title">
-<div id="admonition-returned-values-are-constants-title">
-<p>Returned values are constants</p>
-</div>
-<a class="admonition-anchor-link" href="#admonition-returned-values-are-constants"></a>
-</div>
-<div>
-<p><a href="/book/language/variables.html">Variable</a> values returned by a variable resolver are treated as <em><a href="/book/language/constants.html">constants</a></em>.</p>
-<p>This is to avoid needing a mutable reference to the underlying data provider which may not be possible to obtain.</p>
-<p>To change these <a href="/book/language/variables.html">variables</a>, better push them into a custom <a href="/book/engine/scope.html"><code>Scope</code></a> instead of
-using a variable resolver.</p>
-</div>
-</div>
-<div id="admonition-tip-returning-shared-values" class="admonition admonish-tip small" role="note" aria-labelledby="admonition-tip-returning-shared-values-title">
-<div class="admonition-title">
-<div id="admonition-tip-returning-shared-values-title">
-<p>Tip: Returning shared values</p>
-</div>
-<a class="admonition-anchor-link" href="#admonition-tip-returning-shared-values"></a>
-</div>
-<div>
-<p>It is possible to return a <em>shared</em> value from a variable resolver.</p>
-<p>This is one way to implement <a href="/book/patterns/global-mutable-state.html">Mutable Global State</a>.</p>
-</div>
-</div>
-<h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_var"><code>Engine::on_var</code></a> takes the following form.</p>
-<blockquote>
-<pre><code class="language-rust">Fn(name: &amp;str, index: usize, context: EvalContext) -&gt; Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code></pre>
-</blockquote>
-<p>where:</p>
-<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th style="text-align: center">Type</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>name</code></td><td style="text-align: center"><code>&amp;str</code></td><td><a href="/book/language/variables.html">variable</a> name</td></tr>
-<tr><td><code>index</code></td><td style="text-align: center"><code>usize</code></td><td>an offset from the bottom of the current <a href="/book/engine/scope.html"><code>Scope</code></a> that the <a href="/book/language/variables.html">variable</a> is supposed to reside.<br/>Offsets start from 1, with 1 meaning the last <a href="/book/language/variables.html">variable</a> in the current <a href="/book/engine/scope.html"><code>Scope</code></a>.  Essentially the correct <a href="/book/language/variables.html">variable</a> is at position <code>scope.len() - index</code>.<br/>If <code>index</code> is zero, then there is no pre-calculated offset position and a search through the current <a href="/book/engine/scope.html"><code>Scope</code></a> must be performed.</td></tr>
-<tr><td><code>context</code></td><td style="text-align: center"><a href="/book/engine/eval-context.html"><code>EvalContext</code></a></td><td>mutable reference to the current <em>evaluation context</em></td></tr>
-</tbody></table>
-</div>
-<p>and <a href="/book/engine/eval-context.html"><code>EvalContext</code></a> is a type that encapsulates the current <em>evaluation context</em>.</p>
-<h3 id="return-value"><a class="header" href="#return-value">Return value</a></h3>
-<p>The return value is <code>Result&lt;Option&lt;Dynamic&gt;, Box&lt;EvalAltResult&gt;&gt;</code> where:</p>
-<div class="table-wrapper"><table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>Ok(None)</code></td><td>normal <a href="/book/language/variables.html">variable</a> resolution process should continue, i.e. continue searching through the <a href="/book/engine/scope.html"><code>Scope</code></a></td></tr>
-<tr><td><code>Ok(Some(value))</code></td><td>value (a <a href="/book/language/dynamic.html"><code>Dynamic</code></a>) of the <a href="/book/language/variables.html">variable</a>, treated as a <a href="/book/language/constants.html">constant</a></td></tr>
-<tr><td><code>Err(Box&lt;EvalAltResult&gt;)</code></td><td>error that is reflected back to the <a href="/book/engine/hello-world.html"><code>Engine</code></a>, normally <code>EvalAltResult::ErrorVariableNotFound</code> to indicate that the <a href="/book/language/variables.html">variable</a> does not exist, but it can be any <code>EvalAltResult</code>.</td></tr>
-</tbody></table>
-</div>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<ul>
+<li>
+<p>If the <a href="/book/grain/compiler-vm.html">bytecodes</a> was transpiled on a Rhai instance with a 64-bit integer build, but is being loaded
+on a 32-bit build of Rhai (via <a href="/book/start/features.html"><code>only_i32</code></a>), it will refuse to load.</p>
+</li>
+<li>
+<p>If the <a href="/book/grain/compiler-vm.html">bytecodes</a> was transpiled on a full Rhai instance, for example, but it does not use any
+<a href="/book/language/arrays.html">arrays</a> or <a href="/book/language/object-maps.html">object maps</a>.  Then the same <a href="/book/grain/compiler-vm.html">bytecodes</a> can be successfully loaded and run on a
+computer with a <a href="/book/start/features.html"><code>no_index</code></a> and <a href="/book/start/features.html"><code>no_object</code></a> build of Rhai, because those features are not used.</p>
+</li>
+<li>
+<p>If the <a href="/book/grain/compiler-vm.html">bytecodes</a> uses a particular language feature of Rhai (e.g. defines a <a href="/book/language/functions.html">function</a>) but the
+host build does not support that feature (e.g. <a href="/book/start/features.html"><code>no_function</code></a>), again it will refuse to load.</p>
+</li>
+<li>
+<p>The key point is that Rhai Grain treats a <a href="/book/grain/compiler-vm.html">bytecodes</a> stream as a deployment unit: if it requires a
+capability the host build does not support, it is not runnable.</p>
+</li>
+</ul>
+<h2 id="verification"><a class="header" href="#verification">Verification</a></h2>
+<p>The ABI check above is only the first gate.</p>
+<p>After the <a href="/book/grain/compiler-vm.html">bytecodes</a> is decoded, a verifier inspects every instruction checks the capabilities that
+instruction requires to run.</p>
+<p>This is a second, more precise check. Even if the fingerprint is declared to be compatible with the
+host, the <a href="/book/grain/compiler-vm.html">bytecodes</a> stream itself is inspected to make sure it does not contain instructions
+that require additional capabilities.</p>
+<p>In other words, Rhai Grain enforces that:</p>
+<ul>
+<li>
+<p><a href="/book/grain/compiler-vm.html">bytecodes</a> capabilities are within the host’s supported capabilities, and</p>
+</li>
+<li>
+<p>every instruction’s requirements fall under the declared capabilities.</p>
+</li>
+</ul>
+<p>Only when both hold can will the <a href="/book/grain/compiler-vm.html">bytecodes</a> safely load.</p>
+<h2 id="caveats-and-gotchas"><a class="header" href="#caveats-and-gotchas">Caveats and Gotcha’s</a></h2>
+<p>Rhai Grain’s capability system is for compatibility, not a general-purpose sandbox.</p>
+<p>It is designed to make sure that a stream of <a href="/book/grain/compiler-vm.html">bytecodes</a> can run on the current host build.</p>
+<p>It does not make the <a href="/book/grain/compiler-vm.html">bytecodes</a> fully portable to every possible build of Rhai.</p>
+<ul>
+<li>
+<p>A build with more <a href="/book/start/features.html">features</a> is usually fine; a build with fewer features is not.
+The host must support every capability the <a href="/book/grain/compiler-vm.html">bytecodes</a> require.</p>
+</li>
+<li>
+<p>This check happens before loading and execution. A mismatch fails at load time,
+not as a later runtime fault.</p>
+</li>
+<li>
+<p>The compatibility test is intentionally strict. <code>Program::read</code> will fail even if
+the host’s integer or floating-point widths are longer than the ones declared
+by the <a href="/book/grain/compiler-vm.html">bytecodes</a>.</p>
+</li>
+<li>
+<p>This is not a substitute for runtime <a href="/book/safety/index.html">safety</a> limits. Even fully compatible
+<a href="/book/grain/compiler-vm.html">bytecodes</a> still requires usual Rhai runtime checks.</p>
+</li>
+</ul>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../engine/def-var.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../grain/store-load.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../language/constants.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../grain/callbacks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -310,11 +366,11 @@ using a variable resolver.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../engine/def-var.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../grain/store-load.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../language/constants.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../grain/callbacks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

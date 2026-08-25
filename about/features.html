@@ -243,10 +243,14 @@ for <a href="/book/start/builds/no-std.html"><code>no-std</code></a> and <a href
 <li>
 <p>Fairly efficient evaluation – 1 million iterations in 0.14 sec on a single-core, 2.6 GHz Linux VM
 running <a href="https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai">this script</a>
-(also see <a href="benchmarks.html">benchmarks</a>).</p>
+with the standard AST-walking interpreter (also see <a href="benchmarks.html">benchmarks</a>).</p>
 </li>
 <li>
 <p>Compile once to <a href="/book/engine/compile.html">AST</a> for repeated evaluations.</p>
+</li>
+<li>
+<p><em>Experimental</em> <strong><a href="/book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM for even faster evaluation
+(roughly 1.8-2.2x) – work-in-progress.</p>
 </li>
 <li>
 <p>Scripts are <a href="/book/engine/optimize/index.html">optimized</a> – useful for template-based machine-generated scripts.</p>

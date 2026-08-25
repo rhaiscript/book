@@ -221,6 +221,11 @@ following features should be considered:</p>
 <p>See Rhai performance <a href="/book/about/benchmarks.html">benchmarks</a>.</p>
 </div>
 </div>
+<h2 id="rhai-grain-bytecodes-vm"><a class="header" href="#rhai-grain-bytecodes-vm">Rhai Grain Bytecodes VM</a></h2>
+<p>There is an <em>experimental</em> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM (called <strong><a href="/book/grain/index.html">Rhai Grain</a></strong>)
+that is a work-in-progress and available under the <a href="/book/start/features.html"><code>grain</code></a> feature.</p>
+<p>By transpiling to <a href="/book/grain/compiler-vm.html">bytecodes</a> and running in a VM, it is roughly 1.8-2x faster than the standard
+AST-walking interpreter.</p>
 <h2 id="unchecked-build"><a class="header" href="#unchecked-build">Unchecked Build</a></h2>
 <p>By default, Rhai provides a <a href="https://en.wikipedia.org/wiki/Phrases_from_The_Hitchhiker%27s_Guide_to_the_Galaxy#Don&#x27;t_Panic"><em>Don’t Panic</em></a>
 guarantee and prevents malicious scripts from bringing down the host. Any panic can be considered a bug.</p>
