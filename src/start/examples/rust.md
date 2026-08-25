@@ -16,6 +16,8 @@ A number of examples can be found under `examples`.
 | [`custom_types_and_methods`]({{repoHome}}/examples/custom_types_and_methods.rs) | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] for it                                         |
 | [`custom_types`]({{repoHome}}/examples/custom_types.rs)                         | shows how to register a [Rust type][custom type] and [methods]/[getters/setters] using the [`CustomType`] trait.                |
 | [`definitions`]({{repoHome}}/examples/definitions)                              | shows how to generate definition files for use with the [Rhai Language Server][lsp] (requires the [`metadata`] feature)         |
+| [`grain_bench`]({{repoHome}}/examples/grain_bench.rs)                           | comparison benchmarks for [Rhai Grain VM]                                                                                       |
+| [`grain_dump`]({{repoHome}}/examples/grain_dump.rs)                             | compile a Rhai script to [Rhai Grain] [bytecodes] and print the disassembly                                                     |
 | [`hello`]({{repoHome}}/examples/hello.rs)                                       | simple example that evaluates an expression and prints the result                                                               |
 | [`pause_and_resume`]({{repoHome}}/pause_and_resume.rs)                          | shows how to pause/resume/stop an `Engine` running in a separate thread via an MPSC channel                                     |
 | [`reuse_scope`]({{repoHome}}/examples/reuse_scope.rs)                           | evaluates two pieces of code in separate runs, but using a common [`Scope`]                                                     |

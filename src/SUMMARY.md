@@ -274,6 +274,20 @@ Usage Patterns
 
 ----------------------
 
+Rhai Grain (Experimental)
+=========================
+
+- [Introduction](grain/index.md)
+- [Transpiler & VM](grain/compiler-vm.md)
+- [Store and Transfer Bytecodes](grain/store-load.md)
+- [Capabilities Matching](grain/capabilities.md)
+- [Handling Callbacks](grain/callbacks.md)
+- [Diagnostics](grain/diagnostics.md)
+- [Primary API](grain/api.md)
+- [Caveats](grain/caveats.md)
+
+----------------------
+
 Language Reference
 ==================
 

@@ -28,9 +28,12 @@ Features of Rhai
 
 * Fairly efficient evaluation &ndash; 1 million iterations in 0.14 sec on a single-core, 2.6 GHz Linux VM
   running [this script](https://github.com/rhaiscript/rhai/blob/main/scripts/speed_test.rhai)
-  (also see [benchmarks](benchmarks.md)).
+  with the standard AST-walking interpreter (also see [benchmarks](benchmarks.md)).
 
 * Compile once to [AST][`AST`] for repeated evaluations.
+
+* _Experimental_ **[Rhai Grain]** [bytecodes][bytecodes-wiki] transpiler and VM for even faster evaluation
+  (roughly 1.8-2.2x) &ndash; work-in-progress.
 
 * Scripts are [optimized][script optimization] &ndash; useful for template-based machine-generated scripts.
 ```

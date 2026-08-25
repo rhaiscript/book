@@ -16,17 +16,25 @@
 [`no_custom_syntax`]: {{rootUrl}}/start/features.md
 [`no_time`]: {{rootUrl}}/start/features.md
 [`no_std`]: {{rootUrl}}/start/features.md
+[`grain`]: {{rootUrl}}/start/features.md
 [`wasm-bindgen`]: {{rootUrl}}/start/features.md
 [`metadata`]: {{rootUrl}}/start/features.md
 [`internals`]: {{rootUrl}}/start/features.md
 [`debugging`]: {{rootUrl}}/start/features.md
 [`unicode-xid-ident`]: {{rootUrl}}/start/features.md
+[bytecodes-wiki]: https://en.wikipedia.org/wiki/Bytecode
 
 [minimal builds]: {{rootUrl}}/start/builds/minimal.md
 [`no-std`]: {{rootUrl}}/start/builds/no-std.md
 [WASM]: {{rootUrl}}/start/builds/wasm.md
 [static hashing]: {{rootUrl}}/patterns/static-hash.md
 [benchmarks]: {{rootUrl}}/about/benchmarks.md
+
+[Rhai Grain]: {{rootUrl}}/grain/index.md
+[Rhai Grain VM]: {{rootUrl}}/grain/index.md
+[VM]: {{rootUrl}}/grain/index.md
+[bytecodes]: {{rootUrl}}/grain/compiler-vm.md
+[`Sidecar`]: {{rootUrl}}/grain/diagnostics.md
 
 [playground]: https://rhai.rs/playground
 [lsp]: https://github.com/rhaiscript/lsp

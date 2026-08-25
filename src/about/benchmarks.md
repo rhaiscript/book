@@ -3,7 +3,6 @@ Benchmarking Rhai
 
 {{#include ../links.md}}
 
-[bytecodes]: https://en.wikipedia.org/wiki/Bytecode
 [JIT]: https://en.wikipedia.org/wiki/Just-in-time_compilation
 [Python 3]: https://www.python.org
 [V8]: https://v8.dev
@@ -14,31 +13,34 @@ Benchmarking Rhai
 ```admonish tip.side.wide "Tip: Nothing beats a JIT"
 
 Needless to say [V8] (JavaScript), which is a [JIT] compiler with type specialization, blows any interpreter
-(AST or [bytecodes] based) out of the water, as also should [LuaJIT].
+(AST or [bytecodes][bytecodes-wiki] based) out of the water, as also should [LuaJIT].
 
 So if you _absolutely must_ have top performance...
 ```
 
-The purpose of Rhai is not to be _blazing fast_, but to make it as easy and versatile as possible to
-integrate with native Rust applications.
-  
-What you lose from running an [AST][`AST`] walker, you gain back from increased flexibility.
+The main design goal of Rhai is to make it as easy and versatile as possible to integrate with
+native Rust applications.
+
+So, what you lose from running an [AST][`AST`] walker, you gain back from increased flexibility.
 
 The following benchmarks were run on a 2.6GHz Linux VM comparing
-[performance-optimized](../start/builds/performance.md) and full builds of Rhai with [Python 3] and
-[V8] ([Node.js]).
+[performance-optimized](../start/builds/performance.md) and full builds of Rhai with [Python 3]
+and [V8] ([Node.js]).
 
-| Benchmark                                         | Rhai<br/>(Perf) | Rhai</br>(Full) | [Python 3]<br/>([bytecodes]) | [V8]<br/>([JIT]) | Description                                                                     |
-| ------------------------------------------------- | :-------------: | :-------------: | :--------------------------: | :--------------: | ------------------------------------------------------------------------------- |
-| [Fibonacci]({{repoHome}}/scripts/fibonacci.rhai)  |      2.25s      |      3.2s       |             0.6s             |      0.07s       | stresses recursive [function] calls                                             |
-| [1M loop]({{repoHome}}/scripts/speed_test.rhai)   |      0.13s      |      0.2s       |            0.08s             |      0.05s       | a simple counting loop (1 million iterations) that must run as fast as possible |
-| [Prime numbers]({{repoHome}}/scripts/primes.rhai) |      0.85s      |      1.2s       |             0.4s             |      0.09s       | a closer-to-real-life calculation workload                                      |
+| Benchmark                                         | Rhai<br/>(Perf) | Rhai</br>(Full) | [Rhai&nbsp;Grain][Rhai Grain] <br/>(Perf, [bytecodes][bytecodes-wiki]) | [Python 3]<br/>([bytecodes][bytecodes-wiki]) | [V8]<br/>([JIT]) | Description                                                                     |
+| ------------------------------------------------- | :-------------: | :-------------: | :--------------------------------------------------------------------: | :------------------------------------------: | :--------------: | ------------------------------------------------------------------------------- |
+| [Fibonacci]({{repoHome}}/scripts/fibonacci.rhai)  |      2.25s      |      3.2s       |                                  1.2s                                  |                     0.6s                     |      0.07s       | stresses recursive [function] calls                                             |
+| [1M loop]({{repoHome}}/scripts/speed_test.rhai)   |      0.13s      |      0.2s       |                                 0.05s                                  |                    0.08s                     |      0.05s       | a simple counting loop (1 million iterations) that must run as fast as possible |
+| [Prime numbers]({{repoHome}}/scripts/primes.rhai) |      0.85s      |      1.2s       |                                  1.1s                                  |                     0.4s                     |      0.09s       | a closer-to-real-life calculation workload                                      |
 
-In general, Rhai is roughly 2x slower than [Python 3], which is a [bytecodes] interpreter, for
-typical real-life workloads.
+In general, Rhai's standard AST-walking interpreter is roughly 2-3x slower than [Python 3], which is
+a [bytecodes][bytecodes-wiki] interpreter, for typical real-life workloads.
+
+The _experimental_ **[Rhai Grain]** [bytecodes][bytecodes-wiki] VM (work-in-progress and only
+available under the [`grain`] feature) is roughly 2x faster, making it roughly at par with [Python 3].
 
 
-```admonish question "TL;DR &ndash; Rhai is usually fast enough"
+```admonish question "TL;DR &ndash; You may not need bytecodes &ndash; Rhai is usually fast enough"
 
 #### Small data structures
 
@@ -70,6 +72,24 @@ Rhai uses [immutable strings][`ImmutableString`] to bypass cloning issues.
 
 In a typical script evaluation run, no data is shared and nothing is locked (other than
 [variables] captured by [closures]).
+```
+
+```admonish info "Pros/Cons of Rhai Grain"
+#### Pros
+
+* Faster.
+
+* Smaller memory footprint and fewer allocations.
+
+* Compiled [bytecodes] do not need the original script sources to run, enabling more secured usage scenarios.
+
+#### Cons
+
+* Still experimental.
+
+* There is an additional compilation step.
+
+* Not yet 100% feature parity with the interpreter.
 ```
 
 ```admonish danger "DO NOT: Write the next 4D VR game entirely in Rhai"

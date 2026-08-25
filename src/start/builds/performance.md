@@ -26,6 +26,16 @@ See Rhai performance [benchmarks].
 ~~~
 
 
+Rhai Grain Bytecodes VM
+-----------------------
+
+There is an _experimental_ [bytecodes][bytecodes-wiki] transpiler and VM (called **[Rhai Grain]**)
+that is a work-in-progress and available under the [`grain`] feature.
+
+By transpiling to [bytecodes] and running in a VM, it is roughly 1.8-2x faster than the standard
+AST-walking interpreter.
+
+
 Unchecked Build
 ---------------
 

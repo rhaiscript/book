@@ -53,8 +53,9 @@ order to support a wide range of user customizations, such as:
 * [filtering variables definition][variable definition filter].
 ```
 
-* **No bytecodes/JIT** &ndash; Rhai uses a heavily-optimized AST-walking interpreter which is fast
-  enough for most real-life scenarios.
+* **No JIT** &ndash; Rhai primarily uses a heavily-optimized AST-walking interpreter which is fast
+  enough for most real-life scenarios. There is an _experimental_ [bytecodes][bytecodes-wiki]
+  transpiler and VM (called **[Rhai Grain]**) that is a work-in-progress.
 
 ```admonish info.small "How it compares?"
 
