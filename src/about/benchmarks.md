@@ -74,22 +74,22 @@ In a typical script evaluation run, no data is shared and nothing is locked (oth
 [variables] captured by [closures]).
 ```
 
-```admonish info "Pros/Cons of Rhai Grain"
+```admonish info "Pros/Cons of [Rhai Grain]"
 #### Pros
 
 * Faster.
 
 * Smaller memory footprint and fewer allocations.
 
-* Compiled [bytecodes] do not need the original script sources to run, enabling more secured usage scenarios.
+* Transpiled [bytecodes] do not need the original script sources to run, enabling more secured usage scenarios.
 
 #### Cons
 
 * Still experimental.
 
-* There is an additional compilation step.
+* There is an additional transpilation step.
 
-* Not yet 100% feature parity with the interpreter.
+* Not yet 100% feature parity.
 ```
 
 ```admonish danger "DO NOT: Write the next 4D VR game entirely in Rhai"
