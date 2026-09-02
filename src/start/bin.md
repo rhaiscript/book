@@ -10,11 +10,13 @@ A number of Rhai-driven tools can be found in the `src/bin` directory:
 It is possible to turn these tools into [_Domain-Specific Tools_](../patterns/domain-tools.md).
 ```
 
-|                       Tool                       | Required feature(s) | Description            |
-| :----------------------------------------------: | :-----------------: | ---------------------- |
-|  [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)  |                     | runs Rhai script files |
-| [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs) |     `rustyline`     | a simple REPL tool     |
-|  [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)  |    [`debugging`]    | the _Rhai Debugger_    |
+|                           Tool                           | Required feature(s) | Description                                                 |
+| :------------------------------------------------------: | :-----------------: | ----------------------------------------------------------- |
+|      [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)      |                     | runs Rhai script files                                      |
+|     [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs)     |     `rustyline`     | a simple REPL tool                                          |
+|      [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)      |    [`debugging`]    | the _Rhai Debugger_                                         |
+| [`grain-compile`]({{repoHome}}/src/bin/grain-compile.rs) |      [`grain`]      | compile a Rhai script to [Rhai Grain] [bytecodes]           |
+|    [`grain-dump`]({{repoHome}}/src/bin/grain-dump.rs)    |      [`grain`]      | print the disassembly of a [Rhai Grain] [bytecodes] program |
 
 ~~~admonish tip "Tip: `bin-features`"
 Some bin tools require certain [features] and will not be built by default without those [features] set.
