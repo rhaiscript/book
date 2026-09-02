@@ -11,6 +11,12 @@ Rhai's [`Dynamic`] type supports serialization and deserialization by
 [`Dynamic`] works _both_ as a _serialization format_ as well as a data type that is serializable.
 ```
 
+~~~admonish danger.small "Important: `SmartString`"
+
+[`smartstring/serde`][`smartstring`] must be manually enabled in `Cargo.toml` due to a bug in the
+crate that prevents it from building in [`no-std`].
+~~~
+
 [`serde`]: https://crates.io/crates/serde
 [`serde_json`]: https://crates.io/crates/serde_json
 [`serde::Serialize`]: https://docs.serde.rs/serde/trait.Serialize.html
