@@ -16,6 +16,7 @@
 [`no_custom_syntax`]: {{rootUrl}}/start/features.md
 [`no_time`]: {{rootUrl}}/start/features.md
 [`no_std`]: {{rootUrl}}/start/features.md
+[`no_ast`]: {{rootUrl}}/start/features.md
 [`grain`]: {{rootUrl}}/start/features.md
 [`wasm-bindgen`]: {{rootUrl}}/start/features.md
 [`metadata`]: {{rootUrl}}/start/features.md
