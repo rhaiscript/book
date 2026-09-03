@@ -209,6 +209,18 @@
 <p><a href="/book/language/dynamic.html"><code>Dynamic</code></a> works <em>both</em> as a <em>serialization format</em> as well as a data type that is serializable.</p>
 </div>
 </div>
+<div id="admonition-important-smartstring" class="admonition admonish-danger small" role="note" aria-labelledby="admonition-important-smartstring-title">
+<div class="admonition-title">
+<div id="admonition-important-smartstring-title">
+<p>Important: <code>SmartString</code></p>
+</div>
+<a class="admonition-anchor-link" href="#admonition-important-smartstring"></a>
+</div>
+<div>
+<p><a href="https://crates.io/crates/smartstring"><code>smartstring/serde</code></a> must be manually enabled in <code>Cargo.toml</code> due to a bug in the
+crate that prevents it from building in <a href="/book/start/builds/no-std.html"><code>no-std</code></a>.</p>
+</div>
+</div>
 <h2 id="serializedeserialize-a-dynamic"><a class="header" href="#serializedeserialize-a-dynamic">Serialize/Deserialize a <code>Dynamic</code></a></h2>
 <p>With the <a href="/book/start/features.html"><code>serde</code></a> feature turned on, <a href="/book/language/dynamic.html"><code>Dynamic</code></a> implements <a href="https://docs.serde.rs/serde/trait.Serialize.html"><code>serde::Serialize</code></a> and
 <a href="https://docs.serde.rs/serde/trait.Deserialize.html"><code>serde::Deserialize</code></a>, so it can easily be serialized and deserialized with <a href="/book/rust/serde.html"><code>serde</code></a> (for example,

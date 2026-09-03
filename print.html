@@ -939,7 +939,7 @@ what scripts can (or cannot) do.</p>
 <tr><td><code>sync</code></td><td style="text-align: center"><strong>no</strong></td><td>restricts all values types to those that are <code>Send + Sync</code>; under this feature, all Rhai types, including <a href="start//book/engine/hello-world.html"><code>Engine</code></a>, <a href="start//book/engine/scope.html"><code>Scope</code></a> and <a href="start//book/engine/compile.html"><code>AST</code></a>, are all <code>Send + Sync</code></td></tr>
 <tr><td><code>decimal</code></td><td style="text-align: center"><strong>no</strong></td><td>enables the <a href="https://crates.io/crates/rust_decimal"><code>Decimal</code></a> number type (pulls in the <a href="https://crates.io/crates/rust_decimal"><code>rust_decimal</code></a> crate)</td></tr>
 <tr><td><code>unicode-xid-ident</code></td><td style="text-align: center"><strong>no</strong></td><td>allows <a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a> as identifiers (pulls in the <a href="https://crates.io/crates/unicode-xid"><code>unicode-xid</code></a> crate)</td></tr>
-<tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate)</td></tr>
+<tr><td><code>serde</code></td><td style="text-align: center">yes</td><td>enables serialization/deserialization via <code>serde</code> (pulls in the <a href="https://crates.io/crates/serde"><code>serde</code></a> crate);<br/><br/><a href="https://crates.io/crates/smartstring"><code>smartstring/serde</code></a> must be manually enabled due to a bug that prevents it from being used in <a href="start//book/start/builds/no-std.html"><code>no-std</code></a></td></tr>
 <tr><td><code>metadata</code></td><td style="text-align: center">yes</td><td>enables exporting <a href="start//book/engine/metadata/index.html">functions metadata</a>; implies <code>serde</code> and additionally pulls in <a href="https://crates.io/crates/serde_json"><code>serde_json</code></a></td></tr>
 <tr><td><code>grain</code></td><td style="text-align: center">yes</td><td>enables the <em>experimental</em> <strong><a href="start//book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> transpiler and VM (work-in-progress)</td></tr>
 <tr><td><code>internals</code></td><td style="text-align: center">yes</td><td>exposes internal data structures (e.g. <a href="start//book/engine/compile.html"><code>AST</code></a> nodes);<br/><br/><strong>Safety Warnings</strong><ul><li>allowing access to internal types may enable external attack vectors</li><li>internal types and functions are volatile and may change from version to version</li></ul></td></tr>
@@ -7860,6 +7860,18 @@ built-in support of tuples in order to return multiple values from <a href="lang
 </div>
 <div>
 <p><a href="rust//book/language/dynamic.html"><code>Dynamic</code></a> works <em>both</em> as a <em>serialization format</em> as well as a data type that is serializable.</p>
+</div>
+</div>
+<div id="admonition-important-smartstring" class="admonition admonish-danger small" role="note" aria-labelledby="admonition-important-smartstring-title">
+<div class="admonition-title">
+<div id="admonition-important-smartstring-title">
+<p>Important: <code>SmartString</code></p>
+</div>
+<a class="admonition-anchor-link" href="rust/serde.html#admonition-important-smartstring"></a>
+</div>
+<div>
+<p><a href="https://crates.io/crates/smartstring"><code>smartstring/serde</code></a> must be manually enabled in <code>Cargo.toml</code> due to a bug in the
+crate that prevents it from building in <a href="rust//book/start/builds/no-std.html"><code>no-std</code></a>.</p>
 </div>
 </div>
 <h2 id="serializedeserialize-a-dynamic"><a class="header" href="#serializedeserialize-a-dynamic">Serialize/Deserialize a <code>Dynamic</code></a></h2>
