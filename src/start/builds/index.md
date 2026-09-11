@@ -6,4 +6,4 @@ Special Builds
 It is possible to mix-and-match various [features] of the Rhai crate to make specialized builds with
 specific characteristics and behaviors.
 
-These include smaller builds, WebAssembly targets, and the experimental [Rhai Grain VM].
+These include smaller builds, WebAssembly targets, and the [Rhai Grain VM].

@@ -36,8 +36,8 @@ and [V8] ([Node.js]).
 In general, Rhai's standard AST-walking interpreter is roughly 2-3x slower than [Python 3], which is
 a [bytecodes][bytecodes-wiki] interpreter, for typical real-life workloads.
 
-The _experimental_ **[Rhai Grain]** [bytecodes][bytecodes-wiki] VM (work-in-progress and only
-available under the [`grain`] feature) is roughly 2x faster, making it roughly at par with [Python 3].
+The **[Rhai Grain]** [bytecodes][bytecodes-wiki] VM (work-in-progress and only available under the
+[`grain`] feature) is roughly 2x faster, making it roughly at par with [Python 3].
 
 
 ```admonish question "TL;DR &ndash; You may not need bytecodes &ndash; Rhai is usually fast enough"
@@ -77,17 +77,15 @@ In a typical script evaluation run, no data is shared and nothing is locked (oth
 ```admonish info "Pros/Cons of [Rhai Grain]"
 #### Pros
 
-* Faster.
+* 2x faster.
 
-* Smaller memory footprint and fewer allocations.
+* Much smaller memory footprint and allocations.
 
-* Transpiled [bytecodes] do not need the original script sources to run, enabling more secured usage scenarios.
+* Transpiled [bytecodes] do not need the original script source, enabling secured usage scenarios.
 
 #### Cons
 
-* Still experimental.
-
-* There is an additional transpilation step.
+* Additional transpilation step.
 
 * Not yet 100% feature parity.
 ```

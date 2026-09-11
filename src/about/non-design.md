@@ -54,8 +54,8 @@ order to support a wide range of user customizations, such as:
 ```
 
 * **No JIT** &ndash; Rhai primarily uses a heavily-optimized AST-walking interpreter which is fast
-  enough for most real-life scenarios. There is an _experimental_ [bytecodes][bytecodes-wiki]
-  transpiler and VM (called **[Rhai Grain]**) that is a work-in-progress.
+  enough for most real-life scenarios. For more speed, there is also a [bytecodes][bytecodes-wiki]
+  VM called **[Rhai Grain]**.
 
 ```admonish info.small "How it compares?"
 

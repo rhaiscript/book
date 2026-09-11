@@ -3,7 +3,7 @@ Rhai Grain
 
 {{#include ../links.md}}
 
-Rhai Grain is an _experimental_ [bytecodes][bytecodes-wiki] transpiler and VM for Rhai scripts.
+Rhai Grain is a [bytecodes][bytecodes-wiki] transpiler and VM for Rhai scripts.
 
 It is only available under the [`grain`] feature.
 
@@ -12,12 +12,6 @@ See [documentation on Rhai Grain](https://docs.rs/rhai/latest/rhai/grain/index.h
 
 When to Use Rhai Grain
 ----------------------
-
-```admonish warning.small "Warning: Experimental"
-
-Rhai Grain is still experimental and is not yet fully production-ready.
-
-```
 
 Use Rhai Grain when you want to:
 

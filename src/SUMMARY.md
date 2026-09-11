@@ -274,8 +274,8 @@ Usage Patterns
 
 ----------------------
 
-Rhai Grain (Experimental)
-=========================
+Rhai Grain VM
+=============
 
 - [Introduction](grain/index.md)
 - [Transpiler & VM](grain/compiler-vm.md)

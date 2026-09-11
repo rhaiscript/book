@@ -32,8 +32,7 @@ Features of Rhai
 
 * Compile once to [AST][`AST`] for repeated evaluations.
 
-* _Experimental_ **[Rhai Grain]** [bytecodes][bytecodes-wiki] transpiler and VM for even faster evaluation
-  (roughly 1.8-2.2x) &ndash; work-in-progress.
+* **[Rhai Grain]** [bytecodes][bytecodes-wiki] transpiler and VM for even more speed (roughly 1.8-2.2x) &ndash; work-in-progress.
 
 * Scripts are [optimized][script optimization] &ndash; useful for template-based machine-generated scripts.
 ```
