@@ -10,8 +10,8 @@ Literals Syntax
 |                        [Ranges] in [`switch`] cases                        | `-10..10` (exclusive), `0..=50` (inclusive)                                                                             |
 |                              Normal [string]                               | `"... \x?? \u???? \U???????? ..."`                                                                                      |
 |                         [String] with continuation                         | `"this is the first line\`<br/>`second line\`<br/>`the third line"`                                                     |
-|                        Multi-line literal [string]                         | `` `this is the first line``<br/>``second line``</br>``the last line` ``                                                |
-|               Multi-line literal [string] with interpolation               | `` `this is the first field: ${obj.field1}``<br/>``second field: {obj.field2}``</br>``the last field: ${obj.field3}` `` |
+|                        Multi-line literal [string]                         | `` `this is the first line``<br/>``second line``<br/>``the last line` ``                                                |
+|               Multi-line literal [string] with interpolation               | `` `this is the first field: ${obj.field1}``<br/>``second field: {obj.field2}``<br/>``the last field: ${obj.field3}` `` |
 |                                [Character]                                 | single: `'?'`<br/>ASCII hex: `'\x??'`<br/>Unicode: `'\u????'`, `'\U????????'`                                           |
 |                                 [`Array`]                                  | `[ ???, ???, ??? ]`                                                                                                     |
 |                                [Object map]                                | `#{ a: ???, b: ???, c: ???, "def": ??? }`                                                                               |

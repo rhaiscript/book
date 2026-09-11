@@ -11,6 +11,7 @@ site-url = "/book/"
 git-repository-url = "https://github.com/rhaiscript/rhai"
 edit-url-template = "https://github.com/rhaiscript/book/edit/master/{path}"
 smart-punctuation = true
+sidebar-header-nav = false
 
 [output.html.fold]
 enable = true

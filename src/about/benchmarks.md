@@ -27,7 +27,7 @@ The following benchmarks were run on a 2.6GHz Linux VM comparing
 [performance-optimized](../start/builds/performance.md) and full builds of Rhai with [Python 3]
 and [V8] ([Node.js]).
 
-| Benchmark                                         | Rhai<br/>(Perf) | Rhai</br>(Full) | [Rhai&nbsp;Grain][Rhai Grain] <br/>(Perf, [bytecodes][bytecodes-wiki]) | [Python 3]<br/>([bytecodes][bytecodes-wiki]) | [V8]<br/>([JIT]) | Description                                                                     |
+| Benchmark                                         | Rhai<br/>(Perf) | Rhai<br/>(Full) | [Rhai&nbsp;Grain][Rhai Grain] <br/>(Perf, [bytecodes][bytecodes-wiki]) | [Python 3]<br/>([bytecodes][bytecodes-wiki]) | [V8]<br/>([JIT]) | Description                                                                     |
 | ------------------------------------------------- | :-------------: | :-------------: | :--------------------------------------------------------------------: | :------------------------------------------: | :--------------: | ------------------------------------------------------------------------------- |
 | [Fibonacci]({{repoHome}}/scripts/fibonacci.rhai)  |      2.25s      |      3.2s       |                                  1.2s                                  |                     0.6s                     |      0.07s       | stresses recursive [function] calls                                             |
 | [1M loop]({{repoHome}}/scripts/speed_test.rhai)   |      0.13s      |      0.2s       |                                 0.05s                                  |                    0.08s                     |      0.05s       | a simple counting loop (1 million iterations) that must run as fast as possible |

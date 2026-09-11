@@ -40,7 +40,7 @@ Getters and setters are disabled under the [`no_object`] feature.
 | ------------------ | -------------------------------------------------------------------------------- | :----------------------------: |
 | `register_get`     | `Fn(&mut T) -> V`                                                                |      yes, but not advised      |
 | `register_set`     | `Fn(&mut T, V)`                                                                  |              yes               |
-| `register_get_set` | getter: `Fn(&mut T) -> V`</br>setter: `Fn(&mut T, V)`                            | yes, but not advised in getter |
+| `register_get_set` | getter: `Fn(&mut T) -> V`<br/>setter: `Fn(&mut T, V)`                            | yes, but not advised in getter |
 
 ```admonish danger.small "No support for references"
 

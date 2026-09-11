@@ -11,7 +11,7 @@ Rhai is an embedded scripting language and evaluation engine for Rust that gives
 to add scripting to any application.
 
 
-Versions
---------
+Version
+-------
 
 This Book is for version **{{version}}** of Rhai.

@@ -36,7 +36,7 @@ using a [raw `Engine`]) provides runtime information for debugging purposes.
 
 | Function     | Parameter(s) |      Not available under      | Description                                                                                                                                                 |
 | ------------ | ------------ | :---------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `back_trace` | _none_       | [`no_function`], [`no_index`] | returns an [array] of [object maps] or [strings], each containing one level of [function] call;</br>returns an empty [array] if no [debugger] is registered |
+| `back_trace` | _none_       | [`no_function`], [`no_index`] | returns an [array] of [object maps] or [strings], each containing one level of [function] call;<br/>returns an empty [array] if no [debugger] is registered |
 
 ```rust
 // This recursive function prints its own call stack during each run
