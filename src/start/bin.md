@@ -12,7 +12,7 @@ It is possible to turn these tools into [_Domain-Specific Tools_](../patterns/do
 
 |                           Tool                           | Required feature(s) | Description                                                 |
 | :------------------------------------------------------: | :-----------------: | ----------------------------------------------------------- |
-|      [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)      |                     | runs Rhai script files                                      |
+|      [`rhai-run`]({{repoHome}}/src/bin/rhai-run.rs)      |                     | runs Rhai script or [Rhai Grain] [bytecodes] files          |
 |     [`rhai-repl`]({{repoHome}}/src/bin/rhai-repl.rs)     |     `rustyline`     | a simple REPL tool                                          |
 |      [`rhai-dbg`]({{repoHome}}/src/bin/rhai-dbg.rs)      |    [`debugging`]    | the _Rhai Debugger_                                         |
 | [`grain-compile`]({{repoHome}}/src/bin/grain-compile.rs) |      [`grain`]      | compile a Rhai script to [Rhai Grain] [bytecodes]           |
@@ -94,16 +94,16 @@ rhai-repl init1.rhai init2.rhai init3.rhai
 
 ~~~admonish danger "`rhai-run` &ndash; The Rhai Runner"
 
-Use `rhai-run` to run Rhai scripts.
+Use `rhai-run` to run Rhai scripts or [Rhai Grain] [bytecodes].
 
 Filenames passed to it as command line arguments are run in sequence as Rhai scripts.
 
 ### Example
 
-The following command runs the scripts `script1.rhai`, `script2.rhai` and `script3.rhai` in order.
+The following command runs the scripts `script1.rhai`, `script2.rhai` and `compiled.rgrn` in order.
 
 ```sh
-rhai-run script1.rhai script2.rhai script3.rhai
+rhai-run script1.rhai script2.rhai compiled.rgrn
 ```
 ~~~
 

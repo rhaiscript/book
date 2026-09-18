@@ -37,11 +37,11 @@ Each [bin tool] is a single source file.
 
 Download the necessary one(s) into the project's `bin` or `example` subdirectory.
 
-| Select this source file                             | To make                               |
-| --------------------------------------------------- | ------------------------------------- |
-| [`rhai-run.rs`]({{repoHome}}/src/bin/rhai-run.rs)   | a simple script runner for the system |
-| [`rhai-repl.rs`]({{repoHome}}/src/bin/rhai-repl.rs) | an interactive REPL for the system    |
-| [`rhai-dbg.rs`]({{repoHome}}/src/bin/rhai-dbg.rs)   | a script debugger for the system      |
+| Select this source file                             | To make                                                  |
+| --------------------------------------------------- | -------------------------------------------------------- |
+| [`rhai-run.rs`]({{repoHome}}/src/bin/rhai-run.rs)   | a simple Rhai script and [Rhai Grain] [bytecodes] runner |
+| [`rhai-repl.rs`]({{repoHome}}/src/bin/rhai-repl.rs) | an interactive REPL for Rhai scripts                     |
+| [`rhai-dbg.rs`]({{repoHome}}/src/bin/rhai-dbg.rs)   | a Rhai script debugger                                   |
 
 #### Example
 
