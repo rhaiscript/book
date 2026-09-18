@@ -4,13 +4,41 @@
 {{#include ../../../links.md}}
 
 
-```admonish abstract.small "Default"
+```admonish abstract.side.wide "Default"
 
 `FileModuleResolver` is the default for [`Engine::new`][`Engine`].
 ```
 
 The _default_ [module] resolution service, not available for [`no_std`] or [WASM] builds.
-Loads a script file (based off the current directory or a specified one) with `.rhai` extension.
+
+Loads a script file (based off the current directory or a specified one) with a specific extension
+(default to `.rhai`), or a [Rhai Grain] [bytecodes] file (default to `.rgrn`).
+
+
+File Types
+----------
+
+```admonish tip.side.wide "Tip: Rhai Grain also"
+
+The `FileModuleResolver` also supports loading [Rhai Grain] [bytecodes] files with the
+`.rgrn` extension.
+
+If the [`no_ast`] feature is turned on, the default extension becomes `.rgrn`.
+```
+
+By default, the `FileModuleResolver` supports loading script files with the `.rhai` extension.
+
+When such a script file is not found, and if the [`grain`] feature is turned on, it also looks
+for a [Rhai Grain] [bytecodes] file with the `.rgrn` extension.
+
+So, the files searching order depending on feature flags is:
+
+* [`std`]: only `.rhai` script files
+  
+* [`std`] + [`grain`]: `.rhai` script files, followed by `.rgrn` [bytecodes] files
+  &ndash; if the [`import`] path has the `.rgrn` extension, then it is preferred over `.rhai`
+
+* [`no_ast`] + [`grain`]: only `.rgrn` [bytecodes] files
 
 
 Function Namespace
@@ -26,7 +54,7 @@ which are also available to [functions] defined within the same script file.
 Base Directory
 --------------
 
-```admonish tip.side.wide "Tip: Default"
+```admonish tip.side.wide "Tip: Current directory as default"
 
 If the base directory is not set, then relative paths are based off the directory of the loading script.
 

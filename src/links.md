@@ -1,4 +1,5 @@
 [features]: {{rootUrl}}/start/features.md
+[`std`]: {{rootUrl}}/start/features.md
 [`unchecked`]: {{rootUrl}}/start/features.md
 [`sync`]: {{rootUrl}}/start/features.md
 [`no_position`]: {{rootUrl}}/start/features.md
