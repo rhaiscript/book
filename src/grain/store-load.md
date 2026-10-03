@@ -4,9 +4,14 @@ Store Bytecodes and Reload It Later
 {{#include ../links.md}}
 
 
-```admonish note.side "Benefits"
-The size of the [bytecodes] stream is usually smaller than the original script source,
-and _much_ smaller than memory required to hold the entire [`AST`].
+```admonish note.side "Size"
+[Bytecodes] can even be smaller than the original script source,
+and always _much_ smaller than the memory required to hold the entire [`AST`].
+```
+
+```admonish tip.side "Tip: Minimal runtime"
+The [`Engine`] running the [bytecodes] can be minimal: e.g. built with [`no_ast`]
+such that no parser or [`AST`] features are included.
 ```
 
 This is the primary use case for Rhai Grain: transpile an [`AST`] to [bytecodes]

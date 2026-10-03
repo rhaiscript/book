@@ -17,7 +17,7 @@ Use Rhai Grain when you want to:
 
 - ship a script without shipping source code,
 
-- reduce per-script memory and CPU costs on constrained devices,
+- significantly reduce per-script memory and CPU costs on constrained devices,
 
 - run faster than the standard Rhai interpreter,
 
@@ -51,18 +51,19 @@ Unsupported Features
 
 Rhai Grain does not support every feature of the language.
 
-When the transpiler failes, it preserves that part as a residual [`AST`] fragment and hands it back to
-Rhai for processing.
+When the transpiler fails, it preserves that part as a _residual [`AST`]_ fragment and hands it back
+to Rhai for processing.
 
 They include:
 
-- [`eval`],
+- [`eval`]!
 
-- loading [modules] via [`import`],
+- [custom syntax] which modifies the [`Scope`]
 
-- the [`Engine::on_map_missing_property`]({{rootUrl}}/language/object-maps-missing-prop.md) advanced callback,
+- [custom syntax] which contains a `return`, `continue` or `break` statement that affects an outer loop
 
-- [custom syntax]
+- [custom types] recorded as [constants] &ndash; this usually only occur under [`OptimizationLevel::Full`].
 
-If `Program::residual_count()` is non-zero, the program still runs, but part of it will fall back to
-Rhai's normal [`AST`] evaluation path.
+Check `Program::residual_count()` to see how many residual [`AST`] fragments exist.
+If it is non-zero, the program still runs, but parts of it will fall back
+to Rhai's normal [`AST`] evaluation path.

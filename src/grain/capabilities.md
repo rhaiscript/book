@@ -33,7 +33,7 @@ properly decoded and/or run on the host.
 ```admonish note.side
 The fingerprint is not just metadata.
 
-It is the compatibility guard-rails that prevents a [bytecodes] stream from running
+It is the compatibility guard-rails that prevent a [bytecodes] stream from running
 on a build that does not have the features to handle it.
 ```
 
@@ -45,10 +45,18 @@ The fingerprint records:
 
 - the _capabilities_ required to run.
 
+A set of [bytecodes] will refuse to load if the primary numeric types are at odds &ndash;
+for example, [bytecodes] compiled on an [`only_i64`] build cannot be loaded on an [`only_i32`] build.
+
+The [bytecodes] _can_ load and run, however, on a [VM] built with fewer features than the
+original environment, as long as the missing features are not used in the script!
+
+That's where the _capabilities_ check come into play.
+
 
 ### Capabilities set
 
-The capability set covers Rhai language features that a script may use, such as:
+The capabilities set covers all the Rhai language features that a script may use, such as:
 
 - floating-point or [`decimal`] numbers,
 
@@ -56,9 +64,11 @@ The capability set covers Rhai language features that a script may use, such as:
 
 - indexing (i.e. usage of `[ .. ]` syntax),
 
-- accessing [properties][getters/setters],
+- [properties][getters/setters],
 
 - calling functions in [method-call][method] style,
+
+- calling [functions] in [modules],
 
 - the `this` pointer,
 
