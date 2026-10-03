@@ -106,6 +106,14 @@ The feature `bin-features` include all the features necessary for building the [
 By default, it includes: `decimal`, `metadata`, `serde`, `debugging` and `rustyline`.
 
 
+Compatibility Features
+----------------------
+
+| Feature       | Additive? | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ------------- | :-------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compact_str` |    yes    | replaces the unmaintained [`smartstring`] crate with [`compact_str`](https://crates.io/crates/compact_str).<br/><br/>[`smartstring`] is archived, [unmaintained](https://rustsec.org/advisories/RUSTSEC-2026-0249.html), has a bug in its `serde` feature that conflicts with `no-std`, and licensed under `MPL-2.0+` ([`#897`](https://github.com/rhaiscript/rhai/issues/897)) while`compact_str` is licensed under the more permissive `MIT`.<br/><br/>Under this feature, the type of [`Map`][object maps] keys is [`CompactString`](https://docs.rs/compact_str/latest/compact_str/struct.CompactString.html) instead of [`SmartString`]. `serde`-serializable types use it directly instead of `String`. Most code needs no change.<br/><br/>`compact_str` is intended to become the default in version 2.0 |
+
+
 Example
 -------
 
