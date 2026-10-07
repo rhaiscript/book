@@ -70,6 +70,7 @@
 [plugin modules]: {{rootUrl}}/plugins/module.md
 [plugin function]: {{rootUrl}}/plugins/function.md
 [plugin functions]: {{rootUrl}}/plugins/function.md
+[lazy]: {{rootUrl}}/plugins/lazy-loading.md
 [functions metadata]: {{rootUrl}}/engine/metadata/index.md
 [`Scope`]: {{rootUrl}}/engine/scope.md
 [`serde`]: {{rootUrl}}/rust/serde.md

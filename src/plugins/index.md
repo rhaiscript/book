@@ -643,6 +643,7 @@ Parameters can be applied to the `#[export_module]` attribute to override its de
 | `export_all`            | exports all functions (including private, non-`pub` functions);<br />use `#[rhai_fn(skip)]` on individual functions to avoid export |
 | `export_prefix = "..."` | exports only functions (including private, non-`pub` functions) with names starting with a specific prefix                          |
 | `root = "..."`          | specifies an alternative name for the Rhai crate (default is `rhai`) if it is renamed in `Cargo.toml`                               |
+| `manifest`              | specifies that this plugin module supports [_lazy-loadeding_][lazy]                                                                 |
 
 
 Inner Attributes

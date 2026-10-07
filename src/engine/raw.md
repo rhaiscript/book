@@ -3,18 +3,25 @@ Raw `Engine`
 
 {{#include ../links.md}}
 
-`Engine::new` creates a scripting [`Engine`] with common functionalities (e.g. printing to `stdout`
-via [`print`] or [`debug`]).
-
-In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
-application code storage space.
-
 ```admonish info.side.wide "Built-in operators"
 
 Even with a raw [`Engine`], some operators are built-in and always available.
 
 See [_Built-in Operators_][built-in operators] for a full list.
 ```
+
+```admonish tip.side.wide "Tip: Use lazy-loading"
+
+To conserve runtime memory usage, use [_lazy-loading_][lazy] for packages via _PackageName_`::new_lazy()`.
+
+All [built-in packages] support [`lazy-loading`][lazy].
+```
+
+`Engine::new` creates a scripting [`Engine`] with common functionalities (e.g. printing to `stdout`
+via [`print`] or [`debug`]).
+
+In many controlled embedded environments, however, these may not be needed and unnecessarily occupy
+application code storage space.
 
 Use `Engine::new_raw` to create a _raw_ [`Engine`], in which only a minimal set of
 [built-in][built-in operators] basic arithmetic and logical operators are supported.
@@ -67,8 +74,9 @@ engine.on_debug(|text, source, pos| match (source, pos) {
     (None, pos) => println!("{pos:?} | {text}"),
 });
 
-// Register the Standard Package
-let package = StandardPackage::new();
+// Register the Standard Package, with lazy-loading
+// to conserve runtime memory usage.
+let package = StandardPackage::new_lazy();
 
 // Load the package into the [`Engine`]
 package.register_into_engine(&mut engine);

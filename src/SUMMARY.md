@@ -84,6 +84,7 @@ Rust Integration
     - [Custom Module Resolvers](rust/modules/resolvers/custom.md)
   - [Self-Contained AST](rust/modules/self-contained.md)
 - [Plugin Modules](plugins/index.md)
+  - [Lazy-Loading](plugins/lazy-loading.md)
 - [Packages](rust/packages/index.md)
   - [Built-in Packages](rust/packages/builtin.md)
   - [Create Custom Packages](rust/packages/create.md)

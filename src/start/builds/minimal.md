@@ -65,3 +65,13 @@ Packages are shared (even across threads via the [`sync`] feature), so they only
 In addition, a [`Engine::new_raw`][raw `Engine`] disables the _[strings interner]_, which might
 actually increase memory usage if many strings are created in scripts. Therefore, selectively turn
 on the [strings interner] via [`Engine::set_max_strings_interned`][options].
+
+
+Lazy-Loading
+------------
+
+[Lazy-loading][lazy] allows functions in [plugin modules] to be resolved only when called,
+significantly reducing runtime memory usage.
+
+Use it together with [`Engine::new_raw`][raw `Engine`] and `StandardPackage::new_lazy` to minimize
+runtime memory usage by loading functions only when they are called.

@@ -18,6 +18,7 @@ A number of examples can be found under `examples`.
 | [`definitions`]({{repoHome}}/examples/definitions)                              | shows how to generate definition files for use with the [Rhai Language Server][lsp] (requires the [`metadata`] feature)         |
 | [`grain_bench`]({{repoHome}}/examples/grain_bench.rs)                           | comparison benchmarks for [Rhai Grain VM]                                                                                       |
 | [`hello`]({{repoHome}}/examples/hello.rs)                                       | simple example that evaluates an expression and prints the result                                                               |
+| [`lazy_bench`]({{repoHome}}/examples/lazy_bench.rs)                             | comparison benchmarks for [lazy-loading][lazy]                                                                                  |
 | [`pause_and_resume`]({{repoHome}}/pause_and_resume.rs)                          | shows how to pause/resume/stop an `Engine` running in a separate thread via an MPSC channel                                     |
 | [`reuse_scope`]({{repoHome}}/examples/reuse_scope.rs)                           | evaluates two pieces of code in separate runs, but using a common [`Scope`]                                                     |
 | [`serde`]({{repoHome}}/examples/serde.rs)                                       | example to serialize and deserialize Rust types with [`serde`](https://crates.io/crates/serde) (requires the [`serde`] feature) |
