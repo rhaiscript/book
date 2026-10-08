@@ -3,6 +3,10 @@ Related Resources
 
 {{#include ../links.md}}
 
+```admonish tip "For AI agents"
+Use this [cheat-sheet](https://github.com/rhaiscript/rhai/blob/main/RHAI-CHEATSHEET.md)
+for the Rhai scripting language.
+```
 
 ```admonish danger "Online resources"
 

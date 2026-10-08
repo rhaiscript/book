@@ -41,6 +41,7 @@ Feature Dependencies
 | [`serde`](https://crates.io/crates/serde)             | [`serde`], [`metadata`] |
 | [`serde_json`](https://crates.io/crates/serde_json)   |      [`metadata`]       |
 | [`rustyline`](https://crates.io/crates/rustyline)     |     `bin-features`      |
+| [`compact_str`](https://crates.io/crates/compact_str) |     [`compact_str`]     |
 
 
 WASM Dependencies
