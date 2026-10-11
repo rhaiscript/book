@@ -34,7 +34,7 @@
 
 [Rhai Grain]: {{rootUrl}}/grain/index.md
 [Rhai Grain VM]: {{rootUrl}}/grain/index.md
-[VM]: {{rootUrl}}/grain/index.md
+[VM]: {{rootUrl}}/grain/compiler-vm.md
 [bytecodes]: {{rootUrl}}/grain/compiler-vm.md
 [`Sidecar`]: {{rootUrl}}/grain/diagnostics.md
 

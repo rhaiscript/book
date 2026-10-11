@@ -4,7 +4,7 @@ Related Resources
 {{#include ../links.md}}
 
 ```admonish tip "For AI agents"
-Use this [cheat-sheet](https://github.com/rhaiscript/rhai/blob/main/RHAI-CHEATSHEET.md)
+Use this [cheat-sheet](https://raw.githubusercontent.com/rhaiscript/rhai/refs/heads/main/RHAI-CHEATSHEET.md)
 for the Rhai scripting language.
 ```
 

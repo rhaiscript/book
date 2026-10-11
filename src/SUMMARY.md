@@ -37,6 +37,7 @@ User’s Guide
   - [Minimal](start/builds/minimal.md)
   - [no-std](start/builds/no-std.md)
   - [WebAssembly (WASM)](start/builds/wasm.md)
+  - [Embedded](start/builds/embedded.md)
 
 ----------------------
 

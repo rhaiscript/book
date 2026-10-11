@@ -11,5 +11,5 @@ This is a stand-alone reference for the Rhai scripting language.
 For AI Agents
 -------------
 
-Use this [cheat-sheet](https://github.com/rhaiscript/rhai/blob/main/RHAI-CHEATSHEET.md)
+Use this [cheat-sheet](https://raw.githubusercontent.com/rhaiscript/rhai/refs/heads/main/RHAI-CHEATSHEET.md)
 for the Rhai scripting language.
