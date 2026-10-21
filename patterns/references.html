@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -386,7 +386,7 @@ appropriate scope where the wrapped reference may no longer be valid.</p>
 potentially be persistent (e.g. within an <a href="/book/language/object-maps.html">object map</a>).</p>
 <h4 id="safety-check-via-unique-id"><a class="header" href="#safety-check-via-unique-id">Safety check via unique ID</a></h4>
 <p>One solution, as illustrated in the example, is to always tag each handle instance together with
-a unique random ID. That same ID can then be set into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
+a unique random ID. That same ID can then be set into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> (via <a href="https://docs.rs/rhai/1.27.0/rhai/struct.Engine.html#method.set_default_tag"><code>Engine::set_default_tag</code></a>)
 before running scripts.</p>
 <p>Before executing any API function, first check whether the handle’s ID matches that of the current <a href="/book/engine/hello-world.html"><code>Engine</code></a>
 (via <a href="/book/rust/context.html"><code>NativeCallContext::tag</code></a>). If they differ, the handle is stale and should never be used;

@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -201,7 +201,7 @@ sometimes more fine-grained control is needed.</p>
 a particular variable name needs to be protected and not others.  Or only under very special
 circumstances.</p>
 <p>Under this scenario, it is possible to provide a <em>filter</em> closure to the <a href="/book/engine/hello-world.html"><code>Engine</code></a> via
-<a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="/book/language/variables.html"><code>let</code></a> or
+<a href="https://docs.rs/rhai/1.27.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> that traps variable definitions (i.e. <a href="/book/language/variables.html"><code>let</code></a> or
 <a href="/book/language/constants.html"><code>const</code></a> statements) in a Rhai script.</p>
 <p>The filter is called when a <a href="/book/language/variables.html">variable</a> or <a href="/book/language/constants.html">constant</a> is defined both during runtime and compilation.</p>
 <pre><code class="language-rust">let mut engine = Engine::new();
@@ -220,7 +220,7 @@ engine.on_def_var(|is_runtime, info, context| {
     }
 });</code></pre>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.27.0/rhai/struct.Engine.html#method.on_def_var"><code>Engine::on_def_var</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(is_runtime: bool, info: VarDefInfo, context: EvalContext) -&gt; Result&lt;bool, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>

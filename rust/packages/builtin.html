@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-2538afa6.js"></script>
+        <script src="../../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -200,25 +200,25 @@
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Package</th><th>Description</th><th style="text-align: center">In <code>Core</code></th><th style="text-align: center">In <code>Standard</code></th></tr>
+<tr><th>Package</th><th>Description</th><th style="text-align: center"><code>Core</code></th><th style="text-align: center"><code>Standard</code></th><th style="text-align: center"><a href="/book/plugins/lazy-loading.html"><em>Lazy-loading</em></a></th></tr>
 </thead>
 <tbody>
-<tr><td><code>LanguageCorePackage</code></td><td>core functions for the Rhai language</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>ArithmeticPackage</code></td><td>arithmetic operators (e.g. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BitFieldPackage</code></td><td>basic <a href="/book/language/bit-fields.html">bit-field</a> functions</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicIteratorPackage</code></td><td>numeric ranges (e.g. <code>range(1, 100, 5)</code>), iterators for <a href="/book/language/arrays.html">arrays</a>, <a href="/book/language/strings-chars.html">strings</a>, <a href="/book/language/bit-fields.html">bit-fields</a> and <a href="/book/language/object-maps.html">object maps</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>LogicPackage</code></td><td>logical and comparison operators (e.g. <code>==</code>, <code>&gt;</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicStringPackage</code></td><td>basic string functions (e.g. <code>print</code>, <code>debug</code>, <code>len</code>) that are not built in</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicTimePackage</code></td><td>basic time functions (e.g. <a href="/book/language/timestamps.html">timestamps</a>, not available under <a href="/book/start/features.html"><code>no_time</code></a> or <a href="/book/start/features.html"><code>no_std</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>MoreStringPackage</code></td><td>additional string functions, including converting common types to string</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicMathPackage</code></td><td>basic math functions (e.g. <code>sin</code>, <code>sqrt</code>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicArrayPackage</code></td><td>basic <a href="/book/language/arrays.html">array</a> functions (not available under <a href="/book/start/features.html"><code>no_index</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicBlobPackage</code></td><td>basic <a href="/book/language/blobs.html">BLOB</a> functions (not available under <a href="/book/start/features.html"><code>no_index</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicMapPackage</code></td><td>basic <a href="/book/language/object-maps.html">object map</a> functions (not available under <a href="/book/start/features.html"><code>no_object</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
-<tr><td><code>BasicFnPackage</code></td><td>basic methods for <a href="/book/language/fn-ptr.html">function pointers</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>DebuggingPackage</code></td><td>basic functions for <a href="/book/engine/debugging/debugger.html">debugging</a> (requires <a href="/book/start/features.html"><code>debugging</code></a>)</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>CorePackage</code></td><td>basic essentials</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
-<tr><td><code>StandardPackage</code></td><td>standard library (default for <code>Engine::new</code>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td></tr>
+<tr><td><code>LanguageCorePackage</code></td><td>core functions for the Rhai language</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>ArithmeticPackage</code></td><td>arithmetic operators (e.g. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BitFieldPackage</code></td><td>basic <a href="/book/language/bit-fields.html">bit-field</a> functions</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicIteratorPackage</code></td><td>numeric ranges (e.g. <code>range(1, 100, 5)</code>), iterators for <a href="/book/language/arrays.html">arrays</a>, <a href="/book/language/strings-chars.html">strings</a>, <a href="/book/language/bit-fields.html">bit-fields</a> and <a href="/book/language/object-maps.html">object maps</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>LogicPackage</code></td><td>logical and comparison operators (e.g. <code>==</code>, <code>&gt;</code>) for numeric types that are not built in (e.g. <code>u16</code>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicStringPackage</code></td><td>basic string functions (e.g. <code>print</code>, <code>debug</code>, <code>len</code>) that are not built in</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicTimePackage</code></td><td>basic time functions (e.g. <a href="/book/language/timestamps.html">timestamps</a>, not available under <a href="/book/start/features.html"><code>no_time</code></a> or <a href="/book/start/features.html"><code>no_std</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>MoreStringPackage</code></td><td>additional string functions, including converting common types to string</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicMathPackage</code></td><td>basic math functions (e.g. <code>sin</code>, <code>sqrt</code>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicArrayPackage</code></td><td>basic <a href="/book/language/arrays.html">array</a> functions (not available under <a href="/book/start/features.html"><code>no_index</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicBlobPackage</code></td><td>basic <a href="/book/language/blobs.html">BLOB</a> functions (not available under <a href="/book/start/features.html"><code>no_index</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicMapPackage</code></td><td>basic <a href="/book/language/object-maps.html">object map</a> functions (not available under <a href="/book/start/features.html"><code>no_object</code></a>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>BasicFnPackage</code></td><td>basic methods for <a href="/book/language/fn-ptr.html">function pointers</a></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>DebuggingPackage</code></td><td>basic functions for <a href="/book/engine/debugging/debugger.html">debugging</a> (requires <a href="/book/start/features.html"><code>debugging</code></a>)</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>CorePackage</code></td><td>basic essentials</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
+<tr><td><code>StandardPackage</code></td><td>standard library (default for <code>Engine::new</code>)</td><td style="text-align: center"><strong>no</strong></td><td style="text-align: center">yes</td><td style="text-align: center">yes</td></tr>
 </tbody>
 </table>
 </div>
@@ -232,6 +232,11 @@ let package = CorePackage::new();
 
 // Register the package into the 'Engine'.
 package.register_into_engine(&amp;mut engine);</code></pre>
+<h2 id="lazy-loading"><a class="header" href="#lazy-loading">Lazy-Loading</a></h2>
+<p>Use the <em>PackageName</em><code>::new_lazy()</code> on a package built from a module with <a href="/book/plugins/lazy-loading.html"><em>lazy-loading</em></a>
+enabled (via <code>#[export_module(manifest)]</code>).</p>
+<p><a href="/book/plugins/lazy-loading.html">Lazy-loaded</a> functions are only loaded into the <a href="/book/engine/hello-world.html"><code>Engine</code></a> when they are first called, which
+helps conserve runtime memory usage.</p>
 
                     </main>
 

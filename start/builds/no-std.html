@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-2538afa6.js"></script>
+        <script src="../../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -195,62 +195,81 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="no-std-build"><a class="header" href="#no-std-build"><code>no-std</code> Build</a></h1>
-<p>The feature <a href="/book/start/features.html"><code>no_std</code></a> automatically converts the scripting engine into a <code>no-std</code> build.</p>
-<p>Usually, a <code>no-std</code> build goes hand-in-hand with <a href="/book/start/builds/minimal.html">minimal builds</a> because typical embedded
-hardware (the primary target for <code>no-std</code>) has limited storage.</p>
-<div id="admonition-nightly-required" class="admonition admonish-warning" role="note" aria-labelledby="admonition-nightly-required-title">
-<div class="admonition-title">
-<div id="admonition-nightly-required-title">
-<p>Nightly required</p>
-</div>
+<p>The <a href="/book/start/features.html"><code>no_std</code></a> feature lets Rhai run in a Rust <code>no_std</code> application, primarily for embedded devices.</p>
+<p>Since Rhai allocates, the application must provide an allocator, such as <a href="https://crates.io/crates/wee_alloc"><code>wee_alloc</code></a>.</p>
+<p>A <code>no-std</code> build is often combined with <a href="/book/start/builds/minimal.html">minimal builds</a> because embedded hardware usually have
+limited storage.</p>
+<p>The sample below uses <a href="https://crates.io/crates/wee_alloc"><code>wee_alloc</code></a> as allocator and
+evaluates a simple expression using a <a href="/book/engine/raw.html">raw <code>Engine</code></a>.</p>
+<h2 id="cargotoml"><a class="header" href="#cargotoml"><code>Cargo.toml</code></a></h2>
+<pre><code class="language-toml">[dependencies]
+rhai = { version = "1.27.0", default-features = false, features = ["no_std"] }
+wee_alloc = { version = "0.4.5", default-features = false }
 
-<a class="admonition-anchor-link" href="#admonition-nightly-required"></a>
-</div>
+[profile.dev]
+panic = "abort"
 
-<div>
-<p>Currently, <a href="/book/start/features.html"><code>no_std</code></a> requires the nightly compiler due to the crates that it uses.</p>
-</div>
+[profile.release]
+opt-level = "z"
+debug = false
+rpath = false
+debug-assertions = false
+codegen-units = 1
+panic = "abort"
 
-</div>
+[profile.unix]
+inherits = "release"
+lto = true
 
-<h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
-<p>Rhai allocates, so the first thing that must be included in any <code>no-std</code> project is
-an allocator crate, such as <a href="https://crates.io/crates/wee_alloc"><code>wee_alloc</code></a>.</p>
-<p>Then there is the need to set up proper error/panic handlers.
-The following example uses <code>panic = "abort"</code> and <code>wee_alloc</code> as the allocator.</p>
-<pre><code class="language-rust">// Set up for no-std.
+[profile.windows]
+inherits = "release"
+
+[profile.macos]
+inherits = "release"
+lto = "fat"
+</code></pre>
+<h2 id="application"><a class="header" href="#application">Application</a></h2>
+<pre><code class="language-rust">#![no_main]
 #![no_std]
+#![feature(alloc_error_handler, abort_immediate)]
 
-// The following no-std features are usually needed.
-#![feature(alloc_error_handler, start, core_intrinsics, lang_items, link_cfg)]
-
-// Set up the global allocator.
 extern crate alloc;
 extern crate wee_alloc;
 
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-// Rust needs a CRT runtime on Windows when compiled with MSVC.
 #[cfg(all(windows, target_env = "msvc"))]
 #[link(name = "msvcrt")]
 #[link(name = "libcmt")]
 extern "C" {}
 
-// Set up panic and error handlers
+use rhai::{Engine, INT};
+
+#[no_mangle]
+pub extern "C" fn main(_argc: isize, _argv: *const *const u8) -&gt; isize {
+    // A raw engine starts with only the built-in operators.
+    // Load packages from `rhai::packages` to add more functionality.
+    let engine = Engine::new_raw();
+
+    engine.eval_expression::&lt;INT&gt;("40 + 2").unwrap() as isize
+}
+
 #[alloc_error_handler]
-fn err_handler(_: core::alloc::Layout) -&gt; ! {
-    core::intrinsics::abort();
+fn foo(_: core::alloc::Layout) -&gt; ! {
+    core::process::abort_immediate()
 }
 
 #[panic_handler]
-#[lang = "panic_impl"]
-extern "C" fn rust_begin_panic(_: &amp;core::panic::PanicInfo) -&gt; ! {
-    core::intrinsics::abort();
+fn rust_begin_panic(_: &amp;core::panic::PanicInfo) -&gt; ! {
+    core::process::abort_immediate()
 }
 
-#[lang = "eh_personality"]
-extern "C" fn eh_personality() {}
+#[no_mangle]
+extern "C" fn _rust_eh_personality() {}
+
+#[no_mangle]
+extern "C" fn rust_eh_personality() {}
 
 #[no_mangle]
 extern "C" fn rust_eh_register_frames() {}
@@ -259,19 +278,24 @@ extern "C" fn rust_eh_register_frames() {}
 extern "C" fn rust_eh_unregister_frames() {}
 
 #[no_mangle]
-extern "C" fn _Unwind_Resume() {}
-
-#[start]
-fn main(_argc: isize, _argv: *const *const u8) -&gt; isize {
-    // ... main program ...
-}</code></pre>
-<div id="admonition-samples" class="admonition admonish-example small" role="note" aria-labelledby="admonition-samples-title">
+extern "C" fn _Unwind_Resume() {}</code></pre>
+<h2 id="building"><a class="header" href="#building">Building</a></h2>
+<p>This example uses nightly-only Rust features for the allocator error handler and immediate abort.</p>
+<p>Build it with the nightly toolchain:</p>
+<pre><code class="language-bash">cargo +nightly build --release
+</code></pre>
+<p>The sample defines <code>unix</code>, <code>windows</code>, and <code>macos</code> profiles, which inherit the size-optimized release
+profile and can be selected by name:</p>
+<pre><code class="language-bash">cargo +nightly build --profile unix
+</code></pre>
+<p>The release profile is optimized for size; it can be changed to optimize for speed instead.</p>
+<div id="admonition-sample" class="admonition admonish-example small" role="note" aria-labelledby="admonition-sample-title">
 <div class="admonition-title">
-<div id="admonition-samples-title">
-<p>Samples</p>
+<div id="admonition-sample-title">
+<p>Sample</p>
 </div>
 
-<a class="admonition-anchor-link" href="#admonition-samples"></a>
+<a class="admonition-anchor-link" href="#admonition-sample"></a>
 </div>
 
 <div>

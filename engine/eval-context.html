@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -218,8 +218,8 @@ current evaluation state to be accessed and/or modified.</p>
 <tr><td><code>this_ptr()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>Option&lt;&amp;Dynamic&gt;</code></a></td><td>reference to the current bound <code>this</code> pointer, if any</td></tr>
 <tr><td><code>this_ptr_mut()</code></td><td style="text-align: center"></td><td style="text-align: center"><a href="/book/language/dynamic.html"><code>&amp;mut Option&lt;&amp;mut Dynamic&gt;</code></a></td><td>mutable reference to the current bound <code>this</code> pointer, if any</td></tr>
 <tr><td><code>call_level()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>usize</code></td><td>the current nesting level of <a href="/book/language/functions.html">function</a> calls</td></tr>
-<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
-<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.26.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>global_runtime_state()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.27.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;GlobalRuntimeState</code></a></td><td>reference to the current <a href="https://docs.rs/rhai/1.27.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
+<tr><td><code>global_runtime_state_mut()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a></td><td style="text-align: center"><a href="https://docs.rs/rhai/1.27.0/rhai/struct.GlobalRuntimeState.html"><code>&amp;mut &amp;mut GlobalRuntimeState</code></a></td><td>mutable reference to the current <a href="https://docs.rs/rhai/1.27.0/rhai/struct.GlobalRuntimeState.html">global runtime state</a></td></tr>
 <tr><td><code>debugger()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>, <a href="/book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="/book/engine/debugging/debugger.html"><code>Option&lt;&amp;debugger::Debugger&gt;</code></a></td><td>reference to the <a href="/book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
 <tr><td><code>debugger_mut()</code></td><td style="text-align: center"><a href="/book/start/features.html"><code>internals</code></a>, <a href="/book/start/features.html"><code>debugging</code></a></td><td style="text-align: center"><a href="/book/engine/debugging/debugger.html"><code>Option&lt;&amp;mut debugger::Debugger&gt;</code></a></td><td>mutable reference to the <a href="/book/engine/debugging/debugger.html">debugging interface</a>, if any</td></tr>
 <tr><td><code>new_frame()</code></td><td style="text-align: center"></td><td style="text-align: center"><code>EvalContextFrameGuard</code></td><td>create a new frame that automatically restores field values upon <code>Drop</code></td></tr>

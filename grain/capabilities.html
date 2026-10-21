@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -220,7 +220,7 @@ properly decoded and/or run on the host.</p>
 
 <div>
 <p>The fingerprint is not just metadata.</p>
-<p>It is the compatibility guard-rails that prevents a <a href="/book/grain/compiler-vm.html">bytecodes</a> stream from running
+<p>It is the compatibility guard-rails that prevent a <a href="/book/grain/compiler-vm.html">bytecodes</a> stream from running
 on a build that does not have the features to handle it.</p>
 </div>
 
@@ -238,8 +238,13 @@ on a build that does not have the features to handle it.</p>
 <p>the <em>capabilities</em> required to run.</p>
 </li>
 </ul>
+<p>A set of <a href="/book/grain/compiler-vm.html">bytecodes</a> will refuse to load if the primary numeric types are at odds –
+for example, <a href="/book/grain/compiler-vm.html">bytecodes</a> compiled on an <a href="/book/start/features.html"><code>only_i64</code></a> build cannot be loaded on an <a href="/book/start/features.html"><code>only_i32</code></a> build.</p>
+<p>The <a href="/book/grain/compiler-vm.html">bytecodes</a> <em>can</em> load and run, however, on a <a href="/book/grain/compiler-vm.html">VM</a> built with fewer features than the
+original environment, as long as the missing features are not used in the script!</p>
+<p>That’s where the <em>capabilities</em> check come into play.</p>
 <h3 id="capabilities-set"><a class="header" href="#capabilities-set">Capabilities set</a></h3>
-<p>The capability set covers Rhai language features that a script may use, such as:</p>
+<p>The capabilities set covers all the Rhai language features that a script may use, such as:</p>
 <ul>
 <li>
 <p>floating-point or <a href="/book/start/features.html"><code>decimal</code></a> numbers,</p>
@@ -251,10 +256,13 @@ on a build that does not have the features to handle it.</p>
 <p>indexing (i.e. usage of <code>[ .. ]</code> syntax),</p>
 </li>
 <li>
-<p>accessing <a href="/book/rust/getters-setters.html">properties</a>,</p>
+<p><a href="/book/rust/getters-setters.html">properties</a>,</p>
 </li>
 <li>
 <p>calling functions in <a href="/book/rust/methods.html">method-call</a> style,</p>
+</li>
+<li>
+<p>calling <a href="/book/language/functions.html">functions</a> in <a href="/book/rust/modules/index.html">modules</a>,</p>
 </li>
 <li>
 <p>the <code>this</code> pointer,</p>

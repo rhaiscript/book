@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-2538afa6.js"></script>
+        <script src="../../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -233,6 +233,11 @@ only a very <a href="/book/engine/builtin.html">restricted set</a> of basic arit
 <p>In addition, a <a href="/book/engine/raw.html"><code>Engine::new_raw</code></a> disables the <em><a href="/book/rust/strings-interner.html">strings interner</a></em>, which might
 actually increase memory usage if many strings are created in scripts. Therefore, selectively turn
 on the <a href="/book/rust/strings-interner.html">strings interner</a> via <a href="/book/engine/options.html"><code>Engine::set_max_strings_interned</code></a>.</p>
+<h2 id="lazy-loading"><a class="header" href="#lazy-loading">Lazy-Loading</a></h2>
+<p><a href="/book/plugins/lazy-loading.html">Lazy-loading</a> allows functions in <a href="/book/plugins/module.html">plugin modules</a> to be resolved only when called,
+significantly reducing runtime memory usage.</p>
+<p>Use it together with <a href="/book/engine/raw.html"><code>Engine::new_raw</code></a> and <code>StandardPackage::new_lazy</code> to minimize
+runtime memory usage by loading functions only when they are called.</p>
 
                     </main>
 

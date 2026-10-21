@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -195,18 +195,34 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="store-bytecodes-and-reload-it-later"><a class="header" href="#store-bytecodes-and-reload-it-later">Store Bytecodes and Reload It Later</a></h1>
-<div id="admonition-benefits" class="admonition admonish-note side" role="note" aria-labelledby="admonition-benefits-title">
+<div id="admonition-size" class="admonition admonish-note side" role="note" aria-labelledby="admonition-size-title">
 <div class="admonition-title">
-<div id="admonition-benefits-title">
-<p>Benefits</p>
+<div id="admonition-size-title">
+<p>Size</p>
 </div>
 
-<a class="admonition-anchor-link" href="#admonition-benefits"></a>
+<a class="admonition-anchor-link" href="#admonition-size"></a>
 </div>
 
 <div>
-<p>The size of the <a href="/book/grain/compiler-vm.html">bytecodes</a> stream is usually smaller than the original script source,
-and <em>much</em> smaller than memory required to hold the entire <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
+<p><a href="/book/grain/compiler-vm.html">Bytecodes</a> can even be smaller than the original script source,
+and always <em>much</em> smaller than the memory required to hold the entire <a href="/book/engine/compile.html"><code>AST</code></a>.</p>
+</div>
+
+</div>
+
+<div id="admonition-tip-minimal-runtime" class="admonition admonish-tip side" role="note" aria-labelledby="admonition-tip-minimal-runtime-title">
+<div class="admonition-title">
+<div id="admonition-tip-minimal-runtime-title">
+<p>Tip: Minimal runtime</p>
+</div>
+
+<a class="admonition-anchor-link" href="#admonition-tip-minimal-runtime"></a>
+</div>
+
+<div>
+<p>The <a href="/book/engine/hello-world.html"><code>Engine</code></a> running the <a href="/book/grain/compiler-vm.html">bytecodes</a> can be minimal: e.g. built with <a href="/book/start/features.html"><code>no_ast</code></a>
+such that no parser or <a href="/book/engine/compile.html"><code>AST</code></a> features are included.</p>
 </div>
 
 </div>

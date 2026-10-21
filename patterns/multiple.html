@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,7 +252,7 @@ a different <a href="/book/start/features.html">features</a> set, by their <em>s
 </ul>
 <p>Use the following configuration in <code>Cargo.toml</code> to pull in multiple copies of Rhai within the same project:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = { version = "1.26.0", features = [ "no_float" ] }
+rhai = { version = "1.27.0", features = [ "no_float" ] }
 rhai_github = { git = "https://github.com/rhaiscript/rhai", features = [ "unchecked" ] }
 rhai_my_github = { git = "https://github.com/my_github/rhai", branch = "variation1", features = [ "serde", "no_closure" ] }
 rhai_local = { path = "../rhai_copy" }

@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -223,7 +223,7 @@
 <h2 id="dependency"><a class="header" href="#dependency">Dependency</a></h2>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
-rhai = "1.26.0"
+rhai = "1.27.0"
 rhai-rand = "0.1"       # use rhai-rand crate
 </code></pre>
 <h2 id="load-package-into-engine"><a class="header" href="#load-package-into-engine">Load Package into <a href="/book/engine/hello-world.html"><code>Engine</code></a></a></h2>
@@ -264,7 +264,7 @@ random.register_into_engine(&amp;mut engine);</code></pre>
 <p><code>Cargo.toml</code>:</p>
 <pre><code class="language-toml">[dependencies]
 # Rhai is set for 'no_float', meaning no floating-point support
-rhai = { version="1.26.0", features = ["no_float"] }
+rhai = { version="1.27.0", features = ["no_float"] }
 
 # Use 'default-features = false' to clear defaults, then only add 'array'
 rhai-rand = { version="0.1", default-features = false, features = ["array"] }

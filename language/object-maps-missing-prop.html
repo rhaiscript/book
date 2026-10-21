@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -218,7 +218,7 @@ registered into an <a href="/book/engine/hello-world.html"><code>Engine</code></
 <p>Using this callback, for instance, it is simple to instruct Rhai to create a new property in the
 <a href="/book/language/object-maps.html">object map</a> on the fly, possibly with a default value, when a non-existent property is accessed.</p>
 <h2 id="function-signature"><a class="header" href="#function-signature">Function Signature</a></h2>
-<p>The function signature passed to <a href="https://docs.rs/rhai/1.26.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
+<p>The function signature passed to <a href="https://docs.rs/rhai/1.27.0/rhai/struct.Engine.html#method.on_map_missing_property"><code>Engine::on_map_missing_property</code></a> takes the following form.</p>
 <blockquote>
 <pre><code class="language-rust">Fn(map: &amp;mut Map, prop: &amp;str, context: EvalContext) -&gt; Result&lt;Target, Box&lt;EvalAltResult&gt;&gt;</code></pre>
 </blockquote>

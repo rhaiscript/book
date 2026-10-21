@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -232,8 +232,8 @@ and <a href="https://v8.dev">V8</a> (<a href="https://nodejs.org">Node.js</a>).<
 </div>
 <p>In general, Rhai’s standard AST-walking interpreter is roughly 2-3x slower than <a href="https://www.python.org">Python 3</a>, which is
 a <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> interpreter, for typical real-life workloads.</p>
-<p>The <em>experimental</em> <strong><a href="/book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> VM (work-in-progress and only
-available under the <a href="/book/start/features.html"><code>grain</code></a> feature) is roughly 2x faster, making it roughly at par with <a href="https://www.python.org">Python 3</a>.</p>
+<p>The <strong><a href="/book/grain/index.html">Rhai Grain</a></strong> <a href="https://en.wikipedia.org/wiki/Bytecode">bytecodes</a> VM (work-in-progress and only available under the
+<a href="/book/start/features.html"><code>grain</code></a> feature) is roughly 2x faster, making it roughly at par with <a href="https://www.python.org">Python 3</a>.</p>
 <div id="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough" class="admonition admonish-question" role="note" aria-labelledby="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough-title">
 <div class="admonition-title">
 <div id="admonition-tldr--you-may-not-need-bytecodes--rhai-is-usually-fast-enough-title">
@@ -270,7 +270,7 @@ and fragmentation while being cache-friendly.</p>
 <div id="admonition-proscons-of-rhai-grain" class="admonition admonish-info" role="note" aria-labelledby="admonition-proscons-of-rhai-grain-title">
 <div class="admonition-title">
 <div id="admonition-proscons-of-rhai-grain-title">
-<p>Pros/Cons of Rhai Grain</p>
+<p>Pros/Cons of <a href="/book/grain/index.html">Rhai Grain</a></p>
 </div>
 
 <a class="admonition-anchor-link" href="#admonition-proscons-of-rhai-grain"></a>
@@ -280,25 +280,22 @@ and fragmentation while being cache-friendly.</p>
 <h4 id="pros"><a class="header" href="#pros">Pros</a></h4>
 <ul>
 <li>
-<p>Faster.</p>
+<p>2x faster.</p>
 </li>
 <li>
-<p>Smaller memory footprint and fewer allocations.</p>
+<p>Much smaller memory footprint and allocations.</p>
 </li>
 <li>
-<p>Compiled <a href="/book/grain/compiler-vm.html">bytecodes</a> do not need the original script sources to run, enabling more secured usage scenarios.</p>
+<p>Transpiled <a href="/book/grain/compiler-vm.html">bytecodes</a> do not need the original script source, enabling secured usage scenarios.</p>
 </li>
 </ul>
 <h4 id="cons"><a class="header" href="#cons">Cons</a></h4>
 <ul>
 <li>
-<p>Still experimental.</p>
+<p>Additional transpilation step.</p>
 </li>
 <li>
-<p>There is an additional compilation step.</p>
-</li>
-<li>
-<p>Not yet 100% feature parity with the interpreter.</p>
+<p>Not yet 100% feature parity.</p>
 </li>
 </ul>
 </div>

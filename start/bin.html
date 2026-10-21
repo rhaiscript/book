@@ -41,7 +41,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/rhai-8e213452.min.css">
+        <link rel="stylesheet" href="../theme/rhai-3c1e4fad.min.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -49,10 +49,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-7bdc2fac.js";
+            window.path_to_searchindex_js = "../searchindex-a925192e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-2538afa6.js"></script>
+        <script src="../toc-7b1a29b2.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -217,9 +217,11 @@
 <tr><th style="text-align: center">Tool</th><th style="text-align: center">Required feature(s)</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/rhai-run.rs"><code>rhai-run</code></a></td><td style="text-align: center"></td><td>runs Rhai script files</td></tr>
+<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/rhai-run.rs"><code>rhai-run</code></a></td><td style="text-align: center"></td><td>runs Rhai script or <a href="/book/grain/index.html">Rhai Grain</a> <a href="/book/grain/compiler-vm.html">bytecodes</a> files</td></tr>
 <tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/rhai-repl.rs"><code>rhai-repl</code></a></td><td style="text-align: center"><code>rustyline</code></td><td>a simple REPL tool</td></tr>
 <tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/rhai-dbg.rs"><code>rhai-dbg</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>debugging</code></a></td><td>the <em>Rhai Debugger</em></td></tr>
+<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/grain-compile.rs"><code>grain-compile</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>grain</code></a></td><td>compile a Rhai script to <a href="/book/grain/index.html">Rhai Grain</a> <a href="/book/grain/compiler-vm.html">bytecodes</a></td></tr>
+<tr><td style="text-align: center"><a href="https://github.com/rhaiscript/rhai/blob/main/src/bin/grain-dump.rs"><code>grain-dump</code></a></td><td style="text-align: center"><a href="/book/start/features.html"><code>grain</code></a></td><td>print the disassembly of a <a href="/book/grain/index.html">Rhai Grain</a> <a href="/book/grain/compiler-vm.html">bytecodes</a> program</td></tr>
 </tbody>
 </table>
 </div>
@@ -313,11 +315,11 @@ loading the functions defined in each script into the <em>global</em> namespace.
 </div>
 
 <div>
-<p>Use <code>rhai-run</code> to run Rhai scripts.</p>
+<p>Use <code>rhai-run</code> to run Rhai scripts or <a href="/book/grain/index.html">Rhai Grain</a> <a href="/book/grain/compiler-vm.html">bytecodes</a>.</p>
 <p>Filenames passed to it as command line arguments are run in sequence as Rhai scripts.</p>
 <h3 id="example-1"><a class="header" href="#example-1">Example</a></h3>
-<p>The following command runs the scripts <code>script1.rhai</code>, <code>script2.rhai</code> and <code>script3.rhai</code> in order.</p>
-<pre><code class="language-sh">rhai-run script1.rhai script2.rhai script3.rhai
+<p>The following command runs the scripts <code>script1.rhai</code>, <code>script2.rhai</code> and <code>compiled.rgrn</code> in order.</p>
+<pre><code class="language-sh">rhai-run script1.rhai script2.rhai compiled.rgrn
 </code></pre>
 </div>
 
